@@ -12,7 +12,7 @@ const PrimaryButton = lazy(() => import('../Common/Button/PrimaryButton'));
 import snippetStyles from '../../styles/competition/competition-snippet.native';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 import { getLocalRoute } from '../../actions/apiRouting';
-import snippetStyles from '../../styles/competition/competition-fullNew.native';
+
 class CompetitionParticipant extends React.Component {
   constructor(props) {
     super(props);

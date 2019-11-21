@@ -7,7 +7,7 @@ const CompetitionSnippet = lazy(() => import('../CompetitionSnippet.native'));
 
 import PropTypes from 'prop-types';
 import { trees } from './../../../assets';
-import styles from '../../../styles/competition/competition-master.native';
+
 import i18n from '../../../locales/i18n';
 
 export default class AllCompetitions extends Component {

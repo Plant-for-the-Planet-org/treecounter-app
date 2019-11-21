@@ -115,6 +115,8 @@ const UpdatePledgeEvent = lazy(() =>
   import('./../PledgeEvents/UpdatePledgeEvent.native')
 );
 
+import CreateCompeition from './../Competition/Tabs/createCompetition.native';
+
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -224,7 +226,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: MakePledgeForm
       },
       ['app_create_competition']: {
-        screen: createCompeition
+        screen: CreateCompeition
       }
     },
     {

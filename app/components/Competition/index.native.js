@@ -13,9 +13,7 @@ const AllCompetitions = lazy(() => import('./Tabs/all.native'));
 import i18n from '../../locales/i18n';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import ClosedCompetitions from './Tabs/closed.native'; // Shows all Archived competitions
-import MineCompetitions from './Tabs/mine.native'; // Shows my competitions
-import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured competitions
-import AllCompetitions from './Tabs/all.native'; // Shows all competitions
+
 const Layout = {
   window: {
     width: Dimensions.get('window').width

@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import configureStore from '../../stores/TreecounterStore';
 import { isIOS, isAndroid } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
 const SmartBannerClickable = lazy(() => import('../SmartBanner'));
 const GlobalErrorBoundary = lazy(() =>
@@ -21,7 +22,13 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div style={styles.container}>
+              <LoadingIndicator />
+            </div>
+          }
+        >
           <GlobalErrorBoundary>
             <TreeCounter />
             <SmartBannerClickable
@@ -38,5 +45,7 @@ export default class App extends Component {
     );
   }
 }
-
+let styles = {
+  container: { textAlign: 'center', margin: '0 auto' }
+};
 export const getStore = () => store;

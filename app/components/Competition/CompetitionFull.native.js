@@ -28,7 +28,7 @@ import {
 import { compCalendar, email } from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { formatDate } from '../../utils/utils';
-import snippetStyles from './../../styles/competition/competition-fullNew.native';
+
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 /**

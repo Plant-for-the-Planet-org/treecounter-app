@@ -144,15 +144,10 @@
     "eslint-plugin-json": "1.4.0",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-native": "^3.8.1",
-<<<<<<< HEAD
     "favicons-webpack-plugin": "^1.0.2",
     "file-loader": "^4.2.0",
-=======
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "favicons-webpack-plugin": "^1.0.2",
-    "file-loader": "^4.2.0",
     "fork-ts-checker-notifier-webpack-plugin": "^1.0.2",
->>>>>>> develop
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^4.0.0-beta.8",
     "husky": "^0.14.3",
@@ -169,10 +164,7 @@
     "reactotron-react-native": "^3.7.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
-<<<<<<< HEAD
-=======
     "uglifyjs-webpack-plugin": "^2.2.0",
->>>>>>> develop
     "url-loader": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-bugsnag-plugins": "^1.4.2",

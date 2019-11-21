@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Keyboard } from 'react-native';
 import { FormikForm } from './formComponents.native';
 
-export default function createCompetition(props) {
+export default (CreateCompetition = props => {
   const [buttonType, setButtonType] = useState('competition');
 
   const keyboardDidShow = () => {
@@ -46,4 +46,4 @@ export default function createCompetition(props) {
       />
     </View>
   );
-}
+});

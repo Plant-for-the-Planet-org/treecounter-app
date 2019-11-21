@@ -44,5 +44,6 @@ package-lock.json
 #app build
 web/prod
 web/server
+web/dist
 app/config/index.js
 app/config/index.js.env.*

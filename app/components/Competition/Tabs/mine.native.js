@@ -19,7 +19,7 @@ import close_green from '../../../assets/images/icons/close_green.png';
 import imageUpload from '../../../assets/images/icons/upload_image.png';
 import ImagePicker from 'react-native-image-picker';
 
-let Form = t.form.Form;
+// let Form = t.form.Form;
 
 // const getCompFormLayoutTemplate = () => {
 //   const formLayoutTreesTemplate = locals => {

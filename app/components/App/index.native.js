@@ -9,9 +9,7 @@ const GlobalErrorBoundary = lazy(() =>
 );
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-// import LoadingIndicator from '../../components/Common/LoadingIndicator';
-
-let store;
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
 
 let store;
 Icon.loadFont();
@@ -26,8 +24,8 @@ export default class App extends Component {
       <Provider store={store}>
         <Suspense
           fallback={() => (
-            <View>
-              <Text>Loading..</Text>
+            <View style={styles.container}>
+              <LoadingIndicator />
             </View>
           )}
         >
@@ -39,5 +37,7 @@ export default class App extends Component {
     );
   }
 }
-
+let styles = {
+  container: {}
+};
 export const getStore = () => store;

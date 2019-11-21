@@ -8,6 +8,7 @@ import {
   ScrollView
 } from 'react-native';
 import SingleReview from './SingleReview';
+import { getReviewIndexes } from '../../actions/reviews';
 // import { ScrollView } from 'react-native-gesture-handler';
 const { width } = Dimensions.get('window');
 import { pushStaticRoute } from './../../helpers/routerHelper';
@@ -28,7 +29,18 @@ class Reviews extends Component {
     super(props);
     console.log('reviews props:', props);
 
-    this.state = {};
+    this.state = {
+      reviewIndexes: []
+    };
+  }
+  async componentWillMount() {
+    try {
+      const { data } = await getReviewIndexes();
+      console.log('indexs', data);
+      this.setState({ reviewIndexes: data });
+    } catch (err) {
+      console.log('eror on reviewindex', err);
+    }
   }
   sorted() {
     return this.props.reviews.sort(
@@ -113,6 +125,7 @@ class Reviews extends Component {
                 navigation={this.props.navigation}
                 key={review.id}
                 review={review}
+                reviewIndexes={this.state.reviewIndexes}
               />
             );
           })}

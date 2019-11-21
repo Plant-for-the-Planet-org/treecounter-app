@@ -16,11 +16,21 @@ import i18n from '../../locales/i18n.js';
 import UserProfileImage from '../Common/UserProfileImage';
 const { width } = Dimensions.get('window');
 import { getLocalRoute } from '../../actions/apiRouting';
+import { find } from 'lodash';
 export default class SingleReview extends Component {
   constructor(props) {
     super(props);
     console.log('single props', props);
     this.close = this.close.bind(this);
+    this.state = {
+      reviewIndexes: props.reviewIndexes
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    nextProps.reviewIndexes
+      ? this.setState({ reviewIndexes: nextProps.reviewIndexes })
+      : '';
+    console.log('got new indexes', nextProps.reviewIndexes);
   }
   close() {
     this.RBSheet.close();
@@ -40,10 +50,15 @@ export default class SingleReview extends Component {
   getAvatar() {
     return this.props.review.reviewer ? this.props.review.reviewer.avatar : '';
   }
+  getAllIndexes() {
+    let { reviewIndexScores } = this.props.review;
+    return Object.keys(reviewIndexScores);
+  }
   render() {
     let { review, navigation } = this.props;
     // console.log('in single props in render', this.props);
-
+    const { reviewIndexScores } = review;
+    const { reviewIndexes } = this.state;
     return (
       <View
         style={{
@@ -118,25 +133,28 @@ export default class SingleReview extends Component {
 
         {/* Review Rating */}
         <View style={styles.ratingsParent}>
-          {/*  {console.log('scores', review.reviewIndexScores, review.reviewIndexScores['co-benefits'], review.reviewIndexScores['land-quality'], review.reviewIndexScores['servival-rate'])} */}
-          {review.reviewIndexScores['land-quality'].score > 0 ? (
-            <SingleRating
-              name={'land-quality'}
-              indexScore={review.reviewIndexScores['land-quality']}
-            />
-          ) : null}
-          {review.reviewIndexScores['co-benefits'].score > 0 ? (
-            <SingleRating
-              name={'co-benefits'}
-              indexScore={review.reviewIndexScores['co-benefits']}
-            />
-          ) : null}
-          {review.reviewIndexScores['survival-rate'].score > 0 ? (
-            <SingleRating
-              name={'survival-rate'}
-              indexScore={review.reviewIndexScores['survival-rate']}
-            />
-          ) : null}
+          {console.log(
+            'updating view with indexScore',
+            reviewIndexes,
+            reviewIndexScores,
+            find(reviewIndexes, { slug: 'survival-rate' })
+          )}
+          {reviewIndexes.length
+            ? this.getAllIndexes().map(index => {
+                console.log(
+                  'index',
+                  index,
+                  find(reviewIndexes, { slug: index }).name,
+                  reviewIndexScores[index].score
+                );
+                return reviewIndexScores[index].score > 0 ? (
+                  <SingleRating
+                    name={find(reviewIndexes, { slug: index }).name}
+                    indexScore={reviewIndexScores[index]}
+                  />
+                ) : null;
+              })
+            : null}
         </View>
         {/* Review Rating Ended */}
         {review.pdf && (

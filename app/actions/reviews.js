@@ -1,4 +1,5 @@
 import {
+  getRequest,
   putAuthenticatedRequest,
   deleteAuthenticatedRequest,
   postAuthenticatedRequest
@@ -16,6 +17,9 @@ import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
 // import { ScrollView } from 'react-native-gesture-handler';
 
+export function getReviewIndexes() {
+  return getRequest('review_indexes_get', { translated: 1 });
+}
 export function addReview(review) {
   return dispatch => {
     dispatch(setProgressModelState(true));

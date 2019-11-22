@@ -7,6 +7,11 @@ import { bindActionCreators } from 'redux';
 import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import HeaderContainer from '../../containers/HeaderContainer';
+import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
+import PageNotFound from '../ErrorBoundry/404';
+import BrowserRouter from '../Common/BrowserRouter';
+import Footer from '../Footer';
 
 // Components imports
 const SelectPlantProjectContainer = lazy(() =>
@@ -17,7 +22,6 @@ const TargetContainer = lazy(() => import('../../containers/TargetContainer'));
 const RegisterTreesContainer = lazy(() =>
   import('../../containers/RegisterTrees')
 );
-const HeaderContainer = lazy(() => import('../../containers/HeaderContainer'));
 const UserContributionsContainer = lazy(() =>
   import('../../containers/UserContributions')
 );
@@ -42,7 +46,6 @@ const EmailSentContainer = lazy(() =>
 const SignupSuccessPage = lazy(() =>
   import('../Authentication/SignupSuccessPage')
 );
-const BrowserRouter = lazy(() => import('../Common/BrowserRouter'));
 const SideMenuContainer = lazy(() =>
   import('../../containers/Menu/SideMenuContainer')
 );
@@ -52,8 +55,6 @@ const RedemptionContainer = lazy(() =>
   import('../../containers/RedemptionContainer')
 );
 
-// import Footer from '../Footer';
-const Footer = lazy(() => import('../Footer'));
 // Components which use SVG
 
 const PublicTreecounterContainer = lazy(() =>
@@ -86,9 +87,6 @@ const EditUserProfileContainer = lazy(() =>
   import('../../containers/EditUserProfile')
 );
 const LeaderboardContainer = lazy(() => import('../../containers/Leaderboard'));
-const ProgressModal = lazy(() =>
-  import('../../components/Common/ModalDialog/ProgressModal')
-);
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 const PrivacyContainer = lazy(() => import('../../containers/Privacy'));
 const ImprintContainer = lazy(() => import('../../containers/Imprint'));
@@ -96,7 +94,6 @@ const AppPaymentContainer = lazy(() => import('../../containers/AppPayment'));
 const BodyErrorBoundary = lazy(() =>
   import('../ErrorBoundry/bodyErrorBoundry')
 );
-const PageNotFound = lazy(() => import('../ErrorBoundry/404'));
 const WidgetShareContainer = lazy(() =>
   import('../../containers/WidgetsShare')
 );
@@ -388,24 +385,24 @@ class TreeCounter extends Component {
     // }
     return !this.state.loading ? (
       <div className="app">
-        <Suspense
-          fallback={() => (
-            <div style={{ margin: '0 auto' }}>
-              <LoadingIndicator />
-            </div>
-          )}
-        >
-          <BrowserRouter history={history}>
-            <div className="app-container">
-              <ProgressModal />
-              <HeaderContainer />
+        <BrowserRouter history={history}>
+          <div className="app-container">
+            <ProgressModal />
+            <HeaderContainer />
+            <Suspense
+              fallback={
+                <div style={{ margin: 'auto' }}>
+                  <LoadingIndicator />
+                </div>
+              }
+            >
               <Route component={SideMenuContainer} />
               {this._appRoutes}
-              <Footer />
-            </div>
-          </BrowserRouter>
-          <NotificationContainer />
-        </Suspense>
+            </Suspense>
+            <Footer />
+          </div>
+        </BrowserRouter>
+        <NotificationContainer />
       </div>
     ) : null;
   }

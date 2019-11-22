@@ -4,6 +4,7 @@ const commonConfig = require('./webpack.common.config.js')();
 const path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
+  mode: 'development',
   entry: {
     bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')]
     /* uncomment these widgets if you want to work on them */
@@ -29,6 +30,7 @@ module.exports = webpackMerge(commonConfig, {
     //   path.join(__dirname, '../widgets/NDVI/widget.js')
     // ]
   },
+
   output: {
     path: path.join(__dirname, '../dist'),
     filename: '[name].js',
@@ -37,16 +39,9 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
   devServer: {
     inline: true,
-    port: 8080,
     historyApiFallback: true,
-    disableHostCheck: true,
-    host: '0.0.0.0'
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        ENV: JSON.stringify('development')
-      }
-    })
-  ]
+    disableHostCheck: true
+    //port: 8080,
+    //host: '0.0.0.0'
+  }
 });

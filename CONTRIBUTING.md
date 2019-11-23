@@ -9,7 +9,7 @@ Please note we have a code of conduct, please follow it in all your interactions
 1. Ensure you pull request builds with `npm start` or `npm run build` and does not create errors with our eslint definitions running `npm run lint:errors`.
 2. Ensure that also the native apps with `react-native run-android` and `react-native run-ios` build.
 3. Ensure newly added npm modules do not increase our bundle sizes too much testing with `npm run analyze`.
-4. Update the README.md or our Wiki if you changes something in the development process.
+4. Update the [README.md](https://github.com/Plant-for-the-Planet-org/treecounter-app/blob/develop/README.md) or our [Wiki](https://github.com/Plant-for-the-Planet-org/treecounter-app/wiki) if you change something in the development process.
 5. You may merge the Pull Request in once you have the sign-off of another developer, or if you 
    do not have permission to do that, you may request the reviewer to merge it for you.
 

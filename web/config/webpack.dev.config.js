@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common.config.js')();
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = webpackMerge(commonConfig, {
   mode: 'development',
@@ -39,9 +40,32 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
   devServer: {
     inline: true,
+    //port: 8081,
     historyApiFallback: true,
     disableHostCheck: true
-    //port: 8080,
-    //host: '0.0.0.0'
-  }
+    //host: '192.168.100.208'
+  },
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        ENV: JSON.stringify('development')
+      },
+      rules: [
+        {
+          test: /\.(gif|png|jpe?g|svg)$/i,
+          use: [
+            'file-loader',
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                bypassOnDebug: true, // webpack@1.x
+                disable: process.env.node_env !== 'production' // webpack@2.x and newer
+              }
+            }
+          ]
+        }
+      ]
+    })
+  ]
 });

@@ -178,7 +178,15 @@ export default class Challenge extends Component {
       return;
     }
 
-    this.props.challengeUser(requestData);
+    if (this.state.modeUser === 'invitation') {
+      if (requestData.goal !== '' && this.refs.challengeUser.getValue()) {
+        this.props.challengeUser(requestData);
+      }
+    } else {
+      if (requestData.goal !== '' && requestData.challenged !== '') {
+        this.props.challengeUser(requestData);
+      }
+    }
   };
 
   render() {
@@ -216,7 +224,7 @@ export default class Challenge extends Component {
                 />
               )}
             </Tabs>
-            {this.state.showchecked ? (
+            {this.state.showchecked && this.state.modeUser === 'direct' ? (
               <Errormessage>{i18n.t('label.name_is_required')}</Errormessage>
             ) : null}
             <div className="number_trees">

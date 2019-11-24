@@ -107,7 +107,6 @@ class PlantProjectSnippet extends PureComponent {
     }
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     const textColor = '#4d5153';
-    const backgroundColorLeaf = '#1a85b936';
     return (
       <TouchableHighlight
         underlayColor={'transparent'}

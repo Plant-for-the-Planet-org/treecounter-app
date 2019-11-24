@@ -36,11 +36,26 @@ function getConfig(prodEnv) {
         },
         {
           test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            name: '[hash].[ext]'
-          }
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 8192,
+                name: '[hash].[ext]'
+              }
+            },
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                bypassOnDebug: !prodEnv, // webpack@1.x
+                disable: !prodEnv, // webpack@2.x and newer
+                pngquant: {
+                  quality: [0.65, 0.9],
+                  speed: 2
+                }
+              }
+            }
+          ]
         }
       ]
     },

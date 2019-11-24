@@ -218,7 +218,6 @@ class PlantProjectSnippet extends PureComponent {
                       <Text
                         style={{
                           padding: 5,
-                          backgroundColor: backgroundColorLeaf,
                           borderRadius: 12,
                           marginLeft: 4,
                           paddingBottom: 2,

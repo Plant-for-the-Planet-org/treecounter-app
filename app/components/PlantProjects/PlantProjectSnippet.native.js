@@ -105,6 +105,12 @@ class PlantProjectSnippet extends PureComponent {
         deducibleText1 += ', ';
       }
     }
+    const survivalRateLeaf =
+      survivalRateStatus == 'verified'
+        ? leaf
+        : survivalRateStatus == 'self-reported'
+          ? leafGray
+          : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     const textColor = '#4d5153';
     return (
@@ -214,25 +220,25 @@ class PlantProjectSnippet extends PureComponent {
                         {specsProps.survivalRate}%{' '}
                         {i18n.t('label.survival_rate')}
                       </Text>
-                      <Text
-                        style={{
-                          padding: 5,
-                          borderRadius: 12,
-                          marginLeft: 4,
-                          paddingBottom: 2,
-                          paddingTop: 2
-                        }}
-                      >
-                        <Image
-                          source={
-                            survivalRateStatus == 'verified' ? leaf : leafGray
-                          }
+                      {survivalRateLeaf ? (
+                        <Text
                           style={{
-                            width: 13,
-                            height: 13
+                            padding: 5,
+                            borderRadius: 12,
+                            marginLeft: 4,
+                            paddingBottom: 2,
+                            paddingTop: 2
                           }}
-                        />
-                      </Text>
+                        >
+                          <Image
+                            source={survivalRateLeaf}
+                            style={{
+                              width: 13,
+                              height: 13
+                            }}
+                          />
+                        </Text>
+                      ) : null}
                     </View>
                   </View>
                 </View>

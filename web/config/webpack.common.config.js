@@ -48,7 +48,11 @@ function getConfig(prodEnv) {
               loader: 'image-webpack-loader',
               options: {
                 bypassOnDebug: !prodEnv, // webpack@1.x
-                disable: !prodEnv // webpack@2.x and newer
+                disable: !prodEnv, // webpack@2.x and newer
+                pngquant: {
+                  quality: [0.65, 0.9],
+                  speed: 2
+                }
               }
             }
           ]

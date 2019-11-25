@@ -3,4 +3,5 @@
 
 target 'TreecounterApp' do
   inherit! :search_paths
+  require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 end

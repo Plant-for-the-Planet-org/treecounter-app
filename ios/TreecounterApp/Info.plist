@@ -43,17 +43,7 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
+	
 	<key>NSAppleMusicUsageDescription</key>
 	<string>We would like access to your music library for the app.</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
@@ -66,8 +56,8 @@
 	<string>We would like to use your camera for the app.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to get the coordinates for the tree registration.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to get the coordinates for the tree registration.</string>
+	
+	
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We would like to use your microphone (for videos).</string>
 	<key>NSMotionUsageDescription</key>

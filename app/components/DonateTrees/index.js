@@ -238,7 +238,9 @@ export default class DonateTrees extends Component {
       if (value) {
         if (this.state.modeReceipt === 'individual') {
           receipt['receiptIndividual'] = value;
+          receipt['receiptCompany'] = {};
         } else {
+          receipt['receiptIndividual'] = {};
           receipt['receiptCompany'] = value;
         }
 
@@ -277,7 +279,9 @@ export default class DonateTrees extends Component {
       if (value) {
         if (this.state.modeReceipt === 'individual') {
           receipt['receiptIndividual'] = value;
+          receipt['receiptCompany'] = {};
         } else {
+          receipt['receiptIndividual'] = {};
           receipt['receiptCompany'] = value;
         }
         this.setState({

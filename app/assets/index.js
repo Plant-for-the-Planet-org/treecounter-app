@@ -151,6 +151,7 @@ import nextArrow from './images/icons/nextArrow.png';
 import nextArrowWhite from './images/icons/nextArrowWhite.png';
 import closeBlack from './images/icons/closeblack.png';
 import planetLogo from './images/Planet-Logo.png';
+import circleDelete from './images/icons/circle-delete.png';
 export {
   germany,
   worldImg,
@@ -304,5 +305,6 @@ export {
   nextArrow,
   nextArrowWhite,
   closeBlack,
-  planetLogo
+  planetLogo,
+  circleDelete
 };

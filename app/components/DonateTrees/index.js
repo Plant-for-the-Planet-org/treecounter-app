@@ -28,6 +28,8 @@ import PaymentSelector from '../Payment/PaymentSelector';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { paymentFee } from '../../helpers/utils';
 
+import donateTreesSchema from '../../server/formSchemas/donateTrees';
+
 let TCombForm = t.form.Form;
 
 const pageHeadings = [
@@ -80,11 +82,24 @@ export default class DonateTrees extends Component {
         props.currentUserProfile.type === 'individual'
           ? 'individual'
           : 'company';
-      if (modeReceipt === 'individual') {
-        receipt['receiptIndividual'] = props.currentUserProfile;
-      } else {
-        receipt['receiptCompany'] = props.currentUserProfile;
-      }
+
+      // prefill individual fields
+      receipt['receiptIndividual'] = {};
+      const receiptIndividualFields = Object.keys(
+        donateTreesSchema.properties.receiptIndividual.properties
+      );
+      receiptIndividualFields.forEach(item => {
+        receipt['receiptIndividual'][item] = props.currentUserProfile[item];
+      });
+
+      // prefill company fields
+      receipt['receiptCompany'] = {};
+      const receiptCompanyFields = Object.keys(
+        donateTreesSchema.properties.receiptCompany.properties
+      );
+      receiptCompanyFields.forEach(item => {
+        receipt['receiptCompany'][item] = props.currentUserProfile[item];
+      });
     } else {
       modeReceipt = '';
     }

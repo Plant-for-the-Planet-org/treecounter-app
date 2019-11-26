@@ -137,7 +137,7 @@ class PlantProjectSnippet extends PureComponent {
                         {
                           fontSize: 14,
                           // lineHeight: 19,
-                          color: { textColor },
+                          color: textColor,
                           textAlign: 'center',
                           marginRight: 5,
                           marginLeft: 2

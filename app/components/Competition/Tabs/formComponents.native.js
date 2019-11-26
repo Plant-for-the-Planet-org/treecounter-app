@@ -226,7 +226,9 @@ export function AddImage(props) {
   return (
     <View>
       <Text style={styles.addImageTitle}>{i18n.t('label.add_image')}</Text>
-      <View style={styles.showImage}>{image ? renderAsset(image) : null}</View>
+      <View style={styles.showImage}>
+        {image && image != 'null' ? renderAsset(image) : null}
+      </View>
       <View style={styles.addImageButtonContainer}>
         <TouchableOpacity
           style={styles.addImageButton1}

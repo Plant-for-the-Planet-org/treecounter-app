@@ -271,7 +271,7 @@ export function AddImage(props) {
     <View>
       <Text style={styles.addImageTitle}>{i18n.t('label.add_image')}</Text>
       <View style={styles.showImage}>
-        {image ? (
+        {image && image != 'null' ? (
           image.includes('base64') ? (
             <View style={styles.projectImageContainer}>
               <TouchableOpacity

@@ -216,7 +216,7 @@ class PlantProjectSnippet extends PureComponent {
                   />
                   <View style={styles.survivalText}>
                     <View style={{ flexDirection: 'row' }}>
-                      <Text>
+                      <Text style={styles.survivalText}>
                         {specsProps.survivalRate}%{' '}
                         {i18n.t('label.survival_rate')}
                       </Text>

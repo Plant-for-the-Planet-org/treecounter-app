@@ -82,6 +82,7 @@ class GiftTreesContainer extends Component {
           paymentClear={this.props.paymentClear}
           plantProjectClear={this.props.clearPlantProject}
           key="gift-trees"
+          context={this.props.match ? this.props.match.params : null}
         />
       ) : null
     ];
@@ -122,5 +123,6 @@ GiftTreesContainer.propTypes = {
   fetchCurrencies: PropTypes.func,
   paymentClear: PropTypes.func,
   clearPlantProject: PropTypes.func,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  match: PropTypes.any
 };

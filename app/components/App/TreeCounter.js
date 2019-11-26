@@ -331,7 +331,7 @@ class TreeCounter extends Component {
             />
             {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
             <Route
-              path={getLocalRoute('app_giftTrees')}
+              path={getLocalRoute('app_giftTrees') + '/:slug?'}
               component={GiftTreesContainer}
             />
             <Route

@@ -335,6 +335,10 @@ class TreeCounter extends Component {
               component={GiftTreesContainer}
             />
             <Route
+              path={getLocalRoute('app_support') + '/:slug?'}
+              component={GiftTreesContainer}
+            />
+            <Route
               path={getLocalRoute('app_selectProject')}
               component={SelectPlantProjectContainer}
             />

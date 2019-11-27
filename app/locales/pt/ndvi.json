@@ -2,5 +2,12 @@
   "NDVI_gradient_result_line_title": "Atual",
   "NDVI_legend_indicators": "Indicadores",
   "NDVI_info": "informação",
-  "NDVI_info_average": "Média:"
+  "NDVI_info_average": "Média:",
+  "NDVI_info_maximum": "Máx:",
+  "NDVI_info_minimum": "Mín:",
+  "NDVI_legend_water": "Água",
+  "NDVI_legend_rock_sand_snow": "Rocha/Areia/Neve",
+  "NDVI_legend_dense_vegetation": "Vegetação densa",
+  "NDVI_on_load_refresh_button": "Atualizar",
+  "NDVI_carbon_title": "CO2 capturado"
 }

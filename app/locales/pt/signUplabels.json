@@ -5,5 +5,17 @@
   "address": "Endereço",
   "zipCode": "Código postal",
   "city": "Cidade",
-  "subtype": "Categoria"
+  "subtype": "Categoria",
+  "country": "País",
+  "password_repeat": "Repita a senha",
+  "firstname": "Primeiro nome",
+  "lastname": "Sobrenome",
+  "company_or_orga_name": "Nome da empresa ou organização",
+  "i_am_a": "eu sou um(a)",
+  "i_am": "eu sou",
+  "tpo_title": "Organização de plantação de árvores",
+  "individual_title": "Apenas eu",
+  "company_title": "Empresa / Organização",
+  "education_title": "Escola",
+  "is_anonymous": "Esconder meu nome da lista (compromissos anônimos)"
 }

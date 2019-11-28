@@ -149,6 +149,7 @@ export default class SingleReview extends Component {
                 );
                 return reviewIndexScores[index].score > 0 ? (
                   <SingleRating
+                    key={index}
                     name={find(reviewIndexes, { slug: index }).name}
                     indexScore={reviewIndexScores[index]}
                   />

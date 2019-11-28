@@ -104,11 +104,10 @@ class AddReview extends Component {
             }}
           >
             <Text style={styles.reviewPageTitle}>
-              {this.props.selectedPlantProject.name}
+              {i18n.t('label.add_project_review')}
             </Text>
             <Text style={styles.reviewPageSubTitle}>
-              {' '}
-              {i18n.t('label.add_project_review')}
+              {this.props.selectedPlantProject.name}
             </Text>
           </View>
         </View>

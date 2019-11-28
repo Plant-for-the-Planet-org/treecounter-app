@@ -42,11 +42,6 @@ class Reviews extends Component {
       console.log('eror on reviewindex', err);
     }
   }
-  sorted() {
-    return this.props.reviews.sort(
-      (b, a) => new Date(a.created).getTime() - new Date(b.created).getTime()
-    );
-  }
   isReviewer() {
     return (
       this.props.currentUserProfile && this.props.currentUserProfile.isReviewer
@@ -117,7 +112,7 @@ class Reviews extends Component {
 
         {/*All Reviews*/}
         <View style={{ paddingTop: 20, backgroundColor: 'white' }}>
-          {this.sorted().map(review => {
+          {this.props.reviews.sort((b, a) => a.id - b.id).map(review => {
             return (
               <SingleReview
                 currentUserProfile={this.props.currentUserProfile}

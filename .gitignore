@@ -45,3 +45,4 @@ web/prod
 web/server
 app/config/index.js
 app/config/index.js.env.*
+/ios/Podfile.lock

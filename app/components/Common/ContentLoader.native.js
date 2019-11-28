@@ -203,7 +203,7 @@ const ContentLoading = props => {
       {screen === 'AppHome' && <WorldLoader />}
       {screen === 'LeaderBoard' && <LeaderBoardLoader />}
       {screen === 'Competition' && <CompetitionLoader />}
-      {screen === 'worldLoader' && <WorldLoader />}
+      {screen === 'worldLoader' && <DefaultLoader />}
       {screen === 'profileLoader' && <ProfileLoader />}
       {screen === 'publicProfileLoader' && <PublicProfileLoader />}
       {screen === 'competitionListLoader' && <CompetitionListLoader />}

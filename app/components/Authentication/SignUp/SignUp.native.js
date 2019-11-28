@@ -9,7 +9,6 @@ import PrimaryButton from '../../Common/Button/PrimaryButton';
 import styles from '../../../styles/login.native';
 import { SignupTypes, SignUpType } from './SignupType';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 import { SignupOrganization, SignupJustMe } from '../../../assets';
 
 let Form = t.form.Form;
@@ -22,7 +21,6 @@ export default class SignUp extends Component {
     };
     this.changeProfile = this.changeProfile.bind(this);
     // eslint-disable-next-line no-underscore-dangle
-    this._recaptchaToken = undefined;
   }
 
   onLoginClicked = () => {
@@ -34,12 +32,6 @@ export default class SignUp extends Component {
       Profiletype: type
     });
   }
-
-  verifyCallback = token => {
-    // eslint-disable-next-line no-underscore-dangle
-    this._recaptchaToken = token;
-    // Here you will get the final token!!!
-  };
 
   refreshToken = () => {
     // eslint-disable-next-line no-underscore-dangle
@@ -54,7 +46,7 @@ export default class SignUp extends Component {
       Keyboard.dismiss();
     }
     // eslint-disable-next-line no-underscore-dangle
-    this.props.onSignUpClicked(type, this._recaptchaToken, this.refreshToken);
+    this.props.onSignUpClicked(type);
   };
 
   render() {
@@ -76,13 +68,6 @@ export default class SignUp extends Component {
       // contentContainerStyle={[{ flex: 1 }]}
       // keyboardShouldPersistTaps={'handled'}
       >
-        <ReCaptchaV3
-          // eslint-disable-next-line no-underscore-dangle
-          ref={ref => (this._captchaRef = ref)}
-          captchaDomain={'https://www.trilliontreecampaign.org'}
-          siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
-          onReceiveToken={token => this.verifyCallback(token)}
-        />
         <ImageBackground style={[styles.container, styles.parentContainer]}>
           {!ProfileTypeParam ? (
             <SignupTypes changeProfile={this.changeProfile} />

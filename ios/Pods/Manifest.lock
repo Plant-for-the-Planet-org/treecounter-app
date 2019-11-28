@@ -226,6 +226,8 @@ PODS:
   - React-jsinspector (0.61.5)
   - react-native-image-picker (1.1.0):
     - React
+  - react-native-webview (7.5.2):
+    - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
   - React-RCTAnimation (0.61.5):
@@ -265,9 +267,15 @@ PODS:
     - React
   - RNDeviceInfo (5.3.1):
     - React
+  - RNGestureHandler (1.5.1):
+    - React
   - RNI18n (2.0.15):
     - React
   - RNPermissions (2.0.4):
+    - React
+  - RNReanimated (1.4.0):
+    - React
+  - RNScreens (1.0.0-alpha.23):
     - React
   - RNSVG (9.13.3):
     - React
@@ -318,6 +326,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -331,8 +340,11 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNI18n (from `../node_modules/react-native-i18n`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
+  - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - tipsi-stripe (from `../node_modules/tipsi-stripe`)
@@ -415,6 +427,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -439,10 +453,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/async-storage"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   RNI18n:
     :path: "../node_modules/react-native-i18n"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
+  RNScreens:
+    :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -488,6 +508,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-image-picker: 3637d63fef7e32a230141ab4660d3ceb773c824f
+  react-native-webview: 7eefdb64f283cae1bebe82ebd8ddeb4b805900c0
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -500,8 +521,11 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNCAsyncStorage: 6b57de0f6cb0dcfd17521af1681fa39001d3efff
   RNDeviceInfo: e5976ab5c3bed0b5c78f188e0b8abb139b33a9da
+  RNGestureHandler: 7add966bb5d90ee8cf38d4341f87814474357972
   RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
   RNPermissions: 0558997f20848147d9b909eb7978a93fc2f4ae30
+  RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
+  RNScreens: f28b48b8345f2f5f39ed6195518291515032a788
   RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Stripe: 898f83a95d72180c6eb4acd65b2ae6158fc6a8bd

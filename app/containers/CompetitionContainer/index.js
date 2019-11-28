@@ -73,6 +73,13 @@ class CompetitionContainer extends React.Component {
       });
     }
   }
+
+  updateCompetitions = async () => {
+    this.props.fetchCompetitions('featured');
+    this.props.fetchCompetitions('all');
+    this.props.fetchMineCompetitions();
+  };
+
   render() {
     return (
       <Competiton
@@ -85,6 +92,7 @@ class CompetitionContainer extends React.Component {
         supportTreecounterAction={this.props.supportTreecounterAction}
         editCompetition={id => this.editCompetition(id)}
         navigation={this.props.navigation}
+        updateCompetitions={this.updateCompetitions}
       />
     );
   }

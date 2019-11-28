@@ -2,5 +2,8 @@
   "redeem_trees": "Resgatar vale árvore",
   "redeem_heading": "Se você recebeu um código de voucher ou um vale presente de árvore, você pode resgatar o código correspondente aqui. As árvores aparecerão em \"Minha Floresta\".",
   "claim_trees": "Reivindicar árvores",
-  "validate_code": "Validar Código"
+  "log_in": "Faça o login ou inscreva-se para resgatar seu código.",
+  "validate_code": "Validar Código",
+  "code": "Código",
+  "redeem_code": "Resgatar Código"
 }

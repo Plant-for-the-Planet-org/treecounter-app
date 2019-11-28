@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
-  Image
+  Image,
+  Linking
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { AirbnbRating } from 'react-native-ratings';
@@ -168,6 +169,8 @@ export default class AddRatingSection extends Component {
   }
 
   render() {
+    const guideLineUrl =
+      'https://startplanting.atlassian.net/wiki/spaces/PA/pages/25559041';
     return (
       <View>
         <View
@@ -369,6 +372,11 @@ export default class AddRatingSection extends Component {
         >
           {i18n.t('label.guide_line')}
           <Text
+            onPress={() => {
+              Linking.openURL(guideLineUrl).catch(err => {
+                console.log(err);
+              });
+            }}
             style={{
               color: '#89b53a'
             }}

@@ -87,7 +87,9 @@ class BottomTabContainer extends Component {
           position: 'absolute',
           bottom: 0,
           flex: 1,
-          width: '100%'
+          width: '100%',
+          borderTopColor: '#ecf0f1',
+          borderTopWidth: 1
         }}
       >
         <TabComponent

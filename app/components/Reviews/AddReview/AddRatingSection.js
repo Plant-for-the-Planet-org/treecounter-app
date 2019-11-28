@@ -168,7 +168,6 @@ export default class AddRatingSection extends Component {
   }
 
   render() {
-    console.log('add', this.state);
     return (
       <View>
         <View
@@ -255,45 +254,45 @@ export default class AddRatingSection extends Component {
           />
 
           {/* Document Picking */}
-          <View style={{ marginTop: 20 }}>
-            <Text style={{ textTransform: 'uppercase', fontSize: 12 }}>
-              {i18n.t('label.upload_report')}
-            </Text>
-            <TouchableOpacity
+          <View style={{ marginTop: 20 }} />
+          <Text style={{ textTransform: 'uppercase', fontSize: 12 }}>
+            {i18n.t('label.upload_report')}
+          </Text>
+          <TouchableOpacity
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              width: '100%',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              marginTop: -20
+            }}
+            onPress={() => this.pickDocument()}
+          >
+            <View
+              style={{ flexGrow: 1, width: '100%', justifyContent: 'center' }}
+            />
+            <Image
+              source={attach}
               style={{
-                display: 'flex',
-                flexDirection: 'row',
-                width: '100%',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                marginTop: -20
+                height: 24,
+                width: 24,
+                marginLeft: -24,
+                marginBottom: -12
               }}
-              onPress={() => this.pickDocument()}
-            >
-              <View
-                style={{ flexGrow: 1, width: '100%', justifyContent: 'center' }}
-              />
-              <Image
-                source={attach}
-                style={{
-                  height: 24,
-                  width: 24,
-                  marginLeft: -24,
-                  marginBottom: -12
-                }}
-              />
-            </TouchableOpacity>
-            {this.state.pdfFile ? (
-              <View style={{ marginTop: 15 }}>
-                <Text>{i18n.t('label.file_selected')}</Text>
-              </View>
-            ) : null}
-            {this.props.review && this.props.review.pdf ? (
-              <View style={{ marginTop: 15 }}>
-                <Text>{i18n.t('label.file_already_upload')}</Text>
-              </View>
-            ) : null}
-          </View>
+            />
+          </TouchableOpacity>
+          {this.state.pdfFile ? (
+            <View style={{ marginTop: 15 }}>
+              <Text>{i18n.t('label.file_selected')}</Text>
+            </View>
+          ) : null}
+          {this.props.review && this.props.review.pdf ? (
+            <View style={{ marginTop: 15 }}>
+              <Text>{i18n.t('label.file_already_upload')}</Text>
+            </View>
+          ) : null}
+          {/* </View> */}
 
           {/* Document Picking ends */}
 

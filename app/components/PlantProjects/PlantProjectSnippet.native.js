@@ -131,7 +131,7 @@ class PlantProjectSnippet extends PureComponent {
                 <View
                   style={[
                     styles.certifiedAndRatingContainer,
-                    !isCertified ? styles.withoutCertified : ''
+                    !isCertified && styles.withoutCertified
                   ]}
                 >
                   <TouchableOpacity
@@ -141,20 +141,20 @@ class PlantProjectSnippet extends PureComponent {
                       updateStaticRoute('app_reviews', this.props.navigation);
                     }}
                   >
-                    {isCertified ? (
-                      <Image
-                        source={tick}
-                        style={{
-                          width: 15,
-                          height: 15,
-                          marginLeft: 2,
-                          marginRight: 3
-                        }}
-                      />
-                    ) : null}
                     <View
                       style={{ flexDirection: 'row', alignItems: 'center' }}
                     >
+                      {isCertified ? (
+                        <Image
+                          source={tick}
+                          style={{
+                            width: 15,
+                            height: 15,
+                            marginLeft: 2,
+                            marginRight: 3
+                          }}
+                        />
+                      ) : null}
                       <Text
                         style={[
                           {

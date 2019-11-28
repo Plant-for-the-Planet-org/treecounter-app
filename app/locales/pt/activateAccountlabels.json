@@ -1,5 +1,16 @@
 {
   "activate_ur_account": "Ative sua conta",
+  "not_yet_activated": "Confirme seu e-mail para continuar.",
   "received_email": "Você recebeu um email após o seu cadastro. Clique no link de ativação fornecido neste e-mail para concluir o processo de inscrição.",
-  "account_activation": "Ativação da conta"
+  "not_received_email": "Se você não recebeu o email de ativação, clique no link abaixo para reenviar um email de ativação.",
+  "resent_email": "Reenviar e-mail",
+  "account_activation": "Ativação da conta",
+  "successfully_activated": "Você ativou sua conta com sucesso.",
+  "already_activated": "Sua conta já foi ativada anteriormente.",
+  "do_profile_or_target": "Agora você pode",
+  "customize_your_profile": "personalize seu perfil",
+  "or": "ou",
+  "set_a_target": "definir um objetivo",
+  "do_login": "Agora você pode",
+  "login": "Conecte-se"
 }

@@ -5,7 +5,7 @@ import { Circle, Rect } from 'react-native-svg';
 
 const AppHomeLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"
@@ -23,7 +23,7 @@ const AppHomeLoader = () => (
 );
 const CompetitionLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"
@@ -48,7 +48,7 @@ const LeaderBoardLoader = () => (
 );
 const WorldLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"
@@ -66,7 +66,7 @@ const WorldLoader = () => (
 );
 const ProfileLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"
@@ -84,7 +84,7 @@ const ProfileLoader = () => (
 );
 const PublicProfileLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"
@@ -103,7 +103,7 @@ const PublicProfileLoader = () => (
 
 const CompetitionListLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"
@@ -122,7 +122,7 @@ const CompetitionListLoader = () => (
 
 const CompetitionSingleLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"
@@ -141,7 +141,7 @@ const CompetitionSingleLoader = () => (
 
 const ProjectListLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"
@@ -160,7 +160,7 @@ const ProjectListLoader = () => (
 
 const ProjectSingleLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"
@@ -179,7 +179,7 @@ const ProjectSingleLoader = () => (
 
 const DefaultLoader = () => (
   <ContentLoader
-    height={980}
+    height={550}
     width={500}
     speed={3}
     primaryColor="#f3f3f3"

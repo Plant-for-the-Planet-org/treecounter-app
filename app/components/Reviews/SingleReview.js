@@ -79,7 +79,7 @@ export default class SingleReview extends Component {
               />
             </TouchableOpacity>
           </View>
-          <View style={{ marginLeft: 10, flexGrow: 1 }}>
+          <View style={{ marginLeft: 5, flexGrow: 1 }}>
             <TouchableOpacity
               onPress={() =>
                 review.reviewer &&
@@ -127,20 +127,8 @@ export default class SingleReview extends Component {
 
         {/* Review Rating */}
         <View style={styles.ratingsParent}>
-          {console.log(
-            'updating view with indexScore',
-            reviewIndexes,
-            reviewIndexScores,
-            find(reviewIndexes, { slug: 'survival-rate' })
-          )}
           {reviewIndexes.length
             ? this.getAllIndexes().map(index => {
-                console.log(
-                  'index',
-                  index,
-                  find(reviewIndexes, { slug: index }).name,
-                  reviewIndexScores[index].score
-                );
                 return reviewIndexScores[index].score > 0 ? (
                   <SingleRating
                     key={index}

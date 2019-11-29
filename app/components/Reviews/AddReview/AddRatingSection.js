@@ -192,7 +192,7 @@ export default class AddRatingSection extends Component {
             return (
               <View style={styles.singleRatingBox} key={index}>
                 <Text style={styles.ratingsText}>
-                  {reviewIndexes[index].name}
+                  {reviewIndexes[index] && reviewIndexes[index].name}
                 </Text>
 
                 <AirbnbRating

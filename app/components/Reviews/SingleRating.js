@@ -14,31 +14,30 @@ export default class SingleRating extends Component {
         name="star"
         size={12}
         solid={fill}
-        style={{ color: '#89b53a', marginLeft: 3 }}
+        style={{ color: '#89b53a', marginLeft: 2 }}
       />
     ));
   }
   render() {
     return (
-      <View>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 5
-          }}
-        >
-          {this.props.name ? (
-            <Text style={styles.ratingsText}>{this.props.name}</Text>
-          ) : null}
-          {this.props.indexScore
-            ? this.generateStar(true, this.props.indexScore.score)
-            : null}
-          {this.props.indexScore
-            ? this.generateStar(false, this.props.indexScore.score)
-            : null}
-        </View>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginBottom: 5,
+          marginRight: 1
+        }}
+      >
+        {this.props.name ? (
+          <Text style={styles.ratingsText}>{this.props.name}</Text>
+        ) : null}
+        {this.props.indexScore
+          ? this.generateStar(true, this.props.indexScore.score)
+          : null}
+        {this.props.indexScore
+          ? this.generateStar(false, this.props.indexScore.score)
+          : null}
       </View>
     );
   }

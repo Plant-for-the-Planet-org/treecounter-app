@@ -14,7 +14,11 @@ import AddRatingSection from './AddRatingSection';
 const { width } = Dimensions.get('window');
 import { forward } from './../../../assets';
 import { connect } from 'react-redux';
-import { addReview, updateReview } from '../../../actions/reviews';
+import {
+  addReview,
+  updateReview,
+  getReviewIndexes
+} from '../../../actions/reviews';
 import { bindActionCreators } from 'redux';
 import { selectedPlantProjectSelector } from '../../../selectors';
 import i18n from '../../../locales/i18n.js';
@@ -24,6 +28,7 @@ class AddReview extends Component {
     super(props);
     console.log(props, Icon);
     this.state = {
+      reviewIndexes: {},
       review:
         (props.navigation.state.params &&
           props.navigation.state.params.review) ||
@@ -35,7 +40,19 @@ class AddReview extends Component {
   onUpdate(data) {
     this.setState({ review: data });
   }
-
+  async componentWillMount() {
+    try {
+      const { data } = await getReviewIndexes();
+      console.log('indexs', data);
+      let obj = {};
+      data.map(i => {
+        obj[i.slug] = i;
+      });
+      this.setState({ reviewIndexes: obj });
+    } catch (err) {
+      console.log('eror on reviewindex', err);
+    }
+  }
   async create() {
     console.log('creating', this.props.selectedPlantProject, this.state.review);
     const { review } = this.state;
@@ -118,6 +135,7 @@ class AddReview extends Component {
             review={this.state.review}
             selectedPlantProject={this.props.selectedPlantProject}
             onUpdate={this.onUpdate}
+            reviewIndexes={this.state.reviewIndexes}
           />
         </View>
 

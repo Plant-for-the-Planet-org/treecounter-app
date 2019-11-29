@@ -24,30 +24,34 @@ export default class AddRatingSection extends Component {
   constructor(props) {
     super(props);
     console.log('props got in add rating:', props);
+    let scoreObj = {};
     this.state = {
       id: props.review.id || undefined,
       plantProject: props.selectedPlantProject.id,
       summary: props.review.summary || '',
-      reviewIndexScores: props.review.reviewIndexScores || {
-        'co-benefits': {
-          score: 0
-        },
-        'land-quality': {
-          score: 0
-        },
-        'survival-rate': {
-          score: 0
-        }
-      },
+      reviewIndexScores: props.review.reviewIndexScores || scoreObj,
       pdfFile: '',
       reviewImages: props.review.reviewImages
         ? [...props.review.reviewImages]
         : []
     };
 
-    console.log('after merging got props in addrating', this.state);
+    console.log('after merging props in add rating', this.state);
   }
-
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.reviewIndexes &&
+      !Object.keys(this.state.reviewIndexScores).length
+    ) {
+      let scoreObj = {};
+      Object.keys(nextProps.reviewIndexes).map(index => {
+        console.log(index);
+        scoreObj[index] = { score: 0 };
+      });
+      this.setState({ reviewIndexScores: scoreObj });
+      console.log('new props in add rating2', this.state);
+    }
+  }
   setStateAndUpdateParent(data) {
     this.setState(data, () => {
       this.props.onUpdate({ ...this.state });
@@ -167,8 +171,10 @@ export default class AddRatingSection extends Component {
     this.setStateAndUpdateParent({ reviewIndexScores });
     console.log('rating', rating, type);
   }
-
   render() {
+    let { reviewIndexes } = this.props;
+    let { reviewIndexScores } = this.state;
+    console.log('index scores', reviewIndexScores, reviewIndexes, this.props);
     const guideLineUrl =
       'https://startplanting.atlassian.net/wiki/spaces/PA/pages/25559041';
     return (
@@ -182,23 +188,27 @@ export default class AddRatingSection extends Component {
             alignItems: 'flex-start'
           }}
         >
-          <View style={styles.singleRatingBox}>
-            <Text style={styles.ratingsText}>
-              {i18n.t('label.land_quality')}
-            </Text>
+          {Object.keys(reviewIndexScores).map(index => {
+            return (
+              <View style={styles.singleRatingBox} key={index}>
+                <Text style={styles.ratingsText}>
+                  {reviewIndexes[index].name}
+                </Text>
 
-            <AirbnbRating
-              defaultRating={this.state.reviewIndexScores['land-quality'].score}
-              size={20}
-              showRating={false}
-              onFinishRating={rating => {
-                this.ratingCompleted(rating, 'land-quality');
-              }}
-              style={{ color: '#2ecc71' }}
-            />
-          </View>
+                <AirbnbRating
+                  defaultRating={reviewIndexScores[index].score}
+                  size={20}
+                  showRating={false}
+                  onFinishRating={rating => {
+                    this.ratingCompleted(rating, index);
+                  }}
+                  style={{ color: '#2ecc71' }}
+                />
+              </View>
+            );
+          })}
 
-          <View style={styles.singleRatingBox}>
+          {/* <View style={styles.singleRatingBox}>
             <Text style={styles.ratingsText}>
               {i18n.t('label.co_benefits')}
             </Text>
@@ -212,9 +222,9 @@ export default class AddRatingSection extends Component {
               }}
               style={{ color: '#2ecc71' }}
             />
-          </View>
+          </View> */}
 
-          <View style={styles.singleRatingBox}>
+          {/* <View style={styles.singleRatingBox}>
             <Text style={styles.ratingsText}>
               {i18n.t('label.survival_rate')}
             </Text>
@@ -230,7 +240,7 @@ export default class AddRatingSection extends Component {
               }}
               style={{ color: '#2ecc71' }}
             />
-          </View>
+          </View> */}
           <View style={styles.singleRatingBox}>
             <Text style={styles.ratingsText} />
           </View>

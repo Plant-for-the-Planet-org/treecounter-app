@@ -40,6 +40,9 @@ package-lock.json
 # Bundle artifact
 *.jsbundle
 
+#jest
+coverage
+
 #app build
 web/prod
 web/server

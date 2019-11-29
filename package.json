@@ -13,6 +13,7 @@
     "lint": "eslint app",
     "lint:errors": "eslint app --quiet",
     "lint:json": "eslint . --ext .json",
+    "test": "jest",
     "shake": "adb shell input keyevent 82",
     "clean": "./clean.sh"
   },
@@ -43,7 +44,6 @@
     "i18next": "^11.3.1",
     "intl": "1.2.5",
     "jwt-decode": "^2.2.0",
-    "liform-react": "^0.9.0",
     "lodash": "^4.17.10",
     "normalizr": "^3.2.4",
     "number-to-words": "^1.2.3",
@@ -174,11 +174,5 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.1.2"
-  },
-  "jest": {
-    "preset": "react-native",
-    "setupFiles": [
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
-    ]
   }
 }

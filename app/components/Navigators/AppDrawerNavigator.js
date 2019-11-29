@@ -59,7 +59,7 @@ const headerLabels = {
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
-  [getLocalRoute('app_donateTrees')]: 'label.donate',
+  [getLocalRoute('app_donateTrees')]: 'label.projects',
 
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',

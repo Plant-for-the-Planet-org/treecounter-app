@@ -63,6 +63,17 @@ class AddReview extends Component {
         5000
       );
     }
+    if (
+      !Object.keys(review.reviewIndexScores).filter(
+        index => review.reviewIndexScores[index].score
+      ).length
+    ) {
+      return NotificationManager.error(
+        i18n.t('label.at_least_one_index'),
+        i18n.t('label.error'),
+        5000
+      );
+    }
     console.log('review before submitting', review);
     try {
       if (this.state.review.id) {

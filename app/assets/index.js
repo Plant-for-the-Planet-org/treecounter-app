@@ -151,6 +151,7 @@ import nextArrow from './images/icons/nextArrow.png';
 import nextArrowWhite from './images/icons/nextArrowWhite.png';
 import closeBlack from './images/icons/closeblack.png';
 import planetLogo from './images/Planet-Logo.png';
+import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
 export {
@@ -307,6 +308,7 @@ export {
   nextArrowWhite,
   closeBlack,
   planetLogo,
+  circleDelete,
   leaf,
   leafGray
 };

@@ -12,3 +12,8 @@ Please note we have a [code of conduct](https://github.com/Plant-for-the-Planet-
 4. Update the [README.md](https://github.com/Plant-for-the-Planet-org/treecounter-app/blob/develop/README.md) or our [Wiki](https://github.com/Plant-for-the-Planet-org/treecounter-app/wiki) if you change something in the development process.
 5. You may merge the Pull Request in once you have the sign-off of another developer, or if you 
    do not have permission to do that, you may request the reviewer to merge it for you.
+
+## Coding Style
+
+Please use the configuration file at https://github.com/Plant-for-the-Planet-org/treecounter-app/blob/develop/.editorconfig defining the basic rules for editors to use to work on the source code. It supports a lot of different editors you can read about at https://editorconfig.org/.
+

@@ -19,5 +19,7 @@
   "challenge_create_successfully": "Wettbewerb erfolgreich angelegt",
   "please_select_user": "Bitte Benutzer auswählen",
   "please_select_year": "Bitte Jahr auswählen",
-  "could_not_add_user": "Benutzer konnte nicht hinzugefügt werden"
+  "could_not_add_user": "Benutzer konnte nicht hinzugefügt werden",
+  "name_is_required": "Name ist erforderlich",
+  "goal_is_required": "Zielangabe ist erforderlich"
 }

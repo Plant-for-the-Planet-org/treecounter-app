@@ -9,7 +9,14 @@ import {
 } from 'react-native';
 
 import { getImageUrl } from '../../actions/apiRouting';
-import { tick, location_grey, survival_grey, tax_grey } from '../../assets';
+import {
+  tick,
+  location_grey,
+  survival_grey,
+  tax_grey,
+  leaf,
+  leafGray
+} from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { formatNumber } from '../../utils/utils';
@@ -56,7 +63,8 @@ class PlantProjectSnippet extends PureComponent {
       // images,
       imageFile,
       reviewScore: plantProjectRating,
-      reviews
+      reviews,
+      survivalRateStatus
       // description,
       // homepageUrl: homepageUrl,
       // homepageCaption: homepageCaption,
@@ -106,6 +114,12 @@ class PlantProjectSnippet extends PureComponent {
         deducibleText1 += ', ';
       }
     }
+    const survivalRateLeaf =
+      survivalRateStatus == 'verified'
+        ? leaf
+        : survivalRateStatus == 'self-reported'
+          ? leafGray
+          : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     const textColor = '#4d5153';
     return (
@@ -224,9 +238,33 @@ class PlantProjectSnippet extends PureComponent {
                       marginRight: 10
                     }}
                   />
-                  <Text style={styles.survivalText}>
-                    {specsProps.survivalRate}% {i18n.t('label.survival_rate')}
-                  </Text>
+                  <View style={styles.survivalText}>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={styles.survivalText}>
+                        {specsProps.survivalRate}%{' '}
+                        {i18n.t('label.survival_rate')}
+                      </Text>
+                      {survivalRateLeaf ? (
+                        <Text
+                          style={{
+                            padding: 5,
+                            borderRadius: 12,
+                            marginLeft: 4,
+                            paddingBottom: 2,
+                            paddingTop: 2
+                          }}
+                        >
+                          <Image
+                            source={survivalRateLeaf}
+                            style={{
+                              width: 13,
+                              height: 13
+                            }}
+                          />
+                        </Text>
+                      ) : null}
+                    </View>
+                  </View>
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>

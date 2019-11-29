@@ -70,6 +70,7 @@ class SelectPlantProjectContainer extends PureComponent {
         onMoreClick={this.onMoreClick}
         plantProjects={plantProjects}
         navigation={this.props.navigation}
+        supportTreecounter={this.props.supportTreecounter}
       />
     );
   }

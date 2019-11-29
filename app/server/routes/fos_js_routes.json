@@ -4758,6 +4758,21 @@
       ],
       "schemes": []
     },
+    "app_support": {
+      "tokens": [
+        [
+          "text",
+          "/support"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "app_redeem": {
       "tokens": [
         [

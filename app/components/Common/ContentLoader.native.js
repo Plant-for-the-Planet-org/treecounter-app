@@ -2,24 +2,13 @@ import React from 'react';
 import { Image, View, Text } from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
+import i18n from '../../locales/i18n.js';
+import { loadingBar } from '../../assets';
 
 const AppHomeLoader = () => (
-  <ContentLoader
-    height={550}
-    width={500}
-    speed={3}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
-  >
-    <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="215" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="240" rx="10" ry="10" width="250" height="20" />
-    <Rect x="100" y="270" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="460" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="490" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="520" rx="10" ry="10" width="250" height="20" />
-  </ContentLoader>
+  <View style={[loadingIndicatorStyle, style]}>
+    <Image source={loadingBar} alt={i18n.t('label.loading')} />
+  </View>
 );
 const CompetitionLoader = () => (
   <ContentLoader
@@ -177,23 +166,10 @@ const ProjectSingleLoader = () => (
   </ContentLoader>
 );
 
-const DefaultLoader = () => (
-  <ContentLoader
-    height={550}
-    width={500}
-    speed={3}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
-  >
-    <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="215" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="240" rx="10" ry="10" width="250" height="20" />
-    <Rect x="100" y="270" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="460" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="490" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="520" rx="10" ry="10" width="250" height="20" />
-  </ContentLoader>
+const DefaultLoader = ({ style }) => (
+  <View style={[loadingIndicatorStyle, containerStyle]}>
+    <Image source={loadingBar} alt={i18n.t('label.loading')} />
+  </View>
 );
 
 const ContentLoading = props => {
@@ -218,6 +194,10 @@ const loadingIndicatorStyle = {
   flex: 1,
   alignItems: 'center',
   marginTop: '5%'
-  // justifyContent: "center"
+};
+const containerStyle = {
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center'
 };
 export default ContentLoading;

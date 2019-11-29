@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity
-} from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import SingleRating from './SingleRating';
 import BottomAction from './BottomAction';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -14,9 +8,9 @@ import { pushStaticRoute } from './../../helpers/routerHelper';
 import { formatDate } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
 import UserProfileImage from '../Common/UserProfileImage';
-const { width } = Dimensions.get('window');
 import { getLocalRoute } from '../../actions/apiRouting';
 import { find } from 'lodash';
+import styles from '../../styles/review.native';
 export default class SingleReview extends Component {
   constructor(props) {
     super(props);
@@ -202,73 +196,6 @@ export default class SingleReview extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  reviewDate: {
-    fontSize: 12,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 17,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: 'rgba(0, 0, 0, 0.6)'
-  },
-  reviewUser: {
-    fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 19,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153'
-  },
-  headerParent: {
-    width: width * 0.88,
-    marginLeft: width * 0.06,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  textParent: {
-    width: width * 0.88,
-    marginLeft: width * 0.06,
-    marginTop: 16
-  },
-  reviewText: {
-    fontSize: 12,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 18,
-    letterSpacing: 0,
-    textAlign: 'justify',
-    color: '#4d5153'
-  },
-  ratingsParent: {
-    width: width * 0.88,
-    marginLeft: width * 0.06,
-    marginTop: 16,
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between'
-  },
-  pdfButtonText: {
-    fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 19,
-    letterSpacing: 0,
-    textAlign: 'center',
-    color: '#4d5153'
-  },
-  pdfButton: {
-    paddingHorizontal: 36,
-    paddingVertical: 12,
-    backgroundColor: '#ecf0f1',
-    borderRadius: 24,
-    marginTop: 20
-  }
-});
 
 {
   /* <View style={{ flex: 1 }}>

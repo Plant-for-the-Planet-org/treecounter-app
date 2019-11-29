@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import styles from '../../styles/review.native';
 // const { width, height } = Dimensions.get('window');
 
 export default class SingleRating extends Component {
@@ -43,16 +43,3 @@ export default class SingleRating extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  ratingsText: {
-    fontSize: 10,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 14,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153',
-    marginRight: 7
-  }
-});

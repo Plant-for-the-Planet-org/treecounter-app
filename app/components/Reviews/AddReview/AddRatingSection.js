@@ -19,7 +19,7 @@ import RNFS from 'react-native-fs';
 import i18n from '../../../locales/i18n.js';
 import { getImageUrl } from '../../../actions/apiRouting';
 const { width } = Dimensions.get('window');
-
+import styles from '../../../styles/review.native';
 export default class AddRatingSection extends Component {
   constructor(props) {
     super(props);
@@ -399,59 +399,3 @@ export default class AddRatingSection extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  ratingsText: {
-    fontSize: 12,
-    fontWeight: '400',
-    fontStyle: 'normal',
-    lineHeight: 17,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153',
-    marginBottom: 14,
-    textTransform: 'uppercase'
-  },
-  singleRatingBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    marginBottom: 32,
-    minWidth: width * 0.4
-  },
-  pickImageButton1: {
-    flex: 1,
-    backgroundColor: '#03A9F4',
-    padding: 12,
-    alignItems: 'center',
-    borderTopLeftRadius: 4,
-    marginTop: 12,
-    borderRightWidth: 1,
-    borderRightColor: 'white'
-  },
-  pickImageButton2: {
-    flex: 1,
-    backgroundColor: '#03A9F4',
-    padding: 12,
-    alignItems: 'center',
-    borderTopRightRadius: 4,
-    marginTop: 12
-  },
-  pickImageButtonText: {
-    fontSize: 37
-  },
-  briefReview: {
-    backgroundColor: '#ecf0f1',
-    padding: 12,
-    paddingTop: 12,
-    borderRadius: 4,
-    marginTop: 5,
-    textAlign: 'left',
-    alignContent: 'flex-start',
-    alignItems: 'flex-start',
-    borderBottomWidth: 1,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
-});

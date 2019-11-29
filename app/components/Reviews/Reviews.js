@@ -4,7 +4,6 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
-  StyleSheet,
   ScrollView
 } from 'react-native';
 import SingleReview from './SingleReview';
@@ -23,6 +22,7 @@ import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import NumberFormat from '../Common/NumberFormat';
 import SingleRating from './SingleRating';
+import styles from '../../styles/review.native';
 
 class Reviews extends Component {
   constructor(props) {
@@ -99,17 +99,6 @@ class Reviews extends Component {
           </View>
         </View>
 
-        {/* <TouchableOpacity
-          onPress={() => {
-            updateStaticRoute('app_add_review', this.props.navigation);
-          }}
-          style={styles.writeReviewButton}
-        >
-          <Text style={{ fontWeight: 'bold', color: 'white' }}>
-            Write a Review
-            </Text>
-        </TouchableOpacity> */}
-
         {/*All Reviews*/}
         <View style={{ paddingTop: 20, backgroundColor: 'white' }}>
           {this.props.reviews.sort((b, a) => a.id - b.id).map(review => {
@@ -152,45 +141,6 @@ class Reviews extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  reviewPageTitle: {
-    fontSize: 27,
-    lineHeight: 40,
-    color: '#4d5153',
-    fontWeight: '800',
-    fontStyle: 'normal'
-  },
-  reviewPageSubTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 24,
-    letterSpacing: 0,
-    color: '#4d5153',
-    marginTop: 7
-  },
-  totalRating: {
-    opacity: 0.8,
-    fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 19,
-    letterSpacing: 0,
-    color: '#4d5153',
-    marginRight: 5
-  },
-  writeReviewButton: {
-    paddingHorizontal: 36,
-    backgroundColor: '#89b53a',
-    height: 52,
-    borderRadius: 24,
-    marginTop: 10,
-    width: '85%',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
 
 const mapStateToProps = state => {
   return {

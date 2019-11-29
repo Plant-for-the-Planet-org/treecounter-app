@@ -5,7 +5,6 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
-  StyleSheet,
   Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -23,6 +22,7 @@ import { bindActionCreators } from 'redux';
 import { selectedPlantProjectSelector } from '../../../selectors';
 import i18n from '../../../locales/i18n.js';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager.native';
+import styles from '../../../styles/review.native';
 class AddReview extends Component {
   constructor(props) {
     super(props);
@@ -170,57 +170,6 @@ class AddReview extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  reviewPageTitle: {
-    fontSize: 27,
-    lineHeight: 40,
-    color: '#4d5153',
-    fontWeight: '800',
-    fontStyle: 'normal'
-  },
-  reviewPageSubTitle: {
-    fontSize: 18,
-    fontWeight: '400',
-    fontStyle: 'normal',
-    lineHeight: 24,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#4d5153',
-    marginTop: 7,
-    marginBottom: 45
-  },
-  totalRating: {
-    opacity: 0.8,
-    fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 19,
-    letterSpacing: 0,
-    color: '#4d5153',
-    marginRight: 5
-  },
-  writeReviewButton: {
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    backgroundColor: '#27ae60',
-    borderRadius: 72,
-    marginTop: 10,
-    alignContent: 'center',
-    alignSelf: 'flex-end',
-    marginRight: 24
-  },
-  pledgeSmallButton: {
-    backgroundColor: '#89b53a',
-    height: 54,
-    width: 54,
-    borderRadius: 27,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 12,
-    marginLeft: '80%'
-  }
-});
 
 const mapStateToProps = state => {
   return {

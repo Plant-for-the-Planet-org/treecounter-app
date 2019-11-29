@@ -13,7 +13,7 @@
     "lint": "eslint app",
     "lint:errors": "eslint app --quiet",
     "lint:json": "eslint . --ext .json",
-    "postinstall": "grep -r --include=*.java -l 'android.support.v7' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v7/androidx.appcompat/' -pi && grep -r --include=*.java -l 'android.support.v4' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v4/androidx.core/' -pi && grep -r --include=*.java -l 'android.support' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi && grep --include=*.java -r -l 'android.support' ./node_modules/react-native-youtube | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi"
+    "postinstall": "grep -r --include=*.java -l 'android.support.v7' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v7/androidx.appcompat/' -pi && grep -r --include=*.java -l 'android.support.v4' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support.v4/androidx.core/' -pi && grep -r --include=*.java -l 'android.support' ./node_modules/react-native-image-picker | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi && grep --include=*.java -r -l 'android.support' ./node_modules/react-native-youtube | sort | uniq | xargs perl -e 's/android.support/androidx/' -pi && jetifier"
   },
   "lint-staged": {
     "*.js": [
@@ -42,6 +42,7 @@
     "history": "^4.10.1",
     "i18next": "^11.3.1",
     "intl": "1.2.5",
+    "jetifier": "^1.6.5",
     "jwt-decode": "^2.2.0",
     "liform-react": "^0.9.0",
     "lodash": "^4.17.10",
@@ -177,6 +178,9 @@
     "webpack-merge": "^4.1.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ]
   }
 }

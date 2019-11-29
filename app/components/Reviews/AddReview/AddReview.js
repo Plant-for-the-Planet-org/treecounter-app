@@ -132,7 +132,9 @@ class AddReview extends Component {
             }}
           >
             <Text style={styles.reviewPageTitle}>
-              {i18n.t('label.add_project_review')}
+              {this.state.review.id
+                ? i18n.t('label.edit_project_review')
+                : i18n.t('label.add_project_review')}
             </Text>
             <Text style={styles.reviewPageSubTitle}>
               {this.props.selectedPlantProject.name}

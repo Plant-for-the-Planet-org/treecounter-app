@@ -38,7 +38,10 @@ class AddReview extends Component {
     this.onUpdate = this.onUpdate.bind(this);
   }
   onUpdate(data) {
-    this.setState({ review: data });
+    this.updating = true;
+    this.setState({ review: data }, () => {
+      this.updating = false;
+    });
   }
   async componentWillMount() {
     try {
@@ -54,7 +57,8 @@ class AddReview extends Component {
     }
   }
   async create() {
-    console.log('creating', this.props.selectedPlantProject, this.state.review);
+    console.log('updating?', this.updating);
+    if (this.updating) return;
     const { review } = this.state;
     if (!review.summary) {
       return NotificationManager.error(
@@ -64,8 +68,8 @@ class AddReview extends Component {
       );
     }
     if (
-      !Object.keys(review.reviewIndexScores).filter(
-        index => review.reviewIndexScores[index].score
+      !Object.keys(review.reviewIndexScores).filter(index =>
+        Number(review.reviewIndexScores[index].score)
       ).length
     ) {
       return NotificationManager.error(

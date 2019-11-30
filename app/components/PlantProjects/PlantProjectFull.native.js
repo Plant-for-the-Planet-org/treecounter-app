@@ -79,7 +79,7 @@ class PlantProjectFull extends React.Component {
                   this.props.selectProject(this.props.plantProject.id)
                 }
               >
-                {i18n.t('label.donate_txt')}
+                {i18n.t('label.donate')}
               </PrimaryButton>
             </View>
           ) : null}

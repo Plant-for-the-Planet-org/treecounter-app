@@ -170,10 +170,13 @@ function escapeRegexCharacters(str) {
 }
 const getSuggestionValue = suggestion => `${suggestion.name}`;
 
-export function getSuggestions(value) {
+export function getSuggestions(value, raw) {
   return new Promise((resolve, reject) => {
     postDirectRequest('/suggest', 'q=' + value.trim()).then(result => {
       let jdata = result.data;
+      if (raw) {
+        return resolve(jdata);
+      }
       const escapedValue = escapeRegexCharacters(value.trim());
       if (escapedValue === '') {
         resolve([]);

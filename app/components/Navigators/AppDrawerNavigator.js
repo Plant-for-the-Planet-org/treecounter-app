@@ -52,6 +52,9 @@ import SuccessfullActivatedContainer from '../../containers/Authentication/Succe
 import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
 import UnfulfilledPledgeEvents from './../PledgeEvents/UnfulfilledPledgeEvent';
 import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
+import Reviews from './../Reviews/Reviews';
+import AddReview from './../Reviews/AddReview/AddReview';
+import PDFViewer from '../PDFViewer';
 import createCompeition from './../Competition/Tabs/createCompetition.native';
 import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 const headerLabels = {
@@ -333,6 +336,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_pledge_form']: {
         screen: MakePledgeForm
+      },
+      ['app_reviews']: {
+        screen: Reviews
+      },
+      ['app_add_review']: {
+        screen: AddReview
+      },
+      ['app_view_pdf']: {
+        screen: PDFViewer
       },
       ['app_pledge_update_form']: {
         screen: UpdatePledgeEvent

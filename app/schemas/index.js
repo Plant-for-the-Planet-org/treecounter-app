@@ -13,8 +13,7 @@ export const eventPledgeSchema = new schema.Entity('eventPledge');
 export const plantProjectSchema = new schema.Entity('plantProject');
 export const plantProjectImageSchema = new schema.Entity('plantProjectImage');
 export const pledgeEventSchema = new schema.Entity('pledgeEvent');
-export const reviewSchema = new schema.Entity('review');
-export const reviewImageSchema = new schema.Entity('reviewImage');
+export const reviewsSchema = new schema.Entity('reviews');
 export const tpoSchema = new schema.Entity('tpo');
 export const treecounterSchema = new schema.Entity('treecounter');
 export const userProfileSchema = new schema.Entity('userProfile');
@@ -54,7 +53,12 @@ eventPledgeSchema.define({
 plantProjectSchema.define({
   tpo: tpoSchema,
   plantProjectImages: [plantProjectImageSchema],
-  reviews: [reviewSchema]
+  reviews: [reviewsSchema]
+});
+
+reviewsSchema.define({
+  plantProject: plantProjectSchema,
+  userProfile: userProfileSchema
 });
 
 plantProjectImageSchema.define({
@@ -63,15 +67,6 @@ plantProjectImageSchema.define({
 
 pledgeEventSchema.define({
   eventPledges: [eventPledgeSchema]
-});
-
-reviewSchema.define({
-  plantProject: plantProjectSchema,
-  reviewImages: [reviewImageSchema]
-});
-
-reviewImageSchema.define({
-  review: reviewSchema
 });
 
 tpoSchema.define({
@@ -91,5 +86,5 @@ userProfileSchema.define({
   treecounter: treecounterSchema,
   plantProjects: [plantProjectSchema],
   eventPledges: [eventPledgeSchema],
-  reviews: [reviewSchema]
+  reviews: [reviewsSchema]
 });

@@ -42,7 +42,7 @@ export default EStyleSheet.create({
     position: 'absolute',
     backgroundColor: '#ffffff',
     height: 27,
-    width: 86,
+    width: 90,
     right: 12,
     borderRadius: 9,
     top: 10,
@@ -55,6 +55,9 @@ export default EStyleSheet.create({
     paddingBottom: 5.6,
     paddingRight: 10,
     paddingLeft: 10
+  },
+  withoutCertified: {
+    width: 68
   },
   teaser__projectImage: {
     flex: 1,

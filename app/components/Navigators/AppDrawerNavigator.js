@@ -63,7 +63,6 @@ const headerLabels = {
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.projects',
-
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
@@ -76,7 +75,7 @@ const headerLabels = {
   [getLocalRoute('app_competitions')]: 'label.competitions',
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
-  [getLocalRoute('app_selectProject')]: 'label.donate',
+  [getLocalRoute('app_selectProject')]: 'label.projects',
   [getLocalRoute('app_competition')]: '',
   [getLocalRoute('app_editCompetition')]: '',
   [getLocalRoute('app_imprint')]: 'label.imprint',

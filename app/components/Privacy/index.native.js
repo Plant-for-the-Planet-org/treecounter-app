@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HTMLView from 'react-native-htmlview';
-import { Text, View, Linking, FlatList } from 'react-native';
-import ListView from "deprecated-react-native-listview";
+import { Text, View, Linking } from 'react-native';
+import ListView from 'deprecated-react-native-listview';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';

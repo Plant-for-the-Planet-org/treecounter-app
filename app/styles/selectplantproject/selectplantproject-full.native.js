@@ -78,5 +78,19 @@ export default EStyleSheet.create({
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10
-  }
+  },
+  makePledgeButton: {
+    display: 'flex',
+    marginBottom: 20,
+    margin: 'auto',
+    alignItems: 'center',
+    width: 180,
+    alignSelf: 'center',
+    paddingHorizontal: 36,
+    paddingVertical: 12,
+    backgroundColor: '#ecf0f1',
+    borderRadius: 24,
+    marginTop: 20
+  },
+  makePledgeButtonView: {}
 });

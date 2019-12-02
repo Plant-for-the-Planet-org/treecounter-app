@@ -424,7 +424,9 @@ export default class DonateTrees extends Component {
     }
 
     return this.state.showSelectProject ? (
-      <SelectPlantProjectContainer />
+      <SelectPlantProjectContainer
+        supportTreecounter={this.props.supportTreecounter}
+      />
     ) : !plantProject ? null : (
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>

@@ -51,6 +51,9 @@ import SuccessfullActivatedContainer from '../../containers/Authentication/Succe
 import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
 import UnfulfilledPledgeEvents from './../PledgeEvents/UnfulfilledPledgeEvent';
 import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
+import Reviews from './../Reviews/Reviews';
+import AddReview from './../Reviews/AddReview/AddReview';
+import PDFViewer from '../PDFViewer';
 import createCompeition from './../Competition/Tabs/createCompetition.native';
 import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 const headerLabels = {
@@ -58,8 +61,7 @@ const headerLabels = {
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
-  [getLocalRoute('app_donateTrees')]: 'label.donate',
-
+  [getLocalRoute('app_donateTrees')]: 'label.projects',
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
@@ -72,7 +74,7 @@ const headerLabels = {
   [getLocalRoute('app_competitions')]: 'label.competitions',
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
-  [getLocalRoute('app_selectProject')]: 'label.donate',
+  [getLocalRoute('app_selectProject')]: 'label.projects',
   [getLocalRoute('app_competition')]: '',
   [getLocalRoute('app_editCompetition')]: '',
   [getLocalRoute('app_imprint')]: 'label.imprint',
@@ -333,6 +335,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_pledge_form']: {
         screen: MakePledgeForm
+      },
+      ['app_reviews']: {
+        screen: Reviews
+      },
+      ['app_add_review']: {
+        screen: AddReview
+      },
+      ['app_view_pdf']: {
+        screen: PDFViewer
       },
       ['app_pledge_update_form']: {
         screen: UpdatePledgeEvent

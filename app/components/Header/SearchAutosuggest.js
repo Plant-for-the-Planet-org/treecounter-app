@@ -79,7 +79,7 @@ class SearchAutosuggest extends Component {
   }
 
   onChange = (event, { newValue }) => {
-    this.props.onChangeName(newValue);
+    this.props.onChangeName && this.props.onChangeName(newValue);
     this.setState({
       value: newValue
     });

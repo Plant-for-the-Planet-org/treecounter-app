@@ -73,6 +73,9 @@ import { getLocalRoute } from '../../actions/apiRouting';
 const SuccessfullyActivatedAccount = lazy(() =>
   import('../../containers/Authentication/SuccessfullActivatedContainer')
 );
+const CompetitionContainer = lazy(() =>
+  import('../../containers/CompetitionContainer/index')
+);
 const DonationTreesContainer = lazy(() =>
   import('../../containers/DonateTrees/index')
 );
@@ -335,8 +338,16 @@ class TreeCounter extends Component {
               component={GiftTreesContainer}
             />
             <Route
+              path={getLocalRoute('app_support') + '/:slug?'}
+              component={DonationTreesContainer}
+            />
+            <Route
               path={getLocalRoute('app_selectProject')}
               component={SelectPlantProjectContainer}
+            />
+            <Route
+              path={getLocalRoute('app_competition') + '/:id?'}
+              component={CompetitionContainer}
             />
             <Route
               path={getLocalRoute('app_donateTrees') + '/:id?'}

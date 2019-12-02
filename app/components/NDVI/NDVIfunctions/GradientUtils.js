@@ -62,13 +62,13 @@ export const getColorForNDVI = (point, gradientWidth = 350) => {
   let percentageWidth = percentage / 100 * gradientWidth;
   let value = (percentageWidth / (gradientWidth / (colorStops.length - 1))) % 1;
 
-  console.log(colorStops.length, lowerIndex, upperIndex, point);
+  // console.log(colorStops.length, lowerIndex, upperIndex, point);
   let color = getStepColor(
     colorStops[lowerIndex].color,
     colorStops[upperIndex].color,
     value
   );
-  console.log(color);
+  // console.log(color);
   return `rgb(${color.join(',')})`;
 };
 

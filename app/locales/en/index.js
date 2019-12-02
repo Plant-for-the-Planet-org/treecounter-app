@@ -33,6 +33,7 @@ import userContributionslabels from './userContributionslabels.json';
 import welcomeScreenlabels from './welcomeScreenlabels.json';
 import widgetShareLabels from './widgetShareLabels.json';
 import NDVI from './ndvi.json';
+import reviews from './reviews.json';
 import formValidationErrors from './formValidationErrors.json';
 
 export default {
@@ -71,5 +72,6 @@ export default {
   ...welcomeScreenlabels,
   ...widgetShareLabels,
   ...NDVI,
+  ...reviews,
   ...formValidationErrors
 };

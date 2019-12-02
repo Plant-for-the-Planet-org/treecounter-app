@@ -46,7 +46,7 @@
   "link_to_my_website": "Link to my website",
   "my_trees_map": "My Trees Map",
   "here_list_of_trees_planted": "Here’s list of trees {{firstname}} has planted",
-  "all_tree_contributors": "All Tree Contributors",
+  "all_tree_contributions": "All Tree Contributions",
   "contributors": "Contributors",
   "contributors_description": "This tree counter is supported by following members. Trees planted by contributors are aggregate to this total Tree Count of this user.",
   "measurement": "Measurements",

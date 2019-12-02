@@ -65,7 +65,7 @@ export default class AllCompetitions extends Component {
     this.setState({
       refreshing: true
     });
-    this.props.updateCompetitions().then(() => {
+    this.props.updateAllCompetitions().then(() => {
       this.setState({ refreshing: false });
     });
   };

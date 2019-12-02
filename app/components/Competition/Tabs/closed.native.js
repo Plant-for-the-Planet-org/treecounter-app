@@ -22,13 +22,15 @@ export default class ClosedCompetitions extends Component {
 
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
-        val.competitions.forEach(comp => {
-          let endDate = comp.endDate;
-          endDate = new Date(endDate);
-          if (CurrentDate > endDate) {
-            archivedCompetitions.push(comp);
-          }
-        });
+        if (val.category === 'archived') {
+          val.competitions.forEach(comp => {
+            let endDate = comp.endDate;
+            endDate = new Date(endDate);
+            if (CurrentDate > endDate) {
+              archivedCompetitions.push(comp);
+            }
+          });
+        }
       });
     }
     this.setState({
@@ -42,13 +44,15 @@ export default class ClosedCompetitions extends Component {
     let CurrentDate = new Date();
     if (allCompetitions.length > 0) {
       allCompetitions.forEach(val => {
-        val.competitions.forEach(comp => {
-          let endDate = comp.endDate;
-          endDate = new Date(endDate);
-          if (CurrentDate > endDate) {
-            archivedCompetitions.push(comp);
-          }
-        });
+        if (val.category === 'archived') {
+          val.competitions.forEach(comp => {
+            let endDate = comp.endDate;
+            endDate = new Date(endDate);
+            if (CurrentDate > endDate) {
+              archivedCompetitions.push(comp);
+            }
+          });
+        }
       });
     }
     this.setState({
@@ -60,7 +64,7 @@ export default class ClosedCompetitions extends Component {
     this.setState({
       refreshing: true
     });
-    this.props.updateCompetitions().then(() => {
+    this.props.updateArchivedCompetitions().then(() => {
       this.setState({ refreshing: false });
     });
   };

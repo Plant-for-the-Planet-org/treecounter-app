@@ -174,6 +174,7 @@ export function createCompetition(value, navigation) {
           dispatch(fetchMineCompetitions());
           dispatch(fetchCompetitions('all'));
           dispatch(fetchCompetitions('featured'));
+          dispatch(fetchCompetitions('archived'));
         })
         .catch(error => {
           debug(error);

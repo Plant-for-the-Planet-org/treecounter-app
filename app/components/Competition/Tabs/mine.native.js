@@ -55,7 +55,7 @@ export default class MineCompetitions extends Component {
     this.setState({
       refreshing: true
     });
-    this.props.updateCompetitions().then(() => {
+    this.props.updateMineCompetitions().then(() => {
       this.setState({ refreshing: false });
     });
   };

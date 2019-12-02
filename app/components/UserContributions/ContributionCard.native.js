@@ -374,54 +374,39 @@ class ContributionCard extends React.Component {
           });
         }}
       >
-        <View style={[styles.leftBorder, styles.leftColorBorder]} />
-        {treeCountLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
-          >
-            {treeCountLine}
-          </Text>
-        ) : null}
-        {plantProjectLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantProjectLine}
-          </Text>
-        ) : null}
-        {plantActionLine ? (
-          <Text
-            numberOfLines={2}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantActionLine}
-          </Text>
-        ) : null}
-        {dedicateActionLine ? (
-          <Text numberOfLines={1} style={styles.restrictTextLength}>
-            {dedicateActionLine}
-          </Text>
-        ) : null}
-        <TouchableOpacity
-          style={styles.deleteTextStyle}
-          onPress={() => {
-            this.props.navigation.navigate('delete_contribution', {
-              deleteContribution: () =>
-                this.props.deleteContribution(contribution.id)
-            });
-          }}
-        >
-          <Image
-            source={baselineDelete}
-            resizeMode="center"
-            style={{ height: 20, width: 20 }}
-          />
-        </TouchableOpacity>
-        {mayUpdate ? (
+        <CardLayout style={[styles.addPadding, styles.minHeight]}>
+          <View style={[styles.leftBorder, styles.leftColorBorder]} />
+          {treeCountLine ? (
+            <Text
+              numberOfLines={1}
+              style={[styles.boldText, styles.gap, styles.restrictTextLength]}
+            >
+              {treeCountLine}
+            </Text>
+          ) : null}
+          {plantProjectLine ? (
+            <Text
+              numberOfLines={1}
+              style={[styles.gap, styles.restrictTextLength]}
+            >
+              {plantProjectLine}
+            </Text>
+          ) : null}
+          {plantActionLine ? (
+            <Text
+              numberOfLines={2}
+              style={[styles.gap, styles.restrictTextLength]}
+            >
+              {plantActionLine}
+            </Text>
+          ) : null}
+          {dedicateActionLine ? (
+            <Text numberOfLines={1} style={styles.restrictTextLength}>
+              {dedicateActionLine}
+            </Text>
+          ) : null}
           <TouchableOpacity
-            style={styles.updateTextStyle}
+            style={styles.deleteTextStyle}
             onPress={() => {
               this.props.navigation.navigate('delete_contribution', {
                 deleteContribution: () =>
@@ -430,19 +415,36 @@ class ContributionCard extends React.Component {
             }}
           >
             <Image
-              source={editProfile}
+              source={baselineDelete}
               resizeMode="center"
-              style={styles.imageStyle}
+              style={{ height: 20, width: 20 }}
             />
           </TouchableOpacity>
-        ) : null}
-        <View style={styles.labelStyle}>
-          <Text style={styles.labelTextStyle}>
-            {cardType && cardType.length > 0
-              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-              : ''}
-          </Text>
-        </View>
+          {mayUpdate ? (
+            <TouchableOpacity
+              style={styles.updateTextStyle}
+              onPress={() => {
+                this.props.navigation.navigate('delete_contribution', {
+                  deleteContribution: () =>
+                    this.props.deleteContribution(contribution.id)
+                });
+              }}
+            >
+              <Image
+                source={editProfile}
+                resizeMode="center"
+                style={styles.imageStyle}
+              />
+            </TouchableOpacity>
+          ) : null}
+          <View style={styles.labelStyle}>
+            <Text style={styles.labelTextStyle}>
+              {cardType && cardType.length > 0
+                ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                : ''}
+            </Text>
+          </View>
+        </CardLayout>
       </TouchableHighlight>
     ) : (
       <CardLayout

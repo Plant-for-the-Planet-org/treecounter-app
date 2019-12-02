@@ -64,6 +64,13 @@ $trans-time: 300ms;
   margin-top: -15px;
   max-width: 250px;
 }
+.error-msg-checked {
+  color: $colorError;
+  text-align: left;
+  margin-bottom: 15px;
+  font-size: 12px;
+  max-width: 250px;
+}
 .pftp-textfield-container {
   width: 100%;
 }

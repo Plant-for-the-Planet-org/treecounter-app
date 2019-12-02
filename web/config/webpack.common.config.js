@@ -1,10 +1,10 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 function getConfig(prodEnv) {
   const config = {
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /node_modules/,
@@ -23,17 +23,39 @@ function getConfig(prodEnv) {
         },
         {
           test: /\.(scss|css)$/,
-          use: ExtractTextPlugin.extract({
-            use: ['css-loader', 'sass-loader']
-          })
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                hmr: process.env.NODE_ENV === 'development'
+              }
+            },
+            'css-loader',
+            'sass-loader'
+          ]
         },
         {
           test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            name: '[hash].[ext]'
-          }
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 8192,
+                name: '[hash].[ext]'
+              }
+            },
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                bypassOnDebug: !prodEnv, // webpack@1.x
+                disable: !prodEnv, // webpack@2.x and newer
+                pngquant: {
+                  quality: [0.65, 0.9],
+                  speed: 2
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -74,7 +96,10 @@ function getConfig(prodEnv) {
         filename: './index.html'
       }),
       new FaviconsWebpackPlugin('./app/assets/images/Planet-Logo.png'),
-      new ExtractTextPlugin(prodEnv ? '[name].[hash].css' : '[name].css')
+      new MiniCssExtractPlugin({
+        filename: prodEnv ? '[name].[hash].css' : '[name].css',
+        chunkFilename: prodEnv ? '[id].[hash].css' : '[id].css'
+      })
     ]
   };
   return config;

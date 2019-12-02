@@ -19,5 +19,7 @@
   "challenge_create_successfully": "Challenge created successfully",
   "please_select_user": "Please select user",
   "please_select_year": "Please select year",
-  "could_not_add_user": "Could not add user"
+  "could_not_add_user": "Could not add user",
+  "name_is_required": "Name is required",
+  "goal_is_required": "Goal is required"
 }

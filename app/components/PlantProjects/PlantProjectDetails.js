@@ -39,6 +39,7 @@ class PlantProjectDetails extends React.Component {
             caption={homepageCaption}
           />
         )}
+
         {videoUrl && (
           <VideoContainer
             onViewMoreClick={this.props.onViewMoreClick.bind(this)}

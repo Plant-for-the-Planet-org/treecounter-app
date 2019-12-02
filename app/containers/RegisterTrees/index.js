@@ -14,7 +14,6 @@ import {
   schemaOptionsSingleTree,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
-import { handleServerResponseError } from '../../helpers/utils';
 
 class RegisterTreesContainer extends PureComponent {
   constructor() {
@@ -29,11 +28,12 @@ class RegisterTreesContainer extends PureComponent {
   onSubmit = (mode, registerTreeForm, plantProject) => {
     registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
-    // console.log(registerTreeForm.validate());
     let value = registerTreeForm.getValue();
-    value = Object.assign({}, value);
-    value = mergeContributionImages(value);
+    console.log('got the form value:register form:', value);
+
     if (value) {
+      value = mergeContributionImages(value);
+
       if (plantProject) {
         value.plantProject = plantProject;
       }
@@ -46,46 +46,7 @@ class RegisterTreesContainer extends PureComponent {
         )
         .then(val => val)
         .catch(err => {
-          if (mode === 'single-tree') {
-            let newSchemaOptions = handleServerResponseError(
-              err,
-              this.state.schemaOptionsSingleTree
-            );
-            this.setState(
-              {
-                schemaOptionsSingleTree: {
-                  ...newSchemaOptions
-                }
-              },
-              () => {
-                if (registerTreeForm) {
-                  registerTreeForm.validate();
-                } else {
-                  this.refs.registerTrees.refs.registerTreeForm.validate();
-                }
-              }
-            );
-          }
-          if (mode === 'multiple-trees') {
-            let newSchemaOptions = handleServerResponseError(
-              err,
-              this.state.schemaOptionsMultipleTrees
-            );
-            this.setState(
-              {
-                schemaOptionsMultipleTrees: {
-                  ...newSchemaOptions
-                }
-              },
-              () => {
-                if (registerTreeForm) {
-                  registerTreeForm.validate();
-                } else {
-                  this.refs.registerTrees.refs.registerTreeForm.validate();
-                }
-              }
-            );
-          }
+          console.error(err);
         });
     }
   };

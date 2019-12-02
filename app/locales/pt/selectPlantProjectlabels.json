@@ -1,5 +1,11 @@
 {
   "name": "Nome",
   "price": "Preço",
-  "select_project": "Selecione o projeto"
+  "select_project": "Selecione o projeto",
+  "featured": "Em destaque",
+  "list": "Todos",
+  "country": "País",
+  "select_by_country": "Classificar por país",
+  "cost_per_tree": "por árvore",
+  "no_tax_deduction": "Nenhuma dedução fiscal disponível"
 }

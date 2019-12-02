@@ -140,16 +140,25 @@ import forward from './images/forward.png';
 import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
+import location_grey from './images/icons/location_grey.png';
+import survival_grey from './images/icons/survival_grey.png';
+import tax_grey from './images/icons/tax_grey.png';
 import worldImg from './images/icons/world.png';
 import germany from './images/germany.png';
 import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
+import attach from './images/attach.png';
+import cameraSolid from './images/icons/camera-solid.png';
+import imageGallery from './images/icons/images-gallery.png';
 import nextArrow from './images/icons/nextArrow.png';
 import nextArrowWhite from './images/icons/nextArrowWhite.png';
 import closeBlack from './images/icons/closeblack.png';
 import planetLogo from './images/Planet-Logo.png';
+import circleDelete from './images/icons/circle-delete.png';
+import leaf from './images/leaf.png';
+import leafGray from './images/leaf_gray.png';
 export {
   germany,
   worldImg,
@@ -295,12 +304,21 @@ export {
   successAnimated,
   trees,
   greencalendar,
+  location_grey,
+  survival_grey,
+  tax_grey,
   googlePlayBadge_en,
   googlePlayBadge_de,
   appleStoreBadge_en,
   appleStoreBadge_de,
+  attach,
+  cameraSolid,
+  imageGallery,
   nextArrow,
   nextArrowWhite,
   closeBlack,
-  planetLogo
+  planetLogo,
+  circleDelete,
+  leaf,
+  leafGray
 };

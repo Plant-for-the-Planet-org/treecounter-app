@@ -1,38 +1,67 @@
 /* eslint-disable no-underscore-dangle */
 // Library imports
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NotificationContainer } from 'react-notifications';
 import PropTypes from 'prop-types';
-
-// Components imports
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
-import GiftTreesContainer from '../../containers/GiftTrees';
-import TargetContainer from '../../containers/TargetContainer';
-import RegisterTreesContainer from '../../containers/RegisterTrees';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import HeaderContainer from '../../containers/HeaderContainer';
-import UserContributionsContainer from '../../containers/UserContributions';
-import EditUserContributionContainer from '../../containers/EditUserContribution';
-import SignUpContainer from '../../containers/Authentication/SignUpContainer';
-import LoginContainer from '../../containers/Authentication/LoginContainer';
-import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
-import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
-import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
-import SignupSuccessPage from '../Authentication/SignupSuccessPage';
+import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
+import PageNotFound from '../ErrorBoundry/404';
 import BrowserRouter from '../Common/BrowserRouter';
-import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
-import FAQContainer from '../../containers/FAQ';
-import PledgeContainer from '../../containers/Pledge';
-import RedemptionContainer from '../../containers/RedemptionContainer';
-
 import Footer from '../Footer';
 
+// Components imports
+const SelectPlantProjectContainer = lazy(() =>
+  import('../../containers/SelectPlantProject')
+);
+const GiftTreesContainer = lazy(() => import('../../containers/GiftTrees'));
+const TargetContainer = lazy(() => import('../../containers/TargetContainer'));
+const RegisterTreesContainer = lazy(() =>
+  import('../../containers/RegisterTrees')
+);
+const UserContributionsContainer = lazy(() =>
+  import('../../containers/UserContributions')
+);
+const EditUserContributionContainer = lazy(() =>
+  import('../../containers/EditUserContribution')
+);
+const SignUpContainer = lazy(() =>
+  import('../../containers/Authentication/SignUpContainer')
+);
+const LoginContainer = lazy(() =>
+  import('../../containers/Authentication/LoginContainer')
+);
+const ForgotPasswordContainer = lazy(() =>
+  import('../../containers/Authentication/ForgotPasswordContainer')
+);
+const ResetPasswordContainer = lazy(() =>
+  import('../../containers/Authentication/ResetPasswordContainer')
+);
+const EmailSentContainer = lazy(() =>
+  import('../../containers/Authentication/EmailSentContainer')
+);
+const SignupSuccessPage = lazy(() =>
+  import('../Authentication/SignupSuccessPage')
+);
+const SideMenuContainer = lazy(() =>
+  import('../../containers/Menu/SideMenuContainer')
+);
+const FAQContainer = lazy(() => import('../../containers/FAQ'));
+const PledgeContainer = lazy(() => import('../../containers/Pledge'));
+const RedemptionContainer = lazy(() =>
+  import('../../containers/RedemptionContainer')
+);
+
 // Components which use SVG
-import PublicTreecounterContainer from '../../containers/PublicTreeCounterContainer';
-import UserHomeContainer from '../../containers/UserHome';
-import Trillion from '../TreecounterGraphics/Trillion';
+
+const PublicTreecounterContainer = lazy(() =>
+  import('../../containers/PublicTreeCounterContainer')
+);
+const UserHomeContainer = lazy(() => import('../../containers/UserHome'));
+const Trillion = lazy(() => import('../TreecounterGraphics/Trillion'));
 
 import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
@@ -40,25 +69,50 @@ import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors';
 import { getLocalRoute } from '../../actions/apiRouting';
-import SuccessfullyActivatedAccount from '../../containers/Authentication/SuccessfullActivatedContainer';
-import DonationTreesContainer from '../../containers/DonateTrees/index';
-import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import ManageProjectContainer from '../../containers/ManageProjects';
 
-import EditUserProfileContainer from '../../containers/EditUserProfile';
-import LeaderboardContainer from '../../containers/Leaderboard';
-import ProgressModal from '../../components/Common/ModalDialog/ProgressModal';
+const SuccessfullyActivatedAccount = lazy(() =>
+  import('../../containers/Authentication/SuccessfullActivatedContainer')
+);
+const CompetitionContainer = lazy(() =>
+  import('../../containers/CompetitionContainer/index')
+);
+const DonationTreesContainer = lazy(() =>
+  import('../../containers/DonateTrees/index')
+);
+const ActivateAccountContainer = lazy(() =>
+  import('../../containers/Authentication/ActivateAccountContainer')
+);
+const ManageProjectContainer = lazy(() =>
+  import('../../containers/ManageProjects')
+);
+
+const EditUserProfileContainer = lazy(() =>
+  import('../../containers/EditUserProfile')
+);
+const LeaderboardContainer = lazy(() => import('../../containers/Leaderboard'));
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
-import PrivacyContainer from '../../containers/Privacy';
-import ImprintContainer from '../../containers/Imprint';
-import AppPaymentContainer from '../../containers/AppPayment';
-import BodyErrorBoundary from '../ErrorBoundry/bodyErrorBoundry';
-import PageNotFound from '../ErrorBoundry/404';
-import WidgetShareContainer from '../../containers/WidgetsShare';
-import ChallengeContainer from '../../containers/Challenge/createChallenge';
-import RedirectedPublicDenyEmail from '../../containers/Challenge/RedirectedPublicDenyEmail';
-import RedirectedPrivateAcceptEmail from '../../containers/Challenge/RedirectedPrivateAcceptEmail';
+const PrivacyContainer = lazy(() => import('../../containers/Privacy'));
+const ImprintContainer = lazy(() => import('../../containers/Imprint'));
+const AppPaymentContainer = lazy(() => import('../../containers/AppPayment'));
+const BodyErrorBoundary = lazy(() =>
+  import('../ErrorBoundry/bodyErrorBoundry')
+);
+const WidgetShareContainer = lazy(() =>
+  import('../../containers/WidgetsShare')
+);
+const ChallengeContainer = lazy(() =>
+  import('../../containers/Challenge/createChallenge')
+);
+const RedirectedPublicDenyEmail = lazy(() =>
+  import('../../containers/Challenge/RedirectedPublicDenyEmail')
+);
+const RedirectedPrivateAcceptEmail = lazy(() =>
+  import('../../containers/Challenge/RedirectedPrivateAcceptEmail')
+);
+
 import { initLocale } from '../../actions/getLocale';
+import { fetchLocation } from '../../actions/fetchLocation';
+import { fetchCurrencies } from '../../actions/currencies';
 
 // Class implementation
 class TreeCounter extends Component {
@@ -80,6 +134,8 @@ class TreeCounter extends Component {
       isAndroid: IS_ANDROID,
       isCancelled: false
     };
+    this.props.fetchLocation();
+    this.props.fetchCurrencies();
     initLocale();
   }
 
@@ -282,8 +338,16 @@ class TreeCounter extends Component {
               component={GiftTreesContainer}
             />
             <Route
+              path={getLocalRoute('app_support') + '/:slug?'}
+              component={DonationTreesContainer}
+            />
+            <Route
               path={getLocalRoute('app_selectProject')}
               component={SelectPlantProjectContainer}
+            />
+            <Route
+              path={getLocalRoute('app_competition') + '/:id?'}
+              component={CompetitionContainer}
             />
             <Route
               path={getLocalRoute('app_donateTrees') + '/:id?'}
@@ -336,8 +400,16 @@ class TreeCounter extends Component {
           <div className="app-container">
             <ProgressModal />
             <HeaderContainer />
-            <Route component={SideMenuContainer} />
-            {this._appRoutes}
+            <Suspense
+              fallback={
+                <div style={{ margin: 'auto' }}>
+                  <LoadingIndicator />
+                </div>
+              }
+            >
+              <Route component={SideMenuContainer} />
+              {this._appRoutes}
+            </Suspense>
             <Footer />
           </div>
         </BrowserRouter>
@@ -358,6 +430,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      fetchCurrencies,
+      fetchLocation,
       loadUserProfile,
       NotificationAction,
       loadTpos,

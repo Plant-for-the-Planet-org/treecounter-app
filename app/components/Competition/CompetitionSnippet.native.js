@@ -1,5 +1,5 @@
 import React from 'react';
-import CardLayout from '../Common/Card';
+import { CardLayoutCompetition } from '../Common/Card';
 import styles from '../../styles/competition/competition-snippet.native';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { getImageUrl } from '../../actions/apiRouting';
@@ -119,7 +119,7 @@ class CompetitionSnippet extends React.Component {
         underlayColor={'transparent'}
         onPress={() => this.containerPress(this.props.competition.id)}
       >
-        <CardLayout style={[styles.projectSnippetContainer]}>
+        <CardLayoutCompetition>
           <View style={styles.projectSpecsContainer}>
             {this.props.competition && this.props.competition.image ? (
               <View style={styles.projectImageContainer}>
@@ -148,25 +148,18 @@ class CompetitionSnippet extends React.Component {
               <View style={styles.projectNameContainer}>
                 <Text
                   ellipsizeMode="tail"
-                  numberOfLines={1}
+                  numberOfLines={3}
                   style={styles.project_teaser__contentText}
                 >
-                  {this.props.competition && this.props.competition.name}
+                  {i18n.t('label.comp_by_name', {
+                    compname:
+                      this.props.competition && this.props.competition.name,
+                    ownername:
+                      this.props.competition && this.props.competition.ownerName
+                  })}
                 </Text>
               </View>
-              <View style={styles.projectByNameContainer}>
-                <Text
-                  ellipsizeMode="tail"
-                  numberOfLines={1}
-                  style={styles.project_teaser__contentByText}
-                >
-                  {i18n.t('label.by_a_name')}{' '}
-                  {this.props.competition && this.props.competition.ownerName}
-                </Text>
-              </View>
-              {/*<View style={styles.projectdetailsContainer}>*/}
-              {/**/}
-              {/*</View>*/}
+
               <View style={styles.topCompetitorContainer}>
                 {this.props.competition &&
                 this.props.competition.topEnrollments &&
@@ -188,7 +181,7 @@ class CompetitionSnippet extends React.Component {
                 <View style={styles.byOrgContainer}>
                   <Image
                     source={compCalendar}
-                    style={{ width: 15, height: 15 }}
+                    style={{ width: 14, height: 14 }}
                   />
                   <Text style={styles.bottomText}>
                     {i18n.t('label.ends')}{' '}
@@ -212,7 +205,7 @@ class CompetitionSnippet extends React.Component {
               </View>
             </View>
           </View>
-        </CardLayout>
+        </CardLayoutCompetition>
       </TouchableHighlight>
     );
   }

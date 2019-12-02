@@ -15,6 +15,7 @@ import {
 import i18n from '../../locales/i18n';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
+import Errormessage from '../Common/Text/Errormessage';
 import ChallengeList from './challengeList';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 
@@ -58,7 +59,9 @@ export default class Challenge extends Component {
         endDate: 2020
       },
       tempForm: {},
-      checked: 'indefinite'
+      checked: 'indefinite',
+      challenged: '',
+      showchecked: false
     };
     this.handleModeUserChange = this.handleModeUserChange.bind(this);
   }
@@ -66,6 +69,8 @@ export default class Challenge extends Component {
   handleModeUserChange(tab) {
     this.setState({
       modeUser: tab,
+      showchecked: false,
+      challenged: '',
       form: {
         ...this.state.form,
         challengeMethod: tab
@@ -80,8 +85,17 @@ export default class Challenge extends Component {
   suggestionClicked = (context, event) => {
     this.setState({
       challenged: event.suggestion.treecounterId,
-      challengedName: event.suggestion.name
+      challengedName: event.suggestion.name,
+      showchecked: false
     });
+  };
+
+  changeName = newValue => {
+    if (newValue === '') {
+      this.setState({
+        challenged: ''
+      });
+    }
   };
 
   handleTreesChange = value => {
@@ -91,6 +105,16 @@ export default class Challenge extends Component {
         goal: value
       }
     });
+
+    if (this.state.challenged === '') {
+      this.setState({
+        showchecked: true
+      });
+    } else {
+      this.setState({
+        showchecked: false
+      });
+    }
   };
 
   handleEndDateChange = value => {
@@ -133,6 +157,15 @@ export default class Challenge extends Component {
         ...this.state.form,
         challenged: this.state.challenged
       };
+      if (this.state.challenged === '') {
+        this.setState({
+          showchecked: true
+        });
+      } else {
+        this.setState({
+          showchecked: false
+        });
+      }
     }
     if (this.state.checked === 'indefinite') {
       delete requestData.endDate;
@@ -145,7 +178,15 @@ export default class Challenge extends Component {
       return;
     }
 
-    this.props.challengeUser(requestData);
+    if (this.state.modeUser === 'invitation') {
+      if (requestData.goal !== '' && this.refs.challengeUser.getValue()) {
+        this.props.challengeUser(requestData);
+      }
+    } else {
+      if (requestData.goal !== '' && requestData.challenged !== '') {
+        this.props.challengeUser(requestData);
+      }
+    }
   };
 
   render() {
@@ -171,6 +212,7 @@ export default class Challenge extends Component {
                 <SearchAutosuggest
                   onSuggestionClicked={this.suggestionClicked}
                   clearSuggestions={false}
+                  onChangeName={this.changeName}
                 />
               ) : (
                 <TCombForm
@@ -182,6 +224,9 @@ export default class Challenge extends Component {
                 />
               )}
             </Tabs>
+            {this.state.showchecked && this.state.modeUser === 'direct' ? (
+              <Errormessage>{i18n.t('label.name_is_required')}</Errormessage>
+            ) : null}
             <div className="number_trees">
               <TextBlock>{i18n.t('label.challenge_to_plant')}</TextBlock>
               <span className="input_trees">
@@ -189,9 +234,17 @@ export default class Challenge extends Component {
                   type="number"
                   value={this.state.form.goal}
                   onChange={evt => this.handleTreesChange(evt.target.value)}
+                  min="1"
                 />
                 <TextBlock>{i18n.t('label.trees')}</TextBlock>
               </span>
+              {this.state.form.goal === '' ? (
+                <Errormessage>
+                  <div style={{ textAlign: 'center' }}>
+                    {i18n.t('label.goal_is_required')} {true}
+                  </div>
+                </Errormessage>
+              ) : null}
             </div>
             <div className="trees_by_time">
               <input

@@ -44,10 +44,8 @@ export default {
       type: 'string',
       title: 'label.competition_image',
       widget: 'file',
-      attr: { maxlength: 255 },
       icon: null,
       help: null,
-      maxLength: 255,
       propertyOrder: 5
     },
     description: {

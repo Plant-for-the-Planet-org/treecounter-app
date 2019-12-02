@@ -1,15 +1,17 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import {
   giftInvitationFormSchema,
   giftInvitationSchemaOptions
 } from '../../../server/parsedSchemas/giftTrees';
 import t from 'tcomb-form-native';
-import CardLayout from '../../Common/Card';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, Keyboard, TouchableOpacity } from 'react-native';
 import { iosInformation } from '../../../assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import i18n from '../../../locales/i18n';
+import styles from '../../../styles/gifttrees/giftrees';
+import buttonStyles from '../../../styles/common/button.native';
+import { forward } from './../../../assets';
 
 let TCombForm = t.form.Form;
 
@@ -19,11 +21,37 @@ export default class GiftEmail extends Component {
     this.setGiftInvitation = element => {
       this.giftInvitation = element;
     };
-    this.state = { form: null, giftMessage: '' };
+    this.state = { form: null, giftMessage: '', buttonType: 'next' };
     this.onNextClick = this.onNextClick.bind(this);
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this._keyboardDidHide
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({
+      buttonType: '>'
+    });
+  };
+
+  _keyboardDidHide = () => {
+    this.setState({
+      buttonType: 'next'
+    });
+  };
 
   onNextClick() {
     if (this.giftInvitation.getValue()) {
@@ -53,46 +81,64 @@ export default class GiftEmail extends Component {
     return returnValue;
   }
   render() {
-    const textColor = '#c4bfbf';
     return (
-      <KeyboardAwareScrollView
-        contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid
-      >
-        <CardLayout>
+      <View style={styles.view_container}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.formScrollView}
+          enableOnAndroid
+          keyboardDismissMode="on-drag"
+          keyboardShouldPersistTaps="always"
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled
+        >
           <View style={{ flexDirection: 'row' }}>
             <View style={{ width: 40, height: 40, alignSelf: 'center' }}>
-              <Image
-                style={{ width: undefined, height: undefined, flex: 1 }}
-                source={iosInformation}
-              />
+              <Image style={styles.gtDescImage} source={iosInformation} />
             </View>
-
-            <Text
-              style={{
-                padding: 5,
-                color: textColor,
-                marginRight: 10,
-                width: '90%'
-              }}
-            >
+            <Text style={styles.gtDescription}>
               {i18n.t('label.gift_trees_description')}
             </Text>
           </View>
-        </CardLayout>
 
-        <CardLayout>
           <TCombForm
             ref={this.setGiftInvitation}
             type={giftInvitationFormSchema}
             options={giftInvitationSchemaOptions}
             value={this.state.form}
           />
-          <PrimaryButton onClick={this.onNextClick}>
-            {i18n.t('label.next')}
-          </PrimaryButton>
-        </CardLayout>
-      </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
+        {this.state.buttonType === 'next' ? (
+          <TouchableOpacity
+            style={[
+              buttonStyles.actionButtonTouchable,
+              { top: undefined, bottom: '14%' }
+            ]}
+            onPress={this.onNextClick}
+          >
+            <View style={buttonStyles.actionButtonView}>
+              <Text style={buttonStyles.actionButtonText}>
+                {i18n.t('label.next')}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ) : null}
+
+        {this.state.buttonType === '>' ? (
+          <TouchableOpacity
+            style={[
+              buttonStyles.actionButtonSmallTouchable,
+              { top: undefined, bottom: '20%' }
+            ]}
+            onPress={this.onNextClick}
+          >
+            <Image
+              source={forward}
+              resizeMode="cover"
+              style={buttonStyles.actionButtonSmallImage}
+            />
+          </TouchableOpacity>
+        ) : null}
+      </View>
     );
   }
   componentDidUpdate(prevProps, prevState) {

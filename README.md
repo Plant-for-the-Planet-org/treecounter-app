@@ -1,6 +1,6 @@
 # Plant-for-the-Planet App
 
-Welcome to this repository which contains the code of the web clients and the native iOS and Android apps of the Trillion Tree Campaign at https://www.trilliontreecampaign.org/ written with React-Native.
+Welcome to this repository which contains the code of the web clients and the native iOS and Android apps of the Trillion Tree Campaign at https://www.trilliontreecampaign.org/ written with React-Native. For contributions please read our [contribution guide](https://github.com/Plant-for-the-Planet-org/treecounter-app/blob/develop/CONTRIBUTING.md) as well as our [code of conduct](https://github.com/Plant-for-the-Planet-org/treecounter-app/blob/develop/CODE_OF_CONDUCT.md) and the following information:
 
 ## Directory Structure
 

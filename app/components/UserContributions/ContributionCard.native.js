@@ -7,10 +7,10 @@ import {
   Image,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableHighlight
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout, baselineDelete, editProfile } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
@@ -134,7 +134,7 @@ class ContributionCard extends React.Component {
   }
 
   plantProjectLine(plantProjectName, country) {
-    return getISOToCountryName(country).country;
+    return country && getISOToCountryName(country).country;
   }
 
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
@@ -262,6 +262,7 @@ class ContributionCard extends React.Component {
       registrationDate,
       redemptionCode,
       redemptionDate
+      // contributionImages,
       // ndviUid
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
@@ -301,14 +302,12 @@ class ContributionCard extends React.Component {
     return contributionType === 'donation' ? (
       <CardLayout
         style={styles.addPadding}
-        // TODO: uncomment this if the contribution cards are ready to get merged
-        // onPress={() => {
-        //   ndviUid &&
-        //     this.props.navigation.navigate('contribution_details', {
-        //       contribution,
-        //       titleParam: plantProjectName || tpoName || treeSpecies
-        //     });
-        // }}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
@@ -366,16 +365,14 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     ) : contributionType === 'planting' ? (
-      <CardLayout
-        style={[styles.addPadding, styles.minHeight]}
-        // TODO: uncomment this if the contribution cards are ready to get merged
-        // onPress={() => {
-        //   ndviUid &&
-        //     this.props.navigation.navigate('contribution_details', {
-        //       contribution,
-        //       titleParam: plantProjectName || tpoName || treeSpecies
-        //     });
-        // }}
+      <TouchableHighlight
+        underlayColor={'transparent'}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
@@ -426,9 +423,9 @@ class ContributionCard extends React.Component {
           <TouchableOpacity
             style={styles.updateTextStyle}
             onPress={() => {
-              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                selectedTreeId: contribution.id,
-                contribution
+              this.props.navigation.navigate('delete_contribution', {
+                deleteContribution: () =>
+                  this.props.deleteContribution(contribution.id)
               });
             }}
           >
@@ -446,18 +443,16 @@ class ContributionCard extends React.Component {
               : ''}
           </Text>
         </View>
-      </CardLayout>
+      </TouchableHighlight>
     ) : (
       <CardLayout
         style={styles.addPadding}
-        // TODO: uncomment this if the contribution cards are ready to get merged
-        // onPress={() => {
-        //   ndviUid &&
-        //     this.props.navigation.navigate('contribution_details', {
-        //       contribution,
-        //       titleParam: plantProjectName || tpoName || treeSpecies
-        //     });
-        // }}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (

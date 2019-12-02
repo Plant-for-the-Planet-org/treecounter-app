@@ -1,5 +1,19 @@
 {
   "tax_deductible": "Dedutível do imposto",
   "location": "Localização",
-  "planted": "Plantado"
+  "planted": "Plantado",
+  "target": "objetivo",
+  "in": "dentro",
+  "donate": "Doar",
+  "different_project": "Selecione um projeto diferente",
+  "project_name": "Nome do Projeto de Plantio de Árvores",
+  "count_target": "objetivo",
+  "tree_cost": "Custo da Árvore",
+  "video_url": "URL do vídeo",
+  "allow_donations": "Gostaria de receber doações (Você pode ser contatado por uma equipe da Plant-for-the-Planet para verificação dos detalhes do seu projeto.)",
+  "is_published": "Publicar projeto",
+  "survival_explaination": "Porcentagem de árvores plantadas que sobrevivem no primeiro ano após o plantio.",
+  "view_more": "Ver mais",
+  "exit": "Saída",
+  "plant_project_update_success": "Projeto plantar atualizado com sucesso"
 }

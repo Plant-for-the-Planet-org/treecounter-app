@@ -79,6 +79,7 @@ class SearchAutosuggest extends Component {
   }
 
   onChange = (event, { newValue }) => {
+    this.props.onChangeName && this.props.onChangeName(newValue);
     this.setState({
       value: newValue
     });
@@ -148,6 +149,7 @@ class SearchAutosuggest extends Component {
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
         onSuggestionSelected={this.onSuggestionClicked}
+        onChange={this.onChange}
         id="custom-render-example"
       />
     );
@@ -159,7 +161,9 @@ const mapDispatchToProps = dispatch => {
 };
 
 SearchAutosuggest.propTypes = {
+  onChangeName: PropTypes.func,
   onSuggestionClicked: PropTypes.func,
+  onChange: PropTypes.func,
   clearSuggestions: PropTypes.bool,
   hideCompetitions: PropTypes.bool
 };

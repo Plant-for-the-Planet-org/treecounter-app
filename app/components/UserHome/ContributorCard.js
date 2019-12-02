@@ -12,13 +12,19 @@ export default class ContributorCard extends React.Component {
   render() {
     let { contributor } = this.props;
     let {
-      avatar,
+      giverAvatar,
       treeCount,
       giverTreecounterId,
       giverSlug,
       giverName
     } = contributor;
-    console.log('avatar:', avatar, treeCount, giverTreecounterId, giverSlug);
+    console.log(
+      'avatar:',
+      giverAvatar,
+      treeCount,
+      giverTreecounterId,
+      giverSlug
+    );
     // remove this line
     giverTreecounterId = giverSlug;
     return (
@@ -26,7 +32,7 @@ export default class ContributorCard extends React.Component {
         <div className="flex-row">
           <div className="limit-width">
             <div className="flex-row">
-              <UserProfileImage profileImage={avatar} />
+              <UserProfileImage profileImage={giverAvatar} />
               <div className="challenge_details">
                 <div>{giverName}</div>
                 <div className="light">

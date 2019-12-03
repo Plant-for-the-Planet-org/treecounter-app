@@ -20,7 +20,7 @@ import i18n from '../../locales/i18n.js';
 
 import { isMyself, isUserFollower, amISupporting } from './utils';
 import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
-import { updateRoute, pushStaticRoute } from '../../helpers/routerHelper';
+import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {

@@ -20,7 +20,7 @@ import i18n from '../../locales/i18n.js';
 
 import { isMyself, isUserFollower, amISupporting } from './utils';
 import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
-import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
+import { updateRoute, pushStaticRoute } from '../../helpers/routerHelper';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -54,7 +54,7 @@ class PublicTreeCounter extends React.Component {
 
   onRegisterSupporter() {
     this.props.supportTreecounterAction(this.props.treecounter);
-    updateRoute('app_donateTrees', this.props.navigation, 0, {
+    updateRoute('app_supportTrees', this.props.navigation, 44, {
       titleParam: i18n.t('label.support_trees_to', {
         user: this.props.treecounter.displayName
       })

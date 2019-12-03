@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "@bugsnag/js": "^6.4.3",
-    "@haskkor/react-native-recaptchav3": "1.0.3",
     "@react-native-community/async-storage": "^1.6.2",
     "@react-native-community/geolocation": "^2.0.2",
     "autosuggest-highlight": "^3.1.1",

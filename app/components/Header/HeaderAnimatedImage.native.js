@@ -5,7 +5,7 @@ import { backArrow } from '../../assets';
 let HEADER_IMAGE_MAX_HEIGHT = 160;
 let HEADER_IMAGE_MIN_HEIGHT = 70;
 
-let HEADER_TEXT_MAX_HEIGHT = 80;
+// let HEADER_TEXT_MAX_HEIGHT = 80;
 let HEADER_TEXT_MIN_HEIGHT = 40;
 
 export default function HeaderAnimatedImage(props) {
@@ -92,16 +92,16 @@ export default function HeaderAnimatedImage(props) {
     extrapolate: 'clamp'
   });
 
-  let _navigateBack = () => {
+  let navigateBack = () => {
     props.navigation.goBack();
     return true;
   };
 
   React.useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', _navigateBack);
+    BackHandler.addEventListener('hardwareBackPress', navigateBack);
     // clean up
     return () => {
-      BackHandler.removeEventListener('hardwareBackPress', _navigateBack);
+      BackHandler.removeEventListener('hardwareBackPress', navigateBack);
     };
   });
 
@@ -123,7 +123,7 @@ export default function HeaderAnimatedImage(props) {
       }}
     >
       <TouchableOpacity
-        style={{ height: 70, paddingTop: 26 }}
+        style={{ height: 70, width: 70, paddingTop: 26, zIndex: 1001 }}
         onPress={() => props.navigation.goBack()}
       >
         <Image source={backArrow} resizeMode="contain" style={{ height: 18 }} />

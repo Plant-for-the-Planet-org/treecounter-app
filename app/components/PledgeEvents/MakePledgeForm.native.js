@@ -19,6 +19,7 @@ import { bindActionCreators } from 'redux';
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 
+import NewHeader from './../Header/NewHeader';
 const validationSchema = generateFormikSchemaFromFormSchema(pledgeFormSchema, [
   'firstname',
   'lastname',
@@ -89,6 +90,10 @@ class MakePledgeForm extends Component {
 
     return (
       <View>
+        <NewHeader
+          navigation={this.props.navigation}
+          title={i18n.t('label.pledgeToPlant')}
+        />
         <KeyboardAwareScrollView
           contentContainerStyle={styles.formScrollView}
           keyboardDismissMode="on-drag"
@@ -98,9 +103,6 @@ class MakePledgeForm extends Component {
           scrollEnabled
         >
           <View>
-            <Text style={styles.titleText}>
-              {i18n.t('label.pledgeToPlant')}
-            </Text>
             <Text style={styles.subtitleText}>
               {i18n.t('label.pledgeToPlantDesc', {
                 treeCost: treeCost,

@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  Animated
+} from 'react-native';
 import { connect } from 'react-redux';
 import i18n from '../../locales/i18n';
 import PledgeTabView from './PledgeTabView.native';
@@ -26,12 +33,16 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 import LoadingIndicator from './../Common/LoadingIndicator';
 import { nextArrowWhite } from '../../assets';
-
+import HeaderAnimatedImage from './../Header/HeaderAnimatedImage.native';
 class PledgeEvents extends Component {
+  static navigationOptions = {
+    header: null
+  };
   state = {
     loading: true,
     myPledge: {},
-    slug: null
+    slug: null,
+    scrollY: new Animated.Value(0)
   };
 
   componentDidMount() {
@@ -128,7 +139,18 @@ class PledgeEvents extends Component {
       <LoadingIndicator />
     ) : (
       <View style={styles.peRootView}>
-        <EventDetails pledges={pledges} />
+        <HeaderAnimatedImage
+          navigation={navigation}
+          title={pledges.name}
+          scrollY={this.state.scrollY}
+          titleStyle={styles.eventTitle}
+          imageStyle={styles.peHeaderLogo}
+          imageSource={{
+            uri: getImageUrl('event', 'thumb', pledges.image)
+          }}
+        />
+
+        <EventDetails pledges={pledges} scrollY={this.state.scrollY} />
 
         <RBSheet
           ref={ref => {
@@ -266,19 +288,17 @@ function FulfillPledgeButton(props) {
 function EventDetails(props) {
   let pledges = props.pledges;
   return (
-    <ScrollView contentContainerStyle={styles.peRootScrollView}>
-      <View style={styles.peHeader}>
-        {/* Show Event Logo */}
-        <Image
-          style={styles.peHeaderLogo}
-          source={{
-            uri: getImageUrl('event', 'thumb', pledges.image)
-          }}
-          resizeMode="contain"
-        />
-        {/* Shows Event Name */}
-        <Text style={styles.eventTitle}>{pledges.name}</Text>
-      </View>
+    <ScrollView
+      contentContainerStyle={styles.peRootScrollView}
+      scrollEnabled
+      scrollEventThrottle={16}
+      onScroll={Animated.event([
+        { nativeEvent: { contentOffset: { y: props.scrollY } } }
+      ])}
+    >
+      {/* <View style={styles.peHeader}>
+
+      </View> */}
 
       {pledges &&
       pledges.highestPledgeEvents &&

@@ -1,6 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Keyboard,
+  Animated
+} from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
@@ -18,6 +25,7 @@ import { bindActionCreators } from 'redux';
 
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
+import HeaderAnimated from './../Header/HeaderAnimated.native';
 
 const validationSchema = generateFormikSchemaFromFormSchema(pledgeFormSchema, [
   'firstname',
@@ -26,9 +34,10 @@ const validationSchema = generateFormikSchemaFromFormSchema(pledgeFormSchema, [
   'treeCount'
 ]);
 
-// let _ = require('lodash');
-
 class MakePledgeForm extends Component {
+  static navigationOptions = {
+    header: null
+  };
   state = {
     firstname: '',
     lastname: '',
@@ -36,7 +45,8 @@ class MakePledgeForm extends Component {
     treeCount: '',
     buttonType: 'pledge',
     isAnonymous: false,
-    loggedIn: false
+    loggedIn: false,
+    scrollY: new Animated.Value(0)
   };
   componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -88,19 +98,24 @@ class MakePledgeForm extends Component {
     const currency = this.props.navigation.getParam('plantProject').currency;
 
     return (
-      <View>
+      <View style={{ backgroundColor: 'white', flex: 1 }}>
+        <HeaderAnimated
+          navigation={this.props.navigation}
+          title={i18n.t('label.pledgeToPlant')}
+          scrollY={this.state.scrollY}
+        />
         <KeyboardAwareScrollView
           contentContainerStyle={styles.formScrollView}
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="always"
-          style={styles.keyboardScrollView}
           resetScrollToCoords={{ x: 0, y: 0 }}
           scrollEnabled
+          scrollEventThrottle={16}
+          onScroll={Animated.event([
+            { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+          ])}
         >
           <View>
-            <Text style={styles.titleText}>
-              {i18n.t('label.pledgeToPlant')}
-            </Text>
             <Text style={styles.subtitleText}>
               {i18n.t('label.pledgeToPlantDesc', {
                 treeCost: treeCost,

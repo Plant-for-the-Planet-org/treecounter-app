@@ -4,10 +4,11 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 const width = Dimensions.get('window').width;
 
 export default EStyleSheet.create({
-  peRootView: { flex: 1, height: '100%' },
+  peRootView: { flex: 1, backgroundColor: 'white' },
   peRootScrollView: {
     backgroundColor: 'white',
-    paddingBottom: 108
+    paddingBottom: 300,
+    marginTop: 200
   },
   peHeader: { marginTop: 20, marginHorizontal: 20 },
   peHeaderLogo: {
@@ -65,10 +66,10 @@ export default EStyleSheet.create({
     top: '90%'
   },
   makePledgeButton2: {
-    width: '80%',
-    marginLeft: '10%',
+    width: '88%',
     position: 'absolute',
-    bottom: '5%'
+    bottom: '5%',
+    marginLeft: '10%'
   },
   makePledgeButtonView: {
     borderRadius: 100,
@@ -132,7 +133,6 @@ export default EStyleSheet.create({
   },
 
   // Make Pledge Form Styles
-  keyboardScrollView: { backgroundColor: 'white' },
   titleText: {
     fontSize: 27,
     lineHeight: 40,
@@ -152,11 +152,9 @@ export default EStyleSheet.create({
     fontFamily: 'OpenSans-SemiBold'
   },
   formScrollView: {
-    backgroundColor: 'white',
-    flexGrow: 1,
     padding: 24,
     paddingBottom: 100,
-    minHeight: '100%'
+    marginTop: 100
   },
   formHalfTextField: { width: '45%' },
 

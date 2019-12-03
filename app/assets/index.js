@@ -155,6 +155,7 @@ import planetLogo from './images/Planet-Logo.png';
 import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
+import backArrow from './images/icons/backArrow.png';
 export {
   germany,
   worldImg,
@@ -312,5 +313,6 @@ export {
   planetLogo,
   circleDelete,
   leaf,
-  leafGray
+  leafGray,
+  backArrow
 };

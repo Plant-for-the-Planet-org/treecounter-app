@@ -123,10 +123,7 @@ class PlantProjectSnippet extends PureComponent {
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     const textColor = '#4d5153';
     return (
-      <TouchableHighlight
-        underlayColor={'transparent'}
-        onPress={onPressHandler}
-      >
+      <TouchableHighlight underlayColor={'red'} onPress={onPressHandler}>
         <CardLayout style={[styles.projectSnippetContainer]} withoutShadow>
           {projectImage ? (
             <View style={styles.projectImageContainer}>

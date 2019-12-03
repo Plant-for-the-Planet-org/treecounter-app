@@ -19,6 +19,7 @@ import {
 import Accordion from 'react-native-collapsible/Accordion';
 import styles from '../../styles/payment.styles.native';
 import StripeCC from './Gateways/StripeCC';
+// currently tipsi-stripe is removed from package.json as (1) it is unused and (2) the native support modules did not compile with Android
 import stripe from 'tipsi-stripe';
 import StripeSepa from './Gateways/StripeSepa';
 import i18n from '../../locales/i18n';

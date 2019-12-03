@@ -53,6 +53,12 @@ export default EStyleSheet.create({
     flexShrink: 0,
     padding: 16
   },
+  floatingButtonContainer: {
+    padding: 16,
+    position: 'absolute',
+    bottom: 35,
+    right: 0
+  },
   plantProjectDetails: {
     flexGrow: 1,
     flexBasis: 'auto',

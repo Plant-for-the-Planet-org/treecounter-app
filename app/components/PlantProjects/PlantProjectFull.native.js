@@ -79,19 +79,18 @@ class PlantProjectFull extends React.Component {
               {...detailsProps}
             />
           </View>
-
-          {this.props.plantProject.allowDonations ? (
-            <View style={styles.buttonContainer}>
-              <PrimaryButton
-                onClick={() =>
-                  this.props.selectProject(this.props.plantProject.id)
-                }
-              >
-                {i18n.t('label.donate')}
-              </PrimaryButton>
-            </View>
-          ) : null}
         </ScrollView>
+        {this.props.plantProject.allowDonations ? (
+          <View style={styles.floatingButtonContainer}>
+            <PrimaryButton
+              onClick={() =>
+                this.props.selectProject(this.props.plantProject.id)
+              }
+            >
+              {i18n.t('label.donate')}
+            </PrimaryButton>
+          </View>
+        ) : null}
         <TabContainer {...this.props} />
       </View>
     );

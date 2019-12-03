@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Image, BackHandler } from 'react-native';
 import { backArrow } from './../../assets';
 
 export default function HeaderNew(props) {
-  _navigateBack = () => {
+  let _navigateBack = () => {
     props.navigation.goBack();
     return true;
   };
@@ -16,6 +16,9 @@ export default function HeaderNew(props) {
     };
   });
 
+  const textColor = '#4d5153';
+  const whiteColor = 'white';
+
   return (
     <View
       style={{
@@ -23,7 +26,7 @@ export default function HeaderNew(props) {
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: 'white',
+        backgroundColor: whiteColor,
         height: 70,
         zIndex: 1000,
         alignItems: 'center',
@@ -52,7 +55,7 @@ export default function HeaderNew(props) {
             lineHeight: 40,
             letterSpacing: 0,
             textAlign: 'left',
-            color: '#4d5153'
+            color: textColor
           }}
         >
           {props.title}

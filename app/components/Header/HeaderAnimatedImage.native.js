@@ -2,11 +2,11 @@ import React from 'react';
 import { Animated, TouchableOpacity, Image, BackHandler } from 'react-native';
 import { backArrow } from '../../assets';
 
-HEADER_IMAGE_MAX_HEIGHT = 160;
-HEADER_IMAGE_MIN_HEIGHT = 70;
+let HEADER_IMAGE_MAX_HEIGHT = 160;
+let HEADER_IMAGE_MIN_HEIGHT = 70;
 
-HEADER_TEXT_MAX_HEIGHT = 80;
-HEADER_TEXT_MIN_HEIGHT = 40;
+let HEADER_TEXT_MAX_HEIGHT = 80;
+let HEADER_TEXT_MIN_HEIGHT = 40;
 
 export default function HeaderAnimatedImage(props) {
   const headerHeight = props.scrollY.interpolate({
@@ -92,7 +92,7 @@ export default function HeaderAnimatedImage(props) {
     extrapolate: 'clamp'
   });
 
-  _navigateBack = () => {
+  let _navigateBack = () => {
     props.navigation.goBack();
     return true;
   };
@@ -104,6 +104,9 @@ export default function HeaderAnimatedImage(props) {
       BackHandler.removeEventListener('hardwareBackPress', _navigateBack);
     };
   });
+
+  const textColor = '#4d5153';
+  const whiteColor = 'white';
   return (
     <Animated.View
       style={{
@@ -111,7 +114,7 @@ export default function HeaderAnimatedImage(props) {
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: 'white',
+        backgroundColor: whiteColor,
         height: headerHeight,
         zIndex: headerZindex,
         display: 'flex',
@@ -120,7 +123,7 @@ export default function HeaderAnimatedImage(props) {
       }}
     >
       <TouchableOpacity
-        style={{ height: 18, marginTop: 26 }}
+        style={{ height: 70, paddingTop: 26 }}
         onPress={() => props.navigation.goBack()}
       >
         <Image source={backArrow} resizeMode="contain" style={{ height: 18 }} />
@@ -144,7 +147,7 @@ export default function HeaderAnimatedImage(props) {
             lineHeight: 40,
             letterSpacing: 0,
             textAlign: 'left',
-            color: '#4d5153'
+            color: textColor
           }}
         >
           {props.title}

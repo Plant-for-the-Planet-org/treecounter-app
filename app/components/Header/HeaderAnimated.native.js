@@ -2,11 +2,11 @@ import React from 'react';
 import { Animated, TouchableOpacity, Image, BackHandler } from 'react-native';
 import { backArrow } from '../../assets';
 
-HEADER_MAX_HEIGHT = 80;
-HEADER_MIN_HEIGHT = 70;
+let HEADER_MAX_HEIGHT = 80;
+let HEADER_MIN_HEIGHT = 70;
 
-HEADER_TEXT_MAX_HEIGHT = 80;
-HEADER_TEXT_MIN_HEIGHT = 40;
+let HEADER_TEXT_MAX_HEIGHT = 80;
+let HEADER_TEXT_MIN_HEIGHT = 40;
 
 export default function HeaderAnimated(props) {
   const headerHeight = props.scrollY.interpolate({
@@ -53,7 +53,7 @@ export default function HeaderAnimated(props) {
     extrapolate: 'clamp'
   });
 
-  _navigateBack = () => {
+  let _navigateBack = () => {
     props.navigation.goBack();
     return true;
   };
@@ -65,6 +65,9 @@ export default function HeaderAnimated(props) {
       BackHandler.removeEventListener('hardwareBackPress', _navigateBack);
     };
   });
+
+  const textColor = '#4d5153';
+  const whiteColor = 'white';
   return (
     <Animated.View
       style={{
@@ -72,7 +75,7 @@ export default function HeaderAnimated(props) {
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: 'white',
+        backgroundColor: whiteColor,
         height: headerHeight,
         zIndex: headerZindex,
         alignItems: 'center',
@@ -101,7 +104,7 @@ export default function HeaderAnimated(props) {
             lineHeight: 40,
             letterSpacing: 0,
             textAlign: 'left',
-            color: '#4d5153'
+            color: textColor
           }}
         >
           {props.title}

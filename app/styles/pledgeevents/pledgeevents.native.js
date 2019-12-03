@@ -133,6 +133,7 @@ export default EStyleSheet.create({
   },
 
   // Make Pledge Form Styles
+  createPledgeRootView: { backgroundColor: 'white', flex: 1 },
   titleText: {
     fontSize: 27,
     lineHeight: 40,

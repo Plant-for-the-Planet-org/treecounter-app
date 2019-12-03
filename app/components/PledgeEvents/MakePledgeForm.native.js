@@ -98,7 +98,7 @@ class MakePledgeForm extends Component {
     const currency = this.props.navigation.getParam('plantProject').currency;
 
     return (
-      <View style={{ backgroundColor: 'white', flex: 1 }}>
+      <View style={styles.createPledgeRootView}>
         <HeaderAnimated
           navigation={this.props.navigation}
           title={i18n.t('label.pledgeToPlant')}

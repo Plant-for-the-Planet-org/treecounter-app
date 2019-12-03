@@ -24,6 +24,12 @@ const WelcomeScreen1 = () => {
           {i18n.t('label.welcome_scrn_1_sub_heading')}
         </Text>
       </View>
+      <View style={styles.dotsContainer}>
+        <View style={styles.activeDot} />
+        <View style={styles.inActiveDot} />
+        <View style={styles.inActiveDot} />
+        <View style={styles.inActiveDot} />
+      </View>
       <View style={styles.bottomRow}>
         <PrimaryButton buttonStyle={styles.buttonStyle}>
           <Text style={styles.gettingStartedBtn}>
@@ -48,6 +54,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  dotsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 10
+  },
+  inActiveDot: {
+    width: 7,
+    height: 7,
+    backgroundColor: '#e6e9ec',
+    marginHorizontal: 5,
+    borderRadius: 5
+  },
+  activeDot: {
+    width: 7,
+    height: 7,
+    backgroundColor: '#89b53a',
+    marginHorizontal: 5,
+    borderRadius: 5
+  },
   crossContainer: {
     borderColor: 'red',
     height: 50,
@@ -56,7 +81,7 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     fontFamily: 'OpenSans',
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     lineHeight: 33,
     textAlign: 'center',
@@ -69,7 +94,7 @@ const styles = StyleSheet.create({
   },
   textPara: {
     fontFamily: 'OpenSans',
-    fontSize: 20,
+    fontSize: 17,
     lineHeight: 27,
     textAlign: 'center',
     color: '#4d5153'

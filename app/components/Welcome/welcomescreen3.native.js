@@ -24,6 +24,12 @@ const WelcomeScreen3 = ({}) => {
           {i18n.t('label.welcome_scrn_3_sub_heading')}
         </Text>
       </View>
+      <View style={styles.dotsContainer}>
+        <View style={styles.activeDot} />
+        <View style={styles.inActiveDot} />
+        <View style={styles.inActiveDot} />
+        <View style={styles.inActiveDot} />
+      </View>
       <View style={styles.bottomRow}>
         <PrimaryButton buttonStyle={styles.buttonStyle}>
           <Text style={styles.continueBtn}>
@@ -50,6 +56,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  dotsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 10
+  },
+  inActiveDot: {
+    width: 7,
+    height: 7,
+    backgroundColor: '#e6e9ec',
+    marginHorizontal: 5,
+    borderRadius: 5
+  },
+  activeDot: {
+    width: 7,
+    height: 7,
+    backgroundColor: '#89b53a',
+    marginHorizontal: 5,
+    borderRadius: 5
   },
   crossContainer: {
     borderColor: 'red',

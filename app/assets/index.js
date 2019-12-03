@@ -153,7 +153,9 @@ import closeBlack from './images/icons/closeblack.png';
 import planetLogo from './images/Planet-Logo.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
+import treelogo from '../../icon.png';
 export {
+  treelogo,
   germany,
   worldImg,
   mapCollapse,

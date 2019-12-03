@@ -26,6 +26,7 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 import LoadingIndicator from './../Common/LoadingIndicator';
 import { nextArrowWhite } from '../../assets';
+import { delimitNumbers } from '../../utils/utils';
 
 class PledgeEvents extends Component {
   state = {
@@ -287,7 +288,7 @@ function EventDetails(props) {
         <View>
           <Text style={styles.eventSubTitle}>
             {i18n.t('label.treesPledgedAllPledges', {
-              treeCount: pledges.total.toLocaleString()
+              treeCount: delimitNumbers(pledges.total)
             })}
           </Text>
           {/* All the pledges are here */}

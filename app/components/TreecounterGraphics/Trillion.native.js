@@ -44,6 +44,7 @@ import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
+import { delimitNumbers } from '../../utils/utils';
 
 class Trillion extends PureComponent {
   constructor() {
@@ -213,7 +214,9 @@ class Trillion extends PureComponent {
                                 featuredEvents.image
                               )}
                               orgname={featuredEvents.name}
-                              treespledged={featuredEvents.total}
+                              treespledged={delimitNumbers(
+                                featuredEvents.total
+                              )}
                               date={featuredEvents.eventDate}
                             />
                           </TouchableOpacity>

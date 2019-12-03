@@ -39,7 +39,7 @@ export default class FeaturedProject extends Component {
                 source={smalltree}
               />
               <Text style={styles.featuredProjectCardIconText}>
-                {this.props.treespledged.toLocaleString()}
+                {this.props.treespledged}
                 {/* Trees Pledged */} {i18n.t('label.treesPledged')}
               </Text>
             </View>

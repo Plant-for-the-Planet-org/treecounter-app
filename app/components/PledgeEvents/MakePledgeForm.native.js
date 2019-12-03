@@ -19,7 +19,6 @@ import { bindActionCreators } from 'redux';
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 
-import NewHeader from './../Header/NewHeader';
 const validationSchema = generateFormikSchemaFromFormSchema(pledgeFormSchema, [
   'firstname',
   'lastname',
@@ -90,10 +89,6 @@ class MakePledgeForm extends Component {
 
     return (
       <View>
-        <NewHeader
-          navigation={this.props.navigation}
-          title={i18n.t('label.pledgeToPlant')}
-        />
         <KeyboardAwareScrollView
           contentContainerStyle={styles.formScrollView}
           keyboardDismissMode="on-drag"
@@ -255,7 +250,7 @@ class MakePledgeForm extends Component {
                       rightTextStyle={{
                         fontFamily: 'OpenSans-Regular'
                       }}
-                      rightText="Hide my Name from the list (Anonymous Pledge)"
+                      rightText={i18n.t('label.createPledgeFormHint')}
                     />
                   </View>
                 </View>

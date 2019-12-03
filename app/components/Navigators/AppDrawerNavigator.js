@@ -123,12 +123,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_faq')]: FAQContainer,
       ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
-
       ['about_us']: { screen: AboutUsContainer },
       ['contribution_details']: { screen: UserContributionDetails },
-
       ['license_info_list']: { screen: LicenseInfoList },
-
       [getLocalRoute('app_imprint')]: {
         screen: ImprintContainer
       },
@@ -169,7 +166,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      navigationOptions: (/*{ navigation }*/) => {
+      defaultNavigationOptions: (/*{ navigation }*/) => {
         return {
           header: null
         };
@@ -299,7 +296,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
       },
-
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTrees
       }

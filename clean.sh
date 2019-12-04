@@ -42,6 +42,7 @@ cd ios
 pod update
 pod install
 cd ..
-​
+
+# for Android the minSDK level of the Manifest of react-native-i18n has to be removed​
 echo 'now run: react-native run-android'
 echo 'now run: react-native run-ios'

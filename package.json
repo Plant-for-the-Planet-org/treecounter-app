@@ -13,7 +13,8 @@
     "lint": "eslint app",
     "lint:errors": "eslint app --quiet",
     "lint:json": "eslint . --ext .json",
-    "shake": "adb shell input keyevent 82"
+    "shake": "adb shell input keyevent 82",
+    "clean": "./clean.sh"
   },
   "lint-staged": {
     "*.js": [

@@ -78,7 +78,7 @@ import com.android.build.OutputFile
 project.ext.react = [
     entryFile: "index.native.js",
     enableHermes: true,
-    root: "../../../../",
+    root: "../../",
 ]
 def jscFlavor = 'org.webkit:android-jsc:+'
 def useIntlJsc = false

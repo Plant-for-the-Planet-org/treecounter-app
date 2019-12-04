@@ -16,11 +16,6 @@ cd ..
 rm -rf ios/Podfile.lock
 rm -rf ios/build
 
-echo 'removing Android cache'
-cd android
-./gradlew cleanBuildCache
-cd ..
-
 echo 'removing node modules'
 rm -rf node_modules
 rm -rf package-lock.json
@@ -42,6 +37,12 @@ cd ios
 pod update
 pod install
 cd ..
+
+echo 'cleaning Android build'
+cd android
+./gradlew cleanBuildCache
+cd ..
+
 
 # for Android the minSDK level of the Manifest of react-native-i18n has to be removed​
 echo 'now run: react-native run-android'

@@ -121,7 +121,6 @@ import selector_menu from './images/icons/selector_menu.png';
 import radio_button from './images/icons/radio_button.png';
 import radio_button_selected from './images/icons/radio_button_selected.png';
 import filter from './images/icons/filter.png';
-import welcomeScreen from './images/welcome-screen.png';
 import flagTarget from './images/flag_target.png';
 import compCalendar from './images/calendar_comp.png';
 import upwardArrow from './images/right-arrow.png';
@@ -137,7 +136,6 @@ import mapExpand from './images/map_expand.png';
 import smalltree from './images/smalltree.png';
 import calendarwhite from './images/calendarwhite.png';
 import forward from './images/forward.png';
-import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
 import location_grey from './images/icons/location_grey.png';
@@ -290,7 +288,6 @@ export {
   shareIcon,
   facebook,
   twitter,
-  welcomeScreen,
   flagTarget,
   compCalendar,
   upwardArrow,
@@ -301,7 +298,6 @@ export {
   smalltree,
   calendarwhite,
   forward,
-  successAnimated,
   trees,
   greencalendar,
   location_grey,

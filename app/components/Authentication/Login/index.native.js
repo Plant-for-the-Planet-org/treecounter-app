@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Text, View, Image, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import scrollStyle from '../../../styles/common/scrollStyle';
-import ReCaptchaV3 from '@haskkor/react-native-recaptchav3';
 import { loginFormSchema } from '../../../server/parsedSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
@@ -17,8 +16,6 @@ let Form = t.form.Form;
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    // eslint-disable-next-line no-underscore-dangle
-    this._recaptchaToken = undefined;
   }
 
   onForgotPasswordClicked = () => {
@@ -33,26 +30,12 @@ export default class Login extends Component {
     this.props.updateRoute('pickup_profile_modal');
   };
 
-  verifyCallback = token => {
-    // Here you will get the final token!!!
-    // eslint-disable-next-line no-underscore-dangle
-    this._recaptchaToken = token;
-  };
-
-  refreshToken = () => {
-    // eslint-disable-next-line no-underscore-dangle
-    if (this._captchaRef) {
-      // eslint-disable-next-line no-underscore-dangle
-      this._captchaRef.refreshToken();
-    }
-  };
-
   handleLoginClick = () => {
     if (this.refs.loginForm.getValue()) {
       Keyboard.dismiss();
     }
     // eslint-disable-next-line no-underscore-dangle
-    this.props.onPress(this._recaptchaToken, this.refreshToken);
+    this.props.onPress();
   };
   render() {
     const backgroundColor = 'white';
@@ -69,13 +52,6 @@ export default class Login extends Component {
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollEnabled
       >
-        <ReCaptchaV3
-          // eslint-disable-next-line no-underscore-dangle
-          ref={ref => (this._captchaRef = ref)}
-          captchaDomain={'https://www.trilliontreecampaign.org'}
-          siteKey={'6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF'}
-          onReceiveToken={token => this.verifyCallback(token)}
-        />
         <View style={styles.parentContainer}>
           <View style={styles.headerContainer}>
             <Image

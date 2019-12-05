@@ -33,7 +33,7 @@ export default EStyleSheet.create({
   },
   textHeader: {
     fontFamily: 'OpenSans',
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     lineHeight: 33,
     textAlign: 'center',
@@ -48,7 +48,7 @@ export default EStyleSheet.create({
   },
   textPara: {
     fontFamily: 'OpenSans',
-    fontSize: 20,
+    fontSize: 17,
     lineHeight: 27,
     textAlign: 'center',
     color: '#4d5153'

@@ -57,8 +57,8 @@ export default EStyleSheet.create({
   },
   bottomRow2: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 10
+    justifyContent: 'center'
+    //marginVertical: 10
   },
   buttonStyle: {
     width: 312,

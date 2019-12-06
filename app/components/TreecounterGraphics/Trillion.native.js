@@ -59,10 +59,10 @@ class Trillion extends PureComponent {
         { key: 'world', title: i18n.t('label.world') },
         { key: 'leaderBoard', title: i18n.t('label.leaderboard') }
       ],
-      index: 0,
-      userPledges: {}
+      index: 0
     };
   }
+
   componentDidMount() {
     this.setState({ contentLoader: true });
     trillionCampaign()
@@ -112,9 +112,6 @@ class Trillion extends PureComponent {
             let stringPledges = JSON.parse(data);
             stringPledges = stringPledges.toString();
             this.props.fetchPublicPledgesAction(stringPledges);
-            this.setState({
-              userPledges: this.props.entities.eventPledge
-            });
           }
         })
         .catch(error => console.log(error));
@@ -122,11 +119,12 @@ class Trillion extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.entities.eventPledge !== this.props.entities.eventPledge) {
+    if (
+      JSON.stringify(prevProps.entities.eventPledge) !==
+      JSON.stringify(this.props.entities.eventPledge)
+    ) {
       if (this.props.userProfile) {
-        this.setState({
-          userPledges: this.props.entities.eventPledge
-        });
+        console.log('User Logged in');
       } else {
         fetchItem('pledgedEvent')
           .then(data => {
@@ -134,9 +132,6 @@ class Trillion extends PureComponent {
               let stringPledges = JSON.parse(data);
               stringPledges = stringPledges.toString();
               this.props.fetchPublicPledgesAction(stringPledges);
-              this.setState({
-                userPledges: this.props.entities.eventPledge
-              });
             }
           })
           .catch(error => console.log(error));
@@ -170,35 +165,35 @@ class Trillion extends PureComponent {
         return this.state.loading ? (
           <LoadingIndicator contentLoader={contentLoader} screen="AppHome" />
         ) : (
-            <ScrollView
-              contentContainerStyle={{
-                paddingBottom: 72,
-                backgroundColor: backgroundColor
-              }}
-            >
-              <View style={styles.parentContainer}>
-                {/* Trillion Tree Events Title */}
-                <View style={{ marginTop: 25, marginLeft: 16 }}>
-                  <Text style={styles.trillionTreeEventTitle}>
-                    {this.props.pledgeEvents &&
-                      this.props.pledgeEvents.pledgeEvents &&
-                      this.props.pledgeEvents.pledgeEvents.length > 0
-                      ? i18n.t('label.trillionTreesEvents')
-                      : null}
-                  </Text>
-                </View>
-                {/* Trillion Tree Events Title Ended */}
+          <ScrollView
+            contentContainerStyle={{
+              paddingBottom: 72,
+              backgroundColor: backgroundColor
+            }}
+          >
+            <View style={styles.parentContainer}>
+              {/* Trillion Tree Events Title */}
+              <View style={{ marginTop: 25, marginLeft: 16 }}>
+                <Text style={styles.trillionTreeEventTitle}>
+                  {this.props.pledgeEvents &&
+                  this.props.pledgeEvents.pledgeEvents &&
+                  this.props.pledgeEvents.pledgeEvents.length > 0
+                    ? i18n.t('label.trillionTreesEvents')
+                    : null}
+                </Text>
+              </View>
+              {/* Trillion Tree Events Title Ended */}
 
-                {/* Featured events horizontal ScrollView */}
-                <View style={{ marginTop: 16 }}>
-                  <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ paddingRight: 20 }}
-                  >
-                    {this.props.pledgeEvents &&
-                      this.props.pledgeEvents.pledgeEvents
-                      ? this.props.pledgeEvents.pledgeEvents.map(
+              {/* Featured events horizontal ScrollView */}
+              <View style={{ marginTop: 16 }}>
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={{ paddingRight: 20 }}
+                >
+                  {this.props.pledgeEvents &&
+                  this.props.pledgeEvents.pledgeEvents
+                    ? this.props.pledgeEvents.pledgeEvents.map(
                         featuredEvents => (
                           <TouchableOpacity
                             key={featuredEvents.slug}
@@ -227,68 +222,94 @@ class Trillion extends PureComponent {
                           </TouchableOpacity>
                         )
                       )
-                      : null}
-                  </ScrollView>
-                </View>
-                {/* Featured events horizontal ScrollView Ended */}
+                    : null}
+                </ScrollView>
+              </View>
+              {/* Featured events horizontal ScrollView Ended */}
 
-                {/*  Unfulfilled Pledge Events horizontal ScrollView */}
-                {this.props.entities.eventPledge ? (
-                  <View>
-                    <View style={{ marginTop: 25, marginLeft: 16 }}>
-                      <Text style={styles.trillionTreeEventTitle}>
-                        {i18n.t('label.unfulfilledPledgesTitle')}
-                      </Text>
-                    </View>
-                    <View style={{ marginTop: 16 }}>
-                      <ScrollView
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        contentContainerStyle={{ paddingRight: 20 }}
-                      >
-                        {Object.values(this.props.entities.eventPledge).map(
-                          unfulfilledEvent =>
-                            unfulfilledEvent.status === 'pending' ? (
-                              <TouchableOpacity
-                                key={unfulfilledEvent.token}
-                                onPress={() => {
-                                  updateStaticRoute(
-                                    'app_pledge_events',
-                                    navigation,
-                                    {
-                                      slug: unfulfilledEvent.slug,
-                                      plantProject: { id: -1 },
-                                      treeCount: -1
-                                    }
-                                  );
-                                }}
-                              >
-                                <UnfulfilledEvents event={unfulfilledEvent} />
-                              </TouchableOpacity>
-                            ) : null
-                        )}
-                      </ScrollView>
-                    </View>
+              {/*  Unfulfilled Pledge Events horizontal ScrollView */}
+              {this.props.entities.eventPledge ? (
+                <View>
+                  <View style={{ marginTop: 25, marginLeft: 16 }}>
+                    <Text style={styles.trillionTreeEventTitle}>
+                      {i18n.t('label.unfulfilledPledgesTitle')}
+                    </Text>
                   </View>
-                ) : null}
-                {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
-
-                {/* Tree Counter SVG */}
-                <View style={svgStyles.svgContainer}>
-                  <SvgContainer {...this.state.svgData} trillion />
+                  <View style={{ marginTop: 16 }}>
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      contentContainerStyle={{ paddingRight: 20 }}
+                    >
+                      {Object.values(this.props.entities.eventPledge).map(
+                        unfulfilledEvent =>
+                          unfulfilledEvent.status === 'pending' ? (
+                            <TouchableOpacity
+                              key={unfulfilledEvent.token}
+                              onPress={() => {
+                                updateStaticRoute(
+                                  'app_pledge_events',
+                                  navigation,
+                                  {
+                                    slug: unfulfilledEvent.slug,
+                                    plantProject: { id: -1 },
+                                    treeCount: -1
+                                  }
+                                );
+                              }}
+                            >
+                              <UnfulfilledEvents event={unfulfilledEvent} />
+                            </TouchableOpacity>
+                          ) : null
+                      )}
+                    </ScrollView>
+                  </View>
                 </View>
-                {/* Tree Counter SVG Ended */}
+              ) : null}
+              {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
+              <View style={{ marginTop: 16 }}>
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={{ paddingRight: 20 }}
+                >
+                  {Object.values(this.props.entities.eventPledge).map(
+                    unfulfilledEvent =>
+                      unfulfilledEvent.status === 'pending' ? (
+                        <TouchableOpacity
+                          key={unfulfilledEvent.token}
+                          onPress={() => {
+                            updateStaticRoute('app_pledge_events', navigation, {
+                              slug: unfulfilledEvent.eventSlug,
+                              plantProject: { id: -1 },
+                              treeCount: -1
+                            });
+                          }}
+                        >
+                          <UnfulfilledEvents event={unfulfilledEvent} />
+                        </TouchableOpacity>
+                      ) : null
+                  )}
+                </ScrollView>
+              </View>
+            </View>
 
-                <CardLayout style={styles.cardContainer}>
-                  <Text style={styles.titleText}>
-                    {i18n.t('label.trillionTreeMessage1')}
-                  </Text>
-                  <Text style={styles.titleText}>
-                    {i18n.t('label.trillionTreeMessage2')}
-                  </Text>
-                </CardLayout>
+            {/* Tree Counter SVG */}
+            <View style={svgStyles.svgContainer}>
+              <SvgContainer {...this.state.svgData} trillion />
+            </View>
+            {/* Tree Counter SVG Ended */}
 
-                {/* {userProfile && userProfile.type === 'tpo' ? (
+            <CardLayout style={styles.cardContainer}>
+              <Text style={styles.titleText}>
+                {i18n.t('label.trillionTreeMessage1')}
+              </Text>
+              <Text style={styles.titleText}>
+                {i18n.t('label.trillionTreeMessage2')}
+              </Text>
+            </CardLayout>
+
+            {/* {userProfile && userProfile.type === 'tpo' ? (
                 <CardLayout
                   style={[
                     styles.cardContainer,
@@ -320,42 +341,41 @@ class Trillion extends PureComponent {
                 </CardLayout>
               ) : null} */}
 
-                <CardLayout
-                  style={[
-                    styles.cardContainer,
-                    {
-                      padding: 16
-                    }
-                  ]}
-                >
-                  <Text style={[styles.googleCardTitle, { textAlign: 'left' }]}>
-                    {i18n.t('label.searchProjectTitle')}
-                  </Text>
-                  <View style={styles.googleCardParaContainer}>
-                    <Text style={styles.googleCardPara}>
-                      {i18n.t('label.searchProjectPara')}
-                    </Text>
-                    <Image
-                      source={trees}
-                      style={{ width: 72, height: 56, flex: 1 }}
-                      resizeMode="cover"
-                    />
-                  </View>
-                  <View style={styles.horizontalLine} />
-                  <TouchableOpacity
-                    style={{ width: '100%' }}
-                    onPress={() =>
-                      navigation.navigate(getLocalRoute('app_donateTrees'))
-                    }
-                  >
-                    <Text style={styles.googleCardButton}>
-                      {i18n.t('label.searchProjectButton')}
-                    </Text>
-                  </TouchableOpacity>
-                </CardLayout>
+            <CardLayout
+              style={[
+                styles.cardContainer,
+                {
+                  padding: 16
+                }
+              ]}
+            >
+              <Text style={[styles.googleCardTitle, { textAlign: 'left' }]}>
+                {i18n.t('label.searchProjectTitle')}
+              </Text>
+              <View style={styles.googleCardParaContainer}>
+                <Text style={styles.googleCardPara}>
+                  {i18n.t('label.searchProjectPara')}
+                </Text>
+                <Image
+                  source={trees}
+                  style={{ width: 72, height: 56, flex: 1 }}
+                  resizeMode="cover"
+                />
               </View>
-            </ScrollView>
-          );
+              <View style={styles.horizontalLine} />
+              <TouchableOpacity
+                style={{ width: '100%' }}
+                onPress={() =>
+                  navigation.navigate(getLocalRoute('app_donateTrees'))
+                }
+              >
+                <Text style={styles.googleCardButton}>
+                  {i18n.t('label.searchProjectButton')}
+                </Text>
+              </TouchableOpacity>
+            </CardLayout>
+          </ScrollView>
+        );
       }
       case 'leaderBoard': {
         return <Leaderboard navigation={this.props.navigation} />;
@@ -410,7 +430,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 Trillion.propTypes = {
-  pledgeEvents: PropTypes.object.isRequired,
+  pledgeEvents: PropTypes.any,
   navigation: PropTypes.any,
   fetchpledgeEventsAction: PropTypes.func,
   fetchPublicPledgesAction: PropTypes.func

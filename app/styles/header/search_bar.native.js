@@ -60,6 +60,7 @@ export default EStyleSheet.create({
     fontSize: 16,
     marginLeft: 14,
     color: '$primary',
-    ...centerTextInput
+    ...centerTextInput,
+    fontFamily: 'OpenSans-Regular'
   }
 });

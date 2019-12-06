@@ -7,3 +7,5 @@ export const row = {
 export const margin_top10 = {
   marginTop: 10
 };
+
+export const fullPageWhite = { flex: 1, backgroundColor: '#fff' };

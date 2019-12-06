@@ -88,9 +88,19 @@ class TreeCountSelector extends React.Component {
         : newState.variableAmount
     });
   }
+  getFormattedNumber(treeCount, symbol) {
+    const { currency, treeCountToAmount } = this.props;
+    try {
+      const data = formatNumber(treeCountToAmount(treeCount), null, currency);
+      return symbol ? data.replace(/[\d.,]/g, '') : data;
+    } catch (err) {
+      console.log('error formatting', err);
+      return symbol ? currency : treeCountToAmount(treeCount) + ' ' + currency;
+    }
+  }
 
   render() {
-    const { treeCountOptions, currency, treeCountToAmount } = this.props;
+    const { treeCountOptions } = this.props;
     let radio_props = [];
     treeCountOptions.fixedTreeCountOptions.map(treeCount => {
       let label = treeCount + ' ' + i18n.t('label.trees');
@@ -154,11 +164,7 @@ class TreeCountSelector extends React.Component {
                   </View>
                   <View style={styles.treecount_price_conversion_text_input}>
                     <Text style={{ width: '100%' }} key={treeCount}>
-                      {formatNumber(
-                        treeCountToAmount(treeCount),
-                        null,
-                        currency
-                      )}
+                      {this.getFormattedNumber(treeCount)}
                     </Text>
                   </View>
                 </View>
@@ -236,7 +242,8 @@ class TreeCountSelector extends React.Component {
                 numberOfLines={1}
                 style={styles.treecount_price_conversion_label}
               >
-                {' ' + formatNumber(1, null, currency).replace(/[\d.,]/g, '')}
+                {' '}
+                {this.getFormattedNumber(1, true)}
               </Text>
             </View>
           </View>

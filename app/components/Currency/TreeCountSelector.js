@@ -92,9 +92,17 @@ class TreeCountSelector extends React.Component {
         : newState.variableAmount
     });
   }
-
+  getFormattedNumber(treeCount, symbol) {
+    const { currency, treeCountToAmount } = this.props;
+    try {
+      const data = formatNumber(treeCountToAmount(treeCount), null, currency);
+      return symbol ? data.replace(/[\d.,]/g, '') : data;
+    } catch (err) {
+      return symbol ? currency : treeCountToAmount(treeCount) + ' ' + currency;
+    }
+  }
   render() {
-    const { treeCountOptions, currency, treeCountToAmount } = this.props;
+    const { treeCountOptions } = this.props;
 
     return (
       <div className={'treecount-container'}>
@@ -118,7 +126,7 @@ class TreeCountSelector extends React.Component {
               </label>
               <span className="price-conversion__equal">=</span>
               <span className="price-conversion__amount">
-                {formatNumber(treeCountToAmount(treeCount), null, currency)}
+                {this.getFormattedNumber(treeCount)}
               </span>
             </div>
           );
@@ -160,7 +168,7 @@ class TreeCountSelector extends React.Component {
                 this.handleVariableAmountChange(evt.target.value)
               }
             />{' '}
-            {formatNumber(1, null, currency).replace(/[\d.,]/g, '')}
+            {this.getFormattedNumber(1, true)}
           </span>
         </div>
       </div>

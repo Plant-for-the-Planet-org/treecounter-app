@@ -23,9 +23,11 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
   locale = locale || getLocale();
   try {
     let style = { maximumFractionDigits: 2 };
+    // console.log('got numberformat', data, locale, currency, style, userProfile);
     if (currency) {
       style.style = 'currency';
       style.currency = currency;
+      //console.log('cu', currency, userProfile);
       if (userProfile && userProfile.currency) {
         style.currency = userProfile.currency;
         if (
@@ -37,6 +39,8 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
             currencies.currencies.currency_rates[currency].rates[
               userProfile.currency
             ] * data;
+        } else {
+          style.currency = currency;
         }
       }
     }
@@ -50,7 +54,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
 
 export function formatDate(date, style = 'dd MMM yyyy', locale) {
   locale = locale || getLocale();
-  console.log('formatDate', date, style, locale);
+  //console.log('formatDate', date, style, locale);
 
   if (date) {
     return format(parseISO(date), style, {

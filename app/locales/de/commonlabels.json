@@ -35,5 +35,8 @@
   "quadrillion_plural": "Billiarden",
   "quintillion_singular": "Trillion",
   "quintillion_plural": "Trillionen",
-  "donation_id_missing_error": "Spenden-ID fehlt"
+  "donation_id_missing_error": "Spenden-ID fehlt",
+  "datePickerTitle": "Datum Wählen",
+  "datePickerCancel": "Stornieren",
+  "datePickerConfirm": "Bestätigen"
 }

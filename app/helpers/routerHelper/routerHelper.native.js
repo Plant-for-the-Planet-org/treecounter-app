@@ -18,3 +18,7 @@ export function updateStaticRoute(routeName, navigation, params) {
   let route = routeName;
   navigation.navigate(route, params);
 }
+
+export function pushStaticRoute(routeName, navigation, params) {
+  navigation.push(routeName, params);
+}

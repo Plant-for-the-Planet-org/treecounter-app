@@ -17,5 +17,6 @@
   "gift_to": "Geschenk an {{name}}",
   "support_to": "Unterstützung für {{name}}",
   "gift_trees_to": "Schenke {{user}} Bäume",
-  "select_valid_user_profile": "Wähle ein gültiges Benutzerprofil aus"
+  "select_valid_user_profile": "Wähle ein gültiges Benutzerprofil aus",
+  "gift": "Geschenk"
 }

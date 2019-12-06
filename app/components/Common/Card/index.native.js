@@ -15,6 +15,15 @@ const CardLayout = ({ children, style, onPress, withoutShadow }) => (
   </TouchableItem>
 );
 
+export const CardLayoutCompetition = ({ children, style, onPress }) => (
+  <TouchableItem
+    style={[style, styles.competitionCardContainer]}
+    onPress={onPress}
+  >
+    {children}
+  </TouchableItem>
+);
+
 CardLayout.propTypes = {
   children: PropTypes.node,
   style: PropTypes.any,

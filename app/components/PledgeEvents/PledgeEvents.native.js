@@ -146,9 +146,9 @@ class PledgeEvents extends Component {
           <View style={styles.baContainer}>
             <Text style={styles.baMessage}>
               {i18n.t('label.pledgeAddedMessage', {
-                treeCount: this.props.navigation
-                  .getParam('treeCount')
-                  .toLocaleString()
+                treeCount: delimitNumbers(
+                  this.props.navigation.getParam('treeCount')
+                )
               })}
             </Text>
 

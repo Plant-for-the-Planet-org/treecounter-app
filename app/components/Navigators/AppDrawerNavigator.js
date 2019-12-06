@@ -1,8 +1,7 @@
-import {
-  createBottomTabNavigator,
-  createDrawerNavigator,
-  createStackNavigator
-} from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
 import { Animated } from 'react-native';
 import Trillion from '../TreecounterGraphics/Trillion';
@@ -124,12 +123,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_faq')]: FAQContainer,
       ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
-
       ['about_us']: { screen: AboutUsContainer },
       ['contribution_details']: { screen: UserContributionDetails },
-
       ['license_info_list']: { screen: LicenseInfoList },
-
       [getLocalRoute('app_imprint')]: {
         screen: ImprintContainer
       },
@@ -170,7 +166,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      navigationOptions: (/*{ navigation }*/) => {
+      defaultNavigationOptions: (/*{ navigation }*/) => {
         return {
           header: null
         };
@@ -300,7 +296,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
       },
-
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTrees
       }
@@ -357,7 +352,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     },
     {
-      navigationOptions: ({ navigation }) => {
+      defaultNavigationOptions: ({ navigation }) => {
         let navigationConfig = {
           headerStyle: styles.container,
           headerTitleStyle: { paddingRight: 16 },
@@ -391,5 +386,5 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       contentComponent: SideMenuContainer
     }
   );
-  return AppNavigator;
+  return createAppContainer(AppNavigator);
 };

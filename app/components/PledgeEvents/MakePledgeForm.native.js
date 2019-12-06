@@ -19,13 +19,6 @@ import { bindActionCreators } from 'redux';
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 
-const validationSchema = generateFormikSchemaFromFormSchema(pledgeFormSchema, [
-  'firstname',
-  'lastname',
-  'email',
-  'treeCount'
-]);
-
 // let _ = require('lodash');
 
 class MakePledgeForm extends Component {
@@ -38,7 +31,13 @@ class MakePledgeForm extends Component {
     isAnonymous: false,
     loggedIn: false
   };
+
   componentWillMount() {
+    this.validationSchema = generateFormikSchemaFromFormSchema(
+      pledgeFormSchema,
+      ['firstname', 'lastname', 'email', 'treeCount']
+    );
+
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       this._keyboardDidShow
@@ -138,7 +137,7 @@ class MakePledgeForm extends Component {
                 treeCount: data.treeCount
               });
             }}
-            validationSchema={validationSchema}
+            validationSchema={this.validationSchema}
           >
             {props => (
               <>

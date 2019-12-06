@@ -289,26 +289,27 @@ class PaymentSelector extends Component {
             );
           }
           if ('offline' === gateway) {
-            return (
-              <div key={gateway}>
-                {this.state.errorMessage ? (
-                  <div>{this.state.errorMessage}</div>
-                ) : null}
-                <Offline
-                  key={gateway}
-                  onSuccess={this.decorateSuccess(gateway, accountName, {
-                    userMessage: 'Success',
-                    isConfirmed: true
-                  })}
-                  amount={paymentDetails.amount}
-                  currency={currency}
-                  account={accounts[accountName]}
-                  expanded={this.props.expandedOption === '4'}
-                  handleExpandedClicked={() => this.handleExpandedClicked('4')}
-                  {...gatewayProps}
-                />
-              </div>
-            );
+            return null;
+            // (
+            //   <div key={gateway}>
+            //     {this.state.errorMessage ? (
+            //       <div>{this.state.errorMessage}</div>
+            //     ) : null}
+            //     <Offline
+            //       key={gateway}
+            //       onSuccess={this.decorateSuccess(gateway, accountName, {
+            //         userMessage: 'Success',
+            //         isConfirmed: true
+            //       })}
+            //       amount={paymentDetails.amount}
+            //       currency={currency}
+            //       account={accounts[accountName]}
+            //       expanded={this.props.expandedOption === '4'}
+            //       handleExpandedClicked={() => this.handleExpandedClicked('4')}
+            //       {...gatewayProps}
+            //     />
+            //   </div>
+            // );
           }
         })}
       </div>

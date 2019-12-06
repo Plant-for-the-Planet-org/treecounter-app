@@ -16,7 +16,7 @@ export default function HeaderAnimatedImage(props) {
   });
   const headerZindex = props.scrollY.interpolate({
     inputRange: [0, HEADER_IMAGE_MAX_HEIGHT - HEADER_IMAGE_MIN_HEIGHT, 180],
-    outputRange: [0, 500, 1000],
+    outputRange: [100, 500, 1000],
     extrapolate: 'clamp'
   });
 

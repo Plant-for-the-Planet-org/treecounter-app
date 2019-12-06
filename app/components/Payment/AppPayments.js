@@ -31,7 +31,7 @@ export default class AppPayments extends Component {
   }
 
   render() {
-    let { paymentInfo } = this.props;
+    let { paymentInfo, paymentStatus } = this.props;
     let paymentMethods;
     if (paymentInfo) {
       let countryCurrency = `${paymentInfo.country}/${paymentInfo.currency}`;
@@ -61,14 +61,14 @@ export default class AppPayments extends Component {
                 </PrimaryButton>
               </TextBlock>
             </div>
-          ) : this.props.paymentStatus &&
-          !this.props.paymentStatus.status &&
-          this.props.paymentStatus.message ? (
+          ) : paymentStatus &&
+          !paymentStatus.status &&
+          paymentStatus.message ? (
             <div className="payment-success">
               <img src={attention} />
               <div className={'gap'} />
               <TextBlock strong>
-                {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
+                {i18n.t('label.error') + ' ' + paymentStatus.message}
               </TextBlock>
               <div className={'gap'} />
               <TextBlock>
@@ -90,6 +90,7 @@ export default class AppPayments extends Component {
                   currency={paymentInfo.currency}
                   expandedOption={this.state.expandedOption}
                   handleExpandedClicked={this.handleExpandedClicked}
+                  paymentStatus={paymentStatus}
                   paymentDetails={{
                     amount: paymentInfo.amount,
                     currency: paymentInfo.currency,

@@ -45,14 +45,21 @@ class Paypal extends React.Component {
 
   render() {
     let paypal = window.paypal;
-    const { amount, mode, currency, account, onSuccess } = this.props;
+    const {
+      amount,
+      mode,
+      currency,
+      account,
+      onSuccess,
+      donationId
+    } = this.props;
 
     const { showButton } = this.state;
 
     const CLIENT = {
       [mode]: account.authorization.client_id
     };
-
+    const invoice_number = `ttc-${donationId}`;
     const payment = () => {
       return paypal.rest.payment.create(mode, CLIENT, {
         transactions: [
@@ -60,7 +67,8 @@ class Paypal extends React.Component {
             amount: {
               total: Math.round(amount * 100) / 100,
               currency
-            }
+            },
+            invoice_number: invoice_number
           }
         ]
       });

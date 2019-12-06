@@ -267,6 +267,12 @@ class PaymentSelector extends Component {
             // );
           }
           if ('paypal' === gateway) {
+            const donationId = this.props.donationId
+              ? this.props.donationId
+              : this.props.paymentStatus &&
+                this.props.paymentStatus.contribution
+                ? this.props.paymentStatus.contribution[0].id
+                : undefined;
             return (
               <div key={gateway}>
                 {this.state.errorMessage ? (
@@ -279,6 +285,7 @@ class PaymentSelector extends Component {
                   }
                   amount={paymentDetails.amount}
                   currency={currency}
+                  donationId={donationId}
                   account={accounts[accountName]}
                   mode={accounts[accountName].mode}
                   expanded={this.props.expandedOption === '3'}

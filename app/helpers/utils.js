@@ -110,6 +110,7 @@ export const categoryIcons = {
 };
 export function queryParamsToObject(queryParams) {
   let returnObject = {};
+  if(!queryParams) return returnObject
   try {
     returnObject = JSON.parse(
       '{"' +

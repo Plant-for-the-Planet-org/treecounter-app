@@ -14,6 +14,7 @@ export default EStyleSheet.create({
     paddingBottom: 10
   },
   flexContainer: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingBottom: 90
   }
 });

@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 // import { View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { Dimensions } from 'react-native';
+import { Dimensions, Text, Image, View } from 'react-native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import { updateStaticRoute } from '../../helpers/routerHelper';
+import { trees } from './../../assets';
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -87,10 +88,22 @@ export default class SelectPlantTabView extends PureComponent {
     switch (route.key) {
       case 'featured':
         return (
-          <FeaturedProjects
-            onSelectProjects={this.onSelectProjects}
-            {...props}
-          />
+          <View>
+            <View style={styles.headerView}>
+              <Text style={styles.headerTitle}>
+                {i18n.t('label.select_project_title')}
+              </Text>
+              <Image
+                source={trees}
+                style={{ height: 60, flex: 1 }}
+                resizeMode="contain"
+              />
+            </View>
+            <FeaturedProjects
+              onSelectProjects={this.onSelectProjects}
+              {...props}
+            />
+          </View>
         );
       case 'list':
         return (

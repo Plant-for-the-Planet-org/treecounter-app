@@ -121,7 +121,6 @@ class PlantProjectSnippet extends PureComponent {
           ? leafGray
           : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
-    const textColor = '#4d5153';
     return (
       <TouchableHighlight
         underlayColor={'transparent'}
@@ -142,49 +141,21 @@ class PlantProjectSnippet extends PureComponent {
                 resizeMode={'cover'}
               />
               {reviews && reviews.length ? (
-                <View
-                  style={[
-                    styles.certifiedAndRatingContainer,
-                    !isCertified && styles.withoutCertified
-                  ]}
-                >
+                <View style={styles.certifiedAndRatingContainer}>
                   <TouchableOpacity
-                    style={{ height: 48, paddingTop: 13, flex: 1 }}
+                    style={styles.ratingTouchable}
                     onPress={() => {
                       this.props.selectPlantProjectAction(id);
                       updateStaticRoute('app_reviews', this.props.navigation);
                     }}
                   >
-                    <View
-                      style={{ flexDirection: 'row', alignItems: 'center' }}
-                    >
-                      {isCertified ? (
-                        <Image
-                          source={tick}
-                          style={{
-                            width: 15,
-                            height: 15,
-                            marginLeft: 2,
-                            marginRight: 3
-                          }}
-                        />
-                      ) : null}
-                      <Text
-                        style={[
-                          {
-                            fontSize: 14,
-                            // lineHeight: 19,
-                            color: textColor,
-                            textAlign: 'center',
-                            marginRight: 5,
-                            marginLeft: 2
-                          }
-                        ]}
-                      >
-                        {(plantProjectRating / 100).toFixed(2) || '0.0'}
-                      </Text>
-                      {starIcon}
-                    </View>
+                    {isCertified ? (
+                      <Image source={tick} style={styles.ratingTick} />
+                    ) : null}
+                    <Text style={styles.ratingCount}>
+                      {(plantProjectRating / 100).toFixed(2) || '0.0'}
+                    </Text>
+                    {starIcon}
                   </TouchableOpacity>
                 </View>
               ) : null}

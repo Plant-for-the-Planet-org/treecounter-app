@@ -247,7 +247,8 @@ export function PaymentOption(props) {
             treeCount: props.treeCount,
             treeCost: props.treeCost,
             selectedCurrency: props.selectedCurrency,
-            commissionSwitch: props.commissionSwitch
+            commissionSwitch: props.commissionSwitch,
+            navigation: props.navigation
           });
         }}
         style={styles.continueButtonView}

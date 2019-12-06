@@ -10,13 +10,15 @@ import {
   TextInput,
   ScrollView,
   Keyboard,
-  Animated
+  Animated,
+  Switch
 } from 'react-native';
 import { Formik } from 'formik';
 import { TextField } from 'react-native-material-textfield';
 import CheckBox from 'react-native-check-box';
+import { Dropdown } from 'react-native-material-dropdown';
 
-import styles from '../../styles/donations/donationDetails';
+import styles from '../../styles/donations/donorDetails';
 import {
   currencyIcon,
   gPayLogo,
@@ -28,25 +30,31 @@ import i18n from '../../locales/i18n.js';
 
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
-
   const [buttonType, setButtonType] = useState('donate');
 
+  const keyboardDidShow = () => {
+    setButtonType('>');
+  };
+
+  const keyboardDidHide = () => {
+    setButtonType('donate');
+  };
+
   useEffect(() => {
-    this.keyboardDidShowListener = Keyboard.addListener(
+    keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
-      setButtonType('>')
+      keyboardDidShow
     );
-    this.keyboardDidHideListener = Keyboard.addListener(
+    keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
-      setButtonType('donate')
+      keyboardDidHide
     );
     // clean up
     return () => {
-      this.keyboardDidShowListener.remove();
-      this.keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
     };
   }, []);
-
   return (
     <View style={{ backgroundColor: 'white', flex: 1 }}>
       <Header
@@ -58,10 +66,15 @@ export default function DonorDetails(props) {
       <KeyboardAwareScrollView
         contentContainerStyle={styles.scrollView}
         keyboardDismissMode="on-drag"
-        keyboardShouldPersistTaps="always"
-        style={styles.keyboardScrollView}
         resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled
+        scrollEnabled={true}
+        extraScrollHeight={72}
+        extraHeight={72}
+        enableOnAndroid
+        scrollEventThrottle={16}
+        onScroll={Animated.event([
+          { nativeEvent: { contentOffset: { y: scrollY } } }
+        ])}
       >
         <Formik
           initialValues={{
@@ -134,19 +147,50 @@ export default function DonorDetails(props) {
                   />
                 </View>
 
-                <View style={{ width: '100%', marginTop: 30 }}>
-                  <CheckBox
-                    onClick={() => {
-                      console.log('null');
+                <CountryPicker
+                  values={props.values}
+                  touched={props.touched}
+                  errors={props.errors}
+                  handleChange={props.handleChange}
+                  setFieldValue={props.setFieldValue}
+                />
+
+                <View style={styles.coverCommissionView}>
+                  <Text style={styles.coverCommissionText}>
+                    This is a Company Donation
+                  </Text>
+                  <Switch
+                    style={styles.coverCommissionSwitch}
+                    onValueChange={props.handleChange('isCompany')}
+                    thumbColor={'#89b53a'}
+                    trackColor={{
+                      false: '#f2f2f7',
+                      true: 'rgba(137, 181, 58, 0.8)'
                     }}
-                    checkedCheckBoxColor="#89b53a"
-                    isChecked={props.values.isCompany}
-                    rightTextStyle={{
-                      fontFamily: 'OpenSans-Regular'
-                    }}
-                    rightText="Is Company ?"
+                    value={props.values.isCompany}
                   />
                 </View>
+
+                {props.values.isCompany ? (
+                  <View>
+                    <TextField
+                      label={'Company Name'}
+                      value={props.values.companyName}
+                      tintColor={'#89b53a'}
+                      titleFontSize={12}
+                      lineWidth={1}
+                      error={
+                        props.touched.companyName && props.errors.companyName
+                      }
+                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      returnKeyType="next"
+                      onChangeText={props.handleChange('companyName')}
+                      onBlur={props.handleBlur('companyName')}
+                    />
+                  </View>
+                ) : null}
               </View>
             </>
           )}
@@ -167,6 +211,40 @@ export default function DonorDetails(props) {
 DonorDetails.navigationOptions = {
   header: null
 };
+
+export function CountryPicker(props) {
+  let data = [
+    {
+      label: 'Germany',
+      value: 'germany'
+    },
+    {
+      label: 'India',
+      value: 'india'
+    },
+    {
+      label: 'USA',
+      value: 'usa'
+    }
+  ];
+
+  const refContainer = React.useRef('dropdown');
+
+  return (
+    <View>
+      <Dropdown
+        ref={refContainer}
+        label={'Country'}
+        data={data}
+        onChangeText={props.handleChange('country')}
+        lineWidth={1}
+        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+      />
+    </View>
+  );
+}
+
 export function PaymentOption(props) {
   return (
     <View style={styles.bottomButtonView}>

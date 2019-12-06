@@ -21,7 +21,6 @@ export default EStyleSheet.create({
   },
   projectSnippetContainer: {
     flexDirection: 'column',
-
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
@@ -38,27 +37,39 @@ export default EStyleSheet.create({
     overflow: 'hidden',
     position: 'relative'
   },
+
+  // Rating Styles
   certifiedAndRatingContainer: {
     position: 'absolute',
     backgroundColor: '#ffffff',
-    height: 27,
-    width: 90,
     right: 12,
     borderRadius: 9,
-    top: 10,
-    borderColor: '#707070',
-    borderWidth: 0.1,
-    flexDirection: 'row',
+    top: 12,
     justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  ratingTouchable: {
+    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 5.6,
-    paddingBottom: 5.6,
-    paddingRight: 10,
-    paddingLeft: 10
+    padding: 5,
+    paddingHorizontal: 12
   },
-  withoutCertified: {
-    width: 68
+  ratingTick: {
+    width: 15,
+    height: 15,
+    marginRight: 7
   },
+  ratingCount: {
+    fontSize: 14,
+    fontFamily: 'OpenSans-SemiBold',
+    color: '#4d5153',
+    textAlign: 'center',
+    marginRight: 5,
+    marginLeft: 2
+  },
+  // Rating styles ends
+
   teaser__projectImage: {
     flex: 1,
     overflow: 'hidden'
@@ -99,18 +110,18 @@ export default EStyleSheet.create({
     // padding: 5,
     paddingLeft: 5,
     color: 'white',
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-SemiBold'
   },
   treePlantedtextTrees: {
     color: 'white',
     paddingLeft: 5,
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-SemiBold'
   },
   treePlantedtextPlanted: {
     color: 'white',
-    fontWeight: 'bold',
     paddingLeft: 16,
-    fontSize: 14
+    fontSize: 14,
+    fontFamily: 'OpenSans-SemiBold'
   },
   targetContainer: {
     width: '100%',
@@ -151,10 +162,10 @@ export default EStyleSheet.create({
   },
   project_teaser__contentText: {
     fontSize: 18,
-    fontWeight: 'bold',
     color: '$cardTextColor',
     maxWidth: '90%',
-    lineHeight: 24
+    lineHeight: 24,
+    fontFamily: 'OpenSans-SemiBold'
   },
   byOrgContainer: {
     width: '70%',
@@ -173,11 +184,10 @@ export default EStyleSheet.create({
     color: '$cardTextColor'
   },
   survivalText: {
-    fontSize: 12,
+    fontSize: 11,
     flexWrap: 'wrap',
-    // paddingTop: 3,
-    // paddingBottom: 8,
-    color: '$cardTextColor'
+    color: '$cardTextColor',
+    fontFamily: 'OpenSans-Regular'
   },
   costTextContainer: {
     backgroundColor: '#f2f2f7',
@@ -189,11 +199,16 @@ export default EStyleSheet.create({
     // marginRight: 20
   },
   costText: {
-    fontSize: 20,
+    fontSize: 14,
     color: '$newPrimary',
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-Bold'
   },
-  costPerTreeText: { fontSize: 9, marginTop: 6, color: '$cardTextColor' },
+  costPerTreeText: {
+    fontSize: 9,
+    marginTop: 6,
+    color: '$cardTextColor',
+    fontFamily: 'OpenSans-Regular'
+  },
   buttonContainer: {
     flexDirection: 'row',
     width: '30%',
@@ -233,9 +248,8 @@ export default EStyleSheet.create({
   projectNameContainer: {
     flexDirection: 'row',
     width: '100%',
-    paddingBottom: 5,
     alignItems: 'center',
-    marginRight: 10,
+    marginRight: 16,
     justifyContent: 'space-between'
   }
 });

@@ -253,6 +253,26 @@ export const selectedPlantProjectSelector = createSelector(
         );
   }
 );
+
+/**
+ * Returns the plant project, currently selected by the user, in normalized form.
+ */
+export const selectedReviewsSelector = createSelector(
+  selectedPlantProjectIdSelector,
+  entitiesSelector,
+  (selectedPlantProjectId, entities) => {
+    logSelectorUpdate('selectedReviewsSelector');
+    return null === selectedPlantProjectId
+      ? null
+      : //denormalize(
+        Object.values(entities.reviews).filter(
+          review => review.plantProjectId === selectedPlantProjectId
+        );
+    //reviewsSchema,
+    // entities
+    // )
+  }
+);
 /**
  * Returns the TPO that corresponds to the currently selected plant project
  */

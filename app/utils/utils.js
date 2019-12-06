@@ -23,6 +23,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
   locale = locale || getLocale();
   try {
     let style = { maximumFractionDigits: 2 };
+    // console.log('got numberformat', data, locale, currency, style, userProfile);
     if (currency) {
       style.style = 'currency';
       style.currency = currency;

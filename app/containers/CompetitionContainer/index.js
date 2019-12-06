@@ -1,6 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import Competiton from '../../components/Competition/index.native';
+import Competiton from '../../components/Competition';
 import { updateRoute } from '../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

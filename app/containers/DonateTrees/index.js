@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import {
   selectedPlantProjectSelector,
   selectedTpoSelector,
@@ -29,8 +29,28 @@ import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { updateRoute } from '../../helpers/routerHelper';
 import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
+import { postDirectRequest } from '../../utils/api';
 
 class DonationTreesContainer extends PureComponent {
+  componentWillMount() {
+    const { supportTreecounterAction, match } = this.props;
+    if (match && match.params && match.params.slug) {
+      postDirectRequest('/suggest', 'q=' + match.params.slug)
+        .then(_suggestions => {
+          console.log('sugessions', _suggestions);
+          if (
+            _suggestions.data.length &&
+            _suggestions.data[0].slug == match.params.slug
+          ) {
+            supportTreecounterAction({
+              id: _suggestions.data[0].treecounterId,
+              displayName: _suggestions.data[0].name
+            });
+          }
+        })
+        .catch(error => console.log(error));
+    }
+  }
   componentDidMount() {
     let selectedProjectId = undefined;
     if (this.props.match) {
@@ -93,6 +113,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      supportTreecounterAction,
       selectPlantProjectAction,
       fetchCurrencies,
       paymentClear,

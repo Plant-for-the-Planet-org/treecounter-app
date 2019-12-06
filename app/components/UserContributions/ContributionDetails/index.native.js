@@ -92,11 +92,11 @@ class UserContributionsDetails extends React.Component {
       }
       contributionTypeText = i18n.t('label.usr_contribution_redeemed');
     }
-    
+
     const backgroundColor = '#fff';
 
     return (
-      <ScrollView style={{ backgroundColor: {backgroundColor}, flex: 1 }}>
+      <ScrollView style={{ backgroundColor: { backgroundColor }, flex: 1 }}>
         <UserContributions
           mayUpdate={mayUpdate}
           treeCount={treeCount}

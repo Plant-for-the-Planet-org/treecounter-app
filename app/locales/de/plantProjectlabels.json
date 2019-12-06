@@ -18,5 +18,11 @@
   "view_more": "Weitere anschauen",
   "link": "Link",
   "exit": "Beenden",
-  "plant_project_update_success": "Planzprojekt erfolgreich aktualisiert"
+  "plant_project_update_success": "Planzprojekt erfolgreich aktualisiert",
+  "land-quality": "Landqualität",
+  "co-benefits": "Nebeneffekte",
+  "survival-rate": "Überlebensrate",
+  "new_review_added_successfully": "Neue Bewertung erfolgreich hinzugefügt",
+  "review_deleted_successfully": "Bewertung erfolgreich gelöscht",
+  "review_updated_successfully": "Bewertung erfolgreich geändert"
 }

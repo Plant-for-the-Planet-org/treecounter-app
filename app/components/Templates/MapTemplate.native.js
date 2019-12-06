@@ -1,6 +1,8 @@
 import { Text, View } from 'react-native';
 import React from 'react';
-import Permissions from 'react-native-permissions';
+import { Platform } from 'react-native';
+import { PERMISSIONS, request } from 'react-native-permissions';
+import Geolocation from '@react-native-community/geolocation';
 import PrimaryButton from '../../components/Common/Button/PrimaryButton';
 import mapTemplateStyle from '../../styles/mapTemplate.native';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
@@ -24,28 +26,28 @@ export function MapTemplate(locals) {
     <View style={[mapTemplateStyle.mapContainer, borderStyle]}>
       <PrimaryButton
         onClick={() => {
-          navigator.geolocation.setRNConfiguration({
-            skipPermissionRequests: true
+          request(
+            Platform.select({
+              android: PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+              ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
+            })
+          ).then((/*response*/) => {
+            Geolocation.getCurrentPosition(
+              location => {
+                let { latitude, longitude } = location.coords;
+                locals.onChange(
+                  'geoLongitude=' + longitude + '&geoLatitude=' + latitude
+                );
+              },
+              (/*location*/) => {
+                NotificationManager.error(
+                  i18n.t('label.location_permission_denied'),
+                  i18n.t('label.error'),
+                  5000
+                );
+              }
+            );
           });
-          Permissions.request('location', { type: 'whenInUse' }).then(
-            (/*response*/) => {
-              navigator.geolocation.getCurrentPosition(
-                location => {
-                  let { latitude, longitude } = location.coords;
-                  locals.onChange(
-                    'geoLongitude=' + longitude + '&geoLatitude=' + latitude
-                  );
-                },
-                (/*location*/) => {
-                  NotificationManager.error(
-                    i18n.t('label.location_permission_denied'),
-                    i18n.t('label.error'),
-                    5000
-                  );
-                }
-              );
-            }
-          );
         }}
       >
         {i18n.t('label.get_device_location')}

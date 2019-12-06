@@ -314,6 +314,7 @@ class PlantProjectSnippet extends PureComponent {
               ) : null} */}
             </View>
           </View>
+          <View style={styles.horizontalLine} />
         </CardLayout>
       </TouchableHighlight>
     );

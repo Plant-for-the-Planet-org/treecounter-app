@@ -251,5 +251,13 @@ export default EStyleSheet.create({
     alignItems: 'center',
     marginRight: 16,
     justifyContent: 'space-between'
+  },
+  horizontalLine: {
+    backgroundColor: '#ecf0f1',
+    height: 2,
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 16,
+    borderRadius: 2
   }
 });

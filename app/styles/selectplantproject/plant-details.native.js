@@ -4,14 +4,17 @@ export default EStyleSheet.create({
   carousalContainer: { flexDirection: 'column' },
   descriptionContainer: {
     paddingTop: 15,
-
     marginTop: 12,
     width: '100%',
     marginBottom: 20,
     paddingBottom: 20
   },
   descriptionText: {
-    color: '#686060'
+    color: '#686060',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    lineHeight: 19,
+    margin: 6
   },
   linkTextContainer: {
     flexDirection: 'row',
@@ -25,9 +28,6 @@ export default EStyleSheet.create({
   },
   linkText: { alignSelf: 'flex-end', color: '$colorPrimaryAccent' },
   videoContainer: {
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#d5d5d5',
-    padding: 5
+    marginTop: 12
   }
 });

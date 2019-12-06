@@ -56,11 +56,24 @@ const PlantProjectDetails = ({
   const url = cleanUrl(homepageUrl);
   const backgroundColorLightGreen = '#89b53a';
   const backgroundColor = 'white';
+
+  const [readMore, setReadMore] = React.useState(false);
+
   return (
     <View style={styles.carousalContainer}>
       <PlantProjectImageCarousel images={plantProjectImages} />
       <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>{description}</Text>
+        <Text style={styles.descriptionText}>About</Text>
+        <Text style={styles.descriptionText}>
+          {readMore ? description : description.substring(0, 200) + '...'}
+        </Text>
+        <TouchableOpacity onPress={() => setReadMore(!readMore)}>
+          {readMore ? (
+            <Text style={styles.descriptionText}>Read less &#x25B2;</Text>
+          ) : (
+            <Text style={styles.descriptionText}>Read more &#x25BC;</Text>
+          )}
+        </TouchableOpacity>
       </View>
       {url ? (
         <TouchableItem

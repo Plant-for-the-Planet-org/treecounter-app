@@ -6,11 +6,13 @@ import {
   TouchableWithoutFeedback,
   StyleSheet
 } from 'react-native';
+import { Dimensions } from 'react-native';
+
 import React, { Component } from 'react';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
 import PropTypes from 'prop-types';
-
+const width = Dimensions.get('window').width;
 class PlantProjectImageCarousel extends Component {
   imageCarousel;
 
@@ -98,17 +100,18 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   imageContainer: {
-    height: 100,
-    width: 100,
-    maxHeight: 100,
-    maxWidth: 100,
+    height: width * 0.4,
+    width: width * 0.7,
+    maxHeight: width * 0.4,
+    maxWidth: width * 0.7,
     marginLeft: 5,
     marginRight: 5
   },
   image: {
     flex: 1,
     width: undefined,
-    height: undefined
+    height: undefined,
+    borderRadius: 9
   }
 });
 export default PlantProjectImageCarousel;

@@ -18,6 +18,9 @@ import styles from '../../styles/faq';
 import TabContainer from '../../containers/Menu/TabContainer';
 
 export default class FAQ extends Component {
+  state = {
+    activeSections: []
+  };
   _renderHeader(section, index, isActive) {
     return (
       <View style={styles.header}>
@@ -55,6 +58,9 @@ export default class FAQ extends Component {
       </View>
     );
   }
+  _updateSections = activeSections => {
+    this.setState({ activeSections });
+  };
   render() {
     return this.props.loading ? (
       <LoadingIndicator />
@@ -62,11 +68,13 @@ export default class FAQ extends Component {
       <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
           <Accordion
+            activeSections={this.state.activeSections}
             sections={this.props.faqs}
             renderSectionTitle={this._renderSectionTitle}
             renderHeader={this._renderHeader}
             renderContent={this._renderContent}
             touchableComponent={TouchableOpacity}
+            onChange={this._updateSections}
           />
         </ScrollView>
         <TabContainer {...this.props} />

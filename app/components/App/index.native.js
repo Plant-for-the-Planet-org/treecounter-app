@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import 'react-native-gesture-handler';
 
 import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';

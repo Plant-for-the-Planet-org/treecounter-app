@@ -24,7 +24,7 @@ class App extends Component {
     const backgroundColor = 'white';
     return (
       <SafeAreaView
-        forceInset={{ top: 'never' }}
+        forceInset={{ top: 'never', bottom: 'always' }}
         style={{ flex: 1, backgroundColor: backgroundColor }}
       >
         <AppDrawerNavigatorContainer />

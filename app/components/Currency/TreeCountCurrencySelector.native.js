@@ -30,15 +30,17 @@ class TreeCountCurrencySelector extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTreeCount !== this.state.selectedTreeCount) {
       this.setState({
-        selectedTreeCount: nextProps.selectedTreeCount
+        selectedTreeCount: nextProps.selectedTreeCount // Changing the Tree Count State
       });
     }
   }
 
+  // This function handles the currency change
   handleCurrencyChange(currency) {
     this.updateStateAndParent({ selectedCurrency: currency });
   }
 
+  // This function uses treeCount and amount to update state and parent state
   handleTreeCountChange(treeCountData) {
     this.updateStateAndParent({
       selectedTreeCount: treeCountData.treeCount,
@@ -46,6 +48,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
     });
   }
 
+  // This function takes the tree Count and calculates the total amount
   calculateAmount(treeCount) {
     return (
       Math.round(treeCount * this.props.treeCost * this.getRate() * 100) / 100 +
@@ -53,16 +56,19 @@ class TreeCountCurrencySelector extends React.PureComponent {
     );
   }
 
+  //
   calculateTreeCount(amount) {
     return Math.floor(
       (amount - this.props.fees) / (this.props.treeCost * this.getRate())
     );
   }
 
+  // This function gets rate of tree depending on the selected currency
   getRate() {
     return parseFloat(this.props.rates[this.state.selectedCurrency]);
   }
 
+  // This updates the Parent state
   updateStateAndParent(updates) {
     const newState = { ...this.state, ...updates };
     this.setState(newState, () => {
@@ -87,6 +93,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
             <View style={styles.selectedProjectRow}>
               <Text>{this.props.selectedProject.name}</Text>
             </View>
+            {/* Check whether context is Gift Trees */}
             {this.props.giftTreeCounterName ? (
               <View
                 style={{
@@ -107,7 +114,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
                 </Text>
                 {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
               </View>
-            ) : this.props.supportTreecounter &&
+            ) : this.props.supportTreecounter && // Check whether context is Support Participant
             this.props.supportTreecounter.displayName ? (
               <View
                 style={{
@@ -150,6 +157,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
             </View>
           </View>
 
+          {/* Currency Selector */}
           <CurrencySelector
             currencies={currencies}
             onChange={this.handleCurrencyChange}

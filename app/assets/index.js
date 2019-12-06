@@ -153,6 +153,11 @@ import planetLogo from './images/Planet-Logo.png';
 import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
+import backArrow from './images/icons/backArrow.png';
+import currencyIcon from './images/currencyIcon.png';
+import gPayLogo from './images/gpay.png';
+import applePayLogo from './images/applepay.png';
+import blackLock from './images/icons/blackLock.png';
 export {
   germany,
   worldImg,
@@ -308,5 +313,10 @@ export {
   planetLogo,
   circleDelete,
   leaf,
-  leafGray
+  leafGray,
+  currencyIcon,
+  gPayLogo,
+  applePayLogo,
+  backArrow,
+  blackLock
 };

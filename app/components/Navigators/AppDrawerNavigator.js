@@ -10,6 +10,7 @@ import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import TargetContainer from '../../containers/TargetContainer';
 import DonationTreesContainer from '../../containers/DonateTrees';
+import DonorDetailsContainer from '../../containers/DonateTrees/donorDetails';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import styles from '../../styles/header.native';
@@ -86,7 +87,7 @@ const headerLabels = {
   ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
   ['delete_contribution']: 'label.delete_contribution',
-  ['app_donate_detail']: 'label.donate',
+  ['app_donate_detail']: '',
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
   ['app_pledge_events']: 'Pledges',
@@ -325,6 +326,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
+      },
+      ['donor_details_form']: {
+        screen: DonorDetailsContainer
       },
       ['app_pledge_events']: {
         screen: PledgeEvents

@@ -24,7 +24,7 @@ import {
   nextArrowWhite
 } from '../../assets';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import i18n from '../../locales/i18n.js';
 
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
@@ -56,7 +56,7 @@ export default function DonorDetails(props) {
       />
 
       <KeyboardAwareScrollView
-        contentContainerStyle={styles.formScrollView}
+        contentContainerStyle={styles.scrollView}
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="always"
         style={styles.keyboardScrollView}
@@ -106,9 +106,6 @@ export default function DonorDetails(props) {
                       titleFontSize={12}
                       returnKeyType="next"
                       lineWidth={1}
-                      ref={input => {
-                        this.lastnameTextInput = input;
-                      }}
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
@@ -127,9 +124,6 @@ export default function DonorDetails(props) {
                     titleFontSize={12}
                     lineWidth={1}
                     keyboardType="email-address"
-                    ref={input => {
-                      this.emailTextInput = input;
-                    }}
                     error={props.touched.email && props.errors.email}
                     labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}

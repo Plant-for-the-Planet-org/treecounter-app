@@ -15,7 +15,8 @@ import {
   currencyIcon,
   gPayLogo,
   blackLock,
-  nextArrowWhite
+  nextArrowWhite,
+  infoHint
 } from './../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
@@ -118,7 +119,47 @@ function DonationDetails(props) {
               value={commissionSwitch}
             />
           </View>
-        ) : null}
+        ) : (
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              marginTop: 24,
+              borderRadius: 6,
+              backgroundColor: '#F5F7F9',
+              alignItems: 'center'
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: '#89b53a',
+                width: 6,
+                height: '100%',
+                borderTopLeftRadius: 6,
+                borderBottomLeftRadius: 6
+              }}
+            />
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                marginLeft: 24,
+                paddingTop: 24,
+                paddingBottom: 24,
+                alignItems: 'center',
+                paddingRight: 24
+              }}
+            >
+              <Image
+                source={infoHint}
+                style={{ marginRight: 12, height: 24, width: 24 }}
+              />
+              <Text style={{ maxWidth: '90%', fontFamily: 'OpenSans-Regular' }}>
+                Please select Tree Count to Donate trees.
+              </Text>
+            </View>
+          </View>
+        )}
 
         {/* Tax Receipt */}
         {/* <Text style={styles.notTaxDeductible}>

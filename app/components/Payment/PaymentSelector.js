@@ -8,7 +8,7 @@ import i18n from '../../locales/i18n';
 import StripeContainer from '../../containers/StripePayment';
 
 import Paypal from './Gateways/Paypal';
-import Offline from './Gateways/Offline';
+// import Offline from './Gateways/Offline';
 import { handlePay, finalizeDonation } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { paymentFailed } from '../../reducers/paymentStatus';

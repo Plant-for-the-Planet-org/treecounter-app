@@ -14,21 +14,22 @@ class CompetitionTopCompetitor extends React.Component {
     return (
       <View style={styles.topCompetitorSection}>
         <View style={styles.topCompetitorName}>
-          <Text style={styles.topCompetitorScoreText}>
-            {this.props.index + 1}
-          </Text>
+          <Text style={styles.topCompetitorRank}>{this.props.index + 1}</Text>
           <UserProfileImage
             profileImage={
               this.props.topCompetitor &&
               this.props.topCompetitor.treecounterAvatar
             }
-            imageStyle={{ width: 30, height: 30, borderRadius: 30 / 2 }}
+            imageStyle={{
+              width: 17,
+              height: 17,
+              borderRadius: 17 / 2,
+              marginLeft: 10
+            }}
           />
-          <Text style={styles.topCompetitorScoreText}>
+          <Text style={[styles.topCompetitorScoreText, { flexGrow: 1 }]}>
             {this.props.topCompetitor.treecounterDisplayName}
           </Text>
-        </View>
-        <View style={styles.topCompetitorScore}>
           <Text style={styles.topCompetitorScoreText}>
             {this.props.topCompetitor.score}
           </Text>

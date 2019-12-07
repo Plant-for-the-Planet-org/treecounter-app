@@ -8,6 +8,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import { ScrollView } from 'react-native';
+
 import PlantProjectSnippet from './PlantProjectSnippet.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import TabContainer from '../../containers/Menu/TabContainer';
@@ -45,8 +46,9 @@ class PlantProjectFull extends React.Component {
       linkText,
       ndviUid
     };
-
+    const navigation = this.props.navigation;
     const backgroundColor = 'white';
+
     return (
       <View style={{ flex: 1 }}>
         <ScrollView
@@ -66,12 +68,18 @@ class PlantProjectFull extends React.Component {
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
             tpoName={tpo_name}
             selectProject={this.props.selectProject}
+            navigation={navigation}
           />
 
           {/* <View style={styles.horizontalRule} /> */}
           <View style={styles.plantProjectDetails}>
-            <PlantProjectDetails {...detailsProps} />
+            <PlantProjectDetails
+              currentUserProfile={this.props.currentUserProfile}
+              navigation={navigation}
+              {...detailsProps}
+            />
           </View>
+
           {this.props.plantProject.allowDonations ? (
             <View style={styles.buttonContainer}>
               <PrimaryButton
@@ -79,7 +87,7 @@ class PlantProjectFull extends React.Component {
                   this.props.selectProject(this.props.plantProject.id)
                 }
               >
-                {i18n.t('label.donate_txt')}
+                {i18n.t('label.donate')}
               </PrimaryButton>
             </View>
           ) : null}

@@ -1,19 +1,35 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { Image, Text, TouchableHighlight, View } from 'react-native';
+import {
+  Image,
+  Text,
+  TouchableHighlight,
+  View,
+  TouchableOpacity
+} from 'react-native';
 
 import { getImageUrl } from '../../actions/apiRouting';
-import { tick, location_grey, survival_grey, tax_grey } from '../../assets';
+import {
+  tick,
+  location_grey,
+  survival_grey,
+  tax_grey,
+  leaf,
+  leafGray
+} from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { formatNumber } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
 import CardLayout from '../Common/Card';
 import PlantedProgressBar from './PlantedProgressbar.native';
-
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 //keeping Icon here instead of in assets
-const starIcon = <Icon name="star" size={14} color="#4d5153" />;
+const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -47,7 +63,8 @@ class PlantProjectSnippet extends PureComponent {
       // images,
       imageFile,
       reviewScore: plantProjectRating,
-      reviews
+      reviews,
+      survivalRateStatus
       // description,
       // homepageUrl: homepageUrl,
       // homepageCaption: homepageCaption,
@@ -97,6 +114,12 @@ class PlantProjectSnippet extends PureComponent {
         deducibleText1 += ', ';
       }
     }
+    const survivalRateLeaf =
+      survivalRateStatus == 'verified'
+        ? leaf
+        : survivalRateStatus == 'self-reported'
+          ? leafGray
+          : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     const textColor = '#4d5153';
     return (
@@ -119,35 +142,50 @@ class PlantProjectSnippet extends PureComponent {
                 resizeMode={'cover'}
               />
               {reviews && reviews.length ? (
-                <View style={[styles.certifiedAndRatingContainer]}>
-                  {teaserProps.isCertified ? (
-                    <Image
-                      source={tick}
-                      style={{
-                        width: 15,
-                        height: 15,
-                        marginLeft: 2,
-                        marginRight: 3
-                      }}
-                    />
-                  ) : null}
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text
-                      style={[
-                        {
-                          fontSize: 14,
-                          // lineHeight: 19,
-                          color: { textColor },
-                          textAlign: 'center',
-                          marginRight: 5,
-                          marginLeft: 2
-                        }
-                      ]}
+                <View
+                  style={[
+                    styles.certifiedAndRatingContainer,
+                    !isCertified && styles.withoutCertified
+                  ]}
+                >
+                  <TouchableOpacity
+                    style={{ height: 48, paddingTop: 13, flex: 1 }}
+                    onPress={() => {
+                      this.props.selectPlantProjectAction(id);
+                      updateStaticRoute('app_reviews', this.props.navigation);
+                    }}
+                  >
+                    <View
+                      style={{ flexDirection: 'row', alignItems: 'center' }}
                     >
-                      {(plantProjectRating / 100).toFixed(2) || '0.0'}
-                    </Text>
-                    {starIcon}
-                  </View>
+                      {isCertified ? (
+                        <Image
+                          source={tick}
+                          style={{
+                            width: 15,
+                            height: 15,
+                            marginLeft: 2,
+                            marginRight: 3
+                          }}
+                        />
+                      ) : null}
+                      <Text
+                        style={[
+                          {
+                            fontSize: 14,
+                            // lineHeight: 19,
+                            color: textColor,
+                            textAlign: 'center',
+                            marginRight: 5,
+                            marginLeft: 2
+                          }
+                        ]}
+                      >
+                        {(plantProjectRating / 100).toFixed(2) || '0.0'}
+                      </Text>
+                      {starIcon}
+                    </View>
+                  </TouchableOpacity>
                 </View>
               ) : null}
             </View>
@@ -200,9 +238,33 @@ class PlantProjectSnippet extends PureComponent {
                       marginRight: 10
                     }}
                   />
-                  <Text style={styles.survivalText}>
-                    {specsProps.survivalRate}% {i18n.t('label.survival_rate')}
-                  </Text>
+                  <View style={styles.survivalText}>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={styles.survivalText}>
+                        {specsProps.survivalRate}%{' '}
+                        {i18n.t('label.survival_rate')}
+                      </Text>
+                      {survivalRateLeaf ? (
+                        <Text
+                          style={{
+                            padding: 5,
+                            borderRadius: 12,
+                            marginLeft: 4,
+                            paddingBottom: 2,
+                            paddingTop: 2
+                          }}
+                        >
+                          <Image
+                            source={survivalRateLeaf}
+                            style={{
+                              width: 13,
+                              height: 13
+                            }}
+                          />
+                        </Text>
+                      ) : null}
+                    </View>
+                  </View>
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -301,5 +363,12 @@ PlantProjectSnippet.propTypes = {
   showCertifiedTag: PropTypes.bool,
   selectProject: PropTypes.func
 };
-
-export default PlantProjectSnippet;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      selectPlantProjectAction
+    },
+    dispatch
+  );
+};
+export default connect(null, mapDispatchToProps)(PlantProjectSnippet);

@@ -1,4 +1,6 @@
 {
   "dont_have_account": "Não tem uma conta?",
-  "login": "Entrar"
+  "login": "Entrar",
+  "password": "Senha",
+  "current_password": "senha atual"
 }

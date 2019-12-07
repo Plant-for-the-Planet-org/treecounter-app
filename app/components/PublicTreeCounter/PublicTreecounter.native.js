@@ -119,7 +119,7 @@ class PublicTreeCounter extends React.Component {
     updateStaticRoute('app_donate_detail', navigation);
   };
   render() {
-    const { treecounter, currentUserProfile } = this.props;
+    const { treecounter, currentUserProfile, navigation } = this.props;
     if (null === treecounter) {
       return <LoadingIndicator contentLoader={true} screen="worldLoader" />;
     }
@@ -158,12 +158,12 @@ class PublicTreeCounter extends React.Component {
             followChanged={this.onFollowChanged}
           />
           {'tpo' !== userProfile.type &&
-            !isMyself(treecounter, currentUserProfile) ? (
-              <SupportButton
-                {...supportProps}
-                onRegisterSupporter={this.onRegisterSupporter}
-              />
-            ) : null}
+          !isMyself(treecounter, currentUserProfile) ? (
+            <SupportButton
+              {...supportProps}
+              onRegisterSupporter={this.onRegisterSupporter}
+            />
+          ) : null}
         </View>
         <View style={stylesHome.svgContainer}>
           {Object.keys(this.state.svgData).length !== 0 ? (
@@ -175,30 +175,30 @@ class PublicTreeCounter extends React.Component {
         </View>
         <View>
           {userProfile.synopsis1 ||
-            userProfile.synopsis2 ||
-            userProfile.linkText ||
-            userProfile.url ? (
-              <CardLayout>
-                {userProfile.synopsis1 ? (
-                  <Text style={stylesHome.footerText}>
-                    {userProfile.synopsis1}
-                  </Text>
-                ) : null}
-                {userProfile.synopsis2 ? (
-                  <Text style={stylesHome.footerText}>
-                    {userProfile.synopsis2}
-                  </Text>
-                ) : null}
-                {userProfile.url ? (
-                  <Text
-                    style={stylesHome.linkText}
-                    onPress={() => this._goToURL(userProfile.url)}
-                  >
-                    {userProfile.linkText || i18n.t('label.read_more')}
-                  </Text>
-                ) : null}
-              </CardLayout>
-            ) : null}
+          userProfile.synopsis2 ||
+          userProfile.linkText ||
+          userProfile.url ? (
+            <CardLayout>
+              {userProfile.synopsis1 ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.synopsis1}
+                </Text>
+              ) : null}
+              {userProfile.synopsis2 ? (
+                <Text style={stylesHome.footerText}>
+                  {userProfile.synopsis2}
+                </Text>
+              ) : null}
+              {userProfile.url ? (
+                <Text
+                  style={stylesHome.linkText}
+                  onPress={() => this._goToURL(userProfile.url)}
+                >
+                  {userProfile.linkText || i18n.t('label.read_more')}
+                </Text>
+              ) : null}
+            </CardLayout>
+          ) : null}
         </View>
         <View>
           {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
@@ -214,6 +214,7 @@ class PublicTreeCounter extends React.Component {
                   selectProject={id => this.onPlantProjectSelected(id)}
                   showMoreButton={false}
                   tpoName={project.tpo_name}
+                  navigation={navigation}
                 />
               ))}
             </View>

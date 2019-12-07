@@ -1,21 +1,56 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-import { View, TextInput, Image, Text } from 'react-native';
+import {
+  View,
+  TextInput,
+  Image,
+  Text,
+  TouchableOpacity,
+  Keyboard
+} from 'react-native';
 import SearchUser from './SearchUser.native';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
-import CardLayout from '../../Common/Card';
 import { iosInformation } from '../../../assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import i18n from '../../../locales/i18n';
-const textColor = '#ff0033';
+import styles from '../../../styles/gifttrees/giftrees';
+import buttonStyles from '../../../styles/common/button.native';
+import { forward } from './../../../assets';
+
 export default class GiftUser extends Component {
   constructor(props) {
     super(props);
     this.state = { selectedSuggestion: null };
     this.onNextClick = this.onNextClick.bind(this);
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
-    this.state = { form: {} };
+    this.state = { form: {}, buttonType: 'next' };
   }
-  componentWillMount() {}
+  componentWillMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this._keyboardDidHide
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({
+      buttonType: '>'
+    });
+  };
+
+  _keyboardDidHide = () => {
+    this.setState({
+      buttonType: 'next'
+    });
+  };
   onSearchResultClick(suggestion) {
     // console.log('suggestion clicked', suggestion);
     this.setState({ selectedSuggestion: suggestion });
@@ -43,76 +78,71 @@ export default class GiftUser extends Component {
   }
   render() {
     return (
-      <KeyboardAwareScrollView
-        contentContainerStyle={{ paddingBottom: 72 }}
-        enableOnAndroid
-      >
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            width: '100%',
-            height: '100%'
-          }}
+      <View style={styles.view_container}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.formScrollView}
+          enableOnAndroid
+          keyboardDismissMode="on-drag"
+          keyboardShouldPersistTaps="always"
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled
         >
-          <CardLayout>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={{ width: 40, height: 40, alignSelf: 'center' }}>
-                <Image
-                  style={{ width: undefined, height: undefined, flex: 1 }}
-                  source={iosInformation}
-                />
-              </View>
-
-              <Text
-                style={{
-                  padding: 5,
-                  color: textColor,
-                  marginRight: 10,
-                  width: '90%'
-                }}
-              >
-                {i18n.t('label.gift_trees_description')}
-              </Text>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ width: 40, height: 40, alignSelf: 'center' }}>
+              <Image style={styles.gtDescImage} source={iosInformation} />
             </View>
-          </CardLayout>
-          <CardLayout style={{ flex: 0.8 }}>
-            <SearchUser
-              onSearchResultClick={this.onSearchResultClick}
-              currentUserProfile={this.props.currentUserProfile}
-              hideCompetitions
-            />
-            <View>
-              <Text
-                style={{
-                  color: textColor,
-                  fontSize: 11
-                }}
-              >
-                {this.state.error}
-              </Text>
-            </View>
-
-            <TextInput
-              multiline
-              style={{
-                height: 100,
-                margin: 10,
-                padding: 5
-              }}
-              underlineColorAndroid={'transparent'}
-              onChangeText={val => this.onChangeText(val)}
-              placeholder={i18n.t('label.gift_message')}
-            />
-          </CardLayout>
-
-          <View style={{ flex: 0.2 }}>
-            <PrimaryButton onClick={this.onNextClick}>
-              {i18n.t('label.next')}
-            </PrimaryButton>
+            <Text style={styles.gtDescription}>
+              {i18n.t('label.gift_trees_description')}
+            </Text>
           </View>
-        </View>
-      </KeyboardAwareScrollView>
+          <SearchUser
+            onSearchResultClick={this.onSearchResultClick}
+            currentUserProfile={this.props.currentUserProfile}
+            hideCompetitions
+          />
+          <View>
+            <Text style={styles.errorText}>{this.state.error}</Text>
+          </View>
+
+          <TextInput
+            multiline
+            style={styles.giftMessageText}
+            onChangeText={val => this.onChangeText(val)}
+            placeholder={i18n.t('label.gift_message')}
+          />
+        </KeyboardAwareScrollView>
+        {this.state.buttonType === 'next' ? (
+          <TouchableOpacity
+            style={[
+              buttonStyles.actionButtonTouchable,
+              { top: undefined, bottom: '14%' }
+            ]}
+            onPress={this.onNextClick}
+          >
+            <View style={buttonStyles.actionButtonView}>
+              <Text style={buttonStyles.actionButtonText}>
+                {i18n.t('label.next')}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ) : null}
+
+        {this.state.buttonType === '>' ? (
+          <TouchableOpacity
+            style={[
+              buttonStyles.actionButtonSmallTouchable,
+              { top: undefined, bottom: '20%' }
+            ]}
+            onPress={this.onNextClick}
+          >
+            <Image
+              source={forward}
+              resizeMode="cover"
+              style={buttonStyles.actionButtonSmallImage}
+            />
+          </TouchableOpacity>
+        ) : null}
+      </View>
     );
   }
 }

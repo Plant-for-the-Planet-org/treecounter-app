@@ -1,5 +1,9 @@
 {
   "support": "Apoio",
   "plant_trees": "Plante Árvores",
-  "read_more": "Ler mais"
+  "read_more": "Ler mais",
+  "contributor": "Contribuidor",
+  "planted_trees": "Árvores plantadas",
+  "target": "Alvo",
+  "support_trees_to": "Apoie árvores para {{user}}"
 }

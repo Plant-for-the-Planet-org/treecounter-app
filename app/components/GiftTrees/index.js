@@ -34,6 +34,7 @@ import PaymentSelector from '../Payment/PaymentSelector';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import TextBlock from '../Common/Text/TextBlock';
 import InlineLink from '../Common/InlineLink';
+import { postDirectRequest } from '../../utils/api';
 
 let TCombForm = t.form.Form;
 
@@ -95,7 +96,6 @@ export default class GiftTrees extends Component {
 
   constructor(props) {
     super(props);
-
     let modeReceipt;
     if (props.currentUserProfile) {
       modeReceipt = props.currentUserProfile.type;
@@ -119,7 +119,8 @@ export default class GiftTrees extends Component {
       expandedOption: '1',
       showNextButton: true,
       donationCreated: false,
-      showSelectProject: true
+      showSelectProject: true,
+      context: { ...props.context }
     };
 
     this.handleModeReceiptChange = this.handleModeReceiptChange.bind(this);
@@ -128,6 +129,9 @@ export default class GiftTrees extends Component {
     );
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
     this.handleModeUserChange = this.handleModeUserChange.bind(this);
+    this.getSuggestionAndSet = this.getSuggestionAndSet.bind(this);
+    this.updatePageIndex = this.updatePageIndex.bind(this);
+    this.updateSelectProject = this.updateSelectProject.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -152,7 +156,26 @@ export default class GiftTrees extends Component {
       });
     }
   }
-
+  updatePageIndex(index = 1) {
+    this.setState({ pageIndex: index });
+  }
+  updateSelectProject(value = true) {
+    this.setState({ showSelectProject: value });
+  }
+  getSuggestionAndSet(value) {
+    console.log('calling', value);
+    const { updatePageIndex, updateSelectProject, suggestionClicked } = this;
+    postDirectRequest('/suggest', 'q=' + value.trim())
+      .then(_suggestions => {
+        console.log('sugessions', _suggestions);
+        if (_suggestions.data.length && _suggestions.data[0].slug == value) {
+          suggestionClicked(null, { suggestion: _suggestions.data[0] });
+          updatePageIndex(1);
+          updateSelectProject(true);
+        }
+      })
+      .catch(error => console.log(error));
+  }
   handleTreeCountCurrencyChange(treeCountCurrencyData) {
     this.setState({
       selectedCurrency: treeCountCurrencyData.currency,
@@ -177,7 +200,11 @@ export default class GiftTrees extends Component {
   componentWillUnmount() {
     this.props.paymentClear();
   }
-
+  componentWillMount() {
+    if (this.state.context && this.state.context.slug) {
+      this.getSuggestionAndSet(this.state.context.slug);
+    }
+  }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.donationCreated !== this.state.donationCreated) {
       let requestData = {
@@ -582,5 +609,6 @@ GiftTrees.propTypes = {
   createPaymentGift: PropTypes.func,
   paymentStatus: PropTypes.object,
   paymentClear: PropTypes.func,
-  plantProjectClear: PropTypes.func
+  plantProjectClear: PropTypes.func,
+  context: PropTypes.any
 };

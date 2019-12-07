@@ -1,0 +1,23 @@
+{
+  "community_reviews": "Expertenbewertungen",
+  "write_review": "Bewertung schreiben",
+  "view_pdf": "PDF ansehen",
+  "edit_review": "Bewertung ändern",
+  "delete_review": "Bewertung löschen",
+  "upload_report": "Bewertung hochladen (PDF)",
+  "add_project_review": "Projektbewertung hinzufügen",
+  "edit_project_review": "Projektbewertung bearbeiten",
+  "guide_line": "Bitte überprüfe die Richtlinien und bewerte nur Kriterien, mit denen du am besten vertraut bist. Alle Kriterien sind optional",
+  "brief_review": "KURZE BESCHREIBUNG DES PROJEKTS",
+  "no_pdf_found": "Kein gültiges PDF gefunden!",
+  "reviews": "Bewertungen",
+  "summary_missing": "Kurzbeschreibung fehlt",
+  "file_selected": "1 Datei ausgewählt",
+  "add_pictures": "BILDER HINZUFÜGEN",
+  "file_already_upload": "1 PDF-Datei bereits vorhanden",
+  "view_guidelines": "Zeige Richtlinien",
+  "land_quality": "Landqualität",
+  "co_benefits": "Nebeneffekte",
+  "survival_rate": "Überlebensrate",
+  "at_least_one_index": "Mindestens ein Bewertungskriterium muss bestimmt werden."
+}

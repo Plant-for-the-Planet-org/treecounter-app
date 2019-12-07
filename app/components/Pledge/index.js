@@ -7,7 +7,6 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { getDocumentTitle } from '../../helpers/utils';
 import { delimitNumbers } from '../../utils/utils';
 import Modal from 'react-modal';
-import { fetchItem } from './../../stores/localStorage';
 import {
   pledgeFormSchema,
   pledgeSchemaOptions
@@ -22,6 +21,7 @@ import {
 import { AllPledges, IncreasePledge, MakePledge, UpdatePledge } from './modals';
 let TCombForm = t.form.Form;
 import Fade from 'react-reveal/Fade';
+import LoadingIndicator from '../Common/LoadingIndicator';
 
 const formLayout = locals => {
   return (
@@ -55,47 +55,16 @@ export default class Pledge extends Component {
       loggedIn: false,
       myPledge: {},
       updatingTreeCount: '', // used while increasing tree count
-      pledgeButtonDisabled: false // To disable button until page reloads
+      pledgeButtonDisabled: false, // To disable button until page reloads
+      loading: true
     };
   }
 
-  componentDidMount() {
-    if (this.props.currentUserProfile) {
+  componentDidUpdate() {
+    if (this.props.pledges && this.props.pledges.image && this.state.loading) {
       this.setState({
-        loggedIn: true
+        loading: false
       });
-    } else {
-      fetchItem('pledgedEvent')
-        .then(data => {
-          if (typeof data !== 'undefined' && data.length > 0) {
-            let stringPledges = JSON.parse(data);
-            stringPledges = stringPledges.toString();
-            this.props.fetchPublicPledgesAction(stringPledges);
-          }
-        })
-        .catch(error => console.log(error));
-    }
-    this.getMyPledge();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.pledges !== this.props.pledges) {
-      if (this.props.currentUserProfile) {
-        this.setState({
-          loggedIn: true
-        });
-      } else {
-        fetchItem('pledgedEvent')
-          .then(data => {
-            if (typeof data !== 'undefined' && data.length > 0) {
-              let stringPledges = JSON.parse(data);
-              stringPledges = stringPledges.toString();
-              this.props.fetchPublicPledgesAction(stringPledges);
-            }
-          })
-          .catch(error => console.log(error));
-      }
-      this.getMyPledge();
     }
   }
 
@@ -128,10 +97,8 @@ export default class Pledge extends Component {
     this.setState({ SubmitPledgeModalIsOpen: true });
   };
   closeSubmitPledgeModal = () => {
+    this.props.fetchPledgesAction(this.props.eventSlug);
     this.setState({ SubmitPledgeModalIsOpen: false });
-    this.setState({
-      pledgeButtonDisabled: false
-    });
   };
 
   // Functions for Later/Continue after Update Modal
@@ -139,6 +106,7 @@ export default class Pledge extends Component {
     this.setState({ SubmitUpdateModalIsOpen: true });
   };
   closeSubmitUpdateModal = () => {
+    this.props.fetchPledgesAction(this.props.eventSlug);
     this.setState({ SubmitUpdateModalIsOpen: false });
   };
 
@@ -147,9 +115,6 @@ export default class Pledge extends Component {
   }
 
   onFormSubmit() {
-    this.setState({
-      pledgeButtonDisabled: true
-    });
     let value = this.state.value;
     if (value) {
       this.props.postPledge(value);
@@ -169,69 +134,46 @@ export default class Pledge extends Component {
     const data = {
       treeCount: this.state.updatingTreeCount
     };
-    this.props.updatePledge(
-      data,
-      {
-        token: token,
-        version: 'v1.3'
-      },
-      this.state.loggedIn
-    );
+    this.props.updatePledge(data, token);
     this.closeIncreasePledgesModal();
     this.openSubmitUpdateModal();
   };
 
-  getMyPledge = () => {
-    let userPledges =
-      this.props.entities && this.props.entities.eventPledge
-        ? this.props.pledges &&
-          this.props.pledges.allEventPledges &&
-          this.props.pledges.allEventPledges.length > 0
-          ? typeof this.props.entities.eventPledge !== 'undefined'
-            ? ((userPledges = Object.values(this.props.entities.eventPledge)), // convert object to array
-              userPledges.filter(pledge => {
-                return this.props.pledges.allEventPledges.some(f => {
-                  return f.token === pledge.token && f.email === pledge.email;
-                });
-              }))
-            : null
-          : null
-        : null;
-    this.setState({
-      myPledge: userPledges
-    });
-  };
-
   render() {
-    let selectedPledge = {};
-    if (
-      this.props.pledgeEvents &&
-      this.props.pledgeEvents.pledgeEvents.length > 0
-    ) {
-      selectedPledge = this.props.pledgeEvents.pledgeEvents.filter(
-        val => val.slug === this.props.eventSlug
-      )[0];
-    }
-    document.title = getDocumentTitle(selectedPledge.name);
-
-    let myPledge = this.state.myPledge;
+    let myPledge = this.props.myPledge;
     let pledges =
       this.props.pledges && this.props.pledges.total !== undefined
         ? this.props.pledges
         : null;
 
-    return pledges && pledges.total !== undefined ? (
+    if (pledges) {
+      document.title = getDocumentTitle(pledges.name);
+    }
+
+    return this.state.loading ? (
+      <div className="sidenav-wrapper">
+        <LoadingIndicator />
+      </div>
+    ) : (
       <div className="sidenav-wrapper app-container__content--center">
-        <EventHeaderDetails selectedPledge={selectedPledge} />
+        {pledges && pledges.name ? (
+          <EventHeaderDetails selectedPledge={pledges} />
+        ) : null}
+
         <div className="pledge_content--center">
-          <RecentHighestPledges
-            pledges={pledges}
-            openAllPledgesModal={this.openAllPledgesModal}
-          />
-          <div className="row">
-            <EventDescription pledges={pledges} />
-            <EventImages pledges={pledges} />
-          </div>
+          {pledges && pledges.name ? (
+            <RecentHighestPledges
+              pledges={pledges}
+              openAllPledgesModal={this.openAllPledgesModal}
+            />
+          ) : null}
+
+          {pledges && pledges.name ? (
+            <div className="row">
+              <EventDescription pledges={pledges} />
+              <EventImages pledges={pledges} />
+            </div>
+          ) : null}
 
           {typeof myPledge !== 'undefined' && myPledge !== null ? (
             myPledge.length > 0 ? (
@@ -305,6 +247,7 @@ export default class Pledge extends Component {
             contentLabel="Pledge Modal"
             overlayClassName="pledge-overlay"
             className="pledge-content"
+            appElement={document.getElementById('root')}
           >
             <Fade bottom>
               <div className="make-pledge-form-x">
@@ -343,12 +286,14 @@ export default class Pledge extends Component {
           </Modal>
 
           {/* Modal for showing all the pledges  */}
-          <AllPledges
-            isOpen={this.state.AllPledgesModalIsOpen}
-            pledges={pledges}
-            closeAllPledgesModal={this.closeAllPledgesModal}
-            name={selectedPledge.name}
-          />
+          {pledges && pledges.name ? (
+            <AllPledges
+              isOpen={this.state.AllPledgesModalIsOpen}
+              pledges={pledges}
+              closeAllPledgesModal={this.closeAllPledgesModal}
+              name={pledges.name}
+            />
+          ) : null}
 
           {/* Modal for showing increase pledge form  */}
           {typeof myPledge !== 'undefined' && myPledge !== null ? (
@@ -381,7 +326,7 @@ export default class Pledge extends Component {
           />
         </div>
       </div>
-    ) : null;
+    );
   }
 }
 

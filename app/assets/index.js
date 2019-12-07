@@ -117,7 +117,6 @@ import selector_menu from './images/icons/selector_menu.png';
 import radio_button from './images/icons/radio_button.png';
 import radio_button_selected from './images/icons/radio_button_selected.png';
 import filter from './images/icons/filter.png';
-import welcomeScreen from './images/welcome-screen.png';
 import flagTarget from './images/flag_target.png';
 import compCalendar from './images/calendar_comp.png';
 import upwardArrow from './images/right-arrow.png';
@@ -133,7 +132,6 @@ import mapExpand from './images/map_expand.png';
 import smalltree from './images/smalltree.png';
 import calendarwhite from './images/calendarwhite.png';
 import forward from './images/forward.png';
-import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
 import location_grey from './images/icons/location_grey.png';
@@ -145,10 +143,16 @@ import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
+import attach from './images/attach.png';
+import cameraSolid from './images/icons/camera-solid.png';
+import imageGallery from './images/icons/images-gallery.png';
 import nextArrow from './images/icons/nextArrow.png';
 import nextArrowWhite from './images/icons/nextArrowWhite.png';
 import closeBlack from './images/icons/closeblack.png';
 import planetLogo from './images/Planet-Logo.png';
+import circleDelete from './images/icons/circle-delete.png';
+import leaf from './images/leaf.png';
+import leafGray from './images/leaf_gray.png';
 export {
   germany,
   worldImg,
@@ -276,7 +280,6 @@ export {
   shareIcon,
   facebook,
   twitter,
-  welcomeScreen,
   flagTarget,
   compCalendar,
   upwardArrow,
@@ -287,7 +290,6 @@ export {
   smalltree,
   calendarwhite,
   forward,
-  successAnimated,
   trees,
   greencalendar,
   location_grey,
@@ -297,8 +299,14 @@ export {
   googlePlayBadge_de,
   appleStoreBadge_en,
   appleStoreBadge_de,
+  attach,
+  cameraSolid,
+  imageGallery,
   nextArrow,
   nextArrowWhite,
   closeBlack,
-  planetLogo
+  planetLogo,
+  circleDelete,
+  leaf,
+  leafGray
 };

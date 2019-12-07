@@ -8,7 +8,7 @@ import i18n from '../../locales/i18n';
 import StripeContainer from '../../containers/StripePayment';
 
 import Paypal from './Gateways/Paypal';
-import Offline from './Gateways/Offline';
+// import Offline from './Gateways/Offline';
 import { handlePay, finalizeDonation } from '../../actions/donateAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { paymentFailed } from '../../reducers/paymentStatus';
@@ -296,26 +296,27 @@ class PaymentSelector extends Component {
             );
           }
           if ('offline' === gateway) {
-            return (
-              <div key={gateway}>
-                {this.state.errorMessage ? (
-                  <div>{this.state.errorMessage}</div>
-                ) : null}
-                <Offline
-                  key={gateway}
-                  onSuccess={this.decorateSuccess(gateway, accountName, {
-                    userMessage: 'Success',
-                    isConfirmed: true
-                  })}
-                  amount={paymentDetails.amount}
-                  currency={currency}
-                  account={accounts[accountName]}
-                  expanded={this.props.expandedOption === '4'}
-                  handleExpandedClicked={() => this.handleExpandedClicked('4')}
-                  {...gatewayProps}
-                />
-              </div>
-            );
+            return null;
+            // (
+            //   <div key={gateway}>
+            //     {this.state.errorMessage ? (
+            //       <div>{this.state.errorMessage}</div>
+            //     ) : null}
+            //     <Offline
+            //       key={gateway}
+            //       onSuccess={this.decorateSuccess(gateway, accountName, {
+            //         userMessage: 'Success',
+            //         isConfirmed: true
+            //       })}
+            //       amount={paymentDetails.amount}
+            //       currency={currency}
+            //       account={accounts[accountName]}
+            //       expanded={this.props.expandedOption === '4'}
+            //       handleExpandedClicked={() => this.handleExpandedClicked('4')}
+            //       {...gatewayProps}
+            //     />
+            //   </div>
+            // );
           }
         })}
       </div>

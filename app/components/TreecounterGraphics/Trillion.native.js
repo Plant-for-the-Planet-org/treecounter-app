@@ -273,23 +273,30 @@ class Trillion extends PureComponent {
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={{ paddingRight: 20 }}
                 >
-                  {Object.values(this.props.entities.eventPledge).map(
-                    unfulfilledEvent =>
-                      unfulfilledEvent.status === 'pending' ? (
-                        <TouchableOpacity
-                          key={unfulfilledEvent.token}
-                          onPress={() => {
-                            updateStaticRoute('app_pledge_events', navigation, {
-                              slug: unfulfilledEvent.eventSlug,
-                              plantProject: { id: -1 },
-                              treeCount: -1
-                            });
-                          }}
-                        >
-                          <UnfulfilledEvents event={unfulfilledEvent} />
-                        </TouchableOpacity>
-                      ) : null
-                  )}
+                  {this.props.entities.eventPledge !== null &&
+                  this.props.entities.eventPledge !== undefined
+                    ? Object.values(this.props.entities.eventPledge).map(
+                        unfulfilledEvent =>
+                          unfulfilledEvent.status === 'pending' ? (
+                            <TouchableOpacity
+                              key={unfulfilledEvent.token}
+                              onPress={() => {
+                                updateStaticRoute(
+                                  'app_pledge_events',
+                                  navigation,
+                                  {
+                                    slug: unfulfilledEvent.eventSlug,
+                                    plantProject: { id: -1 },
+                                    treeCount: -1
+                                  }
+                                );
+                              }}
+                            >
+                              <UnfulfilledEvents event={unfulfilledEvent} />
+                            </TouchableOpacity>
+                          ) : null
+                      )
+                    : null}
                 </ScrollView>
               </View>
             </View>

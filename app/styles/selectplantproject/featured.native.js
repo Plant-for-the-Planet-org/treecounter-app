@@ -16,5 +16,22 @@ export default EStyleSheet.create({
   flexContainer: {
     flexGrow: 1,
     paddingBottom: 90
-  }
+  },
+
+  headerView: {
+    display: 'flex',
+    flexDirection: 'row',
+    margin: 20,
+    marginBottom: 0
+  },
+  headerTitle: {
+    fontSize: 14,
+    fontFamily: 'OpenSans-Regular',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    maxWidth: '70%'
+  },
+  headerImage: { height: 60, flex: 1 }
 });

@@ -1,5 +1,26 @@
 {
   "total_trees": "Total de árvores",
+  "most_recent": "Compromissos Recentes",
   "biggest_pledges": "Maiores Promessas",
-  "pledgeTitleName": "Nome"
+  "pledge": "Compromisso",
+  "pledge_trees": "Árvores de Compromisso",
+  "pledge_des": "Após o compromisso, você receberá um e-mail informando como doar as árvores compromissadas.",
+  "noPledges": "Parece que nenhuma árvore foi compromissada ainda. Faça uma compromisso e volte mais tarde para verificar os maiores compromissos.",
+  "makePledgeButton": "Faça uma compromisso",
+  "pledgeTitleName": "Nome",
+  "pledgeTitleTrees": "Árvores",
+  "pledgeToPlant": "Compromisso de plantar árvores",
+  "pledgeToPlantDesc": "Uma árvore custa {{treeCost}} {{currency}} e é plantada em {{projectName}}. Você receberá um e-mail com um link para cumprir sua compromisso. ",
+  "pledgeFormFName": "Primeiro nome",
+  "pledgeFormLName": "Sobrenome",
+  "pledgeFormEmail": "E-mail",
+  "pledgeFormTreecount": "Contagem de Árvores",
+  "pledgeAddedMessage": "Você se compromissou plantar {{treeCount}} árvores. Você pode tocar em continuar para cumprir sua compromisso agora.",
+  "pledgeAddedLaterButton": "MAIS TARDE",
+  "pledgeAddedContinueButton": "CONTINUAR",
+  "treesPledgedAllPledges": "{{treeCount}} árvores compromissadas",
+  "increaseMyPledge": "+ AUMENTAR MEU COMPROMISSO",
+  "increasePledge": "Aumentar compromisso",
+  "treesPledgedOn": "Lista de árvores compromissadas",
+  "increasePledgeMessage": "Para aumentar seu compromisso, insira um valor maior que {{treeCount}} árvores. Uma árvore custa {{treeCost}} {{currency}} e é plantada em {{projectName}}"
 }

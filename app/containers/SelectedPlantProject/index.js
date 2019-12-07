@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 
 import {
   selectedPlantProjectSelector,
-  selectedTpoSelector
+  selectedTpoSelector,
+  currentUserProfileSelector
 } from '../../selectors';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
@@ -46,6 +47,7 @@ class SelectedPlantProjectContainer extends Component {
           plantProject={this.props.selectedProject}
           tpoName={this.props.selectedTpo ? this.props.selectedTpo.name : null}
           selectProject={id => this.selectProject(id)}
+          currentUserProfile={this.props.currentUserProfile}
         />
       );
     } else {
@@ -56,7 +58,8 @@ class SelectedPlantProjectContainer extends Component {
 
 const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),
-  selectedTpo: selectedTpoSelector(state)
+  selectedTpo: selectedTpoSelector(state),
+  currentUserProfile: currentUserProfileSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {

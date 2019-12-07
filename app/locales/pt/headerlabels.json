@@ -1,7 +1,22 @@
 {
   "signUp": "Cadastre-se",
   "home": "Home",
+  "search": "Digite um nome ou competição",
   "enter_a_user": "Pesquisar um usuário ...",
   "placeholder_value": "Digite um nome ...",
-  "welcome_hi": "Olá {{user}}"
+  "welcome_hi": "Olá {{user}}",
+  "edit_profile": "Editar Perfil",
+  "help": "Ajuda",
+  "logout": "Sair",
+  "save_changes": "Salvar alterações",
+  "about_me": "Sobre mim",
+  "change_email": "Trocar e-mail",
+  "change_email_warning": "Depois de alterar seu e-mail, você será desconectado e precisará confirmar sua conta com o link enviado para o seu novo endereço.",
+  "new_email": "Novo Email",
+  "new_email_repeat": "Confirme o novo email",
+  "change_password": "Alterar a senha",
+  "delete_profile": "Excluir perfil",
+  "unsubscribe": "Deixar de Seguir",
+  "subscribe": "Seguir",
+  "subscribed": "Seguindo"
 }

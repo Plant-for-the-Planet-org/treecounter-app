@@ -5,5 +5,17 @@
   "plant_date": "Data da planta",
   "geo_location": "Localização Geográfica",
   "add_images": "Adicionar imagens",
-  "tree_scientific_name": "Nome Científico da Árvore"
+  "add_classification": "Adicionar classificação",
+  "tree_classification": "Classificação de Árvores",
+  "tree_scientific_name": "Nome Científico da Árvore",
+  "add_measurements": "Adicione medidas",
+  "tree_diameter": "Diâmetro da árvore",
+  "tree_height": "Altura da Árvore",
+  "measurement_date": "Data de Medição",
+  "heading_register_trees": "Registrar árvores plantadas",
+  "register": "Registrar",
+  "many_trees": "Várias árvores",
+  "plant_project": "Projeto Plantar",
+  "plant_projects": "Projetos Plantar",
+  "get_device_location": "Obter localização do dispositivo"
 }

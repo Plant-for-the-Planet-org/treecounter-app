@@ -48,6 +48,9 @@ class EditCompetitionContainer extends Component {
     if (value.imageFile && value.imageFile.includes('base64')) {
       json.imageFile = value.imageFile;
     }
+    if (value.imageFile && value.imageFile === 'null') {
+      json.imageFile = null;
+    }
     this.props
       .editCompetition(json, params, this.props.navigation)
       .then((/* success */) => {})

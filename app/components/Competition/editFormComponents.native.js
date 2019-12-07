@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { cameraSolid, imageGallery, forward } from '../../assets';
+import { cameraSolid, imageGallery, forward, circleDelete } from '../../assets';
 import styles from '../../styles/competition/competition-form.native';
 import { formatDateToMySQL } from '../../helpers/utils';
 import { formatDate } from '../../utils/utils';
@@ -271,9 +271,18 @@ export function AddImage(props) {
     <View>
       <Text style={styles.addImageTitle}>{i18n.t('label.add_image')}</Text>
       <View style={styles.showImage}>
-        {image ? (
+        {image && image != 'null' ? (
           image.includes('base64') ? (
             <View style={styles.projectImageContainer}>
+              <TouchableOpacity
+                style={styles.competitionDeleteButton}
+                onPress={() => props.setFieldValue('imageFile', 'null')}
+              >
+                <Image
+                  style={styles.competitionDeleteImage}
+                  source={circleDelete}
+                />
+              </TouchableOpacity>
               <Image
                 style={styles.teaser__projectImage}
                 source={{ uri: image }}
@@ -282,6 +291,15 @@ export function AddImage(props) {
             </View>
           ) : (
             <View style={styles.projectImageContainer}>
+              <TouchableOpacity
+                style={styles.competitionDeleteButton}
+                onPress={() => props.setFieldValue('imageFile', 'null')}
+              >
+                <Image
+                  style={styles.competitionDeleteImage}
+                  source={circleDelete}
+                />
+              </TouchableOpacity>
               <Image
                 style={styles.teaser__projectImage}
                 source={{

@@ -114,6 +114,10 @@ export default EStyleSheet.create({
     textAlign: 'left',
     color: '#4d5153'
   },
+  bottomBorder: {
+    backgroundColor: 'transparent',
+    height: 16
+  },
   plantProjectDetails: {
     flexGrow: 1,
     flexBasis: 'auto',

@@ -9,7 +9,6 @@ import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
 import { ScrollView } from 'react-native';
 import { right_arrow_button } from '../../assets';
-import stylesSnippet from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import PlantProjectSnippet from './PlantProjectSnippet.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
@@ -110,7 +109,7 @@ class PlantProjectFull extends React.Component {
             </FullHeightButton>
           </View>
         ) : null}
-        <View style={{ backgroundColor: 'black', height: 2 }} />
+        <View style={styles.bottomBorder} />
       </View>
     );
   }

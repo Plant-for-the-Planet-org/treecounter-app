@@ -71,7 +71,9 @@ export default class AddRatingSection extends Component {
         console.log('received image', images, images[0].data);
         this.updateImages(images);
       })
-      .catch(e => alert(e));
+      .catch(e => {
+        console.log('error', e);
+      });
   }
   updateImages(images) {
     let { reviewImages } = this.state;
@@ -98,7 +100,9 @@ export default class AddRatingSection extends Component {
         this.updateImages([image]);
       })
 
-      .catch(e => alert(e));
+      .catch(e => {
+        console.log('error', e);
+      });
   }
 
   renderAsset(image) {

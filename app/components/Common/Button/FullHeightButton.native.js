@@ -18,7 +18,7 @@ const FullHeightButton = ({
     <View style={styles.fullHeightButton}>
       <Image
         source={image}
-        style={image ? { width: 36, height: 24 } : { width: 0 }}
+        style={image ? { width: 24, height: 24 } : { width: 0 }}
       />
       <Text style={[styles.primaryButtonText, textStyle]}>{children}</Text>
     </View>

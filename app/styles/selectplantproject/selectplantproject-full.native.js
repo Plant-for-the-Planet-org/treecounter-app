@@ -56,7 +56,8 @@ export default EStyleSheet.create({
   centeredContentContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingLeft: 20
   },
   bottomActionArea: {
     padding: 0,
@@ -72,7 +73,46 @@ export default EStyleSheet.create({
     backgroundColor: '#89b53a',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    fontFamily: 'OpenSans',
+    fontSize: 12,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff'
+  },
+  cost: {
+    fontFamily: 'OpenSans',
+    fontSize: 18,
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#89b53a'
+  },
+  buttonText: {
+    fontFamily: 'OpenSans',
+    fontSize: 16,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff'
+  },
+  costPerTree: {
+    height: 19,
+    fontFamily: 'OpenSans',
+    fontSize: 14,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
   },
   floatingButtonContainer: {
     // padding: 16,

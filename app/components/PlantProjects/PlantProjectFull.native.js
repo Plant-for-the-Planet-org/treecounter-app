@@ -8,7 +8,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
 import { ScrollView } from 'react-native';
-import { nextArrowWhite } from '../../assets';
+import { right_arrow_button } from '../../assets';
 import stylesSnippet from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import PlantProjectSnippet from './PlantProjectSnippet.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
@@ -57,7 +57,6 @@ class PlantProjectFull extends React.Component {
           contentContainerStyle={[
             scrollStyle.styleContainer,
             {
-              paddingBottom: 72,
               backgroundColor: backgroundColor
             }
           ]}
@@ -85,8 +84,8 @@ class PlantProjectFull extends React.Component {
         {this.props.plantProject.allowDonations ? (
           <View style={styles.bottomActionArea}>
             <View style={styles.centeredContentContainer}>
-              <View style={stylesSnippet.costTextContainer}>
-                <Text style={[stylesSnippet.costText]}>
+              <View>
+                <Text style={[styles.cost]}>
                   {formatNumber(
                     this.props.plantProject.treeCost,
                     null,
@@ -95,7 +94,7 @@ class PlantProjectFull extends React.Component {
                 </Text>
               </View>
 
-              <Text style={[stylesSnippet.costPerTreeText]}>
+              <Text style={[styles.costPerTree]}>
                 {i18n.t('label.cost_per_tree')}
               </Text>
             </View>
@@ -104,12 +103,14 @@ class PlantProjectFull extends React.Component {
               onClick={() =>
                 this.props.selectProject(this.props.plantProject.id)
               }
-              image={nextArrowWhite}
+              textStyle={styles.buttonText}
+              image={right_arrow_button}
             >
               {i18n.t('label.donate')}
             </FullHeightButton>
           </View>
         ) : null}
+        <View style={{ backgroundColor: 'black', height: 2 }} />
       </View>
     );
   }

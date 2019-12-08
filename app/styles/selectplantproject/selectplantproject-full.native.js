@@ -114,13 +114,6 @@ export default EStyleSheet.create({
     textAlign: 'left',
     color: '#4d5153'
   },
-  floatingButtonContainer: {
-    // padding: 16,
-    // position: 'absolute',
-    // bottom: 35,
-    // right: 0
-    backgroundColor: 'red'
-  },
   plantProjectDetails: {
     flexGrow: 1,
     flexBasis: 'auto',

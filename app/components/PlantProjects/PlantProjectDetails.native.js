@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, Linking, Text, View, TouchableOpacity } from 'react-native';
 
-import { link } from '../../assets';
+import { link, readmoreDown, readmoreUp } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import VideoContainer from '../../components/Common/VideoContainer';
 import NDVI from '../../containers/NDVI/NDVI';
@@ -63,15 +63,47 @@ const PlantProjectDetails = ({
     <View style={styles.carousalContainer}>
       <PlantProjectImageCarousel images={plantProjectImages} />
       <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>About</Text>
+        <Text style={styles.descriptionTextTitle}>About</Text>
         <Text style={styles.descriptionText}>
           {readMore ? description : description.substring(0, 200) + '...'}
         </Text>
         <TouchableOpacity onPress={() => setReadMore(!readMore)}>
           {readMore ? (
-            <Text style={styles.descriptionText}>Read less &#x25B2;</Text>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginLeft: 6
+              }}
+            >
+              <View style={{ height: 12, marginRight: 8 }}>
+                <Image
+                  source={readmoreUp}
+                  style={{ height: 12, width: 19.46 }}
+                  resizeMode={'contain'}
+                />
+              </View>
+              <Text style={styles.descriptionText}>Read less</Text>
+            </View>
           ) : (
-            <Text style={styles.descriptionText}>Read more &#x25BC;</Text>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginLeft: 6
+              }}
+            >
+              <View style={{ height: 12, marginRight: 8 }}>
+                <Image
+                  source={readmoreDown}
+                  style={{ height: 12, width: 19.46 }}
+                  resizeMode={'contain'}
+                />
+              </View>
+              <Text style={styles.descriptionText}>Read more</Text>
+            </View>
           )}
         </TouchableOpacity>
       </View>

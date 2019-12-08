@@ -159,6 +159,9 @@ import gPayLogo from './images/gpay.png';
 import applePayLogo from './images/applepay.png';
 import blackLock from './images/icons/blackLock.png';
 import infoHint from './images/infoHint.png';
+import readmoreDown from './images/readmoreDown.png';
+import readmoreUp from './images/readmoreUp.png';
+
 export {
   germany,
   worldImg,
@@ -320,5 +323,7 @@ export {
   applePayLogo,
   backArrow,
   blackLock,
-  infoHint
+  infoHint,
+  readmoreDown,
+  readmoreUp
 };

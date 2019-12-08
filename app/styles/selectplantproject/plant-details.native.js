@@ -16,6 +16,13 @@ export default EStyleSheet.create({
     lineHeight: 19,
     margin: 6
   },
+  descriptionTextTitle: {
+    color: '#686060',
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    lineHeight: 19,
+    margin: 6
+  },
   linkTextContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',

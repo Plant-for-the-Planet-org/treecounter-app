@@ -53,11 +53,33 @@ export default EStyleSheet.create({
     flexShrink: 0,
     padding: 16
   },
+  centeredContentContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  bottomActionArea: {
+    padding: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#f2f2f7',
+    height: 88
+  },
+  squareButton: {
+    height: 88,
+    width: 100,
+    backgroundColor: '#89b53a',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
   floatingButtonContainer: {
-    padding: 16,
-    position: 'absolute',
-    bottom: 35,
-    right: 0
+    // padding: 16,
+    // position: 'absolute',
+    // bottom: 35,
+    // right: 0
+    backgroundColor: 'red'
   },
   plantProjectDetails: {
     flexGrow: 1,

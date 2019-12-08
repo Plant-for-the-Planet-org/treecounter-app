@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+import FullHeightButton from '../Common/Button/FullHeightButton';
 import { ScrollView } from 'react-native';
-
+import { nextArrowWhite } from '../../assets';
+import stylesSnippet from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import PlantProjectSnippet from './PlantProjectSnippet.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
-import TabContainer from '../../containers/Menu/TabContainer';
+import { formatNumber } from '../../utils/utils';
+// import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -81,17 +83,33 @@ class PlantProjectFull extends React.Component {
           </View>
         </ScrollView>
         {this.props.plantProject.allowDonations ? (
-          <View style={styles.floatingButtonContainer}>
-            <PrimaryButton
+          <View style={styles.bottomActionArea}>
+            <View style={styles.centeredContentContainer}>
+              <View style={stylesSnippet.costTextContainer}>
+                <Text style={[stylesSnippet.costText]}>
+                  {formatNumber(
+                    this.props.plantProject.treeCost,
+                    null,
+                    this.props.plantProject.currency
+                  )}
+                </Text>
+              </View>
+
+              <Text style={[stylesSnippet.costPerTreeText]}>
+                {i18n.t('label.cost_per_tree')}
+              </Text>
+            </View>
+            <FullHeightButton
+              buttonStyle={styles.squareButton}
               onClick={() =>
                 this.props.selectProject(this.props.plantProject.id)
               }
+              image={nextArrowWhite}
             >
               {i18n.t('label.donate')}
-            </PrimaryButton>
+            </FullHeightButton>
           </View>
         ) : null}
-        <TabContainer {...this.props} />
       </View>
     );
   }

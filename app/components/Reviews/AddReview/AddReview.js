@@ -28,6 +28,7 @@ class AddReview extends Component {
     super(props);
     console.log(props, Icon);
     this.state = {
+      validationError: {},
       reviewIndexes: {},
       review:
         (props.navigation.state.params &&
@@ -60,23 +61,21 @@ class AddReview extends Component {
     console.log('updating?', this.updating);
     if (this.updating) return;
     const { review } = this.state;
-    if (!review.summary) {
-      return NotificationManager.error(
-        i18n.t('label.summary_missing'),
-        i18n.t('label.error'),
-        5000
-      );
-    }
+
     if (
       !Object.keys(review.reviewIndexScores).filter(index =>
         Number(review.reviewIndexScores[index].score)
       ).length
     ) {
-      return NotificationManager.error(
-        i18n.t('label.at_least_one_index'),
-        i18n.t('label.error'),
-        5000
+      console.log(
+        Object.keys(review.reviewIndexScores).filter(index =>
+          Number(review.reviewIndexScores[index].score)
+        )
       );
+      return this.setState({ validationError: { index: true } });
+    }
+    if (!review.summary) {
+      return this.setState({ validationError: { summary: true } });
     }
     console.log('review before submitting', review);
     try {
@@ -153,6 +152,7 @@ class AddReview extends Component {
             selectedPlantProject={this.props.selectedPlantProject}
             onUpdate={this.onUpdate}
             reviewIndexes={this.state.reviewIndexes}
+            validationError={this.state.validationError}
           />
         </View>
 

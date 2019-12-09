@@ -19,6 +19,7 @@ import i18n from '../../../locales/i18n.js';
 import { getImageUrl } from '../../../actions/apiRouting';
 const { width } = Dimensions.get('window');
 import styles from '../../../styles/review.native';
+import AddImage from '../../Common/Forms/AddImage';
 export default class AddRatingSection extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +35,8 @@ export default class AddRatingSection extends Component {
         ? [...props.review.reviewImages]
         : []
     };
-
+    this.updateImages = this.updateImages.bind(this);
+    this.deleteImage = this.deleteImage.bind(this);
     console.log('after merging props in add rating', this.state);
   }
   componentWillReceiveProps(nextProps) {
@@ -75,14 +77,27 @@ export default class AddRatingSection extends Component {
         console.log('error', e);
       });
   }
+  deleteImage(index) {
+    let { reviewImages } = this.state;
+    let images = [...reviewImages];
+    images = images.filter((data, i) => i !== index);
+    reviewImages = [];
+    console.log(images, index, reviewImages);
+    this.setStateAndUpdateParent({
+      reviewImages: images
+    });
+  }
   updateImages(images) {
     let { reviewImages } = this.state;
+    if (typeof images == 'string') {
+      images = [images];
+    }
     images.map(image => {
       return reviewImages.push({
-        imageFile: 'data:application/jpeg;base64,' + image.data
+        imageFile: image
       });
     });
-    console.log('data', reviewImages);
+    console.log('updating review images:', reviewImages);
     this.setStateAndUpdateParent({
       reviewImages: reviewImages
     });
@@ -117,7 +132,7 @@ export default class AddRatingSection extends Component {
     console.log('image', image);
     return (
       <Image
-        style={{ width: 27, height: 27, marginRight: 5, borderRadius: 2 }}
+        style={{ width: 200, height: 107, marginRight: 5, borderRadius: 2 }}
         source={image}
       />
     );
@@ -181,19 +196,25 @@ export default class AddRatingSection extends Component {
     const guideLineUrl =
       'https://startplanting.atlassian.net/wiki/spaces/PA/pages/25559041';
     return (
-      <View>
+      <View
+        style={{
+          width: width * 0.88,
+          marginLeft: width * 0.06
+        }}
+      >
         <View
           style={{
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            justifyContent: 'space-around',
-            alignItems: 'flex-start'
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            marginBottom: -20
           }}
         >
           {Object.keys(reviewIndexScores).map(index => {
             return (
-              <View style={styles.singleRatingBox} key={index}>
+              <View style={[styles.singleRatingBox]} key={index}>
                 <Text style={styles.ratingsText}>
                   {reviewIndexes[index] && reviewIndexes[index].name}
                 </Text>
@@ -210,50 +231,13 @@ export default class AddRatingSection extends Component {
               </View>
             );
           })}
-
-          {/* <View style={styles.singleRatingBox}>
-            <Text style={styles.ratingsText}>
-              {i18n.t('label.co_benefits')}
+          {this.props.validationError && this.props.validationError.index ? (
+            <Text style={{ color: 'red' }}>
+              {i18n.t('label.at_least_one_index')}
             </Text>
-
-            <AirbnbRating
-              defaultRating={this.state.reviewIndexScores['co-benefits'].score}
-              size={20}
-              showRating={false}
-              onFinishRating={rating => {
-                this.ratingCompleted(rating, 'co-benefits');
-              }}
-              style={{ color: '#2ecc71' }}
-            />
-          </View> */}
-
-          {/* <View style={styles.singleRatingBox}>
-            <Text style={styles.ratingsText}>
-              {i18n.t('label.survival_rate')}
-            </Text>
-
-            <AirbnbRating
-              defaultRating={
-                this.state.reviewIndexScores['survival-rate'].score
-              }
-              size={20}
-              showRating={false}
-              onFinishRating={rating => {
-                this.ratingCompleted(rating, 'survival-rate');
-              }}
-              style={{ color: '#2ecc71' }}
-            />
-          </View> */}
-          <View style={styles.singleRatingBox}>
-            <Text style={styles.ratingsText} />
-          </View>
+          ) : null}
         </View>
-        <View
-          style={{
-            width: width * 0.88,
-            marginLeft: width * 0.06
-          }}
-        >
+        <View>
           <TextField
             tintColor={'#89b53a'}
             titleFontSize={12}
@@ -268,10 +252,14 @@ export default class AddRatingSection extends Component {
             multiline
             label={i18n.t('label.brief_review')}
           />
-
+          {this.props.validationError && this.props.validationError.summary ? (
+            <Text style={{ color: 'red' }}>
+              {i18n.t('label.summary_missing')}
+            </Text>
+          ) : null}
           {/* Document Picking */}
-          <View style={{ marginTop: 20 }} />
-          <Text style={{ textTransform: 'uppercase', fontSize: 12 }}>
+          <View style={{ marginTop: 25 }} />
+          <Text style={{ textTransform: 'uppercase', fontSize: 16 }}>
             {i18n.t('label.upload_report')}
           </Text>
           <TouchableOpacity
@@ -311,74 +299,24 @@ export default class AddRatingSection extends Component {
           {/* </View> */}
 
           {/* Document Picking ends */}
-
-          {/* Image Picking Part */}
-          <Text style={{ marginTop: 40, fontSize: 12 }}>
-            {i18n.t('label.add_pictures')}
-          </Text>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              marginTop: 9,
-              alignItems: 'center',
-              justifyContent: 'flex-start'
-            }}
-          >
-            <ScrollView
-              contentContainerStyle={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start'
-              }}
-            >
-              {this.state.reviewImages
-                ? this.state.reviewImages.map((i, index) => (
-                    <View
-                      key={index}
-                      style={{ display: 'flex', flexDirection: 'row' }}
-                    >
-                      {this.renderAsset(i)}
-                    </View>
-                  ))
-                : null}
-
-              <TouchableOpacity
-                style={{
-                  height: 37,
-                  width: 37,
-                  marginLeft: 5,
-                  display: 'flex'
-                }}
-                onPress={this.pickMultiple.bind(this)}
-              >
-                <Text style={{ margin: 1 }}>
-                  <Icon name={'plus'} solid size={18} />
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={{
-                  height: 37,
-                  width: 37
-                }}
-                onPress={() => this.clickImage(true)}
-              >
-                <Text style={{ margin: 1 }}>
-                  <Icon name={'camera'} size={18} />
-                </Text>
-              </TouchableOpacity>
-            </ScrollView>
-          </View>
+          <AddImage
+            title={i18n.t('label.add_pictures')}
+            updateImages={this.updateImages}
+            deleteImage={this.deleteImage}
+            images={this.state.reviewImages.map(
+              data =>
+                data.imageFile
+                  ? data.imageFile
+                  : getImageUrl('review', 'medium', data.image)
+            )}
+          />
 
           {/* Image Picking Part Ends */}
         </View>
         <Text
           style={{
-            margin: 30,
-            marginBottom: 40,
+            marginTop: 20,
+            marginBottom: 20,
             fontSize: 13,
             lineHeight: 20
           }}

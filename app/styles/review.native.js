@@ -66,7 +66,7 @@ export default EStyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    marginBottom: 32,
+    marginBottom: 25,
     minWidth: '40%'
   },
   pickImageButton1: {

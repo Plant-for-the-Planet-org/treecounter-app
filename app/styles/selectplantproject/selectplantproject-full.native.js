@@ -74,7 +74,7 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 12,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -84,7 +84,7 @@ export default EStyleSheet.create({
     color: '#ffffff'
   },
   cost: {
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 18,
     fontWeight: 'bold',
     fontStyle: 'normal',
@@ -94,7 +94,7 @@ export default EStyleSheet.create({
     color: '#89b53a'
   },
   buttonText: {
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -105,7 +105,7 @@ export default EStyleSheet.create({
   },
   costPerTree: {
     height: 19,
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -114,9 +114,10 @@ export default EStyleSheet.create({
     textAlign: 'left',
     color: '#4d5153'
   },
-  bottomBorder: {
-    backgroundColor: 'transparent',
-    height: 16
+  bottomButtonExtension: {
+    backgroundColor: '#89b53a',
+    justifyContent: 'center',
+    width: 100
   },
   plantProjectDetails: {
     flexGrow: 1,

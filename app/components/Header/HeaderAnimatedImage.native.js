@@ -44,7 +44,7 @@ export default function HeaderAnimatedImage(props) {
         HEADER_TEXT_MIN_HEIGHT +
         26
     ],
-    outputRange: [-36, -20, -12, 12],
+    outputRange: [-36, -20, -12, 24],
     extrapolate: 'clamp'
   });
 
@@ -160,7 +160,8 @@ export default function HeaderAnimatedImage(props) {
               flexDirection: 'row',
               flex: 1,
               flexWrap: 'wrap',
-              width: width * 0.8
+              width: width * 0.8,
+              alignItems: 'center'
             }}
           >
             <Animated.Text
@@ -174,7 +175,7 @@ export default function HeaderAnimatedImage(props) {
                 flex: 1
               }}
             >
-              {props.title} {props.title}
+              {props.title}
             </Animated.Text>
           </View>
         </Animated.View>

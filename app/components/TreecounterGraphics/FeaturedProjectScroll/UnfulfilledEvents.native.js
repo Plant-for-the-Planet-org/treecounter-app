@@ -49,10 +49,10 @@ export default class UnfulfilledEvents extends Component {
                 <View style={styles.ufpCostView}>
                   <Text style={styles.ufpCostText}>
                     {this.props.event.plantProjectCurrency}{' '}
-                    {(
+                    {delimitNumbers(
                       this.props.event.treeCount *
-                      this.props.event.plantProjectTreeCost
-                    ).toLocaleString()}
+                        this.props.event.plantProjectTreeCost
+                    )}
                   </Text>
                 </View>
                 <Text style={styles.ufpPlantNow}>

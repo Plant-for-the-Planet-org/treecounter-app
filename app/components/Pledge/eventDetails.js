@@ -54,7 +54,7 @@ export function RecentHighestPledges(props) {
                     </span>
                   </span>
                   <span className="row-list-item-treeCount">
-                    {i18n.t(pledge.treeCount.toLocaleString())}
+                    {i18n.t(delimitNumbers(pledge.treeCount))}
                   </span>
                 </div>
               )))
@@ -102,7 +102,7 @@ export function RecentHighestPledges(props) {
                   </span>
                   <span className="row-list-item-treeCount">
                     {/*delimitNumbers(parseInt(pledge.treeCount)) */}
-                    {i18n.t(pledge.treeCount.toLocaleString())}
+                    {i18n.t(delimitNumbers(pledge.treeCount))}
                   </span>
                 </div>
               )))

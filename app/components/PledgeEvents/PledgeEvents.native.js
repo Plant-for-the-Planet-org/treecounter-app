@@ -11,6 +11,7 @@ import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { fetchItem } from './../../stores/localStorage';
+import { delimitNumbers } from './../../utils/utils';
 
 import {
   fetchPledgesAction,
@@ -229,7 +230,7 @@ function FulfillPledgeButton(props) {
       <View style={styles.leftSection}>
         <Text style={styles.pledgeTreesAmount}>
           {i18n.t('label.treesPledgedAllPledges', {
-            treeCount: props.myPledge.treeCount.toLocaleString()
+            treeCount: delimitNumbers(props.myPledge.treeCount)
           })}
         </Text>
         <TouchableOpacity

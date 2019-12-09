@@ -8,7 +8,7 @@ export default EStyleSheet.create({
   peRootScrollView: {
     backgroundColor: 'white',
     paddingBottom: 300,
-    marginTop: 200
+    marginTop: 240
   },
   peHeader: { marginTop: 20, marginHorizontal: 20 },
   peHeaderLogo: {
@@ -66,7 +66,7 @@ export default EStyleSheet.create({
     top: '90%'
   },
   makePledgeButton2: {
-    width: '88%',
+    width: '80%',
     position: 'absolute',
     bottom: '5%',
     marginLeft: '10%'
@@ -133,7 +133,9 @@ export default EStyleSheet.create({
   },
 
   // Make Pledge Form Styles
-  createPledgeRootView: { backgroundColor: 'white', flex: 1 },
+  createPledgeRootView: {
+    backgroundColor: 'white'
+  },
   titleText: {
     fontSize: 27,
     lineHeight: 40,
@@ -154,7 +156,7 @@ export default EStyleSheet.create({
   },
   formScrollView: {
     padding: 24,
-    paddingBottom: 100,
+    paddingBottom: 220,
     marginTop: 100
   },
   formHalfTextField: { width: '45%' },

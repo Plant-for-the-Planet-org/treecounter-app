@@ -1,5 +1,11 @@
 import React from 'react';
-import { Animated, TouchableOpacity, Image, BackHandler } from 'react-native';
+import {
+  Animated,
+  TouchableOpacity,
+  Image,
+  BackHandler,
+  SafeAreaView
+} from 'react-native';
 import { backArrow } from '../../assets';
 
 let HEADER_MAX_HEIGHT = 80;
@@ -69,47 +75,53 @@ export default function HeaderAnimated(props) {
   const textColor = '#4d5153';
   const whiteColor = 'white';
   return (
-    <Animated.View
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: whiteColor,
-        height: headerHeight,
-        zIndex: headerZindex,
-        alignItems: 'center',
-        display: 'flex',
-        flexDirection: 'row',
-        width: '100%'
-      }}
-    >
-      <TouchableOpacity
-        style={{ height: 18, zIndex: 1001 }}
-        onPress={() => props.navigation.goBack()}
-      >
-        <Image source={backArrow} resizeMode="contain" style={{ height: 18 }} />
-      </TouchableOpacity>
+    <SafeAreaView>
       <Animated.View
         style={{
           position: 'absolute',
-          bottom: headerTitleBottom,
-          left: headerTitleLeft
+          top: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: whiteColor,
+          height: headerHeight,
+          zIndex: headerZindex,
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'row',
+          width: '100%'
         }}
       >
-        <Animated.Text
+        <TouchableOpacity
+          style={{ height: 18, zIndex: 1001 }}
+          onPress={() => props.navigation.goBack()}
+        >
+          <Image
+            source={backArrow}
+            resizeMode="contain"
+            style={{ height: 18 }}
+          />
+        </TouchableOpacity>
+        <Animated.View
           style={{
-            fontFamily: 'OpenSans-Bold',
-            fontSize: headerFontSize,
-            lineHeight: 40,
-            letterSpacing: 0,
-            textAlign: 'left',
-            color: textColor
+            position: 'absolute',
+            bottom: headerTitleBottom,
+            left: headerTitleLeft
           }}
         >
-          {props.title}
-        </Animated.Text>
+          <Animated.Text
+            style={{
+              fontFamily: 'OpenSans-Bold',
+              fontSize: headerFontSize,
+              lineHeight: 40,
+              letterSpacing: 0,
+              textAlign: 'left',
+              color: textColor
+            }}
+          >
+            {props.title}
+          </Animated.Text>
+        </Animated.View>
       </Animated.View>
-    </Animated.View>
+    </SafeAreaView>
   );
 }

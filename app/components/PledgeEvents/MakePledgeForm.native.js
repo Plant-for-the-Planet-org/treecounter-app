@@ -104,62 +104,63 @@ class MakePledgeForm extends Component {
           title={i18n.t('label.pledgeToPlant')}
           scrollY={this.state.scrollY}
         />
-        <KeyboardAwareScrollView
-          contentContainerStyle={styles.formScrollView}
-          keyboardDismissMode="on-drag"
-          keyboardShouldPersistTaps="always"
-          resetScrollToCoords={{ x: 0, y: 0 }}
-          scrollEnabled
-          scrollEventThrottle={16}
-          onScroll={Animated.event([
-            { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
-          ])}
+        <Formik
+          initialValues={{
+            firstname,
+            lastname,
+            email,
+            treeCount
+          }}
+          onSubmit={values => {
+            const data = {
+              firstname: values.firstname,
+              lastname: values.lastname,
+              email: values.email,
+              treeCount: values.treeCount,
+              isAnonymous: this.state.isAnonymous
+            };
+            console.log(data);
+            const params = this.props.navigation.getParam('slug');
+            this.props.postPledge(
+              data,
+              {
+                pledgeEventSlug: params,
+                version: 'v1.3'
+              },
+              this.state.loggedIn
+            );
+            //this.RBSheet.open();
+            updateStaticRoute('app_pledge_events', this.props.navigation, {
+              slug: this.props.navigation.getParam('slug'),
+              plantProject: this.props.navigation.getParam('plantProject'),
+              treeCount: data.treeCount
+            });
+          }}
+          validationSchema={validationSchema}
         >
-          <View>
-            <Text style={styles.subtitleText}>
-              {i18n.t('label.pledgeToPlantDesc', {
-                treeCost: treeCost,
-                currency: currency,
-                projectName: projectName
-              })}
-            </Text>
-          </View>
-          <Formik
-            initialValues={{
-              firstname,
-              lastname,
-              email,
-              treeCount
-            }}
-            onSubmit={values => {
-              const data = {
-                firstname: values.firstname,
-                lastname: values.lastname,
-                email: values.email,
-                treeCount: values.treeCount,
-                isAnonymous: this.state.isAnonymous
-              };
-              console.log(data);
-              const params = this.props.navigation.getParam('slug');
-              this.props.postPledge(
-                data,
-                {
-                  pledgeEventSlug: params,
-                  version: 'v1.3'
-                },
-                this.state.loggedIn
-              );
-              //this.RBSheet.open();
-              updateStaticRoute('app_pledge_events', this.props.navigation, {
-                slug: this.props.navigation.getParam('slug'),
-                plantProject: this.props.navigation.getParam('plantProject'),
-                treeCount: data.treeCount
-              });
-            }}
-            validationSchema={validationSchema}
-          >
-            {props => (
-              <>
+          {props => (
+            <>
+              <KeyboardAwareScrollView
+                contentContainerStyle={styles.formScrollView}
+                keyboardDismissMode="on-drag"
+                keyboardShouldPersistTaps="always"
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                scrollEnabled
+                scrollEventThrottle={16}
+                onScroll={Animated.event([
+                  { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+                ])}
+              >
+                <View>
+                  <Text style={styles.subtitleText}>
+                    {i18n.t('label.pledgeToPlantDesc', {
+                      treeCost: treeCost,
+                      currency: currency,
+                      projectName: projectName
+                    })}
+                  </Text>
+                </View>
+
                 <View>
                   <View style={styles.formView}>
                     <View style={styles.formHalfTextField}>
@@ -272,36 +273,36 @@ class MakePledgeForm extends Component {
                     />
                   </View>
                 </View>
+              </KeyboardAwareScrollView>
 
-                {this.state.buttonType === 'pledge' ? (
-                  <TouchableOpacity
-                    style={styles.makePledgeButton2}
-                    onPress={props.handleSubmit}
-                  >
-                    <View style={styles.makePledgeButtonView}>
-                      <Text style={styles.makePledgeButtonText}>
-                        {i18n.t('label.pledge')}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                ) : null}
+              {this.state.buttonType === 'pledge' ? (
+                <TouchableOpacity
+                  style={styles.makePledgeButton2}
+                  onPress={props.handleSubmit}
+                >
+                  <View style={styles.makePledgeButtonView}>
+                    <Text style={styles.makePledgeButtonText}>
+                      {i18n.t('label.pledge')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ) : null}
 
-                {this.state.buttonType === '>' ? (
-                  <TouchableOpacity
-                    style={styles.pledgeSmallButton}
-                    onPress={props.handleSubmit}
-                  >
-                    <Image
-                      source={forward}
-                      resizeMode="cover"
-                      style={styles.pledgeSmallButtonIcon}
-                    />
-                  </TouchableOpacity>
-                ) : null}
-              </>
-            )}
-          </Formik>
-        </KeyboardAwareScrollView>
+              {this.state.buttonType === '>' ? (
+                <TouchableOpacity
+                  style={styles.pledgeSmallButton}
+                  onPress={props.handleSubmit}
+                >
+                  <Image
+                    source={forward}
+                    resizeMode="cover"
+                    style={styles.pledgeSmallButtonIcon}
+                  />
+                </TouchableOpacity>
+              ) : null}
+            </>
+          )}
+        </Formik>
       </View>
     );
   }

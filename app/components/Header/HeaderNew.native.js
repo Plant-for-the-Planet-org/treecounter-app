@@ -1,5 +1,12 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image, BackHandler } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  BackHandler,
+  SafeAreaView
+} from 'react-native';
 import { backArrow } from './../../assets';
 
 export default function HeaderNew(props) {
@@ -20,7 +27,7 @@ export default function HeaderNew(props) {
   const whiteColor = 'white';
 
   return (
-    <View
+    <SafeAreaView
       style={{
         position: 'absolute',
         top: 0,
@@ -61,6 +68,6 @@ export default function HeaderNew(props) {
           {props.title}
         </Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

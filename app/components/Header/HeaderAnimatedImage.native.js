@@ -1,8 +1,18 @@
 import React from 'react';
-import { Animated, TouchableOpacity, Image, BackHandler } from 'react-native';
+import {
+  Animated,
+  TouchableOpacity,
+  Image,
+  BackHandler,
+  SafeAreaView,
+  View
+} from 'react-native';
 import { backArrow } from '../../assets';
+import { Dimensions } from 'react-native';
 
-let HEADER_IMAGE_MAX_HEIGHT = 160;
+const width = Dimensions.get('window').width;
+
+let HEADER_IMAGE_MAX_HEIGHT = 200;
 let HEADER_IMAGE_MIN_HEIGHT = 70;
 
 // let HEADER_TEXT_MAX_HEIGHT = 80;
@@ -34,7 +44,7 @@ export default function HeaderAnimatedImage(props) {
         HEADER_TEXT_MIN_HEIGHT +
         26
     ],
-    outputRange: [-36, -30, -24, 12],
+    outputRange: [-36, -20, -12, 12],
     extrapolate: 'clamp'
   });
 
@@ -52,7 +62,7 @@ export default function HeaderAnimatedImage(props) {
         HEADER_TEXT_MIN_HEIGHT +
         26
     ],
-    outputRange: [24, 24, 24, 72],
+    outputRange: [12, 24, 48, 72],
     extrapolate: 'clamp'
   });
 
@@ -70,7 +80,7 @@ export default function HeaderAnimatedImage(props) {
         HEADER_TEXT_MIN_HEIGHT +
         26
     ],
-    outputRange: [27, 24, 21, 18],
+    outputRange: [27, 21, 18, 18],
     extrapolate: 'clamp'
   });
 
@@ -108,51 +118,67 @@ export default function HeaderAnimatedImage(props) {
   const textColor = '#4d5153';
   const whiteColor = 'white';
   return (
-    <Animated.View
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: whiteColor,
-        height: headerHeight,
-        zIndex: headerZindex,
-        display: 'flex',
-        flexDirection: 'row',
-        width: '100%'
-      }}
-    >
-      <TouchableOpacity
-        style={{ height: 70, width: 70, paddingTop: 26, zIndex: 1001 }}
-        onPress={() => props.navigation.goBack()}
-      >
-        <Image source={backArrow} resizeMode="contain" style={{ height: 18 }} />
-      </TouchableOpacity>
+    <SafeAreaView>
       <Animated.View
         style={{
           position: 'absolute',
-          bottom: headerTitleBottom,
-          left: headerTitleLeft
+          top: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: whiteColor,
+          height: headerHeight,
+          zIndex: headerZindex,
+          display: 'flex',
+          flexDirection: 'row',
+          width: '100%'
         }}
       >
-        <Animated.Image
-          style={[props.imageStyle, { opacity: imageOpacity }]}
-          source={props.imageSource}
-          resizeMode="contain"
-        />
-        <Animated.Text
+        <TouchableOpacity
+          style={{ height: 70, width: 70, paddingTop: 26, zIndex: 1001 }}
+          onPress={() => props.navigation.goBack()}
+        >
+          <Image
+            source={backArrow}
+            resizeMode="contain"
+            style={{ height: 18 }}
+          />
+        </TouchableOpacity>
+        <Animated.View
           style={{
-            fontFamily: 'OpenSans-Bold',
-            fontSize: headerFontSize,
-            lineHeight: 40,
-            letterSpacing: 0,
-            textAlign: 'left',
-            color: textColor
+            position: 'absolute',
+            bottom: headerTitleBottom,
+            left: headerTitleLeft
           }}
         >
-          {props.title}
-        </Animated.Text>
+          <Animated.Image
+            style={[props.imageStyle, { opacity: imageOpacity }]}
+            source={props.imageSource}
+            resizeMode="contain"
+          />
+          <View
+            style={{
+              flexDirection: 'row',
+              flex: 1,
+              flexWrap: 'wrap',
+              width: width * 0.8
+            }}
+          >
+            <Animated.Text
+              style={{
+                fontFamily: 'OpenSans-Bold',
+                fontSize: headerFontSize,
+                letterSpacing: 0,
+                textAlign: 'left',
+                color: textColor,
+                flexWrap: 'wrap',
+                flex: 1
+              }}
+            >
+              {props.title} {props.title}
+            </Animated.Text>
+          </View>
+        </Animated.View>
       </Animated.View>
-    </Animated.View>
+    </SafeAreaView>
   );
 }

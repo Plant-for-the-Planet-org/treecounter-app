@@ -123,10 +123,7 @@ class PlantProjectSnippet extends PureComponent {
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     const textColor = '#4d5153';
     return (
-      <TouchableHighlight
-        underlayColor={'transparent'}
-        onPress={onPressHandler}
-      >
+      <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
         <CardLayout style={[styles.projectSnippetContainer]} withoutShadow>
           {projectImage ? (
             <View style={styles.projectImageContainer}>
@@ -297,23 +294,21 @@ class PlantProjectSnippet extends PureComponent {
                     /> */}
                 </View>
               </View>
+              <TouchableOpacity
+                onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
+              >
+                <View style={styles.costContainer}>
+                  <View style={styles.costTextContainer}>
+                    <Text style={[styles.costText]}>
+                      {formatNumber(specsProps.treeCost, null, currency)}
+                    </Text>
+                  </View>
 
-              <View style={styles.costContainer}>
-                <View style={styles.costTextContainer}>
-                  <Text
-                    style={[styles.costText]}
-                    onPress={() =>
-                      this.props.onSelectClickedFeaturedProjects(id)
-                    }
-                  >
-                    {formatNumber(specsProps.treeCost, null, currency)}
+                  <Text style={[styles.costPerTreeText]}>
+                    {i18n.t('label.cost_per_tree')}
                   </Text>
                 </View>
-
-                <Text style={[styles.costPerTreeText]}>
-                  {i18n.t('label.cost_per_tree')}
-                </Text>
-              </View>
+              </TouchableOpacity>
             </View>
 
             <View key="actionContainer" style={styles.actionContainer}>

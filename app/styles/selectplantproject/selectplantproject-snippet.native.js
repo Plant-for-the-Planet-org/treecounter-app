@@ -27,8 +27,7 @@ export default EStyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 2,
     elevation: 0,
-    borderWidth: 0,
-    borderColor: 'red'
+    borderWidth: 0
   },
   projectImageContainer: {
     height: Layout.window.width * 0.4,

@@ -314,6 +314,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     {
       Tab: ApptabNavigator,
       Base: baseNavigator,
+      ['app_supportTrees']: {
+        screen: SelectPlantProjectContainer
+      },
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },

@@ -54,7 +54,7 @@ class PublicTreeCounter extends React.Component {
 
   onRegisterSupporter() {
     this.props.supportTreecounterAction(this.props.treecounter);
-    updateRoute('app_donateTrees', this.props.navigation, 0, {
+    updateRoute('app_supportTrees', this.props.navigation, 44, {
       titleParam: i18n.t('label.support_trees_to', {
         user: this.props.treecounter.displayName
       })

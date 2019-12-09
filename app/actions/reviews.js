@@ -115,7 +115,7 @@ export function updateReview(review) {
         review: reviewId
       })
         .then(res => {
-          console.log(res);
+          console.log('updated reviews:', res.data);
           let { review, plantProject } = res.data.merge;
           try {
             dispatch(mergeEntities(normalize(review, [reviewsSchema])));

@@ -7,7 +7,10 @@ import {
   Dimensions,
   Image
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {
+  selectedPlantProjectSelector,
+  selectedReviewsSelector
+} from '../../../selectors';
 // import { ScrollView } from 'react-native-gesture-handler';
 import AddRatingSection from './AddRatingSection';
 const { width } = Dimensions.get('window');
@@ -20,13 +23,13 @@ import {
   getReviewIndexes
 } from '../../../actions/reviews';
 import { bindActionCreators } from 'redux';
-import { selectedPlantProjectSelector } from '../../../selectors';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/review.native';
+// import { find } from 'lodash';
 class AddReview extends Component {
   constructor(props) {
     super(props);
-    console.log(props, Icon);
+    console.log('props in add reviews', props);
     this.state = {
       validationError: {},
       reviewIndexes: {},
@@ -186,6 +189,7 @@ class AddReview extends Component {
 
 const mapStateToProps = state => {
   return {
+    reviews: selectedReviewsSelector(state),
     selectedPlantProject: selectedPlantProjectSelector(state)
   };
 };

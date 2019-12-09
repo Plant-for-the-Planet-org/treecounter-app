@@ -27,7 +27,6 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 import LoadingIndicator from './../Common/LoadingIndicator';
 import { nextArrowWhite } from '../../assets';
-import { delimitNumbers } from '../../utils/utils';
 
 class PledgeEvents extends Component {
   state = {

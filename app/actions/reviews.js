@@ -115,6 +115,7 @@ export function updateReview(review) {
         review: reviewId
       })
         .then(res => {
+          console.log(res);
           let { review, plantProject } = res.data.merge;
           try {
             dispatch(mergeEntities(normalize(review, [reviewsSchema])));
@@ -125,7 +126,7 @@ export function updateReview(review) {
             if (unlink && deleteContent) {
               // TODO: we need to fix this error and enable this
               // this will delete entry from reviews and unlink from project and userprofile if there is params in response
-              // dispatch(unlinkEntity(unlink));
+              dispatch(unlinkEntity(unlink));
               // dispatch(deleteEntity(deleteContent));
             }
           } catch (err) {

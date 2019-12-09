@@ -4,11 +4,9 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
-  ScrollView,
   Image,
   Linking
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import { AirbnbRating } from 'react-native-ratings';
 import ImagePicker from 'react-native-image-crop-picker';
 import DocumentPicker from 'react-native-document-picker';
@@ -192,7 +190,7 @@ export default class AddRatingSection extends Component {
   render() {
     let { reviewIndexes } = this.props;
     let { reviewIndexScores } = this.state;
-    console.log('index scores', reviewIndexScores, reviewIndexes, this.props);
+    console.log('index scores in add rating:', this.props);
     const guideLineUrl =
       'https://startplanting.atlassian.net/wiki/spaces/PA/pages/25559041';
     return (
@@ -232,7 +230,7 @@ export default class AddRatingSection extends Component {
             );
           })}
           {this.props.validationError && this.props.validationError.index ? (
-            <Text style={{ color: 'red' }}>
+            <Text style={{ color: 'red', marginBottom: 25, marginTop: -20 }}>
               {i18n.t('label.at_least_one_index')}
             </Text>
           ) : null}

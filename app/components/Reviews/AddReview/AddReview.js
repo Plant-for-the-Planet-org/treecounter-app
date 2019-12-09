@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import AddRatingSection from './AddRatingSection';
 const { width } = Dimensions.get('window');
 import { forward } from './../../../assets';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import {
   addReview,
@@ -21,7 +22,6 @@ import {
 import { bindActionCreators } from 'redux';
 import { selectedPlantProjectSelector } from '../../../selectors';
 import i18n from '../../../locales/i18n.js';
-import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager.native';
 import styles from '../../../styles/review.native';
 class AddReview extends Component {
   constructor(props) {
@@ -39,9 +39,9 @@ class AddReview extends Component {
     this.onUpdate = this.onUpdate.bind(this);
   }
   onUpdate(data) {
-    this.updating = true;
     this.setState({ review: data }, () => {
-      this.updating = false;
+      console.log('submitted', this.submitted);
+      this.submitted && this.validate();
     });
   }
   async componentWillMount() {
@@ -57,26 +57,33 @@ class AddReview extends Component {
       console.log('eror on reviewindex', err);
     }
   }
-  async create() {
-    console.log('updating?', this.updating);
-    if (this.updating) return;
+  validate() {
     const { review } = this.state;
-
+    console.log('validating', review, !review.reviewIndexScores);
     if (
+      !review.reviewIndexScores ||
       !Object.keys(review.reviewIndexScores).filter(index =>
         Number(review.reviewIndexScores[index].score)
       ).length
     ) {
-      console.log(
-        Object.keys(review.reviewIndexScores).filter(index =>
-          Number(review.reviewIndexScores[index].score)
-        )
-      );
-      return this.setState({ validationError: { index: true } });
+      this.setState({ validationError: { index: true } });
+      return false;
+    } else {
+      this.setState({ validationError: { index: false } });
     }
     if (!review.summary) {
-      return this.setState({ validationError: { summary: true } });
+      this.setState({ validationError: { summary: true } });
+      return false;
+    } else {
+      this.setState({ validationError: { summary: false } });
     }
+    return true;
+  }
+  async create() {
+    this.submitted = true;
+    if (!this.validate()) return;
+    const { review } = this.state;
+
     console.log('review before submitting', review);
     try {
       if (this.state.review.id) {
@@ -105,7 +112,7 @@ class AddReview extends Component {
           this.props.selectedPlantProject
         );
       }
-      this.props.navigation.navigate('app_reviews');
+      updateStaticRoute('app_reviews', this.props.navigation);
     } catch (err) {
       console.error(err);
     }

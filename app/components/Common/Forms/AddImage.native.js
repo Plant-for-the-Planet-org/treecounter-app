@@ -12,6 +12,7 @@ const AddImage = props => {
     title: props.title || 'Add Image',
     allowsEditing: true,
     mediaType: 'photo',
+    multiple: true,
     storageOptions: {
       skipBackup: true,
       path: 'images'

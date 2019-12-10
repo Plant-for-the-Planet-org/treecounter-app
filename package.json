@@ -33,6 +33,7 @@
     "bugsnag-react-native": "^2.23.2",
     "classnames": "^2.2.5",
     "cookie-cutter": "^0.2.0",
+    "core-js": "^2.6.11",
     "css-loader": "^0.28.9",
     "date-fns": "^2.6.0",
     "deprecated-react-native-listview": "0.0.6",

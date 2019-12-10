@@ -4,9 +4,8 @@
 
 import 'react-native';
 import React from 'react';
-// Testing App does not yet work:
-//import App from '../app/components/App';
-import LoadingIndicator from '../app/components/Common/LoadingIndicator';
+// Testing App does not yet completely work
+import App from '../app/components/App';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
@@ -46,13 +45,30 @@ jest.mock('react-native-gesture-handler', () => {
     Directions: {}
   };
 });
-
 jest.mock('react-native-reanimated', () => {});
 jest.mock('react-native-tab-view', () => {});
+jest.mock('react-native-device-info', () => {});
+//jest.mock('@react-native-community/async-storage');
+jest.mock('react-navigation-drawer', () => {});
+jest.mock('react-navigation-redux-helpers', () => {
+  return {
+    createReactNavigationReduxMiddleware: jest.fn(),
+    createReduxBoundAddListener: jest.fn()
+  };
+});
+jest.mock('react-native-image-picker', () => {});
+jest.mock('deprecated-react-native-listview', () => {});
+jest.mock('react-native-document-picker', () => {});
+jest.mock('react-native-fs', () => {});
+jest.mock('rn-fetch-blob', () => {});
+jest.mock('react-native-vector-icons/FontAwesome', () => {
+  return {
+    loadFont: jest.fn()
+  };
+});
 
 // eslint-disable-next-line no-undef
 it('renders correctly', () => {
-  // Testing App does not yet work:
-  //renderer.create(<App />);
-  renderer.create(<LoadingIndicator />);
+  // Testing App does not yet completely work:
+  renderer.create(<App />);
 });

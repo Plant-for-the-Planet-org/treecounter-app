@@ -7,6 +7,6 @@ module.exports = {
   testURL: 'http://localhost/',
   // transform some node modules
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?react-native|react-navigation|react-navigation-redux-helpers|@react-navigation/.*)'
+    'node_modules/(?!(jest-)?react-native|static-container|tcomb-form-native|@react-native-community/async-storage|react-navigation|@react-navigation/.*)'
   ]
 };

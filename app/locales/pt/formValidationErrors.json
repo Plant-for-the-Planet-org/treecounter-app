@@ -3,5 +3,6 @@
   "invalid_number": "Não é um número válido",
   "required_field": "{{field}} é obrigatório",
   "selection_invalid": "Não é uma seleção válida",
-  "email_invalid": "Não é um e-mail válido"
+  "email_invalid": "Não é um e-mail válido",
+  "char_limit": "Caractere não pode exceder {{limit}}"
 }

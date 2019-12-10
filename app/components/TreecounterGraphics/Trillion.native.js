@@ -214,9 +214,7 @@ class Trillion extends PureComponent {
                                 featuredEvents.image
                               )}
                               orgname={featuredEvents.name}
-                              treespledged={delimitNumbers(
-                                featuredEvents.total
-                              )}
+                              treespledged={featuredEvents.total}
                               date={featuredEvents.eventDate}
                             />
                           </TouchableOpacity>

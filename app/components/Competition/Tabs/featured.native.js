@@ -65,9 +65,14 @@ export default class FeaturedCompetitions extends Component {
     this.setState({
       refreshing: true
     });
-    this.props.updateFeaturedCompetitions().then(() => {
-      this.setState({ refreshing: false });
-    });
+    this.props
+      .updateFeaturedCompetitions()
+      .then(() => {
+        this.setState({ refreshing: false });
+      })
+      .catch(() => {
+        this.setState({ refreshing: false });
+      });
   };
 
   render() {

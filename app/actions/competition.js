@@ -26,7 +26,7 @@ import i18n from '../locales/i18n.js';
 export function fetchCompetitions(category) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    getAuthenticatedRequest('competitions_get', {
+    return getAuthenticatedRequest('competitions_get', {
       category: category,
       limit: 100
     })
@@ -40,10 +40,12 @@ export function fetchCompetitions(category) {
           )
         );
         dispatch(setProgressModelState(false));
+        return res;
       })
       .catch(err => {
         debug(err);
         dispatch(setProgressModelState(false));
+        return err;
       });
   };
 }
@@ -300,7 +302,7 @@ export function fetchAllCompetitions() {
 export function fetchMineCompetitions() {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    getAuthenticatedRequest('competitionsMine_get')
+    return getAuthenticatedRequest('competitionsMine_get')
       .then(res => {
         dispatch(
           mergeEntities(
@@ -311,10 +313,12 @@ export function fetchMineCompetitions() {
           )
         );
         dispatch(setProgressModelState(false));
+        return res;
       })
       .catch(err => {
         debug(err);
         dispatch(setProgressModelState(false));
+        return err;
       });
   };
 }

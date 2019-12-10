@@ -76,16 +76,16 @@ class CompetitionContainer extends React.Component {
   }
 
   updateAllCompetitions = async () => {
-    this.props.fetchCompetitions('all');
+    return this.props.fetchCompetitions('all');
   };
   updateFeaturedCompetitions = async () => {
-    this.props.fetchCompetitions('featured');
+    return this.props.fetchCompetitions('featured');
   };
   updateMineCompetitions = async () => {
-    this.props.fetchMineCompetitions();
+    return this.props.fetchMineCompetitions();
   };
   updateArchivedCompetitions = async () => {
-    this.props.fetchCompetitions('archived');
+    return this.props.fetchCompetitions('archived');
   };
 
   render() {

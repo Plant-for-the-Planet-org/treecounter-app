@@ -199,7 +199,7 @@ export default class Pledge extends Component {
                     <div className="left-buttons">
                       <div className="trees-pledged">
                         {i18n.t('label.treesPledgedAllPledges', {
-                          treeCount: myPledge[0].treeCount.toLocaleString()
+                          treeCount: delimitNumbers(myPledge[0].treeCount)
                         })}
                       </div>
                       <div

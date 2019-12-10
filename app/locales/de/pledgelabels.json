@@ -3,6 +3,7 @@
   "most_recent": "Neueste Baumversprechen",
   "biggest_pledges": "Größte Baumversprechen",
   "pledge": "Versprechen",
+  "pledges": "Versprechen",
   "pledge_trees": "Bäume versprechen",
   "pledge_des": "Sobald du Bäume versprochen hast, senden wir dir eine E-Mail zu, wie du die versprochenen Bäume pflanzen kannst.",
   "noPledges": "Scheinbar wurden bisher noch keine Bäume versprochen. Versprich jetzt Bäume und schaue dir später die größten Baumversprechen nochmal an.",
@@ -27,5 +28,9 @@
   "allPledges": "Alle Zusagen",
   "treesPledgedOn": "Liste der zugesagten Bäume",
   "donateXTrees": "Spende {{treeCount}} Bäume",
-  "increasePledgeMessage": "Gebe einen höheren Betrag als {{treeCount}} ein, um Dein Versprechen zu erhöhen. Ein Baum kostet {{treeCost}} {{currency}} und wird in {{projectName}} gepflanzt."
+  "increasePledgeMessage": "Gebe einen höheren Betrag als {{treeCount}} ein, um Dein Versprechen zu erhöhen. Ein Baum kostet {{treeCost}} {{currency}} und wird in {{projectName}} gepflanzt.",
+  "createPledgeFormHint": "Verstecke meinen Namen (Anonymes Versprechen)",
+  "updatePledge": "Aktualisiere dein Versprechen",
+  "plantNow": "Pflanze jetzt",
+  "pledgedOn": "Mache ein Versprechen"
 }

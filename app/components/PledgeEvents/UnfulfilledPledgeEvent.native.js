@@ -21,6 +21,7 @@ import {
 import LoadingIndicator from '../Common/LoadingIndicator';
 import PropTypes from 'prop-types';
 import { nextArrowWhite } from '../../assets';
+import { delimitNumbers } from './../../utils/utils';
 
 class UnfulfilledPledgeEvents extends Component {
   state = {
@@ -74,7 +75,7 @@ class UnfulfilledPledgeEvents extends Component {
             <View>
               <Text style={styles.eventSubTitle}>
                 {i18n.t('label.treesPledgedAllPledges', {
-                  treeCount: this.props.pledges.total.toLocaleString()
+                  treeCount: delimitNumbers(this.props.pledges.total)
                 })}
               </Text>
               <PledgeTabView pledges={this.props.pledges} />
@@ -135,7 +136,7 @@ class UnfulfilledPledgeEvents extends Component {
             <Text style={styles.pledgeTreesAmount}>
               {unfulfilledEvent
                 ? i18n.t('label.treesPledgedAllPledges', {
-                    treeCount: unfulfilledEvent.treeCount.toLocaleString()
+                    treeCount: delimitNumbers(unfulfilledEvent.treeCount)
                   })
                 : null}
             </Text>

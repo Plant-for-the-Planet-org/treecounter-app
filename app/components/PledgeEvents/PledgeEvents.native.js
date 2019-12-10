@@ -11,6 +11,7 @@ import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { fetchItem } from './../../stores/localStorage';
+import { delimitNumbers } from './../../utils/utils';
 
 import {
   fetchPledgesAction,
@@ -145,9 +146,9 @@ class PledgeEvents extends Component {
           <View style={styles.baContainer}>
             <Text style={styles.baMessage}>
               {i18n.t('label.pledgeAddedMessage', {
-                treeCount: this.props.navigation
-                  .getParam('treeCount')
-                  .toLocaleString()
+                treeCount: delimitNumbers(
+                  this.props.navigation.getParam('treeCount')
+                )
               })}
             </Text>
 
@@ -228,7 +229,7 @@ function FulfillPledgeButton(props) {
       <View style={styles.leftSection}>
         <Text style={styles.pledgeTreesAmount}>
           {i18n.t('label.treesPledgedAllPledges', {
-            treeCount: props.myPledge.treeCount.toLocaleString()
+            treeCount: delimitNumbers(props.myPledge.treeCount)
           })}
         </Text>
         <TouchableOpacity
@@ -287,7 +288,7 @@ function EventDetails(props) {
         <View>
           <Text style={styles.eventSubTitle}>
             {i18n.t('label.treesPledgedAllPledges', {
-              treeCount: pledges.total.toLocaleString()
+              treeCount: delimitNumbers(pledges.total)
             })}
           </Text>
           {/* All the pledges are here */}

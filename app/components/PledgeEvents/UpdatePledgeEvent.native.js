@@ -17,10 +17,6 @@ import { Formik } from 'formik';
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 
-const validationSchema = generateFormikSchemaFromFormSchema(pledgeFormSchema, [
-  'treeCount'
-]);
-
 class MakePledgeForm extends Component {
   state = {
     treeCount: '',
@@ -29,6 +25,11 @@ class MakePledgeForm extends Component {
   };
 
   componentWillMount() {
+    this.validationSchema = generateFormikSchemaFromFormSchema(
+      pledgeFormSchema,
+      ['treeCount']
+    );
+
     const unfulfilledEvent = this.props.navigation.getParam('unfulfilledEvent');
     this.setState({
       treeCount: unfulfilledEvent.treeCount.toString()
@@ -128,7 +129,7 @@ class MakePledgeForm extends Component {
                 treeCount: data.treeCount
               });
             }}
-            validationSchema={validationSchema}
+            validationSchema={this.validationSchema}
           >
             {props => (
               <>

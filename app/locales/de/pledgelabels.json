@@ -29,8 +29,8 @@
   "treesPledgedOn": "Liste der zugesagten Bäume",
   "donateXTrees": "Spende {{treeCount}} Bäume",
   "increasePledgeMessage": "Gebe einen höheren Betrag als {{treeCount}} ein, um Dein Versprechen zu erhöhen. Ein Baum kostet {{treeCost}} {{currency}} und wird in {{projectName}} gepflanzt.",
-  "createPledgeFormHint": "Verstecke meinen Namen (Anonymes Versprechen)",
-  "updatePledge": "Aktualisiere dein Versprechen",
+  "createPledgeFormHint": "Verstecke meinen Namen auf der Liste (anonymes Versprechen)",
+  "updatePledge": "Aktualisiere Dein Versprechen",
   "plantNow": "Pflanze jetzt",
-  "pledgedOn": "Mache ein Versprechen"
+  "pledgedOn": "Versprochen am"
 }

@@ -230,7 +230,7 @@ export default class AddRatingSection extends Component {
             );
           })}
           {this.props.validationError && this.props.validationError.index ? (
-            <Text style={{ color: 'red', marginBottom: 25, marginTop: -20 }}>
+            <Text style={{ color: 'red', marginBottom: 20, marginTop: -10 }}>
               {i18n.t('label.at_least_one_index')}
             </Text>
           ) : null}
@@ -248,6 +248,7 @@ export default class AddRatingSection extends Component {
             }}
             value={this.state.summary}
             multiline
+            style={{ paddingBottom: 6 }}
             label={i18n.t('label.brief_review')}
           />
           {this.props.validationError && this.props.validationError.summary ? (

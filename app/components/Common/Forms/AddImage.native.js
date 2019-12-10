@@ -46,7 +46,7 @@ const AddImage = props => {
         {props.title ? props.title : i18n.t('label.add_image')}
       </Text>
       <ScrollView horizontal>
-        {images && images != 'null' ? images.map(renderAsset) : null}
+        {images && images != 'null' ? images.reverse().map(renderAsset) : null}
       </ScrollView>
       <View style={styles.addImageButtonContainer}>
         <TouchableOpacity

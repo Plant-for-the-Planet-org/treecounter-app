@@ -44,7 +44,6 @@ import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
-import { delimitNumbers } from '../../utils/utils';
 
 class Trillion extends PureComponent {
   constructor() {

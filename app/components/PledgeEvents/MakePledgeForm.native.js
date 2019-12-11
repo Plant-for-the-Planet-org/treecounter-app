@@ -16,6 +16,7 @@ import { postPledge } from './../../actions/pledgeAction';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
+import { SafeAreaView } from 'react-navigation';
 
 import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
@@ -98,7 +99,7 @@ class MakePledgeForm extends Component {
     const currency = this.props.navigation.getParam('plantProject').currency;
 
     return (
-      <View style={styles.createPledgeRootView}>
+      <SafeAreaView style={styles.createPledgeRootView}>
         <HeaderAnimated
           navigation={this.props.navigation}
           title={i18n.t('label.pledgeToPlant')}
@@ -303,7 +304,7 @@ class MakePledgeForm extends Component {
             </>
           )}
         </Formik>
-      </View>
+      </SafeAreaView>
     );
   }
 }

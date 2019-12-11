@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   Image,
   BackHandler,
-  SafeAreaView,
   View
 } from 'react-native';
 import { backArrow } from '../../assets';
@@ -118,68 +117,62 @@ export default function HeaderAnimatedImage(props) {
   const textColor = '#4d5153';
   const whiteColor = 'white';
   return (
-    <SafeAreaView>
+    <Animated.View
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: whiteColor,
+        height: headerHeight,
+        zIndex: headerZindex,
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%'
+      }}
+    >
+      <TouchableOpacity
+        style={{ height: 70, width: 70, paddingTop: 26, zIndex: 1001 }}
+        onPress={() => props.navigation.goBack()}
+      >
+        <Image source={backArrow} resizeMode="contain" style={{ height: 18 }} />
+      </TouchableOpacity>
       <Animated.View
         style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: whiteColor,
-          height: headerHeight,
-          zIndex: headerZindex,
-          display: 'flex',
-          flexDirection: 'row',
-          width: '100%'
+          bottom: headerTitleBottom,
+          left: headerTitleLeft
         }}
       >
-        <TouchableOpacity
-          style={{ height: 70, width: 70, paddingTop: 26, zIndex: 1001 }}
-          onPress={() => props.navigation.goBack()}
-        >
-          <Image
-            source={backArrow}
-            resizeMode="contain"
-            style={{ height: 18 }}
-          />
-        </TouchableOpacity>
-        <Animated.View
+        <Animated.Image
+          style={[props.imageStyle, { opacity: imageOpacity }]}
+          source={props.imageSource}
+          resizeMode="contain"
+        />
+        <View
           style={{
-            position: 'absolute',
-            bottom: headerTitleBottom,
-            left: headerTitleLeft
+            flexDirection: 'row',
+            flex: 1,
+            flexWrap: 'wrap',
+            width: width * 0.8,
+            alignItems: 'center'
           }}
         >
-          <Animated.Image
-            style={[props.imageStyle, { opacity: imageOpacity }]}
-            source={props.imageSource}
-            resizeMode="contain"
-          />
-          <View
+          <Animated.Text
             style={{
-              flexDirection: 'row',
-              flex: 1,
+              fontFamily: 'OpenSans-Bold',
+              fontSize: headerFontSize,
+              letterSpacing: 0,
+              textAlign: 'left',
+              color: textColor,
               flexWrap: 'wrap',
-              width: width * 0.8,
-              alignItems: 'center'
+              flex: 1
             }}
           >
-            <Animated.Text
-              style={{
-                fontFamily: 'OpenSans-Bold',
-                fontSize: headerFontSize,
-                letterSpacing: 0,
-                textAlign: 'left',
-                color: textColor,
-                flexWrap: 'wrap',
-                flex: 1
-              }}
-            >
-              {props.title}
-            </Animated.Text>
-          </View>
-        </Animated.View>
+            {props.title}
+          </Animated.Text>
+        </View>
       </Animated.View>
-    </SafeAreaView>
+    </Animated.View>
   );
 }

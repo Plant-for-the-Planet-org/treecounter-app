@@ -18,6 +18,7 @@ import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { fetchItem } from './../../stores/localStorage';
+import { SafeAreaView } from 'react-navigation';
 
 import {
   fetchPledgesAction,
@@ -138,7 +139,7 @@ class PledgeEvents extends Component {
     return this.state.loading ? (
       <LoadingIndicator />
     ) : (
-      <View style={styles.peRootView}>
+      <SafeAreaView style={styles.peRootView}>
         <HeaderAnimatedImage
           navigation={navigation}
           title={pledges.name}
@@ -216,7 +217,7 @@ class PledgeEvents extends Component {
         ) : (
           <MakePledgeButton navigation={navigation} pledges={pledges} />
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 }

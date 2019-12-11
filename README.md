@@ -116,11 +116,11 @@ V 1.1.`11` A `12` [increment per release]
 ## Supporters
 The deployment and production of this app is also possible due to support from open-source software contributors.
 <a href="https://www.browserstack.com">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTPH0TU07S98aX7O5PbjVtOwLz5Q-8IAnaRWn6tv_qkxKaAedd9" height="24"></a>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTPH0TU07S98aX7O5PbjVtOwLz5Q-8IAnaRWn6tv_qkxKaAedd9" height="24"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.elastic.co">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTG4fX8xAc2tJIbk7hb5tMPNNPVEbAfCmQKJO7S4xY6au-1fdrj" height="30"></a>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTG4fX8xAc2tJIbk7hb5tMPNNPVEbAfCmQKJO7S4xY6au-1fdrj" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.bugsnag.com">
-<img src="https://global-uploads.webflow.com/5c741219fd0819540590e785/5c741219fd0819856890e790_asset%2039.svg" height="24"></a>
+<img src="https://global-uploads.webflow.com/5c741219fd0819540590e785/5c741219fd0819856890e790_asset%2039.svg" height="24"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://lingohub.com">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqJ0vVrXzxzszvleoGhXuxpMFlGueY5UfBEP-HPtTVTH2j29hv" height="30"></a>
 

@@ -22,9 +22,13 @@ export default class GiftEmail extends Component {
       this.giftInvitation = element;
     };
     this.state = { form: null, giftMessage: '', buttonType: 'next' };
+    this.onChange = this.onChange.bind(this);
     this.onNextClick = this.onNextClick.bind(this);
   }
-
+  onChange(value) {
+    console.log('updating form:', value);
+    this.setState({ form: value });
+  }
   componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -105,6 +109,7 @@ export default class GiftEmail extends Component {
             type={giftInvitationFormSchema}
             options={giftInvitationSchemaOptions}
             value={this.state.form}
+            onChange={this.onChange}
           />
         </KeyboardAwareScrollView>
         {this.state.buttonType === 'next' ? (

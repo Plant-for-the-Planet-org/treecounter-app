@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  Animated
+} from 'react-native';
 import { connect } from 'react-redux';
 import i18n from '../../locales/i18n';
 import PledgeTabView from './PledgeTabView.native';
@@ -11,6 +18,7 @@ import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { fetchItem } from './../../stores/localStorage';
+import { SafeAreaView } from 'react-navigation';
 import { delimitNumbers } from './../../utils/utils';
 
 import {
@@ -27,12 +35,16 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 import LoadingIndicator from './../Common/LoadingIndicator';
 import { nextArrowWhite } from '../../assets';
-
+import HeaderAnimatedImage from './../Header/HeaderAnimatedImage.native';
 class PledgeEvents extends Component {
+  static navigationOptions = {
+    header: null
+  };
   state = {
     loading: true,
     myPledge: {},
-    slug: null
+    slug: null,
+    scrollY: new Animated.Value(0)
   };
 
   componentDidMount() {
@@ -128,74 +140,87 @@ class PledgeEvents extends Component {
     return this.state.loading ? (
       <LoadingIndicator />
     ) : (
-      <View style={styles.peRootView}>
-        <EventDetails pledges={pledges} />
+      <SafeAreaView style={styles.peRootView}>
+        <View>
+          <HeaderAnimatedImage
+            navigation={navigation}
+            title={pledges.name}
+            scrollY={this.state.scrollY}
+            titleStyle={styles.eventTitle}
+            imageStyle={styles.peHeaderLogo}
+            imageSource={{
+              uri: getImageUrl('event', 'thumb', pledges.image)
+            }}
+          />
 
-        <RBSheet
-          ref={ref => {
-            this.RBSheet = ref;
-          }}
-          height={354}
-          duration={250}
-          customStyles={{
-            container: {
-              justifyContent: 'center'
-            }
-          }}
-        >
-          <View style={styles.baContainer}>
-            <Text style={styles.baMessage}>
-              {i18n.t('label.pledgeAddedMessage', {
-                treeCount: delimitNumbers(
-                  this.props.navigation.getParam('treeCount')
-                )
-              })}
-            </Text>
+          <EventDetails pledges={pledges} scrollY={this.state.scrollY} />
 
-            <View style={styles.baButtonContainer}>
-              <TouchableOpacity
-                style={styles.baLaterButton}
-                onPress={() => {
-                  this.props.fetchPledgesAction(slug);
-                  this.RBSheet.close();
-                }}
-              >
-                <Text style={styles.baLaterText}>
-                  {i18n.t('label.pledgeAddedLaterButton')}
-                </Text>
-              </TouchableOpacity>
+          <RBSheet
+            ref={ref => {
+              this.RBSheet = ref;
+            }}
+            height={354}
+            duration={250}
+            customStyles={{
+              container: {
+                justifyContent: 'center'
+              }
+            }}
+          >
+            <View style={styles.baContainer}>
+              <Text style={styles.baMessage}>
+                {i18n.t('label.pledgeAddedMessage', {
+                  treeCount: this.props.navigation
+                    .getParam('treeCount')
+                    .toLocaleString()
+                })}
+              </Text>
 
-              <TouchableOpacity
-                style={styles.baContinueButton}
-                onPress={() => {
-                  updateStaticRoute(
-                    getLocalRoute('app_donateTrees'),
-                    this.props.navigation
-                  );
-                }}
-              >
-                <Text style={styles.baContinueText}>
-                  {i18n.t('label.pledgeAddedContinueButton')}
-                </Text>
-              </TouchableOpacity>
+              <View style={styles.baButtonContainer}>
+                <TouchableOpacity
+                  style={styles.baLaterButton}
+                  onPress={() => {
+                    this.props.fetchPledgesAction(slug);
+                    this.RBSheet.close();
+                  }}
+                >
+                  <Text style={styles.baLaterText}>
+                    {i18n.t('label.pledgeAddedLaterButton')}
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.baContinueButton}
+                  onPress={() => {
+                    updateStaticRoute(
+                      getLocalRoute('app_donateTrees'),
+                      this.props.navigation
+                    );
+                  }}
+                >
+                  <Text style={styles.baContinueText}>
+                    {i18n.t('label.pledgeAddedContinueButton')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </RBSheet>
+          </RBSheet>
 
-        {typeof myPledge !== 'undefined' && myPledge !== null ? (
-          myPledge.length > 0 ? (
-            <FulfillPledgeButton
-              myPledge={myPledge[0]}
-              pledges={pledges}
-              navigation={navigation}
-            />
+          {typeof myPledge !== 'undefined' && myPledge !== null ? (
+            myPledge.length > 0 ? (
+              <FulfillPledgeButton
+                myPledge={myPledge[0]}
+                pledges={pledges}
+                navigation={navigation}
+              />
+            ) : (
+              <MakePledgeButton navigation={navigation} pledges={pledges} />
+            )
           ) : (
             <MakePledgeButton navigation={navigation} pledges={pledges} />
-          )
-        ) : (
-          <MakePledgeButton navigation={navigation} pledges={pledges} />
-        )}
-      </View>
+          )}
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -267,19 +292,17 @@ function FulfillPledgeButton(props) {
 function EventDetails(props) {
   let pledges = props.pledges;
   return (
-    <ScrollView contentContainerStyle={styles.peRootScrollView}>
-      <View style={styles.peHeader}>
-        {/* Show Event Logo */}
-        <Image
-          style={styles.peHeaderLogo}
-          source={{
-            uri: getImageUrl('event', 'thumb', pledges.image)
-          }}
-          resizeMode="contain"
-        />
-        {/* Shows Event Name */}
-        <Text style={styles.eventTitle}>{pledges.name}</Text>
-      </View>
+    <ScrollView
+      contentContainerStyle={styles.peRootScrollView}
+      scrollEnabled
+      scrollEventThrottle={16}
+      onScroll={Animated.event([
+        { nativeEvent: { contentOffset: { y: props.scrollY } } }
+      ])}
+    >
+      {/* <View style={styles.peHeader}>
+
+      </View> */}
 
       {pledges &&
       pledges.highestPledgeEvents &&

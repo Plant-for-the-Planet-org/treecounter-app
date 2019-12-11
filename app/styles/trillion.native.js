@@ -199,9 +199,10 @@ export default EStyleSheet.create({
   featuredProjectCardIconContainer: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: 5
+    marginTop: 5,
+    alignItems: 'center'
   },
-  featuredProjectCardIconText: { fontFamily: 'OpenSans-Regular' },
+  featuredProjectCardIconText: { fontFamily: 'OpenSans-Regular', fontSize: 12 },
 
   // Unfulfilled Pledge
 

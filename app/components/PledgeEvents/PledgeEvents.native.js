@@ -19,6 +19,7 @@ import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { fetchItem } from './../../stores/localStorage';
 import { SafeAreaView } from 'react-navigation';
+import { delimitNumbers } from './../../utils/utils';
 
 import {
   fetchPledgesAction,
@@ -253,7 +254,7 @@ function FulfillPledgeButton(props) {
       <View style={styles.leftSection}>
         <Text style={styles.pledgeTreesAmount}>
           {i18n.t('label.treesPledgedAllPledges', {
-            treeCount: props.myPledge.treeCount.toLocaleString()
+            treeCount: delimitNumbers(props.myPledge.treeCount)
           })}
         </Text>
         <TouchableOpacity
@@ -310,7 +311,7 @@ function EventDetails(props) {
         <View>
           <Text style={styles.eventSubTitle}>
             {i18n.t('label.treesPledgedAllPledges', {
-              treeCount: pledges.total.toLocaleString()
+              treeCount: delimitNumbers(pledges.total)
             })}
           </Text>
           {/* All the pledges are here */}

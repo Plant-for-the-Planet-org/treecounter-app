@@ -53,6 +53,72 @@ export default EStyleSheet.create({
     flexShrink: 0,
     padding: 16
   },
+  centeredContentContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 20
+  },
+  bottomActionArea: {
+    padding: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#f2f2f7',
+    height: 88
+  },
+  squareButton: {
+    height: 88,
+    width: 100,
+    backgroundColor: '#89b53a',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 12,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff'
+  },
+  cost: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 18,
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#89b53a'
+  },
+  buttonText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff'
+  },
+  costPerTree: {
+    height: 19,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  bottomButtonExtension: {
+    backgroundColor: '#89b53a',
+    justifyContent: 'center',
+    width: 100
+  },
   plantProjectDetails: {
     flexGrow: 1,
     flexBasis: 'auto',

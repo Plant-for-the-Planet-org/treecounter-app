@@ -51,6 +51,11 @@ export default EStyleSheet.create({
     color: '#ffffff',
     fontSize: 15
   },
+  fullHeightButton: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   textContainer: {
     // width: '100%',
     flexDirection: 'row'

@@ -46,6 +46,7 @@ import competition_outline from './images/icons/competition_outline.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
+import right_arrow_button from './images/icons/right-arrow-button.png';
 import arrow_left_orange_outline from './images/icons/arrow_left_orange_outline.png';
 import arrow_left_orange from './images/icons/arrow_left_orange.png';
 import tick from './images/icons/tick.png';
@@ -310,5 +311,6 @@ export {
   circleDelete,
   leaf,
   leafGray,
-  backArrow
+  backArrow,
+  right_arrow_button
 };

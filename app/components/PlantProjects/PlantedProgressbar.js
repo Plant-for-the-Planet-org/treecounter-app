@@ -22,15 +22,19 @@ class PlantedProgressBar extends React.Component {
     } else {
       treeCountWidth = treePlantedRatio * 100;
     }
-
     return (
-      <div className="planted-project-progressbar">
+      <div className="planted-project-progressbar" style={{ display: 'block' }}>
         <div className="tree-planted-container">
           <div
             className={
               treeCountWidth > 0 ? 'tree-width-container' : 'empty-tree-count'
             }
-            style={{ width: treeCountWidth + '%' }}
+            style={{
+              width: treeCountWidth + '%',
+              display: 'block',
+              'padding-right': 0,
+              position: 'absolute'
+            }}
           />
           <div className="tree-count-container">
             <div className="treePlantedtextPlanted">
@@ -40,19 +44,19 @@ class PlantedProgressBar extends React.Component {
               {i18n.t('label.trees_planted')}
             </div>
           </div>
+
+          {!this.props.hideTargetImage ? (
+            <div className="targetContainer" style={{ 'z-index': '999' }}>
+              <div className="treePlantedtext">
+                {countTarget ? delimitNumbers(countTarget) : null}
+              </div>
+
+              <div className="target-icon-container">
+                <img src={targetPlanted} />
+              </div>
+            </div>
+          ) : null}
         </div>
-
-        {!this.props.hideTargetImage ? (
-          <div className="targetContainer">
-            <div className="treePlantedtext">
-              {countTarget ? delimitNumbers(countTarget) : null}
-            </div>
-
-            <div className="target-icon-container">
-              <img src={targetPlanted} />
-            </div>
-          </div>
-        ) : null}
       </div>
     );
   }

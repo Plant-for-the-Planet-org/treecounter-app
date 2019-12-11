@@ -82,7 +82,7 @@ class PlantedProgressBar extends React.Component {
               {countTarget
                 ? countTarget > 100000
                   ? convertNumber(countTarget, 2)
-                  : countTarget
+                  : formatNumber(parseInt(countTarget))
                 : null}
             </Text>
 

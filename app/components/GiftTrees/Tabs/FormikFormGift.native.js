@@ -18,6 +18,9 @@ export default class FormikFormGift extends Component {
     this.state = { buttonType: 'next' };
   }
   componentWillMount() {
+    this.validationSchema = generateFormikSchemaFromFormSchema(
+      giftInvitationFormSchema.properties.giftInvitation
+    );
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       this.keyboardDidShow
@@ -46,9 +49,7 @@ export default class FormikFormGift extends Component {
   };
   render() {
     let { props } = this;
-    const validationSchema = generateFormikSchemaFromFormSchema(
-      giftInvitationFormSchema.properties.giftInvitation
-    );
+
     const backgroundColor = 'rgba(137, 181, 58, 0.19)';
     console.log('buttonType', this.buttonType);
     return (
@@ -57,7 +58,7 @@ export default class FormikFormGift extends Component {
         onSubmit={values => {
           props.openProjects(values, 'invitation');
         }}
-        validationSchema={validationSchema}
+        validationSchema={this.validationSchema}
       >
         {props => {
           let isValid = props;

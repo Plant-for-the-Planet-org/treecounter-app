@@ -11,19 +11,21 @@ import {
 } from '../../actions/redemptionAction';
 import i18n from '../../locales/i18n.js';
 
-function RedemptionContainer(props) {
-  return (
-    <Redemption
-      navigation={props.navigation}
-      validateCodeAction={validateCodeAction}
-      setRedemptionCode={setRedemptionCodeAction}
-    />
-  );
-}
+class RedemptionContainer extends Component {
+  static navigationOptions = {
+    header: null
+  };
 
-RedemptionContainer.navigationOptions = {
-  header: null
-};
+  render() {
+    return (
+      <Redemption
+        navigation={this.props.navigation}
+        validateCodeAction={validateCodeAction}
+        setRedemptionCode={setRedemptionCodeAction}
+      />
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {

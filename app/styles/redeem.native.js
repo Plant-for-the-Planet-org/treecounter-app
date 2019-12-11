@@ -15,6 +15,12 @@ export default EStyleSheet.create({
     marginTop: 10,
     flexDirection: 'column'
   },
+
+  formScrollView: {
+    padding: 24,
+    paddingBottom: 220,
+    marginTop: 100
+  },
   cardContainer: {
     flexDirection: 'column',
     flex: 1,

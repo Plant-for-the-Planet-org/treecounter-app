@@ -24,7 +24,7 @@ export default function Redemption(props) {
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const value = '';
   return (
-    <SafeAreaView style={styles.createPledgeRootView}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View>
         <HeaderAnimated
           navigation={props.navigation}
@@ -59,7 +59,10 @@ export default function Redemption(props) {
                   }
                 ])}
               >
-                <Text style={styles.titleText}>Subheading</Text>
+                <Text style={styles.titleText}>
+                  You can use this tool to add trees to your tree counter using
+                  Tree Voucher or a Merchandise Code
+                </Text>
                 <Image
                   style={styles.imageStyle}
                   resizeMode="contain"
@@ -91,6 +94,10 @@ export default function Redemption(props) {
     </SafeAreaView>
   );
 }
+
+Redemption.navigationOptions = {
+  header: null
+};
 
 Redemption.propTypes = {
   navigation: PropTypes.any

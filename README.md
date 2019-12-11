@@ -115,11 +115,11 @@ V 1.1.`11` A `12` [increment per release]
 
 ## Supporters
 The deployment and production of this app is also possible due to support from open-source software contributors.
-
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTPH0TU07S98aX7O5PbjVtOwLz5Q-8IAnaRWn6tv_qkxKaAedd9" height="24">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTG4fX8xAc2tJIbk7hb5tMPNNPVEbAfCmQKJO7S4xY6au-1fdrj" height="30">
-<img src="https://techcrunch.com/wp-content/uploads/2015/07/bugsnag-logo-1.png?w=730&crop=1" height="30">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqJ0vVrXzxzszvleoGhXuxpMFlGueY5UfBEP-HPtTVTH2j29hv" height="30">
+<a href="https://www.browserstack.com">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTPH0TU07S98aX7O5PbjVtOwLz5Q-8IAnaRWn6tv_qkxKaAedd9" height="24"></a><a href="https://www.elastic.co">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTG4fX8xAc2tJIbk7hb5tMPNNPVEbAfCmQKJO7S4xY6au-1fdrj" height="30"></a><a href="https://www.bugsnag.com">
+<img src="https://techcrunch.com/wp-content/uploads/2015/07/bugsnag-logo-1.png?w=730&crop=1" height="30"></a><a href="https://lingohub.com">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqJ0vVrXzxzszvleoGhXuxpMFlGueY5UfBEP-HPtTVTH2j29hv" height="30"></a>
 
 ## License
 

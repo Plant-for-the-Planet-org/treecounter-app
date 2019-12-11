@@ -1,13 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect, Component } from 'react';
+import React, { Component } from 'react';
 
-import { View, Image, Text, Keyboard, TouchableOpacity } from 'react-native';
-import { iosInformation } from '../../../assets';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import i18n from '../../../locales/i18n';
-import styles from '../../../styles/gifttrees/giftrees';
-import buttonStyles from '../../../styles/common/button.native';
-import { forward } from './../../../assets';
+import { View } from 'react-native';
 import FormikFormGift from './FormikFormGift.native';
 
 export default class GiftEmail extends Component {
@@ -22,7 +16,7 @@ export default class GiftEmail extends Component {
       <View style={style}>
         <FormikFormGift
           initialValues={{
-            firstName: '',
+            firstname: '',
             lastname: '',
             email: '',
             message: ''

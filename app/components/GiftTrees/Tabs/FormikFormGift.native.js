@@ -1,7 +1,8 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { forward } from '../../../assets';
 import styles from '../../../styles/competition/competition-form.native';
+import stylesGift from '../../../styles/gifttrees/giftrees';
 import i18n from '../../../locales/i18n';
 import { Formik } from 'formik';
 import { TextField } from 'react-native-material-textfield';
@@ -9,7 +10,6 @@ import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
 import buttonStyles from '../../../styles/common/button.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import giftInvitationFormSchema from '../../../server/formSchemas/giftTrees';
-import { opaqueType } from '@babel/types';
 
 export default class FormikFormGift extends Component {
   constructor(props) {
@@ -20,11 +20,11 @@ export default class FormikFormGift extends Component {
   componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
-      this._keyboardDidShow
+      this.keyboardDidShow
     );
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
-      this._keyboardDidHide
+      this.keyboardDidHide
     );
   }
 
@@ -33,13 +33,13 @@ export default class FormikFormGift extends Component {
     this.keyboardDidHideListener.remove();
   }
 
-  _keyboardDidShow = () => {
+  keyboardDidShow = () => {
     this.setState({
       buttonType: '>'
     });
   };
 
-  _keyboardDidHide = () => {
+  keyboardDidHide = () => {
     this.setState({
       buttonType: 'next'
     });
@@ -47,9 +47,9 @@ export default class FormikFormGift extends Component {
   render() {
     let { props } = this;
     const validationSchema = generateFormikSchemaFromFormSchema(
-      giftInvitationFormSchema.properties.giftInvitation,
-      ['firstname', 'lastname', 'email']
+      giftInvitationFormSchema.properties.giftInvitation
     );
+    const backgroundColor = 'rgba(137, 181, 58, 0.19)';
     console.log('buttonType', this.buttonType);
     return (
       <Formik
@@ -69,7 +69,7 @@ export default class FormikFormGift extends Component {
                   <Text style={styles.add_competition_title}>
                     {i18n.t('label.gift_receipient')}
                   </Text>
-                  <Text style={{ fontSize: 16, color: '#4d5153' }}>
+                  <Text style={stylesGift.description}>
                     {i18n.t('label.gift_trees_description')}
                   </Text>
                 </View>
@@ -173,7 +173,7 @@ export default class FormikFormGift extends Component {
                         style={[
                           buttonStyles.dualActionButtonView2,
                           !props.isValid
-                            ? { backgroundColor: 'rgba(137, 181, 58, 0.19)' }
+                            ? { backgroundColor: backgroundColor }
                             : {}
                         ]}
                       >
@@ -190,9 +190,7 @@ export default class FormikFormGift extends Component {
                     style={[
                       buttonStyles.actionButtonSmallTouchable,
                       { top: undefined, bottom: '16%' },
-                      !props.isValid
-                        ? { backgroundColor: 'rgba(137, 181, 58, 0.19)' }
-                        : {}
+                      !props.isValid ? { backgroundColor: backgroundColor } : {}
                     ]}
                     onPress={props.handleSubmit}
                   >

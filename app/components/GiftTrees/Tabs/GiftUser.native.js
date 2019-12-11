@@ -9,13 +9,11 @@ import {
   Keyboard
 } from 'react-native';
 import SearchUser from './SearchUser.native';
-import { iosInformation } from '../../../assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import i18n from '../../../locales/i18n';
 import styles from '../../../styles/gifttrees/giftrees';
 import buttonStyles from '../../../styles/common/button.native';
 import { forward } from './../../../assets';
-import stylesCompetetion from '../../../styles/competition/competition-form.native';
 export default class GiftUser extends Component {
   constructor(props) {
     super(props);
@@ -78,7 +76,7 @@ export default class GiftUser extends Component {
   }
   render() {
     return (
-      <View style={[styles.view_container, { backgroundColor: 'red' }]}>
+      <View style={[styles.view_container]}>
         <KeyboardAwareScrollView
           contentContainerStyle={styles.formScrollView}
           enableOnAndroid
@@ -88,7 +86,7 @@ export default class GiftUser extends Component {
           scrollEnabled
         >
           <View style={{ paddingLeft: 10 }}>
-            <Text style={{ fontSize: 16, color: '#4d5153' }}>
+            <Text style={styles.description}>
               {i18n.t('label.search_user_desrcription')}
             </Text>
           </View>

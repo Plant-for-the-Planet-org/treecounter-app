@@ -55,7 +55,7 @@ export default {
           propertyOrder: 4
         }
       },
-      required: ['firstname', 'lastname', 'email'],
+      required: ['firstname', 'firstname', 'lastname', 'email'],
       icon: null,
       help: null,
       propertyOrder: 2

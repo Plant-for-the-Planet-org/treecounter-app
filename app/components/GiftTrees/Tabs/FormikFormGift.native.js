@@ -49,7 +49,6 @@ export default class FormikFormGift extends Component {
       giftInvitationFormSchema.properties.giftInvitation
     );
     console.log('buttonType', this.buttonType);
-    let buttonType = props.buttonType;
     return (
       <Formik
         initialValues={props.initialValues}
@@ -61,8 +60,19 @@ export default class FormikFormGift extends Component {
         {props => (
           <>
             <View style={styles.view_container}>
+              <View style={{ padding: 20, paddingBottom: 0 }}>
+                <Text style={styles.add_competition_title}>
+                  {i18n.t('label.gift_receipient')}
+                </Text>
+                <Text style={{ fontSize: 16, color: '#4d5153' }}>
+                  {i18n.t('label.gift_trees_description')}
+                </Text>
+              </View>
               <KeyboardAwareScrollView
-                contentContainerStyle={styles.formScrollView}
+                contentContainerStyle={[
+                  styles.formScrollView,
+                  { paddingTop: 0 }
+                ]}
                 enableOnAndroid
                 keyboardDismissMode="on-drag"
                 keyboardShouldPersistTaps="always"
@@ -72,7 +82,7 @@ export default class FormikFormGift extends Component {
                 <View style={styles.formView}>
                   <View style={styles.formHalfTextField}>
                     <TextField
-                      label={i18n.t('label.firstname')}
+                      label={i18n.t('label.First_Name')}
                       value={props.values.firstname}
                       tintColor={'#89b53a'}
                       titleFontSize={12}
@@ -82,7 +92,6 @@ export default class FormikFormGift extends Component {
                       titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       blurOnSubmit={false}
-                      keyboardType="numeric"
                       error={props.touched.firstname && props.errors.firstname}
                       onChangeText={props.handleChange('firstname')}
                       onBlur={props.handleBlur('firstname')}
@@ -91,7 +100,7 @@ export default class FormikFormGift extends Component {
 
                   <View style={styles.formHalfTextField}>
                     <TextField
-                      label={i18n.t('label.lastname')}
+                      label={i18n.t('label.Last_Name')}
                       value={props.values.lastname}
                       tintColor={'#89b53a'}
                       titleFontSize={12}
@@ -101,7 +110,6 @@ export default class FormikFormGift extends Component {
                       titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       blurOnSubmit={false}
-                      keyboardType="numeric"
                       error={props.touched.lastname && props.errors.lastname}
                       onChangeText={props.handleChange('lastname')}
                       onBlur={props.handleBlur('lastname')}
@@ -110,7 +118,7 @@ export default class FormikFormGift extends Component {
                 </View>
                 <View>
                   <TextField
-                    label={i18n.t('label.email')}
+                    label={i18n.t('label.Email')}
                     value={props.values.email}
                     tintColor={'#89b53a'}
                     titleFontSize={12}
@@ -127,7 +135,7 @@ export default class FormikFormGift extends Component {
                 </View>
                 <View>
                   <TextField
-                    label={i18n.t('label.gift_message')}
+                    label={i18n.t('label.Gift_Message')}
                     value={props.values.message}
                     tintColor={'#89b53a'}
                     titleFontSize={12}
@@ -149,14 +157,14 @@ export default class FormikFormGift extends Component {
                 <>
                   <TouchableOpacity
                     style={[
-                      buttonStyles.dualActionButtonTouchable2,
-                      { top: undefined, bottom: 55 }
+                      buttonStyles.dualActionButtonTouchable,
+                      { top: undefined, bottom: 55, flex: 1, padding: 20 }
                     ]}
                     onPress={props.handleSubmit}
                   >
                     <View style={buttonStyles.dualActionButtonView2}>
                       <Text style={buttonStyles.dualActionButtonText2}>
-                        {i18n.t('label.next')}
+                        {i18n.t('label.continue_to_select_project')}
                       </Text>
                     </View>
                   </TouchableOpacity>

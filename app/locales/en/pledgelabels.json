@@ -34,5 +34,5 @@
   "updatePledgeButton": "Update Pledge",
   "plantNow": "Plant Now",
   "pledgedOn": "Pledged on",
-  "higherTreeCount": "Add Tree Count higher than {{treeCount}}"
+  "higherTreeCount": "Please enter a number higher than {{treeCount}}"
 }

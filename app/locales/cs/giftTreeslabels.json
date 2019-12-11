@@ -10,7 +10,6 @@
   "heading_payment": "Platba",
   "no_of_trees": "Počet stromů",
   "trees": "Stromy",
-  "gift_trees_description": "Darujte stromy přátelům či dalším lidem! Každý strom, který darujete, se objeví na počítadle stromů vás i vašeho příjemce. Pokud však ještě počítadlo stromů nemají, pozveme je e-mailem, aby s námi sázeli!",
   "gift_message": "Zpráva k daru (volitelná)",
   "support_user_trees": "Podporuje {{user}} k vysázení {{count}} stromů",
   "gift_user_trees": "Darování {{count}} stromů uživateli {{user}}",

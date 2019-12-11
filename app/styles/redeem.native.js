@@ -21,8 +21,7 @@ export default EStyleSheet.create({
     paddingLeft: 27,
     paddingRight: 27,
     paddingTop: 16,
-    paddingBottom: 16,
-    alignItems: 'center'
+    paddingBottom: 16
   },
   headerContainer: {
     flexDirection: 'column',
@@ -30,15 +29,29 @@ export default EStyleSheet.create({
     alignItems: 'center',
     padding: 20
   },
+  mainTitle: {
+    fontSize: 27,
+    fontWeight: '800',
+    fontStyle: 'normal',
+    lineHeight: 40,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
   titleText: {
-    color: '#575756',
-    fontSize: 15,
-    textAlign: 'center'
+    fontSize: 18,
+    fontWeight: '400',
+    fontStyle: 'normal',
+    lineHeight: 24,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginTop: 7
   },
   imageStyle: {
-    width: 59,
-    height: 81,
-    margin: 15
+    width: 320,
+    height: 174,
+    marginTop: 24
   },
   imageLoginStyle: {
     width: 50,
@@ -98,5 +111,27 @@ export default EStyleSheet.create({
   },
   buttonStyle: {
     margin: 20
+  },
+  validateCodeButton: {
+    marginTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  validateCodeButtonView: {
+    width: '88%',
+    borderRadius: 100,
+    backgroundColor: '#89b53a',
+    height: 52,
+    justifyContent: 'center'
+  },
+  validateCodeButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff'
   }
 });

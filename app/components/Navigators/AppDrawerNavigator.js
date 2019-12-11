@@ -37,7 +37,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
 import SelectedCompetition from '../../containers/SelectedCompetition';
-import RedemptionContainer from '../../containers/RedemptionContainer';
+import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
@@ -70,7 +70,6 @@ const headerLabels = {
   [getLocalRoute('app_userHome')]: 'Trillion Tree Campaign',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
-  [getLocalRoute('app_redeem')]: 'label.redeem_trees',
   [getLocalRoute('app_competitions')]: 'label.competitions',
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',

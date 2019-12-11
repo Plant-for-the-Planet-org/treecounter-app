@@ -155,6 +155,8 @@ import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
 import backArrow from './images/icons/backArrow.png';
+import redeemImage from './images/redeemImage.png';
+
 export {
   germany,
   worldImg,
@@ -174,6 +176,7 @@ export {
   payment_bank,
   payment_credit,
   payment_paypal,
+  redeemImage,
   payment_sepa,
   MapPinBlue,
   MapPinGreen,

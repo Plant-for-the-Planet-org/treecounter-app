@@ -10,6 +10,7 @@
   "heading_payment": "Bezahlung",
   "no_of_trees": "Anzahl der Bäume",
   "trees": "Bäume",
+  "gift_receipient": "Verschenke Bäume an",
   "gift_trees_description": "Verschenke Bäume an Freunde oder Bekannte! Jeder Baum, den du verschenkst, erscheint sowohl in deinem eigenen als auch im Baumzähler der Beschenkten. Falls diese noch keinen Baumzähler haben, laden wir sie via E-Mail zum Mitpflanzen ein!",
   "gift_message": "Nachricht zum Geschenk (optional)",
   "support_user_trees": "{{user}} wird unterstützt, um {{count}}-Bäume zu pflanzen",
@@ -18,5 +19,10 @@
   "support_to": "Unterstützung für {{name}}",
   "gift_trees_to": "Schenke {{user}} Bäume",
   "select_valid_user_profile": "Wähle ein gültiges Benutzerprofil aus",
-  "gift": "Geschenk"
+  "gift": "Geschenk",
+  "First_Name": "Vorname",
+  "Last_Name": "Nachname",
+  "Email": "Email",
+  "Gift_Message": "Nachricht zum Geschenk",
+  "search_user_desrcription": "Verschenke Bäume an Freunde oder Bekannte! Jeder Baum, den du verschenkst, erscheint sowohl in deinem eigenen als auch im Baumzähler der Beschenkten."
 }

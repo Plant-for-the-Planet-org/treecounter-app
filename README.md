@@ -113,6 +113,16 @@ V 1.1.`11` B `12`
 V 1.1.`11` A `12` [increment per release]
 
 
+## Supporters
+The deployment and production of this app is also possible due to support from 
+BrowserStack, Elastic Cloud, BugSnag, Lingohub
+
+![Browser Stack Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTPH0TU07S98aX7O5PbjVtOwLz5Q-8IAnaRWn6tv_qkxKaAedd9)
+![Elastic Cloud Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTG4fX8xAc2tJIbk7hb5tMPNNPVEbAfCmQKJO7S4xY6au-1fdrj)
+![BugSnag Logo](https://techcrunch.com/wp-content/uploads/2015/07/bugsnag-logo-1.png?w=730&crop=1)
+![Lingohub Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqJ0vVrXzxzszvleoGhXuxpMFlGueY5UfBEP-HPtTVTH2j29hv)
+
+
 ## License
 
 Plant-for-the-Planet App is free software, and is released under the terms of the <abbr title="GNU General Public License">GPL</abbr> version 3 or (at your option) any later version. See <a href="license.txt">license.txt</a>.</p>

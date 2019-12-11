@@ -47,7 +47,8 @@ export default class FormikFormGift extends Component {
   render() {
     let { props } = this;
     const validationSchema = generateFormikSchemaFromFormSchema(
-      giftInvitationFormSchema.properties.giftInvitation
+      giftInvitationFormSchema.properties.giftInvitation,
+      ['firstname', 'lastname', 'email']
     );
     console.log('buttonType', this.buttonType);
     return (
@@ -60,10 +61,9 @@ export default class FormikFormGift extends Component {
       >
         {props => {
           let isValid = props;
-          let opacityValue = isValid ? 1 : '0.2';
           return (
             <>
-              {console.log('props', props)}
+              {console.log('isValid', isValid)}
               <View style={styles.view_container}>
                 <View style={{ padding: 20, paddingBottom: 0 }}>
                   <Text style={styles.add_competition_title}>
@@ -172,7 +172,7 @@ export default class FormikFormGift extends Component {
                       <View
                         style={[
                           buttonStyles.dualActionButtonView2,
-                          !isValid
+                          !props.isValid
                             ? { backgroundColor: 'rgba(137, 181, 58, 0.19)' }
                             : {}
                         ]}
@@ -189,7 +189,7 @@ export default class FormikFormGift extends Component {
                   <TouchableOpacity
                     style={[
                       buttonStyles.actionButtonSmallTouchable,
-                      { top: undefined, bottom: '20%' },
+                      { top: undefined, bottom: '16%' },
                       !props.isValid
                         ? { backgroundColor: 'rgba(137, 181, 58, 0.19)' }
                         : {}

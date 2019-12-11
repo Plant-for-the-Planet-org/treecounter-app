@@ -77,12 +77,9 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     entryFile: "index.native.js",
-    enableHermes: true,
+    enableHermes: false,
     root: "../../",
 ]
-def jscFlavor = 'org.webkit:android-jsc:+'
-def useIntlJsc = false
-def enableHermes = project.ext.react.get("enableHermes", true);
 
 apply from: "../../node_modules/react-native/react.gradle"
 project.ext.vectoricons = [
@@ -105,6 +102,29 @@ def enableSeparateBuildPerCPUArchitecture = true
  * Run Proguard to shrink the Java bytecode in release builds.
  */
 def enableProguardInReleaseBuilds = false
+
+/**
+ * The preferred build flavor of JavaScriptCore.
+ *
+ * For example, to use the international variant, you can use:
+ * `def jscFlavor = 'org.webkit:android-jsc-intl:+'`
+ *
+ * The international variant includes ICU i18n library and necessary data
+ * allowing to use e.g. `Date.toLocaleString` and `String.localeCompare` that
+ * give correct results when using with locales other than en-US.  Note that
+ * this variant is about 6MiB larger per architecture than default.
+ */
+def jscFlavor = 'org.webkit:android-jsc:+'
+
+/**
+ * Whether to enable the Hermes VM.
+ *
+ * This should be set on project.ext.react and mirrored here.  If it is not set
+ * on project.ext.react, JavaScript will not be compiled to Hermes Bytecode
+ * and the benefits of using Hermes will therefore be sharply reduced.
+ */
+def enableHermes = project.ext.react.get("enableHermes", false);
+def useIntlJsc = false
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion

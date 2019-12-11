@@ -38,7 +38,8 @@ class MakePledgeForm extends Component {
     firstname: '',
     lastname: '',
     isAnonymous: false,
-    scrollY: new Animated.Value(0)
+    scrollY: new Animated.Value(0),
+    oldTreeCount: ''
   };
 
   componentWillMount() {
@@ -50,6 +51,7 @@ class MakePledgeForm extends Component {
     const unfulfilledEvent = this.props.navigation.getParam('unfulfilledEvent');
     this.setState({
       treeCount: unfulfilledEvent.treeCount.toString(),
+      oldTreeCount: unfulfilledEvent.treeCount.toString(),
       firstname: unfulfilledEvent.firstname,
       lastname: unfulfilledEvent.lastname,
       isAnonymous: unfulfilledEvent.isAnonymous
@@ -98,6 +100,7 @@ class MakePledgeForm extends Component {
     const projectName = unfulfilledEvent.plantProjectName;
     const currency = unfulfilledEvent.plantProjectCurrency;
     const token = unfulfilledEvent.token;
+
     return (
       <SafeAreaView style={styles.createPledgeRootView}>
         <View>
@@ -141,6 +144,15 @@ class MakePledgeForm extends Component {
               });
             }}
             validationSchema={this.validationSchema}
+            validate={values => {
+              let errors = {};
+              if (values.treeCount < this.state.oldTreeCount) {
+                errors.treeCount = i18n.t('label.higherTreeCount', {
+                  treeCount: this.state.oldTreeCount
+                });
+              }
+              return errors;
+            }}
           >
             {props => (
               <>

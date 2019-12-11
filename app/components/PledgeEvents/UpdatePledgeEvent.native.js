@@ -103,7 +103,7 @@ class MakePledgeForm extends Component {
         <View>
           <HeaderAnimated
             navigation={this.props.navigation}
-            title={i18n.t('label.increasePledge')}
+            title={i18n.t('label.updatePledgeButton')}
             scrollY={this.state.scrollY}
           />
           <View />

@@ -28,12 +28,6 @@ import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
 
-const validationSchema = generateFormikSchemaFromFormSchema(pledgeFormSchema, [
-  'firstname',
-  'lastname',
-  'email',
-  'treeCount'
-]);
 // let _ = require('lodash');
 
 class MakePledgeForm extends Component {

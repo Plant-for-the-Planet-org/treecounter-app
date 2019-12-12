@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import i18n from '../../locales/i18n.js';
 import TouchableItem from '../../components/Common/TouchableItem';
-import { redeemImage } from '../../assets';
+import { redeemImage, forward } from '../../assets';
 import styles from '../../styles/redeem';
 import {
   View,
@@ -11,7 +11,8 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
-  Animated
+  Animated,
+  Keyboard
 } from 'react-native';
 import { updateRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -19,10 +20,39 @@ import { TextField } from 'react-native-material-textfield';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
 import { SafeAreaView } from 'react-navigation';
 import { Formik } from 'formik';
+import buttonStyles from '../../styles/common/button.native';
 
 export default function Redemption(props) {
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const value = '';
+
+  const [buttonType, setButtonType] = React.useState('competition');
+
+  const keyboardDidShow = () => {
+    setButtonType('>');
+  };
+
+  const keyboardDidHide = () => {
+    setButtonType('competition');
+  };
+
+  let keyboardDidShowListener;
+  let keyboardDidHideListener;
+  React.useEffect(() => {
+    keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      keyboardDidShow
+    );
+    keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      keyboardDidHide
+    );
+    // clean up
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View>
@@ -51,6 +81,7 @@ export default function Redemption(props) {
                 resetScrollToCoords={{ x: 0, y: 0 }}
                 scrollEnabled
                 scrollEventThrottle={16}
+                enableOnAndroid
                 onScroll={Animated.event([
                   {
                     nativeEvent: {
@@ -58,6 +89,7 @@ export default function Redemption(props) {
                     }
                   }
                 ])}
+                extraScrollHeight={12}
               >
                 <Text style={styles.titleText}>
                   You can use this tool to add trees to your tree counter using
@@ -87,6 +119,32 @@ export default function Redemption(props) {
                   </View>
                 </View>
               </KeyboardAwareScrollView>
+
+              {buttonType === 'competition' ? (
+                <TouchableOpacity
+                  style={buttonStyles.actionButtonTouchable}
+                  onPress={props.handleSubmit}
+                >
+                  <View style={buttonStyles.actionButtonView}>
+                    <Text style={buttonStyles.actionButtonText}>
+                      {i18n.t('Validate Code')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ) : null}
+
+              {buttonType === '>' ? (
+                <TouchableOpacity
+                  style={buttonStyles.actionButtonSmallTouchable}
+                  onPress={props.handleSubmit}
+                >
+                  <Image
+                    source={forward}
+                    resizeMode="cover"
+                    style={buttonStyles.actionButtonSmallImage}
+                  />
+                </TouchableOpacity>
+              ) : null}
             </>
           )}
         </Formik>

@@ -131,9 +131,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_privacy')]: {
         screen: PrivacyContainer
       },
-      [getLocalRoute('app_redeem')]: {
-        screen: RedemptionContainer
-      },
       [getLocalRoute('app_claim')]: {
         screen: RedemptionContainer
       },
@@ -161,6 +158,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_create_competition']: {
         screen: createCompeition
+      },
+      ['app_redeem']: {
+        screen: RedemptionContainer,
+        navigationOptions: {
+          header: null //this will hide the header
+        }
       }
     },
     {

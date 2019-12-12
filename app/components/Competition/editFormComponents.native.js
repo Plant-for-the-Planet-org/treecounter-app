@@ -22,7 +22,7 @@ export const FormikForm = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     competitionFormSchema
   );
-
+  console.log('validation schema', validationSchema);
   const buttonType = props.buttonType;
 
   const handleDelete = () => {

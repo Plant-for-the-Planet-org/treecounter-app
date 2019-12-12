@@ -70,9 +70,11 @@ export default class FormikFormGift extends Component {
                   <Text style={styles.add_competition_title}>
                     {i18n.t('label.gift_receipient')}
                   </Text>
-                  <Text style={stylesGift.description}>
-                    {i18n.t('label.gift_trees_description')}
-                  </Text>
+                  {this.state.buttonType === 'next' ? (
+                    <Text style={stylesGift.description}>
+                      {i18n.t('label.gift_trees_description')}
+                    </Text>
+                  ) : null}
                 </View>
                 <KeyboardAwareScrollView
                   contentContainerStyle={[

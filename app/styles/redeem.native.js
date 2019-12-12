@@ -46,8 +46,7 @@ export default EStyleSheet.create({
   },
   titleText: {
     fontSize: 18,
-    fontWeight: '400',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-SemiBold',
     lineHeight: 24,
     letterSpacing: 0,
     textAlign: 'left',
@@ -57,7 +56,7 @@ export default EStyleSheet.create({
   imageStyle: {
     width: 320,
     height: 174,
-    marginTop: 24
+    marginTop: 42
   },
   imageLoginStyle: {
     width: 50,

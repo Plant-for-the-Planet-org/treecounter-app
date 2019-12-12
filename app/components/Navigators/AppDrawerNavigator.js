@@ -37,7 +37,6 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
 import SelectedCompetition from '../../containers/SelectedCompetition';
-import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
@@ -56,6 +55,11 @@ import AddReview from './../Reviews/AddReview/AddReview';
 import PDFViewer from '../PDFViewer';
 import createCompeition from './../Competition/Tabs/createCompetition.native';
 import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
+
+import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
+import AddTrees from '../Redemption/app/AddTrees.native';
+import SeeProject from '../Redemption/app/SeeProject.native';
+
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -131,9 +135,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_privacy')]: {
         screen: PrivacyContainer
       },
-      [getLocalRoute('app_claim')]: {
-        screen: RedemptionContainer
-      },
+      // [getLocalRoute('app_claim')]: {
+      //   screen: RedemptionContainer
+      // },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
@@ -158,12 +162,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_create_competition']: {
         screen: createCompeition
-      },
-      ['app_redeem']: {
-        screen: RedemptionContainer,
-        navigationOptions: {
-          header: null //this will hide the header
-        }
       }
     },
     {
@@ -351,6 +349,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_unfulfilled_pledge_events']: {
         screen: UnfulfilledPledgeEvents
+      },
+      ['app_redeem']: {
+        screen: RedemptionContainer
+      },
+      ['redeem_add_trees']: {
+        screen: AddTrees
+      },
+      ['redeem_see_project']: {
+        screen: SeeProject
       }
     },
     {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Redemption from '../../components/Redemption/';
+import Redemption from '../../components/Redemption/index.native';
 import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
 import {
@@ -12,6 +12,9 @@ import {
 import i18n from '../../locales/i18n.js';
 
 class RedemptionContainer extends Component {
+  static navigationOptions = {
+    header: null
+  };
   render() {
     return (
       <Redemption

@@ -14,7 +14,7 @@ import {
   Animated,
   Keyboard
 } from 'react-native';
-import { updateRoute } from '../../helpers/routerHelper';
+import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
@@ -26,14 +26,14 @@ export default function Redemption(props) {
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const value = '';
 
-  const [buttonType, setButtonType] = React.useState('competition');
+  const [buttonType, setButtonType] = React.useState('validate');
 
   const keyboardDidShow = () => {
     setButtonType('>');
   };
 
   const keyboardDidHide = () => {
-    setButtonType('competition');
+    setButtonType('validate');
   };
 
   let keyboardDidShowListener;
@@ -55,7 +55,7 @@ export default function Redemption(props) {
   }, []);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <View>
+      <View style={{ flex: 1 }}>
         <HeaderAnimated
           navigation={props.navigation}
           title={i18n.t('Redeem Trees')}
@@ -70,6 +70,7 @@ export default function Redemption(props) {
               code: values.code
             };
             console.log(data);
+            updateStaticRoute('redeem_add_trees', props.navigation);
           }}
         >
           {props => (
@@ -120,7 +121,7 @@ export default function Redemption(props) {
                 </View>
               </KeyboardAwareScrollView>
 
-              {buttonType === 'competition' ? (
+              {buttonType === 'validate' ? (
                 <TouchableOpacity
                   style={buttonStyles.actionButtonTouchable}
                   onPress={props.handleSubmit}

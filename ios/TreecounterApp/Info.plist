@@ -64,6 +64,8 @@
 	<string>We would like access to your calendar for the app.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We would like to use your camera for the app.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>We would like to access your contacts for the app.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to get the coordinates for the tree registration.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -76,8 +78,10 @@
 	<string>We would like to save photos to your photo gallery.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We would like access to your photo gallery for the app.</string>
+	<key>NSSiriUsageDescription</key>
+	<string>We would like to use Siri for the app.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>We would like to use spearch recognition for the app.</string>
+	<string>We would like to use speach recognition for the app.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Bold.ttf</string>

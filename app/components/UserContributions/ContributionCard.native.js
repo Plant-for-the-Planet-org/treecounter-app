@@ -1,9 +1,15 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Dimensions, FlatList, Image, Text, View } from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  Text,
+  View,
+  TouchableHighlight
+} from 'react-native';
 import { withNavigation } from 'react-navigation';
-
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
@@ -13,7 +19,7 @@ import styles, {
 } from '../../styles/myTrees/user_contribution_card';
 import { formatDate, delimitNumbers } from '../../utils/utils';
 import CardLayout from '../Common/Card';
-
+import { getISOToCountryName } from '../../helpers/utils';
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -122,7 +128,7 @@ class ContributionCard extends React.Component {
   }
 
   plantProjectLine(plantProjectName, country) {
-    return (plantProjectName ? plantProjectName + ', ' : '') + country;
+    return country && getISOToCountryName(country).country;
   }
 
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
@@ -256,6 +262,7 @@ class ContributionCard extends React.Component {
       registrationDate,
       redemptionCode,
       redemptionDate
+      // contributionImages,
       // ndviUid
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
@@ -295,14 +302,12 @@ class ContributionCard extends React.Component {
     return contributionType === 'donation' ? (
       <CardLayout
         style={styles.addPadding}
-        // TODO: uncomment this if the contribution cards are ready to get merged
-        // onPress={() => {
-        //   ndviUid &&
-        //     this.props.navigation.navigate('contribution_details', {
-        //       contribution,
-        //       titleParam: plantProjectName || tpoName || treeSpecies
-        //     });
-        // }}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (
@@ -356,90 +361,88 @@ class ContributionCard extends React.Component {
         </View>
       </CardLayout>
     ) : contributionType === 'planting' ? (
-      <CardLayout
-        style={[styles.addPadding, styles.minHeight]}
-        // TODO: uncomment this if the contribution cards are ready to get merged
-        // onPress={() => {
-        //   ndviUid &&
-        //     this.props.navigation.navigate('contribution_details', {
-        //       contribution,
-        //       titleParam: plantProjectName || tpoName || treeSpecies
-        //     });
-        // }}
+      <TouchableHighlight
+        underlayColor={'transparent'}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
       >
-        <View style={[styles.leftBorder, styles.leftColorBorder]} />
-        {treeCountLine ? (
+        <CardLayout style={[styles.addPadding, styles.minHeight]}>
+          <View style={[styles.leftBorder, styles.leftColorBorder]} />
+          {treeCountLine ? (
+            <Text
+              numberOfLines={1}
+              style={[styles.boldText, styles.gap, styles.restrictTextLength]}
+            >
+              {treeCountLine}
+            </Text>
+          ) : null}
+          {plantProjectLine ? (
+            <Text
+              numberOfLines={1}
+              style={[styles.gap, styles.restrictTextLength]}
+            >
+              {plantProjectLine}
+            </Text>
+          ) : null}
+          {plantActionLine ? (
+            <Text
+              numberOfLines={2}
+              style={[styles.gap, styles.restrictTextLength]}
+            >
+              {plantActionLine}
+            </Text>
+          ) : null}
+          {dedicateActionLine ? (
+            <Text numberOfLines={1} style={styles.restrictTextLength}>
+              {dedicateActionLine}
+            </Text>
+          ) : null}
           <Text
-            numberOfLines={1}
-            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
-          >
-            {treeCountLine}
-          </Text>
-        ) : null}
-        {plantProjectLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantProjectLine}
-          </Text>
-        ) : null}
-        {plantActionLine ? (
-          <Text
-            numberOfLines={2}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantActionLine}
-          </Text>
-        ) : null}
-        {dedicateActionLine ? (
-          <Text numberOfLines={1} style={styles.restrictTextLength}>
-            {dedicateActionLine}
-          </Text>
-        ) : null}
-        <Text
-          style={styles.deleteTextStyle}
-          onPress={() => {
-            this.props.navigation.navigate('delete_contribution', {
-              deleteContribution: () =>
-                this.props.deleteContribution(contribution.id)
-            });
-          }}
-        >
-          {i18n.t('label.delete')}
-        </Text>
-        {mayUpdate ? (
-          <Text
-            style={styles.updateTextStyle}
+            style={styles.deleteTextStyle}
             onPress={() => {
-              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                selectedTreeId: contribution.id,
-                contribution
+              this.props.navigation.navigate('delete_contribution', {
+                deleteContribution: () =>
+                  this.props.deleteContribution(contribution.id)
               });
             }}
           >
-            {i18n.t('label.update')}
+            {i18n.t('label.delete')}
           </Text>
-        ) : null}
-        <View style={styles.labelStyle}>
-          <Text style={styles.labelTextStyle}>
-            {cardType && cardType.length > 0
-              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-              : ''}
-          </Text>
-        </View>
-      </CardLayout>
+          {mayUpdate ? (
+            <Text
+              style={styles.updateTextStyle}
+              onPress={() => {
+                this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
+                  selectedTreeId: contribution.id,
+                  contribution
+                });
+              }}
+            >
+              {i18n.t('label.update')}
+            </Text>
+          ) : null}
+          <View style={styles.labelStyle}>
+            <Text style={styles.labelTextStyle}>
+              {cardType && cardType.length > 0
+                ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                : ''}
+            </Text>
+          </View>
+        </CardLayout>
+      </TouchableHighlight>
     ) : (
       <CardLayout
         style={styles.addPadding}
-        // TODO: uncomment this if the contribution cards are ready to get merged
-        // onPress={() => {
-        //   ndviUid &&
-        //     this.props.navigation.navigate('contribution_details', {
-        //       contribution,
-        //       titleParam: plantProjectName || tpoName || treeSpecies
-        //     });
-        // }}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
       >
         <View style={[styles.leftBorder, styles.leftColorBorder]} />
         {treeCountLine ? (

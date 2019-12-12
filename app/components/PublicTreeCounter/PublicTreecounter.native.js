@@ -54,7 +54,7 @@ class PublicTreeCounter extends React.Component {
 
   onRegisterSupporter() {
     this.props.supportTreecounterAction(this.props.treecounter);
-    updateRoute('app_donateTrees', this.props.navigation, 0, {
+    updateRoute('app_supportTrees', this.props.navigation, 44, {
       titleParam: i18n.t('label.support_trees_to', {
         user: this.props.treecounter.displayName
       })
@@ -119,7 +119,7 @@ class PublicTreeCounter extends React.Component {
     updateStaticRoute('app_donate_detail', navigation);
   };
   render() {
-    const { treecounter, currentUserProfile } = this.props;
+    const { treecounter, currentUserProfile, navigation } = this.props;
     if (null === treecounter) {
       return <LoadingIndicator />;
     }
@@ -211,8 +211,10 @@ class PublicTreeCounter extends React.Component {
                   onSelectClickedFeaturedProjects={id =>
                     this.onSelectClickedFeaturedProjects(id)
                   }
+                  selectProject={id => this.onPlantProjectSelected(id)}
                   showMoreButton={false}
                   tpoName={project.tpo_name}
+                  navigation={navigation}
                 />
               ))}
             </View>

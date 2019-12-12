@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { targetPlanted } from '../../assets';
-import { delimitNumbers } from '../../utils/utils';
+import { convertNumber, formatNumber } from '../../utils/utils';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const flagIcon = <Icon name="flag" size={18} color="#ffffff" />;
 
 class PlantedProgressBar extends React.Component {
   constructor(props) {
@@ -13,7 +16,12 @@ class PlantedProgressBar extends React.Component {
   }
 
   render() {
-    const { countPlanted, countTarget } = this.props;
+    const {
+      countPlanted,
+      countTarget,
+      style,
+      treePlantedChildContainerStyle
+    } = this.props;
     let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
     treePlantedRatio = parseFloat(treePlantedRatio);
     let treeCountWidth;
@@ -24,9 +32,9 @@ class PlantedProgressBar extends React.Component {
     } else {
       treeCountWidth = treePlantedRatio * 100;
     }
-    const colors = { backgroundColor: '#b9d384', borderColor: '#b9d384' };
+    const colors = { backgroundColor: '#79b805', borderColor: '#79b805' };
     return (
-      <View style={styles.treeCounterContainer}>
+      <View style={[styles.treeCounterContainer, style]}>
         <View style={styles.treePlantedContainer}>
           <View
             style={
@@ -39,13 +47,12 @@ class PlantedProgressBar extends React.Component {
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,
-                    borderTopRightRadius: 20,
-                    borderBottomRightRadius: 20,
-                    borderWidth: 0.5
+                    borderTopRightRadius: treeCountWidth < 100 ? 20 : 0,
+                    borderBottomRightRadius: treeCountWidth < 100 ? 20 : 0,
+                    borderWidth: 0.5,
+                    ...treePlantedChildContainerStyle
                   }
                 : {
-                    height: '100%',
-                    flexDirection: 'row',
                     padding: 5
                   }
             }
@@ -61,10 +68,10 @@ class PlantedProgressBar extends React.Component {
             }}
           >
             <Text style={styles.treePlantedtextPlanted}>
-              {delimitNumbers(countPlanted)}
+              {formatNumber(parseInt(countPlanted))}
             </Text>
             <Text style={styles.treePlantedtextTrees}>
-              {i18n.t('label.trees')}
+              {i18n.t('label.planted')}
             </Text>
           </View>
         </View>
@@ -72,11 +79,15 @@ class PlantedProgressBar extends React.Component {
         {!this.props.hideTargetImage ? (
           <View style={styles.targetContainer}>
             <Text style={styles.treePlantedtext}>
-              {countTarget ? delimitNumbers(countTarget) : null}
+              {countTarget
+                ? countTarget > 100000
+                  ? convertNumber(countTarget, 2)
+                  : formatNumber(parseInt(countTarget))
+                : null}
             </Text>
 
-            <View style={{ paddingLeft: 5, paddingRight: 16 }}>
-              <Image source={targetPlanted} style={{ width: 15, height: 15 }} />
+            <View style={{ paddingLeft: 5.5, paddingRight: 12 }}>
+              {flagIcon}
             </View>
           </View>
         ) : null}
@@ -88,7 +99,9 @@ class PlantedProgressBar extends React.Component {
 PlantedProgressBar.propTypes = {
   countPlanted: PropTypes.number,
   countTarget: PropTypes.number,
-  hideTargetImage: PropTypes.bool
+  hideTargetImage: PropTypes.bool,
+  style: PropTypes.object,
+  treePlantedChildContainerStyle: PropTypes.object
 };
 
 export default PlantedProgressBar;

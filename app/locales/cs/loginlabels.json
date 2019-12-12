@@ -1,1 +1,8 @@
-{ }
+{
+  "reset": "Reset.",
+  "dont_have_account": "Nemáte účet?",
+  "login": "Přihlásit se",
+  "password": "Heslo",
+  "current_password": "Aktuální heslo",
+  "login_description": "Přihlaste se ke svému Plant-for-the-Planet účtu, abyste získali přístup ke svému osobnímu počítadlu stromů. Můžete se zaregistrovat, pokud ještě nemáte účet. Nemáte-li účet, můžete se zaregistrovat."
+}

@@ -24,5 +24,6 @@
   "organization": "Organization",
   "title": "Title",
   "registration_successfully": "Registration successful",
-  "passwords_do_not_match": "Passwords do not match"
+  "passwords_do_not_match": "Passwords do not match",
+  "is_anonymous": "Hide my Name from the list (Anonymous Pledge)"
 }

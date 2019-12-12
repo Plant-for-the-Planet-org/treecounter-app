@@ -9,6 +9,7 @@ import {
 import React, { Component } from 'react';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
+import PropTypes from 'prop-types';
 
 class PlantProjectImageCarousel extends Component {
   imageCarousel;
@@ -33,15 +34,22 @@ class PlantProjectImageCarousel extends Component {
 
   renderFooter = () => <Text style={styles.footerText} />;
 
-  renderImage = idx => (
-    <Image
-      style={StyleSheet.absoluteFill}
-      resizeMode="contain"
-      source={{
-        uri: getImageUrl('project', 'large', this.props.images[idx].image)
-      }}
-    />
-  );
+  renderImage = idx => {
+    return (
+      <Image
+        key={this.props.images[idx].image}
+        style={StyleSheet.absoluteFill}
+        resizeMode="contain"
+        source={{
+          uri: getImageUrl(
+            this.props.pictureType,
+            'large',
+            this.props.images[idx].image
+          )
+        }}
+      />
+    );
+  };
 
   render() {
     return (
@@ -55,9 +63,9 @@ class PlantProjectImageCarousel extends Component {
               <View key={`viewof-${url}`} style={styles.imageContainer}>
                 <Image
                   style={styles.image}
-                  key={url}
+                  key={url.image}
                   source={{
-                    uri: getImageUrl('project', 'large', url.image)
+                    uri: getImageUrl(this.props.pictureType, 'large', url.image)
                   }}
                 />
               </View>
@@ -69,7 +77,12 @@ class PlantProjectImageCarousel extends Component {
   }
 }
 
-PlantProjectImageCarousel.propTypes = {};
+PlantProjectImageCarousel.propTypes = {
+  pictureType: PropTypes.string
+};
+PlantProjectImageCarousel.defaultProps = {
+  pictureType: 'project'
+};
 const textColor = 'white';
 const styles = StyleSheet.create({
   container: {

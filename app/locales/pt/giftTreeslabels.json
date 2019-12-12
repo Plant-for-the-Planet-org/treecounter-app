@@ -1,4 +1,20 @@
 {
   "currency": "Moeda",
-  "treecounter_user_name": "Usuário existente"
+  "gift_trees": "Árvores de presentes",
+  "treecounter_user_name": "Usuário existente",
+  "other_email": "E-mail",
+  "heading_give": "Dar para ...",
+  "heading_donate_details": "Detalhes da doação",
+  "heading_donor_details": "Detalhes do doador",
+  "heading_project": "Projeto",
+  "heading_payment": "Pagamento",
+  "no_of_trees": "Número de árvores",
+  "trees": "Árvores",
+  "gift_message": "Mensagem de presente (opcional)",
+  "gift_user_trees": "Transferindo {{count}} árvores para {{user}}",
+  "gift_to": "Presente para {{name}}",
+  "support_to": "Ajuda para {{name}}",
+  "gift_trees_to": "Árvores de presente para {{user}}",
+  "select_valid_user_profile": "Selecione um perfil de usuário válido",
+  "gift": "Presente"
 }

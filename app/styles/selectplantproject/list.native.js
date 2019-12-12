@@ -8,7 +8,8 @@ const Layout = {
 };
 export default EStyleSheet.create({
   flexContainer: {
-    flex: 1
+    flex: 1,
+    flexGrow: 1
   },
   listItemContainer: {
     flexDirection: 'column',

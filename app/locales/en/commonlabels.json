@@ -35,5 +35,8 @@
   "quadrillion_plural": "Quadrillion",
   "quintillion_singular": "Quintillion",
   "quintillion_plural": "Quintillion",
-  "donation_id_missing_error": "donation id is missing"
+  "donation_id_missing_error": "donation id is missing",
+  "datePickerTitle": "Pick a date",
+  "datePickerCancel": "Cancel",
+  "datePickerConfirm": "Confirm"
 }

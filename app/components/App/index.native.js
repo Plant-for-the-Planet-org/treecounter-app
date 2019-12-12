@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import 'react-native-gesture-handler';
 
 import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
 import GlobalErrorBoundary from '../ErrorBoundry/globalErrorBoundry';
-let store;
+import Icon from 'react-native-vector-icons/FontAwesome';
 
+let store;
+Icon.loadFont();
 export default class App extends Component {
   constructor() {
     super();

@@ -1,15 +1,35 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { Image, Text, TouchableHighlight, View } from 'react-native';
+import {
+  Image,
+  Text,
+  TouchableHighlight,
+  View,
+  TouchableOpacity
+} from 'react-native';
 
 import { getImageUrl } from '../../actions/apiRouting';
-import { tick } from '../../assets';
+import {
+  tick,
+  location_grey,
+  survival_grey,
+  tax_grey,
+  leaf,
+  leafGray
+} from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { formatNumber } from '../../utils/utils';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+import { getISOToCountryName } from '../../helpers/utils';
 import CardLayout from '../Common/Card';
 import PlantedProgressBar from './PlantedProgressbar.native';
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+//keeping Icon here instead of in assets
+const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -27,11 +47,13 @@ class PlantProjectSnippet extends PureComponent {
 
   render() {
     const {
+      // eslint-disable-next-line no-unused-vars
       id,
       name: projectName,
       isCertified,
       plantProjectImages,
       location,
+      country,
       countPlanted,
       countTarget,
       currency,
@@ -39,7 +61,10 @@ class PlantProjectSnippet extends PureComponent {
       paymentSetup,
       survivalRate,
       // images,
-      imageFile
+      imageFile,
+      reviewScore: plantProjectRating,
+      reviews,
+      survivalRateStatus
       // description,
       // homepageUrl: homepageUrl,
       // homepageCaption: homepageCaption,
@@ -89,13 +114,17 @@ class PlantProjectSnippet extends PureComponent {
         deducibleText1 += ', ';
       }
     }
+    const survivalRateLeaf =
+      survivalRateStatus == 'verified'
+        ? leaf
+        : survivalRateStatus == 'self-reported'
+          ? leafGray
+          : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
+    const textColor = '#4d5153';
     return (
-      <TouchableHighlight
-        underlayColor={'transparent'}
-        onPress={onPressHandler}
-      >
-        <CardLayout style={[styles.projectSnippetContainer]}>
+      <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
+        <CardLayout style={[styles.projectSnippetContainer]} withoutShadow>
           {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image
@@ -109,11 +138,60 @@ class PlantProjectSnippet extends PureComponent {
                 }}
                 resizeMode={'cover'}
               />
+              {reviews && reviews.length ? (
+                <View
+                  style={[
+                    styles.certifiedAndRatingContainer,
+                    !isCertified && styles.withoutCertified
+                  ]}
+                >
+                  <TouchableOpacity
+                    style={{ height: 48, paddingTop: 13, flex: 1 }}
+                    onPress={() => {
+                      this.props.selectPlantProjectAction(id);
+                      updateStaticRoute('app_reviews', this.props.navigation);
+                    }}
+                  >
+                    <View
+                      style={{ flexDirection: 'row', alignItems: 'center' }}
+                    >
+                      {isCertified ? (
+                        <Image
+                          source={tick}
+                          style={{
+                            width: 15,
+                            height: 15,
+                            marginLeft: 2,
+                            marginRight: 3
+                          }}
+                        />
+                      ) : null}
+                      <Text
+                        style={[
+                          {
+                            fontSize: 14,
+                            // lineHeight: 19,
+                            color: textColor,
+                            textAlign: 'center',
+                            marginRight: 5,
+                            marginLeft: 2
+                          }
+                        ]}
+                      >
+                        {(plantProjectRating / 100).toFixed(2) || '0.0'}
+                      </Text>
+                      {starIcon}
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              ) : null}
             </View>
           ) : null}
           <PlantedProgressBar
             countPlanted={specsProps.countPlanted}
             countTarget={specsProps.countTarget}
+            style={{ borderBottomLeftRadius: 7, borderBottomRightRadius: 7 }}
+            treePlantedChildContainerStyle={{ borderBottomLeftRadius: 7 }}
           />
           <View style={styles.projectSpecsContainer}>
             <View
@@ -122,44 +200,90 @@ class PlantProjectSnippet extends PureComponent {
             >
               <Text
                 ellipsizeMode="tail"
-                numberOfLines={1}
                 style={styles.project_teaser__contentText}
               >
-                {teaserProps.projectName}
+                {`${teaserProps.projectName}  ${
+                  teaserProps.tpoName ? 'by ' + teaserProps.tpoName : ''
+                }`}
               </Text>
-              {teaserProps.isCertified ? (
-                <Image
-                  source={tick}
-                  style={{
-                    width: 15,
-                    height: 15,
-                    marginLeft: 5,
-                    maxWidth: '10%'
-                  }}
-                />
-              ) : null}
             </View>
             <View
               key="projectdetailsContainer"
               style={styles.projectdetailsContainer}
             >
               <View style={styles.locationContainer}>
-                <Text style={styles.locationText} ellipsizeMode="tail">
-                  {specsProps.location}
-                </Text>
-                <View>
-                  <Text style={styles.survivalText}>
-                    {i18n.t('label.survival_rate')} {':'}{' '}
-                    {specsProps.survivalRate}%
+                <View style={{ flexDirection: 'row' }}>
+                  <Image
+                    source={location_grey}
+                    style={{
+                      width: 17,
+                      height: 17,
+                      marginRight: 10
+                    }}
+                  />
+                  <Text style={styles.survivalText} ellipsizeMode="tail">
+                    {getISOToCountryName(country).country}
                   </Text>
                 </View>
-                {specsProps.taxDeduction && specsProps.taxDeduction.length ? (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                  <Image
+                    source={survival_grey}
+                    style={{
+                      width: 17,
+                      height: 17,
+                      marginRight: 10
+                    }}
+                  />
+                  <View style={styles.survivalText}>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={styles.survivalText}>
+                        {specsProps.survivalRate}%{' '}
+                        {i18n.t('label.survival_rate')}
+                      </Text>
+                      {survivalRateLeaf ? (
+                        <Text
+                          style={{
+                            padding: 5,
+                            borderRadius: 12,
+                            marginLeft: 4,
+                            paddingBottom: 2,
+                            paddingTop: 2
+                          }}
+                        >
+                          <Image
+                            source={survivalRateLeaf}
+                            style={{
+                              width: 13,
+                              height: 13
+                            }}
+                          />
+                        </Text>
+                      ) : null}
+                    </View>
+                  </View>
+                </View>
+
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                    <Image
+                      source={tax_grey}
+                      style={{
+                        width: 17,
+                        height: 17,
+                        marginRight: 10
+                      }}
+                    />
                     <Text style={styles.survivalText}>
-                      {i18n.t('label.tax_deductible')} {i18n.t('label.in')}{' '}
-                      {deducibleText1}
+                      {specsProps.taxDeduction && specsProps.taxDeduction.length
+                        ? `${i18n.t('label.tax_deductible')} ${i18n.t(
+                            'label.in'
+                          )} ${deducibleText1}`
+                        : i18n.t('label.no_tax_deduction')}
                     </Text>
-                    {/* <ReactNativeTooltipMenu
+                  </View>
+
+                  {/* <ReactNativeTooltipMenu
                       buttonComponent={
                         <Image
                           style={styles.project_specs__taxdeductibleIcon}
@@ -168,19 +292,27 @@ class PlantProjectSnippet extends PureComponent {
                       }
                       items={[{ label: tooltipText1, onPress: () => {} }]}
                     /> */}
+                </View>
+              </View>
+              <TouchableOpacity
+                onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
+              >
+                <View style={styles.costContainer}>
+                  <View style={styles.costTextContainer}>
+                    <Text style={[styles.costText]}>
+                      {formatNumber(specsProps.treeCost, null, currency)}
+                    </Text>
                   </View>
-                ) : null}
-              </View>
 
-              <View style={styles.costContainer}>
-                <Text style={styles.costText}>
-                  {formatNumber(specsProps.treeCost, null, currency)}
-                </Text>
-              </View>
+                  <Text style={[styles.costPerTreeText]}>
+                    {i18n.t('label.cost_per_tree')}
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
 
             <View key="actionContainer" style={styles.actionContainer}>
-              <View key="byOrgContainer" style={styles.byOrgContainer}>
+              {/* <View key="byOrgContainer" style={styles.byOrgContainer}>
                 <Text
                   style={styles.byOrgText}
                   ellipsizeMode="tail"
@@ -188,9 +320,9 @@ class PlantProjectSnippet extends PureComponent {
                 >
                   {teaserProps.tpoName}
                 </Text>
-              </View>
+              </View> */}
 
-              {this.props.plantProject.allowDonations ? (
+              {/* {this.props.plantProject.allowDonations ? (
                 <View key="buttonContainer" style={styles.buttonContainer}>
                   <PrimaryButton
                     style={styles.buttonItem}
@@ -203,7 +335,7 @@ class PlantProjectSnippet extends PureComponent {
                     <Text> {i18n.t('label.donate')}</Text>
                   </PrimaryButton>
                 </View>
-              ) : null}
+              ) : null} */}
             </View>
           </View>
         </CardLayout>
@@ -211,7 +343,7 @@ class PlantProjectSnippet extends PureComponent {
     );
   }
 }
-PlantProjectSnippet.defaultProps = { clickable: true };
+PlantProjectSnippet.defaultProps = { clickable: true, showCertifiedTag: true };
 PlantProjectSnippet.propTypes = {
   plantProject: PropTypes.object.isRequired,
   callExpanded: PropTypes.func,
@@ -222,7 +354,16 @@ PlantProjectSnippet.propTypes = {
   onNextClick: PropTypes.func,
   onMoreClick: PropTypes.func,
   onSelectClickedFeaturedProjects: PropTypes.func,
-  clickable: PropTypes.bool
+  clickable: PropTypes.bool,
+  showCertifiedTag: PropTypes.bool,
+  selectProject: PropTypes.func
 };
-
-export default PlantProjectSnippet;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      selectPlantProjectAction
+    },
+    dispatch
+  );
+};
+export default connect(null, mapDispatchToProps)(PlantProjectSnippet);

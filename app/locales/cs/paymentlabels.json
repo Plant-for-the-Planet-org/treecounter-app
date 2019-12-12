@@ -1,1 +1,22 @@
-{ }
+{
+  "amount": "Výše daru",
+  "creditCard": "Kreditní karta",
+  "confirm": "Potvrzuji, že zaplatím částku {{amount}}{{currency}} na následující účet.",
+  "bank_transfer": "Bankovní převod",
+  "pay_via": "Platba bankovním převodem",
+  "pay": "Zaplatit",
+  "choose": "Vybrat",
+  "card": "Karta",
+  "last4": "Poslední 4 číslice",
+  "save_for_later": "Přidat tuto platební metodu k mému účtu pro budoucí darování",
+  "sepa_debit": "SEPA Direct Debit platba",
+  "stripe_sepa_des1": "Poskytnutím IBANu a potvrzením této platby autorizujete",
+  "pay_via_sepa": "Platit SEPA platbou",
+  "contact_firstname": "Křestní jméno",
+  "contact_lastname": "Příjmení",
+  "payment_failed": "Platba se nezdařila",
+  "go_back_to_app": "Jděte zpět do aplikace Plant-for-the-Planet",
+  "please_confirm": "Prosím potvrďte",
+  "please_enter_card_details": "Zadejte správné údaje o kartě",
+  "please_enter_iban": "Zadejte prosím správný IBAN"
+}

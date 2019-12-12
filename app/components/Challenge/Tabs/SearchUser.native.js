@@ -98,7 +98,7 @@ class SearchUser extends React.Component {
   render() {
     const backgroundColor = 'transparent';
     return (
-      <View style={{ width: '100%' }}>
+      <View style={{ width: '100%', ...this.props.addstyles }}>
         <SearchBar
           dontFocus
           onChangeQuery={this.onChangeTextDelayed}

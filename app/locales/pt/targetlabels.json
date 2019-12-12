@@ -1,4 +1,7 @@
 {
   "set_target": "Minha meta de árvore",
-  "save": "Salvar"
+  "update_target": "Meu objetivo de árvores",
+  "save": "Salvar",
+  "target_count": "Objetivo total da árvore",
+  "target_year": "Ano Alvo"
 }

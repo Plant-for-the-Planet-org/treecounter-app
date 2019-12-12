@@ -1,1 +1,7 @@
-{ }
+{
+  "set_target": "Můj stromový cíl",
+  "update_target": "Můj stromový cíl",
+  "save": "Uložit",
+  "target_count": "Cílový počet stromů",
+  "target_year": "Cílový rok"
+}

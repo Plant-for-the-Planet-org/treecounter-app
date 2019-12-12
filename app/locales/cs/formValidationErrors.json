@@ -1,0 +1,7 @@
+{
+  "positive_number": "Číslo by mělo být kladné",
+  "invalid_number": "Neplatné číslo",
+  "required_field": "Vyžaduje se {{field}}",
+  "selection_invalid": "Výběr není platný",
+  "email_invalid": "Neplatný e-mail"
+}

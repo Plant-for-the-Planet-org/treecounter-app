@@ -169,6 +169,11 @@ export default class SelectPlantProject extends Component {
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
+          {this.props.supportTreecounter &&
+            this.props.supportTreecounter.treecounterId &&
+            i18n.t('label.support_trees_to', {
+              user: this.props.supportTreecounter.displayName
+            }) + '\n'}
           {i18n.t('label.select_project')}
           <DescriptionHeading>
             {i18n.t('label.donate_trees_description')}
@@ -226,7 +231,7 @@ export default class SelectPlantProject extends Component {
                           this.onSelectClickedFeaturedProjects(project.id)
                         }
                       >
-                        {i18n.t('label.donate')}
+                        {i18n.t('label.projects')}
                       </PrimaryButton>
                     </div>
                   </CardLayout>

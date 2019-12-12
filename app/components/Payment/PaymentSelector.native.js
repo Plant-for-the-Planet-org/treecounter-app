@@ -19,6 +19,7 @@ import {
 import Accordion from 'react-native-collapsible/Accordion';
 import styles from '../../styles/payment.styles.native';
 import StripeCC from './Gateways/StripeCC';
+// currently tipsi-stripe is removed from package.json as (1) it is unused and (2) the native support modules did not compile with Android
 import stripe from 'tipsi-stripe';
 import StripeSepa from './Gateways/StripeSepa';
 import i18n from '../../locales/i18n';
@@ -151,7 +152,12 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
   }
 
   _renderContent(section) {
-    const { currency, context } = this.props;
+    const { currency, context, paymentStatus } = this.props;
+    const donationId = this.props.donationId
+      ? this.props.donationId
+      : paymentStatus && paymentStatus.contribution
+        ? paymentStatus.contribution[0].id
+        : undefined;
     const gatewayProps = {
       context: context,
       currency: currency,
@@ -168,6 +174,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
             amount={this.props.amount}
             currency={this.props.currency}
             account={section.value}
+            donationId={donationId}
             mode={this.props.accounts[accountName].mode}
             onSuccess={this.donateSuccess(paymentGateway, accountName)}
           />
@@ -302,6 +309,7 @@ PaymentSelector.propTypes = {
   expandedOption: PropTypes.string,
   handleExpandedClicked: PropTypes.func,
   amount: PropTypes.number.isRequired,
+  donationId: PropTypes.number,
   currency: PropTypes.string.isRequired,
   context: PropTypes.object.isRequired,
   onSuccess: PropTypes.func.isRequired,

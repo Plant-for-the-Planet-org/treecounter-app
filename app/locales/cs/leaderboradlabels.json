@@ -1,1 +1,18 @@
-{ }
+{
+  "treecount_leaderboard": "Žebříček",
+  "trillion_tree_campaign_app_header": "Plant-for-the-Planet aplikace",
+  "tree_planter": "Sázeč stromů",
+  "treecount_map": "Mapa",
+  "sortBy": "Seřadit podle",
+  "timePeriod": "Časový úsek",
+  "map_description": "Ve světě je dostatek místa pro spousty nových stromů. Celkem bychom mohli zalesnit plochu velikosti USA! Objevte na mapě, kde už jsou stromy zasazené a kde zasazené být můžou. V žebříčku vidíte, které země, organizace či společnosti zasadily nejvíce stromů.",
+  "explore": "Světová mapa stromů",
+  "plantedTrees": "Zasazené stromy",
+  "plantedTrees_description": "Všechny stromy registrované na těchto stránkách od roku 2006.",
+  "existingForest": "Stávající les",
+  "existingForest_description": "V současné době celosvětově existuje 3,04 bilionu stromů. Namísto šesti bilionů stromů, které na planetě byly, než jsme začali kácet lesy před asi 11 tisíci lety. Mapa zobrazuje počet stromů na kilometry čtvereční.",
+  "existingForest_source": "Crowther, T. W. et al. (2015) Mapping tree density at a global scale. Nature 525, 201–205.",
+  "restorationOpportunities": "Příležitosti pro obnovu lesů",
+  "restorationOpportunities_description": "Půl miliardy hektarů je vhodných pro rozsáhlou obnovu uzavřených lesů. Dalších jedna a půl miliardy hektarů je nejlepší pro mozaikovou výsadbu, která kombinuje lesy a například zemedělství či osídlení.",
+  "restorationOpportunities_source": "Crowther, T. W. et al. (2017) Predicting Global Forest Reforestation Potential. bioRxiv 210062."
+}

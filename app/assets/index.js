@@ -25,7 +25,6 @@ import baselineDelete from './images/baseline-delete.png';
 import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/darkTree.png';
-import SideMenuImage from './images/side_menu.png';
 import GreenEmail from './images/email-green.png';
 import RedEmail from './images/email-red.png';
 import MapPinRed from './images/map_pin_red.png';
@@ -47,6 +46,7 @@ import competition_outline from './images/icons/competition_outline.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
+import right_arrow_button from './images/icons/right-arrow-button.png';
 import arrow_left_orange_outline from './images/icons/arrow_left_orange_outline.png';
 import arrow_left_orange from './images/icons/arrow_left_orange.png';
 import tick from './images/icons/tick.png';
@@ -118,7 +118,6 @@ import selector_menu from './images/icons/selector_menu.png';
 import radio_button from './images/icons/radio_button.png';
 import radio_button_selected from './images/icons/radio_button_selected.png';
 import filter from './images/icons/filter.png';
-import welcomeScreen from './images/welcome-screen.png';
 import flagTarget from './images/flag_target.png';
 import compCalendar from './images/calendar_comp.png';
 import upwardArrow from './images/right-arrow.png';
@@ -134,16 +133,28 @@ import mapExpand from './images/map_expand.png';
 import smalltree from './images/smalltree.png';
 import calendarwhite from './images/calendarwhite.png';
 import forward from './images/forward.png';
-import successAnimated from './images/successAnimated.gif';
 import trees from './images/trees.png';
 import greencalendar from './images/greencalendar.png';
+import location_grey from './images/icons/location_grey.png';
+import survival_grey from './images/icons/survival_grey.png';
+import tax_grey from './images/icons/tax_grey.png';
 import worldImg from './images/icons/world.png';
 import germany from './images/germany.png';
 import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
-
+import attach from './images/attach.png';
+import cameraSolid from './images/icons/camera-solid.png';
+import imageGallery from './images/icons/images-gallery.png';
+import nextArrow from './images/icons/nextArrow.png';
+import nextArrowWhite from './images/icons/nextArrowWhite.png';
+import closeBlack from './images/icons/closeblack.png';
+import planetLogo from './images/Planet-Logo.png';
+import circleDelete from './images/icons/circle-delete.png';
+import leaf from './images/leaf.png';
+import leafGray from './images/leaf_gray.png';
+import backArrow from './images/icons/backArrow.png';
 export {
   germany,
   worldImg,
@@ -176,7 +187,6 @@ export {
   GreenEmail,
   baselineEdit,
   baselineDelete,
-  SideMenuImage,
   FooterLogos,
   SignupOrganization,
   SignupJustMe,
@@ -272,7 +282,6 @@ export {
   shareIcon,
   facebook,
   twitter,
-  welcomeScreen,
   flagTarget,
   compCalendar,
   upwardArrow,
@@ -283,11 +292,25 @@ export {
   smalltree,
   calendarwhite,
   forward,
-  successAnimated,
   trees,
   greencalendar,
+  location_grey,
+  survival_grey,
+  tax_grey,
   googlePlayBadge_en,
   googlePlayBadge_de,
   appleStoreBadge_en,
-  appleStoreBadge_de
+  appleStoreBadge_de,
+  attach,
+  cameraSolid,
+  imageGallery,
+  nextArrow,
+  nextArrowWhite,
+  closeBlack,
+  planetLogo,
+  circleDelete,
+  leaf,
+  leafGray,
+  backArrow,
+  right_arrow_button
 };

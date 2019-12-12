@@ -4,10 +4,11 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 const width = Dimensions.get('window').width;
 
 export default EStyleSheet.create({
-  peRootView: { flex: 1, height: '100%' },
+  peRootView: { flex: 1, backgroundColor: 'white' },
   peRootScrollView: {
     backgroundColor: 'white',
-    paddingBottom: 108
+    paddingBottom: 300,
+    marginTop: 240
   },
   peHeader: { marginTop: 20, marginHorizontal: 20 },
   peHeaderLogo: {
@@ -21,7 +22,6 @@ export default EStyleSheet.create({
     padding: 16,
     flexDirection: 'column',
     flex: 1,
-    alignItems: 'center',
     borderRadius: 7,
     borderStyle: 'solid',
     borderWidth: 1,
@@ -29,12 +29,11 @@ export default EStyleSheet.create({
   },
   peDescriptionText: {
     fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',
-    color: '#4d5153'
+    color: '#4d5153',
+    fontFamily: 'OpenSans-Regular'
   },
   peSliderImage: {
     width: width * 0.75,
@@ -44,23 +43,21 @@ export default EStyleSheet.create({
   },
   eventTitle: {
     fontSize: 27,
-    fontWeight: '800',
-    fontStyle: 'normal',
     lineHeight: 40,
     letterSpacing: 0,
     textAlign: 'left',
-    color: '#4d5153'
+    color: '#4d5153',
+    fontFamily: 'OpenSans-Bold'
   },
   eventSubTitle: {
     fontSize: 18,
-    fontWeight: '400',
-    fontStyle: 'normal',
     lineHeight: 27,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
     marginTop: 7,
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    fontFamily: 'OpenSans-Regular'
   },
   makePledgeButton: {
     width: '88%',
@@ -69,10 +66,10 @@ export default EStyleSheet.create({
     top: '90%'
   },
   makePledgeButton2: {
-    width: '100%',
-    marginLeft: '6%',
+    width: '80%',
     position: 'absolute',
-    top: '90%'
+    bottom: '5%',
+    marginLeft: '10%'
   },
   makePledgeButtonView: {
     borderRadius: 100,
@@ -82,12 +79,11 @@ export default EStyleSheet.create({
   },
   makePledgeButtonText: {
     fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 22,
     letterSpacing: 0.21,
     textAlign: 'center',
-    color: '#ffffff'
+    color: '#ffffff',
+    fontFamily: 'OpenSans-SemiBold'
   },
   // Pledge Tab View Styles
   tabViewButtonContainer: {
@@ -95,15 +91,15 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginTop: 20
   },
   tabViewButtonText: {
     fontSize: 13,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 25,
     letterSpacing: 0,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'OpenSans-SemiBold'
   },
   tabViewTitleContainer: {
     display: 'flex',
@@ -118,52 +114,50 @@ export default EStyleSheet.create({
   },
   tabViewTitleText: {
     fontSize: 18,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 24,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
     marginTop: 26,
-    marginBottom: 20
+    marginBottom: 20,
+    fontFamily: 'OpenSans-SemiBold'
   },
   tabViewContentText: {
     fontSize: 16,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
     lineHeight: 22,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
-    marginBottom: 24
+    marginBottom: 24,
+    fontFamily: 'OpenSans-Regular'
   },
 
   // Make Pledge Form Styles
-  keyboardScrollView: { backgroundColor: 'white' },
+  createPledgeRootView: {
+    backgroundColor: 'white'
+  },
   titleText: {
     fontSize: 27,
-    fontWeight: '800',
-    fontStyle: 'normal',
     lineHeight: 40,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
-    marginTop: 30
+    marginTop: 30,
+    fontFamily: 'OpenSans-Bold'
   },
   subtitleText: {
     fontSize: 18,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 27,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
-    marginTop: 7
+    marginTop: 7,
+    fontFamily: 'OpenSans-SemiBold'
   },
   formScrollView: {
-    backgroundColor: 'white',
-    flexGrow: 1,
-    padding: 24
+    padding: 24,
+    paddingBottom: 220,
+    marginTop: 100
   },
   formHalfTextField: { width: '45%' },
 
@@ -189,8 +183,8 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    top: '90%',
-    left: '88%'
+    bottom: '5%',
+    right: '10%'
   },
   pledgeSmallButtonIcon: { height: 32, width: 32 },
 
@@ -207,24 +201,22 @@ export default EStyleSheet.create({
   },
   baMessage: {
     fontSize: 20,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
     lineHeight: 30,
     letterSpacing: 0.28,
     textAlign: 'center',
     color: 'rgba(0, 0, 0, 0.87)',
-    marginTop: 18
+    marginTop: 18,
+    fontFamily: 'OpenSans-Regular'
   },
 
   baSuccessImage: { height: 100, width: 100, alignSelf: 'center' },
   baContinueText: {
     textAlign: 'center',
     fontSize: 20,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 27,
     letterSpacing: 0.26,
-    color: 'white'
+    color: 'white',
+    fontFamily: 'OpenSans-SemiBold'
   },
   baContinueButton: {
     backgroundColor: 'rgba(137, 181, 58, 0.8)',
@@ -235,11 +227,10 @@ export default EStyleSheet.create({
   baLaterText: {
     textAlign: 'center',
     fontSize: 20,
-    fontWeight: '600',
-    fontStyle: 'normal',
     lineHeight: 27,
     letterSpacing: 0.26,
-    color: 'rgba(0, 0, 0, 0.87)'
+    color: 'rgba(0, 0, 0, 0.87)',
+    fontFamily: 'OpenSans-SemiBold'
   },
   baLaterButton: {
     borderStyle: 'solid',
@@ -249,5 +240,60 @@ export default EStyleSheet.create({
     paddingVertical: 14,
     marginTop: 36,
     marginRight: 12
+  },
+
+  bottomButtonView: {
+    width: '100%',
+    backgroundColor: '#f7f7f7',
+    height: 88,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: '0%'
+  },
+  leftSection: {
+    padding: 20
+  },
+  pledgeTreesAmount: {
+    fontSize: 18,
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#89b53a',
+    fontFamily: 'OpenSans-Bold'
+  },
+  donationTree: {
+    fontSize: 14,
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#707070',
+    marginLeft: 6,
+    fontFamily: 'OpenSans-SemiBold'
+  },
+  pledgeTreesAction: {
+    fontSize: 12,
+    lineHeight: 12,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginTop: 8,
+    fontFamily: 'OpenSans-SemiBold'
+  },
+  continueButtonView: {
+    backgroundColor: '#89b53a',
+    padding: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%'
+  },
+  continueText: {
+    fontSize: 16,
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff',
+    marginTop: 4,
+    fontFamily: 'OpenSans-SemiBold'
   }
 });

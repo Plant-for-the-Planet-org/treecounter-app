@@ -5,6 +5,7 @@ const commonConfig = require('./webpack.common.config.js')(true);
 const path = require('path');
 
 module.exports = webpackMerge(commonConfig, {
+  mode: 'production',
   entry: {
     bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
     widget: [
@@ -34,13 +35,16 @@ module.exports = webpackMerge(commonConfig, {
     publicPath: '/'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: ['eslint-loader']
       }
     ]
+  },
+  optimization: {
+    minimize: true
   },
   plugins: [
     new WebpackCleanupPlugin(),
@@ -50,15 +54,6 @@ module.exports = webpackMerge(commonConfig, {
           minimize: false
         }
       }
-    }),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: {
-        keep_fnames: true
-      }
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
 });

@@ -1,1 +1,10 @@
-{ }
+{
+  "redeem_trees": "Uplatnit darované stromy",
+  "redeem_heading": "Pokud jste obdrželi voucher kód či stromový dar, můžete je uplatnit zde. Stromy se vám poté objeví v sekci \"Můj les\". ",
+  "claim_trees": "Nárokovat stromy",
+  "enter_code": "Zadejte prosím stromový voucher, merchandise kód či token k uplatnění vašich stromů",
+  "log_in": "Přihlaste se nebo se zaregistrujte a využijte svůj kód",
+  "validate_code": "Ověřit kód",
+  "code": "Kód",
+  "redeem_code": "Použít kód"
+}

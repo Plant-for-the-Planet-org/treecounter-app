@@ -3,8 +3,9 @@
   "price": "Preis",
   "select_project": "Projekt aussuchen",
   "featured": "Empfohlen",
-  "list": "Liste",
+  "list": "Alle",
   "country": "Land",
   "select_by_country": "Sortieren nach Land",
-  "cost_per_tree": "Kosten pro Baum"
+  "cost_per_tree": "pro Baum",
+  "no_tax_deduction": "Kein Steuerabzug möglich"
 }

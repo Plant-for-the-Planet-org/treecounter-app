@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { editCompetition } from '../../actions/competition';
+import { editCompetition, deleteCompetition } from '../../actions/competition';
 import EditCompetition from '../../components/Competition/EditCompetition.native';
 import { handleServerResponseError } from '../../helpers/utils';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
+import { formatDateToMySQL } from './../../helpers/utils';
 
 class EditCompetitionContainer extends Component {
   constructor(props) {
@@ -35,19 +36,20 @@ class EditCompetitionContainer extends Component {
       }
     }
   }
-  editCompetition(value, params, formRef) {
+  editCompetition(value, params) {
     console.log(value);
     let json = {
       name: value.name,
       goal: value.goal,
-      endDate: value.endDate,
+      endDate: formatDateToMySQL(value.endDate),
       access: value.access,
-      description: value.description,
-      contact: value.contact,
-      email: value.email
+      description: value.description
     };
     if (value.imageFile && value.imageFile.includes('base64')) {
       json.imageFile = value.imageFile;
+    }
+    if (value.imageFile && value.imageFile === 'null') {
+      json.imageFile = null;
     }
     this.props
       .editCompetition(json, params, this.props.navigation)
@@ -58,16 +60,11 @@ class EditCompetitionContainer extends Component {
           err,
           this.state.competitionFormSchemaOptions
         );
-        this.setState(
-          {
-            competitionFormSchemaOptions: {
-              ...newSchemaOptions
-            }
-          },
-          () => {
-            formRef.validate();
+        this.setState({
+          competitionFormSchemaOptions: {
+            ...newSchemaOptions
           }
-        );
+        });
       });
   }
   componentDidMount() {}
@@ -79,7 +76,9 @@ class EditCompetitionContainer extends Component {
           {...this.props}
           competition_id={this.state.competition_id}
           editCompetition={this.editCompetition}
+          deleteCompetition={this.props.deleteCompetition}
           competitionFormSchemaOptions={this.state.competitionFormSchemaOptions}
+          navigation={this.props.navigation}
         />
       );
     } else {
@@ -93,7 +92,8 @@ const mapStateToProps = () => ({});
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      editCompetition
+      editCompetition,
+      deleteCompetition
     },
     dispatch
   );
@@ -112,5 +112,6 @@ EditCompetitionContainer.propTypes = {
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
   supportTreecounterAction: PropTypes.any,
-  editCompetition: PropTypes.any
+  editCompetition: PropTypes.any,
+  deleteCompetition: PropTypes.any
 };

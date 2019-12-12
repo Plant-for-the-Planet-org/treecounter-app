@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import i18n from '../../locales/i18n';
+import { delimitNumbers } from './../../utils/utils';
 
 export default class PledgeTabView extends Component {
   state = {
@@ -30,12 +31,14 @@ export default class PledgeTabView extends Component {
       >
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
-            {highestPledges.firstname} {highestPledges.lastname}
+            {highestPledges.isAnonymous
+              ? i18n.t('label.anonymous')
+              : highestPledges.firstname + ' ' + highestPledges.lastname}
           </Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.tabViewContentText}>
-            {i18n.t(highestPledges.treeCount.toLocaleString())}
+            {i18n.t(delimitNumbers(highestPledges.treeCount))}
           </Text>
         </View>
       </View>
@@ -47,12 +50,14 @@ export default class PledgeTabView extends Component {
       <View key={`latestPledges-${index}`} style={styles.tabViewTitleContainer}>
         <View style={{ flex: 1, marginLeft: 26 }}>
           <Text style={styles.tabViewContentText}>
-            {latestPledges.firstname} {latestPledges.lastname}
+            {latestPledges.isAnonymous
+              ? i18n.t('label.anonymous')
+              : latestPledges.firstname + ' ' + latestPledges.lastname}
           </Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.tabViewContentText}>
-            {i18n.t(latestPledges.treeCount.toLocaleString())}
+            {i18n.t(delimitNumbers(latestPledges.treeCount))}
           </Text>
         </View>
       </View>

@@ -1,5 +1,19 @@
 {
   "amount": "Valor da doação",
   "creditCard": "Cartão de crédito",
-  "confirm": "Confirmo que pagarei o valor de {{amount}}{{currency}} na conta a seguir."
+  "confirm": "Confirmo que pagarei o valor de {{amount}}{{currency}} na conta a seguir.",
+  "bank_transfer": "Transferência bancária",
+  "pay_via": "Pague via transferência bancária",
+  "pay": "Pagamento",
+  "choose": "Escolher",
+  "card": "Cartão",
+  "last4": "Últimos 4 digitos",
+  "save_for_later": "Adicione este método de pagamento à minha conta para futuras doações",
+  "contact_firstname": "Primeiro nome",
+  "contact_lastname": "Sobrenome",
+  "donate_to": "Doar para {{name}}",
+  "payment_failed": "Pagamento falhou",
+  "go_back_to_app": "Voltar ao aplicativo Plant-for-the-Planet",
+  "please_confirm": "Por favor confirme",
+  "please_enter_card_details": "Digite corretamente os dados do cartão"
 }

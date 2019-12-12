@@ -1,4 +1,15 @@
 {
   "individual_plant_personal": "plantado por mim",
-  "treecounter_tooltip": "Árvores plantadas por pessoas que dedicaram árvores a este contador.\nPor exemplo, você pode dedicar árvores a seus amigos, escola ou cidade e ajudá-los a atingir sua meta! Todas as árvores que você presentear a eles aparecerão no contador de árvores deles."
+  "individual_plant_community": "dedicado a mim",
+  "treecounter_tooltip": "Árvores plantadas por pessoas que dedicaram árvores a este contador.\nPor exemplo, você pode dedicar árvores a seus amigos, escola ou cidade e ajudá-los a atingir sua meta! Todas as árvores que você presentear a eles aparecerão no contador de árvores deles.",
+  "tpo_plant_personal": "feito por nós",
+  "tpo_individual_plant_community": "Dedicado a nós",
+  "by": "de",
+  "faqs": "FAQs",
+  "logged_in": "Logado",
+  "trillionlabel": "Eventos Trilhão de árvores hoje",
+  "trillionTreesEvents": "Eventos do Trilhões de Árvores",
+  "searchProjectTitle": "O mundo precisa de mais árvores",
+  "searchProjectButton": "Encontrar projetos para doar",
+  "treesPledged": "Árvores Compromissadas"
 }

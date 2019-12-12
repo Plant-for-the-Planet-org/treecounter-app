@@ -24,5 +24,6 @@
   "organization": "Organisation",
   "title": "Titel",
   "registration_successfully": "Registrierung erfolgreich",
-  "passwords_do_not_match": "Passwörter stimmen nicht überein"
+  "passwords_do_not_match": "Passwörter stimmen nicht überein",
+  "is_anonymous": "Meinen Namen auf der Liste nicht anzeigen (Anonymes Versprechen)"
 }

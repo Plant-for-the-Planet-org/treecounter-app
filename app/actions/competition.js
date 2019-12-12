@@ -26,7 +26,7 @@ import i18n from '../locales/i18n.js';
 export function fetchCompetitions(category) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    getAuthenticatedRequest('competitions_get', {
+    return getAuthenticatedRequest('competitions_get', {
       category: category,
       limit: 100
     })
@@ -40,10 +40,12 @@ export function fetchCompetitions(category) {
           )
         );
         dispatch(setProgressModelState(false));
+        return res;
       })
       .catch(err => {
         debug(err);
         dispatch(setProgressModelState(false));
+        return err;
       });
   };
 }
@@ -158,10 +160,12 @@ export function createCompetition(value, navigation) {
               normalize(res.data.merge.treecounter, [treecounterSchema])
             )
           );
-          updateRoute('app_competition', navigation || dispatch, 1, {
-            competition: res.data.merge.competition[0].id,
-            titleParam: res.data.merge.competition[0].name
-          });
+          // updateRoute('app_competition', navigation || dispatch, 1, {
+          //   competition: res.data.merge.competition[0].id,
+          //   titleParam: res.data.merge.competition[0].name
+          // });
+          console.log(updateRoute('app_competitions', navigation || dispatch));
+          updateRoute('app_competitions', navigation || dispatch);
           resolve(res.data);
           dispatch(setProgressModelState(false));
           NotificationManager.success(
@@ -172,6 +176,7 @@ export function createCompetition(value, navigation) {
           dispatch(fetchMineCompetitions());
           dispatch(fetchCompetitions('all'));
           dispatch(fetchCompetitions('featured'));
+          dispatch(fetchCompetitions('archived'));
         })
         .catch(error => {
           debug(error);
@@ -224,6 +229,37 @@ export function editCompetition(value, param, navigation) {
   };
 }
 
+export function deleteCompetition(param) {
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      deleteAuthenticatedRequest('competition_delete', { competition: param })
+        .then(res => {
+          dispatch(unlinkEntity(res.data.unlink));
+          dispatch(deleteEntity(res.data.delete));
+
+          dispatch(setProgressModelState(false));
+          NotificationManager.success(
+            i18n.t('label.competition_deleted_successfully'),
+            i18n.t('label.success'),
+            5000
+          );
+          dispatch(fetchMineCompetitions());
+        })
+        .catch(error => {
+          debug(error);
+          NotificationManager.error(
+            i18n.t('label.competition_delete_error'),
+            i18n.t('label.error'),
+            5000
+          );
+          reject(error);
+          dispatch(setProgressModelState(false));
+        });
+    });
+  };
+}
+
 export function enrollCompetition(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
@@ -266,7 +302,7 @@ export function fetchAllCompetitions() {
 export function fetchMineCompetitions() {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    getAuthenticatedRequest('competitionsMine_get')
+    return getAuthenticatedRequest('competitionsMine_get')
       .then(res => {
         dispatch(
           mergeEntities(
@@ -277,10 +313,12 @@ export function fetchMineCompetitions() {
           )
         );
         dispatch(setProgressModelState(false));
+        return res;
       })
       .catch(err => {
         debug(err);
         dispatch(setProgressModelState(false));
+        return err;
       });
   };
 }

@@ -1,12 +1,12 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
-import YouTube from 'react-native-youtube';
-import { StyleSheet } from 'react-native';
+import WebView from 'react-native-webview';
 
 class VideoContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { moduleMargin: StyleSheet.hairlineWidth * 2 };
+    this.state = {};
   }
   componentWillMount() {
     let videoId = undefined;
@@ -25,51 +25,39 @@ class VideoContainer extends React.Component {
     } else if (this.props.videoId) {
       videoId = this.props.videoId;
     }
-    // Periodically triggeting a forced unnoticable layout rendering until onReady to make sure the
-    // native loading progress is shown
     if (videoId) {
       this.setState({ videoId });
-      // eslint-disable-next-line no-underscore-dangle
-      this._interval = setInterval(() => {
-        this.setState({ moduleMargin: Math.random() / 2 });
-      }, 250);
+      console.log(this.state);
     }
   }
-  _onReady = event => {
-    // eslint-disable-next-line no-underscore-dangle
-    clearInterval(this._interval);
 
-    // The Android YouTube native module is pretty problematic when it comes to mounting correctly
-    // and rendering inside React-Native's views hierarchy. For now we must trigger some layout
-    // changes to force a real render on it so it will smoothly appear after ready and show
-    // controls. We also use the minimal margin to avoid `UNAUTHORIZED_OVERLAY` error from the
-    // native module that is very sensitive to being covered or even touching its containing view.
-    setTimeout(() => {
-      this.setState({ moduleMargin: StyleSheet.hairlineWidth + 1 });
-    }, 2000);
-    setTimeout(() => {
-      this.setState({ moduleMargin: StyleSheet.hairlineWidth });
-    }, 250);
-    if (this.props.onReady) this.props.onReady(event.nativeEvent);
-  };
+  displaySpinner() {
+    return (
+      <ActivityIndicator
+        style={{ position: 'absolute', left: 0, right: 0, bottom: 0, top: 0 }}
+        size="large"
+      />
+    );
+  }
+
   render() {
     if (this.state.videoId) {
       return (
-        <YouTube
-          apiKey="AIzaSyC0sO3FQX-DYNRsBW1-Hc8BBnhwnwvZQ2Y"
-          ref={component => {
-            // eslint-disable-next-line no-underscore-dangle
-            this._youTubeRef = component;
+        <WebView
+          style={{ height: 300 }}
+          javaScriptEnabled
+          source={{
+            uri: `https://www.youtube.com/embed/${
+              this.state.videoId
+            }?rel=0&autoplay=0&showinfo=0&controls=1&fullscreen=0`
           }}
-          style={[{ height: 300 }, { margin: this.state.moduleMargin }]}
-          // eslint-disable-next-line no-underscore-dangle
-          onReady={this._onReady}
-          videoId={this.state.videoId}
-          play={false}
+          startInLoadingState
+          renderLoading={() => {
+            return this.displaySpinner();
+          }}
         />
       );
     }
-    // console.log(this.state);
     return null;
   }
 }

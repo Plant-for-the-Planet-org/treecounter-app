@@ -1,1 +1,16 @@
-{ }
+{
+  "activate_ur_account": "Aktivujte svůj účet",
+  "not_yet_activated": "Chcete-li pokračovat, potvrďte svůj e-mail",
+  "received_email": "Když jste se zaregistrovali, měli jste obdržet e-mail. Chcete-li dokončit registraci, klikněte na aktivační odkaz uvedený v tomto e-mailu.",
+  "not_received_email": "Pokud jste nedostali aktivační e-mail, klikněte prosím na níže uvedený odkaz a odešleme jej znovu.",
+  "resent_email": "Znovu poslat e-mail",
+  "account_activation": "Aktivace účtu",
+  "successfully_activated": "Úspěšně jste aktivovali svůj účet.",
+  "already_activated": "Váš účet již byl aktivován dříve.",
+  "do_profile_or_target": "Nyní můžete",
+  "customize_your_profile": "přizpůsobte svůj profil",
+  "or": "nebo",
+  "set_a_target": "nastavit cíl",
+  "do_login": "Nyní se můžete {{login}}.",
+  "login": "přihlásit se"
+}

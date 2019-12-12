@@ -29,7 +29,10 @@ EStyleSheet.build({
   $colorRedeemBorder: '#9fc356',
   $colorRedeemInside: '#f5fbe8',
   $cardTextColor: '#686060',
-  $lightTextColor: '#9c9b9b'
+  $lightTextColor: '#9c9b9b',
+
+  $newPrimary: '#89b53a',
+  $greyColor: '#d3d3d3'
 });
 
 class AppDrawerNavigatorContainer extends Component {

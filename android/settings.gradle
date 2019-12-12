@@ -1,24 +1,3 @@
 rootProject.name = 'TreecounterApp'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
-include ':@react-native-community_async-storage'
-project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
-include ':react-native-youtube'
-project(':react-native-youtube').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-youtube/android')
-//include ':react-native-paypal-wrapper'
-//project(':react-native-paypal-wrapper').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-paypal-wrapper/android')
-include ':react-native-linear-gradient'
-project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
-include ':bugsnag-react-native'
-project(':bugsnag-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/bugsnag-react-native/android')
-// include ':tipsi-stripe'
-// project(':tipsi-stripe').projectDir = new File(rootProject.projectDir, '../node_modules/tipsi-stripe/android')
-include ':react-native-device-info'
-project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
-include ':react-native-image-picker'
-project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
-include ':react-native-i18n'
-project(':react-native-i18n').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-i18n/android')
-include ':react-native-svg'
-project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
-// include ':react-native-tooltips'
-// project(':react-native-tooltips').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-tooltips/android')

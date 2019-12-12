@@ -12,16 +12,11 @@ const rowHeight = 20;
 export default EStyleSheet.create({
   projectSnippetContainer: {
     flexDirection: 'column',
-
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowOpacity: 0.5,
-    elevation: 1,
     padding: 0,
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10
+    borderRadius: 7,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#d5d5d5'
   },
   competitionContent: {
     paddingTop: 10,
@@ -32,8 +27,8 @@ export default EStyleSheet.create({
   projectImageContainer: {
     height: Layout.window.width * 0.4,
     width: '100%',
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
     overflow: 'hidden'
   },
   teaser__projectImage: {
@@ -44,9 +39,9 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    backgroundColor: '#d2e3af',
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    backgroundColor: '#d3d3d3',
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
     height: rowHeight * 1.7
   },
   treePlantedContainer: {
@@ -57,24 +52,25 @@ export default EStyleSheet.create({
   treePlantedChildContainer: {
     height: '100%',
     flexDirection: 'row',
-    backgroundColor: '#b9d384',
-    borderRightColor: '#b9d384'
+    backgroundColor: '#89b53a',
+    borderRightColor: '#89b53a'
   },
   treePlantedtext: {
     // padding: 5,
     paddingLeft: 5,
     color: 'white',
-    fontWeight: 'bold'
+    fontSize: 14,
+    fontFamily: 'OpenSans-Bold'
   },
   treePlantedtextTrees: {
     color: 'white',
     paddingLeft: 5,
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-Bold'
   },
   treePlantedtextPlanted: {
     color: 'white',
-    fontWeight: 'bold',
-    paddingLeft: 16
+    paddingLeft: 16,
+    fontFamily: 'OpenSans-Bold'
   },
   targetContainer: {
     width: '100%',
@@ -103,10 +99,13 @@ export default EStyleSheet.create({
     //height: rowHeight + rowHeight / 2,
   },
   project_teaser__contentText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '$cardTextColor',
-    maxWidth: '90%'
+    maxWidth: '90%',
+    fontSize: 16,
+    lineHeight: 27,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    fontFamily: 'OpenSans-SemiBold'
   },
   project_teaser__contentByText: {
     fontSize: 10,
@@ -119,15 +118,21 @@ export default EStyleSheet.create({
     color: '$cardTextColor'
   },
   bottomText: {
-    fontSize: 14,
-    color: '$cardTextColor',
-    paddingLeft: 10,
-    paddingRight: 5
+    marginLeft: 8,
+    fontSize: 11,
+    lineHeight: 15,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)',
+    fontFamily: 'OpenSans-Regular'
   },
   bottomParticipantText: {
-    fontSize: 14,
-    color: 'rgba(0, 0, 0, 0.6)',
-    paddingLeft: 5
+    fontSize: 11,
+    fontFamily: 'OpenSans-Regular',
+    lineHeight: 15,
+    letterSpacing: 0,
+    textAlign: 'right',
+    color: 'rgba(0, 0, 0, 0.6)'
   },
   byOrgContainer: {
     width: '50%',
@@ -232,18 +237,30 @@ export default EStyleSheet.create({
     justifyContent: 'space-between'
   },
   topCompetitorName: {
-    width: '90%',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    width: '100%'
   },
   topCompetitorScore: {
     width: '10%',
     alignItems: 'flex-end'
   },
   topCompetitorScoreText: {
-    fontSize: 14,
-    color: '$cardTextColor',
-    maxWidth: '100%'
+    fontSize: 11,
+    lineHeight: 16,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)',
+    marginLeft: 10,
+    fontFamily: 'OpenSans-Regular'
+  },
+  topCompetitorRank: {
+    fontSize: 12,
+    lineHeight: 17,
+    letterSpacing: 1.2,
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)',
+    fontFamily: 'OpenSans-SemiBold'
   },
   topCompetitorDiv: {
     width: '100%',
@@ -262,5 +279,40 @@ export default EStyleSheet.create({
     borderRadius: 0,
     borderWidth: 0,
     marginLeft: 10
-  }
+  },
+
+  progressbar: {
+    height: '100%',
+    flexDirection: 'row',
+    backgroundColor: '#89b53a',
+    borderColor: '#89b53a',
+    paddingRight: 12,
+    padding: 5,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20
+  },
+  progressbarw100: {
+    height: '100%',
+    flexDirection: 'row',
+    backgroundColor: '#89b53a',
+    borderColor: '#89b53a',
+
+    paddingRight: 12,
+    padding: 5
+  },
+  progressbarw0: {
+    height: '100%',
+    flexDirection: 'row',
+    padding: 5
+  },
+  treeCountViewPB: {
+    width: '100%',
+    flexDirection: 'row',
+    position: 'absolute',
+    alignItems: 'center',
+    paddingTop: 8,
+    paddingBottom: 8
+  },
+  targetflagview: { paddingLeft: 5, paddingRight: 16 },
+  targetflagimage: { width: 15, height: 15 }
 });

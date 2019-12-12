@@ -9,12 +9,15 @@ export default EStyleSheet.create({
   },
   tabItem: {},
   textActive: {
-    // color: '#ec6453',
-    backgroundColor: '#ec6453'
-    //  width: 75
+    backgroundColor: '#89b53a',
+    height: 3,
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3
   },
   textStyle: {
     color: '#aba2a2',
-    fontSize: 12
+    fontSize: 11,
+    fontFamily: 'OpenSans-SemiBold',
+    textTransform: 'capitalize'
   }
 });

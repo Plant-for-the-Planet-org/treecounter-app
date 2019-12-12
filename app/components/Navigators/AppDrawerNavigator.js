@@ -1,8 +1,7 @@
-import {
-  createBottomTabNavigator,
-  createDrawerNavigator,
-  createStackNavigator
-} from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
 import { Animated } from 'react-native';
 import Trillion from '../TreecounterGraphics/Trillion';
@@ -50,14 +49,19 @@ import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerM
 import EditCompetitionContainer from '../../containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
+import UnfulfilledPledgeEvents from './../PledgeEvents/UnfulfilledPledgeEvent';
 import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
+import Reviews from './../Reviews/Reviews';
+import AddReview from './../Reviews/AddReview/AddReview';
+import PDFViewer from '../PDFViewer';
+import createCompeition from './../Competition/Tabs/createCompetition.native';
+import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
-  [getLocalRoute('app_donateTrees')]: 'label.donate',
-
+  [getLocalRoute('app_donateTrees')]: 'label.projects',
   [getLocalRoute('app_faq')]: 'label.faqs',
   [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
@@ -70,9 +74,9 @@ const headerLabels = {
   [getLocalRoute('app_competitions')]: 'label.competitions',
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
-  [getLocalRoute('app_selectProject')]: 'label.donate',
-  [getLocalRoute('app_competition')]: 'label.competitions',
-  [getLocalRoute('app_editCompetition')]: 'label.edit_competition',
+  [getLocalRoute('app_selectProject')]: 'label.projects',
+  [getLocalRoute('app_competition')]: '',
+  [getLocalRoute('app_editCompetition')]: '',
   [getLocalRoute('app_imprint')]: 'label.imprint',
   [getLocalRoute('app_privacy')]: 'label.data_protection',
   [getLocalRoute('app_challenge')]: 'label.challenge_heading',
@@ -85,8 +89,11 @@ const headerLabels = {
   ['app_donate_detail']: 'label.donate',
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
-  ['app_pledge_events']: 'Pledges',
-  ['app_pledge_form']: 'Pledge to plant a tree'
+  ['app_pledge_events']: 'label.pledges',
+  ['app_create_competition']: '',
+  ['app_unfulfilled_pledge_events']: 'label.pledges',
+  ['app_pledge_form']: 'label.pledgeToPlant',
+  ['app_pledge_update_form']: 'label.updatePledge'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -116,12 +123,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_faq')]: FAQContainer,
       ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
-
       ['about_us']: { screen: AboutUsContainer },
       ['contribution_details']: { screen: UserContributionDetails },
-
       ['license_info_list']: { screen: LicenseInfoList },
-
       [getLocalRoute('app_imprint')]: {
         screen: ImprintContainer
       },
@@ -155,11 +159,14 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_pledge_form']: {
         screen: MakePledgeForm
+      },
+      ['app_create_competition']: {
+        screen: createCompeition
       }
     },
     {
       headerMode: 'none',
-      navigationOptions: (/*{ navigation }*/) => {
+      defaultNavigationOptions: (/*{ navigation }*/) => {
         return {
           header: null
         };
@@ -289,7 +296,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
       },
-
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTrees
       }
@@ -308,6 +314,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     {
       Tab: ApptabNavigator,
       Base: baseNavigator,
+      ['app_supportTrees']: {
+        screen: SelectPlantProjectContainer
+      },
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },
@@ -325,10 +334,25 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_pledge_form']: {
         screen: MakePledgeForm
+      },
+      ['app_reviews']: {
+        screen: Reviews
+      },
+      ['app_add_review']: {
+        screen: AddReview
+      },
+      ['app_view_pdf']: {
+        screen: PDFViewer
+      },
+      ['app_pledge_update_form']: {
+        screen: UpdatePledgeEvent
+      },
+      ['app_unfulfilled_pledge_events']: {
+        screen: UnfulfilledPledgeEvents
       }
     },
     {
-      navigationOptions: ({ navigation }) => {
+      defaultNavigationOptions: ({ navigation }) => {
         let navigationConfig = {
           headerStyle: styles.container,
           headerTitleStyle: { paddingRight: 16 },
@@ -362,5 +386,5 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       contentComponent: SideMenuContainer
     }
   );
-  return AppNavigator;
+  return createAppContainer(AppNavigator);
 };

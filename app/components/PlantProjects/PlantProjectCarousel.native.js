@@ -53,6 +53,7 @@ class PlantProjectCarousel extends Component {
                     this.props.onSelect(id)
                   }
                   tpoName={tpoName}
+                  selectProject={this.props.selectProject}
                 />
               </ScrollView>
             ))

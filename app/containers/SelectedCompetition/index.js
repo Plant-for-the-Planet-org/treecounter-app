@@ -34,6 +34,12 @@ class SelectedCompetitionContainer extends Component {
     this.enrollCompetition = this.enrollCompetition.bind(this);
     this.editCompetition = this.editCompetition.bind(this);
   }
+
+  static navigationOptions = () => {
+    return {
+      title: ''
+    };
+  };
   componentWillReceiveProps(nextProps) {
     if (nextProps.match) {
       // empty

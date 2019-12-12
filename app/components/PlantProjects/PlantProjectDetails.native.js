@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Image, Linking, Text, View } from 'react-native';
+import { Image, Linking, Text, View, TouchableOpacity } from 'react-native';
 
 import { link } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
@@ -9,7 +9,7 @@ import NDVI from '../../containers/NDVI/NDVI';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/plant-details.native';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
-
+import { updateStaticRoute } from '../../helpers/routerHelper';
 const cleanUrl = url => {
   url = (url || '').trim();
   if (url) {
@@ -45,14 +45,17 @@ const PlantProjectDetails = ({
   videoUrl,
   // mapData,
   plantProjectImages,
-  ndviUid
+  ndviUid,
+  currentUserProfile,
+  navigation
 }) => {
   // if (context.debug && !this.props.videoUrl) {
   //   //un-comment this if anybody want to test video playing on App
   //   // videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
   // }
   const url = cleanUrl(homepageUrl);
-
+  const backgroundColorLightGreen = '#89b53a';
+  const backgroundColor = 'white';
   return (
     <View style={styles.carousalContainer}>
       <PlantProjectImageCarousel images={plantProjectImages} />
@@ -71,10 +74,45 @@ const PlantProjectDetails = ({
           </Text>
         </TouchableItem>
       ) : null}
-
-      <View style={styles.videoContainer}>
-        <VideoContainer url={videoUrl} />
-      </View>
+      {currentUserProfile && currentUserProfile.isReviewer ? (
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 15
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              paddingHorizontal: 36,
+              backgroundColor: backgroundColorLightGreen,
+              height: 52,
+              borderRadius: 24,
+              width: '85%',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            onPress={() => {
+              updateStaticRoute('app_add_review', navigation);
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: 'bold',
+                color: backgroundColor,
+                fontSize: 16
+              }}
+            >
+              {i18n.t('label.write_review')}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
+      {videoUrl ? (
+        <View style={styles.videoContainer}>
+          <VideoContainer url={videoUrl} />
+        </View>
+      ) : null}
       {<NDVI ndviUid={ndviUid} />}
     </View>
   );
@@ -99,7 +137,8 @@ PlantProjectDetails.propTypes = {
   // unused
   mapData: PropTypes.object,
   plantProjectImages: PropTypes.array,
-  ndviUid: PropTypes.string
+  ndviUid: PropTypes.string,
+  currentUserProfile: PropTypes.any
 };
 
 export default PlantProjectDetails;

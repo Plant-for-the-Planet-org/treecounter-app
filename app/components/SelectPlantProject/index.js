@@ -231,7 +231,7 @@ export default class SelectPlantProject extends Component {
                         this.onSelectClickedFeaturedProjects(project.id)
                       }
                     >
-                      {i18n.t('label.select_project')}
+                      {i18n.t('label.donate_trees_cap')}
                     </PrimaryButton>
                   </div>
                 </CardLayout>

@@ -58,7 +58,6 @@ import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 
 import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
 import AddTrees from '../Redemption/app/AddTrees.native';
-import SeeProject from '../Redemption/app/SeeProject.native';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -355,9 +354,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['redeem_add_trees']: {
         screen: AddTrees
-      },
-      ['redeem_see_project']: {
-        screen: SeeProject
       }
     },
     {

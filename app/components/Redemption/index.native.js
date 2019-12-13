@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import LoadingIndicator from '../Common/LoadingIndicator';
 import i18n from '../../locales/i18n.js';
-import TouchableItem from '../../components/Common/TouchableItem';
 import { redeemImage, forward } from '../../assets';
 import styles from '../../styles/redeem';
 import {
   View,
   Image,
-  TextInput,
   Text,
   TouchableOpacity,
   Animated,
-  Keyboard
+  Keyboard,
+  ActivityIndicator
 } from 'react-native';
-import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
@@ -23,9 +21,10 @@ import { Formik } from 'formik';
 import buttonStyles from '../../styles/common/button.native';
 
 export default function Redemption(props) {
-  const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
+  const [scrollY] = React.useState(new Animated.Value(0));
   const value = '';
 
+  const [loadButton, setloadButton] = React.useState(false);
   const [buttonType, setButtonType] = React.useState('validate');
 
   const keyboardDidShow = () => {
@@ -54,24 +53,54 @@ export default function Redemption(props) {
     };
   }, []);
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <View style={{ flex: 1 }}>
+    <SafeAreaView style={styles.safeAreaViewContainer}>
+      <View style={styles.mainContainer}>
         <HeaderAnimated
           navigation={props.navigation}
-          title={i18n.t('Redeem Trees')}
+          title={i18n.t('label.redeem_trees')}
           scrollY={scrollY}
         />
         <Formik
           initialValues={{
             code: ''
           }}
-          onSubmit={values => {
-            const data = {
-              code: values.code
-            };
-            console.log(data);
-            updateStaticRoute('redeem_add_trees', props.navigation);
+          onSubmit={(values, actions) => {
+            setloadButton(true);
+            props
+              .validateCodeAction({
+                type: 'gift',
+                code: values.code
+              })
+              .then(res => {
+                if (res.data.status === 'error') {
+                  actions.setFieldError('code', res.data.errorText);
+                  setloadButton(false);
+                } else {
+                  updateStaticRoute('redeem_add_trees', props.navigation, {
+                    code: values.code
+                  });
+                }
+              });
           }}
+          // validate={
+          //   values => {
+          //     let errors = {};
+          //     setFormError('')
+          //     props.validateCodeAction({
+          //       type: 'gift',
+          //       code: values.code
+          //     }).then(res => {
+          //       if (res.data.status === "error") {
+          //         setFormError(res.data.errorText)
+          //         console.log(res.data.errorText)
+          //       } else {
+          //         setFormError('')
+          //       }
+          //     })
+          //     errors.code = formError;
+          //     return errors;
+          //   }
+          // }
         >
           {props => (
             <>
@@ -93,31 +122,29 @@ export default function Redemption(props) {
                 extraScrollHeight={12}
               >
                 <Text style={styles.titleText}>
-                  You can use this tool to add trees to your tree counter using
-                  Tree Voucher or a Merchandise Code
+                  {i18n.t('label.redeem_heading')}
                 </Text>
                 <Image
                   style={styles.imageStyle}
                   resizeMode="contain"
                   source={redeemImage}
                 />
-                <View style={{ marginTop: 40 }}>
-                  <View>
-                    <TextField
-                      label={i18n.t('Please type Code to Redeem')}
-                      value={value}
-                      tintColor={'#89b53a'}
-                      titleFontSize={12}
-                      lineWidth={1}
-                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      blurOnSubmit={false}
-                      error={props.touched.code && props.errors.code}
-                      onChangeText={props.handleChange('code')}
-                      onBlur={props.handleBlur('code')}
-                    />
-                  </View>
+                <View style={styles.validateCodeInputContainer}>
+                  <TextField
+                    label={i18n.t('label.validate_code_label')}
+                    value={value}
+                    tintColor={'#89b53a'}
+                    titleFontSize={12}
+                    lineWidth={1}
+                    labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                    affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    blurOnSubmit={false}
+                    error={props.errors.code}
+                    onChangeText={props.handleChange('code')}
+                    onBlur={props.handleBlur('code')}
+                  />
+                  {console.log('Error', props.errors.code)}
                 </View>
               </KeyboardAwareScrollView>
 
@@ -127,9 +154,13 @@ export default function Redemption(props) {
                   onPress={props.handleSubmit}
                 >
                   <View style={buttonStyles.actionButtonView}>
-                    <Text style={buttonStyles.actionButtonText}>
-                      {i18n.t('Validate Code')}
-                    </Text>
+                    {loadButton ? (
+                      <ActivityIndicator size="large" color="#ffffff" />
+                    ) : (
+                      <Text style={buttonStyles.actionButtonText}>
+                        {i18n.t('label.validate_code')}
+                      </Text>
+                    )}
                   </View>
                 </TouchableOpacity>
               ) : null}
@@ -139,11 +170,15 @@ export default function Redemption(props) {
                   style={buttonStyles.actionButtonSmallTouchable}
                   onPress={props.handleSubmit}
                 >
-                  <Image
-                    source={forward}
-                    resizeMode="cover"
-                    style={buttonStyles.actionButtonSmallImage}
-                  />
+                  {loadButton ? (
+                    <ActivityIndicator size="large" color="#ffffff" />
+                  ) : (
+                    <Image
+                      source={forward}
+                      resizeMode="cover"
+                      style={buttonStyles.actionButtonSmallImage}
+                    />
+                  )}
                 </TouchableOpacity>
               ) : null}
             </>

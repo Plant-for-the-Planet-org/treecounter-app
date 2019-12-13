@@ -1,19 +1,19 @@
+
+// This file will be used in Future 
+
 import React from 'react';
-import styles from '../../../styles/redeem';
 import {
   View,
   Image,
-  TextInput,
   Text,
   TouchableOpacity,
-  Animated,
-  Keyboard
+  Animated
 } from 'react-native';
 import HeaderAnimated from './../../Header/HeaderAnimated.native';
 import { SafeAreaView } from 'react-navigation';
 import buttonStyles from '../../../styles/common/button.native';
 import PropTypes from 'prop-types';
-import { updateRoute, updateStaticRoute } from '../../../helpers/routerHelper';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
 import { smalltree, greencalendar } from '../../../assets';
 
 export default function SeeProject(props) {

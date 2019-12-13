@@ -6,5 +6,8 @@
   "log_in": "Please login or sign up to redeem your code.",
   "validate_code": "Validate Code",
   "code": "Code",
-  "redeem_code": "Redeem Code"
+  "redeem_code": "Redeem Code",
+  "validate_code_label": "Please type Code to Redeem",
+  "claiming": "Claiming:",
+  "trees_in_code": "Trees in this code"
 }

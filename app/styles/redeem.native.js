@@ -1,7 +1,8 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
-  scrollContainer: {},
+  safeAreaViewContainer: { flex: 1, backgroundColor: 'white' },
+  mainContainer: { flex: 1 },
   loadingContainer: {
     flex: 1,
     alignItems: 'center'
@@ -10,12 +11,12 @@ export default EStyleSheet.create({
     flexDirection: 'column',
     flex: 1
   },
+
   contentContainer: {
     margin: 15,
     marginTop: 10,
     flexDirection: 'column'
   },
-
   formScrollView: {
     padding: 24,
     paddingBottom: 220,
@@ -117,6 +118,10 @@ export default EStyleSheet.create({
   buttonStyle: {
     margin: 20
   },
+
+  // Validate Code Input
+
+  validateCodeInputContainer: { marginTop: 40 },
   validateCodeButton: {
     marginTop: 30,
     justifyContent: 'center',
@@ -138,5 +143,47 @@ export default EStyleSheet.create({
     letterSpacing: 0.21,
     textAlign: 'center',
     color: '#ffffff'
-  }
+  },
+
+  // Add Trees Page
+
+  subheader: { marginTop: 110, padding: 20 },
+  subheaderClaiming: { fontFamily: 'OpenSans-SemiBold', fontSize: 18 },
+  subheaderTrees: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 16,
+    marginTop: 42
+  },
+  singleRedeemObject: { borderBottomWidth: 1, borderBottomColor: '#d5d5d5' },
+  redeemObjectDate: {
+    backgroundColor: '#f7f7f7',
+    height: 40,
+    width: '100%',
+    justifyContent: 'center',
+    padding: 20
+  },
+  redeemObjectDateText: { fontFamily: 'OpenSans-Regular', fontSize: 14 },
+  redeemObjectTreesContainer: { paddingHorizontal: 20, paddingVertical: 16 },
+  row1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  row2: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 6
+  },
+  redeemObjectTitle: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 18,
+    color: '#4d5153'
+  },
+  redeemObjectTrees: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 18,
+    color: '#89b53a'
+  },
+  redeemObjectSubTitle: { fontFamily: 'OpenSans-Regular', fontSize: 13 }
 });

@@ -2,21 +2,20 @@ import React from 'react';
 import styles from '../../../styles/redeem';
 import {
   View,
-  Image,
-  TextInput,
   Text,
   TouchableOpacity,
   Animated,
-  Keyboard
+  ScrollView
 } from 'react-native';
 import HeaderAnimated from './../../Header/HeaderAnimated.native';
 import { SafeAreaView } from 'react-navigation';
 import buttonStyles from '../../../styles/common/button.native';
 import PropTypes from 'prop-types';
-import { updateRoute, updateStaticRoute } from '../../../helpers/routerHelper';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import i18n from '../../../locales/i18n.js';
 
 export default function AddTrees(props) {
-  const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
+  const [scrollY] = React.useState(new Animated.Value(0));
 
   const redeemObject = [
     {
@@ -43,90 +42,43 @@ export default function AddTrees(props) {
     }
   ];
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <SafeAreaView style={styles.safeAreaViewContainer}>
+      <View style={styles.mainContainer}>
         <HeaderAnimated
           navigation={props.navigation}
           title={'Redeem 20,500 Trees'}
           scrollY={scrollY}
         />
-        <View style={{ marginTop: 110, padding: 20 }}>
-          <Text style={{ fontFamily: 'OpenSans-SemiBold', fontSize: 18 }}>
-            Claiming: 19D-CHN-11X-7
+        <View style={styles.subheader}>
+          <Text style={styles.subheaderClaiming}>
+            {i18n.t('label.claiming')} {props.navigation.getParam('code')}
           </Text>
-          <Text
-            style={{
-              fontFamily: 'OpenSans-SemiBold',
-              fontSize: 16,
-              marginTop: 42
-            }}
-          >
-            Trees in this code
+          <Text style={styles.subheaderTrees}>
+            {i18n.t('label.trees_in_code')}
           </Text>
         </View>
-        <View>
+        <ScrollView>
           {/* Single Redeem Object */}
-          <View style={{ borderBottomWidth: 1, borderBottomColor: '#d5d5d5' }}>
+          <View style={styles.singleRedeemObject}>
             {/* if Date */}
-            <View
-              style={{
-                backgroundColor: '#f7f7f7',
-                height: 40,
-                width: '100%',
-                justifyContent: 'center',
-                padding: 20
-              }}
-            >
-              <Text style={{ fontFamily: 'OpenSans-Regular', fontSize: 14 }}>
-                March 7, 2019
-              </Text>
+            <View style={styles.redeemObjectDate}>
+              <Text style={styles.redeemObjectDateText}>March 7, 2019</Text>
             </View>
             {/* Trees to be redeemed */}
-            <View style={{ paddingHorizontal: 20, paddingVertical: 16 }}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <Text
-                  style={{
-                    fontFamily: 'OpenSans-Bold',
-                    fontSize: 18,
-                    color: '#4d5153'
-                  }}
-                >
-                  Gift to S. William
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: 'OpenSans-Bold',
-                    fontSize: 18,
-                    color: '#89b53a'
-                  }}
-                >
-                  10,000
-                </Text>
+            <View style={styles.redeemObjectTreesContainer}>
+              <View style={styles.row1}>
+                <Text style={styles.redeemObjectTitle}>Gift to S. William</Text>
+                <Text style={styles.redeemObjectTrees}>10,000</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginTop: 6
-                }}
-              >
-                <Text style={{ fontFamily: 'OpenSans-Regular', fontSize: 13 }}>
+              <View style={styles.row2}>
+                <Text style={styles.redeemObjectSubTitle}>
                   Planted by Plant-for-the-Planet
                 </Text>
-                <Text style={{ fontFamily: 'OpenSans-Regular', fontSize: 13 }}>
-                  Trees
-                </Text>
+                <Text style={styles.redeemObjectSubTitle}>Trees</Text>
               </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
         <TouchableOpacity
           style={buttonStyles.actionButtonTouchable}
           onPress={() =>

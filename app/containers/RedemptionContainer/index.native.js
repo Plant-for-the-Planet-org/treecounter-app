@@ -9,7 +9,6 @@ import {
   validateCodeAction,
   setRedemptionCodeAction
 } from '../../actions/redemptionAction';
-import i18n from '../../locales/i18n.js';
 
 class RedemptionContainer extends Component {
   static navigationOptions = {

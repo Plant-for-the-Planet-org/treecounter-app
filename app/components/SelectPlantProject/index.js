@@ -209,7 +209,7 @@ export default class SelectPlantProject extends Component {
           </div>
           <Slider {...settings}>
             {featuredProjects.length !== 0
-              ? featuredProjects.map(project => (
+              ? featuredProjects.sort((a, b) => a.id - b.id).map(project => (
                 <CardLayout
                   className="plant_project_content"
                   key={project.id}

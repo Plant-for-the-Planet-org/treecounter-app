@@ -64,7 +64,8 @@ export default class SelectPlantProject extends Component {
 
     let featuredProjects = plantProjects.filter(project => project.isFeatured);
     featuredProjects = _.orderBy(featuredProjects, 'id');
-
+    featuredProjects.length && featuredProjects.push(featuredProjects[0]);
+    console.log('Pojects featured:', featuredProjects);
     let priceSortedProjects = sortProjectsByPrice(
       plantProjects,
       true,
@@ -140,9 +141,7 @@ export default class SelectPlantProject extends Component {
       )
     });
   }
-  sort(projects) {
-    return projects.sort((a, b) => b.id - a.id);
-  }
+
   render() {
     let {
       filteredProjects,
@@ -210,13 +209,13 @@ export default class SelectPlantProject extends Component {
             {i18n.t('label.featuredProjects')}{' '}
           </div>
           <Slider {...settings}>
-            {console.log('featured projects:', this.sort(featuredProjects))}
             {featuredProjects.length !== 0
-              ? this.sort(filteredProjects).map(project => {
+              ? featuredProjects.map(project => {
+                  console.log(project);
                   return (
                     <CardLayout
                       className="plant_project_content"
-                      key={project.id}
+                      key={project.created}
                     >
                       <PlantProjectFull
                         onViewMoreClick={() =>

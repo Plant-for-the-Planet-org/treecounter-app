@@ -210,32 +210,32 @@ export default class SelectPlantProject extends Component {
           <Slider {...settings}>
             {featuredProjects.length !== 0
               ? featuredProjects.map(project => (
-                  <CardLayout
-                    className="plant_project_content"
-                    key={project.id}
-                  >
-                    <PlantProjectFull
-                      onViewMoreClick={() =>
-                        this.setState({
-                          imageViewMore: !this.state.imageViewMore
-                        })
+                <CardLayout
+                  className="plant_project_content"
+                  key={project.id}
+                >
+                  <PlantProjectFull
+                    onViewMoreClick={() =>
+                      this.setState({
+                        imageViewMore: !this.state.imageViewMore
+                      })
+                    }
+                    callExpanded={() => this.callExpanded()}
+                    expanded={false}
+                    plantProject={project}
+                    tpoName={project.tpo_name}
+                  />
+                  <div className="select-project_button__container">
+                    <PrimaryButton
+                      onClick={() =>
+                        this.onSelectClickedFeaturedProjects(project.id)
                       }
-                      callExpanded={() => this.callExpanded()}
-                      expanded={false}
-                      plantProject={project}
-                      tpoName={project.tpo_name}
-                    />
-                    <div className="select-project_button__container">
-                      <PrimaryButton
-                        onClick={() =>
-                          this.onSelectClickedFeaturedProjects(project.id)
-                        }
-                      >
-                        {i18n.t('label.projects')}
-                      </PrimaryButton>
-                    </div>
-                  </CardLayout>
-                ))
+                    >
+                      {i18n.t('label.select_project')}
+                    </PrimaryButton>
+                  </div>
+                </CardLayout>
+              ))
               : null}
           </Slider>
         </div>
@@ -285,27 +285,27 @@ export default class SelectPlantProject extends Component {
                     <tbody>
                       {filteredProjects.length !== 0
                         ? filteredProjects.map(project => (
-                            <tr key={'tr' + project.id}>
-                              <td className="align-left">{project.name}</td>
-                              <td className="align-left">{project.tpo_name}</td>
-                              <td className="align-right">
-                                {delimitNumbers(parseInt(project.countPlanted))}
-                              </td>
-                              <td className="align-right">
-                                <NumberFormat
-                                  currency={project.currency}
-                                  data={project.treeCost.toFixed(2)}
-                                />
-                              </td>
-                              <td>
-                                <PrimaryButton
-                                  onClick={() => this.openModal(project.id)}
-                                >
-                                  {i18n.t('label.see_more')}
-                                </PrimaryButton>
-                              </td>
-                            </tr>
-                          ))
+                          <tr key={'tr' + project.id}>
+                            <td className="align-left">{project.name}</td>
+                            <td className="align-left">{project.tpo_name}</td>
+                            <td className="align-right">
+                              {delimitNumbers(parseInt(project.countPlanted))}
+                            </td>
+                            <td className="align-right">
+                              <NumberFormat
+                                currency={project.currency}
+                                data={project.treeCost.toFixed(2)}
+                              />
+                            </td>
+                            <td>
+                              <PrimaryButton
+                                onClick={() => this.openModal(project.id)}
+                              >
+                                {i18n.t('label.see_more')}
+                              </PrimaryButton>
+                            </td>
+                          </tr>
+                        ))
                         : null}
                     </tbody>
                   </table>
@@ -336,27 +336,27 @@ export default class SelectPlantProject extends Component {
                     <tbody>
                       {priceSortedProjects.length !== 0
                         ? priceSortedProjects.map(project => (
-                            <tr key={'tr' + project.id}>
-                              <td className="align-left">{project.name}</td>
-                              <td className="align-left">{project.tpo_name}</td>
-                              <td className="align-right">
-                                {delimitNumbers(parseInt(project.countPlanted))}
-                              </td>
-                              <td className="align-right">
-                                <NumberFormat
-                                  currency={project.currency}
-                                  data={project.treeCost.toFixed(2)}
-                                />
-                              </td>
-                              <td>
-                                <PrimaryButton
-                                  onClick={() => this.openModal(project.id)}
-                                >
-                                  {i18n.t('label.see_more')}
-                                </PrimaryButton>
-                              </td>
-                            </tr>
-                          ))
+                          <tr key={'tr' + project.id}>
+                            <td className="align-left">{project.name}</td>
+                            <td className="align-left">{project.tpo_name}</td>
+                            <td className="align-right">
+                              {delimitNumbers(parseInt(project.countPlanted))}
+                            </td>
+                            <td className="align-right">
+                              <NumberFormat
+                                currency={project.currency}
+                                data={project.treeCost.toFixed(2)}
+                              />
+                            </td>
+                            <td>
+                              <PrimaryButton
+                                onClick={() => this.openModal(project.id)}
+                              >
+                                {i18n.t('label.see_more')}
+                              </PrimaryButton>
+                            </td>
+                          </tr>
+                        ))
                         : null}
                     </tbody>
                   </table>

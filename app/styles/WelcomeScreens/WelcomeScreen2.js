@@ -43,8 +43,9 @@ export default EStyleSheet.create({
     color: '#4d5153'
   },
   imageStyle: {
-    width: 200,
-    height: 200
+    width: 150,
+    height: 150,
+    marginVertical: 10
   },
   textPara: {
     fontFamily: 'OpenSans',

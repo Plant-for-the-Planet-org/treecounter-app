@@ -154,6 +154,7 @@ import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
 import treelogo from '../../icon.png';
+import Projects from './images/projects.jpg';
 export {
   treelogo,
   germany,
@@ -310,5 +311,6 @@ export {
   planetLogo,
   circleDelete,
   leaf,
-  leafGray
+  leafGray,
+  Projects
 };

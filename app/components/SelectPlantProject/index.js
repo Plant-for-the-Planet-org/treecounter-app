@@ -140,7 +140,9 @@ export default class SelectPlantProject extends Component {
       )
     });
   }
-
+  sort(projects) {
+    return projects.sort((a, b) => b.id - a.id);
+  }
   render() {
     let {
       filteredProjects,
@@ -208,34 +210,37 @@ export default class SelectPlantProject extends Component {
             {i18n.t('label.featuredProjects')}{' '}
           </div>
           <Slider {...settings}>
+            {console.log('featured projects:', this.sort(featuredProjects))}
             {featuredProjects.length !== 0
-              ? featuredProjects.sort((a, b) => a.id - b.id).map(project => (
-                <CardLayout
-                  className="plant_project_content"
-                  key={project.id}
-                >
-                  <PlantProjectFull
-                    onViewMoreClick={() =>
-                      this.setState({
-                        imageViewMore: !this.state.imageViewMore
-                      })
-                    }
-                    callExpanded={() => this.callExpanded()}
-                    expanded={false}
-                    plantProject={project}
-                    tpoName={project.tpo_name}
-                  />
-                  <div className="select-project_button__container">
-                    <PrimaryButton
-                      onClick={() =>
-                        this.onSelectClickedFeaturedProjects(project.id)
-                      }
+              ? this.sort(filteredProjects).map(project => {
+                  return (
+                    <CardLayout
+                      className="plant_project_content"
+                      key={project.id}
                     >
-                      {i18n.t('label.donate_trees_cap')}
-                    </PrimaryButton>
-                  </div>
-                </CardLayout>
-              ))
+                      <PlantProjectFull
+                        onViewMoreClick={() =>
+                          this.setState({
+                            imageViewMore: !this.state.imageViewMore
+                          })
+                        }
+                        callExpanded={() => this.callExpanded()}
+                        expanded={false}
+                        plantProject={project}
+                        tpoName={project.tpo_name}
+                      />
+                      <div className="select-project_button__container">
+                        <PrimaryButton
+                          onClick={() =>
+                            this.onSelectClickedFeaturedProjects(project.id)
+                          }
+                        >
+                          {i18n.t('label.donate_trees_cap')}
+                        </PrimaryButton>
+                      </div>
+                    </CardLayout>
+                  );
+                })
               : null}
           </Slider>
         </div>
@@ -284,28 +289,34 @@ export default class SelectPlantProject extends Component {
                     </thead>
                     <tbody>
                       {filteredProjects.length !== 0
-                        ? filteredProjects.sort((a, b) => a.id - b.id).map(project => (
-                          <tr key={'tr' + project.id}>
-                            <td className="align-left">{project.name}</td>
-                            <td className="align-left">{project.tpo_name}</td>
-                            <td className="align-right">
-                              {delimitNumbers(parseInt(project.countPlanted))}
-                            </td>
-                            <td className="align-right">
-                              <NumberFormat
-                                currency={project.currency}
-                                data={project.treeCost.toFixed(2)}
-                              />
-                            </td>
-                            <td>
-                              <PrimaryButton
-                                onClick={() => this.openModal(project.id)}
-                              >
-                                {i18n.t('label.see_more')}
-                              </PrimaryButton>
-                            </td>
-                          </tr>
-                        ))
+                        ? filteredProjects
+                            .sort((a, b) => a.id - b.id)
+                            .map(project => (
+                              <tr key={'tr' + project.id}>
+                                <td className="align-left">{project.name}</td>
+                                <td className="align-left">
+                                  {project.tpo_name}
+                                </td>
+                                <td className="align-right">
+                                  {delimitNumbers(
+                                    parseInt(project.countPlanted)
+                                  )}
+                                </td>
+                                <td className="align-right">
+                                  <NumberFormat
+                                    currency={project.currency}
+                                    data={project.treeCost.toFixed(2)}
+                                  />
+                                </td>
+                                <td>
+                                  <PrimaryButton
+                                    onClick={() => this.openModal(project.id)}
+                                  >
+                                    {i18n.t('label.see_more')}
+                                  </PrimaryButton>
+                                </td>
+                              </tr>
+                            ))
                         : null}
                     </tbody>
                   </table>
@@ -336,27 +347,27 @@ export default class SelectPlantProject extends Component {
                     <tbody>
                       {priceSortedProjects.length !== 0
                         ? priceSortedProjects.map(project => (
-                          <tr key={'tr' + project.id}>
-                            <td className="align-left">{project.name}</td>
-                            <td className="align-left">{project.tpo_name}</td>
-                            <td className="align-right">
-                              {delimitNumbers(parseInt(project.countPlanted))}
-                            </td>
-                            <td className="align-right">
-                              <NumberFormat
-                                currency={project.currency}
-                                data={project.treeCost.toFixed(2)}
-                              />
-                            </td>
-                            <td>
-                              <PrimaryButton
-                                onClick={() => this.openModal(project.id)}
-                              >
-                                {i18n.t('label.see_more')}
-                              </PrimaryButton>
-                            </td>
-                          </tr>
-                        ))
+                            <tr key={'tr' + project.id}>
+                              <td className="align-left">{project.name}</td>
+                              <td className="align-left">{project.tpo_name}</td>
+                              <td className="align-right">
+                                {delimitNumbers(parseInt(project.countPlanted))}
+                              </td>
+                              <td className="align-right">
+                                <NumberFormat
+                                  currency={project.currency}
+                                  data={project.treeCost.toFixed(2)}
+                                />
+                              </td>
+                              <td>
+                                <PrimaryButton
+                                  onClick={() => this.openModal(project.id)}
+                                >
+                                  {i18n.t('label.see_more')}
+                                </PrimaryButton>
+                              </td>
+                            </tr>
+                          ))
                         : null}
                     </tbody>
                   </table>

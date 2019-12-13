@@ -63,7 +63,7 @@ export default class SelectPlantProject extends Component {
     } = props;
 
     let featuredProjects = plantProjects.filter(project => project.isFeatured);
-    featuredProjects = _.orderBy(featuredProjects, 'created');
+    featuredProjects = _.orderBy(featuredProjects, 'id');
 
     let priceSortedProjects = sortProjectsByPrice(
       plantProjects,
@@ -284,7 +284,7 @@ export default class SelectPlantProject extends Component {
                     </thead>
                     <tbody>
                       {filteredProjects.length !== 0
-                        ? filteredProjects.map(project => (
+                        ? filteredProjects.sort((a, b) => a.id - b.id).map(project => (
                           <tr key={'tr' + project.id}>
                             <td className="align-left">{project.name}</td>
                             <td className="align-left">{project.tpo_name}</td>

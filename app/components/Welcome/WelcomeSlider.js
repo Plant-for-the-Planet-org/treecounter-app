@@ -10,23 +10,32 @@ import WelcomeScreen5 from './welcomescreen5.native';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
 import styless from '../../styles/WelcomeScreens/WelcomeScreen5';
+import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 
-const WelcomSlider = () => {
+const WelcomSlider = ({ navigation }) => {
+  const _appHomePage = () => updateRoute('app_homepage', navigation);
   const Footer = () => {
     return (
-      <View style={{}}>
+      <View style={{ backgroundColor: '#fff' }}>
         <View style={styless.bottomRow}>
-          <PrimaryButton buttonStyle={styless.buttonStyle}>
+          <PrimaryButton
+            onClick={() => updateRoute('app_signup', navigation)}
+            buttonStyle={styless.buttonStyle}
+          >
             <Text style={styless.continueBtn}>
               {i18n.t('label.welcome_scrn_5_create_an_account')}
             </Text>
           </PrimaryButton>
         </View>
         <View style={styless.bottomRow}>
-          <PrimaryButton buttonStyle={styless.lowerBtnStyle}>
+          <PrimaryButton
+            onClick={() => updateRoute('app_login', navigation)}
+            buttonStyle={styless.lowerBtnStyle}
+          >
             <Text style={styless.alreadyHaveAccountBtn}>
               {i18n.t('label.welcome_scrn_5_already_have_an_account')}
               <Text style={styless.signInBtn}>
+                {' '}
                 {i18n.t('label.welcome_scrn_5_sign_in')}
               </Text>
             </Text>
@@ -42,9 +51,10 @@ const WelcomSlider = () => {
         style={styles.container}
         showsButtons={false}
         activeDotColor={'#89b53a'}
+        paginationStyle={{ bottom: 0 }}
       >
         <View style={styles.container}>
-          <WelcomeScreen1 />
+          <WelcomeScreen1 _appHomePage={_appHomePage} />
         </View>
         <View style={styles.container}>
           <WelcomeScreen2 />

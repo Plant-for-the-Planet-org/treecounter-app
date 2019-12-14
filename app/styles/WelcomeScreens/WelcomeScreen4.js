@@ -3,39 +3,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default EStyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center'
-  },
-  dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 10
-  },
-  inActiveDot: {
-    width: 7,
-    height: 7,
-    backgroundColor: '#e6e9ec',
-    marginHorizontal: 5,
-    borderRadius: 5
-  },
-  activeDot: {
-    width: 7,
-    height: 7,
-    backgroundColor: '#89b53a',
-    marginHorizontal: 5,
-    borderRadius: 5
-  },
-  signInBtn: {
-    fontWeight: 'bold'
-  },
-  zeroPercentComissionContainer: {
-    marginVertical: 20
-  },
-  crossContainer: {
-    borderColor: 'red',
-    height: 50,
-    justifyContent: 'center',
-    paddingLeft: 10
   },
   zeroPercentContainer: {
     flexDirection: 'row',
@@ -81,34 +50,5 @@ export default EStyleSheet.create({
   bottomRow: {
     flexDirection: 'row',
     justifyContent: 'center'
-  },
-  buttonStyle: {
-    width: 312,
-    height: 52,
-    borderRadius: 100,
-    backgroundColor: '#89b53a'
-  },
-  lowerTextStyle: {
-    fontFamily: 'OpenSans',
-    fontSize: 16,
-    color: '#4d5153'
-  },
-  lowerBtnStyle: {
-    width: 312,
-    height: 52,
-    backgroundColor: 'white',
-    borderWidth: 0
-  },
-  continueBtn: {
-    width: 72,
-    height: 22,
-    fontFamily: 'OpenSans',
-    fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 22,
-    letterSpacing: 0.21,
-    textAlign: 'center',
-    color: '#ffffff'
   }
 });

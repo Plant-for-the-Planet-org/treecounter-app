@@ -3,37 +3,14 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default EStyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
-  dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 10
-  },
-  inActiveDot: {
-    width: 7,
-    height: 7,
-    backgroundColor: '#e6e9ec',
-    marginHorizontal: 5,
-    borderRadius: 5
-  },
-  activeDot: {
-    width: 7,
-    height: 7,
-    backgroundColor: '#89b53a',
-    marginHorizontal: 5,
-    borderRadius: 5
-  },
-  crossContainer: {
-    borderColor: 'red',
-    height: 50,
-    justifyContent: 'center',
-    paddingLeft: 10
-  },
+
   signInBtn: {
-    fontWeight: 'bold'
+    color: '#87b738'
   },
+
   textHeader: {
     fontFamily: 'OpenSans',
     fontSize: 20,

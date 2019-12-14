@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, ScrollView, Image } from 'react-native';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import welcomeLogo from '../../assets/images/icons/welcomeLogo.png';
+import { WelcomeImage3 } from '../../assets/index';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/WelcomeScreens/WelcomeScreen3';
 
@@ -15,7 +14,7 @@ const WelcomeScreen3 = () => {
         <Image
           style={styles.imageStyle}
           resizeMode="contain"
-          source={welcomeLogo}
+          source={WelcomeImage3}
         />
         <Text style={styles.textPara}>
           {i18n.t('label.welcome_scrn_3_sub_heading')}

@@ -155,6 +155,8 @@ import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
 import treelogo from '../../icon.png';
 import Projects from './images/projects.jpg';
+import WelcomeImage3 from './images/welcome_screen_3_image.jpg';
+
 export {
   treelogo,
   germany,
@@ -312,5 +314,6 @@ export {
   circleDelete,
   leaf,
   leafGray,
-  Projects
+  Projects,
+  WelcomeImage3
 };

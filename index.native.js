@@ -8,4 +8,4 @@ import WelcomScreenSlider from './app/components/Welcome/WelcomeSlider';
 console.disableYellowBox = true;
 console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
-AppRegistry.registerComponent('TreecounterApp', () => WelcomScreenSlider);
+AppRegistry.registerComponent('TreecounterApp', () => App);

@@ -5,9 +5,14 @@ import i18n from '../../locales/i18n.js';
 import { treelogo } from '../../assets';
 import styles from '../../styles/WelcomeScreens/WelcomeScreen1';
 
-const WelcomeScreen1 = ({}) => {
+const WelcomeScreen1 = ({ _appHomePage }) => {
   return (
     <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#fff' }}>
+      <View style={styles.openAsGuestContainer}>
+        <Text style={styles.openAsGuest} onPress={_appHomePage}>
+          {i18n.t('label.welcome_scrn_1_open_as_guest')}
+        </Text>
+      </View>
       <View style={styles.container}>
         <Image
           style={styles.imageStyle}

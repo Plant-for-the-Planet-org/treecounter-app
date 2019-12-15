@@ -68,9 +68,14 @@ export default class EditUserProfile extends Component {
     };
   }
 
-  changeEmail = () => {
-    let value = this.refs.tabView.refs.securityTabView.refs.change_email.getValue();
-    this.props.updateEmail(value);
+  changeEmail = emailForm => {
+    if (this.refs.tabView.refs.securityTabView) {
+      let value = this.refs.tabView.refs.securityTabView.refs.change_email.getValue();
+      this.props.updateEmail(value);
+    } else {
+      let value = emailForm.getValue();
+      this.props.updateEmail(value);
+    }
   };
 
   _renderTabBar = props => {
@@ -186,7 +191,7 @@ export default class EditUserProfile extends Component {
       case 'security':
         return (
           <SecurityTabView
-            ref="securityTabView"
+            ref={'securityTabView'}
             onSave={onSave}
             currentUserProfile={currentUserProfile}
             getFormSchemaOption={this.getFormSchemaOption}
@@ -332,7 +337,7 @@ class SecurityTabView extends React.PureComponent {
           </View>
           <PrimaryButton
             onClick={() => {
-              this.props.changeEmail();
+              this.props.changeEmail(this.refs.change_email);
             }}
           >
             {i18n.t('label.save_changes')}

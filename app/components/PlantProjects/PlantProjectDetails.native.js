@@ -120,6 +120,7 @@ const PlantProjectDetails = ({
 
 // eslint-disable-next-line no-underscore-dangle
 const _goToURL = url => {
+  /*
   Linking.canOpenURL(url).then(supported => {
     if (supported) {
       Linking.openURL(url);
@@ -127,6 +128,8 @@ const _goToURL = url => {
       console.log('Cannot open URI: ' + url);
     }
   });
+*/
+  Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
 };
 
 PlantProjectDetails.propTypes = {

@@ -13,7 +13,7 @@ export function fetchLocation() {
   return dispatch => {
     if (!getItemSync('preferredCurrency')) {
       getExternalRequest({
-        endPoint: `http://api.ipstack.com/check?access_key=${
+        endPoint: `https://api.ipstack.com/check?access_key=${
           context.locationApikKey
         }&fields=location,country_code,currency`
       })

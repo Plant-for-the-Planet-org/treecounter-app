@@ -221,7 +221,9 @@ class LeaderBoardContainer extends React.Component {
             orderByOptionsInfo.orderByOptionsKeys
               ? orderByOptionsInfo.orderByOptionsKeys[0]
               : null,
-            timePeriodsInfo ? timePeriodsInfo.timePeriodsKeys[0] : null
+            timePeriodsInfo.timePeriodsKeys
+              ? timePeriodsInfo.timePeriodsKeys[0]
+              : null
           )
         });
         this.sendSearchQuery();

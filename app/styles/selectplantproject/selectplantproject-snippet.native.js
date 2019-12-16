@@ -32,21 +32,14 @@ export default EStyleSheet.create({
   projectImageContainer: {
     height: Layout.window.width * 0.4,
     width: '100%',
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
     overflow: 'hidden',
     position: 'relative'
   },
   certifiedAndRatingContainer: {
-    position: 'absolute',
     backgroundColor: '#ffffff',
     height: 27,
-    width: 90,
-    right: 12,
     borderRadius: 9,
     top: 10,
-    borderColor: '#707070',
-    borderWidth: 0.1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -91,8 +84,7 @@ export default EStyleSheet.create({
     height: '100%',
     flexDirection: 'row',
     backgroundColor: '#79b805', //b9d384',
-    borderRightColor: '#79b805',
-    borderBottomLeftRadius: 4
+    borderRightColor: '#79b805'
   },
   treePlantedtext: {
     // padding: 5,

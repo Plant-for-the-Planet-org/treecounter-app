@@ -155,6 +155,7 @@ import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
 import backArrow from './images/icons/backArrow.png';
+import snippetTree from './images/snippet-tree.png';
 export {
   germany,
   worldImg,
@@ -312,5 +313,6 @@ export {
   leaf,
   leafGray,
   backArrow,
-  right_arrow_button
+  right_arrow_button,
+  snippetTree
 };

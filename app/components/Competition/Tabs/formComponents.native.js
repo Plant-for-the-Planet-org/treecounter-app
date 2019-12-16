@@ -20,11 +20,11 @@ import buttonStyles from '../../../styles/common/button.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
 
-const validationSchema = generateFormikSchemaFromFormSchema(
-  competitionFormSchema
-);
-
 export const FormikForm = props => {
+  const validationSchema = generateFormikSchemaFromFormSchema(
+    competitionFormSchema
+  );
+
   const buttonType = props.buttonType;
 
   return (

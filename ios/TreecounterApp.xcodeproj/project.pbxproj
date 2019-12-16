@@ -609,7 +609,7 @@
 				CODE_SIGN_ENTITLEMENTS = TreecounterApp/TreecounterApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = UYRJ8SA699;
 				HEADER_SEARCH_PATHS = (
@@ -628,7 +628,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 1.49.1;
+				MARKETING_VERSION = 1.49.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -650,7 +650,7 @@
 				CODE_SIGN_ENTITLEMENTS = TreecounterApp/TreecounterApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = UYRJ8SA699;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -668,7 +668,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 1.49.1;
+				MARKETING_VERSION = 1.49.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

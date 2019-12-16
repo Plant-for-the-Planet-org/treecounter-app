@@ -4,7 +4,8 @@ import styles from '../../../styles/trillion.native';
 import i18n from '../../../locales/i18n';
 import { greencalendar } from '../../../assets';
 import { smalltree } from '../../../assets';
-import { formatDate } from '../../../utils/utils';
+import { formatDate, delimitNumbers } from '../../../utils/utils';
+
 export default class FeaturedProject extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +40,7 @@ export default class FeaturedProject extends Component {
                 source={smalltree}
               />
               <Text style={styles.featuredProjectCardIconText}>
-                {this.props.treespledged.toLocaleString()}
+                {delimitNumbers(this.props.treespledged)}
                 {/* Trees Pledged */} {i18n.t('label.treesPledged')}
               </Text>
             </View>

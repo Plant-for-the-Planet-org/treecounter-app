@@ -7,27 +7,18 @@ const path = require('path');
 module.exports = webpackMerge(commonConfig, {
   mode: 'production',
   entry: {
-    bundle: ['babel-polyfill', path.join(__dirname, '../../index.web.js')],
-    widget: [
-      'babel-polyfill',
-      path.join(__dirname, '../widgets/basic/widget.js')
-    ],
+    bundle: [path.join(__dirname, '../../index.web.js')],
+    widget: [path.join(__dirname, '../widgets/basic/widget.js')],
     treecounterwidget: [
-      'babel-polyfill',
       path.join(__dirname, '../widgets/Treecounter/widget.js')
     ],
     donatetreewidget: [
-      'babel-polyfill',
       path.join(__dirname, '../widgets/DonateTrees/widget.js')
     ],
     progressbarwidget: [
-      'babel-polyfill',
       path.join(__dirname, '../widgets/progressbar/widget.js')
-      // ],
-      // ndviwidget: [
-      //   'babel-polyfill',
-      //   path.join(__dirname, '../widgets/NDVI/widget.js')
     ]
+    // ndviwidget: [ path.join(__dirname, '../widgets/NDVI/widget.js') ]
   },
   output: {
     path: path.join(__dirname, '../prod'),

@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+import FullHeightButton from '../Common/Button/FullHeightButton';
 import { ScrollView } from 'react-native';
-
+import { right_arrow_button } from '../../assets';
 import PlantProjectSnippet from './PlantProjectSnippet.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
-import TabContainer from '../../containers/Menu/TabContainer';
+import { formatNumber } from '../../utils/utils';
+// import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -55,7 +56,6 @@ class PlantProjectFull extends React.Component {
           contentContainerStyle={[
             scrollStyle.styleContainer,
             {
-              paddingBottom: 72,
               backgroundColor: backgroundColor
             }
           ]}
@@ -79,20 +79,43 @@ class PlantProjectFull extends React.Component {
               {...detailsProps}
             />
           </View>
-
-          {this.props.plantProject.allowDonations ? (
-            <View style={styles.buttonContainer}>
-              <PrimaryButton
-                onClick={() =>
-                  this.props.selectProject(this.props.plantProject.id)
-                }
-              >
-                {i18n.t('label.donate')}
-              </PrimaryButton>
-            </View>
-          ) : null}
         </ScrollView>
-        <TabContainer {...this.props} />
+        {this.props.plantProject.allowDonations ? (
+          <View style={styles.bottomActionArea}>
+            <View style={styles.centeredContentContainer}>
+              <View>
+                <Text style={[styles.cost]}>
+                  {formatNumber(
+                    this.props.plantProject.treeCost,
+                    null,
+                    this.props.plantProject.currency
+                  )}
+                </Text>
+              </View>
+
+              <Text style={[styles.costPerTree]}>
+                {i18n.t('label.cost_per_tree')}
+              </Text>
+            </View>
+            <FullHeightButton
+              buttonStyle={styles.squareButton}
+              onClick={() =>
+                this.props.selectProject(this.props.plantProject.id)
+              }
+              textStyle={styles.buttonText}
+              image={right_arrow_button}
+            >
+              {i18n.t('label.donate')}
+            </FullHeightButton>
+          </View>
+        ) : null}
+        <View style={[styles.bottomActionArea, { height: 14 }]}>
+          <View style={styles.centeredContentContainer} />
+          <FullHeightButton
+            buttonStyle={styles.bottomButtonExtension}
+            onClick={() => this.props.selectProject(this.props.plantProject.id)}
+          />
+        </View>
       </View>
     );
   }

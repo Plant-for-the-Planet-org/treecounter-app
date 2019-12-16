@@ -134,7 +134,7 @@ export function MakePledge(props) {
           <div className="submit-pledge-form-para">
             <p>
               {i18n.t('label.pledgeAddedMessage', {
-                treeCount: props.treeCount
+                treeCount: delimitNumbers(props.treeCount)
               })}
             </p>
           </div>
@@ -173,7 +173,7 @@ export function UpdatePledge(props) {
           <div className="submit-pledge-form-para">
             <p>
               {i18n.t('label.pledgeAddedMessage', {
-                treeCount: props.treeCount
+                treeCount: delimitNumbers(props.treeCount)
               })}
             </p>
           </div>

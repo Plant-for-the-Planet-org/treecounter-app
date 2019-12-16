@@ -4,14 +4,21 @@ export default EStyleSheet.create({
   carousalContainer: { flexDirection: 'column' },
   descriptionContainer: {
     paddingTop: 15,
-
     marginTop: 12,
     width: '100%',
     marginBottom: 20,
     paddingBottom: 20
   },
   descriptionText: {
-    color: '#686060'
+    color: '#686060',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'italic',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#000000'
   },
   linkTextContainer: {
     flexDirection: 'row',
@@ -29,5 +36,15 @@ export default EStyleSheet.create({
     borderWidth: 1,
     borderColor: '#d5d5d5',
     padding: 5
+  },
+  aboutHeader: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 19,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 23,
+    letterSpacing: 0,
+    color: '#4d5153',
+    paddingBottom: 10
   }
 });

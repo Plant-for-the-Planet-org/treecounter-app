@@ -109,13 +109,6 @@ class PlantProjectFull extends React.Component {
             </FullHeightButton>
           </View>
         ) : null}
-        <View style={[styles.bottomActionArea, { height: 14 }]}>
-          <View style={styles.centeredContentContainer} />
-          <FullHeightButton
-            buttonStyle={styles.bottomButtonExtension}
-            onClick={() => this.props.selectProject(this.props.plantProject.id)}
-          />
-        </View>
       </View>
     );
   }

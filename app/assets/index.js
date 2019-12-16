@@ -9,6 +9,7 @@ import gift_outline from './images/icons/gift_outline.png';
 import challenge_outline from './images/icons/challenge_outline.png';
 import heart_outline from './images/icons/heart_outline.png';
 import rocket_outline from './images/icons/rocket_outline.png';
+import rocket from './images/icons/rocket.png';
 import shovel_outline from './images/icons/shovel_outline.png';
 import target_outline from './images/icons/target_outline.png';
 import tree_outline_red from './images/icons/tree_outline_red.png';
@@ -156,6 +157,8 @@ import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
 import backArrow from './images/icons/backArrow.png';
 import snippetTree from './images/snippet-tree.png';
+import globe from './images/icons/globe.png';
+import outline_email from './images/icons/outline_email.png';
 export {
   germany,
   worldImg,
@@ -314,5 +317,8 @@ export {
   leafGray,
   backArrow,
   right_arrow_button,
-  snippetTree
+  snippetTree,
+  globe,
+  rocket,
+  outline_email
 };

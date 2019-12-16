@@ -98,17 +98,18 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   imageContainer: {
-    height: 100,
-    width: 100,
-    maxHeight: 100,
-    maxWidth: 100,
-    marginLeft: 5,
+    height: 180,
+    width: 250,
+    maxHeight: 180,
+    maxWidth: 250,
+    marginLeft: 0,
     marginRight: 5
   },
   image: {
     flex: 1,
     width: undefined,
-    height: undefined
+    height: undefined,
+    borderRadius: 7
   }
 });
 export default PlantProjectImageCarousel;

@@ -148,7 +148,7 @@ class PlantProjectSnippet extends PureComponent {
             style={{ borderBottomLeftRadius: 7, borderBottomRightRadius: 0 }}
             treePlantedChildContainerStyle={{ borderBottomLeftRadius: 0 }}
           />
-          <View style={styles.projectSpecsContainer}>
+          <View style={[styles.projectSpecsContainer]}>
             <View
               key="projectNameContainer"
               style={[styles.projectNameContainer, { paddingLeft: 10 }]}
@@ -214,7 +214,7 @@ class PlantProjectSnippet extends PureComponent {
             >
               <Image
                 source={snippetTree}
-                style={{ width: 90, height: 90 }}
+                style={{ width: 90, height: 90, paddingLeft: 5 }}
                 resizeMode={'contain'}
               />
               <View

@@ -10,6 +10,7 @@ import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/plant-details.native';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 import { updateStaticRoute } from '../../helpers/routerHelper';
+import Accordion from './HelperComponents/Accordion.native';
 const cleanUrl = url => {
   url = (url || '').trim();
   if (url) {
@@ -47,7 +48,8 @@ const PlantProjectDetails = ({
   plantProjectImages,
   ndviUid,
   currentUserProfile,
-  navigation
+  navigation,
+  slug
 }) => {
   // if (context.debug && !this.props.videoUrl) {
   //   //un-comment this if anybody want to test video playing on App
@@ -58,8 +60,16 @@ const PlantProjectDetails = ({
   const backgroundColor = 'white';
   return (
     <View style={styles.carousalContainer}>
+      {videoUrl ? (
+        <View
+          style={[styles.videoContainer, { paddingBottom: 20, borderWidth: 0 }]}
+        >
+          <VideoContainer url={videoUrl} />
+        </View>
+      ) : null}
       <PlantProjectImageCarousel images={plantProjectImages} />
-      <View style={styles.descriptionContainer}>
+      <View style={[styles.descriptionContainer]}>
+        <Text style={styles.aboutHeader}>{i18n.t('label.about')}</Text>
         <Text style={styles.descriptionText}>{description}</Text>
       </View>
       {url ? (
@@ -74,6 +84,12 @@ const PlantProjectDetails = ({
           </Text>
         </TouchableItem>
       ) : null}
+      <Accordion
+        navigation={navigation}
+        slug={slug}
+        updateStaticRoute={updateStaticRoute}
+        url={url}
+      />
       {currentUserProfile && currentUserProfile.isReviewer ? (
         <View
           style={{
@@ -108,11 +124,7 @@ const PlantProjectDetails = ({
           </TouchableOpacity>
         </View>
       ) : null}
-      {videoUrl ? (
-        <View style={styles.videoContainer}>
-          <VideoContainer url={videoUrl} />
-        </View>
-      ) : null}
+
       {<NDVI ndviUid={ndviUid} />}
     </View>
   );

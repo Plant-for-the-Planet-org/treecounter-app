@@ -24,5 +24,8 @@
   "survival-rate": "Survival Rate",
   "new_review_added_successfully": "New Review added successfully",
   "review_deleted_successfully": "Review deleted successfully",
-  "review_updated_successfully": "Review updated successfully"
+  "review_updated_successfully": "Review updated successfully",
+  "about": "About",
+  "contact_details": "Contact Details",
+  "view_profile": "View Profile"
 }

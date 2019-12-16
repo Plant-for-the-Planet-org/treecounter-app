@@ -19,7 +19,15 @@ export default class Accordion extends Component {
   };
 
   render() {
-    const { slug, updateStaticRoute, navigation, url, _goToURL } = this.props;
+    const {
+      slug,
+      updateStaticRoute,
+      navigation,
+      url,
+      _goToURL,
+      address,
+      email
+    } = this.props;
     return (
       <View style={styles.paymentCardView}>
         <TouchableOpacity
@@ -90,39 +98,43 @@ export default class Accordion extends Component {
                   }}
                 />
                 <TouchableOpacity onPress={() => _goToURL(url)}>
-                  <Text style={styles.viewProfileText}>
-                    {i18n.t('label.view_profile')}
+                  <Text
+                    style={styles.viewProfileText}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >
+                    {url}
                   </Text>
                 </TouchableOpacity>
               </View>
             ) : null}
 
-            <View style={{ flexDirection: 'row', marginTop: 10 }}>
-              <Image
-                source={rocket}
-                style={{
-                  width: 17,
-                  height: 17,
-                  marginRight: 10
-                }}
-              />
-              <Text style={styles.viewProfileText}>
-                {i18n.t('label.view_profile')}
-              </Text>
-            </View>
-            <View style={{ flexDirection: 'row', marginTop: 10 }}>
-              <Image
-                source={outline_email}
-                style={{
-                  width: 17,
-                  height: 17,
-                  marginRight: 10
-                }}
-              />
-              <Text style={styles.viewProfileText}>
-                {i18n.t('label.view_profile')}
-              </Text>
-            </View>
+            {address ? (
+              <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                <Image
+                  source={rocket}
+                  style={{
+                    width: 17,
+                    height: 17,
+                    marginRight: 10
+                  }}
+                />
+                <Text style={styles.viewProfileText}>{address}</Text>
+              </View>
+            ) : null}
+            {email ? (
+              <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                <Image
+                  source={outline_email}
+                  style={{
+                    width: 17,
+                    height: 17,
+                    marginRight: 10
+                  }}
+                />
+                <Text style={styles.viewProfileText}>{email}</Text>
+              </View>
+            ) : null}
           </View>
         ) : null}
         {/* Hidden until expanded by User */}

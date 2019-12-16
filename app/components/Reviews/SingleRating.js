@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../../styles/review.native';
 // const { width, height } = Dimensions.get('window');
 export function GenerateStar(fill, score = 0) {
@@ -10,7 +10,7 @@ export function GenerateStar(fill, score = 0) {
     <Icon
       key={index}
       name="star"
-      size={12}
+      size={16}
       solid={fill}
       style={{ color: '#89b53a', marginLeft: 2 }}
     />
@@ -24,12 +24,14 @@ export default class SingleRating extends Component {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          marginBottom: 5,
+          marginBottom: 0,
           marginRight: 1
         }}
       >
         {this.props.name ? (
-          <Text style={styles.ratingsText}>{this.props.name}</Text>
+          <Text style={[styles.ratingsText, { paddingBottom: -2 }]}>
+            {this.props.name}
+          </Text>
         ) : null}
         {this.props.indexScore
           ? GenerateStar(true, this.props.indexScore.score)

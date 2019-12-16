@@ -46,7 +46,17 @@ class PlantProjectSnippet extends PureComponent {
       this.props.onMoreClick(id, name);
     }
   };
-
+  getTaxCountries() {
+    let { plantProject } = this.props;
+    return (
+      plantProject.taxDeductibleCountries &&
+      plantProject.taxDeductibleCountries.length &&
+      plantProject.taxDeductibleCountries
+        .map(country => getISOToCountryName(country).country)
+        .join(', ')
+        .concat('.')
+    );
+  }
   render() {
     const {
       // eslint-disable-next-line no-unused-vars
@@ -106,16 +116,6 @@ class PlantProjectSnippet extends PureComponent {
       treeCost,
       taxDeduction: paymentSetup.taxDeduction
     };
-    let deducibleText1 = '';
-    // let tooltipText1 = '';
-    for (let i = 0; i < specsProps.taxDeduction.length; i++) {
-      deducibleText1 += specsProps.taxDeduction[i];
-      if (i == specsProps.taxDeduction.length - 1) {
-        deducibleText1 += '.';
-      } else {
-        deducibleText1 += ', ';
-      }
-    }
     const survivalRateLeaf =
       survivalRateStatus == 'verified'
         ? leaf
@@ -148,10 +148,15 @@ class PlantProjectSnippet extends PureComponent {
             style={{ borderBottomLeftRadius: 7, borderBottomRightRadius: 0 }}
             treePlantedChildContainerStyle={{ borderBottomLeftRadius: 0 }}
           />
-          <View style={[styles.projectSpecsContainer]}>
+          <View
+            style={[
+              styles.projectSpecsContainer,
+              { padding: 15, paddingTop: 20 }
+            ]}
+          >
             <View
               key="projectNameContainer"
-              style={[styles.projectNameContainer, { paddingLeft: 10 }]}
+              style={[styles.projectNameContainer]}
             >
               <Text
                 ellipsizeMode="tail"
@@ -163,41 +168,22 @@ class PlantProjectSnippet extends PureComponent {
               </Text>
             </View>
             {reviews && reviews.length ? (
-              <View
-                style={[
-                  styles.certifiedAndRatingContainer,
-                  !isCertified && styles.withoutCertified
-                ]}
+              <TouchableOpacity
+                style={{ paddingTop: 3, paddingLeft: 2, flex: 1 }}
+                onPress={() => {
+                  this.props.selectPlantProjectAction(id);
+                  updateStaticRoute('app_reviews', this.props.navigation);
+                }}
               >
-                <TouchableOpacity
-                  style={{ height: 48, paddingTop: 13, flex: 1 }}
-                  onPress={() => {
-                    this.props.selectPlantProjectAction(id);
-                    updateStaticRoute('app_reviews', this.props.navigation);
-                  }}
-                >
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text
-                      style={[
-                        {
-                          fontSize: 14,
-                          color: textColor,
-                          textAlign: 'center',
-                          marginRight: 5,
-                          marginLeft: 2
-                        }
-                      ]}
-                    >
-                      {(plantProjectRating / 100).toFixed(2) || '0.0'}
-                    </Text>
-                    <SingleRating
-                      indexScore={{
-                        score: Math.round(plantProjectRating / 100)
-                      }}
-                    />
-                  </View>
-                </TouchableOpacity>
-              </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <SingleRating
+                    name={(plantProjectRating / 100).toFixed(2) || '0.0'}
+                    indexScore={{
+                      score: Math.round(plantProjectRating / 100)
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>
             ) : null}
 
             <View
@@ -214,7 +200,12 @@ class PlantProjectSnippet extends PureComponent {
             >
               <Image
                 source={snippetTree}
-                style={{ width: 90, height: 90, paddingLeft: 5 }}
+                style={{
+                  width: 90,
+                  height: 90,
+                  paddingLeft: 5,
+                  marginRight: 5
+                }}
                 resizeMode={'contain'}
               />
               <View
@@ -269,10 +260,10 @@ class PlantProjectSnippet extends PureComponent {
                     }}
                   />
                   <Text style={styles.survivalText}>
-                    {specsProps.taxDeduction && specsProps.taxDeduction.length
+                    {this.getTaxCountries()
                       ? `${i18n.t('label.tax_deductible')} ${i18n.t(
                           'label.in'
-                        )} ${deducibleText1}`
+                        )} ${this.getTaxCountries()}`
                       : i18n.t('label.no_tax_deduction')}
                   </Text>
                 </View>

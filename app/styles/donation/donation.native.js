@@ -229,7 +229,7 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    paddingBottom: 20
+    paddingBottom: 5
   },
   paypalMessage: {
     fontSize: 12,

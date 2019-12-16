@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
+import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
 import { queryParamsToObject } from '../../helpers/utils';
 import { View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
@@ -20,6 +21,16 @@ class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
   }
+  // async componentWillMount() {
+  //   try {
+  //     console.log('getting project details', this.props.plantProject);
+  //     let projectData = await fetchPlantProjectDetail(this.props.plantProject.id);
+  //     console.log('got project details', projectData);
+  //     // this.setState({});
+  //   } catch (err) {
+  //     console.log(error);
+  //   }
+  // }
   render() {
     const {
       images,

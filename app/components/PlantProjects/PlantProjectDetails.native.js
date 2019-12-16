@@ -49,7 +49,9 @@ const PlantProjectDetails = ({
   ndviUid,
   currentUserProfile,
   navigation,
-  slug
+  slug,
+  email,
+  address
 }) => {
   // if (context.debug && !this.props.videoUrl) {
   //   //un-comment this if anybody want to test video playing on App
@@ -90,6 +92,8 @@ const PlantProjectDetails = ({
         updateStaticRoute={updateStaticRoute}
         url={url}
         _goToURL={_goToURL}
+        email={email}
+        address={address}
       />
       {currentUserProfile && currentUserProfile.isReviewer ? (
         <View

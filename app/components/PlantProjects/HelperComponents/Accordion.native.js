@@ -19,7 +19,7 @@ export default class Accordion extends Component {
   };
 
   render() {
-    const { slug, updateStaticRoute, navigation, url } = this.props;
+    const { slug, updateStaticRoute, navigation, url, _goToURL } = this.props;
     return (
       <View style={styles.paymentCardView}>
         <TouchableOpacity
@@ -89,11 +89,7 @@ export default class Accordion extends Component {
                     marginRight: 10
                   }}
                 />
-                <TouchableOpacity
-                  onPress={() => {
-                    updateStaticRoute(`/t/${slug}`, navigation);
-                  }}
-                >
+                <TouchableOpacity onPress={() => _goToURL(url)}>
                   <Text style={styles.viewProfileText}>
                     {i18n.t('label.view_profile')}
                   </Text>

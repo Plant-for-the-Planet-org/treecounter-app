@@ -89,6 +89,7 @@ const PlantProjectDetails = ({
         slug={slug}
         updateStaticRoute={updateStaticRoute}
         url={url}
+        _goToURL={_goToURL}
       />
       {currentUserProfile && currentUserProfile.isReviewer ? (
         <View

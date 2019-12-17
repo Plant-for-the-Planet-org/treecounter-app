@@ -14,7 +14,6 @@ import PlantProjectSnippet from './PlantProjectSnippet.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 // import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -22,7 +21,7 @@ import { bindActionCreators } from 'redux';
 class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { ...props.plantProject };
   }
   async componentWillMount() {
     try {
@@ -39,7 +38,7 @@ class PlantProjectFull extends React.Component {
     let { plantProject } = this.state;
 
     if (!plantProject) return <View />;
-    console.log('rendering with tpo', plantProject.tpo);
+    console.log('rendering with tpo', plantProject.tpoData);
     const {
       images,
       description,
@@ -52,7 +51,7 @@ class PlantProjectFull extends React.Component {
       linkText,
       ndviUid
     } = plantProject;
-    let tpo = plantProject.tpo || {};
+    let tpo = plantProject.tpoData || {};
     const detailsProps = {
       description,
       images,
@@ -139,12 +138,5 @@ PlantProjectFull.propTypes = {
   selectProject: PropTypes.func,
   onBackClick: PropTypes.func
 };
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      //fetchPlantProjectDetail
-    },
-    dispatch
-  );
-};
-export default connect(null, mapDispatchToProps)(PlantProjectFull);
+
+export default PlantProjectFull;

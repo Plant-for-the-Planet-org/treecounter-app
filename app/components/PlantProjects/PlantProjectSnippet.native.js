@@ -85,7 +85,7 @@ class PlantProjectSnippet extends PureComponent {
       // videoUrl: videoUrl,
       // geoLocation
     } = this.props.plantProject;
-    let tpo = this.props.plantProject.tpo || {};
+    let tpo = this.props.plantProject.tpoData || {};
     let projectImage = null;
     // let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
     // treePlantedRatio = parseFloat(treePlantedRatio);
@@ -167,7 +167,7 @@ class PlantProjectSnippet extends PureComponent {
               >
                 {`${teaserProps.projectName}  ${
                   teaserProps.tpoName ? 'by ' + teaserProps.tpoName : ''
-                }`}
+                  }`}
               </Text>
             </View>
             {reviews && reviews.length ? (
@@ -265,8 +265,8 @@ class PlantProjectSnippet extends PureComponent {
                   <Text style={styles.survivalText}>
                     {this.getTaxCountries()
                       ? `${i18n.t('label.tax_deductible')} ${i18n.t(
-                          'label.in'
-                        )} ${this.getTaxCountries()}`
+                        'label.in'
+                      )} ${this.getTaxCountries()}`
                       : i18n.t('label.no_tax_deduction')}
                   </Text>
                 </View>

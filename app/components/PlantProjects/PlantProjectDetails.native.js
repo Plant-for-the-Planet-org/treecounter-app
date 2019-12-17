@@ -10,7 +10,8 @@ import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/plant-details.native';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 import { updateStaticRoute } from '../../helpers/routerHelper';
-import Accordion from './HelperComponents/Accordion.native';
+import AccordionContact./HelperComponents/AccordionContactInfo.nativedionContactInfo.native';
+import ReadMore from './HelperComponents/ReadMore.native';
 const cleanUrl = url => {
   url = (url || '').trim();
   if (url) {
@@ -51,6 +52,11 @@ const PlantProjectDetails = ({
   navigation,
   tpo: { email, treecounterSlug: slug, address, name }
 }) => {
+  const getDescriptionPart = (which) => {
+    let howManySentence = description.split('.');
+    if (!which && howManySentence.length < 3) return false;
+    return which == 1 ? howManySentence.slice(0, 2).join('') : howManySentence.slice(-(howManySentence.length - 2)).join('');
+  }
   // if (context.debug && !this.props.videoUrl) {
   //   //un-comment this if anybody want to test video playing on App
   //   // videoUrl = 'https://www.youtube.com/embed/XJ3p5TAjH30';
@@ -71,10 +77,12 @@ const PlantProjectDetails = ({
       <PlantProjectImageCarousel images={plantProjectImages} />
       <View style={[styles.descriptionContainer]}>
         <Text style={styles.aboutHeader}>{i18n.t('label.about')}</Text>
-        <Text style={styles.descriptionText}>{description}</Text>
+        <Text style={styles.descriptionText}>{getDescriptionPart(1)}</Text>
+        {getDescriptionPart() && <ReadMore style={styles.descriptionText}
+          desciptionText={getDescriptionPart()} />}
       </View>
 
-      <Accordion
+      <AccordionContactInfo
         navigation={navigation}
         slug={slug}
         updateStaticRoute={updateStaticRoute}

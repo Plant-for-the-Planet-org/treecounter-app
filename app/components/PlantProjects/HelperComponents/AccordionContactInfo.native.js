@@ -2,20 +2,33 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { globe, rocket, tree_outline, outline_email } from '../../../assets';
-import styles from './../../../styles/donation/donation.native';
-import i18n from './../../../locales/i18n';
+import styles from '../../../styles/donation/donation.native';
+import i18n from '../../../locales/i18n';
 import { getLocalRoute } from '../../../actions/apiRouting';
-export default class Accordion extends Component {
+import { getISOToCountryName } from '../../../helpers/utils';
+export default class AccordionContactInfo extends Component {
   state = {
     showInfo: true
   };
 
-  togglePaypalInfo = () => {
+  toggleInfo = () => {
     this.setState({
       showInfo: !this.state.showInfo
     });
   };
-
+  getAddress(address) {
+    let str = [];
+    Object.keys(address).forEach(item => {
+      try {
+        if (item == 'country')
+          item = getISOToCountryName(address[item]).country;
+      } catch (error) {
+        console.log(err);
+      }
+      str.push(address[item]);
+    })
+    return str.join(', ');
+  }
   render() {
     const {
       slug,
@@ -27,33 +40,24 @@ export default class Accordion extends Component {
       email,
       name
     } = this.props;
+    let iconName = this.state.showInfo ? 'chevron-up' : 'chevron-down';
     return (
       <View style={styles.paymentCardView}>
         <TouchableOpacity
           style={styles.paymentModeView}
           onPress={() => {
-            this.togglePaypalInfo();
+            this.toggleInfo();
           }}
         >
           <Text style={styles.paymentModeTitle}>
             {i18n.t('label.contact_details')}
           </Text>
-
-          {this.state.showInfo ? (
-            <Icon
-              name="chevron-up"
-              size={14}
-              color="rgba(0, 0, 0, 0.38)"
-              style={{ marginLeft: 10 }}
-            />
-          ) : (
-            <Icon
-              name="chevron-down"
-              size={14}
-              color="rgba(0, 0, 0, 0.38)"
-              style={{ marginLeft: 10 }}
-            />
-          )}
+          <Icon
+            name={iconName}
+            size={14}
+            color="rgba(0, 0, 0, 0.38)"
+            style={{ marginLeft: 10 }}
+          />
         </TouchableOpacity>
 
         {/* Hidden until expanded by User */}
@@ -122,7 +126,7 @@ export default class Accordion extends Component {
                     marginRight: 10
                   }}
                 />
-                <Text style={styles.viewProfileText}>{address}</Text>
+                <Text style={styles.viewProfileText}>{this.getAddress(address)}</Text>
               </View>
             ) : null}
             {email ? (

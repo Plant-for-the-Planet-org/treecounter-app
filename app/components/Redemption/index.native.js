@@ -22,7 +22,6 @@ import buttonStyles from '../../styles/common/button.native';
 
 export default function Redemption(props) {
   const [scrollY] = React.useState(new Animated.Value(0));
-  const value = '';
 
   const [loadButton, setloadButton] = React.useState(false);
   const [buttonType, setButtonType] = React.useState('validate');

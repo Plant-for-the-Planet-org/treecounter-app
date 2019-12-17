@@ -26,6 +26,7 @@ import CardLayout from '../Common/Card';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -40,6 +41,7 @@ class PlantProjectSnippet extends PureComponent {
   // toggleExpanded(id) {
   //   this.props.onMoreClick(id);
   // }
+
   containerPress = () => {
     if (this.props.onMoreClick) {
       const { id, name } = this.props.plantProject;
@@ -83,6 +85,7 @@ class PlantProjectSnippet extends PureComponent {
       // videoUrl: videoUrl,
       // geoLocation
     } = this.props.plantProject;
+    let tpo = this.props.plantProject.tpo || {};
     let projectImage = null;
     // let treePlantedRatio = (countPlanted / countTarget).toFixed(2);
     // treePlantedRatio = parseFloat(treePlantedRatio);
@@ -102,7 +105,7 @@ class PlantProjectSnippet extends PureComponent {
     }
 
     const teaserProps = {
-      tpoName: this.props.tpoName,
+      tpoName: tpo.name,
       projectName,
       isCertified,
       projectImage
@@ -279,7 +282,6 @@ PlantProjectSnippet.defaultProps = { clickable: true, showCertifiedTag: true };
 PlantProjectSnippet.propTypes = {
   plantProject: PropTypes.object.isRequired,
   callExpanded: PropTypes.func,
-  tpoName: PropTypes.string,
   selectAnotherProject: PropTypes.bool,
   projectClear: PropTypes.func,
   showNextButton: PropTypes.bool,
@@ -293,6 +295,7 @@ PlantProjectSnippet.propTypes = {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      fetchPlantProjectDetail,
       selectPlantProjectAction
     },
     dispatch

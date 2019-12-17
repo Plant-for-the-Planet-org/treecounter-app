@@ -49,9 +49,7 @@ const PlantProjectDetails = ({
   ndviUid,
   currentUserProfile,
   navigation,
-  slug,
-  email,
-  address
+  tpo: { email, treecounterSlug: slug, address, name }
 }) => {
   // if (context.debug && !this.props.videoUrl) {
   //   //un-comment this if anybody want to test video playing on App
@@ -60,6 +58,7 @@ const PlantProjectDetails = ({
   const url = cleanUrl(homepageUrl);
   const backgroundColorLightGreen = '#89b53a';
   const backgroundColor = 'white';
+
   return (
     <View style={styles.carousalContainer}>
       {videoUrl ? (
@@ -74,18 +73,7 @@ const PlantProjectDetails = ({
         <Text style={styles.aboutHeader}>{i18n.t('label.about')}</Text>
         <Text style={styles.descriptionText}>{description}</Text>
       </View>
-      {url ? (
-        <TouchableItem
-          style={styles.linkTextContainer}
-          onPress={() => _goToURL(url)}
-        >
-          <Image source={link} style={styles.linkIcon} />
 
-          <Text style={styles.linkText}>
-            {homepageCaption ? homepageCaption : i18n.t('label.link')}
-          </Text>
-        </TouchableItem>
-      ) : null}
       <Accordion
         navigation={navigation}
         slug={slug}
@@ -94,6 +82,7 @@ const PlantProjectDetails = ({
         _goToURL={_goToURL}
         email={email}
         address={address}
+        name={name}
       />
       {currentUserProfile && currentUserProfile.isReviewer ? (
         <View

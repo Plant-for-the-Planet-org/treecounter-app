@@ -13,6 +13,8 @@ import { right_arrow_button } from '../../assets';
 import PlantProjectSnippet from './PlantProjectSnippet.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 // import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -20,18 +22,24 @@ import { formatNumber } from '../../utils/utils';
 class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
-  // async componentWillMount() {
-  //   try {
-  //     console.log('getting project details', this.props.plantProject);
-  //     let projectData = await fetchPlantProjectDetail(this.props.plantProject.id);
-  //     console.log('got project details', projectData);
-  //     // this.setState({});
-  //   } catch (err) {
-  //     console.log(error);
-  //   }
-  // }
+  async componentWillMount() {
+    try {
+      console.log('getting project details', this.props.plantProject);
+      let plantProject = await fetchPlantProjectDetail(
+        this.props.plantProject.id
+      );
+      this.setState({ plantProject });
+    } catch (err) {
+      console.log(error);
+    }
+  }
   render() {
+    let { plantProject } = this.state;
+
+    if (!plantProject) return <View />;
+    console.log('rendering with tpo', plantProject.tpo);
     const {
       images,
       description,
@@ -42,10 +50,9 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       url,
       linkText,
-      tpo_name,
       ndviUid
-    } = this.props.plantProject;
-
+    } = plantProject;
+    let tpo = plantProject.tpo || {};
     const detailsProps = {
       description,
       images,
@@ -56,8 +63,10 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       url,
       linkText,
-      ndviUid
+      ndviUid,
+      tpo
     };
+
     const navigation = this.props.navigation;
     const backgroundColor = 'white';
 
@@ -72,12 +81,11 @@ class PlantProjectFull extends React.Component {
           ]}
         >
           <PlantProjectSnippet
-            key={'projectFull' + this.props.plantProject.id}
+            key={'projectFull' + plantProject.id}
             showMoreButton={false}
             clickable={false}
-            plantProject={this.props.plantProject}
+            plantProject={plantProject}
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
-            tpoName={tpo_name}
             selectProject={this.props.selectProject}
             navigation={navigation}
           />
@@ -91,15 +99,15 @@ class PlantProjectFull extends React.Component {
             />
           </View>
         </ScrollView>
-        {this.props.plantProject.allowDonations ? (
+        {plantProject.allowDonations ? (
           <View style={styles.bottomActionArea}>
             <View style={styles.centeredContentContainer}>
               <View>
                 <Text style={[styles.cost]}>
                   {formatNumber(
-                    this.props.plantProject.treeCost,
+                    plantProject.treeCost,
                     null,
-                    this.props.plantProject.currency
+                    plantProject.currency
                   )}
                 </Text>
               </View>
@@ -110,9 +118,7 @@ class PlantProjectFull extends React.Component {
             </View>
             <FullHeightButton
               buttonStyle={styles.squareButton}
-              onClick={() =>
-                this.props.selectProject(this.props.plantProject.id)
-              }
+              onClick={() => this.props.selectProject(plantProject.id)}
               textStyle={styles.buttonText}
               image={right_arrow_button}
             >
@@ -127,12 +133,18 @@ class PlantProjectFull extends React.Component {
 
 PlantProjectFull.propTypes = {
   plantProject: PropTypes.object.isRequired,
-  tpoName: PropTypes.string,
   projectClear: PropTypes.func,
   showNextButton: PropTypes.bool,
   onNextClick: PropTypes.func,
   selectProject: PropTypes.func,
   onBackClick: PropTypes.func
 };
-
-export default PlantProjectFull;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      //fetchPlantProjectDetail
+    },
+    dispatch
+  );
+};
+export default connect(null, mapDispatchToProps)(PlantProjectFull);

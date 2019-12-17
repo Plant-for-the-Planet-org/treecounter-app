@@ -4,12 +4,10 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { globe, rocket, tree_outline, outline_email } from '../../../assets';
 import styles from './../../../styles/donation/donation.native';
 import i18n from './../../../locales/i18n';
-
+import { getLocalRoute } from '../../../actions/apiRouting';
 export default class Accordion extends Component {
   state = {
-    showInfo: true,
-    showPay: true,
-    allValid: false
+    showInfo: true
   };
 
   togglePaypalInfo = () => {
@@ -26,7 +24,8 @@ export default class Accordion extends Component {
       url,
       _goToURL,
       address,
-      email
+      email,
+      name
     } = this.props;
     return (
       <View style={styles.paymentCardView}>
@@ -66,7 +65,7 @@ export default class Accordion extends Component {
             ]}
           >
             {slug ? (
-              <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'row', marginTop: 10 }}>
                 <Image
                   source={tree_outline}
                   style={{
@@ -77,7 +76,11 @@ export default class Accordion extends Component {
                 />
                 <TouchableOpacity
                   onPress={() => {
-                    updateStaticRoute(`/t/${slug}`, navigation);
+                    updateStaticRoute(
+                      getLocalRoute('app_treecounter'),
+                      navigation,
+                      { treeCounterId: slug, titleParam: name }
+                    );
                   }}
                 >
                   <Text style={styles.viewProfileText}>

@@ -54,7 +54,7 @@ class PublicTreeCounter extends React.Component {
 
   onRegisterSupporter() {
     this.props.supportTreecounterAction(this.props.treecounter);
-    updateRoute('app_donateTrees', this.props.navigation, 0, {
+    updateRoute('app_supportTrees', this.props.navigation, 44, {
       titleParam: i18n.t('label.support_trees_to', {
         user: this.props.treecounter.displayName
       })
@@ -290,6 +290,7 @@ class PublicTreeCounter extends React.Component {
   }
 
   _goToURL(url) {
+    /*
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
@@ -297,6 +298,8 @@ class PublicTreeCounter extends React.Component {
         console.log("Don't know how to open URI: " + url);
       }
     });
+*/
+    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
   }
 }
 

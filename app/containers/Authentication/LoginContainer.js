@@ -41,7 +41,7 @@ class LoginContainer extends React.Component {
         .login(value, recaptchaToken, this.props.navigation)
         .then(val => val)
         .catch(err => {
-          refreshToken();
+          if (refreshToken) refreshToken();
           console.log('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
             err,

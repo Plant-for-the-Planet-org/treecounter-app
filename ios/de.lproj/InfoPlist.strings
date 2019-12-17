@@ -17,3 +17,5 @@
 "NSBluetoothAlwaysUsageDescription" = "Wir würden gerne Bluetooh für die App verwenden.";
 "NSMotionUsageDescription" = "Wir würden gerne den Bewegungssensor für die App verwenden.";
 "NSSpeechRecognitionUsageDescription" = "Wir würden gerne die Spracherkennung für die App verwenden.";
+"NSContactsUsageDescription" = "Wir benötigen Zugriff auf die Kontakte für die App.";
+"NSSiriUsageDescription" = "Wir würden gerne Siri für die App verwenden";

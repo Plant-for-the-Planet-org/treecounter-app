@@ -46,6 +46,7 @@ import competition_outline from './images/icons/competition_outline.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
+import right_arrow_button from './images/icons/right-arrow-button.png';
 import arrow_left_orange_outline from './images/icons/arrow_left_orange_outline.png';
 import arrow_left_orange from './images/icons/arrow_left_orange.png';
 import tick from './images/icons/tick.png';
@@ -153,6 +154,7 @@ import planetLogo from './images/Planet-Logo.png';
 import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
+import backArrow from './images/icons/backArrow.png';
 export {
   germany,
   worldImg,
@@ -308,5 +310,7 @@ export {
   planetLogo,
   circleDelete,
   leaf,
-  leafGray
+  leafGray,
+  backArrow,
+  right_arrow_button
 };

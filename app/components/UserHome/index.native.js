@@ -212,6 +212,7 @@ export default class UserHome extends Component {
   };
 
   _goToURL(url) {
+    /*
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
@@ -219,6 +220,8 @@ export default class UserHome extends Component {
         //console.log("Don't know how to open URI: " + url);
       }
     });
+*/
+    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
   }
 
   render() {

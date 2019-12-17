@@ -10,7 +10,6 @@
   "heading_payment": "Pagamento",
   "no_of_trees": "Número de árvores",
   "trees": "Árvores",
-  "gift_trees_description": "Árvores de presente para amigos ou outros contatos! Cada árvore que você dá aparece no seu contador de árvore e do destinatário. Se eles ainda não possuem um contador de árvores, nós os convidaremos a plantar conosco via e-mail!",
   "gift_message": "Mensagem de presente (opcional)",
   "gift_user_trees": "Transferindo {{count}} árvores para {{user}}",
   "gift_to": "Presente para {{name}}",

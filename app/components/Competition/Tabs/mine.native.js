@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View, RefreshControl } from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
@@ -10,7 +10,8 @@ export default class MineCompetitions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myCompetitions: []
+      myCompetitions: [],
+      refreshing: false
     };
   }
 
@@ -50,6 +51,20 @@ export default class MineCompetitions extends Component {
     }
   }
 
+  onRefresh = () => {
+    this.setState({
+      refreshing: true
+    });
+    this.props
+      .updateMineCompetitions()
+      .then(() => {
+        this.setState({ refreshing: false });
+      })
+      .catch(() => {
+        this.setState({ refreshing: false });
+      });
+  };
+
   render() {
     let { myCompetitions } = this.state;
 
@@ -59,6 +74,12 @@ export default class MineCompetitions extends Component {
           scrollStyle.styleContainer,
           { paddingBottom: 72 }
         ]}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+          />
+        }
       >
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>

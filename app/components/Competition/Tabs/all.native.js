@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, Image } from 'react-native';
+import { ScrollView, Text, View, Image, RefreshControl } from 'react-native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
@@ -11,7 +11,8 @@ export default class AllCompetitions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAllCompetitions: []
+      showAllCompetitions: [],
+      refreshing: false
     };
   }
   componentWillMount() {
@@ -60,6 +61,20 @@ export default class AllCompetitions extends Component {
     });
   }
 
+  onRefresh = () => {
+    this.setState({
+      refreshing: true
+    });
+    this.props
+      .updateAllCompetitions()
+      .then(() => {
+        this.setState({ refreshing: false });
+      })
+      .catch(() => {
+        this.setState({ refreshing: false });
+      });
+  };
+
   render() {
     let { showAllCompetitions } = this.state;
     return (
@@ -68,6 +83,12 @@ export default class AllCompetitions extends Component {
           scrollStyle.styleContainer,
           { paddingBottom: 72 }
         ]}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+          />
+        }
       >
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>

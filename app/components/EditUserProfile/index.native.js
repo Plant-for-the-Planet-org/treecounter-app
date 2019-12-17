@@ -68,9 +68,14 @@ export default class EditUserProfile extends Component {
     };
   }
 
-  changeEmail = () => {
-    let value = this.refs.tabView.refs.securityTabView.refs.change_email.getValue();
-    this.props.updateEmail(value);
+  changeEmail = emailForm => {
+    if (this.refs.tabView.refs.securityTabView) {
+      let value = this.refs.tabView.refs.securityTabView.refs.change_email.getValue();
+      this.props.updateEmail(value);
+    } else {
+      let value = emailForm.getValue();
+      this.props.updateEmail(value);
+    }
   };
 
   _renderTabBar = props => {
@@ -138,47 +143,47 @@ export default class EditUserProfile extends Component {
           <CardLayout style={{ flex: 1 }}>
             <ScrollView>
               {treeCounter &&
-                treeCounter.followeeIds &&
-                this.props.followeeList &&
-                this.props.followeeList.length > 0 ? (
-                  <View>
-                    {this.props.followeeList.map(follow => (
-                      <View key={follow.id} style={styles.followerRow}>
-                        <UserProfileImage
-                          profileImage={follow.userProfile.image}
-                        />
-                        <TouchableItem
-                          style={styles.followerCol}
-                          onPress={() => {
-                            setTimeout(() => {
-                              this.props.navigation.navigate(
-                                getLocalRoute('app_treecounter'),
-                                {
-                                  treeCounterId: follow.id,
-                                  titleParam: follow.displayName
-                                }
-                              );
-                            }, 0);
-                          }}
-                        >
-                          <Text>{follow.displayName}</Text>
-                        </TouchableItem>
+              treeCounter.followeeIds &&
+              this.props.followeeList &&
+              this.props.followeeList.length > 0 ? (
+                <View>
+                  {this.props.followeeList.map(follow => (
+                    <View key={follow.id} style={styles.followerRow}>
+                      <UserProfileImage
+                        profileImage={follow.userProfile.image}
+                      />
+                      <TouchableItem
+                        style={styles.followerCol}
+                        onPress={() => {
+                          setTimeout(() => {
+                            this.props.navigation.navigate(
+                              getLocalRoute('app_treecounter'),
+                              {
+                                treeCounterId: follow.id,
+                                titleParam: follow.displayName
+                              }
+                            );
+                          }, 0);
+                        }}
+                      >
+                        <Text>{follow.displayName}</Text>
+                      </TouchableItem>
 
-                        <FollowLabelButton
-                          label={i18n.t('label.unsubscribe')}
-                          isSubscribed
-                          onClick={() => {
-                            this.props.unfollowUser(follow.id);
-                          }}
-                        />
-                      </View>
-                    ))}
-                  </View>
-                ) : this.props.followeeList ? (
-                  <Text>{i18n.t('label.not_following_anybody')}</Text>
-                ) : (
-                    <LoadingIndicator contentLoader={true} screen="profileLoader" />
-                  )}
+                      <FollowLabelButton
+                        label={i18n.t('label.unsubscribe')}
+                        isSubscribed
+                        onClick={() => {
+                          this.props.unfollowUser(follow.id);
+                        }}
+                      />
+                    </View>
+                  ))}
+                </View>
+              ) : this.props.followeeList ? (
+                <Text>{i18n.t('label.not_following_anybody')}</Text>
+              ) : (
+                <LoadingIndicator contentLoader={true} screen="profileLoader" />
+              )}
             </ScrollView>
           </CardLayout>
         );
@@ -186,7 +191,7 @@ export default class EditUserProfile extends Component {
       case 'security':
         return (
           <SecurityTabView
-            ref="securityTabView"
+            ref={'securityTabView'}
             onSave={onSave}
             currentUserProfile={currentUserProfile}
             getFormSchemaOption={this.getFormSchemaOption}
@@ -332,7 +337,7 @@ class SecurityTabView extends React.PureComponent {
           </View>
           <PrimaryButton
             onClick={() => {
-              this.props.changeEmail();
+              this.props.changeEmail(this.refs.change_email);
             }}
           >
             {i18n.t('label.save_changes')}

@@ -27,10 +27,9 @@ import i18n from '../locales/i18n.js';
 
 export function fetchCompetitions(category) {
   return dispatch => {
-    // dispatch(setProgressModelState(true));
     dispatch(setContentLoaderState(true));
-
-    getAuthenticatedRequest('competitions_get', {
+    dispatch(setProgressModelState(true));
+    return getAuthenticatedRequest('competitions_get', {
       category: category,
       limit: 100
     })
@@ -43,13 +42,15 @@ export function fetchCompetitions(category) {
             )
           )
         );
-        // dispatch(setProgressModelState(false));
         dispatch(setContentLoaderState(false));
+        dispatch(setProgressModelState(false));
+        return res;
       })
       .catch(err => {
         debug(err);
-        // dispatch(setProgressModelState(false));
         dispatch(setContentLoaderState(false));
+        dispatch(setProgressModelState(false));
+        return err;
       });
   };
 }
@@ -180,6 +181,7 @@ export function createCompetition(value, navigation) {
           dispatch(fetchMineCompetitions());
           dispatch(fetchCompetitions('all'));
           dispatch(fetchCompetitions('featured'));
+          dispatch(fetchCompetitions('archived'));
         })
         .catch(error => {
           debug(error);
@@ -304,10 +306,9 @@ export function fetchAllCompetitions() {
 
 export function fetchMineCompetitions() {
   return dispatch => {
-    // dispatch(setProgressModelState(true));
     dispatch(setContentLoaderState(true));
-
-    getAuthenticatedRequest('competitionsMine_get')
+    dispatch(setProgressModelState(true));
+    return getAuthenticatedRequest('competitionsMine_get')
       .then(res => {
         dispatch(
           mergeEntities(
@@ -317,13 +318,15 @@ export function fetchMineCompetitions() {
             )
           )
         );
-        // dispatch(setProgressModelState(false));
         dispatch(setContentLoaderState(false));
+        dispatch(setProgressModelState(false));
+        return res;
       })
       .catch(err => {
         debug(err);
-        // dispatch(setProgressModelState(false));
         dispatch(setContentLoaderState(false));
+        dispatch(setProgressModelState(false));
+        return err;
       });
   };
 }

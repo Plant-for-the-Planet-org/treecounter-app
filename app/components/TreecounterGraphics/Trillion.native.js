@@ -173,58 +173,54 @@ class Trillion extends PureComponent {
           >
             <View style={styles.parentContainer}>
               {/* Trillion Tree Events Title */}
-              <View style={{ marginTop: 25, marginLeft: 16 }}>
-                <Text style={styles.trillionTreeEventTitle}>
-                  {this.props.pledgeEvents &&
-                  this.props.pledgeEvents.pledgeEvents &&
-                  this.props.pledgeEvents.pledgeEvents.length > 0
-                    ? i18n.t('label.trillionTreesEvents')
-                    : null}
-                </Text>
-              </View>
+              {this.props.pledgeEvents &&
+              this.props.pledgeEvents.pledgeEvents &&
+              this.props.pledgeEvents.pledgeEvents.length > 0 ? (
+                <View style={{ marginTop: 25, marginLeft: 16 }}>
+                  <Text style={styles.trillionTreeEventTitle}>
+                    {i18n.t('label.trillionTreesEvents')}
+                  </Text>
+                </View>
+              ) : null}
               {/* Trillion Tree Events Title Ended */}
 
               {/* Featured events horizontal ScrollView */}
-              <View style={{ marginTop: 16 }}>
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={{ paddingRight: 20 }}
-                >
-                  {this.props.pledgeEvents &&
-                  this.props.pledgeEvents.pledgeEvents
-                    ? this.props.pledgeEvents.pledgeEvents.map(
-                        featuredEvents => (
-                          <TouchableOpacity
-                            key={featuredEvents.slug}
-                            onPress={() => {
-                              updateStaticRoute(
-                                'app_pledge_events',
-                                navigation,
-                                {
-                                  slug: featuredEvents.slug,
-                                  plantProject: { id: -1 },
-                                  treeCount: -1
-                                }
-                              );
-                            }}
-                          >
-                            <FeaturedProject
-                              imageUri={getImageUrl(
-                                'event',
-                                'thumb',
-                                featuredEvents.image
-                              )}
-                              orgname={featuredEvents.name}
-                              treespledged={featuredEvents.total}
-                              date={featuredEvents.eventDate}
-                            />
-                          </TouchableOpacity>
-                        )
+              {this.props.pledgeEvents &&
+              this.props.pledgeEvents.pledgeEvents ? (
+                <View style={{ marginTop: 16 }}>
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{ paddingRight: 20 }}
+                  >
+                    {this.props.pledgeEvents.pledgeEvents.map(
+                      featuredEvents => (
+                        <TouchableOpacity
+                          key={featuredEvents.slug}
+                          onPress={() => {
+                            updateStaticRoute('app_pledge_events', navigation, {
+                              slug: featuredEvents.slug,
+                              plantProject: { id: -1 },
+                              treeCount: -1
+                            });
+                          }}
+                        >
+                          <FeaturedProject
+                            imageUri={getImageUrl(
+                              'event',
+                              'thumb',
+                              featuredEvents.image
+                            )}
+                            orgname={featuredEvents.name}
+                            treespledged={featuredEvents.total}
+                            date={featuredEvents.eventDate}
+                          />
+                        </TouchableOpacity>
                       )
-                    : null}
-                </ScrollView>
-              </View>
+                    )}
+                  </ScrollView>
+                </View>
+              ) : null}
               {/* Featured events horizontal ScrollView Ended */}
 
               {/*  Unfulfilled Pledge Events horizontal ScrollView */}

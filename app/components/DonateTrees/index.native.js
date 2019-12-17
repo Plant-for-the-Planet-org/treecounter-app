@@ -132,12 +132,15 @@ export default class DonateTrees extends React.PureComponent {
   // open your gateway
   openGateWay = async url => {
     url = context.scheme + '://' + context.host + url;
+    /*
     const canOpen = await Linking.canOpenURL(url);
     if (canOpen) {
       Linking.openURL(url).catch(err =>
         console.error('An error occurred', err)
       );
     }
+*/
+    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
   };
 
   getFees() {

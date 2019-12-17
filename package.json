@@ -1,6 +1,6 @@
 {
   "name": "TreecounterApp",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "analyze": "source-map-explorer ./web/server/bundle.*",
@@ -13,6 +13,7 @@
     "lint": "eslint app",
     "lint:errors": "eslint app --quiet",
     "lint:json": "eslint . --ext .json",
+    "test": "jest",
     "shake": "adb shell input keyevent 82",
     "clean": "./clean.sh"
   },
@@ -33,6 +34,7 @@
     "bugsnag-react-native": "^2.23.2",
     "classnames": "^2.2.5",
     "cookie-cutter": "^0.2.0",
+    "core-js": "^2.6.11",
     "css-loader": "^0.28.9",
     "date-fns": "^2.6.0",
     "deprecated-react-native-listview": "0.0.6",
@@ -42,7 +44,6 @@
     "i18next": "^11.3.1",
     "intl": "1.2.5",
     "jwt-decode": "^2.2.0",
-    "liform-react": "^0.9.0",
     "lodash": "^4.17.10",
     "normalizr": "^3.2.4",
     "number-to-words": "^1.2.3",
@@ -131,19 +132,17 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.2",
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-react-jsx": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
     "@babel/runtime": "^7.6.2",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-loader": "^8.0.6",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-react-native": "^4.0.1",
-    "babel-preset-stage-2": "^6.24.1",
     "eslint": "^6.6.0",
     "eslint-loader": "^2.2.1",
     "eslint-plugin-json": "1.4.0",
@@ -176,11 +175,5 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.1.2"
-  },
-  "jest": {
-    "preset": "react-native",
-    "setupFiles": [
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
-    ]
   }
 }

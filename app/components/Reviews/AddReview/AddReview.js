@@ -7,11 +7,15 @@ import {
   Dimensions,
   Image
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {
+  selectedPlantProjectSelector,
+  selectedReviewsSelector
+} from '../../../selectors';
 // import { ScrollView } from 'react-native-gesture-handler';
 import AddRatingSection from './AddRatingSection';
 const { width } = Dimensions.get('window');
 import { forward } from './../../../assets';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import {
   addReview,
@@ -19,15 +23,15 @@ import {
   getReviewIndexes
 } from '../../../actions/reviews';
 import { bindActionCreators } from 'redux';
-import { selectedPlantProjectSelector } from '../../../selectors';
 import i18n from '../../../locales/i18n.js';
-import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager.native';
 import styles from '../../../styles/review.native';
+// import { find } from 'lodash';
 class AddReview extends Component {
   constructor(props) {
     super(props);
-    console.log(props, Icon);
+    console.log('props in add reviews', props);
     this.state = {
+      validationError: {},
       reviewIndexes: {},
       review:
         (props.navigation.state.params &&
@@ -38,9 +42,9 @@ class AddReview extends Component {
     this.onUpdate = this.onUpdate.bind(this);
   }
   onUpdate(data) {
-    this.updating = true;
     this.setState({ review: data }, () => {
-      this.updating = false;
+      console.log('submitted', this.submitted);
+      this.submitted && this.validate();
     });
   }
   async componentWillMount() {
@@ -56,28 +60,33 @@ class AddReview extends Component {
       console.log('eror on reviewindex', err);
     }
   }
-  async create() {
-    console.log('updating?', this.updating);
-    if (this.updating) return;
+  validate() {
     const { review } = this.state;
-    if (!review.summary) {
-      return NotificationManager.error(
-        i18n.t('label.summary_missing'),
-        i18n.t('label.error'),
-        5000
-      );
-    }
+    console.log('validating', review, !review.reviewIndexScores);
     if (
+      !review.reviewIndexScores ||
       !Object.keys(review.reviewIndexScores).filter(index =>
         Number(review.reviewIndexScores[index].score)
       ).length
     ) {
-      return NotificationManager.error(
-        i18n.t('label.at_least_one_index'),
-        i18n.t('label.error'),
-        5000
-      );
+      this.setState({ validationError: { index: true } });
+      return false;
+    } else {
+      this.setState({ validationError: { index: false } });
     }
+    if (!review.summary) {
+      this.setState({ validationError: { summary: true } });
+      return false;
+    } else {
+      this.setState({ validationError: { summary: false } });
+    }
+    return true;
+  }
+  async create() {
+    this.submitted = true;
+    if (!this.validate()) return;
+    const { review } = this.state;
+
     console.log('review before submitting', review);
     try {
       if (this.state.review.id) {
@@ -106,7 +115,7 @@ class AddReview extends Component {
           this.props.selectedPlantProject
         );
       }
-      this.props.navigation.navigate('app_reviews');
+      updateStaticRoute('app_reviews', this.props.navigation);
     } catch (err) {
       console.error(err);
     }
@@ -153,6 +162,7 @@ class AddReview extends Component {
             selectedPlantProject={this.props.selectedPlantProject}
             onUpdate={this.onUpdate}
             reviewIndexes={this.state.reviewIndexes}
+            validationError={this.state.validationError}
           />
         </View>
 
@@ -179,6 +189,7 @@ class AddReview extends Component {
 
 const mapStateToProps = state => {
   return {
+    reviews: selectedReviewsSelector(state),
     selectedPlantProject: selectedPlantProjectSelector(state)
   };
 };

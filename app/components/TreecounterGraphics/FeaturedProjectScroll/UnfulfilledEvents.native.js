@@ -4,6 +4,8 @@ import styles from '../../../styles/trillion.native';
 import { greencalendar } from './../../../assets/';
 import { smalltree } from './../../../assets/';
 import { formatDate } from '../../../utils/utils';
+import { delimitNumbers } from '../../../utils/utils';
+import i18n from '../../../locales/i18n';
 
 export default class UnfulfilledEvents extends Component {
   render() {
@@ -12,7 +14,7 @@ export default class UnfulfilledEvents extends Component {
         <View style={[styles.unfulfilledEventCard]}>
           <View style={[styles.ufpColumn, { flexDirection: 'column' }]}>
             <Text style={styles.ufpTrees}>
-              Pledged on {this.props.event.eventName}
+              {i18n.t('label.pledgedOn')} {this.props.event.eventName}
             </Text>
             <View style={styles.ufpLeftSection}>
               <View>
@@ -27,7 +29,8 @@ export default class UnfulfilledEvents extends Component {
                       { maxWidth: 200, flexWrap: 'wrap' }
                     ]}
                   >
-                    {this.props.event.treeCount.toLocaleString()} Trees
+                    {delimitNumbers(this.props.event.treeCount)}{' '}
+                    {i18n.t('label.trees')}
                   </Text>
                 </View>
                 <View style={styles.featuredProjectCardIconContainer}>
@@ -46,13 +49,15 @@ export default class UnfulfilledEvents extends Component {
                 <View style={styles.ufpCostView}>
                   <Text style={styles.ufpCostText}>
                     {this.props.event.plantProjectCurrency}{' '}
-                    {(
+                    {delimitNumbers(
                       this.props.event.treeCount *
-                      this.props.event.plantProjectTreeCost
-                    ).toLocaleString()}
+                        this.props.event.plantProjectTreeCost
+                    )}
                   </Text>
                 </View>
-                <Text style={styles.ufpPlantNow}>Plant Now</Text>
+                <Text style={styles.ufpPlantNow}>
+                  {i18n.t('label.plantNow')}
+                </Text>
               </View>
             </View>
           </View>

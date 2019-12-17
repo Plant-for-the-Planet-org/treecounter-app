@@ -24,7 +24,7 @@ export default class SingleReview extends Component {
     nextProps.reviewIndexes
       ? this.setState({ reviewIndexes: nextProps.reviewIndexes })
       : '';
-    console.log('got new indexes', nextProps.reviewIndexes);
+    console.log('got new props: in single reviews:', nextProps);
   }
   close() {
     this.RBSheet.close();

@@ -70,7 +70,7 @@ export default EStyleSheet.create({
     width: '88%',
     marginLeft: '6%',
     position: 'absolute',
-    top: '86%'
+    bottom: '4%'
   },
   actionButtonView: {
     borderRadius: 100,

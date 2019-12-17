@@ -9,5 +9,9 @@
   "redeem_code": "Redeem Code",
   "validate_code_label": "Please type Code to Redeem",
   "claiming": "Claiming:",
-  "trees_in_code": "Trees in this code"
+  "trees_in_code": "Trees in this code",
+  "you_can_redeem": "You can redeem",
+  "planted_by": "Planted by",
+  "add_my_trees": "Add to my Trees",
+  "already_redeemed_trees": "You have already Redeemed these this code, please try another."
 }

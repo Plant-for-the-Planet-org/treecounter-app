@@ -5,42 +5,40 @@ import {
   Text,
   TouchableOpacity,
   Animated,
+  ActivityIndicator,
   ScrollView
 } from 'react-native';
 import HeaderAnimated from './../../Header/HeaderAnimated.native';
 import { SafeAreaView } from 'react-navigation';
 import buttonStyles from '../../../styles/common/button.native';
 import PropTypes from 'prop-types';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
+import { updateRoute } from '../../../helpers/routerHelper';
 import i18n from '../../../locales/i18n.js';
+import { delimitNumbers } from '../../../utils/utils';
 
 export default function AddTrees(props) {
   const [scrollY] = React.useState(new Animated.Value(0));
+  const [loadButton, setloadButton] = React.useState(false);
+  const [errorText, seterrorText] = React.useState('');
 
-  const redeemObject = [
-    {
-      type: 'donation',
-      category: 'default',
-      treeCount: 100,
-      date: '2019-10-24',
-      tpo: 'Plant for the Planet'
-    },
-    {
-      type: 'donation',
-      category: 'default',
-      treeCount: 500,
-      date: '2019-10-24',
-      tpo: 'Plant for the Planet'
-    },
-    {
-      type: 'donation',
-      category: 'gift',
-      treeCount: 200,
-      date: '2019-10-20',
-      tpo: 'Plant for the Planet',
-      giftRecipient: 'Sagar Aryal'
-    }
-  ];
+  const redeemCode = () => {
+    setloadButton(true),
+      props.navigation
+        .getParam('setRedemptionCode')({
+          type: props.navigation.getParam('type'),
+          code: props.navigation.getParam('code')
+        })
+        .then(res => {
+          if (res.data.response.status === 'error') {
+            seterrorText(true);
+            setloadButton(false);
+          } else {
+            updateRoute('app_myTrees', props.navigation);
+            setloadButton(false);
+          }
+        });
+  };
+  const white = '#ffffff';
   return (
     <SafeAreaView style={styles.safeAreaViewContainer}>
       <View style={styles.mainContainer}>
@@ -53,42 +51,59 @@ export default function AddTrees(props) {
           <Text style={styles.subheaderClaiming}>
             {i18n.t('label.claiming')} {props.navigation.getParam('code')}
           </Text>
-          <Text style={styles.subheaderTrees}>
-            {i18n.t('label.trees_in_code')}
-          </Text>
+          {errorText ? (
+            <Text style={styles.alreadyRedeemed}>
+              {i18n.t('label.already_redeemed_trees')}
+            </Text>
+          ) : (
+            <Text style={styles.subheaderTrees}>
+              {i18n.t('label.trees_in_code')}
+            </Text>
+          )}
         </View>
         <ScrollView>
           {/* Single Redeem Object */}
-          <View style={styles.singleRedeemObject}>
-            {/* if Date */}
-            <View style={styles.redeemObjectDate}>
+          {errorText ? null : (
+            <View style={styles.singleRedeemObject}>
+              {/* if Date */}
+              {/* <View style={styles.redeemObjectDate}>
               <Text style={styles.redeemObjectDateText}>March 7, 2019</Text>
-            </View>
-            {/* Trees to be redeemed */}
-            <View style={styles.redeemObjectTreesContainer}>
-              <View style={styles.row1}>
-                <Text style={styles.redeemObjectTitle}>Gift to S. William</Text>
-                <Text style={styles.redeemObjectTrees}>10,000</Text>
+            </View> */}
+              {/* Trees to be redeemed */}
+              <View style={styles.redeemObjectTreesContainer}>
+                <View style={styles.row1}>
+                  <Text style={styles.redeemObjectTitle}>
+                    {i18n.t('label.you_can_redeem')}
+                  </Text>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(props.navigation.getParam('treeCount'))}
+                  </Text>
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {i18n.t('label.planted_by')}{' '}
+                    {props.navigation.getParam('tpoName')}
+                  </Text>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {i18n.t('label.trees')}
+                  </Text>
+                </View>
               </View>
-              <View style={styles.row2}>
-                <Text style={styles.redeemObjectSubTitle}>
-                  Planted by Plant-for-the-Planet
-                </Text>
-                <Text style={styles.redeemObjectSubTitle}>Trees</Text>
-              </View>
             </View>
-          </View>
+          )}
         </ScrollView>
         <TouchableOpacity
           style={buttonStyles.actionButtonTouchable}
-          onPress={() =>
-            updateStaticRoute('redeem_see_project', props.navigation)
-          }
+          onPress={() => redeemCode()}
         >
           <View style={buttonStyles.actionButtonView}>
-            <Text style={buttonStyles.actionButtonText}>
-              {'Add to my Trees'}
-            </Text>
+            {loadButton ? (
+              <ActivityIndicator size="large" color={white} />
+            ) : (
+              <Text style={buttonStyles.actionButtonText}>
+                {i18n.t('label.add_my_trees')}
+              </Text>
+            )}
           </View>
         </TouchableOpacity>
       </View>

@@ -14,12 +14,21 @@ class RedemptionContainer extends Component {
   static navigationOptions = {
     header: null
   };
+
   render() {
+    const code = this.props.navigation.state.params.code
+      ? this.props.navigation.state.params.code
+      : '';
+    const type = this.props.navigation.state.params.type
+      ? this.props.navigation.state.params.type
+      : '';
     return (
       <Redemption
         navigation={this.props.navigation}
         validateCodeAction={validateCodeAction}
         setRedemptionCode={setRedemptionCodeAction}
+        code={code}
+        type={type}
       />
     );
   }

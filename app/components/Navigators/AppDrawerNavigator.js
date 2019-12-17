@@ -350,7 +350,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: UnfulfilledPledgeEvents
       },
       ['app_redeem']: {
-        screen: RedemptionContainer
+        screen: RedemptionContainer,
+        path: 'redeem/:type/:code'
+      },
+      ['app_claim']: {
+        screen: RedemptionContainer,
+        path: 'claim/:type/:code'
       },
       ['redeem_add_trees']: {
         screen: AddTrees
@@ -379,7 +384,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
 
   const AppNavigator = createDrawerNavigator(
     {
-      appStackNavigator,
+      appStackNavigator: {
+        screen: appStackNavigator,
+        path: ''
+      },
       searchNavigator: searchNavigator,
       deleteProfileNavigator,
       deleteContributionNavigator,

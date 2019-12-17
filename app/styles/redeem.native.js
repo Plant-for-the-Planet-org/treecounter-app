@@ -20,7 +20,7 @@ export default EStyleSheet.create({
   formScrollView: {
     padding: 24,
     paddingBottom: 220,
-    marginTop: 100
+    marginTop: 50
   },
   cardContainer: {
     flexDirection: 'column',
@@ -38,9 +38,8 @@ export default EStyleSheet.create({
   },
   mainTitle: {
     fontSize: 27,
-    fontWeight: '800',
-    fontStyle: 'normal',
     lineHeight: 40,
+    fontFamily: 'OpenSans-Bold',
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153'
@@ -147,12 +146,18 @@ export default EStyleSheet.create({
 
   // Add Trees Page
 
-  subheader: { marginTop: 110, padding: 20 },
+  subheader: { marginTop: 110, padding: 24 },
   subheaderClaiming: { fontFamily: 'OpenSans-SemiBold', fontSize: 18 },
   subheaderTrees: {
     fontFamily: 'OpenSans-SemiBold',
     fontSize: 16,
     marginTop: 42
+  },
+  alreadyRedeemed: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 16,
+    marginTop: 42,
+    color: '#e74c3c'
   },
   singleRedeemObject: { borderBottomWidth: 1, borderBottomColor: '#d5d5d5' },
   redeemObjectDate: {

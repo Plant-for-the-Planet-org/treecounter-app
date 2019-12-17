@@ -35,6 +35,9 @@ export default function Redemption(props) {
     setButtonType('validate');
   };
 
+  const type = props.type ? props.type : 'gift';
+  const code = props.code ? props.code : '';
+
   let keyboardDidShowListener;
   let keyboardDidHideListener;
   React.useEffect(() => {
@@ -52,23 +55,26 @@ export default function Redemption(props) {
       keyboardDidHideListener.remove();
     };
   }, []);
+
+  const white = '#ffffff';
+
   return (
     <SafeAreaView style={styles.safeAreaViewContainer}>
       <View style={styles.mainContainer}>
         <HeaderAnimated
           navigation={props.navigation}
-          title={i18n.t('label.redeem_trees')}
+          title={''}
           scrollY={scrollY}
         />
         <Formik
           initialValues={{
-            code: ''
+            code: code
           }}
           onSubmit={(values, actions) => {
             setloadButton(true);
             props
               .validateCodeAction({
-                type: 'gift',
+                type: type,
                 code: values.code
               })
               .then(res => {
@@ -77,8 +83,13 @@ export default function Redemption(props) {
                   setloadButton(false);
                 } else {
                   updateStaticRoute('redeem_add_trees', props.navigation, {
-                    code: values.code
+                    code: values.code,
+                    type: type,
+                    treeCount: res.data.treeCount,
+                    tpoName: res.data.tpos[0].tpoName,
+                    setRedemptionCode: props.setRedemptionCode
                   });
+                  setloadButton(false);
                 }
               });
           }}
@@ -121,6 +132,9 @@ export default function Redemption(props) {
                 ])}
                 extraScrollHeight={12}
               >
+                <Text style={styles.mainTitle}>
+                  {i18n.t('label.redeem_trees')}
+                </Text>
                 <Text style={styles.titleText}>
                   {i18n.t('label.redeem_heading')}
                 </Text>
@@ -132,19 +146,22 @@ export default function Redemption(props) {
                 <View style={styles.validateCodeInputContainer}>
                   <TextField
                     label={i18n.t('label.validate_code_label')}
-                    value={value}
+                    value={props.values.code}
                     tintColor={'#89b53a'}
                     titleFontSize={12}
                     lineWidth={1}
+                    autoCapitalize={'characters'}
                     labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                    titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                    titleTextStyle={{
+                      fontFamily: 'OpenSans-SemiBold',
+                      textTransform: 'uppercase'
+                    }}
                     affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     blurOnSubmit={false}
                     error={props.errors.code}
                     onChangeText={props.handleChange('code')}
                     onBlur={props.handleBlur('code')}
                   />
-                  {console.log('Error', props.errors.code)}
                 </View>
               </KeyboardAwareScrollView>
 
@@ -155,7 +172,7 @@ export default function Redemption(props) {
                 >
                   <View style={buttonStyles.actionButtonView}>
                     {loadButton ? (
-                      <ActivityIndicator size="large" color="#ffffff" />
+                      <ActivityIndicator size="large" color={white} />
                     ) : (
                       <Text style={buttonStyles.actionButtonText}>
                         {i18n.t('label.validate_code')}
@@ -171,7 +188,7 @@ export default function Redemption(props) {
                   onPress={props.handleSubmit}
                 >
                   {loadButton ? (
-                    <ActivityIndicator size="large" color="#ffffff" />
+                    <ActivityIndicator size="large" color={white} />
                   ) : (
                     <Image
                       source={forward}

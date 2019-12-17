@@ -18,11 +18,11 @@ import { updateRoute } from '../../helpers/routerHelper';
 import ImagePicker from 'react-native-image-picker';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
-const validationSchema = generateFormikSchemaFromFormSchema(
-  competitionFormSchema
-);
-
 export const FormikForm = props => {
+  const validationSchema = generateFormikSchemaFromFormSchema(
+    competitionFormSchema
+  );
+  console.log('validation schema', validationSchema);
   const buttonType = props.buttonType;
 
   const handleDelete = () => {

@@ -32,7 +32,7 @@ class SignUpContainer extends React.Component {
         .signUp(profileType, formValue, token, this.props.navigation)
         .then((/* success */) => {})
         .catch(err => {
-          refreshToken();
+          if (refreshToken) refreshToken();
           console.log('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
             err,

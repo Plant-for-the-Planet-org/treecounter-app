@@ -41,9 +41,10 @@ class Competiton extends React.Component {
   _renderTabBar = props => {
     return (
       <TabBar
+        scrollEnabled
         {...props}
         style={styles.tabBar}
-        tabStyle={{ width: Layout.window.width / 4 }}
+        tabStyle={{ width: Layout.window.width / 3 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
       />

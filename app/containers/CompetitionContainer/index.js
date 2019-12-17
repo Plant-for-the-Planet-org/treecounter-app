@@ -57,6 +57,7 @@ class CompetitionContainer extends React.Component {
   componentDidMount() {
     this.props.fetchCompetitions('featured');
     this.props.fetchCompetitions('all');
+    this.props.fetchCompetitions('archived');
     this.props.fetchMineCompetitions();
   }
   leaveCompetition(id) {
@@ -73,6 +74,20 @@ class CompetitionContainer extends React.Component {
       });
     }
   }
+
+  updateAllCompetitions = async () => {
+    return this.props.fetchCompetitions('all');
+  };
+  updateFeaturedCompetitions = async () => {
+    return this.props.fetchCompetitions('featured');
+  };
+  updateMineCompetitions = async () => {
+    return this.props.fetchMineCompetitions();
+  };
+  updateArchivedCompetitions = async () => {
+    return this.props.fetchCompetitions('archived');
+  };
+
   render() {
     return (
       <Competiton
@@ -85,6 +100,10 @@ class CompetitionContainer extends React.Component {
         supportTreecounterAction={this.props.supportTreecounterAction}
         editCompetition={id => this.editCompetition(id)}
         navigation={this.props.navigation}
+        updateAllCompetitions={this.updateAllCompetitions}
+        updateFeaturedCompetitions={this.updateFeaturedCompetitions}
+        updateMineCompetitions={this.updateMineCompetitions}
+        updateArchivedCompetitions={this.updateArchivedCompetitions}
       />
     );
   }

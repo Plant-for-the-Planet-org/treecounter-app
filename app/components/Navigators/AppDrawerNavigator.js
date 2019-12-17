@@ -90,11 +90,11 @@ const headerLabels = {
   ['app_donate_detail']: 'label.donate',
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
-  ['app_pledge_events']: 'Pledges',
+  ['app_pledge_events']: 'label.pledges',
   ['app_create_competition']: '',
-  ['app_unfulfilled_pledge_events']: 'Pledges',
-  ['app_pledge_form']: 'Pledge to plant a tree',
-  ['app_pledge_update_form']: 'Update your pledge'
+  ['app_unfulfilled_pledge_events']: 'label.pledges',
+  ['app_pledge_form']: 'label.pledgeToPlant',
+  ['app_pledge_update_form']: 'label.updatePledge'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -315,6 +315,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     {
       Tab: ApptabNavigator,
       Base: baseNavigator,
+      ['app_supportTrees']: {
+        screen: SelectPlantProjectContainer
+      },
       [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProject
       },

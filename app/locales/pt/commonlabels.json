@@ -9,6 +9,7 @@
   "error_reported": "Relatamos esse erro aos nossos profissionais de TI.",
   "home_page_redirected": "Você será redirecionado para a página inicial em {{seconds}} segundos",
   "planting_404": "Para evitar essa situação no planeta, podemos plantar algumas árvores.",
+  "close_and_reopen": "Por favor, feche o aplicativo e reinicie-o.",
   "cancel": "Cancelar",
   "searchshort": "Buscar",
   "user": "Usuário",

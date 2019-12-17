@@ -46,6 +46,7 @@ import competition_outline from './images/icons/competition_outline.png';
 import education from './images/icons/education.png';
 import company from './images/icons/company.png';
 import arrow_right_orange from './images/icons/arrow_right_orange.png';
+import right_arrow_button from './images/icons/right-arrow-button.png';
 import arrow_left_orange_outline from './images/icons/arrow_left_orange_outline.png';
 import arrow_left_orange from './images/icons/arrow_left_orange.png';
 import tick from './images/icons/tick.png';
@@ -156,7 +157,7 @@ import leafGray from './images/leaf_gray.png';
 import treelogo from '../../icon.png';
 import Projects from './images/projects.jpg';
 import WelcomeImage3 from './images/welcome_screen_3_image.jpg';
-
+import backArrow from './images/icons/backArrow.png';
 export {
   treelogo,
   germany,
@@ -315,5 +316,7 @@ export {
   leaf,
   leafGray,
   Projects,
-  WelcomeImage3
+  WelcomeImage3,
+  backArrow,
+  right_arrow_button
 };

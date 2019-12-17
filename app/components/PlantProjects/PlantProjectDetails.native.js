@@ -39,12 +39,11 @@ const cleanUrl = url => {
 const getDescriptionPart = (which, description) => {
   let howManySentence = description.split('.');
   if (!which && howManySentence.length < 3) return false;
-  console.log(
-    'haow',
-    howManySentence.slice(-(howManySentence.length - 2)).join('.')
-  );
   return which == 1
-    ? howManySentence.slice(0, 2).join('.')
+    ? howManySentence
+        .slice(0, 2)
+        .join('.')
+        .concat('.')
     : howManySentence.slice(-(howManySentence.length - 2)).join('.');
 };
 /**
@@ -52,8 +51,7 @@ const getDescriptionPart = (which, description) => {
  */
 const PlantProjectDetails = ({
   description,
-  homepageUrl,
-  homepageCaption,
+  url: homepageUrl,
   videoUrl,
   // mapData,
   plantProjectImages,

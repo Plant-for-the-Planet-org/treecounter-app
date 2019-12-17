@@ -6,8 +6,8 @@ export default EStyleSheet.create({
     paddingTop: 15,
     marginTop: 12,
     width: '100%',
-    marginBottom: 20,
-    paddingBottom: 20
+    marginBottom: 10,
+    paddingBottom: 0
   },
   descriptionText: {
     color: '#686060',

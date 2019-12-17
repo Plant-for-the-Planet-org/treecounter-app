@@ -10,7 +10,6 @@ export default EStyleSheet.create({
     paddingBottom: 0
   },
   descriptionText: {
-    color: '#686060',
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     fontWeight: 'normal',

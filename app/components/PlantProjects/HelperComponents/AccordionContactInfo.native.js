@@ -26,7 +26,7 @@ export default class AccordionContactInfo extends Component {
           value = address[item];
         }
       } catch (error) {
-        console.log(err);
+        console.log(error);
       }
       str.push(value);
     });

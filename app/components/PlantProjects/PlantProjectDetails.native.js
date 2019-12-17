@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Image, Linking, Text, View, TouchableOpacity } from 'react-native';
+import { Linking, Text, View, TouchableOpacity } from 'react-native';
 
-import { link } from '../../assets';
-import TouchableItem from '../../components/Common/TouchableItem';
 import VideoContainer from '../../components/Common/VideoContainer';
 import NDVI from '../../containers/NDVI/NDVI';
 import i18n from '../../locales/i18n';

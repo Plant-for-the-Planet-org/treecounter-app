@@ -18,15 +18,18 @@ export default class AccordionContactInfo extends Component {
   };
   getAddress(address) {
     let str = [];
-    Object.keys(address).forEach(item => {
+    Object.keys(address).forEach((item, value) => {
       try {
-        if (item == 'country')
-          item = getISOToCountryName(address[item]).country;
+        if (item == 'countryCode') {
+          value = getISOToCountryName(address[item]).country;
+        } else {
+          value = address[item];
+        }
       } catch (error) {
         console.log(err);
       }
-      str.push(address[item]);
-    })
+      str.push(value);
+    });
     return str.join(', ');
   }
   render() {
@@ -65,7 +68,7 @@ export default class AccordionContactInfo extends Component {
           <View
             style={[
               styles.expandedPaymentModePaypal,
-              { alignItems: 'flex-start' }
+              { alignItems: 'flex-start', paddingRight: 20 }
             ]}
           >
             {slug ? (
@@ -126,7 +129,9 @@ export default class AccordionContactInfo extends Component {
                     marginRight: 10
                   }}
                 />
-                <Text style={styles.viewProfileText}>{this.getAddress(address)}</Text>
+                <Text style={styles.viewProfileText}>
+                  {this.getAddress(address)}
+                </Text>
               </View>
             ) : null}
             {email ? (
@@ -139,7 +144,13 @@ export default class AccordionContactInfo extends Component {
                     marginRight: 10
                   }}
                 />
-                <Text style={styles.viewProfileText}>{email}</Text>
+                <Text
+                  style={styles.viewProfileText}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                >
+                  {email}
+                </Text>
               </View>
             ) : null}
           </View>

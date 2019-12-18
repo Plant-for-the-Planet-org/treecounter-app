@@ -8,7 +8,7 @@ import { getLocalRoute } from '../../../actions/apiRouting';
 import { getISOToCountryName } from '../../../helpers/utils';
 export default class AccordionContactInfo extends Component {
   state = {
-    showInfo: true
+    showInfo: false
   };
 
   toggleInfo = () => {

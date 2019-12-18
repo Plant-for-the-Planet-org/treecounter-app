@@ -18,7 +18,7 @@ export default class ReadMore extends Component {
     const { descriptionText, style } = this.props;
     let iconName = this.state.showInfo ? 'chevron-up' : 'chevron-down';
     return (
-      <View style={{ marginTop: 10, paddingLeft: 10 }}>
+      <View style={{ marginTop: 10 }}>
         {
           <TouchableOpacity
             style={{
@@ -33,7 +33,7 @@ export default class ReadMore extends Component {
               name={iconName}
               size={16}
               color="#4d5153"
-              style={{ marginRight: 10, paddingTop: 2 }}
+              style={{ marginRight: 10, paddingTop: 2, paddingLeft: 5 }}
             />
             <Text style={[styles.paymentModeTitle, { color: '#4d5153' }]}>
               {!this.state.showInfo

@@ -60,13 +60,18 @@ class PlantProjectImageCarousel extends Component {
             renderContent={this.renderImage}
           >
             {this.props.images.map(url => (
-              <View key={`viewof-${url}`} style={styles.imageContainer}>
+              <View key={`viewof-${url}`} style={[styles.imageContainer]}>
                 <Image
-                  style={styles.image}
+                  style={[
+                    styles.image,
+                    this.props.style ? this.props.style : ''
+                  ]}
+                  aspectRatio={this.props.aspectRatio}
                   key={url.image}
                   source={{
                     uri: getImageUrl(this.props.pictureType, 'large', url.image)
                   }}
+                  resizeMode={this.props.resizeMode}
                 />
               </View>
             ))}
@@ -98,18 +103,22 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   imageContainer: {
-    height: 180,
-    width: 250,
-    maxHeight: 180,
-    maxWidth: 250,
+    height: 150,
+    width: 265,
+    maxHeight: 150,
+    maxWidth: 265,
     marginLeft: 0,
-    marginRight: 5
+    marginRight: 10,
+    borderColor: '#cdcdee',
+    borderWidth: 1,
+    borderRadius: 9,
+    padding: 0
   },
   image: {
     flex: 1,
-    width: undefined,
-    height: undefined,
-    borderRadius: 7
+    width: 265,
+    height: 150,
+    borderRadius: 9
   }
 });
 export default PlantProjectImageCarousel;

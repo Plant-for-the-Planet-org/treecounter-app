@@ -75,7 +75,11 @@ const PlantProjectDetails = ({
           <VideoContainer url={videoUrl} />
         </View>
       ) : null}
-      <PlantProjectImageCarousel images={plantProjectImages} />
+      <PlantProjectImageCarousel
+        resizeMode={'cover'}
+        images={plantProjectImages}
+        aspectRatio={16 / 9}
+      />
       <View style={[styles.descriptionContainer]}>
         <Text style={styles.aboutHeader}>{i18n.t('label.about')}</Text>
         <Text style={styles.descriptionText}>

@@ -6,9 +6,9 @@ import {
   TouchableWithoutFeedback,
   StyleSheet
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import React, { Component } from 'react';
 import { getImageUrl } from '../../actions/apiRouting';
-import i18n from '../../locales/i18n';
 import PropTypes from 'prop-types';
 
 class PlantProjectImageCarousel extends Component {
@@ -26,13 +26,25 @@ class PlantProjectImageCarousel extends Component {
 
   renderHeader = () => (
     <TouchableWithoutFeedback onPress={this.handleHeaderPress}>
-      <View>
-        <Text style={styles.closeText}>{i18n.t('label.exit')}</Text>
+      <View style={{ alignItems: 'flex-start', padding: 20 }}>
+        <Icon
+          name="clear"
+          size={24}
+          color="white"
+          style={{ marginRight: 10, paddingTop: 2, paddingLeft: 5 }}
+        />
       </View>
     </TouchableWithoutFeedback>
   );
 
-  renderFooter = () => <Text style={styles.footerText} />;
+  renderFooter = idx => (
+    <View style={{ marginBottom: 25 }}>
+      <Text style={styles.footerText}>
+        {idx + 1}/{this.props.images.length} -{' '}
+        {this.props.images[idx].description}
+      </Text>
+    </View>
+  );
 
   renderImage = idx => {
     return (
@@ -58,6 +70,8 @@ class PlantProjectImageCarousel extends Component {
           <ImageCarousel
             ref={this.captureImageCarousel}
             renderContent={this.renderImage}
+            renderHeader={this.renderHeader}
+            renderFooter={this.renderFooter}
           >
             {this.props.images.map(url => (
               <View key={`viewof-${url}`} style={[styles.imageContainer]}>
@@ -100,7 +114,13 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: textColor,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 18,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 24,
+    letterSpacing: 0
   },
   imageContainer: {
     height: 150,

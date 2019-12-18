@@ -156,7 +156,6 @@ import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
 import backArrow from './images/icons/backArrow.png';
-import snippetTree from './images/snippet-tree.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
 export {
@@ -317,7 +316,6 @@ export {
   leafGray,
   backArrow,
   right_arrow_button,
-  snippetTree,
   globe,
   rocket,
   outline_email

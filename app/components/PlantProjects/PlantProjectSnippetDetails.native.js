@@ -14,8 +14,7 @@ import {
   survival_grey,
   tax_grey,
   leaf,
-  leafGray,
-  snippetTree
+  leafGray
 } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippetDetails.native';
@@ -197,13 +196,17 @@ class PlantProjectSnippetDetails extends PureComponent {
               ]}
             >
               <Image
-                source={snippetTree}
+                source={{
+                  uri: getImageUrl('profile', 'avatar', tpo.avatar)
+                }}
                 style={{
                   width: 90,
-                  height: 80,
+                  height: 90,
                   paddingLeft: 5,
-                  marginRight: 10
+                  marginRight: 10,
+                  borderRadius: 45
                 }}
+                resizeMode="cover"
               />
               <View
                 style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}

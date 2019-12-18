@@ -16,32 +16,36 @@ export default class ReadMore extends Component {
 
   render() {
     const { descriptionText, style } = this.props;
-    console.log('Description:', descriptionText);
     let iconName = this.state.showInfo ? 'chevron-up' : 'chevron-down';
     return (
-      <View style={{ marginTop: 15 }}>
-        {!this.state.showInfo ? (
+      <View style={{ marginTop: 10, paddingLeft: 10 }}>
+        {
           <TouchableOpacity
-            style={{ flexDirection: 'row' }}
+            style={{
+              flexDirection: 'row',
+              paddingBottom: this.state.showInfo ? 10 : 0
+            }}
             onPress={() => {
               this.toggleInfo();
             }}
           >
             <Icon
               name={iconName}
-              size={14}
-              color="rgba(0, 0, 0, 0.38)"
-              style={{ marginRight: 10 }}
+              size={16}
+              color="#4d5153"
+              style={{ marginRight: 10, paddingTop: 2 }}
             />
-            <Text style={styles.paymentModeTitle}>
-              {i18n.t('label.read_more')}
+            <Text style={[styles.paymentModeTitle, { color: '#4d5153' }]}>
+              {!this.state.showInfo
+                ? i18n.t('label.read_more')
+                : i18n.t('label.read_less')}
             </Text>
           </TouchableOpacity>
-        ) : null}
+        }
 
         {this.state.showInfo ? (
           descriptionText ? (
-            <Text style={style}>{descriptionText}</Text>
+            <Text style={[style, { marginTop: -5 }]}>{descriptionText}</Text>
           ) : null
         ) : null}
       </View>

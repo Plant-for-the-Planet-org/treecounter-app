@@ -10,10 +10,11 @@ import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
 import { ScrollView } from 'react-native';
 import { right_arrow_button } from '../../assets';
-import PlantProjectSnippet from './PlantProjectSnippet.native';
+import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
 import { connect } from 'react-redux';
+import LoadingIndicator from '../Common/LoadingIndicator.native';
 import { bindActionCreators } from 'redux';
 // import TabContainer from '../../containers/Menu/TabContainer';
 /**
@@ -22,18 +23,24 @@ import { bindActionCreators } from 'redux';
 class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { ...props.plantProject };
+    const plantProject = { ...props.plantProject };
+    this.state = { plantProject };
   }
   async componentWillMount() {
     try {
-      console.log('getting project details', this.props.plantProject);
-      if (!this.props.plantProject.tpoData) {
-        // we dont have the details in store, fetch it
-        let plantProject = await this.props.fetchPlantProjectDetail(
-          this.props.plantProject.id
-        );
-        this.setState({ plantProject });
-      }
+      console.log(
+        'getting project details: we already have:',
+        this.state.plantProject,
+        this.props.plantProject
+      );
+      //if (!this.state.plantProject || !this.state.plantProject.tpoData) {
+      // we dont have the details in store, fetch it
+      const plantProject = await fetchPlantProjectDetail(
+        this.props.plantProject.id
+      );
+      console.log('fetched details plantproject', plantProject);
+      this.setState({ plantProject });
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +48,7 @@ class PlantProjectFull extends React.Component {
   render() {
     let { plantProject } = this.state;
 
-    if (!plantProject) return <View />;
+    if (!plantProject) return <LoadingIndicator />;
     console.log('rendering with tpo', plantProject.tpoData);
     const {
       images,
@@ -83,7 +90,7 @@ class PlantProjectFull extends React.Component {
             }
           ]}
         >
-          <PlantProjectSnippet
+          <PlantProjectSnippetDetails
             key={'projectFull' + plantProject.id}
             showMoreButton={false}
             clickable={false}

@@ -68,7 +68,9 @@ class PlantedProgressBar extends React.Component {
             }}
           >
             <Text style={styles.treePlantedtextPlanted}>
-              {formatNumber(parseInt(countPlanted))}
+              {this.props.compact
+                ? convertNumber(countPlanted, 2)
+                : formatNumber(parseInt(countPlanted))}
             </Text>
             <Text style={styles.treePlantedtextTrees}>
               {i18n.t('label.planted')}

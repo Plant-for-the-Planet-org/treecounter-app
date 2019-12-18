@@ -13,7 +13,6 @@ export default EStyleSheet.create({
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     fontWeight: 'normal',
-    fontStyle: 'italic',
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: 'left',

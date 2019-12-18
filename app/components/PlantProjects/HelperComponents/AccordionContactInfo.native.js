@@ -52,13 +52,13 @@ export default class AccordionContactInfo extends Component {
             this.toggleInfo();
           }}
         >
-          <Text style={styles.paymentModeTitle}>
+          <Text style={[styles.paymentModeTitle, { color: '#4d5153' }]}>
             {i18n.t('label.contact_details')}
           </Text>
           <Icon
             name={iconName}
             size={14}
-            color="rgba(0, 0, 0, 0.38)"
+            color="#4d5153"
             style={{ marginLeft: 10 }}
           />
         </TouchableOpacity>

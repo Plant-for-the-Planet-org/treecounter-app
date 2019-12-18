@@ -7,6 +7,12 @@ export default EStyleSheet.create({
     flex: 1
   },
 
+  formView: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
   parentContainer: {
     flex: 1,
     backgroundColor: 'white',
@@ -15,10 +21,8 @@ export default EStyleSheet.create({
   },
   container: {
     width: '100%',
-    // justifyContent: 'center',
     padding: 15,
-    paddingTop: 30,
-    flexGrow: 1
+    paddingTop: 30
   },
   headerContainer: {
     flexDirection: 'column',
@@ -31,9 +35,9 @@ export default EStyleSheet.create({
     height: 64
   },
 
-  inputContainer: {
-    height: 120
-  },
+  // inputContainer: {
+  //   height: 120
+  // },
   button: {
     height: 50,
     backgroundColor: '$primary',
@@ -97,7 +101,10 @@ export default EStyleSheet.create({
   loginDescriptionStyle: {
     fontSize: 12,
     color: '$textColor',
-    textAlign: 'center'
+    textAlign: 'center',
+    lineHeight: 18,
+    fontFamily: 'OpenSans-Regular',
+    marginTop: 12
   },
   loginButtonStyle: {
     width: 100,

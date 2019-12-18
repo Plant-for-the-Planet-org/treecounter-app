@@ -1,21 +1,37 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { Text, View, Image, Keyboard } from 'react-native';
+import { Text, View, Image, Keyboard, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import scrollStyle from '../../../styles/common/scrollStyle';
-import { loginFormSchema } from '../../../server/parsedSchemas/login';
+import { loginFormSchema } from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import { planetLogo } from '../../../assets';
+import { planetLogo, eye, closeeye } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
-
+import { TextField } from 'react-native-material-textfield';
+import { Formik } from 'formik';
+import { generateFormikSchemaFromFormSchema } from './../../../helpers/utils';
 let Form = t.form.Form;
+import HeaderNew from './../../Header/HeaderNew.native';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      hidePassword: true
+    };
+  }
+
+  togglePassword = () => {
+    this.setState({
+      hidePassword: !this.state.hidePassword
+    });
+  };
+  componentWillMount() {
+    this.validationSchema = generateFormikSchemaFromFormSchema(loginFormSchema);
   }
 
   onForgotPasswordClicked = () => {
@@ -31,7 +47,7 @@ export default class Login extends Component {
   };
 
   handleLoginClick = () => {
-    if (this.refs.loginForm.getValue()) {
+    if (this.refs.loginForm.value) {
       Keyboard.dismiss();
     }
     // eslint-disable-next-line no-underscore-dangle
@@ -66,12 +82,83 @@ export default class Login extends Component {
 
           <View style={styles.container}>
             <View style={styles.inputContainer}>
-              <Form
+              <Formik
+                initialValues={{
+                  _username: '',
+                  _password: ''
+                }}
                 ref={'loginForm'}
-                type={loginFormSchema}
-                options={this.props.schemaOptions}
-                value={this.props.formValue}
-              />
+                onSubmit={values => {
+                  console.log(values);
+                }}
+                validationSchema={this.validationSchema}
+              >
+                {props => (
+                  <>
+                    <View>
+                      <View>
+                        <TextField
+                          label={i18n.t('label.email')}
+                          value={props.values._username}
+                          tintColor={'#89b53a'}
+                          titleFontSize={12}
+                          lineWidth={1}
+                          error={
+                            props.touched._username && props.errors._username
+                          }
+                          labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                          titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                          affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                          returnKeyType="next"
+                          onChangeText={props.handleChange('_username')}
+                          onBlur={props.handleBlur('_username')}
+                        />
+                      </View>
+
+                      <View style={styles.formView}>
+                        <View style={{ width: '100%' }}>
+                          <TextField
+                            label={i18n.t('label.password')}
+                            value={props.values._password}
+                            tintColor={'#89b53a'}
+                            titleFontSize={12}
+                            lineWidth={1}
+                            secureTextEntry={this.state.hidePassword}
+                            labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                            titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                            affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                            blurOnSubmit={false}
+                            error={
+                              props.touched._password && props.errors._password
+                            }
+                            onChangeText={props.handleChange('_password')}
+                            onBlur={props.handleBlur('_password')}
+                          />
+                        </View>
+
+                        <TouchableOpacity
+                          onPress={() => this.togglePassword()}
+                          style={{ marginLeft: '-14%', bottom: -6 }}
+                        >
+                          {this.state.hidePassword ? (
+                            <Image
+                              source={eye}
+                              resizeMode={'contain'}
+                              style={{ height: 24 }}
+                            />
+                          ) : (
+                            <Image
+                              source={closeeye}
+                              resizeMode={'contain'}
+                              style={{ height: 24 }}
+                            />
+                          )}
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </>
+                )}
+              </Formik>
             </View>
             <View style={styles.bottomRow}>
               <TouchableItem onPress={this.onForgotPasswordClicked}>

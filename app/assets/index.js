@@ -155,6 +155,9 @@ import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import leafGray from './images/leaf_gray.png';
 import backArrow from './images/icons/backArrow.png';
+import eye from './images/eye.png';
+import closeeye from './images/closeeye.png';
+
 export {
   germany,
   worldImg,
@@ -312,5 +315,7 @@ export {
   leaf,
   leafGray,
   backArrow,
+  eye,
+  closeeye,
   right_arrow_button
 };

@@ -16,6 +16,7 @@ export default class DonorDetailsContainer extends Component {
         treeCost={treeCost}
         selectedCurrency={selectedCurrency}
         commissionSwitch={commissionSwitch}
+        navigation={this.props.navigation}
       />
     );
   }

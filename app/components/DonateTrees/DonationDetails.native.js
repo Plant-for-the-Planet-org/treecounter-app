@@ -25,7 +25,7 @@ import { formatNumber, delimitNumbers } from '../../utils/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from './DonationDetailsComponents/Header';
 import { updateStaticRoute } from '../../helpers/routerHelper';
-
+import HeaderAnimated from './../Header/HeaderAnimated.native';
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
@@ -45,7 +45,7 @@ function DonationDetails(props) {
   };
   return (
     <View style={{ backgroundColor: 'white' }}>
-      <Header
+      <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
         title={'Tree Donation'}

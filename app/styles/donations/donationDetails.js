@@ -311,7 +311,9 @@ export default EStyleSheet.create({
   },
   leftSection: {
     padding: 20,
-    width: width * 0.75
+    //width: width * 0.75
+    flexGrow: 1,
+    justifyContent: 'center'
   },
   paymentTreeAmount: {
     fontSize: 18,
@@ -367,13 +369,11 @@ export default EStyleSheet.create({
     padding: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
     width: width * 0.25
   },
   continueButtonText: {
     fontFamily: 'OpenSans-SemiBold',
     fontSize: 12,
-    lineHeight: 22,
     letterSpacing: 0.21,
     textAlign: 'center',
     color: '#ffffff',

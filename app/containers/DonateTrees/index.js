@@ -96,6 +96,7 @@ class DonationTreesContainer extends Component {
         updateRoute={this.updateRoute}
         updateUserProfile={this.props.updateUserProfile}
         {...this.props}
+        navigation={this.props.navigation}
       />
     );
   }

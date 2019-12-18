@@ -17,6 +17,7 @@ import { Formik } from 'formik';
 import { TextField } from 'react-native-material-textfield';
 import CheckBox from 'react-native-check-box';
 import { Dropdown } from 'react-native-material-dropdown';
+import HeaderAnimated from './../Header/HeaderAnimated.native';
 
 import styles from '../../styles/donations/donorDetails';
 import {
@@ -57,7 +58,7 @@ export default function DonorDetails(props) {
   }, []);
   return (
     <View style={{ backgroundColor: 'white', flex: 1 }}>
-      <Header
+      <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
         title={'Contact Details'}

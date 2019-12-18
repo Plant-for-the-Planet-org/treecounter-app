@@ -87,7 +87,6 @@ const headerLabels = {
   ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
   ['delete_contribution']: 'label.delete_contribution',
-  ['app_donate_detail']: '',
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
   ['app_pledge_events']: 'label.pledges',

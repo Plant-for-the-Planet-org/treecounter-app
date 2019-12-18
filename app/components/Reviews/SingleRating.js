@@ -6,10 +6,11 @@ import styles from '../../styles/review.native';
 export function GenerateStar(fill, score = 0) {
   let repeater = Array(fill ? Number(score) : 5 - Number(score)).fill(1);
   // console.log('repeater', repeater);
+  const icon = fill ? 'star' : 'star-border';
   return repeater.map((data, index) => (
     <Icon
       key={index}
-      name="star"
+      name={icon}
       size={16}
       solid={fill}
       style={{ color: '#89b53a', marginLeft: 2 }}
@@ -18,6 +19,7 @@ export function GenerateStar(fill, score = 0) {
 }
 export default class SingleRating extends Component {
   render() {
+    console.log('single rating', this.props);
     return (
       <View
         style={{

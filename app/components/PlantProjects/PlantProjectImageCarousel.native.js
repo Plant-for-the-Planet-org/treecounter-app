@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     maxWidth: 265,
     marginLeft: 0,
     marginRight: 10,
-    borderColor: '#cdcdee',
+    borderColor: '#29000000',
     borderWidth: 1,
     borderRadius: 9,
     padding: 0

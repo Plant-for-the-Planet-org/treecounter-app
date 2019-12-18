@@ -200,11 +200,10 @@ class PlantProjectSnippetDetails extends PureComponent {
                 source={snippetTree}
                 style={{
                   width: 90,
-                  height: 90,
+                  height: 80,
                   paddingLeft: 5,
-                  marginRight: 5
+                  marginRight: 10
                 }}
-                resizeMode={'contain'}
               />
               <View
                 style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}

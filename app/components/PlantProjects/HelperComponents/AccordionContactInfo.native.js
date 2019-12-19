@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { globe, rocket, tree_outline, outline_email } from '../../../assets';
-import styles from '../../../styles/donation/donation.native';
+import styles from '../../../styles/selectplantproject/plant-details.native';
 import i18n from '../../../locales/i18n';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { getISOToCountryName } from '../../../helpers/utils';
@@ -46,14 +46,14 @@ export default class AccordionContactInfo extends Component {
     let iconName = this.state.showInfo ? 'chevron-up' : 'chevron-down';
     const textColor = '#4d5153';
     return (
-      <View style={styles.paymentCardView}>
+      <View style={styles.accordionCardView}>
         <TouchableOpacity
-          style={styles.paymentModeView}
+          style={styles.accordionView}
           onPress={() => {
             this.toggleInfo();
           }}
         >
-          <Text style={[styles.paymentModeTitle, { color: textColor }]}>
+          <Text style={[styles.accordionTitle, { color: textColor }]}>
             {i18n.t('label.contact_details')}
           </Text>
           <Icon
@@ -73,15 +73,8 @@ export default class AccordionContactInfo extends Component {
             ]}
           >
             {slug ? (
-              <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                <Image
-                  source={tree_outline}
-                  style={{
-                    width: 17,
-                    height: 17,
-                    marginRight: 10
-                  }}
-                />
+              <View style={styles.iconTextRow}>
+                <Image source={tree_outline} style={styles.iconImage} />
                 <TouchableOpacity
                   onPress={() => {
                     updateStaticRoute(
@@ -99,56 +92,39 @@ export default class AccordionContactInfo extends Component {
             ) : null}
 
             {url ? (
-              <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                <Image
-                  source={globe}
-                  style={{
-                    width: 17,
-                    height: 17,
-                    marginRight: 10
-                  }}
-                />
+              <View style={styles.iconTextRow}>
+                <Image source={globe} style={styles.iconImage} />
                 <TouchableOpacity onPress={() => _goToURL(url)}>
                   <Text
                     style={styles.viewProfileText}
-                    numberOfLines={1}
+                    numberOfLines={2}
                     ellipsizeMode="tail"
                   >
-                    {url}
+                    {
+                      url
+                        .replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
+                        .split('/')[0]
+                    }
                   </Text>
                 </TouchableOpacity>
               </View>
             ) : null}
 
             {address ? (
-              <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                <Image
-                  source={rocket}
-                  style={{
-                    width: 17,
-                    height: 17,
-                    marginRight: 10
-                  }}
-                />
-                <Text style={styles.viewProfileText}>
+              <View style={styles.iconTextRow}>
+                <Image source={rocket} style={styles.iconImage} />
+                <Text style={styles.accordionText}>
                   {this.getAddress(address)}
                 </Text>
               </View>
             ) : null}
             {email ? (
-              <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                <Image
-                  source={outline_email}
-                  style={{
-                    width: 17,
-                    height: 17,
-                    marginRight: 10
-                  }}
-                />
+              <View style={styles.iconTextRow}>
+                <Image source={outline_email} style={styles.iconImage} />
                 <Text
-                  style={styles.viewProfileText}
+                  style={styles.accordionText}
                   ellipsizeMode="tail"
-                  numberOfLines={1}
+                  numberOfLines={2}
                 >
                   {email}
                 </Text>

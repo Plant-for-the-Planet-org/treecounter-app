@@ -55,5 +55,61 @@ export default EStyleSheet.create({
     letterSpacing: 0,
     color: '#4d5153',
     paddingBottom: 10
+  },
+
+  // Accordion
+
+  accordionCardView: {
+    borderRadius: 9,
+    backgroundColor: '#ffffff',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    padding: 18,
+    marginTop: 20,
+    marginBottom: 20
+  },
+  accordionTitle: {
+    fontSize: 16,
+    fontFamily: 'OpenSans-SemiBold',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    flexGrow: 1
+  },
+  accordionView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingBottom: 5
+  },
+  viewProfileText: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#3498db'
+  },
+  accordionText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  iconTextRow: {
+    flexDirection: 'row',
+    marginTop: 12,
+    alignItems: 'center',
+    width: '90%'
+  },
+  iconImage: {
+    width: 24,
+    height: 24,
+    marginRight: 10
   }
 });

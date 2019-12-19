@@ -9,7 +9,7 @@ import styles from '../../styles/selectplantproject/plant-details.native';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import AccordionContactInfo from './HelperComponents/AccordionContactInfo.native';
-import ReadMore from './HelperComponents/ReadMore.native';
+
 import { readmoreDown, readmoreUp } from '../../assets';
 const cleanUrl = url => {
   url = (url || '').trim();
@@ -90,10 +90,10 @@ const PlantProjectDetails = ({
         <TouchableOpacity onPress={() => setReadMore(!readMore)}>
           {readMore ? (
             <View style={styles.readmoreButtonView}>
-              <View style={{ height: 12 }}>
+              <View style={{ height: 8 }}>
                 <Image
                   source={readmoreUp}
-                  style={{ height: 10, width: 18 }}
+                  style={{ height: 8, width: 15 }}
                   resizeMode={'contain'}
                 />
               </View>
@@ -103,10 +103,10 @@ const PlantProjectDetails = ({
             </View>
           ) : (
             <View style={styles.readmoreButtonView}>
-              <View style={{ height: 10 }}>
+              <View style={{ height: 8 }}>
                 <Image
                   source={readmoreDown}
-                  style={{ height: 10, width: 18 }}
+                  style={{ height: 8, width: 15 }}
                   resizeMode={'contain'}
                 />
               </View>

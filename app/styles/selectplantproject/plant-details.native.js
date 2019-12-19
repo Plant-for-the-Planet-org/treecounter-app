@@ -91,7 +91,7 @@ export default EStyleSheet.create({
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: 'left',
-    color: '#3498db'
+    color: '#4d5153'
   },
   accordionText: {
     fontFamily: 'OpenSans-Regular',
@@ -110,6 +110,6 @@ export default EStyleSheet.create({
   iconImage: {
     width: 24,
     height: 24,
-    marginRight: 10
+    marginRight: 16
   }
 });

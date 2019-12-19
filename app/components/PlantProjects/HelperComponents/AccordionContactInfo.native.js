@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { globe, rocket, tree_outline, outline_email } from '../../../assets';
 import styles from '../../../styles/selectplantproject/plant-details.native';
@@ -32,6 +32,12 @@ export default class AccordionContactInfo extends Component {
     });
     return str.join(', ');
   }
+
+  getMapUrl = address => {
+    let fullAdress = this.getAddress(address);
+    fullAdress = encodeURIComponent(fullAdress);
+    return `https://www.google.com/maps/search/?api=1&query=${fullAdress}`;
+  };
   render() {
     const {
       slug,
@@ -113,22 +119,36 @@ export default class AccordionContactInfo extends Component {
             {address ? (
               <View style={styles.iconTextRow}>
                 <Image source={rocket} style={styles.iconImage} />
-                <Text style={styles.accordionText}>
-                  {this.getAddress(address)}
-                </Text>
+                <TouchableOpacity
+                  onPress={() => _goToURL(this.getMapUrl(address))}
+                >
+                  <Text style={styles.viewProfileText}>{address.address},</Text>
+                  <Text style={styles.viewProfileText}>{address.city},</Text>
+                  <Text style={styles.viewProfileText}>
+                    {address.zipCode},{' '}
+                    {getISOToCountryName(address.countryCode).country}
+                  </Text>
+                </TouchableOpacity>
               </View>
             ) : null}
             {email ? (
-              <View style={styles.iconTextRow}>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL(
+                    `mailto:${email}?subject=Re:${name} at Plant-for-the-Planet App`
+                  )
+                }
+                style={styles.iconTextRow}
+              >
                 <Image source={outline_email} style={styles.iconImage} />
                 <Text
-                  style={styles.accordionText}
+                  style={styles.viewProfileText}
                   ellipsizeMode="tail"
                   numberOfLines={2}
                 >
                   {email}
                 </Text>
-              </View>
+              </TouchableOpacity>
             ) : null}
           </View>
         ) : null}

@@ -24,21 +24,21 @@ class LoginContainer extends React.Component {
     }
   }
 
-  onPress = (recaptchaToken, refreshToken) => {
-    let result = this.refs.loginContainer.refs.loginForm.validate();
-    console.log(result);
-    let value = this.refs.loginContainer.refs.loginForm.getValue();
+  onPress = (value, recaptchaToken, refreshToken) => {
+    // let result = this.refs.loginContainer.refs.loginForm.validate();
+    // console.log(result);
+    // let value = this.refs.loginContainer.refs.loginForm.getValue();
     if (value) {
       this.onClick(value, recaptchaToken, refreshToken);
     }
   };
 
-  onClick(value, recaptchaToken, refreshToken) {
-    console.log(this.refs.loginContainer.refs.loginForm.validate());
-    let formValue = this.refs.loginContainer.refs.loginForm.getValue();
+  onClick(formValue, recaptchaToken, refreshToken) {
+    // console.log(this.refs.loginContainer.refs.loginForm.validate());
+    // let formValue = this.refs.loginContainer.refs.loginForm.getValue();
     if (formValue) {
       this.props
-        .login(value, recaptchaToken, this.props.navigation)
+        .login(formValue, recaptchaToken, this.props.navigation)
         .then(val => val)
         .catch(err => {
           if (refreshToken) refreshToken();
@@ -52,10 +52,10 @@ class LoginContainer extends React.Component {
               schemaOptions: {
                 ...newSchemaOptions
               }
-            },
-            () => {
-              this.refs.loginContainer.refs.loginForm.validate();
             }
+            // () => {
+            //   this.refs.loginContainer.refs.loginForm.validate();
+            // }
           );
         });
       this.setState({ formValue: formValue });

@@ -13,11 +13,43 @@ export default EStyleSheet.create({
     alignItems: 'center'
   },
 
+  actionButtonTouchable: {
+    width: '60%',
+    // marginLeft: '20%',
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: '-36%'
+  },
+  actionButtonView: {
+    borderRadius: 100,
+    backgroundColor: '#89b53a',
+    height: 52,
+    justifyContent: 'center'
+  },
+  actionButtonText: {
+    fontSize: 16,
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff',
+    fontFamily: 'OpenSans-Bold'
+  },
+  actionButtonSmallTouchable: {
+    backgroundColor: '#89b53a',
+    height: 54,
+    width: 54,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: '15%',
+    left: '82%'
+  },
+  actionButtonSmallImage: { height: 32, width: 32 },
+
   parentContainer: {
     flex: 1,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    paddingBottom: 300
+    backgroundColor: 'white'
   },
   container: {
     width: '100%',
@@ -26,7 +58,6 @@ export default EStyleSheet.create({
   },
   headerContainer: {
     flexDirection: 'column',
-
     alignItems: 'center',
     margin: 20
   },
@@ -35,9 +66,9 @@ export default EStyleSheet.create({
     height: 64
   },
 
-  // inputContainer: {
-  //   height: 120
-  // },
+  inputContainer: {
+    height: '100%'
+  },
   button: {
     height: 50,
     backgroundColor: '$primary',

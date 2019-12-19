@@ -68,7 +68,7 @@ export default EStyleSheet.create({
       width: 0,
       height: -3
     },
-    height: rowHeight * 1.75,
+    height: 36,
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,

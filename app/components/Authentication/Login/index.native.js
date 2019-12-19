@@ -85,6 +85,7 @@ export default class Login extends Component {
           initialValues={{
             // eslint-disable-next-line no-underscore-dangle
             _username: '',
+            // eslint-disable-next-line no-underscore-dangle
             _password: ''
           }}
           ref={'loginForm'}
@@ -92,6 +93,7 @@ export default class Login extends Component {
             const formValue = {
               // eslint-disable-next-line no-underscore-dangle
               _username: values._username,
+              // eslint-disable-next-line no-underscore-dangle
               _password: values._password
             };
 
@@ -130,10 +132,12 @@ export default class Login extends Component {
                   <View>
                     <TextField
                       label={i18n.t('label.email')}
+                      // eslint-disable-next-line no-underscore-dangle
                       value={props.values._username}
                       tintColor={'#89b53a'}
                       titleFontSize={12}
                       lineWidth={1}
+                      // eslint-disable-next-line no-underscore-dangle
                       error={props.touched._username && props.errors._username}
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
@@ -148,6 +152,7 @@ export default class Login extends Component {
                     <View style={{ width: '100%' }}>
                       <TextField
                         label={i18n.t('label.password')}
+                        // eslint-disable-next-line no-underscore-dangle
                         value={props.values._password}
                         tintColor={'#89b53a'}
                         titleFontSize={12}
@@ -158,6 +163,7 @@ export default class Login extends Component {
                         affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                         blurOnSubmit={false}
                         error={
+                          // eslint-disable-next-line no-underscore-dangle
                           props.touched._password && props.errors._password
                         }
                         onChangeText={props.handleChange('_password')}

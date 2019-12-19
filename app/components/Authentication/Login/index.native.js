@@ -21,11 +21,7 @@ export default class Login extends Component {
 
     this.state = {
       hidePassword: true,
-      buttonType: 'login',
-      formValue: {
-        _username: '',
-        _password: ''
-      }
+      buttonType: 'login'
     };
   }
 
@@ -95,12 +91,6 @@ export default class Login extends Component {
           }}
           ref={'loginForm'}
           onSubmit={values => {
-            console.log(values);
-            this.setState({
-              _username: values._username,
-              _password: values._password
-            });
-
             const formValue = {
               _username: values._username,
               _password: values._password
@@ -225,10 +215,17 @@ export default class Login extends Component {
 
                   {this.state.buttonType === 'login' ? (
                     <TouchableOpacity
-                      style={styles.actionButtonTouchable}
-                      onPress={props.handleSubmit}
+                      style={[styles.actionButtonTouchable]}
+                      onPress={props.isValid && props.handleSubmit}
                     >
-                      <View style={styles.actionButtonView}>
+                      <View
+                        style={[
+                          styles.actionButtonView,
+                          !props.isValid
+                            ? { backgroundColor: 'rgba(137, 181, 58, 0.19)' }
+                            : {}
+                        ]}
+                      >
                         <Text style={styles.actionButtonText}>
                           {i18n.t('label.login')}
                         </Text>
@@ -239,7 +236,7 @@ export default class Login extends Component {
                   {this.state.buttonType === '>' ? (
                     <TouchableOpacity
                       style={styles.actionButtonSmallTouchable}
-                      onPress={props.handleSubmit}
+                      onPress={props.isValid && props.handleSubmit}
                     >
                       <Image
                         source={forward}

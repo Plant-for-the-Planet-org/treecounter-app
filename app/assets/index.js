@@ -154,6 +154,9 @@ import closeBlack from './images/icons/closeblack.png';
 import planetLogo from './images/Planet-Logo.png';
 import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
+import readmoreUp from './images/readmoreUp.png';
+import readmoreDown from './images/readmoreDown.png';
+
 import leafGray from './images/leaf_gray.png';
 import backArrow from './images/icons/backArrow.png';
 import globe from './images/icons/globe.png';
@@ -318,5 +321,7 @@ export {
   right_arrow_button,
   globe,
   rocket,
-  outline_email
+  outline_email,
+  readmoreUp,
+  readmoreDown
 };

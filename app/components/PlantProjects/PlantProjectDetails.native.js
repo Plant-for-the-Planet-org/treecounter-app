@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Linking, Text, View, TouchableOpacity } from 'react-native';
+import { Linking, Text, View, TouchableOpacity, Image } from 'react-native';
 
 import VideoContainer from '../../components/Common/VideoContainer';
 import NDVI from '../../containers/NDVI/NDVI';
@@ -10,6 +10,7 @@ import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import AccordionContactInfo from './HelperComponents/AccordionContactInfo.native';
 import ReadMore from './HelperComponents/ReadMore.native';
+import { readmoreDown, readmoreUp } from '../../assets';
 const cleanUrl = url => {
   url = (url || '').trim();
   if (url) {
@@ -66,6 +67,7 @@ const PlantProjectDetails = ({
   const backgroundColorLightGreen = '#89b53a';
   const backgroundColor = 'white';
 
+  const [readMore, setReadMore] = React.useState(false);
   return (
     <View style={styles.carousalContainer}>
       {videoUrl ? (
@@ -81,8 +83,40 @@ const PlantProjectDetails = ({
         aspectRatio={16 / 9}
       />
       <View style={[styles.descriptionContainer]}>
-        <Text style={styles.aboutHeader}>{i18n.t('label.about')}</Text>
+        <Text style={styles.descriptionTextTitle}>{i18n.t('label.about')}</Text>
         <Text style={styles.descriptionText}>
+          {readMore ? description : description.substring(0, 200) + '...'}
+        </Text>
+        <TouchableOpacity onPress={() => setReadMore(!readMore)}>
+          {readMore ? (
+            <View style={styles.readmoreButtonView}>
+              <View style={{ height: 12 }}>
+                <Image
+                  source={readmoreUp}
+                  style={{ height: 10, width: 18 }}
+                  resizeMode={'contain'}
+                />
+              </View>
+              <Text style={styles.descriptionText}>
+                {i18n.t('label.read_less')}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.readmoreButtonView}>
+              <View style={{ height: 10 }}>
+                <Image
+                  source={readmoreDown}
+                  style={{ height: 10, width: 18 }}
+                  resizeMode={'contain'}
+                />
+              </View>
+              <Text style={styles.descriptionText}>
+                {i18n.t('label.read_more')}
+              </Text>
+            </View>
+          )}
+        </TouchableOpacity>
+        {/* <Text style={styles.descriptionText}>
           {description && getDescriptionPart(1, description)}
         </Text>
         {description &&
@@ -91,7 +125,7 @@ const PlantProjectDetails = ({
               style={styles.descriptionText}
               descriptionText={getDescriptionPart(0, description)}
             />
-          )}
+          )} */}
       </View>
 
       <AccordionContactInfo

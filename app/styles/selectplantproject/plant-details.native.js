@@ -10,13 +10,24 @@ export default EStyleSheet.create({
     paddingBottom: 0
   },
   descriptionText: {
+    color: '#686060',
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
-    fontWeight: 'normal',
     lineHeight: 19,
-    letterSpacing: 0,
-    textAlign: 'left',
-    color: '#000000'
+    margin: 6
+  },
+  descriptionTextTitle: {
+    color: '#686060',
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    lineHeight: 19,
+    margin: 6
+  },
+  readmoreButtonView: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 6
   },
   linkTextContainer: {
     flexDirection: 'row',

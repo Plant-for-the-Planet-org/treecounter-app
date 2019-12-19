@@ -35,16 +35,16 @@ const cleanUrl = url => {
   }
   return null;
 };
-const getDescriptionPart = (which, description) => {
-  let howManySentence = description.split('.');
-  if (!which && howManySentence.length < 3) return false;
-  return which == 1
-    ? howManySentence
-        .slice(0, 2)
-        .join('.')
-        .concat('.')
-    : howManySentence.slice(-(howManySentence.length - 2)).join('.');
-};
+// const getDescriptionPart = (which, description) => {
+//   let howManySentence = description.split('.');
+//   if (!which && howManySentence.length < 3) return false;
+//   return which == 1
+//     ? howManySentence
+//         .slice(0, 2)
+//         .join('.')
+//         .concat('.')
+//     : howManySentence.slice(-(howManySentence.length - 2)).join('.');
+// };
 /**
  * Bottom half of PlantProjectFull
  */

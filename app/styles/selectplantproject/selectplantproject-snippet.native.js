@@ -7,7 +7,6 @@ const Layout = {
     width: Dimensions.get('window').width
   }
 };
-const rowHeight = 20;
 
 export const flatListContainerStyle = {
   paddingBottom: 45,

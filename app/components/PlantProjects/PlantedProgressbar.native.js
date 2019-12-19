@@ -63,8 +63,8 @@ class PlantedProgressBar extends React.Component {
               flexDirection: 'row',
               position: 'absolute',
               alignItems: 'center',
-              paddingTop: 8,
-              paddingBottom: 8
+              paddingTop: 6,
+              paddingBottom: 6
             }}
           >
             <Text style={styles.treePlantedtextPlanted}>

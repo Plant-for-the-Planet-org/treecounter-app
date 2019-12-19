@@ -76,11 +76,12 @@ export default EStyleSheet.create({
       width: 0,
       height: -3
     },
-    height: rowHeight * 1.75,
+    height: 36,
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
-    lineHeight: 19
+    lineHeight: 19,
+    alignItems: 'center'
   },
   treePlantedContainer: {
     flexDirection: 'row',
@@ -98,12 +99,12 @@ export default EStyleSheet.create({
     // padding: 5,
     paddingLeft: 5,
     color: 'white',
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-Bold'
   },
   treePlantedtextTrees: {
     color: 'white',
     paddingLeft: 5,
-    fontWeight: 'bold'
+    fontFamily: 'OpenSans-Bold'
   },
   treePlantedtextPlanted: {
     color: 'white',

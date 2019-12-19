@@ -6,14 +6,14 @@ import styles from '../../styles/review.native';
 export function GenerateStar(fill, score = 0) {
   let repeater = Array(fill ? Number(score) : 5 - Number(score)).fill(1);
   // console.log('repeater', repeater);
-  const icon = fill ? 'star' : 'star-border';
+  const color = fill ? '#89b53a' : '#d3d3d3';
   return repeater.map((data, index) => (
     <Icon
       key={index}
-      name={icon}
-      size={16}
+      name={'star'}
+      size={18}
       solid={fill}
-      style={{ color: '#89b53a', marginLeft: 2 }}
+      style={{ color: color, marginLeft: 2 }}
     />
   ));
 }

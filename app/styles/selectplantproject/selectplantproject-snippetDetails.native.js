@@ -141,9 +141,9 @@ export default EStyleSheet.create({
   },
   project_teaser__contentText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Bold',
     color: '$cardTextColor',
-    maxWidth: '90%',
+    maxWidth: '100%',
     lineHeight: 24
   },
   byOrgContainer: {
@@ -165,8 +165,7 @@ export default EStyleSheet.create({
   survivalText: {
     fontSize: 12,
     flexWrap: 'wrap',
-    // paddingTop: 3,
-    // paddingBottom: 8,
+    fontFamily: 'OpenSans-Regular',
     color: '$cardTextColor'
   },
   costTextContainer: {
@@ -227,5 +226,11 @@ export default EStyleSheet.create({
     alignItems: 'center',
     marginRight: 10,
     justifyContent: 'space-between'
+  },
+  iconTextRow: { flexDirection: 'row', alignItems: 'center', marginTop: 10 },
+  iconImage: {
+    width: 17,
+    height: 17,
+    marginRight: 10
   }
 });

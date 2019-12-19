@@ -166,7 +166,7 @@ class PlantProjectSnippetDetails extends PureComponent {
             </View>
             {reviews && reviews.length ? (
               <TouchableOpacity
-                style={{ paddingTop: 3, paddingLeft: 2, flex: 1 }}
+                style={{ paddingTop: 8, paddingLeft: 2, flex: 1 }}
                 onPress={() => {
                   this.props.selectPlantProjectAction(id);
                   updateStaticRoute('app_reviews', this.props.navigation);
@@ -200,40 +200,26 @@ class PlantProjectSnippetDetails extends PureComponent {
                   uri: getImageUrl('profile', 'avatar', tpo.avatar)
                 }}
                 style={{
-                  width: 90,
-                  height: 90,
+                  width: 72,
+                  height: 72,
                   paddingLeft: 5,
                   marginRight: 10,
                   borderRadius: 45
                 }}
                 resizeMode="cover"
               />
-              <View
-                style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}
-              >
-                <View style={{ flexDirection: 'row' }}>
-                  <Image
-                    source={location_grey}
-                    style={{
-                      width: 17,
-                      height: 17,
-                      marginRight: 10
-                    }}
-                  />
-                  <Text style={styles.survivalText} ellipsizeMode="tail">
-                    {getISOToCountryName(country).country}
-                  </Text>
-                </View>
+              <View>
+                {getISOToCountryName(country).country ? (
+                  <View style={[styles.iconTextRow, { marginTop: 0 }]}>
+                    <Image source={location_grey} style={styles.iconImage} />
+                    <Text style={styles.survivalText} ellipsizeMode="tail">
+                      {getISOToCountryName(country).country}
+                    </Text>
+                  </View>
+                ) : null}
 
-                <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                  <Image
-                    source={survival_grey}
-                    style={{
-                      width: 17,
-                      height: 17,
-                      marginRight: 10
-                    }}
-                  />
+                <View style={styles.iconTextRow}>
+                  <Image source={survival_grey} style={styles.iconImage} />
                   <View style={[styles.survivalText, { flexDirection: 'row' }]}>
                     <Text style={[styles.survivalText, { marginRight: 8 }]}>
                       {specsProps.survivalRate}% {i18n.t('label.survival_rate')}
@@ -250,15 +236,8 @@ class PlantProjectSnippetDetails extends PureComponent {
                   </View>
                 </View>
 
-                <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                  <Image
-                    source={tax_grey}
-                    style={{
-                      width: 17,
-                      height: 17,
-                      marginRight: 10
-                    }}
-                  />
+                <View style={styles.iconTextRow}>
+                  <Image source={tax_grey} style={styles.iconImage} />
                   <Text style={styles.survivalText}>
                     {this.getTaxCountries()
                       ? `${i18n.t('label.tax_deductible')} ${i18n.t(

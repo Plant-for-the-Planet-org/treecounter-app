@@ -3,7 +3,6 @@ import { normalize } from 'normalizr';
 import { getRequest } from '../utils/api';
 import { plantProjectSchema } from '../schemas/index';
 // import { mergeEntities } from '../reducers/entitiesReducer';
-import { setProgressModelState } from '../reducers/modelDialogReducer';
 export function fetchPlantProjectDetail(uid) {
   const request = getRequest('plantProject_get', { uid, version: 'v1.3' });
   // TODO: make this real dispatch whihc updates data to redux

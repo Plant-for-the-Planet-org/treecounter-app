@@ -103,14 +103,10 @@ PlantProjectImageCarousel.defaultProps = {
   pictureType: 'project'
 };
 const textColor = 'white';
+const borderColor = '#29000000';
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  closeText: {
-    color: textColor,
-    textAlign: 'right',
-    padding: 10
   },
   footerText: {
     color: textColor,
@@ -129,7 +125,7 @@ const styles = StyleSheet.create({
     maxWidth: 265,
     marginLeft: 0,
     marginRight: 10,
-    borderColor: '#29000000',
+    borderColor: borderColor,
     borderWidth: 1,
     borderRadius: 9,
     padding: 0

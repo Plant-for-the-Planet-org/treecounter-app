@@ -44,6 +44,7 @@ export default class AccordionContactInfo extends Component {
       name
     } = this.props;
     let iconName = this.state.showInfo ? 'chevron-up' : 'chevron-down';
+    const textColor = '#4d5153';
     return (
       <View style={styles.paymentCardView}>
         <TouchableOpacity
@@ -52,7 +53,7 @@ export default class AccordionContactInfo extends Component {
             this.toggleInfo();
           }}
         >
-          <Text style={[styles.paymentModeTitle, { color: '#4d5153' }]}>
+          <Text style={[styles.paymentModeTitle, { color: textColor }]}>
             {i18n.t('label.contact_details')}
           </Text>
           <Icon

@@ -17,6 +17,7 @@ export default class ReadMore extends Component {
   render() {
     const { descriptionText, style } = this.props;
     let iconName = this.state.showInfo ? 'chevron-up' : 'chevron-down';
+    const textColor = '#4d5153';
     return (
       <View style={{ marginTop: 10 }}>
         {
@@ -35,7 +36,7 @@ export default class ReadMore extends Component {
               color="#4d5153"
               style={{ marginRight: 10, paddingTop: 2, paddingLeft: 5 }}
             />
-            <Text style={[styles.paymentModeTitle, { color: '#4d5153' }]}>
+            <Text style={[styles.paymentModeTitle, { color: textColor }]}>
               {!this.state.showInfo
                 ? i18n.t('label.read_more')
                 : i18n.t('label.read_less')}

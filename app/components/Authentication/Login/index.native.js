@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
 import { Text, View, Image, Keyboard, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { loginFormSchema } from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { planetLogo, eye, closeeye, forward } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
 import { generateFormikSchemaFromFormSchema } from './../../../helpers/utils';
-import HeaderNew from './../../Header/HeaderNew.native';
-import buttonStyles from '../../../styles/common/button.native';
 
 export default class Login extends Component {
   constructor(props) {
@@ -35,11 +31,11 @@ export default class Login extends Component {
 
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
-      this._keyboardDidShow
+      this.keyboardDidShow
     );
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
-      this._keyboardDidHide
+      this.keyboardDidHide
     );
   }
 
@@ -48,13 +44,13 @@ export default class Login extends Component {
     this.keyboardDidHideListener.remove();
   }
 
-  _keyboardDidShow = () => {
+  keyboardDidShow = () => {
     this.setState({
       buttonType: '>'
     });
   };
 
-  _keyboardDidHide = () => {
+  keyboardDidHide = () => {
     this.setState({
       buttonType: 'login'
     });
@@ -87,12 +83,14 @@ export default class Login extends Component {
       <View style={styles.parentContainer}>
         <Formik
           initialValues={{
+            // eslint-disable-next-line no-underscore-dangle
             _username: '',
             _password: ''
           }}
           ref={'loginForm'}
           onSubmit={values => {
             const formValue = {
+              // eslint-disable-next-line no-underscore-dangle
               _username: values._username,
               _password: values._password
             };

@@ -82,6 +82,7 @@ export default class Login extends Component {
   };
   render() {
     const backgroundColor = 'white';
+    const lockedButton = 'rgba(137, 181, 58, 0.19)';
     return (
       <View style={styles.parentContainer}>
         <Formik
@@ -222,7 +223,7 @@ export default class Login extends Component {
                         style={[
                           styles.actionButtonView,
                           !props.isValid
-                            ? { backgroundColor: 'rgba(137, 181, 58, 0.19)' }
+                            ? { backgroundColor: lockedButton }
                             : {}
                         ]}
                       >

@@ -14,11 +14,11 @@ export default EStyleSheet.create({
   },
 
   actionButtonTouchable: {
-    width: '60%',
+    width: '80%',
     // marginLeft: '20%',
     alignSelf: 'center',
     position: 'absolute',
-    bottom: '-36%'
+    bottom: '5%'
   },
   actionButtonView: {
     borderRadius: 100,
@@ -42,13 +42,12 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: '15%',
-    left: '82%'
+    bottom: '8%',
+    right: '8%'
   },
   actionButtonSmallImage: { height: 32, width: 32 },
 
   parentContainer: {
-    flex: 1,
     backgroundColor: 'white'
   },
   container: {

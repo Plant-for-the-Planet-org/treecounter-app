@@ -1,52 +1,48 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
+
+const height = Dimensions.get('window').height;
 
 export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#ffffff'
   },
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
   zeroPercentContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    height: 100
+    marginTop: 48,
+    alignItems: 'center'
   },
   commisionStyle: {
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Light',
     fontSize: 24,
-    fontWeight: '300',
-    color: '#87b738'
+    color: '#87b738',
+    textAlign: 'center',
+    marginBottom: 48,
+    marginTop: -24
   },
   zeroStyle: {
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 90,
     color: '#87b738'
   },
   percentStyle: {
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 40,
-    lineHeight: 122,
     color: '#87b738'
   },
   textHeader: {
-    fontFamily: 'OpenSans',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 24,
     lineHeight: 33,
     textAlign: 'center',
-    color: '#4d5153'
-  },
-  imageStyle: {
-    width: 200,
-    height: 200
+    color: '#4d5153',
+    marginTop: 64
   },
   textPara: {
-    fontFamily: 'OpenSans',
-    fontSize: 17,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 20,
     lineHeight: 27,
     textAlign: 'center',
     color: '#4d5153'

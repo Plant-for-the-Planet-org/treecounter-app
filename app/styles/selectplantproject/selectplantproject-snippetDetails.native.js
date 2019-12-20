@@ -20,12 +20,6 @@ export default EStyleSheet.create({
   },
   projectSnippetContainer: {
     flexDirection: 'column',
-
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    elevation: 0,
     borderWidth: 0
   },
   projectImageContainer: {
@@ -64,14 +58,7 @@ export default EStyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     backgroundColor: '$greyColor',
-    shadowOffset: {
-      width: 0,
-      height: -3
-    },
     height: 36,
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
     lineHeight: 19
   },
   treePlantedContainer: {

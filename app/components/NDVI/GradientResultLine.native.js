@@ -38,7 +38,9 @@ const GradientResultLine = props => {
 
   return (
     <View style={{ width: '100%', marginTop: 21 }}>
-      <Text style={{ marginBottom: 16 }}>{`${formatDate(
+      <Text
+        style={{ marginBottom: 16, fontFamily: 'OpenSans-SemiBold' }}
+      >{`${formatDate(
         formatDateToMySQL(
           new Date(selectedDataPoint.year, selectedDataPoint.month - 1, 1)
         ),

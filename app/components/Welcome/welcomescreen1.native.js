@@ -6,7 +6,7 @@ import styles from '../../styles/WelcomeScreens/WelcomeScreen1';
 
 const WelcomeScreen1 = ({ _appHomePage }) => {
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <View style={styles.mainContainer}>
       <View style={styles.openAsGuestContainer}>
         <Text style={styles.openAsGuest} onPress={_appHomePage}>
           {i18n.t('label.welcome_scrn_1_open_as_guest')}

@@ -6,7 +6,7 @@ import styles from '../../styles/WelcomeScreens/WelcomeScreen3';
 
 const WelcomeScreen3 = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <View style={styles.mainContainer}>
       <View style={styles.container}>
         <Text style={styles.textHeader}>
           {i18n.t('label.welcome_scrn_3_heading')}

@@ -13,7 +13,7 @@ import styless from '../../styles/WelcomeScreens/WelcomeScreen5';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 
 const WelcomSlider = ({ navigation }) => {
-  const _appHomePage = () => updateRoute('app_homepage', navigation);
+  const appHomePage = () => updateRoute('app_homepage', navigation);
   const Footer = () => {
     return (
       <View style={{ backgroundColor: '#fff' }}>
@@ -54,7 +54,7 @@ const WelcomSlider = ({ navigation }) => {
         paginationStyle={{ bottom: 0 }}
       >
         <View style={styles.container}>
-          <WelcomeScreen1 _appHomePage={_appHomePage} />
+          <WelcomeScreen1 _appHomePage={appHomePage} />
         </View>
         <View style={styles.container}>
           <WelcomeScreen2 />

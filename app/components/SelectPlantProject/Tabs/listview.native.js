@@ -41,7 +41,7 @@ class ListViewProjects extends PureComponent {
 
   render() {
     const Header = (
-      <View style={styles.headerView}>
+      <View style={[styles.headerView, { marginTop: 0 }]}>
         <Text style={styles.headerTitle}>
           {i18n.t('label.select_project_title')}
         </Text>

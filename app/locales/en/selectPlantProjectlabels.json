@@ -2,6 +2,7 @@
   "name": "Name",
   "price": "Price",
   "select_project": "Select Project",
+  "search_project": "Search Projects...",
   "donate_trees_cap": "Donate Trees",
   "featured": "Featured",
   "list": "All",

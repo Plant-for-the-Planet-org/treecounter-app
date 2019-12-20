@@ -328,6 +328,5 @@ export {
   readmoreUp,
   readmoreDown,
   eye,
-  closeeye,
-  right_arrow_button
+  closeeye
 };

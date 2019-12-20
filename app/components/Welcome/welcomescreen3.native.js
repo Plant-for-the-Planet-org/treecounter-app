@@ -6,7 +6,7 @@ import styles from '../../styles/WelcomeScreens/WelcomeScreen3';
 
 const WelcomeScreen3 = () => {
   return (
-    <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#fff' }}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <View style={styles.container}>
         <Text style={styles.textHeader}>
           {i18n.t('label.welcome_scrn_3_heading')}
@@ -20,7 +20,7 @@ const WelcomeScreen3 = () => {
           {i18n.t('label.welcome_scrn_3_sub_heading')}
         </Text>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

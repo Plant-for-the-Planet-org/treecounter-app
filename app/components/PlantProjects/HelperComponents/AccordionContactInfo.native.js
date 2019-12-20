@@ -8,7 +8,7 @@ import { getLocalRoute } from '../../../actions/apiRouting';
 import { getISOToCountryName } from '../../../helpers/utils';
 export default class AccordionContactInfo extends Component {
   state = {
-    showInfo: false
+    showInfo: true
   };
 
   toggleInfo = () => {
@@ -90,7 +90,7 @@ export default class AccordionContactInfo extends Component {
                     );
                   }}
                 >
-                  <Text style={styles.viewProfileText}>
+                  <Text style={styles.accordionText}>
                     {i18n.t('label.view_profile')}
                   </Text>
                 </TouchableOpacity>
@@ -102,7 +102,7 @@ export default class AccordionContactInfo extends Component {
                 <Image source={globe} style={styles.iconImage} />
                 <TouchableOpacity onPress={() => _goToURL(url)}>
                   <Text
-                    style={styles.viewProfileText}
+                    style={styles.accordionText}
                     numberOfLines={2}
                     ellipsizeMode="tail"
                   >
@@ -122,9 +122,9 @@ export default class AccordionContactInfo extends Component {
                 <TouchableOpacity
                   onPress={() => _goToURL(this.getMapUrl(address))}
                 >
-                  <Text style={styles.viewProfileText}>{address.address},</Text>
-                  <Text style={styles.viewProfileText}>{address.city},</Text>
-                  <Text style={styles.viewProfileText}>
+                  <Text style={styles.accordionText}>{address.address},</Text>
+                  <Text style={styles.accordionText}>{address.city},</Text>
+                  <Text style={styles.accordionText}>
                     {address.zipCode},{' '}
                     {getISOToCountryName(address.countryCode).country}
                   </Text>
@@ -142,7 +142,7 @@ export default class AccordionContactInfo extends Component {
               >
                 <Image source={outline_email} style={styles.iconImage} />
                 <Text
-                  style={styles.viewProfileText}
+                  style={styles.accordionText}
                   ellipsizeMode="tail"
                   numberOfLines={2}
                 >

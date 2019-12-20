@@ -1,11 +1,10 @@
 import React from 'react';
 import { Text, View, ScrollView, Image } from 'react-native';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import { Projects } from '../../assets/index';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/WelcomeScreens/WelcomeScreen2';
 
-const WelcomeScreen2 = ({}) => {
+const WelcomeScreen2 = () => {
   return (
     <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#fff' }}>
       <View style={styles.container}>

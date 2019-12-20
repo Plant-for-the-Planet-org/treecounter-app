@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, ScrollView, Image } from 'react-native';
-import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
 import { treelogo } from '../../assets';
 import styles from '../../styles/WelcomeScreens/WelcomeScreen1';

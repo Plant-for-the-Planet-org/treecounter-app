@@ -161,6 +161,9 @@ import leafGray from './images/leaf_gray.png';
 import backArrow from './images/icons/backArrow.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
+import eye from './images/eye.png';
+import closeeye from './images/closeeye.png';
+
 export {
   germany,
   worldImg,
@@ -323,5 +326,8 @@ export {
   rocket,
   outline_email,
   readmoreUp,
-  readmoreDown
+  readmoreDown,
+  eye,
+  closeeye,
+  right_arrow_button
 };

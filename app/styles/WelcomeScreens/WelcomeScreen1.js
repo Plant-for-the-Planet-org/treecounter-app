@@ -1,6 +1,10 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#ffffff'
+  },
   container: {
     flex: 1,
     justifyContent: 'space-around',

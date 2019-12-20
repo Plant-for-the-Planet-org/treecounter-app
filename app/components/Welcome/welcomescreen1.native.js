@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View, ScrollView, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import { treelogo } from '../../assets';
 import styles from '../../styles/WelcomeScreens/WelcomeScreen1';
 
 const WelcomeScreen1 = ({ _appHomePage }) => {
   return (
-    <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#fff' }}>
+    <View style={styles.mainContainer}>
       <View style={styles.openAsGuestContainer}>
         <Text style={styles.openAsGuest} onPress={_appHomePage}>
           {i18n.t('label.welcome_scrn_1_open_as_guest')}
@@ -25,7 +25,7 @@ const WelcomeScreen1 = ({ _appHomePage }) => {
           {i18n.t('label.welcome_scrn_1_sub_heading')}
         </Text>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

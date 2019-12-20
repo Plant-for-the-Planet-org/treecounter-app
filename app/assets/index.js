@@ -158,6 +158,7 @@ import treelogo from '../../icon.png';
 import Projects from './images/projects.jpg';
 import WelcomeImage3 from './images/welcome_screen_3_image.jpg';
 import backArrow from './images/icons/backArrow.png';
+import welcomeScreen5 from './images/welcomeScreen5.png';
 export {
   treelogo,
   germany,
@@ -318,5 +319,6 @@ export {
   Projects,
   WelcomeImage3,
   backArrow,
-  right_arrow_button
+  right_arrow_button,
+  welcomeScreen5
 };

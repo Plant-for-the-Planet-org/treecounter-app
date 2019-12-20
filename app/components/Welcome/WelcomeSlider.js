@@ -16,7 +16,7 @@ const WelcomSlider = ({ navigation }) => {
   const appHomePage = () => updateRoute('app_homepage', navigation);
   const Footer = () => {
     return (
-      <View style={{ backgroundColor: '#fff' }}>
+      <View style={{ backgroundColor: '#fff', marginTop: 16 }}>
         <View style={styless.bottomRow}>
           <PrimaryButton
             onClick={() => updateRoute('app_signup', navigation)}

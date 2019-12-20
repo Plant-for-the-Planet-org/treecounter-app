@@ -1,14 +1,12 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
+
+const height = Dimensions.get('window').height;
 
 export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#ffffff'
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center'
   },
 
   signInBtn: {
@@ -16,20 +14,22 @@ export default EStyleSheet.create({
   },
 
   textHeader: {
-    fontFamily: 'OpenSans',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 24,
     lineHeight: 33,
     textAlign: 'center',
-    color: '#4d5153'
+    color: '#4d5153',
+    marginTop: 64
   },
   imageStyle: {
-    width: 200,
-    height: 200
+    width: height * 0.3,
+    height: height * 0.3,
+    alignSelf: 'center',
+    marginVertical: 42
   },
   textPara: {
-    fontFamily: 'OpenSans',
-    fontSize: 17,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 20,
     lineHeight: 27,
     textAlign: 'center',
     color: '#4d5153'
@@ -45,7 +45,7 @@ export default EStyleSheet.create({
     backgroundColor: '#89b53a'
   },
   alreadyHaveAccountBtn: {
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     color: '#4d5153'
   },
@@ -58,9 +58,8 @@ export default EStyleSheet.create({
   continueBtn: {
     width: 72,
     height: 22,
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Bold',
     fontSize: 16,
-    fontWeight: '600',
     lineHeight: 22,
     letterSpacing: 0.21,
     textAlign: 'center',

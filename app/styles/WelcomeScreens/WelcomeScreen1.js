@@ -25,7 +25,7 @@ export default EStyleSheet.create({
   },
   textHeader: {
     fontFamily: 'OpenSans-Bold',
-    fontSize: 20,
+    fontSize: 24,
     lineHeight: 33,
     textAlign: 'center',
     color: '#4d5153',

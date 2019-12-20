@@ -1,31 +1,31 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#ffffff'
   },
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
   textHeader: {
-    fontFamily: 'OpenSans',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 24,
     lineHeight: 33,
     textAlign: 'center',
-    color: '#4d5153'
+    color: '#4d5153',
+    marginTop: 64
   },
   imageStyle: {
-    width: 150,
-    height: 150,
-    marginVertical: 10
+    width: height * 0.3,
+    height: height * 0.3,
+    marginVertical: 42,
+    alignSelf: 'center'
   },
   textPara: {
-    fontFamily: 'OpenSans',
-    fontSize: 17,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 20,
     lineHeight: 27,
     textAlign: 'center',
     color: '#4d5153'

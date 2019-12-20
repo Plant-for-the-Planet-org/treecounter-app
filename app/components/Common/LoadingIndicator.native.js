@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
+import { Image, View } from 'react-native';
 import { loadingBar } from '../../assets';
 import ContentLoading from '../../components/Common/ContentLoader.native';
 import i18n from '../../locales/i18n.js';
@@ -9,10 +9,10 @@ const LoadingIndicator = props => {
   return contentLoader ? (
     <ContentLoading screen={screen} />
   ) : (
-      <View style={[loadingIndicatorStyle, style]}>
-        <Image source={loadingBar} alt={i18n.t('label.loading')} />
-      </View>
-    );
+    <View style={[loadingIndicatorStyle, style]}>
+      <Image source={loadingBar} alt={i18n.t('label.loading')} />
+    </View>
+  );
 };
 
 const loadingIndicatorStyle = {

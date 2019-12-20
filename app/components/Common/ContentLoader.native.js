@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
+import { Image, View } from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
 import i18n from '../../locales/i18n.js';
@@ -166,7 +166,7 @@ const ProjectSingleLoader = () => (
   </ContentLoader>
 );
 
-const DefaultLoader = ({ style }) => (
+const DefaultLoader = ({}) => (
   <View style={[loadingIndicatorStyle, containerStyle]}>
     <Image source={loadingBar} alt={i18n.t('label.loading')} />
   </View>

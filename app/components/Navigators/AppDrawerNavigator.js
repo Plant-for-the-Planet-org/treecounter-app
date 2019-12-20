@@ -374,14 +374,14 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
 
   const AppNavigator = createDrawerNavigator(
     {
-      appStackNavigator,
+      //appStackNavigator,
       searchNavigator: searchNavigator,
       deleteProfileNavigator,
       deleteContributionNavigator,
       welcomeScreenNavigator
     },
     {
-      initialRouteName: 'appStackNavigator',
+      initialRouteName: 'welcomeScreenNavigator',
       gesturesEnabled: false,
       contentComponent: SideMenuContainer
     }

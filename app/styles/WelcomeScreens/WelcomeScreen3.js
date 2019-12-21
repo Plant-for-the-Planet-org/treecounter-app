@@ -6,26 +6,21 @@ const height = Dimensions.get('window').height;
 export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    justifyContent: 'space-around'
   },
-  // container: {
-  //   flex: 1,
-  //   justifyContent: 'space-around',
-  //   alignItems: 'center'
-  // },
   textHeader: {
     fontFamily: 'OpenSans-Bold',
     fontSize: 24,
     lineHeight: 33,
     textAlign: 'center',
-    color: '#4d5153',
-    marginTop: 64
+    color: '#4d5153'
   },
   imageStyle: {
     width: height * 0.33,
     height: height * 0.33,
     alignSelf: 'center',
-    marginVertical: 42
+    marginVertical: 15
   },
   textPara: {
     fontFamily: 'OpenSans-Regular',

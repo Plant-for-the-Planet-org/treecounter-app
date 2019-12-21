@@ -3,7 +3,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    justifyContent: 'space-around'
   },
   zeroPercentContainer: {
     flexDirection: 'row',
@@ -34,8 +35,7 @@ export default EStyleSheet.create({
     fontSize: 24,
     lineHeight: 33,
     textAlign: 'center',
-    color: '#4d5153',
-    marginTop: 64
+    color: '#4d5153'
   },
   textPara: {
     fontFamily: 'OpenSans-Regular',

@@ -6,20 +6,20 @@ const height = Dimensions.get('window').height;
 export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    justifyContent: 'space-around'
   },
   textHeader: {
     fontFamily: 'OpenSans-Bold',
     fontSize: 24,
     lineHeight: 33,
     textAlign: 'center',
-    color: '#4d5153',
-    marginTop: 64
+    color: '#4d5153'
   },
   imageStyle: {
     width: height * 0.3,
     height: height * 0.3,
-    marginVertical: 42,
+    marginVertical: 15,
     alignSelf: 'center'
   },
   textPara: {

@@ -5,11 +5,6 @@ export default EStyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff'
   },
-  // container: {
-  //   flex: 1,
-  //   justifyContent: 'space-around',
-  //   alignItems: 'center'
-  // },
   openAsGuestContainer: {
     height: 50,
     justifyContent: 'flex-end',

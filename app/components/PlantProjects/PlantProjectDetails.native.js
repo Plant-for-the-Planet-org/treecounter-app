@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Linking, Text, View, TouchableOpacity, Image } from 'react-native';
+import {
+  Linking,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView
+} from 'react-native';
 
 import VideoContainer from '../../components/Common/VideoContainer';
 import NDVI from '../../containers/NDVI/NDVI';
@@ -70,18 +77,20 @@ const PlantProjectDetails = ({
   const [readMore, setReadMore] = React.useState(false);
   return (
     <View style={styles.carousalContainer}>
-      {videoUrl ? (
-        <View
-          style={[styles.videoContainer, { paddingBottom: 20, borderWidth: 0 }]}
-        >
-          <VideoContainer url={videoUrl} />
-        </View>
-      ) : null}
-      <PlantProjectImageCarousel
-        resizeMode={'cover'}
-        images={plantProjectImages}
-        aspectRatio={16 / 9}
-      />
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={{ display: 'flex', flexDirection: 'row' }}
+      >
+        {videoUrl ? <VideoContainer url={videoUrl} /> : null}
+        <PlantProjectImageCarousel
+          resizeMode={'cover'}
+          images={plantProjectImages}
+          aspectRatio={16 / 9}
+          videoUrl={videoUrl}
+        />
+      </ScrollView>
+
       <View style={[styles.descriptionContainer]}>
         <Text style={styles.descriptionTextTitle}>{i18n.t('label.about')}</Text>
         <Text style={styles.descriptionText}>

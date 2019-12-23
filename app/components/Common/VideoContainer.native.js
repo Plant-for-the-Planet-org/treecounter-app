@@ -44,7 +44,12 @@ class VideoContainer extends React.Component {
     if (this.state.videoId) {
       return (
         <WebView
-          style={{ height: 300 }}
+          containerStyle={{
+            borderRadius: 9,
+            height: 150,
+            width: 265,
+            marginRight: 12
+          }}
           javaScriptEnabled
           source={{
             uri: `https://www.youtube.com/embed/${

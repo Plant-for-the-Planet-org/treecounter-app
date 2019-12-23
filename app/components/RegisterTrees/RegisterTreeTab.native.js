@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { PureComponent } from 'react';
 // import t from 'tcomb-form-native';
-import {Image, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';

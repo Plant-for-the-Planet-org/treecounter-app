@@ -148,7 +148,7 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
-        manifestPlaceholders = [google_maps_api_key: properties.getProperty("GOOGLE_MAPS_API_KEY")]
+        manifestPlaceholders = [googleApiKey: properties.getProperty("googleApiKey")]
     }
     signingConfigs {
       release {

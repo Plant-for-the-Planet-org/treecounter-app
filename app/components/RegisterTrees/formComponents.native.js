@@ -121,7 +121,7 @@ export const FormikFormTree = props => {
                   (parentProps.mode === 'single-tree' && props.touched.geoLocation && props.errors.geoLocation) ||
                   (parentProps.mode === 'multiple-trees' && props.touched.geometry && props.errors.geometry) ? styles.errorView : ''}>
                   <MapboxMap
-                    mode={'single-tree'}
+                    mode={parentProps.mode}
                     mapStyle={{height: 200}}
                     geometry={geometry}
                     geoLocation={geoLocation}

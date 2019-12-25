@@ -172,7 +172,7 @@ export default class RegisterTreeTab extends PureComponent {
               </Text>
             </View>
             <MapboxMap
-              mode={'single-tree'}
+              mode={this.props.mode}
               geometry={this.formProps && this.formProps.values ? this.formProps.values.geometry : null}
               geoLocation={this.formProps && this.formProps.values ? this.formProps.values.geoLocation : null}
               mapStyle={{ opacity: 1 }}

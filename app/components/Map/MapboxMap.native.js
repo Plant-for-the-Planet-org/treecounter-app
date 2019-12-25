@@ -120,7 +120,7 @@ const styles = EStyleSheet.create({
   markerFullScreen: {
     height: 48,
     width: 48,
-    top: -20
+    // top: -20
   },
   marker: {
     height: 48,
@@ -435,6 +435,8 @@ class MapboxMap extends Component {
       this.props.onPress(e)
     } else if(!this.isSingleTree) {
       const {editing, creatingHole} = this.state;
+      console.log(this.isSingleTree, {editing, creatingHole})
+
       if (!editing) {
         this.setState({
           editing: {
@@ -512,7 +514,7 @@ class MapboxMap extends Component {
     };
     const { editing, region: {latitude, longitude}, markers } = this.state;
     console.log({
-      editing, latitude, longitude, markers, Config
+      editing, latitude, longitude, markers, Config, isSingleTree: this.isSingleTree, mode: this.props.mode
     });
     if (editing) {
       mapOptions.scrollEnabled = false;
@@ -570,7 +572,7 @@ class MapboxMap extends Component {
             key={marker.key}
             coordinate={marker.coordinate}
           >
-            <Image style={this.props.fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage} />
+            <Image style={this.props.fullScreen ? styles.marker : styles.marker} source={markerImage} />
           </Marker>
         ))}
         {
@@ -580,7 +582,7 @@ class MapboxMap extends Component {
             key={index}
             coordinate={marker}
           >
-            <Image style={this.props.fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage} />
+            <Image style={this.props.fullScreen ? styles.marker : styles.marker} source={markerImage} />
           </Marker>
         ))}
       </MapView>
@@ -855,7 +857,7 @@ MapboxMap.propTypes = {
 
 MapboxMap.defaultProps = {
   fullScreen: false,
-  onPress: () => {},
+  onPress: null,
   location: {
     latitude: LATITUDE,
     longitude: LONGITUDE,

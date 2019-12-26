@@ -48,7 +48,6 @@ const WelcomSlider = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Swiper
-        style={styles.container}
         showsButtons={false}
         activeDotColor={'#89b53a'}
         paginationStyle={{ bottom: 0 }}

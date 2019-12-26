@@ -9,4 +9,4 @@ import CountryDetails from './app/components/LeaderboardRefresh/Countries/Countr
 console.disableYellowBox = true;
 console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
-AppRegistry.registerComponent('TreecounterApp', () => CountryDetails);
+AppRegistry.registerComponent('TreecounterApp', () => App);

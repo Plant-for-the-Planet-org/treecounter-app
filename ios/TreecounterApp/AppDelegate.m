@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  NSString *apiUrl = [ReactNativeConfig envFor:@"googleApiKey"];
+  NSString *apiUrl = [ReactNativeConfig envFor:@"googleMapApiKey"];
   NSURL *jsCodeLocation;
   [GMSServices provideAPIKey:apiUrl];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];

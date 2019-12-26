@@ -21,7 +21,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 // import {context} from '../../config';
 import buttonStyles from '../../styles/common/button.native';
 import markerImage from '../../assets/images/tree.png'
-// const {googleApiKey} = context;
+// const {googleMapApiKey} = context;
 const {width, height} = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
@@ -762,7 +762,7 @@ class MapboxMap extends Component {
                   nearbyPlacesAPI="GooglePlacesSearch"
                   query={{
                     // available options: https://developers.google.com/places/web-service/autocomplete
-                    key: Config.googleApiKey,
+                    key: Config.googleMapApiKey,
                     language: 'en' // language of the results
                   }}
                   currentLocation={false}

@@ -160,9 +160,7 @@ export default class Leaderboard extends Component {
         </Text>
         <ReactNativeTooltipMenu
           ref={'tooltip'}
-          labelContainerStyle={{
-            width: 150
-          }}
+          labelContainerStyle={{ width: 150 }}
           tooltipContainerStyle={styles.tooltipContainerStyle}
           setBelow
           labelSeparatorColor="transparent"

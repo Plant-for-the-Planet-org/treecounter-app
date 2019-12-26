@@ -1,0 +1,98 @@
+import EStyleSheet from 'react-native-extended-stylesheet';
+export default EStyleSheet.create({
+  mainContainer: {
+    marginHorizontal: 15,
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  headerContainer: {
+    marginVertical: 10
+  },
+  headerText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 27,
+    fontWeight: 'bold',
+    color: '#4d5153'
+  },
+  subHeaderText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#4d5153'
+  },
+  timeLineContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 10,
+    borderWidth: 0,
+    borderColor: '#4d5153'
+  },
+  activeChipContainer: {
+    backgroundColor: '#87b738',
+    alignItems: 'center',
+    borderRadius: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    marginHorizontal: 10
+  },
+  activeChipText: {
+    color: '#fff',
+    fontFamily: 'OpenSans-Regular'
+  },
+  chipContainer: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    borderRadius: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    marginHorizontal: 10,
+    borderColor: '#4d5153',
+    borderWidth: 1
+  },
+  chipText: {
+    color: '#4d5153',
+    fontFamily: 'OpenSans-Regular'
+  },
+  countriesListContainer: {
+    flex: 1,
+    marginVertical: 10
+  },
+  oneContryContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 15
+  },
+  indexContainer: {
+    flex: 0.1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  indexText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16
+  },
+  countryFlagContainer: {
+    flex: 0.2
+  },
+  countryFlagImage: {
+    width: 50,
+    height: 50
+  },
+  countryBody: {
+    flex: 0.7
+  },
+  countryNameText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 18,
+    color: '#4d5153'
+  },
+  tressCounter: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 13,
+    color: '#4d5153',
+    fontWeight: 'bold'
+  },
+  tressText: {
+    fontWeight: 'normal'
+  }
+});

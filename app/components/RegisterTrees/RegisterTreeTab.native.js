@@ -1,30 +1,32 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 // import t from 'tcomb-form-native';
 import {Text, View} from 'react-native';
 import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { FormikFormTree } from './formComponents.native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {FormikFormTree} from './formComponents.native';
 import MapboxMap from '../Map/MapboxMap.native';
 import i18n from '../../locales/i18n';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
+import {fromPromise} from 'rxjs/observable/fromPromise';
+
 const backgroundColor = 'white';
 const defaultInitValue = {
   plantDate: new Date(new Date().valueOf() + 1000 * 3600 * 24),
   treeClassification: '',
-  treeSpecies:'',
+  treeSpecies: '',
   treeScientificName: '',
   treeDiameter: '',
   treeHeight: '',
   access: '',
-  treeCount:1,
+  treeCount: 1,
   plantProject: '',
   treeMeasurementData: new Date(new Date().valueOf() + 1000 * 3600 * 24),
   imageFile: '',
-  geoLocation:'',
-  geometry:'',
+  geoLocation: '',
+  geometry: '',
 };
 
 export default class RegisterTreeTab extends PureComponent {
@@ -39,8 +41,8 @@ export default class RegisterTreeTab extends PureComponent {
       formValueSingle: props.value
         ? props.value
         : {
-            treeCount: 1
-          },
+          treeCount: 1
+        },
       formValueMultiple: props.value ? props.value : '',
       defaultValue: defaultInitValue,
       isOpen: false,
@@ -50,14 +52,28 @@ export default class RegisterTreeTab extends PureComponent {
   }
 
   openModel = (formProps) => {
-    this.formProps = formProps;
-    this.setState({
-      isOpen: true
-    })
+    console.log('model open');
+    if(this.formProps !== formProps) {
+      this.formProps = formProps;
+      this.renderFullscreenMap = (
+        <MapboxMap
+          mode={'single-tree'}
+          geometry={this.formProps && this.formProps.values ? this.formProps.values.geometry : null}
+          geoLocation={this.formProps && this.formProps.values ? this.formProps.values.geoLocation : null}
+          mapStyle={{opacity: 1}}
+          fullScreen
+          onContinue={(geoLocation, geometry) => {
+            this.onModelClosed(geoLocation, geometry);
+          }}/>
+      )
+      this.setState({
+        isOpen: true
+      })
+    }
   };
 
   onModelClosed = (geoLocation, geometry) => {
-    if(this.formProps){
+    if (this.formProps) {
       this.formProps.setFieldValue('geoLocation', geoLocation)
       this.formProps.setFieldValue('geometry', geometry)
     }
@@ -78,30 +94,32 @@ export default class RegisterTreeTab extends PureComponent {
       template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions
     };*/
-    const { isOpen, geometry, geoLocation, defaultValue } = this.state;
-    if(geometry){
+    const {isOpen, geometry, geoLocation, defaultValue} = this.state;
+    if (geometry) {
       defaultValue.geometry = geometry;
     }
-    if(geoLocation){
+    if (geoLocation) {
       defaultValue.geoLocation = geoLocation;
     }
+
+
+
     return (
       <KeyboardAwareScrollView
         enableOnAndroid
         keyboardShouldPersistTaps={'always'}
       >
-        <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
+        <View style={{backgroundColor: backgroundColor, flex: 1}}>
           <FormikFormTree
             onCreateCompetition={(value) => {
-              if(this.props.mode === 'single-tree'){
-                value.geometry= undefined;
+              if (this.props.mode === 'single-tree') {
+                value.geometry = undefined;
                 // delete value.geometry;
+              } else {
+                value.geometry = JSON.stringify(value.geometry)
               }
-              else {
-                value.geometry= JSON.stringify(value.geometry)
-              }
-              console.log('value in RegisterTab:',value);
-              if(this.props.onRegister){
+              console.log('value in RegisterTab:', value);
+              if (this.props.onRegister) {
                 this.props.onRegister(this.props.mode, value, this.state.plantProject === '' ? null : this.state.plantProject);
               }
             }}
@@ -111,18 +129,19 @@ export default class RegisterTreeTab extends PureComponent {
             geometry={geometry}
             geoLocation={geoLocation}
             initialValues={this.state.defaultValue}
-            openModel={this.openModel}
+            openModel={(formProps) => this.openModel(formProps)}
           />
           <Modal
             // position={'bottom'}
             isOpen={isOpen}
             onClosed={this.onClosed}
             coverScreen
+
             swipeToClose={false}
           >
             <View style={{
-              height: 80,  opacity: 1,
-            }} >
+              height: 80, opacity: 1,
+            }}>
               <TouchableItem
                 // key={button.type}
                 style={{
@@ -143,7 +162,7 @@ export default class RegisterTreeTab extends PureComponent {
               padding: 25,
               backgroundColor: 'white',
               position: 'relative',
-              }}
+            }}
             >
               <Text
                 style={{
@@ -171,15 +190,7 @@ export default class RegisterTreeTab extends PureComponent {
                 {i18n.t('label.planting_location_desc')}
               </Text>
             </View>
-            <MapboxMap
-              mode={'single-tree'}
-              geometry={this.formProps && this.formProps.values ? this.formProps.values.geometry : null}
-              geoLocation={this.formProps && this.formProps.values ? this.formProps.values.geoLocation : null}
-              mapStyle={{ opacity: 1 }}
-              fullScreen
-              onContinue={(geoLocation, geometry) => {
-                this.onModelClosed(geoLocation, geometry);
-              }} />
+            {this.renderFullscreenMap}
           </Modal>
         </View>
       </KeyboardAwareScrollView>

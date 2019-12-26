@@ -35,7 +35,9 @@ import widgetShareLabels from './widgetShareLabels.json';
 import NDVI from './ndvi.json';
 import reviews from './reviews.json';
 import formValidationErrors from './formValidationErrors.json';
-
+import leaderboard from './leaderBoardRefresh/leaderboard.json';
+import CountriesLeaderBoard from './leaderBoardRefresh/CountriesLeaderBoard.json';
+import CountryDetails from './leaderBoardRefresh/countryDetails.json';
 export default {
   ...activateAccountlabels,
   ...challengelabels,
@@ -73,5 +75,8 @@ export default {
   ...widgetShareLabels,
   ...NDVI,
   ...reviews,
-  ...formValidationErrors
+  ...formValidationErrors,
+  ...leaderboard,
+  ...CountriesLeaderBoard,
+  ...CountryDetails
 };

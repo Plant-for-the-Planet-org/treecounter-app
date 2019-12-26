@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import styles from '../../../styles/LeaderboardRefresh/Leaderboard/leaderboardstyles';
+import i18n from '../../../locales/i18n';
+
 const Leaderboard = () => {
   return (
     <View style={styles.mainContainer}>
@@ -15,7 +17,9 @@ const Leaderboard = () => {
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
-            <Text style={styles.widgetTitle}>Countries</Text>
+            <Text style={styles.widgetTitle}>
+              {i18n.t('label.lbr_countries')}
+            </Text>
           </View>
         </View>
         <View style={styles.widgetContainer}>
@@ -28,7 +32,9 @@ const Leaderboard = () => {
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
-            <Text style={styles.widgetTitle}>Companies</Text>
+            <Text style={styles.widgetTitle}>
+              {i18n.t('label.lbr_companies')}
+            </Text>
           </View>
         </View>
       </View>
@@ -43,7 +49,9 @@ const Leaderboard = () => {
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
-            <Text style={styles.widgetTitle}>Individuals</Text>
+            <Text style={styles.widgetTitle}>
+              {i18n.t('label.lbr_individuals')}
+            </Text>
           </View>
         </View>
         <View style={styles.widgetContainer}>
@@ -56,7 +64,9 @@ const Leaderboard = () => {
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
-            <Text style={styles.widgetTitle}>Schools</Text>
+            <Text style={styles.widgetTitle}>
+              {i18n.t('label.lbr_schools')}
+            </Text>
           </View>
         </View>
       </View>
@@ -71,7 +81,9 @@ const Leaderboard = () => {
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
-            <Text style={styles.widgetTitle}>Tree Planting Organizations</Text>
+            <Text style={styles.widgetTitle}>
+              {i18n.t('label.lbr_tree_planting_organizations')}
+            </Text>
           </View>
         </View>
       </View>

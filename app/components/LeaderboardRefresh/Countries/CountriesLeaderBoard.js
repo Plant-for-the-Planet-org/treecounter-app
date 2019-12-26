@@ -2,25 +2,30 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
+import i18n from '../../../locales/i18n';
 
 const CountriesLeaderBoard = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Countries</Text>
+        <Text style={styles.headerText}>{i18n.t('label.lbr_c_countries')}</Text>
       </View>
       <View>
-        <Text style={styles.subHeaderText}>Leaderboard</Text>
+        <Text style={styles.subHeaderText}>
+          {i18n.t('label.lbr_c_leaderboard')}
+        </Text>
       </View>
       <View style={styles.timeLineContainer}>
         <View style={styles.activeChipContainer}>
-          <Text style={styles.activeChipText}>This week</Text>
+          <Text style={styles.activeChipText}>
+            {i18n.t('label.lbr_c_this_week')}
+          </Text>
         </View>
         <View style={styles.chipContainer}>
-          <Text style={styles.chipText}>1 Year</Text>
+          <Text style={styles.chipText}>{i18n.t('label.lbr_c_year')}</Text>
         </View>
         <View style={styles.chipContainer}>
-          <Text style={styles.chipText}>All Time</Text>
+          <Text style={styles.chipText}>{i18n.t('label.lbr_c_all_time')}</Text>
         </View>
       </View>
       <View style={styles.countriesListContainer}>

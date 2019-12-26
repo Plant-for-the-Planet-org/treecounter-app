@@ -2,7 +2,7 @@ import { AppRegistry } from 'react-native';
 import App from './app/components/App';
 import './ReactotronConfig';
 /* app.js */
-import LeaderBoardRefresh from './app/components/LeaderboardRefresh/index';
+import LeaderboardTabs from './app/components/LeaderboardRefresh/index';
 import CountriesLeaderBoard from './app/components/LeaderboardRefresh/Countries/CountriesLeaderBoard';
 import CountryDetails from './app/components/LeaderboardRefresh/Countries/CountryDetails';
 

@@ -5,13 +5,15 @@ import Map from './Map/map';
 import Leaderboard from './LeaderBoard/leaderboard';
 import World from './World/world';
 import Header from './header';
+
 const initialLayout = { width: Dimensions.get('window').width };
+
 const Layout = {
   window: {
     width: Dimensions.get('window').width
   }
 };
-export default function TabViewExample() {
+const LeaderboardTabs = () => {
   const [index, setIndex] = React.useState(1);
   const [routes] = React.useState([
     { key: 'first', title: 'World' },
@@ -32,7 +34,6 @@ export default function TabViewExample() {
         tabStyle={{ width: Layout.window.width / 3 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
-        activeColor={'#89b53a'}
       />
     );
   };
@@ -48,7 +49,7 @@ export default function TabViewExample() {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -74,3 +75,4 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize'
   }
 });
+export default LeaderboardTabs;

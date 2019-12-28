@@ -63,7 +63,7 @@ const PublicTreecounterContainer = lazy(() =>
 const UserHomeContainer = lazy(() => import('../../containers/UserHome'));
 const Trillion = lazy(() => import('../TreecounterGraphics/Trillion'));
 
-import { loadTpos } from '../../actions/loadTposAction';
+import { loadTpos, loadProjects } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
@@ -158,7 +158,8 @@ class TreeCounter extends Component {
   }
 
   componentDidMount() {
-    this.props.loadTpos();
+    this.props.loadProjects();
+    this.props.loadProjects('featured');
     this.props.fetchpledgeEventsAction();
   }
 
@@ -435,6 +436,7 @@ const mapDispatchToProps = dispatch => {
       loadUserProfile,
       NotificationAction,
       loadTpos,
+      loadProjects,
       fetchpledgeEventsAction
     },
     dispatch

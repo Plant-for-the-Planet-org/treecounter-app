@@ -61,11 +61,11 @@ export default class SelectPlantProject extends Component {
       plantProjects,
       currencies: { currencies }
     } = props;
-
+    console.log('Pojects featured:', plantProjects);
     let featuredProjects = plantProjects.filter(project => project.isFeatured);
     featuredProjects = _.orderBy(featuredProjects, 'id');
     featuredProjects.length && featuredProjects.push(featuredProjects[0]);
-    console.log('Pojects featured:', featuredProjects);
+
     let priceSortedProjects = sortProjectsByPrice(
       plantProjects,
       true,

@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import styles from '../../../styles/LeaderboardRefresh/Leaderboard/leaderboardstyles';
 import i18n from '../../../locales/i18n';
-
 const Leaderboard = () => {
   return (
     <View style={styles.mainContainer}>

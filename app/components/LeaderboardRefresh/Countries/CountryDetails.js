@@ -3,13 +3,13 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountriesDetailsStyle';
 import i18n from '../../../locales/i18n';
-
-// {i18n.t('label.lbr_c_countries')}
+import BackHeader from '../Header/BackHeader';
 
 class CountryDetails extends React.Component {
   render() {
     return (
       <View style={styles.mainContainer}>
+        <BackHeader />
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>{'Bosnia and\nHerzegovina'}</Text>
         </View>

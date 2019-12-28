@@ -3,10 +3,11 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
-
+import Header from '../Header/BackHeader';
 const CountriesLeaderBoard = () => {
   return (
     <View style={styles.mainContainer}>
+      <Header />
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>{i18n.t('label.lbr_c_countries')}</Text>
       </View>

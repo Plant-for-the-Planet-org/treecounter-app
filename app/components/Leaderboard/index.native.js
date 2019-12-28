@@ -201,10 +201,7 @@ export default class Leaderboard extends Component {
           handleCategoryChange={this._handleCategoryChange}
         />
         <ScrollView
-          contentContainerStyle={{
-            justifyContent: 'flex-start',
-            flexGrow: 1
-          }}
+          contentContainerStyle={{ justifyContent: 'flex-start', flexGrow: 1 }}
           showsHorizontalScrollIndicator={false}
         >
           {this._getSortView()}

@@ -50,7 +50,7 @@ const WelcomSlider = ({ navigation }) => {
       <Swiper
         showsButtons={false}
         activeDotColor={'#89b53a'}
-        paginationStyle={{ bottom: 0 }}
+        paginationStyle={{ bottom: -5 }}
       >
         <View style={styles.container}>
           <WelcomeScreen1 _appHomePage={appHomePage} />

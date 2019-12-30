@@ -50,11 +50,7 @@ export default class Menu extends Component {
     const welcome = await fetchItem('welcome');
 
     if (!this.props.userProfile) {
-      if (welcome == null) {
-        updateRoute('welcome_screen', this.props.navigation, 0);
-      } else {
-        updateRoute('app_homepage', this.props.navigation, 0);
-      }
+      updateRoute('welcome_screen', this.props.navigation, 0);
     }
     saveItem('welcome', JSON.stringify({ value: 'true' }));
   }

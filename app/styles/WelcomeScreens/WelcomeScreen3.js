@@ -17,8 +17,8 @@ export default EStyleSheet.create({
     color: '#4d5153'
   },
   imageStyle: {
-    width: height * 0.33,
-    height: height * 0.33,
+    width: 150,
+    height: 150,
     alignSelf: 'center',
     marginVertical: 15
   },

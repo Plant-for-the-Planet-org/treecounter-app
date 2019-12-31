@@ -9,8 +9,8 @@ export default EStyleSheet.create({
   zeroPercentContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 48,
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 150
   },
   commisionStyle: {
     fontFamily: 'OpenSans-Light',

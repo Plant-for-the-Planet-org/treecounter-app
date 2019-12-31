@@ -16,15 +16,20 @@ export function loadTpos() {
       .catch(error => console.log(error));
   };
 }
-export function loadProjects(category = 'all') {
-  const request = getRequest('plantProjects_get', { category: category });
+export function loadProjects(category = 'all', options = {}) {
+  const request = getRequest('plantProjects_get', {
+    category: category,
+    ...options
+  });
   return dispatch => {
     request
       .then(res => {
         console.dir(res);
         let plantProjectPager = res.data.merge.plantProjectPager[0];
         if (plantProjectPager.currentPage < plantProjectPager.nbPages) {
-          // dispatch(loadProjects(category));
+          dispatch(
+            loadProjects(category, { page: ++plantProjectPager.currentPage })
+          );
         }
         dispatch(
           mergeEntities(
@@ -33,9 +38,10 @@ export function loadProjects(category = 'all') {
             ])
           )
         );
-        res.data.merge.plantProjectPager[0].entities.map(plantProject => {
-          dispatch(loadProject(plantProject));
-        });
+        category == 'featured' &&
+          res.data.merge.plantProjectPager[0].entities.map(plantProject => {
+            dispatch(loadProject(plantProject));
+          });
       })
       .catch(error => console.log(error));
   };

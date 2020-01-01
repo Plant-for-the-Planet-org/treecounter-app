@@ -17,7 +17,10 @@ function guess() {
     getLocale() == 'de'
       ? 'EUR'
       : getItemSync('preferredCurrency') || context.currency;
-  cache.currency && saveItem('preferredCurrency', cache.currency);
+  if (!cache.currency) {
+    cache.currency = context.currency;
+  }
+  saveItem('preferredCurrency', cache.currency);
   return cache.currency;
 }
 

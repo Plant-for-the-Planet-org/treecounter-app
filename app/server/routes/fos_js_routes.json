@@ -563,6 +563,7 @@
         ]
       ],
       "defaults": {
+        "category": "all",
         "_locale": []
       },
       "requirements": [],
@@ -2132,6 +2133,39 @@
       ],
       "schemes": []
     },
+    "public_ipstack": {
+      "tokens": [
+        [
+          "text",
+          "/ipstack"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "public_userNotification": {
       "tokens": [
         [
@@ -2255,6 +2289,46 @@
         ]
       ],
       "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "public_currencyRates_get": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "baseCurrency"
+        ],
+        [
+          "text",
+          "/currencyRates"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults": {
+        "baseCurrency": null,
         "_locale": []
       },
       "requirements": [],
@@ -4144,6 +4218,85 @@
       ],
       "schemes": []
     },
+    "plantProjects_get": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "category"
+        ],
+        [
+          "text",
+          "/plantProjects"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults": {
+        "category": "all",
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "plantProject_get": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "uid"
+        ],
+        [
+          "text",
+          "/plantProject"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "review_form": {
       "tokens": [
         [
@@ -4746,11 +4899,19 @@
     "app_giftTrees": {
       "tokens": [
         [
+          "variable",
+          "/",
+          "[^/]++",
+          "treecounter"
+        ],
+        [
           "text",
           "/gift-trees"
         ]
       ],
-      "defaults": [],
+      "defaults": {
+        "treecounter": null
+      },
       "requirements": [],
       "hosttokens": [],
       "methods": [
@@ -4760,6 +4921,12 @@
     },
     "app_support": {
       "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "treecounter"
+        ],
         [
           "text",
           "/support"

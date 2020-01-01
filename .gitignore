@@ -27,6 +27,8 @@ ios/Pods/._Pods.xcodeproj
 ios/Podfile.lock
 ios/Pods/*
 
+.env*
+!.env.sample
 # Android/IntelliJ
 #
 build/

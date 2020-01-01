@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
+import {Dimensions} from 'react-native';
 
 const Layout = {
   window: {
@@ -10,49 +10,46 @@ const Layout = {
 export default EStyleSheet.create({
   formPlantingLocation: {
     fontSize: 20,
-    lineHeight: 40,
+    lineHeight: 20,
     letterSpacing: 0,
+    paddingTop:40,
     textAlign: 'left',
     color: '#4d5153',
-    fontWeight: '500',
-    fontFamily: 'OpenSans-Regular'
+    fontFamily: 'OpenSans-Semibold'
   },
   formPlantingDescription: {
-    fontSize: 16,
-    lineHeight: 15,
+    fontSize: 14,
+    lineHeight: 21,
     color: '#4d5153',
     marginTop: 5,
     marginBottom: 15,
-    fontWeight: '100'
+    fontFamily: 'OpenSans-Regular'
   },
-  errorView:{
-    backgroundColor:'red',
-    padding:1,
-    color:'red',
+  errorView: {
+    backgroundColor: 'red',
+    padding: 1,
+    color: 'red',
   },
-  errorText:{
+  errorText: {
 
-    padding:2,
-    color:'red',
+    padding: 2,
+    color: 'red',
   },
   formScrollView: {
     backgroundColor: 'white',
-    flexGrow: 1,
     padding: 0,
-    paddingBottom: 10
+    paddingBottom: 40,
   },
   formLabel: {
-    lineHeight: 24,
-    fontSize: 27
+
   },
   formHalfTextField: {
-    flex: 2,
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10
   },
-  formNameFields: { flex: 1, marginRight: 20 },
+  formNameFields: {flex: 1, marginRight: 20},
   showImage: {
     display: 'flex',
     flexDirection: 'row',
@@ -64,8 +61,8 @@ export default EStyleSheet.create({
     marginRight: 20,
     flex: 1
   },
-  formView: { marginTop: 0 },
-  addImageTitle: { marginTop: 20, fontSize: 16 },
+  formView: {marginTop: 0,},
+  addImageTitle: {marginTop: 40, fontSize: 14, color: '#4d5153', fontFamily: 'OpenSans-SemiBold'},
 
   addImageButtonContainer: {
     display: 'flex',
@@ -110,7 +107,7 @@ export default EStyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 35,
     justifyContent: 'space-between'
   },
   formClassificationLabel: {
@@ -120,13 +117,13 @@ export default EStyleSheet.create({
     lineHeight: 27,
     fontWeight: '300'
   },
-  formAddImageBlock: {},
+  formAddImageBlock: {color: '#4d5153', fontFamily: 'OpenSans-Semibold'},
   classificationBlock: {
     flex: 2,
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
-  addImageButtonIcon: { maxHeight: 20, width: 26 },
+  addImageButtonIcon: {maxHeight: 20, width: 26},
   addedImage: {
     maxWidth: 80,
     height: 80,
@@ -138,17 +135,18 @@ export default EStyleSheet.create({
     width: '100%',
     marginTop: 7,
     borderBottomWidth: 1,
-    borderBottomColor: '#909090'
+    opacity: 0.6,
+    borderBottomColor: '#4d5153'
   },
-  labelEndDate: { fontSize: 12, marginTop: 2, fontFamily: 'OpenSans-Regular' },
-  EndDate: { fontFamily: 'OpenSans-Regular', color: '#000000', lineHeight: 27 },
+  labelEndDate: {fontSize: 12, marginTop: 3, fontFamily: 'OpenSans-Semibold', color: '#4d5153'},
+  EndDate: {fontFamily: 'OpenSans-Regular', color: '#4d5153', lineHeight: 27,fontSize:18},
   form_error_text: {
     fontSize: 12,
     color: 'red',
     marginTop: 4,
     fontFamily: 'OpenSans-Regular'
   },
-  view_container: { backgroundColor: 'white', flex: 1 },
+  view_container: {backgroundColor: 'white', flex: 1},
   picker_container: {
     height: 50,
     width: '100%',
@@ -181,5 +179,10 @@ export default EStyleSheet.create({
   competitionDeleteImage: {
     height: 20,
     width: 20
-  }
+  },
+  textFiledLabel: {
+    fontFamily: 'OpenSans-Semibold',
+    color: '#4d5153',
+  },
+  textFiledTitle: {fontFamily: 'OpenSans-Regular', color: '#4d5153'}
 });

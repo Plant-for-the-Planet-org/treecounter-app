@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
-import React, {useState, useEffect} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {Image, Platform, Text, TouchableOpacity, View} from 'react-native';
 import {Switch} from 'react-native-switch';
 import {cameraSolid, circleDelete, imageGallery} from '../../assets';
 import styles from '../../styles/register_trees.native';
@@ -27,8 +27,8 @@ export const FormikFormTree = props => {
 
     setGeometry(props.geometry);
   }, [props.geometry]);
-   useEffect(() => {
-     setGeoLocation(props.geoLocation);
+  useEffect(() => {
+    setGeoLocation(props.geoLocation);
   }, [props.geoLocation]);
 
   const parentProps = props;
@@ -36,6 +36,15 @@ export const FormikFormTree = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     isMultipleTree ? schemaOptionsMultiple.multiple_trees : schemaOptionsMultiple.single_tree
   );
+  let inputs = [];
+
+  // function to focus the field
+  function focusTheField(id) {
+
+    inputs[id].focus();
+
+  }
+
   return (
     <Formik
       initialValues={parentProps.initialValues}
@@ -45,30 +54,31 @@ export const FormikFormTree = props => {
       {props => (
         <>
           <View>
-            <KeyboardAwareScrollView
-              contentContainerStyle={styles.formScrollView}
-              enableOnAndroid
-              keyboardDismissMode="on-drag"
-              keyboardShouldPersistTaps="always"
-              resetScrollToCoords={{x: 0, y: 0}}
-              scrollEnabled
+            <View style={styles.formScrollView}
             >
               <View style={styles.formView}>
                 <View>
-
                   <View style={!isMultipleTree ? styles.formHalfTextField : ''}>
                     <View style={!isMultipleTree ? styles.formNameFields : ''}>
                       <TextField
+                        ref={input => {
+                          inputs['treeSpecies'] = input
+                        }}
+                        onSubmitEditing={() => {
+                          isMultipleTree && focusTheField('treeCount') || showClassification && focusTheField('treeClassifications')
+                        }}
                         label={i18n.t('label.trees_name')}
                         value={props.values.treeSpecies}
-                        tintColor={'#89b53a'}
+                        tintColor={'#4d5153'}
                         titleFontSize={12}
+                        labelFontSize={12}
+                        fontSize={18}
                         returnKeyType="next"
                         lineWidth={1}
                         blurOnSubmit={false}
-                        labelTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                        titleTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                        affixTextStyle={{fontFamily: 'OpenSans-Regular'}}
+                        labelTextStyle={styles.textFiledLabel}
+                        titleTextStyle={styles.textFieldTitle}
+                        textColor={'#4d5153'}
                         error={props.touched.treeSpecies && props.errors.treeSpecies}
                         onChangeText={props.handleChange('treeSpecies')}
                         onBlur={props.handleBlur('treeSpecies')}
@@ -79,15 +89,24 @@ export const FormikFormTree = props => {
                         <View style={isMultipleTree ? styles.formNameFields : ''}>
                           <TextField
                             label={i18n.t('label.tree_count')}
+                            ref={input => {
+                              inputs['treeCount'] = input
+                            }}
+                            onSubmitEditing={() => {
+                              showClassification && focusTheField('treeClassifications')
+                            }}
                             value={props.values.treeCount}
-                            tintColor={'#89b53a'}
+                            tintColor={'#4d5153'}
                             titleFontSize={12}
+                            labelFontSize={12}
+                            fontSize={18}
                             returnKeyType="next"
                             lineWidth={1}
+                            textColor={'#4d5153'}
+
                             blurOnSubmit={false}
-                            labelTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                            titleTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                            affixTextStyle={{fontFamily: 'OpenSans-Regular'}}
+                            labelTextStyle={styles.textFiledLabel}
+                            titleTextStyle={styles.textFieldTitle}
                             error={props.touched.treeCount && props.errors.treeCount}
                             onChangeText={props.handleChange('treeCount')}
                             onBlur={props.handleBlur('treeCount')}
@@ -130,8 +149,10 @@ export const FormikFormTree = props => {
                     }}/>
                 </View>
                 <View>
-                  {parentProps.mode === 'single-tree' && props.touched.geoLocation && props.errors.geoLocation && <Text style={styles.errorText}>{props.errors.geoLocation}</Text>}
-                  {parentProps.mode === 'multiple-trees' && props.touched.geometry && props.errors.geometry && <Text style={styles.errorText}>{props.errors.geometry}</Text>}
+                  {parentProps.mode === 'single-tree' && props.touched.geoLocation && props.errors.geoLocation &&
+                  <Text style={styles.errorText}>{props.errors.geoLocation}</Text>}
+                  {parentProps.mode === 'multiple-trees' && props.touched.geometry && props.errors.geometry &&
+                  <Text style={styles.errorText}>{props.errors.geometry}</Text>}
                 </View>
               </View>
               <View style={styles.formAddImageBlock}>
@@ -158,15 +179,24 @@ export const FormikFormTree = props => {
                       <View style={styles.formClassificationFields}>
                         <TextField
                           label={i18n.t('label.tree_classification')}
+                          ref={input => {
+                            inputs['treeClassifications'] = input
+                          }}
+                          onSubmitEditing={() => {
+                            focusTheField('treeScientificName')
+                          }}
                           value={props.values.treeClassifications}
-                          tintColor={'#89b53a'}
+                          tintColor={'#4d5153'}
                           titleFontSize={12}
+                          labelFontSize={12}
+                          fontSize={18}
                           returnKeyType="next"
                           lineWidth={1}
+                          textColor={'#4d5153'}
+
                           blurOnSubmit={false}
-                          labelTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                          titleTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                          affixTextStyle={{fontFamily: 'OpenSans-Regular'}}
+                          labelTextStyle={styles.textFiledLabel}
+                          titleTextStyle={styles.textFieldTitle}
                           onChangeText={props.handleChange('treeClassifications')}
                           onBlur={props.handleBlur('treeClassifications')}
                         />
@@ -174,15 +204,21 @@ export const FormikFormTree = props => {
                       <View style={{flex: 1}}>
                         <TextField
                           label={i18n.t('label.tree_scientific_name')}
+                          ref={input => {
+                            inputs['treeScientificName'] = input
+                          }}
                           value={props.values.treeScientificName}
-                          tintColor={'#89b53a'}
+                          tintColor={'#4d5153'}
                           titleFontSize={12}
+                          labelFontSize={12}
+                          fontSize={18}
                           returnKeyType="next"
                           lineWidth={1}
                           blurOnSubmit={false}
-                          labelTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                          titleTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                          affixTextStyle={{fontFamily: 'OpenSans-Regular'}}
+                          textColor={'#4d5153'}
+
+                          labelTextStyle={styles.textFiledLabel}
+                          titleTextStyle={styles.textFieldTitle}
                           onChangeText={props.handleChange('treeScientificName')}
                           onBlur={props.handleBlur('treeScientificName')}
                         />
@@ -190,7 +226,13 @@ export const FormikFormTree = props => {
                     </View>
                   )}
                 </View>
-                <AddMeasurements props={props}/>
+                <AddMeasurements
+                  props={props}
+                  textFiledRef={(name, input) => {
+                    inputs[name] = input
+                  }}
+                  focusField={(name) => focusTheField(name)}
+                />
 
               </View>}
 
@@ -207,13 +249,14 @@ export const FormikFormTree = props => {
                   />
                 ) : <View/>
               ) : <View/>}
-            </KeyboardAwareScrollView>
+            </View>
             <View style={buttonStyles.buttonContainer}>
               <TouchableOpacity
                 style={buttonStyles.actionButtonTouchable}
                 onPress={props.handleSubmit}
+                disabled={!props.isValid}
               >
-                <View style={buttonStyles.actionButtonView}>
+                <View style={props.isValid ? buttonStyles.actionButtonView : buttonStyles.disabledButtonView}>
                   <Text style={buttonStyles.actionButtonText}>
                     {i18n.t('label.register')}
                   </Text>
@@ -221,7 +264,8 @@ export const FormikFormTree = props => {
               </TouchableOpacity>
             </View>
           </View>
-          {console.log({FormProps:props, parentProps})}
+
+          {console.log({FormProps: props, parentProps})}
         </>
       )}
     </Formik>
@@ -306,15 +350,22 @@ export class AddMeasurements extends React.Component {
                         <TextField
                           label={i18n.t('label.tree_diameter')}
                           value={props.values.treeDiameter}
-                          tintColor={'#89b53a'}
+                          onSubmitEditing={() => {
+                            this.props.focusField('treeHeight')
+                          }}
+
+                          ref={input => this.props.textFiledRef('treeDiameter', input)}
+                          tintColor={'#4d5153'}
                           titleFontSize={12}
+                          labelFontSize={12}
+                          fontSize={18}
                           returnKeyType="next"
+                          textColor={'#4d5153'}
                           lineWidth={1}
                           blurOnSubmit={false}
                           keyboardType="numeric"
-                          labelTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                          titleTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                          affixTextStyle={{fontFamily: 'OpenSans-Regular'}}
+                          labelTextStyle={styles.textFiledLabel}
+                          titleTextStyle={styles.textFieldTitle}
                           renderRightAccessory={() => (
                             <Text style={{fontSize: 16, color: '#4d5153'}}>
                               cm
@@ -329,9 +380,12 @@ export class AddMeasurements extends React.Component {
                         <TextField
                           label={i18n.t('label.tree_height')}
                           value={props.values.treeHeight}
-                          tintColor={'#89b53a'}
+                          ref={input => this.props.textFiledRef('treeHeight', input)}
+                          tintColor={'#4d5153'}
                           titleFontSize={50}
                           labelFontSize={12}
+                          textColor={'#4d5153'}
+
                           returnKeyType="next"
                           renderRightAccessory={() => (
                             <Text style={{fontSize: 16, color: '#4d5153'}}>
@@ -342,9 +396,9 @@ export class AddMeasurements extends React.Component {
                           keyboardType="numeric"
                           lineWidth={1}
                           blurOnSubmit={false}
-                          labelTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                          titleTextStyle={{fontFamily: 'OpenSans-Regular'}}
-                          affixTextStyle={{fontFamily: 'OpenSans-Regular'}}
+                          labelTextStyle={styles.textFiledLabel}
+
+                          titleTextStyle={styles.textFieldTitle}
                           error={props.touched.treeHeight && props.errors.treeHeight}
                           onChangeText={props.handleChange('treeHeight')}
                           onBlur={props.handleBlur('treeHeight')}
@@ -467,7 +521,7 @@ export function AddImage(props) {
   };
   return (
     <View>
-      <Text style={styles.addImageTitle}>{i18n.t('label.add_image')}</Text>
+      <Text style={styles.addImageTitle}>{i18n.t('label.add_images')}</Text>
       <View style={styles.showImage}>
         {image && image != 'null' ? renderAsset(image) : null}
       </View>
@@ -538,10 +592,12 @@ export function CompetitionDatePicker(props) {
         onConfirm={date => {
           (date = date || props.endDate),
             setShowDatePicker(false),
-            props.setFieldValue('endDate', date);
+            props.setFieldValue('plantDate', date);
         }}
+        date={new Date(props.endDate)}
         onCancel={() => setShowDatePicker(false)}
-        minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}
+        maximumDate={Platform.OS === 'ios' ? new Date(new Date().valueOf() + 1000 * 3600 * 24) : undefined}
+        minimumDate={Platform.OS === 'android' ? new Date(new Date().valueOf() + 1000 * 3600 * 24) : undefined}
         titleIOS={i18n.t('label.datePickerTitle')}
         cancelTextIOS={i18n.t('label.datePickerCancel')}
         confirmTextIOS={i18n.t('label.datePickerConfirm')}

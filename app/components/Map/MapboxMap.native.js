@@ -6,7 +6,8 @@ import MapView, {
   Marker,
   Polygon,
   ProviderPropType,
-PROVIDER_GOOGLE} from 'react-native-maps';
+  PROVIDER_GOOGLE
+} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
 
@@ -21,6 +22,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {context} from '../../config';
 import buttonStyles from '../../styles/common/button.native';
 import markerImage from '../../assets/images/tree.png'
+
 const {googleMapApiKey} = context;
 const {width, height} = Dimensions.get('window');
 
@@ -51,18 +53,16 @@ const styles = EStyleSheet.create({
     position: 'relative'
   },
   map: {
-    flex: 1
+    height: 200,
   },
   inputContainerFullScreen: {
     top: -25,
     position: 'absolute',
     width: '94%',
     left: '3%',
-    borderRadius: 20 ,
-    borderLeftWidth: 1,
-    borderRightWidth: 2,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: '#aaaaaa',
     backgroundColor: '#ffff'
   },
   inputContainer: {
@@ -70,11 +70,9 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     width: '94%',
     left: '2.5%',
-    borderRadius: 20 ,
-    borderLeftWidth: 0.5,
-    borderRightWidth: 1,
-    borderTopWidth: 0.5,
-    borderBottomWidth: 0.5,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: '#aaaaaa',
     // borderRadius: '50%',
     backgroundColor: '#ffff'
   },
@@ -292,9 +290,10 @@ const mapStyle = [
     ]
   }
 ]
+
 function getQueryVariable(query, variable) {
-  if(!query){
-    return  null;
+  if (!query) {
+    return null;
   }
   let vars = query.split('&');
   for (let i = 0; i < vars.length; i++) {
@@ -307,15 +306,14 @@ function getQueryVariable(query, variable) {
 }
 
 export function encodeFormData(mode, mapPoint) {
-  console.log('map point in encodeFormData',mapPoint, mode)
-  if(!mapPoint){
+  console.log('map point in encodeFormData', mapPoint, mode)
+  if (!mapPoint) {
     return '';
   }
-  if(mode) {
-    if(mode === 'single-tree' && Array.isArray(mapPoint) && mapPoint.length){
+  if (mode) {
+    if (mode === 'single-tree' && Array.isArray(mapPoint) && mapPoint.length) {
       return `geoLatitude=${mapPoint[0].coordinate.latitude}&geoLongitude=${mapPoint[0].coordinate.longitude}`
-    }
-    else if(mode === 'multiple-trees' && mapPoint && mapPoint.coordinates) {
+    } else if (mode === 'multiple-trees' && mapPoint && mapPoint.coordinates) {
       const data = mapPoint.coordinates.map((cord) => {
         return [
           cord.latitude, cord.longitude
@@ -328,29 +326,28 @@ export function encodeFormData(mode, mapPoint) {
       }
     }
     return null;
-  }
-  else{
+  } else {
     return null;
   }
 }
+
 export function decodeFormData(mode, mapPoint) {
-  console.log('map point in decodeFormData',mapPoint, mode)
-  if(!mapPoint){
+  console.log('map point in decodeFormData', mapPoint, mode)
+  if (!mapPoint) {
     return null;
   }
 
-  if(mode) {
-    if(mode === 'single-tree' && mapPoint){
+  if (mode) {
+    if (mode === 'single-tree' && mapPoint) {
       return [{
-        coordinate:{
+        coordinate: {
           latitude: getQueryVariable(mapPoint, 'geoLatitude'),
           longitude: getQueryVariable(mapPoint, 'geoLongitude'),
           key: 1
         }
       }];
       // return point;
-    }
-    else if(mode === 'multiple-trees' && mapPoint && mapPoint.coordinates && mapPoint.type === 'Polygon'){
+    } else if (mode === 'multiple-trees' && mapPoint && mapPoint.coordinates && mapPoint.type === 'Polygon') {
       const item = {};
       item.coordinates = mapPoint.coordinates[0].map(items => {
         return {
@@ -361,7 +358,7 @@ export function decodeFormData(mode, mapPoint) {
       return item;
     }
   }
-  return  mode === 'single-tree' ? [] : null;
+  return mode === 'single-tree' ? [] : null;
 }
 
 class MapboxMap extends Component {
@@ -369,7 +366,7 @@ class MapboxMap extends Component {
     super(props);
     this.mapRef = null;
     this.isSingleTree = this.props.mode === 'single-tree';
-    const { geoLocation, mode, geometry } = this.props;
+    const {geoLocation, mode, geometry} = this.props;
     const marker = this.isSingleTree && geoLocation ? decodeFormData(mode, geoLocation) : null;
     this.state = {
       pointInView: null,
@@ -392,15 +389,17 @@ class MapboxMap extends Component {
 
   componentDidMount() {
     this.gotoLocation();
+    console.log('this.map', this.map)
   }
 
   componentWillReceiveProps(nextProps) {
     this.onPropsUpdate(nextProps);
   }
-  onPropsUpdate = (nextProps) => {
-    if(!nextProps.fullScreen){
 
-      const { geoLocation, mode, geometry } = nextProps;
+  onPropsUpdate = (nextProps) => {
+    if (!nextProps.fullScreen) {
+
+      const {geoLocation, mode, geometry} = nextProps;
       const marker = this.isSingleTree && geoLocation ? decodeFormData(mode, geoLocation) : null;
       const state = {
         region: {
@@ -412,13 +411,13 @@ class MapboxMap extends Component {
         editing: !this.isSingleTree && !Array.isArray(geometry) ? decodeFormData(mode, geometry) : null,
         markers: marker || [],
       };
-     setTimeout(() => {
-       this.setState({
-         ...state
-       }, () => {
-         this.gotoLocation();
-       })
-     }, 1000)
+      setTimeout(() => {
+        this.setState({
+          ...state
+        }, () => {
+          this.gotoLocation();
+        })
+      }, 1000)
     }
 
   };
@@ -429,11 +428,12 @@ class MapboxMap extends Component {
     }
     return null;
   };
+
   onPress(e) {
     // const isSingleTree = this.props.mode === 'single-tree';
     if (this.props.onPress) {
       this.props.onPress(e)
-    } else if(!this.isSingleTree) {
+    } else if (!this.isSingleTree) {
       const {editing, creatingHole} = this.state;
       if (!editing) {
         this.setState({
@@ -476,9 +476,9 @@ class MapboxMap extends Component {
   };
   onRegionChange = region => {
 
-    if(this.props.fullScreen && this.isSingleTree) {
+    if (this.props.fullScreen && this.isSingleTree) {
       this.setState({
-        region:{
+        region: {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: LATITUDE_DELTA,
@@ -507,10 +507,10 @@ class MapboxMap extends Component {
       liteMode: !this.props.fullScreen,
       rotateEnabled: this.props.fullScreen,
       zoomEnabled: this.props.fullScreen,
-      // loadingEnabled: false,
+      loadingEnabled: !this.props.fullScreen,
       showsUserLocation: false
     };
-    const { editing, region: {latitude, longitude}, markers } = this.state;
+    const {editing, region: {latitude, longitude}, markers} = this.state;
     console.log({
       editing, latitude, longitude, markers, Config
     });
@@ -519,8 +519,8 @@ class MapboxMap extends Component {
       mapOptions.onPanDrag = e => this.onPress(e);
     }
     if ((latitude && longitude)) {
-      mapOptions.initialRegion ={
-        ... this.state.region
+      mapOptions.initialRegion = {
+        ...this.state.region
       }
     }
     return (
@@ -529,7 +529,8 @@ class MapboxMap extends Component {
         ref={ref => (this.map = ref)}
         provider={PROVIDER_GOOGLE}
         //provider={this.props.provider}
-        style={[this.props.mapStyle, styles.map]}
+        style={[this.props.mapStyle,{borderRadius:7}]}
+        mapPadding={!this.props.fullScreen ? {top:0,right:0,left:0,bottom:22} : {top:0,right:0,left:0,bottom:42}}
         // initialRegion={this.state.region}
         onPress={e => this.onPress(e)}
         onDoublePress={e => this.onDoublePress(e)}
@@ -565,24 +566,24 @@ class MapboxMap extends Component {
 
         {
           !this.props.fullScreen && this.state.markers.map(marker => (
-          <Marker
-            // image={markerImage}
-            key={marker.key}
-            coordinate={marker.coordinate}
-          >
-            <Image style={this.props.fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage} />
-          </Marker>
-        ))}
+            <Marker
+              // image={markerImage}
+              key={marker.key}
+              coordinate={marker.coordinate}
+            >
+              <Image style={this.props.fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage}/>
+            </Marker>
+          ))}
         {
           this.props.fullScreen && !this.isSingleTree && this.state.editing && this.state.editing.coordinates.map((marker, index) => (
-          <Marker
-            // image={markerImage}
-            key={index}
-            coordinate={marker}
-          >
-            <Image style={this.props.fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage} />
-          </Marker>
-        ))}
+            <Marker
+              // image={markerImage}
+              key={index}
+              coordinate={marker}
+            >
+              <Image style={this.props.fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage}/>
+            </Marker>
+          ))}
       </MapView>
     );
   }
@@ -594,28 +595,25 @@ class MapboxMap extends Component {
     })
   };
   goto = () => {
-    if(!this.props.fullScreen){
+    if (!this.props.fullScreen) {
       if (this.props.onPress) {
         this.props.onPress()
       }
-    }
-    else {
+    } else {
       this.getMyLocation();
     }
   };
   gotoLocation = () => {
-    if(!this.props.fullScreen && this.state.markers && this.state.markers.length){
+    if (!this.props.fullScreen && this.state.markers && this.state.markers.length) {
       this.gotoCurrentLocation({
         latitude: this.state.markers[0].coordinate.latitude,
         longitude: this.state.markers[0].coordinate.longitude,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       });
-    }
-    else if(this.state.marker && this.state.marker.length <= 0 && this.isSingleTree) {
+    } else if (this.state.marker && this.state.marker.length <= 0 && this.isSingleTree) {
       this.getMyLocation();
-    }
-    else if(!this.isSingleTree || !this.state.region.latitude) {
+    } else if (!this.isSingleTree || !this.state.region.latitude) {
       this.getMyLocation();
     }
 
@@ -678,21 +676,20 @@ class MapboxMap extends Component {
   };
 
   renderComp = (render) => {
-    const { fullScreen, onPress } = this.props;
-    if(!fullScreen){
+    const {fullScreen, onPress} = this.props;
+    if (!fullScreen) {
       return (
         <TouchableOpacity onPress={onPress}>
           {render}
         </TouchableOpacity>
       )
-    }
-    else {
+    } else {
       return render
     }
   };
 
   render() {
-    const { fullScreen, onContinue, mode, onPress } = this.props;
+    const {fullScreen, onContinue, mode, onPress} = this.props;
     const inputProps = fullScreen ? {
       onFocus: () => {
         this.setState({
@@ -720,7 +717,7 @@ class MapboxMap extends Component {
         {
           fullScreen && this.isSingleTree &&
           <View style={styles.markerFixed}>
-            <Image style={fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage} />
+            <Image style={fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage}/>
           </View>
         }
         {
@@ -734,6 +731,7 @@ class MapboxMap extends Component {
                   minLength={2}
                   autoFocus={false}
                   fetchDetails={true}
+                  placeholderTextColor={'#4d5153'}
                   // listViewDisplayed="auto"
                   returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
                   keyboardAppearance={'light'}
@@ -742,20 +740,28 @@ class MapboxMap extends Component {
                       borderTopWidth: 0,
                       borderBottomWidth: 0,
                       width: '100%',
-                      borderRadius: 20 ,
-                      backgroundColor: '#ffff'
+                      borderRadius: 30,
+                      backgroundColor: 'transparent',
                     },
                     textInput: {
+                      backgroundColor: 'transparent',
+
                       marginLeft: 0,
                       marginTop: 0,
                       marginBottom: 0,
-                      marginRight: 0,
+                      marginRight: 5,
                       height: 44,
-                      fontSize: 16,
-                      borderRadius: 20 ,
+                      fontSize: 14,
+                      borderRadius: 30,
+                      color: '#4d5153',
                     },
                     predefinedPlacesDescription: {
                       color: '#1faadb'
+                    },
+                    container: {
+                      height:44,
+                      borderColor: '#aaaaaa',
+                      justifyContent:'center'
                     },
                     poweredContainer: {
                       display: 'none'
@@ -775,9 +781,10 @@ class MapboxMap extends Component {
                       style={{
                         width: 19,
                         height: 19,
-                        marginLeft: 12,
-                        marginTop: 12,
-                        resizeMode: 'cover'
+                        marginLeft: 16,
+                        marginTop: 14,
+                        resizeMode: 'cover',
+                        color:'#4d5153'
                       }}
                     />
                   )}
@@ -821,10 +828,10 @@ class MapboxMap extends Component {
           style={[buttonStyles.actionButtonTouchableFullScreen, styles.actionButtonTouchableFullScreen]}
           onPress={() => {
             setTimeout(() => {
-              if(onContinue){
+              if (onContinue) {
                 onContinue(
-                  this.state.mode === 'single-tree' ? encodeFormData( mode, this.state.markers) : `geoLatitude=${this.state.region.latitude}&geoLongitude=${this.state.region.longitude}`,
-                  encodeFormData( mode, this.state.editing),
+                  this.state.mode === 'single-tree' ? encodeFormData(mode, this.state.markers) : `geoLatitude=${this.state.region.latitude}&geoLongitude=${this.state.region.longitude}`,
+                  encodeFormData(mode, this.state.editing),
                   mode
                 )
               }
@@ -858,7 +865,8 @@ MapboxMap.propTypes = {
 
 MapboxMap.defaultProps = {
   fullScreen: false,
-  onPress: () => {},
+  onPress: () => {
+  },
   location: {
     latitude: LATITUDE,
     longitude: LONGITUDE,

@@ -98,6 +98,13 @@ export default EStyleSheet.create({
     height: 52,
     justifyContent: 'center'
   },
+  disabledButtonView: {
+    borderRadius: 100,
+    backgroundColor: '#89b53a',
+    opacity:0.2,
+    height: 52,
+    justifyContent: 'center'
+  },
   actionButtonText: {
     fontSize: 16,
     lineHeight: 22,

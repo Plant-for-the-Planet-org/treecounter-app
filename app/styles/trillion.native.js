@@ -10,6 +10,7 @@ export default EStyleSheet.create({
     flexDirection: 'column',
     flex: 1
   },
+
   contentContainer: {
     margin: 15,
     marginTop: 10,
@@ -221,11 +222,19 @@ export default EStyleSheet.create({
     flexDirection: 'column'
   },
   ufpTrees: {
-    lineHeight: 24,
+    lineHeight: 40,
     letterSpacing: 0,
+    fontSize:27,
     textAlign: 'left',
-    marginBottom: 14,
-    fontFamily: 'OpenSans-Bold'
+    marginBottom: 7,
+    fontFamily: 'OpenSans-ExtraBold',
+    color:'#4d5153',
+  },
+  textStyle:{
+    fontFamily: 'OpenSans-Semibold',
+    color:'#4d5153',
+    fontSize:18,
+    lineHeight:24,
   },
   ufpLeftSection: { flexDirection: 'row', justifyContent: 'space-between' },
   ufpCostView: {

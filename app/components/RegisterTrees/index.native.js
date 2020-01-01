@@ -11,13 +11,16 @@ import RegisterTreeTab from './RegisterTreeTab.native';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import tabBarStyles from '../../styles/common/tabbar.native';
 import styles from '../../styles/trillion.native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const routes = [
   {
     key: 'single-tree',
-    title: i18n.t('label.individual')
+    title: i18n.t('label.individual'),
+    color:'#89b53a'
   },
-  { key: 'multiple-trees', title: i18n.t('label.many_trees') }
+  { key: 'multiple-trees', title: i18n.t('label.many_trees'),    color:'#89b53a'
+  }
 ];
 export default class RegisterTrees extends Component {
   constructor(props) {
@@ -45,9 +48,19 @@ export default class RegisterTrees extends Component {
     return (
       <TabBar
         {...props}
-        style={[tabBarStyles.tabBar, { justifyContent: 'center' }]}
+        style={[tabBarStyles.tabBar]}
         labelStyle={tabBarStyles.textStyle}
+        renderLabel={({ route, focused }) => {
+          return (
+            <Text style={ tabBarStyles.textStyle,{color: '#aba2a2'}}>
+              {route.title}
+            </Text>
+        )}}
+
+        contentContainerStyle={{justifyContent: 'center'}}
         indicatorStyle={tabBarStyles.textActive}
+        indicatorContainerStyle={{justifyContent: 'center',left:105}}
+        tabStyle={{width:'auto',alignItems:'flex-end'}}
         useNativeDriver
       />
     );
@@ -62,7 +75,6 @@ export default class RegisterTrees extends Component {
     return (
       <RegisterTreeTab
         onRegister={(mode, value, plantProject)=>{
-          console.log('Data in index register',value)
           return this.props.onSubmit(mode, value, plantProject)
         }}
         isTpo={isTpo(this.props.currentUserProfile)}
@@ -74,16 +86,16 @@ export default class RegisterTrees extends Component {
 
   render() {
     return (
-      <ScrollView
-        contentContainerStyle={{ flex: 1, paddingBottom: 72 }}
+      <KeyboardAwareScrollView
         enableOnAndroid
-        keyboardShouldPersistTaps
+        contentContailnerStyle={{justifyContent:'center'}}
+        extraHeight={66}
+        keyboardShouldPersistTaps={'always'}
       >
         <CardLayout style={{ flex: 1 }}>
-          <Text style={styles.ufpTrees}>Register Trees</Text>
+          <Text style={styles.ufpTrees}>{i18n.t('label.register_trees')}</Text>
           <Text style={styles.textStyle}>
-            Please use this form to register the trees you have planted
-            personally
+            {i18n.t('label.register_trees_description')}
           </Text>
           <TabView
             useNativeDriver
@@ -95,7 +107,7 @@ export default class RegisterTrees extends Component {
           />
 
         </CardLayout>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

@@ -5,19 +5,22 @@ export default EStyleSheet.create({
     flex: 1
   },
   tabBar: {
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    marginTop: 10,
   },
   tabItem: {},
   textActive: {
     backgroundColor: '#89b53a',
     height: 3,
+    width: 75,
     borderTopLeftRadius: 3,
     borderTopRightRadius: 3
   },
   textStyle: {
-    color: '#aba2a2',
+    color: '#4d5153',
     fontSize: 11,
     fontFamily: 'OpenSans-SemiBold',
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
+    fontWeight: '300',
   }
 });

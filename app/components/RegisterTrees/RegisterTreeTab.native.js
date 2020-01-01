@@ -60,7 +60,7 @@ export default class RegisterTreeTab extends PureComponent {
           mode={'single-tree'}
           geometry={this.formProps && this.formProps.values ? this.formProps.values.geometry : null}
           geoLocation={this.formProps && this.formProps.values ? this.formProps.values.geoLocation : null}
-          mapStyle={{opacity: 1}}
+          mapStyle={{flex:1,opacity: 1}}
           fullScreen
           onContinue={(geoLocation, geometry) => {
             this.onModelClosed(geoLocation, geometry);
@@ -82,6 +82,7 @@ export default class RegisterTreeTab extends PureComponent {
       geometry: geometry,
       isOpen: false
     });
+
   };
   onClosed = () => {
     this.setState({
@@ -101,14 +102,7 @@ export default class RegisterTreeTab extends PureComponent {
     if (geoLocation) {
       defaultValue.geoLocation = geoLocation;
     }
-
-
-
     return (
-      <KeyboardAwareScrollView
-        enableOnAndroid
-        keyboardShouldPersistTaps={'always'}
-      >
         <View style={{backgroundColor: backgroundColor, flex: 1}}>
           <FormikFormTree
             onCreateCompetition={(value) => {
@@ -136,7 +130,7 @@ export default class RegisterTreeTab extends PureComponent {
             isOpen={isOpen}
             onClosed={this.onClosed}
             coverScreen
-
+            keyboardTopOffset={0}
             swipeToClose={false}
           >
             <View style={{
@@ -193,7 +187,7 @@ export default class RegisterTreeTab extends PureComponent {
             {this.renderFullscreenMap}
           </Modal>
         </View>
-      </KeyboardAwareScrollView>
+
     );
   }
 }

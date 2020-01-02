@@ -31,7 +31,7 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       url,
       linkText,
-      tpo_name,
+      tpoName,
       ndviUid
     } = this.props.plantProject;
 
@@ -66,7 +66,7 @@ class PlantProjectFull extends React.Component {
             clickable={false}
             plantProject={this.props.plantProject}
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
-            tpoName={tpo_name}
+            tpoName={tpoName}
             selectProject={this.props.selectProject}
             navigation={navigation}
           />

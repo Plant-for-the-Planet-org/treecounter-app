@@ -79,7 +79,14 @@ class SelectPlantProjectContainer extends PureComponent {
   loadDetails = ({ id }) => {
     return this.props.loadProject({ id });
   };
-  onMoreClick = (id, name) => {
+  onMoreClick = async (id, name) => {
+    let project = this.props.plantProjects.find(
+      project => project['id'] === id
+    );
+    console.log('project on more click', project);
+    if (project && !project.paymentSetup) {
+      project = await this.loadDetails({ id: id });
+    }
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {

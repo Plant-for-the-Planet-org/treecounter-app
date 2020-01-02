@@ -58,7 +58,7 @@ class PlantProjectSnippet extends PureComponent {
       countTarget,
       currency,
       treeCost,
-      paymentSetup,
+      taxDeductibleCountries,
       survivalRate,
       // images,
       imageFile,
@@ -102,18 +102,19 @@ class PlantProjectSnippet extends PureComponent {
       survivalRate,
       currency,
       treeCost,
-      taxDeduction: paymentSetup.taxDeduction
+      taxDeduction: taxDeductibleCountries
     };
     let deducibleText1 = '';
     // let tooltipText1 = '';
-    for (let i = 0; i < specsProps.taxDeduction.length; i++) {
-      deducibleText1 += specsProps.taxDeduction[i];
-      if (i == specsProps.taxDeduction.length - 1) {
-        deducibleText1 += '.';
-      } else {
-        deducibleText1 += ', ';
+    if (taxDeductibleCountries)
+      for (let i = 0; i < specsProps.taxDeduction.length; i++) {
+        deducibleText1 += specsProps.taxDeduction[i];
+        if (i == specsProps.taxDeduction.length - 1) {
+          deducibleText1 += '.';
+        } else {
+          deducibleText1 += ', ';
+        }
       }
-    }
     const survivalRateLeaf =
       survivalRateStatus == 'verified'
         ? leaf

@@ -4,12 +4,14 @@ import {
   Text,
   Image,
   TouchableWithoutFeedback,
-  StyleSheet
+  StyleSheet,
+  Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React, { Component } from 'react';
 import { getImageUrl } from '../../actions/apiRouting';
 import PropTypes from 'prop-types';
+const width = Dimensions.get('window').width;
 
 class PlantProjectImageCarousel extends Component {
   imageCarousel;
@@ -119,22 +121,22 @@ const styles = StyleSheet.create({
     letterSpacing: 0
   },
   imageContainer: {
-    height: 150,
-    width: 265,
-    maxHeight: 150,
-    maxWidth: 265,
+    height: width * 0.82 * 0.5625,
+    width: width * 0.82,
+    maxHeight: width * 0.82 * 0.5625,
+    maxWidth: width * 0.82,
     marginLeft: 0,
-    marginRight: 10,
+    marginRight: 16,
     borderColor: borderColor,
     borderWidth: 1,
-    borderRadius: 9,
+    borderRadius: 7,
     padding: 0
   },
   image: {
     flex: 1,
-    width: 265,
-    height: 150,
-    borderRadius: 9
+    width: width * 0.82,
+    height: width * 0.82 * 0.5625,
+    borderRadius: 7
   }
 });
 export default PlantProjectImageCarousel;

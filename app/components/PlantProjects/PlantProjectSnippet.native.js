@@ -137,7 +137,7 @@ class PlantProjectSnippet extends PureComponent {
                 }}
                 resizeMode={'cover'}
               />
-              {reviews && reviews.length ? (
+              {/* {reviews && reviews.length ? (
                 <View style={styles.certifiedAndRatingContainer}>
                   <TouchableOpacity
                     style={styles.ratingTouchable}
@@ -155,7 +155,7 @@ class PlantProjectSnippet extends PureComponent {
                     {starIcon}
                   </TouchableOpacity>
                 </View>
-              ) : null}
+              ) : null} */}
             </View>
           ) : null}
           <PlantedProgressBar
@@ -173,9 +173,7 @@ class PlantProjectSnippet extends PureComponent {
                 ellipsizeMode="tail"
                 style={styles.project_teaser__contentText}
               >
-                {`${teaserProps.projectName}  ${
-                  teaserProps.tpoName ? 'by ' + teaserProps.tpoName : ''
-                }`}
+                {teaserProps.projectName}
               </Text>
             </View>
             <View
@@ -311,7 +309,7 @@ class PlantProjectSnippet extends PureComponent {
               ) : null} */}
             </View>
           </View>
-          <View style={styles.horizontalLine} />
+          {/* <View style={styles.horizontalLine} /> */}
         </CardLayout>
       </TouchableHighlight>
     );

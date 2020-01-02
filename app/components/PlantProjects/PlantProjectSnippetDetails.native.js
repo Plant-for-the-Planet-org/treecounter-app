@@ -159,14 +159,13 @@ class PlantProjectSnippetDetails extends PureComponent {
                 ellipsizeMode="tail"
                 style={styles.project_teaser__contentText}
               >
-                {`${teaserProps.projectName}  ${
-                  teaserProps.tpoName ? 'by ' + teaserProps.tpoName : ''
-                }`}
+                {teaserProps.projectName}
+                {/* TODO Add certified badge like twitter */}
               </Text>
             </View>
             {reviews && reviews.length ? (
               <TouchableOpacity
-                style={{ paddingTop: 8, paddingLeft: 2, flex: 1 }}
+                style={{ paddingTop: 0, paddingLeft: 2, flex: 1 }}
                 onPress={() => {
                   this.props.selectPlantProjectAction(id);
                   updateStaticRoute('app_reviews', this.props.navigation);

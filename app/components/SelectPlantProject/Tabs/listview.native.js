@@ -1,9 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { FlatList, View, Image, Text } from 'react-native';
-import { trees } from './../../../assets';
-import i18n from '../../../locales/i18n.js';
+import { FlatList, View } from 'react-native';
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/selectplantproject/list.native';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
@@ -40,25 +38,12 @@ class ListViewProjects extends PureComponent {
   );
 
   render() {
-    const Header = (
-      <View style={[styles.headerView, { marginTop: 0 }]}>
-        <Text style={styles.headerTitle}>
-          {i18n.t('label.select_project_title')}
-        </Text>
-        <Image
-          source={trees}
-          style={{ height: 60, flex: 1 }}
-          resizeMode="contain"
-        />
-      </View>
-    );
     return (
       <View style={{ height: '100%' }}>
         <FlatList
           contentContainerStyle={{
             ...flatListContainerStyle
           }}
-          ListHeaderComponent={Header}
           data={this.props.projects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

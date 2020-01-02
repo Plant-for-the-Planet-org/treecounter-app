@@ -10,14 +10,14 @@ export default EStyleSheet.create({
     paddingBottom: 0
   },
   descriptionText: {
-    color: '#686060',
+    color: '#4d5153',
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     lineHeight: 19,
     margin: 6
   },
   descriptionTextTitle: {
-    color: '#686060',
+    color: '#4d5153',
     fontFamily: 'OpenSans-SemiBold',
     fontSize: 14,
     lineHeight: 19,
@@ -82,8 +82,7 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
-    paddingBottom: 5
+    width: '100%'
   },
   viewProfileText: {
     fontFamily: 'OpenSans-SemiBold',
@@ -104,7 +103,6 @@ export default EStyleSheet.create({
   iconTextRow: {
     flexDirection: 'row',
     marginTop: 12,
-    alignItems: 'center',
     width: '90%'
   },
   iconImage: {

@@ -83,6 +83,7 @@ const PlantProjectDetails = ({
         style={{ display: 'flex', flexDirection: 'row' }}
       >
         {videoUrl ? <VideoContainer url={videoUrl} /> : null}
+        {/* TODO Add thumbnail for video */}
         <PlantProjectImageCarousel
           resizeMode={'cover'}
           images={plantProjectImages}
@@ -94,7 +95,7 @@ const PlantProjectDetails = ({
       <View style={[styles.descriptionContainer]}>
         <Text style={styles.descriptionTextTitle}>{i18n.t('label.about')}</Text>
         <Text style={styles.descriptionText}>
-          {readMore ? description : description.substring(0, 200) + '...'}
+          {readMore ? description : description.substring(0, 250) + '...'}
         </Text>
         <TouchableOpacity onPress={() => setReadMore(!readMore)}>
           {readMore ? (
@@ -182,7 +183,7 @@ const PlantProjectDetails = ({
         </View>
       ) : null}
 
-      {<NDVI ndviUid={ndviUid} />}
+      {/* {<NDVI ndviUid={ndviUid} />} */}
     </View>
   );
 };

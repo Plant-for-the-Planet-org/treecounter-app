@@ -3,6 +3,7 @@ import { normalize } from 'normalizr';
 import { getRequest } from '../utils/api';
 import { tpoSchema, plantProjectSchema } from '../schemas/index';
 import { mergeEntities } from '../reducers/entitiesReducer';
+import { setProgressModelState } from '../reducers/modelDialogReducer';
 
 export function loadTpos() {
   // loadProjects();
@@ -49,12 +50,21 @@ export function loadProjects(category = 'all', options = {}) {
 export function loadProject(plantProject) {
   const request = getRequest('plantProject_get', { uid: plantProject.id });
   return dispatch => {
-    request
-      .then(res => {
-        console.log('========================', res.data);
-        dispatch(mergeEntities(normalize(res.data, plantProjectSchema)));
-        dispatch(mergeEntities(normalize(res.data.tpoData, tpoSchema)));
-      })
-      .catch(error => console.log(error));
+    dispatch(setProgressModelState(true));
+    return new Promise(function(resolve, reject) {
+      request
+        .then(res => {
+          console.log('========================', res.data);
+          dispatch(mergeEntities(normalize(res.data, plantProjectSchema)));
+          dispatch(mergeEntities(normalize(res.data.tpoData, tpoSchema)));
+          dispatch(setProgressModelState(false));
+          resolve(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+          dispatch(setProgressModelState(false));
+          reject(error);
+        });
+    });
   };
 }

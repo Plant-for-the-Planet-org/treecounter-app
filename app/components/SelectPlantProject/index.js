@@ -85,7 +85,7 @@ export default class SelectPlantProject extends Component {
     let filteredProjects = plantProjects.reduce((projects, project) => {
       if (
         project.name.toLowerCase().includes(value) ||
-        project.tpo_name.toLowerCase().includes(value)
+        project.tpoName.toLowerCase().includes(value)
       ) {
         projects.push(project);
       }
@@ -133,13 +133,21 @@ export default class SelectPlantProject extends Component {
     });
   }
 
-  openModal(key) {
-    this.setState({
-      isOpen: true,
-      modalProject: this.props.plantProjects.find(
+  async openModal(key) {
+    try {
+      let project = this.props.plantProjects.find(
         project => project['id'] === key
-      )
-    });
+      );
+      if (project && !project.paymentSetup) {
+        project = await this.props.loadDetails({ id: key });
+      }
+      this.setState({
+        isOpen: true,
+        modalProject: project
+      });
+    } catch (error) {
+      console.log('load details error', error);
+    }
   }
 
   render() {
@@ -192,7 +200,7 @@ export default class SelectPlantProject extends Component {
                 }
                 expanded={false}
                 plantProject={this.state.modalProject}
-                tpoName={this.state.modalProject.tpo_name}
+                tpoName={this.state.modalProject.tpoName}
               />
             ) : null}
             <div className="select-project_button__container">
@@ -226,7 +234,7 @@ export default class SelectPlantProject extends Component {
                         callExpanded={() => this.callExpanded()}
                         expanded={false}
                         plantProject={project}
-                        tpoName={project.tpo_name}
+                        tpoName={project.tpoName}
                       />
                       <div className="select-project_button__container">
                         <PrimaryButton
@@ -294,7 +302,7 @@ export default class SelectPlantProject extends Component {
                               <tr key={'tr' + project.id}>
                                 <td className="align-left">{project.name}</td>
                                 <td className="align-left">
-                                  {project.tpo_name}
+                                  {project.tpoName}
                                 </td>
                                 <td className="align-right">
                                   {delimitNumbers(
@@ -348,7 +356,7 @@ export default class SelectPlantProject extends Component {
                         ? priceSortedProjects.map(project => (
                             <tr key={'tr' + project.id}>
                               <td className="align-left">{project.name}</td>
-                              <td className="align-left">{project.tpo_name}</td>
+                              <td className="align-left">{project.tpoName}</td>
                               <td className="align-right">
                                 {delimitNumbers(parseInt(project.countPlanted))}
                               </td>

@@ -2,7 +2,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { FlatList, View } from 'react-native';
-
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/selectplantproject/list.native';
 import { updateStaticRoute } from '../../../helpers/routerHelper';

@@ -17,7 +17,9 @@ const LegendInfo = props => {
 const Legend = () => {
   return (
     <View style={styles.legendContainer}>
-      <Text>{i18n.t('label.NDVI_legend_indicators')}</Text>
+      <Text style={{ fontFamily: 'OpenSans-SemiBold' }}>
+        {i18n.t('label.NDVI_legend_indicators')}
+      </Text>
       <View style={styles.legendWrapper}>
         {/* indicatorsSpell={}
           grasslandsSpell={i18n.t('label.NDVI_legend_grasslands')}

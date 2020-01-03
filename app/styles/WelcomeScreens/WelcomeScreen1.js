@@ -12,18 +12,18 @@ export default EStyleSheet.create({
   },
   openAsGuestContainer: {
     position: 'absolute',
-    right: 10,
+    left: 10,
     top: 50,
     zIndex: 1
   },
   openAsGuest: {
     color: '#87b738',
-    fontFamily: 'OpenSans-SemiBold',
-    fontSize: 14,
-    fontWeight: '600',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16,
+    fontWeight: '400',
     paddingRight: 20,
-    paddingLeft: 20,
-    paddingTop: 16,
+    paddingLeft: 14,
+    paddingTop: 10,
     paddingBottom: 16
   },
   textHeader: {

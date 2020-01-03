@@ -59,6 +59,7 @@ import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 import CountriesLeaderBoard from '../../components/LeaderboardRefresh/Countries/CountriesLeaderBoard';
 import CountryDetails from '../../components/LeaderboardRefresh/Countries/CountryDetails';
 import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeaderBoard';
+import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -362,6 +363,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['companies_leaderboard']: {
         screen: CompaniesLeaderBoard
+      },
+      ['schools_leaderboard']: {
+        screen: SchoolsLeaderBoard
       }
     },
     {

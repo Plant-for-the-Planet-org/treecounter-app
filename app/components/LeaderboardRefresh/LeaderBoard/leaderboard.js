@@ -73,7 +73,7 @@ const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => _navigateTo('education')}
+          onPress={() => _navigateTo('education', 'schools_leaderboard')}
           style={styles.widgetContainer}
         >
           <Image

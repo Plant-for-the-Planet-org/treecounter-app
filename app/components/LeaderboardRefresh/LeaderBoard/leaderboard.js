@@ -10,14 +10,14 @@ const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
   const [category, setCategory] = useState('country');
   const [sortedCategories, setSortedCategories] = useState([]);
   useEffect(() => {}, []);
-  const getQueryResultAndNavigate = category => {
-    updateRoute('countries_leaderboard', navigation, undefined, { category });
+  const _navigateTo = (category, routeName) => {
+    updateRoute(routeName, navigation, undefined, { category });
   };
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => getQueryResultAndNavigate('country')}
+          onPress={() => _navigateTo('country', 'countries_leaderboard')}
           style={styles.widgetContainer}
         >
           <Image
@@ -35,7 +35,7 @@ const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => getQueryResultAndNavigate('company')}
+          onPress={() => _navigateTo('company', 'companies_leaderboard')}
           style={styles.widgetContainer}
         >
           <Image
@@ -55,7 +55,7 @@ const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
       </View>
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => getQueryResultAndNavigate('individual')}
+          onPress={() => _navigateTo('individual')}
           style={styles.widgetContainer}
         >
           <Image
@@ -73,7 +73,7 @@ const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => getQueryResultAndNavigate('education')}
+          onPress={() => _navigateTo('education')}
           style={styles.widgetContainer}
         >
           <Image
@@ -93,7 +93,7 @@ const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
       </View>
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => getQueryResultAndNavigate('organization')}
+          onPress={() => _navigateTo('organization')}
           style={styles.widgetContainer}
         >
           <Image

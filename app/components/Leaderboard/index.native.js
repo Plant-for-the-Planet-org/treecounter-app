@@ -202,18 +202,12 @@ export default class Leaderboard extends Component {
     console.log('this.props.queryResult', this.props.queryResult);
     return (
       <View style={[styles.leaderBoardContainer]}>
-        <CategoryTypes
+        {/* <CategoryTypes
           categoryInfo={this.props.categoryInfo}
           sectionInfo={this.props.sectionInfo}
           handleCategoryChange={this._handleCategoryChange}
-        />
-        <LeaderboardRefresh
-          navigation={this.props.navigation}
-          category={this.state.category}
-          categoryInfo={this.props.categoryInfo}
-          _getQueryResult={this._getQueryResult}
-          queryResult={this.props.queryResult}
-        />
+        /> */}
+        <LeaderboardRefresh navigation={this.props.navigation} />
         {/* <ScrollView
           contentContainerStyle={{ justifyContent: 'flex-start', flexGrow: 1 }}
           showsHorizontalScrollIndicator={false}

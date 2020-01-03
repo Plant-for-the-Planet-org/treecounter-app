@@ -4,12 +4,14 @@ import {
   Text,
   Image,
   TouchableWithoutFeedback,
-  StyleSheet
+  StyleSheet,
+  Dimensions
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import React, { Component } from 'react';
 import { getImageUrl } from '../../actions/apiRouting';
-import i18n from '../../locales/i18n';
 import PropTypes from 'prop-types';
+const width = Dimensions.get('window').width;
 
 class PlantProjectImageCarousel extends Component {
   imageCarousel;
@@ -26,13 +28,25 @@ class PlantProjectImageCarousel extends Component {
 
   renderHeader = () => (
     <TouchableWithoutFeedback onPress={this.handleHeaderPress}>
-      <View>
-        <Text style={styles.closeText}>{i18n.t('label.exit')}</Text>
+      <View style={{ alignItems: 'flex-start', padding: 20 }}>
+        <Icon
+          name="clear"
+          size={24}
+          color="white"
+          style={{ marginRight: 10, paddingTop: 2, paddingLeft: 5 }}
+        />
       </View>
     </TouchableWithoutFeedback>
   );
 
-  renderFooter = () => <Text style={styles.footerText} />;
+  renderFooter = idx => (
+    <View style={{ marginBottom: 25 }}>
+      <Text style={styles.footerText}>
+        {idx + 1}/{this.props.images.length} -{' '}
+        {this.props.images[idx].description}
+      </Text>
+    </View>
+  );
 
   renderImage = idx => {
     return (
@@ -58,15 +72,28 @@ class PlantProjectImageCarousel extends Component {
           <ImageCarousel
             ref={this.captureImageCarousel}
             renderContent={this.renderImage}
+            renderHeader={this.renderHeader}
+            renderFooter={this.renderFooter}
           >
             {this.props.images.map(url => (
-              <View key={`viewof-${url}`} style={styles.imageContainer}>
+              <View
+                key={`viewof-${url}`}
+                style={[
+                  styles.imageContainer,
+                  { marginLeft: this.props.videoUrl ? null : 20 }
+                ]}
+              >
                 <Image
-                  style={styles.image}
+                  style={[
+                    styles.image,
+                    this.props.style ? this.props.style : ''
+                  ]}
+                  aspectRatio={this.props.aspectRatio}
                   key={url.image}
                   source={{
                     uri: getImageUrl(this.props.pictureType, 'large', url.image)
                   }}
+                  resizeMode={this.props.resizeMode}
                 />
               </View>
             ))}
@@ -84,31 +111,38 @@ PlantProjectImageCarousel.defaultProps = {
   pictureType: 'project'
 };
 const textColor = 'white';
+const borderColor = '#29000000';
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  closeText: {
-    color: textColor,
-    textAlign: 'right',
-    padding: 10
-  },
   footerText: {
     color: textColor,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 18,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 24,
+    letterSpacing: 0
   },
   imageContainer: {
-    height: 100,
-    width: 100,
-    maxHeight: 100,
-    maxWidth: 100,
-    marginLeft: 5,
-    marginRight: 5
+    height: width * 0.82 * 0.5625,
+    width: width * 0.82,
+    maxHeight: width * 0.82 * 0.5625,
+    maxWidth: width * 0.82,
+    marginLeft: 0,
+    marginRight: 16,
+    borderColor: borderColor,
+    borderWidth: 1,
+    borderRadius: 7,
+    padding: 0
   },
   image: {
     flex: 1,
-    width: undefined,
-    height: undefined
+    width: width * 0.82,
+    height: width * 0.82 * 0.5625,
+    borderRadius: 7
   }
 });
 export default PlantProjectImageCarousel;

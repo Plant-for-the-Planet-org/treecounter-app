@@ -8,7 +8,7 @@ import _ from 'lodash';
 const TimeSerie = props => {
   return (
     <View style={styles.container}>
-      <Text>{props.year}</Text>
+      <Text style={{ fontFamily: 'OpenSans-Regular' }}>{props.year}</Text>
       {props.dataPoints.map((dataPoint, index) => {
         if (!_.isEmpty(dataPoint) && dataPoint.status === 'available') {
           return (

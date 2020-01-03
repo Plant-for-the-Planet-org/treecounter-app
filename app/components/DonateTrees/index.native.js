@@ -10,7 +10,7 @@ import RecieptTabsView from './receiptTabs';
 
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 // import PaymentSelector from '../Payment/PaymentSelector';
-import { View, Linking } from 'react-native';
+import { Linking, SafeAreaView } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
@@ -132,12 +132,15 @@ export default class DonateTrees extends React.PureComponent {
   // open your gateway
   openGateWay = async url => {
     url = context.scheme + '://' + context.host + url;
+    /*
     const canOpen = await Linking.canOpenURL(url);
     if (canOpen) {
       Linking.openURL(url).catch(err =>
         console.error('An error occurred', err)
       );
     }
+*/
+    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
   };
 
   getFees() {
@@ -388,7 +391,7 @@ export default class DonateTrees extends React.PureComponent {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <TabView
           navigationState={this.state}
           renderScene={this._renderScene}
@@ -397,7 +400,7 @@ export default class DonateTrees extends React.PureComponent {
           onIndexChange={this.function_handleIndexChange}
         />
         <TabContainer {...this.props} />
-      </View>
+      </SafeAreaView>
     );
   }
 }

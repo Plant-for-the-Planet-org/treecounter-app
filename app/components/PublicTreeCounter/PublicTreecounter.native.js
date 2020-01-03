@@ -290,6 +290,7 @@ class PublicTreeCounter extends React.Component {
   }
 
   _goToURL(url) {
+    /*
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
@@ -297,6 +298,8 @@ class PublicTreeCounter extends React.Component {
         console.log("Don't know how to open URI: " + url);
       }
     });
+*/
+    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
   }
 }
 

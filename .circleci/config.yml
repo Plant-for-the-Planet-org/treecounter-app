@@ -59,6 +59,10 @@ jobs:
             echo $SERVER_URL
             cp app/config/index.js.dist app/config/index.js
             sed -i "s/test.trilliontreecampaign.org/$SERVER_URL/" app/config/index.js
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]
+            then
+              sed -i "s/debug: true/debug: false/" app/config/index.js
+            fi
       - run:
           name: Build web client
           command: |
@@ -147,10 +151,10 @@ jobs:
             source $ENV_VARS
             echo $SERVER_URL
             ssh $HOST "cd $WD_REACT; cp app/config/index.js.dist app/config/index.js"
-            ssh $HOST "cd $WD_REACT; sed -i "s/test.trilliontreecampaign.org/$SERVER_URL/" app/config/index.js"
+            ssh $HOST "cd $WD_REACT; sed -i 's/test.trilliontreecampaign.org/'$SERVER_URL'/' app/config/index.js"
             if [[ "${CIRCLE_BRANCH}" == "master" ]]
             then
-              ssh $HOST "cd $WD_REACT; sed -i "s/debug: true/debug: false/" app/config/index.js"
+              ssh $HOST "cd $WD_REACT; sed -i 's/debug: true/debug: false/' app/config/index.js"
             fi
       # - run:
       #     name: Build web client

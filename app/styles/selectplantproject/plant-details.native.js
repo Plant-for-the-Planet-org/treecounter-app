@@ -14,20 +14,29 @@ export default EStyleSheet.create({
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     lineHeight: 19,
-    margin: 6
+    marginTop: 16
   },
-  descriptionTextTitle: {
+  readMoreText: {
     color: '#4d5153',
-    fontFamily: 'OpenSans-SemiBold',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     lineHeight: 19,
-    margin: 6
+    marginLeft: 12
+  },
+  descriptionTextTitle: {
+    fontSize: 16,
+    fontFamily: 'OpenSans-SemiBold',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    flexGrow: 1
   },
   readmoreButtonView: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 6
+    marginTop: 14
   },
   linkTextContainer: {
     flexDirection: 'row',
@@ -66,8 +75,7 @@ export default EStyleSheet.create({
     borderWidth: 1,
     borderColor: '#d5d5d5',
     padding: 18,
-    marginTop: 20,
-    marginBottom: 20
+    margin: 20
   },
   accordionTitle: {
     fontSize: 16,

@@ -47,9 +47,10 @@ class VideoContainer extends React.Component {
         <WebView
           containerStyle={{
             borderRadius: 9,
-            height: 150,
-            width: 265,
-            marginRight: 12
+            height: width * 0.82 * 0.5625,
+            width: width * 0.82,
+            marginRight: 16,
+            marginLeft: 20
           }}
           allowsFullscreenVideo
           javaScriptEnabled

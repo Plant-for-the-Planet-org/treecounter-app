@@ -7,6 +7,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
+import SingleRating from '../Reviews/SingleRating';
 
 import { getImageUrl } from '../../actions/apiRouting';
 import {
@@ -123,7 +124,7 @@ class PlantProjectSnippet extends PureComponent {
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
-        <CardLayout style={[styles.projectSnippetContainer]} withoutShadow>
+        <View style={[styles.projectSnippetContainer]} withoutShadow>
           {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image
@@ -176,6 +177,24 @@ class PlantProjectSnippet extends PureComponent {
                 {teaserProps.projectName}
               </Text>
             </View>
+            {reviews && reviews.length ? (
+              <TouchableOpacity
+                style={{ paddingTop: 10, paddingLeft: 2, flex: 1 }}
+                onPress={() => {
+                  this.props.selectPlantProjectAction(id);
+                  updateStaticRoute('app_reviews', this.props.navigation);
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <SingleRating
+                    name={(plantProjectRating / 100).toFixed(2) || '0.0'}
+                    indexScore={{
+                      score: Math.round(plantProjectRating / 100)
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>
+            ) : null}
             <View
               key="projectdetailsContainer"
               style={styles.projectdetailsContainer}
@@ -282,8 +301,8 @@ class PlantProjectSnippet extends PureComponent {
               </TouchableOpacity>
             </View>
 
-            <View key="actionContainer" style={styles.actionContainer}>
-              {/* <View key="byOrgContainer" style={styles.byOrgContainer}>
+            {/* <View key="actionContainer" style={styles.actionContainer}> */}
+            {/* <View key="byOrgContainer" style={styles.byOrgContainer}>
                 <Text
                   style={styles.byOrgText}
                   ellipsizeMode="tail"
@@ -293,7 +312,7 @@ class PlantProjectSnippet extends PureComponent {
                 </Text>
               </View> */}
 
-              {/* {this.props.plantProject.allowDonations ? (
+            {/* {this.props.plantProject.allowDonations ? (
                 <View key="buttonContainer" style={styles.buttonContainer}>
                   <PrimaryButton
                     style={styles.buttonItem}
@@ -307,10 +326,10 @@ class PlantProjectSnippet extends PureComponent {
                   </PrimaryButton>
                 </View>
               ) : null} */}
-            </View>
+            {/* </View> */}
           </View>
           {/* <View style={styles.horizontalLine} /> */}
-        </CardLayout>
+        </View>
       </TouchableHighlight>
     );
   }

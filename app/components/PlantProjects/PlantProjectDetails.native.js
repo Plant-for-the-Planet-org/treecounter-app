@@ -80,7 +80,7 @@ const PlantProjectDetails = ({
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={{ display: 'flex', flexDirection: 'row' }}
+        style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}
       >
         {videoUrl ? <VideoContainer url={videoUrl} /> : null}
         {/* TODO Add thumbnail for video */}
@@ -92,7 +92,7 @@ const PlantProjectDetails = ({
         />
       </ScrollView>
 
-      <View style={[styles.descriptionContainer]}>
+      <View style={[styles.accordionCardView, { marginTop: 20 }]}>
         <Text style={styles.descriptionTextTitle}>{i18n.t('label.about')}</Text>
         <Text style={styles.descriptionText}>
           {readMore ? description : description.substring(0, 250) + '...'}
@@ -107,7 +107,7 @@ const PlantProjectDetails = ({
                   resizeMode={'contain'}
                 />
               </View>
-              <Text style={styles.descriptionText}>
+              <Text style={styles.readMoreText}>
                 {i18n.t('label.read_less')}
               </Text>
             </View>
@@ -120,7 +120,7 @@ const PlantProjectDetails = ({
                   resizeMode={'contain'}
                 />
               </View>
-              <Text style={styles.descriptionText}>
+              <Text style={styles.readMoreText}>
                 {i18n.t('label.read_more')}
               </Text>
             </View>

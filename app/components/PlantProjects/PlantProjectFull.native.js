@@ -129,7 +129,6 @@ class PlantProjectFull extends React.Component {
             <FullHeightButton
               buttonStyle={styles.squareButton}
               onClick={() => this.props.selectProject(plantProject.id)}
-              textStyle={styles.buttonText}
               image={right_arrow_button}
             >
               {i18n.t('label.donate')}

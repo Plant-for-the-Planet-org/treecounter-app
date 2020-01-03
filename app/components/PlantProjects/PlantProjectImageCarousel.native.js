@@ -76,7 +76,13 @@ class PlantProjectImageCarousel extends Component {
             renderFooter={this.renderFooter}
           >
             {this.props.images.map(url => (
-              <View key={`viewof-${url}`} style={[styles.imageContainer]}>
+              <View
+                key={`viewof-${url}`}
+                style={[
+                  styles.imageContainer,
+                  { marginLeft: this.props.videoUrl ? null : 20 }
+                ]}
+              >
                 <Image
                   style={[
                     styles.image,

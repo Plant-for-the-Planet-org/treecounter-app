@@ -10,7 +10,7 @@ const Layout = {
 const rowHeight = 20;
 
 export const flatListContainerStyle = {
-  paddingBottom: 45,
+  paddingBottom: 64,
   flexGrow: 1,
   backgroundColor: '#ffffff'
 };
@@ -21,12 +21,10 @@ export default EStyleSheet.create({
   },
   projectSnippetContainer: {
     flexDirection: 'column',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    elevation: 0,
-    borderWidth: 0
+    borderWidth: 0,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 40
   },
   projectImageContainer: {
     height: Layout.window.width * 0.4,
@@ -75,8 +73,7 @@ export default EStyleSheet.create({
   },
   projectSpecsContainer: {
     width: '100%',
-    padding: 4,
-    paddingTop: 7
+    marginTop: 16
   },
   treeCounterContainer: {
     flexDirection: 'row',
@@ -134,10 +131,8 @@ export default EStyleSheet.create({
   projectdetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 15,
     marginTop: 16,
-    // marginRight: 5,
-    alignItems: 'center'
+    alignItems: 'flex-end'
   },
   locationContainer: {
     flexDirection: 'column',

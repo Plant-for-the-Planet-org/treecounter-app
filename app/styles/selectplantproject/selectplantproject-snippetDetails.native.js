@@ -208,7 +208,7 @@ export default EStyleSheet.create({
   projectNameContainer: {
     flexDirection: 'row',
     width: '100%',
-    paddingBottom: 10,
+    paddingBottom: 5,
     alignItems: 'center',
     marginRight: 10,
     justifyContent: 'space-between'

@@ -1,7 +1,8 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import WebView from 'react-native-webview';
+const width = Dimensions.get('window').width;
 
 class VideoContainer extends React.Component {
   constructor(props) {
@@ -44,7 +45,14 @@ class VideoContainer extends React.Component {
     if (this.state.videoId) {
       return (
         <WebView
-          style={{ height: 300 }}
+          containerStyle={{
+            borderRadius: 9,
+            height: width * 0.82 * 0.5625,
+            width: width * 0.82,
+            marginRight: 16,
+            marginLeft: 20
+          }}
+          allowsFullscreenVideo
           javaScriptEnabled
           source={{
             uri: `https://www.youtube.com/embed/${

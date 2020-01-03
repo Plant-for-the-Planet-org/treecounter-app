@@ -6,22 +6,37 @@ export default EStyleSheet.create({
     paddingTop: 15,
     marginTop: 12,
     width: '100%',
-    marginBottom: 20,
-    paddingBottom: 20
+    marginBottom: 10,
+    paddingBottom: 0
   },
   descriptionText: {
-    color: '#686060',
+    color: '#4d5153',
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     lineHeight: 19,
-    margin: 6
+    marginTop: 16
   },
-  descriptionTextTitle: {
-    color: '#686060',
-    fontFamily: 'OpenSans-SemiBold',
+  readMoreText: {
+    color: '#4d5153',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     lineHeight: 19,
-    margin: 6
+    marginLeft: 12
+  },
+  descriptionTextTitle: {
+    fontSize: 16,
+    fontFamily: 'OpenSans-SemiBold',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    flexGrow: 1
+  },
+  readmoreButtonView: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 14
   },
   linkTextContainer: {
     flexDirection: 'row',
@@ -35,6 +50,73 @@ export default EStyleSheet.create({
   },
   linkText: { alignSelf: 'flex-end', color: '$colorPrimaryAccent' },
   videoContainer: {
-    marginTop: 12
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    padding: 5
+  },
+  aboutHeader: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 19,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 23,
+    letterSpacing: 0,
+    color: '#4d5153',
+    paddingBottom: 10
+  },
+
+  // Accordion
+
+  accordionCardView: {
+    borderRadius: 9,
+    backgroundColor: '#ffffff',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    padding: 18,
+    margin: 8,
+    paddingHorizontal: 12
+  },
+  accordionTitle: {
+    fontSize: 16,
+    fontFamily: 'OpenSans-SemiBold',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    flexGrow: 1
+  },
+  accordionView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%'
+  },
+  viewProfileText: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  accordionText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  iconTextRow: {
+    flexDirection: 'row',
+    marginTop: 12,
+    width: '90%'
+  },
+  iconImage: {
+    width: 24,
+    height: 24,
+    marginRight: 16
   }
 });

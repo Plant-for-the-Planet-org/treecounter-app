@@ -1,10 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { FlatList, View, Image, Text } from 'react-native';
-import { trees } from './../../../assets';
-import i18n from '../../../locales/i18n.js';
-
+import { FlatList, View } from 'react-native';
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/selectplantproject/list.native';
 import { updateStaticRoute } from '../../../helpers/routerHelper';

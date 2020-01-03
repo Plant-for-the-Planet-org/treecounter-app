@@ -3,24 +3,14 @@ import PropTypes from 'prop-types';
 import TouchableItem from '../TouchableItem';
 import styles from '../../../styles/common/button';
 import { Text, Image, View } from 'react-native';
-const FullHeightButton = ({
-  onClick,
-  children,
-  buttonStyle,
-  textStyle,
-  image
-}) => (
-  <TouchableItem
-    activeOpacity={0.6}
-    onPress={() => onClick()}
-    style={[buttonStyle]}
-  >
+const FullHeightButton = ({ onClick, children, image }) => (
+  <TouchableItem activeOpacity={0.6} onPress={() => onClick()}>
     <View style={styles.fullHeightButton}>
+      <Text style={[styles.primaryButtonText]}>{children}</Text>
       <Image
         source={image}
         style={image ? { width: 24, height: 24 } : { width: 0 }}
       />
-      <Text style={[styles.primaryButtonText, textStyle]}>{children}</Text>
     </View>
   </TouchableItem>
 );

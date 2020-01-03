@@ -24,9 +24,10 @@ export default EStyleSheet.create({
     justifyContent: 'center'
   },
   primaryButtonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'white',
-    fontFamily: 'OpenSans-Bold'
+    fontFamily: 'OpenSans-SemiBold',
+    marginRight: 10
   },
   secondaryButton: {
     backgroundColor: '$colorPrimaryAccent',
@@ -55,9 +56,31 @@ export default EStyleSheet.create({
     fontSize: 15
   },
   fullHeightButton: {
-    flexDirection: 'column',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#89b53a',
+    marginRight: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 28,
+    borderRadius: 26
+  },
+
+  squareButton: {
+    height: 88,
+    width: 100,
+    backgroundColor: '#89b53a',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'column',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 12,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff'
   },
   textContainer: {
     // width: '100%',

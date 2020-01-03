@@ -3,13 +3,12 @@ import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { FlatList, View, Image, Text } from 'react-native';
-import { trees } from './../../../assets';
-import i18n from '../../../locales/i18n.js';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
-
+import { trees } from './../../../assets';
+import i18n from '../../../locales/i18n.js';
 export default class FeaturedProjects extends PureComponent {
   constructor(props) {
     super(props);

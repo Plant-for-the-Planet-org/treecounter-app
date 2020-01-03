@@ -9,6 +9,7 @@ import gift_outline from './images/icons/gift_outline.png';
 import challenge_outline from './images/icons/challenge_outline.png';
 import heart_outline from './images/icons/heart_outline.png';
 import rocket_outline from './images/icons/rocket_outline.png';
+import rocket from './images/icons/rocket.png';
 import shovel_outline from './images/icons/shovel_outline.png';
 import target_outline from './images/icons/target_outline.png';
 import tree_outline_red from './images/icons/tree_outline_red.png';
@@ -153,8 +154,13 @@ import closeBlack from './images/icons/closeblack.png';
 import planetLogo from './images/Planet-Logo.png';
 import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
+import readmoreUp from './images/readmoreUp.png';
+import readmoreDown from './images/readmoreDown.png';
+
 import leafGray from './images/leaf_gray.png';
 import backArrow from './images/icons/backArrow.png';
+import globe from './images/icons/globe.png';
+import outline_email from './images/icons/outline_email.png';
 import eye from './images/eye.png';
 import closeeye from './images/closeeye.png';
 
@@ -315,7 +321,12 @@ export {
   leaf,
   leafGray,
   backArrow,
+  right_arrow_button,
+  globe,
+  rocket,
+  outline_email,
+  readmoreUp,
+  readmoreDown,
   eye,
-  closeeye,
-  right_arrow_button
+  closeeye
 };

@@ -8,7 +8,8 @@ export default EStyleSheet.create({
   },
   legendInfoText: {
     marginLeft: 6,
-    fontSize: 10
+    fontSize: 10,
+    fontFamily: 'OpenSans-Regular'
   },
   legendContainer: {
     marginTop: 22

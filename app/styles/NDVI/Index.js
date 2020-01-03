@@ -7,14 +7,16 @@ export default EStyleSheet.create({
     marginLeft: 2
   },
   monthStyle: {
-    height: 15,
-    width: 15,
-    fontSize: 13
+    height: 16,
+    width: 16,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 11
   },
   headerText: {
     marginTop: 20,
     fontSize: 14,
     color: '$textColor',
+    fontFamily: 'OpenSans-SemiBold',
     marginRight: 8
   },
   cardLayout: {

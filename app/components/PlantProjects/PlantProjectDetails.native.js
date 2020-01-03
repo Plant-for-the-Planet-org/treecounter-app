@@ -18,8 +18,6 @@ import styles from '../../styles/selectplantproject/plant-details.native';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import AccordionContactInfo from './HelperComponents/AccordionContactInfo.native';
-
-import { readmoreDown, readmoreUp } from '../../assets';
 const cleanUrl = url => {
   url = (url || '').trim();
   if (url) {

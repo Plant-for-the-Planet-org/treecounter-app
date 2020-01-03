@@ -28,7 +28,7 @@ export function fetchCompetitions(category) {
     dispatch(setProgressModelState(true));
     return getAuthenticatedRequest('competitions_get', {
       category: category,
-      limit: 100
+      limit: 10
     })
       .then(res => {
         dispatch(

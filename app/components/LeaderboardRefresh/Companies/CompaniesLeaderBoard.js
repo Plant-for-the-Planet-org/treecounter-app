@@ -45,7 +45,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
     },
     [period]
   );
-  const _renderCountryList = () => {
+  const _renderCompanyList = () => {
     if (queryresult) {
       return (
         <FlatList
@@ -145,7 +145,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.countriesListContainer}>{_renderCountryList()}</View>
+      <View style={styles.countriesListContainer}>{_renderCompanyList()}</View>
     </View>
   );
 };

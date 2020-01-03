@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import styles from '../../../styles/LeaderboardRefresh/Leaderboard/leaderboardstyles';
 import i18n from '../../../locales/i18n';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
@@ -55,7 +55,7 @@ const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
       </View>
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => _navigateTo('individual')}
+          onPress={() => _navigateTo('individual', 'individuals_leaderboard')}
           style={styles.widgetContainer}
         >
           <Image
@@ -93,7 +93,9 @@ const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
       </View>
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => _navigateTo('organization')}
+          onPress={() =>
+            _navigateTo('organization', 'organizations_LeaderBoard')
+          }
           style={styles.widgetContainer}
         >
           <Image

@@ -2,14 +2,16 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginBottom: 50
   },
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
   widgetContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 20
   },
   image: {
     width: 100,

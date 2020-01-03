@@ -15,7 +15,7 @@ import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getLocalRoute } from '../../../actions/apiRouting';
 
-const SchoolsLeaderBoard = ({ navigation }) => {
+const OrganizationLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
   const [period, setPeriod] = useState('all');
   const [orderBy, setOrderBy] = useState('planted');
@@ -45,7 +45,7 @@ const SchoolsLeaderBoard = ({ navigation }) => {
     },
     [period]
   );
-  const _renderSchoolsList = () => {
+  const _renderOrganizationsList = () => {
     if (queryresult) {
       return (
         <FlatList
@@ -106,7 +106,7 @@ const SchoolsLeaderBoard = ({ navigation }) => {
     <View style={styles.mainContainer}>
       {/* <Header /> */}
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>{'Schools'}</Text>
+        <Text style={styles.headerText}>{'Organizations'}</Text>
       </View>
       <View>
         <Text style={styles.subHeaderText}>
@@ -145,9 +145,11 @@ const SchoolsLeaderBoard = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.countriesListContainer}>{_renderSchoolsList()}</View>
+      <View style={styles.countriesListContainer}>
+        {_renderOrganizationsList()}
+      </View>
     </View>
   );
 };
 
-export default SchoolsLeaderBoard;
+export default OrganizationLeaderBoard;

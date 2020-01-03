@@ -1,9 +1,15 @@
 import React from 'react';
-import { Animated, TouchableOpacity, Image, BackHandler } from 'react-native';
+import {
+  Animated,
+  TouchableOpacity,
+  Image,
+  BackHandler,
+  View
+} from 'react-native';
 import { backArrow } from '../../assets';
 
 let HEADER_MAX_HEIGHT = 80;
-let HEADER_MIN_HEIGHT = 70;
+let HEADER_MIN_HEIGHT = 80;
 
 // let HEADER_TEXT_MAX_HEIGHT = 80;
 let HEADER_TEXT_MIN_HEIGHT = 40;
@@ -20,14 +26,24 @@ export default function HeaderAnimated(props) {
     extrapolate: 'clamp'
   });
 
-  const headerTitleBottom = props.scrollY.interpolate({
+  const headerTitleZIndex = props.scrollY.interpolate({
     inputRange: [
       0,
       HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
       HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + HEADER_TEXT_MIN_HEIGHT,
+      100
+    ],
+    outputRange: [100, 100, 100, 1001],
+    extrapolate: 'clamp'
+  });
+
+  const headerTitleBottom = props.scrollY.interpolate({
+    inputRange: [
+      0,
+      HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
       HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + HEADER_TEXT_MIN_HEIGHT + 26
     ],
-    outputRange: [-36, -30, -24, 12],
+    outputRange: [-116, -110, -64],
     extrapolate: 'clamp'
   });
 
@@ -49,7 +65,7 @@ export default function HeaderAnimated(props) {
       HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + HEADER_TEXT_MIN_HEIGHT,
       HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + HEADER_TEXT_MIN_HEIGHT + 26
     ],
-    outputRange: [27, 24, 21, 18],
+    outputRange: [27, 27, 27, 18],
     extrapolate: 'clamp'
   });
 
@@ -69,32 +85,39 @@ export default function HeaderAnimated(props) {
   const textColor = '#4d5153';
   const whiteColor = 'white';
   return (
-    <Animated.View
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: whiteColor,
-        height: headerHeight,
-        zIndex: headerZindex,
-        alignItems: 'center',
-        display: 'flex',
-        flexDirection: 'row',
-        width: '100%'
-      }}
-    >
-      <TouchableOpacity
-        style={{ height: 18, zIndex: 1001 }}
-        onPress={() => props.navigation.goBack()}
+    <View>
+      <Animated.View
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: whiteColor,
+          height: headerHeight,
+          zIndex: headerZindex,
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'row',
+          width: '100%'
+        }}
       >
-        <Image source={backArrow} resizeMode="contain" style={{ height: 18 }} />
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={{ height: 18, zIndex: 1001 }}
+          onPress={() => props.navigation.goBack()}
+        >
+          <Image
+            source={backArrow}
+            resizeMode="contain"
+            style={{ height: 18 }}
+          />
+        </TouchableOpacity>
+      </Animated.View>
       <Animated.View
         style={{
           position: 'absolute',
           bottom: headerTitleBottom,
-          left: headerTitleLeft
+          left: headerTitleLeft,
+          zIndex: headerTitleZIndex
         }}
       >
         <Animated.Text
@@ -110,6 +133,6 @@ export default function HeaderAnimated(props) {
           {props.title}
         </Animated.Text>
       </Animated.View>
-    </Animated.View>
+    </View>
   );
 }

@@ -1,12 +1,25 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../../styles/LeaderboardRefresh/Leaderboard/leaderboardstyles';
 import i18n from '../../../locales/i18n';
-const Leaderboard = () => {
+import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
+
+import _ from 'lodash';
+
+const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
+  const [category, setCategory] = useState('country');
+  const [sortedCategories, setSortedCategories] = useState([]);
+  useEffect(() => {}, []);
+  const getQueryResultAndNavigate = category => {
+    updateRoute('countries_leaderboard', navigation, undefined, { category });
+  };
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
-        <View style={styles.widgetContainer}>
+        <TouchableOpacity
+          onPress={() => getQueryResultAndNavigate('country')}
+          style={styles.widgetContainer}
+        >
           <Image
             style={styles.image}
             source={{
@@ -20,8 +33,11 @@ const Leaderboard = () => {
               {i18n.t('label.lbr_countries')}
             </Text>
           </View>
-        </View>
-        <View style={styles.widgetContainer}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => getQueryResultAndNavigate('company')}
+          style={styles.widgetContainer}
+        >
           <Image
             style={styles.image}
             source={{
@@ -35,10 +51,13 @@ const Leaderboard = () => {
               {i18n.t('label.lbr_companies')}
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.container}>
-        <View style={styles.widgetContainer}>
+        <TouchableOpacity
+          onPress={() => getQueryResultAndNavigate('individual')}
+          style={styles.widgetContainer}
+        >
           <Image
             style={styles.image}
             source={{
@@ -52,8 +71,11 @@ const Leaderboard = () => {
               {i18n.t('label.lbr_individuals')}
             </Text>
           </View>
-        </View>
-        <View style={styles.widgetContainer}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => getQueryResultAndNavigate('education')}
+          style={styles.widgetContainer}
+        >
           <Image
             style={styles.image}
             source={{
@@ -67,10 +89,13 @@ const Leaderboard = () => {
               {i18n.t('label.lbr_schools')}
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.container}>
-        <View style={styles.widgetContainer}>
+        <TouchableOpacity
+          onPress={() => getQueryResultAndNavigate('organization')}
+          style={styles.widgetContainer}
+        >
           <Image
             style={styles.image}
             source={{
@@ -84,7 +109,7 @@ const Leaderboard = () => {
               {i18n.t('label.lbr_tree_planting_organizations')}
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

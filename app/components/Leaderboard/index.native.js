@@ -12,6 +12,7 @@ import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import ContextMenuItem from './contextMenuItem.native';
 import { categoryIcons } from '../../helpers/utils';
 import LeaderboardItem from './leaderBoardListItem.native';
+import LeaderboardRefresh from '../LeaderboardRefresh/LeaderBoard/leaderboard';
 import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
 import _ from 'lodash';
@@ -21,7 +22,8 @@ export default class Leaderboard extends Component {
     super(props);
     this.state = {
       selectedCategory: '',
-      timeSorting: ''
+      timeSorting: '',
+      sortedCategories: []
     };
     this._handleItemPress = this._handleItemPress.bind(this);
   }
@@ -42,7 +44,7 @@ export default class Leaderboard extends Component {
   };
 
   _handleItemPress(treeCounterId, uri, title) {
-    //console.log(treeCounterId);
+    console.log(treeCounterId, uri, title, 'treeCounterId , uri, title ');
     if (treeCounterId) {
       this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
         treeCounterId,
@@ -60,7 +62,9 @@ export default class Leaderboard extends Component {
       );
     }
   }
-
+  _getQueryResult = selectedCategory => {
+    this.props.handleSectionChange(selectedCategory);
+  };
   _getTableView = selectedCategory => {
     //console.log(this.props.queryResult);
     let listItemsUI = <LoadingIndicator />;
@@ -69,7 +73,6 @@ export default class Leaderboard extends Component {
       const sortedQueryResults = _.sortBy(this.props.queryResult, ['planted']);
       maxPlanted = sortedQueryResults[sortedQueryResults.length - 1].planted;
     }
-
     if (selectedCategory)
       listItemsUI = (
         <CardLayout style={styles.cardStyle}>
@@ -79,6 +82,7 @@ export default class Leaderboard extends Component {
                 const isPrivate =
                   // eslint-disable-next-line no-prototype-builtins
                   result.hasOwnProperty('mayPublish') && !result.mayPublish;
+                // console.log(isPrivate, result, maxPlanted, "Resultsssss")
                 return (
                   <LeaderboardItem
                     key={'LeaderboardItem' + index}
@@ -186,6 +190,7 @@ export default class Leaderboard extends Component {
     );
     return sortView;
   };
+
   render() {
     const { categoryInfo } = this.props;
     const selectedCategory =
@@ -193,6 +198,8 @@ export default class Leaderboard extends Component {
       (categoryInfo &&
         categoryInfo.categoryKeys &&
         categoryInfo.categoryKeys[0]);
+    console.log('categoryInfo', categoryInfo);
+    console.log('this.props.queryResult', this.props.queryResult);
     return (
       <View style={[styles.leaderBoardContainer]}>
         <CategoryTypes
@@ -200,7 +207,14 @@ export default class Leaderboard extends Component {
           sectionInfo={this.props.sectionInfo}
           handleCategoryChange={this._handleCategoryChange}
         />
-        <ScrollView
+        <LeaderboardRefresh
+          navigation={this.props.navigation}
+          category={this.state.category}
+          categoryInfo={this.props.categoryInfo}
+          _getQueryResult={this._getQueryResult}
+          queryResult={this.props.queryResult}
+        />
+        {/* <ScrollView
           contentContainerStyle={{ justifyContent: 'flex-start', flexGrow: 1 }}
           showsHorizontalScrollIndicator={false}
         >
@@ -215,7 +229,7 @@ export default class Leaderboard extends Component {
               />
             </View>
           )}
-        </ScrollView>
+        </ScrollView> */}
       </View>
     );
   }

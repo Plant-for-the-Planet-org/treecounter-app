@@ -47,21 +47,23 @@ export default class RegisterTrees extends Component {
 
   _renderTabBar = props => {
     return (
+
       <TabBar
         {...props}
-        style={[tabBarStyles.tabBar]}
-        labelStyle={tabBarStyles.textStyle}
+        keyboardDismissMode={'on-drag'}
+        style={[styles.tabBar]}
+        labelStyle={styles.tabBarTextStyle}
         renderLabel={({route, focused}) => {
           return (
-            <Text style={[tabBarStyles.textStyle, {color: focused ? route.color : '#aba2a2'}]}>
+            <Text style={[styles.tabBarTextStyle, {color: focused ? route.color : '#4d5153'}]}>
               {route.title}
             </Text>
           )
         }}
 
         contentContainerStyle={{justifyContent: 'center'}}
-        indicatorStyle={tabBarStyles.textActive}
-        indicatorContainerStyle={{justifyContent: 'center', left: 105}}
+        indicatorStyle={styles.tabBarTextActive}
+        indicatorContainerStyle={{left: 106}}
         tabStyle={{width: 'auto', alignItems: 'flex-end'}}
         useNativeDriver
       />
@@ -93,7 +95,7 @@ export default class RegisterTrees extends Component {
         enableOnAndroid
         contentContailnerStyle={{justifyContent: 'center'}}
         extraHeight={66}
-        keyboardShouldPersistTaps={'always'}
+        keyboardShouldPersistTaps={'handled'}
       >
         <CardLayout style={{flex: 1}}>
           <Text style={styles.ufpTrees}>{i18n.t('label.register_trees')}</Text>

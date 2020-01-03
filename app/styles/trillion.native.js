@@ -258,5 +258,27 @@ export default EStyleSheet.create({
     color: '#707070',
     marginTop: 8,
     fontFamily: 'OpenSans-Regular'
-  }
+  },
+    tabBarcontainer: {
+      flex: 1
+    },
+    tabBar: {
+      backgroundColor: '#ffffff',
+      marginTop: 10,
+    },
+    tabBarTabItem: {},
+    tabBarTextActive: {
+      backgroundColor: '#89b53a',
+      height: 3,
+      width: 74,
+      borderTopLeftRadius: 3,
+      borderTopRightRadius: 3
+    },
+    tabBarTextStyle: {
+      color: '#4d5153',
+      fontSize: 13,
+      fontFamily: 'OpenSans-SemiBold',
+      textTransform: 'capitalize',
+
+    }
 });

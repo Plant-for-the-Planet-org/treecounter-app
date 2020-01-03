@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Image, Platform, Text, TouchableOpacity, View} from 'react-native';
 import {Switch} from 'react-native-switch';
 import {cameraSolid, circleDelete, imageGallery} from '../../assets';
@@ -14,7 +14,6 @@ import schemaOptionsMultiple from '../../server/formSchemas/registerTrees';
 import {generateFormikSchemaFromFormSchema} from '../../helpers/utils';
 import ImagePicker from 'react-native-image-picker';
 import buttonStyles from '../../styles/common/button.native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Dropdown} from 'react-native-material-dropdown';
 import MapboxMap from '../Map/MapboxMap.native';
 

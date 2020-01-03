@@ -26,7 +26,7 @@ import { getISOToCountryName } from '../../helpers/utils';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //keeping Icon here instead of in assets

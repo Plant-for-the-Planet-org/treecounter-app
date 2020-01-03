@@ -53,9 +53,8 @@ export default EStyleSheet.create({
 
   ratingsText: {
     marginRight: 4,
-    fontSize: 12,
-    fontWeight: '400',
-    fontStyle: 'normal',
+    fontSize: 14,
+    fontFamily: 'OpenSans-SemiBold',
     lineHeight: 17,
     letterSpacing: 0,
     textAlign: 'left',

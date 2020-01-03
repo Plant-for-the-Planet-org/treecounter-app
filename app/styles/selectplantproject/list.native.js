@@ -15,6 +15,22 @@ export default EStyleSheet.create({
     flexDirection: 'column',
     height: 150
   },
+  headerView: {
+    display: 'flex',
+    flexDirection: 'row',
+    margin: 20,
+    marginBottom: 0
+  },
+  headerTitle: {
+    fontSize: 14,
+    fontFamily: 'OpenSans-Regular',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    maxWidth: '70%'
+  },
+  headerImage: { height: 60, flex: 1 },
   selectedItemStyle: {
     backgroundColor: '#e3e3e3'
   },
@@ -70,26 +86,24 @@ export default EStyleSheet.create({
   },
 
   searchContainer: {
-    width: '100%',
     flexDirection: 'row',
-    margin: 3,
-    height: 40,
+    margin: 20,
     alignItems: 'center',
     borderColor: '#efefef',
     borderStyle: 'solid',
-    borderBottomWidth: 1,
-    padding: 10
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 4
   },
   searchItem: {
     // paddingBottom: 10
-    backgroundColor: 'white',
-    height: 40
+    backgroundColor: 'white'
     //marginRight: 15
   },
   searchIconContainer: {
     height: 15,
     width: 15,
-    marginRight: 1
+    marginRight: 8
   },
   searchIcon: {
     height: '100%',
@@ -98,7 +112,8 @@ export default EStyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 14,
-    color: '$textColor'
+    color: '$textColor',
+    fontFamily: 'OpenSans-Italic'
   },
 
   listContentContainer: {

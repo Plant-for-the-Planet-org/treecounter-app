@@ -75,7 +75,8 @@ export default EStyleSheet.create({
     borderWidth: 1,
     borderColor: '#d5d5d5',
     padding: 18,
-    margin: 20
+    margin: 8,
+    paddingHorizontal: 12
   },
   accordionTitle: {
     fontSize: 16,

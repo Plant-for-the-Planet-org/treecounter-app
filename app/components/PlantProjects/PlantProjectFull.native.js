@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View, Text } from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
@@ -81,7 +81,7 @@ class PlantProjectFull extends React.Component {
     const backgroundColor = 'white';
 
     return (
-      <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
             scrollStyle.styleContainer,
@@ -135,7 +135,7 @@ class PlantProjectFull extends React.Component {
             </FullHeightButton>
           </View>
         ) : null}
-      </View>
+      </SafeAreaView>
     );
   }
 }

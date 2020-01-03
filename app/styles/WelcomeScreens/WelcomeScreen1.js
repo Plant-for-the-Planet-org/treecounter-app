@@ -21,7 +21,10 @@ export default EStyleSheet.create({
     fontFamily: 'OpenSans-SemiBold',
     fontSize: 14,
     fontWeight: '600',
-    marginRight: 20
+    paddingRight: 20,
+    paddingLeft: 20,
+    paddingTop: 16,
+    paddingBottom: 16
   },
   textHeader: {
     fontFamily: 'OpenSans-Bold',

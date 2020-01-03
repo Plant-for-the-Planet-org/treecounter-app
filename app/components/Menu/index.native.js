@@ -47,7 +47,7 @@ export default class Menu extends Component {
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);
-    const welcome = await fetchItem('welcome');
+    // const welcome = await fetchItem('welcome');
 
     if (!this.props.userProfile) {
       updateRoute('welcome_screen', this.props.navigation, 0);

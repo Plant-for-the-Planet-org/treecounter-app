@@ -113,7 +113,7 @@ export default EStyleSheet.create({
     flex: 1,
     fontSize: 14,
     color: '$textColor',
-    fontFamily: 'OpenSans-Regular'
+    fontFamily: 'OpenSans-Italic'
   },
 
   listContentContainer: {

@@ -2,31 +2,34 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
 const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#ffffff',
-    justifyContent: 'space-around'
+    backgroundColor: '#ffffff'
   },
   textHeader: {
     fontFamily: 'OpenSans-Bold',
-    fontSize: 24,
-    lineHeight: 33,
+    fontSize: height * 0.032,
+    lineHeight: height * 0.032 * 1.375,
     textAlign: 'center',
-    color: '#4d5153'
+    color: '#4d5153',
+    marginTop: height * 0.099
   },
   imageStyle: {
-    width: 150,
-    height: 150,
-    alignSelf: 'center',
-    marginVertical: 15
+    width: width * 0.556,
+    height: width * 0.556,
+    marginVertical: height <= 600 ? height * 0.036 : height * 0.061,
+    alignSelf: 'center'
   },
   textPara: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: 20,
-    lineHeight: 27,
+    fontSize: height * 0.0264,
+    lineHeight: height * 0.0264 * 1.375,
     textAlign: 'center',
-    color: '#4d5153'
+    color: '#4d5153',
+    maxWidth: '86.6%',
+    left: '6.7%'
   }
 });

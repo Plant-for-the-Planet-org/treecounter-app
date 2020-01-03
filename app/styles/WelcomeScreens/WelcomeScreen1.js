@@ -1,4 +1,8 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
+
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 export default EStyleSheet.create({
   mainContainer: {
@@ -13,32 +17,31 @@ export default EStyleSheet.create({
   openAsGuestContainer: {
     position: 'absolute',
     left: 10,
-    top: 50,
-    zIndex: 1
+    top: height * 0.058,
+    zIndex: 1,
+    paddingRight: 20,
+    paddingLeft: 14
   },
   openAsGuest: {
     color: '#87b738',
-    fontFamily: 'OpenSans-Regular',
-    fontSize: 16,
-    fontWeight: '400',
-    paddingRight: 20,
-    paddingLeft: 14,
-    paddingTop: 10,
-    paddingBottom: 16
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 16
   },
   textHeader: {
     fontFamily: 'OpenSans-Bold',
     fontSize: 24,
     lineHeight: 33,
+    // fontSize: height * 0.032, experimental numbers
+    // lineHeight: height * 0.032 * 1.5,
     textAlign: 'center',
     color: '#4d5153',
-    marginVertical: 50
+    marginVertical: height * 0.068
   },
   imageStyle: {
-    width: 100,
-    height: 100,
+    width: width * 0.333,
+    height: width * 0.333,
     alignSelf: 'center',
-    marginTop: 64
+    marginTop: height * 0.1
   },
   textPara: {
     fontFamily: 'OpenSans-Regular',

@@ -198,10 +198,8 @@ export default class Leaderboard extends Component {
       (categoryInfo &&
         categoryInfo.categoryKeys &&
         categoryInfo.categoryKeys[0]);
-    console.log('categoryInfo', categoryInfo);
-    console.log('this.props.queryResult', this.props.queryResult);
     return (
-      <View style={[styles.leaderBoardContainer]}>
+      <View style={styles.leaderBoardContainer}>
         {/* <CategoryTypes
           categoryInfo={this.props.categoryInfo}
           sectionInfo={this.props.sectionInfo}

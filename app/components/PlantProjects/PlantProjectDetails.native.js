@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import VideoContainer from '../../components/Common/VideoContainer';
-import NDVI from '../../containers/NDVI/NDVI';
+// import NDVI from '../../containers/NDVI/NDVI';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/plant-details.native';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
@@ -61,7 +61,7 @@ const PlantProjectDetails = ({
   videoUrl,
   // mapData,
   plantProjectImages,
-  ndviUid,
+  // ndviUid,
   currentUserProfile,
   navigation,
   tpo: { email, treecounterSlug: slug, address, name }

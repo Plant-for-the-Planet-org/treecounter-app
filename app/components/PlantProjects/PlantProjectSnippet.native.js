@@ -11,7 +11,7 @@ import SingleRating from '../Reviews/SingleRating';
 
 import { getImageUrl } from '../../actions/apiRouting';
 import {
-  tick,
+  // tick,
   location_grey,
   survival_grey,
   tax_grey,
@@ -22,7 +22,7 @@ import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { formatNumber } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
-import CardLayout from '../Common/Card';
+// import CardLayout from '../Common/Card';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
@@ -30,7 +30,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //keeping Icon here instead of in assets
-const starIcon = <Icon name="star" size={14} color="#89b53a" />;
+// const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull

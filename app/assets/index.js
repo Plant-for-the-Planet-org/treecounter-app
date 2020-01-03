@@ -156,8 +156,11 @@ import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import readmoreUp from './images/readmoreUp.png';
 import readmoreDown from './images/readmoreDown.png';
-
 import leafGray from './images/leaf_gray.png';
+import treelogo from '../../icon.png';
+import Projects from './images/projects.jpg';
+import WelcomeImage3 from './images/welcome_screen_3_image.jpg';
+import welcomeScreen5 from './images/welcomeScreen5.png';
 import backArrow from './images/icons/backArrow.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
@@ -165,6 +168,7 @@ import eye from './images/eye.png';
 import closeeye from './images/closeeye.png';
 
 export {
+  treelogo,
   germany,
   worldImg,
   mapCollapse,
@@ -320,6 +324,9 @@ export {
   circleDelete,
   leaf,
   leafGray,
+  Projects,
+  WelcomeImage3,
+  welcomeScreen5,
   backArrow,
   right_arrow_button,
   globe,

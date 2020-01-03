@@ -7,10 +7,11 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
+import SingleRating from '../Reviews/SingleRating';
 
 import { getImageUrl } from '../../actions/apiRouting';
 import {
-  tick,
+  // tick,
   location_grey,
   survival_grey,
   tax_grey,
@@ -21,7 +22,7 @@ import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
 import { formatNumber } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
-import CardLayout from '../Common/Card';
+// import CardLayout from '../Common/Card';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
@@ -29,7 +30,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //keeping Icon here instead of in assets
-const starIcon = <Icon name="star" size={14} color="#89b53a" />;
+// const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -121,10 +122,9 @@ class PlantProjectSnippet extends PureComponent {
           ? leafGray
           : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
-    const textColor = '#4d5153';
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
-        <CardLayout style={[styles.projectSnippetContainer]} withoutShadow>
+        <View style={[styles.projectSnippetContainer]} withoutShadow>
           {projectImage ? (
             <View style={styles.projectImageContainer}>
               <Image
@@ -138,53 +138,25 @@ class PlantProjectSnippet extends PureComponent {
                 }}
                 resizeMode={'cover'}
               />
-              {reviews && reviews.length ? (
-                <View
-                  style={[
-                    styles.certifiedAndRatingContainer,
-                    !isCertified && styles.withoutCertified
-                  ]}
-                >
+              {/* {reviews && reviews.length ? (
+                <View style={styles.certifiedAndRatingContainer}>
                   <TouchableOpacity
-                    style={{ height: 48, paddingTop: 13, flex: 1 }}
+                    style={styles.ratingTouchable}
                     onPress={() => {
                       this.props.selectPlantProjectAction(id);
                       updateStaticRoute('app_reviews', this.props.navigation);
                     }}
                   >
-                    <View
-                      style={{ flexDirection: 'row', alignItems: 'center' }}
-                    >
-                      {isCertified ? (
-                        <Image
-                          source={tick}
-                          style={{
-                            width: 15,
-                            height: 15,
-                            marginLeft: 2,
-                            marginRight: 3
-                          }}
-                        />
-                      ) : null}
-                      <Text
-                        style={[
-                          {
-                            fontSize: 14,
-                            // lineHeight: 19,
-                            color: textColor,
-                            textAlign: 'center',
-                            marginRight: 5,
-                            marginLeft: 2
-                          }
-                        ]}
-                      >
-                        {(plantProjectRating / 100).toFixed(2) || '0.0'}
-                      </Text>
-                      {starIcon}
-                    </View>
+                    {isCertified ? (
+                      <Image source={tick} style={styles.ratingTick} />
+                    ) : null}
+                    <Text style={styles.ratingCount}>
+                      {(plantProjectRating / 100).toFixed(2) || '0.0'}
+                    </Text>
+                    {starIcon}
                   </TouchableOpacity>
                 </View>
-              ) : null}
+              ) : null} */}
             </View>
           ) : null}
           <PlantedProgressBar
@@ -202,29 +174,47 @@ class PlantProjectSnippet extends PureComponent {
                 ellipsizeMode="tail"
                 style={styles.project_teaser__contentText}
               >
-                {`${teaserProps.projectName}  ${
-                  teaserProps.tpoName ? 'by ' + teaserProps.tpoName : ''
-                }`}
+                {teaserProps.projectName}
               </Text>
             </View>
+            {reviews && reviews.length ? (
+              <TouchableOpacity
+                style={{ paddingTop: 10, paddingLeft: 2, flex: 1 }}
+                onPress={() => {
+                  this.props.selectPlantProjectAction(id);
+                  updateStaticRoute('app_reviews', this.props.navigation);
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <SingleRating
+                    name={(plantProjectRating / 100).toFixed(2) || '0.0'}
+                    indexScore={{
+                      score: Math.round(plantProjectRating / 100)
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>
+            ) : null}
             <View
               key="projectdetailsContainer"
               style={styles.projectdetailsContainer}
             >
               <View style={styles.locationContainer}>
-                <View style={{ flexDirection: 'row' }}>
-                  <Image
-                    source={location_grey}
-                    style={{
-                      width: 17,
-                      height: 17,
-                      marginRight: 10
-                    }}
-                  />
-                  <Text style={styles.survivalText} ellipsizeMode="tail">
-                    {getISOToCountryName(country).country}
-                  </Text>
-                </View>
+                {country ? (
+                  <View style={{ flexDirection: 'row' }}>
+                    <Image
+                      source={location_grey}
+                      style={{
+                        width: 17,
+                        height: 17,
+                        marginRight: 10
+                      }}
+                    />
+                    <Text style={styles.survivalText} ellipsizeMode="tail">
+                      {getISOToCountryName(country).country}
+                    </Text>
+                  </View>
+                ) : null}
 
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                   <Image
@@ -311,8 +301,8 @@ class PlantProjectSnippet extends PureComponent {
               </TouchableOpacity>
             </View>
 
-            <View key="actionContainer" style={styles.actionContainer}>
-              {/* <View key="byOrgContainer" style={styles.byOrgContainer}>
+            {/* <View key="actionContainer" style={styles.actionContainer}> */}
+            {/* <View key="byOrgContainer" style={styles.byOrgContainer}>
                 <Text
                   style={styles.byOrgText}
                   ellipsizeMode="tail"
@@ -322,7 +312,7 @@ class PlantProjectSnippet extends PureComponent {
                 </Text>
               </View> */}
 
-              {/* {this.props.plantProject.allowDonations ? (
+            {/* {this.props.plantProject.allowDonations ? (
                 <View key="buttonContainer" style={styles.buttonContainer}>
                   <PrimaryButton
                     style={styles.buttonItem}
@@ -336,9 +326,10 @@ class PlantProjectSnippet extends PureComponent {
                   </PrimaryButton>
                 </View>
               ) : null} */}
-            </View>
+            {/* </View> */}
           </View>
-        </CardLayout>
+          {/* <View style={styles.horizontalLine} /> */}
+        </View>
       </TouchableHighlight>
     );
   }

@@ -13,7 +13,8 @@ export default EStyleSheet.create({
   openAsGuestContainer: {
     position: 'absolute',
     right: 10,
-    top: 50
+    top: 50,
+    zIndex: 1
   },
   openAsGuest: {
     color: '#87b738',

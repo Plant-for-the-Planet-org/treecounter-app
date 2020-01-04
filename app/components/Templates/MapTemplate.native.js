@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native';
 import React from 'react';
 import mapTemplateStyle from '../../styles/mapTemplate.native';
-import MapboxMap from '../Map/MapboxMap.native';
+import MapboxMap from '../Map/NativeMapView.native';
 
 export function MapTemplate(locals) {
   let errorBlockStyle = locals.stylesheet && locals.stylesheet.

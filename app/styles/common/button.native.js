@@ -126,7 +126,8 @@ export default EStyleSheet.create({
   disabledButtonView: {
     borderRadius: 100,
     backgroundColor: '#89b53a',
-    opacity:0.2,
+    opacity:0.5,
+    color:'white',
     height: 52,
     justifyContent: 'center'
   },

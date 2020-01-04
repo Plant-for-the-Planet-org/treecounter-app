@@ -270,7 +270,7 @@ export default EStyleSheet.create({
     tabBarTextActive: {
       backgroundColor: '#89b53a',
       height: 3,
-      width: 74,
+      width: 75,
       borderTopLeftRadius: 3,
       borderTopRightRadius: 3
     },

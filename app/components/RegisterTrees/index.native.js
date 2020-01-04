@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {Text, KeyboardAvoidingView} from 'react-native';
 import PropTypes from 'prop-types';
 import {TabBar, TabView} from 'react-native-tab-view';
 import CardLayout from '../Common/Card';
@@ -63,7 +63,7 @@ export default class RegisterTrees extends Component {
 
         contentContainerStyle={{justifyContent: 'center'}}
         indicatorStyle={styles.tabBarTextActive}
-        indicatorContainerStyle={{left: 106}}
+        indicatorContainerStyle={{left: 103}}
         tabStyle={{width: 'auto', alignItems: 'flex-end'}}
         useNativeDriver
       />

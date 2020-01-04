@@ -6,7 +6,7 @@ import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {FormikFormTree} from './formComponents.native';
-import MapboxMap from '../Map/MapboxMap.native';
+import MapboxMap from '../Map/NativeMapView.native';
 import i18n from '../../locales/i18n';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
@@ -14,7 +14,7 @@ import {fromPromise} from 'rxjs/observable/fromPromise';
 
 const backgroundColor = 'white';
 const defaultInitValue = {
-  plantDate: new Date(new Date().valueOf() + 1000 * 3600 * 24),
+  plantDate: new Date(),
   treeClassification: '',
   treeSpecies: '',
   treeScientificName: '',
@@ -23,7 +23,7 @@ const defaultInitValue = {
   access: '',
   treeCount: 1,
   plantProject: '',
-  treeMeasurementData: new Date(new Date().valueOf() + 1000 * 3600 * 24),
+  treeMeasurementData: new Date(),
   imageFile: '',
   geoLocation: '',
   geometry: '',
@@ -134,17 +134,17 @@ export default class RegisterTreeTab extends PureComponent {
             swipeToClose={false}
           >
             <View style={{
-              height: 80, opacity: 1,
+              height: 70, opacity: 1,
             }}>
               <TouchableItem
                 // key={button.type}
                 style={{
-                  height: 80,
+                  height: 70,
                 }}
                 onPress={this.onClosed}
               >
                 <Icon name="keyboard-arrow-down" size={48} color="#4d5153" style={{
-                  top: 50,
+                  top: 40,
                   left: 18
                 }}/>
               </TouchableItem>

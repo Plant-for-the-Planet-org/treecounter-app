@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-boolean-value,react-native/no-color-literals */
 import React, {Component} from 'react';
-import {Text, View, Dimensions, Image, Platform, TouchableOpacity} from 'react-native';
+import {Text, View, Dimensions, Image, Platform, TouchableOpacity, PixelRatio} from 'react-native';
 import PropTypes from 'prop-types';
 import MapView, {
   Marker,
@@ -33,7 +33,6 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 let id = 0;
-
 
 const styles = EStyleSheet.create({
   container: {
@@ -361,7 +360,7 @@ export function decodeFormData(mode, mapPoint) {
   return mode === 'single-tree' ? [] : null;
 }
 
-class MapboxMap extends Component {
+class NativeMapView extends Component {
   constructor(props) {
     super(props);
     this.mapRef = null;
@@ -523,16 +522,25 @@ class MapboxMap extends Component {
         ...this.state.region
       }
     }
+    const screen = Dimensions.get('window');
+    const mapPaddingTop = screen.height * 0.1;
+   const setMapPadding = () => {
+      const iosEdgePadding = { top: mapPaddingTop * 0.5, right: 0, bottom: this.props.fullScreen ? PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * (0.034)): screen.height * 0.025, left: 0 };
+      const androidEdgePadding = { top: 0, right: 0, bottom:this.props.fullScreen ?  Dimensions.get('window').height * (0.1):PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.012), left: 0 };
+      const edgePadding = (Platform.OS === 'android') ? androidEdgePadding : iosEdgePadding;
+      return edgePadding;
+    }
     return (
       <MapView
         // mapType={'standard'}
         ref={ref => (this.map = ref)}
         provider={PROVIDER_GOOGLE}
         //provider={this.props.provider}
-        style={[this.props.mapStyle,{borderRadius:7}]}
-        mapPadding={!this.props.fullScreen ? {top:0,right:0,left:0,bottom:22} : {top:0,right:0,left:0,bottom:42}}
+        style={[this.props.mapStyle,{borderRadius:7,width:this.state.width}]}
+        mapPadding={ setMapPadding()}//!this.props.fullScreen ? {top:0,right:0,left:0,bottom:Platform.OS === 'ios' ? Dimensions.get('window').height * (0.03): -30} : {top:0,right:0,left:0,bottom:Dimensions.get('window').height * (0.1),}}
         // initialRegion={this.state.region}
         onPress={e => this.onPress(e)}
+        onMapReady={() => this.setState({ width:screen.width*0.99 })}
         onDoublePress={e => this.onDoublePress(e)}
         onLongPress={e => this.onDoublePress(e)}
         onMarkerPress={e => this.onDoublePress(e)}
@@ -817,6 +825,7 @@ class MapboxMap extends Component {
           fullScreen &&
           <RoundedButton
             buttonStyle={fullScreen ? styles.btnLocationFullScreen : styles.btnLocation}
+            textStyle={{marginRight:0}}
             onClick={this.goto}
           >
             <Icon name="my-location" size={fullScreen ? 24 : 18} color="#000000"/>
@@ -850,7 +859,7 @@ class MapboxMap extends Component {
   }
 }
 
-MapboxMap.propTypes = {
+NativeMapView.propTypes = {
   mapStyle: PropTypes.object,
   onContinue: PropTypes.func.isRequired,
   navigation: PropTypes.func.isRequired,
@@ -863,7 +872,7 @@ MapboxMap.propTypes = {
   provider: ProviderPropType
 };
 
-MapboxMap.defaultProps = {
+NativeMapView.defaultProps = {
   fullScreen: false,
   onPress: () => {
   },
@@ -875,4 +884,4 @@ MapboxMap.defaultProps = {
   }
 };
 
-export default MapboxMap;
+export default NativeMapView;

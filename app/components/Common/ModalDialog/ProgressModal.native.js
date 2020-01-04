@@ -30,7 +30,7 @@ const ProgressModal = () => {
           backgroundColor
         }}
       >
-        <LoadingIndicator contentLoader={true} screen="defaultLoader" />
+        <LoadingIndicator contentLoader screen="defaultLoader" />
       </View>
     </Modal>
   );

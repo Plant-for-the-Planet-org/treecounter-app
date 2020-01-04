@@ -26,7 +26,6 @@ const commonReducers = {
   paymentStatus: paymentStatusReducer,
   modelDialogState: modelDialogReducer,
   contentloaderState: contentloaderReducer,
-
   pledgeEvents: pledgeEventReducer,
   lastRouteState: updateLastRouteReducer,
   competitionDetail: competitionDetailReducer

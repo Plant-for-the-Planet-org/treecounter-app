@@ -193,11 +193,10 @@ class CompetitionFull extends React.Component {
         );
       }
     }
-
     return (
       <View style={snippetStyles.flexView}>
         {contentloader ? (
-          <LoadingIndicator contentLoader={true} screen="Competition" />
+          <LoadingIndicator contentLoader screen={'Competition'} />
         ) : (
           <KeyboardAwareScrollView
             keyboardDismissMode="on-drag"

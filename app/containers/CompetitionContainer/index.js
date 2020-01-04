@@ -110,7 +110,7 @@ class CompetitionContainer extends React.Component {
         updateArchivedCompetitions={this.updateArchivedCompetitions}
       />
     ) : (
-      <LoadingIndicator contentLoader={true} screen="Competition" />
+      <LoadingIndicator contentLoader screen="Competition" />
     );
   }
   onMoreClick(id, name) {

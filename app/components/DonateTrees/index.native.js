@@ -304,7 +304,7 @@ export default class DonateTrees extends React.PureComponent {
             onChange={this.handleTreeCountCurrencyChange}
           />
         ) : (
-          <LoadingIndicator contentLoader={true} screen="defaultLoader" />
+          <LoadingIndicator contentLoader screen="defaultLoader" />
         );
       // break;
 

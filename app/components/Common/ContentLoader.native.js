@@ -5,11 +5,6 @@ import { Circle, Rect } from 'react-native-svg';
 import i18n from '../../locales/i18n.js';
 import { loadingBar } from '../../assets';
 
-const AppHomeLoader = () => (
-  <View style={[loadingIndicatorStyle, style]}>
-    <Image source={loadingBar} alt={i18n.t('label.loading')} />
-  </View>
-);
 const CompetitionLoader = () => (
   <ContentLoader
     height={550}
@@ -166,7 +161,7 @@ const ProjectSingleLoader = () => (
   </ContentLoader>
 );
 
-const DefaultLoader = ({}) => (
+const DefaultLoader = () => (
   <View style={[loadingIndicatorStyle, containerStyle]}>
     <Image source={loadingBar} alt={i18n.t('label.loading')} />
   </View>
@@ -175,7 +170,7 @@ const DefaultLoader = ({}) => (
 const ContentLoading = props => {
   const { screen } = props;
   return (
-    <View style={[loadingIndicatorStyle]}>
+    <View style={loadingIndicatorStyle}>
       {screen === 'AppHome' && <WorldLoader />}
       {screen === 'LeaderBoard' && <LeaderBoardLoader />}
       {screen === 'Competition' && <CompetitionLoader />}

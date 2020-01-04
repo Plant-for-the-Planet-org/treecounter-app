@@ -182,7 +182,7 @@ export default class EditUserProfile extends Component {
               ) : this.props.followeeList ? (
                 <Text>{i18n.t('label.not_following_anybody')}</Text>
               ) : (
-                <LoadingIndicator contentLoader={true} screen="profileLoader" />
+                <LoadingIndicator contentLoader screen="profileLoader" />
               )}
             </ScrollView>
           </CardLayout>

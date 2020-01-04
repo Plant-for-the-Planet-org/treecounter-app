@@ -15,9 +15,9 @@ let HEADER_MIN_HEIGHT = 80;
 let HEADER_TEXT_MIN_HEIGHT = 40;
 
 export default function HeaderAnimated(props) {
-  const headerHeight = props.scrollY.interpolate({
-    inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-    outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+  const headerTop = props.scrollY.interpolate({
+    inputRange: [0, 80],
+    outputRange: [0, -100],
     extrapolate: 'clamp'
   });
   const headerZindex = props.scrollY.interpolate({
@@ -38,12 +38,8 @@ export default function HeaderAnimated(props) {
   });
 
   const headerTitleBottom = props.scrollY.interpolate({
-    inputRange: [
-      0,
-      HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
-      HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + HEADER_TEXT_MIN_HEIGHT + 26
-    ],
-    outputRange: [-116, -110, -64],
+    inputRange: [0, 116],
+    outputRange: [-116, 0],
     extrapolate: 'clamp'
   });
 
@@ -89,11 +85,11 @@ export default function HeaderAnimated(props) {
       <Animated.View
         style={{
           position: 'absolute',
-          top: 0,
+          top: headerTop,
           left: 0,
           right: 0,
           backgroundColor: whiteColor,
-          height: headerHeight,
+          height: 80,
           zIndex: headerZindex,
           alignItems: 'center',
           display: 'flex',
@@ -116,14 +112,14 @@ export default function HeaderAnimated(props) {
         style={{
           position: 'absolute',
           bottom: headerTitleBottom,
-          left: headerTitleLeft,
+          left: 24,
           zIndex: headerTitleZIndex
         }}
       >
         <Animated.Text
           style={{
             fontFamily: 'OpenSans-Bold',
-            fontSize: headerFontSize,
+            fontSize: 27,
             lineHeight: 40,
             letterSpacing: 0,
             textAlign: 'left',

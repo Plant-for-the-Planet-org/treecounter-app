@@ -6,10 +6,7 @@ import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
 
 import _ from 'lodash';
 
-const Leaderboard = ({ _getQueryResult, queryResult, navigation }) => {
-  const [category, setCategory] = useState('country');
-  const [sortedCategories, setSortedCategories] = useState([]);
-  useEffect(() => {}, []);
+const Leaderboard = ({ navigation }) => {
   const _navigateTo = (category, routeName) => {
     updateRoute(routeName, navigation, undefined, { category });
   };

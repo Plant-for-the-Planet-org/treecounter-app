@@ -10,7 +10,6 @@ import {
   ImageBackground,
   Image,
   ViewPropTypes,
-  ImagePropTypes,
   Linking,
   StyleSheet
 } from 'react-native';
@@ -27,7 +26,9 @@ const TYPES = {
 class VideoContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      playing: false
+    };
   }
   componentWillMount() {
     let videoId = undefined;
@@ -60,7 +61,9 @@ class VideoContainer extends React.Component {
       />
     );
   }
-
+  setPlaying() {
+    this.setState({ playing: true });
+  }
   render() {
     if (this.state.videoId) {
       if (!this.state.playing) {
@@ -76,9 +79,7 @@ class VideoContainer extends React.Component {
               marginRight: 16,
               marginLeft: 20
             }}
-            onPress={() => {
-              this.setState({ playing: true });
-            }}
+            onPress={this.setPlaying}
           />
         );
       } else {
@@ -246,7 +247,15 @@ class Thumbnail extends PureComponent {
           {showPlayIcon ? (
             <Image
               source={require('../../assets/images/play.png')}
-              style={[styles.playIcon, iconStyle]}
+              style={[
+                styles.playIcon,
+                iconStyle,
+                {
+                  backgroundColor: 'white',
+                  borderRadius: 50,
+                  resizeMode: 'contain'
+                }
+              ]}
               testId="thumbnail-image"
             />
           ) : null}
@@ -257,15 +266,15 @@ class Thumbnail extends PureComponent {
     );
   }
 }
-
+const tintColor = 'black';
 const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center'
   },
   playIcon: {
-    tintColor: 'black',
-    width: 88,
-    height: 88
+    tintColor: tintColor,
+    width: 60,
+    height: 60
   }
 });

@@ -77,7 +77,7 @@ class VideoContainer extends React.Component {
               height: width * 0.82 * 0.5625,
               width: width * 0.82,
               marginRight: 16,
-              marginLeft: 20
+              marginLeft: 10
             }}
             onPress={this.setPlaying}
           />
@@ -91,7 +91,7 @@ class VideoContainer extends React.Component {
               height: width * 0.82 * 0.5625,
               width: width * 0.82,
               marginRight: 16,
-              marginLeft: 20
+              marginLeft: 10
             }}
             allowsFullscreenVideo
             javaScriptEnabled

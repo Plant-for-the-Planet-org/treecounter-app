@@ -105,7 +105,7 @@ class AppDrawerNavigatorContainer extends Component {
         </View>
       );
     }
-    return <LoadingIndicator />;
+    return <LoadingIndicator contentLoader screen="worldLoader" />;
   }
 
   static propTypes = {

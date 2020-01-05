@@ -251,7 +251,6 @@ class Thumbnail extends PureComponent {
                 styles.playIcon,
                 iconStyle,
                 {
-                  backgroundColor: 'white',
                   borderRadius: 50,
                   resizeMode: 'contain'
                 }
@@ -272,7 +271,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   playIcon: {
-    width: 60,
-    height: 60
+    width: 65,
+    height: 65
   }
 });

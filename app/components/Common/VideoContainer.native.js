@@ -61,9 +61,9 @@ class VideoContainer extends React.Component {
       />
     );
   }
-  setPlaying() {
+  setPlaying = () => {
     this.setState({ playing: true });
-  }
+  };
   render() {
     if (this.state.videoId) {
       if (!this.state.playing) {

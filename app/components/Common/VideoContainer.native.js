@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   playIcon: {
-    width: 65,
-    height: 65
+    width: 75,
+    height: 75
   }
 });

@@ -17,6 +17,9 @@ import {
 } from '../../actions/selectPlantProjectAction';
 
 class SelectedPlantProjectContainer extends Component {
+  static navigationOptions = {
+    header: null
+  };
   constructor(props) {
     super(props);
     this.selectProject = this.selectProject.bind(this);

@@ -167,6 +167,9 @@ import outline_email from './images/icons/outline_email.png';
 import eye from './images/eye.png';
 import closeeye from './images/closeeye.png';
 
+import crossBlack from './images/header/crossBlack.png';
+import crossWhite from './images/header/crossWhite.png';
+
 export {
   treelogo,
   germany,
@@ -335,5 +338,7 @@ export {
   readmoreUp,
   readmoreDown,
   eye,
-  closeeye
+  closeeye,
+  crossBlack,
+  crossWhite
 };

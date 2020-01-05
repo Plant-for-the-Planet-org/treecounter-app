@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
+
 import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import { SafeAreaView, View, Text } from 'react-native';
+import { SafeAreaView, View, Text, Animated, StatusBar } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
@@ -16,6 +17,7 @@ import { formatNumber } from '../../utils/utils';
 import { connect } from 'react-redux';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 import { bindActionCreators } from 'redux';
+import HeaderAirBnb from '../Header/HeaderAirBnb.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -24,7 +26,10 @@ class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
     const plantProject = { ...props.plantProject };
-    this.state = { plantProject };
+    this.state = {
+      plantProject,
+      scrollY: new Animated.Value(0)
+    };
   }
   async componentWillMount() {
     try {
@@ -47,6 +52,9 @@ class PlantProjectFull extends React.Component {
   }
   render() {
     let { plantProject } = this.state;
+
+    // StatusBar.setBarStyle('light-content', true);
+    // StatusBar.setTranslucent(true)
 
     if (!plantProject) return <LoadingIndicator />;
     console.log('rendering with tpo', plantProject.tpoData);
@@ -82,6 +90,15 @@ class PlantProjectFull extends React.Component {
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar
+          backgroundColor="rgba(52, 52, 52, 0.0)"
+          barStyle="dark-content"
+        />
+        <HeaderAirBnb
+          navigation={this.props.navigation}
+          title={''}
+          scrollY={this.state.scrollY}
+        />
         <ScrollView
           contentContainerStyle={[
             scrollStyle.styleContainer,
@@ -89,6 +106,14 @@ class PlantProjectFull extends React.Component {
               backgroundColor: backgroundColor
             }
           ]}
+          scrollEventThrottle={16}
+          onScroll={Animated.event([
+            {
+              nativeEvent: {
+                contentOffset: { y: this.state.scrollY }
+              }
+            }
+          ])}
         >
           <PlantProjectSnippetDetails
             key={'projectFull' + plantProject.id}

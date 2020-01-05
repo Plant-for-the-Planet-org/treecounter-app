@@ -266,14 +266,12 @@ class Thumbnail extends PureComponent {
     );
   }
 }
-const tintColor = 'black';
 const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center'
   },
   playIcon: {
-    tintColor: tintColor,
     width: 60,
     height: 60
   }

@@ -166,6 +166,7 @@ import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
 import eye from './images/eye.png';
 import closeeye from './images/closeeye.png';
+import FAQsCover from './images/FAQs.png';
 
 export {
   treelogo,
@@ -335,5 +336,6 @@ export {
   readmoreUp,
   readmoreDown,
   eye,
-  closeeye
+  closeeye,
+  FAQsCover
 };

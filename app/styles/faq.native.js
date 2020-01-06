@@ -1,5 +1,8 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Platform } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 let lineBreakMargin = -20;
 if (Platform.OS === 'android') {
@@ -24,12 +27,13 @@ export default EStyleSheet.create({
     justifyContent: 'space-between'
   },
   headerText: {
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: 15,
     textAlign: 'left',
-    color: '#686060',
+    color: '#4d5153',
     paddingRight: 12,
-    flex: 1
+    flex: 1,
+    fontFamily: 'OpenSans-SemiBold',
+    marginTop: 12
   },
   content: {
     borderBottomLeftRadius: 5,
@@ -41,14 +45,21 @@ export default EStyleSheet.create({
     backgroundColor: '#fff'
   },
   imageStyle: {
-    width: 17,
-    height: 18
+    width: 14,
+    height: 14
+  },
+  faqcover: {
+    width: width * 0.6,
+    height: width * 0.6 * 0.83,
+    alignSelf: 'center',
+    marginTop: 24,
+    marginBottom: 12
   },
 
   a: {
     fontWeight: '300',
     color: '$colorPrimaryAccent'
   },
-  p: { color: '#938989' },
+  p: { color: '#938989', fontFamily: 'Open Sans' },
   br: { marginBottom: lineBreakMargin }
 });

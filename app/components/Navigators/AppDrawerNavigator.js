@@ -120,7 +120,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_accountActivation')]: {
         screen: ActivateAccountContainer
       },
-      [getLocalRoute('app_faq')]: FAQContainer,
       ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
       ['about_us']: { screen: AboutUsContainer },
@@ -323,6 +322,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetition : LoginContainer
       },
+      [getLocalRoute('app_faq')]: FAQContainer,
+
       [getLocalRoute('app_editCompetition')]: {
         screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
       },

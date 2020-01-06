@@ -3,7 +3,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Accordion from 'react-native-collapsible/Accordion';
 import HTMLView from 'react-native-htmlview';
-import { foldin, foldout } from '../../assets';
+import {
+  foldin,
+  foldout,
+  readmoreDown,
+  readmoreUp,
+  FAQsCover
+} from '../../assets';
 import {
   Text,
   View,
@@ -16,6 +22,9 @@ import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
 import TabContainer from '../../containers/Menu/TabContainer';
+import HeaderNew from './../Header/HeaderNew.native';
+
+import i18n from '../../locales/i18n.js';
 
 export default class FAQ extends Component {
   state = {
@@ -28,7 +37,7 @@ export default class FAQ extends Component {
         <Image
           style={styles.imageStyle}
           resizeMode="contain"
-          source={isActive ? foldin : foldout}
+          source={isActive ? readmoreUp : readmoreDown}
         />
       </View>
     );
@@ -66,7 +75,18 @@ export default class FAQ extends Component {
       <LoadingIndicator />
     ) : (
       <View style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
+        <HeaderNew
+          title={i18n.t('label.faq')}
+          navigation={this.props.navigation}
+        />
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 72, paddingTop: 80 }}
+        >
+          <Image
+            resizeMode="contain"
+            source={FAQsCover}
+            style={styles.faqcover}
+          />
           <Accordion
             activeSections={this.state.activeSections}
             sections={this.props.faqs}
@@ -77,7 +97,7 @@ export default class FAQ extends Component {
             onChange={this._updateSections}
           />
         </ScrollView>
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </View>
     );
   }

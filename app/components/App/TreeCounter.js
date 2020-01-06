@@ -158,8 +158,8 @@ class TreeCounter extends Component {
   }
 
   componentDidMount() {
-    this.props.loadProjects();
-    this.props.loadProjects('featured');
+    // this.props.loadProjects();
+    // this.props.loadProjects('featured');
     this.props.fetchpledgeEventsAction();
   }
 

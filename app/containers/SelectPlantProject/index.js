@@ -10,7 +10,7 @@ import {
   // sortedUserContributionsSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { loadProject } from '../../actions/loadTposAction';
+import { loadProject, loadProjects } from '../../actions/loadTposAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
@@ -52,7 +52,9 @@ class SelectPlantProjectContainer extends PureComponent {
   //   }
   // }
 
-  componentDidMount() {
+  async componentDidMount() {
+    let data = await this.props.loadProjects('featured');
+    console.log('===got data in await in did mount:', data);
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
@@ -64,7 +66,8 @@ class SelectPlantProjectContainer extends PureComponent {
     let plantProjects = this.props.plantProjects.filter(
       project => project.allowDonations
     );
-    return (
+    console.log('==== plantprojects', plantProjects);
+    return !plantProjects.length ? null : (
       <SelectPlantProject
         selectProject={this.selectPlantProjectAction}
         currencies={this.props.currencies}
@@ -116,7 +119,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectPlantProjectAction, fetchCurrencies, loadProject },
+    { selectPlantProjectAction, fetchCurrencies, loadProject, loadProjects },
     dispatch
   );
 };

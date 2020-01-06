@@ -18,8 +18,8 @@ class App extends Component {
     this.props.fetchCurrencies();
     // TODO: at this time the locale isn't yet defined, so this API call is currently done with locale = undefined
     // Is there any way to wait with this API call until the locale is defined?
-    this.props.loadProjects();
-    this.props.loadProjects('featured');
+    // this.props.loadProjects();
+    // this.props.loadProjects('featured');
   }
   render() {
     const backgroundColor = 'white';

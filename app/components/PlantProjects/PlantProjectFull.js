@@ -62,6 +62,7 @@ class PlantProjectFull extends React.Component {
       countTarget,
       currency,
       treeCost,
+      taxDeductibleCountries,
       paymentSetup,
       survivalRate: survivalRate,
       images,
@@ -96,7 +97,7 @@ class PlantProjectFull extends React.Component {
       survivalRate,
       currency,
       treeCost,
-      taxDeduction: paymentSetup.taxDeduction
+      taxDeduction: taxDeductibleCountries
     };
     const detailsProps = {
       description,
@@ -108,6 +109,8 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       ndviUid
     };
+
+    if (!projectImage) projectImage = this.state.projectImage;
     return (
       <React.Fragment>
         <div className="project-teaser__container">
@@ -115,11 +118,7 @@ class PlantProjectFull extends React.Component {
             <div className="teaser-image__container">
               <img
                 className="teaser__projectImage"
-                src={getImageUrl(
-                  'project',
-                  'large',
-                  this.state.projectImage.image
-                )}
+                src={getImageUrl('project', 'large', projectImage.image)}
                 alt={projectImage.description}
               />
             </div>

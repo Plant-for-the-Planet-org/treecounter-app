@@ -15,7 +15,7 @@ import {
   selectPlantProjectAction,
   clearPlantProject
 } from '../../actions/selectPlantProjectAction';
-
+import { loadProjects } from '../../actions/loadTposAction';
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
@@ -50,6 +50,10 @@ class DonationTreesContainer extends PureComponent {
         })
         .catch(error => console.log(error));
     }
+  }
+  async componentWillMount() {
+    await this.props.loadProjects('featured');
+    await this.props.loadProjects();
   }
   componentDidMount() {
     let selectedProjectId = undefined;
@@ -113,6 +117,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      loadProjects,
       supportTreecounterAction,
       selectPlantProjectAction,
       fetchCurrencies,

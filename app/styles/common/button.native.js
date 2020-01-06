@@ -72,9 +72,8 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#89b53a',
-    height: 52,
     marginRight: 20,
-    paddingVertical: 15,
+    paddingVertical: 10,
     paddingHorizontal: 28,
     borderRadius: 26
   },

@@ -10,7 +10,6 @@ export default EStyleSheet.create({
     flexDirection: 'column',
     flex: 1
   },
-
   contentContainer: {
     margin: 15,
     marginTop: 10,
@@ -222,19 +221,11 @@ export default EStyleSheet.create({
     flexDirection: 'column'
   },
   ufpTrees: {
-    lineHeight: 40,
+    lineHeight: 24,
     letterSpacing: 0,
-    fontSize:27,
     textAlign: 'left',
-    marginBottom: 7,
-    fontFamily: 'OpenSans-ExtraBold',
-    color:'#4d5153',
-  },
-  textStyle:{
-    fontFamily: 'OpenSans-Semibold',
-    color:'#4d5153',
-    fontSize:18,
-    lineHeight:24,
+    marginBottom: 14,
+    fontFamily: 'OpenSans-Bold'
   },
   ufpLeftSection: { flexDirection: 'row', justifyContent: 'space-between' },
   ufpCostView: {
@@ -258,27 +249,5 @@ export default EStyleSheet.create({
     color: '#707070',
     marginTop: 8,
     fontFamily: 'OpenSans-Regular'
-  },
-    tabBarcontainer: {
-      flex: 1
-    },
-    tabBar: {
-      backgroundColor: '#ffffff',
-      marginTop: 10,
-    },
-    tabBarTabItem: {},
-    tabBarTextActive: {
-      backgroundColor: '#89b53a',
-      height: 3,
-      width: 75,
-      borderTopLeftRadius: 3,
-      borderTopRightRadius: 3
-    },
-    tabBarTextStyle: {
-      color: '#4d5153',
-      fontSize: 13,
-      fontFamily: 'OpenSans-SemiBold',
-      textTransform: 'capitalize',
-
-    }
+  }
 });

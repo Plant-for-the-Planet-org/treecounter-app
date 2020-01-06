@@ -1,6 +1,15 @@
 /* eslint-disable react/jsx-boolean-value,react-native/no-color-literals */
 import React, {Component} from 'react';
-import {Text, View, Dimensions, Image, Platform, TouchableOpacity, PixelRatio} from 'react-native';
+import {
+  Text,
+  View,
+  Dimensions,
+  Image,
+  Platform,
+  TouchableOpacity,
+  PixelRatio,
+  TouchableWithoutFeedback
+} from 'react-native';
 import PropTypes from 'prop-types';
 import MapView, {
   Marker,
@@ -73,7 +82,7 @@ const styles = EStyleSheet.create({
     borderWidth: 1,
     borderColor: '#aaaaaa',
     // borderRadius: '50%',
-    backgroundColor: '#ffff'
+    backgroundColor: '#ffff',
   },
   btnLocation: {
     position: 'absolute',
@@ -382,6 +391,7 @@ class NativeMapView extends Component {
       editing: !this.isSingleTree && !Array.isArray(geometry) ? decodeFormData(mode, geometry) : null,
       creatingHole: false,
       markers: marker || [],
+      width:500,
     };
 
   }
@@ -392,32 +402,35 @@ class NativeMapView extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.onPropsUpdate(nextProps);
+    console.log('this.props', nextProps);
+    if (nextProps !== this.props)
+      this.onPropsUpdate(nextProps);
   }
 
-  onPropsUpdate = (nextProps) => {
-    if (!nextProps.fullScreen) {
 
-      const {geoLocation, mode, geometry} = nextProps;
-      const marker = this.isSingleTree && geoLocation ? decodeFormData(mode, geoLocation) : null;
-      const state = {
-        region: {
-          latitude: getQueryVariable(geoLocation, 'geoLatitude'),
-          longitude: getQueryVariable(geoLocation, 'geoLongitude'),
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA
-        },
-        editing: !this.isSingleTree && !Array.isArray(geometry) ? decodeFormData(mode, geometry) : null,
-        markers: marker || [],
-      };
-      setTimeout(() => {
-        this.setState({
-          ...state
-        }, () => {
-          this.gotoLocation();
-        })
-      }, 1000)
-    }
+  onPropsUpdate = (nextProps) => {
+    // if (!nextProps.fullScreen) {
+
+    const {geoLocation, mode, geometry} = nextProps;
+    const marker = this.isSingleTree && geoLocation ? decodeFormData(mode, geoLocation) : null;
+    const state = {
+      region: {
+        latitude: getQueryVariable(geoLocation, 'geoLatitude'),
+        longitude: getQueryVariable(geoLocation, 'geoLongitude'),
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      },
+      editing: !this.isSingleTree && !Array.isArray(geometry) ? decodeFormData(mode, geometry) : null,
+      markers: marker || [],
+    };
+    setTimeout(() => {
+      this.setState({
+        ...state
+      }, () => {
+        this.gotoLocation();
+      })
+    }, 1500)
+    // }
 
   };
 
@@ -506,7 +519,7 @@ class NativeMapView extends Component {
       liteMode: !this.props.fullScreen,
       rotateEnabled: this.props.fullScreen,
       zoomEnabled: this.props.fullScreen,
-      loadingEnabled: !this.props.fullScreen,
+      // loadingEnabled: false,
       showsUserLocation: false
     };
     const {editing, region: {latitude, longitude}, markers} = this.state;
@@ -524,9 +537,19 @@ class NativeMapView extends Component {
     }
     const screen = Dimensions.get('window');
     const mapPaddingTop = screen.height * 0.1;
-   const setMapPadding = () => {
-      const iosEdgePadding = { top: mapPaddingTop * 0.5, right: 0, bottom: this.props.fullScreen ? PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height * (0.034)): screen.height * 0.025, left: 0 };
-      const androidEdgePadding = { top: 0, right: 0, bottom:this.props.fullScreen ?  Dimensions.get('window').height * (0.1):PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.012), left: 0 };
+    const setMapPadding = () => {
+      const iosEdgePadding = {
+        top: mapPaddingTop * 0.5,
+        right: 0,
+        bottom: this.props.fullScreen ? (screen.height >= 700 ? PixelRatio.getPixelSizeForLayoutSize(screen.height * (0.034)) : PixelRatio.getPixelSizeForLayoutSize(screen.height * (0.05))) : screen.height * 0.025,
+        left: 0
+      };
+      const androidEdgePadding = {
+        top: 0,
+        right: 0,
+        bottom: this.props.fullScreen ? height * (0.1) : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.012),
+        left: 0
+      };
       const edgePadding = (Platform.OS === 'android') ? androidEdgePadding : iosEdgePadding;
       return edgePadding;
     }
@@ -536,11 +559,11 @@ class NativeMapView extends Component {
         ref={ref => (this.map = ref)}
         provider={PROVIDER_GOOGLE}
         //provider={this.props.provider}
-        style={[this.props.mapStyle,{borderRadius:7,width:this.state.width}]}
-        mapPadding={ setMapPadding()}//!this.props.fullScreen ? {top:0,right:0,left:0,bottom:Platform.OS === 'ios' ? Dimensions.get('window').height * (0.03): -30} : {top:0,right:0,left:0,bottom:Dimensions.get('window').height * (0.1),}}
+        style={[this.props.mapStyle, {width: this.state.width}]}
+        mapPadding={setMapPadding()}//!this.props.fullScreen ? {top:0,right:0,left:0,bottom:Platform.OS === 'ios' ? Dimensions.get('window').height * (0.03): -30} : {top:0,right:0,left:0,bottom:Dimensions.get('window').height * (0.1),}}
         // initialRegion={this.state.region}
         onPress={e => this.onPress(e)}
-        onMapReady={() => this.setState({ width:screen.width*0.99 })}
+        onMapReady={() => this.setState({ width:screen.width})}
         onDoublePress={e => this.onDoublePress(e)}
         onLongPress={e => this.onDoublePress(e)}
         onMarkerPress={e => this.onDoublePress(e)}
@@ -687,9 +710,12 @@ class NativeMapView extends Component {
     const {fullScreen, onPress} = this.props;
     if (!fullScreen) {
       return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableWithoutFeedback
+          onPress={onPress}
+        >
           {render}
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
+
       )
     } else {
       return render
@@ -710,17 +736,22 @@ class NativeMapView extends Component {
         })
       },
       editable: true,
+      onPress: () => {
+        console.log('clicked')
+      }
+
     } : {
-      editable: false,
+      editable: true,
       onFocus: onPress,
-      onPress: onPress
+      pointerEvents: 'none',
     };
+    console.log('googleMapApiKey', googleMapApiKey)
     // inputProps.style = styles.inputStyle
     // const isSingleTree = this.props.mode === 'single-tree';
     return (
-      <View style={fullScreen ? styles.fullScreenContainer : styles.container}>
+      this.renderComp(<View style={fullScreen ? styles.fullScreenContainer : styles.container}>
         {
-          this.renderComp(this.renderPolygon())
+          this.renderPolygon()
         }
         {
           fullScreen && this.isSingleTree &&
@@ -729,87 +760,94 @@ class NativeMapView extends Component {
           </View>
         }
         {
-          this.renderComp(
-            (
-              <View style={fullScreen ? styles.inputContainerFullScreen : styles.inputContainer}>
-                <GooglePlacesAutocomplete
-                  listViewDisplayed={this.state.shouldDisplayListView}
-                  keyboardShouldPersistTaps={'always'}
-                  placeholder={i18n.t('label.map_search_placeholder')}
-                  minLength={2}
-                  autoFocus={false}
-                  fetchDetails={true}
-                  placeholderTextColor={'#4d5153'}
-                  // listViewDisplayed="auto"
-                  returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-                  keyboardAppearance={'light'}
-                  styles={{
-                    textInputContainer: {
-                      borderTopWidth: 0,
-                      borderBottomWidth: 0,
-                      width: '100%',
-                      borderRadius: 30,
-                      backgroundColor: 'transparent',
-                    },
-                    textInput: {
-                      backgroundColor: 'transparent',
-
-                      marginLeft: 0,
-                      marginTop: 0,
-                      marginBottom: 0,
-                      marginRight: 5,
-                      height: 44,
-                      fontSize: 14,
-                      borderRadius: 30,
-                      color: '#4d5153',
-                    },
-                    predefinedPlacesDescription: {
-                      color: '#1faadb'
-                    },
-                    container: {
-                      height:44,
-                      borderColor: '#aaaaaa',
-                      justifyContent:'center'
-                    },
-                    poweredContainer: {
-                      display: 'none'
-                    }
-                  }}
-                  debounce={200}
-                  nearbyPlacesAPI="GooglePlacesSearch"
-                  query={{
-                    // available options: https://developers.google.com/places/web-service/autocomplete
-                    key: googleMapApiKey,
-                    language: 'en' // language of the results
-                  }}
-                  currentLocation={false}
-                  renderLeftButton={() => (
-                    <Image
-                      source={iosSearchGrey}
-                      style={{
-                        width: 19,
-                        height: 19,
-                        marginLeft: 16,
-                        marginTop: 14,
-                        resizeMode: 'cover',
-                        color:'#4d5153'
-                      }}
-                    />
-                  )}
-                  onPress={(data, details = null) => {
-                    // 'details' is provided when fetchDetails = true
-                    this.gotoCurrentLocation({
-                      latitude: details.geometry.location.lat,
-                      longitude: details.geometry.location.lng,
-                      latitudeDelta: LATITUDE_DELTA,
-                      longitudeDelta: LONGITUDE_DELTA
-                    });
-                  }}
-                  textInputProps={inputProps}
-                />
-              </View>
-            )
-          )
+          this.renderComp(<TouchableWithoutFeedback
+            onPress={e => {
+              this.onPress(e)
+            }
+            }
+          >
+            <View style={fullScreen ? styles.inputContainerFullScreen : styles.inputContainer}>
+              <GooglePlacesAutocomplete
+                listViewDisplayed={this.state.shouldDisplayListView}
+                keyboardShouldPersistTaps={'always'}
+                placeholder={i18n.t('label.map_search_placeholder')}
+                minLength={2}
+                autoFocus={false}
+                fetchDetails={true}
+                placeholderTextColor={'#4d5153'}
+                // listViewDisplayed="auto"
+                returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
+                keyboardAppearance={'light'}
+                styles={{
+                  textInputContainer: {
+                    borderTopWidth: 0,
+                    borderBottomWidth: 0,
+                    width: '100%',
+                    borderRadius: 30,
+                    backgroundColor: 'transparent',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  },
+                  textInput: {
+                    backgroundColor: 'transparent',
+                    marginLeft: 0,
+                    marginTop: 0,
+                    marginBottom: 0,
+                    marginRight: 5,
+                    height: 44,
+                    fontSize: 14,
+                    borderRadius: 30,
+                    color: '#4d5153',
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                  },
+                  predefinedPlacesDescription: {
+                    color: '#1faadb'
+                  },
+                  container: {
+                    borderColor: '#aaaaaa',
+                    justifyContent: 'center'
+                  },
+                  poweredContainer: {
+                    display: 'none'
+                  }
+                }}
+                debounce={200}
+                nearbyPlacesAPI="GooglePlacesSearch"
+                query={{
+                  // available options: https://developers.google.com/places/web-service/autocomplete
+                  key: googleMapApiKey,
+                  language: 'en' // language of the results
+                }}
+                currentLocation={false}
+                renderLeftButton={() => (
+                  <Image
+                    source={iosSearchGrey}
+                    style={{
+                      width: 19,
+                      height: 19,
+                      marginLeft: 16,
+                      resizeMode: 'cover',
+                      color: '#4d5153'
+                    }}
+                  />
+                )}
+                onPress={(data, details = null) => {
+                  // 'details' is provided when fetchDetails = true
+                  this.gotoCurrentLocation({
+                    latitude: details.geometry.location.lat,
+                    longitude: details.geometry.location.lng,
+                    latitudeDelta: LATITUDE_DELTA,
+                    longitudeDelta: LONGITUDE_DELTA
+                  });
+                }}
+                textInputProps={inputProps}
+              />
+            </View>
+          </TouchableWithoutFeedback>)
         }
 
         {
@@ -825,7 +863,7 @@ class NativeMapView extends Component {
           fullScreen &&
           <RoundedButton
             buttonStyle={fullScreen ? styles.btnLocationFullScreen : styles.btnLocation}
-            textStyle={{marginRight:0}}
+            textStyle={{marginRight: 0}}
             onClick={this.goto}
           >
             <Icon name="my-location" size={fullScreen ? 24 : 18} color="#000000"/>
@@ -854,7 +892,7 @@ class NativeMapView extends Component {
             </Text>
           </View>
         </TouchableOpacity>}
-      </View>
+      </View>)
     );
   }
 }

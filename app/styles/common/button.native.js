@@ -12,7 +12,7 @@ const Layout = {
 export default EStyleSheet.create({
   buttonContainer: {
     marginTop: 0,
-    marginBottom: 100,
+    marginBottom: 150,
   },
   primaryButton: {
     height: 50,

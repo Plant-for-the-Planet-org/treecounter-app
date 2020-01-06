@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {FormikFormTree} from './formComponents.native';
 import MapboxMap from '../Map/NativeMapView.native';
+import isEqual from 'lodash/isEqual';
+
 import i18n from '../../locales/i18n';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
@@ -53,7 +55,7 @@ export default class RegisterTreeTab extends PureComponent {
 
   openModel = (formProps) => {
     console.log('model open');
-    if(this.formProps !== formProps) {
+    if(!isEqual(this.formProps , formProps)) {
       this.formProps = formProps;
       this.renderFullscreenMap = (
         <MapboxMap
@@ -65,24 +67,25 @@ export default class RegisterTreeTab extends PureComponent {
           onContinue={(geoLocation, geometry) => {
             this.onModelClosed(geoLocation, geometry);
           }}/>
-      )
-      this.setState({
-        isOpen: true
-      })
+      );
+
     }
+    this.setState({
+      isOpen: true
+    })
   };
 
   onModelClosed = (geoLocation, geometry) => {
-    if (this.formProps) {
-      this.formProps.setFieldValue('geoLocation', geoLocation)
-      this.formProps.setFieldValue('geometry', geometry)
-    }
     this.setState({
       geoLocation: geoLocation,
       geometry: geometry,
       isOpen: false
-    });
-
+    },()=>{;
+    if (this.formProps) {
+      this.formProps.setFieldValue('geoLocation', geoLocation)
+      this.formProps.setFieldValue('geometry', geometry)
+    }
+    })
   };
   onClosed = () => {
     this.setState({

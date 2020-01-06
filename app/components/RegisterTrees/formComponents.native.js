@@ -16,6 +16,7 @@ import ImagePicker from 'react-native-image-picker';
 import buttonStyles from '../../styles/common/button.native';
 import {Dropdown} from 'react-native-material-dropdown';
 import NativeMapView from '../Map/NativeMapView.native';
+import CardLayout from '../Common/Card';
 
 
 export const FormikFormTree = props => {
@@ -56,6 +57,7 @@ export const FormikFormTree = props => {
           <View>
             <View style={styles.formScrollView}
             >
+              <CardLayout>
               <View style={styles.formView}>
                 <View>
                   <View style={!isMultipleTree ? styles.formHalfTextField : ''}>
@@ -135,6 +137,7 @@ export const FormikFormTree = props => {
                   {parentProps.mode === 'multiple-trees' ? (i18n.t('label.many_tree_planting_location_description')) : (i18n.t('label.single_tree_planting_location_description'))}
                 </Text>
               </View>
+              </CardLayout>
               <View>
                 <View style={
                   (parentProps.mode === 'single-tree' && props.touched.geoLocation && props.errors.geoLocation) ||
@@ -155,6 +158,7 @@ export const FormikFormTree = props => {
                   <Text style={styles.errorText}>{props.errors.geometry}</Text>}
                 </View>
               </View>
+              <CardLayout>
               <View style={styles.formAddImageBlock}>
                 <AddImage
                   image={props.values.imageFile}
@@ -250,6 +254,7 @@ export const FormikFormTree = props => {
                   />
                 ) : <View/>
               ) : <View/>}
+              </CardLayout>
             </View>
             <View style={buttonStyles.buttonContainer}>
               <TouchableOpacity

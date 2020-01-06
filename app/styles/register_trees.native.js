@@ -8,6 +8,50 @@ const Layout = {
   }
 };
 export default EStyleSheet.create({
+  tabBarcontainer: {
+    flex: 1
+  },
+  tabBar: {
+    backgroundColor: '#ffffff',
+    marginTop: 10,
+  },
+  tabBarTabItem: {},
+  tabBarTextActive: {
+    backgroundColor: '#89b53a',
+    height: 3,
+    width: 75,
+
+    flex:1,
+    borderTopLeftRadius: 3,
+    justifyContent:'flex-end',
+    alignSelf:'flex-end',
+    borderTopRightRadius: 3
+  },
+  tabBarTextStyle: {
+    color: '#4d5153',
+    fontSize: 13,
+    fontFamily: 'OpenSans-SemiBold',
+    textTransform: 'capitalize',
+
+  },
+  mapEdgecut:{
+  },
+  textStyle:{
+    fontFamily: 'OpenSans-Semibold',
+    color:'#4d5153',
+    fontSize:18,
+    lineHeight:24,
+  },
+  ufpTrees: {
+    lineHeight: 40,
+    letterSpacing: 0,
+    fontSize:27,
+    textAlign: 'left',
+    marginBottom: 7,
+    fontFamily: 'OpenSans-ExtraBold',
+    color:'#4d5153',
+  },
+
   formPlantingLocation: {
     fontSize: 20,
     lineHeight: 20,
@@ -62,7 +106,7 @@ export default EStyleSheet.create({
     flex: 1
   },
   formView: {marginTop: 0,},
-  addImageTitle: {marginTop: 40, fontSize: 14, color: '#4d5153', fontFamily: 'OpenSans-SemiBold'},
+  addImageTitle: {marginTop: 40, fontSize: 12, color: '#4d5153', fontFamily: 'OpenSans-SemiBold'},
 
   addImageButtonContainer: {
     display: 'flex',

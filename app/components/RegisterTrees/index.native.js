@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
 import React, {Component} from 'react';
-import {Text, KeyboardAvoidingView} from 'react-native';
+import {Text, KeyboardAvoidingView, PixelRatio} from 'react-native';
 import PropTypes from 'prop-types';
 import {TabBar, TabView} from 'react-native-tab-view';
 import CardLayout from '../Common/Card';
@@ -9,8 +9,9 @@ import i18n from '../../locales/i18n.js';
 // import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
 import {getPlantProjectEnum, isTpo} from '../../helpers/utils';
-import tabBarStyles from '../../styles/common/tabbar.native';
-import styles from '../../styles/trillion.native';
+import styles from '../../styles/register_trees.native';
+import { Dimensions } from 'react-native';
+
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const routes = [
@@ -46,6 +47,7 @@ export default class RegisterTrees extends Component {
   }
 
   _renderTabBar = props => {
+    console.log('Dimensions.get(\'window\').width',Dimensions.get('window').width)
     return (
 
       <TabBar
@@ -63,7 +65,7 @@ export default class RegisterTrees extends Component {
 
         contentContainerStyle={{justifyContent: 'center'}}
         indicatorStyle={styles.tabBarTextActive}
-        indicatorContainerStyle={{left: 103}}
+        indicatorContainerStyle={{left:Dimensions.get('window').width <= 400? PixelRatio.roundToNearestPixel(Dimensions.get('window').width * 0.28):PixelRatio.roundToNearestPixel(Dimensions.get('window').width * 0.3) }}
         tabStyle={{width: 'auto', alignItems: 'flex-end'}}
         useNativeDriver
       />
@@ -76,7 +78,6 @@ export default class RegisterTrees extends Component {
       this.props.currentUserProfile,
       this.props.plantProjects
     );
-
     return (
       <RegisterTreeTab
         onRegister={(mode, value, plantProject) => {
@@ -102,7 +103,9 @@ export default class RegisterTrees extends Component {
           <Text style={styles.textStyle}>
             {i18n.t('label.register_trees_description')}
           </Text>
-          <TabView
+        </CardLayout>
+
+        <TabView
             useNativeDriver
             ref="registerTreeForm"
             navigationState={this.state}
@@ -111,7 +114,6 @@ export default class RegisterTrees extends Component {
             onIndexChange={this._handleIndexChange}
           />
 
-        </CardLayout>
       </KeyboardAwareScrollView>
     );
   }

@@ -9,15 +9,14 @@ export default EStyleSheet.create({
     marginVertical: 10
   },
   headerText: {
-    fontFamily: 'OpenSans-Regular',
+    fontFamily: 'OpenSans-Bold',
     fontSize: 27,
-    fontWeight: 'bold',
     color: '#4d5153'
   },
   subHeaderText: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 18,
-    fontWeight: '600',
+    lineHeight: 24,
     color: '#4d5153'
   },
   timeLineContainer: {
@@ -30,9 +29,9 @@ export default EStyleSheet.create({
   activeChipContainer: {
     backgroundColor: '#87b738',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 60,
     paddingVertical: 5,
-    paddingHorizontal: 10,
+    paddingHorizontal: 19,
     marginHorizontal: 10
   },
   activeChipText: {
@@ -42,9 +41,9 @@ export default EStyleSheet.create({
   chipContainer: {
     backgroundColor: '#fff',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 60,
     paddingVertical: 5,
-    paddingHorizontal: 10,
+    paddingHorizontal: 19,
     marginHorizontal: 10,
     borderColor: '#4d5153',
     borderWidth: 1
@@ -60,7 +59,8 @@ export default EStyleSheet.create({
   oneContryContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 15
+    // marginVertical: 15,
+    height: 86
   },
   indexContainer: {
     flex: 0.1,
@@ -68,7 +68,7 @@ export default EStyleSheet.create({
     justifyContent: 'center'
   },
   indexText: {
-    fontFamily: 'OpenSans-Regular',
+    fontFamily: 'OpenSans-Bold',
     fontSize: 16
   },
   countryFlagContainer: {
@@ -84,13 +84,15 @@ export default EStyleSheet.create({
   countryNameText: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 18,
-    color: '#4d5153'
+    color: '#4d5153',
+    lineHeight: 24
   },
   tressCounter: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 13,
     color: '#4d5153',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    lineHeight: 25
   },
   tressText: {
     fontWeight: 'normal'

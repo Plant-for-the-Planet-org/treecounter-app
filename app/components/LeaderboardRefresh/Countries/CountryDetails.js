@@ -72,10 +72,11 @@ const CountryDetails = ({ navigation }) => {
                 </View>
                 <View style={styles.countryFlagContainer}>
                   <Image
+                    resizeMode={'contain'}
                     style={styles.countryFlagImage}
                     source={{
                       uri:
-                        'https://cdn4.iconfinder.com/data/icons/material-circular-world-flags/180/circle_china_flag_nation_country-512.png'
+                        'https://cdn5.vectorstock.com/i/1000x1000/23/49/new-man-avatar-icon-flat-vector-19152349.jpg'
                     }}
                   />
                 </View>

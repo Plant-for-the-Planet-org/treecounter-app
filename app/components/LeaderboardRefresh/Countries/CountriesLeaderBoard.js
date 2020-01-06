@@ -63,6 +63,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
                 </View>
                 <View style={styles.countryFlagContainer}>
                   <Image
+                    resizeMode={'contain'}
                     style={styles.countryFlagImage}
                     source={{
                       uri:
@@ -73,7 +74,9 @@ const CountriesLeaderBoard = ({ navigation }) => {
                 <View style={styles.countryBody}>
                   <Text style={styles.countryNameText}>{item.caption}</Text>
                   <Text style={styles.tressCounter}>
-                    {item.planted}{' '}
+                    {item.planted
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
                     <Text style={styles.tressText}>{' trees'}</Text>
                   </Text>
                 </View>

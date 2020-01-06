@@ -2133,6 +2133,39 @@
       ],
       "schemes": []
     },
+    "public_ipstack": {
+      "tokens": [
+        [
+          "text",
+          "/ipstack"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults": {
+        "_locale": []
+      },
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "public_userNotification": {
       "tokens": [
         [

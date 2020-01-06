@@ -3,13 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Accordion from 'react-native-collapsible/Accordion';
 import HTMLView from 'react-native-htmlview';
-import {
-  foldin,
-  foldout,
-  readmoreDown,
-  readmoreUp,
-  FAQsCover
-} from '../../assets';
+import { readmoreDown, readmoreUp, FAQsCover } from '../../assets';
 import {
   Text,
   View,
@@ -21,7 +15,6 @@ import {
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
-import TabContainer from '../../containers/Menu/TabContainer';
 import HeaderNew from './../Header/HeaderNew.native';
 
 import i18n from '../../locales/i18n.js';

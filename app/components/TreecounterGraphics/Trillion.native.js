@@ -17,7 +17,6 @@ import { pledgeEventSelector, entitiesSelector } from '../../selectors';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute } from '../../helpers/routerHelper';
@@ -53,6 +52,7 @@ class Trillion extends PureComponent {
       svgData: null,
       displayName: '',
       loading: true,
+      contentLoader: false,
       loadSvg: true,
       routes: [
         { key: 'world', title: i18n.t('label.world') },
@@ -63,6 +63,7 @@ class Trillion extends PureComponent {
   }
 
   componentDidMount() {
+    this.setState({ contentLoader: true });
     trillionCampaign()
       .then(({ data }) => {
         const svgData = {
@@ -76,7 +77,8 @@ class Trillion extends PureComponent {
         this.setState({
           svgData,
           displayName: svgData.displayName,
-          loading: false
+          loading: false,
+          contentLoader: false
         });
         saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
@@ -155,12 +157,12 @@ class Trillion extends PureComponent {
   _renderScreen = ({ route }) => {
     const { navigation /* , userProfile, isLoggedIn */ } = this.props;
     const backgroundColor = 'white';
-
+    const { contentLoader } = this.state;
     // console.log(this.props.pledgeEvents);
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (
-          <LoadingIndicator />
+          <LoadingIndicator contentLoader={contentLoader} screen="AppHome" />
         ) : (
           <ScrollView
             contentContainerStyle={{
@@ -170,7 +172,7 @@ class Trillion extends PureComponent {
           >
             <View style={styles.parentContainer}>
               {/* Trillion Tree Events Title */}
-              {this.props.pledgeEvents &&
+              {/* {this.props.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents.length > 0 ? (
                 <View style={{ marginTop: 25, marginLeft: 16 }}>
@@ -178,13 +180,13 @@ class Trillion extends PureComponent {
                     {i18n.t('label.trillionTreesEvents')}
                   </Text>
                 </View>
-              ) : null}
+              ) : null} */}
               {/* Trillion Tree Events Title Ended */}
 
               {/* Featured events horizontal ScrollView */}
               {this.props.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents ? (
-                <View style={{ marginTop: 16 }}>
+                <View style={{ marginTop: 24 }}>
                   <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -244,7 +246,7 @@ class Trillion extends PureComponent {
                                   'app_pledge_events',
                                   navigation,
                                   {
-                                    slug: unfulfilledEvent.eventSlug,
+                                    slug: unfulfilledEvent.slug,
                                     plantProject: { id: -1 },
                                     treeCount: -1
                                   }
@@ -260,23 +262,56 @@ class Trillion extends PureComponent {
                 </View>
               ) : null}
               {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
-
-              {/* Tree Counter SVG */}
-              <View style={svgStyles.svgContainer}>
-                <SvgContainer {...this.state.svgData} trillion />
+              <View style={{ marginTop: 16 }}>
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={{ paddingRight: 20 }}
+                >
+                  {this.props.entities.eventPledge !== null &&
+                  this.props.entities.eventPledge !== undefined
+                    ? Object.values(this.props.entities.eventPledge).map(
+                        unfulfilledEvent =>
+                          unfulfilledEvent.status === 'pending' ? (
+                            <TouchableOpacity
+                              key={unfulfilledEvent.token}
+                              onPress={() => {
+                                updateStaticRoute(
+                                  'app_pledge_events',
+                                  navigation,
+                                  {
+                                    slug: unfulfilledEvent.eventSlug,
+                                    plantProject: { id: -1 },
+                                    treeCount: -1
+                                  }
+                                );
+                              }}
+                            >
+                              <UnfulfilledEvents event={unfulfilledEvent} />
+                            </TouchableOpacity>
+                          ) : null
+                      )
+                    : null}
+                </ScrollView>
               </View>
-              {/* Tree Counter SVG Ended */}
+            </View>
 
-              <CardLayout style={styles.cardContainer}>
-                <Text style={styles.titleText}>
-                  {i18n.t('label.trillionTreeMessage1')}
-                </Text>
-                <Text style={styles.titleText}>
-                  {i18n.t('label.trillionTreeMessage2')}
-                </Text>
-              </CardLayout>
+            {/* Tree Counter SVG */}
+            <View style={svgStyles.svgContainer}>
+              <SvgContainer {...this.state.svgData} trillion />
+            </View>
+            {/* Tree Counter SVG Ended */}
 
-              {/* {userProfile && userProfile.type === 'tpo' ? (
+            <View style={styles.cardContainer}>
+              <Text style={[styles.titleText, { marginBottom: 16 }]}>
+                {i18n.t('label.trillionTreeMessage1')}
+              </Text>
+              <Text style={styles.titleText}>
+                {i18n.t('label.trillionTreeMessage2')}
+              </Text>
+            </View>
+
+            {/* {userProfile && userProfile.type === 'tpo' ? (
                 <CardLayout
                   style={[
                     styles.cardContainer,
@@ -308,39 +343,41 @@ class Trillion extends PureComponent {
                 </CardLayout>
               ) : null} */}
 
-              <CardLayout
-                style={[
-                  styles.cardContainer,
-                  {
-                    padding: 16
-                  }
-                ]}
-              >
-                <Text style={[styles.googleCardTitle, { textAlign: 'left' }]}>
-                  {i18n.t('label.searchProjectTitle')}
+            <View
+              style={[
+                styles.cardContainer,
+                {
+                  padding: 16,
+                  marginLeft: 8,
+                  marginRight: 8,
+                  marginTop: 20
+                }
+              ]}
+            >
+              <Text style={[styles.googleCardTitle, { textAlign: 'left' }]}>
+                {i18n.t('label.searchProjectTitle')}
+              </Text>
+              <View style={styles.googleCardParaContainer}>
+                <Text style={styles.googleCardPara}>
+                  {i18n.t('label.searchProjectPara')}
                 </Text>
-                <View style={styles.googleCardParaContainer}>
-                  <Text style={styles.googleCardPara}>
-                    {i18n.t('label.searchProjectPara')}
-                  </Text>
-                  <Image
-                    source={trees}
-                    style={{ width: 72, height: 56, flex: 1 }}
-                    resizeMode="cover"
-                  />
-                </View>
-                <View style={styles.horizontalLine} />
-                <TouchableOpacity
-                  style={{ width: '100%' }}
-                  onPress={() =>
-                    navigation.navigate(getLocalRoute('app_donateTrees'))
-                  }
-                >
-                  <Text style={styles.googleCardButton}>
-                    {i18n.t('label.searchProjectButton')}
-                  </Text>
-                </TouchableOpacity>
-              </CardLayout>
+                <Image
+                  source={trees}
+                  style={{ width: 72, height: 56, flex: 1 }}
+                  resizeMode="cover"
+                />
+              </View>
+              <View style={styles.horizontalLine} />
+              <TouchableOpacity
+                style={{ width: '100%' }}
+                onPress={() =>
+                  navigation.navigate(getLocalRoute('app_donateTrees'))
+                }
+              >
+                <Text style={styles.googleCardButton}>
+                  {i18n.t('label.searchProjectButton')}
+                </Text>
+              </TouchableOpacity>
             </View>
           </ScrollView>
         );

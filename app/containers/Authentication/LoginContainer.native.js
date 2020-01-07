@@ -75,6 +75,7 @@ class LoginContainer extends React.Component {
         }
         formValue={this.state.formValue}
         schemaOptions={this.state.schemaOptions}
+        navigation={this.props.navigation}
       />
     );
   }

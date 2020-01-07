@@ -194,10 +194,10 @@ const PublicTreeCounterContentLoader = () => (
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
-    <Circle cx="50" cy="60" r="30" />
-    <Rect x="100" y="40" rx="4" ry="4" width="220" height="13" />
-    <Rect x="100" y="70" rx="4" ry="4" width="100" height="13" />
-    <Circle cx="160" cy="270" r="106" />
+    <Circle cx="15%" cy="60" r="30" />
+    <Rect x="30%" y="40" rx="4" ry="4" width="60%" height="13" />
+    <Rect x="30%" y="70" rx="4" ry="4" width="30%" height="13" />
+    <Circle cx="50%" cy="50%" r="106" />
   </ContentLoader>
 );
 const PledgeEventsContentLoader = () => (

@@ -12,8 +12,7 @@ const ListProjects = ({
   selectProject,
   onMoreClick,
   placeholderTextColor,
-  loadProjects,
-  loadProject
+  loadProjects
 }) => {
   const [search, setSearch] = useState('');
   useEffect(() => {

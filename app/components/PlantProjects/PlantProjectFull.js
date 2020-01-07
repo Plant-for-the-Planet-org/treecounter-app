@@ -77,7 +77,6 @@ class PlantProjectFull extends React.Component {
       currency,
       treeCost,
       taxDeductibleCountries,
-      paymentSetup,
       survivalRate: survivalRate,
       images,
       imageFile,

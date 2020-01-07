@@ -173,7 +173,7 @@ class Trillion extends PureComponent {
           >
             <View style={styles.parentContainer}>
               {/* Trillion Tree Events Title */}
-              {this.props.pledgeEvents &&
+              {/* {this.props.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents.length > 0 ? (
                 <View style={{ marginTop: 25, marginLeft: 16 }}>
@@ -181,13 +181,13 @@ class Trillion extends PureComponent {
                     {i18n.t('label.trillionTreesEvents')}
                   </Text>
                 </View>
-              ) : null}
+              ) : null} */}
               {/* Trillion Tree Events Title Ended */}
 
               {/* Featured events horizontal ScrollView */}
               {this.props.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents ? (
-                <View style={{ marginTop: 16 }}>
+                <View style={{ marginTop: 24 }}>
                   <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -303,14 +303,14 @@ class Trillion extends PureComponent {
             </View>
             {/* Tree Counter SVG Ended */}
 
-            <CardLayout style={styles.cardContainer}>
-              <Text style={styles.titleText}>
+            <View style={styles.cardContainer}>
+              <Text style={[styles.titleText, { marginBottom: 16 }]}>
                 {i18n.t('label.trillionTreeMessage1')}
               </Text>
               <Text style={styles.titleText}>
                 {i18n.t('label.trillionTreeMessage2')}
               </Text>
-            </CardLayout>
+            </View>
 
             {/* {userProfile && userProfile.type === 'tpo' ? (
                 <CardLayout
@@ -344,11 +344,14 @@ class Trillion extends PureComponent {
                 </CardLayout>
               ) : null} */}
 
-            <CardLayout
+            <View
               style={[
                 styles.cardContainer,
                 {
-                  padding: 16
+                  padding: 16,
+                  marginLeft: 8,
+                  marginRight: 8,
+                  marginTop: 20
                 }
               ]}
             >
@@ -376,7 +379,7 @@ class Trillion extends PureComponent {
                   {i18n.t('label.searchProjectButton')}
                 </Text>
               </TouchableOpacity>
-            </CardLayout>
+            </View>
           </ScrollView>
         );
       }

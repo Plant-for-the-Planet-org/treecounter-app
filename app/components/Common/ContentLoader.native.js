@@ -51,20 +51,20 @@ const LeaderBoardLoader = () => (
 );
 const WorldLoader = () => (
   <ContentLoader
-    height={550}
-    width={500}
+    height={HEIGHT}
+    width={WIDTH}
     speed={3}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
-    <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="215" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="240" rx="10" ry="10" width="250" height="20" />
-    <Rect x="100" y="270" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="460" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="490" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="520" rx="10" ry="10" width="250" height="20" />
+    <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
+    <Rect x="30" y="190" rx="10" ry="10" width="45%" height="20" />
+    <Rect x="30" y="215" rx="10" ry="10" width="75%" height="20" />
+    <Rect x="30" y="240" rx="10" ry="10" width="70%" height="20" />
+    <Rect x="30" y="270" rx="10" ry="10" width="85%" height="180" />
+    <Rect x="30" y="460" rx="10" ry="10" width="45%" height="20" />
+    <Rect x="30" y="490" rx="10" ry="10" width="70%" height="20" />
+    <Rect x="30" y="520" rx="10" ry="10" width="85%" height="20" />
   </ContentLoader>
 );
 const ProfileLoader = () => (

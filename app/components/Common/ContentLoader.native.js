@@ -27,19 +27,19 @@ const CompetitionLoader = () => (
 );
 const SingleCompetitionLoader = () => (
   <ContentLoader
-    height={550}
-    width={500}
+    height={HEIGHT}
+    width={WIDTH}
     speed={3}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
-    <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="217" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="244" rx="10" ry="10" width="250" height="20" />
-    <Rect x="100" y="274" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="304" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="334" rx="10" ry="10" width="250" height="20" />
+    <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
+    <Rect x="30" y="190" rx="10" ry="10" width="45%" height="20" />
+    <Rect x="30" y="217" rx="10" ry="10" width="85%" height="20" />
+    <Rect x="30" y="244" rx="10" ry="10" width="75%" height="20" />
+    <Rect x="30" y="274" rx="10" ry="10" width="45%" height="20" />
+    <Rect x="30" y="304" rx="10" ry="10" width="85%" height="20" />
+    <Rect x="30" y="334" rx="10" ry="10" width="65%" height="20" />
   </ContentLoader>
 );
 const LeaderBoardLoader = () => (
@@ -200,7 +200,25 @@ const PublicTreeCounterContentLoader = () => (
     <Circle cx="160" cy="270" r="106" />
   </ContentLoader>
 );
-
+const PledgeEventsContentLoader = () => (
+  <ContentLoader
+    height={HEIGHT}
+    width={WIDTH}
+    speed={3}
+    primaryColor="#f3f3f3"
+    secondaryColor="#ecebeb"
+  >
+    <Circle cx="53" cy="43" r="30" />
+    <Rect x="30" y="94" rx="4" ry="4" width="70%" height="13" />
+    <Rect x="30" y="118" rx="4" ry="4" width="40%" height="13" />
+    <Rect x="30" y="142" rx="4" ry="4" width="80%" height="13" />
+    <Rect x="30" y="170" rx="0" ry="0" width="80%" height="41" />
+    <Rect x="30" y="227" rx="0" ry="0" width="80%" height="41" />
+    <Rect x="30" y="284" rx="4" ry="4" width="60%" height="13" />
+    <Rect x="30" y="307" rx="4" ry="4" width="80%" height="11" />
+    <Rect x="30" y="330" rx="4" ry="4" width="35%" height="13" />
+  </ContentLoader>
+);
 const ContentLoading = props => {
   const { screen } = props;
   return (
@@ -219,6 +237,7 @@ const ContentLoading = props => {
       {screen === 'projectListLoader' && <ProjectListLoader />}
       {screen === 'worldLoader' && <WorldLoader />}
       {screen === 'projectSingleLoader' && <ProjectSingleLoader />}
+      {screen === 'PledgeEvents' && <PledgeEventsContentLoader />}
     </View>
   );
 };

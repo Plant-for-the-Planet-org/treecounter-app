@@ -2,16 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
+import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View, Text } from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
 import { ScrollView } from 'react-native';
 import { right_arrow_button } from '../../assets';
-import PlantProjectSnippet from './PlantProjectSnippet.native';
+import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
+import { connect } from 'react-redux';
+import LoadingIndicator from '../Common/LoadingIndicator.native';
+import { bindActionCreators } from 'redux';
 // import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -19,8 +23,33 @@ import { formatNumber } from '../../utils/utils';
 class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
+    const plantProject = { ...props.plantProject };
+    this.state = { plantProject };
+  }
+  async componentWillMount() {
+    try {
+      console.log(
+        'getting project details: we already have:',
+        this.state.plantProject,
+        this.props.plantProject
+      );
+      //if (!this.state.plantProject || !this.state.plantProject.tpoData) {
+      // we dont have the details in store, fetch it
+      const plantProject = await fetchPlantProjectDetail(
+        this.props.plantProject.id
+      );
+      console.log('fetched details plantproject', plantProject);
+      this.setState({ plantProject });
+      // }
+    } catch (error) {
+      console.log(error);
+    }
   }
   render() {
+    let { plantProject } = this.state;
+
+    if (!plantProject) return <LoadingIndicator />;
+    console.log('rendering with tpo', plantProject.tpoData);
     const {
       images,
       description,
@@ -33,8 +62,8 @@ class PlantProjectFull extends React.Component {
       linkText,
       tpoName,
       ndviUid
-    } = this.props.plantProject;
-
+    } = plantProject;
+    let tpo = plantProject.tpoData || {};
     const detailsProps = {
       description,
       images,
@@ -45,13 +74,15 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       url,
       linkText,
-      ndviUid
+      ndviUid,
+      tpo
     };
+
     const navigation = this.props.navigation;
     const backgroundColor = 'white';
 
     return (
-      <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
             scrollStyle.styleContainer,
@@ -60,11 +91,11 @@ class PlantProjectFull extends React.Component {
             }
           ]}
         >
-          <PlantProjectSnippet
-            key={'projectFull' + this.props.plantProject.id}
+          <PlantProjectSnippetDetails
+            key={'projectFull' + plantProject.id}
             showMoreButton={false}
             clickable={false}
-            plantProject={this.props.plantProject}
+            plantProject={plantProject}
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
             tpoName={tpoName}
             selectProject={this.props.selectProject}
@@ -80,15 +111,15 @@ class PlantProjectFull extends React.Component {
             />
           </View>
         </ScrollView>
-        {this.props.plantProject.allowDonations ? (
+        {plantProject.allowDonations ? (
           <View style={styles.bottomActionArea}>
             <View style={styles.centeredContentContainer}>
               <View>
                 <Text style={[styles.cost]}>
                   {formatNumber(
-                    this.props.plantProject.treeCost,
+                    plantProject.treeCost,
                     null,
-                    this.props.plantProject.currency
+                    plantProject.currency
                   )}
                 </Text>
               </View>
@@ -99,31 +130,20 @@ class PlantProjectFull extends React.Component {
             </View>
             <FullHeightButton
               buttonStyle={styles.squareButton}
-              onClick={() =>
-                this.props.selectProject(this.props.plantProject.id)
-              }
-              textStyle={styles.buttonText}
+              onClick={() => this.props.selectProject(plantProject.id)}
               image={right_arrow_button}
             >
               {i18n.t('label.donate')}
             </FullHeightButton>
           </View>
         ) : null}
-        <View style={[styles.bottomActionArea, { height: 14 }]}>
-          <View style={styles.centeredContentContainer} />
-          <FullHeightButton
-            buttonStyle={styles.bottomButtonExtension}
-            onClick={() => this.props.selectProject(this.props.plantProject.id)}
-          />
-        </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
 
 PlantProjectFull.propTypes = {
   plantProject: PropTypes.object.isRequired,
-  tpoName: PropTypes.string,
   projectClear: PropTypes.func,
   showNextButton: PropTypes.bool,
   onNextClick: PropTypes.func,
@@ -131,4 +151,12 @@ PlantProjectFull.propTypes = {
   onBackClick: PropTypes.func
 };
 
-export default PlantProjectFull;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      fetchPlantProjectDetail
+    },
+    dispatch
+  );
+};
+export default connect(null, mapDispatchToProps)(PlantProjectFull);

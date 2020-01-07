@@ -35,19 +35,6 @@ const ListProjects = ({
     <View key={'listViewProject'} style={styles.flexContainer}>
       <View style={styles.searchItem}>
         <View style={[styles.searchContainer]}>
-          <TextInput
-            clearButtonMode="while-editing"
-            underlineColorAndroid={'transparent'}
-            onChangeText={setSearch}
-            value={search}
-            autoCorrect={false}
-            returnKeyType="search"
-            placeholder={i18n.t('label.searchshort')}
-            placeholderTextColor={placeholderTextColor || '#ccc'}
-            style={[styles.searchInput, { paddingVertical: 0 }]}
-            autoCapitalize={'sentences'}
-          />
-
           <View style={styles.searchIconContainer}>
             <Image
               source={iosSearchGrey}
@@ -55,6 +42,18 @@ const ListProjects = ({
               style={styles.searchIcon}
             />
           </View>
+          <TextInput
+            clearButtonMode="while-editing"
+            underlineColorAndroid={'transparent'}
+            onChangeText={setSearch}
+            value={search}
+            autoCorrect={false}
+            returnKeyType="search"
+            placeholder={i18n.t('label.search_project')}
+            placeholderTextColor={placeholderTextColor || '#ccc'}
+            style={[styles.searchInput, { paddingVertical: 0 }]}
+            autoCapitalize={'sentences'}
+          />
         </View>
       </View>
 

@@ -138,7 +138,7 @@ class PledgeEvents extends Component {
 
     let slug = this.state.slug;
     return this.state.loading ? (
-      <LoadingIndicator />
+      <LoadingIndicator contentLoader screen={'PledgeEvents'} />
     ) : (
       <SafeAreaView style={styles.peRootView}>
         <View>

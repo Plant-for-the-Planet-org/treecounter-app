@@ -31,13 +31,20 @@ const SingleCompetitionLoader = () => (
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
-    <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
-    <Rect x="30" y="190" rx="10" ry="10" width="45%" height="20" />
-    <Rect x="30" y="217" rx="10" ry="10" width="85%" height="20" />
-    <Rect x="30" y="244" rx="10" ry="10" width="75%" height="20" />
-    <Rect x="30" y="274" rx="10" ry="10" width="45%" height="20" />
-    <Rect x="30" y="304" rx="10" ry="10" width="85%" height="20" />
-    <Rect x="30" y="334" rx="10" ry="10" width="65%" height="20" />
+    <Rect x="30" y="14" rx="10" ry="10" width="85%" height="150" />
+    <Rect x="30" y="173" rx="10" ry="10" width="85%" height="20" />
+    <Rect x="30" y="240" rx="5" ry="5" width="85%" height="10" />
+    <Rect x="30" y="260" rx="5" ry="5" width="85%" height="10" />
+    <Rect x="30" y="280" rx="5" ry="5" width="75%" height="10" />
+    <Rect x="30" y="312" rx="5" ry="5" width="25%" height="30" />
+    <Circle cx="53" cy="380" r="16" />
+    <Rect x="80" y="375" rx="5" ry="5" width="70%" height="10" />
+    <Circle cx="53" cy="420" r="16" />
+    <Rect x="80" y="415" rx="5" ry="5" width="70%" height="10" />
+    <Circle cx="55" cy="460" r="16" />
+    <Rect x="80" y="455" rx="5" ry="5" width="70%" height="10" />
+    <Circle cx="55" cy="500" r="16" />
+    <Rect x="80" y="495" rx="5" ry="5" width="70%" height="10" />
   </ContentLoader>
 );
 const LeaderBoardLoader = () => (
@@ -255,4 +262,4 @@ const loadingIndicatorStyle = {
 }
 export default ContentLoading;
 
-export { PublicTreeCounterContentLoader };
+export { PublicTreeCounterContentLoader, SingleCompetitionLoader };

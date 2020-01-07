@@ -17,7 +17,6 @@ import { pledgeEventSelector, entitiesSelector } from '../../selectors';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute } from '../../helpers/routerHelper';

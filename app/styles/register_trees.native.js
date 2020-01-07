@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
 const Layout = {
   window: {
@@ -13,7 +13,7 @@ export default EStyleSheet.create({
   },
   tabBar: {
     backgroundColor: '#ffffff',
-    marginTop: 10,
+    marginTop: 10
   },
   tabBarTabItem: {},
   tabBarTextActive: {
@@ -21,42 +21,40 @@ export default EStyleSheet.create({
     height: 3,
     width: 75,
 
-    flex:1,
+    flex: 1,
     borderTopLeftRadius: 3,
-    justifyContent:'flex-end',
-    alignSelf:'flex-end',
+    justifyContent: 'flex-end',
+    alignSelf: 'flex-end',
     borderTopRightRadius: 3
   },
   tabBarTextStyle: {
     color: '#4d5153',
     fontSize: 13,
     fontFamily: 'OpenSans-SemiBold',
-    textTransform: 'capitalize',
-
+    textTransform: 'capitalize'
   },
-  mapEdgecut:{
-  },
-  textStyle:{
+  mapEdgecut: {},
+  textStyle: {
     fontFamily: 'OpenSans-Semibold',
-    color:'#4d5153',
-    fontSize:18,
-    lineHeight:24,
+    color: '#4d5153',
+    fontSize: 18,
+    lineHeight: 24
   },
   ufpTrees: {
     lineHeight: 40,
     letterSpacing: 0,
-    fontSize:27,
+    fontSize: 27,
     textAlign: 'left',
     marginBottom: 7,
     fontFamily: 'OpenSans-ExtraBold',
-    color:'#4d5153',
+    color: '#4d5153'
   },
 
   formPlantingLocation: {
     fontSize: 20,
     lineHeight: 20,
     letterSpacing: 0,
-    paddingTop:40,
+    marginTop: 40,
     textAlign: 'left',
     color: '#4d5153',
     fontFamily: 'OpenSans-Semibold'
@@ -72,28 +70,24 @@ export default EStyleSheet.create({
   errorView: {
     backgroundColor: 'red',
     padding: 1,
-    color: 'red',
+    color: 'red'
   },
   errorText: {
-
     padding: 2,
-    color: 'red',
+    color: 'red'
   },
   formScrollView: {
     backgroundColor: 'white',
     padding: 0,
-    paddingBottom: 40,
+    paddingBottom: 40
   },
-  formLabel: {
-
-  },
+  formLabel: {},
   formHalfTextField: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10
+    alignItems: 'center'
   },
-  formNameFields: {flex: 1, marginRight: 20},
+  formNameFields: { flex: 1, marginRight: 20 },
   showImage: {
     display: 'flex',
     flexDirection: 'row',
@@ -102,11 +96,15 @@ export default EStyleSheet.create({
     alignItems: 'flex-start'
   },
   formClassificationFields: {
-    marginRight: 20,
     flex: 1
   },
-  formView: {marginTop: 0,},
-  addImageTitle: {marginTop: 40, fontSize: 12, color: '#4d5153', fontFamily: 'OpenSans-SemiBold'},
+  formView: { marginTop: 0 },
+  addImageTitle: {
+    marginTop: 20,
+    fontSize: 12,
+    color: '#4d5153',
+    fontFamily: 'OpenSans-SemiBold'
+  },
 
   addImageButtonContainer: {
     display: 'flex',
@@ -161,13 +159,13 @@ export default EStyleSheet.create({
     lineHeight: 27,
     fontWeight: '300'
   },
-  formAddImageBlock: {color: '#4d5153', fontFamily: 'OpenSans-Semibold'},
+  formAddImageBlock: { color: '#4d5153', fontFamily: 'OpenSans-Semibold' },
   classificationBlock: {
     flex: 2,
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
-  addImageButtonIcon: {maxHeight: 20, width: 26},
+  addImageButtonIcon: { maxHeight: 20, width: 26 },
   addedImage: {
     maxWidth: 80,
     height: 80,
@@ -182,15 +180,25 @@ export default EStyleSheet.create({
     opacity: 0.6,
     borderBottomColor: '#4d5153'
   },
-  labelEndDate: {fontSize: 12, marginTop: 3, fontFamily: 'OpenSans-Semibold', color: '#4d5153'},
-  EndDate: {fontFamily: 'OpenSans-Regular', color: '#4d5153', lineHeight: 27,fontSize:18},
+  labelEndDate: {
+    fontSize: 12,
+    marginTop: 3,
+    fontFamily: 'OpenSans-Semibold',
+    color: '#4d5153'
+  },
+  EndDate: {
+    fontFamily: 'OpenSans-Regular',
+    color: '#4d5153',
+    lineHeight: 27,
+    fontSize: 18
+  },
   form_error_text: {
     fontSize: 12,
     color: 'red',
     marginTop: 4,
     fontFamily: 'OpenSans-Regular'
   },
-  view_container: {backgroundColor: 'white', flex: 1},
+  view_container: { backgroundColor: 'white', flex: 1 },
   picker_container: {
     height: 50,
     width: '100%',
@@ -227,6 +235,7 @@ export default EStyleSheet.create({
   textFiledLabel: {
     fontFamily: 'OpenSans-Semibold',
     color: '#4d5153',
+    height: 50
   },
-  textFiledTitle: {fontFamily: 'OpenSans-Regular', color: '#4d5153'}
+  textFiledTitle: { fontFamily: 'OpenSans-Regular', color: '#4d5153' }
 });

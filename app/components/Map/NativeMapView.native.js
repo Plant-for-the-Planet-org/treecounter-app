@@ -1,5 +1,5 @@
-/* eslint-disable react/jsx-boolean-value,react-native/no-color-literals */
-import React, {Component} from 'react';
+/* eslint-disable react/jsx-boolean-value,react-native/no-color-literals,no-underscore-dangle */
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -20,20 +20,20 @@ import MapView, {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
 
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {iosSearchGrey} from '../../assets';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { iosSearchGrey } from '../../assets';
 import RoundedButton from '../Common/Button/RoundButton.native';
-import {PERMISSIONS, request} from 'react-native-permissions';
+import { PERMISSIONS, request } from 'react-native-permissions';
 import Geolocation from '@react-native-community/geolocation';
-import {NotificationManager} from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 import i18n from '../../locales/i18n';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {context} from '../../config';
+import { context } from '../../config';
 import buttonStyles from '../../styles/common/button.native';
-import markerImage from '../../assets/images/tree.png'
+import markerImage from '../../assets/images/tree.png';
 
-const {googleMapApiKey} = context;
-const {width, height} = Dimensions.get('window');
+const { googleMapApiKey } = context;
+const { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = null; //37.78825;
@@ -61,14 +61,14 @@ const styles = EStyleSheet.create({
     position: 'relative'
   },
   map: {
-    height: 200,
+    height: 200
   },
   inputContainerFullScreen: {
     top: -25,
     position: 'absolute',
     width: '94%',
     left: '3%',
-    borderRadius: 30,
+    borderRadius: 25,
     borderWidth: 1,
     borderColor: '#aaaaaa',
     backgroundColor: '#ffff'
@@ -82,7 +82,7 @@ const styles = EStyleSheet.create({
     borderWidth: 1,
     borderColor: '#aaaaaa',
     // borderRadius: '50%',
-    backgroundColor: '#ffff',
+    backgroundColor: '#ffff'
   },
   btnLocation: {
     position: 'absolute',
@@ -130,7 +130,7 @@ const styles = EStyleSheet.create({
   },
   marker: {
     height: 48,
-    width: 48,
+    width: 48
     // top: -20
   },
   actionButtonTouchableFullScreen: {
@@ -140,164 +140,164 @@ const styles = EStyleSheet.create({
 
 const mapStyle = [
   {
-    'elementType': 'geometry',
-    'stylers': [
+    elementType: 'geometry',
+    stylers: [
       {
-        'color': '#f5f5f5'
+        color: '#f5f5f5'
       }
     ]
   },
   {
-    'elementType': 'labels.icon',
-    'stylers': [
+    elementType: 'labels.icon',
+    stylers: [
       {
-        'visibility': 'off'
+        visibility: 'off'
       }
     ]
   },
   {
-    'elementType': 'labels.text.fill',
-    'stylers': [
+    elementType: 'labels.text.fill',
+    stylers: [
       {
-        'color': '#616161'
+        color: '#616161'
       }
     ]
   },
   {
-    'elementType': 'labels.text.stroke',
-    'stylers': [
+    elementType: 'labels.text.stroke',
+    stylers: [
       {
-        'color': '#f5f5f5'
+        color: '#f5f5f5'
       }
     ]
   },
   {
-    'featureType': 'administrative.land_parcel',
-    'elementType': 'labels.text.fill',
-    'stylers': [
+    featureType: 'administrative.land_parcel',
+    elementType: 'labels.text.fill',
+    stylers: [
       {
-        'color': '#bdbdbd'
+        color: '#bdbdbd'
       }
     ]
   },
   {
-    'featureType': 'poi',
-    'elementType': 'geometry',
-    'stylers': [
+    featureType: 'poi',
+    elementType: 'geometry',
+    stylers: [
       {
-        'color': '#eeeeee'
+        color: '#eeeeee'
       }
     ]
   },
   {
-    'featureType': 'poi',
-    'elementType': 'labels.text.fill',
-    'stylers': [
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [
       {
-        'color': '#757575'
+        color: '#757575'
       }
     ]
   },
   {
-    'featureType': 'poi.park',
-    'elementType': 'geometry',
-    'stylers': [
+    featureType: 'poi.park',
+    elementType: 'geometry',
+    stylers: [
       {
-        'color': '#e5e5e5'
+        color: '#e5e5e5'
       }
     ]
   },
   {
-    'featureType': 'poi.park',
-    'elementType': 'labels.text.fill',
-    'stylers': [
+    featureType: 'poi.park',
+    elementType: 'labels.text.fill',
+    stylers: [
       {
-        'color': '#9e9e9e'
+        color: '#9e9e9e'
       }
     ]
   },
   {
-    'featureType': 'road',
-    'elementType': 'geometry',
-    'stylers': [
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [
       {
-        'color': '#ffffff'
+        color: '#ffffff'
       }
     ]
   },
   {
-    'featureType': 'road.arterial',
-    'elementType': 'labels.text.fill',
-    'stylers': [
+    featureType: 'road.arterial',
+    elementType: 'labels.text.fill',
+    stylers: [
       {
-        'color': '#757575'
+        color: '#757575'
       }
     ]
   },
   {
-    'featureType': 'road.highway',
-    'elementType': 'geometry',
-    'stylers': [
+    featureType: 'road.highway',
+    elementType: 'geometry',
+    stylers: [
       {
-        'color': '#dadada'
+        color: '#dadada'
       }
     ]
   },
   {
-    'featureType': 'road.highway',
-    'elementType': 'labels.text.fill',
-    'stylers': [
+    featureType: 'road.highway',
+    elementType: 'labels.text.fill',
+    stylers: [
       {
-        'color': '#616161'
+        color: '#616161'
       }
     ]
   },
   {
-    'featureType': 'road.local',
-    'elementType': 'labels.text.fill',
-    'stylers': [
+    featureType: 'road.local',
+    elementType: 'labels.text.fill',
+    stylers: [
       {
-        'color': '#9e9e9e'
+        color: '#9e9e9e'
       }
     ]
   },
   {
-    'featureType': 'transit.line',
-    'elementType': 'geometry',
-    'stylers': [
+    featureType: 'transit.line',
+    elementType: 'geometry',
+    stylers: [
       {
-        'color': '#e5e5e5'
+        color: '#e5e5e5'
       }
     ]
   },
   {
-    'featureType': 'transit.station',
-    'elementType': 'geometry',
-    'stylers': [
+    featureType: 'transit.station',
+    elementType: 'geometry',
+    stylers: [
       {
-        'color': '#eeeeee'
+        color: '#eeeeee'
       }
     ]
   },
   {
-    'featureType': 'water',
-    'elementType': 'geometry',
-    'stylers': [
+    featureType: 'water',
+    elementType: 'geometry',
+    stylers: [
       {
-        'color': '#c9c9c9'
+        color: '#c9c9c9'
       }
     ]
   },
   {
-    'featureType': 'water',
-    'elementType': 'labels.text.fill',
-    'stylers': [
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [
       {
-        'color': '#9e9e9e'
+        color: '#9e9e9e'
       }
     ]
   }
-]
+];
 
 function getQueryVariable(query, variable) {
   if (!query) {
@@ -314,24 +314,24 @@ function getQueryVariable(query, variable) {
 }
 
 export function encodeFormData(mode, mapPoint) {
-  console.log('map point in encodeFormData', mapPoint, mode)
+  console.log('map point in encodeFormData', mapPoint, mode);
   if (!mapPoint) {
     return '';
   }
   if (mode) {
     if (mode === 'single-tree' && Array.isArray(mapPoint) && mapPoint.length) {
-      return `geoLatitude=${mapPoint[0].coordinate.latitude}&geoLongitude=${mapPoint[0].coordinate.longitude}`
+      return `geoLatitude=${mapPoint[0].coordinate.latitude}&geoLongitude=${
+        mapPoint[0].coordinate.longitude
+      }`;
     } else if (mode === 'multiple-trees' && mapPoint && mapPoint.coordinates) {
-      const data = mapPoint.coordinates.map((cord) => {
-        return [
-          cord.latitude, cord.longitude
-        ]
+      const data = mapPoint.coordinates.map(cord => {
+        return [cord.latitude, cord.longitude];
       });
       data.push(data[0]);
       return {
-        'type': 'Polygon',
-        'coordinates': [data]
-      }
+        type: 'Polygon',
+        coordinates: [data]
+      };
     }
     return null;
   } else {
@@ -340,28 +340,35 @@ export function encodeFormData(mode, mapPoint) {
 }
 
 export function decodeFormData(mode, mapPoint) {
-  console.log('map point in decodeFormData', mapPoint, mode)
+  console.log('map point in decodeFormData', mapPoint, mode);
   if (!mapPoint) {
     return null;
   }
 
   if (mode) {
     if (mode === 'single-tree' && mapPoint) {
-      return [{
-        coordinate: {
-          latitude: getQueryVariable(mapPoint, 'geoLatitude'),
-          longitude: getQueryVariable(mapPoint, 'geoLongitude'),
-          key: 1
+      return [
+        {
+          coordinate: {
+            latitude: getQueryVariable(mapPoint, 'geoLatitude'),
+            longitude: getQueryVariable(mapPoint, 'geoLongitude'),
+            key: 1
+          }
         }
-      }];
+      ];
       // return point;
-    } else if (mode === 'multiple-trees' && mapPoint && mapPoint.coordinates && mapPoint.type === 'Polygon') {
+    } else if (
+      mode === 'multiple-trees' &&
+      mapPoint &&
+      mapPoint.coordinates &&
+      mapPoint.type === 'Polygon'
+    ) {
       const item = {};
       item.coordinates = mapPoint.coordinates[0].map(items => {
         return {
           latitude: items[0],
           longitude: items[1]
-        }
+        };
       });
       return item;
     }
@@ -374,8 +381,11 @@ class NativeMapView extends Component {
     super(props);
     this.mapRef = null;
     this.isSingleTree = this.props.mode === 'single-tree';
-    const {geoLocation, mode, geometry} = this.props;
-    const marker = this.isSingleTree && geoLocation ? decodeFormData(mode, geoLocation) : null;
+    const { geoLocation, mode, geometry } = this.props;
+    const marker =
+      this.isSingleTree && geoLocation
+        ? decodeFormData(mode, geoLocation)
+        : null;
     this.state = {
       pointInView: null,
       coordinates: null,
@@ -388,31 +398,34 @@ class NativeMapView extends Component {
         longitudeDelta: LONGITUDE_DELTA
       },
       polygons: [],
-      editing: !this.isSingleTree && !Array.isArray(geometry) ? decodeFormData(mode, geometry) : null,
+      editing:
+        !this.isSingleTree && !Array.isArray(geometry)
+          ? decodeFormData(mode, geometry)
+          : null,
       creatingHole: false,
       markers: marker || [],
-      width:500,
+      width: 500
     };
-
   }
 
   componentDidMount() {
     this.gotoLocation();
-    console.log('this.map', this.map)
+    console.log('this.map', this.map);
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('this.props', nextProps);
-    if (nextProps !== this.props)
-      this.onPropsUpdate(nextProps);
+    if (nextProps !== this.props) this.onPropsUpdate(nextProps);
   }
 
-
-  onPropsUpdate = (nextProps) => {
+  onPropsUpdate = nextProps => {
     // if (!nextProps.fullScreen) {
 
-    const {geoLocation, mode, geometry} = nextProps;
-    const marker = this.isSingleTree && geoLocation ? decodeFormData(mode, geoLocation) : null;
+    const { geoLocation, mode, geometry } = nextProps;
+    const marker =
+      this.isSingleTree && geoLocation
+        ? decodeFormData(mode, geoLocation)
+        : null;
     const state = {
       region: {
         latitude: getQueryVariable(geoLocation, 'geoLatitude'),
@@ -420,23 +433,28 @@ class NativeMapView extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       },
-      editing: !this.isSingleTree && !Array.isArray(geometry) ? decodeFormData(mode, geometry) : null,
-      markers: marker || [],
+      editing:
+        !this.isSingleTree && !Array.isArray(geometry)
+          ? decodeFormData(mode, geometry)
+          : null,
+      markers: marker || []
     };
     setTimeout(() => {
-      this.setState({
-        ...state
-      }, () => {
-        this.gotoLocation();
-      })
-    }, 1500)
+      this.setState(
+        {
+          ...state
+        },
+        () => {
+          this.gotoLocation();
+        }
+      );
+    }, 1500);
     // }
-
   };
 
-  onDoublePress = (e) => {
+  onDoublePress = e => {
     if (this.props.onPress && !this.props.fullScreen) {
-      this.props.onPress(e)
+      this.props.onPress(e);
     }
     return null;
   };
@@ -444,9 +462,9 @@ class NativeMapView extends Component {
   onPress(e) {
     // const isSingleTree = this.props.mode === 'single-tree';
     if (this.props.onPress) {
-      this.props.onPress(e)
+      this.props.onPress(e);
     } else if (!this.isSingleTree) {
-      const {editing, creatingHole} = this.state;
+      const { editing, creatingHole } = this.state;
       if (!editing) {
         this.setState({
           editing: {
@@ -478,7 +496,6 @@ class NativeMapView extends Component {
         });
       }
     }
-
   }
 
   gotoCurrentLocation = location => {
@@ -487,7 +504,6 @@ class NativeMapView extends Component {
     }
   };
   onRegionChange = region => {
-
     if (this.props.fullScreen && this.isSingleTree) {
       this.setState({
         region: {
@@ -503,11 +519,11 @@ class NativeMapView extends Component {
           {
             coordinate: {
               latitude: region.latitude,
-              longitude: region.longitude,
+              longitude: region.longitude
             },
-            key: id++,
-          },
-        ],
+            key: id++
+          }
+        ]
       });
     }
   };
@@ -522,18 +538,26 @@ class NativeMapView extends Component {
       // loadingEnabled: false,
       showsUserLocation: false
     };
-    const {editing, region: {latitude, longitude}, markers} = this.state;
+    const {
+      editing,
+      region: { latitude, longitude },
+      markers
+    } = this.state;
     console.log({
-      editing, latitude, longitude, markers, Config
+      editing,
+      latitude,
+      longitude,
+      markers,
+      Config
     });
     if (editing) {
       mapOptions.scrollEnabled = false;
       mapOptions.onPanDrag = e => this.onPress(e);
     }
-    if ((latitude && longitude)) {
+    if (latitude && longitude) {
       mapOptions.initialRegion = {
         ...this.state.region
-      }
+      };
     }
     const screen = Dimensions.get('window');
     const mapPaddingTop = screen.height * 0.1;
@@ -541,48 +565,54 @@ class NativeMapView extends Component {
       const iosEdgePadding = {
         top: mapPaddingTop * 0.5,
         right: 0,
-        bottom: this.props.fullScreen ? (screen.height >= 700 ? PixelRatio.getPixelSizeForLayoutSize(screen.height * (0.034)) : PixelRatio.getPixelSizeForLayoutSize(screen.height * (0.05))) : screen.height * 0.025,
+        bottom: this.props.fullScreen
+          ? screen.height >= 700
+            ? PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.034)
+            : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.05)
+          : screen.height * 0.025,
         left: 0
       };
       const androidEdgePadding = {
         top: 0,
         right: 0,
-        bottom: this.props.fullScreen ? height * (0.1) : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.012),
+        bottom: this.props.fullScreen
+          ? height * 0.1
+          : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.012),
         left: 0
       };
-      const edgePadding = (Platform.OS === 'android') ? androidEdgePadding : iosEdgePadding;
+      const edgePadding =
+        Platform.OS === 'android' ? androidEdgePadding : iosEdgePadding;
       return edgePadding;
-    }
+    };
     return (
       <MapView
         // mapType={'standard'}
         ref={ref => (this.map = ref)}
         provider={PROVIDER_GOOGLE}
         //provider={this.props.provider}
-        style={[this.props.mapStyle, {width: this.state.width}]}
-        mapPadding={setMapPadding()}//!this.props.fullScreen ? {top:0,right:0,left:0,bottom:Platform.OS === 'ios' ? Dimensions.get('window').height * (0.03): -30} : {top:0,right:0,left:0,bottom:Dimensions.get('window').height * (0.1),}}
+        style={[this.props.mapStyle, { width: this.state.width }]}
+        mapPadding={setMapPadding()} //!this.props.fullScreen ? {top:0,right:0,left:0,bottom:Platform.OS === 'ios' ? Dimensions.get('window').height * (0.03): -30} : {top:0,right:0,left:0,bottom:Dimensions.get('window').height * (0.1),}}
         // initialRegion={this.state.region}
         onPress={e => this.onPress(e)}
-        onMapReady={() => this.setState({ width:screen.width})}
+        onMapReady={() => this.setState({ width: screen.width })}
         onDoublePress={e => this.onDoublePress(e)}
         onLongPress={e => this.onDoublePress(e)}
         onMarkerPress={e => this.onDoublePress(e)}
         onRegionChangeComplete={this.onRegionChange}
         customMapStyle={mapStyle}
-
         {...mapOptions}
       >
-        {this.props.mode === 'multipal-tree' && this.state.polygons.map(polygon => (
-          <Polygon
-            key={polygon.id}
-            coordinates={polygon.coordinates}
-            holes={polygon.holes}
-            strokeColor="#F00"
-            fillColor="rgba(255,0,0,0.5)"
-            strokeWidth={1}
-
-          />
-        ))}
+        {this.props.mode === 'multipal-tree' &&
+          this.state.polygons.map(polygon => (
+            <Polygon
+              key={polygon.id}
+              coordinates={polygon.coordinates}
+              holes={polygon.holes}
+              strokeColor="#F00"
+              fillColor="rgba(255,0,0,0.5)"
+              strokeWidth={1}
+            />
+          ))}
         {editing && (
           <Polygon
             key={editing.id}
@@ -595,24 +625,40 @@ class NativeMapView extends Component {
           />
         )}
 
-        {
-          !this.props.fullScreen && this.state.markers.map(marker => (
+        {!this.props.fullScreen &&
+          this.state.markers.map(marker => (
             <Marker
               // image={markerImage}
               key={marker.key}
               coordinate={marker.coordinate}
             >
-              <Image style={this.props.fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage}/>
+              <Image
+                style={
+                  this.props.fullScreen
+                    ? styles.markerFullScreen
+                    : styles.marker
+                }
+                source={markerImage}
+              />
             </Marker>
           ))}
-        {
-          this.props.fullScreen && !this.isSingleTree && this.state.editing && this.state.editing.coordinates.map((marker, index) => (
+        {this.props.fullScreen &&
+          !this.isSingleTree &&
+          this.state.editing &&
+          this.state.editing.coordinates.map((marker, index) => (
             <Marker
               // image={markerImage}
               key={index}
               coordinate={marker}
             >
-              <Image style={this.props.fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage}/>
+              <Image
+                style={
+                  this.props.fullScreen
+                    ? styles.markerFullScreen
+                    : styles.marker
+                }
+                source={markerImage}
+              />
             </Marker>
           ))}
       </MapView>
@@ -623,31 +669,38 @@ class NativeMapView extends Component {
     this.setState({
       markers: [],
       editing: null
-    })
+    });
   };
   goto = () => {
     if (!this.props.fullScreen) {
       if (this.props.onPress) {
-        this.props.onPress()
+        this.props.onPress();
       }
     } else {
       this.getMyLocation();
     }
   };
   gotoLocation = () => {
-    if (!this.props.fullScreen && this.state.markers && this.state.markers.length) {
+    if (
+      !this.props.fullScreen &&
+      this.state.markers &&
+      this.state.markers.length
+    ) {
       this.gotoCurrentLocation({
         latitude: this.state.markers[0].coordinate.latitude,
         longitude: this.state.markers[0].coordinate.longitude,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       });
-    } else if (this.state.marker && this.state.marker.length <= 0 && this.isSingleTree) {
+    } else if (
+      this.state.marker &&
+      this.state.marker.length <= 0 &&
+      this.isSingleTree
+    ) {
       this.getMyLocation();
     } else if (!this.isSingleTree || !this.state.region.latitude) {
       this.getMyLocation();
     }
-
   };
 
   getMyLocation = () => {
@@ -659,18 +712,21 @@ class NativeMapView extends Component {
     ).then((/*response*/) => {
       Geolocation.getCurrentPosition(
         location => {
-          let {latitude, longitude} = location.coords;
+          let { latitude, longitude } = location.coords;
           const region = {
             latitude,
             longitude,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA
           };
-          this.setState({
-            region
-          }, () => {
-            this.gotoCurrentLocation(region);
-          })
+          this.setState(
+            {
+              region
+            },
+            () => {
+              this.gotoCurrentLocation(region);
+            }
+          );
 
           // Temporary added comment for prevent moving map to current location DO NOT REMOVE code
           // if(this.props.fullScreen && this.state.marker && this.state.marker.length){
@@ -693,7 +749,6 @@ class NativeMapView extends Component {
           //   Sta: this.state.region,
           //   marker: this.state.markers
           // })
-
         },
         (/*location*/) => {
           NotificationManager.error(
@@ -706,67 +761,73 @@ class NativeMapView extends Component {
     });
   };
 
-  renderComp = (render) => {
-    const {fullScreen, onPress} = this.props;
+  renderComp = render => {
+    const { fullScreen, onPress } = this.props;
     if (!fullScreen) {
       return (
-        <TouchableWithoutFeedback
-          onPress={onPress}
-        >
+        <TouchableWithoutFeedback onPress={onPress}>
           {render}
         </TouchableWithoutFeedback>
-
-      )
+      );
     } else {
-      return render
+      return render;
     }
   };
 
   render() {
-    const {fullScreen, onContinue, mode, onPress} = this.props;
-    const inputProps = fullScreen ? {
-      onFocus: () => {
-        this.setState({
-          shouldDisplayListView: true
-        })
-      },
-      onBlur: () => {
-        this.setState({
-          shouldDisplayListView: false
-        })
-      },
-      editable: true,
-      onPress: () => {
-        console.log('clicked')
-      }
+    const { fullScreen, onContinue, mode, onPress } = this.props;
 
-    } : {
-      editable: true,
-      onFocus: onPress,
-      pointerEvents: 'none',
-    };
-    console.log('googleMapApiKey', googleMapApiKey)
+    const inputProps = fullScreen
+      ? {
+          onFocus: () => {
+            this.setState({
+              shouldDisplayListView: true
+            });
+          },
+
+          onBlur: () => {
+            this.setState({
+              shouldDisplayListView: false
+            });
+          },
+          editable: true,
+          onPress: () => {
+            console.log('clicked');
+          }
+        }
+      : {
+          editable: true,
+          onFocus: onPress,
+          pointerEvents: 'none'
+        };
+    console.log('googleMapApiKey', googleMapApiKey);
     // inputProps.style = styles.inputStyle
     // const isSingleTree = this.props.mode === 'single-tree';
-    return (
-      this.renderComp(<View style={fullScreen ? styles.fullScreenContainer : styles.container}>
-        {
-          this.renderPolygon()
-        }
-        {
-          fullScreen && this.isSingleTree &&
-          <View style={styles.markerFixed}>
-            <Image style={fullScreen ? styles.markerFullScreen : styles.marker} source={markerImage}/>
-          </View>
-        }
-        {
-          this.renderComp(<TouchableWithoutFeedback
+    return this.renderComp(
+      <View style={fullScreen ? styles.fullScreenContainer : styles.container}>
+        {this.renderPolygon()}
+        {fullScreen &&
+          this.isSingleTree && (
+            <View style={styles.markerFixed}>
+              <Image
+                style={fullScreen ? styles.markerFullScreen : styles.marker}
+                source={markerImage}
+              />
+            </View>
+          )}
+        {this.renderComp(
+          <TouchableWithoutFeedback
             onPress={e => {
-              this.onPress(e)
-            }
-            }
+              this.onPress(e);
+            }}
           >
-            <View style={fullScreen ? styles.inputContainerFullScreen : styles.inputContainer}>
+            <View
+              style={
+                fullScreen
+                  ? [styles.inputContainerFullScreen]
+                  : styles.inputContainer
+              }
+            >
               <GooglePlacesAutocomplete
                 listViewDisplayed={this.state.shouldDisplayListView}
                 keyboardShouldPersistTaps={'always'}
@@ -774,6 +835,7 @@ class NativeMapView extends Component {
                 minLength={2}
                 autoFocus={false}
                 fetchDetails={true}
+                ref={ref => (this.ref = ref)}
                 placeholderTextColor={'#4d5153'}
                 // listViewDisplayed="auto"
                 returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
@@ -783,10 +845,10 @@ class NativeMapView extends Component {
                     borderTopWidth: 0,
                     borderBottomWidth: 0,
                     width: '100%',
-                    borderRadius: 30,
+                    borderRadius: 25,
                     backgroundColor: 'transparent',
                     justifyContent: 'center',
-                    alignItems: 'center',
+                    alignItems: 'center'
                   },
                   textInput: {
                     backgroundColor: 'transparent',
@@ -796,13 +858,13 @@ class NativeMapView extends Component {
                     marginRight: 5,
                     height: 44,
                     fontSize: 14,
-                    borderRadius: 30,
+                    borderRadius: 7,
                     color: '#4d5153',
                     flex: 1,
                     flexDirection: 'row',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    textAlign: 'center',
+                    textAlign: 'center'
                   },
                   predefinedPlacesDescription: {
                     color: '#1faadb'
@@ -846,53 +908,68 @@ class NativeMapView extends Component {
                 }}
                 textInputProps={inputProps}
               />
+              {console.log('this.ref-======>', this.ref)}
             </View>
-          </TouchableWithoutFeedback>)
-        }
+          </TouchableWithoutFeedback>
+        )}
 
-        {
-          !!(this.state.markers.length || this.state.editing) && !this.isSingleTree &&
+        {!!(this.state.markers.length || this.state.editing) &&
+          !this.isSingleTree && (
+            <RoundedButton
+              buttonStyle={
+                fullScreen ? styles.btnDeleteFullScreen : styles.btnLocation
+              }
+              onClick={this.removeData}
+            >
+              <Icon name="delete" size={fullScreen ? 24 : 18} color="#000000" />
+            </RoundedButton>
+          )}
+        {fullScreen && (
           <RoundedButton
-            buttonStyle={fullScreen ? styles.btnDeleteFullScreen : styles.btnLocation}
-            onClick={this.removeData}
-          >
-            <Icon name="delete" size={fullScreen ? 24 : 18} color="#000000"/>
-          </RoundedButton>
-        }
-        {
-          fullScreen &&
-          <RoundedButton
-            buttonStyle={fullScreen ? styles.btnLocationFullScreen : styles.btnLocation}
-            textStyle={{marginRight: 0}}
+            buttonStyle={
+              fullScreen ? styles.btnLocationFullScreen : styles.btnLocation
+            }
+            textStyle={{ marginRight: 0 }}
             onClick={this.goto}
           >
-            <Icon name="my-location" size={fullScreen ? 24 : 18} color="#000000"/>
+            <Icon
+              name="my-location"
+              size={fullScreen ? 24 : 18}
+              color="#000000"
+            />
           </RoundedButton>
-        }
+        )}
 
-        {fullScreen &&
-        <TouchableOpacity
-          style={[buttonStyles.actionButtonTouchableFullScreen, styles.actionButtonTouchableFullScreen]}
-          onPress={() => {
-            setTimeout(() => {
-              if (onContinue) {
-                onContinue(
-                  this.state.mode === 'single-tree' ? encodeFormData(mode, this.state.markers) : `geoLatitude=${this.state.region.latitude}&geoLongitude=${this.state.region.longitude}`,
-                  encodeFormData(mode, this.state.editing),
-                  mode
-                )
-              }
-            }, 500)
-
-          }}
-        >
-          <View style={buttonStyles.actionButtonView}>
-            <Text style={buttonStyles.actionButtonText}>
-              {i18n.t('label.continue')}
-            </Text>
-          </View>
-        </TouchableOpacity>}
-      </View>)
+        {fullScreen && (
+          <TouchableOpacity
+            style={[
+              buttonStyles.actionButtonTouchableFullScreen,
+              styles.actionButtonTouchableFullScreen
+            ]}
+            onPress={() => {
+              setTimeout(() => {
+                if (onContinue) {
+                  onContinue(
+                    this.state.mode === 'single-tree'
+                      ? encodeFormData(mode, this.state.markers)
+                      : `geoLatitude=${
+                          this.state.region.latitude
+                        }&geoLongitude=${this.state.region.longitude}`,
+                    encodeFormData(mode, this.state.editing),
+                    mode
+                  );
+                }
+              }, 500);
+            }}
+          >
+            <View style={buttonStyles.actionButtonView}>
+              <Text style={buttonStyles.actionButtonText}>
+                {i18n.t('label.continue')}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      </View>
     );
   }
 }
@@ -912,8 +989,7 @@ NativeMapView.propTypes = {
 
 NativeMapView.defaultProps = {
   fullScreen: false,
-  onPress: () => {
-  },
+  onPress: () => {},
   location: {
     latitude: LATITUDE,
     longitude: LONGITUDE,

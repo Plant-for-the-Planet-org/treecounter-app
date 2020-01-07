@@ -1,18 +1,18 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
-import React, {Component} from 'react';
-import {Text, KeyboardAvoidingView, PixelRatio} from 'react-native';
+import React, { Component } from 'react';
+import { Text, PixelRatio } from 'react-native';
 import PropTypes from 'prop-types';
-import {TabBar, TabView} from 'react-native-tab-view';
+import { TabBar, TabView } from 'react-native-tab-view';
 import CardLayout from '../Common/Card';
 
 import i18n from '../../locales/i18n.js';
 // import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
-import {getPlantProjectEnum, isTpo} from '../../helpers/utils';
+import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import styles from '../../styles/register_trees.native';
 import { Dimensions } from 'react-native';
 
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const routes = [
   {
@@ -21,7 +21,9 @@ const routes = [
     color: '#89b53a'
   },
   {
-    key: 'multiple-trees', title: i18n.t('label.many_trees'), color: '#89b53a'
+    key: 'multiple-trees',
+    title: i18n.t('label.many_trees'),
+    color: '#89b53a'
   }
 ];
 export default class RegisterTrees extends Component {
@@ -40,40 +42,54 @@ export default class RegisterTrees extends Component {
     this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
 
-  _handleIndexChange = index => this.setState({index});
+  _handleIndexChange = index => this.setState({ index });
 
   handleGeoLocationChange(/* geoLocation */) {
     //console.log(geoLocation);
   }
 
   _renderTabBar = props => {
-    console.log('Dimensions.get(\'window\').width',Dimensions.get('window').width)
+    console.log(
+      "Dimensions.get('window').width",
+      Dimensions.get('window').width
+    );
     return (
-
       <TabBar
         {...props}
         keyboardDismissMode={'on-drag'}
         style={[styles.tabBar]}
         labelStyle={styles.tabBarTextStyle}
-        renderLabel={({route, focused}) => {
+        renderLabel={({ route, focused }) => {
           return (
-            <Text style={[styles.tabBarTextStyle, {color: focused ? route.color : '#4d5153'}]}>
+            <Text
+              style={[
+                styles.tabBarTextStyle,
+                { color: focused ? route.color : '#4d5153' }
+              ]}
+            >
               {route.title}
             </Text>
-          )
+          );
         }}
-
-        contentContainerStyle={{justifyContent: 'center'}}
+        contentContainerStyle={{ justifyContent: 'center' }}
         indicatorStyle={styles.tabBarTextActive}
-        indicatorContainerStyle={{left:Dimensions.get('window').width <= 400? PixelRatio.roundToNearestPixel(Dimensions.get('window').width * 0.28):PixelRatio.roundToNearestPixel(Dimensions.get('window').width * 0.3) }}
-        tabStyle={{width: 'auto', alignItems: 'flex-end'}}
+        indicatorContainerStyle={{
+          left:
+            Dimensions.get('window').width <= 400
+              ? PixelRatio.roundToNearestPixel(
+                  Dimensions.get('window').width * 0.28
+                )
+              : PixelRatio.roundToNearestPixel(
+                  Dimensions.get('window').width * 0.3
+                )
+        }}
+        tabStyle={{ width: 'auto', alignItems: 'flex-end' }}
         useNativeDriver
       />
-    )
-      ;
+    );
   };
 
-  _renderScene = ({route}) => {
+  _renderScene = ({ route }) => {
     const plantProjects = getPlantProjectEnum(
       this.props.currentUserProfile,
       this.props.plantProjects
@@ -81,7 +97,7 @@ export default class RegisterTrees extends Component {
     return (
       <RegisterTreeTab
         onRegister={(mode, value, plantProject) => {
-          return this.props.onSubmit(mode, value, plantProject)
+          return this.props.onSubmit(mode, value, plantProject);
         }}
         isTpo={isTpo(this.props.currentUserProfile)}
         mode={route.key}
@@ -94,11 +110,11 @@ export default class RegisterTrees extends Component {
     return (
       <KeyboardAwareScrollView
         enableOnAndroid
-        contentContailnerStyle={{justifyContent: 'center'}}
+        contentContailnerStyle={{ justifyContent: 'center' }}
         extraHeight={66}
         keyboardShouldPersistTaps={'handled'}
       >
-        <CardLayout style={{flex: 1}}>
+        <CardLayout style={{ flex: 1 }}>
           <Text style={styles.ufpTrees}>{i18n.t('label.register_trees')}</Text>
           <Text style={styles.textStyle}>
             {i18n.t('label.register_trees_description')}
@@ -106,14 +122,13 @@ export default class RegisterTrees extends Component {
         </CardLayout>
 
         <TabView
-            useNativeDriver
-            ref="registerTreeForm"
-            navigationState={this.state}
-            renderScene={this._renderScene.bind(this)}
-            renderTabBar={this._renderTabBar}
-            onIndexChange={this._handleIndexChange}
-          />
-
+          useNativeDriver
+          ref="registerTreeForm"
+          navigationState={this.state}
+          renderScene={this._renderScene.bind(this)}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
       </KeyboardAwareScrollView>
     );
   }

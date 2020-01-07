@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux';
 import i18n from '../../../locales/i18n';
 
 import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
+import { tree } from '../../../assets';
 class ListViewProjects extends PureComponent {
   constructor(props) {
     super(props);
@@ -46,7 +47,7 @@ class ListViewProjects extends PureComponent {
           {i18n.t('label.select_project_title')}
         </Text>
         <Image
-          source={trees}
+          source={tree}
           style={{ height: 60, flex: 1 }}
           resizeMode="contain"
         />

@@ -2,7 +2,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Platform, Dimensions } from 'react-native';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 let lineBreakMargin = -20;
 if (Platform.OS === 'android') {

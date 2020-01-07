@@ -5,12 +5,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import loginFormSchema from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
-import { planetLogo, eye, closeeye, forward } from '../../../assets';
+import { eye, closeeye, forward } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
 import { generateFormikSchemaFromFormSchema } from './../../../helpers/utils';
 import HeaderNew from './../../Header/HeaderNew.native';
+import { SafeAreaView } from 'react-navigation';
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -80,7 +82,7 @@ export default class Login extends Component {
     const backgroundColor = 'white';
     const lockedButton = 'rgba(137, 181, 58, 0.19)';
     return (
-      <View style={{ flex: 1, paddingTop: 80 }}>
+      <SafeAreaView style={{ flex: 1, paddingTop: 80 }}>
         <HeaderNew title={''} navigation={this.props.navigation} />
         <View style={styles.forgotPassword}>
           <TouchableItem onPress={this.onForgotPasswordClicked}>
@@ -244,7 +246,7 @@ export default class Login extends Component {
             </>
           )}
         </Formik>
-      </View>
+      </SafeAreaView>
     );
   }
 }

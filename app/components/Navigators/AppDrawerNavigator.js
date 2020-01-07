@@ -102,9 +102,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_editProfile')]: {
         screen: isLoggedIn ? EditUserProfile : LoginContainer
       },
-      [getLocalRoute('app_login')]: {
-        screen: LoginContainer
-      },
       [getLocalRoute('app_passwordSent')]: {
         screen: EmailSentContainer
       },
@@ -337,6 +334,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_reviews']: {
         screen: Reviews
+      },
+      [getLocalRoute('app_login')]: {
+        screen: LoginContainer
       },
       ['app_add_review']: {
         screen: AddReview

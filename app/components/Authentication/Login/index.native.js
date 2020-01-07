@@ -10,7 +10,7 @@ import TouchableItem from '../../Common/TouchableItem.native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
 import { generateFormikSchemaFromFormSchema } from './../../../helpers/utils';
-
+import HeaderNew from './../../Header/HeaderNew.native';
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -80,7 +80,15 @@ export default class Login extends Component {
     const backgroundColor = 'white';
     const lockedButton = 'rgba(137, 181, 58, 0.19)';
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, paddingTop: 80 }}>
+        <HeaderNew title={''} navigation={this.props.navigation} />
+        <View style={styles.forgotPassword}>
+          <TouchableItem onPress={this.onForgotPasswordClicked}>
+            <Text style={styles.forgotPasswordHighlight}>
+              {i18n.t('label.forgot_ur_password')}
+            </Text>
+          </TouchableItem>
+        </View>
         <Formik
           initialValues={{
             // eslint-disable-next-line no-underscore-dangle
@@ -117,7 +125,7 @@ export default class Login extends Component {
                 resetScrollToCoords={{ x: 0, y: 0 }}
                 scrollEnabled
               >
-                <View style={styles.headerContainer}>
+                {/* <View style={styles.headerContainer}>
                   <Image
                     style={styles.imageStyle}
                     resizeMode={'contain'}
@@ -126,7 +134,8 @@ export default class Login extends Component {
                   <Text style={styles.loginDescriptionStyle}>
                     {i18n.t('label.login_description')}
                   </Text>
-                </View>
+                </View> */}
+                <Text style={styles.loginTitle}>{i18n.t('label.log-in')}</Text>
                 <View>
                   <TextField
                     label={i18n.t('label.email')}
@@ -175,13 +184,13 @@ export default class Login extends Component {
                   >
                     {this.state.hidePassword ? (
                       <Image
-                        source={eye}
+                        source={closeeye}
                         resizeMode={'contain'}
                         style={{ height: 24 }}
                       />
                     ) : (
                       <Image
-                        source={closeeye}
+                        source={eye}
                         resizeMode={'contain'}
                         style={{ height: 24 }}
                       />
@@ -189,19 +198,12 @@ export default class Login extends Component {
                   </TouchableOpacity>
                 </View>
 
-                <View style={styles.bottomRow}>
-                  <TouchableItem onPress={this.onForgotPasswordClicked}>
-                    <Text style={styles.bottomTextHighlight}>
-                      {i18n.t('label.forgot_ur_password')}
-                    </Text>
-                  </TouchableItem>
-                </View>
                 <View style={[styles.bottomRow]}>
                   <TouchableItem
                     style={{ paddingRight: 5 }}
                     onPress={this.onSignupClicked}
                   >
-                    <Text style={styles.bottomTextHighlight}>
+                    <Text style={styles.forgotPasswordHighlight}>
                       {i18n.t('label.dont_have_account')}{' '}
                       {i18n.t('label.signUp')}
                     </Text>

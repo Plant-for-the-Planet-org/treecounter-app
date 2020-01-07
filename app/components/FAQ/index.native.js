@@ -18,6 +18,7 @@ import styles from '../../styles/faq';
 import HeaderNew from './../Header/HeaderNew.native';
 
 import i18n from '../../locales/i18n.js';
+import { SafeAreaView } from 'react-navigation';
 
 export default class FAQ extends Component {
   state = {
@@ -67,7 +68,7 @@ export default class FAQ extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <HeaderNew
           title={i18n.t('label.faq')}
           navigation={this.props.navigation}
@@ -91,7 +92,7 @@ export default class FAQ extends Component {
           />
         </ScrollView>
         {/* <TabContainer {...this.props} /> */}
-      </View>
+      </SafeAreaView>
     );
   }
 }

@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, Image, RefreshControl } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  Image,
+  RefreshControl,
+  FlatList
+} from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
@@ -74,6 +81,21 @@ export default class ClosedCompetitions extends Component {
       });
   };
 
+  _keyExtractor = item => item.id.toString();
+
+  _renderItem = ({ item }) => (
+    <CompetitionSnippet
+      key={'competition' + item.id}
+      cardStyle={styles.cardStyle}
+      onMoreClick={id => this.props.onMoreClick(id, item.name)}
+      leaveCompetition={id => this.props.leaveCompetition(id)}
+      enrollCompetition={id => this.props.enrollCompetition(id)}
+      editCompetition={this.props.editCompetition}
+      competition={item}
+      type="featured"
+    />
+  );
+
   render() {
     let { archivedCompetitions } = this.state;
     return (
@@ -99,20 +121,11 @@ export default class ClosedCompetitions extends Component {
             resizeMode="contain"
           />
         </View>
-        {archivedCompetitions.length > 0
-          ? archivedCompetitions.map(competition => (
-              <CompetitionSnippet
-                key={'competition' + competition.id}
-                cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id, competition.name)}
-                leaveCompetition={id => this.props.leaveCompetition(id)}
-                enrollCompetition={id => this.props.enrollCompetition(id)}
-                editCompetition={this.props.editCompetition}
-                competition={competition}
-                type="featured"
-              />
-            ))
-          : null}
+        <FlatList
+          data={archivedCompetitions}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
       </ScrollView>
     );
   }

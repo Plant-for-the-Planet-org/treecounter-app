@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, View, RefreshControl } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  Text,
+  View,
+  RefreshControl,
+  FlatList
+} from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
@@ -65,6 +72,21 @@ export default class MineCompetitions extends Component {
       });
   };
 
+  _keyExtractor = item => item.id.toString();
+
+  _renderItem = ({ item }) => (
+    <CompetitionSnippet
+      key={'competition' + item.id}
+      cardStyle={styles.cardStyle}
+      onMoreClick={id => this.props.onMoreClick(id, item.name)}
+      competition={item}
+      leaveCompetition={id => this.props.leaveCompetition(id)}
+      enrollCompetition={id => this.props.enrollCompetition(id)}
+      editCompetition={this.props.editCompetition}
+      type="mine"
+    />
+  );
+
   render() {
     let { myCompetitions } = this.state;
 
@@ -93,20 +115,12 @@ export default class MineCompetitions extends Component {
             resizeMode="contain"
           />
         </View>
-        {myCompetitions.length > 0
-          ? myCompetitions.map(competition => (
-              <CompetitionSnippet
-                key={'competition' + competition.id}
-                cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id, competition.name)}
-                competition={competition}
-                leaveCompetition={id => this.props.leaveCompetition(id)}
-                enrollCompetition={id => this.props.enrollCompetition(id)}
-                editCompetition={this.props.editCompetition}
-                type="mine"
-              />
-            ))
-          : null}
+
+        <FlatList
+          data={myCompetitions}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
       </ScrollView>
     );
   }

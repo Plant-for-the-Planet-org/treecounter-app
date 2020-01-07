@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, Image, RefreshControl } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  Image,
+  RefreshControl,
+  FlatList
+} from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
@@ -38,6 +45,21 @@ export default class FeaturedCompetitions extends Component {
       featuredCompetitions: featuredCompetitions
     });
   }
+
+  _keyExtractor = item => item.id.toString();
+
+  _renderItem = ({ item }) => (
+    <CompetitionSnippet
+      key={'competition' + item.id}
+      cardStyle={styles.cardStyle}
+      onMoreClick={id => this.props.onMoreClick(id, item.name)}
+      leaveCompetition={id => this.props.leaveCompetition(id)}
+      enrollCompetition={id => this.props.enrollCompetition(id)}
+      editCompetition={this.props.editCompetition}
+      competition={item}
+      type="featured"
+    />
+  );
 
   componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
@@ -100,20 +122,12 @@ export default class FeaturedCompetitions extends Component {
             resizeMode="contain"
           />
         </View>
-        {featuredCompetitions.length > 0
-          ? featuredCompetitions.map(competition => (
-              <CompetitionSnippet
-                key={'competition' + competition.id}
-                cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id, competition.name)}
-                leaveCompetition={id => this.props.leaveCompetition(id)}
-                enrollCompetition={id => this.props.enrollCompetition(id)}
-                editCompetition={this.props.editCompetition}
-                competition={competition}
-                type="featured"
-              />
-            ))
-          : null}
+
+        <FlatList
+          data={featuredCompetitions}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
       </ScrollView>
     );
   }

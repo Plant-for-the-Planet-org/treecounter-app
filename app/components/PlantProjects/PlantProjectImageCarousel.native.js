@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Dimensions
 } from 'react-native';
-import { Dimensions } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React, { Component } from 'react';

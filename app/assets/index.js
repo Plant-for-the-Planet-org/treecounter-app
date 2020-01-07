@@ -154,8 +154,11 @@ import closeBlack from './images/icons/closeblack.png';
 import planetLogo from './images/Planet-Logo.png';
 import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
-
 import leafGray from './images/leaf_gray.png';
+import treelogo from '../../icon.png';
+import Projects from './images/projects.jpg';
+import WelcomeImage3 from './images/welcome_screen_3_image.jpg';
+import welcomeScreen5 from './images/welcomeScreen5.png';
 import backArrow from './images/icons/backArrow.png';
 import currencyIcon from './images/currencyIcon.png';
 import gPayLogo from './images/gpay.png';
@@ -170,6 +173,7 @@ import eye from './images/eye.png';
 import closeeye from './images/closeeye.png';
 
 export {
+  treelogo,
   germany,
   worldImg,
   mapCollapse,
@@ -328,6 +332,9 @@ export {
   currencyIcon,
   gPayLogo,
   applePayLogo,
+  Projects,
+  WelcomeImage3,
+  welcomeScreen5,
   backArrow,
   blackLock,
   infoHint,

@@ -2,11 +2,13 @@
   "name": "Name",
   "price": "Preis",
   "select_project": "Projekt aussuchen",
-  "donate_trees_cap": "Spenden",
+  "search_project": "Projekte suchen ...",
+  "donate_trees_cap": "Bäume Spenden",
   "featured": "Empfohlen",
   "list": "Alle",
   "country": "Land",
   "select_by_country": "Sortieren nach Land",
   "cost_per_tree": "pro Baum",
-  "no_tax_deduction": "Kein Steuerabzug möglich"
+  "no_tax_deduction": "Kein Steuerabzug möglich",
+  "select_project_title": "Wähle ein Pflanzprojekt aus, um für das Pflanzen von Bäumen zu spenden"
 }

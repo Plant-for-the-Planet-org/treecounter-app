@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   ScrollView
 } from 'react-native';
-import HeaderAnimated from './../../Header/HeaderAnimated.native';
+import HeaderNew from './../../Header/HeaderNew.native';
 import { SafeAreaView } from 'react-navigation';
 import buttonStyles from '../../../styles/common/button.native';
 import PropTypes from 'prop-types';
@@ -39,12 +39,18 @@ export default function AddTrees(props) {
         });
   };
   const white = '#ffffff';
+  const treeCount = props.navigation.getParam('treeCount');
+
   return (
     <SafeAreaView style={styles.safeAreaViewContainer}>
       <View style={styles.mainContainer}>
-        <HeaderAnimated
+        <HeaderNew
           navigation={props.navigation}
-          title={'Redeem 20,500 Trees'}
+          title={
+            treeCount > 1
+              ? i18n.t('label.RedeemxTrees', { treeCount })
+              : i18n.t('label.RedeemxTrees', { treeCount })
+          }
           scrollY={scrollY}
         />
         <View style={styles.subheader}>
@@ -76,7 +82,7 @@ export default function AddTrees(props) {
                     {i18n.t('label.you_can_redeem')}
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
-                    {delimitNumbers(props.navigation.getParam('treeCount'))}
+                    {delimitNumbers(treeCount)}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -85,7 +91,9 @@ export default function AddTrees(props) {
                     {props.navigation.getParam('tpoName')}
                   </Text>
                   <Text style={styles.redeemObjectSubTitle}>
-                    {i18n.t('label.trees')}
+                    {treeCount > 1
+                      ? i18n.t('label.trees')
+                      : i18n.t('label.tree')}
                   </Text>
                 </View>
               </View>

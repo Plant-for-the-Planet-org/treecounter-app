@@ -13,5 +13,7 @@
   "you_can_redeem": "You can redeem",
   "planted_by": "Planted by",
   "add_my_trees": "Add to my Trees",
-  "already_redeemed_trees": "You have already Redeemed these this code, please try another."
+  "already_redeemed_trees": "You have already Redeemed this code, please try another.",
+  "RedeemxTrees": "Redeem {{treeCount}} Trees",
+  "Redeem1Tree": "Redeem {{treeCount}} Tree"
 }

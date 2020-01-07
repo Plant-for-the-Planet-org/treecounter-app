@@ -162,41 +162,47 @@ export default function Redemption(props) {
                     onBlur={props.handleBlur('code')}
                   />
                 </View>
-              </KeyboardAwareScrollView>
 
-              {buttonType === 'validate' ? (
-                <TouchableOpacity
-                  style={buttonStyles.actionButtonTouchable}
-                  onPress={props.handleSubmit}
-                >
-                  <View style={buttonStyles.actionButtonView}>
+                {buttonType === 'validate' ? (
+                  <TouchableOpacity
+                    style={[
+                      buttonStyles.actionButtonTouchable,
+                      { alignSelf: 'center' }
+                    ]}
+                    onPress={props.handleSubmit}
+                  >
+                    <View style={buttonStyles.actionButtonView}>
+                      {loadButton ? (
+                        <ActivityIndicator size="large" color={white} />
+                      ) : (
+                        <Text style={buttonStyles.actionButtonText}>
+                          {i18n.t('label.validate_code')}
+                        </Text>
+                      )}
+                    </View>
+                  </TouchableOpacity>
+                ) : null}
+
+                {buttonType === '>' ? (
+                  <TouchableOpacity
+                    style={[
+                      buttonStyles.actionButtonSmallTouchable,
+                      { top: '90%', left: '90%' }
+                    ]}
+                    onPress={props.handleSubmit}
+                  >
                     {loadButton ? (
                       <ActivityIndicator size="large" color={white} />
                     ) : (
-                      <Text style={buttonStyles.actionButtonText}>
-                        {i18n.t('label.validate_code')}
-                      </Text>
+                      <Image
+                        source={forward}
+                        resizeMode="cover"
+                        style={buttonStyles.actionButtonSmallImage}
+                      />
                     )}
-                  </View>
-                </TouchableOpacity>
-              ) : null}
-
-              {buttonType === '>' ? (
-                <TouchableOpacity
-                  style={buttonStyles.actionButtonSmallTouchable}
-                  onPress={props.handleSubmit}
-                >
-                  {loadButton ? (
-                    <ActivityIndicator size="large" color={white} />
-                  ) : (
-                    <Image
-                      source={forward}
-                      resizeMode="cover"
-                      style={buttonStyles.actionButtonSmallImage}
-                    />
-                  )}
-                </TouchableOpacity>
-              ) : null}
+                  </TouchableOpacity>
+                ) : null}
+              </KeyboardAwareScrollView>
             </>
           )}
         </Formik>

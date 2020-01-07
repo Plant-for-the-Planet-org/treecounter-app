@@ -1,5 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-
+import { Dimensions } from 'react-native';
+const height = Dimensions.get('window').height;
+// const width = Dimensions.get('window').width
 export default EStyleSheet.create({
   safeAreaViewContainer: { flex: 1, backgroundColor: 'white' },
   mainContainer: { flex: 1 },
@@ -19,8 +21,8 @@ export default EStyleSheet.create({
   },
   formScrollView: {
     padding: 24,
-    paddingBottom: 220,
-    marginTop: 50
+    marginTop: 50,
+    minHeight: height * 0.94
   },
   cardContainer: {
     flexDirection: 'column',

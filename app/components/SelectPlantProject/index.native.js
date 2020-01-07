@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 // import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { Dimensions } from 'react-native';
 // import TabContainer from '../../containers/Menu/TabContainer';
@@ -9,12 +11,16 @@ import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import { updateStaticRoute } from '../../helpers/routerHelper';
+
+import { getAllPlantProjectsSelector } from '../../selectors';
+import { loadProject, loadProjects } from '../../actions/loadTposAction';
+
 const Layout = {
   window: {
     width: Dimensions.get('window').width
   }
 };
-export default class SelectPlantTabView extends PureComponent {
+class SelectPlantTabView extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,7 +77,9 @@ export default class SelectPlantTabView extends PureComponent {
       onMoreClick,
       selectProject,
       navigation,
-      currencies
+      currencies,
+      loadProject,
+      loadProjects
     } = this.props;
     // props for children
     const props = {
@@ -79,7 +87,9 @@ export default class SelectPlantTabView extends PureComponent {
       onMoreClick,
       selectProject,
       navigation,
-      currencies
+      currencies,
+      loadProjects,
+      loadProject
     };
     // const { index } = this.state;
 
@@ -114,6 +124,15 @@ export default class SelectPlantTabView extends PureComponent {
   }
 }
 
+const mapStateToProps = state => ({
+  plantProjects: getAllPlantProjectsSelector(state)
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ loadProject, loadProjects }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectPlantTabView);
 SelectPlantTabView.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,

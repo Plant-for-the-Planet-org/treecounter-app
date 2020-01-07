@@ -47,6 +47,7 @@ export function loadProjects(category = 'all', options = {}) {
       .catch(error => console.log(error));
   };
 }
+
 export function loadProject(plantProject) {
   const request = getRequest('plantProject_get', { uid: plantProject.id });
   return dispatch => {

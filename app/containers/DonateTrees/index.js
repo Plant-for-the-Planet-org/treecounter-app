@@ -51,10 +51,7 @@ class DonationTreesContainer extends PureComponent {
         .catch(error => console.log(error));
     }
   }
-  async componentWillMount() {
-    await this.props.loadProjects('featured');
-    await this.props.loadProjects();
-  }
+
   componentDidMount() {
     let selectedProjectId = undefined;
     if (this.props.match) {

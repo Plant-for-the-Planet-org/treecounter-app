@@ -17,8 +17,12 @@ import { delimitNumbers } from '../../utils/utils';
 import NumberFormat from '../Common/NumberFormat';
 import { sortProjectsByPrice } from '../../utils/currency';
 import _ from 'lodash';
+import { getAllPlantProjectsSelector } from '../../selectors';
+import { loadProject, loadProjects } from '../../actions/loadTposAction';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class SelectPlantProject extends Component {
+class SelectPlantProject extends Component {
   static data = {
     tabs: [
       {
@@ -48,7 +52,19 @@ export default class SelectPlantProject extends Component {
     };
   }
 
-  componentWillMount() {
+  async componentWillMount() {
+    if (
+      this.props.plantProjects(
+        plantProject => plantProject.isFeatured && !plantProject.tpoData
+      ).length
+    ) {
+      this.props.plantProjects(
+        plantProject =>
+          plantProject.isFeatured &&
+          !plantProject.tpoData &&
+          this.props.loadProject(plantProject)
+      );
+    }
     this.setState(this.initialStateFromProps(this.props));
   }
 
@@ -218,7 +234,7 @@ export default class SelectPlantProject extends Component {
           </div>
           <Slider {...settings}>
             {featuredProjects.length !== 0
-              ? featuredProjects.map(project => {
+              ? featuredProjects.sort((a, b) => a.id - b.id).map(project => {
                   console.log(project);
                   return (
                     <CardLayout
@@ -387,7 +403,15 @@ export default class SelectPlantProject extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  plantProjects: getAllPlantProjectsSelector(state)
+});
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ loadProject, loadProjects }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectPlantProject);
 SelectPlantProject.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,

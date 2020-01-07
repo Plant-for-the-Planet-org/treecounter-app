@@ -1,9 +1,7 @@
 import React from 'react';
-import { Image, View, Dimensions } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import ContentLoader from 'react-native-content-loader';
-import { Circle, Rect, Text } from 'react-native-svg';
-import i18n from '../../locales/i18n.js';
-import { loadingBar } from '../../assets';
+import { Circle, Rect } from 'react-native-svg';
 
 const HEIGHT = Dimensions.get('window').height;
 const WIDTH = Dimensions.get('window').width;
@@ -180,11 +178,13 @@ const ProjectSingleLoader = () => (
   </ContentLoader>
 );
 
-const DefaultLoader = () => (
+{
+  /*const DefaultLoader = () => (
   <View style={[loadingIndicatorStyle, containerStyle]}>
     <Image source={loadingBar} alt={i18n.t('label.loading')} />
   </View>
-);
+);*/
+}
 
 const PublicTreeCounterContentLoader = () => (
   <ContentLoader
@@ -246,11 +246,13 @@ const loadingIndicatorStyle = {
   alignItems: 'center',
   marginTop: '5%'
 };
-const containerStyle = {
+{
+  /*const containerStyle = {
   flex: 1,
   alignItems: 'center',
   justifyContent: 'center'
-};
+};*/
+}
 export default ContentLoading;
 
 export { PublicTreeCounterContentLoader };

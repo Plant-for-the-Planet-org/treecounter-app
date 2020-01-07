@@ -22,7 +22,8 @@ export default EStyleSheet.create({
 
   loginTitle: {
     fontFamily: 'OpenSans-Bold',
-    fontSize: 27
+    fontSize: 27,
+    color: '#4d5153'
   },
 
   forgotPasswordHighlight: {

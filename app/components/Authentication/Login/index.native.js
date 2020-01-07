@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import loginFormSchema from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
-import { eye, closeeye, forward } from '../../../assets';
+import { eye, closeeye } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
@@ -18,8 +18,7 @@ export default class Login extends Component {
     super(props);
 
     this.state = {
-      hidePassword: true,
-      buttonType: 'login'
+      hidePassword: true
     };
   }
 
@@ -30,33 +29,8 @@ export default class Login extends Component {
   };
   componentWillMount() {
     this.validationSchema = generateFormikSchemaFromFormSchema(loginFormSchema);
-
-    this.keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      this.keyboardDidShow
-    );
-    this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      this.keyboardDidHide
-    );
   }
 
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
-  keyboardDidShow = () => {
-    this.setState({
-      buttonType: '>'
-    });
-  };
-
-  keyboardDidHide = () => {
-    this.setState({
-      buttonType: 'login'
-    });
-  };
   onForgotPasswordClicked = () => {
     this.props.updateRoute('app_forgotPassword');
   };
@@ -72,6 +46,7 @@ export default class Login extends Component {
   handleLoginClick = () => {
     if (this.state.formValue) {
       Keyboard.dismiss();
+
       console.log('Form value', this.state.formValue);
     }
     console.log('Form value', this.state.formValue);
@@ -213,36 +188,21 @@ export default class Login extends Component {
                 </View>
               </KeyboardAwareScrollView>
 
-              {this.state.buttonType === 'login' ? (
-                <TouchableOpacity
-                  style={[styles.actionButtonTouchable]}
-                  onPress={props.isValid && props.handleSubmit}
+              <TouchableOpacity
+                style={[styles.actionButtonTouchable]}
+                onPress={props.isValid && props.handleSubmit}
+              >
+                <View
+                  style={[
+                    styles.actionButtonView,
+                    !props.isValid ? { backgroundColor: lockedButton } : {}
+                  ]}
                 >
-                  <View
-                    style={[
-                      styles.actionButtonView,
-                      !props.isValid ? { backgroundColor: lockedButton } : {}
-                    ]}
-                  >
-                    <Text style={styles.actionButtonText}>
-                      {i18n.t('label.login')}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ) : null}
-
-              {this.state.buttonType === '>' ? (
-                <TouchableOpacity
-                  style={styles.actionButtonSmallTouchable}
-                  onPress={props.isValid && props.handleSubmit}
-                >
-                  <Image
-                    source={forward}
-                    resizeMode="cover"
-                    style={styles.actionButtonSmallImage}
-                  />
-                </TouchableOpacity>
-              ) : null}
+                  <Text style={styles.actionButtonText}>
+                    {i18n.t('label.login')}
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </>
           )}
         </Formik>

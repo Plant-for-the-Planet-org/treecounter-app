@@ -7,20 +7,20 @@ const HEIGHT = Dimensions.get('window').height;
 const WIDTH = Dimensions.get('window').width;
 const CompetitionLoader = () => (
   <ContentLoader
-    height={550}
-    width={500}
+    height={HEIGHT}
+    width={WIDTH}
     speed={3}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
-    <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="215" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="240" rx="10" ry="10" width="250" height="20" />
-    <Rect x="100" y="270" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="460" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="490" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="520" rx="10" ry="10" width="250" height="20" />
+    <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
+    <Rect x="30" y="190" rx="10" ry="10" width="35%" height="20" />
+    <Rect x="30" y="215" rx="10" ry="10" width="85%" height="20" />
+    <Rect x="30" y="240" rx="10" ry="10" width="75%" height="20" />
+    <Rect x="30" y="270" rx="10" ry="10" width="85%" height="180" />
+    <Rect x="30" y="460" rx="10" ry="10" width="35%" height="20" />
+    <Rect x="30" y="490" rx="10" ry="10" width="85%" height="20" />
+    <Rect x="30" y="520" rx="10" ry="10" width="75%" height="20" />
   </ContentLoader>
 );
 const SingleCompetitionLoader = () => (
@@ -186,11 +186,13 @@ const ProjectSingleLoader = () => (
 );
 
 {
-  /*const DefaultLoader = () => (
-  <View style={[loadingIndicatorStyle, containerStyle]}>
-    <Image source={loadingBar} alt={i18n.t('label.loading')} />
-  </View>
-);*/
+  /*
+    const DefaultLoader = () => (
+    <View style={[loadingIndicatorStyle, containerStyle]}>
+      <Image source={loadingBar} alt={i18n.t('label.loading')} />
+    </View>
+  );
+  */
 }
 
 const PublicTreeCounterContentLoader = () => (
@@ -215,19 +217,27 @@ const PledgeEventsContentLoader = () => (
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
-    <Circle cx="53" cy="43" r="30" />
-    <Rect x="30" y="94" rx="4" ry="4" width="70%" height="13" />
-    <Rect x="30" y="118" rx="4" ry="4" width="40%" height="13" />
-    <Rect x="30" y="142" rx="4" ry="4" width="80%" height="13" />
-    <Rect x="30" y="170" rx="0" ry="0" width="80%" height="41" />
-    <Rect x="30" y="227" rx="0" ry="0" width="80%" height="41" />
-    <Rect x="30" y="284" rx="4" ry="4" width="60%" height="13" />
-    <Rect x="30" y="307" rx="4" ry="4" width="80%" height="11" />
-    <Rect x="30" y="330" rx="4" ry="4" width="35%" height="13" />
+    <View>
+      <Rect x="30" y="10%" rx="5" ry="5" width="45" height="28" />
+      <Rect x="30" y="17%" rx="4" ry="4" width="60%" height="12" />
+      <Rect x="30" y="21%" rx="3" ry="3" width="75%" height="12" />
+      <Rect x="30" y="26%" rx="3" ry="3" width="85%" height="6" />
+      <Rect x="30" y="30%" rx="3" ry="3" width="85%" height="6" />
+      <Rect x="30" y="34%" rx="3" ry="3" width="75%" height="6" />
+      <Rect x="30" y="45%" rx="5" ry="5" width="38%" height="36" />
+      <Rect x="50%" y="45%" rx="5" ry="5" width="35%" height="36" />
+      <Rect x="30" y="80%" rx="5" ry="5" width="131" height="47" />
+      <Rect x="50%" y="80%" rx="5" ry="5" width="131" height="47" />
+      <Rect x="30" y="60%" rx="3" ry="3" width="301" height="6" />
+      <Rect x="30" y="63%" rx="3" ry="3" width="301" height="6" />
+      <Rect x="30" y="66%" rx="3" ry="3" width="301" height="6" />
+      <Rect x="30" y="69%" rx="3" ry="3" width="301" height="6" />
+    </View>
   </ContentLoader>
 );
 const ContentLoading = props => {
   const { screen } = props;
+  console.log(screen, 'screenscreenscreenscreenscreenscreen');
   return (
     <View style={loadingIndicatorStyle}>
       {screen === 'AppHome' && <WorldLoader />}
@@ -261,5 +271,3 @@ const loadingIndicatorStyle = {
 };*/
 }
 export default ContentLoading;
-
-export { PublicTreeCounterContentLoader, SingleCompetitionLoader };

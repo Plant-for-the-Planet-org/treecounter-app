@@ -188,7 +188,6 @@ export default class Leaderboard extends Component {
     );
     return sortView;
   };
-
   render() {
     // const { categoryInfo } = this.props;
     // const selectedCategory = this.state.selectedCategory || (categoryInfo && categoryInfo.categoryKeys && categoryInfo.categoryKeys[0]);

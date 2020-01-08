@@ -5,24 +5,13 @@ import { tpoSchema, plantProjectSchema } from '../schemas/index';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 
-export function loadTpos() {
-  // loadProjects();
-  const request = getRequest('data_tpos_get');
-
-  return dispatch => {
-    request
-      .then(res => {
-        dispatch(mergeEntities(normalize(res.data, [tpoSchema])));
-      })
-      .catch(error => console.log(error));
-  };
-}
 export function loadProjects(category = 'all', options = {}) {
   const request = getRequest('plantProjects_get', {
     category: category,
     ...options
   });
   return dispatch => {
+    dispatch(setProgressModelState(true));
     request
       .then(res => {
         console.dir(res);
@@ -39,31 +28,35 @@ export function loadProjects(category = 'all', options = {}) {
             ])
           )
         );
-        category == 'featured' &&
-          res.data.merge.plantProjectPager[0].entities.map(plantProject => {
-            dispatch(loadProject(plantProject));
-          });
+        // category == 'featured' &&
+        //   res.data.merge.plantProjectPager[0].entities.map(plantProject => {
+        //     dispatch(loadProject(plantProject));
+        //   });
+        dispatch(setProgressModelState(false));
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        dispatch(setProgressModelState(false));
+      });
   };
 }
 
 export function loadProject(plantProject) {
   const request = getRequest('plantProject_get', { uid: plantProject.id });
   return dispatch => {
-    dispatch(setProgressModelState(true));
+    // dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
       request
         .then(res => {
           console.log('========================', res.data);
           dispatch(mergeEntities(normalize(res.data, plantProjectSchema)));
           dispatch(mergeEntities(normalize(res.data.tpoData, tpoSchema)));
-          dispatch(setProgressModelState(false));
+          // dispatch(setProgressModelState(false));
           resolve(res.data);
         })
         .catch(error => {
           console.log(error);
-          dispatch(setProgressModelState(false));
+          // dispatch(setProgressModelState(false));
           reject(error);
         });
     });

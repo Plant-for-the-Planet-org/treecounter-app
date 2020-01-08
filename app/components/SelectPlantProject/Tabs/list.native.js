@@ -11,16 +11,16 @@ const ListProjects = ({
   plantProjects,
   selectProject,
   onMoreClick,
-  placeholderTextColor,
-  loadProjects
+  placeholderTextColor
+  // loadProjects
 }) => {
   const [search, setSearch] = useState('');
-  useEffect(() => {
-    if (!plantProjects.filter(project => !project.isFeatured).length) {
-      loadProjects();
-    }
-    console.log('mount it!');
-  }, []); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
+  // useEffect(() => {
+  //   if (!plantProjects.filter(project => !project.isFeatured).length) {
+  //     loadProjects();
+  //   }
+  //   console.log('mount it!');
+  // }, []); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
   // memoized: refilters if plantProjects or search string changes
   const filteredProjects = useMemo(

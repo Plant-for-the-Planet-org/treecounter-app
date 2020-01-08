@@ -52,22 +52,35 @@ class SelectPlantProject extends Component {
     };
   }
 
-  async componentWillMount() {
-    if (
-      this.props.plantProjects(
-        plantProject => plantProject.isFeatured && !plantProject.tpoData
-      ).length
-    ) {
-      this.props.plantProjects(
-        plantProject =>
-          plantProject.isFeatured &&
-          !plantProject.tpoData &&
-          this.props.loadProject(plantProject)
-      );
-    }
+  componentWillMount() {
     this.setState(this.initialStateFromProps(this.props));
   }
 
+  async componentDidMount() {
+    if (
+      this.props.plantProjects.filter(
+        plantProject => plantProject.isFeatured && !plantProject.tpoData
+      ).length
+    ) {
+      let { loadProject } = this.props;
+      await [
+        this.props.plantProjects.map(
+          plantProject =>
+            plantProject.isFeatured &&
+            !plantProject.tpoData &&
+            loadProject(plantProject)
+        )
+      ];
+    }
+    if (
+      !this.props.plantProjects.filter(plantProject => !plantProject.isFeatured)
+        .length
+    ) {
+      let { loadProjects } = this.props;
+      await loadProjects();
+    }
+    this.setState(this.initialStateFromProps(this.props));
+  }
   componentWillReceiveProps(props) {
     this.setState(this.initialStateFromProps(props));
   }
@@ -235,7 +248,9 @@ class SelectPlantProject extends Component {
           <Slider {...settings}>
             {featuredProjects.length !== 0
               ? featuredProjects.sort((a, b) => a.id - b.id).map(project => {
-                  console.log(project);
+                  {
+                    /* console.log(project); */
+                  }
                   return (
                     <CardLayout
                       className="plant_project_content"

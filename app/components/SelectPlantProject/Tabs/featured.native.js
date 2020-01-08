@@ -67,7 +67,7 @@ export default class FeaturedProjects extends PureComponent {
             ...flatListContainerStyle
           }}
           ListHeaderComponent={Header}
-          data={featuredProjects}
+          data={featuredProjects.sort((a, b) => a.id - b.id)}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />

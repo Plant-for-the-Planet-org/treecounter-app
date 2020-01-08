@@ -15,7 +15,6 @@ import {
   selectPlantProjectAction,
   clearPlantProject
 } from '../../actions/selectPlantProjectAction';
-import { loadProjects } from '../../actions/loadTposAction';
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
@@ -114,7 +113,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      loadProjects,
       supportTreecounterAction,
       selectPlantProjectAction,
       fetchCurrencies,

@@ -26,16 +26,13 @@ class PlantProjectFull extends React.Component {
     const plantProject = { ...props.plantProject };
     this.state = { plantProject };
   }
-  async componentWillMount() {
+  async componentDidMount() {
     try {
-      console.log(
-        'getting project details: we already have:',
-        this.state.plantProject,
-        this.props.plantProject
-      );
-      if (!this.state.plantProject || !this.state.plantProject.tpoData) {
+      if (this.props.plantProject && !this.props.plantProject.tpoData) {
         // we dont have the details in store, fetch it
-        const plantProject = await loadProject(this.props.plantProject.id);
+        const plantProject = await this.props.loadProject(
+          this.props.plantProject
+        );
         console.log('fetched details plantproject', plantProject);
         this.setState({ plantProject });
       }

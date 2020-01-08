@@ -55,7 +55,19 @@ class SelectPlantTabView extends PureComponent {
   };
 
   handleIndexChange = index => {
+    console.log('indicator index, ', index);
     this.setState({ index: index });
+    if (
+      index &&
+      !this.props.plantProjects.filter(project => !project.isFeatured).length
+    ) {
+      try {
+        this.props.loadProjects();
+        //console.log('loaded projects in list', projects);
+      } catch (error) {
+        console.log('error on lloading project on list', error);
+      }
+    }
   };
 
   renderTabBar = props => {
@@ -91,11 +103,12 @@ class SelectPlantTabView extends PureComponent {
       loadProjects,
       loadProject
     };
-    // const { index } = this.state;
+    const { index } = this.state;
 
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
+        console.log('fatured active', index, this.props.plantProjects);
         return (
           <FeaturedProjects
             onSelectProjects={this.onSelectProjects}
@@ -103,6 +116,8 @@ class SelectPlantTabView extends PureComponent {
           />
         );
       case 'list':
+        console.log('list active', index, this.props.plantProjects);
+
         return (
           <ListProjects onSelectProjects={this.onSelectProjects} {...props} />
         );

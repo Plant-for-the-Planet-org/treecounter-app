@@ -53,9 +53,14 @@ class SelectPlantProjectContainer extends PureComponent {
   // }
 
   async componentDidMount() {
-    let data = await this.props.loadProjects('featured');
-
-    console.log('===got data in await in did mount:', data);
+    if (
+      this.props.plantProjects &&
+      !this.props.plantProjects.filter(plantProject => plantProject.isFeatured)
+        .length
+    ) {
+      let data = await this.props.loadProjects('featured');
+      console.log('===got data in await in did mount:', data);
+    }
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }

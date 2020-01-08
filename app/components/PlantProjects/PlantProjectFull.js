@@ -42,13 +42,16 @@ class PlantProjectFull extends React.Component {
     }
   }
   async componentDidMount() {
-    if (!this.state.plantProject || !this.state.plantProject.tpoData) {
+    if (this.props.plantProject && !this.props.plantProject.tpoData) {
       // we dont have the details in store, fetch it
       const plantProject = await this.props.loadProject(
         this.props.plantProject
       );
       this.setState({ plantProject });
-      console.log('fetched details plantproject', plantProject);
+      console.log(
+        'fetched details plantproject n plan project full',
+        plantProject
+      );
     }
   }
   toggleExpanded() {

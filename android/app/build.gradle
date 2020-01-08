@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
 
@@ -148,7 +149,7 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
-        manifestPlaceholders = [googleMapApiKey: properties.getProperty("googleMapApiKey")]
+        // manifestPlaceholders = [googleMapApiKey: project.env.get("googleMapApiKey")]
     }
     signingConfigs {
       release {

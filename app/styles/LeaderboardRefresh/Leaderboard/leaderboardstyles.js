@@ -29,7 +29,7 @@ export default EStyleSheet.create({
   },
   widgetTitle: {
     fontSize: 14,
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Regular',
     color: '#4d5153'
   }
 });

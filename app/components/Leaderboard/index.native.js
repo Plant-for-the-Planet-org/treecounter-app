@@ -65,7 +65,7 @@ export default class Leaderboard extends Component {
   };
   _getTableView = selectedCategory => {
     //console.log(this.props.queryResult);
-    let listItemsUI = <LoadingIndicator />;
+    let listItemsUI = <LoadingIndicator contentLoader screen="LeaderBoard" />;
     let maxPlanted = 0;
     if (this.props.queryResult) {
       const sortedQueryResults = _.sortBy(this.props.queryResult, ['planted']);
@@ -105,7 +105,7 @@ export default class Leaderboard extends Component {
               })}
             </View>
           ) : (
-            <LoadingIndicator />
+            <LoadingIndicator contentLoader screen="LeaderBoard" />
           )}
         </CardLayout>
       );

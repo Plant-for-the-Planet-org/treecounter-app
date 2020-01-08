@@ -8,6 +8,8 @@ import currenciesReducer from './currenciesReducer';
 import currencyReducer from './currencyReducer';
 import paymentStatusReducer from './paymentStatus';
 import modelDialogReducer from './modelDialogReducer';
+import contentloaderReducer from './contentloaderReducer';
+
 import pledgeEventReducer from './pledgeEventReducer';
 import updateLastRouteReducer from './updateLastRouteReducer';
 import competitionDetailReducer from './competitionDetailReducer';
@@ -23,6 +25,7 @@ const commonReducers = {
   currency: currencyReducer,
   paymentStatus: paymentStatusReducer,
   modelDialogState: modelDialogReducer,
+  contentloaderState: contentloaderReducer,
   pledgeEvents: pledgeEventReducer,
   lastRouteState: updateLastRouteReducer,
   competitionDetail: competitionDetailReducer

@@ -8,7 +8,6 @@ import * as icons from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
-import { fetchItem, saveItem } from '../../stores/localStorage';
 import UserProfileImage from '../Common/UserProfileImage.native';
 
 //   icons.target_outline;
@@ -47,16 +46,16 @@ export default class Menu extends Component {
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);
-    const welcome = await fetchItem('welcome');
-
+    // const welcome = await fetchItem('welcome');
     if (!this.props.userProfile) {
-      if (welcome == null) {
-        updateRoute('welcome_screen', this.props.navigation, 0);
-      } else {
-        updateRoute('app_homepage', this.props.navigation, 0);
-      }
+      // if (welcome == null) {
+      //   updateRoute('welcome_screen', this.props.navigation, 0);
+      // } else {
+      //   updateRoute('app_homepage', this.props.navigation, 0);
+      // }
+      updateRoute('welcome_screen', this.props.navigation, 0);
     }
-    saveItem('welcome', JSON.stringify({ value: 'true' }));
+    // saveItem('welcome', JSON.stringify({ value: 'true' }));
   }
   componentWillUnmount() {
     // Remove the listener

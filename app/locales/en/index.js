@@ -38,6 +38,11 @@ import formValidationErrors from './formValidationErrors.json';
 import leaderboard from './leaderBoardRefresh/leaderboard.json';
 import CountriesLeaderBoard from './leaderBoardRefresh/CountriesLeaderBoard.json';
 import CountryDetails from './leaderBoardRefresh/countryDetails.json';
+import WelcomeScreen1 from './welcomescreen1.json';
+import WelcomeScreen2 from './welcomescreen2.json';
+import WelcomeScreen3 from './welcomescreen3.json';
+import WelcomeScreen4 from './welcomescreen4.json';
+import WelcomeScreen5 from './welcomescreen5.json';
 export default {
   ...activateAccountlabels,
   ...challengelabels,
@@ -78,5 +83,10 @@ export default {
   ...formValidationErrors,
   ...leaderboard,
   ...CountriesLeaderBoard,
-  ...CountryDetails
+  ...CountryDetails,
+  ...WelcomeScreen1,
+  ...WelcomeScreen2,
+  ...WelcomeScreen3,
+  ...WelcomeScreen4,
+  ...WelcomeScreen5
 };

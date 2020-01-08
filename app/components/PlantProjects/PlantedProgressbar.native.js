@@ -47,8 +47,8 @@ class PlantedProgressBar extends React.Component {
                     width: treeCountWidth + '%',
                     paddingRight: 10,
                     padding: 5,
-                    borderTopRightRadius: treeCountWidth < 100 ? 20 : 0,
-                    borderBottomRightRadius: treeCountWidth < 100 ? 20 : 0,
+                    borderTopRightRadius: treeCountWidth < 100 ? 5 : 0,
+                    borderBottomRightRadius: treeCountWidth < 100 ? 5 : 7,
                     borderWidth: 0.5,
                     ...treePlantedChildContainerStyle
                   }
@@ -63,12 +63,14 @@ class PlantedProgressBar extends React.Component {
               flexDirection: 'row',
               position: 'absolute',
               alignItems: 'center',
-              paddingTop: 8,
-              paddingBottom: 8
+              paddingTop: 6,
+              paddingBottom: 6
             }}
           >
             <Text style={styles.treePlantedtextPlanted}>
-              {formatNumber(parseInt(countPlanted))}
+              {this.props.compact
+                ? convertNumber(countPlanted, 2)
+                : formatNumber(parseInt(countPlanted))}
             </Text>
             <Text style={styles.treePlantedtextTrees}>
               {i18n.t('label.planted')}

@@ -25,7 +25,7 @@ import AboutUsContainer from '../../containers/AboutUs';
 import UserContributionDetails from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
 import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
-import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal';
+import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import BottomTabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
@@ -236,7 +236,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
   );
   const welcomeScreenNavigator = createStackNavigator(
     {
-      ['welcome_screen']: { screen: WelcomeScreenModal }
+      ['welcome_screen']: { screen: WelcomScreenSlider }
     },
     {
       headerMode: 'none',

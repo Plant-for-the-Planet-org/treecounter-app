@@ -70,7 +70,6 @@
     "react-native-fs": "2.14.1",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-htmlview": "^0.15.0",
-    "react-native-content-loader": "^0.1.6",
     "react-native-i18n": "^2.0.15",
     "react-native-image-carousel": "^0.4.6",
     "react-native-image-crop-picker": "^0.25.0",

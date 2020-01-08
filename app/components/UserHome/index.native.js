@@ -66,21 +66,6 @@ export default class UserHome extends Component {
     this.setState({ index });
   };
 
-  _renderTabBar = props => {
-    return (
-      <TabBar
-        {...props}
-        style={tabStyles.tabBar}
-        tabStyle={{ width: Layout.window.width / 2 }}
-        labelStyle={tabStyles.textStyle}
-        indicatorStyle={tabStyles.textActive}
-        scrollEnabled
-        bounces
-        useNativeDriver
-      />
-    );
-  };
-
   updateSvg(toggle) {
     if (toggle) {
       const treecounter = this.props.treecounterData;
@@ -117,122 +102,90 @@ export default class UserHome extends Component {
     }
   }
 
-  _renderUserHome = ({ route }) => {
-    const { userProfile } = this.props;
-    const profileType = userProfile.type;
-    let { svgData } = this.state;
-    switch (route.key) {
-      case 'home':
-        return (
-          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
-            <View style={styles.header}>
-              <View style={styles.userProfileContainer}>
-                <UserProfileImage
-                  imageStyle={styles.userProfileImage}
-                  profileImage={userProfile.image}
-                />
-
-                <View style={styles.userInfo}>
-                  <View style={styles.userInfoName}>
-                    <Text style={styles.nameStyle}>
-                      {userProfile.treecounter.displayName}
-                    </Text>
-                  </View>
-                  <View style={styles.userInfoProfileType}>
-                    <Image
-                      style={styles.profileTypeImage}
-                      resizeMode="contain"
-                      source={
-                        profileType === 'education'
-                          ? images['schoolIcon']
-                          : profileType === 'tpo'
-                            ? images['tpoIcon']
-                            : profileType === 'company'
-                              ? images['companyIcon']
-                              : images['individualIcon']
-                      }
-                    />
-                  </View>
-                </View>
-              </View>
-            </View>
-            <View style={styles.svgContainer}>
-              <SvgContainer
-                {...svgData}
-                onToggle={toggleVal => this.updateSvg(toggleVal)}
-              />
-            </View>
-            <View>
-              {userProfile.synopsis1 ||
-              userProfile.synopsis2 ||
-              userProfile.linkText ||
-              userProfile.url ? (
-                <CardLayout>
-                  {userProfile.synopsis1 ? (
-                    <Text style={styles.footerText}>
-                      {userProfile.synopsis1}
-                    </Text>
-                  ) : null}
-                  {userProfile.synopsis2 ? (
-                    <Text style={styles.footerText}>
-                      {userProfile.synopsis2}
-                    </Text>
-                  ) : null}
-                  {userProfile.url ? (
-                    <Text
-                      style={styles.linkText}
-                      onPress={() => this._goToURL(userProfile.url)}
-                    >
-                      {userProfile.linkText || i18n.t('label.read_more')}
-                    </Text>
-                  ) : null}
-                </CardLayout>
-              ) : null}
-            </View>
-            <View>
-              {'tpo' === userProfile.type &&
-              1 <= userProfile.plantProjects.length
-                ? null
-                : null}
-            </View>
-          </ScrollView>
-        );
-      case 'my-trees':
-        return (
-          <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
-            <ContributionCardList
-              contributions={this.props.userContributions}
-              deleteContribution={this.props.deleteContribution}
-            />
-          </ScrollView>
-        );
-      default:
-        return null;
-    }
-  };
-
   _goToURL(url) {
-    /*
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url);
-      } else {
-        //console.log("Don't know how to open URI: " + url);
-      }
-    });
-*/
     Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
   }
 
   render() {
+    const { userProfile } = this.props;
+    const profileType = userProfile.type;
+    let { svgData } = this.state;
     return (
-      <TabView
-        useNativeDriver
-        navigationState={this.state}
-        renderScene={this._renderUserHome}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
-      />
+      <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
+        <View>
+          <View style={styles.header}>
+            <View style={styles.userProfileContainer}>
+              <UserProfileImage
+                imageStyle={styles.userProfileImage}
+                profileImage={userProfile.image}
+              />
+
+              <View style={styles.userInfo}>
+                <View style={styles.userInfoName}>
+                  <Text style={styles.nameStyle}>
+                    {userProfile.treecounter.displayName}
+                  </Text>
+                </View>
+                <View style={styles.userInfoProfileType}>
+                  <Image
+                    style={styles.profileTypeImage}
+                    resizeMode="contain"
+                    source={
+                      profileType === 'education'
+                        ? images['schoolIcon']
+                        : profileType === 'tpo'
+                          ? images['tpoIcon']
+                          : profileType === 'company'
+                            ? images['companyIcon']
+                            : images['individualIcon']
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.svgContainer}>
+            <SvgContainer
+              {...svgData}
+              onToggle={toggleVal => this.updateSvg(toggleVal)}
+            />
+          </View>
+          <View>
+            {userProfile.synopsis1 ||
+            userProfile.synopsis2 ||
+            userProfile.linkText ||
+            userProfile.url ? (
+              <CardLayout>
+                {userProfile.synopsis1 ? (
+                  <Text style={styles.footerText}>{userProfile.synopsis1}</Text>
+                ) : null}
+                {userProfile.synopsis2 ? (
+                  <Text style={styles.footerText}>{userProfile.synopsis2}</Text>
+                ) : null}
+                {userProfile.url ? (
+                  <Text
+                    style={styles.linkText}
+                    onPress={() => this._goToURL(userProfile.url)}
+                  >
+                    {userProfile.linkText || i18n.t('label.read_more')}
+                  </Text>
+                ) : null}
+              </CardLayout>
+            ) : null}
+          </View>
+          <View>
+            {'tpo' === userProfile.type && 1 <= userProfile.plantProjects.length
+              ? null
+              : null}
+          </View>
+        </View>
+        <View contentContainerStyle={{ paddingBottom: 72 }}>
+          <ContributionCardList
+            contributions={this.props.userContributions}
+            deleteContribution={this.props.deleteContribution}
+          />
+        </View>
+      </ScrollView>
     );
   }
 }

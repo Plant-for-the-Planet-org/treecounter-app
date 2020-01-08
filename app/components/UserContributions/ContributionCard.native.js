@@ -7,7 +7,8 @@ import {
   Image,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  TouchableOpacity
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -262,8 +263,6 @@ class ContributionCard extends React.Component {
       registrationDate,
       redemptionCode,
       redemptionDate
-      // contributionImages,
-      // ndviUid
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };
@@ -300,8 +299,60 @@ class ContributionCard extends React.Component {
     let styles = myTreesStyle(labelColor, borderColor);
 
     return contributionType === 'donation' ? (
-      <CardLayout
-        style={styles.addPadding}
+      // <CardLayout
+      //   style={styles.addPadding}
+      //   onPress={() => {
+      //     this.props.navigation.navigate('contribution_details', {
+      //       contribution,
+      //       titleParam: plantProjectName || tpoName || treeSpecies
+      //     });
+      //   }}
+      // >
+
+      //   {plantProjectLine ? (
+      //     <Text
+      //       numberOfLines={1}
+      //       style={[styles.gap, styles.restrictTextLength]}
+      //     >
+      //       {plantProjectLine}
+      //     </Text>
+      //   ) : null}
+      //   {donateActionLine ? (
+      //     <Text
+      //       numberOfLines={1}
+      //       style={[styles.gap, styles.restrictTextLength]}
+      //     >
+      //       {donateActionLine}
+      //     </Text>
+      //   ) : null}
+      //   {tpoLine ? (
+      //     <Text numberOfLines={1} style={styles.restrictTextLength}>
+      //       {tpoLine}
+      //     </Text>
+      //   ) : null}
+      //   {mayUpdate ? (
+      //     <Text
+      //       style={styles.updateTextStyle}
+      //       onPress={() => {
+      //         this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
+      //           selectedTreeId: contribution.id,
+      //           contribution
+      //         });
+      //       }}
+      //     >
+      //       {i18n.t('label.update')}
+      //     </Text>
+      //   ) : null}
+      //   <View style={styles.labelStyle}>
+      //     <Text style={styles.labelTextStyle}>
+      //       {cardType && cardType.length > 0
+      //         ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
+      //         : ''}
+      //     </Text>
+      //   </View>
+      // </CardLayout>
+      <TouchableOpacity
+        style={styles.singleRedeemObject}
         onPress={() => {
           this.props.navigation.navigate('contribution_details', {
             contribution,
@@ -309,134 +360,34 @@ class ContributionCard extends React.Component {
           });
         }}
       >
-        <View style={[styles.leftBorder, styles.leftColorBorder]} />
-        {treeCountLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
-          >
-            {treeCountLine}
-          </Text>
-        ) : null}
-        {plantProjectLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantProjectLine}
-          </Text>
-        ) : null}
-        {donateActionLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {donateActionLine}
-          </Text>
-        ) : null}
-        {tpoLine ? (
-          <Text numberOfLines={1} style={styles.restrictTextLength}>
-            {tpoLine}
-          </Text>
-        ) : null}
-        {mayUpdate ? (
-          <Text
-            style={styles.updateTextStyle}
-            onPress={() => {
-              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                selectedTreeId: contribution.id,
-                contribution
-              });
-            }}
-          >
-            {i18n.t('label.update')}
-          </Text>
-        ) : null}
-        <View style={styles.labelStyle}>
-          <Text style={styles.labelTextStyle}>
-            {cardType && cardType.length > 0
-              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-              : ''}
-          </Text>
-        </View>
-      </CardLayout>
-    ) : contributionType === 'planting' ? (
-      <TouchableHighlight
-        underlayColor={'transparent'}
-        onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
-        }}
-      >
-        <CardLayout style={[styles.addPadding, styles.minHeight]}>
-          <View style={[styles.leftBorder, styles.leftColorBorder]} />
-          {treeCountLine ? (
-            <Text
-              numberOfLines={1}
-              style={[styles.boldText, styles.gap, styles.restrictTextLength]}
-            >
-              {treeCountLine}
-            </Text>
+        <View>
+          {plantDate ? (
+            <View style={styles.redeemObjectDate}>
+              <Text style={styles.redeemObjectDateText}>
+                {formatDate(plantDate)}
+              </Text>
+            </View>
           ) : null}
-          {plantProjectLine ? (
-            <Text
-              numberOfLines={1}
-              style={[styles.gap, styles.restrictTextLength]}
-            >
-              {plantProjectLine}
-            </Text>
-          ) : null}
-          {plantActionLine ? (
-            <Text
-              numberOfLines={2}
-              style={[styles.gap, styles.restrictTextLength]}
-            >
-              {plantActionLine}
-            </Text>
-          ) : null}
-          {dedicateActionLine ? (
-            <Text numberOfLines={1} style={styles.restrictTextLength}>
-              {dedicateActionLine}
-            </Text>
-          ) : null}
-          <Text
-            style={styles.deleteTextStyle}
-            onPress={() => {
-              this.props.navigation.navigate('delete_contribution', {
-                deleteContribution: () =>
-                  this.props.deleteContribution(contribution.id)
-              });
-            }}
-          >
-            {i18n.t('label.delete')}
-          </Text>
-          {mayUpdate ? (
-            <Text
-              style={styles.updateTextStyle}
-              onPress={() => {
-                this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                  selectedTreeId: contribution.id,
-                  contribution
-                });
-              }}
-            >
-              {i18n.t('label.update')}
-            </Text>
-          ) : null}
-          <View style={styles.labelStyle}>
-            <Text style={styles.labelTextStyle}>
-              {cardType && cardType.length > 0
-                ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-                : ''}
-            </Text>
+
+          <View style={styles.redeemObjectTreesContainer}>
+            <View style={styles.row1}>
+              <Text style={styles.redeemObjectTitle}>Tree Donation</Text>
+              <Text style={styles.redeemObjectTrees}>
+                {delimitNumbers(treeCount)}
+              </Text>
+            </View>
+            <View style={styles.row2}>
+              <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+              <Text style={styles.redeemObjectSubTitle}>
+                {treeCount > 1 ? i18n.t('label.trees') : i18n.t('label.tree')}
+              </Text>
+            </View>
           </View>
-        </CardLayout>
-      </TouchableHighlight>
-    ) : (
-      <CardLayout
-        style={styles.addPadding}
+        </View>
+      </TouchableOpacity>
+    ) : contributionType === 'planting' ? (
+      <TouchableOpacity
+        style={styles.singleRedeemObject}
         onPress={() => {
           this.props.navigation.navigate('contribution_details', {
             contribution,
@@ -444,57 +395,71 @@ class ContributionCard extends React.Component {
           });
         }}
       >
-        <View style={[styles.leftBorder, styles.leftColorBorder]} />
-        {treeCountLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
-          >
-            {treeCountLine}
-          </Text>
-        ) : null}
-        {plantProjectLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantProjectLine}
-          </Text>
-        ) : null}
-        {redeemActionLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {redeemActionLine}
-          </Text>
-        ) : null}
-        {tpoLine ? (
-          <Text numberOfLines={1} style={styles.restrictTextLength}>
-            {tpoLine}
-          </Text>
-        ) : null}
-        {mayUpdate ? (
-          <Text
-            style={styles.updateTextStyle}
-            onPress={() => {
-              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                selectedTreeId: contribution.id,
-                contribution
-              });
-            }}
-          >
-            {i18n.t('label.update')}
-          </Text>
-        ) : null}
-        <View style={styles.labelStyle}>
-          <Text style={styles.labelTextStyle}>
-            {cardType && cardType.length > 0
-              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-              : ''}
-          </Text>
+        <View>
+          {plantDate ? (
+            <View style={styles.redeemObjectDate}>
+              <Text style={styles.redeemObjectDateText}>
+                {formatDate(plantDate)}
+              </Text>
+            </View>
+          ) : null}
+
+          <View style={styles.redeemObjectTreesContainer}>
+            <View style={styles.row1}>
+              <Text style={styles.redeemObjectTitle}>Registered Trees</Text>
+              <Text style={styles.redeemObjectTrees}>
+                {delimitNumbers(treeCount)}
+              </Text>
+            </View>
+            <View style={styles.row2}>
+              <Text style={styles.redeemObjectSubTitle}>
+                {plantProjectLine}
+              </Text>
+              <Text style={styles.redeemObjectSubTitle}>
+                {treeCount > 1 ? i18n.t('label.trees') : i18n.t('label.tree')}
+              </Text>
+            </View>
+            <View style={styles.row2}>
+              <Text style={styles.redeemObjectSubTitle}>
+                {dedicateActionLine}
+              </Text>
+            </View>
+          </View>
         </View>
-      </CardLayout>
+      </TouchableOpacity>
+    ) : (
+      <TouchableOpacity
+        style={styles.singleRedeemObject}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
+      >
+        <View>
+          {plantDate ? (
+            <View style={styles.redeemObjectDate}>
+              <Text style={styles.redeemObjectDateText}>March 7, 2019</Text>
+            </View>
+          ) : null}
+
+          <View style={styles.redeemObjectTreesContainer}>
+            <View style={styles.row1}>
+              <Text style={styles.redeemObjectTitle}>Gift to</Text>
+              <Text style={styles.redeemObjectTrees}>
+                {delimitNumbers(treeCount)}
+              </Text>
+            </View>
+            <View style={styles.row2}>
+              <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+              <Text style={styles.redeemObjectSubTitle}>
+                {treeCount > 1 ? i18n.t('label.trees') : i18n.t('label.tree')}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
     );
   }
 }

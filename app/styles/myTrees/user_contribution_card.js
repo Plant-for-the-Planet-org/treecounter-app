@@ -151,7 +151,42 @@ export const myTreesStyle = (color, borderColor) =>
     },
     leftColorBorder: {
       borderColor: '$borderColor'
-    }
+    },
+
+    // New Design
+
+    singleRedeemObject: { borderBottomWidth: 1, borderBottomColor: '#d5d5d5' },
+    redeemObjectDate: {
+      backgroundColor: '#f7f7f7',
+      height: 40,
+      width: '100%',
+      justifyContent: 'center',
+      padding: 20
+    },
+    redeemObjectDateText: { fontFamily: 'OpenSans-Regular', fontSize: 14 },
+    redeemObjectTreesContainer: { paddingHorizontal: 20, paddingVertical: 16 },
+    row1: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    },
+    row2: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginTop: 6
+    },
+    redeemObjectTitle: {
+      fontFamily: 'OpenSans-Bold',
+      fontSize: 18,
+      color: '#4d5153'
+    },
+    redeemObjectTrees: {
+      fontFamily: 'OpenSans-Bold',
+      fontSize: 18,
+      color: '#89b53a'
+    },
+    redeemObjectSubTitle: { fontFamily: 'OpenSans-Regular', fontSize: 13 }
   });
 
 const style = myTreesStyle('#95c243', '#68aeec');

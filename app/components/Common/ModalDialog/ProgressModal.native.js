@@ -9,12 +9,11 @@ const ProgressModal = () => {
   // This component will re-render anytime progressModalState is updated in redux
   const isOpen = useSelector(getProgressModelState);
   const backgroundColor = 'rgba(255,255,255,0.5)';
-
   return (
     <Modal
       animationType={'slide'}
       transparent
-      visible={isOpen}
+      visible={false}
       elevation="10"
       onRequestClose={() => {
         Alert.alert('Loading cancelled in between');

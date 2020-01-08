@@ -12,7 +12,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import "ReactNativeConfig.h"
-@import GoogleMaps;
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation AppDelegate
 

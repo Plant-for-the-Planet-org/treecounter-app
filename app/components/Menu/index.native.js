@@ -8,7 +8,6 @@ import * as icons from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
-import { saveItem } from '../../stores/localStorage';
 import UserProfileImage from '../Common/UserProfileImage.native';
 
 //   icons.target_outline;

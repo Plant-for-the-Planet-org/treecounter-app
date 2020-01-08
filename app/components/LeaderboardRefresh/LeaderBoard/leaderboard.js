@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../../styles/LeaderboardRefresh/Leaderboard/leaderboardstyles';
 import i18n from '../../../locales/i18n';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
 
-import _ from 'lodash';
-
 const Leaderboard = ({ navigation }) => {
-  const _navigateTo = (category, routeName) => {
+  const navigateTo = (category, routeName) => {
     updateRoute(routeName, navigation, undefined, { category });
   };
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => _navigateTo('country', 'countries_leaderboard')}
+          onPress={() => navigateTo('country', 'countries_leaderboard')}
           style={styles.widgetContainer}
         >
           <Image
@@ -32,7 +30,7 @@ const Leaderboard = ({ navigation }) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => _navigateTo('company', 'companies_leaderboard')}
+          onPress={() => navigateTo('company', 'companies_leaderboard')}
           style={styles.widgetContainer}
         >
           <Image
@@ -52,7 +50,7 @@ const Leaderboard = ({ navigation }) => {
       </View>
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => _navigateTo('individual', 'individuals_leaderboard')}
+          onPress={() => navigateTo('individual', 'individuals_leaderboard')}
           style={styles.widgetContainer}
         >
           <Image
@@ -70,7 +68,7 @@ const Leaderboard = ({ navigation }) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => _navigateTo('education', 'schools_leaderboard')}
+          onPress={() => navigateTo('education', 'schools_leaderboard')}
           style={styles.widgetContainer}
         >
           <Image
@@ -91,7 +89,7 @@ const Leaderboard = ({ navigation }) => {
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() =>
-            _navigateTo('organization', 'organizations_LeaderBoard')
+            navigateTo('organization', 'organizations_LeaderBoard')
           }
           style={styles.widgetContainer}
         >

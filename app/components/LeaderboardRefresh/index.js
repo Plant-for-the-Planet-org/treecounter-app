@@ -4,7 +4,6 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import Map from './Map/map';
 import Leaderboard from './LeaderBoard/leaderboard';
 import World from './World/world';
-import Header from './header';
 
 const initialLayout = { width: Dimensions.get('window').width };
 
@@ -26,7 +25,7 @@ const LeaderboardTabs = () => {
     second: Leaderboard,
     three: Map
   });
-  const _renderTabBar = props => {
+  const renderTabBar = props => {
     return (
       <TabBar
         {...props}
@@ -45,7 +44,7 @@ const LeaderboardTabs = () => {
         renderScene={renderScene}
         onIndexChange={setIndex}
         initialLayout={initialLayout}
-        renderTabBar={_renderTabBar}
+        renderTabBar={renderTabBar}
       />
     </View>
   );

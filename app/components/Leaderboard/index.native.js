@@ -1,8 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { PropTypes } from 'prop-types';
-import CategoryTypes from './categoryTypes';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import CardLayout from '../Common/Card';
 import styles from '../../styles/leaderboard/leader_board';
@@ -10,7 +9,6 @@ import { filter } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import ContextMenuItem from './contextMenuItem.native';
-import { categoryIcons } from '../../helpers/utils';
 import LeaderboardItem from './leaderBoardListItem.native';
 import LeaderboardRefresh from '../LeaderboardRefresh/LeaderBoard/leaderboard';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -192,12 +190,8 @@ export default class Leaderboard extends Component {
   };
 
   render() {
-    const { categoryInfo } = this.props;
-    const selectedCategory =
-      this.state.selectedCategory ||
-      (categoryInfo &&
-        categoryInfo.categoryKeys &&
-        categoryInfo.categoryKeys[0]);
+    // const { categoryInfo } = this.props;
+    // const selectedCategory = this.state.selectedCategory || (categoryInfo && categoryInfo.categoryKeys && categoryInfo.categoryKeys[0]);
     return (
       <View style={styles.leaderBoardContainer}>
         {/* <CategoryTypes

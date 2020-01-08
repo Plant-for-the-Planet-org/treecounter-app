@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity
-} from 'react-native';
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
-import Header from '../Header/BackHeader';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
-import {
-  ExploreDataAction,
-  LeaderBoardDataAction
-} from '../../../actions/exploreAction';
+import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 
 const CountriesLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
   const [period, setPeriod] = useState('all');
-  const [orderBy, setOrderBy] = useState('planted');
+  const [orderBy] = useState('planted');
 
   useEffect(
     () => {
@@ -47,7 +36,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
     },
     [period]
   );
-  const _renderCountryList = () => {
+  const renderCountryList = () => {
     if (queryresult) {
       return (
         <FlatList
@@ -55,7 +44,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
           renderItem={({ item, index }) => {
             return (
               <TouchableOpacity
-                onPress={() => _onPressCountry(item)}
+                onPress={() => onPressCountry(item)}
                 style={styles.oneContryContainer}
               >
                 <View style={styles.indexContainer}>
@@ -95,7 +84,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
       );
     }
   };
-  const _onPressCountry = item => {
+  const onPressCountry = item => {
     console.log(item, 'itemitemitem');
     const section = navigation.getParam('category');
     let uriArray = item.uri.split('/');
@@ -151,7 +140,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.countriesListContainer}>{_renderCountryList()}</View>
+      <View style={styles.countriesListContainer}>{renderCountryList()}</View>
     </View>
   );
 };

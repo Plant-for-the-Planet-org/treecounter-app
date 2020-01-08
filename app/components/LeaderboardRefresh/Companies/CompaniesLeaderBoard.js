@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity
-} from 'react-native';
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
-import Header from '../Header/BackHeader';
-import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getLocalRoute } from '../../../actions/apiRouting';
 
 const CompaniesLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
   const [period, setPeriod] = useState('all');
-  const [orderBy, setOrderBy] = useState('planted');
+  const [orderBy] = useState('planted');
 
   useEffect(
     () => {
@@ -45,7 +36,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
     },
     [period]
   );
-  const _renderCompanyList = () => {
+  const renderCompanyList = () => {
     if (queryresult) {
       return (
         <FlatList
@@ -54,7 +45,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
             return (
               <TouchableOpacity
                 onPress={() =>
-                  _onPressListItem(item.treecounterId, item.caption)
+                  onPressListItem(item.treecounterId, item.caption)
                 }
                 style={styles.oneContryContainer}
               >
@@ -93,7 +84,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
     }
   };
 
-  const _onPressListItem = (treeCounterId, title) => {
+  const onPressListItem = (treeCounterId, title) => {
     if (treeCounterId) {
       navigation.navigate(getLocalRoute('app_treecounter'), {
         treeCounterId,
@@ -145,7 +136,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.countriesListContainer}>{_renderCompanyList()}</View>
+      <View style={styles.countriesListContainer}>{renderCompanyList()}</View>
     </View>
   );
 };

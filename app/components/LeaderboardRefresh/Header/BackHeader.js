@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const BackHeader = () => {
@@ -20,6 +20,4 @@ const BackHeader = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 export default BackHeader;

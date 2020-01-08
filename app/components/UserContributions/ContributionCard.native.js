@@ -299,58 +299,6 @@ class ContributionCard extends React.Component {
     let styles = myTreesStyle(labelColor, borderColor);
 
     return contributionType === 'donation' ? (
-      // <CardLayout
-      //   style={styles.addPadding}
-      //   onPress={() => {
-      //     this.props.navigation.navigate('contribution_details', {
-      //       contribution,
-      //       titleParam: plantProjectName || tpoName || treeSpecies
-      //     });
-      //   }}
-      // >
-
-      //   {plantProjectLine ? (
-      //     <Text
-      //       numberOfLines={1}
-      //       style={[styles.gap, styles.restrictTextLength]}
-      //     >
-      //       {plantProjectLine}
-      //     </Text>
-      //   ) : null}
-      //   {donateActionLine ? (
-      //     <Text
-      //       numberOfLines={1}
-      //       style={[styles.gap, styles.restrictTextLength]}
-      //     >
-      //       {donateActionLine}
-      //     </Text>
-      //   ) : null}
-      //   {tpoLine ? (
-      //     <Text numberOfLines={1} style={styles.restrictTextLength}>
-      //       {tpoLine}
-      //     </Text>
-      //   ) : null}
-      //   {mayUpdate ? (
-      //     <Text
-      //       style={styles.updateTextStyle}
-      //       onPress={() => {
-      //         this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-      //           selectedTreeId: contribution.id,
-      //           contribution
-      //         });
-      //       }}
-      //     >
-      //       {i18n.t('label.update')}
-      //     </Text>
-      //   ) : null}
-      //   <View style={styles.labelStyle}>
-      //     <Text style={styles.labelTextStyle}>
-      //       {cardType && cardType.length > 0
-      //         ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-      //         : ''}
-      //     </Text>
-      //   </View>
-      // </CardLayout>
       <TouchableOpacity
         style={styles.singleRedeemObject}
         onPress={() => {
@@ -427,6 +375,41 @@ class ContributionCard extends React.Component {
           </View>
         </View>
       </TouchableOpacity>
+    ) : contribution.type === 'tpo-coupon' ? (
+      <TouchableOpacity
+        style={styles.singleRedeemObject}
+        onPress={() => {
+          this.props.navigation.navigate('contribution_details', {
+            contribution,
+            titleParam: plantProjectName || tpoName || treeSpecies
+          });
+        }}
+      >
+        <View>
+          {redemptionDate ? (
+            <View style={styles.redeemObjectDate}>
+              <Text style={styles.redeemObjectDateText}>
+                {formatDate(redemptionDate)}
+              </Text>
+            </View>
+          ) : null}
+
+          <View style={styles.redeemObjectTreesContainer}>
+            <View style={styles.row1}>
+              <Text style={styles.redeemObjectTitle}>Redeemed Trees</Text>
+              <Text style={styles.redeemObjectTrees}>
+                {delimitNumbers(treeCount)}
+              </Text>
+            </View>
+            <View style={styles.row2}>
+              <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+              <Text style={styles.redeemObjectSubTitle}>
+                {treeCount > 1 ? i18n.t('label.trees') : i18n.t('label.tree')}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
     ) : (
       <TouchableOpacity
         style={styles.singleRedeemObject}
@@ -438,15 +421,11 @@ class ContributionCard extends React.Component {
         }}
       >
         <View>
-          {plantDate ? (
-            <View style={styles.redeemObjectDate}>
-              <Text style={styles.redeemObjectDateText}>March 7, 2019</Text>
-            </View>
-          ) : null}
-
           <View style={styles.redeemObjectTreesContainer}>
             <View style={styles.row1}>
-              <Text style={styles.redeemObjectTitle}>Gift to</Text>
+              <Text style={styles.redeemObjectTitle}>
+                Gift from {contribution.giverName}
+              </Text>
               <Text style={styles.redeemObjectTrees}>
                 {delimitNumbers(treeCount)}
               </Text>

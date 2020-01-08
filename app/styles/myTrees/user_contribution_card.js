@@ -179,7 +179,8 @@ export const myTreesStyle = (color, borderColor) =>
     redeemObjectTitle: {
       fontFamily: 'OpenSans-Bold',
       fontSize: 18,
-      color: '#4d5153'
+      color: '#4d5153',
+      maxWidth: '70%'
     },
     redeemObjectTrees: {
       fontFamily: 'OpenSans-Bold',

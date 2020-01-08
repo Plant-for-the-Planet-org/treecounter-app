@@ -1,0 +1,133 @@
+{
+  "id": 316,
+  "contributionType": "donation",
+  "cardType": "donation",
+  "treeCount": 50,
+  "plantDate": "2019-12-06",
+  "geoLongitude": -77.899634,
+  "geoLatitude": 86.841271,
+  "country": "",
+  "tpoName": "Plant-for-the-Planet",
+  "plantProjectName": "Campeche Rainforest Restoration",
+  "contributionImages": [],
+  "contributionMeasurements": [],
+  "treeType": null,
+  "treeSpecies": null,
+  "giftRecipient": null,
+  "isPending": false,
+  "isGift": false,
+  "context": null,
+  "isRecurrent": false,
+  "plantProjectId": 1,
+  "givee": null,
+  "giveeSlug": null,
+  "recurrencyMnemonic": null,
+  "category": "contributions"
+}
+
+
+{
+  "id": 48,
+  "contributionType": "planting",
+  "cardType": "gift",
+  "treeCount": 49,
+  "plantDate": "1995-06-24",
+  "geoLongitude": 121.402656,
+  "geoLatitude": 23.71509,
+  "country": "MX",
+  "contributionImages": [],
+  "contributionMeasurements": [
+    {
+      "id": 9,
+      "diameter": 866,
+      "height": 687,
+      "measurementDate": "1992-07-26"
+    },
+    {
+      "id": 12,
+      "diameter": 873,
+      "height": 1417,
+      "measurementDate": "1995-07-13"
+    },
+    {
+      "id": 120,
+      "diameter": 180,
+      "height": 1539,
+      "measurementDate": "2017-02-19"
+    },
+    {
+      "id": 206,
+      "diameter": 508,
+      "height": 2544,
+      "measurementDate": "1992-07-20"
+    },
+    {
+      "id": 214,
+      "diameter": 355,
+      "height": 2777,
+      "measurementDate": "1994-01-29"
+    }
+  ],
+  "treeType": "maple",
+  "treeSpecies": "maple",
+  "treeClassification": "",
+  "treeScientificName": "",
+  "mayUpdate": false,
+  "isGift": true,
+  "isPending": false,
+  "context": null,
+  "registrationDate": "2019-11-26",
+  "givee": "Test4 Lastname4",
+  "giveeSlug": "test4-lastname4",
+  "geoLocation": "geoLongitude=121.402656&geoLatitude=23.71509&country=MX",
+  "ndviUid": null,
+  "geometry": null,
+  "category": "contributions"
+}
+
+
+{
+  "isPending": false,
+  "cardType": "gift",
+  "treeType": null,
+  "treeSpecies": null,
+  "geoLongitude": 66.419488,
+  "geoLatitude": -71.955257,
+  "country": "LY",
+  "plantProjectName": "project_4",
+  "tpoName": "One Tree Planted",
+  "id": 113,
+  "type": "donation-invitation",
+  "treeCount": 16692,
+  "redemptionDate": null,
+  "giverSlug": "american-red-cross",
+  "giverName": "American Red Cross",
+  "giverAvatar": "5ddd78f572057584739525.png",
+  "giverTreecounterId": 13,
+  "giver": "American Red Cross",
+  "message": null,
+  "category": "gifts"
+}
+
+
+{
+  "id": 238,
+  "type": "tpo-coupon",
+  "cardType": "gift",
+  "treeCount": 0.2,
+  "geoLongitude": -77.899634,
+  "geoLatitude": 86.841271,
+  "country": "",
+  "plantProjectName": "Campeche Rainforest Restoration",
+  "treeType": null,
+  "isPending": false,
+  "treeSpecies": null,
+  "tpoName": "Plant-for-the-Planet",
+  "redemptionDate": "2020-01-07 00:00:03",
+  "giverSlug": null,
+  "giverName": null,
+  "giverAvatar": null,
+  "giverTreecounterId": null,
+  "giver": null,
+  "category": "gifts"
+}

@@ -79,7 +79,7 @@ export default EStyleSheet.create({
     height: 50
   },
   countryBody: {
-    flex: 0.7
+    flex: 0.8
   },
   countryNameText: {
     fontFamily: 'OpenSans-Regular',

@@ -12,6 +12,9 @@ import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAct
 class ListViewProjects extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      page: 1
+    };
   }
   _keyExtractor = item => item.id.toString();
   onSelectClickedFeaturedProjects(id) {
@@ -36,7 +39,15 @@ class ListViewProjects extends PureComponent {
       navigation={this.props.navigation}
     />
   );
-
+  fetchMore = () => {
+    let { page } = this.state;
+    this.setState({ page: ++page }, async () => {
+      const data = await this.props.loadProjects('all', {
+        page: this.state.page
+      });
+      console.log('Got from fetch more:', data);
+    });
+  };
   render() {
     return (
       <View style={{ height: '100%' }}>
@@ -47,6 +58,8 @@ class ListViewProjects extends PureComponent {
           data={this.props.projects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
+          onEndReached={this.fetchMore}
+          onEndReachedThreshold={3}
         />
       </View>
     );

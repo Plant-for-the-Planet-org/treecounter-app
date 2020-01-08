@@ -11,16 +11,16 @@ export function loadProjects(category = 'all', options = {}) {
     ...options
   });
   return dispatch => {
-    dispatch(setProgressModelState(true));
+    !options.page && dispatch(setProgressModelState(true));
     request
       .then(res => {
-        console.dir(res);
-        let plantProjectPager = res.data.merge.plantProjectPager[0];
-        if (plantProjectPager.currentPage < plantProjectPager.nbPages) {
-          dispatch(
-            loadProjects(category, { page: ++plantProjectPager.currentPage })
-          );
-        }
+        // console.dir(res);
+        // let plantProjectPager = res.data.merge.plantProjectPager[0];
+        // if (plantProjectPager.currentPage < plantProjectPager.nbPages) {
+        //   dispatch(
+        //     loadProjects(category, { page: ++plantProjectPager.currentPage })
+        //   );
+        // }
         dispatch(
           mergeEntities(
             normalize(res.data.merge.plantProjectPager[0].entities, [
@@ -32,11 +32,11 @@ export function loadProjects(category = 'all', options = {}) {
         //   res.data.merge.plantProjectPager[0].entities.map(plantProject => {
         //     dispatch(loadProject(plantProject));
         //   });
-        dispatch(setProgressModelState(false));
+        !options.page && dispatch(setProgressModelState(false));
       })
       .catch(error => {
         console.log(error);
-        dispatch(setProgressModelState(false));
+        !options.page && dispatch(setProgressModelState(false));
       });
   };
 }

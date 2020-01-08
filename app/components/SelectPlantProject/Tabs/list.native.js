@@ -11,8 +11,8 @@ const ListProjects = ({
   plantProjects,
   selectProject,
   onMoreClick,
-  placeholderTextColor
-  // loadProjects
+  placeholderTextColor,
+  loadProjects
 }) => {
   const [search, setSearch] = useState('');
   // useEffect(() => {
@@ -69,6 +69,7 @@ const ListProjects = ({
           projects={filteredProjects}
           selectProject={selectProject}
           onMoreClick={onMoreClick}
+          loadProjects={loadProjects}
         />
       </View>
     </View>
@@ -79,7 +80,8 @@ ListProjects.propTypes = {
   plantProjects: PropTypes.array.isRequired,
   selectProject: PropTypes.func.isRequired,
   onMoreClick: PropTypes.func.isRequired,
-  placeholderTextColor: PropTypes.string
+  placeholderTextColor: PropTypes.string,
+  loadProjects: PropTypes.func.isRequired
 };
 
 export default ListProjects;

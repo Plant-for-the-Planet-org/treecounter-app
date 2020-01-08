@@ -15,7 +15,9 @@
     "lint:json": "eslint . --ext .json",
     "test": "jest",
     "shake": "adb shell input keyevent 82",
-    "clean": "./clean.sh"
+    "clean": "./clean.sh",
+    "ios": "ENVFILE=.env react-native run-ios",
+    "android": "ENVFILE=.env react-native run-android"
   },
   "lint-staged": {
     "*.js": [

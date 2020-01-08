@@ -24,5 +24,5 @@ export const context = {
     appId: '1444740626'
   },
   locationApikKey: '1dfab408903c332b660f5e7cb90da06a',
-  googleMapApiKey: ''
+  googleMapApiKey: process.env.googleMapApiKey || ''
 };

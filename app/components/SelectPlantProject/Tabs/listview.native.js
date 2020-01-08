@@ -13,7 +13,7 @@ class ListViewProjects extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      page: 1
+      page: props.projects.filter(p => !p.isFeatured).length ? 1 : 0
     };
   }
   _keyExtractor = item => item.id.toString();
@@ -59,7 +59,7 @@ class ListViewProjects extends PureComponent {
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
           onEndReached={this.fetchMore}
-          onEndReachedThreshold={3}
+          onEndReachedThreshold={3.5}
         />
       </View>
     );

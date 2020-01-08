@@ -15,12 +15,17 @@ export function loadProjects(category = 'all', options = {}) {
     request
       .then(res => {
         // console.dir(res);
-        // let plantProjectPager = res.data.merge.plantProjectPager[0];
-        // if (plantProjectPager.currentPage < plantProjectPager.nbPages) {
-        //   dispatch(
-        //     loadProjects(category, { page: ++plantProjectPager.currentPage })
-        //   );
-        // }
+        if (options.loadAll) {
+          let plantProjectPager = res.data.merge.plantProjectPager[0];
+          if (plantProjectPager.currentPage < plantProjectPager.nbPages) {
+            dispatch(
+              loadProjects(category, {
+                ...options,
+                page: ++plantProjectPager.currentPage
+              })
+            );
+          }
+        }
         dispatch(
           mergeEntities(
             normalize(res.data.merge.plantProjectPager[0].entities, [

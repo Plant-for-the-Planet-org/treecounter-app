@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Image, TextInput, View } from 'react-native';
 
 import { iosSearchGrey } from '../../../assets';
@@ -16,13 +16,6 @@ const ListProjects = ({
   index
 }) => {
   const [search, setSearch] = useState('');
-  // useEffect(() => {
-  //   if (!plantProjects.filter(project => !project.isFeatured).length) {
-  //     loadProjects();
-  //   }
-  //   console.log('mount it!');
-  // }, []); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
-
   // memoized: refilters if plantProjects or search string changes
   const filteredProjects = useMemo(
     () => {

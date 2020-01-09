@@ -5,6 +5,7 @@ import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderbo
 import i18n from '../../../locales/i18n';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getLocalRoute } from '../../../actions/apiRouting';
+import { getImageUrl } from '../../../actions/apiRouting';
 
 const OrganizationLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
@@ -28,6 +29,7 @@ const OrganizationLeaderBoard = ({ navigation }) => {
             success.data.data
           )
             setQueryResult(success.data.data);
+          console.log(success.data.data, 'success.data.data at Organizations');
         },
         error => {
           console.log(error);
@@ -56,8 +58,11 @@ const OrganizationLeaderBoard = ({ navigation }) => {
                   <Image
                     style={styles.countryFlagImage}
                     source={{
-                      uri:
-                        'https://cdn4.iconfinder.com/data/icons/material-circular-world-flags/180/circle_china_flag_nation_country-512.png'
+                      uri: getImageUrl(
+                        'profile',
+                        'avatar',
+                        item.contributorAvatar
+                      )
                     }}
                   />
                 </View>

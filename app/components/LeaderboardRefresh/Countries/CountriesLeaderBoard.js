@@ -42,6 +42,9 @@ const CountriesLeaderBoard = ({ navigation }) => {
         <FlatList
           data={queryresult}
           renderItem={({ item, index }) => {
+            let countryCode = item.uri.split('/')[
+              item.uri.split('/').length - 1
+            ];
             return (
               <TouchableOpacity
                 onPress={() => onPressCountry(item)}
@@ -52,11 +55,9 @@ const CountriesLeaderBoard = ({ navigation }) => {
                 </View>
                 <View style={styles.countryFlagContainer}>
                   <Image
-                    resizeMode={'contain'}
                     style={styles.countryFlagImage}
                     source={{
-                      uri:
-                        'https://cdn4.iconfinder.com/data/icons/material-circular-world-flags/180/circle_china_flag_nation_country-512.png'
+                      uri: `https://www.trilliontreecampaign.org/flags/png/256/${countryCode}.png`
                     }}
                   />
                 </View>

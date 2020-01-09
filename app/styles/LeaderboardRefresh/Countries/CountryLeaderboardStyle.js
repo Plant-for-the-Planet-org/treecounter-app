@@ -75,7 +75,8 @@ export default EStyleSheet.create({
   },
   countryFlagImage: {
     width: 50,
-    height: 50
+    height: 50,
+    borderRadius: 100
   },
   countryBody: {
     flex: 0.7

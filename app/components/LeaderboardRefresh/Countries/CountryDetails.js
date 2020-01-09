@@ -5,6 +5,7 @@ import styles from '../../../styles/LeaderboardRefresh/Countries/CountriesDetail
 import i18n from '../../../locales/i18n';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getLocalRoute } from '../../../actions/apiRouting';
+import { getImageUrl } from '../../../actions/apiRouting';
 
 const CountryDetails = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
@@ -33,6 +34,7 @@ const CountryDetails = ({ navigation }) => {
             success.data.data
           )
             setQueryResult(success.data.data);
+          console.log(success.data.data, 'success.data.datasuccess.data.data');
         },
         error => {
           console.log(error);
@@ -60,11 +62,13 @@ const CountryDetails = ({ navigation }) => {
                 </View>
                 <View style={styles.countryFlagContainer}>
                   <Image
-                    resizeMode={'contain'}
                     style={styles.countryFlagImage}
                     source={{
-                      uri:
-                        'https://cdn5.vectorstock.com/i/1000x1000/23/49/new-man-avatar-icon-flat-vector-19152349.jpg'
+                      uri: getImageUrl(
+                        'profile',
+                        'avatar',
+                        item.contributorAvatar
+                      )
                     }}
                   />
                 </View>

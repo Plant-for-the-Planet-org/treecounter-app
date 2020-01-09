@@ -62,7 +62,7 @@ class SelectPlantTabView extends PureComponent {
       !this.props.plantProjects.filter(project => !project.isFeatured).length
     ) {
       try {
-        this.props.loadProjects();
+        // this.props.loadProjects();
         //console.log('loaded projects in list', projects);
       } catch (error) {
         console.log('error on lloading project on list', error);
@@ -113,13 +113,18 @@ class SelectPlantTabView extends PureComponent {
           <FeaturedProjects
             onSelectProjects={this.onSelectProjects}
             {...props}
+            index={this.state.index}
           />
         );
       case 'list':
         console.log('list active', index, this.props.plantProjects);
 
         return (
-          <ListProjects onSelectProjects={this.onSelectProjects} {...props} />
+          <ListProjects
+            onSelectProjects={this.onSelectProjects}
+            {...props}
+            index={this.state.index}
+          />
         );
       default:
         return null;

@@ -12,37 +12,41 @@ export function loadProjects(category = 'all', options = {}) {
   });
   return dispatch => {
     !options.page && dispatch(setProgressModelState(true));
-    request
-      .then(res => {
-        // console.dir(res);
-        if (options.loadAll) {
-          let plantProjectPager = res.data.merge.plantProjectPager[0];
-          if (plantProjectPager.currentPage < plantProjectPager.nbPages) {
-            dispatch(
-              loadProjects(category, {
-                ...options,
-                page: ++plantProjectPager.currentPage
-              })
-            );
+    return new Promise(function(resolve, reject) {
+      request
+        .then(res => {
+          // console.dir(res);
+          if (options.loadAll) {
+            let plantProjectPager = res.data.merge.plantProjectPager[0];
+            if (plantProjectPager.currentPage < plantProjectPager.nbPages) {
+              dispatch(
+                loadProjects(category, {
+                  ...options,
+                  page: ++plantProjectPager.currentPage
+                })
+              );
+            }
           }
-        }
-        dispatch(
-          mergeEntities(
-            normalize(res.data.merge.plantProjectPager[0].entities, [
-              plantProjectSchema
-            ])
-          )
-        );
-        // category == 'featured' &&
-        //   res.data.merge.plantProjectPager[0].entities.map(plantProject => {
-        //     dispatch(loadProject(plantProject));
-        //   });
-        !options.page && dispatch(setProgressModelState(false));
-      })
-      .catch(error => {
-        console.log(error);
-        !options.page && dispatch(setProgressModelState(false));
-      });
+          dispatch(
+            mergeEntities(
+              normalize(res.data.merge.plantProjectPager[0].entities, [
+                plantProjectSchema
+              ])
+            )
+          );
+          // category == 'featured' &&
+          //   res.data.merge.plantProjectPager[0].entities.map(plantProject => {
+          //     dispatch(loadProject(plantProject));
+          //   });
+          resolve(res.data.merge.plantProjectPager[0].entities);
+          !options.page && dispatch(setProgressModelState(false));
+        })
+        .catch(error => {
+          console.log(error);
+          reject(error);
+          !options.page && dispatch(setProgressModelState(false));
+        });
+    });
   };
 }
 

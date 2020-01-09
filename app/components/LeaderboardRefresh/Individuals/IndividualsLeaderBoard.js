@@ -109,7 +109,7 @@ const IndividualsLeaderBoard = ({ navigation }) => {
     <View style={styles.mainContainer}>
       {/* <Header /> */}
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>{'Individuals'}</Text>
+        <Text style={styles.headerText}>{i18n.t('label.lbr_individuals')}</Text>
       </View>
       <View>
         <Text style={styles.subHeaderText}>

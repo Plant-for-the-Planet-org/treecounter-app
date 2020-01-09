@@ -106,7 +106,7 @@ const SchoolsLeaderBoard = ({ navigation }) => {
     <View style={styles.mainContainer}>
       {/* <Header /> */}
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>{'Schools'}</Text>
+        <Text style={styles.headerText}>{i18n.t('label.lbr_schools')}</Text>
       </View>
       <View>
         <Text style={styles.subHeaderText}>

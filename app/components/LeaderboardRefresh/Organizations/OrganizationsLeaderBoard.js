@@ -106,7 +106,9 @@ const OrganizationLeaderBoard = ({ navigation }) => {
     <View style={styles.mainContainer}>
       {/* <Header /> */}
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>{'Organizations'}</Text>
+        <Text style={styles.headerText}>
+          {i18n.t('label.lbr_organizations')}
+        </Text>
       </View>
       <View>
         <Text style={styles.subHeaderText}>

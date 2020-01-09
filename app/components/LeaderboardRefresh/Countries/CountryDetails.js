@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
-import styles from '../../../styles/LeaderboardRefresh/Countries/CountriesDetailsStyle';
+import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getLocalRoute } from '../../../actions/apiRouting';

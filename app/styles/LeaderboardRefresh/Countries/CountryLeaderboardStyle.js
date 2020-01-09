@@ -59,7 +59,7 @@ export default EStyleSheet.create({
   oneContryContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 10
+    marginVertical: 20
   },
   indexContainer: {
     flex: 0.1,

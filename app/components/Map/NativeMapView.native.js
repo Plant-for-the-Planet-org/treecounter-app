@@ -18,7 +18,6 @@ import MapView, {
   PROVIDER_GOOGLE
 } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Config from 'react-native-config';
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { iosSearchGrey } from '../../assets';
@@ -32,7 +31,6 @@ import { context } from '../../config';
 import buttonStyles from '../../styles/common/button.native';
 import markerImage from '../../assets/images/tree.png';
 
-const { googleMapApiKey } = context;
 const { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
@@ -543,12 +541,11 @@ class NativeMapView extends Component {
       region: { latitude, longitude },
       markers
     } = this.state;
-    console.log({
+    console.log('this.state variables', {
       editing,
       latitude,
       longitude,
-      markers,
-      Config
+      markers
     });
     if (editing) {
       mapOptions.scrollEnabled = false;
@@ -800,7 +797,7 @@ class NativeMapView extends Component {
           onFocus: onPress,
           pointerEvents: 'none'
         };
-    console.log('googleMapApiKey', googleMapApiKey);
+    console.log('googleMapApiKey', context.googleMapApiKey);
     // inputProps.style = styles.inputStyle
     // const isSingleTree = this.props.mode === 'single-tree';
     return this.renderComp(
@@ -881,7 +878,7 @@ class NativeMapView extends Component {
                 nearbyPlacesAPI="GooglePlacesSearch"
                 query={{
                   // available options: https://developers.google.com/places/web-service/autocomplete
-                  key: googleMapApiKey,
+                  key: context.googleMapApiKey,
                   language: 'en' // language of the results
                 }}
                 currentLocation={false}

@@ -48,7 +48,9 @@ const CountriesLeaderBoard = ({ navigation }) => {
             ];
             return (
               <TouchableOpacity
-                onPress={() => onPressCountry(item)}
+                onPress={() =>
+                  item.mayPublish ? onPressCountry(item) : undefined
+                }
                 style={styles.oneContryContainer}
               >
                 <View style={styles.indexContainer}>
@@ -87,7 +89,6 @@ const CountriesLeaderBoard = ({ navigation }) => {
     }
   };
   const onPressCountry = item => {
-    console.log(item, 'itemitemitem');
     const section = navigation.getParam('category');
     let uriArray = item.uri.split('/');
     let subSection = uriArray[uriArray.length - 1];
@@ -101,7 +102,6 @@ const CountriesLeaderBoard = ({ navigation }) => {
   console.log('queryresult', queryresult);
   return (
     <View style={styles.mainContainer}>
-      {/* <Header /> */}
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>{i18n.t('label.lbr_c_countries')}</Text>
       </View>

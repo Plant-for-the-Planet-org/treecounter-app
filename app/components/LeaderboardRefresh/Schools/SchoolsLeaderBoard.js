@@ -47,7 +47,9 @@ const SchoolsLeaderBoard = ({ navigation }) => {
             return (
               <TouchableOpacity
                 onPress={() =>
-                  onPressListItem(item.treecounterId, item.caption)
+                  item.mayPublish
+                    ? onPressListItem(item.treecounterId, item.caption)
+                    : undefined
                 }
                 style={styles.oneContryContainer}
               >

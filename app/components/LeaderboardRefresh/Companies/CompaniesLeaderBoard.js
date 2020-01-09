@@ -47,7 +47,9 @@ const CompaniesLeaderBoard = ({ navigation }) => {
             return (
               <TouchableOpacity
                 onPress={() =>
-                  onPressListItem(item.treecounterId, item.caption)
+                  item.mayPublish
+                    ? onPressListItem(item.treecounterId, item.caption)
+                    : undefined
                 }
                 style={styles.oneContryContainer}
               >
@@ -104,7 +106,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
     <View style={styles.mainContainer}>
       {/* <Header /> */}
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>{'Companies'}</Text>
+        <Text style={styles.headerText}>{i18n.t('label.lbr_companies')}</Text>
       </View>
       <View>
         <Text style={styles.subHeaderText}>

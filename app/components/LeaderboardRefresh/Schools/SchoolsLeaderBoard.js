@@ -41,6 +41,7 @@ const SchoolsLeaderBoard = ({ navigation }) => {
     if (queryresult) {
       return (
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={queryresult}
           renderItem={({ item, index }) => {
             return (

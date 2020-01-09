@@ -29,10 +29,6 @@ const CompaniesLeaderBoard = ({ navigation }) => {
             success.data.data
           )
             setQueryResult(success.data.data);
-          console.log(
-            success.data.data,
-            'success.data.success.data.data at Companies'
-          );
         },
         error => {
           console.log(error);
@@ -45,6 +41,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
     if (queryresult) {
       return (
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={queryresult}
           renderItem={({ item, index }) => {
             return (

@@ -3,7 +3,13 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../../styles/LeaderboardRefresh/Leaderboard/leaderboardstyles';
 import i18n from '../../../locales/i18n';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
-
+import {
+  countriesleaderboard,
+  schooldleaderboard,
+  organizationleaderboard,
+  individualsleaderboard,
+  companiesleaderboard
+} from '../../../assets/index';
 const Leaderboard = ({ navigation }) => {
   const navigateTo = (category, routeName) => {
     updateRoute(routeName, navigation, undefined, { category });
@@ -17,10 +23,7 @@ const Leaderboard = ({ navigation }) => {
         >
           <Image
             style={styles.image}
-            source={{
-              uri:
-                'https://cdn.zeplin.io/5cad97d9b33d0b5931d90a9b/assets/88AFF8D1-86C3-49EB-BF8C-6658B0D2E50D.png'
-            }}
+            source={countriesleaderboard}
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
@@ -35,10 +38,7 @@ const Leaderboard = ({ navigation }) => {
         >
           <Image
             style={styles.image}
-            source={{
-              uri:
-                'https://cdn.zeplin.io/5cad97d9b33d0b5931d90a9b/assets/81A18291-CCBC-49F2-9968-3BBF2CFF666C.png'
-            }}
+            source={companiesleaderboard}
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
@@ -55,10 +55,7 @@ const Leaderboard = ({ navigation }) => {
         >
           <Image
             style={styles.image}
-            source={{
-              uri:
-                'https://cdn.zeplin.io/5cad97d9b33d0b5931d90a9b/assets/77782C4C-2A9C-462B-8A60-14911DA51AF6.png'
-            }}
+            source={individualsleaderboard}
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
@@ -73,10 +70,7 @@ const Leaderboard = ({ navigation }) => {
         >
           <Image
             style={styles.image}
-            source={{
-              uri:
-                'https://cdn.zeplin.io/5cad97d9b33d0b5931d90a9b/assets/8381140B-4114-4677-AB5B-EE3BCE473DE5.png'
-            }}
+            source={schooldleaderboard}
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
@@ -95,10 +89,7 @@ const Leaderboard = ({ navigation }) => {
         >
           <Image
             style={styles.image}
-            source={{
-              uri:
-                'https://cdn.zeplin.io/5cad97d9b33d0b5931d90a9b/assets/8381140B-4114-4677-AB5B-EE3BCE473DE5.png'
-            }}
+            source={organizationleaderboard}
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>

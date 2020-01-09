@@ -34,7 +34,6 @@ const CountryDetails = ({ navigation }) => {
             success.data.data
           )
             setQueryResult(success.data.data);
-          console.log(success.data.data, 'success.data.datasuccess.data.data');
         },
         error => {
           console.log(error);
@@ -48,6 +47,7 @@ const CountryDetails = ({ navigation }) => {
     if (queryresult) {
       return (
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={queryresult}
           renderItem={({ item, index }) => {
             return (

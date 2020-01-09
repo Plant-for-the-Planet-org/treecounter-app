@@ -29,7 +29,6 @@ const OrganizationLeaderBoard = ({ navigation }) => {
             success.data.data
           )
             setQueryResult(success.data.data);
-          console.log(success.data.data, 'success.data.data at Organizations');
         },
         error => {
           console.log(error);
@@ -42,6 +41,7 @@ const OrganizationLeaderBoard = ({ navigation }) => {
     if (queryresult) {
       return (
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={queryresult}
           renderItem={({ item, index }) => {
             return (

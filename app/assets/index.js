@@ -165,7 +165,11 @@ import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
 import eye from './images/eye.png';
 import closeeye from './images/closeeye.png';
-
+import countriesleaderboard from './images/countriesleaderboard.png';
+import schooldleaderboard from './images/schooldleaderboard.png';
+import organizationleaderboard from './images/organizationleaderboard.png';
+import individualsleaderboard from './images/individualsleaderboard.png';
+import companiesleaderboard from './images/companiesleaderboard.png';
 export {
   treelogo,
   germany,
@@ -333,5 +337,10 @@ export {
   readmoreUp,
   readmoreDown,
   eye,
-  closeeye
+  closeeye,
+  countriesleaderboard,
+  schooldleaderboard,
+  organizationleaderboard,
+  individualsleaderboard,
+  companiesleaderboard
 };

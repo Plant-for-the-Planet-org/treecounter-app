@@ -40,6 +40,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
     if (queryresult) {
       return (
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={queryresult}
           renderItem={({ item, index }) => {
             let countryCode = item.uri.split('/')[

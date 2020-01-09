@@ -28,6 +28,7 @@ const IndividualsLeaderBoard = ({ navigation }) => {
             success.data.data
           )
             setQueryResult(success.data.data);
+          console.log(success.data.data, 'success.data.data');
         },
         error => {
           console.log(error);
@@ -43,11 +44,16 @@ const IndividualsLeaderBoard = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           data={queryresult}
           renderItem={({ item, index }) => {
+            const isPrivate =
+              // eslint-disable-next-line no-prototype-builtins
+              item.hasOwnProperty('mayPublish') && !item.mayPublish;
             return (
               <TouchableOpacity
-                onPress={() =>
-                  onPressListItem(item.treecounterId, item.caption)
-                }
+                onPress={() => {
+                  item.mayPublish
+                    ? onPressListItem(item.treecounterId, item.caption)
+                    : undefined;
+                }}
                 style={styles.oneContryContainer}
               >
                 <View style={styles.indexContainer}>

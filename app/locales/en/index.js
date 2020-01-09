@@ -30,7 +30,7 @@ import tpoProjectlabels from './tpoProjectlabels.json';
 import treecounterGraphicslabels from './treecounterGraphicslabels.json';
 import trillionlabels from './trillionLabels.json';
 import userContributionslabels from './userContributionslabels.json';
-import widgetShareLabels from './widgetShareLabels.json';
+// import widgetShareLabels from './widgetShareLabels.json';
 import NDVI from './ndvi.json';
 import reviews from './reviews.json';
 import formValidationErrors from './formValidationErrors.json';

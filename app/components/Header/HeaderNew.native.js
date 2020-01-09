@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  BackHandler,
-  SafeAreaView
-} from 'react-native';
+import { Text, View, TouchableOpacity, Image, BackHandler } from 'react-native';
 import { backArrow } from './../../assets';
+import { SafeAreaView } from 'react-navigation';
 
 export default function HeaderNew(props) {
   let navigateBack = () => {
@@ -27,7 +21,7 @@ export default function HeaderNew(props) {
   const whiteColor = 'white';
 
   return (
-    <SafeAreaView
+    <View
       style={{
         position: 'absolute',
         top: 0,
@@ -68,6 +62,6 @@ export default function HeaderNew(props) {
           {props.title}
         </Text>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }

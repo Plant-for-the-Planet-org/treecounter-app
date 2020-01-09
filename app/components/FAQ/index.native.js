@@ -69,10 +69,19 @@ export default class FAQ extends Component {
       <LoadingIndicator />
     ) : (
       <SafeAreaView style={{ flex: 1 }}>
-        <HeaderNew
-          title={i18n.t('label.faq')}
-          navigation={this.props.navigation}
-        />
+        <HeaderNew title={''} navigation={this.props.navigation} />
+        <Text
+          style={{
+            fontFamily: 'OpenSans-Bold',
+            fontSize: 18,
+            lineHeight: 40,
+            letterSpacing: 0,
+            textAlign: 'left',
+            color: textColor
+          }}
+        >
+          {i18n.t('label.faq')}
+        </Text>
         <ScrollView
           contentContainerStyle={{ paddingBottom: 72, paddingTop: 80 }}
         >

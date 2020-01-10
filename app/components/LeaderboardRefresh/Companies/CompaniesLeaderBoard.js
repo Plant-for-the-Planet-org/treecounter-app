@@ -79,7 +79,9 @@ const CompaniesLeaderBoard = ({ navigation }) => {
                   />
                 </View>
                 <View style={styles.countryBody}>
-                  <Text style={styles.countryNameText}>{item.caption}</Text>
+                  <Text numberOfLines={2} style={styles.countryNameText}>
+                    {item.caption}
+                  </Text>
                   <Text style={styles.tressCounter}>
                     {item.planted
                       .toString()

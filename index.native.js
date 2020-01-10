@@ -1,7 +1,6 @@
 import { AppRegistry } from 'react-native';
 import App from './app/components/App';
 import './ReactotronConfig';
-
 /* app.js */
 
 console.disableYellowBox = true;

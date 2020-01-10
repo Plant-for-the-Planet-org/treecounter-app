@@ -17,10 +17,10 @@ export async function initLocale() {
   cache.locale = await guessLocale();
 }
 
-export function getLocale() {
+export async function getLocale() {
   // console.log('getLocale', cache.locale);
   if (!cache.locale) {
-    initLocale();
+    await initLocale();
   }
   return cache.locale;
 }

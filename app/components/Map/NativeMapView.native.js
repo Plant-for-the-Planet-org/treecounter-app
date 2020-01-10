@@ -868,7 +868,7 @@ class NativeMapView extends Component {
                 nearbyPlacesAPI="GooglePlacesSearch"
                 query={{
                   // available options: https://developers.google.com/places/web-service/autocomplete
-                  key: googleMapApiKey,
+                  key: context.googleMapApiKey,
                   language: 'en' // language of the results
                 }}
                 currentLocation={false}

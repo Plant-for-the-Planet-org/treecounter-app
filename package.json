@@ -15,7 +15,9 @@
     "lint:json": "eslint . --ext .json",
     "test": "jest",
     "shake": "adb shell input keyevent 82",
-    "clean": "./clean.sh"
+    "clean": "./clean.sh",
+    "ios": "ENVFILE=.env react-native run-ios",
+    "android": "ENVFILE=.env react-native run-android"
   },
   "lint-staged": {
     "*.js": [
@@ -39,6 +41,7 @@
     "css-loader": "^0.28.9",
     "date-fns": "^2.6.0",
     "deprecated-react-native-listview": "0.0.6",
+    "dotenv-webpack": "^1.7.0",
     "esri-loader": "^2.12.0",
     "formik": "^1.5.8",
     "history": "^4.10.1",
@@ -63,7 +66,8 @@
     "react-native-action-button": "^2.8.5",
     "react-native-check-box": "^2.1.7",
     "react-native-collapsible": "^1.5.1",
-    "react-native-config": "github:luggit/react-native-config#master",
+    "react-native-config": "^0.12.0",
+    "react-native-content-loader": "^0.1.6",
     "react-native-device-info": "^5.3.1",
     "react-native-document-picker": "^3.2.4",
     "react-native-extended-stylesheet": "^0.12.0",
@@ -71,7 +75,6 @@
     "react-native-gesture-handler": "^1.5.2",
     "react-native-google-places-autocomplete": "^1.4.0",
     "react-native-htmlview": "^0.15.0",
-    "react-native-content-loader": "^0.1.6",
     "react-native-i18n": "^2.0.15",
     "react-native-image-carousel": "^0.4.6",
     "react-native-image-crop-picker": "^0.25.0",

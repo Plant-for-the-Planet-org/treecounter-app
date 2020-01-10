@@ -26,9 +26,13 @@ ios/._TreecounterApp.xcworkspace
 ios/Pods/._Pods.xcodeproj
 ios/Podfile.lock
 ios/Pods/*
+ios/tmp.xcconfig
 
+# Enviroment
+#
 .env*
 !.env.sample
+
 # Android/IntelliJ
 #
 build/
@@ -55,4 +59,3 @@ web/prod
 web/server
 app/config/index.js
 app/config/index.js.env.*
-ios/tmp.xcconfig

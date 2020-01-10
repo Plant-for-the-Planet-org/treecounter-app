@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { FlatList, View, RefreshControl } from 'react-native';
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/selectplantproject/list.native';
@@ -9,38 +9,44 @@ import { flatListContainerStyle } from '../../../styles/selectplantproject/selec
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
-class ListViewProjects extends Component {
+
+class ListViewProjects extends PureComponent {
   constructor(props) {
     super(props);
-    const perPage = 10;
+    this.perPage = 10;
     this.state = {
       plantProjects: [...props.projects],
       isFetching: false,
-      page: parseInt(props.projects.length / perPage),
-      initiated: false
+      page: parseInt(props.projects.length / this.perPage),
+      initiated: false,
+      shouldLoad: true
     };
   }
-  onRefresh = () => {
+  onRefresh() {
     this.setState({ isFetching: true, page: 1 }, async () => {
       try {
         const data = await this.props.loadProjects('all', {
           page: this.state.page
         });
-        this.setState({ plantProjects: [...data], isFetching: false });
+        this.setState({
+          plantProjects: [...data],
+          isFetching: false,
+          shouldLoad: data.length == this.perPage
+        });
       } catch (error) {
         this.setState({ isFetching: false });
       }
     });
-  };
+  }
   async componentWillReceiveProps(nextProps) {
     if (nextProps.index && !this.state.initiated) {
       console.log(
         'component got index =======================================================',
         nextProps
       );
-      this.setState({ isFetching: true, initiated: true });
+      this.setState({ initiated: true });
       try {
-        const data = await this.props.loadProjects('all', { page: 1 });
+        const data = await this.props.loadProjects('all', {});
         this.setState({ isFetching: false, plantProjects: data }, () => {
           console.log(
             'component updated with data first time =======================================================',
@@ -53,24 +59,22 @@ class ListViewProjects extends Component {
     }
   }
   fetchMore = () => {
-    if (!this.state.isFetching)
-      this.setState(
-        { page: this.state.page + 1, isFetching: true },
-        async () => {
-          try {
-            const data = await this.props.loadProjects('all', {
-              page: this.state.page
-            });
-            this.setState({
-              isFetching: false,
-              plantProjects: [...this.state.plantProjects, ...data]
-            });
-            console.log('Got from fetch more:', data);
-          } catch (error) {
-            this.setState({ isFetching: false });
-          }
+    if (!this.state.isFetching && this.state.shouldLoad)
+      this.setState({ page: this.state.page + 1 }, async () => {
+        try {
+          const data = await this.props.loadProjects('all', {
+            page: this.state.page
+          });
+          this.setState({
+            isFetching: false,
+            shouldLoad: data.length == this.perPage,
+            plantProjects: [...this.state.plantProjects, ...data]
+          });
+          console.log('Got from fetch more:', data);
+        } catch (error) {
+          this.setState({ isFetching: false });
         }
-      );
+      });
   };
   _keyExtractor = item => item.id.toString();
   onSelectClickedFeaturedProjects(id) {
@@ -103,15 +107,15 @@ class ListViewProjects extends Component {
           contentContainerStyle={{
             ...flatListContainerStyle
           }}
-          data={this.state.plantProjects}
+          data={this.props.projects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
           onEndReached={this.fetchMore}
-          onEndReachedThreshold={3.5}
+          onEndReachedThreshold={2.5}
           refreshControl={
             <RefreshControl
               refreshing={this.state.isFetching}
-              onRefresh={this.onRefresh}
+              onRefresh={this.onRefresh.bind(this)}
               tintColor={'#89b53a'}
             />
           }

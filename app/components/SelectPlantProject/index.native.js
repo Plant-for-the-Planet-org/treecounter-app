@@ -83,7 +83,7 @@ class SelectPlantTabView extends PureComponent {
     ];
   };
 
-  renderSelectPlantScene = ({ route }) => {
+  renderSelectPlantScene = ({ route, jumpTo }) => {
     const {
       plantProjects,
       onMoreClick,
@@ -113,6 +113,7 @@ class SelectPlantTabView extends PureComponent {
           <FeaturedProjects
             onSelectProjects={this.onSelectProjects}
             {...props}
+            jumpTo={jumpTo}
             index={this.state.index}
           />
         );
@@ -123,6 +124,7 @@ class SelectPlantTabView extends PureComponent {
           <ListProjects
             onSelectProjects={this.onSelectProjects}
             {...props}
+            jumpTo={jumpTo}
             index={this.state.index}
           />
         );
@@ -139,6 +141,7 @@ class SelectPlantTabView extends PureComponent {
         renderScene={this.renderSelectPlantScene}
         renderTabBar={this.renderTabBar}
         onIndexChange={this.handleIndexChange}
+        lazy
       />
     );
   }

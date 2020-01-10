@@ -44,10 +44,12 @@ const CompaniesLeaderBoard = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           data={queryresult}
           renderItem={({ item, index }) => {
+            const isPrivate =
+              item.hasOwnProperty('mayPublish') && !item.mayPublish;
             return (
               <TouchableOpacity
                 onPress={() =>
-                  item.mayPublish
+                  !isPrivate
                     ? onPressListItem(item.treecounterId, item.caption)
                     : undefined
                 }

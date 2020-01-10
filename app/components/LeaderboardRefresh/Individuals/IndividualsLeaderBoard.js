@@ -45,12 +45,11 @@ const IndividualsLeaderBoard = ({ navigation }) => {
           data={queryresult}
           renderItem={({ item, index }) => {
             const isPrivate =
-              // eslint-disable-next-line no-prototype-builtins
               item.hasOwnProperty('mayPublish') && !item.mayPublish;
             return (
               <TouchableOpacity
                 onPress={() => {
-                  item.mayPublish
+                  !isPrivate
                     ? onPressListItem(item.treecounterId, item.caption)
                     : undefined;
                 }}

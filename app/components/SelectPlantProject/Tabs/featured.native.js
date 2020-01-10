@@ -2,14 +2,7 @@
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import {
-  FlatList,
-  ScrollView,
-  View,
-  Image,
-  Text,
-  RefreshControl
-} from 'react-native';
+import { FlatList, View, Image, Text, RefreshControl } from 'react-native';
 
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';

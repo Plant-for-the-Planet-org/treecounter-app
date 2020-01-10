@@ -14,8 +14,8 @@ export default EStyleSheet.create({
     marginVertical: 20
   },
   image: {
-    width: 100,
-    height: 100
+    // width: 100,
+    // height: 100
   },
   widgetTitleContainer: {
     backgroundColor: 'white',
@@ -29,7 +29,10 @@ export default EStyleSheet.create({
   },
   widgetTitle: {
     fontSize: 14,
-    fontFamily: 'OpenSans-Regular',
-    color: '#4d5153'
+    fontFamily: 'OpenSans-SemiBold',
+    color: '#4d5153',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'center'
   }
 });

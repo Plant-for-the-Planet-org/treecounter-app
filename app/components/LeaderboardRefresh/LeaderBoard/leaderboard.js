@@ -80,25 +80,21 @@ const Leaderboard = ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() =>
-            navigateTo('organization', 'organizations_LeaderBoard')
-          }
-          style={styles.widgetContainer}
-        >
-          <Image
-            style={styles.image}
-            source={organizationleaderboard}
-            resizeMode={'contain'}
-          />
-          <View style={styles.widgetTitleContainer}>
-            <Text style={styles.widgetTitle}>
-              {i18n.t('label.lbr_tree_planting_organizations')}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        onPress={() => navigateTo('organization', 'organizations_LeaderBoard')}
+        style={styles.widgetContainer}
+      >
+        <Image
+          style={styles.image}
+          source={organizationleaderboard}
+          resizeMode={'contain'}
+        />
+        <View style={styles.widgetTitleContainer}>
+          <Text style={styles.widgetTitle}>
+            {i18n.t('label.lbr_tree_planting_organizations')}
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

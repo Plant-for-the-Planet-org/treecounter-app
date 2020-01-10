@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: 0 */ // --> OFF
 import PropTypes from 'prop-types';
 import React, { useMemo, useState } from 'react';
 import { Image, TextInput, View } from 'react-native';

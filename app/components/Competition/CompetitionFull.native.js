@@ -49,7 +49,7 @@ class CompetitionFull extends React.Component {
       button2 = null;
     const competitionDetail = this.props.competitionDetail;
 
-    console.log(competitionDetail);
+    console.log(' CompetitionFull ', competitionDetail);
     let participantCount = 0,
       requestCount = 0,
       // eslint-disable-next-line no-unused-vars
@@ -196,7 +196,7 @@ class CompetitionFull extends React.Component {
     return (
       <View style={snippetStyles.flexView}>
         {contentloader ? (
-          <LoadingIndicator contentLoader screen={'Competition'} />
+          <LoadingIndicator contentLoader screen={'SingleCompetition'} />
         ) : (
           <KeyboardAwareScrollView
             keyboardDismissMode="on-drag"

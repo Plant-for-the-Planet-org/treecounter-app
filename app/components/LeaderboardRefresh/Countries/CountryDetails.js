@@ -122,7 +122,7 @@ const CountryDetails = ({ navigation }) => {
   return (
     <View style={styles.mainContainer}>
       <Header navigation={navigation} />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>{section}</Text>
         </View>

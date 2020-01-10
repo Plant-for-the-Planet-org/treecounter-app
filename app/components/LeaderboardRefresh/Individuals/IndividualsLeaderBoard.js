@@ -118,7 +118,7 @@ const IndividualsLeaderBoard = ({ navigation }) => {
   return (
     <View style={styles.mainContainer}>
       <Header navigation={navigation} />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>
             {i18n.t('label.lbr_individuals')}

@@ -35,7 +35,8 @@ export default EStyleSheet.create({
     alignItems: 'center',
     borderRadius: 60,
     paddingVertical: 5,
-    width: 104
+    width: 104,
+    marginHorizontal: 15
   },
   activeChipText: {
     color: '#fff',
@@ -46,7 +47,7 @@ export default EStyleSheet.create({
     alignItems: 'center',
     borderRadius: 60,
     paddingVertical: 5,
-    marginHorizontal: 10,
+    marginHorizontal: 15,
     borderColor: '#4d5153',
     borderWidth: 1,
     width: 104

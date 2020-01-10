@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  ScrollView
+} from 'react-native';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
@@ -113,50 +120,63 @@ const CountryDetails = ({ navigation }) => {
   return (
     <View style={styles.mainContainer}>
       <Header navigation={navigation} />
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>{section}</Text>
-      </View>
-      <View>
-        <Text style={styles.subHeaderText}>
-          {i18n.t('label.lbr_c_d_leaderboard')}
-        </Text>
-      </View>
-      <View style={styles.timeLineContainer}>
-        <TouchableOpacity
-          disabled
-          onPress={() => setPeriod('')}
-          style={styles[period == '' ? 'activeChipContainer' : 'chipContainer']}
-        >
-          <Text style={styles[period == '' ? 'activeChipText' : 'chipText']}>
-            {i18n.t('label.lbr_c_d_this_week')}
+      <ScrollView>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerText}>{section}</Text>
+        </View>
+        <View>
+          <Text style={styles.subHeaderText}>
+            {i18n.t('label.lbr_c_d_leaderboard')}
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          disabled
-          onPress={() => setPeriod('1-year')}
-          style={
-            styles[period == '1-year' ? 'activeChipContainer' : 'chipContainer']
-          }
+        </View>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          contentContainerStyle={styles.timeLineContentContainerStyle}
+          style={styles.timeLineContainer}
         >
-          <Text
-            style={styles[period == '1-year' ? 'activeChipText' : 'chipText']}
+          <TouchableOpacity
+            disabled
+            onPress={() => setPeriod('')}
+            style={
+              styles[period == '' ? 'activeChipContainer' : 'chipContainer']
+            }
           >
-            {i18n.t('label.lbr_c_d_year')}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          disabled
-          onPress={() => setPeriod('all')}
-          style={
-            styles[period == 'all' ? 'activeChipContainer' : 'chipContainer']
-          }
-        >
-          <Text style={styles[period == 'all' ? 'activeChipText' : 'chipText']}>
-            {i18n.t('label.lbr_c_d_all_time')}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.countriesListContainer}>{renderList()}</View>
+            <Text style={styles[period == '' ? 'activeChipText' : 'chipText']}>
+              {i18n.t('label.lbr_c_d_this_week')}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            disabled
+            onPress={() => setPeriod('1-year')}
+            style={
+              styles[
+                period == '1-year' ? 'activeChipContainer' : 'chipContainer'
+              ]
+            }
+          >
+            <Text
+              style={styles[period == '1-year' ? 'activeChipText' : 'chipText']}
+            >
+              {i18n.t('label.lbr_c_d_year')}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            disabled
+            onPress={() => setPeriod('all')}
+            style={
+              styles[period == 'all' ? 'activeChipContainer' : 'chipContainer']
+            }
+          >
+            <Text
+              style={styles[period == 'all' ? 'activeChipText' : 'chipText']}
+            >
+              {i18n.t('label.lbr_c_d_all_time')}
+            </Text>
+          </TouchableOpacity>
+        </ScrollView>
+        <View style={styles.countriesListContainer}>{renderList()}</View>
+      </ScrollView>
     </View>
   );
 };

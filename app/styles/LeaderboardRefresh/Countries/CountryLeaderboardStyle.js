@@ -20,19 +20,22 @@ export default EStyleSheet.create({
     color: '#4d5153'
   },
   timeLineContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     marginVertical: 10,
     borderWidth: 0,
-    borderColor: '#4d5153'
+    borderColor: '#4d5153',
+    maxHeight: 40
+  },
+  timeLineContentContainerStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   activeChipContainer: {
     backgroundColor: '#87b738',
     alignItems: 'center',
     borderRadius: 60,
     paddingVertical: 5,
-    paddingHorizontal: 19
-    // marginHorizontal: 10
+    width: 104
   },
   activeChipText: {
     color: '#fff',
@@ -43,10 +46,10 @@ export default EStyleSheet.create({
     alignItems: 'center',
     borderRadius: 60,
     paddingVertical: 5,
-    paddingHorizontal: 19,
-    // marginHorizontal: 10,
+    marginHorizontal: 10,
     borderColor: '#4d5153',
-    borderWidth: 1
+    borderWidth: 1,
+    width: 104
   },
   chipText: {
     color: '#4d5153',
@@ -59,7 +62,7 @@ export default EStyleSheet.create({
   oneContryContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 15,
     borderColor: 'red',
     borderWidth: 0
   },

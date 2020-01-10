@@ -52,6 +52,7 @@ eventPledgeSchema.define({
 
 plantProjectSchema.define({
   tpo: tpoSchema,
+
   plantProjectImages: [plantProjectImageSchema],
   reviews: [reviewsSchema]
 });

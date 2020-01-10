@@ -58,10 +58,11 @@ class PlantProjectSnippet extends PureComponent {
       countTarget,
       currency,
       treeCost,
-      paymentSetup,
+      taxDeductibleCountries,
       survivalRate,
       // images,
       imageFile,
+      image,
       reviewScore: plantProjectRating,
       reviews,
       survivalRateStatus
@@ -83,12 +84,12 @@ class PlantProjectSnippet extends PureComponent {
     //   treeCountWidth = treePlantedRatio * 100;
     // }
 
-    if (imageFile) {
-      projectImage = { image: imageFile };
+    if (imageFile || image) {
+      projectImage = { image: imageFile || image };
     } else {
       projectImage = plantProjectImages && plantProjectImages.find(() => true);
     }
-
+    // console.log('project image', projectImage);
     const teaserProps = {
       tpoName: this.props.tpoName,
       projectName,
@@ -102,18 +103,16 @@ class PlantProjectSnippet extends PureComponent {
       survivalRate,
       currency,
       treeCost,
-      taxDeduction: paymentSetup.taxDeduction
+      taxDeduction: taxDeductibleCountries
     };
-    let deducibleText1 = '';
-    // let tooltipText1 = '';
-    for (let i = 0; i < specsProps.taxDeduction.length; i++) {
-      deducibleText1 += specsProps.taxDeduction[i];
-      if (i == specsProps.taxDeduction.length - 1) {
-        deducibleText1 += '.';
-      } else {
-        deducibleText1 += ', ';
+    let deducibleText1 = [];
+    if (taxDeductibleCountries)
+      for (let i = 0; i < taxDeductibleCountries.length; i++) {
+        deducibleText1.push(
+          getISOToCountryName(taxDeductibleCountries[i]).country
+        );
       }
-    }
+    deducibleText1 = deducibleText1.join(', ') + '.';
     const survivalRateLeaf =
       survivalRateStatus == 'verified'
         ? leaf

@@ -15,7 +15,6 @@ import {
   selectPlantProjectAction,
   clearPlantProject
 } from '../../actions/selectPlantProjectAction';
-
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
@@ -51,6 +50,7 @@ class DonationTreesContainer extends PureComponent {
         .catch(error => console.log(error));
     }
   }
+
   componentDidMount() {
     let selectedProjectId = undefined;
     if (this.props.match) {

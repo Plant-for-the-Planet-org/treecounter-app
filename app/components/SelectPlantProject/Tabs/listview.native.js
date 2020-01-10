@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, RefreshControl } from 'react-native';
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/selectplantproject/list.native';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
@@ -9,10 +9,73 @@ import { flatListContainerStyle } from '../../../styles/selectplantproject/selec
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
+
 class ListViewProjects extends PureComponent {
   constructor(props) {
     super(props);
+    this.perPage = 10;
+    this.state = {
+      plantProjects: [...props.projects],
+      isFetching: false,
+      page: parseInt(props.projects.length / this.perPage),
+      initiated: false,
+      shouldLoad: true
+    };
   }
+  onRefresh() {
+    this.setState({ isFetching: true, page: 1 }, async () => {
+      try {
+        const data = await this.props.loadProjects('all', {
+          page: this.state.page
+        });
+        this.setState({
+          plantProjects: [...data],
+          isFetching: false,
+          shouldLoad: data.length == this.perPage
+        });
+      } catch (error) {
+        this.setState({ isFetching: false });
+      }
+    });
+  }
+  async componentWillReceiveProps(nextProps) {
+    if (nextProps.index && !this.state.initiated) {
+      console.log(
+        'component got index =======================================================',
+        nextProps
+      );
+      this.setState({ initiated: true });
+      try {
+        const data = await this.props.loadProjects('all', {});
+        this.setState({ isFetching: false, plantProjects: data }, () => {
+          console.log(
+            'component updated with data first time =======================================================',
+            this.state
+          );
+        });
+      } catch (error) {
+        this.setState({ isFetching: false });
+      }
+    }
+  }
+  fetchMore = () => {
+    if (!this.state.isFetching && this.state.shouldLoad)
+      this.setState({ page: this.state.page + 1 }, async () => {
+        try {
+          const data = await this.props.loadProjects('all', {
+            page: this.state.page
+          });
+          this.setState({
+            isFetching: false,
+            shouldLoad: data.length == this.perPage,
+            plantProjects: [...this.state.plantProjects, ...data]
+          });
+          console.log('Got from fetch more:', data);
+        } catch (error) {
+          this.setState({ isFetching: false });
+        }
+      });
+  };
   _keyExtractor = item => item.id.toString();
   onSelectClickedFeaturedProjects(id) {
     this.props.selectPlantProjectAction(id);
@@ -47,6 +110,15 @@ class ListViewProjects extends PureComponent {
           data={this.props.projects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
+          onEndReached={this.fetchMore}
+          onEndReachedThreshold={2.5}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isFetching}
+              onRefresh={this.onRefresh.bind(this)}
+              tintColor={'#89b53a'}
+            />
+          }
         />
       </View>
     );

@@ -109,14 +109,15 @@ class SelectPlantTabView extends PureComponent {
     switch (route.key) {
       case 'featured':
         console.log('fatured active', index, this.props.plantProjects);
-        return (
+        return this.props.plantProjects.filter(project => project.isFeatured)
+          .length ? (
           <FeaturedProjects
             onSelectProjects={this.onSelectProjects}
             {...props}
             jumpTo={jumpTo}
             index={this.state.index}
           />
-        );
+        ) : null;
       case 'list':
         console.log('list active', index, this.props.plantProjects);
 

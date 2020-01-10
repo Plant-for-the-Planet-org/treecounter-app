@@ -34,7 +34,7 @@ const ListProjects = ({
 
   return (
     <View key={'listViewProject'} style={styles.flexContainer}>
-      <View style={styles.searchItem}>
+      {/* <View style={styles.searchItem}>
         <View style={[styles.searchContainer]}>
           <View style={styles.searchIconContainer}>
             <Image
@@ -56,7 +56,7 @@ const ListProjects = ({
             autoCapitalize={'sentences'}
           />
         </View>
-      </View>
+      </View> */}
 
       <View style={styles.listViewContainer}>
         <ListViewProjects

@@ -26,25 +26,26 @@ export default class FeaturedProjects extends PureComponent {
     };
   }
   onRefresh() {
-    this.setState({ isFetching: true, page: 1 }, async () => {
-      try {
-        const data = await this.props.loadProjects('featured', {
-          page: this.state.page
-        });
-        this.setState({
-          plantProjects: [...data],
-          isFetching: false,
-          shouldLoad: data.length == this.perPage
-        });
-      } catch (error) {
-        this.setState({ isFetching: false });
-      }
-    });
+    if (!this.state.isFetching && this.state.shouldLoad)
+      this.setState({ isFetching: true, page: 1 }, async () => {
+        try {
+          const data = await this.props.loadProjects('featured', {
+            page: this.state.page
+          });
+          this.setState({
+            plantProjects: [...data],
+            isFetching: false,
+            shouldLoad: data.length == this.perPage
+          });
+        } catch (error) {
+          this.setState({ isFetching: false });
+        }
+      });
   }
   async componentWillReceiveProps(nextProps) {
     if (nextProps.index == 0 && !this.state.initiated) {
       console.log(
-        'component got index =======================================================',
+        'component got index calling in featured=======================================================',
         nextProps
       );
       this.setState({
@@ -54,7 +55,7 @@ export default class FeaturedProjects extends PureComponent {
     }
   }
   fetchMore = () => {
-    console.log('this. should load', this.state.shouldLoad);
+    console.log('this. should load in fetch more', this.state.shouldLoad);
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ page: this.state.page + 1 }, async () => {
         try {

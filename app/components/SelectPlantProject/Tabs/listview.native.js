@@ -17,7 +17,7 @@ class ListViewProjects extends PureComponent {
     this.state = {
       plantProjects: [...props.projects],
       isFetching: false,
-      page: parseInt(props.projects.length / this.perPage),
+      page: Math.ceil(props.projects.length / this.perPage),
       initiated: false,
       shouldLoad: true
     };
@@ -41,7 +41,7 @@ class ListViewProjects extends PureComponent {
   async componentWillReceiveProps(nextProps) {
     if (nextProps.index && !this.state.initiated) {
       console.log(
-        'component got index =======================================================',
+        'component got index list =======================================================',
         nextProps
       );
       this.setState({ initiated: true });
@@ -49,7 +49,7 @@ class ListViewProjects extends PureComponent {
         const data = await this.props.loadProjects('all', {});
         this.setState({ isFetching: false, plantProjects: data }, () => {
           console.log(
-            'component updated with data first time =======================================================',
+            'component updated with data first time list =======================================================',
             this.state
           );
         });
@@ -61,6 +61,7 @@ class ListViewProjects extends PureComponent {
   fetchMore = () => {
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ page: this.state.page + 1 }, async () => {
+        console.log('fettch more list calling load');
         try {
           const data = await this.props.loadProjects('all', {
             page: this.state.page
@@ -111,7 +112,6 @@ class ListViewProjects extends PureComponent {
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
           onEndReached={this.fetchMore}
-          onEndReachedThreshold={2.5}
           refreshControl={
             <RefreshControl
               refreshing={this.state.isFetching}

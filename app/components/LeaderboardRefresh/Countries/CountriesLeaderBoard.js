@@ -112,6 +112,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
       </View>
       <View style={styles.timeLineContainer}>
         <TouchableOpacity
+          disabled
           onPress={() => setPeriod('')}
           style={styles[period == '' ? 'activeChipContainer' : 'chipContainer']}
         >
@@ -120,6 +121,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          disabled
           onPress={() => setPeriod('1-year')}
           style={
             styles[period == '1-year' ? 'activeChipContainer' : 'chipContainer']
@@ -132,6 +134,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          disabled
           onPress={() => setPeriod('all')}
           style={
             styles[period == 'all' ? 'activeChipContainer' : 'chipContainer']

@@ -28,11 +28,10 @@ import Geolocation from '@react-native-community/geolocation';
 import { NotificationManager } from 'react-notifications';
 import i18n from '../../locales/i18n';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { context } from '../../config';
 import buttonStyles from '../../styles/common/button.native';
 import markerImage from '../../assets/images/tree.png';
 
-const { googleMapApiKey } = context;
+const { googleMapApiKey } = Config;
 const { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
@@ -868,7 +867,7 @@ class NativeMapView extends Component {
                 nearbyPlacesAPI="GooglePlacesSearch"
                 query={{
                   // available options: https://developers.google.com/places/web-service/autocomplete
-                  key: context.googleMapApiKey,
+                  key: googleMapApiKey,
                   language: 'en' // language of the results
                 }}
                 currentLocation={false}

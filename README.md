@@ -49,7 +49,7 @@ Build and run the app in development mode deployed from Metro Bundler in an iOS 
 
 ```
 bash
-react-native run-ios
+npm run ios
 ```
 
 If you have problems with a cached version of the bundle, you can stop the Metro Bundler and manually start it with the reset cache option:
@@ -82,7 +82,7 @@ Build and run the app in development mode deployed from Metro Bundler (starts Me
 
 ```
 bash
-react-native run-android
+npm run android
 ```
 
 If you have problems with a cached version of the bundle, you can stop the Metro Bundler and manually start it with the reset cache option:

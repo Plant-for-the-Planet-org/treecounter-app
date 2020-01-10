@@ -10,7 +10,8 @@ Welcome to this repository which contains the code of the web clients and the na
 
 ## Configuration
 
-Copy `app/config/index.js.dist` to `app/config/index.js`.
+* Copy `app/config/index.js.dist` to `app/config/index.js` and adapt the configuration to your environment.
+* Copy `.env.sample` to `.env` and add the necessary API keys for your environment.
 
 ## Web Setup
 

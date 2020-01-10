@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { PureComponent } from 'react';
 // import t from 'tcomb-form-native';
-import { Text, View } from 'react-native';
+import { Text, View, Linking } from 'react-native';
 import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
 import { FormikFormTree } from './formComponents.native';
@@ -11,6 +11,8 @@ import isEqual from 'lodash/isEqual';
 import i18n from '../../locales/i18n';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
+import PopupNative from '../Common/ModalDialog/Popup.native';
+import { getLocalRoute } from '../../actions/apiRouting';
 
 const backgroundColor = 'white';
 const defaultInitValue = {
@@ -52,7 +54,6 @@ export default class RegisterTreeTab extends PureComponent {
   }
 
   openModel = formProps => {
-    console.log('model open');
     if (!isEqual(this.formProps, formProps)) {
       this.formProps = formProps;
       this.renderFullscreenMap = (
@@ -124,7 +125,6 @@ export default class RegisterTreeTab extends PureComponent {
             } else {
               value.geometry = JSON.stringify(value.geometry);
             }
-            console.log('value in RegisterTab:', value);
             if (this.props.onRegister) {
               this.props.onRegister(
                 this.props.mode,
@@ -135,11 +135,34 @@ export default class RegisterTreeTab extends PureComponent {
           }}
           isTpo={this.props.isTpo}
           mode={this.props.mode}
-          plantProjects={this.props.plantProjects}
+          plantProjects={this.props.plantProjects || ''}
           geometry={geometry}
           geoLocation={geoLocation}
           initialValues={this.state.defaultValue}
           openModel={formProps => this.openModel(formProps)}
+        />
+        <PopupNative
+          isOpen={
+            this.props.isTpo &&
+            this.props.plantProjects &&
+            this.props.plantProjects.length <= 0
+          }
+          headerText={i18n.t('label.register_tree_tpo_no_plant_project_header')}
+          bodyText={i18n.t(
+            'label.register_tree_tpo_no_plant_project_description'
+          )}
+          onCancel={() => {
+            this.props.navigation.navigation.navigate(
+              getLocalRoute('app_userHome')
+            );
+          }}
+          cancelText={i18n.t('label.go_back')}
+          applyText={i18n.t('label.add_project')}
+          onApply={() => {
+            Linking.openURL(
+              'https://test.trilliontreecampaign.org/manage-plant-projects'
+            );
+          }}
         />
         <Modal
           // position={'bottom'}

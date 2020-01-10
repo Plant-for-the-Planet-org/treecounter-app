@@ -12,9 +12,7 @@ export default {
         propertyOrder: 1
       },
       plantProject: {
-        enum: ['4', '6'],
-        enum_titles: ['project_4', 'Campeche Rainforest Restoration 2'],
-        type: 'string',
+        type: 'integer',
         title: 'label.plant_project',
         icon: null,
         help: null,
@@ -142,9 +140,9 @@ export default {
         icon: null,
         help: null,
         propertyOrder: 8
-      },
+      }
     },
-    required: ['treeCount', 'plantDate', 'geoLocation','treeSpecies'],
+    required: ['treeCount', 'plantDate', 'geoLocation', 'treeSpecies'],
     submit_url: '',
     submit_method: 'POST'
   },
@@ -160,8 +158,6 @@ export default {
         propertyOrder: 1
       },
       plantProject: {
-        enum: ['4', '6'],
-        enum_titles: ['project_4', 'Campeche Rainforest Restoration 2'],
         type: 'string',
         title: 'label.plant_project',
         icon: null,
@@ -225,7 +221,13 @@ export default {
         propertyOrder: 5
       }
     },
-    required: ['treeCount', 'plantDate', 'geometry',  'geoLocation', 'treeSpecies'],
+    required: [
+      'treeCount',
+      'plantDate',
+      'geometry',
+      'geoLocation',
+      'treeSpecies'
+    ],
     submit_url: '',
     submit_method: 'POST'
   }

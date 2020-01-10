@@ -62,6 +62,7 @@ class RegisterTreesContainer extends PureComponent {
         <RegisterTrees
           key="register-tree"
           ref="registerTrees"
+          navigation={this.props}
           onSubmit={this.onSubmit}
           currentUserProfile={this.props.currentUserProfile}
         />

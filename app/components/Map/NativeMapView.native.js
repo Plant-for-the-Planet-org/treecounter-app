@@ -310,11 +310,9 @@ function getQueryVariable(query, variable) {
       return parseFloat(decodeURIComponent(pair[1]));
     }
   }
-  console.log('Query variable %s not found', variable);
 }
 
 export function encodeFormData(mode, mapPoint) {
-  console.log('map point in encodeFormData', mapPoint, mode);
   if (!mapPoint) {
     return '';
   }
@@ -340,7 +338,6 @@ export function encodeFormData(mode, mapPoint) {
 }
 
 export function decodeFormData(mode, mapPoint) {
-  console.log('map point in decodeFormData', mapPoint, mode);
   if (!mapPoint) {
     return null;
   }
@@ -410,11 +407,9 @@ class NativeMapView extends Component {
 
   componentDidMount() {
     this.gotoLocation();
-    console.log('this.map', this.map);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('this.props', nextProps);
     if (nextProps !== this.props) this.onPropsUpdate(nextProps);
   }
 
@@ -540,16 +535,9 @@ class NativeMapView extends Component {
     };
     const {
       editing,
-      region: { latitude, longitude },
-      markers
+      region: { latitude, longitude }
     } = this.state;
-    console.log({
-      editing,
-      latitude,
-      longitude,
-      markers,
-      Config
-    });
+
     if (editing) {
       mapOptions.scrollEnabled = false;
       mapOptions.onPanDrag = e => this.onPress(e);
@@ -602,7 +590,7 @@ class NativeMapView extends Component {
         customMapStyle={mapStyle}
         {...mapOptions}
       >
-        {this.props.mode === 'multipal-tree' &&
+        {this.props.mode === 'multiple-trees' &&
           this.state.polygons.map(polygon => (
             <Polygon
               key={polygon.id}
@@ -800,7 +788,6 @@ class NativeMapView extends Component {
           onFocus: onPress,
           pointerEvents: 'none'
         };
-    console.log('googleMapApiKey', googleMapApiKey);
     // inputProps.style = styles.inputStyle
     // const isSingleTree = this.props.mode === 'single-tree';
     return this.renderComp(
@@ -908,7 +895,6 @@ class NativeMapView extends Component {
                 }}
                 textInputProps={inputProps}
               />
-              {console.log('this.ref-======>', this.ref)}
             </View>
           </TouchableWithoutFeedback>
         )}

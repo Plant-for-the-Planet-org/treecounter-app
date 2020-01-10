@@ -48,7 +48,6 @@ export const FormikFormTree = props => {
   function focusTheField(id) {
     inputs[id].focus();
   }
-
   return (
     <Formik
       initialValues={parentProps.initialValues}
@@ -180,7 +179,7 @@ export const FormikFormTree = props => {
                   }
                 >
                   <NativeMapView
-                    mode={'single-tree'}
+                    mode={parentProps.mode}
                     mapStyle={{ height: 200 }}
                     geometry={geometry}
                     geoLocation={geoLocation}
@@ -296,12 +295,16 @@ export const FormikFormTree = props => {
                   </View>
                 )}
                 {parentProps.isTpo ? (
+                  parentProps.plantProjects &&
                   parentProps.plantProjects.length > 0 ? (
                     <Dropdown
                       value={props.values.plantProject}
                       onChangeText={props.handleChange('plantProject')}
                       onBlur={props.handleBlur('plantProject')}
                       label={i18n.t('label.plant_project')}
+                      error={
+                        props.touched.plantProject && props.errors.plantProject
+                      }
                       data={parentProps.plantProjects.map(item => {
                         return { value: item.value, label: item.text };
                       })}
@@ -334,8 +337,6 @@ export const FormikFormTree = props => {
               </TouchableOpacity>
             </View>
           </View>
-
-          {console.log({ FormProps: props, parentProps })}
         </>
       )}
     </Formik>

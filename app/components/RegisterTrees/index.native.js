@@ -36,7 +36,7 @@ export default class RegisterTrees extends Component {
       index: 0,
       routes: routes
     };
-
+    console.log('this.props.navigation', this.props);
     // Bind Local method
     this._handleIndexChange = this._handleIndexChange.bind(this);
     this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
@@ -102,11 +102,13 @@ export default class RegisterTrees extends Component {
         isTpo={isTpo(this.props.currentUserProfile)}
         mode={route.key}
         plantProjects={plantProjects}
+        navigation={this.props.navigation}
       />
     );
   };
 
   render() {
+    console.log('this.props===----===--=-=-=->', this.props);
     return (
       <KeyboardAwareScrollView
         enableOnAndroid

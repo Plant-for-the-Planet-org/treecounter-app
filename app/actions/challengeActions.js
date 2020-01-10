@@ -18,7 +18,7 @@ export function challenge(challengeDetails) {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
       let request = postAuthenticatedRequest(route, challengeDetails, {
-        version: 'v1.3'
+        version: 'v1.1'
       });
       request
         .then(response => {

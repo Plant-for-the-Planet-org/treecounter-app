@@ -6,6 +6,8 @@ import i18n from '../../../locales/i18n';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getImageUrl } from '../../../actions/apiRouting';
+import Header from '../../Header/BackHeader';
+
 const IndividualsLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
   const [period, setPeriod] = useState('all');
@@ -106,7 +108,7 @@ const IndividualsLeaderBoard = ({ navigation }) => {
   console.log('queryresult', queryresult);
   return (
     <View style={styles.mainContainer}>
-      {/* <Header /> */}
+      <Header navigation={navigation} />
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>{i18n.t('label.lbr_individuals')}</Text>
       </View>

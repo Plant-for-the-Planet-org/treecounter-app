@@ -6,6 +6,7 @@ import i18n from '../../../locales/i18n';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { getImageUrl } from '../../../actions/apiRouting';
+import Header from '../../Header/BackHeader';
 
 const CountryDetails = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
@@ -111,7 +112,7 @@ const CountryDetails = ({ navigation }) => {
 
   return (
     <View style={styles.mainContainer}>
-      {/* <BackHeader /> */}
+      <Header navigation={navigation} />
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>{section}</Text>
       </View>

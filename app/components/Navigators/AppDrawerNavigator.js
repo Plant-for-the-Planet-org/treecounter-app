@@ -357,22 +357,28 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: UnfulfilledPledgeEvents
       },
       ['countries_leaderboard']: {
-        screen: CountriesLeaderBoard
+        screen: CountriesLeaderBoard,
+        navigationOptions: { header: null }
       },
       ['country_details_leaderboard']: {
-        screen: CountryDetails
+        screen: CountryDetails,
+        navigationOptions: { header: null }
       },
       ['companies_leaderboard']: {
-        screen: CompaniesLeaderBoard
+        screen: CompaniesLeaderBoard,
+        navigationOptions: { header: null }
       },
       ['schools_leaderboard']: {
-        screen: SchoolsLeaderBoard
+        screen: SchoolsLeaderBoard,
+        navigationOptions: { header: null }
       },
       ['individuals_leaderboard']: {
-        screen: IndividualsLeaderBoard
+        screen: IndividualsLeaderBoard,
+        navigationOptions: { header: null }
       },
       ['organizations_LeaderBoard']: {
-        screen: OrganizationLeaderBoard
+        screen: OrganizationLeaderBoard,
+        navigationOptions: { header: null }
       }
     },
     {

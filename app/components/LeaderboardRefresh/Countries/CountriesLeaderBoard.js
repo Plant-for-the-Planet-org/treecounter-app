@@ -5,6 +5,7 @@ import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderbo
 import i18n from '../../../locales/i18n';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
+import Header from '../../Header/BackHeader';
 
 const CountriesLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
@@ -102,6 +103,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
   console.log('queryresult', queryresult);
   return (
     <View style={styles.mainContainer}>
+      <Header navigation={navigation} />
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>{i18n.t('label.lbr_c_countries')}</Text>
       </View>

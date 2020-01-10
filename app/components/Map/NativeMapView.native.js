@@ -30,6 +30,7 @@ import i18n from '../../locales/i18n';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import buttonStyles from '../../styles/common/button.native';
 import markerImage from '../../assets/images/tree.png';
+import { getLocale } from '../../actions/getLocale';
 
 const { googleMapApiKey } = Config;
 const { width, height } = Dimensions.get('window');
@@ -868,7 +869,7 @@ class NativeMapView extends Component {
                 query={{
                   // available options: https://developers.google.com/places/web-service/autocomplete
                   key: googleMapApiKey,
-                  language: 'en' // language of the results
+                  language: getLocale() // language of the results
                 }}
                 currentLocation={false}
                 renderLeftButton={() => (

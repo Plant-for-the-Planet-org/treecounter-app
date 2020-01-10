@@ -48,6 +48,7 @@ export const FormikFormTree = props => {
   function focusTheField(id) {
     inputs[id].focus();
   }
+
   return (
     <Formik
       initialValues={parentProps.initialValues}

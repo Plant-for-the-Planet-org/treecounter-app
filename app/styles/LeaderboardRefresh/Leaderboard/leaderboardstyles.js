@@ -12,7 +12,9 @@ export default EStyleSheet.create({
   widgetContainer: {
     alignItems: 'center',
     marginVertical: 20,
-    flex: 1
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'red'
   },
   image: {
     // width: 100,
@@ -22,11 +24,15 @@ export default EStyleSheet.create({
     backgroundColor: 'white',
     borderColor: '#4d5153',
     borderWidth: 1,
-    paddingHorizontal: 20,
-    paddingVertical: 5,
+    // paddingHorizontal: 20,
+    // paddingVertical: 5,
     borderRadius: 20,
     marginTop: -13,
-    zIndex: 1
+    width: 111,
+    height: 32,
+    zIndex: 1,
+    justifyContent: 'center'
+    // flex: 1,
   },
   widgetTitle: {
     fontSize: 14,

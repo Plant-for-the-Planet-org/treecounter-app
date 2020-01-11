@@ -92,7 +92,7 @@ const Leaderboard = ({ navigation }) => {
             source={organizationleaderboard}
             resizeMode={'contain'}
           />
-          <View style={styles.widgetTitleContainer}>
+          <View style={[styles.widgetTitleContainer, { width: 277 }]}>
             <Text style={styles.widgetTitle}>
               {i18n.t('label.lbr_tree_planting_organizations')}
             </Text>

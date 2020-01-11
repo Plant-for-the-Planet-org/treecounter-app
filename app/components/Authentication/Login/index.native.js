@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-  View,
-  Image,
-  Keyboard,
-  TouchableOpacity,
-  SafeAreaView
-} from 'react-native';
+import { Text, View, Image, Keyboard, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import loginFormSchema from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
@@ -18,7 +11,7 @@ import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
 import { generateFormikSchemaFromFormSchema } from './../../../helpers/utils';
 import HeaderNew from './../../Header/HeaderNew.native';
-// import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-navigation';
 
 export default class Login extends Component {
   constructor(props) {
@@ -64,15 +57,13 @@ export default class Login extends Component {
     const backgroundColor = 'white';
     const lockedButton = 'rgba(137, 181, 58, 0.19)';
     return (
-      <SafeAreaView style={{ flex: 1, paddingTop: 80 }}>
-        <HeaderNew title={''} navigation={this.props.navigation} />
-        <View style={styles.forgotPassword}>
-          <TouchableItem onPress={this.onForgotPasswordClicked}>
-            <Text style={styles.forgotPasswordHighlight}>
-              {i18n.t('label.forgot_ur_password')}
-            </Text>
-          </TouchableItem>
-        </View>
+      <View style={{ flex: 1, paddingTop: 120 }}>
+        <HeaderNew
+          title={''}
+          navigation={this.props.navigation}
+          rightLink={i18n.t('label.forgot_ur_password')}
+          rightLinkFunction={this.onForgotPasswordClicked}
+        />
         <Formik
           initialValues={{
             // eslint-disable-next-line no-underscore-dangle
@@ -213,7 +204,7 @@ export default class Login extends Component {
             </>
           )}
         </Formik>
-      </SafeAreaView>
+      </View>
     );
   }
 }

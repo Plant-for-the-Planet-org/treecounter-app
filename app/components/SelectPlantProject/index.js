@@ -77,7 +77,7 @@ class SelectPlantProject extends Component {
         .length
     ) {
       let { loadProjects } = this.props;
-      await loadProjects('all', { loadAll: true });
+      await loadProjects('all', { loadAll: true, limit: 100 });
     }
     this.setState(this.initialStateFromProps(this.props));
   }

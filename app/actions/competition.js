@@ -28,7 +28,6 @@ import i18n from '../locales/i18n.js';
 export function fetchCompetitions(category) {
   return dispatch => {
     dispatch(setContentLoaderState(true));
-    dispatch(setProgressModelState(true));
     return getAuthenticatedRequest('competitions_get', {
       category: category,
       limit: 100
@@ -43,13 +42,11 @@ export function fetchCompetitions(category) {
           )
         );
         dispatch(setContentLoaderState(false));
-        dispatch(setProgressModelState(false));
         return res;
       })
       .catch(err => {
         debug(err);
         dispatch(setContentLoaderState(false));
-        dispatch(setProgressModelState(false));
         return err;
       });
   };
@@ -307,7 +304,6 @@ export function fetchAllCompetitions() {
 export function fetchMineCompetitions() {
   return dispatch => {
     dispatch(setContentLoaderState(true));
-    dispatch(setProgressModelState(true));
     return getAuthenticatedRequest('competitionsMine_get')
       .then(res => {
         dispatch(
@@ -319,13 +315,11 @@ export function fetchMineCompetitions() {
           )
         );
         dispatch(setContentLoaderState(false));
-        dispatch(setProgressModelState(false));
         return res;
       })
       .catch(err => {
         debug(err);
         dispatch(setContentLoaderState(false));
-        dispatch(setProgressModelState(false));
         return err;
       });
   };

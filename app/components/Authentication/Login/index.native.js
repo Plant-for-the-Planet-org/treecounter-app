@@ -212,7 +212,7 @@ export default class Login extends Component {
               {this.state.buttonType === 'login' ? (
                 <TouchableOpacity
                   style={[styles.actionButtonTouchable]}
-                  onPress={props.isValid && props.handleSubmit}
+                  onPress={props.isValid ? props.handleSubmit : null}
                 >
                   <View
                     style={[
@@ -230,7 +230,7 @@ export default class Login extends Component {
               {this.state.buttonType === '>' ? (
                 <TouchableOpacity
                   style={styles.actionButtonSmallTouchable}
-                  onPress={props.isValid && props.handleSubmit}
+                  onPress={props.isValid ? props.handleSubmit : null}
                 >
                   <Image
                     source={forward}

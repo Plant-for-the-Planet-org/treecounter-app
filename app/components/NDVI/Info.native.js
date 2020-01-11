@@ -7,8 +7,12 @@ import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import { formatDate } from '../../utils/utils';
 import { formatDateToMySQL } from '../../helpers/utils';
 
-const textCommonStyle = { fontSize: 10, lineHeight: 14 };
-const boldTextStyle = { fontWeight: 'bold' };
+const textCommonStyle = {
+  fontSize: 10,
+  lineHeight: 14,
+  fontFamily: 'OpenSans-Regular'
+};
+const boldTextStyle = { fontFamily: 'OpenSans-Bold' };
 
 const Info = props => {
   const aggregate = props.selectedDataPoint.ndviAggregate;
@@ -49,7 +53,8 @@ const Info = props => {
             <ReactNativeTooltipMenu
               labelContainerStyle={{
                 width: 200,
-                alignItems: 'center'
+                alignItems: 'center',
+                fontFamily: 'OpenSans-Regular'
               }}
               buttonComponent={
                 <TouchableItem
@@ -57,7 +62,14 @@ const Info = props => {
                     ...styles.info
                   }}
                 >
-                  <Text>?</Text>
+                  <Text
+                    style={{
+                      fontFamily: 'OpenSans-Bold',
+                      fontSize: 11
+                    }}
+                  >
+                    ?
+                  </Text>
                 </TouchableItem>
               }
               items={[

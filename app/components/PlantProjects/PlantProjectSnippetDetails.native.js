@@ -26,6 +26,7 @@ import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SingleRating from '../Reviews/SingleRating';
+
 //keeping Icon here instead of in assets
 
 /**

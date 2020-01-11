@@ -14,6 +14,7 @@ import { loadProject, loadProjects } from '../../actions/loadTposAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
+import LoadingIndicator from '../../components/Common/LoadingIndicator.native';
 
 class SelectPlantProjectContainer extends PureComponent {
   // componentWillMount() {
@@ -73,7 +74,9 @@ class SelectPlantProjectContainer extends PureComponent {
       project => project.allowDonations
     );
     console.log('==== plantprojects', plantProjects);
-    return !plantProjects.length ? null : (
+    return !plantProjects.length ? (
+      <LoadingIndicator contentLoader screen={'SingleProjectContentLoader'} />
+    ) : (
       <SelectPlantProject
         selectProject={this.selectPlantProjectAction}
         currencies={this.props.currencies}

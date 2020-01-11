@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
-import Swiper from '../../components/ReactNativeSwiper';
+import Swiper from '../../components/ReactNativeSwiper/index';
 import WelcomeScreen1 from './welcomescreen1.native';
 import WelcomeScreen2 from './welcomescreen2.native';
 import WelcomeScreen3 from './welcomescreen3.native';

@@ -16,6 +16,7 @@ import { formatNumber } from '../../utils/utils';
 import { connect } from 'react-redux';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 import { bindActionCreators } from 'redux';
+
 // import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -24,9 +25,10 @@ class PlantProjectFull extends React.Component {
   constructor(props) {
     super(props);
     const plantProject = { ...props.plantProject };
-    this.state = { plantProject };
+    this.state = { plantProject, isLoading: false };
   }
   async componentDidMount() {
+    setTimeout(() => this.setState({ isLoading: true }), 5000);
     try {
       if (this.props.plantProject && !this.props.plantProject.tpoData) {
         // we dont have the details in store, fetch it
@@ -41,7 +43,7 @@ class PlantProjectFull extends React.Component {
     }
   }
   render() {
-    let { plantProject } = this.state;
+    let { plantProject, isLoading } = this.state;
 
     if (!plantProject) return <LoadingIndicator />;
     console.log('rendering with tpo', plantProject.tpoData);
@@ -76,7 +78,7 @@ class PlantProjectFull extends React.Component {
     const navigation = this.props.navigation;
     const backgroundColor = 'white';
 
-    return (
+    return isLoading ? (
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
@@ -133,6 +135,8 @@ class PlantProjectFull extends React.Component {
           </View>
         ) : null}
       </SafeAreaView>
+    ) : (
+      <LoadingIndicator contentLoader screen={'SingleProjectContentLoader'} />
     );
   }
 }

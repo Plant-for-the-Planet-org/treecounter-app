@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Image } from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
+import { treelogo } from '../../assets/index';
 
 const HEIGHT = Dimensions.get('window').height;
 const WIDTH = Dimensions.get('window').width;
@@ -71,6 +72,37 @@ const WorldLoader = () => (
     <Rect x="30" y="490" rx="10" ry="10" width="70%" height="20" />
     <Rect x="30" y="520" rx="10" ry="10" width="85%" height="20" />
   </ContentLoader>
+);
+
+const InitialContentLoader = () => (
+  <View>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 40
+      }}
+    >
+      <Image source={treelogo} style={{ height: 100, width: 100 }} />
+    </View>
+    <ContentLoader
+      height={HEIGHT}
+      width={WIDTH}
+      speed={3}
+      primaryColor="#f3f3f3"
+      secondaryColor="#ecebeb"
+    >
+      <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
+      <Rect x="30" y="190" rx="10" ry="10" width="45%" height="20" />
+      <Rect x="30" y="220" rx="10" ry="10" width="75%" height="20" />
+      <Rect x="30" y="250" rx="10" ry="10" width="70%" height="20" />
+      <Rect x="30" y="280" rx="10" ry="10" width="85%" height="20" />
+      <Rect x="30" y="310" rx="10" ry="10" width="45%" height="20" />
+      <Rect x="30" y="340" rx="10" ry="10" width="70%" height="20" />
+      <Rect x="30" y="370" rx="10" ry="10" width="85%" height="20" />
+    </ContentLoader>
+  </View>
 );
 const ProfileLoader = () => (
   <ContentLoader
@@ -240,21 +272,21 @@ const SingleProjectContentLoader = () => (
   <ContentLoader
     height={HEIGHT}
     width={WIDTH}
-    speed={2}
+    speed={3}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
-    <Rect x="30" y="10%" rx="4" ry="4" width="82%" height="16" />
-    <Rect x="126" y="22%" rx="4" ry="4" width="55%" height="6" />
-    <Rect x="127" y="26%" rx="3" ry="3" width="55%" height="6" />
-    <Rect x="126" y="30%" rx="3" ry="3" width="55%" height="6" />
-    <Circle cx="70" cy="27%" r="36" />
-    <Rect x="30" y="40%" rx="10" ry="10" width="75%" height="150" />
-    <Rect x="88%" y="40%" rx="10" ry="10" width="30%" height="150" />
-    <Rect x="30" y="70%" rx="0" ry="0" width="55%" height="21" />
-    <Rect x="30" y="76%" rx="0" ry="0" width="75%" height="21" />
-    <Rect x="30" y="82%" rx="0" ry="0" width="75%" height="21" />
-    <Rect x="30" y="88%" rx="0" ry="0" width="75%" height="21" />
+    <Rect x="30" y="5%" rx="4" ry="4" width="82%" height="16" />
+    <Rect x="126" y="15%" rx="4" ry="4" width="55%" height="6" />
+    <Rect x="127" y="18%" rx="3" ry="3" width="55%" height="6" />
+    <Rect x="126" y="22%" rx="3" ry="3" width="55%" height="6" />
+    <Circle cx="70" cy="19%" r="36" />
+    <Rect x="30" y="30%" rx="10" ry="10" width="75%" height="150" />
+    <Rect x="88%" y="30%" rx="10" ry="10" width="30%" height="150" />
+    <Rect x="30" y="60%" rx="0" ry="0" width="55%" height="21" />
+    <Rect x="30" y="66%" rx="0" ry="0" width="75%" height="21" />
+    <Rect x="30" y="72%" rx="0" ry="0" width="75%" height="21" />
+    <Rect x="30" y="78%" rx="0" ry="0" width="75%" height="21" />
   </ContentLoader>
 );
 
@@ -275,9 +307,12 @@ const ContentLoading = props => {
       {screen === 'competitionListLoader' && <CompetitionListLoader />}
       {screen === 'competitionSingleLoader' && <CompetitionSingleLoader />}
       {screen === 'projectListLoader' && <ProjectListLoader />}
-      {screen === 'worldLoader' && <WorldLoader />}
-      {screen === 'projectSingleLoader' && <SingleProjectContentLoader />}
+      {screen === 'worldLoader' && <InitialContentLoader />}
+      {screen === 'projectSingleLoader' && <ProjectSingleLoader />}
       {screen === 'PledgeEvents' && <PledgeEventsContentLoader />}
+      {screen === 'SingleProjectContentLoader' && (
+        <SingleProjectContentLoader />
+      )}
     </View>
   );
 };

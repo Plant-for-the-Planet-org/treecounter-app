@@ -3,22 +3,23 @@ export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
     justifyContent: 'space-around',
-    marginBottom: 50
+    marginBottom: 60
   },
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    flex: 1
   },
   widgetContainer: {
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 5,
     flex: 1,
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: 'red'
   },
   image: {
-    // width: 100,
-    // height: 100
+    width: '90%',
+    height: '90%'
   },
   widgetTitleContainer: {
     backgroundColor: 'white',

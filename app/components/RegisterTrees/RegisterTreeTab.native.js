@@ -13,7 +13,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
 import PopupNative from '../Common/ModalDialog/Popup.native';
 import { getLocalRoute } from '../../actions/apiRouting';
+import Config from 'react-native-config';
 
+const { host, scheme } = Config;
 const backgroundColor = 'white';
 const defaultInitValue = {
   plantDate: new Date(),
@@ -159,9 +161,11 @@ export default class RegisterTreeTab extends PureComponent {
           cancelText={i18n.t('label.go_back')}
           applyText={i18n.t('label.add_project')}
           onApply={() => {
-            Linking.openURL(
-              'https://test.trilliontreecampaign.org/manage-plant-projects'
+            console.log(
+              '`${host}/manage-plant-projects`',
+              `${scheme}://${host}/manage-plant-projects`
             );
+            Linking.openURL(`${scheme}://${host}/manage-plant-projects`);
           }}
         />
         <Modal

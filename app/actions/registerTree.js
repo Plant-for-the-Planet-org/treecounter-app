@@ -20,13 +20,13 @@ export function registerTree(
       'plantContribution_post',
       plantContribution,
       {
-        version: 'v1.3',
+        version: 'v1.1',
         mode: mode
       }
     )
       .then(res => {
         const { statusText } = res;
-        const { contribution, treecounter } = res.data.merge;
+        const { contribution, treecounter } = res;
 
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));

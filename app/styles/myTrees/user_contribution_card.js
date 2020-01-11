@@ -159,11 +159,15 @@ export const myTreesStyle = (color, borderColor) =>
     redeemObjectDate: {
       backgroundColor: '#f7f7f7',
       height: 40,
-      width: '100%',
       justifyContent: 'center',
-      padding: 20
+      zIndex: 2,
+      paddingLeft: 20
     },
-    redeemObjectDateText: { fontFamily: 'OpenSans-Regular', fontSize: 14 },
+    redeemObjectDateText: {
+      fontFamily: 'OpenSans-Regular',
+      fontSize: 14,
+      zIndex: 3
+    },
     redeemObjectTreesContainer: { paddingHorizontal: 20, paddingVertical: 16 },
     row1: {
       flexDirection: 'row',

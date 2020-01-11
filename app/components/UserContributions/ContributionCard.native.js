@@ -247,6 +247,7 @@ class ContributionCard extends React.Component {
 
   render() {
     let { contribution } = this.props;
+    console.log('Contribution', contribution);
     let {
       treeCount,
       treeSpecies,

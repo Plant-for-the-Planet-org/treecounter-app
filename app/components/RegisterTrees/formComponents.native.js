@@ -1,20 +1,20 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
-import React, { useState, useEffect } from 'react';
-import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
-import { Switch } from 'react-native-switch';
-import { cameraSolid, circleDelete, imageGallery } from '../../assets';
+import React, {useState, useEffect} from 'react';
+import {Image, Platform, Text, TouchableOpacity, View} from 'react-native';
+import {Switch} from 'react-native-switch';
+import {cameraSolid, circleDelete, imageGallery} from '../../assets';
 import styles from '../../styles/register_trees.native';
-import { formatDateToMySQL } from './../../helpers/utils';
-import { formatDate } from './../../utils/utils';
+import {formatDateToMySQL} from './../../helpers/utils';
+import {formatDate} from './../../utils/utils';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import i18n from '../../locales/i18n';
-import { Formik } from 'formik';
-import { TextField } from 'react-native-material-textfield';
+import {Formik} from 'formik';
+import {TextField} from 'react-native-material-textfield';
 import schemaOptionsMultiple from '../../server/formSchemas/registerTrees';
-import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
+import {generateFormikSchemaFromFormSchema} from '../../helpers/utils';
 import ImagePicker from 'react-native-image-picker';
 import buttonStyles from '../../styles/common/button.native';
-import { Dropdown } from 'react-native-material-dropdown';
+import {Dropdown} from 'react-native-material-dropdown';
 import NativeMapView from '../Map/NativeMapView.native';
 import CardLayout from '../Common/Card';
 
@@ -40,7 +40,7 @@ export const FormikFormTree = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     isMultipleTree
       ? schemaOptionsMultiple.multiple_trees
-      : schemaOptionsMultiple.single_tree
+      : props.schemaOptionsSingleTree
   );
   let inputs = [];
 
@@ -74,8 +74,8 @@ export const FormikFormTree = props => {
                           }}
                           onSubmitEditing={() => {
                             (isMultipleTree && focusTheField('treeCount')) ||
-                              (showClassification &&
-                                focusTheField('treeClassifications'));
+                            (showClassification &&
+                              focusTheField('treeClassifications'));
                           }}
                           label={i18n.t('label.trees_name')}
                           value={props.values.treeSpecies}
@@ -101,7 +101,7 @@ export const FormikFormTree = props => {
                         style={
                           isMultipleTree
                             ? styles.formHalfTextField
-                            : { flex: 1 }
+                            : {flex: 1}
                         }
                       >
                         {parentProps.mode === 'multiple-trees' && (
@@ -115,7 +115,7 @@ export const FormikFormTree = props => {
                               }}
                               onSubmitEditing={() => {
                                 showClassification &&
-                                  focusTheField('treeClassifications');
+                                focusTheField('treeClassifications');
                               }}
                               value={props.values.treeCount}
                               tintColor={'#4d5153'}
@@ -138,7 +138,7 @@ export const FormikFormTree = props => {
                           </View>
                         )}
 
-                        <View style={isMultipleTree ? { flex: 1 } : ''}>
+                        <View style={isMultipleTree ? {flex: 1} : ''}>
                           <CompetitionDatePicker
                             endDate={props.values.plantDate}
                             label={i18n.t('label.plant_date')}
@@ -161,8 +161,8 @@ export const FormikFormTree = props => {
                     {parentProps.mode === 'multiple-trees'
                       ? i18n.t('label.many_tree_planting_location_description')
                       : i18n.t(
-                          'label.single_tree_planting_location_description'
-                        )}
+                        'label.single_tree_planting_location_description'
+                      )}
                   </Text>
                 </View>
               </CardLayout>
@@ -180,7 +180,7 @@ export const FormikFormTree = props => {
                   }
                 >
                   <NativeMapView
-                    mode={parentProps.mode}
+                    mode={'single-tree'}
                     mapStyle={{ height: 200 }}
                     geometry={geometry}
                     geoLocation={geoLocation}
@@ -191,19 +191,19 @@ export const FormikFormTree = props => {
                 </View>
                 <View>
                   {parentProps.mode === 'single-tree' &&
-                    props.touched.geoLocation &&
-                    props.errors.geoLocation && (
-                      <Text style={styles.errorText}>
-                        {props.errors.geoLocation}
-                      </Text>
-                    )}
+                  props.touched.geoLocation &&
+                  props.errors.geoLocation && (
+                    <Text style={styles.errorText}>
+                      {props.errors.geoLocation}
+                    </Text>
+                  )}
                   {parentProps.mode === 'multiple-trees' &&
-                    props.touched.geometry &&
-                    props.errors.geometry && (
-                      <Text style={styles.errorText}>
-                        {props.errors.geometry}
-                      </Text>
-                    )}
+                  props.touched.geometry &&
+                  props.errors.geometry && (
+                    <Text style={styles.errorText}>
+                      {props.errors.geometry}
+                    </Text>
+                  )}
                 </View>
               </View>
               <CardLayout>
@@ -256,7 +256,7 @@ export const FormikFormTree = props => {
                               onBlur={props.handleBlur('treeClassifications')}
                             />
                           </View>
-                          <View style={{ flex: 1 }}>
+                          <View style={{flex: 1}}>
                             <TextField
                               label={i18n.t('label.tree_scientific_name')}
                               ref={input => {
@@ -307,14 +307,14 @@ export const FormikFormTree = props => {
                         props.touched.plantProject && props.errors.plantProject
                       }
                       data={parentProps.plantProjects.map(item => {
-                        return { value: item.value, label: item.text };
+                        return {value: item.value, label: item.text};
                       })}
                     />
                   ) : (
-                    <View />
+                    <View/>
                   )
                 ) : (
-                  <View />
+                  <View/>
                 )}
               </CardLayout>
             </View>
@@ -338,6 +338,7 @@ export const FormikFormTree = props => {
               </TouchableOpacity>
             </View>
           </View>
+          {console.log('formProps', {props})}
         </>
       )}
     </Formik>
@@ -365,7 +366,7 @@ export class AddMeasurements extends React.Component {
   }
 
   _addMeasurementView = (val, index) => {
-    const { measurementView } = this.state;
+    const {measurementView} = this.state;
     if (val) {
       let ele = measurementView;
       if (ele[index]) {
@@ -413,8 +414,8 @@ export class AddMeasurements extends React.Component {
   };
 
   render() {
-    const { measurementView, elementMasument } = this.state;
-    const { props } = this.props;
+    const {measurementView, elementMasument} = this.state;
+    const {props} = this.props;
     return (
       <View>
         {measurementView.map((item, index) => {
@@ -423,7 +424,7 @@ export class AddMeasurements extends React.Component {
               <View style={styles.formSwitchView}>
                 <Text style={styles.formClassificationLabel}>
                   {i18n.t('label.add_measurements') +
-                    (item.id <= 1 ? '' : item.id)}
+                  (item.id <= 1 ? '' : item.id)}
                 </Text>
                 <View>
                   <CustomSwitch
@@ -461,7 +462,7 @@ export class AddMeasurements extends React.Component {
                           labelTextStyle={styles.textFiledLabel}
                           titleTextStyle={styles.textFieldTitle}
                           renderRightAccessory={() => (
-                            <Text style={{ fontSize: 16, color: '#4d5153' }}>
+                            <Text style={{fontSize: 16, color: '#4d5153'}}>
                               cm
                             </Text>
                           )}
@@ -479,7 +480,7 @@ export class AddMeasurements extends React.Component {
                           onBlur={props.handleBlur('diameter')}
                         />
                       </View>
-                      <View style={{ flex: 1 }}>
+                      <View style={{flex: 1}}>
                         <TextField
                           label={i18n.t('label.tree_height')}
                           value={props.values.treeHeight}
@@ -492,7 +493,7 @@ export class AddMeasurements extends React.Component {
                           textColor={'#4d5153'}
                           returnKeyType="next"
                           renderRightAccessory={() => (
-                            <Text style={{ fontSize: 16, color: '#4d5153' }}>
+                            <Text style={{fontSize: 16, color: '#4d5153'}}>
                               meter
                             </Text>
                           )}
@@ -516,7 +517,7 @@ export class AddMeasurements extends React.Component {
                         />
                       </View>
                     </View>
-                    <View style={{ width: '47%', paddingTop: 20 }}>
+                    <View style={{width: '47%', paddingTop: 20}}>
                       <CompetitionDatePicker
                         endDate={
                           elementMasument[index]['measurementDate'] ||
@@ -570,8 +571,8 @@ export function AccessPicker(props) {
         onChangeText={onChange}
         lineWidth={1}
         error={props.touched.access && props.errors.access}
-        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+        itemTextStyle={{fontFamily: 'OpenSans-Regular'}}
+        labelTextStyle={{fontFamily: 'OpenSans-Regular'}}
       />
     </View>
   );
@@ -621,11 +622,11 @@ export function AddImage(props) {
           style={styles.competitionDeleteButton}
           onPress={() => props.setFieldValue('imageFile', '')}
         >
-          <Image style={styles.competitionDeleteImage} source={circleDelete} />
+          <Image style={styles.competitionDeleteImage} source={circleDelete}/>
         </TouchableOpacity>
         <Image
           style={styles.teaser__projectImage}
-          source={{ uri: image }}
+          source={{uri: image}}
           resizeMode={'cover'}
         />
       </View>
@@ -655,7 +656,7 @@ export function AddImage(props) {
             });
           }}
         >
-          <Image style={styles.addImageButtonIcon} source={imageGallery} />
+          <Image style={styles.addImageButtonIcon} source={imageGallery}/>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -675,7 +676,7 @@ export function AddImage(props) {
           }}
           style={styles.addImageButton2}
         >
-          <Image style={styles.addImageButtonIcon} source={cameraSolid} />
+          <Image style={styles.addImageButtonIcon} source={cameraSolid}/>
         </TouchableOpacity>
       </View>
     </View>
@@ -696,7 +697,7 @@ export function CompetitionDatePicker(props) {
             <Text>{props.errors.endDate}</Text>
           ) : null}
         </View>
-        <View style={styles.datePickerUnderline} />
+        <View style={styles.datePickerUnderline}/>
       </TouchableOpacity>
 
       <DateTimePicker

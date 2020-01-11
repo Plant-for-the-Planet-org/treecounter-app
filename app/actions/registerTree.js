@@ -20,21 +20,17 @@ export function registerTree(
       'plantContribution_post',
       plantContribution,
       {
-        version: 'v1.1',
         mode: mode
       }
     )
       .then(res => {
+        console.log('resp===>',res);
         const { statusText } = res;
-        const { contribution, treecounter } = res;
+        const { contribution, treecounter } = res.data;
 
         dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
         dispatch(mergeEntities(normalize(contribution, contributionSchema)));
         dispatch(setProgressModelState(false));
-        // Note: for resetting in navigation params
-        // updateRoute('app_registerTrees', navigation || dispatch, null,
-        //   {value: null, mode: null, geoLocation: null, geometry: null}
-        //   );
         updateRoute('app_userHome', navigation || dispatch);
         NotificationManager.success(statusText, i18n.t('label.success'), 5000);
         return res;

@@ -12,8 +12,8 @@ import i18n from '../../locales/i18n';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
 import PopupNative from '../Common/ModalDialog/Popup.native';
-import { getLocalRoute } from '../../actions/apiRouting';
 import Config from 'react-native-config';
+import {updateRoute} from '../../helpers/routerHelper';
 
 const { host, scheme } = Config;
 const backgroundColor = 'white';
@@ -154,17 +154,11 @@ export default class RegisterTreeTab extends PureComponent {
             'label.register_tree_tpo_no_plant_project_description'
           )}
           onCancel={() => {
-            this.props.navigation.navigation.navigate(
-              getLocalRoute('app_userHome')
-            );
+            updateRoute('app_userHome', this.props.navigation.navigation)
           }}
           cancelText={i18n.t('label.go_back')}
           applyText={i18n.t('label.add_project')}
           onApply={() => {
-            console.log(
-              '`${host}/manage-plant-projects`',
-              `${scheme}://${host}/manage-plant-projects`
-            );
             Linking.openURL(`${scheme}://${host}/manage-plant-projects`);
           }}
         />

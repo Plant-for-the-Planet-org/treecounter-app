@@ -12,7 +12,9 @@ export default {
         propertyOrder: 1
       },
       plantProject: {
-        type: 'integer',
+        enum: ['4', '6'],
+        enum_titles: ['project_4', 'Campeche Rainforest Restoration 2'],
+        type: 'string',
         title: 'label.plant_project',
         icon: null,
         help: null,
@@ -23,7 +25,7 @@ export default {
         title: 'label.tree_species',
         icon: null,
         help: null,
-        propertyOrder: 3
+        propertyOrder: 2
       },
       plantDate: {
         type: 'string',
@@ -32,7 +34,7 @@ export default {
         maxDate: true,
         icon: null,
         help: null,
-        propertyOrder: 4
+        propertyOrder: 3
       },
       geoLocation: {
         type: 'string',
@@ -40,7 +42,7 @@ export default {
         widget: 'map',
         icon: null,
         help: null,
-        propertyOrder: 5
+        propertyOrder: 4
       },
       contributionImages: {
         type: 'array',
@@ -64,43 +66,28 @@ export default {
         },
         icon: null,
         help: null,
-        propertyOrder: 6
+        propertyOrder: 5
       },
-      treeClassifications: {
-        type: 'array',
-        title: 'label.add_classification',
-        items: {
-          title: 'prototype',
-          type: 'object',
-          properties: {
-            treeClassification: {
-              type: 'string',
-              title: 'label.tree_classification',
-              attr: {
-                maxlength: 255
-              },
-              icon: null,
-              help: null,
-              maxLength: 255,
-              propertyOrder: 1
-            },
-            treeScientificName: {
-              type: 'string',
-              title: 'label.tree_scientific_name',
-              attr: {
-                maxlength: 255
-              },
-              icon: null,
-              help: null,
-              maxLength: 255,
-              propertyOrder: 2
-            }
-          },
-          icon: null,
-          help: null
+      treeClassification: {
+        type: 'string',
+        title: 'label.tree_classification',
+        attr: {
+          maxlength: 255
         },
         icon: null,
         help: null,
+        maxLength: 255,
+        propertyOrder: 6
+      },
+      treeScientificName: {
+        type: 'string',
+        title: 'label.tree_scientific_name',
+        attr: {
+          maxlength: 255
+        },
+        icon: null,
+        help: null,
+        maxLength: 255,
         propertyOrder: 7
       },
       contributionMeasurements: {
@@ -134,6 +121,7 @@ export default {
               propertyOrder: 3
             }
           },
+          required: ['diameter', 'height', 'measurementDate'],
           icon: null,
           help: null
         },
@@ -142,7 +130,7 @@ export default {
         propertyOrder: 8
       }
     },
-    required: ['treeCount', 'plantDate', 'geoLocation', 'treeSpecies'],
+    required: ['treeCount', 'plantDate', 'geoLocation'],
     submit_url: '',
     submit_method: 'POST'
   },
@@ -158,6 +146,8 @@ export default {
         propertyOrder: 1
       },
       plantProject: {
+        enum: ['4', '6'],
+        enum_titles: ['project_4', 'Campeche Rainforest Restoration 2'],
         type: 'string',
         title: 'label.plant_project',
         icon: null,
@@ -181,14 +171,6 @@ export default {
         propertyOrder: 3
       },
       geoLocation: {
-        type: 'string',
-        title: 'label.geo_location',
-        widget: 'map',
-        icon: null,
-        help: null,
-        propertyOrder: 3
-      },
-      geometry: {
         type: 'string',
         title: 'label.geo_location',
         widget: 'map',
@@ -221,13 +203,7 @@ export default {
         propertyOrder: 5
       }
     },
-    required: [
-      'treeCount',
-      'plantDate',
-      'geometry',
-      'geoLocation',
-      'treeSpecies'
-    ],
+    required: ['treeCount', 'plantDate', 'geoLocation'],
     submit_url: '',
     submit_method: 'POST'
   }

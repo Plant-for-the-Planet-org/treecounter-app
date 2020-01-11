@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
+import {Dimensions} from 'react-native';
+import {row, margin_top10} from './common/common_styles';
 
 const Layout = {
   window: {
@@ -87,7 +88,7 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  formNameFields: { flex: 1, marginRight: 20 },
+  formNameFields: {flex: 1, marginRight: 20},
   showImage: {
     display: 'flex',
     flexDirection: 'row',
@@ -98,7 +99,7 @@ export default EStyleSheet.create({
   formClassificationFields: {
     flex: 1
   },
-  formView: { marginTop: 0 },
+  formView: {marginTop: 0},
   addImageTitle: {
     marginTop: 20,
     fontSize: 12,
@@ -159,13 +160,13 @@ export default EStyleSheet.create({
     lineHeight: 27,
     fontWeight: '300'
   },
-  formAddImageBlock: { color: '#4d5153', fontFamily: 'OpenSans-Semibold' },
+  formAddImageBlock: {color: '#4d5153', fontFamily: 'OpenSans-Semibold'},
   classificationBlock: {
     flex: 2,
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
-  addImageButtonIcon: { maxHeight: 20, width: 26 },
+  addImageButtonIcon: {maxHeight: 20, width: 26},
   addedImage: {
     maxWidth: 80,
     height: 80,
@@ -198,7 +199,7 @@ export default EStyleSheet.create({
     marginTop: 4,
     fontFamily: 'OpenSans-Regular'
   },
-  view_container: { backgroundColor: 'white', flex: 1 },
+  view_container: {backgroundColor: 'white', flex: 1},
   picker_container: {
     height: 50,
     width: '100%',
@@ -237,5 +238,7 @@ export default EStyleSheet.create({
     color: '#4d5153',
     height: 50
   },
-  textFiledTitle: { fontFamily: 'OpenSans-Regular', color: '#4d5153' }
+  textFiledTitle: {fontFamily: 'OpenSans-Regular', color: '#4d5153'},
+
+
 });

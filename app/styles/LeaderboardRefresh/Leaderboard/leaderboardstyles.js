@@ -11,7 +11,8 @@ export default EStyleSheet.create({
   },
   widgetContainer: {
     alignItems: 'center',
-    marginVertical: 20
+    marginVertical: 20,
+    flex: 1
   },
   image: {
     // width: 100,

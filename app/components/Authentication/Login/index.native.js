@@ -11,7 +11,6 @@ import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
 import { generateFormikSchemaFromFormSchema } from './../../../helpers/utils';
 import HeaderNew from './../../Header/HeaderNew.native';
-import { SafeAreaView } from 'react-navigation';
 
 export default class Login extends Component {
   constructor(props) {

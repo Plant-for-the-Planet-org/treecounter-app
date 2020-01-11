@@ -20,7 +20,7 @@ export default function HeaderNew(props) {
 
   const textColor = '#4d5153';
   const whiteColor = 'white';
-
+  const linkColor = '#89B53A';
   return (
     <SafeAreaView
       style={{
@@ -74,7 +74,7 @@ export default function HeaderNew(props) {
         <TouchableItem onPress={props.rightLinkFunction}>
           <Text
             style={{
-              color: '#89B53A',
+              color: linkColor,
               fontFamily: 'OpenSans-SemiBold'
             }}
           >

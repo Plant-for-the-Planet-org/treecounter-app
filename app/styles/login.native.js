@@ -162,5 +162,10 @@ export default EStyleSheet.create({
     alignSelf: 'center',
     position: 'absolute',
     right: 0
+  },
+  emailSentImage: {
+    width: Dimensions.get('window').width * 0.67,
+    height: Dimensions.get('window').width * 0.67,
+    alignSelf: 'center'
   }
 });

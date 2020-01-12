@@ -10,13 +10,17 @@ import { schemaOptions } from '../../server/parsedSchemas/forgotpassword';
 import { handleServerResponseError } from '../../helpers/utils';
 
 class ForgotPasswordContainer extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
   constructor(props) {
     super(props);
     this.state = { schemaOptions: schemaOptions };
   }
 
   onPress = () => {
-    let value = this.refs.forgotPasswordContainer.refs.forgotPasswordForm.getValue();
+    let value = this.refs.forgotPasswordContainer.refs.forgotPasswordForm
+      .values;
     if (value) {
       this.props
         .forgot_password(value, this.props.navigation)
@@ -49,6 +53,8 @@ class ForgotPasswordContainer extends React.Component {
         updateRoute={(routeName, id) =>
           this.props.route(routeName, id, this.props.navigation)
         }
+        navigation={this.props.navigation}
+        forgetPasswordFunction={this.props.forgot_password}
       />
     );
   }

@@ -164,7 +164,7 @@ import welcomeScreen5 from './images/welcomeScreen5.png';
 import backArrow from './images/icons/backArrow.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
-
+import emailSent from './images/emailSent.png';
 export {
   treelogo,
   germany,
@@ -331,5 +331,6 @@ export {
   rocket,
   outline_email,
   readmoreUp,
-  readmoreDown
+  readmoreDown,
+  emailSent
 };

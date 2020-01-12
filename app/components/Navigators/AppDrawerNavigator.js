@@ -102,17 +102,11 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_editProfile')]: {
         screen: isLoggedIn ? EditUserProfile : LoginContainer
       },
-      [getLocalRoute('app_passwordSent')]: {
-        screen: EmailSentContainer
-      },
       [getLocalRoute('app_signup')]: {
         screen: SignUpContainer
       },
       [getLocalRoute('app_myTrees')]: {
         screen: UserContributions
-      },
-      [getLocalRoute('app_forgotPassword')]: {
-        screen: ForgotPasswordContainer
       },
       [getLocalRoute('app_accountActivation')]: {
         screen: ActivateAccountContainer
@@ -349,6 +343,12 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_unfulfilled_pledge_events']: {
         screen: UnfulfilledPledgeEvents
+      },
+      [getLocalRoute('app_forgotPassword')]: {
+        screen: ForgotPasswordContainer
+      },
+      [getLocalRoute('app_passwordSent')]: {
+        screen: EmailSentContainer
       }
     },
     {

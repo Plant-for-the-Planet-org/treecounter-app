@@ -168,7 +168,7 @@ export default class FormikFormGift extends Component {
                         buttonStyles.dualActionButtonTouchable,
                         { top: undefined, bottom: 55, flex: 1, padding: 20 }
                       ]}
-                      onPress={props.isValid && props.handleSubmit}
+                      onPress={props.isValid ? props.handleSubmit : null}
                     >
                       <View
                         style={[
@@ -193,7 +193,7 @@ export default class FormikFormGift extends Component {
                       { top: undefined, bottom: '16%' },
                       !props.isValid ? { backgroundColor: backgroundColor } : {}
                     ]}
-                    onPress={props.isValid && props.handleSubmit}
+                    onPress={props.isValid ? props.handleSubmit : null}
                   >
                     <Image
                       source={forward}

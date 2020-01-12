@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Text,
   View,
-  Image,
   Keyboard,
   TouchableOpacity,
   KeyboardAvoidingView
@@ -12,7 +11,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import loginFormSchema from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
-import { eye, closeeye } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';

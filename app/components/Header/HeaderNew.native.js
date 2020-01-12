@@ -38,10 +38,20 @@ export default function HeaderNew(props) {
       }}
     >
       <TouchableOpacity
-        style={{ height: 18, zIndex: 1001 }}
+        style={{
+          height: 36,
+          zIndex: 1001,
+          width: 36,
+          left: 24,
+          justifyContent: 'center'
+        }}
         onPress={() => props.navigation.goBack()}
       >
-        <Image source={backArrow} resizeMode="contain" style={{ height: 18 }} />
+        <Image
+          source={backArrow}
+          resizeMode="contain"
+          style={{ height: 18, width: 18.48, alignSelf: 'flex-start' }}
+        />
       </TouchableOpacity>
       <View
         style={{

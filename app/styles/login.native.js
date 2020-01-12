@@ -21,7 +21,7 @@ export default EStyleSheet.create({
   },
 
   loginTitle: {
-    fontFamily: 'OpenSans-Bold',
+    fontFamily: 'OpenSans-ExtraBold',
     fontSize: 27,
     color: '#4d5153'
   },
@@ -32,7 +32,7 @@ export default EStyleSheet.create({
   },
 
   actionButtonTouchable: {
-    width: '80%',
+    width: '100%',
     // marginLeft: '20%',
     alignSelf: 'center',
     position: 'absolute',
@@ -90,7 +90,6 @@ export default EStyleSheet.create({
     height: 50,
     backgroundColor: '$primary',
     borderColor: '$primary',
-    borderWidth: 1,
     borderRadius: 5,
     marginBottom: 21,
     marginTop: 30,
@@ -157,7 +156,6 @@ export default EStyleSheet.create({
   loginButtonStyle: {
     width: 100,
     height: 40,
-    borderWidth: 1,
     borderRadius: 6,
     padding: 0,
     margin: 0,

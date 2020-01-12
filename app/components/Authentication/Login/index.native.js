@@ -98,7 +98,7 @@ export default class Login extends Component {
                     styles.parentContainer,
                     {
                       backgroundColor: backgroundColor,
-                      padding: 20,
+                      padding: 24,
                       paddingTop: 120,
                       height: '100%'
                     }
@@ -142,7 +142,7 @@ export default class Login extends Component {
                     />
                   </View>
 
-                  <View style={styles.formView}>
+                  <View style={[styles.formView]}>
                     <View style={{ width: '100%' }}>
                       <TextField
                         label={i18n.t('label.password')}
@@ -167,20 +167,19 @@ export default class Login extends Component {
 
                     <TouchableOpacity
                       onPress={() => this.togglePassword()}
-                      style={{ marginLeft: '-14%', bottom: -6 }}
+                      style={{
+                        bottom: -6,
+                        marginLeft: '-10%',
+                        alignItems: 'flex-end'
+                      }}
                     >
                       {this.state.hidePassword ? (
-                        <Image
-                          source={closeeye}
-                          resizeMode={'contain'}
-                          style={{ height: 24 }}
-                        />
+                        <Text style={styles.forgotPasswordHighlight}>Show</Text>
                       ) : (
-                        <Image
-                          source={eye}
-                          resizeMode={'contain'}
-                          style={{ height: 24 }}
-                        />
+                        <Text style={styles.forgotPasswordHighlight}>
+                          {' '}
+                          Hide
+                        </Text>
                       )}
                     </TouchableOpacity>
                   </View>
@@ -197,7 +196,10 @@ export default class Login extends Component {
                     </TouchableItem>
                   </View>
                   <TouchableOpacity
-                    style={[styles.actionButtonTouchable]}
+                    style={[
+                      styles.actionButtonTouchable,
+                      { marginLeft: 24, marginRight: 24 }
+                    ]}
                     onPress={props.isValid && props.handleSubmit}
                   >
                     <View

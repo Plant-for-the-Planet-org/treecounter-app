@@ -164,8 +164,8 @@ export default EStyleSheet.create({
     right: 0
   },
   emailSentImage: {
-    width: Dimensions.get('window').width * 0.67,
-    height: Dimensions.get('window').width * 0.67,
+    width: Dimensions.get('window').width * 0.76,
+    height: Dimensions.get('window').width * 0.76,
     alignSelf: 'center'
   }
 });

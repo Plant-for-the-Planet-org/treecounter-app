@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Text,
   View,
-  Image,
   Keyboard,
   TouchableOpacity,
   KeyboardAvoidingView
@@ -12,7 +11,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import loginFormSchema from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
-import { eye, closeeye } from '../../../assets';
 import TouchableItem from '../../Common/TouchableItem.native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
@@ -98,7 +96,7 @@ export default class Login extends Component {
                     styles.parentContainer,
                     {
                       backgroundColor: backgroundColor,
-                      padding: 20,
+                      padding: 24,
                       paddingTop: 120,
                       height: '100%'
                     }
@@ -142,7 +140,7 @@ export default class Login extends Component {
                     />
                   </View>
 
-                  <View style={styles.formView}>
+                  <View style={[styles.formView]}>
                     <View style={{ width: '100%' }}>
                       <TextField
                         label={i18n.t('label.password')}
@@ -167,20 +165,19 @@ export default class Login extends Component {
 
                     <TouchableOpacity
                       onPress={() => this.togglePassword()}
-                      style={{ marginLeft: '-14%', bottom: -6 }}
+                      style={{
+                        bottom: -6,
+                        marginLeft: '-10%',
+                        alignItems: 'flex-end'
+                      }}
                     >
                       {this.state.hidePassword ? (
-                        <Image
-                          source={closeeye}
-                          resizeMode={'contain'}
-                          style={{ height: 24 }}
-                        />
+                        <Text style={styles.forgotPasswordHighlight}>Show</Text>
                       ) : (
-                        <Image
-                          source={eye}
-                          resizeMode={'contain'}
-                          style={{ height: 24 }}
-                        />
+                        <Text style={styles.forgotPasswordHighlight}>
+                          {' '}
+                          Hide
+                        </Text>
                       )}
                     </TouchableOpacity>
                   </View>
@@ -197,7 +194,10 @@ export default class Login extends Component {
                     </TouchableItem>
                   </View>
                   <TouchableOpacity
-                    style={[styles.actionButtonTouchable]}
+                    style={[
+                      styles.actionButtonTouchable,
+                      { marginLeft: 24, marginRight: 24 }
+                    ]}
                     onPress={props.isValid && props.handleSubmit}
                   >
                     <View

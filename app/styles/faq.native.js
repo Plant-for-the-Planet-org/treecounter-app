@@ -19,10 +19,11 @@ export default EStyleSheet.create({
     borderTopRightRadius: 5,
     backgroundColor: '#fff',
     alignItems: 'center',
-    padding: 12,
+    paddingTop: 12,
+    paddingBottom: 12,
     marginTop: 8,
-    marginLeft: 8,
-    marginRight: 8,
+    marginLeft: 24,
+    marginRight: 24,
     justifyContent: 'space-between'
   },
   headerText: {
@@ -37,9 +38,8 @@ export default EStyleSheet.create({
   content: {
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
-    marginLeft: 8,
-    marginRight: 8,
-    padding: 20,
+    marginLeft: 24,
+    marginRight: 24,
     flex: 1,
     backgroundColor: '#fff'
   },

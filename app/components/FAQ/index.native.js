@@ -65,26 +65,30 @@ export default class FAQ extends Component {
     this.setState({ activeSections });
   };
   render() {
+    const textColor = '#4d5153';
+
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
       <SafeAreaView style={{ flex: 1 }}>
         <HeaderNew title={''} navigation={this.props.navigation} />
-        <Text
-          style={{
-            fontFamily: 'OpenSans-Bold',
-            fontSize: 18,
-            lineHeight: 40,
-            letterSpacing: 0,
-            textAlign: 'left',
-            color: textColor
-          }}
-        >
-          {i18n.t('label.faq')}
-        </Text>
+
         <ScrollView
           contentContainerStyle={{ paddingBottom: 72, paddingTop: 80 }}
         >
+          <Text
+            style={{
+              fontFamily: 'OpenSans-Bold',
+              fontSize: 27,
+              lineHeight: 40,
+              letterSpacing: 0,
+              textAlign: 'left',
+              color: textColor,
+              marginLeft: 24
+            }}
+          >
+            {i18n.t('label.faq')}
+          </Text>
           <Image
             resizeMode="contain"
             source={FAQsCover}

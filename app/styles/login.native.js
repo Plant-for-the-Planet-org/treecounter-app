@@ -13,6 +13,24 @@ export default EStyleSheet.create({
     alignItems: 'center'
   },
 
+  forgotPassword: {
+    right: 24,
+    top: 24,
+    zIndex: 1002,
+    position: 'absolute'
+  },
+
+  loginTitle: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 27,
+    color: '#4d5153'
+  },
+
+  forgotPasswordHighlight: {
+    color: '#89B53A',
+    fontFamily: 'OpenSans-SemiBold'
+  },
+
   actionButtonTouchable: {
     width: '80%',
     // marginLeft: '20%',

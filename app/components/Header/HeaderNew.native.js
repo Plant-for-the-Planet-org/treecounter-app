@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  BackHandler,
-  SafeAreaView
-} from 'react-native';
+import { Text, View, TouchableOpacity, Image, BackHandler } from 'react-native';
 import { backArrow } from './../../assets';
+import { SafeAreaView } from 'react-navigation';
+import TouchableItem from './../Common/TouchableItem.native';
 
 export default function HeaderNew(props) {
   let navigateBack = () => {
@@ -25,7 +20,7 @@ export default function HeaderNew(props) {
 
   const textColor = '#4d5153';
   const whiteColor = 'white';
-
+  const linkColor = '#89B53A';
   return (
     <SafeAreaView
       style={{
@@ -67,6 +62,25 @@ export default function HeaderNew(props) {
         >
           {props.title}
         </Text>
+      </View>
+      <View
+        style={{
+          right: 24,
+          bottom: 24,
+          zIndex: 1002,
+          position: 'absolute'
+        }}
+      >
+        <TouchableItem onPress={props.rightLinkFunction}>
+          <Text
+            style={{
+              color: linkColor,
+              fontFamily: 'OpenSans-SemiBold'
+            }}
+          >
+            {props.rightLink}
+          </Text>
+        </TouchableItem>
       </View>
     </SafeAreaView>
   );

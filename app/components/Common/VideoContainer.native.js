@@ -141,7 +141,7 @@ class Thumbnail extends PureComponent {
     onPressError: PropTypes.func,
     style: ViewPropTypes.style,
     type: PropTypes.oneOf(Object.keys(TYPES)),
-    url: PropTypes.string.isRequired,
+    url: PropTypes.string,
     showPlayIcon: PropTypes.bool
   };
 

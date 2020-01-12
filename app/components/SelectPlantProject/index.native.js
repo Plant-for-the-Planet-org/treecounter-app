@@ -142,7 +142,6 @@ class SelectPlantTabView extends PureComponent {
         renderScene={this.renderSelectPlantScene}
         renderTabBar={this.renderTabBar}
         onIndexChange={this.handleIndexChange}
-        lazy
       />
     );
   }

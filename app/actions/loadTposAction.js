@@ -50,22 +50,22 @@ export function loadProjects(category = 'all', options = {}) {
   };
 }
 
-export function loadProject(plantProject) {
+export function loadProject(plantProject, options = {}) {
   const request = getRequest('plantProject_get', { uid: plantProject.id });
   return dispatch => {
-    // dispatch(setProgressModelState(true));
+    options.loading && dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
       request
         .then(res => {
           console.log('========================', res.data);
           dispatch(mergeEntities(normalize(res.data, plantProjectSchema)));
           dispatch(mergeEntities(normalize(res.data.tpoData, tpoSchema)));
-          // dispatch(setProgressModelState(false));
+          options.loading && dispatch(setProgressModelState(false));
           resolve(res.data);
         })
         .catch(error => {
           console.log(error);
-          // dispatch(setProgressModelState(false));
+          options.loading && dispatch(setProgressModelState(false));
           reject(error);
         });
     });

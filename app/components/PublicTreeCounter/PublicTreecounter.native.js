@@ -48,6 +48,7 @@ class PublicTreeCounter extends React.Component {
   }
 
   onPlantProjectSelected(selectedPlantProjectId) {
+    console.log('on plant project seected', selectedPlantProjectId);
     this.props.selectPlantProjectIdAction(selectedPlantProjectId);
     this.props.route('app_donateTrees');
   }
@@ -109,7 +110,6 @@ class PublicTreeCounter extends React.Component {
   onMoreClick(id, name) {
     this.props.selectPlantProjectIdAction(id);
     const { navigation } = this.props;
-    //console.log('OnMore');
     updateRoute('app_selectProject', navigation, null, { titleParam: name });
   }
 
@@ -202,7 +202,7 @@ class PublicTreeCounter extends React.Component {
         </View>
         <View>
           {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
-            <View>
+            <View style={{ marginBottom: 20 }}>
               {tpoProps.plantProjects.map(project => (
                 <PlantProjectSnippet
                   key={'trillion' + project.id}

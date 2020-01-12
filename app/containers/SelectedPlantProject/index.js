@@ -4,13 +4,14 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import {
+  selectedPlantProjectIdSelector,
   selectedPlantProjectSelector,
   selectedTpoSelector,
   currentUserProfileSelector
 } from '../../selectors';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
-
+import { loadProject } from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
@@ -20,6 +21,12 @@ class SelectedPlantProjectContainer extends Component {
   constructor(props) {
     super(props);
     this.selectProject = this.selectProject.bind(this);
+    if (!props.selectedProject) {
+      props.loadProject(
+        { id: props.selectedPlantProjectId },
+        { loading: true }
+      );
+    }
   }
   componentDidMount() {
     //  this.props.selectPlantProjectAction(1);
@@ -40,6 +47,7 @@ class SelectedPlantProjectContainer extends Component {
     }
   }
   render() {
+    console.log('got selected project', this.props.selectedProject);
     if (this.props.selectedProject) {
       return (
         <PlantProjectFull
@@ -59,14 +67,16 @@ class SelectedPlantProjectContainer extends Component {
 const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),
   selectedTpo: selectedTpoSelector(state),
-  currentUserProfile: currentUserProfileSelector(state)
+  currentUserProfile: currentUserProfileSelector(state),
+  selectedPlantProjectId: selectedPlantProjectIdSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       clearPlantProject,
-      selectPlantProjectAction
+      selectPlantProjectAction,
+      loadProject
     },
     dispatch
   );

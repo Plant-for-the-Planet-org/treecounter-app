@@ -98,7 +98,8 @@ const PlantProjectDetails = ({
           {readMore
             ? description
             : description
-              ? description.substring(0, 250) + '...'
+              ? description.substring(0, 250) +
+                (description.length > 250 ? '...' : '')
               : ''}
         </Text>
         {description && description.length > 250 ? (

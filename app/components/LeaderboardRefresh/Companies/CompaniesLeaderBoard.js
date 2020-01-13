@@ -152,9 +152,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
             disabled
             onPress={() => setPeriod('1y')}
             style={
-              styles[
-                period == '1-year' ? 'activeChipContainer' : 'chipContainer'
-              ]
+              styles[period == '1y' ? 'activeChipContainer' : 'chipContainer']
             }
           >
             <Text

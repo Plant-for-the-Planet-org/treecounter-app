@@ -18,7 +18,7 @@ import Header from '../../Header/BackHeader';
 
 const OrganizationLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
-  const [period, setPeriod] = useState('1-week');
+  const [period, setPeriod] = useState('1w');
   const [orderBy] = useState('planted');
 
   useEffect(
@@ -139,7 +139,7 @@ const OrganizationLeaderBoard = ({ navigation }) => {
         >
           <TouchableOpacity
             disabled
-            onPress={() => setPeriod('1-week')}
+            onPress={() => setPeriod('1w')}
             style={
               styles[period == '' ? 'activeChipContainer' : 'chipContainer']
             }
@@ -150,15 +150,13 @@ const OrganizationLeaderBoard = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             disabled
-            onPress={() => setPeriod('1-year')}
+            onPress={() => setPeriod('1y')}
             style={
-              styles[
-                period == '1-year' ? 'activeChipContainer' : 'chipContainer'
-              ]
+              styles[period == '1y' ? 'activeChipContainer' : 'chipContainer']
             }
           >
             <Text
-              style={styles[period == '1-year' ? 'activeChipText' : 'chipText']}
+              style={styles[period == '1y' ? 'activeChipText' : 'chipText']}
             >
               {i18n.t('label.lbr_c_year')}
             </Text>

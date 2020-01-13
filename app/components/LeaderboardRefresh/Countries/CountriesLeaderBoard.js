@@ -5,7 +5,8 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  SafeAreaView
 } from 'react-native';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
@@ -111,7 +112,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
   };
   console.log('queryresult', queryresult);
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <Header navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.headerContainer}>
@@ -172,7 +173,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
         </ScrollView>
         <View style={styles.countriesListContainer}>{renderCountryList()}</View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

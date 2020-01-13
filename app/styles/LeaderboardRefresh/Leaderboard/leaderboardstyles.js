@@ -19,8 +19,8 @@ export default EStyleSheet.create({
     justifyContent: 'center'
   },
   image: {
-    width: 110,
-    height: 110
+    width: '70%',
+    height: '70%'
   },
   widgetTitleContainer: {
     backgroundColor: 'white',

@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
-import React, {useState, useEffect} from 'react';
-import {Image, Platform, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {Image, Platform, Text, TouchableOpacity, View, TouchableWithoutFeedback} from 'react-native';
 import {Switch} from 'react-native-switch';
-import {cameraSolid, circleDelete, imageGallery} from '../../assets';
+import {cameraSolid, imageGallery, deleteOutlineWhite} from '../../assets';
 import styles from '../../styles/register_trees.native';
 import {formatDateToMySQL} from './../../helpers/utils';
 import {formatDate} from './../../utils/utils';
@@ -17,6 +17,8 @@ import buttonStyles from '../../styles/common/button.native';
 import {Dropdown} from 'react-native-material-dropdown';
 import NativeMapView from '../Map/NativeMapView.native';
 import CardLayout from '../Common/Card';
+import {filter} from 'lodash';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const FormikFormTree = props => {
   const [showClassification, setShowClassificationSwitch] = useState(false);
@@ -40,15 +42,19 @@ export const FormikFormTree = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     isMultipleTree
       ? schemaOptionsMultiple.multiple_trees
-      : props.schemaOptionsSingleTree
+      : schemaOptionsMultiple.single_tree
   );
+  console.log('validationSchema', validationSchema);
   let inputs = [];
+  const inputEl = useRef(null);
 
   // function to focus the field
   function focusTheField(id) {
     inputs[id].focus();
   }
 
+
+  console.log('Input ref=========================>', inputEl)
   return (
     <Formik
       initialValues={parentProps.initialValues}
@@ -59,7 +65,56 @@ export const FormikFormTree = props => {
         <>
           <View>
             <View style={styles.formScrollView}>
-              <CardLayout>
+              <CardLayout style={{marginTop: 9}}>
+                {parentProps.isTpo ? (
+                  parentProps.plantProjects &&
+                  parentProps.plantProjects.length > 0 ? (
+                    <View style={{marginTop: 10, marginBottom: 10, position: 'relative'}}>
+                      <View >
+                        <Text style={{
+                          fontSize: 14,
+                          fontFamily: 'OpenSans-Regular',
+                          color: '#4d5153'
+                        }}>{i18n.t('label.register_tree_tpo_label')}
+                          <TouchableWithoutFeedback onPress={() => {
+                            inputEl && inputEl.current && inputEl.current.focus()
+                          }}>
+                            <Text
+                              style={{
+                                color: '#87b738',
+                                fontFamily: 'OpenSans-Regular',
+                                textAlign:'center',
+                              }}>
+                              {!props.values.plantProject || parentProps.plantProjects.length >= 1 ? parentProps.plantProjects[0].text : filter(parentProps.plantProjects, {value: props.values.plantProject})[0].text}
+                              {`   `}
+                              <Icon name="angle-down" size={20}  color="#87b738"/>
+                            </Text>
+                          </TouchableWithoutFeedback>
+                        </Text>
+                      </View>
+                      <Dropdown
+                        value={props.values.plantProject || parentProps.plantProjects.length >= 1 && parentProps.plantProjects[0].value}
+                        ref={inputEl}
+                        containerStyle={{height: 0, position: 'absolute', top: 0, width: '100%'}}
+                        onChangeText={props.handleChange('plantProject')}
+                        onBlur={props.handleBlur('plantProject')}
+                        inputContainerStyle={{borderBottomWidth: 0, display: 'none'}}
+                        label={i18n.t('label.plant_project')}
+                        dropdownOffset={{top: 0}}
+                        error={
+                          props.touched.plantProject && props.errors.plantProject
+                        }
+                        data={parentProps.plantProjects.map(item => {
+                          return {value: item.value, label: item.text};
+                        })}
+                      />
+                    </View>
+                  ) : (
+                    <View/>
+                  )
+                ) : (
+                  <View/>
+                )}
                 <View style={styles.formView}>
                   <View>
                     <View
@@ -181,8 +236,9 @@ export const FormikFormTree = props => {
                 >
                   <NativeMapView
                     mode={'single-tree'}
-                    mapStyle={{ height: 200 }}
+                    mapStyle={{height: 200}}
                     geometry={geometry}
+                    address={parentProps.address}
                     geoLocation={geoLocation}
                     onPress={() => {
                       parentProps.openModel(props);
@@ -235,6 +291,7 @@ export const FormikFormTree = props => {
                               ref={input => {
                                 inputs['treeClassifications'] = input;
                               }}
+
                               onSubmitEditing={() => {
                                 focusTheField('treeScientificName');
                               }}
@@ -262,6 +319,7 @@ export const FormikFormTree = props => {
                               ref={input => {
                                 inputs['treeScientificName'] = input;
                               }}
+
                               value={props.values.treeScientificName}
                               tintColor={'#4d5153'}
                               titleFontSize={12}
@@ -288,34 +346,14 @@ export const FormikFormTree = props => {
                       textFiledRef={(name, input) => {
                         inputs[name] = input;
                       }}
-                      handleChange={() => {
-                        // props.setFieldValue('contributionMeasurements', filed)
+                      handleChange={(field,value) => {
+                         props.setFieldValue(field,value)
                       }}
                       focusField={name => focusTheField(name)}
                     />
                   </View>
                 )}
-                {parentProps.isTpo ? (
-                  parentProps.plantProjects &&
-                  parentProps.plantProjects.length > 0 ? (
-                    <Dropdown
-                      value={props.values.plantProject}
-                      onChangeText={props.handleChange('plantProject')}
-                      onBlur={props.handleBlur('plantProject')}
-                      label={i18n.t('label.plant_project')}
-                      error={
-                        props.touched.plantProject && props.errors.plantProject
-                      }
-                      data={parentProps.plantProjects.map(item => {
-                        return {value: item.value, label: item.text};
-                      })}
-                    />
-                  ) : (
-                    <View/>
-                  )
-                ) : (
-                  <View/>
-                )}
+
               </CardLayout>
             </View>
             <View style={buttonStyles.buttonContainer}>
@@ -410,7 +448,8 @@ export class AddMeasurements extends React.Component {
     this.setState({
       elementMasument: this.elementMasument
     });
-    this.props.handleChange(this.elementMasument);
+    this.props.handleChange(field,value);
+    //this.props.handleChange(this.elementMasument);
   };
 
   render() {
@@ -439,8 +478,8 @@ export class AddMeasurements extends React.Component {
               <View>
                 {item.isVisible && (
                   <View>
-                    <View style={styles.classificationBlock}>
-                      <View style={styles.formClassificationFields}>
+                    <View style={[styles.classificationBlock]}>
+                      <View style={[styles.formClassificationFields, {marginRight: 10}]}>
                         <TextField
                           label={i18n.t('label.tree_diameter')}
                           value={props.values.treeDiameter}
@@ -480,7 +519,7 @@ export class AddMeasurements extends React.Component {
                           onBlur={props.handleBlur('diameter')}
                         />
                       </View>
-                      <View style={{flex: 1}}>
+                      <View style={[styles.formClassificationFields, {marginLeft: 10}]}>
                         <TextField
                           label={i18n.t('label.tree_height')}
                           value={props.values.treeHeight}
@@ -488,7 +527,9 @@ export class AddMeasurements extends React.Component {
                             this.props.textFiledRef('treeHeight', input)
                           }
                           tintColor={'#4d5153'}
-                          titleFontSize={50}
+                          fontSize={18}
+
+                          titleFontSize={12}
                           labelFontSize={12}
                           textColor={'#4d5153'}
                           returnKeyType="next"
@@ -615,29 +656,34 @@ export function AddImage(props) {
     }
   };
 
-  const renderAsset = image => {
+  const renderAsset = (image, index) => {
+    console.log(image);
     return (
-      <View style={styles.projectImageContainer}>
-        <TouchableOpacity
-          style={styles.competitionDeleteButton}
-          onPress={() => props.setFieldValue('imageFile', '')}
-        >
-          <Image style={styles.competitionDeleteImage} source={circleDelete}/>
-        </TouchableOpacity>
+      <View
+        key={index}
+        style={[{position: 'relative', marginRight: 8}]}
+      >
         <Image
-          style={styles.teaser__projectImage}
+          style={[styles.teaser__projectImage, {width: '95%', height: 150}]}
           source={{uri: image}}
-          resizeMode={'cover'}
+          // resizeMode={'cover'}
         />
+        <View
+          style={[styles.competitionDeleteButton]}
+        >
+          <TouchableOpacity onPress={() =>props.setFieldValue('imageFile', '')} style={styles.addDeleteButtonIcon}>
+            <Image style={{height: 28, width: 28}} source={deleteOutlineWhite}/>
+            <Text style={{color: '#fff', fontFamily: 'OpenSans-Regular', fontSize: 14, lineHeight: 28}}>Remove</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   };
+
   return (
     <View>
       <Text style={styles.addImageTitle}>{i18n.t('label.add_images')}</Text>
-      <View style={styles.showImage}>
-        {image && image != 'null' ? renderAsset(image) : null}
-      </View>
+      {image && image != 'null' ? renderAsset(image) : null}
       <View style={styles.addImageButtonContainer}>
         <TouchableOpacity
           style={styles.addImageButton1}

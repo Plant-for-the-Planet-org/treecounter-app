@@ -14,7 +14,8 @@ export default EStyleSheet.create({
   },
   tabBar: {
     backgroundColor: '#ffffff',
-    marginTop: 10
+    paddingTop:0,
+    borderLeftWidth:0,
   },
   tabBarTabItem: {},
   tabBarTextActive: {
@@ -23,13 +24,10 @@ export default EStyleSheet.create({
     width: 75,
 
     flex: 1,
-    borderTopLeftRadius: 3,
-    justifyContent: 'flex-end',
-    alignSelf: 'flex-end',
-    borderTopRightRadius: 3
   },
   tabBarTextStyle: {
     color: '#4d5153',
+    borderLeftWidth:0,
     fontSize: 13,
     fontFamily: 'OpenSans-SemiBold',
     textTransform: 'capitalize'
@@ -90,14 +88,12 @@ export default EStyleSheet.create({
   },
   formNameFields: {flex: 1, marginRight: 20},
   showImage: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    position: 'absolute',
+    right: 0,
+    backgroundColor: '#000',
   },
   formClassificationFields: {
-    flex: 1
+    flex: 1,
   },
   formView: {marginTop: 0},
   addImageTitle: {
@@ -162,11 +158,11 @@ export default EStyleSheet.create({
   },
   formAddImageBlock: {color: '#4d5153', fontFamily: 'OpenSans-Semibold'},
   classificationBlock: {
-    flex: 2,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between'
   },
   addImageButtonIcon: {maxHeight: 20, width: 26},
+  addDeleteButtonIcon: {justifyContent: 'center', alignItems: 'center'},
   addedImage: {
     maxWidth: 80,
     height: 80,
@@ -210,7 +206,7 @@ export default EStyleSheet.create({
     flex: 1,
     overflow: 'hidden',
     marginTop: 6,
-    borderRadius: 4
+    borderRadius: 7
   },
   projectImageContainer: {
     height: Layout.window.width * 0.4,
@@ -221,13 +217,18 @@ export default EStyleSheet.create({
   // Competition Delete Button
 
   competitionDeleteButton: {
-    height: 20,
-    width: 20,
-    alignSelf: 'flex-end',
-    top: 14,
+    width: 70,
+    height: 150,
+    marginTop: 6,
     zIndex: 5,
     position: 'absolute',
-    right: 8
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    right: 18,
+    borderTopRightRadius: 7,
+    borderBottomRightRadius: 7,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   competitionDeleteImage: {
     height: 20,
@@ -239,6 +240,21 @@ export default EStyleSheet.create({
     height: 50
   },
   textFiledTitle: {fontFamily: 'OpenSans-Regular', color: '#4d5153'},
+  triangleContainer: {
+    width: 12,
+    height: 6,
+    overflow: 'hidden',
+    alignItems: 'center',
 
+    backgroundColor: 'transparent', /* XXX: Required */
+  }, triangle: {
+    width: 8,
+    height: 8,
+    transform: [{
+      translateY: -4,
+    }, {
+      rotate: '45deg',
+    }],
+  },
 
 });

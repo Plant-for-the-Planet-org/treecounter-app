@@ -593,6 +593,7 @@ export function generateFormikSchemaFromFormSchema(
   schemaObj = {properties: {}, required: []},
   fields = []
 ) {
+  console.log('schemaObj====>',schemaObj);
   let validationSchemaGenerated = {};
   Object.keys(schemaObj.properties).map(key => {
     if (fields.length === 0 || fields.indexOf(key) !== -1) {

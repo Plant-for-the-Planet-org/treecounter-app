@@ -1,5 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
+import { isIOS, isAndroid } from '../../utils/utils';
+
 
 const backgroundColor = 'rgba(0,0,0,0.46)';
 const Layout = {
@@ -20,7 +22,7 @@ export default EStyleSheet.create({
   container: {
     backgroundColor: 'white',
     width: Layout.window.width * 0.8,
-    height: Layout.window.height * 0.32,
+    height: isAndroid() ? 50 : Layout.window.height * 0.32,
     paddingLeft: 25,
     paddingRight: 25,
     paddingTop: 25,

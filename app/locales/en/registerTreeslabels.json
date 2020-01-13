@@ -1,6 +1,7 @@
 {
   "register_trees": "Register Trees",
   "register_trees_description": "Please use this form to register the trees you have planted personally.",
+  "register_tree_tpo_label": "Trees you register will be added to ",
   "register_tree_tpo_no_plant_project_header": "Please create a Project to Register Trees",
   "register_tree_tpo_no_plant_project_description": "Tree Planting Organizations can only Register trees to a project. Please add a project first.",
   "edit_trees": "Edit Trees",

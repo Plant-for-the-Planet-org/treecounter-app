@@ -12,10 +12,10 @@ import i18n from '../../locales/i18n';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
 import PopupNative from '../Common/ModalDialog/Popup.native';
-import Config from 'react-native-config';
 import {updateRoute} from '../../helpers/routerHelper';
+import { context } from '../../config';
 
-const { host, scheme } = Config;
+const { host, scheme } = context;
 const backgroundColor = 'white';
 const defaultInitValue = {
   plantDate: new Date(),
@@ -56,7 +56,7 @@ export default class RegisterTreeTab extends PureComponent {
   }
 
   openModel = formProps => {
-    if (!isEqual(this.formProps, formProps)) {
+   // if (!isEqual(this.formProps, formProps)) {
       this.formProps = formProps;
       this.renderFullscreenMap = (
         <MapboxMap
@@ -73,22 +73,23 @@ export default class RegisterTreeTab extends PureComponent {
           }
           mapStyle={{ flex: 1, opacity: 1 }}
           fullScreen
-          onContinue={(geoLocation, geometry) => {
-            this.onModelClosed(geoLocation, geometry);
+          onContinue={(geoLocation, geometry,mode,address) => {
+            this.onModelClosed(geoLocation, geometry,mode,address);
           }}
         />
       );
-    }
+   // }
     this.setState({
       isOpen: true
     });
   };
 
-  onModelClosed = (geoLocation, geometry) => {
+  onModelClosed = (geoLocation, geometry,mode,address=null) => {
     this.setState(
       {
         geoLocation: geoLocation,
         geometry: geometry,
+        address,
         isOpen: false
       },
       () => {
@@ -110,7 +111,7 @@ export default class RegisterTreeTab extends PureComponent {
       template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions
     };*/
-    const { isOpen, geometry, geoLocation, defaultValue } = this.state;
+    const { isOpen, geometry, geoLocation, defaultValue,address } = this.state;
     if (geometry) {
       defaultValue.geometry = geometry;
     }
@@ -139,6 +140,7 @@ export default class RegisterTreeTab extends PureComponent {
           mode={this.props.mode}
           plantProjects={this.props.plantProjects || ''}
           geometry={geometry}
+          address={address}
           geoLocation={geoLocation}
           initialValues={this.state.defaultValue}
           openModel={formProps => this.openModel(formProps)}
@@ -165,7 +167,9 @@ export default class RegisterTreeTab extends PureComponent {
         <Modal
           // position={'bottom'}
           isOpen={isOpen}
+          position={'top'}
           onClosed={this.onClosed}
+          backdropPressToClose={false}
           coverScreen
           keyboardTopOffset={0}
           swipeToClose={false}

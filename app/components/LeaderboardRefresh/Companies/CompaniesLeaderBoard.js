@@ -18,7 +18,7 @@ import Header from '../../Header/BackHeader';
 
 const CompaniesLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
-  const [period, setPeriod] = useState('all');
+  const [period, setPeriod] = useState('1-week');
   const [orderBy] = useState('planted');
 
   useEffect(

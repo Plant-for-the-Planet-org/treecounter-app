@@ -18,7 +18,7 @@ import Header from '../../Header/BackHeader';
 
 const CountryDetails = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
-  const [period, setPeriod] = useState('all');
+  const [period, setPeriod] = useState('1-week');
   const [section, setSection] = useState('');
   const [orderBy] = useState('planted');
 

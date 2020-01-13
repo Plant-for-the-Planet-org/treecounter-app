@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-boolean-value,react-native/no-color-literals,no-underscore-dangle */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -18,23 +18,23 @@ import MapView, {
   PROVIDER_GOOGLE
 } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Config from 'react-native-config';
+import { context } from '../../config';
 
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {iosSearchGrey} from '../../assets';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { iosSearchGrey } from '../../assets';
 import RoundedButton from '../Common/Button/RoundButton.native';
-import {PERMISSIONS, request} from 'react-native-permissions';
+import { PERMISSIONS, request } from 'react-native-permissions';
 import Geolocation from '@react-native-community/geolocation';
-import {NotificationManager} from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 import i18n from '../../locales/i18n';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import buttonStyles from '../../styles/common/button.native';
 import markerImage from '../../assets/images/tree.png';
-import {getLocale} from '../../actions/getLocale';
-import {isEqual} from 'lodash';
+import { getLocale } from '../../actions/getLocale';
+import { isEqual } from 'lodash';
 
-const {googleMapApiKey} = Config;
-const {width, height} = Dimensions.get('window');
+const { googleMapApiKey } = context;
+const { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = null; //37.78825;
@@ -379,7 +379,7 @@ class NativeMapView extends Component {
     super(props);
     this.mapRef = null;
     this.isSingleTree = this.props.mode === 'single-tree';
-    const {geoLocation, mode, geometry} = this.props;
+    const { geoLocation, mode, geometry } = this.props;
     const marker =
       this.isSingleTree && geoLocation
         ? decodeFormData(mode, geoLocation)
@@ -403,7 +403,7 @@ class NativeMapView extends Component {
       creatingHole: false,
       markers: marker || [],
       width: 500,
-      mapMargin: 1,
+      mapMargin: 1
     };
   }
 
@@ -414,15 +414,14 @@ class NativeMapView extends Component {
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps, this.props)) {
       this.onPropsUpdate(nextProps);
-      this.ref && this.ref.setAddressText(nextProps.address)
+      this.ref && this.ref.setAddressText(nextProps.address);
     }
-
   }
 
   onPropsUpdate = nextProps => {
     // if (!nextProps.fullScreen) {
 
-    const {geoLocation, mode, geometry} = nextProps;
+    const { geoLocation, mode, geometry } = nextProps;
     const marker =
       this.isSingleTree && geoLocation
         ? decodeFormData(mode, geoLocation)
@@ -468,7 +467,7 @@ class NativeMapView extends Component {
     if (this.props.onPress) {
       this.props.onPress(e);
     } else if (!this.isSingleTree) {
-      const {editing, creatingHole} = this.state;
+      const { editing, creatingHole } = this.state;
       if (!editing) {
         this.setState({
           editing: {
@@ -502,17 +501,16 @@ class NativeMapView extends Component {
     }
   }
 
-  gotoCurrentLocation = (location, address = null,isFromTextInput=false) => {
+  gotoCurrentLocation = (location, address = null, isFromTextInput = false) => {
     if (address && isFromTextInput) {
       this.setState({
-        address,
-      })
+        address
+      });
     }
     if (this.map) {
       setTimeout(() => {
         this.map.animateToRegion(location);
-
-      }, 1000)
+      }, 1000);
     }
   };
   onRegionChange = region => {
@@ -552,7 +550,7 @@ class NativeMapView extends Component {
     };
     const {
       editing,
-      region: {latitude, longitude}
+      region: { latitude, longitude }
     } = this.state;
 
     if (editing) {
@@ -595,11 +593,14 @@ class NativeMapView extends Component {
         ref={ref => (this.map = ref)}
         provider={PROVIDER_GOOGLE}
         //provider={this.props.provider}
-        style={[this.props.mapStyle, {width: this.state.width, marginBottom: this.state.mapMargin}]}
+        style={[
+          this.props.mapStyle,
+          { width: this.state.width, marginBottom: this.state.mapMargin }
+        ]}
         mapPadding={setMapPadding()} //!this.props.fullScreen ? {top:0,right:0,left:0,bottom:Platform.OS === 'ios' ? Dimensions.get('window').height * (0.03): -30} : {top:0,right:0,left:0,bottom:Dimensions.get('window').height * (0.1),}}
         // initialRegion={this.state.region}
         onPress={e => this.onPress(e)}
-        onMapReady={() => this.setState({width: screen.width})}
+        onMapReady={() => this.setState({ width: screen.width })}
         onDoublePress={e => this.onDoublePress(e)}
         onLongPress={e => this.onDoublePress(e)}
         onMarkerPress={e => this.onDoublePress(e)}
@@ -608,16 +609,16 @@ class NativeMapView extends Component {
         {...mapOptions}
       >
         {this.props.mode === 'multiple-trees' &&
-        this.state.polygons.map(polygon => (
-          <Polygon
-            key={polygon.id}
-            coordinates={polygon.coordinates}
-            holes={polygon.holes}
-            strokeColor="#F00"
-            fillColor="rgba(255,0,0,0.5)"
-            strokeWidth={1}
-          />
-        ))}
+          this.state.polygons.map(polygon => (
+            <Polygon
+              key={polygon.id}
+              coordinates={polygon.coordinates}
+              holes={polygon.holes}
+              strokeColor="#F00"
+              fillColor="rgba(255,0,0,0.5)"
+              strokeWidth={1}
+            />
+          ))}
         {editing && (
           <Polygon
             key={editing.id}
@@ -631,41 +632,41 @@ class NativeMapView extends Component {
         )}
 
         {!this.props.fullScreen &&
-        this.state.markers.map(marker => (
-          <Marker
-            // image={markerImage}
-            key={marker.key}
-            coordinate={marker.coordinate}
-          >
-            <Image
-              style={
-                this.props.fullScreen
-                  ? styles.markerFullScreen
-                  : styles.marker
-              }
-              source={markerImage}
-            />
-          </Marker>
-        ))}
+          this.state.markers.map(marker => (
+            <Marker
+              // image={markerImage}
+              key={marker.key}
+              coordinate={marker.coordinate}
+            >
+              <Image
+                style={
+                  this.props.fullScreen
+                    ? styles.markerFullScreen
+                    : styles.marker
+                }
+                source={markerImage}
+              />
+            </Marker>
+          ))}
         {this.props.fullScreen &&
-        !this.isSingleTree &&
-        this.state.editing &&
-        this.state.editing.coordinates.map((marker, index) => (
-          <Marker
-            // image={markerImage}
-            key={index}
-            coordinate={marker}
-          >
-            <Image
-              style={
-                this.props.fullScreen
-                  ? styles.markerFullScreen
-                  : styles.marker
-              }
-              source={markerImage}
-            />
-          </Marker>
-        ))}
+          !this.isSingleTree &&
+          this.state.editing &&
+          this.state.editing.coordinates.map((marker, index) => (
+            <Marker
+              // image={markerImage}
+              key={index}
+              coordinate={marker}
+            >
+              <Image
+                style={
+                  this.props.fullScreen
+                    ? styles.markerFullScreen
+                    : styles.marker
+                }
+                source={markerImage}
+              />
+            </Marker>
+          ))}
       </MapView>
     );
   }
@@ -715,11 +716,11 @@ class NativeMapView extends Component {
         ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
       })
     ).then((/*response*/) => {
-      console.log('Location=====>', Geolocation)
+      console.log('Location=====>', Geolocation);
       setTimeout(() => {
         Geolocation.getCurrentPosition(
           location => {
-            let {latitude, longitude} = location.coords;
+            let { latitude, longitude } = location.coords;
             const region = {
               latitude,
               longitude,
@@ -757,8 +758,8 @@ class NativeMapView extends Component {
             //   marker: this.state.markers
             // })
           },
-          (error) => {
-            console.log('Errors===>', error)
+          error => {
+            console.log('Errors===>', error);
             NotificationManager.error(
               i18n.t('label.location_permission_denied'),
               i18n.t('label.error'),
@@ -766,13 +767,12 @@ class NativeMapView extends Component {
             );
           }
         );
-      }, 1000)
-
+      }, 1000);
     });
   };
 
   renderComp = render => {
-    const {fullScreen, onPress} = this.props;
+    const { fullScreen, onPress } = this.props;
     if (!fullScreen) {
       return (
         <TouchableWithoutFeedback onPress={onPress}>
@@ -785,45 +785,45 @@ class NativeMapView extends Component {
   };
 
   render() {
-    const {fullScreen, onContinue, mode, onPress} = this.props;
+    const { fullScreen, onContinue, mode, onPress } = this.props;
 
     const inputProps = fullScreen
       ? {
-        onFocus: () => {
-          this.setState({
-            shouldDisplayListView: true
-          });
-        },
+          onFocus: () => {
+            this.setState({
+              shouldDisplayListView: true
+            });
+          },
 
-        onBlur: () => {
-          this.setState({
-            shouldDisplayListView: false
-          });
-        },
-        editable: true,
-        onPress: () => {
-          console.log('clicked');
+          onBlur: () => {
+            this.setState({
+              shouldDisplayListView: false
+            });
+          },
+          editable: true,
+          onPress: () => {
+            console.log('clicked');
+          }
         }
-      }
       : {
-        editable: true,
-        onFocus: onPress,
-        pointerEvents: 'none'
-      };
+          editable: true,
+          onFocus: onPress,
+          pointerEvents: 'none'
+        };
     // inputProps.style = styles.inputStyle
     // const isSingleTree = this.props.mode === 'single-tree';
     return this.renderComp(
       <View style={fullScreen ? styles.fullScreenContainer : styles.container}>
         {this.renderPolygon()}
         {fullScreen &&
-        this.isSingleTree && (
-          <View style={styles.markerFixed}>
-            <Image
-              style={fullScreen ? styles.markerFullScreen : styles.marker}
-              source={markerImage}
-            />
-          </View>
-        )}
+          this.isSingleTree && (
+            <View style={styles.markerFixed}>
+              <Image
+                style={fullScreen ? styles.markerFullScreen : styles.marker}
+                source={markerImage}
+              />
+            </View>
+          )}
         {this.renderComp(
           <TouchableWithoutFeedback
             onPress={e => {
@@ -875,7 +875,7 @@ class NativeMapView extends Component {
                     alignItems: 'center',
                     textAlign: 'center',
                     overflow: 'hidden',
-                    lineHeight: 18,
+                    lineHeight: 18
                   },
                   predefinedPlacesDescription: {
                     color: '#1faadb'
@@ -910,14 +910,18 @@ class NativeMapView extends Component {
                 )}
                 onPress={(data, details = null) => {
                   // 'details' is provided when fetchDetails = true
-                  console.log('Details===>', details)
-                  console.log('Data===>', data)
-                  this.gotoCurrentLocation({
-                    latitude: details.geometry.location.lat,
-                    longitude: details.geometry.location.lng,
-                    latitudeDelta: LATITUDE_DELTA,
-                    longitudeDelta: LONGITUDE_DELTA
-                  }, data.description,true);
+                  console.log('Details===>', details);
+                  console.log('Data===>', data);
+                  this.gotoCurrentLocation(
+                    {
+                      latitude: details.geometry.location.lat,
+                      longitude: details.geometry.location.lng,
+                      latitudeDelta: LATITUDE_DELTA,
+                      longitudeDelta: LONGITUDE_DELTA
+                    },
+                    data.description,
+                    true
+                  );
                 }}
                 defaultValue={!fullScreen && this.props.address}
                 textInputProps={inputProps}
@@ -927,22 +931,22 @@ class NativeMapView extends Component {
         )}
 
         {!!(this.state.markers.length || this.state.editing) &&
-        !this.isSingleTree && (
-          <RoundedButton
-            buttonStyle={
-              fullScreen ? styles.btnDeleteFullScreen : styles.btnLocation
-            }
-            onClick={this.removeData}
-          >
-            <Icon name="delete" size={fullScreen ? 24 : 18} color="#000000"/>
-          </RoundedButton>
-        )}
+          !this.isSingleTree && (
+            <RoundedButton
+              buttonStyle={
+                fullScreen ? styles.btnDeleteFullScreen : styles.btnLocation
+              }
+              onClick={this.removeData}
+            >
+              <Icon name="delete" size={fullScreen ? 24 : 18} color="#000000" />
+            </RoundedButton>
+          )}
         {fullScreen && (
           <RoundedButton
             buttonStyle={
               fullScreen ? styles.btnLocationFullScreen : styles.btnLocation
             }
-            textStyle={{marginRight: 0}}
+            textStyle={{ marginRight: 0 }}
             onClick={this.goto}
           >
             <Icon
@@ -966,8 +970,8 @@ class NativeMapView extends Component {
                     this.state.mode === 'single-tree'
                       ? encodeFormData(mode, this.state.markers)
                       : `geoLatitude=${
-                        this.state.region.latitude
-                      }&geoLongitude=${this.state.region.longitude}`,
+                          this.state.region.latitude
+                        }&geoLongitude=${this.state.region.longitude}`,
                     encodeFormData(mode, this.state.editing),
                     mode,
                     this.state.address
@@ -1004,8 +1008,7 @@ NativeMapView.propTypes = {
 
 NativeMapView.defaultProps = {
   fullScreen: false,
-  onPress: () => {
-  },
+  onPress: () => {},
   location: {
     latitude: LATITUDE,
     longitude: LONGITUDE,

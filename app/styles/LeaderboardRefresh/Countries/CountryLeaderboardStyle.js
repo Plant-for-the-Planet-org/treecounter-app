@@ -1,12 +1,15 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 export default EStyleSheet.create({
   mainContainer: {
-    marginHorizontal: 15,
+    // marginHorizontal: 15,
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: 'transparent'
   },
   headerContainer: {
     marginVertical: 10
+  },
+  headingAndSubHeadeingContainer: {
+    marginHorizontal: 15
   },
   headerText: {
     fontFamily: 'OpenSans-Bold',
@@ -23,7 +26,8 @@ export default EStyleSheet.create({
     marginVertical: 10,
     borderWidth: 0,
     borderColor: '#4d5153',
-    maxHeight: 40
+    maxHeight: 40,
+    zIndex: 3
   },
   timeLineContentContainerStyle: {
     flexDirection: 'row',
@@ -58,7 +62,8 @@ export default EStyleSheet.create({
   },
   countriesListContainer: {
     flex: 1,
-    marginVertical: 10
+    marginVertical: 10,
+    marginHorizontal: 15
   },
   oneContryContainer: {
     flexDirection: 'row',

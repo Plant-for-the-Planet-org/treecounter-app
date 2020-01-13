@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     height: 56,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginHorizontal: 15
   }
 });

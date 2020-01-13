@@ -119,13 +119,17 @@ const CompaniesLeaderBoard = ({ navigation }) => {
     <SafeAreaView style={styles.mainContainer}>
       <Header navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>{i18n.t('label.lbr_companies')}</Text>
-        </View>
-        <View>
-          <Text style={styles.subHeaderText}>
-            {i18n.t('label.lbr_c_leaderboard')}
-          </Text>
+        <View style={styles.headingAndSubHeadeingContainer}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>
+              {i18n.t('label.lbr_companies')}
+            </Text>
+          </View>
+          <View>
+            <Text style={styles.subHeaderText}>
+              {i18n.t('label.lbr_c_leaderboard')}
+            </Text>
+          </View>
         </View>
         <ScrollView
           showsHorizontalScrollIndicator={false}

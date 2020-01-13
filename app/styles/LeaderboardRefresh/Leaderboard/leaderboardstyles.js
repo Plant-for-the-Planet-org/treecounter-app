@@ -15,25 +15,23 @@ export default EStyleSheet.create({
     marginVertical: 5,
     flex: 1,
     borderWidth: 0,
-    borderColor: 'red'
+    borderColor: 'red',
+    justifyContent: 'center'
   },
   image: {
-    width: '90%',
-    height: '90%'
+    width: 110,
+    height: 110
   },
   widgetTitleContainer: {
     backgroundColor: 'white',
     borderColor: '#4d5153',
     borderWidth: 1,
-    // paddingHorizontal: 20,
-    // paddingVertical: 5,
     borderRadius: 20,
     marginTop: -13,
-    width: 111,
+    width: 110,
     height: 32,
     zIndex: 1,
     justifyContent: 'center'
-    // flex: 1,
   },
   widgetTitle: {
     fontSize: 14,

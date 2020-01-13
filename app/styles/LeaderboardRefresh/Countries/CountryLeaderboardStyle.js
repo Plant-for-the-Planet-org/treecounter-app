@@ -65,7 +65,8 @@ export default EStyleSheet.create({
     alignItems: 'center',
     marginVertical: 15,
     borderColor: 'red',
-    borderWidth: 0
+    borderWidth: 0,
+    minHeight: 80
   },
   indexContainer: {
     width: 27,

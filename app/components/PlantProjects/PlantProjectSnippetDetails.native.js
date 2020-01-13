@@ -246,6 +246,10 @@ class PlantProjectSnippetDetails extends PureComponent {
                             leafDetails: !this.state.leafDetails
                           });
                         }}
+                        style={{
+                          height: 24,
+                          hidth: 24
+                        }}
                       >
                         {!this.state.leafDetails ? (
                           <View
@@ -272,7 +276,7 @@ class PlantProjectSnippetDetails extends PureComponent {
                           <View
                             style={{
                               borderRadius: 24,
-                              padding: 3,
+                              padding: 2,
                               paddingLeft: 10,
                               paddingRight: 10,
                               borderColor: survivalColor,
@@ -296,15 +300,34 @@ class PlantProjectSnippetDetails extends PureComponent {
                   </View>
                 </View>
 
-                <View style={styles.iconTextRow}>
-                  <Image source={tax_grey} style={styles.iconImage} />
-                  <Text style={styles.survivalText}>
-                    {this.getTaxCountries()
-                      ? `${i18n.t('label.tax_deductible')} ${i18n.t(
-                          'label.in'
-                        )} ${this.getTaxCountries()}`
-                      : i18n.t('label.no_tax_deduction')}
-                  </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                    <Image
+                      source={tax_grey}
+                      style={{
+                        width: 17,
+                        height: 17,
+                        marginRight: 10
+                      }}
+                    />
+                    <Text
+                      style={[
+                        styles.survivalText,
+                        {
+                          marginRight: 20,
+                          flex: 1,
+                          flexWrap: 'wrap',
+                          paddingRight: 20
+                        }
+                      ]}
+                    >
+                      {this.getTaxCountries()
+                        ? `${i18n.t('label.tax_deductible')} ${i18n.t(
+                            'label.in'
+                          )} ${this.getTaxCountries()}`
+                        : i18n.t('label.no_tax_deduction')}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>

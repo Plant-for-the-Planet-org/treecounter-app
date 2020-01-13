@@ -95,37 +95,43 @@ const PlantProjectDetails = ({
       <View style={[styles.accordionCardView, { marginTop: 20 }]}>
         <Text style={styles.descriptionTextTitle}>{i18n.t('label.about')}</Text>
         <Text style={styles.descriptionText}>
-          {readMore ? description : description.substring(0, 250) + '...'}
+          {readMore
+            ? description
+            : description
+              ? description.substring(0, 250) + '...'
+              : ''}
         </Text>
-        <TouchableOpacity onPress={() => setReadMore(!readMore)}>
-          {readMore ? (
-            <View style={styles.readmoreButtonView}>
-              <View style={{ height: 8 }}>
-                <Image
-                  source={readmoreUp}
-                  style={{ height: 8, width: 15 }}
-                  resizeMode={'contain'}
-                />
+        {description && description.length > 250 ? (
+          <TouchableOpacity onPress={() => setReadMore(!readMore)}>
+            {readMore ? (
+              <View style={styles.readmoreButtonView}>
+                <View style={{ height: 8 }}>
+                  <Image
+                    source={readmoreUp}
+                    style={{ height: 8, width: 15 }}
+                    resizeMode={'contain'}
+                  />
+                </View>
+                <Text style={styles.readMoreText}>
+                  {i18n.t('label.read_less')}
+                </Text>
               </View>
-              <Text style={styles.readMoreText}>
-                {i18n.t('label.read_less')}
-              </Text>
-            </View>
-          ) : (
-            <View style={styles.readmoreButtonView}>
-              <View style={{ height: 8 }}>
-                <Image
-                  source={readmoreDown}
-                  style={{ height: 8, width: 15 }}
-                  resizeMode={'contain'}
-                />
+            ) : (
+              <View style={styles.readmoreButtonView}>
+                <View style={{ height: 8 }}>
+                  <Image
+                    source={readmoreDown}
+                    style={{ height: 8, width: 15 }}
+                    resizeMode={'contain'}
+                  />
+                </View>
+                <Text style={styles.readMoreText}>
+                  {i18n.t('label.read_more')}
+                </Text>
               </View>
-              <Text style={styles.readMoreText}>
-                {i18n.t('label.read_more')}
-              </Text>
-            </View>
-          )}
-        </TouchableOpacity>
+            )}
+          </TouchableOpacity>
+        ) : null}
         {/* <Text style={styles.descriptionText}>
           {description && getDescriptionPart(1, description)}
         </Text>

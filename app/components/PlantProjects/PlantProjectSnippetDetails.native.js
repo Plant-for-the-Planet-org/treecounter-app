@@ -70,7 +70,6 @@ class PlantProjectSnippetDetails extends PureComponent {
       survivalRate,
       // images,
       imageFile,
-      image,
       reviewScore: plantProjectRating,
       reviews,
       survivalRateStatus
@@ -93,8 +92,8 @@ class PlantProjectSnippetDetails extends PureComponent {
     //   treeCountWidth = treePlantedRatio * 100;
     // }
 
-    if (imageFile || image) {
-      projectImage = { image: imageFile || image };
+    if (imageFile) {
+      projectImage = { image: imageFile };
     } else {
       projectImage = plantProjectImages && plantProjectImages.find(() => true);
     }

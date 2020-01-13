@@ -573,7 +573,6 @@ export function getISOToCountryName(code) {
   const foundCountry = countryCodes.filter(data => {
     return data.countryCode == code;
   });
-  // console.log('found counrty ', foundCountry);
   return foundCountry.length ? foundCountry[0] : { country: code };
 }
 export function isTpo(currentUserProfile) {

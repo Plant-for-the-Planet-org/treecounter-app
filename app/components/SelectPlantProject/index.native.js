@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 // import { View } from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { Dimensions } from 'react-native';
 // import TabContainer from '../../containers/Menu/TabContainer';
@@ -11,16 +9,12 @@ import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import { updateStaticRoute } from '../../helpers/routerHelper';
-
-import { getAllPlantProjectsSelector } from '../../selectors';
-import { loadProject, loadProjects } from '../../actions/loadTposAction';
-
 const Layout = {
   window: {
     width: Dimensions.get('window').width
   }
 };
-class SelectPlantTabView extends PureComponent {
+export default class SelectPlantTabView extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,19 +49,7 @@ class SelectPlantTabView extends PureComponent {
   };
 
   handleIndexChange = index => {
-    console.log('indicator index, ', index);
     this.setState({ index: index });
-    if (
-      index &&
-      !this.props.plantProjects.filter(project => !project.isFeatured).length
-    ) {
-      try {
-        // this.props.loadProjects();
-        //console.log('loaded projects in list', projects);
-      } catch (error) {
-        console.log('error on lloading project on list', error);
-      }
-    }
   };
 
   renderTabBar = props => {
@@ -83,15 +65,13 @@ class SelectPlantTabView extends PureComponent {
     ];
   };
 
-  renderSelectPlantScene = ({ route, jumpTo }) => {
+  renderSelectPlantScene = ({ route }) => {
     const {
       plantProjects,
       onMoreClick,
       selectProject,
       navigation,
-      currencies,
-      loadProject,
-      loadProjects
+      currencies
     } = this.props;
     // props for children
     const props = {
@@ -99,34 +79,22 @@ class SelectPlantTabView extends PureComponent {
       onMoreClick,
       selectProject,
       navigation,
-      currencies,
-      loadProjects,
-      loadProject
+      currencies
     };
-    const { index } = this.state;
+    // const { index } = this.state;
 
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        console.log('fatured active', index, this.props.plantProjects);
         return (
           <FeaturedProjects
             onSelectProjects={this.onSelectProjects}
             {...props}
-            jumpTo={jumpTo}
-            index={this.state.index}
           />
         );
       case 'list':
-        console.log('list active', index, this.props.plantProjects);
-
         return (
-          <ListProjects
-            onSelectProjects={this.onSelectProjects}
-            {...props}
-            jumpTo={jumpTo}
-            index={this.state.index}
-          />
+          <ListProjects onSelectProjects={this.onSelectProjects} {...props} />
         );
       default:
         return null;
@@ -141,21 +109,11 @@ class SelectPlantTabView extends PureComponent {
         renderScene={this.renderSelectPlantScene}
         renderTabBar={this.renderTabBar}
         onIndexChange={this.handleIndexChange}
-        lazy
       />
     );
   }
 }
 
-const mapStateToProps = state => ({
-  plantProjects: getAllPlantProjectsSelector(state)
-});
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ loadProject, loadProjects }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectPlantTabView);
 SelectPlantTabView.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,

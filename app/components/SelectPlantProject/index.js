@@ -17,12 +17,8 @@ import { delimitNumbers } from '../../utils/utils';
 import NumberFormat from '../Common/NumberFormat';
 import { sortProjectsByPrice } from '../../utils/currency';
 import _ from 'lodash';
-import { getAllPlantProjectsSelector } from '../../selectors';
-import { loadProject, loadProjects } from '../../actions/loadTposAction';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-class SelectPlantProject extends Component {
+export default class SelectPlantProject extends Component {
   static data = {
     tabs: [
       {
@@ -56,31 +52,6 @@ class SelectPlantProject extends Component {
     this.setState(this.initialStateFromProps(this.props));
   }
 
-  async componentDidMount() {
-    if (
-      this.props.plantProjects.filter(
-        plantProject => plantProject.isFeatured && !plantProject.tpoData
-      ).length
-    ) {
-      let { loadProject } = this.props;
-      await [
-        this.props.plantProjects.map(
-          plantProject =>
-            plantProject.isFeatured &&
-            !plantProject.tpoData &&
-            loadProject(plantProject)
-        )
-      ];
-    }
-    if (
-      !this.props.plantProjects.filter(plantProject => !plantProject.isFeatured)
-        .length
-    ) {
-      let { loadProjects } = this.props;
-      await loadProjects('all', { loadAll: true });
-    }
-    this.setState(this.initialStateFromProps(this.props));
-  }
   componentWillReceiveProps(props) {
     this.setState(this.initialStateFromProps(props));
   }
@@ -90,11 +61,11 @@ class SelectPlantProject extends Component {
       plantProjects,
       currencies: { currencies }
     } = props;
-    console.log('Pojects featured:', plantProjects);
+
     let featuredProjects = plantProjects.filter(project => project.isFeatured);
     featuredProjects = _.orderBy(featuredProjects, 'id');
     featuredProjects.length && featuredProjects.push(featuredProjects[0]);
-
+    console.log('Pojects featured:', featuredProjects);
     let priceSortedProjects = sortProjectsByPrice(
       plantProjects,
       true,
@@ -114,7 +85,7 @@ class SelectPlantProject extends Component {
     let filteredProjects = plantProjects.reduce((projects, project) => {
       if (
         project.name.toLowerCase().includes(value) ||
-        project.tpoName.toLowerCase().includes(value)
+        project.tpo_name.toLowerCase().includes(value)
       ) {
         projects.push(project);
       }
@@ -162,21 +133,13 @@ class SelectPlantProject extends Component {
     });
   }
 
-  async openModal(key) {
-    try {
-      let project = this.props.plantProjects.find(
+  openModal(key) {
+    this.setState({
+      isOpen: true,
+      modalProject: this.props.plantProjects.find(
         project => project['id'] === key
-      );
-      if (project && !project.paymentSetup) {
-        project = await this.props.loadDetails({ id: key });
-      }
-      this.setState({
-        isOpen: true,
-        modalProject: project
-      });
-    } catch (error) {
-      console.log('load details error', error);
-    }
+      )
+    });
   }
 
   render() {
@@ -229,7 +192,7 @@ class SelectPlantProject extends Component {
                 }
                 expanded={false}
                 plantProject={this.state.modalProject}
-                tpoName={this.state.modalProject.tpoName}
+                tpoName={this.state.modalProject.tpo_name}
               />
             ) : null}
             <div className="select-project_button__container">
@@ -247,10 +210,8 @@ class SelectPlantProject extends Component {
           </div>
           <Slider {...settings}>
             {featuredProjects.length !== 0
-              ? featuredProjects.sort((a, b) => a.id - b.id).map(project => {
-                  {
-                    /* console.log(project); */
-                  }
+              ? featuredProjects.map(project => {
+                  console.log(project);
                   return (
                     <CardLayout
                       className="plant_project_content"
@@ -265,7 +226,7 @@ class SelectPlantProject extends Component {
                         callExpanded={() => this.callExpanded()}
                         expanded={false}
                         plantProject={project}
-                        tpoName={project.tpoName}
+                        tpoName={project.tpo_name}
                       />
                       <div className="select-project_button__container">
                         <PrimaryButton
@@ -333,7 +294,7 @@ class SelectPlantProject extends Component {
                               <tr key={'tr' + project.id}>
                                 <td className="align-left">{project.name}</td>
                                 <td className="align-left">
-                                  {project.tpoName}
+                                  {project.tpo_name}
                                 </td>
                                 <td className="align-right">
                                   {delimitNumbers(
@@ -387,7 +348,7 @@ class SelectPlantProject extends Component {
                         ? priceSortedProjects.map(project => (
                             <tr key={'tr' + project.id}>
                               <td className="align-left">{project.name}</td>
-                              <td className="align-left">{project.tpoName}</td>
+                              <td className="align-left">{project.tpo_name}</td>
                               <td className="align-right">
                                 {delimitNumbers(parseInt(project.countPlanted))}
                               </td>
@@ -418,15 +379,7 @@ class SelectPlantProject extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  plantProjects: getAllPlantProjectsSelector(state)
-});
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ loadProject, loadProjects }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectPlantProject);
 SelectPlantProject.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,

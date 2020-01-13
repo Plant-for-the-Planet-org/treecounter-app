@@ -11,11 +11,10 @@ const ListProjects = ({
   plantProjects,
   selectProject,
   onMoreClick,
-  placeholderTextColor,
-  loadProjects,
-  index
+  placeholderTextColor
 }) => {
   const [search, setSearch] = useState('');
+
   // memoized: refilters if plantProjects or search string changes
   const filteredProjects = useMemo(
     () => {
@@ -63,8 +62,6 @@ const ListProjects = ({
           projects={filteredProjects}
           selectProject={selectProject}
           onMoreClick={onMoreClick}
-          loadProjects={loadProjects}
-          index={index}
         />
       </View>
     </View>
@@ -75,9 +72,7 @@ ListProjects.propTypes = {
   plantProjects: PropTypes.array.isRequired,
   selectProject: PropTypes.func.isRequired,
   onMoreClick: PropTypes.func.isRequired,
-  placeholderTextColor: PropTypes.string,
-  loadProjects: PropTypes.func.isRequired,
-  index: PropTypes.any
+  placeholderTextColor: PropTypes.string
 };
 
 export default ListProjects;

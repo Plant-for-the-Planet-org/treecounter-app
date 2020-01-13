@@ -13,6 +13,7 @@ import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderbo
 import i18n from '../../../locales/i18n';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
+import { getCountryFlagImageUrl } from '../../../actions/apiRouting';
 import Header from '../../Header/BackHeader';
 
 const CountriesLeaderBoard = ({ navigation }) => {
@@ -49,6 +50,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
     if (queryresult) {
       return (
         <FlatList
+          initialNumToRender={50}
           showsVerticalScrollIndicator={false}
           data={queryresult}
           renderItem={({ item, index }) => {
@@ -57,6 +59,10 @@ const CountriesLeaderBoard = ({ navigation }) => {
             ];
             const isPrivate =
               item.hasOwnProperty('mayPublish') && !item.mayPublish;
+            console.log(
+              getCountryFlagImageUrl(countryCode, 'png', 256),
+              'getCountryFlagImageUrl(countryCode 256)'
+            );
             return (
               <TouchableOpacity
                 onPress={() => (!isPrivate ? onPressCountry(item) : undefined)}
@@ -69,7 +75,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
                   <Image
                     style={styles.countryFlagImage}
                     source={{
-                      uri: `https://www.trilliontreecampaign.org/flags/png/256/${countryCode}.png`
+                      uri: getCountryFlagImageUrl(countryCode, 'png', 256)
                     }}
                   />
                 </View>

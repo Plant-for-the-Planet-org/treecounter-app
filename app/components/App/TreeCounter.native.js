@@ -19,7 +19,7 @@ class App extends Component {
     // Is there any way to wait with this API call until the locale is defined?
   }
   render() {
-    const backgroundColor = 'white';
+    const backgroundColor = 'transparent';
     return (
       <SafeAreaView
         forceInset={{ top: 'never', bottom: 'always' }}

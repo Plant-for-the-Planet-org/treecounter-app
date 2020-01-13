@@ -142,7 +142,7 @@ const CountryDetails = ({ navigation }) => {
         >
           <TouchableOpacity
             disabled
-            onPress={() => setPeriod('')}
+            onPress={() => setPeriod('1-week')}
             style={
               styles[period == '' ? 'activeChipContainer' : 'chipContainer']
             }

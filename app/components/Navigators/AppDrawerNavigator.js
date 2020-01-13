@@ -61,7 +61,7 @@ import CountryDetails from '../../components/LeaderboardRefresh/Countries/Countr
 import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeaderBoard';
 import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
 import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
-import OrganizationLeaderBoard from '../LeaderboardRefresh/Organizations/OrganizationsLeaderBoard';
+import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -376,8 +376,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: IndividualsLeaderBoard,
         navigationOptions: { header: null }
       },
-      ['organizations_LeaderBoard']: {
-        screen: OrganizationLeaderBoard,
+      ['tpo_LeaderBoard']: {
+        screen: tpoLeaderBoard,
         navigationOptions: { header: null }
       }
     },

@@ -6,7 +6,7 @@ import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
 import {
   countriesleaderboard,
   schooldleaderboard,
-  organizationleaderboard,
+  tpoleaderboard,
   individualsleaderboard,
   companiesleaderboard
 } from '../../../assets/index';
@@ -82,14 +82,12 @@ const Leaderboard = ({ navigation }) => {
       </View>
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() =>
-            navigateTo('organization', 'organizations_LeaderBoard')
-          }
+          onPress={() => navigateTo('tpo', 'tpo_LeaderBoard')}
           style={styles.widgetContainer}
         >
           <Image
             style={styles.image}
-            source={organizationleaderboard}
+            source={tpoleaderboard}
             resizeMode={'contain'}
           />
           <View style={[styles.widgetTitleContainer, { width: 277 }]}>

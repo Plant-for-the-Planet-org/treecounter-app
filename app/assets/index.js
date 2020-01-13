@@ -167,7 +167,7 @@ import eye from './images/eye.png';
 import closeeye from './images/closeeye.png';
 import countriesleaderboard from './images/countriesleaderboard.png';
 import schooldleaderboard from './images/schooldleaderboard.png';
-import organizationleaderboard from './images/organizationleaderboard.png';
+import tpoleaderboard from './images/tpoleaderboard.png';
 import individualsleaderboard from './images/individualsleaderboard.png';
 import companiesleaderboard from './images/companiesleaderboard.png';
 export {
@@ -340,7 +340,7 @@ export {
   closeeye,
   countriesleaderboard,
   schooldleaderboard,
-  organizationleaderboard,
+  tpoleaderboard,
   individualsleaderboard,
   companiesleaderboard
 };

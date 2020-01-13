@@ -16,7 +16,7 @@ import { getLocalRoute } from '../../../actions/apiRouting';
 import { getImageUrl } from '../../../actions/apiRouting';
 import Header from '../../Header/BackHeader';
 
-const OrganizationLeaderBoard = ({ navigation }) => {
+const tpoLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
   const [period, setPeriod] = useState('1w');
   const [orderBy] = useState('planted');
@@ -122,7 +122,7 @@ const OrganizationLeaderBoard = ({ navigation }) => {
         <View style={styles.headingAndSubHeadeingContainer}>
           <View style={styles.headerContainer}>
             <Text style={styles.headerText}>
-              {i18n.t('label.lbr_organizations')}
+              {i18n.t('label.lbr_tree_planting_organizations')}
             </Text>
           </View>
           <View>
@@ -182,4 +182,4 @@ const OrganizationLeaderBoard = ({ navigation }) => {
   );
 };
 
-export default OrganizationLeaderBoard;
+export default tpoLeaderBoard;

@@ -141,18 +141,18 @@ const CountryDetails = ({ navigation }) => {
           style={styles.timeLineContainer}
         >
           <TouchableOpacity
-            disabled
             onPress={() => setPeriod('1w')}
             style={
-              styles[period == '' ? 'activeChipContainer' : 'chipContainer']
+              styles[period == '1w' ? 'activeChipContainer' : 'chipContainer']
             }
           >
-            <Text style={styles[period == '' ? 'activeChipText' : 'chipText']}>
+            <Text
+              style={styles[period == '1w' ? 'activeChipText' : 'chipText']}
+            >
               {i18n.t('label.lbr_c_d_this_week')}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            disabled
             onPress={() => setPeriod('1y')}
             style={
               styles[period == '1y' ? 'activeChipContainer' : 'chipContainer']
@@ -165,7 +165,6 @@ const CountryDetails = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            disabled
             onPress={() => setPeriod('all')}
             style={
               styles[period == 'all' ? 'activeChipContainer' : 'chipContainer']

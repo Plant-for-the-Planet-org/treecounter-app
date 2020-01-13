@@ -39,8 +39,7 @@ export const getPDFUrl = filename => {
   return `${scheme}://${host}/uploads/pdfs/review/${filename}`;
 };
 
-//`https://www.trilliontreecampaign.org/flags/png/256/${countryCode}.png`
 export const getCountryFlagImageUrl = (countryCode, type, size) => {
   const { scheme, host, base: baseUrl } = context;
-  return `${scheme}://${host}/${type}/${size}/${countryCode}.${type}`;
+  return `${scheme}://${host}/flags/${type}/${size}/${countryCode}.${type}`;
 };

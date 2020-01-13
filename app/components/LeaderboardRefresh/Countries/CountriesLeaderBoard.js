@@ -59,10 +59,6 @@ const CountriesLeaderBoard = ({ navigation }) => {
             ];
             const isPrivate =
               item.hasOwnProperty('mayPublish') && !item.mayPublish;
-            console.log(
-              getCountryFlagImageUrl(countryCode, 'png', 256),
-              'getCountryFlagImageUrl(countryCode 256)'
-            );
             return (
               <TouchableOpacity
                 onPress={() => (!isPrivate ? onPressCountry(item) : undefined)}

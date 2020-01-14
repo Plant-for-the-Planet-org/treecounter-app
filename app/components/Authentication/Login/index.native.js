@@ -5,6 +5,7 @@ import {
   View,
   Keyboard,
   TouchableOpacity,
+  Platform,
   KeyboardAvoidingView
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -90,14 +91,16 @@ export default class Login extends Component {
         >
           {props => (
             <>
-              <KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
+              <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : null}
+              >
                 <KeyboardAwareScrollView
                   contentContainerStyle={[
                     styles.parentContainer,
                     {
                       backgroundColor: backgroundColor,
                       padding: 24,
-                      paddingTop: 120,
+                      paddingTop: Platform.OS === 'ios' ? 120 : 80,
                       height: '100%'
                     }
                   ]}
@@ -107,17 +110,6 @@ export default class Login extends Component {
                   resetScrollToCoords={{ x: 0, y: 0 }}
                   scrollEnabled
                 >
-                  {/* <View style={styles.headerContainer}>
-                  <Image
-                    style={styles.imageStyle}
-                    resizeMode={'contain'}
-                    source={planetLogo}
-                  />
-                  <Text style={styles.loginDescriptionStyle}>
-                    {i18n.t('label.login_description')}
-                  </Text>
-                </View> */}
-
                   <Text style={styles.loginTitle}>
                     {i18n.t('label.log-in')}
                   </Text>

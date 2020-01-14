@@ -1,3 +1,4 @@
+// eslint-disable no-underscore-dangle
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -177,6 +178,7 @@ export default class Login extends Component {
                           // eslint-disable-next-line no-underscore-dangle
                           props.touched._password && props.errors._password
                         }
+                        returnKeyType="done"
                         onChangeText={props.handleChange('_password')}
                         onBlur={props.handleBlur('_password')}
                       />

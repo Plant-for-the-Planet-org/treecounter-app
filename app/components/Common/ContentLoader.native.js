@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Image } from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
-
+import { treelogo } from '../../assets/index';
 const HEIGHT = Dimensions.get('window').height;
 const WIDTH = Dimensions.get('window').width;
 const CompetitionLoader = () => (
@@ -71,6 +71,36 @@ const WorldLoader = () => (
     <Rect x="30" y="490" rx="10" ry="10" width="70%" height="20" />
     <Rect x="30" y="520" rx="10" ry="10" width="85%" height="20" />
   </ContentLoader>
+);
+const InitialContentLoader = () => (
+  <View>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 40
+      }}
+    >
+      <Image source={treelogo} style={{ height: 100, width: 100 }} />
+    </View>
+    <ContentLoader
+      height={HEIGHT}
+      width={WIDTH}
+      speed={3}
+      primaryColor="#f3f3f3"
+      secondaryColor="#ecebeb"
+    >
+      <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
+      <Rect x="30" y="190" rx="10" ry="10" width="45%" height="20" />
+      <Rect x="30" y="220" rx="10" ry="10" width="75%" height="20" />
+      <Rect x="30" y="250" rx="10" ry="10" width="70%" height="20" />
+      <Rect x="30" y="280" rx="10" ry="10" width="85%" height="20" />
+      <Rect x="30" y="310" rx="10" ry="10" width="45%" height="20" />
+      <Rect x="30" y="340" rx="10" ry="10" width="70%" height="20" />
+      <Rect x="30" y="370" rx="10" ry="10" width="85%" height="20" />
+    </ContentLoader>
+  </View>
 );
 const ProfileLoader = () => (
   <ContentLoader
@@ -252,7 +282,7 @@ const ContentLoading = props => {
       {screen === 'competitionListLoader' && <CompetitionListLoader />}
       {screen === 'competitionSingleLoader' && <CompetitionSingleLoader />}
       {screen === 'projectListLoader' && <ProjectListLoader />}
-      {screen === 'worldLoader' && <WorldLoader />}
+      {screen === 'worldLoader' && <InitialContentLoader />}
       {screen === 'projectSingleLoader' && <ProjectSingleLoader />}
       {screen === 'PledgeEvents' && <PledgeEventsContentLoader />}
     </View>
@@ -271,3 +301,5 @@ const loadingIndicatorStyle = {
 };*/
 }
 export default ContentLoading;
+
+export { WorldLoader };

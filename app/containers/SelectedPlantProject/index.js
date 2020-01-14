@@ -21,15 +21,17 @@ class SelectedPlantProjectContainer extends Component {
   constructor(props) {
     super(props);
     this.selectProject = this.selectProject.bind(this);
-    if (!props.selectedProject) {
-      props.loadProject(
-        { id: props.selectedPlantProjectId },
+  }
+  async componentDidMount() {
+    //  this.props.selectPlantProjectAction(1);
+
+    if (!this.props.selectedProject) {
+      let project = await this.props.loadProject(
+        { id: this.props.selectedPlantProjectId },
         { loading: true }
       );
+      console.log('project found in selected plant project', project);
     }
-  }
-  componentDidMount() {
-    //  this.props.selectPlantProjectAction(1);
   }
 
   onTabChange(/* title */) {
@@ -47,7 +49,11 @@ class SelectedPlantProjectContainer extends Component {
     }
   }
   render() {
-    console.log('got selected project', this.props.selectedProject);
+    console.log(
+      'got id from nav param, and from redux',
+      this.props.navigation.getParam('id'),
+      this.props.selectedProject
+    );
     if (this.props.selectedProject) {
       return (
         <PlantProjectFull

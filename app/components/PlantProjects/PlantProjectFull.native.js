@@ -21,30 +21,43 @@ import { bindActionCreators } from 'redux';
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
 class PlantProjectFull extends React.Component {
-  constructor(props) {
-    super(props);
-    const plantProject = { ...props.plantProject };
-    this.state = { plantProject };
+  async componentWillReceiveProps(nextProps) {
+    try {
+      console.log('plantproject while receive props', nextProps.plantProject);
+      if (nextProps.plantProject && !nextProps.plantProject.tpoData) {
+        // we dont have the details in store, fetch it
+        const plantProject = await this.props.loadProject(
+          nextProps.plantProject,
+          {}
+        );
+        console.log('fetched details plantproject in full', plantProject);
+        // this.setState({ plantProject });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
   async componentDidMount() {
     try {
+      console.log('plantproject while did mount', this.props.plantProject);
       if (this.props.plantProject && !this.props.plantProject.tpoData) {
         // we dont have the details in store, fetch it
         const plantProject = await this.props.loadProject(
-          this.props.plantProject
+          this.props.plantProject,
+          {}
         );
-        console.log('fetched details plantproject', plantProject);
-        this.setState({ plantProject });
+        console.log('fetched details plantproject in full', plantProject);
+        // this.setState({ plantProject });
       }
     } catch (error) {
       console.log(error);
     }
   }
   render() {
-    let { plantProject } = this.state;
+    let { plantProject } = this.props;
 
-    if (!plantProject) return <LoadingIndicator />;
-    console.log('rendering with tpo', plantProject.tpoData);
+    if (!plantProject || !plantProject.tpoData) return <LoadingIndicator />;
+    console.log('rendering with project:', plantProject);
     const {
       images,
       description,

@@ -110,7 +110,10 @@ class PublicTreeCounter extends React.Component {
   onMoreClick(id, name) {
     this.props.selectPlantProjectIdAction(id);
     const { navigation } = this.props;
-    updateRoute('app_selectProject', navigation, null, { titleParam: name });
+    updateRoute('app_selectProject', navigation, null, {
+      titleParam: name,
+      id: id
+    });
   }
 
   onSelectClickedFeaturedProjects = id => {

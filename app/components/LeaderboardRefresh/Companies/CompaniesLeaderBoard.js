@@ -82,7 +82,6 @@ const CompaniesLeaderBoard = ({ navigation }) => {
                   <Text numberOfLines={2} style={styles.countryNameText}>
                     {item.caption}
                   </Text>
-                  //// TODO: localize the treecount (eg 100.100.100)
                   <Text style={styles.tressCounter}>
                     {item.planted
                       .toString()

@@ -6,7 +6,8 @@ import {
   Keyboard,
   TouchableOpacity,
   Platform,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Dimensions
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import loginFormSchema from '../../../server/formSchemas/login';
@@ -23,7 +24,8 @@ export default class Login extends Component {
     super(props);
 
     this.state = {
-      hidePassword: true
+      hidePassword: true,
+      shortHeight: 401
     };
   }
 
@@ -34,6 +36,15 @@ export default class Login extends Component {
   };
   componentWillMount() {
     this.validationSchema = generateFormikSchemaFromFormSchema(loginFormSchema);
+
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this._keyboardDidHide
+    );
   }
 
   onForgotPasswordClicked = () => {
@@ -48,6 +59,19 @@ export default class Login extends Component {
     this.props.updateRoute('pickup_profile_modal');
   };
 
+  _keyboardDidShow = e => {
+    let shortHeight = Dimensions.get('window').height - e.endCoordinates.height;
+    this.setState({
+      shortHeight: shortHeight
+    });
+  };
+
+  _keyboardDidHide = e => {
+    let shortHeight = Dimensions.get('window').height - e.endCoordinates.height;
+    this.setState({
+      shortHeight: shortHeight
+    });
+  };
   handleLoginClick = () => {
     if (this.state.formValue) {
       Keyboard.dismiss();
@@ -93,6 +117,9 @@ export default class Login extends Component {
             <>
               <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : null}
+                style={{
+                  minHeight: '100%'
+                }}
               >
                 <KeyboardAwareScrollView
                   contentContainerStyle={[
@@ -101,7 +128,7 @@ export default class Login extends Component {
                       backgroundColor: backgroundColor,
                       padding: 24,
                       paddingTop: Platform.OS === 'ios' ? 120 : 80,
-                      height: '100%'
+                      minHeight: '100%'
                     }
                   ]}
                   enableOnAndroid
@@ -185,10 +212,35 @@ export default class Login extends Component {
                       </Text>
                     </TouchableItem>
                   </View>
+
+                  {this.state.shortHeight > 600 && Platform.OS === 'ios' ? (
+                    <TouchableOpacity
+                      style={[
+                        styles.actionButtonTouchable,
+                        { marginLeft: 24, marginRight: 24 }
+                      ]}
+                      onPress={props.isValid && props.handleSubmit}
+                    >
+                      <View
+                        style={[
+                          styles.actionButtonView,
+                          !props.isValid
+                            ? { backgroundColor: lockedButton }
+                            : {}
+                        ]}
+                      >
+                        <Text style={styles.actionButtonText}>
+                          {i18n.t('label.login')}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  ) : null}
+                </KeyboardAwareScrollView>
+                {this.state.shortHeight > 400 && Platform.OS === 'android' ? (
                   <TouchableOpacity
                     style={[
                       styles.actionButtonTouchable,
-                      { marginLeft: 24, marginRight: 24 }
+                      { marginLeft: 24, marginRight: 24, paddingHorizontal: 24 }
                     ]}
                     onPress={props.isValid && props.handleSubmit}
                   >
@@ -203,7 +255,7 @@ export default class Login extends Component {
                       </Text>
                     </View>
                   </TouchableOpacity>
-                </KeyboardAwareScrollView>
+                ) : null}
               </KeyboardAvoidingView>
             </>
           )}

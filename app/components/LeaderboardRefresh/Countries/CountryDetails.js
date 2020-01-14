@@ -59,8 +59,7 @@ const CountryDetails = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           data={queryresult}
           renderItem={({ item, index }) => {
-            const isPrivate =
-              item.hasOwnProperty('mayPublish') && !item.mayPublish;
+            const isPrivate = 'mayPublish' in item && !item.mayPublish;
             return (
               <TouchableOpacity
                 onPress={() => {

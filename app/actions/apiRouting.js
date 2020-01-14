@@ -40,6 +40,6 @@ export const getPDFUrl = filename => {
 };
 
 export const getCountryFlagImageUrl = (countryCode, type, size) => {
-  const { scheme, host, base: baseUrl } = context;
+  const { scheme, host } = context;
   return `${scheme}://${host}/flags/${type}/${size}/${countryCode}.${type}`;
 };

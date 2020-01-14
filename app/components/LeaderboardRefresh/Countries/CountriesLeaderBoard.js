@@ -57,8 +57,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
             let countryCode = item.uri.split('/')[
               item.uri.split('/').length - 1
             ];
-            const isPrivate =
-              item.hasOwnProperty('mayPublish') && !item.mayPublish;
+            const isPrivate = 'mayPublish' in item && !item.mayPublish;
             return (
               <TouchableOpacity
                 onPress={() => (!isPrivate ? onPressCountry(item) : undefined)}

@@ -60,7 +60,7 @@ export function editTree(plantContribution, plantId, navigation) {
 export function deleteContribution(plantContributionId, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function() {
       deleteAuthenticatedRequest('plantContribution_delete', {
         version: 'v1.3',
         plantContribution: plantContributionId

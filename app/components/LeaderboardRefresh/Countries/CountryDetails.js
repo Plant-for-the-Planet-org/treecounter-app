@@ -92,7 +92,9 @@ const CountryDetails = ({ navigation }) => {
                     {item.planted
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                    <Text style={styles.tressText}>{' trees'}</Text>
+                    <Text style={styles.tressText}>
+                      {i18n.t('label.trees')}
+                    </Text>
                   </Text>
                 </View>
               </TouchableOpacity>

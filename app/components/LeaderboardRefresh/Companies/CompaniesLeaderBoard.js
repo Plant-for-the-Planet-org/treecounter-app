@@ -82,11 +82,15 @@ const CompaniesLeaderBoard = ({ navigation }) => {
                   <Text numberOfLines={2} style={styles.countryNameText}>
                     {item.caption}
                   </Text>
+                  //// TODO: localize the treecount (eg 100.100.100 for german
+                  numbers)
                   <Text style={styles.tressCounter}>
                     {item.planted
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                    <Text style={styles.tressText}>{' trees'}</Text>
+                    <Text style={styles.tressText}>
+                      {i18n.t('label.trees')}
+                    </Text>
                   </Text>
                 </View>
               </TouchableOpacity>

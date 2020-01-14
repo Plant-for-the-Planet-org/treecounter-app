@@ -69,14 +69,12 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 15,
-    borderColor: 'red',
     borderWidth: 0,
     minHeight: 80
   },
   indexContainer: {
     width: 27,
-    marginRight: 5,
-    borderColor: 'red',
+    marginRight: 10,
     borderWidth: 0
   },
   indexText: {

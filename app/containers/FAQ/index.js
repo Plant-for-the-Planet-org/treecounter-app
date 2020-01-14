@@ -6,6 +6,9 @@ import { FAQAction } from '../../actions/faqAction';
 import _ from 'lodash';
 
 class FAQContainer extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
   constructor() {
     super();
     this.state = {

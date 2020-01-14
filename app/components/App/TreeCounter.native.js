@@ -21,7 +21,7 @@ class App extends Component {
     this.props.loadTpos();
   }
   render() {
-    const backgroundColor = 'white';
+    const backgroundColor = 'transparent';
     return (
       <SafeAreaView
         forceInset={{ top: 'never', bottom: 'always' }}

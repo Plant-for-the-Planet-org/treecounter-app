@@ -64,8 +64,16 @@ class LeaderBoardContainer extends React.Component {
     orderBy = this.state.sortingQueryParam.orderBy,
     period = this.state.sortingQueryParam.period
   ) {
+    console.log(
+      section,
+      orderBy,
+      period,
+      subSection,
+      'section, orderBy, period, subSection  LeaderBoardDataAction'
+    );
     LeaderBoardDataAction({ section, orderBy, period, subSection }).then(
       success => {
+        console.log(success, 'SUCCESSS');
         if (
           success.data &&
           success.data instanceof Object &&
@@ -233,6 +241,10 @@ class LeaderBoardContainer extends React.Component {
   }
 
   render() {
+    console.log(
+      this.props.handleScrollAnimation,
+      'this.props LeaderBoardContainer'
+    );
     return (
       <Leaderboard
         ref={'leaderBoard'}

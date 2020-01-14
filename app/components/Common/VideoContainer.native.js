@@ -13,7 +13,6 @@ import {
   Linking,
   StyleSheet
 } from 'react-native';
-import { scanFile } from 'react-native-fs';
 
 const DEFAULT_WIDTH = width;
 const TYPES = {
@@ -210,8 +209,6 @@ class Thumbnail extends PureComponent {
     }
 
     const {
-      imageWidth,
-      imageHeight,
       containerStyle,
       iconStyle,
       children,

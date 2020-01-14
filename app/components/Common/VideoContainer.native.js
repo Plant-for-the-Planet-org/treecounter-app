@@ -13,6 +13,7 @@ import {
   Linking,
   StyleSheet
 } from 'react-native';
+import { scanFile } from 'react-native-fs';
 
 const DEFAULT_WIDTH = width;
 const TYPES = {
@@ -223,7 +224,7 @@ class Thumbnail extends PureComponent {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        style={containerStyle}
+        style={[containerStyle]}
         onPress={this.onPress}
       >
         <ImageBackground
@@ -231,16 +232,15 @@ class Thumbnail extends PureComponent {
           style={[
             styles.imageContainer,
             {
-              width: imageWidth,
-              height: imageHeight
-            },
-            {
-              borderRadius: 12,
               height: width * 0.82 * 0.5625,
-              width: width * 0.82
+              width: width * 0.82,
+              // transform: [{ scale: 1.2 }]
+              borderRadius: 72,
+              scaleX: 1.2,
+              scaleY: 1.2
             }
           ]}
-          imageStyle={{ borderRadius: 12 }}
+          imageStyle={{ borderRadius: 72 }}
           testId="thumbnail-image-background"
           {...props}
         >

@@ -1,4 +1,3 @@
-// eslint-disable no-underscore-dangle
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -60,6 +59,7 @@ export default class Login extends Component {
     this.props.updateRoute('pickup_profile_modal');
   };
 
+  // eslint-disable-next-line no-underscore-dangle
   _keyboardDidShow = e => {
     let shortHeight = Dimensions.get('window').height - e.endCoordinates.height;
     this.setState({
@@ -67,6 +67,7 @@ export default class Login extends Component {
     });
   };
 
+  // eslint-disable-next-line no-underscore-dangle
   _keyboardDidHide = e => {
     let shortHeight = Dimensions.get('window').height - e.endCoordinates.height;
     this.setState({

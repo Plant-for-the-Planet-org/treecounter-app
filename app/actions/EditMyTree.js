@@ -39,6 +39,16 @@ export function editTree(plantContribution, plantId, navigation) {
                 normalize(merge.contribution[0], contributionSchema)
               )
             );
+          merge.treecounter &&
+            dispatch(
+              mergeEntities(normalize(merge.treecounter[0], treecounterSchema))
+            );
+          merge.plantProject &&
+            dispatch(
+              mergeEntities(
+                normalize(merge.plantProject[0], plantProjectSchema)
+              )
+            );
         }
         updateRoute('app_userHome', navigation || dispatch);
         NotificationManager.success(statusText, i18n.t('label.success'), 5000);

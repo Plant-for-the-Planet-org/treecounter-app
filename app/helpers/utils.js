@@ -605,7 +605,7 @@ export function generateFormikSchemaFromFormSchema(
         let prepareSchema = Yup;
         const title = i18n.t(property.title);
         if (property.type === 'array') {
-          prepareSchema = generateFormikSchemaFromFormSchema(property.items, fields);
+          prepareSchema = prepareSchema.array(generateFormikSchemaFromFormSchema(property.items, fields));
           console.log('prepareSchema====>',prepareSchema);
         } else if (property.type === 'object') {
           prepareSchema = generateFormikSchemaFromFormSchema(property, fields);

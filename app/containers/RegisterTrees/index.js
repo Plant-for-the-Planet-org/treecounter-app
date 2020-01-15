@@ -32,7 +32,7 @@ class RegisterTreesContainer extends PureComponent {
     console.log('got the form value:register form:', value);
 
     if (value) {
-      value = mergeContributionImages(value);
+      //value = mergeContributionImages(value);
 
       if (plantProject) {
         value.plantProject = plantProject;

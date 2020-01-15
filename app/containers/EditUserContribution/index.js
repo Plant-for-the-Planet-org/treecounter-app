@@ -1,36 +1,37 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { editTree } from '../../actions/EditMyTree';
+import {editTree} from '../../actions/EditMyTree';
 import EditUserContribution from '../../components/EditUserContribution';
-import { mergeContributionImages } from '../../helpers/utils';
+import {mergeContributionImages} from '../../helpers/utils';
 // Actions
-import { sortedUserContributionsSelector } from '../../selectors/index';
+import {currentUserProfileSelector, sortedUserContributionsSelector} from '../../selectors/index';
 
 class EditUserContributionsContainer extends React.Component {
   _userContribution = null;
-  onSubmit = (mode, registerTreeForm) => {
-    registerTreeForm =
+  onSubmit = (mode, value) => {
+    //console.log('OnSubmit====>', registerTreeForm);
+    /*registerTreeForm =
       registerTreeForm || this.refs.editTrees.refs.editTreeForm;
-    let value = registerTreeForm.getValue();
-    const { props } = this;
+    let value = registerTreeForm.getValue();*/
+    const {props} = this;
     if (value) {
       value = mergeContributionImages(value);
-      let plantContribution = { plant_contribution: value };
+      let plantContribution = {plant_contribution: value};
       props.editTree(
         plantContribution,
         (props.match && props.match.params.selectedTreeId) ||
-          (props.navigation && props.navigation.getParam('selectedTreeId')),
+        (props.navigation && props.navigation.getParam('selectedTreeId')),
         this.props.navigation
       );
     }
   };
 
   render() {
-    let { props } = this;
+    let {props} = this;
 
     if (props.match) {
       this._userContribution = props.userContributions.filter(
@@ -47,6 +48,8 @@ class EditUserContributionsContainer extends React.Component {
       <EditUserContribution
         ref={'editTrees'}
         userContribution={this._userContribution}
+        currentUserProfile={this.props.currentUserProfile}
+        isEdit
         onSubmit={this.onSubmit}
       />
     );
@@ -54,11 +57,13 @@ class EditUserContributionsContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userContributions: sortedUserContributionsSelector(state)
+  userContributions: sortedUserContributionsSelector(state),
+  currentUserProfile: currentUserProfileSelector(state)
+
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ editTree }, dispatch);
+  return bindActionCreators({editTree}, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -67,6 +72,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 EditUserContributionsContainer.propTypes = {
   userContributions: PropTypes.array.isRequired,
+  currentUserProfile: PropTypes.object,
   editTree: PropTypes.func,
   navigation: PropTypes.any,
   match: PropTypes.shape({

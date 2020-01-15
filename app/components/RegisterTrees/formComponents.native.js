@@ -19,9 +19,10 @@ import NativeMapView from '../Map/NativeMapView.native';
 import CardLayout from '../Common/Card';
 import {filter} from 'lodash';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {getImageUrl} from '../../actions/apiRouting';
 
 export const FormikFormTree = props => {
-  const [showClassification, setShowClassificationSwitch] = useState(false);
+  const [showClassification, setShowClassificationSwitch] = useState(props.initialValues && (props.initialValues.treeClassification||props.initialValues.treeScientificName) || false );
   const [geometry, setGeometry] = useState(props.geometry);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
   useEffect(
@@ -60,6 +61,7 @@ export const FormikFormTree = props => {
       initialValues={parentProps.initialValues}
       onSubmit={parentProps.onCreateCompetition}
       validationSchema={validationSchema}
+      isInitialValid={!!parentProps.isEdit}
     >
       {props => (
         <>
@@ -70,7 +72,7 @@ export const FormikFormTree = props => {
                   parentProps.plantProjects &&
                   parentProps.plantProjects.length > 0 ? (
                     <View style={{marginTop: 10, marginBottom: 10, position: 'relative'}}>
-                      <View >
+                      <View>
                         <Text style={{
                           fontSize: 14,
                           fontFamily: 'OpenSans-Regular',
@@ -83,11 +85,11 @@ export const FormikFormTree = props => {
                               style={{
                                 color: '#87b738',
                                 fontFamily: 'OpenSans-Regular',
-                                textAlign:'center',
+                                textAlign: 'center',
                               }}>
                               {!props.values.plantProject || parentProps.plantProjects.length >= 1 ? parentProps.plantProjects[0].text : filter(parentProps.plantProjects, {value: props.values.plantProject})[0].text}
                               {`   `}
-                              <Icon name="angle-down" size={20}  color="#87b738"/>
+                              <Icon name="angle-down" size={20} color="#87b738"/>
                             </Text>
                           </TouchableWithoutFeedback>
                         </Text>
@@ -265,7 +267,7 @@ export const FormikFormTree = props => {
               <CardLayout>
                 <View style={styles.formAddImageBlock}>
                   <AddImage
-                    image={props.values.imageFile}
+                    image={ parentProps.isEdit && getImageUrl('contribution', 'medium', props.values.contributionImages[0] && props.values.contributionImages[0].image) || props.values.contributionImages && props.values.contributionImages[0].imageFile}
                     setFieldValue={props.setFieldValue}
                   />
                 </View>
@@ -295,7 +297,7 @@ export const FormikFormTree = props => {
                               onSubmitEditing={() => {
                                 focusTheField('treeScientificName');
                               }}
-                              value={props.values.treeClassifications}
+                              value={props.values.treeClassification}
                               tintColor={'#4d5153'}
                               titleFontSize={12}
                               labelFontSize={12}
@@ -308,9 +310,9 @@ export const FormikFormTree = props => {
                               labelTextStyle={styles.textFiledLabel}
                               titleTextStyle={styles.textFieldTitle}
                               onChangeText={props.handleChange(
-                                'treeClassifications'
+                                'treeClassification'
                               )}
-                              onBlur={props.handleBlur('treeClassifications')}
+                              onBlur={props.handleBlur('treeClassification')}
                             />
                           </View>
                           <View style={{flex: 1}}>
@@ -346,8 +348,8 @@ export const FormikFormTree = props => {
                       textFiledRef={(name, input) => {
                         inputs[name] = input;
                       }}
-                      handleChange={(field,value) => {
-                         props.setFieldValue(field,value)
+                      handleChange={(value) => {
+                        props.setFieldValue('contributionMeasurements', value)
                       }}
                       focusField={name => focusTheField(name)}
                     />
@@ -370,7 +372,7 @@ export const FormikFormTree = props => {
                   }
                 >
                   <Text style={buttonStyles.actionButtonText}>
-                    {i18n.t('label.register')}
+                    {parentProps.isEdit ? i18n.t('label.update') : i18n.t('label.register')}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -386,8 +388,10 @@ export const FormikFormTree = props => {
 export class AddMeasurements extends React.Component {
   constructor(props) {
     super(props);
+    const contributionMeasurements = props.props && props.props.values && props.props.values.contributionMeasurements;
+
     this.counter = 1;
-    this.elementMasument = [];
+    this.elementMasument = contributionMeasurements || [];
     this.state = {
       switchValue: false,
       counter: 1,
@@ -398,12 +402,24 @@ export class AddMeasurements extends React.Component {
         }
       ],
       showMeasurement: false,
-      elementMasument: []
+      elementMasument: contributionMeasurements || []
     };
-    this._addMeasurementView();
+    console.log('props.props.value.contributionMeasurements', props.props && props.props.values && props.props.values.contributionMeasurements)
+    if (contributionMeasurements) {
+      contributionMeasurements.map((item, index) => {
+
+        this._addMeasurementView(true, index, item, contributionMeasurements);
+        console.log('measurementView', this.state.elementMasument)
+      });
+
+      this._addMeasurementView()
+
+    } else {
+      this._addMeasurementView()
+    }
   }
 
-  _addMeasurementView = (val, index) => {
+  _addMeasurementView = (val, index, defaultValue = null) => {
     const {measurementView} = this.state;
     if (val) {
       let ele = measurementView;
@@ -416,6 +432,7 @@ export class AddMeasurements extends React.Component {
       // eslint-disable-next-line no-constant-condition
       if (index + 1 === this.counter) {
         this.counter++;
+        if (!defaultValue)
         this.elementMasument.push({
           diameter: 0,
           height: 0,
@@ -427,7 +444,7 @@ export class AddMeasurements extends React.Component {
 
         ele.push({
           isVisible: false,
-          id: this.counter
+          id: defaultValue ? index + 1 : this.counter
         });
       }
       this.setState({
@@ -444,12 +461,15 @@ export class AddMeasurements extends React.Component {
     }
   };
   onChangeHandler = (field, value, index) => {
+    console.log('this.elementMasument', field, value, index);
+
     this.elementMasument[index][field] = value;
     this.setState({
       elementMasument: this.elementMasument
     });
-    this.props.handleChange(field,value);
-    //this.props.handleChange(this.elementMasument);
+    //this.props.handleChange(field, value);
+    console.log('this.elementMasument', this.elementMasument);
+    this.props.handleChange(this.elementMasument);
   };
 
   render() {
@@ -462,8 +482,7 @@ export class AddMeasurements extends React.Component {
             <View key={item.id}>
               <View style={styles.formSwitchView}>
                 <Text style={styles.formClassificationLabel}>
-                  {i18n.t('label.add_measurements') +
-                  (item.id <= 1 ? '' : item.id)}
+                  {`${i18n.t('label.add_measurements')} ${(item.id <= 1 ? '' : item.id)}`}
                 </Text>
                 <View>
                   <CustomSwitch
@@ -482,7 +501,7 @@ export class AddMeasurements extends React.Component {
                       <View style={[styles.formClassificationFields, {marginRight: 10}]}>
                         <TextField
                           label={i18n.t('label.tree_diameter')}
-                          value={props.values.treeDiameter}
+                          value={parseInt(elementMasument[index]['diameter']) || props.values.treeDiameter}
                           onSubmitEditing={() => {
                             this.props.focusField('treeHeight');
                           }}
@@ -522,7 +541,7 @@ export class AddMeasurements extends React.Component {
                       <View style={[styles.formClassificationFields, {marginLeft: 10}]}>
                         <TextField
                           label={i18n.t('label.tree_height')}
-                          value={props.values.treeHeight}
+                          value={parseInt(elementMasument[index]['height']) || props.values.treeHeight}
                           ref={input =>
                             this.props.textFiledRef('treeHeight', input)
                           }
@@ -568,8 +587,8 @@ export class AddMeasurements extends React.Component {
                         setFieldValue={value =>
                           this.onChangeHandler('measurementDate', value, index)
                         } //props.setFieldValue}
-                        touched={props.touched.treeMeasurementData}
-                        errors={props.errors.treeMeasurementData}
+                        touched={props.touched.contributionMeasurements}
+                        errors={props.errors.contributionMeasurements}
                       />
                     </View>
                   </View>
@@ -657,7 +676,7 @@ export function AddImage(props) {
   };
 
   const renderAsset = (image, index) => {
-    console.log(image);
+    console.log("Images====>",image);
     return (
       <View
         key={index}
@@ -671,7 +690,8 @@ export function AddImage(props) {
         <View
           style={[styles.competitionDeleteButton]}
         >
-          <TouchableOpacity onPress={() =>props.setFieldValue('imageFile', '')} style={styles.addDeleteButtonIcon}>
+          <TouchableOpacity onPress={() => props.setFieldValue('contributionImages', '')}
+                            style={styles.addDeleteButtonIcon}>
             <Image style={{height: 28, width: 28}} source={deleteOutlineWhite}/>
             <Text style={{color: '#fff', fontFamily: 'OpenSans-Regular', fontSize: 14, lineHeight: 28}}>Remove</Text>
           </TouchableOpacity>
@@ -695,8 +715,9 @@ export function AddImage(props) {
                 console.log('ImagePicker Error: ', response.error);
               } else {
                 props.setFieldValue(
-                  'imageFile',
-                  'data:image/jpeg;base64,' + response.data
+                  'contributionImages', [{
+                    imageFile: 'data:image/jpeg;base64,' + response.data
+                  }]
                 );
               }
             });

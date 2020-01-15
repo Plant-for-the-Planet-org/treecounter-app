@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 // import t from 'tcomb-form-native';
-import { Text, View, Linking } from 'react-native';
+import {Text, View, Linking} from 'react-native';
 import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
-import { FormikFormTree } from './formComponents.native';
+import {FormikFormTree} from './formComponents.native';
 import MapboxMap from '../Map/NativeMapView.native';
 import isEqual from 'lodash/isEqual';
 
@@ -13,9 +13,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
 import PopupNative from '../Common/ModalDialog/Popup.native';
 import {updateRoute} from '../../helpers/routerHelper';
-import { context } from '../../config';
+import {context} from '../../config';
 
-const { host, scheme } = context;
+const {host, scheme} = context;
 const backgroundColor = 'white';
 const defaultInitValue = {
   plantDate: new Date(),
@@ -45,46 +45,48 @@ export default class RegisterTreeTab extends PureComponent {
       formValueSingle: props.value
         ? props.value
         : {
-            treeCount: 1
-          },
+          treeCount: 1
+        },
       formValueMultiple: props.value ? props.value : '',
-      defaultValue: defaultInitValue,
+      defaultValue: props.value || defaultInitValue,
       isOpen: false,
-      geometry: null,
-      geoLocation: null
+      geometry: props.value && props.value.geometry || null,
+      geoLocation: props.value && props.value.geoLocation || null
     };
+    console.log('default value===>', props.value)
   }
 
   openModel = formProps => {
-   // if (!isEqual(this.formProps, formProps)) {
-      this.formProps = formProps;
-      this.renderFullscreenMap = (
-        <MapboxMap
-          mode={'single-tree'}
-          geometry={
-            this.formProps && this.formProps.values
-              ? this.formProps.values.geometry
-              : null
-          }
-          geoLocation={
-            this.formProps && this.formProps.values
-              ? this.formProps.values.geoLocation
-              : null
-          }
-          mapStyle={{ flex: 1, opacity: 1 }}
-          fullScreen
-          onContinue={(geoLocation, geometry,mode,address) => {
-            this.onModelClosed(geoLocation, geometry,mode,address);
-          }}
-        />
-      );
-   // }
+    // if (!isEqual(this.formProps, formProps)) {
+    this.formProps = formProps;
+    this.renderFullscreenMap = (
+      <MapboxMap
+        mode={'single-tree'}
+        geometry={
+          this.formProps && this.formProps.values
+            ? this.formProps.values.geometry
+            : null
+        }
+        geoLocation={
+          this.formProps && this.formProps.values
+            ? this.formProps.values.geoLocation
+            : null
+        }
+        mapStyle={{flex: 1, opacity: 1}}
+        fullScreen
+        onContinue={(geoLocation, geometry, mode, address) => {
+          this.onModelClosed(geoLocation, geometry, mode, address);
+        }}
+      />
+    );
+    // }
     this.setState({
       isOpen: true
     });
   };
 
-  onModelClosed = (geoLocation, geometry,mode,address=null) => {
+  onModelClosed = (geoLocation, geometry, mode, address = null) => {
+    console.log('geoLocation, geometry',geoLocation, geometry)
     this.setState(
       {
         geoLocation: geoLocation,
@@ -111,7 +113,7 @@ export default class RegisterTreeTab extends PureComponent {
       template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions
     };*/
-    const { isOpen, geometry, geoLocation, defaultValue,address } = this.state;
+    const {isOpen, geometry, geoLocation, defaultValue, address} = this.state;
     if (geometry) {
       defaultValue.geometry = geometry;
     }
@@ -119,7 +121,7 @@ export default class RegisterTreeTab extends PureComponent {
       defaultValue.geoLocation = geoLocation;
     }
     return (
-      <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
+      <View style={{backgroundColor: backgroundColor, flex: 1}}>
         <FormikFormTree
           onCreateCompetition={value => {
             if (this.props.mode === 'single-tree') {
@@ -137,6 +139,7 @@ export default class RegisterTreeTab extends PureComponent {
             }
           }}
           isTpo={this.props.isTpo}
+          isEdit={this.props.isEdit}
           mode={this.props.mode}
           plantProjects={this.props.plantProjects || ''}
           geometry={geometry}
@@ -248,5 +251,6 @@ RegisterTreeTab.propTypes = {
   value: PropTypes.any,
   plantProjects: PropTypes.any,
   buttonTitle: PropTypes.string,
-  isTpo: PropTypes.bool
+  isTpo: PropTypes.bool,
+  isEdit: PropTypes.bool
 };

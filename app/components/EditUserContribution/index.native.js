@@ -8,8 +8,10 @@ import {
   multipleTreesRegisterFormSchema,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
-import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab';
+import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab.native';
 import i18n from '../../locales/i18n.js';
+import {isTpo} from '../../helpers/utils';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export default class EditUserContribution extends Component {
   static mode = {
@@ -39,7 +41,14 @@ export default class EditUserContribution extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <KeyboardAwareScrollView
+        enableOnAndroid
+        contentContailnerStyle={{justifyContent: 'center'}}
+        extraHeight={66}
+        keyboardShouldPersistTaps={'handled'}
+        extraScrollHeight={50}
+        enableResetScrollToCoords={false}
+      >
         <CardLayout>
           <RegisterTreeTab
             buttonTitle={i18n.t('label.update')}
@@ -50,15 +59,17 @@ export default class EditUserContribution extends Component {
                 ? singleTreeRegisterFormSchema
                 : multipleTreesRegisterFormSchema
             }
+            isTpo={isTpo(this.props.currentUserProfile)}
             schemaOptions={
               this.state.mode == 'single-tree'
                 ? schemaOptionsSingleTree
                 : schemaOptionsMultipleTrees
             }
             value={this.props.userContribution}
+            isEdit
           />
         </CardLayout>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

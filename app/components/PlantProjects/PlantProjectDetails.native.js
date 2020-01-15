@@ -92,7 +92,9 @@ const PlantProjectDetails = ({
         />
       </ScrollView>
 
-      <View style={[styles.accordionCardView, { marginTop: 20 }]}>
+      <View
+        style={[styles.accordionCardView, { marginTop: 30, marginBottom: 25 }]}
+      >
         <Text style={styles.descriptionTextTitle}>{i18n.t('label.about')}</Text>
         <Text style={styles.descriptionText}>
           {readMore

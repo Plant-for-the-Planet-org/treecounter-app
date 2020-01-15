@@ -112,7 +112,7 @@ class ListViewProjects extends PureComponent {
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
           onEndReached={this.fetchMore}
-          onEndReachedThreshold={2}
+          onEndReachedThreshold={3}
           refreshControl={
             <RefreshControl
               refreshing={this.state.isFetching}

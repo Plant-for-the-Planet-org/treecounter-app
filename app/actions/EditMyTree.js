@@ -60,7 +60,7 @@ export function editTree(plantContribution, plantId, navigation) {
 export function deleteContribution(plantContributionId, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function() {
+    return new Promise(function(resolve, reject) {
       deleteAuthenticatedRequest('plantContribution_delete', {
         version: 'v1.3',
         plantContribution: plantContributionId
@@ -78,7 +78,6 @@ export function deleteContribution(plantContributionId, navigation) {
                   normalize(merge.treecounter[0], treecounterSchema)
                 )
               );
-            // TODO: is there any example where plantProject is returned in the response?
             merge.plantProject &&
               dispatch(
                 mergeEntities(
@@ -101,6 +100,7 @@ export function deleteContribution(plantContributionId, navigation) {
             i18n.t('label.success'),
             5000
           );
+          resolve(res.data);
         })
         .catch(err => {
           debug(err);
@@ -109,6 +109,7 @@ export function deleteContribution(plantContributionId, navigation) {
             i18n.t('label.error'),
             5000
           );
+          reject(err);
         })
         .finally(() => {
           dispatch(setProgressModelState(false));

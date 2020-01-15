@@ -11,6 +11,7 @@ export function fetchPlantProjectDetail(uid) {
   return new Promise((resolve, reject) => {
     request
       .then(res => {
+        // TODO: response data is not yet handled
         // need to update globale schema to handle the change in store
         // DO the merge entity with new data
         // do that for tpo// find tpoData and set the schema

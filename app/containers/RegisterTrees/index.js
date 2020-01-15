@@ -29,13 +29,15 @@ class RegisterTreesContainer extends PureComponent {
     registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
     let value = registerTreeForm.getValue();
-    console.log('got the form value:register form:', value);
-
     if (value) {
       value = mergeContributionImages(value);
 
       if (plantProject) {
-        value.plantProject = plantProject;
+        // need to changed an immutable struct
+        value = {
+          ...value,
+          plantProject
+        };
       }
       this.props
         .registerTree(

@@ -7,7 +7,8 @@ import {
   contributionSchema,
   // competitionEnrollmentSchema,
   // competitionSchema,
-  treecounterSchema
+  treecounterSchema,
+  plantProjectSchema
 } from '../schemas';
 import { debug } from '../debug';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
@@ -33,14 +34,20 @@ export function registerTree(
         const { statusText } = res;
         const { merge } = res.data;
         if (merge) {
-          merge.treecounter &&
-            dispatch(
-              mergeEntities(normalize(merge.treecounter[0], treecounterSchema))
-            );
           merge.contribution &&
             dispatch(
               mergeEntities(
                 normalize(merge.contribution[0], contributionSchema)
+              )
+            );
+          merge.treecounter &&
+            dispatch(
+              mergeEntities(normalize(merge.treecounter[0], treecounterSchema))
+            );
+          merge.plantProject &&
+            dispatch(
+              mergeEntities(
+                normalize(merge.plantProject[0], plantProjectSchema)
               )
             );
           // TODO: how to interpret these data in the response?

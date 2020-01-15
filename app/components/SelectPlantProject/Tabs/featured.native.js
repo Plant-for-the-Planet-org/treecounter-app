@@ -2,7 +2,7 @@
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { FlatList, View, Image, Text, RefreshControl } from 'react-native';
+import { FlatList, View, Image, Text } from 'react-native';
 
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
@@ -16,14 +16,6 @@ export default class FeaturedProjects extends PureComponent {
     this.onSelectClickedFeaturedProjects = this.onSelectClickedFeaturedProjects.bind(
       this
     );
-    this.perPage = 10;
-    this.state = {
-      plantProjects: [...props.plantProjects],
-      isFetching: false,
-      page: parseInt(props.plantProjects.length / this.perPage),
-      initiated: false,
-      shouldLoad: props.plantProjects.length != this.perPage
-    };
   }
   onRefresh() {
     if (!this.state.isFetching && this.state.shouldLoad)
@@ -123,17 +115,9 @@ export default class FeaturedProjects extends PureComponent {
             ...flatListContainerStyle
           }}
           ListHeaderComponent={Header}
-          data={featuredProjects.sort((a, b) => a.id - b.id)}
+          data={featuredProjects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
-          onEndReached={this.fetchMore}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.isFetching}
-              onRefresh={this.onRefresh.bind(this)}
-              titleColor="#fff"
-            />
-          }
         />
       </View>
     );
@@ -144,6 +128,5 @@ FeaturedProjects.propTypes = {
   plantProjects: PropTypes.array.isRequired,
   selectProject: PropTypes.func.isRequired,
   onMoreClick: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired,
-  index: PropTypes.any
+  navigation: PropTypes.object.isRequired
 };

@@ -10,7 +10,6 @@ import {
   // sortedUserContributionsSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { loadProject, loadProjects } from '../../actions/loadTposAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
@@ -52,15 +51,7 @@ class SelectPlantProjectContainer extends PureComponent {
   //   }
   // }
 
-  async componentDidMount() {
-    if (
-      this.props.plantProjects &&
-      !this.props.plantProjects.filter(plantProject => plantProject.isFeatured)
-        .length
-    ) {
-      let data = await this.props.loadProjects('featured');
-      console.log('===got data in await in did mount:', data);
-    }
+  componentDidMount() {
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
@@ -72,8 +63,7 @@ class SelectPlantProjectContainer extends PureComponent {
     let plantProjects = this.props.plantProjects.filter(
       project => project.allowDonations
     );
-    console.log('==== plantprojects', plantProjects);
-    return !plantProjects.length ? null : (
+    return (
       <SelectPlantProject
         selectProject={this.selectPlantProjectAction}
         currencies={this.props.currencies}
@@ -81,21 +71,11 @@ class SelectPlantProjectContainer extends PureComponent {
         plantProjects={plantProjects}
         navigation={this.props.navigation}
         supportTreecounter={this.props.supportTreecounter}
-        loadDetails={this.loadDetails}
       />
     );
   }
-  loadDetails = ({ id }) => {
-    return this.props.loadProject({ id });
-  };
-  onMoreClick = async (id, name) => {
-    let project = this.props.plantProjects.find(
-      project => project['id'] === id
-    );
-    console.log('project on more click', project);
-    if (project && !project.paymentSetup) {
-      project = await this.loadDetails({ id: id });
-    }
+
+  onMoreClick = (id, name) => {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
@@ -125,7 +105,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectPlantProjectAction, fetchCurrencies, loadProject, loadProjects },
+    { selectPlantProjectAction, fetchCurrencies },
     dispatch
   );
 };

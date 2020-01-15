@@ -93,7 +93,6 @@ export const getAllPlantProjectsSelector = createSelector(
       project.tpo_name = tpos[project.tpoId] ? tpos[project.tpoId].name : '-';
       return project;
     });
-    console.log('tpoNameExpandedProjects', tpoNameExpandedProjects);
     tpoNameExpandedProjects.sort(function(a, b) {
       let nameA = a.name.toLowerCase(),
         nameB = b.name.toLowerCase();

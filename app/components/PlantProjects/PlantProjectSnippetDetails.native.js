@@ -22,7 +22,7 @@ import { getISOToCountryName } from '../../helpers/utils';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
+import { loadProject } from '../../actions/loadTposAction';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SingleRating from '../Reviews/SingleRating';
@@ -73,7 +73,6 @@ class PlantProjectSnippetDetails extends PureComponent {
       survivalRate,
       // images,
       imageFile,
-      image,
       reviewScore: plantProjectRating,
       reviews,
       survivalRateStatus
@@ -96,8 +95,8 @@ class PlantProjectSnippetDetails extends PureComponent {
     //   treeCountWidth = treePlantedRatio * 100;
     // }
 
-    if (imageFile || image) {
-      projectImage = { image: imageFile || image };
+    if (imageFile) {
+      projectImage = { image: imageFile };
     } else {
       projectImage = plantProjectImages && plantProjectImages.find(() => true);
     }
@@ -357,7 +356,7 @@ PlantProjectSnippetDetails.propTypes = {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      fetchPlantProjectDetail,
+      loadProject,
       selectPlantProjectAction
     },
     dispatch

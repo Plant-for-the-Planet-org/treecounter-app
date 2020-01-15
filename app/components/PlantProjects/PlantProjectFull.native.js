@@ -37,7 +37,7 @@ class PlantProjectFull extends React.Component {
       console.log(error);
     }
   }
-  async componentDidMount() {
+  async componentWillMount() {
     try {
       console.log('plantproject while did mount', this.props.plantProject);
       if (this.props.plantProject && !this.props.plantProject.tpoData) {
@@ -68,7 +68,6 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       url,
       linkText,
-      tpoName,
       ndviUid
     } = plantProject;
     let tpo = plantProject.tpoData || {};
@@ -105,7 +104,6 @@ class PlantProjectFull extends React.Component {
             clickable={false}
             plantProject={plantProject}
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
-            tpoName={tpoName}
             selectProject={this.props.selectProject}
             navigation={navigation}
           />

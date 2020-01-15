@@ -62,6 +62,7 @@ class PlantProjectSnippet extends PureComponent {
       survivalRate,
       // images,
       imageFile,
+      allowDonations,
       image,
       reviewScore: plantProjectRating,
       reviews,
@@ -282,21 +283,23 @@ class PlantProjectSnippet extends PureComponent {
                     /> */}
                 </View>
               </View>
-              <TouchableOpacity
-                onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
-              >
-                <View style={styles.costContainer}>
-                  <View style={styles.costTextContainer}>
-                    <Text style={[styles.costText]}>
-                      {formatNumber(specsProps.treeCost, null, currency)}
+              {allowDonations ? (
+                <TouchableOpacity
+                  onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
+                >
+                  <View style={styles.costContainer}>
+                    <View style={styles.costTextContainer}>
+                      <Text style={[styles.costText]}>
+                        {formatNumber(specsProps.treeCost, null, currency)}
+                      </Text>
+                    </View>
+
+                    <Text style={[styles.costPerTreeText]}>
+                      {i18n.t('label.cost_per_tree')}
                     </Text>
                   </View>
-
-                  <Text style={[styles.costPerTreeText]}>
-                    {i18n.t('label.cost_per_tree')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
+                </TouchableOpacity>
+              ) : null}
             </View>
 
             {/* <View key="actionContainer" style={styles.actionContainer}> */}

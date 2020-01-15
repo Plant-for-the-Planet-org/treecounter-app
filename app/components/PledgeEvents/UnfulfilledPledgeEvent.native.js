@@ -53,7 +53,7 @@ class UnfulfilledPledgeEvents extends Component {
   render() {
     const unfulfilledEvent = this.props.navigation.getParam('unfulfilledEvent');
     return this.state.loading ? (
-      <LoadingIndicator />
+      <LoadingIndicator contentLoader screen={'PledgeEvents'} />
     ) : (
       <View style={styles.peRootView}>
         <ScrollView contentContainerStyle={styles.peRootScrollView}>

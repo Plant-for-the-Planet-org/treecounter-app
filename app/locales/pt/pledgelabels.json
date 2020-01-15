@@ -16,11 +16,7 @@
   "pledgeFormEmail": "E-mail",
   "pledgeFormTreecount": "Contagem de Árvores",
   "pledgeAddedMessage": "Você se compromissou plantar {{treeCount}} árvores. Você pode tocar em continuar para cumprir sua compromisso agora.",
-  "pledgeAddedLaterButton": "MAIS TARDE",
-  "pledgeAddedContinueButton": "CONTINUAR",
   "treesPledgedAllPledges": "{{treeCount}} árvores compromissadas",
-  "increaseMyPledge": "+ AUMENTAR MEU COMPROMISSO",
   "increasePledge": "Aumentar compromisso",
-  "treesPledgedOn": "Lista de árvores compromissadas",
   "increasePledgeMessage": "Para aumentar seu compromisso, insira um valor maior que {{treeCount}} árvores. Uma árvore custa {{treeCost}} {{currency}} e é plantada em {{projectName}}"
 }

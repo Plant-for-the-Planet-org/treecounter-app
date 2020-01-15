@@ -11,6 +11,7 @@ import {
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
+import { delimitNumbers } from '../../../utils/utils';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getCountryFlagImageUrl } from '../../../actions/apiRouting';
@@ -79,9 +80,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
                     {item.caption}
                   </Text>
                   <Text style={styles.tressCounter}>
-                    {item.planted
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+                    {delimitNumbers(item.planted)}{' '}
                     <Text style={styles.tressText}>
                       {i18n.t('label.trees')}
                     </Text>

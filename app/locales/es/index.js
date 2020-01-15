@@ -34,6 +34,9 @@ import widgetShareLabels from './widgetShareLabels.json';
 import NDVI from './ndvi.json';
 import reviews from './reviews.json';
 import formValidationErrors from './formValidationErrors.json';
+import leaderboard from './leaderBoardRefresh/leaderboard.json';
+import CountriesLeaderBoard from './leaderBoardRefresh/CountriesLeaderBoard.json';
+import CountryDetails from './leaderBoardRefresh/countryDetails.json';
 import WelcomeScreen1 from './welcomescreen1.json';
 import WelcomeScreen2 from './welcomescreen2.json';
 import WelcomeScreen3 from './welcomescreen3.json';
@@ -77,6 +80,9 @@ export default {
   ...NDVI,
   ...reviews,
   ...formValidationErrors,
+  ...leaderboard,
+  ...CountriesLeaderBoard,
+  ...CountryDetails,
   ...WelcomeScreen1,
   ...WelcomeScreen2,
   ...WelcomeScreen3,

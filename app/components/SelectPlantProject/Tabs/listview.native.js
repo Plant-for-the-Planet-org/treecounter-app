@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, RefreshControl } from 'react-native';
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/selectplantproject/list.native';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
@@ -9,6 +9,7 @@ import { flatListContainerStyle } from '../../../styles/selectplantproject/selec
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
+
 class ListViewProjects extends PureComponent {
   constructor(props) {
     super(props);

@@ -33,7 +33,7 @@ class RegisterTreesContainer extends PureComponent {
       value = mergeContributionImages(value);
 
       if (plantProject) {
-        // need to changed an immutable struct
+        // needs to change an immutable struct
         value = {
           ...value,
           plantProject

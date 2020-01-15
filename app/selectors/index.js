@@ -94,15 +94,15 @@ export const getAllPlantProjectsSelector = createSelector(
       return project;
     });
     console.log('tpoNameExpandedProjects', tpoNameExpandedProjects);
-    // tpoNameExpandedProjects.sort(function(a, b) {
-    //   let nameA = a.name.toLowerCase(),
-    //     nameB = b.name.toLowerCase();
-    //   if (nameA < nameB)
-    //     //sort string ascending
-    //     return -1;
-    //   if (nameA > nameB) return 1;
-    //   return 0; //default return value (no sorting)
-    // });
+    tpoNameExpandedProjects.sort(function(a, b) {
+      let nameA = a.name.toLowerCase(),
+        nameB = b.name.toLowerCase();
+      if (nameA < nameB)
+        //sort string ascending
+        return -1;
+      if (nameA > nameB) return 1;
+      return 0; //default return value (no sorting)
+    });
     return tpoNameExpandedProjects;
   }
 );

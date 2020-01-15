@@ -15,9 +15,9 @@ class ListViewProjects extends PureComponent {
     super(props);
     this.perPage = 10;
     this.state = {
-      plantProjects: [...props.projects],
+      plantProjects: [],
       isFetching: false,
-      page: Math.ceil(props.projects.length / this.perPage),
+      page: 1,
       initiated: false,
       shouldLoad: true
     };
@@ -108,10 +108,11 @@ class ListViewProjects extends PureComponent {
           contentContainerStyle={{
             ...flatListContainerStyle
           }}
-          data={this.props.projects}
+          data={this.state.plantProjects}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
           onEndReached={this.fetchMore}
+          onEndReachedThreshold={2}
           refreshControl={
             <RefreshControl
               refreshing={this.state.isFetching}

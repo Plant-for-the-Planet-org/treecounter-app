@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, Dimensions } from 'react-native';
+import { ActivityIndicator, Dimensions, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import WebView from 'react-native-webview';
 const width = Dimensions.get('window').width;
@@ -217,7 +217,7 @@ class Thumbnail extends PureComponent {
     } = this.props;
 
     const imageURL = `https://img.youtube.com/vi/${videoId}/${this.getType()}.jpg`;
-
+    const radius = Platform.OS == 'android' ? 80 : 12;
     return (
       <TouchableOpacity
         activeOpacity={0.7}
@@ -232,12 +232,12 @@ class Thumbnail extends PureComponent {
               height: width * 0.82 * 0.5625,
               width: width * 0.82,
               // transform: [{ scale: 1.2 }]
-              borderRadius: 72,
+              borderRadius: radius,
               scaleX: 1.2,
               scaleY: 1.2
             }
           ]}
-          imageStyle={{ borderRadius: 72 }}
+          imageStyle={{ borderRadius: radius }}
           testId="thumbnail-image-background"
           {...props}
         >

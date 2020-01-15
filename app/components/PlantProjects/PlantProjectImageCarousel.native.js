@@ -28,21 +28,22 @@ class PlantProjectImageCarousel extends Component {
 
   renderHeader = () => (
     <TouchableWithoutFeedback onPress={this.handleHeaderPress}>
-      <View style={{ alignItems: 'flex-start', padding: 20 }}>
+      <View style={{ alignItems: 'flex-end', padding: 20 }}>
         <Icon
           name="clear"
           size={24}
           color="white"
-          style={{ marginRight: 10, paddingTop: 2, paddingLeft: 5 }}
+          style={{ marginRight: 0, paddingTop: 10, paddingLeft: 5 }}
         />
       </View>
     </TouchableWithoutFeedback>
   );
 
   renderFooter = idx => (
-    <View style={{ marginBottom: 25 }}>
-      <Text style={styles.footerText}>
-        {idx + 1}/{this.props.images.length} -{' '}
+    <View style={[{ height: 150 }]}>
+      <Text style={[styles.footerText, {}]}>
+        {idx + 1}/{this.props.images.length}{' '}
+        {this.props.images[idx].description ? '-' : ''}{' '}
         {this.props.images[idx].description}
       </Text>
     </View>
@@ -52,7 +53,7 @@ class PlantProjectImageCarousel extends Component {
     return (
       <Image
         key={this.props.images[idx].image}
-        style={StyleSheet.absoluteFill}
+        style={[StyleSheet.absoluteFill]}
         resizeMode="contain"
         source={{
           uri: getImageUrl(
@@ -118,7 +119,8 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: textColor,
-    textAlign: 'center',
+    textAlign: 'left',
+    marginLeft: 24,
     fontFamily: 'OpenSans-Regular',
     fontSize: 18,
     fontWeight: '600',

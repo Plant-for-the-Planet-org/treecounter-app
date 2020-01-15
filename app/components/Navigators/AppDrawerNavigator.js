@@ -25,7 +25,7 @@ import AboutUsContainer from '../../containers/AboutUs';
 import UserContributionDetails from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
 import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
-import WelcomeScreenModal from '../../components/Authentication/WelcomeScreenModal';
+import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import BottomTabContainer from '../../containers/Menu/TabContainer';
 import GiftTrees from '../../containers/GiftTrees';
@@ -55,10 +55,14 @@ import AddReview from './../Reviews/AddReview/AddReview';
 import PDFViewer from '../PDFViewer';
 import createCompeition from './../Competition/Tabs/createCompetition.native';
 import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
-
 import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
 import AddTrees from '../Redemption/app/AddTrees.native';
-
+import CountriesLeaderBoard from '../../components/LeaderboardRefresh/Countries/CountriesLeaderBoard';
+import CountryDetails from '../../components/LeaderboardRefresh/Countries/CountryDetails';
+import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeaderBoard';
+import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
+import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
+import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -104,9 +108,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_editProfile')]: {
         screen: isLoggedIn ? EditUserProfile : LoginContainer
       },
-      [getLocalRoute('app_login')]: {
-        screen: LoginContainer
-      },
       [getLocalRoute('app_passwordSent')]: {
         screen: EmailSentContainer
       },
@@ -122,7 +123,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_accountActivation')]: {
         screen: ActivateAccountContainer
       },
-      [getLocalRoute('app_faq')]: FAQContainer,
       ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
       ['about_us']: { screen: AboutUsContainer },
@@ -229,7 +229,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
   );
   const welcomeScreenNavigator = createStackNavigator(
     {
-      ['welcome_screen']: { screen: WelcomeScreenModal }
+      ['welcome_screen']: { screen: WelcomScreenSlider }
     },
     {
       headerMode: 'none',
@@ -322,6 +322,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetition : LoginContainer
       },
+      [getLocalRoute('app_faq')]: FAQContainer,
+
       [getLocalRoute('app_editCompetition')]: {
         screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
       },
@@ -336,6 +338,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_reviews']: {
         screen: Reviews
+      },
+      [getLocalRoute('app_login')]: {
+        screen: LoginContainer
       },
       ['app_add_review']: {
         screen: AddReview
@@ -359,6 +364,30 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['redeem_add_trees']: {
         screen: AddTrees
+      },
+      ['countries_leaderboard']: {
+        screen: CountriesLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['country_details_leaderboard']: {
+        screen: CountryDetails,
+        navigationOptions: { header: null }
+      },
+      ['companies_leaderboard']: {
+        screen: CompaniesLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['schools_leaderboard']: {
+        screen: SchoolsLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['individuals_leaderboard']: {
+        screen: IndividualsLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['tpo_LeaderBoard']: {
+        screen: tpoLeaderBoard,
+        navigationOptions: { header: null }
       }
     },
     {

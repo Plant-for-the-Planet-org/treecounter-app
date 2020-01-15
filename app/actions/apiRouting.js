@@ -38,3 +38,8 @@ export const getPDFUrl = filename => {
   const { scheme, host } = context;
   return `${scheme}://${host}/uploads/pdfs/review/${filename}`;
 };
+
+export const getCountryFlagImageUrl = (countryCode, type, size) => {
+  const { scheme, host } = context;
+  return `${scheme}://${host}/flags/${type}/${size}/${countryCode}.${type}`;
+};

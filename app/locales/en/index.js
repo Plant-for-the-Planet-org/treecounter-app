@@ -30,12 +30,18 @@ import tpoProjectlabels from './tpoProjectlabels.json';
 import treecounterGraphicslabels from './treecounterGraphicslabels.json';
 import trillionlabels from './trillionLabels.json';
 import userContributionslabels from './userContributionslabels.json';
-import welcomeScreenlabels from './welcomeScreenlabels.json';
-import widgetShareLabels from './widgetShareLabels.json';
+// import widgetShareLabels from './widgetShareLabels.json';
 import NDVI from './ndvi.json';
 import reviews from './reviews.json';
 import formValidationErrors from './formValidationErrors.json';
-
+import leaderboard from './leaderBoardRefresh/leaderboard.json';
+import CountriesLeaderBoard from './leaderBoardRefresh/CountriesLeaderBoard.json';
+import CountryDetails from './leaderBoardRefresh/countryDetails.json';
+import WelcomeScreen1 from './welcomescreen1.json';
+import WelcomeScreen2 from './welcomescreen2.json';
+import WelcomeScreen3 from './welcomescreen3.json';
+import WelcomeScreen4 from './welcomescreen4.json';
+import WelcomeScreen5 from './welcomescreen5.json';
 export default {
   ...activateAccountlabels,
   ...challengelabels,
@@ -69,9 +75,15 @@ export default {
   ...treecounterGraphicslabels,
   ...trillionlabels,
   ...userContributionslabels,
-  ...welcomeScreenlabels,
-  ...widgetShareLabels,
   ...NDVI,
   ...reviews,
-  ...formValidationErrors
+  ...formValidationErrors,
+  ...leaderboard,
+  ...CountriesLeaderBoard,
+  ...CountryDetails,
+  ...WelcomeScreen1,
+  ...WelcomeScreen2,
+  ...WelcomeScreen3,
+  ...WelcomeScreen4,
+  ...WelcomeScreen5
 };

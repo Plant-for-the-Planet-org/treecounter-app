@@ -112,7 +112,6 @@ import lightTree from './images/lightTree.png';
 import targetPlanted from './images/target.png';
 import info from './images/icons/info.png';
 import editProfile from './images/icons/edit_profile.png';
-import welcomeLogo from './images/icons/welcomeLogo.png';
 import world_outline from './images/icons/world_outline.png';
 import world_outline_red from './images/icons/world_outline_red.png';
 import selector_menu from './images/icons/selector_menu.png';
@@ -156,16 +155,24 @@ import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
 import readmoreUp from './images/readmoreUp.png';
 import readmoreDown from './images/readmoreDown.png';
-
 import leafGray from './images/leaf_gray.png';
+import treelogo from '../../icon.png';
+import Projects from './images/projects.jpg';
+import WelcomeImage3 from './images/welcome_screen_3_image.jpg';
+import welcomeScreen5 from './images/welcomeScreen5.png';
 import backArrow from './images/icons/backArrow.png';
 import redeemImage from './images/redeemImage.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
-import eye from './images/eye.png';
-import closeeye from './images/closeeye.png';
+import FAQsCover from './images/FAQs.png';
+import countriesleaderboard from './images/countriesleaderboard.png';
+import schooldleaderboard from './images/schooldleaderboard.png';
+import tpoleaderboard from './images/tpoleaderboard.png';
+import individualsleaderboard from './images/individualsleaderboard.png';
+import companiesleaderboard from './images/companiesleaderboard.png';
 
 export {
+  treelogo,
   germany,
   worldImg,
   mapCollapse,
@@ -283,7 +290,6 @@ export {
   targetPlanted,
   info,
   editProfile,
-  welcomeLogo,
   world_outline,
   world_outline_red,
   selector_menu,
@@ -322,6 +328,9 @@ export {
   circleDelete,
   leaf,
   leafGray,
+  Projects,
+  WelcomeImage3,
+  welcomeScreen5,
   backArrow,
   right_arrow_button,
   globe,
@@ -329,6 +338,10 @@ export {
   outline_email,
   readmoreUp,
   readmoreDown,
-  eye,
-  closeeye
+  FAQsCover,
+  countriesleaderboard,
+  schooldleaderboard,
+  tpoleaderboard,
+  individualsleaderboard,
+  companiesleaderboard
 };

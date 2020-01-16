@@ -190,9 +190,7 @@ export default class Login extends Component {
                         ref={input => {
                           this.passwordTextInput = input;
                         }}
-                        onSubmitEditing={() => {
-                          props.isValid && props.handleSubmit;
-                        }}
+                        onSubmitEditing={props.isValid && props.handleSubmit}
                       />
                     </View>
 

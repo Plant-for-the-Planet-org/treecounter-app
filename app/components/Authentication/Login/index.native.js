@@ -160,6 +160,9 @@ export default class Login extends Component {
                       returnKeyType="next"
                       onChangeText={props.handleChange('_username')}
                       onBlur={props.handleBlur('_username')}
+                      onSubmitEditing={() => {
+                        this.passwordTextInput.focus();
+                      }}
                     />
                   </View>
 
@@ -176,7 +179,7 @@ export default class Login extends Component {
                         labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                         titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                         affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                        blurOnSubmit={false}
+                        // blurOnSubmit={false}
                         error={
                           // eslint-disable-next-line no-underscore-dangle
                           props.touched._password && props.errors._password
@@ -184,6 +187,12 @@ export default class Login extends Component {
                         returnKeyType="done"
                         onChangeText={props.handleChange('_password')}
                         onBlur={props.handleBlur('_password')}
+                        ref={input => {
+                          this.passwordTextInput = input;
+                        }}
+                        onSubmitEditing={() => {
+                          props.isValid && props.handleSubmit;
+                        }}
                       />
                     </View>
 
@@ -218,7 +227,7 @@ export default class Login extends Component {
                     </TouchableItem>
                   </View>
 
-                  {this.state.shortHeight > 600 && Platform.OS === 'ios' ? (
+                  {this.state.shortHeight > 400 && Platform.OS === 'ios' ? (
                     <TouchableOpacity
                       style={[
                         styles.actionButtonTouchable,

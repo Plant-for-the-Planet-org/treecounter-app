@@ -164,6 +164,9 @@ import welcomeScreen5 from './images/welcomeScreen5.png';
 import backArrow from './images/icons/backArrow.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
+import grayCalendar from './images/grayCalendar.png';
+import upArrow from './images/icons/up_arrow.png';
+import grayShareIcon from './images/icons/gray_share_icon.png';
 
 export {
   treelogo,
@@ -331,5 +334,8 @@ export {
   rocket,
   outline_email,
   readmoreUp,
-  readmoreDown
+  readmoreDown,
+  grayCalendar,
+  upArrow,
+  grayShareIcon
 };

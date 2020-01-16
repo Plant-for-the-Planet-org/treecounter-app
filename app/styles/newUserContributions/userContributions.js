@@ -2,30 +2,44 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
   container: {
-    marginTop: 16,
-    marginBottom: 20,
-    paddingLeft: 16,
-    marginLeft: 8,
-    marginRight: 8,
-    paddingBottom: 15,
-    display: 'flex',
-    flexDirection: 'row',
-    borderRadius: 5,
-    borderWidth: 0.2,
-    borderColor: '#d5d5d5'
+    paddingHorizontal: 20,
+    paddingTop: 23
   },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  subHeadContainer: {
+    marginTop: 7
+    // marginBottom: 27
+  },
+  subHeaderText: {
+    color: '#4D5153',
+    fontSize: 18,
+    fontFamily: 'OpenSans-SemiBold'
+  },
+  italic: {
+    fontStyle: 'italic'
+  },
+
   icon: {
-    width: 25,
-    height: 25
+    width: 24,
+    height: 24
+  },
+  iconContainer: {
+    minWidth: 38,
+    minHeight: 38,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   image: {
-    width: 50,
-    height: 50
+    width: 40,
+    height: 40
   },
   treeCount: {
-    fontSize: 25,
-    color: '#89b53a',
-    fontWeight: '700'
+    fontSize: 27,
+    color: '#4D5153',
+    fontFamily: 'OpenSans-ExtraBold'
   },
   text: {
     fontSize: 14,
@@ -37,8 +51,8 @@ export default EStyleSheet.create({
     justifyContent: 'space-between'
   },
   button: {
-    alignItems: 'center',
-    flex: 1
+    // alignItems: 'center'
+    // flex: 1
   },
   plantedButtonWrapper: {
     alignItems: 'center',

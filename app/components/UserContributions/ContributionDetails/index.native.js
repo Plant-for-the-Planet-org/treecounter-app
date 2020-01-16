@@ -37,6 +37,7 @@ class UserContributionsDetails extends React.Component {
       contributionImages
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
+    console.log('contributions', contributionImages);
 
     let plantedDate = undefined;
     let dedicatedTo = undefined;
@@ -121,17 +122,39 @@ class UserContributionsDetails extends React.Component {
 
         {contributionOrPlantedImages &&
           contributionOrPlantedImages.length > 0 && (
-            <PlantProjectImageCarousel
-              images={contributionOrPlantedImages}
-              pictureType={
-                contributionType == 'planting' ? 'contribution' : undefined
-              }
-            />
+            <></>
+            // <PlantProjectImageCarousel
+            //   images={contributionOrPlantedImages}
+            //   pictureType={
+            //     contributionType == 'planting' ? 'contribution' : undefined
+            //   }
+            // />
+
+            // <ScrollView
+            //   horizontal
+            //   showsHorizontalScrollIndicator={false}
+            //   style={{
+            //     display: 'flex',
+            //     flexDirection: 'row',
+            //     marginVertical: 30
+            //   }}
+            // >
+            // {/* {videoUrl ? <VideoContainer url={videoUrl} /> : null} */}
+            // {/* TODO Add thumbnail for video */}
+            //   <PlantProjectImageCarousel
+            //     resizeMode={'cover'}
+            //     images={contributionOrPlantedImages}
+            //     aspectRatio={16 / 9}
+            //     // videoUrl={videoUrl}
+            //   />
+            // </ScrollView>
           )}
         {hasMeasurements ? (
-          <Measurements
-            measurements={this.props.contribution.contributionMeasurements}
-          />
+          <View style={{ marginHorizontal: 20, marginTop: 30 }}>
+            <Measurements
+              measurements={this.props.contribution.contributionMeasurements}
+            />
+          </View>
         ) : null}
 
         {ndviUid ? (

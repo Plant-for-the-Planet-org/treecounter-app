@@ -6,9 +6,11 @@ import styles from '../../styles/newUserContributions/userContributions';
 
 import EditIcon from '../../assets/images/pencil.png';
 import DeleteIcon from '../../assets/images/baseline_delete_outline.png';
+import ShareIcon from '../../assets/images/share.png';
 import ArrowRight from '../../assets/images/arrow-right.png';
 import CalendarIcon from '../../assets/images/green-calendar.png';
 import TreeIcon from '../../assets/images/green-tree.png';
+import { grayShareIcon } from '../../assets';
 import i18n from '../../locales/i18n.js';
 
 export default class UserContributions extends React.Component {
@@ -32,9 +34,11 @@ export default class UserContributions extends React.Component {
       mayUpdate
     } = props;
 
+    console.log('user contribution props', props);
+
     return (
       <View style={styles.container}>
-        <View style={{ flex: 2, paddingTop: 20 }}>
+        <View style={styles.header}>
           {treeCount && treeCount > 0 ? (
             <Text style={styles.treeCount}>
               {treeCount > 1
@@ -42,8 +46,46 @@ export default class UserContributions extends React.Component {
                 : `${treeCount} ${i18n.t(
                     'label.usr_contribution_single_tree'
                   )}`}
+              {contributionTypeText === 'Donation' &&
+                ` ${i18n.t('label.donated')}`}
             </Text>
           ) : null}
+          <View style={{ flexDirection: 'row' }}>
+            {showDelete ? (
+              <TouchableOpacity
+                onPress={props.onClickDelete}
+                style={styles.button}
+              >
+                <Image style={styles.image} source={DeleteIcon} />
+              </TouchableOpacity>
+            ) : null}
+            {mayUpdate ? (
+              <TouchableOpacity
+                onPress={props.onClickEdit}
+                style={styles.button}
+              >
+                <Image style={styles.image} source={EditIcon} />
+              </TouchableOpacity>
+            ) : null}
+            <TouchableOpacity onPress={() => {}} style={styles.button}>
+              <Image style={styles.image} source={ShareIcon} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.subHeadContainer}>
+          <Text style={styles.subHeaderText}>
+            {contributionTypeText === 'Donation' &&
+              `${i18n.t('label.planted_at')}`}
+            <Text style={{ color: '#87B738' }}>
+              {contributionTypeText === 'Donation' && `${location}`}
+            </Text>
+          </Text>
+          <Text
+            style={[styles.subHeaderText, styles.italic]}
+          >{`{{ Genius }}`}</Text>
+        </View>
+
+        {/* <View style={{ flex: 2 }}>
           {location ? (
             <View style={styles.itemContainer}>
               <Image source={TreeIcon} style={styles.icon} />
@@ -68,37 +110,19 @@ export default class UserContributions extends React.Component {
           {plantedDate ? (
             <View style={styles.itemContainer}>
               <Image source={CalendarIcon} style={styles.icon} />
+              <Text>just testing</Text>
               <Text style={{ ...styles.text }}>{plantedDate}</Text>
             </View>
           ) : null}
         </View>
-
-        <View style={styles.buttonsWrapper}>
+ */}
+        {/* <View style={styles.buttonsWrapper}>
           <TouchableOpacity style={styles.plantedButtonWrapper}>
             {!!contributionTypeText && (
               <Text style={styles.plantedText}>{contributionTypeText}</Text>
             )}
           </TouchableOpacity>
-
-          <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
-            {showDelete ? (
-              <TouchableOpacity
-                onPress={props.onClickDelete}
-                style={styles.button}
-              >
-                <Image style={styles.image} source={DeleteIcon} />
-              </TouchableOpacity>
-            ) : null}
-            {mayUpdate ? (
-              <TouchableOpacity
-                onPress={props.onClickEdit}
-                style={styles.button}
-              >
-                <Image style={styles.image} source={EditIcon} />
-              </TouchableOpacity>
-            ) : null}
-          </View>
-        </View>
+        </View> */}
       </View>
     );
   }

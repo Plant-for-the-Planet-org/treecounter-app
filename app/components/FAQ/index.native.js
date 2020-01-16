@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Accordion from 'react-native-collapsible/Accordion';
 import HTMLView from 'react-native-htmlview';
-import { foldin, foldout } from '../../assets';
+import { readmoreDown, readmoreUp, FAQsCover } from '../../assets';
 import {
   Text,
   View,
@@ -15,7 +15,10 @@ import {
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
-import TabContainer from '../../containers/Menu/TabContainer';
+import HeaderNew from './../Header/HeaderNew.native';
+
+import i18n from '../../locales/i18n.js';
+import { SafeAreaView } from 'react-navigation';
 
 export default class FAQ extends Component {
   state = {
@@ -28,7 +31,7 @@ export default class FAQ extends Component {
         <Image
           style={styles.imageStyle}
           resizeMode="contain"
-          source={isActive ? foldin : foldout}
+          source={isActive ? readmoreUp : readmoreDown}
         />
       </View>
     );
@@ -62,11 +65,35 @@ export default class FAQ extends Component {
     this.setState({ activeSections });
   };
   render() {
+    const textColor = '#4d5153';
+
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <View style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <HeaderNew title={''} navigation={this.props.navigation} />
+
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 72, paddingTop: 80 }}
+        >
+          <Text
+            style={{
+              fontFamily: 'OpenSans-Bold',
+              fontSize: 27,
+              lineHeight: 40,
+              letterSpacing: 0,
+              textAlign: 'left',
+              color: textColor,
+              marginLeft: 24
+            }}
+          >
+            {i18n.t('label.faq')}
+          </Text>
+          <Image
+            resizeMode="contain"
+            source={FAQsCover}
+            style={styles.faqcover}
+          />
           <Accordion
             activeSections={this.state.activeSections}
             sections={this.props.faqs}
@@ -77,8 +104,8 @@ export default class FAQ extends Component {
             onChange={this._updateSections}
           />
         </ScrollView>
-        <TabContainer {...this.props} />
-      </View>
+        {/* <TabContainer {...this.props} /> */}
+      </SafeAreaView>
     );
   }
 }

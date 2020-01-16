@@ -10,6 +10,9 @@ import { schemaOptions } from '../../server/parsedSchemas/login';
 import { handleServerResponseError } from '../../helpers/utils';
 
 class LoginContainer extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
   constructor(props) {
     super(props);
     this.state = { formValue: {}, schemaOptions };
@@ -72,6 +75,7 @@ class LoginContainer extends React.Component {
         }
         formValue={this.state.formValue}
         schemaOptions={this.state.schemaOptions}
+        navigation={this.props.navigation}
       />
     );
   }

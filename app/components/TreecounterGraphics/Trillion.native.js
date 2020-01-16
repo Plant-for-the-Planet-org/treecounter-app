@@ -20,7 +20,8 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 import { bindActionCreators } from 'redux';
 import { updateStaticRoute } from '../../helpers/routerHelper';
-import Leaderboard from '../../containers/Leaderboard';
+// import Leaderboard from '../../containers/Leaderboard';
+import Leaderboard from '../LeaderboardRefresh/LeaderBoard/leaderboard';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { getLocalRoute } from '../../actions/apiRouting';
 import {

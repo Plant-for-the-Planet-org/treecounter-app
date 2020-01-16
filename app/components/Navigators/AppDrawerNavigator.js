@@ -355,11 +355,11 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: UnfulfilledPledgeEvents
       },
       ['app_redeem']: {
-        screen: RedemptionContainer,
+        screen: isLoggedIn ? RedemptionContainer : LoginContainer,
         path: 'redeem/:type/:code'
       },
       ['app_claim']: {
-        screen: RedemptionContainer,
+        screen: isLoggedIn ? RedemptionContainer : LoginContainer,
         path: 'claim/:type/:code'
       },
       ['redeem_add_trees']: {

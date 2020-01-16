@@ -156,10 +156,12 @@ export default function Redemption(props) {
                       fontFamily: 'OpenSans-SemiBold',
                       textTransform: 'uppercase'
                     }}
+                    returnKeyType="done"
                     affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     error={props.errors.code}
                     onChangeText={props.handleChange('code')}
                     onBlur={props.handleBlur('code')}
+                    onSubmitEditing={props.handleSubmit}
                   />
                 </View>
 
@@ -167,7 +169,8 @@ export default function Redemption(props) {
                   <TouchableOpacity
                     style={[
                       buttonStyles.actionButtonTouchable,
-                      { alignSelf: 'center', bottom: '14%' }
+                      { alignSelf: 'center' },
+                      Platform.OS === 'ios' ? { bottom: '14%' } : null
                     ]}
                     onPress={props.handleSubmit}
                   >

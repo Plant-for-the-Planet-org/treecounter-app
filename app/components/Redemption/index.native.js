@@ -192,7 +192,7 @@ export default function Redemption(props) {
               <TouchableOpacity
                 style={[
                   buttonStyles.actionButtonSmallTouchable,
-                  { top: '90%', left: '90%' }
+                  { bottom: '8%', right: '8%' }
                 ]}
                 onPress={props.handleSubmit}
               >

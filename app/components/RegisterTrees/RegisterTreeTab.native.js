@@ -6,13 +6,13 @@ import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
 import { FormikFormTree } from './formComponents.native';
 import MapboxMap from '../Map/NativeMapView.native';
-import isEqual from 'lodash/isEqual';
+// import isEqual from 'lodash/isEqual';
 
 import i18n from '../../locales/i18n';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
 import PopupNative from '../Common/ModalDialog/Popup.native';
-import {updateRoute} from '../../helpers/routerHelper';
+import { updateRoute } from '../../helpers/routerHelper';
 import { context } from '../../config';
 
 const { host, scheme } = context;
@@ -56,35 +56,35 @@ export default class RegisterTreeTab extends PureComponent {
   }
 
   openModel = formProps => {
-   // if (!isEqual(this.formProps, formProps)) {
-      this.formProps = formProps;
-      this.renderFullscreenMap = (
-        <MapboxMap
-          mode={'single-tree'}
-          geometry={
-            this.formProps && this.formProps.values
-              ? this.formProps.values.geometry
-              : null
-          }
-          geoLocation={
-            this.formProps && this.formProps.values
-              ? this.formProps.values.geoLocation
-              : null
-          }
-          mapStyle={{ flex: 1, opacity: 1 }}
-          fullScreen
-          onContinue={(geoLocation, geometry,mode,address) => {
-            this.onModelClosed(geoLocation, geometry,mode,address);
-          }}
-        />
-      );
-   // }
+    // if (!isEqual(this.formProps, formProps)) {
+    this.formProps = formProps;
+    this.renderFullscreenMap = (
+      <MapboxMap
+        mode={'single-tree'}
+        geometry={
+          this.formProps && this.formProps.values
+            ? this.formProps.values.geometry
+            : null
+        }
+        geoLocation={
+          this.formProps && this.formProps.values
+            ? this.formProps.values.geoLocation
+            : null
+        }
+        mapStyle={{ flex: 1, opacity: 1 }}
+        fullScreen
+        onContinue={(geoLocation, geometry, mode, address) => {
+          this.onModelClosed(geoLocation, geometry, mode, address);
+        }}
+      />
+    );
+    // }
     this.setState({
       isOpen: true
     });
   };
 
-  onModelClosed = (geoLocation, geometry,mode,address=null) => {
+  onModelClosed = (geoLocation, geometry, mode, address = null) => {
     this.setState(
       {
         geoLocation: geoLocation,
@@ -111,7 +111,7 @@ export default class RegisterTreeTab extends PureComponent {
       template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions
     };*/
-    const { isOpen, geometry, geoLocation, defaultValue,address } = this.state;
+    const { isOpen, geometry, geoLocation, defaultValue, address } = this.state;
     if (geometry) {
       defaultValue.geometry = geometry;
     }
@@ -156,7 +156,7 @@ export default class RegisterTreeTab extends PureComponent {
             'label.register_tree_tpo_no_plant_project_description'
           )}
           onCancel={() => {
-            updateRoute('app_userHome', this.props.navigation.navigation)
+            updateRoute('app_userHome', this.props.navigation.navigation);
           }}
           cancelText={i18n.t('label.go_back')}
           applyText={i18n.t('label.add_project')}

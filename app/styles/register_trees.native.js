@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {Dimensions} from 'react-native';
-import {row, margin_top10} from './common/common_styles';
+import { Dimensions } from 'react-native';
+// import {row, margin_top10} from './common/common_styles';
 
 const Layout = {
   window: {
@@ -14,8 +14,8 @@ export default EStyleSheet.create({
   },
   tabBar: {
     backgroundColor: '#ffffff',
-    paddingTop:0,
-    borderLeftWidth:0,
+    paddingTop: 0,
+    borderLeftWidth: 0
   },
   tabBarTabItem: {},
   tabBarTextActive: {
@@ -23,11 +23,11 @@ export default EStyleSheet.create({
     height: 3,
     width: 75,
 
-    flex: 1,
+    flex: 1
   },
   tabBarTextStyle: {
     color: '#4d5153',
-    borderLeftWidth:0,
+    borderLeftWidth: 0,
     fontSize: 13,
     fontFamily: 'OpenSans-SemiBold',
     textTransform: 'capitalize'
@@ -86,16 +86,16 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  formNameFields: {flex: 1, marginRight: 20},
+  formNameFields: { flex: 1, marginRight: 20 },
   showImage: {
     position: 'absolute',
     right: 0,
-    backgroundColor: '#000',
+    backgroundColor: '#000'
   },
   formClassificationFields: {
-    flex: 1,
+    flex: 1
   },
-  formView: {marginTop: 0},
+  formView: { marginTop: 0 },
   addImageTitle: {
     marginTop: 20,
     fontSize: 12,
@@ -156,13 +156,13 @@ export default EStyleSheet.create({
     lineHeight: 27,
     fontWeight: '300'
   },
-  formAddImageBlock: {color: '#4d5153', fontFamily: 'OpenSans-Semibold'},
+  formAddImageBlock: { color: '#4d5153', fontFamily: 'OpenSans-Semibold' },
   classificationBlock: {
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  addImageButtonIcon: {maxHeight: 20, width: 26},
-  addDeleteButtonIcon: {justifyContent: 'center', alignItems: 'center'},
+  addImageButtonIcon: { maxHeight: 20, width: 26 },
+  addDeleteButtonIcon: { justifyContent: 'center', alignItems: 'center' },
   addedImage: {
     maxWidth: 80,
     height: 80,
@@ -195,7 +195,7 @@ export default EStyleSheet.create({
     marginTop: 4,
     fontFamily: 'OpenSans-Regular'
   },
-  view_container: {backgroundColor: 'white', flex: 1},
+  view_container: { backgroundColor: 'white', flex: 1 },
   picker_container: {
     height: 50,
     width: '100%',
@@ -228,7 +228,7 @@ export default EStyleSheet.create({
     borderBottomRightRadius: 7,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   competitionDeleteImage: {
     height: 20,
@@ -239,22 +239,25 @@ export default EStyleSheet.create({
     color: '#4d5153',
     height: 50
   },
-  textFiledTitle: {fontFamily: 'OpenSans-Regular', color: '#4d5153'},
+  textFiledTitle: { fontFamily: 'OpenSans-Regular', color: '#4d5153' },
   triangleContainer: {
     width: 12,
     height: 6,
     overflow: 'hidden',
     alignItems: 'center',
 
-    backgroundColor: 'transparent', /* XXX: Required */
-  }, triangle: {
+    backgroundColor: 'transparent' /* XXX: Required */
+  },
+  triangle: {
     width: 8,
     height: 8,
-    transform: [{
-      translateY: -4,
-    }, {
-      rotate: '45deg',
-    }],
-  },
-
+    transform: [
+      {
+        translateY: -4
+      },
+      {
+        rotate: '45deg'
+      }
+    ]
+  }
 });

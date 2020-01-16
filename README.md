@@ -41,6 +41,7 @@ To run the app as prod, useful for testing features like (hashed js/css):
   npm install
   ```
 
+* Please use node v 12.14.1 LTS; App doesn't build with 13.0 + versions.
 
 ### Running into iOS simulator
 

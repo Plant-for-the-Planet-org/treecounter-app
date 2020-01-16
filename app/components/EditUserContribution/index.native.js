@@ -10,8 +10,8 @@ import {
 } from '../../server/parsedSchemas/registerTrees';
 import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab.native';
 import i18n from '../../locales/i18n.js';
-import {isTpo} from '../../helpers/utils';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class EditUserContribution extends Component {
   static mode = {
@@ -27,10 +27,14 @@ export default class EditUserContribution extends Component {
     } else {
       mode = EditUserContribution.mode.singleTree;
     }
+
     this.state = {
       mode: mode
     };
-
+    this.plantProjects = getPlantProjectEnum(
+      this.props.currentUserProfile,
+      this.props.plantProjects
+    );
     // Bind Local method
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
@@ -43,7 +47,7 @@ export default class EditUserContribution extends Component {
     return (
       <KeyboardAwareScrollView
         enableOnAndroid
-        contentContailnerStyle={{justifyContent: 'center'}}
+        contentContailnerStyle={{ justifyContent: 'center' }}
         extraHeight={66}
         keyboardShouldPersistTaps={'handled'}
         extraScrollHeight={50}
@@ -54,6 +58,7 @@ export default class EditUserContribution extends Component {
             buttonTitle={i18n.t('label.update')}
             onRegister={this.props.onSubmit}
             mode={this.state.mode}
+            plantProjects={this.plantProjects}
             schemaType={
               this.state.mode == 'single-tree'
                 ? singleTreeRegisterFormSchema

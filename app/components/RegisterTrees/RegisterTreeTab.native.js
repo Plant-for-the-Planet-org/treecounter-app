@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-color-literals */
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 // import t from 'tcomb-form-native';
-import {Text, View, Linking} from 'react-native';
+import { Text, View, Linking } from 'react-native';
 import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
-import {FormikFormTree} from './formComponents.native';
+import { FormikFormTree } from './formComponents.native';
 import MapboxMap from '../Map/NativeMapView.native';
 import isEqual from 'lodash/isEqual';
 
@@ -12,12 +12,12 @@ import i18n from '../../locales/i18n';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
 import PopupNative from '../Common/ModalDialog/Popup.native';
-import {updateRoute} from '../../helpers/routerHelper';
-import {context} from '../../config';
+import { updateRoute } from '../../helpers/routerHelper';
+import { context } from '../../config';
 
-const {host, scheme} = context;
+const { host, scheme } = context;
 const backgroundColor = 'white';
-const defaultInitValue = {
+const defaultSingleInitValue = {
   plantDate: new Date(),
   treeClassification: '',
   treeSpecies: '',
@@ -32,10 +32,41 @@ const defaultInitValue = {
   geoLocation: '',
   geometry: ''
 };
+const defaultMultipleInitValue = {
+  plantDate: new Date(),
+  treeSpecies: '',
+  treeCount: 1,
+  plantProject: '',
+  imageFile: '',
+  geoLocation: ''
+};
 
 export default class RegisterTreeTab extends PureComponent {
   constructor(props) {
     super(props);
+    const defaultSingleInitValue = {
+      plantDate: (props.value && props.value.plantDate) || new Date(),
+      treeClassification: (props.value && props.value.treeClassification) || '',
+      treeSpecies: (props.value && props.value.treeSpecies) || '',
+      treeScientificName: (props.value && props.value.treeScientificName) || '',
+      treeDiameter: '',
+      treeHeight: '',
+      access: '',
+      treeCount: 1,
+      plantProject: '',
+      treeMeasurementData: new Date(),
+      imageFile: '',
+      geoLocation: '',
+      geometry: ''
+    };
+    const defaultMultipleInitValue = {
+      plantDate: new Date(),
+      treeSpecies: '',
+      treeCount: 1,
+      plantProject: '',
+      imageFile: '',
+      geoLocation: ''
+    };
     this.state = {
       plantProject: props.isTpo
         ? props.plantProjects.length > 0
@@ -45,15 +76,19 @@ export default class RegisterTreeTab extends PureComponent {
       formValueSingle: props.value
         ? props.value
         : {
-          treeCount: 1
-        },
+            treeCount: 1
+          },
       formValueMultiple: props.value ? props.value : '',
-      defaultValue: props.value || defaultInitValue,
+
+      defaultValue:
+        props.mode === 'single_tree'
+          ? defaultSingleInitValue
+          : defaultMultipleInitValue,
       isOpen: false,
-      geometry: props.value && props.value.geometry || null,
-      geoLocation: props.value && props.value.geoLocation || null
+      geometry: (props.value && props.value.geometry) || null,
+      geoLocation: (props.value && props.value.geoLocation) || null
     };
-    console.log('default value===>', props.value)
+    console.log('default value===>', props.value);
   }
 
   openModel = formProps => {
@@ -72,7 +107,7 @@ export default class RegisterTreeTab extends PureComponent {
             ? this.formProps.values.geoLocation
             : null
         }
-        mapStyle={{flex: 1, opacity: 1}}
+        mapStyle={{ flex: 1, opacity: 1 }}
         fullScreen
         onContinue={(geoLocation, geometry, mode, address) => {
           this.onModelClosed(geoLocation, geometry, mode, address);
@@ -86,7 +121,7 @@ export default class RegisterTreeTab extends PureComponent {
   };
 
   onModelClosed = (geoLocation, geometry, mode, address = null) => {
-    console.log('geoLocation, geometry',geoLocation, geometry)
+    console.log('geoLocation, geometry', geoLocation, geometry);
     this.setState(
       {
         geoLocation: geoLocation,
@@ -97,7 +132,7 @@ export default class RegisterTreeTab extends PureComponent {
       () => {
         if (this.formProps) {
           this.formProps.setFieldValue('geoLocation', geoLocation);
-          this.formProps.setFieldValue('geometry', geometry);
+          //this.formProps.setFieldValue('geometry', geometry);
         }
       }
     );
@@ -113,7 +148,7 @@ export default class RegisterTreeTab extends PureComponent {
       template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions
     };*/
-    const {isOpen, geometry, geoLocation, defaultValue, address} = this.state;
+    const { isOpen, geometry, geoLocation, defaultValue, address } = this.state;
     if (geometry) {
       defaultValue.geometry = geometry;
     }
@@ -121,7 +156,7 @@ export default class RegisterTreeTab extends PureComponent {
       defaultValue.geoLocation = geoLocation;
     }
     return (
-      <View style={{backgroundColor: backgroundColor, flex: 1}}>
+      <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
         <FormikFormTree
           onCreateCompetition={value => {
             if (this.props.mode === 'single-tree') {
@@ -159,7 +194,7 @@ export default class RegisterTreeTab extends PureComponent {
             'label.register_tree_tpo_no_plant_project_description'
           )}
           onCancel={() => {
-            updateRoute('app_userHome', this.props.navigation.navigation)
+            updateRoute('app_userHome', this.props.navigation.navigation);
           }}
           cancelText={i18n.t('label.go_back')}
           applyText={i18n.t('label.add_project')}

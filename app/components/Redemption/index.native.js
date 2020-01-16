@@ -10,13 +10,14 @@ import {
   TouchableOpacity,
   Animated,
   Keyboard,
-  ActivityIndicator
+  ActivityIndicator,
+  SafeAreaView
 } from 'react-native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
-import { SafeAreaView } from 'react-navigation';
+// import { SafeAreaView } from 'react-navigation';
 import { Formik } from 'formik';
 import buttonStyles from '../../styles/common/button.native';
 
@@ -156,7 +157,6 @@ export default function Redemption(props) {
                       textTransform: 'uppercase'
                     }}
                     affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                    blurOnSubmit={false}
                     error={props.errors.code}
                     onChangeText={props.handleChange('code')}
                     onBlur={props.handleBlur('code')}
@@ -167,7 +167,7 @@ export default function Redemption(props) {
                   <TouchableOpacity
                     style={[
                       buttonStyles.actionButtonTouchable,
-                      { alignSelf: 'center' }
+                      { alignSelf: 'center', bottom: '14%' }
                     ]}
                     onPress={props.handleSubmit}
                   >

@@ -3,7 +3,7 @@ import { Animated, TouchableOpacity, Image, BackHandler } from 'react-native';
 import { backArrow } from '../../assets';
 
 let HEADER_MAX_HEIGHT = 80;
-let HEADER_MIN_HEIGHT = 70;
+let HEADER_MIN_HEIGHT = 80;
 
 // let HEADER_TEXT_MAX_HEIGHT = 80;
 let HEADER_TEXT_MIN_HEIGHT = 40;

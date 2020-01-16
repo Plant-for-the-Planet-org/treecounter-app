@@ -24,22 +24,31 @@ export function registerTree(
       }
     )
       .then(res => {
-        console.log('resp===>',res);
-        const { statusText } = res;
-        const { contribution, treecounter } = res.data;
+        console.log('resp===>', res);
+        if (res) {
+          console.log('response==>', res);
 
-        dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
-        dispatch(mergeEntities(normalize(contribution, contributionSchema)));
-        dispatch(setProgressModelState(false));
-        updateRoute('app_userHome', navigation || dispatch);
-        NotificationManager.success(statusText, i18n.t('label.success'), 5000);
-        return res;
+          const { statusText } = res;
+          const { contribution, treecounter } = res.data;
+
+          dispatch(mergeEntities(normalize(treecounter, treecounterSchema)));
+          dispatch(mergeEntities(normalize(contribution, contributionSchema)));
+          dispatch(setProgressModelState(false));
+          updateRoute('app_userHome', navigation || dispatch);
+          NotificationManager.success(
+            statusText,
+            i18n.t('label.success'),
+            5000
+          );
+          return res;
+        }
       })
       .catch(error => {
         debug(error.response);
+        console.log('Error in response', error);
         dispatch(setProgressModelState(false));
         NotificationManager.error(
-          error.response.data.message,
+          error.response && error.response.data && error.response.data.message,
           i18n.t('label.error'),
           5000
         );

@@ -37,12 +37,14 @@ export const FormikFormTree = props => {
   );
   const [geometry, setGeometry] = useState(props.geometry);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
+  const [initValue, setInitValue] = useState(props.initialValues);
   useEffect(
     () => {
       setGeometry(props.geometry);
     },
     [props.geometry]
   );
+  useEffect(() => {}, [props]);
   useEffect(
     () => {
       setGeoLocation(props.geoLocation);
@@ -52,12 +54,12 @@ export const FormikFormTree = props => {
 
   const parentProps = props;
   const isMultipleTree = props.mode === 'multiple-trees';
+
   const validationSchema = generateFormikSchemaFromFormSchema(
     isMultipleTree
       ? schemaOptionsMultiple.multiple_trees
       : schemaOptionsMultiple.single_tree
   );
-  console.log('validationSchema', validationSchema);
   let inputs = [];
   const inputEl = useRef(null);
 
@@ -65,11 +67,11 @@ export const FormikFormTree = props => {
   function focusTheField(id) {
     inputs[id].focus();
   }
-
   const isContributionImage = props => {
     if (parentProps.isEdit) {
       const contributImage =
         props.values.contributionImages &&
+        props.values.contributionImages.length &&
         props.values.contributionImages[0] &&
         props.values.contributionImages[0].image
           ? props.values.contributionImages[0].image
@@ -78,30 +80,35 @@ export const FormikFormTree = props => {
         (contributImage &&
           getImageUrl('contribution', 'medium', contributImage)) ||
         (props.values.contributionImages &&
-          props.values.contributionImages[0].imageFile)
+        props.values.contributionImages.length &&
+        props.values.contributionImages[0].imageFile
+          ? props.values.contributionImages[0].imageFile
+          : '')
       );
     } else {
-      return (
-        props.values.contributionImages &&
+      return props.values.contributionImages &&
+        props.values.contributionImages.length &&
         props.values.contributionImages[0].imageFile
-      );
+        ? props.values.contributionImages[0].imageFile
+        : '';
     }
   };
 
-  console.log('Input ref=========================>', inputEl);
   return (
     <Formik
-      initialValues={parentProps.initialValues}
+      initialValues={initValue}
+      initialStatus={initValue}
       onSubmit={parentProps.onCreateCompetition}
       validationSchema={validationSchema}
       isInitialValid={!!parentProps.isEdit}
+      mapPropsToStatus={initValue}
     >
       {props => (
         <>
           <View>
             <View style={styles.formScrollView}>
               <CardLayout style={{ marginTop: 9 }}>
-                {parentProps.isTpo ? (
+                {!parentProps.isEdit && parentProps.isTpo ? (
                   parentProps.plantProjects &&
                   parentProps.plantProjects.length > 0 ? (
                     <View
@@ -134,7 +141,7 @@ export const FormikFormTree = props => {
                                 textAlign: 'center'
                               }}
                             >
-                              {!props.values.plantProject ||
+                              {!props.values.plantProject &&
                               parentProps.plantProjects.length >= 1
                                 ? parentProps.plantProjects[0].text
                                 : filter(parentProps.plantProjects, {
@@ -171,10 +178,6 @@ export const FormikFormTree = props => {
                         }}
                         label={i18n.t('label.plant_project')}
                         dropdownOffset={{ top: 0 }}
-                        error={
-                          props.touched.plantProject &&
-                          props.errors.plantProject
-                        }
                         data={parentProps.plantProjects.map(item => {
                           return { value: item.value, label: item.text };
                         })}
@@ -285,7 +288,9 @@ export const FormikFormTree = props => {
                   </Text>
                   <Text style={styles.formPlantingDescription}>
                     {parentProps.mode === 'multiple-trees'
-                      ? i18n.t('label.many_tree_planting_location_description')
+                      ? i18n.t(
+                          'label.single_tree_planting_location_description'
+                        )
                       : i18n.t(
                           'label.single_tree_planting_location_description'
                         )}
@@ -446,7 +451,6 @@ export const FormikFormTree = props => {
               </TouchableOpacity>
             </View>
           </View>
-          {console.log('formProps', { props })}
         </>
       )}
     </Formik>
@@ -482,10 +486,11 @@ export class AddMeasurements extends React.Component {
         props.props.values.contributionMeasurements
     );
     if (contributionMeasurements) {
-      contributionMeasurements.map((item, index) => {
-        this._addMeasurementView(true, index, item, contributionMeasurements);
-        console.log('measurementView', this.state.elementMasument);
-      });
+      contributionMeasurements.length &&
+        contributionMeasurements.map((item, index) => {
+          this._addMeasurementView(true, index, item, contributionMeasurements);
+          console.log('measurementView', this.state.elementMasument);
+        });
 
       this._addMeasurementView();
     } else {
@@ -551,182 +556,150 @@ export class AddMeasurements extends React.Component {
     const { props } = this.props;
     return (
       <View>
-        {measurementView.map((item, index) => {
-          return (
-            <View key={item.id}>
-              <View style={styles.formSwitchView}>
-                <Text style={styles.formClassificationLabel}>
-                  {`${i18n.t('label.add_measurements')} ${
-                    item.id <= 1 ? '' : item.id
-                  }`}
-                </Text>
+        {measurementView &&
+          measurementView.map((item, index) => {
+            return (
+              <View key={item.id}>
+                <View style={styles.formSwitchView}>
+                  <Text style={styles.formClassificationLabel}>
+                    {`${i18n.t('label.add_measurements')} ${
+                      item.id <= 1 ? '' : item.id
+                    }`}
+                  </Text>
+                  <View>
+                    <CustomSwitch
+                      value={item.isVisible}
+                      onChange={val => {
+                        this._addMeasurementView(val, index);
+                      }}
+                    />
+                  </View>
+                </View>
+
                 <View>
-                  <CustomSwitch
-                    value={item.isVisible}
-                    onChange={val => {
-                      this._addMeasurementView(val, index);
-                    }}
-                  />
+                  {item.isVisible && (
+                    <View>
+                      <View style={[styles.classificationBlock]}>
+                        <View
+                          style={[
+                            styles.formClassificationFields,
+                            { marginRight: 10 }
+                          ]}
+                        >
+                          <TextField
+                            label={i18n.t('label.tree_diameter')}
+                            value={
+                              parseInt(elementMasument[index]['diameter']) ||
+                              props.values.treeDiameter
+                            }
+                            onSubmitEditing={() => {
+                              this.props.focusField('treeHeight');
+                            }}
+                            ref={input =>
+                              this.props.textFiledRef('treeDiameter', input)
+                            }
+                            tintColor={'#4d5153'}
+                            titleFontSize={12}
+                            labelFontSize={12}
+                            fontSize={18}
+                            returnKeyType="next"
+                            textColor={'#4d5153'}
+                            lineWidth={1}
+                            blurOnSubmit={false}
+                            keyboardType="numeric"
+                            labelTextStyle={styles.textFiledLabel}
+                            titleTextStyle={styles.textFieldTitle}
+                            renderRightAccessory={() => (
+                              <Text style={{ fontSize: 16, color: '#4d5153' }}>
+                                cm
+                              </Text>
+                            )}
+                            error={
+                              props.touched.treeDiameter &&
+                              props.errors.treeDiameter
+                            }
+                            onChangeText={value =>
+                              this.onChangeHandler(
+                                'diameter',
+                                parseInt(value),
+                                index
+                              )
+                            }
+                          />
+                        </View>
+                        <View
+                          style={[
+                            styles.formClassificationFields,
+                            { marginLeft: 10 }
+                          ]}
+                        >
+                          <TextField
+                            label={i18n.t('label.tree_height')}
+                            value={
+                              parseInt(elementMasument[index]['height']) ||
+                              props.values.treeHeight
+                            }
+                            ref={input =>
+                              this.props.textFiledRef('treeHeight', input)
+                            }
+                            tintColor={'#4d5153'}
+                            fontSize={18}
+                            titleFontSize={12}
+                            labelFontSize={12}
+                            textColor={'#4d5153'}
+                            returnKeyType="next"
+                            renderRightAccessory={() => (
+                              <Text style={{ fontSize: 16, color: '#4d5153' }}>
+                                meter
+                              </Text>
+                            )}
+                            prefix={''}
+                            keyboardType="numeric"
+                            lineWidth={1}
+                            blurOnSubmit={false}
+                            labelTextStyle={styles.textFiledLabel}
+                            titleTextStyle={styles.textFieldTitle}
+                            error={
+                              props.touched.treeHeight &&
+                              props.errors.treeHeight
+                            }
+                            onChangeText={value =>
+                              this.onChangeHandler(
+                                'height',
+                                parseInt(value),
+                                index
+                              )
+                            }
+                          />
+                        </View>
+                      </View>
+                      <View style={{ width: '47%', paddingTop: 20 }}>
+                        <CompetitionDatePicker
+                          endDate={
+                            elementMasument[index]['measurementDate'] ||
+                            new Date()
+                          }
+                          label={i18n.t('label.measurement_date')}
+                          setFieldValue={value =>
+                            this.onChangeHandler(
+                              'measurementDate',
+                              value,
+                              index
+                            )
+                          } //props.setFieldValue}
+                          touched={props.touched.contributionMeasurements}
+                          errors={props.errors.contributionMeasurements}
+                        />
+                      </View>
+                    </View>
+                  )}
                 </View>
               </View>
-
-              <View>
-                {item.isVisible && (
-                  <View>
-                    <View style={[styles.classificationBlock]}>
-                      <View
-                        style={[
-                          styles.formClassificationFields,
-                          { marginRight: 10 }
-                        ]}
-                      >
-                        <TextField
-                          label={i18n.t('label.tree_diameter')}
-                          value={
-                            parseInt(elementMasument[index]['diameter']) ||
-                            props.values.treeDiameter
-                          }
-                          onSubmitEditing={() => {
-                            this.props.focusField('treeHeight');
-                          }}
-                          ref={input =>
-                            this.props.textFiledRef('treeDiameter', input)
-                          }
-                          tintColor={'#4d5153'}
-                          titleFontSize={12}
-                          labelFontSize={12}
-                          fontSize={18}
-                          returnKeyType="next"
-                          textColor={'#4d5153'}
-                          lineWidth={1}
-                          blurOnSubmit={false}
-                          keyboardType="numeric"
-                          labelTextStyle={styles.textFiledLabel}
-                          titleTextStyle={styles.textFieldTitle}
-                          renderRightAccessory={() => (
-                            <Text style={{ fontSize: 16, color: '#4d5153' }}>
-                              cm
-                            </Text>
-                          )}
-                          error={
-                            props.touched.treeDiameter &&
-                            props.errors.treeDiameter
-                          }
-                          onChangeText={value =>
-                            this.onChangeHandler(
-                              'diameter',
-                              parseInt(value),
-                              index
-                            )
-                          }
-                          onBlur={props.handleBlur('diameter')}
-                        />
-                      </View>
-                      <View
-                        style={[
-                          styles.formClassificationFields,
-                          { marginLeft: 10 }
-                        ]}
-                      >
-                        <TextField
-                          label={i18n.t('label.tree_height')}
-                          value={
-                            parseInt(elementMasument[index]['height']) ||
-                            props.values.treeHeight
-                          }
-                          ref={input =>
-                            this.props.textFiledRef('treeHeight', input)
-                          }
-                          tintColor={'#4d5153'}
-                          fontSize={18}
-                          titleFontSize={12}
-                          labelFontSize={12}
-                          textColor={'#4d5153'}
-                          returnKeyType="next"
-                          renderRightAccessory={() => (
-                            <Text style={{ fontSize: 16, color: '#4d5153' }}>
-                              meter
-                            </Text>
-                          )}
-                          prefix={''}
-                          keyboardType="numeric"
-                          lineWidth={1}
-                          blurOnSubmit={false}
-                          labelTextStyle={styles.textFiledLabel}
-                          titleTextStyle={styles.textFieldTitle}
-                          error={
-                            props.touched.treeHeight && props.errors.treeHeight
-                          }
-                          onChangeText={value =>
-                            this.onChangeHandler(
-                              'height',
-                              parseInt(value),
-                              index
-                            )
-                          }
-                          onBlur={props.handleBlur('height')}
-                        />
-                      </View>
-                    </View>
-                    <View style={{ width: '47%', paddingTop: 20 }}>
-                      <CompetitionDatePicker
-                        endDate={
-                          elementMasument[index]['measurementDate'] ||
-                          new Date()
-                        }
-                        label={i18n.t('label.measurement_date')}
-                        setFieldValue={value =>
-                          this.onChangeHandler('measurementDate', value, index)
-                        } //props.setFieldValue}
-                        touched={props.touched.contributionMeasurements}
-                        errors={props.errors.contributionMeasurements}
-                      />
-                    </View>
-                  </View>
-                )}
-              </View>
-            </View>
-          );
-        })}
+            );
+          })}
       </View>
     );
   }
-}
-
-export function AccessPicker(props) {
-  let data = [
-    {
-      label: i18n.t('label.competition_access_immediate'),
-      value: 'immediate'
-    },
-    {
-      label: i18n.t('label.competition_access_request'),
-      value: 'request'
-    },
-    {
-      label: i18n.t('label.competition_access_invitation'),
-      value: 'invitation'
-    }
-  ];
-
-  const onChange = value => {
-    props.setFieldValue('access', value);
-  };
-
-  return (
-    <View>
-      <Dropdown
-        ref={ref => (this.dropdown = ref)}
-        label={i18n.t('label.competition_access')}
-        data={data}
-        onChangeText={onChange}
-        lineWidth={1}
-        error={props.touched.access && props.errors.access}
-        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-      />
-    </View>
-  );
 }
 
 export class CustomSwitch extends React.Component {
@@ -777,7 +750,7 @@ export function AddImage(props) {
         />
         <View style={[styles.competitionDeleteButton]}>
           <TouchableOpacity
-            onPress={() => props.setFieldValue('contributionImages', '')}
+            onPress={() => props.setFieldValue('contributionImages', [])}
             style={styles.addDeleteButtonIcon}
           >
             <Image
@@ -834,10 +807,11 @@ export function AddImage(props) {
               } else if (response.error) {
                 console.log('ImagePicker Error: ', response.error);
               } else {
-                props.setFieldValue(
-                  'imageFile',
-                  'data:image/jpeg;base64,' + response.data
-                );
+                props.setFieldValue('contributionImages', [
+                  {
+                    imageFile: 'data:image/jpeg;base64,' + response.data
+                  }
+                ]);
               }
             });
           }}

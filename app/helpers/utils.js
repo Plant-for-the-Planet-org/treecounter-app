@@ -1,4 +1,4 @@
-import {postDirectRequest} from '../../app/utils/api';
+import { postDirectRequest } from '../../app/utils/api';
 import {
   profile,
   country,
@@ -22,7 +22,7 @@ import {
   leaderboards_company_green
 } from '../assets';
 import _ from 'lodash';
-import {getErrorView} from '../server/validator';
+import { getErrorView } from '../server/validator';
 import countryCodes from '../assets/countryCodes.json';
 import * as Yup from 'yup';
 import i18n from '../locales/i18n';
@@ -33,7 +33,7 @@ import i18n from '../locales/i18n';
 /* new options contains error field based on server options
 /* Eg options.field.email.hasError = true;
 */
-export const handleServerResponseError = function (
+export const handleServerResponseError = function(
   serverFormError,
   formSchemaOptions
 ) {
@@ -90,7 +90,7 @@ export const categoryIcons = {
     normal: leaderboards_countries_grey,
     selected: leaderboards_countries_green
   },
-  tpo: {normal: leaderboards_tpo_grey, selected: leaderboards_tpo_green},
+  tpo: { normal: leaderboards_tpo_grey, selected: leaderboards_tpo_green },
   organization: {
     normal: leaderboards_organisations_grey,
     selected: leaderboards_organisations_green
@@ -111,16 +111,16 @@ export const categoryIcons = {
 
 export function queryParamsToObject(queryParams) {
   let returnObject = {};
-  if (!queryParams) return returnObject
+  if (!queryParams) return returnObject;
   try {
     returnObject = JSON.parse(
       '{"' +
-      decodeURI(queryParams)
-        .replace('?', '')
-        .replace(/"/g, '\\"')
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"') +
-      '"}'
+        decodeURI(queryParams)
+          .replace('?', '')
+          .replace(/"/g, '\\"')
+          .replace(/&/g, '","')
+          .replace(/=/g, '":"') +
+        '"}'
     );
   } catch (err) {
     console.log(err);
@@ -216,12 +216,15 @@ export function mergeContributionImages(updatedTreeContribution) {
   const newContributionImages = updatedTreeContribution.contributionImages;
   let contributionImages = [];
   contributionImages = newContributionImages.map(newContributionImage => {
-    if (newContributionImage.image.includes('base64')) {
-      let {image: imageFile} = newContributionImage;
-
+    if (
+      (newContributionImage.image || newContributionImage.imageFile).includes(
+        'base64'
+      )
+    ) {
+      let { imageFile } = newContributionImage;
       return newContributionImage.id
-        ? {imageFile, id: newContributionImage.id}
-        : {imageFile};
+        ? { imageFile, id: newContributionImage.id }
+        : { imageFile };
     }
     return newContributionImage;
   });
@@ -576,7 +579,7 @@ export function getISOToCountryName(code) {
   const foundCountry = countryCodes.filter(data => {
     return data.countryCode == code;
   });
-  return foundCountry.length ? foundCountry[0] : {country: code};
+  return foundCountry.length ? foundCountry[0] : { country: code };
 }
 
 export function isTpo(currentUserProfile) {
@@ -590,10 +593,10 @@ export function isTpo(currentUserProfile) {
 export const paymentFee = 0;
 
 export function generateFormikSchemaFromFormSchema(
-  schemaObj = {properties: {}, required: []},
+  schemaObj = { properties: {}, required: [] },
   fields = []
 ) {
-  console.log('schemaObj====>',schemaObj);
+  console.log('schemaObj====>', schemaObj);
   let validationSchemaGenerated = {};
   Object.keys(schemaObj.properties).map(key => {
     if (fields.length === 0 || fields.indexOf(key) !== -1) {
@@ -605,8 +608,10 @@ export function generateFormikSchemaFromFormSchema(
         let prepareSchema = Yup;
         const title = i18n.t(property.title);
         if (property.type === 'array') {
-          prepareSchema = prepareSchema.array(generateFormikSchemaFromFormSchema(property.items, fields));
-          console.log('prepareSchema====>',prepareSchema);
+          prepareSchema = prepareSchema.array(
+            generateFormikSchemaFromFormSchema(property.items, fields)
+          );
+          console.log('prepareSchema====>', prepareSchema);
         } else if (property.type === 'object') {
           prepareSchema = generateFormikSchemaFromFormSchema(property, fields);
         } else {
@@ -625,7 +630,7 @@ export function generateFormikSchemaFromFormSchema(
 
           if (schemaObj.required && schemaObj.required.indexOf(key) >= 0) {
             prepareSchema = prepareSchema.required(
-              i18n.t('label.required_field', {field: title})
+              i18n.t('label.required_field', { field: title })
             );
           }
 
@@ -643,7 +648,7 @@ export function generateFormikSchemaFromFormSchema(
           if (property.attr && property.attr.maxlength) {
             prepareSchema = prepareSchema.max(
               property.attr.maxlength,
-              i18n.t('label.char_limit', {field: property.attr.maxlength})
+              i18n.t('label.char_limit', { field: property.attr.maxlength })
             );
           }
         }

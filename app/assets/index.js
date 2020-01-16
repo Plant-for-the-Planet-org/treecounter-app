@@ -342,7 +342,5 @@ export {
   schooldleaderboard,
   tpoleaderboard,
   individualsleaderboard,
-  eye,
-  closeeye,
   deleteOutlineWhite
 };

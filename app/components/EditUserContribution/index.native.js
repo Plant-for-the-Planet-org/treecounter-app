@@ -53,27 +53,25 @@ export default class EditUserContribution extends Component {
         extraScrollHeight={50}
         enableResetScrollToCoords={false}
       >
-        <CardLayout>
-          <RegisterTreeTab
-            buttonTitle={i18n.t('label.update')}
-            onRegister={this.props.onSubmit}
-            mode={this.state.mode}
-            plantProjects={this.plantProjects}
-            schemaType={
-              this.state.mode == 'single-tree'
-                ? singleTreeRegisterFormSchema
-                : multipleTreesRegisterFormSchema
-            }
-            isTpo={isTpo(this.props.currentUserProfile)}
-            schemaOptions={
-              this.state.mode == 'single-tree'
-                ? schemaOptionsSingleTree
-                : schemaOptionsMultipleTrees
-            }
-            value={this.props.userContribution}
-            isEdit
-          />
-        </CardLayout>
+        <RegisterTreeTab
+          buttonTitle={i18n.t('label.update')}
+          onRegister={this.props.onSubmit}
+          mode={this.state.mode}
+          plantProjects={this.plantProjects}
+          schemaType={
+            this.state.mode == 'single-tree'
+              ? singleTreeRegisterFormSchema
+              : multipleTreesRegisterFormSchema
+          }
+          isTpo={isTpo(this.props.currentUserProfile)}
+          schemaOptions={
+            this.state.mode == 'single-tree'
+              ? schemaOptionsSingleTree
+              : schemaOptionsMultipleTrees
+          }
+          value={this.props.userContribution}
+          isEdit
+        />
       </KeyboardAwareScrollView>
     );
   }

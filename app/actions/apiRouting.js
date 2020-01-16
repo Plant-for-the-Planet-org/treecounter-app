@@ -8,6 +8,7 @@ Routing.setRoutingData(routes);
 export const getApiRoute = async (routeName, params) => {
   const { scheme, host, base: baseUrl } = context;
   let locale = await getLocale();
+  console.log('-------------------- Api calling with ', locale);
   const serverName = `${scheme}://${host}`;
   params =
     'api_login_check' === routeName

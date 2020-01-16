@@ -113,7 +113,6 @@ import lightTree from './images/lightTree.png';
 import targetPlanted from './images/target.png';
 import info from './images/icons/info.png';
 import editProfile from './images/icons/edit_profile.png';
-import welcomeLogo from './images/icons/welcomeLogo.png';
 import world_outline from './images/icons/world_outline.png';
 import world_outline_red from './images/icons/world_outline_red.png';
 import selector_menu from './images/icons/selector_menu.png';
@@ -165,8 +164,12 @@ import welcomeScreen5 from './images/welcomeScreen5.png';
 import backArrow from './images/icons/backArrow.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
-import eye from './images/eye.png';
-import closeeye from './images/closeeye.png';
+import FAQsCover from './images/FAQs.png';
+import countriesleaderboard from './images/countriesleaderboard.png';
+import schooldleaderboard from './images/schooldleaderboard.png';
+import tpoleaderboard from './images/tpoleaderboard.png';
+import individualsleaderboard from './images/individualsleaderboard.png';
+import companiesleaderboard from './images/companiesleaderboard.png';
 
 export {
   treelogo,
@@ -286,7 +289,6 @@ export {
   targetPlanted,
   info,
   editProfile,
-  welcomeLogo,
   world_outline,
   world_outline_red,
   selector_menu,
@@ -335,7 +337,11 @@ export {
   outline_email,
   readmoreUp,
   readmoreDown,
-  eye,
-  closeeye,
   deleteOutlineWhite,
+  FAQsCover,
+  countriesleaderboard,
+  schooldleaderboard,
+  tpoleaderboard,
+  individualsleaderboard,
+  companiesleaderboard
 };

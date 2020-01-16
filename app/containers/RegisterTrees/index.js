@@ -35,7 +35,11 @@ class RegisterTreesContainer extends PureComponent {
       value = mergeContributionImages(value);
 
       if (plantProject) {
-        value.plantProject = plantProject;
+        // needs to change an immutable struct
+        value = {
+          ...value,
+          plantProject
+        };
       }
       this.props
         .registerTree(

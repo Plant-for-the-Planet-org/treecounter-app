@@ -32,43 +32,55 @@ export function registerTree(
     )
       .then(res => {
         console.log('resp===>', res);
-        const { statusText } = res;
-        const { merge } = res.data;
-        if (merge) {
-          merge.contribution &&
-            dispatch(
-              mergeEntities(
-                normalize(merge.contribution[0], contributionSchema)
-              )
-            );
-          merge.treecounter &&
-            dispatch(
-              mergeEntities(normalize(merge.treecounter[0], treecounterSchema))
-            );
-          merge.plantProject &&
-            dispatch(
-              mergeEntities(
-                normalize(merge.plantProject[0], plantProjectSchema)
-              )
-            );
-          // TODO: how to interpret these data in the response?
-          // merge.competitionEnrollment &&
-          // dispatch(
-          //   mergeEntities(normalize(merge.competitionEnrollment[0], [ competitionEnrollmentSchema]))
-          // );
-          // merge.competition &&
-          // dispatch(
-          //   mergeEntities(normalize(merge.competition[0], [competitionSchema]))
-          // );
+        if (res) {
+          console.log('response==>', res);
+
+          const { statusText } = res;
+          const { merge } = res.data;
+          if (merge) {
+            merge.contribution &&
+              dispatch(
+                mergeEntities(
+                  normalize(merge.contribution[0], contributionSchema)
+                )
+              );
+            merge.treecounter &&
+              dispatch(
+                mergeEntities(
+                  normalize(merge.treecounter[0], treecounterSchema)
+                )
+              );
+            merge.plantProject &&
+              dispatch(
+                mergeEntities(
+                  normalize(merge.plantProject[0], plantProjectSchema)
+                )
+              );
+            // TODO: how to interpret these data in the response?
+            // merge.competitionEnrollment &&
+            // dispatch(
+            //   mergeEntities(normalize(merge.competitionEnrollment[0], [ competitionEnrollmentSchema]))
+            // );
+            // merge.competition &&
+            // dispatch(
+            //   mergeEntities(normalize(merge.competition[0], [competitionSchema]))
+            // );
+          }
+          updateRoute('app_userHome', navigation || dispatch);
+          NotificationManager.success(
+            statusText,
+            i18n.t('label.success'),
+            5000
+          );
+          return res;
         }
-        updateRoute('app_userHome', navigation || dispatch);
-        NotificationManager.success(statusText, i18n.t('label.success'), 5000);
-        return res;
       })
       .catch(error => {
-        debug(error);
+        debug(error.response);
+        console.log('Error in response', error);
+        dispatch(setProgressModelState(false));
         NotificationManager.error(
-          error.response.data.message,
+          error.response && error.response.data && error.response.data.message,
           i18n.t('label.error'),
           5000
         );

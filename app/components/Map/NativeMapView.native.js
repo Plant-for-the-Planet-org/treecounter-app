@@ -101,6 +101,15 @@ const styles = EStyleSheet.create({
     backgroundColor: '#fff',
     borderColor: '#fff'
   },
+  btnAddFullScreen: {
+    position: 'absolute',
+    bottom: 200,
+    width: 50,
+    height: 50,
+    right: 10,
+    backgroundColor: '#fff',
+    borderColor: '#fff'
+  },
   btnLocationFullScreen: {
     position: 'absolute',
     bottom: 85,
@@ -314,6 +323,8 @@ function getQueryVariable(query, variable) {
 }
 
 export function encodeFormData(mode, mapPoint) {
+  console.log('Data in polygon', mapPoint);
+
   if (!mapPoint) {
     return '';
   }
@@ -322,14 +333,28 @@ export function encodeFormData(mode, mapPoint) {
       return `geoLatitude=${mapPoint[0].coordinate.latitude}&geoLongitude=${
         mapPoint[0].coordinate.longitude
       }`;
-    } else if (mode === 'multiple-trees' && mapPoint && mapPoint.coordinates) {
-      const data = mapPoint.coordinates.map(cord => {
-        return [cord.latitude, cord.longitude];
+    } else if (
+      mode === 'multiple-trees' &&
+      Array.isArray(mapPoint) &&
+      mapPoint.length
+    ) {
+      console.log('Data in polygon', mapPoint);
+      const polygon = mapPoint.map(polygonItem => {
+        const data = polygonItem.coordinates.map(cord => {
+          console.log('cord', cord);
+          return [cord.latitude, cord.longitude];
+        });
+        return data;
       });
-      data.push(data[0]);
+      console.log('polygon', polygon);
+
+      /* const data = mapPoint.coordinates.map(cord => {
+         return [cord.latitude, cord.longitude];
+       });
+       data.push(data[0]);*/
       return {
         type: 'Polygon',
-        coordinates: [data]
+        coordinates: polygon
       };
     }
     return null;
@@ -358,17 +383,26 @@ export function decodeFormData(mode, mapPoint) {
     } else if (
       mode === 'multiple-trees' &&
       mapPoint &&
-      mapPoint.coordinates &&
+      mapPoint.length &&
       mapPoint.type === 'Polygon'
     ) {
-      const item = {};
-      item.coordinates = mapPoint.coordinates[0].map(items => {
+      /*const polygon = mapPoint.coordinates.map((items, index) => {
+        const data = items.map(item => {
+          return {
+            latitude: item[0],
+            longitude: item[1]
+          };
+        })
+
+        return data;
+      })*/
+      /*item.coordinates = mapPoint.coordinates[0].map(items => {
         return {
           latitude: items[0],
           longitude: items[1]
         };
-      });
-      return item;
+      });*/
+      return null;
     }
   }
   return mode === 'single-tree' ? [] : null;
@@ -451,6 +485,8 @@ class NativeMapView extends Component {
         }, 1000);
       }
     );
+    console.log(' nextProps.address', nextProps.address);
+    nextProps.address && this.ref && this.ref.setAddressText(nextProps.address);
 
     // }
   };
@@ -464,11 +500,12 @@ class NativeMapView extends Component {
 
   onPress(e) {
     // const isSingleTree = this.props.mode === 'single-tree';
-    if (this.props.onPress) {
+    if (!this.props.fullScreen && this.props.onPress) {
       this.props.onPress(e);
     } else if (!this.isSingleTree) {
       const { editing, creatingHole } = this.state;
       if (!editing) {
+        console.log('clicked map');
         this.setState({
           editing: {
             id: id++,
@@ -507,11 +544,19 @@ class NativeMapView extends Component {
         address
       });
     }
-    if (this.map) {
+    if (this.map && location) {
       setTimeout(() => {
-        this.map.animateToRegion(location);
+        this.map && this.map.animateToRegion(location);
       }, 1000);
     }
+  };
+  addPolygon = () => {
+    const { polygons, editing } = this.state;
+    this.setState({
+      polygons: [...polygons, editing],
+      editing: null,
+      creatingHole: false
+    });
   };
   onRegionChange = region => {
     if (this.props.fullScreen && this.isSingleTree) {
@@ -564,6 +609,7 @@ class NativeMapView extends Component {
     }
     const screen = Dimensions.get('window');
     const mapPaddingTop = screen.height * 0.1;
+
     const setMapPadding = () => {
       const iosEdgePadding = {
         top: mapPaddingTop * 0.5,
@@ -625,13 +671,14 @@ class NativeMapView extends Component {
             coordinates={editing.coordinates}
             holes={editing.holes}
             strokeColor="#000"
-            fillColor="rgba(255,0,0,0.5)"
+            fillColor="rgba(255,2420,8,0.5)"
             strokeWidth={1}
             tappable
           />
         )}
 
         {!this.props.fullScreen &&
+          this.props.mode === 'single-tree' &&
           this.state.markers.map(marker => (
             <Marker
               // image={markerImage}
@@ -934,8 +981,21 @@ class NativeMapView extends Component {
           !this.isSingleTree && (
             <RoundedButton
               buttonStyle={
+                fullScreen ? styles.btnAddFullScreen : styles.btnLocation
+              }
+              textStyle={{ marginRight: 0 }}
+              onClick={this.addPolygon}
+            >
+              <Icon name="plus" size={fullScreen ? 24 : 18} color="#000000" />
+            </RoundedButton>
+          )}
+        {!!(this.state.markers.length || this.state.editing) &&
+          !this.isSingleTree && (
+            <RoundedButton
+              buttonStyle={
                 fullScreen ? styles.btnDeleteFullScreen : styles.btnLocation
               }
+              textStyle={{ marginRight: 0 }}
               onClick={this.removeData}
             >
               <Icon name="delete" size={fullScreen ? 24 : 18} color="#000000" />
@@ -972,7 +1032,7 @@ class NativeMapView extends Component {
                       : `geoLatitude=${
                           this.state.region.latitude
                         }&geoLongitude=${this.state.region.longitude}`,
-                    encodeFormData(mode, this.state.editing),
+                    encodeFormData(mode, this.state.polygons),
                     mode,
                     this.state.address
                   );

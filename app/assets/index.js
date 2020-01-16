@@ -337,11 +337,10 @@ export {
   outline_email,
   readmoreUp,
   readmoreDown,
-  deleteOutlineWhite,
   FAQsCover,
   countriesleaderboard,
   schooldleaderboard,
   tpoleaderboard,
   individualsleaderboard,
-  companiesleaderboard
+  deleteOutlineWhite
 };

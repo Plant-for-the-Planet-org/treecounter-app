@@ -406,7 +406,10 @@ class ContributionCard extends React.Component {
             onPress={() => {
               this.props.navigation.navigate('delete_contribution', {
                 deleteContribution: () =>
-                  this.props.deleteContribution(contribution.id)
+                  this.props.deleteContribution(
+                    contribution.id,
+                    this.props.navigation
+                  )
               });
             }}
           >

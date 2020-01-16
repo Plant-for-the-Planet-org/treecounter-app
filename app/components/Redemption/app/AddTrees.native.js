@@ -101,7 +101,11 @@ export default function AddTrees(props) {
           )}
         </ScrollView>
         <TouchableOpacity
-          style={buttonStyles.actionButtonTouchable}
+          style={[
+            buttonStyles.actionButtonTouchable,
+            { alignSelf: 'center', paddingHorizontal: 24 },
+            Platform.OS === 'ios' ? { bottom: '14%' } : null
+          ]}
           onPress={() => redeemCode()}
         >
           <View style={buttonStyles.actionButtonView}>

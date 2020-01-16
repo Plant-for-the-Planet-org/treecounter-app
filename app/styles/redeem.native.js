@@ -1,7 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 const height = Dimensions.get('window').height;
-// const width = Dimensions.get('window').width
+const width = Dimensions.get('window').width;
 export default EStyleSheet.create({
   safeAreaViewContainer: { flex: 1, backgroundColor: 'white' },
   mainContainer: { flex: 1 },
@@ -22,7 +22,9 @@ export default EStyleSheet.create({
   formScrollView: {
     padding: 24,
     marginTop: 50,
-    minHeight: height * 0.94
+    paddingBottom: 240
+    // borderWidth: 1
+    // minHeight: height * 0.94
   },
   cardContainer: {
     flexDirection: 'column',
@@ -39,26 +41,31 @@ export default EStyleSheet.create({
     padding: 20
   },
   mainTitle: {
-    fontSize: 27,
-    lineHeight: 40,
+    // fontSize: 27,
+    // lineHeight: 40,
+    fontSize: height * 0.032,
+    lineHeight: height * 0.032 * 1.375,
     fontFamily: 'OpenSans-Bold',
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153'
   },
   titleText: {
-    fontSize: 18,
+    // fontSize: 18,
     fontFamily: 'OpenSans-SemiBold',
-    lineHeight: 24,
+    // lineHeight: 24,
+    fontSize: height * 0.0264,
+    lineHeight: height * 0.0264 * 1.375,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
     marginTop: 7
   },
   imageStyle: {
-    width: 320,
-    height: 174,
-    marginTop: 42
+    width: width * 0.889,
+    height: height * 0.235,
+    marginTop: 42,
+    alignSelf: 'center'
   },
   imageLoginStyle: {
     width: 50,

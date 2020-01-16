@@ -30,7 +30,19 @@ class TpoDonationPlantProjectSelector extends React.Component {
 
     this.state = { currentPlantProjectId: defaultPlantProjectId };
   }
+  componentWillReceiveProps(nextProps) {
+    console.log('got in receive props', nextProps);
+    if (nextProps.plantProjects && nextProps.plantProjects.length) {
+      let defaultPlantProjectId = nextProps.defaultPlantProjectId;
+      if (Array.isArray(nextProps.plantProjects)) {
+        if (null === defaultPlantProjectId) {
+          defaultPlantProjectId = nextProps.plantProjects.find(() => true).id;
+        }
+      }
 
+      this.setState({ currentPlantProjectId: defaultPlantProjectId });
+    }
+  }
   onCarouselChange(newPlantProjectId) {
     this.setState({ currentPlantProjectId: newPlantProjectId });
   }

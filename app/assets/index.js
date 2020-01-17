@@ -342,5 +342,6 @@ export {
   schooldleaderboard,
   tpoleaderboard,
   individualsleaderboard,
-  deleteOutlineWhite
+  deleteOutlineWhite,
+  companiesleaderboard
 };

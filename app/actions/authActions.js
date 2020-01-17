@@ -6,7 +6,6 @@ import { clearStorage } from '../stores/localStorage';
 import { postRequest, postActivateLinkRequest } from '../utils/api';
 import { updateJWT, updateActivateToken } from '../utils/user';
 import { NotificationAction } from './notificationAction';
-import { loadTpos } from './loadTposAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import i18n from '../locales/i18n.js';
@@ -69,7 +68,6 @@ export function logoutUser() {
   return dispatch => {
     clearStorage();
     dispatch(userLogout());
-    dispatch(loadTpos());
   };
 }
 

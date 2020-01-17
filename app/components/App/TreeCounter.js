@@ -444,7 +444,6 @@ TreeCounter.propTypes = {
   userProfile: PropTypes.object,
   loadUserProfile: PropTypes.func,
   NotificationAction: PropTypes.func,
-  loadTpos: PropTypes.func,
   dispatch: PropTypes.func,
   fetchpledgeEventsAction: PropTypes.func
 };

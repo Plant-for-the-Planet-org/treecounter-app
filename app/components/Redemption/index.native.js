@@ -11,17 +11,17 @@ import {
   Animated,
   Keyboard,
   ActivityIndicator,
-  SafeAreaView,
   Platform
 } from 'react-native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
-import HeaderAnimated from './../Header/HeaderAnimated.native';
+import HeaderNew from './../Header/HeaderNew.native';
 // import { SafeAreaView } from 'react-navigation';
 import { Formik } from 'formik';
 import buttonStyles from '../../styles/common/button.native';
-
+import { Dimensions } from 'react-native';
+const height = Dimensions.get('window').height;
 export default function Redemption(props) {
   const [scrollY] = React.useState(new Animated.Value(0));
 
@@ -60,13 +60,9 @@ export default function Redemption(props) {
   const white = '#ffffff';
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <View style={styles.mainContainer}>
       {/* <View style={styles.mainContainer}> */}
-      <HeaderAnimated
-        navigation={props.navigation}
-        title={''}
-        scrollY={scrollY}
-      />
+      <HeaderNew title={''} navigation={props.navigation} />
       <Formik
         initialValues={{
           code: code
@@ -172,7 +168,11 @@ export default function Redemption(props) {
                 style={[
                   buttonStyles.actionButtonTouchable,
                   { alignSelf: 'center', paddingHorizontal: 24 },
-                  Platform.OS === 'ios' ? { bottom: '14%' } : null
+                  Platform.OS === 'ios'
+                    ? height < 500
+                      ? { bottom: '14%' }
+                      : { bottom: '6%' }
+                    : null
                 ]}
                 onPress={props.handleSubmit}
               >
@@ -211,7 +211,7 @@ export default function Redemption(props) {
         )}
       </Formik>
       {/* </View> */}
-    </SafeAreaView>
+    </View>
   );
 }
 

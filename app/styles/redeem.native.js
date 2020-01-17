@@ -21,7 +21,7 @@ export default EStyleSheet.create({
   },
   formScrollView: {
     padding: 24,
-    marginTop: 50,
+    marginTop: 80,
     paddingBottom: 240
     // borderWidth: 1
     // minHeight: height * 0.94
@@ -43,8 +43,8 @@ export default EStyleSheet.create({
   mainTitle: {
     // fontSize: 27,
     // lineHeight: 40,
-    fontSize: height * 0.032,
-    lineHeight: height * 0.032 * 1.375,
+    fontSize: height < 500 ? height * 0.032 : 27,
+    lineHeight: height < 500 ? height * 0.032 * 1.375 : 40,
     fontFamily: 'OpenSans-Bold',
     letterSpacing: 0,
     textAlign: 'left',
@@ -54,8 +54,8 @@ export default EStyleSheet.create({
     // fontSize: 18,
     fontFamily: 'OpenSans-SemiBold',
     // lineHeight: 24,
-    fontSize: height * 0.0264,
-    lineHeight: height * 0.0264 * 1.375,
+    fontSize: height < 500 ? height * 0.0264 : 18,
+    lineHeight: height < 500 ? height * 0.0264 * 1.375 : 24,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',

@@ -83,7 +83,7 @@ export default class RegisterTrees extends Component {
     );
   };
 
-  _renderScene = ({ route }) => {
+  _renderScene = () => {
     const plantProjects = getPlantProjectEnum(
       this.props.currentUserProfile,
       this.props.plantProjects

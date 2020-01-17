@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  Modal,
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  Alert
-} from 'react-native';
+import { Modal, View, Text, TouchableWithoutFeedback } from 'react-native';
 import styles from '../../../styles/popup/popup.native';
 import PropTypes from 'prop-types';
-import { isIOS, isAndroid } from '../../../utils/utils';
 
 const PopupNative = props => {
   return (

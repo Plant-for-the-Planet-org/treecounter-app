@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
-import CardLayout from '../Common/Card';
 import {
   singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,

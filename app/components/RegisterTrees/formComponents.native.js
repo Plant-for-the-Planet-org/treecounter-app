@@ -44,7 +44,12 @@ export const FormikFormTree = props => {
     },
     [props.geometry]
   );
-  useEffect(() => {}, [props]);
+  useEffect(
+    () => {
+      setInitValue(props.initialValues);
+    },
+    [props]
+  );
   useEffect(
     () => {
       setGeoLocation(props.geoLocation);

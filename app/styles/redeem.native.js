@@ -62,8 +62,8 @@ export default EStyleSheet.create({
     marginTop: 7
   },
   imageStyle: {
-    width: width * 0.889,
-    height: height * 0.235,
+    width: height > 600 ? width * 0.889 : width * 0.889 * 0.75,
+    height: height > 600 ? height * 0.235 : height * 0.235 * 0.75,
     marginTop: 42,
     alignSelf: 'center'
   },

@@ -56,9 +56,11 @@ class UserContributionsDetails extends React.Component {
       // isSinglePlanted = treeCount > 1 ? false : true;
     } else if (contributionType === 'donation') {
       if (plantProjects.length > 0) {
-        selectedPlantProjectDetails = plantProjects.filter(
-          project => project.id === plantProjectId
-        );
+        for (let i = 0; i <= plantProjects.length; ) {
+          if (plantProjects[i].id === plantProjectId) {
+            selectedPlantProjectDetails = plantProjects[i];
+          }
+        }
         if (selectedPlantProjectDetails.length > 0) {
           selectedPlantProjectDetails = selectedPlantProjectDetails[0];
           contributionOrPlantedImages =
@@ -67,7 +69,7 @@ class UserContributionsDetails extends React.Component {
         }
       }
 
-      contributionTypeText = i18n.t('label.donation_contribution');
+      contributionTypeText = i18n.t('label.donated');
       if (plantProjectName) {
         location = `${plantProjectName} by ${tpoName ? tpoName : ''}`;
       }
@@ -75,16 +77,16 @@ class UserContributionsDetails extends React.Component {
 
     if (givee) {
       if (isGift) {
-        dedicatedTo = i18n.t('label.label.gifted_to_person', { person: givee });
-        contributionTypeText = i18n.t('label.usr_contribution_dedicate');
+        dedicatedTo = i18n.t('label.gifted_to_person', { person: givee });
+        contributionTypeText = i18n.t('label.gifted');
       } else {
-        dedicatedTo = i18n.t('label.dedicated_to_person', { person: givee });
+        dedicatedTo = i18n.t('label.gifted_to_person', { person: givee });
       }
     }
 
     if (isGift && giver) {
-      contributionTypeText = i18n.t('label.gift');
-      dedicatedTo = i18n.t('label.label.gifted_from_person', { person: givee });
+      contributionTypeText = i18n.t('label.received');
+      dedicatedTo = i18n.t('label.gifted_from_person', { person: givee });
     }
     if (redemptionCode && givee) {
       plantedDate = formatDate(redemptionDate);
@@ -122,32 +124,24 @@ class UserContributionsDetails extends React.Component {
 
         {contributionOrPlantedImages &&
           contributionOrPlantedImages.length > 0 && (
-            <></>
-            // <PlantProjectImageCarousel
-            //   images={contributionOrPlantedImages}
-            //   pictureType={
-            //     contributionType == 'planting' ? 'contribution' : undefined
-            //   }
-            // />
-
-            // <ScrollView
-            //   horizontal
-            //   showsHorizontalScrollIndicator={false}
-            //   style={{
-            //     display: 'flex',
-            //     flexDirection: 'row',
-            //     marginVertical: 30
-            //   }}
-            // >
-            // {/* {videoUrl ? <VideoContainer url={videoUrl} /> : null} */}
-            // {/* TODO Add thumbnail for video */}
-            //   <PlantProjectImageCarousel
-            //     resizeMode={'cover'}
-            //     images={contributionOrPlantedImages}
-            //     aspectRatio={16 / 9}
-            //     // videoUrl={videoUrl}
-            //   />
-            // </ScrollView>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                marginVertical: 30
+              }}
+            >
+              {/* {videoUrl ? <VideoContainer url={videoUrl} /> : null} */}
+              {/* TODO Add thumbnail for video */}
+              <PlantProjectImageCarousel
+                resizeMode={'cover'}
+                images={contributionOrPlantedImages}
+                aspectRatio={16 / 9}
+                // videoUrl={videoUrl}
+              />
+            </ScrollView>
           )}
         {hasMeasurements ? (
           <View style={{ marginHorizontal: 20, marginTop: 30 }}>

@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Animated,
   ActivityIndicator,
-  ScrollView
+  ScrollView,
+  Platform
 } from 'react-native';
 import HeaderNew from './../../Header/HeaderNew.native';
 import { SafeAreaView } from 'react-navigation';

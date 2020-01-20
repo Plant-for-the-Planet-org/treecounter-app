@@ -7,7 +7,7 @@ import countryCodes from '../assets/countryCodes.json';
 import supportedCurrency from '../assets/supportedCurrency.json';
 import { find } from 'lodash';
 import { setCurrencyAction } from './globalCurrency';
-import { setCdnMedia, getCdnMedia } from '../reducers/configReducer';
+import { setCdnMedia } from '../reducers/configReducer';
 let cdnMedia = {};
 export function fetchLocation() {
   return dispatch => {

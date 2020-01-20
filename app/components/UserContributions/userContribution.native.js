@@ -10,7 +10,7 @@ import ShareIcon from '../../assets/images/share.png';
 import ArrowRight from '../../assets/images/arrow-right.png';
 import CalendarIcon from '../../assets/images/green-calendar.png';
 import TreeIcon from '../../assets/images/green-tree.png';
-import { grayShareIcon } from '../../assets';
+import { grayShareIcon, closeIcon } from '../../assets';
 import i18n from '../../locales/i18n.js';
 
 export default class UserContributions extends React.Component {
@@ -30,24 +30,39 @@ export default class UserContributions extends React.Component {
       dedicatedTo,
       plantedDate,
       contributionTypeText,
+      contributerPrefix,
+      contributer,
       showDelete,
       mayUpdate
     } = props;
 
-    console.log('user contribution props', props);
+    console.log('\x1b[45mcontributer \n', contributerPrefix, contributer);
+    console.log('\x1b[0m');
 
     return (
       <View style={styles.container}>
+        <View style={styles.mapView}>
+          <TouchableOpacity
+            onPress={props.onClickClose}
+            style={[styles.button, styles.closeIcon]}
+          >
+            <View style={styles.closeContainer}>
+              <Image style={{ width: 16, height: 16 }} source={closeIcon} />
+            </View>
+          </TouchableOpacity>
+          <View style={styles.dateContainer}>
+            <Text style={styles.plantedDate}>{plantedDate}</Text>
+          </View>
+        </View>
         <View style={styles.header}>
           {treeCount && treeCount > 0 ? (
             <Text style={styles.treeCount}>
               {treeCount > 1
-                ? `${treeCount} ${i18n.t('label.usr_contribution_tree')}`
+                ? `${treeCount} ${i18n.t('label.usr_contribution_tree')} `
                 : `${treeCount} ${i18n.t(
                     'label.usr_contribution_single_tree'
-                  )}`}
-              {contributionTypeText === 'Donation' &&
-                ` ${i18n.t('label.donated')}`}
+                  )} `}
+              {contributionTypeText}
             </Text>
           ) : null}
           <View style={{ flexDirection: 'row' }}>
@@ -73,16 +88,19 @@ export default class UserContributions extends React.Component {
           </View>
         </View>
         <View style={styles.subHeadContainer}>
-          <Text style={styles.subHeaderText}>
-            {contributionTypeText === 'Donation' &&
-              `${i18n.t('label.planted_at')}`}
-            <Text style={{ color: '#87B738' }}>
-              {contributionTypeText === 'Donation' && `${location}`}
+          {contributerPrefix &&
+            contributer && (
+              <Text style={styles.subHeaderText}>
+                {contributerPrefix}
+                <Text style={{ color: '#87B738' }}> {contributer}</Text>
+              </Text>
+            )}
+          {location && (
+            <Text style={styles.subHeaderText}>
+              {i18n.t('label.planted_at')}
+              <Text style={{ color: '#87B738' }}>{location}</Text>
             </Text>
-          </Text>
-          <Text
-            style={[styles.subHeaderText, styles.italic]}
-          >{`{{ Genius }}`}</Text>
+          )}
         </View>
 
         {/* <View style={{ flex: 2 }}>

@@ -167,6 +167,9 @@ import outline_email from './images/icons/outline_email.png';
 import grayCalendar from './images/grayCalendar.png';
 import upArrow from './images/icons/up_arrow.png';
 import grayShareIcon from './images/icons/gray_share_icon.png';
+import closeIcon from './images/icons/close.png';
+import downloadGreen from './images/icons/download_green.png';
+import sendWhite from './images/icons/send_white.png';
 
 export {
   treelogo,
@@ -337,5 +340,8 @@ export {
   readmoreDown,
   grayCalendar,
   upArrow,
-  grayShareIcon
+  grayShareIcon,
+  closeIcon,
+  downloadGreen,
+  sendWhite
 };

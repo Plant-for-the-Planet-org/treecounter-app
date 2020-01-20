@@ -1,11 +1,14 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
 
 export default EStyleSheet.create({
   container: {
-    paddingHorizontal: 20,
-    paddingTop: 23
+    // paddingHorizontal: 20,
+    // paddingTop: 23
   },
   header: {
+    paddingHorizontal: 20,
+    paddingTop: 23,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
@@ -21,7 +24,40 @@ export default EStyleSheet.create({
   italic: {
     fontStyle: 'italic'
   },
-
+  mapView: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height * 2 / 5,
+    position: 'relative',
+    backgroundColor: '#c2c2c2'
+  },
+  closeIcon: {
+    position: 'absolute',
+    top: 30,
+    left: 14
+  },
+  dateContainer: {
+    position: 'absolute',
+    left: 20,
+    bottom: -14,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    backgroundColor: '#ffffff',
+    borderRadius: 100,
+    borderColor: '#D5D5D5',
+    borderWidth: 1
+  },
+  closeContainer: {
+    width: 30,
+    height: 30,
+    backgroundColor: '#ffffff',
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  plantedDate: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14
+  },
   icon: {
     width: 24,
     height: 24
@@ -50,9 +86,36 @@ export default EStyleSheet.create({
     flex: 1,
     justifyContent: 'space-between'
   },
-  button: {
-    // alignItems: 'center'
-    // flex: 1
+  buttonGroup: {
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    borderRadius: 100,
+    padding: 14,
+    width: Dimensions.get('window').width * 42 / 100
+  },
+  borderGreen: {
+    borderWidth: 1,
+    borderColor: '#89B53A'
+  },
+  borderedButtonText: {
+    fontFamily: 'OpenSans-SemiBold',
+    color: '#89B53A',
+    fontSize: 16,
+    marginLeft: 10
+  },
+  bgGreen: {
+    backgroundColor: '#89B53A'
+  },
+  bgButtonText: {
+    fontFamily: 'OpenSans-SemiBold',
+    color: '#fff',
+    fontSize: 16,
+    marginLeft: 10
   },
   plantedButtonWrapper: {
     alignItems: 'center',

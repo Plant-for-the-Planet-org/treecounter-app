@@ -9,6 +9,9 @@ import { currentUserProfileIdSelector } from '../../selectors/index';
 import { deleteContribution } from '../../actions/EditMyTree';
 
 class UserContributionsDetailsContainer extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
   getContribution(props = this.props) {
     let contribution = null;
     if (props.match) {

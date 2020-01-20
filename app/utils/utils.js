@@ -65,6 +65,23 @@ export function formatDate(date, style = 'dd MMM yyyy', locale) {
   }
 }
 
+export function formatDateForContribution(
+  date,
+  style = 'MMMM d,  yyyy',
+  locale
+) {
+  locale = locale || getLocale();
+  //console.log('formatDate', date, style, locale);
+
+  if (date) {
+    return format(parseISO(date), style, {
+      locale: localeObjects[locale]
+    });
+  } else {
+    return '';
+  }
+}
+
 function getMobileOperatingSystem() {
   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 

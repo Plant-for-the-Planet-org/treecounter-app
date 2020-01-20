@@ -47,8 +47,10 @@
   "usr_contribution_planted": "Planted",
   "usr_contribution_redeemed": "Redeemed",
   "usr_contribution_dedicate": "Dedicated",
-  "gifted_from_person": "Gift from {{person}}",
-  "gifted_to_person": "Gift to {{person}} ",
+  "usr_contribution_from": "From",
+  "usr_contribution_to": "To",
+  "gifted_from_person": "From {{person}}",
+  "gifted_to_person": "To {{person}} ",
   "donated": "Donated",
   "received": "Received",
   "gifted": "Gifted"

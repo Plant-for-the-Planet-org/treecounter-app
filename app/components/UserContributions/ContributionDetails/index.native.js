@@ -1,14 +1,16 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, TouchableOpacity, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
 import Measurements from '../../Measurements/Measurements.native';
-import { formatDate } from '../../../utils/utils';
+import { formatDateForContribution } from '../../../utils/utils';
 import i18n from '../../../locales/i18n.js';
 import { withNavigation } from 'react-navigation';
 import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
 import { getLocalRoute } from '../../../actions/apiRouting';
+import { downloadGreen, sendWhite } from '../../../assets';
+import styles from '../../../styles/newUserContributions/userContributions';
 
 class UserContributionsDetails extends React.Component {
   render() {
@@ -25,6 +27,7 @@ class UserContributionsDetails extends React.Component {
       givee,
       // eslint-disable-next-line no-unused-vars
       giveeSlug,
+      cardType,
       contributionType,
       plantProjectId,
       isGift,
@@ -37,24 +40,29 @@ class UserContributionsDetails extends React.Component {
       contributionImages
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
-    console.log('contributions', contributionImages);
+
+    console.log('\x1b[45mthis.props.contribution \n', this.props.contribution);
+    console.log('\x1b[0m');
 
     let plantedDate = undefined;
     let dedicatedTo = undefined;
     let contributionTypeText = undefined;
     let location = undefined;
+    let contributerPrefix = undefined;
+    let contributer = undefined;
     // let isSinglePlanted = false;
     let contributionOrPlantedImages = contributionImages;
     let selectedPlantProjectDetails = undefined;
 
     if (plantDate) {
-      plantedDate = formatDate(plantDate);
+      plantedDate = formatDateForContribution(plantDate);
     }
-    if (contributionType === 'planting') {
-      contributionTypeText = i18n.t('label.usr_contribution_planted');
+    if (cardType === 'planting') {
+      // contributionTypeText = i18n.t('label.usr_contribution_planted');
+      contributionTypeText = '';
       // TODO: check if this is a logic error, as this var is never used!
       // isSinglePlanted = treeCount > 1 ? false : true;
-    } else if (contributionType === 'donation') {
+    } else if (cardType === 'donation') {
       if (plantProjects.length > 0) {
         for (let i = 0; i <= plantProjects.length; ) {
           if (plantProjects[i].id === plantProjectId) {
@@ -71,27 +79,36 @@ class UserContributionsDetails extends React.Component {
 
       contributionTypeText = i18n.t('label.donated');
       if (plantProjectName) {
-        location = `${plantProjectName} by ${tpoName ? tpoName : ''}`;
+        // location = `${plantProjectName} by ${tpoName ? tpoName : ''}`;
+        location = plantProjectName;
       }
+    } else if (cardType === 'gift') {
+      if (plantProjectName) {
+        location = plantProjectName;
+      }
+      contributionTypeText = i18n.t('label.received');
+      contributerPrefix = i18n.t('label.usr_contribution_from');
+      contributer = giver;
     }
 
     if (givee) {
+      contributerPrefix = i18n.t('label.usr_contribution_to');
+      contributer = givee;
       if (isGift) {
-        dedicatedTo = i18n.t('label.gifted_to_person', { person: givee });
+        // dedicatedTo = i18n.t('label.usr_contribution_from');
         contributionTypeText = i18n.t('label.gifted');
-      } else {
-        dedicatedTo = i18n.t('label.gifted_to_person', { person: givee });
       }
     }
 
     if (isGift && giver) {
+      contributer = giver;
       contributionTypeText = i18n.t('label.received');
-      dedicatedTo = i18n.t('label.gifted_from_person', { person: givee });
+      contributerPrefix = i18n.t('label.usr_contribution_from');
     }
     if (redemptionCode && givee) {
-      plantedDate = formatDate(redemptionDate);
+      plantedDate = formatDateForContribution(redemptionDate);
       if (plantProjectName) {
-        location = `${plantProjectName} by ${tpoName ? tpoName : ''}`;
+        location = plantProjectName;
       }
       contributionTypeText = i18n.t('label.usr_contribution_redeemed');
     }
@@ -104,7 +121,8 @@ class UserContributionsDetails extends React.Component {
           mayUpdate={mayUpdate}
           treeCount={treeCount}
           location={location}
-          dedicatedTo={dedicatedTo}
+          contributerPrefix={contributerPrefix}
+          contributer={contributer}
           plantedDate={plantedDate}
           showDelete={contributionType == 'planting'}
           contributionTypeText={contributionTypeText}
@@ -120,6 +138,9 @@ class UserContributionsDetails extends React.Component {
               contribution: this.props.contribution
             });
           }}
+          onClickClose={() => {
+            this.props.navigation.goBack();
+          }}
         />
 
         {contributionOrPlantedImages &&
@@ -130,7 +151,8 @@ class UserContributionsDetails extends React.Component {
               style={{
                 display: 'flex',
                 flexDirection: 'row',
-                marginVertical: 30
+                marginVertical: 30,
+                borderWidth: 1
               }}
             >
               {/* {videoUrl ? <VideoContainer url={videoUrl} /> : null} */}
@@ -150,6 +172,27 @@ class UserContributionsDetails extends React.Component {
             />
           </View>
         ) : null}
+
+        <View style={styles.buttonGroup}>
+          <TouchableOpacity onPress={() => {}} style={{}}>
+            <View style={[styles.buttonContainer, styles.borderGreen]}>
+              <Image style={{ width: 16, height: 16 }} source={downloadGreen} />
+              <Text style={styles.borderedButtonText}>Certificate</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}} style={{}}>
+            <View
+              style={[
+                styles.buttonContainer,
+                styles.bgGreen,
+                styles.borderGreen
+              ]}
+            >
+              <Image style={{ width: 16, height: 16 }} source={sendWhite} />
+              <Text style={styles.bgButtonText}>Share</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
 
         {ndviUid ? (
           <View style={{ marginLeft: 8, marginRight: 8, marginTop: 20 }}>

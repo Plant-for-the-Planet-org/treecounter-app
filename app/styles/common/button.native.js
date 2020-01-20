@@ -12,7 +12,7 @@ const Layout = {
 export default EStyleSheet.create({
   buttonContainer: {
     marginTop: 0,
-    marginBottom: 150,
+    marginBottom: 150
   },
   primaryButton: {
     height: 50,
@@ -105,10 +105,10 @@ export default EStyleSheet.create({
     width: 30
   },
   actionButtonTouchable: {
-    width: '88%',
-    marginLeft: '6%',
+    width: '100%',
     position: 'absolute',
-    top: '86%'
+    bottom: '6%'
+    // paddingHorizontal: 24
   },
   actionButtonTouchableFullScreen: {
     width: '88%',
@@ -125,8 +125,8 @@ export default EStyleSheet.create({
   disabledButtonView: {
     borderRadius: 100,
     backgroundColor: '#89b53a',
-    opacity:0.5,
-    color:'white',
+    opacity: 0.5,
+    color: 'white',
     height: 52,
     justifyContent: 'center'
   },

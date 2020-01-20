@@ -25,7 +25,7 @@ class App extends Component {
         forceInset={{ top: 'never', bottom: 'always' }}
         style={{ flex: 1, backgroundColor: backgroundColor }}
       >
-        <AppDrawerNavigatorContainer />
+        <AppDrawerNavigatorContainer uriPrefix={'weplant://'} />
       </SafeAreaView>
     );
   }

@@ -162,6 +162,7 @@ import Projects from './images/projects.jpg';
 import WelcomeImage3 from './images/welcome_screen_3_image.jpg';
 import welcomeScreen5 from './images/welcomeScreen5.png';
 import backArrow from './images/icons/backArrow.png';
+import redeemImage from './images/redeemImage.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
 import FAQsCover from './images/FAQs.png';
@@ -191,6 +192,7 @@ export {
   payment_bank,
   payment_credit,
   payment_paypal,
+  redeemImage,
   payment_sepa,
   MapPinBlue,
   MapPinGreen,

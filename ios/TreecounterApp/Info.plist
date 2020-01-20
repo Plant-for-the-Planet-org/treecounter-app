@@ -26,10 +26,20 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>payments</string>
+			<string>trilliontreecampaign</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>trilliontreecampaign</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>weplant</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>weplant</string>
 			</array>
 		</dict>
 	</array>

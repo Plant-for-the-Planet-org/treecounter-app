@@ -1,258 +1,224 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import LoadingIndicator from '../Common/LoadingIndicator';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
-import TouchableItem from '../../components/Common/TouchableItem';
-import {
-  redeemSignIn,
-  redeemRed,
-  redeemGreen,
-  close_green
-} from '../../assets';
+import { redeemImage, forward } from '../../assets';
 import styles from '../../styles/redeem';
-import { View, Image, TextInput, Text } from 'react-native';
-import { updateRoute } from '../../helpers/routerHelper';
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  Animated,
+  Keyboard,
+  ActivityIndicator,
+  Platform
+} from 'react-native';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import TabContainer from '../../containers/Menu/TabContainer';
+import { TextField } from 'react-native-material-textfield';
+import HeaderNew from './../Header/HeaderNew.native';
+// import { SafeAreaView } from 'react-navigation';
+import { Formik } from 'formik';
+import buttonStyles from '../../styles/common/button.native';
+import { Dimensions } from 'react-native';
+const height = Dimensions.get('window').height;
+export default function Redemption(props) {
+  const [scrollY] = React.useState(new Animated.Value(0));
 
-export default class Redemption extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: this.props.code
-    };
-    this.onChange = this.onChange.bind(this);
-  }
-  componentWillReceiveProps(nextProps) {
-    this.setState({ value: nextProps.code });
-  }
-  onSetRedemption() {
-    if (this.state.value) {
-      this.props.setRedemptionCode(this.state.value);
-    }
-  }
-  onValidationCode() {
-    if (this.state.value) {
-      this.props.validateCode(this.state.value);
-    }
-  }
-  onChange(value) {
-    this.setState({ value: value });
-  }
-  render() {
-    let content,
-      button,
-      icon,
-      errorText,
-      successText,
-      actionText,
-      statusText,
-      form,
-      right_icon = null;
-    errorText = this.props.errorText ? (
-      <View>
-        <Text style={styles.errorTextStyle}>{this.props.errorText}</Text>
-      </View>
-    ) : null;
-    successText = this.props.successText ? (
-      <View>
-        <Text style={styles.descriptionTextStyle}>
-          {this.props.successText}
-        </Text>
-      </View>
-    ) : null;
-    actionText = this.props.actionText ? (
-      <View>
-        <Text style={styles.descriptionTextStyle}>{this.props.actionText}</Text>
-      </View>
-    ) : null;
-    statusText = this.props.statusText ? (
-      <View>
-        <Text style={styles.descriptionTextStyle}>{this.props.statusText}</Text>
-      </View>
-    ) : null;
-    content = (
-      <View>
-        {errorText}
-        {statusText}
-        {successText}
-        {actionText}
-      </View>
+  const [loadButton, setloadButton] = React.useState(false);
+  const [buttonType, setButtonType] = React.useState('validate');
+
+  const keyboardDidShow = () => {
+    setButtonType('>');
+  };
+
+  const keyboardDidHide = () => {
+    setButtonType('validate');
+  };
+
+  const type = props.type ? props.type : 'gift';
+  const code = props.code ? props.code : '';
+
+  let keyboardDidShowListener;
+  let keyboardDidHideListener;
+  React.useEffect(() => {
+    keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      keyboardDidShow
     );
-    if (
-      this.props.pageStatus === 'code-validated' &&
-      this.props.codeStatus === 'error'
-    ) {
-      button = (
-        <View style={styles.buttonStyle}>
-          <PrimaryButton onClick={() => this.onValidationCode()}>
-            {i18n.t('label.validate_code')}
-          </PrimaryButton>
-        </View>
-      );
-      icon = (
-        <Image
-          style={styles.imageStyle}
-          resizeMode="contain"
-          source={redeemRed}
-        />
-      );
-      // icon = redeemRed;
-    } else if (this.props.pageStatus === 'code-unknown') {
-      button = (
-        <View style={styles.buttonStyle}>
-          <PrimaryButton onClick={() => this.onValidationCode()}>
-            {i18n.t('label.validate_code')}
-          </PrimaryButton>
-        </View>
-      );
-      icon = (
-        <Image
-          style={styles.imageStyle}
-          resizeMode="contain"
-          source={redeemGreen}
-        />
-      );
-    } else if (this.props.pageStatus === 'not-logged-in') {
-      button = (
-        <View style={styles.loginButtons}>
-          <PrimaryButton
-            style={styles.loginButton1}
-            onClick={this.props.loginButton}
-          >
-            {i18n.t('label.login')}
-          </PrimaryButton>
-          <PrimaryButton
-            style={styles.loginButton1}
-            onClick={this.props.signupButton}
-          >
-            {i18n.t('label.signUp')}
-          </PrimaryButton>
-        </View>
-      );
-      icon = (
-        <Image
-          style={styles.imageLoginStyle}
-          resizeMode="contain"
-          source={redeemSignIn}
-        />
-      );
-    } else {
-      button = (
-        <View style={styles.buttonStyle}>
-          <PrimaryButton onClick={() => this.onSetRedemption()}>
-            {this.props.buttonText}
-          </PrimaryButton>
-        </View>
-      );
-      icon = (
-        <Image
-          style={styles.imageStyle}
-          resizeMode="contain"
-          source={redeemGreen}
-        />
-      );
-    }
+    keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      keyboardDidHide
+    );
+    // clean up
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
-    let value = this.state.value;
-    if (this.props.pageStatus !== 'success') {
-      let disabled = false;
-      if (this.props.pageStatus === 'code-unknown') {
-        disabled = false;
-      } else {
-        disabled = true;
-      }
-      const onCrossClick = () => {
-        updateRoute('app_redeem', this.props.navigation, null, {
-          code: null
-        });
-      };
-      right_icon = disabled ? (
-        <TouchableItem onPress={() => onCrossClick()}>
-          <Image style={styles.glyphiconStyle} source={close_green} />
-        </TouchableItem>
-      ) : null;
-      form = (
-        <View style={styles.redeemInputView}>
-          <TextInput
-            style={styles.inputStyle}
-            editable={!disabled}
-            value={value}
-            maxLength={20}
-            onChangeText={evt => this.onChange(evt)}
-            autoCapitalize={'sentences'}
-          />
-          {right_icon}
-        </View>
-      );
-    } else {
-      form = null;
-      button = (
-        <View className="row">
-          <PrimaryButton
-            onClick={() => updateRoute('app_myTrees', this.props.navigation)}
-          >
-            {this.props.buttonText}
-          </PrimaryButton>
-        </View>
-      );
-    }
-    // let heading;
-    // if (this.props.path === 'redeem') {
-    //   heading = i18n.t('label.redeem_trees');
-    // } else if (this.props.path === 'claim') {
-    //   heading = i18n.t('label.claim_trees');
-    // }
-    return this.props.loading ? (
-      <View style={styles.loadingContainer}>
-        <LoadingIndicator />
-      </View>
-    ) : (
-      <View style={{ flex: 1 }}>
-        <KeyboardAwareScrollView
-          contentContainerStyle={{
-            paddingBottom: 72
-          }}
-        >
-          <View style={styles.parentContainer}>
-            <CardLayout style={styles.cardContainer}>
+  const white = '#ffffff';
+
+  return (
+    <View style={styles.mainContainer}>
+      {/* <View style={styles.mainContainer}> */}
+      <HeaderNew title={''} navigation={props.navigation} />
+      <Formik
+        initialValues={{
+          code: code
+        }}
+        onSubmit={(values, actions) => {
+          setloadButton(true);
+          props
+            .validateCodeAction({
+              type: type,
+              code: values.code
+            })
+            .then(res => {
+              if (res.data.status === 'error') {
+                actions.setFieldError('code', res.data.errorText);
+                setloadButton(false);
+              } else {
+                updateStaticRoute('redeem_add_trees', props.navigation, {
+                  code: values.code,
+                  type: type,
+                  treeCount: res.data.treeCount,
+                  tpoName: res.data.tpos[0].tpoName,
+                  setRedemptionCode: props.setRedemptionCode
+                });
+                setloadButton(false);
+              }
+            });
+        }}
+        // validate={
+        //   values => {
+        //     let errors = {};
+        //     setFormError('')
+        //     props.validateCodeAction({
+        //       type: 'gift',
+        //       code: values.code
+        //     }).then(res => {
+        //       if (res.data.status === "error") {
+        //         setFormError(res.data.errorText)
+        //         console.log(res.data.errorText)
+        //       } else {
+        //         setFormError('')
+        //       }
+        //     })
+        //     errors.code = formError;
+        //     return errors;
+        //   }
+        // }
+      >
+        {props => (
+          <>
+            <KeyboardAwareScrollView
+              contentContainerStyle={styles.formScrollView}
+              keyboardDismissMode="on-drag"
+              keyboardShouldPersistTaps="always"
+              resetScrollToCoords={{ x: 0, y: 0 }}
+              scrollEnabled
+              scrollEventThrottle={16}
+              enableOnAndroid
+              onScroll={Animated.event([
+                {
+                  nativeEvent: {
+                    contentOffset: { y: scrollY }
+                  }
+                }
+              ])}
+              extraScrollHeight={12}
+            >
+              <Text style={styles.mainTitle}>
+                {i18n.t('label.redeem_trees')}
+              </Text>
               <Text style={styles.titleText}>
                 {i18n.t('label.redeem_heading')}
               </Text>
-            </CardLayout>
-            <CardLayout style={styles.cardContainer}>
-              {icon}
-              {content}
-              {form}
-              {button}
-            </CardLayout>
-          </View>
-        </KeyboardAwareScrollView>
-        <TabContainer {...this.props} />
-      </View>
-    );
-  }
+              <Image
+                style={styles.imageStyle}
+                resizeMode="contain"
+                source={redeemImage}
+              />
+              <View style={styles.validateCodeInputContainer}>
+                <TextField
+                  label={i18n.t('label.validate_code_label')}
+                  value={props.values.code}
+                  tintColor={'#89b53a'}
+                  titleFontSize={12}
+                  lineWidth={1}
+                  autoCapitalize={'characters'}
+                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  titleTextStyle={{
+                    fontFamily: 'OpenSans-SemiBold',
+                    textTransform: 'uppercase'
+                  }}
+                  returnKeyType="done"
+                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  error={props.errors.code}
+                  onChangeText={props.handleChange('code')}
+                  onBlur={props.handleBlur('code')}
+                  onSubmitEditing={props.handleSubmit}
+                />
+              </View>
+            </KeyboardAwareScrollView>
+
+            {buttonType === 'validate' ? (
+              <TouchableOpacity
+                style={[
+                  buttonStyles.actionButtonTouchable,
+                  { alignSelf: 'center', paddingHorizontal: 24 },
+                  Platform.OS === 'ios'
+                    ? height < 500
+                      ? { bottom: '14%' }
+                      : { bottom: '6%' }
+                    : null
+                ]}
+                onPress={props.handleSubmit}
+              >
+                <View style={buttonStyles.actionButtonView}>
+                  {loadButton ? (
+                    <ActivityIndicator size="large" color={white} />
+                  ) : (
+                    <Text style={buttonStyles.actionButtonText}>
+                      {i18n.t('label.validate_code')}
+                    </Text>
+                  )}
+                </View>
+              </TouchableOpacity>
+            ) : null}
+
+            {buttonType === '>' ? (
+              <TouchableOpacity
+                style={[
+                  buttonStyles.actionButtonSmallTouchable,
+                  { bottom: '8%', right: '8%' }
+                ]}
+                onPress={props.handleSubmit}
+              >
+                {loadButton ? (
+                  <ActivityIndicator size="large" color={white} />
+                ) : (
+                  <Image
+                    source={forward}
+                    resizeMode="cover"
+                    style={buttonStyles.actionButtonSmallImage}
+                  />
+                )}
+              </TouchableOpacity>
+            ) : null}
+          </>
+        )}
+      </Formik>
+      {/* </View> */}
+    </View>
+  );
 }
 
+Redemption.navigationOptions = {
+  header: null
+};
+
 Redemption.propTypes = {
-  pageStatus: PropTypes.string,
-  code: PropTypes.string,
-  isLoggedIn: PropTypes.any,
-  route: PropTypes.func,
-  setRedemptionCode: PropTypes.func,
-  validateCode: PropTypes.func,
-  loginButton: PropTypes.func,
-  signupButton: PropTypes.func,
-  path: PropTypes.string,
-  loading: PropTypes.any,
-  codeStatus: PropTypes.string,
-  statusText: PropTypes.string,
-  successText: PropTypes.string,
-  errorText: PropTypes.string,
-  actionText: PropTypes.string,
-  buttonText: PropTypes.string,
-  tpos: PropTypes.array,
   navigation: PropTypes.any
 };

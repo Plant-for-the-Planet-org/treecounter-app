@@ -56,14 +56,14 @@ export default function HeaderNew(props) {
       <View
         style={{
           position: 'absolute',
-          bottom: 12,
-          left: 72
+          bottom: -36,
+          left: 24
         }}
       >
         <Text
           style={{
             fontFamily: 'OpenSans-Bold',
-            fontSize: 18,
+            fontSize: 27,
             lineHeight: 40,
             letterSpacing: 0,
             textAlign: 'left',

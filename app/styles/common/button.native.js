@@ -91,10 +91,10 @@ export default EStyleSheet.create({
     width: 30
   },
   actionButtonTouchable: {
-    width: '88%',
-    marginLeft: '6%',
+    width: '100%',
     position: 'absolute',
-    top: '86%'
+    bottom: '6%'
+    // paddingHorizontal: 24
   },
   actionButtonView: {
     borderRadius: 100,

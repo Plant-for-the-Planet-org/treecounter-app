@@ -2,7 +2,7 @@ const routes = require('../server/routes/fos_js_routes.json');
 import Routing from './router.min.js';
 import { context } from '../config';
 import { getLocale } from './getLocale';
-
+import { getCdnMediaUrl } from './fetchLocation';
 Routing.setRoutingData(routes);
 
 export const getApiRoute = async (routeName, params) => {
@@ -31,13 +31,15 @@ export const getLocalRoute = (routeName, params) => {
 };
 
 export const getImageUrl = (category, variant, imageName) => {
-  const { scheme, host } = context;
-  return `${scheme}://${host}/media/cache/${category}/${variant}/${imageName}`;
+  // const { scheme, host } = context;
+  console.log(getCdnMediaUrl());
+
+  return `${getCdnMediaUrl().images}/${category}/${variant}/${imageName}`;
 };
 
 export const getPDFUrl = filename => {
-  const { scheme, host } = context;
-  return `${scheme}://${host}/uploads/pdfs/review/${filename}`;
+  // const { scheme, host } = context;
+  return `${getCdnMediaUrl().pdfs}/review/${filename}`;
 };
 
 export const getCountryFlagImageUrl = (countryCode, type, size) => {

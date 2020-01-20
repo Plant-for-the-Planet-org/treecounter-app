@@ -14,19 +14,20 @@ import { Dimensions } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const routes = [
-  {
-    key: 'single-tree',
-    title: i18n.t('label.individual'),
-    color: '#89b53a'
-  },
-  {
-    key: 'multiple-trees',
-    title: i18n.t('label.many_trees'),
-    color: '#89b53a'
-  }
-];
 export default class RegisterTrees extends Component {
+  routes = [
+    {
+      key: 'single-tree',
+      title: i18n.t('label.individual'),
+      color: '#89b53a'
+    },
+    {
+      key: 'multiple-trees',
+      title: i18n.t('label.many_trees'),
+      color: '#89b53a'
+    }
+  ];
+
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +36,7 @@ export default class RegisterTrees extends Component {
       },
       mode: 'single-tree',
       index: 0,
-      routes: routes
+      routes: this.routes
     };
     console.log('this.props.navigation', this.props);
     // Bind Local method

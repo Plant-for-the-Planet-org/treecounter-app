@@ -6,5 +6,14 @@
   "log_in": "Bitte logge dich ein oder registriere dich, um deinen Code einzulösen.",
   "validate_code": "Code verifizieren",
   "code": "Code",
-  "redeem_code": "Code einlösen"
+  "redeem_code": "Code einlösen",
+  "validate_code_label": "Bitte geben Sie den Code zum Einlösen ein",
+  "claiming": "Anspruch:",
+  "trees_in_code": "Bäume in diesem Code",
+  "you_can_redeem": "Sie können einlösen",
+  "planted_by": "Gepflanzt von",
+  "add_my_trees": "Zu meinen Bäumen hinzufügen",
+  "already_redeemed_trees": "Sie haben diesen Code bereits eingelöst. Bitte versuchen Sie es mit einem anderen.",
+  "RedeemxTrees": "{{treeCount}} Bäume einlösen",
+  "Redeem1Tree": "{{treeCount}} Baum einlösen"
 }

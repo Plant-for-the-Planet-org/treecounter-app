@@ -477,7 +477,15 @@ function DedicatedTrees(props) {
           <Text style={styles.dedicatedEdit}>{i18n.t('label.edit')}</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.dedicatedContainer2}>
+      <TouchableOpacity
+        onPress={() =>
+          props.navigation.navigate(getLocalRoute('app_treecounter'), {
+            treeCounterId: props.supportedTreecounter.id,
+            titleParam: props.supportedTreecounter.displayName
+          })
+        }
+        style={styles.dedicatedContainer2}
+      >
         <UserProfileImage
           profileImage={props.supportedTreecounter.avatar}
           imageType="avatar"
@@ -500,7 +508,7 @@ function RenderIndividualsList(props) {
   const onPressListItem = (treeCounterId, title) => {
     if (treeCounterId) {
       navigation.navigate(getLocalRoute('app_treecounter'), {
-        treeCounterId,
+        treeCounterId: treeCounterId,
         titleParam: title
       });
     }

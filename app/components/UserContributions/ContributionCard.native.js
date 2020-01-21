@@ -251,15 +251,12 @@ class ContributionCard extends React.Component {
       treeSpecies,
       plantProjectName,
       country,
-      isGift,
       plantDate,
       givee,
       giveeSlug,
       tpoName,
       cardType,
       contributionType,
-      registrationDate,
-      redemptionCode,
       redemptionDate
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {

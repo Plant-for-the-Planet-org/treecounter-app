@@ -96,7 +96,10 @@ export default class DonateTrees extends React.PureComponent {
       );
       if (
         nextProps.selectedProject.paymentSetup &&
-        nextProps.selectedProject.paymentSetup.treeCountOptions
+        nextProps.selectedProject.paymentSetup.treeCountOptions &&
+        this.props.selectedProject &&
+        this.props.selectedProject.paymentSetup &&
+        this.props.selectedProject.paymentSetup.treeCountOptions
       ) {
         const nextTreeCount =
           nextProps.selectedProject.paymentSetup.treeCountOptions

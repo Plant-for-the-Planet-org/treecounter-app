@@ -1,14 +1,8 @@
 {
   "edit_trees": "Editar árboles",
-  "tree_count": "Recuento de árboles",
   "tree_species": "Especie de árbol",
   "geo_location": "Ubicación geográfica",
   "add_images": "Añadir imágenes",
-  "tree_classification": "Clasificación de árbol",
-  "tree_scientific_name": "Nombre científico del árbol",
-  "add_measurements": "Añadir Medidas",
-  "measurement_date": "Fecha de Medida",
   "heading_register_trees": "Registre árboles plantados",
-  "register": "Registración",
   "many_trees": "Muchos árboles"
 }

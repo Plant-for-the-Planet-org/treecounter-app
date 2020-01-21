@@ -21,7 +21,11 @@ export default EStyleSheet.create({
     borderRadius: 7,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: '#d5d5d5'
+    borderColor: '#d5d5d5',
+    marginTop: 15,
+    marginLeft: 8,
+    marginRight: 8,
+    padding: 16
   },
   pledgeContainer: {
     flexDirection: 'column',
@@ -45,10 +49,8 @@ export default EStyleSheet.create({
   },
   titleText: {
     color: '#575756',
-    fontSize: 15,
-    marginBottom: 15,
+    fontSize: 14,
     textAlign: 'left',
-    margin: 12,
     fontFamily: 'OpenSans-Regular'
   },
   imageStyle: {
@@ -114,8 +116,6 @@ export default EStyleSheet.create({
   },
   googleCardTitle: {
     fontSize: 17,
-    // fontWeight: '600',
-    // fontStyle: 'normal',
     lineHeight: 23,
     letterSpacing: 0,
     textAlign: 'left',

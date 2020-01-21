@@ -8,6 +8,7 @@ Routing.setRoutingData(routes);
 export const getApiRoute = async (routeName, params) => {
   const { scheme, host, base: baseUrl } = context;
   let locale = await getLocale();
+  console.log('-------------------- Api calling with ', locale);
   const serverName = `${scheme}://${host}`;
   params =
     'api_login_check' === routeName
@@ -37,4 +38,9 @@ export const getImageUrl = (category, variant, imageName) => {
 export const getPDFUrl = filename => {
   const { scheme, host } = context;
   return `${scheme}://${host}/uploads/pdfs/review/${filename}`;
+};
+
+export const getCountryFlagImageUrl = (countryCode, type, size) => {
+  const { scheme, host } = context;
+  return `${scheme}://${host}/flags/${type}/${size}/${countryCode}.${type}`;
 };

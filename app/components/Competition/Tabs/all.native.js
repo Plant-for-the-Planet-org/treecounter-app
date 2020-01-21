@@ -1,5 +1,13 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-import { ScrollView, Text, View, Image, RefreshControl } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  Image,
+  RefreshControl,
+  FlatList
+} from 'react-native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
@@ -75,6 +83,21 @@ export default class AllCompetitions extends Component {
       });
   };
 
+  _keyExtractor = item => item.id.toString();
+
+  _renderItem = ({ item }) => (
+    <CompetitionSnippet
+      key={'competition' + item.id}
+      cardStyle={styles.cardStyle}
+      onMoreClick={id => this.props.onMoreClick(id, item.name)}
+      leaveCompetition={id => this.props.leaveCompetition(id)}
+      enrollCompetition={id => this.props.enrollCompetition(id)}
+      editCompetition={this.props.editCompetition}
+      competition={item}
+      type="all"
+    />
+  );
+
   render() {
     let { showAllCompetitions } = this.state;
     return (
@@ -100,20 +123,11 @@ export default class AllCompetitions extends Component {
             resizeMode="contain"
           />
         </View>
-        {showAllCompetitions.length > 0
-          ? showAllCompetitions.map(competition => (
-              <CompetitionSnippet
-                key={'competition' + competition.id}
-                cardStyle={styles.cardStyle}
-                onMoreClick={id => this.props.onMoreClick(id, competition.name)}
-                leaveCompetition={id => this.props.leaveCompetition(id)}
-                enrollCompetition={id => this.props.enrollCompetition(id)}
-                editCompetition={this.props.editCompetition}
-                competition={competition}
-                type="all"
-              />
-            ))
-          : null}
+        <FlatList
+          data={showAllCompetitions}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
       </ScrollView>
     );
   }

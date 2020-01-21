@@ -6,12 +6,20 @@ import PropTypes from 'prop-types';
 
 import { editTree } from '../../actions/EditMyTree';
 import EditUserContribution from '../../components/EditUserContribution';
-import { mergeContributionImages } from '../../helpers/utils';
+import {
+  mergeContributionImages,
+  getPlantProjectEnum,
+  isTpo
+} from '../../helpers/utils';
 // Actions
-import { sortedUserContributionsSelector } from '../../selectors/index';
+import {
+  sortedUserContributionsSelector,
+  currentUserProfileSelector
+} from '../../selectors/index';
 
 class EditUserContributionsContainer extends React.Component {
   _userContribution = null;
+
   onSubmit = (mode, registerTreeForm) => {
     registerTreeForm =
       registerTreeForm || this.refs.editTrees.refs.editTreeForm;
@@ -19,6 +27,21 @@ class EditUserContributionsContainer extends React.Component {
     const { props } = this;
     if (value) {
       value = mergeContributionImages(value);
+
+      if (isTpo(this.props.currentUserProfile)) {
+        let plantProject =
+          getPlantProjectEnum(this.props.currentUserProfile).length > 0
+            ? getPlantProjectEnum(this.props.currentUserProfile)[0].value
+            : null;
+        if (plantProject) {
+          // needs to change an immutable struct
+          value = {
+            ...value,
+            plantProject
+          };
+        }
+      }
+
       let plantContribution = { plant_contribution: value };
       props.editTree(
         plantContribution,
@@ -54,7 +77,8 @@ class EditUserContributionsContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userContributions: sortedUserContributionsSelector(state)
+  userContributions: sortedUserContributionsSelector(state),
+  currentUserProfile: currentUserProfileSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -69,6 +93,7 @@ EditUserContributionsContainer.propTypes = {
   userContributions: PropTypes.array.isRequired,
   editTree: PropTypes.func,
   navigation: PropTypes.any,
+  currentUserProfile: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
       selectedTreeId: PropTypes.string

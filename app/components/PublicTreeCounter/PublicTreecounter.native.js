@@ -48,6 +48,7 @@ class PublicTreeCounter extends React.Component {
   }
 
   onPlantProjectSelected(selectedPlantProjectId) {
+    console.log('on plant project seected', selectedPlantProjectId);
     this.props.selectPlantProjectIdAction(selectedPlantProjectId);
     this.props.route('app_donateTrees');
   }
@@ -109,8 +110,10 @@ class PublicTreeCounter extends React.Component {
   onMoreClick(id, name) {
     this.props.selectPlantProjectIdAction(id);
     const { navigation } = this.props;
-    //console.log('OnMore');
-    updateRoute('app_selectProject', navigation, null, { titleParam: name });
+    updateRoute('app_selectProject', navigation, null, {
+      titleParam: name,
+      id: id
+    });
   }
 
   onSelectClickedFeaturedProjects = id => {
@@ -121,7 +124,12 @@ class PublicTreeCounter extends React.Component {
   render() {
     const { treecounter, currentUserProfile, navigation } = this.props;
     if (null === treecounter) {
-      return <LoadingIndicator contentLoader screen="worldLoader" />;
+      return (
+        <LoadingIndicator
+          contentLoader
+          screen="PublicTreeCounterContentLoader"
+        />
+      );
     }
 
     const { userProfile, displayName: caption } = treecounter;
@@ -202,7 +210,7 @@ class PublicTreeCounter extends React.Component {
         </View>
         <View>
           {'tpo' === userProfile.type && 1 <= tpoProps.plantProjects.length ? (
-            <View>
+            <View style={{ marginBottom: 20 }}>
               {tpoProps.plantProjects.map(project => (
                 <PlantProjectSnippet
                   key={'trillion' + project.id}

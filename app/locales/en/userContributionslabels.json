@@ -5,7 +5,7 @@
   "see_less": "- See less",
   "see_more": "+ See more",
   "update": " Update",
-  "my_trees": "My Forest",
+  "my_trees": "My Trees",
   "donate_trees": "Donate trees",
   "projects": "Projects",
   "no_contributions": "Welcome to your forest. Here you can see all the trees you have planted and registered with your hands and all the trees you have donated. Show the world your forest!",
@@ -47,5 +47,6 @@
   "usr_contribution_redeemed": "Redeemed",
   "usr_contribution_dedicate": "Dedicated",
   "gifted_from_person": "Gift from {{person}}",
-  "gifted_to_person": "Gift to {{person}} "
+  "gifted_to_person": "Gift to {{person}} ",
+  "active_recurrent_donations": "Active Recurrent Donations"
 }

@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
+const width = Dimensions.get('window').width;
 
 //Only take multiple of 10s
 const squareDimension =
@@ -160,7 +161,7 @@ export default EStyleSheet.create({
     fontSize: 14,
     lineHeight: 21,
     letterSpacing: 0,
-    textAlign: 'center',
+    textAlign: 'right',
     color: '#89b53a'
   },
   dedicatedName: {
@@ -179,6 +180,63 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20
+  },
+  competitionsView: {
+    borderColor: '#d5d5d5',
+    borderWidth: 1,
+    borderRadius: 4,
+    width: width * 0.44,
+    marginRight: 20,
+    marginTop: 20
+  },
+  competitionsImageView: {
+    height: width * 0.44 * 0.5625,
+    width: '100%',
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    overflow: 'hidden'
+  },
+  competitionsNoImageView: {
+    height: width * 0.44 * 0.5625,
+    width: '100%',
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    overflow: 'hidden',
+    backgroundColor: '#000'
+  },
+  competitionNameText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 10,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 14,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  competitionsInfoView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 4
+  },
+  competitionsInfoGoal: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 10,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 14,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  competitionsInfoActive: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 10,
+    lineHeight: 14,
+    letterSpacing: 0,
+    textAlign: 'right',
+    color: '#87b738'
   },
 
   sectionTitle: {
@@ -204,6 +262,7 @@ export default EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  showMoreView: { backgroundColor: '#f7f7f7', paddingVertical: 20 },
   showMoreText: {
     fontFamily: 'OpenSans-SemiBold',
     fontSize: 14,

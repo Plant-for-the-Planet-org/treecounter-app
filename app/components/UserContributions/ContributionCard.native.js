@@ -7,7 +7,6 @@ import {
   Image,
   Text,
   View,
-  TouchableHighlight,
   TouchableOpacity
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
@@ -19,7 +18,6 @@ import styles, {
   myTreesStyle
 } from '../../styles/myTrees/user_contribution_card';
 import { formatDate, delimitNumbers } from '../../utils/utils';
-import CardLayout from '../Common/Card';
 import { getISOToCountryName } from '../../helpers/utils';
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
@@ -258,7 +256,6 @@ class ContributionCard extends React.Component {
       givee,
       giveeSlug,
       tpoName,
-      mayUpdate,
       cardType,
       contributionType,
       registrationDate,
@@ -272,23 +269,23 @@ class ContributionCard extends React.Component {
     //   'see-more__active': this.state.viewExpanded
     // });
 
-    let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
+    // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
-    let donateActionLine = this.donateActionLine(
-      isGift,
-      plantDate,
-      givee,
-      giveeSlug
-    );
+    // let donateActionLine = this.donateActionLine(
+    //   isGift,
+    //   plantDate,
+    //   givee,
+    //   giveeSlug
+    // );
     let tpoLine = this.tpoLine(tpoName);
-    let plantActionLine = this.plantActionLine(plantDate, registrationDate);
+    // let plantActionLine = this.plantActionLine(plantDate, registrationDate);
     let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
-    let redeemActionLine = this.redeemActionLine(
-      redemptionCode,
-      redemptionDate,
-      givee,
-      giveeSlug
-    );
+    // let redeemActionLine = this.redeemActionLine(
+    //   redemptionCode,
+    //   redemptionDate,
+    //   givee,
+    //   giveeSlug
+    // );
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
     let borderColor =
       contributionType == 'donation'

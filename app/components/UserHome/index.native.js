@@ -5,7 +5,6 @@ import {
   ScrollView,
   View,
   Text,
-  Dimensions,
   Image,
   Linking,
   TouchableOpacity
@@ -14,21 +13,16 @@ import { readmoreDown, readmoreUp } from './../../assets/';
 import { updateRoute } from './../../helpers/routerHelper';
 
 import styles from '../../styles/user-home';
-import tabStyles from '../../styles/common/tabbar';
+// import tabStyles from '../../styles/common/tabbar';
 import * as images from '../../assets';
 
-import CardLayout from '../Common/Card';
+// import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';
 import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -234,7 +228,9 @@ export default class UserHome extends Component {
               updateRoute('app_redeem', this.props.navigation);
             }}
           >
-            <Text style={styles.secondaryButtonText}>Redeem Trees</Text>
+            <Text style={styles.secondaryButtonText}>
+              {i18n.t('label.redeem_trees_button')}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.primaryButton}
@@ -242,7 +238,9 @@ export default class UserHome extends Component {
               updateRoute('app_registerTrees', this.props.navigation);
             }}
           >
-            <Text style={styles.primaryButtonText}>Register Trees</Text>
+            <Text style={styles.primaryButtonText}>
+              {i18n.t('label.register_trees')}
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -257,13 +255,13 @@ export default class UserHome extends Component {
         {userProfile.synopsis1 ? (
           <View>
             <View style={styles.dedicatedContainer}>
-              <Text style={styles.dedicatedTitle}>About</Text>
+              <Text style={styles.dedicatedTitle}>{i18n.t('label.about')}</Text>
               <TouchableOpacity
                 onPress={() => {
                   updateRoute('app_editProfile', this.props.navigation);
                 }}
               >
-                <Text style={styles.dedicatedEdit}>Edit</Text>
+                <Text style={styles.dedicatedEdit}>{i18n.t('label.edit')}</Text>
               </TouchableOpacity>
             </View>
             <View>
@@ -299,7 +297,9 @@ export default class UserHome extends Component {
         {/* Recurrent Donations */}
         {recurrentUserContributions.length ? (
           <View style={{ marginTop: 20 }}>
-            <Text style={styles.sectionTitle}>Active Recurrent Donations</Text>
+            <Text style={styles.sectionTitle}>
+              {i18n.t('label.active_recurrent_donations')}
+            </Text>
             <ContributionCardList
               contributions={recurrentUserContributions}
               deleteContribution={this.props.deleteContribution}
@@ -326,7 +326,7 @@ export default class UserHome extends Component {
 
         {/* Plant Projects of TPO  */}
         {userProfile.plantProjects ? (
-          <Text style={styles.sectionTitle}>Projects</Text>
+          <Text style={styles.sectionTitle}>{i18n.t('label.projects')}</Text>
         ) : null}
         <ScrollView>
           {userProfile.plantProjects
@@ -348,7 +348,7 @@ export default class UserHome extends Component {
 
         {this.props.userContributions.length ? (
           <View contentContainerStyle={{ paddingBottom: 72, marginTop: 20 }}>
-            <Text style={styles.sectionTitle}>My Trees</Text>
+            <Text style={styles.sectionTitle}>{i18n.t('label.my_trees')}</Text>
             <ContributionCardList
               contributions={this.props.userContributions}
               deleteContribution={this.props.deleteContribution}
@@ -381,7 +381,7 @@ UserHome.propTypes = {
 function ToggleButton(props) {
   const showMore = props.showMore;
   return (
-    <View style={{ backgroundColor: '#f7f7f7', paddingVertical: 20 }}>
+    <View style={styles.showMoreView}>
       <TouchableOpacity
         style={styles.showMoreTouchable}
         onPress={() => props.updateFunction()}
@@ -404,7 +404,9 @@ function MyCompetitions(props) {
   return (
     <View style={{ paddingVertical: 20, marginTop: 20 }}>
       <View style={styles.competitionsContainer}>
-        <Text style={styles.dedicatedTitle}>My Competitions</Text>
+        <Text style={styles.dedicatedTitle}>
+          {i18n.t('label.my_competitions')}
+        </Text>
         <TouchableOpacity>
           <Text
             style={styles.dedicatedEdit}
@@ -412,7 +414,7 @@ function MyCompetitions(props) {
               updateRoute('app_competitions', props.navigation);
             }}
           >
-            View All
+            {i18n.t('label.view_all')}
           </Text>
         </TouchableOpacity>
       </View>
@@ -443,13 +445,15 @@ function DedicatedTrees(props) {
   return (
     <View>
       <View style={styles.dedicatedContainer}>
-        <Text style={styles.dedicatedTitle}>Dedicate my trees to</Text>
+        <Text style={styles.dedicatedTitle}>
+          {i18n.t('label.dedicate_trees')}
+        </Text>
         <TouchableOpacity
           onPress={() => {
             updateRoute('pickup_profile_modal', props.navigation);
           }}
         >
-          <Text style={styles.dedicatedEdit}>Edit</Text>
+          <Text style={styles.dedicatedEdit}>{i18n.t('label.edit')}</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.dedicatedContainer2}>

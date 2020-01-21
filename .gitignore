@@ -21,8 +21,17 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-Podfile.lock
+ios/._TreecounterApp.xcodeproj
+ios/._TreecounterApp.xcworkspace
+ios/Pods/._Pods.xcodeproj
+ios/Podfile.lock
 ios/Pods/*
+ios/tmp.xcconfig
+
+# Enviroment
+#
+.env*
+!.env.sample
 
 # Android/IntelliJ
 #

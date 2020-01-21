@@ -1,5 +1,8 @@
 {
   "loading": "loading ...",
+  "go_back": "Go Back",
+  "add_project": "Add Project",
+  "update": "Update",
   "isRequired": "{{context}} is Required",
   "enterValidEmail": "Enter valid Email",
   "invalidLength": "Invalid Length: should be less than {{length}}",

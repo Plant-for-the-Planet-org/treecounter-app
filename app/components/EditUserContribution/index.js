@@ -88,8 +88,8 @@ export default class EditUserContribution extends Component {
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
-  onSubmitClick(event) {
-    this.props.onSubmit();
+  onSubmitClick(event, mode) {
+    this.props.onSubmit(mode, this.editTreeForm.getValue());
     event && event.preventDefault();
   }
 
@@ -102,7 +102,7 @@ export default class EditUserContribution extends Component {
             <div className="register-tree__form">
               {this.state.mode === EditUserContribution.mode.singleTree ? (
                 <TCombForm
-                  ref="editTreeForm"
+                  ref={ref => (this.editTreeForm = ref)}
                   type={singleTreeRegisterFormSchema}
                   options={schemaOptionsSingle}
                   value={this.props.userContribution}

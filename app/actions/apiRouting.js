@@ -34,7 +34,7 @@ export const getImageUrl = (category, variant, imageName) => {
   // const { scheme, host } = context;
   console.log(getCdnMediaUrl());
 
-  return `${getCdnMediaUrl().images}/${category}/${variant}/${imageName}`;
+  return `${getCdnMediaUrl().cache}/${category}/${variant}/${imageName}`;
 };
 
 export const getPDFUrl = filename => {
@@ -43,6 +43,8 @@ export const getPDFUrl = filename => {
 };
 
 export const getCountryFlagImageUrl = (countryCode, type, size) => {
-  const { scheme, host } = context;
-  return `${scheme}://${host}/flags/${type}/${size}/${countryCode}.${type}`;
+  // const { scheme, host } = context;
+  return `${
+    getCdnMediaUrl().images
+  }/flags/${type}/${size}/${countryCode}.${type}`;
 };

@@ -34,7 +34,7 @@ export const getImageUrl = (category, variant, imageName) => {
   // const { scheme, host } = context;
   console.log(getCdnMediaUrl());
 
-  return `${getCdnMediaUrl().images}/${category}/${variant}/${imageName}`;
+  return `${getCdnMediaUrl().cache}/${category}/${variant}/${imageName}`;
 };
 
 export const getPDFUrl = filename => {

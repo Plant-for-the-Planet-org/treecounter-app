@@ -110,6 +110,7 @@ class SelectPlantProjectContainer extends PureComponent {
     const { navigation } = this.props;
     if (navigation) {
       updateStaticRoute('app_donate_detail', navigation, {
+        id: id,
         userForm: navigation.getParam('userForm'),
         giftMethod: navigation.getParam('giftMethod')
       });

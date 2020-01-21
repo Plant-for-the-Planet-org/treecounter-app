@@ -11,6 +11,8 @@ Welcome to this repository which contains the code of the web clients and the na
 ## Configuration
 
 Copy `app/config/index.js.dist` to `app/config/index.js`.
+Install nvm following instructions from https://github.com/nvm-sh/nvm#install--update-script
+Run `nvm install && nvm use` to install and use required version of node.
 
 ## Web Setup
 

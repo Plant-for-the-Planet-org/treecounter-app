@@ -95,7 +95,7 @@ class SelectPlantProjectContainer extends PureComponent {
     console.log(
       'project on more click=================',
       project,
-      navigation.getParam('userForm')
+      this.props.navigation.getParam('userForm')
     );
     if (project && !project.paymentSetup) {
       project = await this.loadDetails({ id: id });
@@ -105,6 +105,7 @@ class SelectPlantProjectContainer extends PureComponent {
     if (navigation) {
       updateRoute('app_selectProject', navigation, 1, {
         userForm: navigation.getParam('userForm'),
+        giftMethod: navigation.getParam('giftMethod'),
         titleParam: name
       });
     }

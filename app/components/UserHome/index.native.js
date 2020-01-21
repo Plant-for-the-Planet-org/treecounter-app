@@ -10,8 +10,6 @@ import {
   Linking,
   TouchableOpacity
 } from 'react-native';
-import { TabView, TabBar } from 'react-native-tab-view';
-import { delimitNumbers } from './../../utils/utils';
 import { readmoreDown, readmoreUp } from './../../assets/';
 import { updateRoute } from './../../helpers/routerHelper';
 
@@ -23,9 +21,9 @@ import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';
-import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet.native';
+import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 import i18n from '../../locales/i18n';
-import CompetitionSnippet from './app/CompetitionSnippet.native';
+import CompetitionSnippet from './app/CompetitionSnippet';
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -63,12 +61,34 @@ export default class UserHome extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     const shouldUpdate =
       JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
-      nextState.index != this.state.index;
+      nextState.index !== this.state.index ||
+      nextState.showAllContributions !== this.state.showAllContributions;
     return shouldUpdate;
   }
 
   _handleIndexChange = index => {
     this.setState({ index });
+  };
+
+  onCompetitionClick = (id, name) => {
+    const { navigation } = this.props;
+    if (navigation) {
+      updateRoute('app_competition', navigation, 1, {
+        competition: id,
+        titleParam: name
+      });
+    }
+  };
+
+  onPlantProjectClick = (id, name) => {
+    this.props.selectPlantProjectAction(id);
+    const { navigation } = this.props;
+    if (navigation) {
+      updateRoute('app_selectProject', navigation, 1, {
+        userForm: navigation.getParam('userForm'),
+        titleParam: name
+      });
+    }
   };
 
   updateSvg(toggle) {
@@ -112,10 +132,9 @@ export default class UserHome extends Component {
   }
 
   readMore() {
-    this.setState({
-      showAllContributions: !this.state.showAllContributions
-    });
-    alert(this.state.showAllContributions);
+    this.setState(prevState => ({
+      showAllContributions: !prevState.showAllContributions
+    }));
   }
 
   render() {
@@ -281,7 +300,7 @@ export default class UserHome extends Component {
                     <CompetitionSnippet
                       key={'competition' + competition.id}
                       onMoreClick={id =>
-                        this.props.onMoreClick(id, competition.name)
+                        this.onCompetitionClick(id, competition.name)
                       }
                       competition={competition}
                       type="all"
@@ -313,12 +332,13 @@ export default class UserHome extends Component {
             ? userProfile.plantProjects.map(project => (
                 <PlantProjectSnippet
                   key={'projectFull' + project.id}
-                  //  onMoreClick={id => this.props.onMoreClick(id, project.name)}
+                  onMoreClick={id => this.onPlantProjectClick(id, project.name)}
                   plantProject={project}
-                  //  onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
+                  onSelectClickedFeaturedProjects={id =>
+                    this.onPlantProjectClick(id, project.name)
+                  }
                   showMoreButton={false}
                   tpoName={project.tpo_name}
-                  //  selectProject={this.props.onSelectProjects}
                   navigation={this.props.navigation}
                 />
               ))

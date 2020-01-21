@@ -46,15 +46,47 @@ export default class UserHome extends Component {
         { key: 'my-trees', title: i18n.t('label.my_trees') }
       ],
       index: 0,
-      showAllContributions: false
+      showAllContributions: false,
+      showAllRecurrentContributions: false,
+      recurrentUserContributions: []
     };
   }
-
+  componentDidMount() {
+    let { userContributions } = this.props;
+    let recurrentUserContributions = [];
+    if (userContributions.length > 0) {
+      userContributions.forEach(contribution => {
+        if (contribution.isRecurrent === true) {
+          recurrentUserContributions.push(contribution);
+        }
+      });
+    }
+    this.setState({
+      recurrentUserContributions: recurrentUserContributions
+    });
+  }
   componentWillReceiveProps(nextProps) {
     const { treecounterData, userProfile } = nextProps;
     if (treecounterData) {
       let svgData = { ...treecounterData, type: userProfile.type };
       this.setState({ svgData });
+    }
+  }
+
+  componentDidUpdate(nextProps) {
+    let { userContributions } = nextProps;
+    if (userContributions !== this.props.userContributions) {
+      let recurrentUserContributions = [];
+      if (userContributions.length > 0) {
+        userContributions.forEach(contribution => {
+          if (contribution.isRecurrent === true) {
+            recurrentUserContributions.push(contribution);
+          }
+        });
+      }
+      this.setState({
+        recurrentUserContributions: recurrentUserContributions
+      });
     }
   }
 
@@ -137,12 +169,23 @@ export default class UserHome extends Component {
     }));
   }
 
+  showRecurrentMore() {
+    this.setState(prevState => ({
+      showAllRecurrentContributions: !prevState.showAllRecurrentContributions
+    }));
+  }
+
   render() {
     const { userProfile } = this.props;
     const profileType = userProfile.type;
-    let { svgData, showAllContributions } = this.state;
+    let {
+      svgData,
+      showAllContributions,
+      showAllRecurrentContributions,
+      recurrentUserContributions
+    } = this.state;
 
-    console.log(userProfile);
+    console.log(recurrentUserContributions);
     return (
       <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
         <View>
@@ -202,33 +245,13 @@ export default class UserHome extends Component {
             <Text style={styles.primaryButtonText}>Register Trees</Text>
           </TouchableOpacity>
         </View>
+
+        {/* Dedicated Trees Section */}
         {userProfile.supportedTreecounter ? (
-          <View>
-            <View style={styles.dedicatedContainer}>
-              <Text style={styles.dedicatedTitle}>Dedicate my trees to</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  updateRoute('pickup_profile_modal', this.props.navigation);
-                }}
-              >
-                <Text style={styles.dedicatedEdit}>Edit</Text>
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity style={styles.dedicatedContainer2}>
-              <UserProfileImage
-                profileImage={userProfile.supportedTreecounter.avatar}
-                imageType="avatar"
-                imageStyle={{
-                  height: 32,
-                  width: 32,
-                  borderRadius: 32 / 2
-                }}
-              />
-              <Text style={styles.dedicatedName}>
-                {userProfile.supportedTreecounter.displayName}
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <DedicatedTrees
+            navigation={this.props.navigation}
+            supportedTreecounter={userProfile.supportedTreecounter}
+          />
         ) : null}
 
         {userProfile.synopsis1 ? (
@@ -273,59 +296,37 @@ export default class UserHome extends Component {
           </View>
         ) : null}
 
-        {/* Competitions */}
-        {userProfile.treecounter.competitions.length > 0 ? (
-          <View style={{ paddingVertical: 20 }}>
-            <View style={styles.competitionsContainer}>
-              <Text style={styles.dedicatedTitle}>My Competitions</Text>
-              <TouchableOpacity>
-                <Text
-                  style={styles.dedicatedEdit}
-                  onPress={() => {
-                    updateRoute('app_competitions', this.props.navigation);
-                  }}
-                >
-                  View All
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ paddingLeft: 20 }}
-            >
-              {userProfile.treecounter.competitions.length > 0
-                ? userProfile.treecounter.competitions.map(competition => (
-                    <CompetitionSnippet
-                      key={'competition' + competition.id}
-                      onMoreClick={id =>
-                        this.onCompetitionClick(id, competition.name)
-                      }
-                      competition={competition}
-                      type="all"
-                    />
-                  ))
-                : null}
-            </ScrollView>
+        {/* Recurrent Donations */}
+        {recurrentUserContributions.length ? (
+          <View style={{ marginTop: 20 }}>
+            <Text style={styles.sectionTitle}>Active Recurrent Donations</Text>
+            <ContributionCardList
+              contributions={recurrentUserContributions}
+              deleteContribution={this.props.deleteContribution}
+              showAllContributions={showAllRecurrentContributions}
+            />
           </View>
         ) : null}
 
+        {recurrentUserContributions && recurrentUserContributions.length > 3 ? (
+          <ToggleButton
+            updateFunction={() => this.showRecurrentMore()}
+            showMore={showAllRecurrentContributions}
+          />
+        ) : null}
+
+        {/* Competitions */}
+        {userProfile.treecounter.competitions.length > 0 ? (
+          <MyCompetitions
+            onCompetitionClick={this.onCompetitionClick}
+            navigation={this.props.navigation}
+            competitions={userProfile.treecounter.competitions}
+          />
+        ) : null}
+
+        {/* Plant Projects of TPO  */}
         {userProfile.plantProjects ? (
-          <Text
-            style={{
-              fontFamily: 'OpenSans-SemiBold',
-              fontSize: 17,
-              lineHeight: 23,
-              letterSpacing: 0,
-              textAlign: 'left',
-              color: '#4d5153',
-              paddingLeft: 20,
-              marginTop: 20
-            }}
-          >
-            Projects
-          </Text>
+          <Text style={styles.sectionTitle}>Projects</Text>
         ) : null}
         <ScrollView>
           {userProfile.plantProjects
@@ -347,20 +348,7 @@ export default class UserHome extends Component {
 
         {this.props.userContributions.length ? (
           <View contentContainerStyle={{ paddingBottom: 72, marginTop: 20 }}>
-            <Text
-              style={{
-                fontFamily: 'OpenSans-SemiBold',
-                fontSize: 17,
-                lineHeight: 23,
-                letterSpacing: 0,
-                textAlign: 'left',
-                color: '#4d5153',
-                paddingLeft: 20,
-                paddingBottom: 20
-              }}
-            >
-              My Trees
-            </Text>
+            <Text style={styles.sectionTitle}>My Trees</Text>
             <ContributionCardList
               contributions={this.props.userContributions}
               deleteContribution={this.props.deleteContribution}
@@ -371,79 +359,10 @@ export default class UserHome extends Component {
 
         {this.props.userContributions &&
         this.props.userContributions.length > 3 ? (
-          showAllContributions ? (
-            <View style={{ backgroundColor: '#f7f7f7', paddingVertical: 20 }}>
-              <TouchableOpacity
-                style={{
-                  width: 138,
-                  borderRadius: 30,
-                  backgroundColor: '#ffffff',
-                  borderStyle: 'solid',
-                  borderWidth: 1,
-                  borderColor: '#4d5153',
-                  alignSelf: 'center',
-                  padding: 4,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                onPress={() => this.readMore()}
-              >
-                <Image
-                  source={readmoreUp}
-                  style={{ height: 8, width: 15, marginRight: 8 }}
-                  resizeMode={'contain'}
-                />
-                <Text
-                  style={{
-                    fontFamily: 'OpenSans-SemiBold',
-                    fontSize: 14,
-                    lineHeight: 21,
-                    color: '#4d5153',
-                    textAlign: 'center'
-                  }}
-                >
-                  Show less
-                </Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <View style={{ backgroundColor: '#f7f7f7', paddingVertical: 20 }}>
-              <TouchableOpacity
-                style={{
-                  width: 138,
-                  borderRadius: 30,
-                  backgroundColor: '#ffffff',
-                  borderStyle: 'solid',
-                  borderWidth: 1,
-                  borderColor: '#4d5153',
-                  alignSelf: 'center',
-                  padding: 4,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                onPress={() => this.readMore()}
-              >
-                <Image
-                  source={readmoreDown}
-                  style={{ height: 8, width: 15, marginRight: 8 }}
-                  resizeMode={'contain'}
-                />
-                <Text
-                  style={{
-                    fontFamily: 'OpenSans-SemiBold',
-                    fontSize: 14,
-                    lineHeight: 21,
-                    color: '#4d5153',
-                    textAlign: 'center'
-                  }}
-                >
-                  Show all
-                </Text>
-              </TouchableOpacity>
-            </View>
-          )
+          <ToggleButton
+            updateFunction={() => this.readMore()}
+            showMore={showAllContributions}
+          />
         ) : null}
       </ScrollView>
     );
@@ -458,3 +377,95 @@ UserHome.propTypes = {
   deleteContribution: PropTypes.func,
   navigation: PropTypes.any
 };
+
+function ToggleButton(props) {
+  const showMore = props.showMore;
+  return (
+    <View style={{ backgroundColor: '#f7f7f7', paddingVertical: 20 }}>
+      <TouchableOpacity
+        style={styles.showMoreTouchable}
+        onPress={() => props.updateFunction()}
+      >
+        <Image
+          source={showMore ? readmoreUp : readmoreDown}
+          style={{ height: 8, width: 15, marginRight: 8 }}
+          resizeMode={'contain'}
+        />
+        <Text style={styles.showMoreText}>
+          {showMore ? 'Show less' : 'Show all'}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function MyCompetitions(props) {
+  const competitions = props.competitions;
+  return (
+    <View style={{ paddingVertical: 20, marginTop: 20 }}>
+      <View style={styles.competitionsContainer}>
+        <Text style={styles.dedicatedTitle}>My Competitions</Text>
+        <TouchableOpacity>
+          <Text
+            style={styles.dedicatedEdit}
+            onPress={() => {
+              updateRoute('app_competitions', props.navigation);
+            }}
+          >
+            View All
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingLeft: 20 }}
+      >
+        {competitions.length > 0
+          ? competitions.map(competition => (
+              <CompetitionSnippet
+                key={'competition' + competition.id}
+                onMoreClick={id =>
+                  props.onCompetitionClick(id, competition.name)
+                }
+                competition={competition}
+                type="all"
+              />
+            ))
+          : null}
+      </ScrollView>
+    </View>
+  );
+}
+
+function DedicatedTrees(props) {
+  return (
+    <View>
+      <View style={styles.dedicatedContainer}>
+        <Text style={styles.dedicatedTitle}>Dedicate my trees to</Text>
+        <TouchableOpacity
+          onPress={() => {
+            updateRoute('pickup_profile_modal', props.navigation);
+          }}
+        >
+          <Text style={styles.dedicatedEdit}>Edit</Text>
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity style={styles.dedicatedContainer2}>
+        <UserProfileImage
+          profileImage={props.supportedTreecounter.avatar}
+          imageType="avatar"
+          imageStyle={{
+            height: 32,
+            width: 32,
+            borderRadius: 32 / 2
+          }}
+        />
+        <Text style={styles.dedicatedName}>
+          {props.supportedTreecounter.displayName}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}

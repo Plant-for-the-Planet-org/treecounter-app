@@ -179,5 +179,36 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20
+  },
+
+  sectionTitle: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 17,
+    lineHeight: 23,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    paddingLeft: 20,
+    paddingBottom: 20
+  },
+  showMoreTouchable: {
+    width: 138,
+    borderRadius: 30,
+    backgroundColor: '#ffffff',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#4d5153',
+    alignSelf: 'center',
+    padding: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  showMoreText: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    lineHeight: 21,
+    color: '#4d5153',
+    textAlign: 'center'
   }
 });

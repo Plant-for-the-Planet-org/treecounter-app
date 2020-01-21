@@ -1,15 +1,13 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  Image,
   Platform,
   Text,
   TouchableOpacity,
-  View,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  View
 } from 'react-native';
 import { Switch } from 'react-native-switch';
-import { cameraSolid, imageGallery, deleteOutlineWhite } from '../../assets';
 import styles from '../../styles/register_trees.native';
 import { formatDateToMySQL } from './../../helpers/utils';
 import { formatDate } from './../../utils/utils';
@@ -19,7 +17,6 @@ import { Formik } from 'formik';
 import { TextField } from 'react-native-material-textfield';
 import schemaOptionsMultiple from '../../server/formSchemas/registerTrees';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
-import ImagePicker from 'react-native-image-picker';
 import buttonStyles from '../../styles/common/button.native';
 import { Dropdown } from 'react-native-material-dropdown';
 import NativeMapView from '../Map/NativeMapView.native';
@@ -27,6 +24,7 @@ import CardLayout from '../Common/Card';
 import { filter } from 'lodash';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { getImageUrl } from '../../actions/apiRouting';
+import AddImage from '../Common/Forms/AddImage.native';
 
 export const FormikFormTree = props => {
   const [showClassification, setShowClassificationSwitch] = useState(
@@ -38,6 +36,9 @@ export const FormikFormTree = props => {
   const [geometry, setGeometry] = useState(props.geometry);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
   const [initValue, setInitValue] = useState(props.initialValues);
+  const [contributionImages, setContributionImages] = useState(
+    props.initialValues.contributionImages || []
+  );
   useEffect(
     () => {
       setGeometry(props.geometry);
@@ -72,33 +73,29 @@ export const FormikFormTree = props => {
   function focusTheField(id) {
     inputs[id].focus();
   }
-  const isContributionImage = props => {
-    if (parentProps.isEdit) {
-      const contributImage =
-        props.values.contributionImages &&
-        props.values.contributionImages.length &&
-        props.values.contributionImages[0] &&
-        props.values.contributionImages[0].image
-          ? props.values.contributionImages[0].image
-          : '';
-      return (
-        (contributImage &&
-          getImageUrl('contribution', 'medium', contributImage)) ||
-        (props.values.contributionImages &&
-        props.values.contributionImages.length &&
-        props.values.contributionImages[0].imageFile
-          ? props.values.contributionImages[0].imageFile
-          : '')
-      );
-    } else {
-      return props.values.contributionImages &&
-        props.values.contributionImages.length &&
-        props.values.contributionImages[0].imageFile
-        ? props.values.contributionImages[0].imageFile
-        : '';
-    }
-  };
 
+  const updateImages = (props, images) => {
+    let contributionImagesList = contributionImages || [];
+    if (typeof images == 'string') {
+      images = [images];
+    }
+    images.map(image => {
+      return contributionImagesList.push({
+        imageFile: image
+      });
+    });
+    console.log('updating review images:', contributionImagesList);
+    setContributionImages(contributionImages);
+    props.setFieldValue('contributionImages', contributionImages);
+  };
+  const deleteImage = (props, index) => {
+    let images = [...contributionImages];
+    images = images.reverse().filter((data, i) => i !== index);
+    setContributionImages([]);
+    console.log(images, index, contributionImages);
+    setContributionImages(images.reverse());
+    props.setFieldValue('contributionImages', images);
+  };
   return (
     <Formik
       initialValues={initValue}
@@ -345,9 +342,23 @@ export const FormikFormTree = props => {
               </View>
               <CardLayout>
                 <View style={styles.formAddImageBlock}>
-                  <AddImage
+                  {/*<AddImage
                     image={isContributionImage(props)}
-                    setFieldValue={props.setFieldValue}
+                    setFieldValue={props.setFieldValue}*/}
+                  <AddImage
+                    title={i18n.t('label.add_pictures')}
+                    updateImages={images => updateImages(props, images)}
+                    deleteImage={index => deleteImage(props, index)}
+                    images={contributionImages.map(
+                      data =>
+                        data && data.imageFile
+                          ? data.imageFile
+                          : getImageUrl(
+                              'contribution',
+                              'medium',
+                              data && data.image
+                            )
+                    )}
                   />
                 </View>
                 {!isMultipleTree && (
@@ -434,28 +445,31 @@ export const FormikFormTree = props => {
                 )}
               </CardLayout>
             </View>
-            <View style={buttonStyles.buttonContainer}>
-              <TouchableOpacity
-                style={buttonStyles.actionButtonTouchable}
-                onPress={props.handleSubmit}
-                disabled={!props.isValid}
-              >
-                <View
-                  style={
-                    props.isValid
-                      ? buttonStyles.actionButtonView
-                      : buttonStyles.disabledButtonView
-                  }
+            <CardLayout style={{ marginTop: 25 }}>
+              <View style={buttonStyles.buttonContainer}>
+                <TouchableOpacity
+                  style={buttonStyles.actionButtonTouchable}
+                  onPress={props.handleSubmit}
+                  disabled={!props.isValid}
                 >
-                  <Text style={buttonStyles.actionButtonText}>
-                    {parentProps.isEdit
-                      ? i18n.t('label.update')
-                      : i18n.t('label.register')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+                  <View
+                    style={
+                      props.isValid
+                        ? buttonStyles.actionButtonView
+                        : buttonStyles.disabledButtonView
+                    }
+                  >
+                    <Text style={buttonStyles.actionButtonText}>
+                      {parentProps.isEdit
+                        ? i18n.t('label.update')
+                        : i18n.t('label.register')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </CardLayout>
           </View>
+          {console.log('formProps', props)}
         </>
       )}
     </Formik>
@@ -731,102 +745,6 @@ export class CustomSwitch extends React.Component {
       </View>
     );
   }
-}
-
-export function AddImage(props) {
-  const image = props.image;
-
-  const options = {
-    title: 'Add Image',
-    storageOptions: {
-      skipBackup: true,
-      path: 'images'
-    }
-  };
-
-  const renderAsset = (image, index) => {
-    console.log('Images====>', image);
-    return (
-      <View key={index} style={[{ position: 'relative', marginRight: 8 }]}>
-        <Image
-          style={[styles.teaser__projectImage, { width: '95%', height: 150 }]}
-          source={{ uri: image }}
-          // resizeMode={'cover'}
-        />
-        <View style={[styles.competitionDeleteButton]}>
-          <TouchableOpacity
-            onPress={() => props.setFieldValue('contributionImages', [])}
-            style={styles.addDeleteButtonIcon}
-          >
-            <Image
-              style={{ height: 28, width: 28 }}
-              source={deleteOutlineWhite}
-            />
-            <Text
-              style={{
-                color: '#fff',
-                fontFamily: 'OpenSans-Regular',
-                fontSize: 14,
-                lineHeight: 28
-              }}
-            >
-              Remove
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
-
-  return (
-    <View>
-      <Text style={styles.addImageTitle}>{i18n.t('label.add_images')}</Text>
-      {image && image != 'null' ? renderAsset(image) : null}
-      <View style={styles.addImageButtonContainer}>
-        <TouchableOpacity
-          style={styles.addImageButton1}
-          onPress={() => {
-            ImagePicker.launchImageLibrary(options, response => {
-              if (response.didCancel) {
-                console.log('User cancelled image picker');
-              } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-              } else {
-                props.setFieldValue('contributionImages', [
-                  {
-                    imageFile: 'data:image/jpeg;base64,' + response.data
-                  }
-                ]);
-              }
-            });
-          }}
-        >
-          <Image style={styles.addImageButtonIcon} source={imageGallery} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => {
-            ImagePicker.launchCamera(options, response => {
-              if (response.didCancel) {
-                console.log('User cancelled image picker');
-              } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-              } else {
-                props.setFieldValue('contributionImages', [
-                  {
-                    imageFile: 'data:image/jpeg;base64,' + response.data
-                  }
-                ]);
-              }
-            });
-          }}
-          style={styles.addImageButton2}
-        >
-          <Image style={styles.addImageButtonIcon} source={cameraSolid} />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
 }
 
 export function CompetitionDatePicker(props) {

@@ -596,7 +596,6 @@ export function generateFormikSchemaFromFormSchema(
   schemaObj = { properties: {}, required: [] },
   fields = []
 ) {
-  console.log('schemaObj====>', schemaObj);
   let validationSchemaGenerated = {};
   Object.keys(schemaObj.properties).map(key => {
     if (fields.length === 0 || fields.indexOf(key) !== -1) {
@@ -611,7 +610,6 @@ export function generateFormikSchemaFromFormSchema(
           prepareSchema = prepareSchema.array(
             generateFormikSchemaFromFormSchema(property.items, fields)
           );
-          console.log('prepareSchema====>', prepareSchema);
         } else if (property.type === 'object') {
           prepareSchema = generateFormikSchemaFromFormSchema(property, fields);
         } else {

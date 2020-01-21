@@ -1,7 +1,12 @@
 import React from 'react';
 import { Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
-import { cameraSolid, imageGallery, circleDelete } from '../../../assets';
-import styles from '../../../styles/competition/competition-form.native';
+import {
+  cameraSolid,
+  imageGallery,
+  circleDelete,
+  deleteOutlineWhite
+} from '../../../assets';
+import styles from '../../../styles/add_image.native';
 import i18n from '../../../locales/i18n';
 import ImagePicker from 'react-native-image-picker';
 
@@ -20,23 +25,35 @@ const AddImage = props => {
   };
 
   const renderAsset = (image, index) => {
-    console.log(image);
+    console.log('Images====>', image);
     return (
-      <View
-        key={index}
-        style={[{ borderRadius: 4, position: 'relative', marginRight: 8 }]}
-      >
+      <View key={index} style={[{ position: 'relative', marginRight: 8 }]}>
         <Image
-          style={[styles.teaser__projectImage, { width: 200, height: 150 }]}
+          style={[styles.teaser__projectImage, { width: 300, height: 150 }]}
           source={{ uri: image }}
           // resizeMode={'cover'}
         />
-        <TouchableOpacity
-          style={[styles.competitionDeleteButton]}
-          onPress={() => props.deleteImage(index)}
-        >
-          <Image style={styles.competitionDeleteImage} source={circleDelete} />
-        </TouchableOpacity>
+        <View style={[styles.competitionDeleteButton]}>
+          <TouchableOpacity
+            onPress={() => props.deleteImage(index)}
+            style={styles.addDeleteButtonIcon}
+          >
+            <Image
+              style={{ height: 28, width: 28 }}
+              source={deleteOutlineWhite}
+            />
+            <Text
+              style={{
+                color: '#fff',
+                fontFamily: 'OpenSans-Regular',
+                fontSize: 14,
+                lineHeight: 28
+              }}
+            >
+              Remove
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   };

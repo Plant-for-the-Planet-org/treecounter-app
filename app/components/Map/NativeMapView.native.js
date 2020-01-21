@@ -484,7 +484,6 @@ class NativeMapView extends Component {
         }, 1000);
       }
     );
-    console.log(' nextProps.address', nextProps.address);
     nextProps.address && this.ref && this.ref.setAddressText(nextProps.address);
 
     // }

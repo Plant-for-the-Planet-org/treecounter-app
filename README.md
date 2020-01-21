@@ -10,7 +10,8 @@ Welcome to this repository which contains the code of the web clients and the na
 
 ## Configuration
 
-Copy `app/config/index.js.dist` to `app/config/index.js`.
+Copy `app/config/index.js.dist` to `app/config/index.js`
+Copy `.env.sample` to `.env` and add the necessary API keys for your environment.
 Install nvm following instructions from https://github.com/nvm-sh/nvm#install--update-script
 Run `nvm install && nvm use` to install and use required version of node.
 
@@ -51,7 +52,7 @@ Build and run the app in development mode deployed from Metro Bundler in an iOS 
 
 ```
 bash
-react-native run-ios
+npm run ios
 ```
 
 If you have problems with a cached version of the bundle, you can stop the Metro Bundler and manually start it with the reset cache option:
@@ -84,7 +85,7 @@ Build and run the app in development mode deployed from Metro Bundler (starts Me
 
 ```
 bash
-react-native run-android
+npm run android
 ```
 
 If you have problems with a cached version of the bundle, you can stop the Metro Bundler and manually start it with the reset cache option:

@@ -76,6 +76,11 @@ export default class DonateTrees extends React.PureComponent {
       });
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
+    console.log(
+      'got user form',
+      this.props.navigation.getParam('userForm'),
+      params
+    );
     if (params !== undefined && params.giftMethod === 'invitation') {
       this.setState({
         giftTreeCounterName:

@@ -4,18 +4,31 @@ import PropTypes from 'prop-types';
 import ContributionCard from './ContributionCard';
 
 const ContributionCardList = props => {
-  const { contributions, deleteContribution } = props;
+  const { contributions, deleteContribution, showAllContributions } = props;
 
-  return contributions.map(
-    contribution =>
-      contribution && (
-        <ContributionCard
-          contribution={contribution}
-          deleteContribution={deleteContribution}
-          key={contribution.id}
-        />
+  return contributions.length > 3 && showAllContributions
+    ? contributions.map(
+        contribution =>
+          contribution && (
+            <ContributionCard
+              contribution={contribution}
+              deleteContribution={deleteContribution}
+              key={contribution.id}
+            />
+          )
       )
-  );
+    : contributions
+        .slice(0, 3)
+        .map(
+          contribution =>
+            contribution && (
+              <ContributionCard
+                contribution={contribution}
+                deleteContribution={deleteContribution}
+                key={contribution.id}
+              />
+            )
+        );
 };
 
 ContributionCardList.propTypes = {

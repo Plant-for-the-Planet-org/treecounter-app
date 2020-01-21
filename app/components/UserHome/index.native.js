@@ -7,9 +7,13 @@ import {
   Text,
   Dimensions,
   Image,
-  Linking
+  Linking,
+  TouchableOpacity
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
+import { delimitNumbers } from './../../utils/utils';
+import { readmoreDown, readmoreUp } from './../../assets/';
+import { updateRoute } from './../../helpers/routerHelper';
 
 import styles from '../../styles/user-home';
 import tabStyles from '../../styles/common/tabbar';
@@ -19,9 +23,9 @@ import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';
-
+import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet.native';
 import i18n from '../../locales/i18n';
-
+import CompetitionSnippet from './app/CompetitionSnippet.native';
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -43,7 +47,8 @@ export default class UserHome extends Component {
         { key: 'home', title: i18n.t('label.home') },
         { key: 'my-trees', title: i18n.t('label.my_trees') }
       ],
-      index: 0
+      index: 0,
+      showAllContributions: false
     };
   }
 
@@ -106,10 +111,19 @@ export default class UserHome extends Component {
     Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
   }
 
+  readMore() {
+    this.setState({
+      showAllContributions: !this.state.showAllContributions
+    });
+    alert(this.state.showAllContributions);
+  }
+
   render() {
     const { userProfile } = this.props;
     const profileType = userProfile.type;
-    let { svgData } = this.state;
+    let { svgData, showAllContributions } = this.state;
+
+    console.log(userProfile);
     return (
       <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
         <View>
@@ -150,41 +164,267 @@ export default class UserHome extends Component {
               onToggle={toggleVal => this.updateSvg(toggleVal)}
             />
           </View>
-          <View>
-            {userProfile.synopsis1 ||
-            userProfile.synopsis2 ||
-            userProfile.linkText ||
-            userProfile.url ? (
-              <CardLayout>
-                {userProfile.synopsis1 ? (
-                  <Text style={styles.footerText}>{userProfile.synopsis1}</Text>
-                ) : null}
-                {userProfile.synopsis2 ? (
-                  <Text style={styles.footerText}>{userProfile.synopsis2}</Text>
-                ) : null}
-                {userProfile.url ? (
-                  <Text
-                    style={styles.linkText}
-                    onPress={() => this._goToURL(userProfile.url)}
-                  >
-                    {userProfile.linkText || i18n.t('label.read_more')}
-                  </Text>
-                ) : null}
-              </CardLayout>
-            ) : null}
-          </View>
-          <View>
-            {'tpo' === userProfile.type && 1 <= userProfile.plantProjects.length
-              ? null
-              : null}
-          </View>
         </View>
-        <View contentContainerStyle={{ paddingBottom: 72 }}>
-          <ContributionCardList
-            contributions={this.props.userContributions}
-            deleteContribution={this.props.deleteContribution}
-          />
+        <View style={styles.buttonViewRow}>
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={() => {
+              updateRoute('app_redeem', this.props.navigation);
+            }}
+          >
+            <Text style={styles.secondaryButtonText}>Redeem Trees</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.primaryButton}
+            onPress={() => {
+              updateRoute('app_registerTrees', this.props.navigation);
+            }}
+          >
+            <Text style={styles.primaryButtonText}>Register Trees</Text>
+          </TouchableOpacity>
         </View>
+        {userProfile.supportedTreecounter ? (
+          <View>
+            <View style={styles.dedicatedContainer}>
+              <Text style={styles.dedicatedTitle}>Dedicate my trees to</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  updateRoute('pickup_profile_modal', this.props.navigation);
+                }}
+              >
+                <Text style={styles.dedicatedEdit}>Edit</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.dedicatedContainer2}>
+              <UserProfileImage
+                profileImage={userProfile.supportedTreecounter.avatar}
+                imageType="avatar"
+                imageStyle={{
+                  height: 32,
+                  width: 32,
+                  borderRadius: 32 / 2
+                }}
+              />
+              <Text style={styles.dedicatedName}>
+                {userProfile.supportedTreecounter.displayName}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+
+        {userProfile.synopsis1 ? (
+          <View>
+            <View style={styles.dedicatedContainer}>
+              <Text style={styles.dedicatedTitle}>About</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  updateRoute('app_editProfile', this.props.navigation);
+                }}
+              >
+                <Text style={styles.dedicatedEdit}>Edit</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              {userProfile.synopsis1 ||
+              userProfile.synopsis2 ||
+              userProfile.linkText ||
+              userProfile.url ? (
+                <View>
+                  {userProfile.synopsis1 ? (
+                    <Text style={styles.footerText}>
+                      {userProfile.synopsis1}
+                    </Text>
+                  ) : null}
+                  {userProfile.synopsis2 ? (
+                    <Text style={styles.footerText}>
+                      {userProfile.synopsis2}
+                    </Text>
+                  ) : null}
+                  {userProfile.url ? (
+                    <Text
+                      style={styles.linkText}
+                      onPress={() => this._goToURL(userProfile.url)}
+                    >
+                      {userProfile.linkText || i18n.t('label.read_more')}
+                    </Text>
+                  ) : null}
+                </View>
+              ) : null}
+            </View>
+          </View>
+        ) : null}
+
+        {/* Competitions */}
+        {userProfile.treecounter.competitions.length > 0 ? (
+          <View style={{ paddingVertical: 20 }}>
+            <View style={styles.competitionsContainer}>
+              <Text style={styles.dedicatedTitle}>My Competitions</Text>
+              <TouchableOpacity>
+                <Text
+                  style={styles.dedicatedEdit}
+                  onPress={() => {
+                    updateRoute('app_competitions', this.props.navigation);
+                  }}
+                >
+                  View All
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingLeft: 20 }}
+            >
+              {userProfile.treecounter.competitions.length > 0
+                ? userProfile.treecounter.competitions.map(competition => (
+                    <CompetitionSnippet
+                      key={'competition' + competition.id}
+                      onMoreClick={id =>
+                        this.props.onMoreClick(id, competition.name)
+                      }
+                      competition={competition}
+                      type="all"
+                    />
+                  ))
+                : null}
+            </ScrollView>
+          </View>
+        ) : null}
+
+        {userProfile.plantProjects ? (
+          <Text
+            style={{
+              fontFamily: 'OpenSans-SemiBold',
+              fontSize: 17,
+              lineHeight: 23,
+              letterSpacing: 0,
+              textAlign: 'left',
+              color: '#4d5153',
+              paddingLeft: 20,
+              marginTop: 20
+            }}
+          >
+            Projects
+          </Text>
+        ) : null}
+        <ScrollView>
+          {userProfile.plantProjects
+            ? userProfile.plantProjects.map(project => (
+                <PlantProjectSnippet
+                  key={'projectFull' + project.id}
+                  //  onMoreClick={id => this.props.onMoreClick(id, project.name)}
+                  plantProject={project}
+                  //  onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
+                  showMoreButton={false}
+                  tpoName={project.tpo_name}
+                  //  selectProject={this.props.onSelectProjects}
+                  navigation={this.props.navigation}
+                />
+              ))
+            : null}
+        </ScrollView>
+
+        {this.props.userContributions.length ? (
+          <View contentContainerStyle={{ paddingBottom: 72, marginTop: 20 }}>
+            <Text
+              style={{
+                fontFamily: 'OpenSans-SemiBold',
+                fontSize: 17,
+                lineHeight: 23,
+                letterSpacing: 0,
+                textAlign: 'left',
+                color: '#4d5153',
+                paddingLeft: 20,
+                paddingBottom: 20
+              }}
+            >
+              My Trees
+            </Text>
+            <ContributionCardList
+              contributions={this.props.userContributions}
+              deleteContribution={this.props.deleteContribution}
+              showAllContributions={showAllContributions}
+            />
+          </View>
+        ) : null}
+
+        {this.props.userContributions &&
+        this.props.userContributions.length > 3 ? (
+          showAllContributions ? (
+            <View style={{ backgroundColor: '#f7f7f7', paddingVertical: 20 }}>
+              <TouchableOpacity
+                style={{
+                  width: 138,
+                  borderRadius: 30,
+                  backgroundColor: '#ffffff',
+                  borderStyle: 'solid',
+                  borderWidth: 1,
+                  borderColor: '#4d5153',
+                  alignSelf: 'center',
+                  padding: 4,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                onPress={() => this.readMore()}
+              >
+                <Image
+                  source={readmoreUp}
+                  style={{ height: 8, width: 15, marginRight: 8 }}
+                  resizeMode={'contain'}
+                />
+                <Text
+                  style={{
+                    fontFamily: 'OpenSans-SemiBold',
+                    fontSize: 14,
+                    lineHeight: 21,
+                    color: '#4d5153',
+                    textAlign: 'center'
+                  }}
+                >
+                  Show less
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={{ backgroundColor: '#f7f7f7', paddingVertical: 20 }}>
+              <TouchableOpacity
+                style={{
+                  width: 138,
+                  borderRadius: 30,
+                  backgroundColor: '#ffffff',
+                  borderStyle: 'solid',
+                  borderWidth: 1,
+                  borderColor: '#4d5153',
+                  alignSelf: 'center',
+                  padding: 4,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                onPress={() => this.readMore()}
+              >
+                <Image
+                  source={readmoreDown}
+                  style={{ height: 8, width: 15, marginRight: 8 }}
+                  resizeMode={'contain'}
+                />
+                <Text
+                  style={{
+                    fontFamily: 'OpenSans-SemiBold',
+                    fontSize: 14,
+                    lineHeight: 21,
+                    color: '#4d5153',
+                    textAlign: 'center'
+                  }}
+                >
+                  Show all
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )
+        ) : null}
       </ScrollView>
     );
   }

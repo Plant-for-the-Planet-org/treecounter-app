@@ -28,12 +28,22 @@ export default EStyleSheet.create({
     borderColor: '#fff'
   },
   footerText: {
-    color: '#686060',
-    padding: 10
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    color: '#4d5153',
+    marginTop: 16,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20
   },
   linkText: {
-    color: '$colorPrimaryAccent',
-    padding: 10
+    marginLeft: 20,
+    marginRight: 20,
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    lineHeight: 21,
+    letterSpacing: 0,
+    color: '#89b53a'
   },
   circle: {
     borderRadius: 35,
@@ -81,5 +91,93 @@ export default EStyleSheet.create({
   profileTypeStyle: {
     color: '#ffffff',
     fontSize: 15
+  },
+
+  // Button Designs
+  buttonViewRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 20
+  },
+  secondaryButton: {
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#89B53A',
+    paddingVertical: 6,
+    height: 32,
+    flex: 1,
+    justifyContent: 'center',
+    marginRight: 20
+  },
+  secondaryButtonText: {
+    fontSize: 14,
+    fontFamily: 'OpenSans-SemiBold',
+    alignSelf: 'center',
+    color: '#89B53A'
+  },
+  primaryButton: {
+    borderRadius: 16,
+    backgroundColor: '#89B53A',
+    paddingVertical: 6,
+    height: 32,
+    flex: 1,
+    justifyContent: 'center'
+  },
+  primaryButtonText: {
+    fontSize: 14,
+    fontFamily: 'OpenSans-SemiBold',
+    alignSelf: 'center',
+    color: '#fff'
+  },
+
+  // Dedicated Trees design
+
+  dedicatedContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    justifyContent: 'space-between',
+    marginTop: 20
+  },
+  dedicatedContainer2: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    marginTop: 20,
+    alignItems: 'center',
+    marginBottom: 20
+  },
+  dedicatedTitle: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 17,
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#4d5153'
+  },
+  dedicatedEdit: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#89b53a'
+  },
+  dedicatedName: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 16,
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: '#4d5153',
+    marginLeft: 10
+  },
+
+  // Competitions
+  competitionsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20
   }
 });

@@ -108,8 +108,10 @@ export const categoryIcons = {
     selected: leaderboards_indiv_green
   }
 };
+
 export function queryParamsToObject(queryParams) {
   let returnObject = {};
+  if (!queryParams) return returnObject;
   try {
     returnObject = JSON.parse(
       '{"' +
@@ -168,6 +170,7 @@ export function formatDateToMySQL(date) {
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+
 const getSuggestionValue = suggestion => `${suggestion.name}`;
 
 export function getSuggestions(value, raw) {
@@ -213,9 +216,12 @@ export function mergeContributionImages(updatedTreeContribution) {
   const newContributionImages = updatedTreeContribution.contributionImages;
   let contributionImages = [];
   contributionImages = newContributionImages.map(newContributionImage => {
-    if (newContributionImage.image.includes('base64')) {
-      let { image: imageFile } = newContributionImage;
-
+    if (
+      (newContributionImage.image || newContributionImage.imageFile).includes(
+        'base64'
+      )
+    ) {
+      let { imageFile } = newContributionImage;
       return newContributionImage.id
         ? { imageFile, id: newContributionImage.id }
         : { imageFile };
@@ -575,6 +581,7 @@ export function getISOToCountryName(code) {
   });
   return foundCountry.length ? foundCountry[0] : { country: code };
 }
+
 export function isTpo(currentUserProfile) {
   let tpo = false;
   if (currentUserProfile && currentUserProfile.type === 'tpo') {
@@ -589,6 +596,7 @@ export function generateFormikSchemaFromFormSchema(
   schemaObj = { properties: {}, required: [] },
   fields = []
 ) {
+  console.log('schemaObj====>', schemaObj);
   let validationSchemaGenerated = {};
   Object.keys(schemaObj.properties).map(key => {
     if (fields.length === 0 || fields.indexOf(key) !== -1) {
@@ -599,8 +607,12 @@ export function generateFormikSchemaFromFormSchema(
 
         let prepareSchema = Yup;
         const title = i18n.t(property.title);
-
-        if (property.type === 'object') {
+        if (property.type === 'array') {
+          prepareSchema = prepareSchema.array(
+            generateFormikSchemaFromFormSchema(property.items, fields)
+          );
+          console.log('prepareSchema====>', prepareSchema);
+        } else if (property.type === 'object') {
           prepareSchema = generateFormikSchemaFromFormSchema(property, fields);
         } else {
           if (property.type === 'string') {

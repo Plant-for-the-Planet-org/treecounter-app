@@ -7,10 +7,15 @@ import {
   Text,
   Image,
   Linking,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList
 } from 'react-native';
 import { readmoreDown, readmoreUp } from './../../assets/';
 import { updateRoute } from './../../helpers/routerHelper';
+import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
+import { getLocalRoute } from './../../actions/apiRouting';
+import { delimitNumbers } from './../../utils/utils';
+import { getImageUrl } from './../../actions/apiRouting';
 
 import styles from '../../styles/user-home';
 // import tabStyles from '../../styles/common/tabbar';
@@ -23,7 +28,7 @@ import ContributionCardList from '../UserContributions/ContributionCardList';
 import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
-
+// import NativeMapView from './../Map/NativeMapView'
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -349,6 +354,17 @@ export default class UserHome extends Component {
         {this.props.userContributions.length ? (
           <View contentContainerStyle={{ paddingBottom: 72, marginTop: 20 }}>
             <Text style={styles.sectionTitle}>{i18n.t('label.my_trees')}</Text>
+
+            {/* <NativeMapView
+              mode={'multiple-trees'}
+              mapStyle={{ height: 200 }}
+              geometry={null}
+              address={parentProps.address}
+              geoLocation={geoLocation}
+              onPress={() => {
+                parentProps.openModel(props);
+              }}
+            /> */}
             <ContributionCardList
               contributions={this.props.userContributions}
               deleteContribution={this.props.deleteContribution}
@@ -364,6 +380,11 @@ export default class UserHome extends Component {
             showMore={showAllContributions}
           />
         ) : null}
+
+        <RenderIndividualsList
+          navigation={this.props.navigation}
+          gifts={userProfile.treecounter.gifts}
+        />
       </ScrollView>
     );
   }
@@ -472,4 +493,70 @@ function DedicatedTrees(props) {
       </TouchableOpacity>
     </View>
   );
+}
+
+function RenderIndividualsList(props) {
+  const { gifts, navigation } = props;
+  const onPressListItem = (treeCounterId, title) => {
+    if (treeCounterId) {
+      navigation.navigate(getLocalRoute('app_treecounter'), {
+        treeCounterId,
+        titleParam: title
+      });
+    }
+  };
+  if (gifts) {
+    return (
+      <View style={{ marginTop: 20 }}>
+        <Text style={styles.sectionTitle}>My Supporters</Text>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={gifts}
+          renderItem={({ item, index }) => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  onPressListItem(item.id, item.giverName);
+                }}
+                style={styles.oneContryContainer}
+              >
+                <View style={styles.indexContainer}>
+                  <Text style={styles.indexText}>{index + 1}</Text>
+                </View>
+                <View style={styles.countryFlagContainer}>
+                  <Image
+                    style={styles.countryFlagImage}
+                    source={{
+                      uri: getImageUrl('profile', 'avatar', item.giverAvatar)
+                    }}
+                  />
+                </View>
+                <View style={styles.countryBody}>
+                  <Text numberOfLines={2} style={styles.countryNameText}>
+                    {item.giverName
+                      ? item.giverName
+                      : i18n.t('label.anonymous')}
+                  </Text>
+                  <Text style={styles.treesText}>
+                    <Text style={styles.treesCounter}>
+                      {delimitNumbers(item.treeCount)}{' '}
+                    </Text>
+                    {i18n.t('label.trees')}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
+    );
+  } else {
+    return (
+      <>
+        <CountryLoader />
+        <CountryLoader />
+        <CountryLoader />
+      </>
+    );
+  }
 }

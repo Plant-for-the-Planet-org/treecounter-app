@@ -269,5 +269,53 @@ export default EStyleSheet.create({
     lineHeight: 21,
     color: '#4d5153',
     textAlign: 'center'
+  },
+
+  // Support
+
+  oneContryContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    paddingLeft: 20,
+    borderWidth: 0,
+    minHeight: 80
+  },
+  indexContainer: {
+    width: 27,
+    marginRight: 10,
+    borderWidth: 0
+  },
+  indexText: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 16,
+    textAlign: 'right',
+    color: '#4d5153'
+  },
+  countryFlagContainer: {
+    flex: 0.2
+  },
+  countryFlagImage: {
+    width: 54,
+    height: 54,
+    borderRadius: 100
+  },
+  countryBody: {
+    flex: 0.7
+  },
+  countryNameText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 18,
+    color: '#4d5153',
+    lineHeight: 24
+  },
+  treesCounter: {
+    fontFamily: 'OpenSans-Bold'
+  },
+  treesText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 13,
+    color: '#4d5153',
+    lineHeight: 25
   }
 });

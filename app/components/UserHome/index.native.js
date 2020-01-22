@@ -381,10 +381,10 @@ export default class UserHome extends Component {
           />
         ) : null}
 
-        <RenderIndividualsList
+        {/* <RenderIndividualsList
           navigation={this.props.navigation}
           gifts={userProfile.treecounter.gifts}
-        />
+        /> */}
       </ScrollView>
     );
   }

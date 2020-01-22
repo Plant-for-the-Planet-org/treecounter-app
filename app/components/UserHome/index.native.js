@@ -7,15 +7,15 @@ import {
   Text,
   Image,
   Linking,
-  TouchableOpacity,
-  FlatList
+  TouchableOpacity
+  // FlatList
 } from 'react-native';
 import { readmoreDown, readmoreUp } from './../../assets/';
 import { updateRoute } from './../../helpers/routerHelper';
-import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
+// import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import { getLocalRoute } from './../../actions/apiRouting';
-import { delimitNumbers } from './../../utils/utils';
-import { getImageUrl } from './../../actions/apiRouting';
+// import { delimitNumbers } from './../../utils/utils';
+// import { getImageUrl } from './../../actions/apiRouting';
 
 import styles from '../../styles/user-home';
 // import tabStyles from '../../styles/common/tabbar';
@@ -503,68 +503,68 @@ function DedicatedTrees(props) {
   );
 }
 
-function RenderIndividualsList(props) {
-  const { gifts, navigation } = props;
-  const onPressListItem = (treeCounterId, title) => {
-    if (treeCounterId) {
-      navigation.navigate(getLocalRoute('app_treecounter'), {
-        treeCounterId: treeCounterId,
-        titleParam: title
-      });
-    }
-  };
-  if (gifts) {
-    return (
-      <View style={{ marginTop: 20 }}>
-        <Text style={styles.sectionTitle}>My Supporters</Text>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={gifts}
-          renderItem={({ item, index }) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  onPressListItem(item.id, item.giverName);
-                }}
-                style={styles.oneContryContainer}
-              >
-                <View style={styles.indexContainer}>
-                  <Text style={styles.indexText}>{index + 1}</Text>
-                </View>
-                <View style={styles.countryFlagContainer}>
-                  <Image
-                    style={styles.countryFlagImage}
-                    source={{
-                      uri: getImageUrl('profile', 'avatar', item.giverAvatar)
-                    }}
-                  />
-                </View>
-                <View style={styles.countryBody}>
-                  <Text numberOfLines={2} style={styles.countryNameText}>
-                    {item.giverName
-                      ? item.giverName
-                      : i18n.t('label.anonymous')}
-                  </Text>
-                  <Text style={styles.treesText}>
-                    <Text style={styles.treesCounter}>
-                      {delimitNumbers(item.treeCount)}{' '}
-                    </Text>
-                    {i18n.t('label.trees')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
-    );
-  } else {
-    return (
-      <>
-        <CountryLoader />
-        <CountryLoader />
-        <CountryLoader />
-      </>
-    );
-  }
-}
+// function RenderIndividualsList(props) {
+//   const { gifts, navigation } = props;
+//   const onPressListItem = (treeCounterId, title) => {
+//     if (treeCounterId) {
+//       navigation.navigate(getLocalRoute('app_treecounter'), {
+//         treeCounterId: treeCounterId,
+//         titleParam: title
+//       });
+//     }
+//   };
+//   if (gifts) {
+//     return (
+//       <View style={{ marginTop: 20 }}>
+//         <Text style={styles.sectionTitle}>My Supporters</Text>
+//         <FlatList
+//           showsVerticalScrollIndicator={false}
+//           data={gifts}
+//           renderItem={({ item, index }) => {
+//             return (
+//               <TouchableOpacity
+//                 onPress={() => {
+//                   onPressListItem(item.id, item.giverName);
+//                 }}
+//                 style={styles.oneContryContainer}
+//               >
+//                 <View style={styles.indexContainer}>
+//                   <Text style={styles.indexText}>{index + 1}</Text>
+//                 </View>
+//                 <View style={styles.countryFlagContainer}>
+//                   <Image
+//                     style={styles.countryFlagImage}
+//                     source={{
+//                       uri: getImageUrl('profile', 'avatar', item.giverAvatar)
+//                     }}
+//                   />
+//                 </View>
+//                 <View style={styles.countryBody}>
+//                   <Text numberOfLines={2} style={styles.countryNameText}>
+//                     {item.giverName
+//                       ? item.giverName
+//                       : i18n.t('label.anonymous')}
+//                   </Text>
+//                   <Text style={styles.treesText}>
+//                     <Text style={styles.treesCounter}>
+//                       {delimitNumbers(item.treeCount)}{' '}
+//                     </Text>
+//                     {i18n.t('label.trees')}
+//                   </Text>
+//                 </View>
+//               </TouchableOpacity>
+//             );
+//           }}
+//         />
+//       </View>
+//     );
+//   } else {
+//     return (
+//       <>
+//         <CountryLoader />
+//         <CountryLoader />
+//         <CountryLoader />
+//       </>
+//     );
+//   }
+// }

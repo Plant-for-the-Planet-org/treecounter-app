@@ -57,6 +57,7 @@ jobs:
           command: |
             source $ENV_VARS
             echo $SERVER_URL
+            cp .env.sample .env
             cp app/config/index.js.dist app/config/index.js
             sed -i "s/test.trilliontreecampaign.org/$SERVER_URL/" app/config/index.js
             if [[ "${CIRCLE_BRANCH}" == "master" ]]
@@ -150,6 +151,7 @@ jobs:
           command: |
             source $ENV_VARS
             echo $SERVER_URL
+            ssh $HOST "cd $WD_REACT; cp .env.sample .env"
             ssh $HOST "cd $WD_REACT; cp app/config/index.js.dist app/config/index.js"
             ssh $HOST "cd $WD_REACT; sed -i 's/test.trilliontreecampaign.org/'$SERVER_URL'/' app/config/index.js"
             if [[ "${CIRCLE_BRANCH}" == "master" ]]
@@ -193,7 +195,9 @@ jobs:
             - node_modules
       - run:
           name: Setup local configuration
-          command: cp app/config/index.js.dist app/config/index.js
+          command: |
+            cp .env.sample .env
+            cp app/config/index.js.dist app/config/index.js
       - run:
           name: Linting
           command: npm run lint:errors

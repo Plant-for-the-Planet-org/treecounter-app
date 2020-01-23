@@ -11,7 +11,6 @@ import { setCdnMedia } from '../reducers/configReducer';
 let cdnMedia = {};
 export function fetchLocation() {
   return dispatch => {
-    dispatch(fetchConfig());
     if (!getItemSync('preferredCurrency')) {
       getRequest('public_ipstack')
         .then(data => {

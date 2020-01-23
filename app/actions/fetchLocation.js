@@ -38,7 +38,9 @@ export function fetchConfig() {
       .then(data => {
         console.log('Got config fetch data:', data.data);
         cdnMedia = data.data.cdnMedia;
-        dispatch(setCdnMedia(data.data.cdnMedia));
+
+        // for now we are not storing those in redux, please uncomment this when you need these urls in your components
+        // dispatch(setCdnMedia(data.data.cdnMedia));
       })
 
       .catch(error => {

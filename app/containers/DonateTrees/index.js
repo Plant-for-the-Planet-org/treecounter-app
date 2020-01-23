@@ -67,11 +67,7 @@ class DonationTreesContainer extends PureComponent {
     if (this.props.selectedProject && !this.props.selectedProject.tpoData) {
       this.props.loadProject({ id: this.props.selectedProject.id });
     }
-    console.log(
-      ' in donation got selectedPlant project',
-      selectedProjectId,
-      this.props.navigation.getParam('id')
-    );
+
     // this causes a redraw
     typeof selectedProjectId == 'number' &&
       this.props.selectPlantProjectAction(selectedProjectId);

@@ -519,9 +519,6 @@ export default class DonateTrees extends Component {
                       }
                       selectedTreeCount={this.state.selectedTreeCount}
                       onChange={this.handleTreeCountCurrencyChange}
-                      giftTreeCounterName={this.props.navigation.getParam(
-                        'userForm'
-                      )}
                     />
                   ) : null}
                 </div>

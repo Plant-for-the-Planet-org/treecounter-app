@@ -7,7 +7,7 @@ import countryCodes from '../assets/countryCodes.json';
 import supportedCurrency from '../assets/supportedCurrency.json';
 import { find } from 'lodash';
 import { setCurrencyAction } from './globalCurrency';
-import { setCdnMedia } from '../reducers/configReducer';
+// import { setCdnMedia } from '../reducers/configReducer';
 let cdnMedia = {};
 export function fetchLocation() {
   return dispatch => {
@@ -32,7 +32,7 @@ export function getCdnMediaUrl() {
   return cdnMedia;
 }
 export function fetchConfig() {
-  return dispatch => {
+  return () => {
     // if (!getItemSync('preferredCurrency')) {
     getRequest('config_get')
       .then(data => {

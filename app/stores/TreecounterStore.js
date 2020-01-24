@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import Reactotron from '../../ReactotronConfig';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
 import middlewares from './middlewares';
@@ -40,6 +41,9 @@ export default function configureStore() {
   return createStore(
     reducers,
     commonInitialState,
-    composeEnhancers(applyMiddleware(...middleware))
+    composeEnhancers(
+      applyMiddleware(...middleware),
+      Reactotron.createEnhancer()
+    )
   );
 }

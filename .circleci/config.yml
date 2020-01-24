@@ -8,7 +8,7 @@ jobs:
   # build the app in the cloud and deploy it onto the dedicated backends
   build:
     docker:
-      - image: circleci/node:10.11-jessie
+      - image: circleci/node:12.14.1
     environment:
       HOST: ssh-840600-pftp2014@jetzt-die-welt-retten.de
       PROJ_DIR: /kunden/188089_20457/pftp2014/source
@@ -174,7 +174,7 @@ jobs:
   # build the app in the cloud to check for eslint or compilation errors
   build_gitflow:
     docker:
-      - image: circleci/node:10.11-jessie
+      - image: circleci/node:12.14.1
     working_directory: ~/ttc-app
     steps:
       - checkout

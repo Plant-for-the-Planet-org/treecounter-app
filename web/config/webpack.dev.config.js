@@ -20,7 +20,6 @@ module.exports = webpackMerge(commonConfig, {
     filename: '[name].js',
     publicPath: '/'
   },
-
   devtool: 'source-map',
   devServer: {
     inline: true,

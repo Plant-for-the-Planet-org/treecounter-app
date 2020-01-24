@@ -24,6 +24,7 @@ import {
   createPaymentGift,
   createPaymentDonation
 } from '../../actions/donateAction';
+import { loadProject } from '../../actions/loadTposAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
 import { updateRoute } from '../../helpers/routerHelper';
@@ -51,11 +52,26 @@ class DonationTreesContainer extends PureComponent {
         .catch(error => console.log(error));
     }
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedProject && !nextProps.selectedProject.tpoData) {
+      this.props.loadProject({ id: nextProps.selectedProject.id });
+    }
+  }
   componentDidMount() {
     let selectedProjectId = undefined;
     if (this.props.match) {
       selectedProjectId = parseInt(this.props.match.params.id);
     }
+    if (this.props.navigation.getParam('id'))
+      selectedProjectId = parseInt(this.props.navigation.getParam('id'));
+    if (this.props.selectedProject && !this.props.selectedProject.tpoData) {
+      this.props.loadProject({ id: this.props.selectedProject.id });
+    }
+    console.log(
+      ' in donation got selectedPlant project',
+      selectedProjectId,
+      this.props.navigation.getParam('id')
+    );
     // this causes a redraw
     typeof selectedProjectId == 'number' &&
       this.props.selectPlantProjectAction(selectedProjectId);
@@ -117,6 +133,7 @@ const mapDispatchToProps = dispatch => {
       selectPlantProjectAction,
       fetchCurrencies,
       paymentClear,
+      loadProject,
       clearPlantProject,
       setProgressModelState,
       loadUserProfile,

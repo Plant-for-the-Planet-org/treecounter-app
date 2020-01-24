@@ -37,7 +37,6 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProject from '../../containers/SelectedPlantProject';
 import SelectedCompetition from '../../containers/SelectedCompetition';
-import RedemptionContainer from '../../containers/RedemptionContainer';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
@@ -56,6 +55,14 @@ import AddReview from './../Reviews/AddReview/AddReview';
 import PDFViewer from '../PDFViewer';
 import createCompeition from './../Competition/Tabs/createCompetition.native';
 import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
+import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
+import AddTrees from '../Redemption/app/AddTrees.native';
+import CountriesLeaderBoard from '../../components/LeaderboardRefresh/Countries/CountriesLeaderBoard';
+import CountryDetails from '../../components/LeaderboardRefresh/Countries/CountryDetails';
+import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeaderBoard';
+import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
+import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
+import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -70,7 +77,6 @@ const headerLabels = {
   [getLocalRoute('app_userHome')]: 'Trillion Tree Campaign',
   [getLocalRoute('app_editTrees')]: 'label.edit_trees',
   [getLocalRoute('app_editProfile')]: 'label.edit_profile',
-  [getLocalRoute('app_redeem')]: 'label.redeem_trees',
   [getLocalRoute('app_competitions')]: 'label.competitions',
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
@@ -117,7 +123,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_accountActivation')]: {
         screen: ActivateAccountContainer
       },
-      [getLocalRoute('app_faq')]: FAQContainer,
       ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
       ['about_us']: { screen: AboutUsContainer },
@@ -129,12 +134,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_privacy')]: {
         screen: PrivacyContainer
       },
-      [getLocalRoute('app_redeem')]: {
-        screen: RedemptionContainer
-      },
-      [getLocalRoute('app_claim')]: {
-        screen: RedemptionContainer
-      },
+      // [getLocalRoute('app_claim')]: {
+      //   screen: RedemptionContainer
+      // },
       [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
@@ -320,6 +322,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetition : LoginContainer
       },
+      [getLocalRoute('app_faq')]: FAQContainer,
+
       [getLocalRoute('app_editCompetition')]: {
         screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
       },
@@ -350,7 +354,44 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       ['app_unfulfilled_pledge_events']: {
         screen: UnfulfilledPledgeEvents
       },
-      ['contribution_details']: { screen: UserContributionDetails }
+      ['contribution_details']: {
+        screen: UserContributionDetails
+      },
+      ['app_redeem']: {
+        screen: isLoggedIn ? RedemptionContainer : LoginContainer,
+        path: 'redeem/:type/:code'
+      },
+      ['app_claim']: {
+        screen: isLoggedIn ? RedemptionContainer : LoginContainer,
+        path: 'claim/:type/:code'
+      },
+      ['redeem_add_trees']: {
+        screen: AddTrees
+      },
+      ['countries_leaderboard']: {
+        screen: CountriesLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['country_details_leaderboard']: {
+        screen: CountryDetails,
+        navigationOptions: { header: null }
+      },
+      ['companies_leaderboard']: {
+        screen: CompaniesLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['schools_leaderboard']: {
+        screen: SchoolsLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['individuals_leaderboard']: {
+        screen: IndividualsLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['tpo_LeaderBoard']: {
+        screen: tpoLeaderBoard,
+        navigationOptions: { header: null }
+      }
     },
     {
       defaultNavigationOptions: ({ navigation }) => {
@@ -375,7 +416,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
 
   const AppNavigator = createDrawerNavigator(
     {
-      appStackNavigator,
+      appStackNavigator: {
+        screen: appStackNavigator,
+        path: ''
+      },
       searchNavigator: searchNavigator,
       deleteProfileNavigator,
       deleteContributionNavigator,

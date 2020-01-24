@@ -22,7 +22,7 @@ import { getISOToCountryName } from '../../helpers/utils';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
+import { loadProject } from '../../actions/loadTposAction';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SingleRating from '../Reviews/SingleRating';
@@ -35,7 +35,7 @@ class PlantProjectSnippetDetails extends PureComponent {
   // toggleExpanded(id) {
   //   this.props.onMoreClick(id);
   // }
-
+  state = { leafDetails: false };
   containerPress = () => {
     if (this.props.onMoreClick) {
       const { id, name } = this.props.plantProject;
@@ -53,6 +53,9 @@ class PlantProjectSnippetDetails extends PureComponent {
         .concat('.')
     );
   }
+  cap(str) {
+    return str[0].toUpperCase() + str.substr(1);
+  }
   render() {
     const {
       // eslint-disable-next-line no-unused-vars
@@ -66,10 +69,11 @@ class PlantProjectSnippetDetails extends PureComponent {
       countTarget,
       currency,
       treeCost,
-      paymentSetup,
+      taxDeductibleCountries,
       survivalRate,
       // images,
       imageFile,
+      image,
       reviewScore: plantProjectRating,
       reviews,
       survivalRateStatus
@@ -92,8 +96,8 @@ class PlantProjectSnippetDetails extends PureComponent {
     //   treeCountWidth = treePlantedRatio * 100;
     // }
 
-    if (imageFile) {
-      projectImage = { image: imageFile };
+    if (imageFile || image) {
+      projectImage = { image: imageFile || image };
     } else {
       projectImage = plantProjectImages && plantProjectImages.find(() => true);
     }
@@ -111,7 +115,7 @@ class PlantProjectSnippetDetails extends PureComponent {
       survivalRate,
       currency,
       treeCost,
-      taxDeduction: paymentSetup.taxDeduction
+      taxDeductibleCountries
     };
     const survivalRateLeaf =
       survivalRateStatus == 'verified'
@@ -119,6 +123,7 @@ class PlantProjectSnippetDetails extends PureComponent {
         : survivalRateStatus == 'self-reported'
           ? leafGray
           : null;
+    const survivalColor = survivalRateStatus == 'verified' ? '#89b53a' : 'gray';
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
@@ -219,31 +224,110 @@ class PlantProjectSnippetDetails extends PureComponent {
 
                 <View style={styles.iconTextRow}>
                   <Image source={survival_grey} style={styles.iconImage} />
-                  <View style={[styles.survivalText, { flexDirection: 'row' }]}>
-                    <Text style={[styles.survivalText, { marginRight: 8 }]}>
+                  <View
+                    style={[
+                      styles.survivalText,
+                      {
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        paddingTop: 5,
+                        paddingBottom: 5
+                      }
+                    ]}
+                  >
+                    <Text style={[styles.survivalText, { marginRight: 5 }]}>
                       {specsProps.survivalRate}% {i18n.t('label.survival_rate')}
                     </Text>
                     {survivalRateLeaf ? (
-                      <Image
-                        source={survivalRateLeaf}
-                        style={{
-                          width: 13,
-                          height: 13
+                      <TouchableOpacity
+                        onPress={() => {
+                          this.setState({
+                            leafDetails: !this.state.leafDetails
+                          });
                         }}
-                      />
+                        style={{
+                          height: 24,
+                          hidth: 24
+                        }}
+                      >
+                        {!this.state.leafDetails ? (
+                          <View
+                            style={{
+                              minHeight: 24,
+                              minWidth: 24,
+                              padding: 3,
+
+                              paddingLeft: 5,
+                              paddingRight: 10,
+                              justifyContent: 'center',
+                              alignItems: 'center'
+                            }}
+                          >
+                            <Image
+                              source={survivalRateLeaf}
+                              style={{
+                                width: 16,
+                                height: 16
+                              }}
+                            />
+                          </View>
+                        ) : (
+                          <View
+                            style={{
+                              borderRadius: 24,
+                              padding: 2,
+                              paddingLeft: 10,
+                              paddingRight: 10,
+                              borderColor: survivalColor,
+                              borderWidth: 1
+                            }}
+                          >
+                            <Text
+                              style={[
+                                styles.survivalText,
+                                { color: survivalColor }
+                              ]}
+                            >
+                              {survivalRateStatus
+                                ? this.cap(survivalRateStatus)
+                                : ''}
+                            </Text>
+                          </View>
+                        )}
+                      </TouchableOpacity>
                     ) : null}
                   </View>
                 </View>
 
-                <View style={styles.iconTextRow}>
-                  <Image source={tax_grey} style={styles.iconImage} />
-                  <Text style={styles.survivalText}>
-                    {this.getTaxCountries()
-                      ? `${i18n.t('label.tax_deductible')} ${i18n.t(
-                          'label.in'
-                        )} ${this.getTaxCountries()}`
-                      : i18n.t('label.no_tax_deduction')}
-                  </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                    <Image
+                      source={tax_grey}
+                      style={{
+                        width: 17,
+                        height: 17,
+                        marginRight: 10
+                      }}
+                    />
+                    <Text
+                      style={[
+                        styles.survivalText,
+                        {
+                          marginRight: 20,
+                          flex: 1,
+                          flexWrap: 'wrap',
+                          paddingRight: 20
+                        }
+                      ]}
+                    >
+                      {this.getTaxCountries()
+                        ? `${i18n.t('label.tax_deductible')} ${i18n.t(
+                            'label.in'
+                          )} ${this.getTaxCountries()}`
+                        : i18n.t('label.no_tax_deduction')}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -273,7 +357,7 @@ PlantProjectSnippetDetails.propTypes = {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      fetchPlantProjectDetail,
+      loadProject,
       selectPlantProjectAction
     },
     dispatch

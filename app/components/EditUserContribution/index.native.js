@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
-import CardLayout from '../Common/Card';
 import {
   singleTreeRegisterFormSchema,
   schemaOptionsSingleTree,
   multipleTreesRegisterFormSchema,
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
-import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab';
+import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab.native';
 import i18n from '../../locales/i18n.js';
+import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class EditUserContribution extends Component {
   static mode = {
@@ -25,10 +25,14 @@ export default class EditUserContribution extends Component {
     } else {
       mode = EditUserContribution.mode.singleTree;
     }
+
     this.state = {
       mode: mode
     };
-
+    this.plantProjects = getPlantProjectEnum(
+      this.props.currentUserProfile,
+      this.props.plantProjects
+    );
     // Bind Local method
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
@@ -39,26 +43,34 @@ export default class EditUserContribution extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <CardLayout>
-          <RegisterTreeTab
-            buttonTitle={i18n.t('label.update')}
-            onRegister={this.props.onSubmit}
-            mode={this.state.mode}
-            schemaType={
-              this.state.mode == 'single-tree'
-                ? singleTreeRegisterFormSchema
-                : multipleTreesRegisterFormSchema
-            }
-            schemaOptions={
-              this.state.mode == 'single-tree'
-                ? schemaOptionsSingleTree
-                : schemaOptionsMultipleTrees
-            }
-            value={this.props.userContribution}
-          />
-        </CardLayout>
-      </ScrollView>
+      <KeyboardAwareScrollView
+        enableOnAndroid
+        contentContailnerStyle={{ justifyContent: 'center' }}
+        extraHeight={66}
+        keyboardShouldPersistTaps={'handled'}
+        extraScrollHeight={50}
+        enableResetScrollToCoords={false}
+      >
+        <RegisterTreeTab
+          buttonTitle={i18n.t('label.update')}
+          onRegister={this.props.onSubmit}
+          mode={this.state.mode}
+          plantProjects={this.plantProjects}
+          schemaType={
+            this.state.mode == 'single-tree'
+              ? singleTreeRegisterFormSchema
+              : multipleTreesRegisterFormSchema
+          }
+          isTpo={isTpo(this.props.currentUserProfile)}
+          schemaOptions={
+            this.state.mode == 'single-tree'
+              ? schemaOptionsSingleTree
+              : schemaOptionsMultipleTrees
+          }
+          value={this.props.userContribution}
+          isEdit
+        />
+      </KeyboardAwareScrollView>
     );
   }
 }

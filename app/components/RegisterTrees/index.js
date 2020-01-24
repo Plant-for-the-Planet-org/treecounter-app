@@ -139,7 +139,11 @@ export default class RegisterTrees extends Component {
             : null;
     }
 
-    this.props.onSubmit(this.state.mode, null, plantProject);
+    this.props.onSubmit(
+      this.state.mode,
+      this.registerTreeForm.getValue(),
+      plantProject
+    );
     event.preventDefault();
   }
 
@@ -198,7 +202,7 @@ export default class RegisterTrees extends Component {
             >
               {isSingleTree ? (
                 <TCombForm
-                  ref="registerTreeForm"
+                  ref={ref => (this.registerTreeForm = ref)}
                   type={singleTreeRegisterFormSchema}
                   options={formSchemaOptions}
                   value={this.state.formValueSingle}

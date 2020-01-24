@@ -1,7 +1,8 @@
-import Reactotron from 'reactotron-react-native';
+import Reactotron from 'reactotron-react-js';
+import { reactotronRedux } from 'reactotron-redux';
 
-Reactotron.configure() // controls connection & communication settings
-  .useReactNative() // add all built-in react native plugins
+const reactotron = Reactotron.configure() // controls connection & communication settings
+  .use(reactotronRedux())
   .connect(); // let's connect!
 // uncomment the following lines and use the command
 //    adb reverse tcp:9090 tcp:9090
@@ -11,3 +12,5 @@ Reactotron.configure() // controls connection & communication settings
 //   host: '10.1.0.22', // server ip
 //   port: 9090
 // }); // let's connect!
+
+export default reactotron;

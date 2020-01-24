@@ -7,27 +7,27 @@ import React, { Component } from 'react';
 //TODO import this first to avoid any init issue of i18n
 import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNavigatorContainer';
 import { connect } from 'react-redux';
-import { loadTpos } from '../../actions/loadTposAction';
 import { bindActionCreators } from 'redux';
 import { SafeAreaView } from 'react-navigation';
 import { initLocale } from '../../actions/getLocale.native.js';
 import { fetchCurrencies } from '../../actions/currencies';
+import { fetchConfig } from '../../actions/fetchLocation';
 class App extends Component {
   componentDidMount() {
     initLocale();
     this.props.fetchCurrencies();
+    this.props.fetchConfig();
     // TODO: at this time the locale isn't yet defined, so this API call is currently done with locale = undefined
     // Is there any way to wait with this API call until the locale is defined?
-    this.props.loadTpos();
   }
   render() {
-    const backgroundColor = 'white';
+    const backgroundColor = 'transparent';
     return (
       <SafeAreaView
         forceInset={{ top: 'never', bottom: 'always' }}
         style={{ flex: 1, backgroundColor: backgroundColor }}
       >
-        <AppDrawerNavigatorContainer />
+        <AppDrawerNavigatorContainer uriPrefix={'weplant://'} />
       </SafeAreaView>
     );
   }
@@ -41,9 +41,9 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchCurrencies,
+      fetchConfig
       // loadUserProfile,
       // NotificationAction,
-      loadTpos
     },
     dispatch
   );

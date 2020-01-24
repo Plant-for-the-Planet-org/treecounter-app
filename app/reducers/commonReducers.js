@@ -6,6 +6,7 @@ import userFeedReducer from './userFeedReducer';
 import fetchPledgesReducer from './pledgeReducer';
 import currenciesReducer from './currenciesReducer';
 import currencyReducer from './currencyReducer';
+import configReducer from './configReducer';
 import paymentStatusReducer from './paymentStatus';
 import modelDialogReducer from './modelDialogReducer';
 import contentloaderReducer from './contentloaderReducer';
@@ -23,6 +24,7 @@ const commonReducers = {
   pledges: fetchPledgesReducer,
   currencies: currenciesReducer,
   currency: currencyReducer,
+  cdnMedia: configReducer,
   paymentStatus: paymentStatusReducer,
   modelDialogState: modelDialogReducer,
   contentloaderState: contentloaderReducer,

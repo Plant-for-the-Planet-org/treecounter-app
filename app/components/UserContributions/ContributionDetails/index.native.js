@@ -129,7 +129,10 @@ class UserContributionsDetails extends React.Component {
           onClickDelete={() => {
             this.props.navigation.navigate('delete_contribution', {
               deleteContribution: () =>
-                this.props.deleteContribution(this.props.contribution.id)
+                this.props.deleteContribution(
+                  this.props.contribution.id,
+                  this.props.navigation
+                )
             });
           }}
           onClickEdit={() => {

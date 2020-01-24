@@ -2,12 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlantProjectSpecsItem from './PlantProjectSpecsItem';
 import i18n from '../../locales/i18n.js';
-
+import { getISOToCountryName } from '../../helpers/utils';
 import { locationIcon, tree_survival } from '../../assets';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectSpecs
  */
 const PlantProjectSpecs = ({ location, survivalRate, taxDeduction }) => {
+  const getTaxCountries = () => {
+    return (
+      taxDeduction &&
+      taxDeduction.length &&
+      taxDeduction
+        .map(country => getISOToCountryName(country).country)
+        .join(', ')
+        .concat('.')
+    );
+  };
   return (
     <div className="project-specs-left__container">
       <PlantProjectSpecsItem icon={locationIcon} label={location} />
@@ -25,7 +35,7 @@ const PlantProjectSpecs = ({ location, survivalRate, taxDeduction }) => {
               ' ' +
               i18n.t('label.in') +
               ' ' +
-              taxDeduction.join(', ')}
+              getTaxCountries()}
           </div>
         ) : null}
       </div>

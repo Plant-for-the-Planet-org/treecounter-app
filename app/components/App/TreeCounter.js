@@ -63,7 +63,6 @@ const PublicTreecounterContainer = lazy(() =>
 const UserHomeContainer = lazy(() => import('../../containers/UserHome'));
 const Trillion = lazy(() => import('../TreecounterGraphics/Trillion'));
 
-import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { NotificationAction } from '../../actions/notificationAction';
 import { getAccessToken } from '../../utils/user';
@@ -111,7 +110,7 @@ const RedirectedPrivateAcceptEmail = lazy(() =>
 );
 
 import { initLocale } from '../../actions/getLocale';
-import { fetchLocation } from '../../actions/fetchLocation';
+import { fetchLocation, fetchConfig } from '../../actions/fetchLocation';
 import { fetchCurrencies } from '../../actions/currencies';
 
 // Class implementation
@@ -134,9 +133,10 @@ class TreeCounter extends Component {
       isAndroid: IS_ANDROID,
       isCancelled: false
     };
+    initLocale();
     this.props.fetchLocation();
     this.props.fetchCurrencies();
-    initLocale();
+    this.props.fetchConfig();
   }
 
   _appRoutes = undefined;
@@ -158,7 +158,6 @@ class TreeCounter extends Component {
   }
 
   componentDidMount() {
-    this.props.loadTpos();
     this.props.fetchpledgeEventsAction();
   }
 
@@ -432,9 +431,9 @@ const mapDispatchToProps = dispatch => {
     {
       fetchCurrencies,
       fetchLocation,
+      fetchConfig,
       loadUserProfile,
       NotificationAction,
-      loadTpos,
       fetchpledgeEventsAction
     },
     dispatch
@@ -447,7 +446,6 @@ TreeCounter.propTypes = {
   userProfile: PropTypes.object,
   loadUserProfile: PropTypes.func,
   NotificationAction: PropTypes.func,
-  loadTpos: PropTypes.func,
   dispatch: PropTypes.func,
   fetchpledgeEventsAction: PropTypes.func
 };

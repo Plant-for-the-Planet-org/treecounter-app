@@ -8,6 +8,7 @@ import { getAccessToken } from '../../utils/user';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from '../../selectors';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import ProgressModal from '../../components/Common/ModalDialog/ProgressModal.native';
 import { View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
@@ -99,6 +100,7 @@ class AppDrawerNavigatorContainer extends Component {
       return (
         <View style={{ flex: 1 }}>
           <this._AppNavigator />
+          <ProgressModal />
         </View>
       );
     }

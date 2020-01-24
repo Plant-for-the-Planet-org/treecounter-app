@@ -362,11 +362,13 @@ class ContributionCard extends React.Component {
                 {treeCount > 1 ? i18n.t('label.trees') : i18n.t('label.tree')}
               </Text>
             </View>
-            <View style={styles.row2}>
-              <Text style={styles.redeemObjectSubTitle}>
-                {dedicateActionLine}
-              </Text>
-            </View>
+            {dedicateActionLine ? (
+              <View style={styles.row2}>
+                <Text style={styles.redeemObjectSubTitle}>
+                  {dedicateActionLine}
+                </Text>
+              </View>
+            ) : null}
           </View>
         </View>
       </TouchableOpacity>

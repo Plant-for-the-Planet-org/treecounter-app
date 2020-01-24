@@ -14,19 +14,17 @@ export default EStyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    elevation: 3
-  },
   userProfileContainer: {
-    flexDirection: 'row',
     padding: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    alignItems: 'center'
   },
   userProfileImage: {
-    borderWidth: 5,
-    borderColor: '#fff'
+    borderWidth: 4,
+    borderColor: '#F4F2F7',
+    width: 100,
+    height: 100,
+    borderRadius: 50
   },
   footerText: {
     fontFamily: 'OpenSans-Regular',
@@ -59,7 +57,10 @@ export default EStyleSheet.create({
     flexDirection: 'column'
   },
   userInfoName: {
-    marginBottom: 10
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   svgContainer: {
     width: squareDimension,
@@ -78,8 +79,14 @@ export default EStyleSheet.create({
     borderRadius: 50 / 2
   },
   nameStyle: {
-    fontSize: 17,
-    color: '$textColor'
+    fontSize: 21,
+    color: '$textColor',
+    fontFamily: 'OpenSans-Bold'
+  },
+  nameStyle2: {
+    fontSize: 21,
+    color: '$textColor',
+    fontFamily: 'OpenSans-Regular'
   },
   userInfoProfileType: {
     flexDirection: 'row'
@@ -108,7 +115,9 @@ export default EStyleSheet.create({
     height: 32,
     flex: 1,
     justifyContent: 'center',
-    marginRight: 20
+    marginRight: 20,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   secondaryButtonText: {
     fontSize: 14,

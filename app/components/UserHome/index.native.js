@@ -24,11 +24,13 @@ import * as images from '../../assets';
 // import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
-import ContributionCardList from '../UserContributions/ContributionCardList';
+import ContributionCardList from '../UserContributions/ContributionCardList.native';
 import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +49,8 @@ export default class UserHome extends Component {
       index: 0,
       showAllContributions: false,
       showAllRecurrentContributions: false,
-      recurrentUserContributions: []
+      recurrentUserContributions: [],
+      readMore: false
     };
   }
   componentDidMount() {
@@ -168,6 +171,12 @@ export default class UserHome extends Component {
     }));
   }
 
+  setReadMore() {
+    this.setState(prevState => ({
+      readMore: !prevState.readMore
+    }));
+  }
+
   showRecurrentMore() {
     this.setState(prevState => ({
       showAllRecurrentContributions: !prevState.showAllRecurrentContributions
@@ -188,7 +197,7 @@ export default class UserHome extends Component {
     return (
       <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
         <View>
-          <View style={styles.header}>
+          <View>
             <View style={styles.userProfileContainer}>
               <UserProfileImage
                 imageStyle={styles.userProfileImage}
@@ -197,24 +206,47 @@ export default class UserHome extends Component {
 
               <View style={styles.userInfo}>
                 <View style={styles.userInfoName}>
-                  <Text style={styles.nameStyle}>
-                    {userProfile.treecounter.displayName}
-                  </Text>
+                  <Text style={styles.nameStyle}>{userProfile.firstname}</Text>
+                  <Text style={styles.nameStyle2}> {userProfile.lastname}</Text>
                 </View>
-                <View style={styles.userInfoProfileType}>
-                  <Image
-                    style={styles.profileTypeImage}
-                    resizeMode="contain"
-                    source={
-                      profileType === 'education'
-                        ? images['schoolIcon']
-                        : profileType === 'tpo'
-                          ? images['tpoIcon']
-                          : profileType === 'company'
-                            ? images['companyIcon']
-                            : images['individualIcon']
-                    }
-                  />
+
+                <View style={[styles.buttonViewRow, { width: '100%' }]}>
+                  <View style={styles.userInfoProfileType}>
+                    <Image
+                      style={styles.profileTypeImage}
+                      resizeMode="contain"
+                      source={
+                        profileType === 'education'
+                          ? images['schoolIcon']
+                          : profileType === 'tpo'
+                            ? images['tpoIcon']
+                            : profileType === 'company'
+                              ? images['companyIcon']
+                              : images['individualIcon']
+                      }
+                    />
+                  </View>
+                  <TouchableOpacity
+                    style={[styles.primaryButton, { marginRight: 20 }]}
+                    onPress={() => {
+                      updateRoute('app_editProfile', this.props.navigation);
+                    }}
+                  >
+                    <Text style={styles.primaryButtonText}>
+                      {i18n.t('label.edit_profile')}
+                    </Text>
+                  </TouchableOpacity>
+                  {/* <TouchableOpacity
+                    style={styles.secondaryButton}
+                    onPress={() => {
+                     // Function For Sharing to be written here
+                    }}
+                  >
+                    <Icon solid name={'paper-plane'} color="#89B53A" size={15} />
+                    <Text style={[styles.secondaryButtonText, { marginLeft: 6 }]}>
+                      {i18n.t('label.share')}
+                    </Text>
+                  </TouchableOpacity> */}
                 </View>
               </View>
             </View>
@@ -270,6 +302,45 @@ export default class UserHome extends Component {
               </TouchableOpacity>
             </View>
             <View>
+              {
+                // userProfile.synopsis1 ||
+                //   userProfile.synopsis2 ||
+                //   userProfile.linkText ||
+                //   userProfile.url ? (
+                //     <View>
+                //       {userProfile.synopsis1 ? (
+                //         <Text style={styles.footerText}>
+                //           {/* {userProfile.synopsis1} */}
+                //           {this.state.readMore
+                //             ? userProfile.synopsis1
+                //             : userProfile.synopsis1
+                //               ? userProfile.synopsis1.substring(0, 250) +
+                //               (userProfile.synopsis1.length > 250 ? '...' : '')
+                //               : ''}
+                //         </Text>
+                //       ) : null}
+                //       {userProfile.synopsis2 ? (
+                //         <Text style={styles.footerText}>
+                //           {/* {userProfile.synopsis2} */}
+                //           {this.state.readMore
+                //             ? userProfile.synopsis2
+                //             : userProfile.synopsis2 && userProfile.synopsis1.length < 250
+                //               ? userProfile.synopsis2.substring(0, 250 - userProfile.synopsis1.length) +
+                //               (userProfile.synopsis2.length > 250 - userProfile.synopsis1.length ? '...' : '')
+                //               : ''}
+                //         </Text>
+                //       ) : null}
+                //       {userProfile.url ? (
+                //         <Text
+                //           style={styles.linkText}
+                //           onPress={() => this._goToURL(userProfile.url)}
+                //         >
+                //           {userProfile.linkText || i18n.t('label.read_more')}
+                //         </Text>
+                //       ) : null}
+                //     </View>
+                //   ) : null
+              }
               {userProfile.synopsis1 ||
               userProfile.synopsis2 ||
               userProfile.linkText ||
@@ -295,6 +366,25 @@ export default class UserHome extends Component {
                   ) : null}
                 </View>
               ) : null}
+              {/* {
+                (userProfile.synopsis1 && userProfile.synopsis1.length > 250) ||
+                  (userProfile.synopsis2 && userProfile.synopsis2.length > 250) ||
+                  ((userProfile.synopsis1 ? userProfile.synopsis1.length : 0) + (userProfile.linkText ? userProfile.linkText.length : 0)) > 250 ? (
+                    <TouchableOpacity onPress={() => this.setReadMore()}>
+                      <View style={styles.readmoreButtonView}>
+                        <View style={{ height: 8 }}>
+                          <Image
+                            source={this.state.readMore ? readmoreUp : readmoreDown}
+                            style={{ height: 8, width: 15 }}
+                            resizeMode={'contain'}
+                          />
+                        </View>
+                        <Text style={styles.readMoreText}>
+                          {this.state.readMore ? i18n.t('label.read_less') : i18n.t('label.read_more')}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  ) : null} */}
             </View>
           </View>
         ) : null}

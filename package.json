@@ -179,7 +179,7 @@
     "reactotron-react-native": "^3.7.1",
     "reactotron-redux": "^3.1.2",
     "sass-loader": "^6.0.6",
-    "terser-webpack-plugin": "^2.2.1",
+    "terser-webpack-plugin": "^2.3.2",
     "url-loader": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-bugsnag-plugins": "^1.4.2",

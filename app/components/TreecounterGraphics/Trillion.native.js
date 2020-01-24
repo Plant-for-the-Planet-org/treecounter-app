@@ -263,15 +263,15 @@ class Trillion extends PureComponent {
                 </View>
               ) : null}
               {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
-              <View style={{ marginTop: 16 }}>
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={{ paddingRight: 20 }}
-                >
-                  {this.props.entities.eventPledge !== null &&
-                  this.props.entities.eventPledge !== undefined
-                    ? Object.values(this.props.entities.eventPledge).map(
+              {/* <View style={{ marginTop: 16 }}>
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{ paddingRight: 20 }}
+                  >
+                    {this.props.entities.eventPledge !== null &&
+                      this.props.entities.eventPledge !== undefined
+                      ? Object.values(this.props.entities.eventPledge).map(
                         unfulfilledEvent =>
                           unfulfilledEvent.status === 'pending' ? (
                             <TouchableOpacity
@@ -292,9 +292,9 @@ class Trillion extends PureComponent {
                             </TouchableOpacity>
                           ) : null
                       )
-                    : null}
-                </ScrollView>
-              </View>
+                      : null}
+                  </ScrollView>
+                </View> */}
             </View>
 
             {/* Tree Counter SVG */}

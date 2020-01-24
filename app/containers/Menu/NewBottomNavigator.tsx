@@ -13,18 +13,28 @@ const height = 64;
 const tabs = [
     {
         name: "account-outline",
+        title: "Me",
+        route: 'app_userHome'
     },
     {
         name: "gift-outline",
+        title: "Gift",
+        route: 'app_giftTrees'
     },
     {
         name: "heart-outline",
+        title: "Donate",
+        route: 'app_donateTrees'
     },
     {
         name: "crown",
+        title: "Compete",
+        route: 'app_competitions'
     },
     {
         name: "earth",
+        title: "World",
+        route: 'app_homepage'
     },
 ];
 const tabWidth = width / tabs.length;
@@ -74,7 +84,7 @@ export default class Tabbar extends React.PureComponent<TabbarProps> {
                         <Path fill={backgroundColor} {...{ d }} />
                     </AnimatedSvg>
                     <View style={StyleSheet.absoluteFill}>
-                        <StaticTabbar {...{ tabs, value }} />
+                        <StaticTabbar {...{ tabs, value }} navigation={this.props.navigation} />
                     </View>
                 </View>
                 <SafeAreaView style={styles.container} />

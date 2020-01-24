@@ -1,8 +1,9 @@
 import * as React from "react";
 import {
-    View, StyleSheet, TouchableWithoutFeedback, Animated, Dimensions,
+    View, StyleSheet, TouchableWithoutFeedback, Animated, Dimensions, Text
 } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { updateRoute } from './../../helpers/routerHelper/tabrouteHelper.native';
 
 const width = Dimensions.get('window').width;
 
@@ -21,11 +22,11 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
     constructor(props: StaticTabbarProps) {
         super(props);
         const { tabs } = this.props;
-        this.values = tabs.map((tab, index) => new Animated.Value(index === 0 ? 1 : 0));
+        this.values = tabs.map((tab, index) => new Animated.Value(index === 4 ? 1 : 0));
     }
 
     onPress = (index: number) => {
-        const { value, tabs } = this.props;
+        const { value, tabs, navigation } = this.props;
         const tabWidth = width / tabs.length;
         Animated.sequence([
             Animated.parallel(
@@ -46,6 +47,7 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
                 }),
             ]),
         ]).start();
+        updateRoute(tabs[index].route, navigation, 0);
     }
 
     render() {
@@ -77,6 +79,7 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
                                 <TouchableWithoutFeedback onPress={() => onPress(key)}>
                                     <Animated.View style={[styles.tab, { opacity }]}>
                                         <Icon name={tab.name} color="#4d5153" size={25} />
+                                        <Text style={styles.tabText}>{tab.title}</Text>
                                     </Animated.View>
                                 </TouchableWithoutFeedback>
                                 <Animated.View
@@ -118,6 +121,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 64,
+    },
+    tabText: {
+        fontSize: 10,
+        fontFamily: 'OpenSans-Regular',
+        marginTop: 2
     },
     activeIcon: {
         // backgroundColor: "white",

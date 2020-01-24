@@ -28,6 +28,8 @@ import ConfirmContributionDeletionModal from '../../components/UserContributions
 import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import BottomTabContainer from '../../containers/Menu/TabContainer';
+import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
+
 import GiftTrees from '../../containers/GiftTrees';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
 import RegisterTrees from '../../containers/RegisterTrees';
@@ -305,7 +307,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         animatedEnable: true,
         swipeEnable: false
       },
-      tabBarComponent: BottomTabContainer
+      tabBarComponent: NewBottomNavigator
     }
   );
 

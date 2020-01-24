@@ -148,7 +148,9 @@ export default class DonateTrees extends React.PureComponent {
 
   // open your gateway
   openGateWay = async url => {
+    const localUrl = 'http://localhost:8081' + url;
     url = context.scheme + '://' + context.host + url;
+    console.log('oprning url', url, ' local ur: ', localUrl);
     /*
     const canOpen = await Linking.canOpenURL(url);
     if (canOpen) {
@@ -289,7 +291,7 @@ export default class DonateTrees extends React.PureComponent {
     // let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
     // let email = receipt !== '' ? receipt.email : '';
     // let paymentMethods;
-    if (receipt && selectedProject) {
+    if (receipt && selectedProject && selectedProject.paymentSetup) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {

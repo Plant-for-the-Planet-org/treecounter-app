@@ -57,7 +57,7 @@ class DonationTreesContainer extends PureComponent {
       this.props.loadProject({ id: nextProps.selectedProject.id });
     }
   }
-  componentDidMount() {
+  async componentDidMount() {
     let selectedProjectId = undefined;
     if (this.props.match) {
       selectedProjectId = parseInt(this.props.match.params.id);
@@ -65,7 +65,7 @@ class DonationTreesContainer extends PureComponent {
     if (this.props.navigation && this.props.navigation.getParam('id'))
       selectedProjectId = parseInt(this.props.navigation.getParam('id'));
     if (this.props.selectedProject && !this.props.selectedProject.tpoData) {
-      this.props.loadProject({ id: this.props.selectedProject.id });
+      await this.props.loadProject({ id: this.props.selectedProject.id });
     }
 
     // this causes a redraw

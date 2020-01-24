@@ -57,5 +57,8 @@ coverage
 #app build
 web/prod
 web/server
-app/config/index.js
-app/config/index.js.env.*
+
+#.env
+.env.production
+.env.develop
+.env.staging

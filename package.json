@@ -16,8 +16,8 @@
     "test": "jest",
     "shake": "adb shell input keyevent 82",
     "clean": "./clean.sh",
-    "ios": "ENVFILE=.env react-native run-ios",
-    "android": "ENVFILE=.env react-native run-android"
+    "ios": "ENVFILE=.env.develop react-native run-ios",
+    "android": "ENVFILE=.env.develop react-native run-android"
   },
   "lint-staged": {
     "*.js": [

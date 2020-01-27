@@ -119,6 +119,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "reselect": "^4.0.0",
+    "rn-bottom-drawer": "^1.4.3",
     "rn-fetch-blob": "^0.11.2",
     "rxjs": "^5.5.6",
     "scheduler": "^0.17.0",

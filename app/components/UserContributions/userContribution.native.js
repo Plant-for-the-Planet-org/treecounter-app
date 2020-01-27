@@ -12,6 +12,8 @@ import CalendarIcon from '../../assets/images/green-calendar.png';
 import TreeIcon from '../../assets/images/green-tree.png';
 import { grayShareIcon, closeIcon } from '../../assets';
 import i18n from '../../locales/i18n.js';
+import MapView, { Marker } from 'react-native-maps';
+import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 
 export default class UserContributions extends React.Component {
   constructor(props) {
@@ -22,6 +24,30 @@ export default class UserContributions extends React.Component {
 
   _handleIndexChange = index => this.setState({ index });
 
+  getMapComponent = () => {
+    let dummyLatLong = {
+      latitude: 37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.0000922,
+      longitudeDelta: 0.00421
+    };
+    return (
+      <MapView
+        mapType={'satellite'}
+        style={{ flex: 1 }}
+        initialRegion={dummyLatLong}
+      >
+        <Marker
+          draggable
+          coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
+        >
+          <View style={styles.markerCircle}>
+            <Image source={Smalltreewhite} resizeMode={'contain'} />
+          </View>
+        </Marker>
+      </MapView>
+    );
+  };
   render() {
     const props = this.props;
     const {
@@ -43,6 +69,7 @@ export default class UserContributions extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.mapView}>
+          {this.getMapComponent()}
           <TouchableOpacity
             onPress={props.onClickClose}
             style={[styles.button, styles.closeIcon]}

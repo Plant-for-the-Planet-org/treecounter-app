@@ -28,8 +28,7 @@ export default EStyleSheet.create({
   mapView: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 2 / 5,
-    position: 'relative',
-    backgroundColor: '#c2c2c2'
+    position: 'relative'
   },
   closeIcon: {
     position: 'absolute',
@@ -134,6 +133,15 @@ export default EStyleSheet.create({
     marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  markerCircle: {
+    width: 30,
+    height: 30,
+    backgroundColor: '#89b53a',
+    borderRadius: 50,
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center'
   }
 });

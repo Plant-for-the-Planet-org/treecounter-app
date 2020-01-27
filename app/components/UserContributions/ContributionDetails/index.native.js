@@ -213,7 +213,7 @@ class UserContributionsDetails extends React.Component {
 
         <View style={{ marginTop: 20 }} />
 
-        {this.props.contribution.contributionType === 'donation' ? (
+        {/* {this.props.contribution.contributionType === 'donation' ? (
           <AccordionContactInfo
             navigation={this.props.navigation}
             slug={'edenprojects'}
@@ -225,9 +225,9 @@ class UserContributionsDetails extends React.Component {
             name={this.props.contribution.plantProjectName}
             title={this.props.contribution.plantProjectName}
           />
-        ) : null}
+        ) : null} */}
 
-        <View style={styles.buttonGroup}>
+        {/* <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={() => {}} style={{}}>
             <View style={[styles.buttonContainer, styles.borderGreen]}>
               <Image style={{ width: 16, height: 16 }} source={downloadGreen} />
@@ -246,7 +246,7 @@ class UserContributionsDetails extends React.Component {
               <Text style={styles.bgButtonText}>Share</Text>
             </View>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         {ndviUid ? (
           <View style={{ marginLeft: 8, marginRight: 8, marginTop: 20 }}>

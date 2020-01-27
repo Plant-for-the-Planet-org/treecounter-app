@@ -24,12 +24,16 @@ export default class UserContributions extends React.Component {
 
   _handleIndexChange = index => this.setState({ index });
 
-  getMapComponent = () => {
+  getMapComponent = ({ geoLongitude, geoLatitude }) => {
     let dummyLatLong = {
-      latitude: 37.78825,
-      longitude: -122.4324,
+      latitude: geoLatitude,
+      longitude: geoLongitude,
       latitudeDelta: 0.0000922,
       longitudeDelta: 0.00421
+    };
+    let markerLatLong = {
+      latitude: geoLatitude,
+      longitude: geoLongitude
     };
     return (
       <MapView
@@ -37,10 +41,7 @@ export default class UserContributions extends React.Component {
         style={{ flex: 1 }}
         initialRegion={dummyLatLong}
       >
-        <Marker
-          draggable
-          coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
-        >
+        <Marker coordinate={markerLatLong}>
           <View style={styles.markerCircle}>
             <Image source={Smalltreewhite} resizeMode={'contain'} />
           </View>
@@ -62,14 +63,14 @@ export default class UserContributions extends React.Component {
       mayUpdate,
       contribution
     } = props;
-
+    console.log(this.props, 'this.props');
     console.log('\x1b[45mcontributer \n', contributerPrefix, contributer);
     console.log('\x1b[0m');
 
     return (
       <View style={styles.container}>
         <View style={styles.mapView}>
-          {this.getMapComponent()}
+          {this.getMapComponent(this.props.contribution)}
           <TouchableOpacity
             onPress={props.onClickClose}
             style={[styles.button, styles.closeIcon]}

@@ -434,27 +434,29 @@ export const FormikFormTree = props => {
                 )}
               </CardLayout>
             </View>
-            <View style={buttonStyles.buttonContainer}>
-              <TouchableOpacity
-                style={buttonStyles.actionButtonTouchable}
-                onPress={props.handleSubmit}
-                disabled={!props.isValid}
-              >
-                <View
-                  style={
-                    props.isValid
-                      ? buttonStyles.actionButtonView
-                      : buttonStyles.disabledButtonView
-                  }
+            <CardLayout style={styles.buttonContainer}>
+              <View style={buttonStyles.buttonContainer}>
+                <TouchableOpacity
+                  style={buttonStyles.actionButtonTouchable}
+                  onPress={props.handleSubmit}
+                  disabled={!props.isValid}
                 >
-                  <Text style={buttonStyles.actionButtonText}>
-                    {parentProps.isEdit
-                      ? i18n.t('label.update')
-                      : i18n.t('label.register')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+                  <View
+                    style={
+                      props.isValid
+                        ? buttonStyles.actionButtonView
+                        : buttonStyles.disabledButtonView
+                    }
+                  >
+                    <Text style={buttonStyles.actionButtonText}>
+                      {parentProps.isEdit
+                        ? i18n.t('label.update')
+                        : i18n.t('label.register')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </CardLayout>
           </View>
         </>
       )}

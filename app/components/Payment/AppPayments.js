@@ -33,7 +33,7 @@ export default class AppPayments extends Component {
   render() {
     let { paymentInfo, paymentStatus } = this.props;
     let paymentMethods;
-    if (paymentInfo) {
+    if (paymentInfo && paymentInfo.paymentSetup) {
       let countryCurrency = `${paymentInfo.country}/${paymentInfo.currency}`;
       const countryCurrencies = paymentInfo.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
@@ -79,7 +79,7 @@ export default class AppPayments extends Component {
             </div>
           ) : (
             <div className="payment-options-container">
-              {paymentInfo ? (
+              {paymentInfo && paymentInfo.paymentSetup ? (
                 <PaymentSelector
                   paymentMethods={paymentMethods}
                   accounts={paymentInfo.paymentSetup.accounts}

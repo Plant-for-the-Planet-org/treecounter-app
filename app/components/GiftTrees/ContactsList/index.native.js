@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { PropTypes } from 'prop-types';
 
-import { PermissionsAndroid, View, Button } from 'react-native';
+import { PermissionsAndroid, View, Button, Text } from 'react-native';
 import Contacts from 'react-native-contacts';
 
 export default (ContactsList = props => {
@@ -37,9 +36,7 @@ export default (ContactsList = props => {
 
   return (
     <View>
-      <Button title="Enter Receiver’s details" />
-      <Button title="Select from contacts" />
+      <Text>{JSON.stringify(contacts)}</Text>
     </View>
   );
-  // return <GiftTabView openProjects={this.openProjects} {...props} />;
 });

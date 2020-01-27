@@ -289,7 +289,7 @@ export default class DonateTrees extends React.PureComponent {
     // let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
     // let email = receipt !== '' ? receipt.email : '';
     // let paymentMethods;
-    if (receipt && selectedProject) {
+    if (receipt && selectedProject && selectedProject.paymentSetup) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {

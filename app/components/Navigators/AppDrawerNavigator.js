@@ -311,7 +311,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
 
   const appStackNavigator = createStackNavigator(
     {
-      Tab: ApptabNavigator,
+      Tab: {
+        screen: ApptabNavigator,
+        navigationOptions: { header: null }
+      },
       Base: baseNavigator,
       ['app_supportTrees']: {
         screen: SelectPlantProjectContainer

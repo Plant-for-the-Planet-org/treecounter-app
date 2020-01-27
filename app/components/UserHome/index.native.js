@@ -18,7 +18,7 @@ import {
   coupon,
   registerTree
 } from './../../assets/';
-import { updateRoute } from './../../helpers/routerHelper';
+import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
 // import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import { getLocalRoute } from './../../actions/apiRouting';
 // import { delimitNumbers } from './../../utils/utils';
@@ -36,7 +36,7 @@ import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
-import Icon from 'react-native-vector-icons/FontAwesome5';
+// import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -291,7 +291,9 @@ export default class UserHome extends Component {
           <TouchableOpacity
             style={styles.circleButton}
             onPress={() => {
-              updateRoute('app_redeem', this.props.navigation);
+              updateStaticRoute('app_redeem', this.props.navigation, {
+                code: null
+              });
             }}
           >
             <View style={styles.circleButtonView}>

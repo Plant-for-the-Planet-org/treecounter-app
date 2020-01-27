@@ -2,9 +2,9 @@ import React from 'react';
 import {
   ScrollView,
   View,
-  TouchableOpacity,
-  Text,
-  Image,
+  // TouchableOpacity,
+  // Text,
+  // Image,
   Linking
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -16,10 +16,10 @@ import i18n from '../../../locales/i18n.js';
 import { withNavigation } from 'react-navigation';
 import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
 import { getLocalRoute } from '../../../actions/apiRouting';
-import { downloadGreen, sendWhite, closeIcon } from '../../../assets';
-import styles from '../../../styles/newUserContributions/userContributions';
-import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
-import { updateStaticRoute } from './../../../helpers/routerHelper';
+// import { downloadGreen, sendWhite, closeIcon } from '../../../assets';
+// import styles from '../../../styles/newUserContributions/userContributions';
+// import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
+// import { updateStaticRoute } from './../../../helpers/routerHelper';
 import { BackHandler } from 'react-native';
 
 class UserContributionsDetails extends React.Component {
@@ -189,8 +189,8 @@ class UserContributionsDetails extends React.Component {
               style={{
                 display: 'flex',
                 flexDirection: 'row',
-                marginVertical: 30,
-                borderWidth: 1
+                marginVertical: 30
+                // borderWidth: 1
               }}
             >
               {/* {videoUrl ? <VideoContainer url={videoUrl} /> : null} */}
@@ -258,9 +258,9 @@ class UserContributionsDetails extends React.Component {
   }
 }
 
-const _goToURL = url => {
-  Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
-};
+// const _goToURL = url => {
+//   Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+// };
 
 UserContributionsDetails.propTypes = {
   userProfileId: PropTypes.number.isRequired,

@@ -172,6 +172,10 @@ import tpoleaderboard from './images/tpoleaderboard.png';
 import individualsleaderboard from './images/individualsleaderboard.png';
 import companiesleaderboard from './images/companiesleaderboard.png';
 
+import share from './images/icons/share.png';
+import coupon from './images/icons/coupon.png';
+import registerTree from './images/icons/registerTree.png';
+
 export {
   treelogo,
   germany,
@@ -345,5 +349,8 @@ export {
   tpoleaderboard,
   individualsleaderboard,
   deleteOutlineWhite,
-  companiesleaderboard
+  companiesleaderboard,
+  share,
+  coupon,
+  registerTree
 };

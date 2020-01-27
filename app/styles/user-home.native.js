@@ -105,7 +105,8 @@ export default EStyleSheet.create({
   buttonViewRow: {
     display: 'flex',
     flexDirection: 'row',
-    padding: 20
+    padding: 20,
+    justifyContent: 'space-around'
   },
   secondaryButton: {
     borderRadius: 16,
@@ -138,6 +139,24 @@ export default EStyleSheet.create({
     fontFamily: 'OpenSans-SemiBold',
     alignSelf: 'center',
     color: '#fff'
+  },
+  circleButton: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  circleButtonView: {
+    backgroundColor: '#89B53A',
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  circleButtonText: {
+    fontSize: 14,
+    fontFamily: 'OpenSans-Regular',
+    alignSelf: 'center',
+    marginTop: 6
   },
 
   // Dedicated Trees design

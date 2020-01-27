@@ -7,10 +7,17 @@ import {
   Text,
   Image,
   Linking,
-  TouchableOpacity
+  TouchableOpacity,
+  Share
   // FlatList
 } from 'react-native';
-import { readmoreDown, readmoreUp } from './../../assets/';
+import {
+  readmoreDown,
+  readmoreUp,
+  share,
+  coupon,
+  registerTree
+} from './../../assets/';
 import { updateRoute } from './../../helpers/routerHelper';
 // import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import { getLocalRoute } from './../../actions/apiRouting';
@@ -183,6 +190,28 @@ export default class UserHome extends Component {
     }));
   }
 
+  onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: `Hey check out my tree counter on Plant for the Planet ! https://www.trilliontreecampaign.org/t/${
+          this.props.userProfile.treecounter.slug
+        }`
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   render() {
     const { userProfile } = this.props;
     const profileType = userProfile.type;
@@ -260,24 +289,47 @@ export default class UserHome extends Component {
         </View>
         <View style={styles.buttonViewRow}>
           <TouchableOpacity
-            style={styles.secondaryButton}
+            style={styles.circleButton}
             onPress={() => {
               updateRoute('app_redeem', this.props.navigation);
             }}
           >
-            <Text style={styles.secondaryButtonText}>
-              {i18n.t('label.redeem_trees_button')}
-            </Text>
+            <View style={styles.circleButtonView}>
+              <Image
+                style={{ width: 24, height: 14.3, alignSelf: 'center' }}
+                source={coupon}
+              />
+            </View>
+            <Text style={styles.circleButtonText}>Redeem</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.primaryButton}
+            style={styles.circleButton}
             onPress={() => {
               updateRoute('app_registerTrees', this.props.navigation);
             }}
           >
-            <Text style={styles.primaryButtonText}>
+            <View style={styles.circleButtonView}>
+              <Image
+                style={{
+                  width: 13.8,
+                  height: 24,
+                  alignSelf: 'center'
+                }}
+                source={registerTree}
+              />
+            </View>
+            <Text style={styles.circleButtonText}>
               {i18n.t('label.register_trees')}
             </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.circleButton} onPress={this.onShare}>
+            <View style={styles.circleButtonView}>
+              <Image
+                style={{ width: 24, height: 24, alignSelf: 'center' }}
+                source={share}
+              />
+            </View>
+            <Text style={styles.circleButtonText}>Share</Text>
           </TouchableOpacity>
         </View>
 

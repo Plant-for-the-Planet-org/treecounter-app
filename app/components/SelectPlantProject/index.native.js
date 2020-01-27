@@ -42,11 +42,17 @@ class SelectPlantTabView extends PureComponent {
     console.log('porps---', this.props);
     this.props.selectProject(id);
     const { navigation } = this.props;
-    updateStaticRoute(
-      'app_donate_detail',
-      navigation,
-      navigation.getParam('userForm')
+    console.log(
+      '=======in selectplant project component... calling donate detail with',
+      {
+        userForm: navigation.getParam('userForm'),
+        giftMethod: navigation.getParam('giftMethod')
+      }
     );
+    updateStaticRoute('app_donate_detail', navigation, {
+      userForm: navigation.getParam('userForm'),
+      giftMethod: navigation.getParam('giftMethod')
+    });
   }
   handleExpandedClicked = optionNumber => {
     this.setState({

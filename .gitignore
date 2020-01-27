@@ -57,8 +57,3 @@ coverage
 #app build
 web/prod
 web/server
-
-#.env
-.env.production
-.env.develop
-.env.staging

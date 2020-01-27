@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 // }
 
 import App from './app/components/App';
+import './ReactotronConfig';
 
 import './web/stylesheet/index.scss';
 import 'react-notifications/lib/notifications.css';

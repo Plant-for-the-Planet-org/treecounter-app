@@ -33,7 +33,8 @@ export default class UserContributions extends React.Component {
       contributerPrefix,
       contributer,
       showDelete,
-      mayUpdate
+      mayUpdate,
+      contribution
     } = props;
 
     console.log('\x1b[45mcontributer \n', contributerPrefix, contributer);
@@ -104,6 +105,17 @@ export default class UserContributions extends React.Component {
               <Text style={{ color: '#87B738' }}>{location}</Text>
             </Text>
           )}
+
+          {contribution.contributionType === 'planting' ? (
+            contribution.treeClassification ? (
+              <Text style={styles.subHeaderText}>
+                {contribution.treeClassification}
+                {contribution.treeSpecies ? (
+                  <Text> {contribution.treeSpecies}</Text>
+                ) : null}
+              </Text>
+            ) : null
+          ) : null}
         </View>
 
         {/* <View style={{ flex: 2 }}>

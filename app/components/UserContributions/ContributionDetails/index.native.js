@@ -16,12 +16,36 @@ import i18n from '../../../locales/i18n.js';
 import { withNavigation } from 'react-navigation';
 import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
 import { getLocalRoute } from '../../../actions/apiRouting';
-import { downloadGreen, sendWhite } from '../../../assets';
+import { downloadGreen, sendWhite, closeIcon } from '../../../assets';
 import styles from '../../../styles/newUserContributions/userContributions';
 import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
+import { BackHandler } from 'react-native';
 
 class UserContributionsDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+  }
+
+  componentWillMount() {
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.handleBackButtonClick
+    );
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener(
+      'hardwareBackPress',
+      this.handleBackButtonClick
+    );
+  }
+
+  handleBackButtonClick() {
+    this.props.navigation.goBack(null);
+    return true;
+  }
   render() {
     if (!this.props.contribution) {
       return null;
@@ -154,6 +178,7 @@ class UserContributionsDetails extends React.Component {
           onClickClose={() => {
             this.props.navigation.goBack();
           }}
+          contribution={this.props.contribution}
         />
 
         {contributionOrPlantedImages &&

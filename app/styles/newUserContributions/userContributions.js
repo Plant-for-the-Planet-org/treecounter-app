@@ -26,7 +26,7 @@ export default EStyleSheet.create({
     fontStyle: 'italic'
   },
   mapView: {
-    width: Dimensions.get('window').width,
+    width: '100%',
     height: Dimensions.get('window').height * 2 / 5,
     position: 'relative'
   },

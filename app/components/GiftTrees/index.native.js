@@ -1,28 +1,18 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-import GiftTabView from './GiftTabs';
+import React, { useEffect, useState } from 'react';
+import { View, Button } from 'react-native';
 
-export default class GiftTrees extends Component {
-  constructor(props) {
-    super(props);
-    this.openProjects = this.openProjects.bind(this);
-  }
-  openProjects(formValue, type) {
-    // console.log('Open Project called up ', formValue);
-    this.props.openProjects(formValue, type);
-  }
-  render() {
-    return <GiftTabView openProjects={this.openProjects} {...this.props} />;
-  }
-}
+import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 
-GiftTrees.propTypes = {
-  selectedProject: PropTypes.object,
-  selectedTpo: PropTypes.object,
-  currentUserProfile: PropTypes.object,
-  currencies: PropTypes.object,
-  gift: PropTypes.func,
-  paymentStatus: PropTypes.object,
-  paymentClear: PropTypes.func,
-  plantProjectClear: PropTypes.func
-};
+export default (GiftTrees = props => {
+  return (
+    <View>
+      <Button title="Enter Receiver’s details" />
+
+      <Button
+        onClick={() => updateStaticRoute('app_contact_list', props.navigation)}
+        title="Select from contacts"
+      />
+    </View>
+  );
+  // return <GiftTabView openProjects={this.openProjects} {...props} />;
+});

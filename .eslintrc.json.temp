@@ -1,15 +1,8 @@
 {
   "root": true,
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
+  "extends": ["prettier", "eslint:recommended", "plugin:react/recommended"],
   "parser": "babel-eslint",
-  "plugins": [
-    "react",
-    "react-native",
-    "json"
-  ],
+  "plugins": ["prettier", "react", "react-native", "json"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -32,6 +25,7 @@
     }
   },
   "rules": {
+    "prettier/prettier": "error",
     "eol-last": 2,
     "jsx-quotes": 2,
     "no-constant-condition": 2,
@@ -54,10 +48,7 @@
         "allowTemplateLiterals": true
       }
     ],
-    "strict": [
-      2,
-      "global"
-    ],
+    "strict": [2, "global"],
     "react-native/no-color-literals": 1, //
     "react-native/no-inline-styles": 1,
     "react-native/no-raw-text": 1, //
@@ -83,9 +74,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "**/*.native.js"
-      ],
+      "files": ["**/*.native.js"],
       "rules": {
         "react-native/no-color-literals": 2,
         "react-native/no-inline-styles": 1,

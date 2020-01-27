@@ -50,9 +50,11 @@ export default class UserContributions extends React.Component {
               <Image style={{ width: 16, height: 16 }} source={closeIcon} />
             </View>
           </TouchableOpacity>
-          <View style={styles.dateContainer}>
-            <Text style={styles.plantedDate}>{plantedDate}</Text>
-          </View>
+          {plantedDate ? (
+            <View style={styles.dateContainer}>
+              <Text style={styles.plantedDate}>{plantedDate}</Text>
+            </View>
+          ) : null}
         </View>
         <View style={styles.header}>
           {treeCount && treeCount > 0 ? (
@@ -87,6 +89,7 @@ export default class UserContributions extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
+
         <View style={styles.subHeadContainer}>
           {contributerPrefix &&
             contributer && (

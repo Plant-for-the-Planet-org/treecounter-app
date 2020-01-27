@@ -10,11 +10,12 @@ export default EStyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 23,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   subHeadContainer: {
-    marginTop: 7
-    // marginBottom: 27
+    marginTop: 7,
+    paddingHorizontal: 20
   },
   subHeaderText: {
     color: '#4D5153',
@@ -88,6 +89,8 @@ export default EStyleSheet.create({
   },
   buttonGroup: {
     paddingHorizontal: 20,
+    marginTop: 50,
+    marginBottom: 50,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
@@ -96,6 +99,7 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     borderRadius: 100,
     padding: 14,
+    alignItems: 'center',
     width: Dimensions.get('window').width * 42 / 100
   },
   borderGreen: {

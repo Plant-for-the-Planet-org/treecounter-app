@@ -1,5 +1,12 @@
 import React from 'react';
-import { ScrollView, View, TouchableOpacity, Text, Image } from 'react-native';
+import {
+  ScrollView,
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  Linking
+} from 'react-native';
 import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
@@ -11,12 +18,15 @@ import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCaro
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { downloadGreen, sendWhite } from '../../../assets';
 import styles from '../../../styles/newUserContributions/userContributions';
+import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
+import { updateStaticRoute } from './../../../helpers/routerHelper';
 
 class UserContributionsDetails extends React.Component {
   render() {
     if (!this.props.contribution) {
       return null;
     }
+
     const hasMeasurements =
       this.props.contribution.contributionMeasurements &&
       Object.keys(this.props.contribution.contributionMeasurements).length > 0;
@@ -176,6 +186,22 @@ class UserContributionsDetails extends React.Component {
           </View>
         ) : null}
 
+        <View style={{ marginTop: 20 }} />
+
+        {this.props.contribution.contributionType === 'donation' ? (
+          <AccordionContactInfo
+            navigation={this.props.navigation}
+            slug={'edenprojects'}
+            updateStaticRoute={updateStaticRoute}
+            url={'edenprojects.org'}
+            _goToURL={_goToURL}
+            email={'email@email.com'}
+            address={'edenprojects'}
+            name={this.props.contribution.plantProjectName}
+            title={this.props.contribution.plantProjectName}
+          />
+        ) : null}
+
         <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={() => {}} style={{}}>
             <View style={[styles.buttonContainer, styles.borderGreen]}>
@@ -206,6 +232,10 @@ class UserContributionsDetails extends React.Component {
     );
   }
 }
+
+const _goToURL = url => {
+  Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+};
 
 UserContributionsDetails.propTypes = {
   userProfileId: PropTypes.number.isRequired,

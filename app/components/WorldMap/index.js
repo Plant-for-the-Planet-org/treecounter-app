@@ -7,7 +7,7 @@ import {
   TapGestureHandler
 } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps';
-
+import BottomContent from './BottomContent';
 // import { LoremIpsum } from '../common';
 // import { true } from '../config';
 
@@ -100,6 +100,7 @@ export class BottomSheet extends Component {
     return (
       <View style={{ flex: 1 }}>
         <MapView
+          style={{ flex: 1 }}
           initialRegion={{
             latitude: 37.78825,
             longitude: -122.4324,
@@ -209,7 +210,8 @@ export default class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <BottomSheet />
+        {/* <BottomSheet /> */}
+        <BottomContent />
       </View>
     );
   }

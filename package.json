@@ -82,7 +82,7 @@
     "react-native-image-picker": "^1.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-lightbox": "^0.8.0",
-    "react-native-linear-gradient": "react-native-community/react-native-linear-gradient",
+    "react-native-linear-gradient": "github:react-native-community/react-native-linear-gradient",
     "react-native-maps": "^0.26.1",
     "react-native-material-dropdown": "git+https://github.com/niteshgrg/react-native-material-dropdown.git",
     "react-native-material-textfield": "^0.16.1",

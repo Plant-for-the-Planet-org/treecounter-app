@@ -5,7 +5,6 @@ import {
   Image,
   BackHandler,
   View,
-  SafeAreaView,
   Platform
 } from 'react-native';
 
@@ -28,11 +27,11 @@ export default function HeaderAnimated(props) {
     extrapolate: 'clamp'
   });
 
-  const iconColor = props.scrollY.interpolate({
-    inputRange: [0, 32, 72],
-    outputRange: [0, 0, 1],
-    extrapolate: 'clamp'
-  });
+  // const iconColor = props.scrollY.interpolate({
+  //   inputRange: [0, 32, 72],
+  //   outputRange: [0, 0, 1],
+  //   extrapolate: 'clamp'
+  // });
 
   let navigateBack = () => {
     props.navigation.goBack();
@@ -48,6 +47,7 @@ export default function HeaderAnimated(props) {
   });
 
   const whiteColor = 'white';
+  const transparent = 'rgba(52, 52, 52, 0.0)';
   return (
     <>
       <Animated.View
@@ -57,7 +57,7 @@ export default function HeaderAnimated(props) {
           left: 0,
           right: 0,
           backgroundColor: whiteColor,
-          height: Platform.OS === 'ios' ? 88 : 76,
+          height: Platform.OS === 'ios' ? 100 : 76,
           zIndex: 1000,
           alignItems: 'center',
           display: 'flex',
@@ -99,8 +99,8 @@ export default function HeaderAnimated(props) {
           top: 0,
           left: 0,
           right: 0,
-          backgroundColor: 'rgba(52, 52, 52, 0.0)',
-          height: Platform.OS === 'ios' ? 88 : 76,
+          backgroundColor: transparent,
+          height: Platform.OS === 'ios' ? 100 : 76,
           zIndex: 999,
           alignItems: 'center',
           display: 'flex',

@@ -10,6 +10,7 @@ import {
   // sortedUserContributionsSelector
 } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { loadProject, loadProjects } from '../../actions/loadTposAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
@@ -51,7 +52,15 @@ class SelectPlantProjectContainer extends PureComponent {
   //   }
   // }
 
-  componentDidMount() {
+  async componentDidMount() {
+    if (
+      this.props.plantProjects &&
+      !this.props.plantProjects.filter(plantProject => plantProject.isFeatured)
+        .length
+    ) {
+      let data = await this.props.loadProjects('featured');
+      console.log('===got data in await in did mount:', data);
+    }
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
@@ -63,7 +72,8 @@ class SelectPlantProjectContainer extends PureComponent {
     let plantProjects = this.props.plantProjects.filter(
       project => project.allowDonations
     );
-    return (
+    console.log('==== plantprojects', plantProjects);
+    return !plantProjects.length ? null : (
       <SelectPlantProject
         selectProject={this.selectPlantProjectAction}
         currencies={this.props.currencies}
@@ -71,16 +81,31 @@ class SelectPlantProjectContainer extends PureComponent {
         plantProjects={plantProjects}
         navigation={this.props.navigation}
         supportTreecounter={this.props.supportTreecounter}
+        loadDetails={this.loadDetails}
       />
     );
   }
-
-  onMoreClick = (id, name) => {
+  loadDetails = ({ id }) => {
+    return this.props.loadProject({ id });
+  };
+  onMoreClick = async (id, name) => {
+    let project = this.props.plantProjects.find(
+      project => project['id'] === id
+    );
+    console.log(
+      'project on more click=================',
+      project,
+      this.props.navigation.getParam('userForm')
+    );
+    if (project && !project.paymentSetup) {
+      project = await this.loadDetails({ id: id });
+    }
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
       updateRoute('app_selectProject', navigation, 1, {
         userForm: navigation.getParam('userForm'),
+        giftMethod: navigation.getParam('giftMethod'),
         titleParam: name
       });
     }
@@ -89,7 +114,16 @@ class SelectPlantProjectContainer extends PureComponent {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
+      console.log(
+        '---in selectplant project container... calling donate detail with',
+        {
+          id: id,
+          userForm: navigation.getParam('userForm'),
+          giftMethod: navigation.getParam('giftMethod')
+        }
+      );
       updateStaticRoute('app_donate_detail', navigation, {
+        id: id,
         userForm: navigation.getParam('userForm'),
         giftMethod: navigation.getParam('giftMethod')
       });
@@ -105,7 +139,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectPlantProjectAction, fetchCurrencies },
+    { selectPlantProjectAction, fetchCurrencies, loadProject, loadProjects },
     dispatch
   );
 };

@@ -6,8 +6,11 @@ import userFeedReducer from './userFeedReducer';
 import fetchPledgesReducer from './pledgeReducer';
 import currenciesReducer from './currenciesReducer';
 import currencyReducer from './currencyReducer';
+import configReducer from './configReducer';
 import paymentStatusReducer from './paymentStatus';
 import modelDialogReducer from './modelDialogReducer';
+import contentloaderReducer from './contentloaderReducer';
+
 import pledgeEventReducer from './pledgeEventReducer';
 import updateLastRouteReducer from './updateLastRouteReducer';
 import competitionDetailReducer from './competitionDetailReducer';
@@ -21,8 +24,10 @@ const commonReducers = {
   pledges: fetchPledgesReducer,
   currencies: currenciesReducer,
   currency: currencyReducer,
+  cdnMedia: configReducer,
   paymentStatus: paymentStatusReducer,
   modelDialogState: modelDialogReducer,
+  contentloaderState: contentloaderReducer,
   pledgeEvents: pledgeEventReducer,
   lastRouteState: updateLastRouteReducer,
   competitionDetail: competitionDetailReducer

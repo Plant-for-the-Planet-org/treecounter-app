@@ -288,8 +288,8 @@ export default EStyleSheet.create({
     borderColor: '#89b53a',
     paddingRight: 12,
     padding: 5,
-    borderTopRightRadius: 20,
-    borderBottomRightRadius: 20
+    borderTopRightRadius: 6,
+    borderBottomRightRadius: 6
   },
   progressbarw100: {
     height: '100%',

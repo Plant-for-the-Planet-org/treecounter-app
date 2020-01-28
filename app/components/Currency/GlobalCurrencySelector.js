@@ -77,8 +77,10 @@ class GlobalCurrencySelector extends Component {
     if (!nextProps.userProfile) {
       this.props.setCurrencyAction(this.state.preferredCurrency);
     } else {
-      this.setState({ preferredCurrency: nextProps.userProfile.currency });
-      this.props.setCurrencyAction(nextProps.userProfile.currency);
+      nextProps.userProfile &&
+        nextProps.userProfile.currency &&
+        this.setState({ preferredCurrency: nextProps.userProfile.currency }) &&
+        this.props.setCurrencyAction(nextProps.userProfile.currency);
     }
 
     if (!nextProps.currencies.currencies) {

@@ -41,7 +41,7 @@ module.exports = webpackMerge(commonConfig, {
     minimizer: [
       new TerserPlugin({
         cache: true,
-        parallel: true,
+        parallel: false,
         sourceMap: true, // Must be set to true if using source-maps in production
         terserOptions: {
           // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions

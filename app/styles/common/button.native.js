@@ -10,6 +10,10 @@ const Layout = {
 };
 
 export default EStyleSheet.create({
+  buttonContainer: {
+    marginTop: 0,
+    marginBottom: 150
+  },
   primaryButton: {
     height: 50,
     backgroundColor: '#89b53a',
@@ -18,6 +22,16 @@ export default EStyleSheet.create({
     borderRadius: 4,
     padding: 10,
     margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  roundButton: {
+    height: 35,
+    width: 35,
+    backgroundColor: '#89b53a',
+    borderColor: '#89b53a',
+    borderWidth: 1,
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -91,14 +105,28 @@ export default EStyleSheet.create({
     width: 30
   },
   actionButtonTouchable: {
+    width: '100%',
+    position: 'absolute',
+    bottom: '6%'
+    // paddingHorizontal: 24
+  },
+  actionButtonTouchableFullScreen: {
     width: '88%',
     marginLeft: '6%',
     position: 'absolute',
-    top: '86%'
+    bottom: '1%'
   },
   actionButtonView: {
     borderRadius: 100,
     backgroundColor: '#89b53a',
+    height: 52,
+    justifyContent: 'center'
+  },
+  disabledButtonView: {
+    borderRadius: 100,
+    backgroundColor: '#89b53a',
+    opacity: 0.5,
+    color: 'white',
     height: 52,
     justifyContent: 'center'
   },

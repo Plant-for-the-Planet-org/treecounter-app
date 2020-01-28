@@ -102,7 +102,7 @@ export default function HeaderAnimated(props) {
         }}
       >
         <TouchableOpacity
-          style={{ height: 18, zIndex: 1001 }}
+          style={{ height: 18, zIndex: 1001, marginLeft: -4 }}
           onPress={() => props.navigation.goBack()}
         >
           <Image

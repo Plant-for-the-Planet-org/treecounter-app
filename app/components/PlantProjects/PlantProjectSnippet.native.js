@@ -26,7 +26,7 @@ import { getISOToCountryName } from '../../helpers/utils';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //keeping Icon here instead of in assets
@@ -59,10 +59,12 @@ class PlantProjectSnippet extends PureComponent {
       countTarget,
       currency,
       treeCost,
-      paymentSetup,
+      taxDeductibleCountries,
       survivalRate,
       // images,
       imageFile,
+      allowDonations,
+      image,
       reviewScore: plantProjectRating,
       reviews,
       survivalRateStatus
@@ -84,12 +86,12 @@ class PlantProjectSnippet extends PureComponent {
     //   treeCountWidth = treePlantedRatio * 100;
     // }
 
-    if (imageFile) {
-      projectImage = { image: imageFile };
+    if (imageFile || image) {
+      projectImage = { image: imageFile || image };
     } else {
       projectImage = plantProjectImages && plantProjectImages.find(() => true);
     }
-
+    // console.log('project image', projectImage);
     const teaserProps = {
       tpoName: this.props.tpoName,
       projectName,
@@ -100,21 +102,19 @@ class PlantProjectSnippet extends PureComponent {
       location,
       countPlanted,
       countTarget,
-      survivalRate,
       currency,
       treeCost,
-      taxDeduction: paymentSetup.taxDeduction
+      taxDeduction: taxDeductibleCountries
     };
-    let deducibleText1 = '';
-    // let tooltipText1 = '';
-    for (let i = 0; i < specsProps.taxDeduction.length; i++) {
-      deducibleText1 += specsProps.taxDeduction[i];
-      if (i == specsProps.taxDeduction.length - 1) {
-        deducibleText1 += '.';
-      } else {
-        deducibleText1 += ', ';
+    specsProps.survivalRate = survivalRate;
+    let deducibleText1 = [];
+    if (taxDeductibleCountries)
+      for (let i = 0; i < taxDeductibleCountries.length; i++) {
+        deducibleText1.push(
+          getISOToCountryName(taxDeductibleCountries[i]).country
+        );
       }
-    }
+    deducibleText1 = deducibleText1.join(', ') + '.';
     const survivalRateLeaf =
       survivalRateStatus == 'verified'
         ? leaf
@@ -284,21 +284,23 @@ class PlantProjectSnippet extends PureComponent {
                     /> */}
                 </View>
               </View>
-              <TouchableOpacity
-                onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
-              >
-                <View style={styles.costContainer}>
-                  <View style={styles.costTextContainer}>
-                    <Text style={[styles.costText]}>
-                      {formatNumber(specsProps.treeCost, null, currency)}
+              {allowDonations ? (
+                <TouchableOpacity
+                  onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
+                >
+                  <View style={styles.costContainer}>
+                    <View style={styles.costTextContainer}>
+                      <Text style={[styles.costText]}>
+                        {formatNumber(specsProps.treeCost, null, currency)}
+                      </Text>
+                    </View>
+
+                    <Text style={[styles.costPerTreeText]}>
+                      {i18n.t('label.cost_per_tree')}
                     </Text>
                   </View>
-
-                  <Text style={[styles.costPerTreeText]}>
-                    {i18n.t('label.cost_per_tree')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
+                </TouchableOpacity>
+              ) : null}
             </View>
 
             {/* <View key="actionContainer" style={styles.actionContainer}> */}

@@ -192,25 +192,25 @@ export default class Login extends Component {
                         }}
                         onSubmitEditing={props.isValid && props.handleSubmit}
                       />
+                      <TouchableOpacity
+                        onPress={() => this.togglePassword()}
+                        style={{
+                          bottom: -6,
+                          alignItems: 'flex-end'
+                        }}
+                      >
+                        {this.state.hidePassword ? (
+                          <Text style={styles.forgotPasswordHighlight}>
+                            {i18n.t('label.show')}
+                          </Text>
+                        ) : (
+                          <Text style={styles.forgotPasswordHighlight}>
+                            {' '}
+                            {i18n.t('label.hide')}
+                          </Text>
+                        )}
+                      </TouchableOpacity>
                     </View>
-
-                    <TouchableOpacity
-                      onPress={() => this.togglePassword()}
-                      style={{
-                        bottom: -6,
-                        marginLeft: '-10%',
-                        alignItems: 'flex-end'
-                      }}
-                    >
-                      {this.state.hidePassword ? (
-                        <Text style={styles.forgotPasswordHighlight}>Show</Text>
-                      ) : (
-                        <Text style={styles.forgotPasswordHighlight}>
-                          {' '}
-                          Hide
-                        </Text>
-                      )}
-                    </TouchableOpacity>
                   </View>
 
                   <View style={[styles.bottomRow]}>

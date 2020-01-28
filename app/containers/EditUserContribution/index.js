@@ -13,17 +13,18 @@ import {
 } from '../../helpers/utils';
 // Actions
 import {
-  sortedUserContributionsSelector,
-  currentUserProfileSelector
+  currentUserProfileSelector,
+  sortedUserContributionsSelector
 } from '../../selectors/index';
 
 class EditUserContributionsContainer extends React.Component {
   _userContribution = null;
 
-  onSubmit = (mode, registerTreeForm) => {
-    registerTreeForm =
+  onSubmit = (mode, value) => {
+    //console.log('OnSubmit====>', registerTreeForm);
+    /*registerTreeForm =
       registerTreeForm || this.refs.editTrees.refs.editTreeForm;
-    let value = registerTreeForm.getValue();
+    let value = registerTreeForm.getValue();*/
     const { props } = this;
     if (value) {
       value = mergeContributionImages(value);
@@ -70,6 +71,8 @@ class EditUserContributionsContainer extends React.Component {
       <EditUserContribution
         ref={'editTrees'}
         userContribution={this._userContribution}
+        currentUserProfile={this.props.currentUserProfile}
+        isEdit
         onSubmit={this.onSubmit}
       />
     );
@@ -91,9 +94,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 EditUserContributionsContainer.propTypes = {
   userContributions: PropTypes.array.isRequired,
+  currentUserProfile: PropTypes.object,
   editTree: PropTypes.func,
   navigation: PropTypes.any,
-  currentUserProfile: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
       selectedTreeId: PropTypes.string

@@ -23,6 +23,7 @@ import pledge_highest from './images/pledge_biggest.png';
 import pledge_latest from './images/pledge_recent.png';
 import baselineEdit from './images/baseline-edit.png';
 import baselineDelete from './images/baseline-delete.png';
+import deleteOutlineWhite from './images/delete_outline_white.png';
 import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/darkTree.png';
@@ -161,6 +162,7 @@ import Projects from './images/projects.jpg';
 import WelcomeImage3 from './images/welcome_screen_3_image.jpg';
 import welcomeScreen5 from './images/welcomeScreen5.png';
 import backArrow from './images/icons/backArrow.png';
+import redeemImage from './images/redeemImage.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
 import FAQsCover from './images/FAQs.png';
@@ -190,6 +192,7 @@ export {
   payment_bank,
   payment_credit,
   payment_paypal,
+  redeemImage,
   payment_sepa,
   MapPinBlue,
   MapPinGreen,
@@ -341,5 +344,6 @@ export {
   schooldleaderboard,
   tpoleaderboard,
   individualsleaderboard,
+  deleteOutlineWhite,
   companiesleaderboard
 };

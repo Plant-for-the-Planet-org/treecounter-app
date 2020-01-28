@@ -6,5 +6,5 @@ import BottomDrawer from './TestingFile';
 
 console.disableYellowBox = true;
 console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
-
-AppRegistry.registerComponent('TreecounterApp', () => BottomDrawer);
+GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+AppRegistry.registerComponent('TreecounterApp', () => App);

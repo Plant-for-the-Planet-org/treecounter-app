@@ -11,10 +11,12 @@ import { bindActionCreators } from 'redux';
 import { SafeAreaView } from 'react-navigation';
 import { initLocale } from '../../actions/getLocale.native.js';
 import { fetchCurrencies } from '../../actions/currencies';
+import { fetchConfig } from '../../actions/fetchLocation';
 class App extends Component {
   componentDidMount() {
     initLocale();
     this.props.fetchCurrencies();
+    this.props.fetchConfig();
     // TODO: at this time the locale isn't yet defined, so this API call is currently done with locale = undefined
     // Is there any way to wait with this API call until the locale is defined?
   }
@@ -25,7 +27,7 @@ class App extends Component {
         forceInset={{ top: 'never', bottom: 'always' }}
         style={{ flex: 1, backgroundColor: backgroundColor }}
       >
-        <AppDrawerNavigatorContainer />
+        <AppDrawerNavigatorContainer uriPrefix={'weplant://'} />
       </SafeAreaView>
     );
   }
@@ -38,7 +40,8 @@ const mapStateToProps = (/* state */) => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      fetchCurrencies
+      fetchCurrencies,
+      fetchConfig
       // loadUserProfile,
       // NotificationAction,
     },

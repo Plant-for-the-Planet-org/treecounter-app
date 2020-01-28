@@ -2,7 +2,7 @@
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { FlatList, View, Image, Text } from 'react-native';
+import { FlatList, View, Image, Text, RefreshControl } from 'react-native';
 
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
@@ -16,7 +16,63 @@ export default class FeaturedProjects extends PureComponent {
     this.onSelectClickedFeaturedProjects = this.onSelectClickedFeaturedProjects.bind(
       this
     );
+    this.perPage = 10;
+    this.state = {
+      plantProjects: [...props.plantProjects],
+      isFetching: false,
+      page: parseInt(props.plantProjects.length / this.perPage),
+      initiated: false,
+      shouldLoad: props.plantProjects.length != this.perPage
+    };
   }
+  onRefresh() {
+    if (!this.state.isFetching && this.state.shouldLoad)
+      this.setState({ isFetching: true, page: 1 }, async () => {
+        try {
+          const data = await this.props.loadProjects('featured', {
+            page: this.state.page
+          });
+          this.setState({
+            plantProjects: [...data],
+            isFetching: false,
+            shouldLoad: data.length == this.perPage
+          });
+        } catch (error) {
+          this.setState({ isFetching: false });
+        }
+      });
+  }
+  async componentWillReceiveProps(nextProps) {
+    if (nextProps.index == 0 && !this.state.initiated) {
+      console.log(
+        'component got index calling in featured=======================================================',
+        nextProps
+      );
+      this.setState({
+        initiated: true,
+        shouldLoad: this.props.plantProjects.length == this.perPage
+      });
+    }
+  }
+  fetchMore = () => {
+    console.log('this. should load in fetch more', this.state.shouldLoad);
+    if (!this.state.isFetching && this.state.shouldLoad)
+      this.setState({ page: this.state.page + 1 }, async () => {
+        try {
+          const data = await this.props.loadProjects('featured', {
+            page: this.state.page
+          });
+          this.setState({
+            isFetching: false,
+            shouldLoad: data.length == this.perPage,
+            plantProjects: [...this.state.plantProjects, ...data]
+          });
+          console.log('Got from fetch more:', data, this.perPage);
+        } catch (error) {
+          this.setState({ isFetching: false, shouldLoad: false });
+        }
+      });
+  };
   _keyExtractor = item => item.id.toString();
   onSelectClickedFeaturedProjects(id) {
     this.props.selectProject(id);
@@ -67,9 +123,17 @@ export default class FeaturedProjects extends PureComponent {
             ...flatListContainerStyle
           }}
           ListHeaderComponent={Header}
-          data={featuredProjects}
+          data={featuredProjects.sort((a, b) => a.id - b.id)}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
+          onEndReached={this.fetchMore}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isFetching}
+              onRefresh={this.onRefresh.bind(this)}
+              titleColor="#fff"
+            />
+          }
         />
       </View>
     );
@@ -80,5 +144,6 @@ FeaturedProjects.propTypes = {
   plantProjects: PropTypes.array.isRequired,
   selectProject: PropTypes.func.isRequired,
   onMoreClick: PropTypes.func.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  index: PropTypes.any
 };

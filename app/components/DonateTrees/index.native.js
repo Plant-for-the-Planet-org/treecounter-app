@@ -76,6 +76,11 @@ export default class DonateTrees extends React.PureComponent {
       });
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
+    console.log(
+      'got user form',
+      this.props.navigation.getParam('userForm'),
+      params
+    );
     if (params !== undefined && params.giftMethod === 'invitation') {
       this.setState({
         giftTreeCounterName:
@@ -90,16 +95,28 @@ export default class DonateTrees extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     // const { navigation } = this.props;
     if (nextProps.selectedProject) {
-      const nextTreeCount =
-        nextProps.selectedProject.paymentSetup.treeCountOptions
-          .fixedDefaultTreeCount;
-      const currentTreeCount = this.props.selectedProject
-        ? this.props.selectedProject.paymentSetup.treeCountOptions
-            .fixedDefaultTreeCount
-        : null;
+      console.log(
+        'nextProps.selectedProject.paymentSetup',
+        nextProps.selectedProject.paymentSetup
+      );
+      if (
+        nextProps.selectedProject.paymentSetup &&
+        nextProps.selectedProject.paymentSetup.treeCountOptions &&
+        this.props.selectedProject &&
+        this.props.selectedProject.paymentSetup &&
+        this.props.selectedProject.paymentSetup.treeCountOptions
+      ) {
+        const nextTreeCount =
+          nextProps.selectedProject.paymentSetup.treeCountOptions
+            .fixedDefaultTreeCount;
+        const currentTreeCount = this.props.selectedProject
+          ? this.props.selectedProject.paymentSetup.treeCountOptions
+              .fixedDefaultTreeCount
+          : null;
 
-      if (nextTreeCount !== currentTreeCount) {
-        this.setState({ selectedTreeCount: nextTreeCount });
+        if (nextTreeCount !== currentTreeCount) {
+          this.setState({ selectedTreeCount: nextTreeCount });
+        }
       }
     }
     if (
@@ -272,7 +289,7 @@ export default class DonateTrees extends React.PureComponent {
     // let name = receipt !== '' ? receipt.firstname + receipt.lastname : '';
     // let email = receipt !== '' ? receipt.email : '';
     // let paymentMethods;
-    if (receipt && selectedProject) {
+    if (receipt && selectedProject && selectedProject.paymentSetup) {
       let countryCurrency = `${receipt.country}/${this.state.selectedCurrency}`;
       const countryCurrencies = selectedProject.paymentSetup.countries;
       if (!Object.keys(countryCurrencies).includes(countryCurrency)) {
@@ -304,7 +321,7 @@ export default class DonateTrees extends React.PureComponent {
             onChange={this.handleTreeCountCurrencyChange}
           />
         ) : (
-          <LoadingIndicator />
+          <LoadingIndicator contentLoader screen="defaultLoader" />
         );
       // break;
 

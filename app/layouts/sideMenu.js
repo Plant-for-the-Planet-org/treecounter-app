@@ -5,7 +5,8 @@ import { getRequest, getAuthenticatedRequest } from '../utils/api';
 const PublicSideMenuSchema = menuNameParam => {
   return new Observable(observe => {
     getRequest('public_menu_get', {
-      category: menuNameParam
+      category: menuNameParam,
+      version: 'v1.4'
     })
       .then(({ data }) => {
         observe.next(data);
@@ -18,7 +19,8 @@ const PublicSideMenuSchema = menuNameParam => {
 const AuthenticatedSideMenuSchema = menuNameParam => {
   return new Observable(observe => {
     getAuthenticatedRequest('data_menu_get', {
-      category: menuNameParam
+      category: menuNameParam,
+      version: 'v1.4'
     })
       .then(({ data }) => {
         observe.next(data);

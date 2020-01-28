@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 function getConfig(prodEnv) {
   const config = {
     module: {
@@ -103,7 +104,8 @@ function getConfig(prodEnv) {
       new MiniCssExtractPlugin({
         filename: prodEnv ? '[name].[hash].css' : '[name].css',
         chunkFilename: prodEnv ? '[id].[hash].css' : '[id].css'
-      })
+      }),
+      new Dotenv()
     ]
   };
   return config;

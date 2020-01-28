@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
 
 import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
+import { loadProject } from '../../actions/loadTposAction';
 import { queryParamsToObject } from '../../helpers/utils';
 import { SafeAreaView, View, Text, Animated, StatusBar } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
@@ -31,27 +32,40 @@ class PlantProjectFull extends React.Component {
       scrollY: new Animated.Value(0)
     };
   }
-  async componentWillMount() {
+  async componentWillReceiveProps(nextProps) {
     try {
-      console.log(
-        'getting project details: we already have:',
-        this.state.plantProject,
-        this.props.plantProject
-      );
-      //if (!this.state.plantProject || !this.state.plantProject.tpoData) {
-      // we dont have the details in store, fetch it
-      const plantProject = await fetchPlantProjectDetail(
-        this.props.plantProject.id
-      );
-      console.log('fetched details plantproject', plantProject);
-      this.setState({ plantProject });
-      // }
+      console.log('plantproject while receive props', nextProps.plantProject);
+      if (nextProps.plantProject && !nextProps.plantProject.tpoData) {
+        // we dont have the details in store, fetch it
+        const plantProject = await this.props.loadProject(
+          nextProps.plantProject,
+          {}
+        );
+        console.log('fetched details plantproject in full', plantProject);
+        // this.setState({ plantProject });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async componentDidMount() {
+    try {
+      console.log('plantproject while did mount', this.props.plantProject);
+      if (this.props.plantProject && !this.props.plantProject.tpoData) {
+        // we dont have the details in store, fetch it
+        const plantProject = await this.props.loadProject(
+          this.props.plantProject,
+          {}
+        );
+        console.log('fetched details plantproject in full', plantProject);
+        // this.setState({ plantProject });
+      }
     } catch (error) {
       console.log(error);
     }
   }
   render() {
-    let { plantProject } = this.state;
+    let { plantProject } = this.props;
 
     // StatusBar.setBarStyle('light-content', true);
     // StatusBar.setTranslucent(true)
@@ -68,6 +82,7 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       url,
       linkText,
+      tpoName,
       ndviUid
     } = plantProject;
     let tpo = plantProject.tpoData || {};
@@ -121,6 +136,7 @@ class PlantProjectFull extends React.Component {
             clickable={false}
             plantProject={plantProject}
             onSelectClickedFeaturedProjects={id => this.props.selectProject(id)}
+            tpoName={tpoName}
             selectProject={this.props.selectProject}
             navigation={navigation}
           />
@@ -177,7 +193,7 @@ PlantProjectFull.propTypes = {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      fetchPlantProjectDetail
+      loadProject
     },
     dispatch
   );

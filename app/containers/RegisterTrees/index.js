@@ -25,17 +25,21 @@ class RegisterTreesContainer extends PureComponent {
     };
   }
 
-  onSubmit = (mode, registerTreeForm, plantProject) => {
-    registerTreeForm =
+  onSubmit = (mode, value, plantProject) => {
+    /* registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
-    let value = registerTreeForm.getValue();
+    let value = registerTreeForm.getValue() || registerTreeForm;*/
     console.log('got the form value:register form:', value);
 
     if (value) {
       value = mergeContributionImages(value);
 
       if (plantProject) {
-        value.plantProject = plantProject;
+        // needs to change an immutable struct
+        value = {
+          ...value,
+          plantProject
+        };
       }
       this.props
         .registerTree(
@@ -72,6 +76,7 @@ class RegisterTreesContainer extends PureComponent {
         <RegisterTrees
           key="register-tree"
           ref="registerTrees"
+          navigation={this.props}
           onSubmit={this.onSubmit}
           schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
           schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}

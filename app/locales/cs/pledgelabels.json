@@ -16,16 +16,12 @@
   "pledgeFormEmail": "Email",
   "pledgeFormTreecount": "Počet stromů",
   "pledgeAddedMessage": "Zavázali jste se zasadit {{treeCount}} stromů. Nyní můžete klepnutím na pokračovat splnit svůj slib.",
-  "pledgeAddedLaterButton": "POZDĚJI",
-  "pledgeAddedContinueButton": "POKRAČOVAT",
   "treesPledgedAllPledges": "{{treeCount}} přislíbených stromů",
   "unfulfilledPledgesTitle": "Nesplněné závazky",
   "anonymous": "Anonymní",
   "eventDescriptionAbout": "O",
-  "increaseMyPledge": "+ ZVÝŠIT MŮJ SLIB",
   "increasePledge": "Zvýšení slibu",
   "allPledges": "Všechny sliby",
-  "treesPledgedOn": "Seznam stromů přislíbených ",
   "donateXTrees": "Darujte {{treeCount}} stromů",
   "increasePledgeMessage": "Chcete-li zvýšit svůj slib, zadejte částku vyšší než {{treeCount}} stromů. Strom stojí {{treeCost}} {{currency}} a je vysazen v {{projectName}}"
 }

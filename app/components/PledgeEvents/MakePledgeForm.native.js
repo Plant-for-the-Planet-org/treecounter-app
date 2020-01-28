@@ -279,7 +279,7 @@ class MakePledgeForm extends Component {
                           rightTextStyle={{
                             fontFamily: 'OpenSans-Regular'
                           }}
-                          rightText="label.createPledgeFormHint"
+                          rightText={i18n.t('label.createPledgeFormHint')}
                         />
                       </View>
                     </View>

@@ -4,13 +4,14 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import {
+  selectedPlantProjectIdSelector,
   selectedPlantProjectSelector,
   selectedTpoSelector,
   currentUserProfileSelector
 } from '../../selectors';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
-
+import { loadProject } from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
@@ -24,8 +25,16 @@ class SelectedPlantProjectContainer extends Component {
     super(props);
     this.selectProject = this.selectProject.bind(this);
   }
-  componentDidMount() {
+  async componentDidMount() {
     //  this.props.selectPlantProjectAction(1);
+
+    if (!this.props.selectedProject) {
+      let project = await this.props.loadProject(
+        { id: this.props.selectedPlantProjectId },
+        { loading: true }
+      );
+      console.log('project found in selected plant project', project);
+    }
   }
 
   onTabChange(/* title */) {
@@ -35,14 +44,19 @@ class SelectedPlantProjectContainer extends Component {
     const { navigation } = this.props;
     this.props.selectPlantProjectAction(id);
     if (navigation) {
-      updateStaticRoute(
-        'app_donate_detail',
-        navigation,
-        navigation.getParam('userForm')
-      );
+      updateStaticRoute('app_donate_detail', navigation, {
+        id: id,
+        userForm: navigation.getParam('userForm'),
+        giftMethod: navigation.getParam('giftMethod')
+      });
     }
   }
   render() {
+    console.log(
+      'got id from nav param, and from redux',
+      this.props.navigation.getParam('id'),
+      this.props.selectedProject
+    );
     if (this.props.selectedProject) {
       return (
         <PlantProjectFull
@@ -62,14 +76,16 @@ class SelectedPlantProjectContainer extends Component {
 const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),
   selectedTpo: selectedTpoSelector(state),
-  currentUserProfile: currentUserProfileSelector(state)
+  currentUserProfile: currentUserProfileSelector(state),
+  selectedPlantProjectId: selectedPlantProjectIdSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       clearPlantProject,
-      selectPlantProjectAction
+      selectPlantProjectAction,
+      loadProject
     },
     dispatch
   );

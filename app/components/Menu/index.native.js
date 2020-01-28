@@ -3,12 +3,11 @@ import { View, ScrollView, SafeAreaView, Text, Linking } from 'react-native';
 import { LargeMenuItem } from './MenuItem.native';
 import PropTypes from 'prop-types';
 import styles from '../../styles/menu.native';
-import { updateRoute } from '../../helpers/routerHelper';
+import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 import * as icons from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
-import { saveItem } from '../../stores/localStorage';
 import UserProfileImage from '../Common/UserProfileImage.native';
 
 //   icons.target_outline;
@@ -48,11 +47,15 @@ export default class Menu extends Component {
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);
     // const welcome = await fetchItem('welcome');
-
     if (!this.props.userProfile) {
+      // if (welcome == null) {
+      //   updateRoute('welcome_screen', this.props.navigation, 0);
+      // } else {
+      //   updateRoute('app_homepage', this.props.navigation, 0);
+      // }
       updateRoute('welcome_screen', this.props.navigation, 0);
     }
-    saveItem('welcome', JSON.stringify({ value: 'true' }));
+    // saveItem('welcome', JSON.stringify({ value: 'true' }));
   }
   componentWillUnmount() {
     // Remove the listener
@@ -223,14 +226,21 @@ export default class Menu extends Component {
               />
             ) : null}
 
-            <LargeMenuItem
-              onPress={this.onPressMenu.bind(this, {
-                uri: getLocalRoute('app_redeem'),
-                params: { code: null }
-              })}
-              title={i18n.t('label.redeem_trees')}
-              iconUrl={icons.redeem_outline}
-            />
+            {this.props.userProfile ? (
+              <LargeMenuItem
+                // onPress={this.onPressMenu.bind(this, {
+                //   uri: getLocalRoute('app_redeem'),
+                //   params: { code: null }
+                // })}
+                onPress={() => {
+                  updateStaticRoute('app_redeem', this.props.navigation, {
+                    code: null
+                  });
+                }}
+                title={i18n.t('label.redeem_trees')}
+                iconUrl={icons.redeem_outline}
+              />
+            ) : null}
             {this.props.userProfile ? (
               <LargeMenuItem
                 onPress={this.onPressMenu.bind(this, {

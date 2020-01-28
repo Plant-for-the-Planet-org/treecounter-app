@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { loadProject } from '../../actions/loadTposAction';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
@@ -11,6 +11,9 @@ import PlantedProgressBar from './PlantedProgressbar';
 import { tick } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
 import NumberFormat from '../Common/NumberFormat';
+import { connect } from 'react-redux';
+// import LoadingIndicator from '../Common/LoadingIndicator.native';
+import { bindActionCreators } from 'redux';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -19,15 +22,17 @@ class PlantProjectFull extends React.Component {
     super(props);
     this.toggleExpanded = this.toggleExpanded.bind(this);
     let projectImage;
-    if (this.props.plantProject.imageFile) {
-      projectImage = { image: this.props.plantProject.imageFile };
+    if (props.plantProject.imageFile) {
+      projectImage = { image: props.plantProject.imageFile };
     } else {
       projectImage =
-        this.props.plantProject &&
-        this.props.plantProject.plantProjectImages &&
-        this.props.plantProject.plantProjectImages.find(() => true);
+        props.plantProject &&
+        props.plantProject.plantProjectImages &&
+        props.plantProject.plantProjectImages.find(() => true);
     }
+    let { plantProject } = props;
     this.state = {
+      plantProject,
       expanded: props.expanded,
       projectImage: projectImage,
       imageViewMore: false
@@ -36,7 +41,19 @@ class PlantProjectFull extends React.Component {
       props.callExpanded(!this.state.expanded);
     }
   }
-
+  async componentDidMount() {
+    if (this.props.plantProject && !this.props.plantProject.tpoData) {
+      // we dont have the details in store, fetch it
+      const plantProject = await this.props.loadProject(
+        this.props.plantProject
+      );
+      this.setState({ plantProject });
+      console.log(
+        'fetched details plantproject n plan project full',
+        plantProject
+      );
+    }
+  }
   toggleExpanded() {
     if (this.props.callExpanded) {
       this.props.callExpanded(!this.state.expanded);
@@ -62,7 +79,7 @@ class PlantProjectFull extends React.Component {
       countTarget,
       currency,
       treeCost,
-      paymentSetup,
+      taxDeductibleCountries,
       survivalRate: survivalRate,
       images,
       imageFile,
@@ -73,7 +90,7 @@ class PlantProjectFull extends React.Component {
       geoLocation,
       ndviUid,
       tpoSlug
-    } = this.props.plantProject;
+    } = this.state.plantProject;
     let projectImage = null;
 
     if (imageFile) {
@@ -96,7 +113,7 @@ class PlantProjectFull extends React.Component {
       survivalRate,
       currency,
       treeCost,
-      taxDeduction: paymentSetup.taxDeduction
+      taxDeduction: taxDeductibleCountries
     };
     const detailsProps = {
       description,
@@ -108,6 +125,8 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       ndviUid
     };
+
+    if (!projectImage) projectImage = this.state.projectImage;
     return (
       <React.Fragment>
         <div className="project-teaser__container">
@@ -115,11 +134,7 @@ class PlantProjectFull extends React.Component {
             <div className="teaser-image__container">
               <img
                 className="teaser__projectImage"
-                src={getImageUrl(
-                  'project',
-                  'large',
-                  this.state.projectImage.image
-                )}
+                src={getImageUrl('project', 'large', projectImage.image)}
                 alt={projectImage.description}
               />
             </div>
@@ -199,5 +214,12 @@ PlantProjectFull.propTypes = {
   projectClear: PropTypes.func,
   onViewMoreClick: PropTypes.func
 };
-
-export default PlantProjectFull;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      loadProject
+    },
+    dispatch
+  );
+};
+export default connect(null, mapDispatchToProps)(PlantProjectFull);

@@ -4,20 +4,23 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+#import <React/RCTLinkingManager.h>
 #import "AppDelegate.h"
 #import <React/RCTBridge.h>
 #import "RCTLinkingManager.h"
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "ReactNativeConfig.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  NSString *apiUrl = [ReactNativeConfig envFor:@"googleMapApiKey"];
   NSURL *jsCodeLocation;
-
+  [GMSServices provideAPIKey:apiUrl];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"TreecounterApp"

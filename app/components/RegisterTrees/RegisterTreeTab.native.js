@@ -1,129 +1,334 @@
+/* eslint-disable react-native/no-color-literals */
 import React, { PureComponent } from 'react';
-import t from 'tcomb-form-native';
-import { View } from 'react-native';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+// import t from 'tcomb-form-native';
+import { Text, View, Linking, Alert, Platform } from 'react-native';
+import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n.js';
-import styles from '../../styles/register_trees.native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Dropdown } from 'react-native-material-dropdown';
-const Form = t.form.Form;
+import { FormikFormTree } from './formComponents.native';
+import MapboxMap from '../Map/NativeMapView.native';
+
+import i18n from '../../locales/i18n';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import TouchableItem from '../../components/Common/TouchableItem';
+import PopupNative from '../Common/ModalDialog/Popup.native';
+import { updateRoute } from '../../helpers/routerHelper';
+import { context } from '../../config';
+
+const { host, scheme } = context;
 const backgroundColor = 'white';
-const getFormLayoutTemplate = (mode /* , isTpo */) => {
-  const formLayoutTreesTemplate = locals => {
-    return (
-      <View style={styles.registerTree__form}>
-        <View style={styles.registerTree__form__row}>
-          <View style={{ flex: mode === 'multiple-trees' ? 1 : 0 }}>
-            {locals.inputs.treeCount}
-          </View>
-          <View style={{ flex: 1 }}>{locals.inputs.treeSpecies}</View>
-        </View>
-
-        {locals.inputs.plantDate}
-
-        {locals.inputs.geoLocation}
-
-        <View
-          style={[styles.registerTree__form__alignLeftRow, styles.margin_top10]}
-        />
-        <View style={styles.registerTree__form__row}>
-          <View style={{ flex: 1 }}>{locals.inputs.treeClassification}</View>
-          <View style={{ flex: 1 }}>{locals.inputs.treeScientificName}</View>
-        </View>
-        <View style={styles.registerTree__form__row__split}>
-          {locals.inputs.contributionMeasurements}
-        </View>
-      </View>
-    );
-  };
-  return formLayoutTreesTemplate;
-};
-
+let isVisible = false;
 export default class RegisterTreeTab extends PureComponent {
   constructor(props) {
     super(props);
+    const defaultSingleInitValue = {
+      plantDate: (props.value && props.value.plantDate) || new Date(),
+      treeClassification: (props.value && props.value.treeClassification) || '',
+      treeSpecies: (props.value && props.value.treeSpecies) || '',
+      treeScientificName: (props.value && props.value.treeScientificName) || '',
+      treeCount: (props.value && props.value.treeCount) || 1,
+      contributionMeasurements:
+        (props.value && props.value.contributionMeasurements) || [],
+      contributionImages: (props.value && props.value.contributionImages) || [],
+      geoLocation: ''
+      // geometry: ''
+    };
+    const defaultMultipleInitValue = {
+      plantDate: (props.value && props.value.plantDate) || new Date(),
+      treeSpecies: (props.value && props.value.treeSpecies) || '',
+      treeCount: (props.value && props.value.treeCount) || 5,
+      contributionImages: (props.value && props.value.contributionImages) || [],
+      geoLocation: (props.value && props.value.geoLocation) || ''
+    };
     this.state = {
       plantProject: props.isTpo
         ? props.plantProjects.length > 0
           ? props.plantProjects[0].value
           : ''
         : '',
-      formValueSingle: props.value
-        ? props.value
-        : {
-            treeCount: 1
-          },
-      formValueMultiple: props.value ? props.value : ''
+      defaultSingleInitValue: defaultSingleInitValue,
+      defaultMultipleInitValue: defaultMultipleInitValue,
+
+      defaultValue:
+        props.mode === 'single-tree'
+          ? defaultSingleInitValue
+          : defaultMultipleInitValue,
+
+      isOpen: false,
+      mode: props.mode,
+      //  geometry: (props.value && props.value.geometry) || null,
+      geoLocation: (props.value && props.value.geoLocation) || null,
+      showAddProjectModel:
+        !props.isEdit &&
+        props.isTpo &&
+        props.plantProjects &&
+        props.plantProjects.length <= 0
     };
+    // this.isVisiable = false;
+    // isAndroid() && this.alertBox(this.state.showAddProjectModel)
   }
 
-  onFormChangeSingle = value => {
-    this.setState({ formValueSingle: value });
+  componentDidMount() {
+    Platform.OS === 'android' &&
+      !isVisible &&
+      this.alertBox(this.state.showAddProjectModel);
+  }
+
+  alertBox = showAddProjectModel => {
+    isVisible = true;
+    return setTimeout(() => {
+      showAddProjectModel &&
+        Alert.alert(
+          i18n.t('label.register_tree_tpo_no_plant_project_header'),
+          i18n.t('label.register_tree_tpo_no_plant_project_description'),
+          [
+            {
+              text: i18n.t('label.go_back'),
+              onPress: () =>
+                updateRoute('app_userHome', this.props.navigation.navigation)
+            },
+
+            {
+              text: i18n.t('label.add_project'),
+              onPress: () =>
+                Linking.openURL(`${scheme}://${host}/manage-plant-projects`)
+            }
+          ],
+          { cancelable: false }
+        );
+    }, 1500);
   };
 
-  onFormChangeMultiple = value => {
-    this.setState({ formValueMultiple: value });
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      mode: nextProps.mode
+    });
+  }
+
+  openModel = formProps => {
+    // if (!isEqual(this.formProps, formProps)) {
+    this.formProps = formProps;
+    this.renderFullscreenMap = (
+      <MapboxMap
+        mode={'single-tree'}
+        /*geometry={
+          this.formProps && this.formProps.values
+            ? this.formProps.values.geometry
+            : null
+        }*/
+        geoLocation={
+          this.formProps && this.formProps.values
+            ? this.formProps.values.geoLocation
+            : null
+        }
+        mapStyle={{ flex: 1, opacity: 1 }}
+        fullScreen
+        onContinue={(geoLocation, geometry, mode, address) => {
+          this.onModelClosed(geoLocation, geometry, mode, address);
+        }}
+      />
+    );
+    // }
+    this.setState({
+      isOpen: true
+    });
+  };
+
+  onModelClosed = (geoLocation, geometry, mode, address = null) => {
+    this.setState(
+      {
+        geoLocation: geoLocation,
+        //geometry: geometry,
+        address,
+        isOpen: false
+      },
+      () => {
+        if (this.formProps) {
+          this.formProps.setFieldValue('geoLocation', geoLocation);
+          //this.formProps.setFieldValue('geometry', geometry);
+        }
+      }
+    );
+  };
+  onClosed = () => {
+    this.setState({
+      isOpen: false
+    });
   };
 
   render() {
-    const schemaOptionsMultiple = {
+    /*const schemaOptionsMultiple = {
       template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
       ...this.props.schemaOptions
-    };
+    };*/
+    const {
+      isOpen,
+      geometry,
+      geoLocation,
+      defaultValue,
+      address,
+      showAddProjectModel
+    } = this.state;
+    /*if (geometry) {
+      defaultValue.geometry = geometry;
+    }*/
+    if (geoLocation) {
+      defaultValue.geoLocation = geoLocation;
+    }
 
     return (
-      <KeyboardAwareScrollView enableOnAndroid>
-        <View style={{ backgroundColor: backgroundColor }}>
-          <Form
-            ref="multipleTreesForm"
-            type={this.props.schemaType}
-            options={schemaOptionsMultiple}
-            value={
-              this.props.mode === 'single-tree'
-                ? this.state.formValueSingle
-                : this.state.formValueMultiple
-            }
-            onChange={
-              this.props.mode === 'single-tree'
-                ? this.onFormChangeSingle
-                : this.onFormChangeMultiple
-            }
-          />
-          {this.props.isTpo ? (
-            this.props.plantProjects.length > 0 ? (
-              <Dropdown
-                value={this.state.plantProject}
-                onChangeText={item =>
-                  this.setState({
-                    plantProject: item
-                  })
-                }
-                label={i18n.t('label.plant_project')}
-                data={this.props.plantProjects.map(item => {
-                  return { value: item.value, label: item.text };
-                })}
-              />
-            ) : null
-          ) : null}
-          <PrimaryButton
-            onClick={() => {
-              this.props.onRegister &&
+      <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
+        {this.state.mode === 'single-tree' ? (
+          <FormikFormTree
+            onCreateCompetition={value => {
+              if (this.props.mode === 'single-tree') {
+                //  value.geometry = undefined;
+                // delete value.geometry;
+              } else {
+                // value.geometry = JSON.stringify(value.geometry);
+              }
+              if (this.props.onRegister) {
                 this.props.onRegister(
                   this.props.mode,
-                  this.refs.multipleTreesForm,
+                  value,
                   this.state.plantProject === ''
                     ? null
                     : this.state.plantProject
                 );
+              }
+            }}
+            isTpo={this.props.isTpo}
+            isEdit={this.props.isEdit}
+            mode={this.props.mode}
+            plantProjects={this.props.plantProjects || ''}
+            geometry={geometry}
+            address={address}
+            geoLocation={geoLocation}
+            initialValues={this.state.defaultSingleInitValue}
+            openModel={formProps => this.openModel(formProps)}
+          />
+        ) : (
+          this.state.mode === 'multiple-trees' && (
+            <FormikFormTree
+              onCreateCompetition={value => {
+                if (this.props.mode === 'single-tree') {
+                  //  value.geometry = undefined;
+                  // delete value.geometry;
+                } else {
+                  // value.geometry = JSON.stringify(value.geometry);
+                }
+                if (this.props.onRegister) {
+                  this.props.onRegister(
+                    this.props.mode,
+                    value,
+                    this.state.plantProject === ''
+                      ? null
+                      : this.state.plantProject
+                  );
+                }
+              }}
+              isTpo={this.props.isTpo}
+              isEdit={this.props.isEdit}
+              mode={this.props.mode}
+              plantProjects={this.props.plantProjects || ''}
+              geometry={geometry}
+              address={address}
+              geoLocation={geoLocation}
+              initialValues={this.state.defaultMultipleInitValue}
+              openModel={formProps => this.openModel(formProps)}
+            />
+          )
+        )}
+        {Platform.OS === 'ios' && (
+          <PopupNative
+            isOpen={showAddProjectModel}
+            headerText={i18n.t(
+              'label.register_tree_tpo_no_plant_project_header'
+            )}
+            bodyText={i18n.t(
+              'label.register_tree_tpo_no_plant_project_description'
+            )}
+            onCancel={() => {
+              updateRoute('app_userHome', this.props.navigation.navigation);
+            }}
+            cancelText={i18n.t('label.go_back')}
+            applyText={i18n.t('label.add_project')}
+            onApply={() => {
+              Linking.openURL(`${scheme}://${host}/manage-plant-projects`);
+            }}
+          />
+        )}
+        <Modal
+          // position={'bottom'}
+          isOpen={isOpen}
+          position={'top'}
+          onClosed={this.onClosed}
+          backdropPressToClose={false}
+          coverScreen
+          keyboardTopOffset={0}
+          swipeToClose={false}
+        >
+          <View
+            style={{
+              height: 70,
+              opacity: 1
             }}
           >
-            {this.props.buttonTitle
-              ? this.props.buttonTitle
-              : i18n.t('label.register')}
-          </PrimaryButton>
-        </View>
-      </KeyboardAwareScrollView>
+            <TouchableItem
+              // key={button.type}
+              style={{
+                height: 70
+              }}
+              onPress={this.onClosed}
+            >
+              <Icon
+                name="keyboard-arrow-down"
+                size={48}
+                color="#4d5153"
+                style={{
+                  top: 40,
+                  left: 18
+                }}
+              />
+            </TouchableItem>
+          </View>
+
+          <View
+            style={{
+              paddingTop: 25,
+              padding: 25,
+              backgroundColor: 'white',
+              position: 'relative'
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 28,
+                fontWeight: 'bold',
+                paddingBottom: 10,
+                fontStyle: 'normal',
+                lineHeight: 30,
+                letterSpacing: 0,
+                textAlign: 'left',
+                color: '#4d5153'
+              }}
+            >
+              {i18n.t('label.planting_location')}
+            </Text>
+            <Text
+              style={{
+                fontSize: 18,
+                fontStyle: 'normal',
+                lineHeight: 19,
+                letterSpacing: 0,
+                color: '#4d5153'
+              }}
+            >
+              {i18n.t('label.planting_location_desc')}
+            </Text>
+          </View>
+          {this.renderFullscreenMap}
+        </Modal>
+      </View>
     );
   }
 }
@@ -134,6 +339,8 @@ RegisterTreeTab.propTypes = {
   schemaType: PropTypes.any.isRequired,
   schemaOptions: PropTypes.any.isRequired,
   value: PropTypes.any,
+  plantProjects: PropTypes.any,
   buttonTitle: PropTypes.string,
-  isTpo: PropTypes.bool
+  isTpo: PropTypes.bool,
+  isEdit: PropTypes.bool
 };

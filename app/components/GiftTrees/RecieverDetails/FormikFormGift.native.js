@@ -86,79 +86,40 @@ export default class FormikFormGift extends Component {
                     </Text>
                   </View>
                   <View style={styles.formView}>
-                    <View style={styles.formHalfTextField}>
-                      <TextField
-                        label={i18n.t('label.First_Name')}
-                        value={props.values.firstname}
-                        tintColor={'#89b53a'}
-                        titleFontSize={12}
-                        returnKeyType="next"
-                        lineWidth={1}
-                        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                        titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                        affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                        blurOnSubmit={false}
-                        error={
-                          props.touched.firstname && props.errors.firstname
-                        }
-                        onChangeText={props.handleChange('firstname')}
-                        onBlur={props.handleBlur('firstname')}
-                      />
-                    </View>
+                    <TextFieldComponent
+                      viewStyle={styles.formHalfTextField}
+                      label={i18n.t('label.First_Name')}
+                      value={props.values.firstname}
+                      error={props.touched.firstname && props.errors.firstname}
+                      onChangeText={props.handleChange('firstname')}
+                      onBlur={props.handleBlur('firstname')}
+                    />
 
-                    <View style={styles.formHalfTextField}>
-                      <TextField
-                        label={i18n.t('label.Last_Name')}
-                        value={props.values.lastname}
-                        tintColor={'#89b53a'}
-                        titleFontSize={12}
-                        returnKeyType="next"
-                        lineWidth={1}
-                        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                        titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                        affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                        blurOnSubmit={false}
-                        error={props.touched.lastname && props.errors.lastname}
-                        onChangeText={props.handleChange('lastname')}
-                        onBlur={props.handleBlur('lastname')}
-                      />
-                    </View>
-                  </View>
-                  <View>
-                    <TextField
-                      label={i18n.t('label.Email')}
+                    <TextFieldComponent
+                      viewStyle={styles.formHalfTextField}
+                      label={i18n.t('label.lastname')}
                       value={props.values.email}
-                      tintColor={'#89b53a'}
-                      titleFontSize={12}
-                      returnKeyType="next"
-                      lineWidth={1}
-                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      blurOnSubmit={false}
-                      error={props.touched.email && props.errors.email}
-                      onChangeText={props.handleChange('email')}
-                      onBlur={props.handleBlur('email')}
+                      error={props.touched.lastname && props.errors.lastname}
+                      onChangeText={props.handleChange('lastname')}
+                      onBlur={props.handleBlur('lastname')}
                     />
                   </View>
-                  <View>
-                    <TextField
-                      label={i18n.t('label.Gift_Message')}
-                      value={props.values.message}
-                      tintColor={'#89b53a'}
-                      titleFontSize={12}
-                      returnKeyType="next"
-                      lineWidth={1}
-                      multiline
-                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      blurOnSubmit={false}
-                      error={props.touched.message && props.errors.message}
-                      onChangeText={props.handleChange('message')}
-                      onBlur={props.handleBlur('message')}
-                    />
-                  </View>
+
+                  <TextFieldComponent
+                    label={i18n.t('label.Email')}
+                    value={props.values.email}
+                    error={props.touched.email && props.errors.email}
+                    onChangeText={props.handleChange('email')}
+                    onBlur={props.handleBlur('email')}
+                  />
+                  <TextFieldComponent
+                    label={i18n.t('label.Gift_Message')}
+                    value={props.values.message}
+                    multiline
+                    error={props.touched.message && props.errors.message}
+                    onChangeText={props.handleChange('message')}
+                    onBlur={props.handleBlur('message')}
+                  />
                 </KeyboardAwareScrollView>
 
                 {this.state.buttonType === 'next' ? (
@@ -210,3 +171,38 @@ export default class FormikFormGift extends Component {
     );
   }
 }
+
+const TextFieldComponent = props => {
+  return (
+    <View style={props.viewStyle ? props.viewStyle : null}>
+      <TextField
+        label={props.label}
+        value={props.message}
+        tintColor={props.tintColor ? props.tintColor : '#89b53a'}
+        titleFontSize={props.titleFontSize ? props.titleFontSize : 12}
+        returnKeyType="next"
+        lineWidth={1}
+        multiline={props.multiline ? props.multiline : false}
+        labelTextStyle={
+          props.labelTextStyle
+            ? props.labelTextStyle
+            : { fontFamily: 'OpenSans-Regular' }
+        }
+        titleTextStyle={
+          props.titleTextStyle
+            ? props.titleTextStyle
+            : { fontFamily: 'OpenSans-Regular' }
+        }
+        affixTextStyle={
+          props.affixTextStyle
+            ? props.affixTextStyle
+            : { fontFamily: 'OpenSans-Regular' }
+        }
+        blurOnSubmit={props.blurOnSubmit ? props.blurOnSubmit : false}
+        error={props.error ? props.error : null}
+        onChangeText={props.onChangeText}
+        onBlur={props.onBlur}
+      />
+    </View>
+  );
+};

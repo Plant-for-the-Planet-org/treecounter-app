@@ -8,8 +8,6 @@ import {
 } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps';
 import BottomContent from './BottomContent';
-// import { LoremIpsum } from '../common';
-// import { true } from '../config';
 
 const HEADER_HEIGHT = 50;
 const windowHeight = Dimensions.get('window').height;
@@ -100,6 +98,7 @@ export class BottomSheet extends Component {
     return (
       <View style={{ flex: 1 }}>
         <MapView
+          mapType={'satellite'}
           style={{ flex: 1 }}
           initialRegion={{
             latitude: 37.78825,
@@ -155,45 +154,7 @@ export class BottomSheet extends Component {
                       onScrollBeginDrag={this._onRegisterLastScroll}
                       scrollEventThrottle={1}
                     >
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
-                      <View>
-                        <Text>Content</Text>
-                      </View>
+                      <BottomContent />
                     </Animated.ScrollView>
                   </NativeViewGestureHandler>
                 </Animated.View>
@@ -210,8 +171,7 @@ export default class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <BottomSheet /> */}
-        <BottomContent />
+        <BottomSheet />
       </View>
     );
   }
@@ -228,7 +188,7 @@ const styles = StyleSheet.create({
   scrollTile: {
     width: 100,
     height: 8,
-    backgroundColor: 'green',
+    backgroundColor: 'white',
     borderRadius: 120,
     marginVertical: 5
   },
@@ -236,7 +196,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    borderColor: 'red',
+    borderColor: 'lightgray',
     borderWidth: 1
   }
 });

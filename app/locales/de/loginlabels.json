@@ -2,6 +2,9 @@
   "reset": "Zurücksetzen.",
   "dont_have_account": "Du hast noch kein Konto?",
   "login": "Einloggen",
+  "log-in": "Anmeldung",
+  "show": "Zeige",
+  "hide": "Verstecke",
   "password": "Passwort",
   "current_password": "Aktuelles Passwort",
   "login_description": "Melde dich mit deinem Plant-for-the-Planet App Konto an, um auf deinen persönlichen Baumzähler zuzugreifen. Du kannst dich registrieren, wenn du noch kein Konto hast."

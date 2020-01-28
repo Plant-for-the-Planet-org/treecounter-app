@@ -23,6 +23,7 @@ import pledge_highest from './images/pledge_biggest.png';
 import pledge_latest from './images/pledge_recent.png';
 import baselineEdit from './images/baseline-edit.png';
 import baselineDelete from './images/baseline-delete.png';
+import deleteOutlineWhite from './images/delete_outline_white.png';
 import pot from './images/pot.png';
 import loadingBar from './images/loading-bar.gif';
 import tree from './images/darkTree.png';
@@ -112,7 +113,6 @@ import lightTree from './images/lightTree.png';
 import targetPlanted from './images/target.png';
 import info from './images/icons/info.png';
 import editProfile from './images/icons/edit_profile.png';
-import welcomeLogo from './images/icons/welcomeLogo.png';
 import world_outline from './images/icons/world_outline.png';
 import world_outline_red from './images/icons/world_outline_red.png';
 import selector_menu from './images/icons/selector_menu.png';
@@ -167,10 +167,15 @@ import blackLock from './images/icons/blackLock.png';
 import infoHint from './images/infoHint.png';
 import readmoreDown from './images/readmoreDown.png';
 import readmoreUp from './images/readmoreUp.png';
+import redeemImage from './images/redeemImage.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
-import eye from './images/eye.png';
-import closeeye from './images/closeeye.png';
+import FAQsCover from './images/FAQs.png';
+import countriesleaderboard from './images/countriesleaderboard.png';
+import schooldleaderboard from './images/schooldleaderboard.png';
+import tpoleaderboard from './images/tpoleaderboard.png';
+import individualsleaderboard from './images/individualsleaderboard.png';
+import companiesleaderboard from './images/companiesleaderboard.png';
 
 export {
   treelogo,
@@ -192,6 +197,7 @@ export {
   payment_bank,
   payment_credit,
   payment_paypal,
+  redeemImage,
   payment_sepa,
   MapPinBlue,
   MapPinGreen,
@@ -290,7 +296,6 @@ export {
   targetPlanted,
   info,
   editProfile,
-  welcomeLogo,
   world_outline,
   world_outline_red,
   selector_menu,
@@ -344,6 +349,11 @@ export {
   outline_email,
   readmoreUp,
   readmoreDown,
-  eye,
-  closeeye
+  FAQsCover,
+  countriesleaderboard,
+  schooldleaderboard,
+  tpoleaderboard,
+  individualsleaderboard,
+  deleteOutlineWhite,
+  companiesleaderboard
 };

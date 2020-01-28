@@ -3,7 +3,7 @@ import { View, ScrollView, SafeAreaView, Text, Linking } from 'react-native';
 import { LargeMenuItem } from './MenuItem.native';
 import PropTypes from 'prop-types';
 import styles from '../../styles/menu.native';
-import { updateRoute } from '../../helpers/routerHelper';
+import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 import * as icons from '../../assets';
 import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -226,14 +226,21 @@ export default class Menu extends Component {
               />
             ) : null}
 
-            <LargeMenuItem
-              onPress={this.onPressMenu.bind(this, {
-                uri: getLocalRoute('app_redeem'),
-                params: { code: null }
-              })}
-              title={i18n.t('label.redeem_trees')}
-              iconUrl={icons.redeem_outline}
-            />
+            {this.props.userProfile ? (
+              <LargeMenuItem
+                // onPress={this.onPressMenu.bind(this, {
+                //   uri: getLocalRoute('app_redeem'),
+                //   params: { code: null }
+                // })}
+                onPress={() => {
+                  updateStaticRoute('app_redeem', this.props.navigation, {
+                    code: null
+                  });
+                }}
+                title={i18n.t('label.redeem_trees')}
+                iconUrl={icons.redeem_outline}
+              />
+            ) : null}
             {this.props.userProfile ? (
               <LargeMenuItem
                 onPress={this.onPressMenu.bind(this, {

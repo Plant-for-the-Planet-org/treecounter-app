@@ -1,5 +1,8 @@
 {
   "loading": "Laden ...",
+  "go_back": "Zurück",
+  "add_project": "Projekt hinzufügen",
+  "update": "Aktualisieren",
   "isRequired": "{{context}} wird benötigt",
   "enterValidEmail": "Gib eine gültige Email-Adresse ein",
   "invalidLength": "Ungültige Länge: Sollte kürzer sein als {{length}}",

@@ -7,7 +7,8 @@ import countryCodes from '../assets/countryCodes.json';
 import supportedCurrency from '../assets/supportedCurrency.json';
 import { find } from 'lodash';
 import { setCurrencyAction } from './globalCurrency';
-
+// import { setCdnMedia } from '../reducers/configReducer';
+let cdnMedia = {};
 export function fetchLocation() {
   return dispatch => {
     if (!getItemSync('preferredCurrency')) {
@@ -25,5 +26,26 @@ export function fetchLocation() {
           console.error(error);
         });
     }
+  };
+}
+export function getCdnMediaUrl() {
+  return cdnMedia;
+}
+export function fetchConfig() {
+  return () => {
+    // if (!getItemSync('preferredCurrency')) {
+    getRequest('config_get')
+      .then(data => {
+        console.log('Got config fetch data:', data.data);
+        cdnMedia = data.data.cdnMedia;
+
+        // for now we are not storing those in redux, please uncomment this when you need these urls in your components
+        // dispatch(setCdnMedia(data.data.cdnMedia));
+      })
+
+      .catch(error => {
+        console.error(error);
+      });
+    // }
   };
 }

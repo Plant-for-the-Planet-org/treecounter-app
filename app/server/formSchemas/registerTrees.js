@@ -12,8 +12,6 @@ export default {
         propertyOrder: 1
       },
       plantProject: {
-        enum: ['4', '6'],
-        enum_titles: ['project_4', 'Campeche Rainforest Restoration 2'],
         type: 'string',
         title: 'label.plant_project',
         icon: null,
@@ -90,6 +88,10 @@ export default {
         maxLength: 255,
         propertyOrder: 7
       },
+
+      /*
+      * Todo: Make universal schema function to handle array type form schemas
+      *  */
       contributionMeasurements: {
         type: 'array',
         title: 'label.add_measurements',
@@ -121,7 +123,7 @@ export default {
               propertyOrder: 3
             }
           },
-          required: ['diameter', 'height', 'measurementDate'],
+          //required: ['diameter', 'height', 'measurementDate'],
           icon: null,
           help: null
         },
@@ -130,7 +132,7 @@ export default {
         propertyOrder: 8
       }
     },
-    required: ['treeCount', 'plantDate', 'geoLocation'],
+    required: ['treeCount', 'plantDate', 'geoLocation', 'treeSpecies'],
     submit_url: '',
     submit_method: 'POST'
   },
@@ -203,7 +205,7 @@ export default {
         propertyOrder: 5
       }
     },
-    required: ['treeCount', 'plantDate', 'geoLocation'],
+    required: ['treeCount', 'plantDate', 'geoLocation', 'treeSpecies'],
     submit_url: '',
     submit_method: 'POST'
   }

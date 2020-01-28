@@ -25,6 +25,7 @@ import { getPledgeEvents } from '../reducers/pledgeEventReducer';
 import { getPaymentStatus } from '../reducers/paymentStatus';
 import { getCurrencies } from '../reducers/currenciesReducer';
 import { getGlobalCurrency } from '../reducers/currencyReducer';
+import { getCdnMedia } from '../reducers/configReducer';
 import { getCompetitionDetail } from '../reducers/competitionDetailReducer';
 
 export const supportedTreecounterSelector = state =>
@@ -46,6 +47,7 @@ export const pledgesSelector = state => getPledges(state);
 export const postedPledgesSelector = state => getPostedPledges(state);
 export const currenciesSelector = state => getCurrencies(state);
 export const getCurrency = state => getGlobalCurrency(state);
+export const getCdnMediaUrl = state => getCdnMedia(state);
 export const paymentStatusSelector = state => getPaymentStatus(state);
 export const pledgeEventSelector = state => getPledgeEvents(state);
 export const selectedCompetitionIdSelector = state =>

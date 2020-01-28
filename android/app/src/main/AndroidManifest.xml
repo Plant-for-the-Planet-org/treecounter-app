@@ -19,7 +19,7 @@
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
-        android:launchMode="singleTop"
+        android:launchMode="singleTask"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">
         <intent-filter>
@@ -30,6 +30,8 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
+            <!-- <data android:scheme="https" android:host="trilliontreecampaign.org" /> -->
+            <data android:scheme="weplant" />
             <data android:scheme="trilliontreecampaign" />
         </intent-filter>
         <intent-filter android:autoVerify="true">
@@ -70,6 +72,8 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+      <meta-data
+           android:name="com.google.android.geo.API_KEY"
+           android:value="@string/googleMapApiKey"/>
     </application>
-
 </manifest>

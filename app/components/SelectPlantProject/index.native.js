@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 // import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { Dimensions, View } from 'react-native';
 // import TabContainer from '../../containers/Menu/TabContainer';
@@ -9,12 +11,16 @@ import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import { updateStaticRoute } from '../../helpers/routerHelper';
+
+import { getAllPlantProjectsSelector } from '../../selectors';
+import { loadProject, loadProjects } from '../../actions/loadTposAction';
+
 const Layout = {
   window: {
     width: Dimensions.get('window').width
   }
 };
-export default class SelectPlantTabView extends PureComponent {
+class SelectPlantTabView extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,11 +42,17 @@ export default class SelectPlantTabView extends PureComponent {
     console.log('porps---', this.props);
     this.props.selectProject(id);
     const { navigation } = this.props;
-    updateStaticRoute(
-      'app_donate_detail',
-      navigation,
-      navigation.getParam('userForm')
+    console.log(
+      '=======in selectplant project component... calling donate detail with',
+      {
+        userForm: navigation.getParam('userForm'),
+        giftMethod: navigation.getParam('giftMethod')
+      }
     );
+    updateStaticRoute('app_donate_detail', navigation, {
+      userForm: navigation.getParam('userForm'),
+      giftMethod: navigation.getParam('giftMethod')
+    });
   }
   handleExpandedClicked = optionNumber => {
     this.setState({
@@ -49,7 +61,19 @@ export default class SelectPlantTabView extends PureComponent {
   };
 
   handleIndexChange = index => {
+    console.log('indicator index, ', index);
     this.setState({ index: index });
+    if (
+      index &&
+      !this.props.plantProjects.filter(project => !project.isFeatured).length
+    ) {
+      try {
+        // this.props.loadProjects();
+        //console.log('loaded projects in list', projects);
+      } catch (error) {
+        console.log('error on lloading project on list', error);
+      }
+    }
   };
 
   renderTabBar = props => {
@@ -65,13 +89,15 @@ export default class SelectPlantTabView extends PureComponent {
     ];
   };
 
-  renderSelectPlantScene = ({ route }) => {
+  renderSelectPlantScene = ({ route, jumpTo }) => {
     const {
       plantProjects,
       onMoreClick,
       selectProject,
       navigation,
-      currencies
+      currencies,
+      loadProject,
+      loadProjects
     } = this.props;
     // props for children
     const props = {
@@ -79,24 +105,35 @@ export default class SelectPlantTabView extends PureComponent {
       onMoreClick,
       selectProject,
       navigation,
-      currencies
+      currencies,
+      loadProjects,
+      loadProject
     };
-    // const { index } = this.state;
+    const { index } = this.state;
 
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        return (
-          <View>
-            <FeaturedProjects
-              onSelectProjects={this.onSelectProjects}
-              {...props}
-            />
-          </View>
-        );
+        console.log('fatured active', index, this.props.plantProjects);
+        return this.props.plantProjects.filter(project => project.isFeatured)
+          .length ? (
+          <FeaturedProjects
+            onSelectProjects={this.onSelectProjects}
+            {...props}
+            jumpTo={jumpTo}
+            index={this.state.index}
+          />
+        ) : null;
       case 'list':
+        console.log('list active', index, this.props.plantProjects);
+
         return (
-          <ListProjects onSelectProjects={this.onSelectProjects} {...props} />
+          <ListProjects
+            onSelectProjects={this.onSelectProjects}
+            {...props}
+            jumpTo={jumpTo}
+            index={this.state.index}
+          />
         );
       default:
         return null;
@@ -116,6 +153,15 @@ export default class SelectPlantTabView extends PureComponent {
   }
 }
 
+const mapStateToProps = state => ({
+  plantProjects: getAllPlantProjectsSelector(state)
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ loadProject, loadProjects }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectPlantTabView);
 SelectPlantTabView.propTypes = {
   plantProjects: PropTypes.array,
   currencies: PropTypes.object,

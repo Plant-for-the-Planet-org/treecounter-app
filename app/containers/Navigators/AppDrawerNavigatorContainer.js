@@ -5,11 +5,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getAppNavigator } from '../../components/Navigators/AppDrawerNavigator';
 import { getAccessToken } from '../../utils/user';
-import { loadTpos } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from '../../selectors';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import ProgressModal from '../../components/Common/ModalDialog/ProgressModal.native';
 import { View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
@@ -101,7 +99,6 @@ class AppDrawerNavigatorContainer extends Component {
       return (
         <View style={{ flex: 1 }}>
           <this._AppNavigator />
-          <ProgressModal />
         </View>
       );
     }
@@ -128,7 +125,6 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators(
       {
         loadUserProfile,
-        loadTpos,
         fetchpledgeEventsAction
       },
       dispatch

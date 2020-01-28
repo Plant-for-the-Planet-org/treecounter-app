@@ -342,8 +342,6 @@ export {
   outline_email,
   readmoreUp,
   readmoreDown,
-  eye,
-  closeeye,
   crossBlack,
   crossWhite,
   FAQsCover,

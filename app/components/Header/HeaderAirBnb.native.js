@@ -5,7 +5,8 @@ import {
   Image,
   BackHandler,
   View,
-  SafeAreaView
+  SafeAreaView,
+  Platform
 } from 'react-native';
 
 import { Dimensions } from 'react-native';
@@ -48,7 +49,7 @@ export default function HeaderAnimated(props) {
 
   const whiteColor = 'white';
   return (
-    <SafeAreaView>
+    <>
       <Animated.View
         style={{
           position: 'absolute',
@@ -56,13 +57,13 @@ export default function HeaderAnimated(props) {
           left: 0,
           right: 0,
           backgroundColor: whiteColor,
-          height: 76,
+          height: Platform.OS === 'ios' ? 88 : 76,
           zIndex: 1000,
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'row',
           width: '100%',
-          paddingTop: 12,
+          paddingTop: Platform.OS === 'ios' ? 36 : 24,
           opacity: headerOpacityReverse
         }}
       >
@@ -84,12 +85,6 @@ export default function HeaderAnimated(props) {
             }}
             onPress={() => props.navigation.goBack()}
           >
-            {/* <Icon
-              name={'close'}
-              size={24}
-              color="#707070"
-              style={{ height: 24, width: 24, alignSelf: 'center' }}
-            /> */}
             <Image
               source={crossBlack}
               resizeMode="contain"
@@ -105,13 +100,13 @@ export default function HeaderAnimated(props) {
           left: 0,
           right: 0,
           backgroundColor: 'rgba(52, 52, 52, 0.0)',
-          height: 76,
+          height: Platform.OS === 'ios' ? 88 : 76,
           zIndex: 999,
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'row',
           width: '100%',
-          paddingTop: 12
+          paddingTop: Platform.OS === 'ios' ? 36 : 24
         }}
       >
         <View
@@ -132,12 +127,6 @@ export default function HeaderAnimated(props) {
             }}
             onPress={() => props.navigation.goBack()}
           >
-            {/* <Icon
-              name={'close'}
-              size={24}
-              color="#fff"
-              style={{ height: 24, width: 24, alignSelf: 'center', elevation: 1 }}
-            /> */}
             <Image
               source={crossWhite}
               resizeMode="contain"
@@ -146,6 +135,6 @@ export default function HeaderAnimated(props) {
           </TouchableOpacity>
         </View>
       </Animated.View>
-    </SafeAreaView>
+    </>
   );
 }

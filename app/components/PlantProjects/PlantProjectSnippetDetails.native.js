@@ -129,7 +129,12 @@ class PlantProjectSnippetDetails extends PureComponent {
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
         <View style={[styles.projectSnippetContainer]}>
           {projectImage ? (
-            <View style={styles.projectImageContainer}>
+            <View
+              style={[
+                styles.projectImageContainer,
+                { backgroundColor: '#aaa' }
+              ]}
+            >
               <Image
                 style={styles.teaser__projectImage}
                 source={{

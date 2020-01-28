@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import i18n from '../../locales/i18n';
-
-import { fetchPlantProjectDetail } from '../../actions/plantProjectAction';
 import { loadProject } from '../../actions/loadTposAction';
 import { queryParamsToObject } from '../../helpers/utils';
 import { SafeAreaView, View, Text, Animated, StatusBar } from 'react-native';
@@ -64,14 +62,16 @@ class PlantProjectFull extends React.Component {
       console.log(error);
     }
   }
+  componentWillMount() {
+    StatusBar.setTranslucent(true);
+  }
+  componentWillUnmount() {
+    StatusBar.setTranslucent(false);
+  }
   render() {
     let { plantProject } = this.props;
 
-    // StatusBar.setBarStyle('light-content', true);
-    // StatusBar.setTranslucent(true)
-
-    if (!plantProject) return <LoadingIndicator />;
-    console.log('rendering with tpo', plantProject.tpoData);
+    if (!plantProject || !plantProject.tpoData) return <LoadingIndicator />;
     const {
       images,
       description,

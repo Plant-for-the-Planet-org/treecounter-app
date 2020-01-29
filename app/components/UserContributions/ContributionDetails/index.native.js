@@ -79,6 +79,7 @@ class UserContributionsDetails extends React.Component {
     console.log('\x1b[0m');
 
     let plantedDate = undefined;
+
     let dedicatedTo = undefined;
     let contributionTypeText = undefined;
     let location = undefined;
@@ -90,6 +91,9 @@ class UserContributionsDetails extends React.Component {
 
     if (plantDate) {
       plantedDate = formatDateForContribution(plantDate);
+    }
+    if (redemptionDate) {
+      plantedDate = formatDateForContribution(redemptionDate);
     }
     if (cardType === 'planting') {
       // contributionTypeText = i18n.t('label.usr_contribution_planted');

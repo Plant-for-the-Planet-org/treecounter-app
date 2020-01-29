@@ -63,9 +63,9 @@ export default class UserContributions extends React.Component {
       mayUpdate,
       contribution
     } = props;
-    console.log(this.props, 'this.props');
-    console.log('\x1b[45mcontributer \n', contributerPrefix, contributer);
-    console.log('\x1b[0m');
+    // console.log(this.props, 'this.props');
+    // console.log('\x1b[45mcontributer \n', redemptionDate);
+    // console.log('\x1b[0m');
 
     return (
       <View style={styles.container}>

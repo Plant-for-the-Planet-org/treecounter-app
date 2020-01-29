@@ -2,15 +2,15 @@ import React from 'react';
 import {
   Animated,
   TouchableOpacity,
-  Image,
   BackHandler,
   View,
   Platform,
-  SafeAreaView
+  StyleSheet
 } from 'react-native';
 
 import { Dimensions } from 'react-native';
-import { crossBlack, crossWhite } from '../../assets';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 const Layout = {
   window: {
     height: Dimensions.get('window').height - (56 + 70 + 20),
@@ -45,6 +45,30 @@ export default function HeaderAnimated(props) {
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', navigateBack);
     };
+  });
+
+  const blackColor = 'black';
+  const styles = StyleSheet.create({
+    whiteWithShadow: {
+      shadowColor: blackColor,
+      shadowOpacity: 0.5,
+      // iOS
+      shadowRadius: 1,
+      shadowOffset: {
+        width: 0, // These can't both be 0
+        height: 1 // i.e. the shadow has to be offset in some way
+      },
+      // Android
+      textShadowRadius: 1,
+      textShadowOffset: {
+        width: 0,
+        height: 1
+      },
+      fontSize: 32,
+      height: 32,
+      width: 32,
+      alignSelf: 'center'
+    }
   });
 
   const whiteColor = 'white';
@@ -86,10 +110,15 @@ export default function HeaderAnimated(props) {
             }}
             onPress={() => props.navigation.goBack()}
           >
-            <Image
-              source={crossBlack}
-              resizeMode="contain"
-              style={{ height: 18, width: 18, alignSelf: 'center' }}
+            <Icon
+              name="clear"
+              color="black"
+              style={{
+                fontSize: 32,
+                height: 32,
+                width: 32,
+                alignSelf: 'center'
+              }}
             />
           </TouchableOpacity>
         </View>
@@ -128,11 +157,7 @@ export default function HeaderAnimated(props) {
             }}
             onPress={() => props.navigation.goBack()}
           >
-            <Image
-              source={crossWhite}
-              resizeMode="contain"
-              style={{ height: 18, width: 18, alignSelf: 'center' }}
-            />
+            <Icon name="clear" color="white" style={styles.whiteWithShadow} />
           </TouchableOpacity>
         </View>
       </Animated.View>

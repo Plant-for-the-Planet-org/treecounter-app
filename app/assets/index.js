@@ -175,6 +175,7 @@ import companiesleaderboard from './images/companiesleaderboard.png';
 import share from './images/icons/share.png';
 import coupon from './images/icons/coupon.png';
 import registerTree from './images/icons/registerTree.png';
+import settings from './images/icons/settings.png';
 
 export {
   treelogo,
@@ -352,5 +353,6 @@ export {
   companiesleaderboard,
   share,
   coupon,
-  registerTree
+  registerTree,
+  settings
 };

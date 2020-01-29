@@ -8,7 +8,9 @@ import {
   Image,
   Linking,
   TouchableOpacity,
-  Share
+  Share,
+  SafeAreaView,
+  Platform
   // FlatList
 } from 'react-native';
 import {
@@ -16,7 +18,8 @@ import {
   readmoreUp,
   share,
   coupon,
-  registerTree
+  registerTree,
+  settings
 } from './../../assets/';
 import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
 // import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
@@ -224,22 +227,41 @@ export default class UserHome extends Component {
 
     console.log(recurrentUserContributions);
     return (
-      <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
-        <View>
-          <View>
-            <View style={styles.userProfileContainer}>
-              <UserProfileImage
-                imageStyle={styles.userProfileImage}
-                profileImage={userProfile.image}
-              />
+      <>
+        <SafeAreaView />
+        <TouchableOpacity
+          style={{
+            top: Platform.OS === 'ios' ? 40 : 20,
+            right: 20,
+            position: 'absolute'
+          }}
+        >
+          <Image source={settings} style={{ height: 20, width: 20 }} />
+        </TouchableOpacity>
 
-              <View style={styles.userInfo}>
-                <View style={styles.userInfoName}>
-                  <Text style={styles.nameStyle}>{userProfile.firstname}</Text>
-                  <Text style={styles.nameStyle2}> {userProfile.lastname}</Text>
+        <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
+          <View>
+            <View>
+              <View style={styles.userProfileContainer}>
+                <View style={{ flexDirection: 'row' }}>
+                  <UserProfileImage
+                    imageStyle={styles.userProfileImage}
+                    profileImage={userProfile.image}
+                  />
                 </View>
 
-                <View style={[styles.buttonViewRow, { width: '100%' }]}>
+                <View style={styles.userInfo}>
+                  <View style={styles.userInfoName}>
+                    <Text style={styles.nameStyle}>
+                      {userProfile.firstname}
+                    </Text>
+                    <Text style={styles.nameStyle2}>
+                      {' '}
+                      {userProfile.lastname}
+                    </Text>
+                  </View>
+
+                  {/* <View style={[styles.buttonViewRow, { width: '100%' }]}>
                   <View style={styles.userInfoProfileType}>
                     <Image
                       style={styles.profileTypeImage}
@@ -265,7 +287,7 @@ export default class UserHome extends Component {
                       {i18n.t('label.edit_profile')}
                     </Text>
                   </TouchableOpacity>
-                  {/* <TouchableOpacity
+                  <TouchableOpacity
                     style={styles.secondaryButton}
                     onPress={() => {
                      // Function For Sharing to be written here
@@ -275,152 +297,159 @@ export default class UserHome extends Component {
                     <Text style={[styles.secondaryButtonText, { marginLeft: 6 }]}>
                       {i18n.t('label.share')}
                     </Text>
-                  </TouchableOpacity> */}
+                  </TouchableOpacity>
+                </View> */}
                 </View>
               </View>
             </View>
+            <View style={styles.svgContainer}>
+              <SvgContainer
+                {...svgData}
+                onToggle={toggleVal => this.updateSvg(toggleVal)}
+              />
+            </View>
           </View>
-          <View style={styles.svgContainer}>
-            <SvgContainer
-              {...svgData}
-              onToggle={toggleVal => this.updateSvg(toggleVal)}
+          <View style={styles.buttonViewRow}>
+            <TouchableOpacity
+              style={styles.circleButton}
+              onPress={() => {
+                updateStaticRoute('app_redeem', this.props.navigation, {
+                  code: null
+                });
+              }}
+            >
+              <View style={styles.circleButtonView}>
+                <Image
+                  style={{ width: 24, height: 14.3, alignSelf: 'center' }}
+                  source={coupon}
+                />
+              </View>
+              <Text style={styles.circleButtonText}>Redeem</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.circleButton}
+              onPress={() => {
+                updateRoute('app_registerTrees', this.props.navigation);
+              }}
+            >
+              <View style={styles.circleButtonView}>
+                <Image
+                  style={{
+                    width: 13.8,
+                    height: 24,
+                    alignSelf: 'center'
+                  }}
+                  source={registerTree}
+                />
+              </View>
+              <Text style={styles.circleButtonText}>
+                {i18n.t('label.register_trees')}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.circleButton}
+              onPress={this.onShare}
+            >
+              <View style={styles.circleButtonView}>
+                <Image
+                  style={{ width: 24, height: 24, alignSelf: 'center' }}
+                  source={share}
+                />
+              </View>
+              <Text style={styles.circleButtonText}>Share</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Dedicated Trees Section */}
+          {userProfile.supportedTreecounter ? (
+            <DedicatedTrees
+              navigation={this.props.navigation}
+              supportedTreecounter={userProfile.supportedTreecounter}
             />
-          </View>
-        </View>
-        <View style={styles.buttonViewRow}>
-          <TouchableOpacity
-            style={styles.circleButton}
-            onPress={() => {
-              updateStaticRoute('app_redeem', this.props.navigation, {
-                code: null
-              });
-            }}
-          >
-            <View style={styles.circleButtonView}>
-              <Image
-                style={{ width: 24, height: 14.3, alignSelf: 'center' }}
-                source={coupon}
-              />
-            </View>
-            <Text style={styles.circleButtonText}>Redeem</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.circleButton}
-            onPress={() => {
-              updateRoute('app_registerTrees', this.props.navigation);
-            }}
-          >
-            <View style={styles.circleButtonView}>
-              <Image
-                style={{
-                  width: 13.8,
-                  height: 24,
-                  alignSelf: 'center'
-                }}
-                source={registerTree}
-              />
-            </View>
-            <Text style={styles.circleButtonText}>
-              {i18n.t('label.register_trees')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.circleButton} onPress={this.onShare}>
-            <View style={styles.circleButtonView}>
-              <Image
-                style={{ width: 24, height: 24, alignSelf: 'center' }}
-                source={share}
-              />
-            </View>
-            <Text style={styles.circleButtonText}>Share</Text>
-          </TouchableOpacity>
-        </View>
+          ) : null}
 
-        {/* Dedicated Trees Section */}
-        {userProfile.supportedTreecounter ? (
-          <DedicatedTrees
-            navigation={this.props.navigation}
-            supportedTreecounter={userProfile.supportedTreecounter}
-          />
-        ) : null}
-
-        {userProfile.synopsis1 ? (
-          <View>
-            <View style={styles.dedicatedContainer}>
-              <Text style={styles.dedicatedTitle}>{i18n.t('label.about')}</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  updateRoute('app_editProfile', this.props.navigation);
-                }}
-              >
-                <Text style={styles.dedicatedEdit}>{i18n.t('label.edit')}</Text>
-              </TouchableOpacity>
-            </View>
+          {userProfile.synopsis1 ? (
             <View>
-              {
-                // userProfile.synopsis1 ||
-                //   userProfile.synopsis2 ||
-                //   userProfile.linkText ||
-                //   userProfile.url ? (
-                //     <View>
-                //       {userProfile.synopsis1 ? (
-                //         <Text style={styles.footerText}>
-                //           {/* {userProfile.synopsis1} */}
-                //           {this.state.readMore
-                //             ? userProfile.synopsis1
-                //             : userProfile.synopsis1
-                //               ? userProfile.synopsis1.substring(0, 250) +
-                //               (userProfile.synopsis1.length > 250 ? '...' : '')
-                //               : ''}
-                //         </Text>
-                //       ) : null}
-                //       {userProfile.synopsis2 ? (
-                //         <Text style={styles.footerText}>
-                //           {/* {userProfile.synopsis2} */}
-                //           {this.state.readMore
-                //             ? userProfile.synopsis2
-                //             : userProfile.synopsis2 && userProfile.synopsis1.length < 250
-                //               ? userProfile.synopsis2.substring(0, 250 - userProfile.synopsis1.length) +
-                //               (userProfile.synopsis2.length > 250 - userProfile.synopsis1.length ? '...' : '')
-                //               : ''}
-                //         </Text>
-                //       ) : null}
-                //       {userProfile.url ? (
-                //         <Text
-                //           style={styles.linkText}
-                //           onPress={() => this._goToURL(userProfile.url)}
-                //         >
-                //           {userProfile.linkText || i18n.t('label.read_more')}
-                //         </Text>
-                //       ) : null}
-                //     </View>
-                //   ) : null
-              }
-              {userProfile.synopsis1 ||
-              userProfile.synopsis2 ||
-              userProfile.linkText ||
-              userProfile.url ? (
-                <View>
-                  {userProfile.synopsis1 ? (
-                    <Text style={styles.footerText}>
-                      {userProfile.synopsis1}
-                    </Text>
-                  ) : null}
-                  {userProfile.synopsis2 ? (
-                    <Text style={styles.footerText}>
-                      {userProfile.synopsis2}
-                    </Text>
-                  ) : null}
-                  {userProfile.url ? (
-                    <Text
-                      style={styles.linkText}
-                      onPress={() => this._goToURL(userProfile.url)}
-                    >
-                      {userProfile.linkText || i18n.t('label.read_more')}
-                    </Text>
-                  ) : null}
-                </View>
-              ) : null}
-              {/* {
+              <View style={styles.dedicatedContainer}>
+                <Text style={styles.dedicatedTitle}>
+                  {i18n.t('label.about')}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    updateRoute('app_editProfile', this.props.navigation);
+                  }}
+                >
+                  <Text style={styles.dedicatedEdit}>
+                    {i18n.t('label.edit')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                {
+                  // userProfile.synopsis1 ||
+                  //   userProfile.synopsis2 ||
+                  //   userProfile.linkText ||
+                  //   userProfile.url ? (
+                  //     <View>
+                  //       {userProfile.synopsis1 ? (
+                  //         <Text style={styles.footerText}>
+                  //           {/* {userProfile.synopsis1} */}
+                  //           {this.state.readMore
+                  //             ? userProfile.synopsis1
+                  //             : userProfile.synopsis1
+                  //               ? userProfile.synopsis1.substring(0, 250) +
+                  //               (userProfile.synopsis1.length > 250 ? '...' : '')
+                  //               : ''}
+                  //         </Text>
+                  //       ) : null}
+                  //       {userProfile.synopsis2 ? (
+                  //         <Text style={styles.footerText}>
+                  //           {/* {userProfile.synopsis2} */}
+                  //           {this.state.readMore
+                  //             ? userProfile.synopsis2
+                  //             : userProfile.synopsis2 && userProfile.synopsis1.length < 250
+                  //               ? userProfile.synopsis2.substring(0, 250 - userProfile.synopsis1.length) +
+                  //               (userProfile.synopsis2.length > 250 - userProfile.synopsis1.length ? '...' : '')
+                  //               : ''}
+                  //         </Text>
+                  //       ) : null}
+                  //       {userProfile.url ? (
+                  //         <Text
+                  //           style={styles.linkText}
+                  //           onPress={() => this._goToURL(userProfile.url)}
+                  //         >
+                  //           {userProfile.linkText || i18n.t('label.read_more')}
+                  //         </Text>
+                  //       ) : null}
+                  //     </View>
+                  //   ) : null
+                }
+                {userProfile.synopsis1 ||
+                userProfile.synopsis2 ||
+                userProfile.linkText ||
+                userProfile.url ? (
+                  <View>
+                    {userProfile.synopsis1 ? (
+                      <Text style={styles.footerText}>
+                        {userProfile.synopsis1}
+                      </Text>
+                    ) : null}
+                    {userProfile.synopsis2 ? (
+                      <Text style={styles.footerText}>
+                        {userProfile.synopsis2}
+                      </Text>
+                    ) : null}
+                    {userProfile.url ? (
+                      <Text
+                        style={styles.linkText}
+                        onPress={() => this._goToURL(userProfile.url)}
+                      >
+                        {userProfile.linkText || i18n.t('label.read_more')}
+                      </Text>
+                    ) : null}
+                  </View>
+                ) : null}
+                {/* {
                 (userProfile.synopsis1 && userProfile.synopsis1.length > 250) ||
                   (userProfile.synopsis2 && userProfile.synopsis2.length > 250) ||
                   ((userProfile.synopsis1 ? userProfile.synopsis1.length : 0) + (userProfile.linkText ? userProfile.linkText.length : 0)) > 250 ? (
@@ -439,67 +468,72 @@ export default class UserHome extends Component {
                       </View>
                     </TouchableOpacity>
                   ) : null} */}
+              </View>
             </View>
-          </View>
-        ) : null}
+          ) : null}
 
-        {/* Recurrent Donations */}
-        {recurrentUserContributions.length ? (
-          <View style={{ marginTop: 20 }}>
-            <Text style={styles.sectionTitle}>
-              {i18n.t('label.active_recurrent_donations')}
-            </Text>
-            <ContributionCardList
-              contributions={recurrentUserContributions}
-              deleteContribution={this.props.deleteContribution}
-              showAllContributions={showAllRecurrentContributions}
+          {/* Recurrent Donations */}
+          {recurrentUserContributions.length ? (
+            <View style={{ marginTop: 20 }}>
+              <Text style={styles.sectionTitle}>
+                {i18n.t('label.active_recurrent_donations')}
+              </Text>
+              <ContributionCardList
+                contributions={recurrentUserContributions}
+                deleteContribution={this.props.deleteContribution}
+                showAllContributions={showAllRecurrentContributions}
+              />
+            </View>
+          ) : null}
+
+          {recurrentUserContributions &&
+          recurrentUserContributions.length > 3 ? (
+            <ToggleButton
+              updateFunction={() => this.showRecurrentMore()}
+              showMore={showAllRecurrentContributions}
             />
-          </View>
-        ) : null}
+          ) : null}
 
-        {recurrentUserContributions && recurrentUserContributions.length > 3 ? (
-          <ToggleButton
-            updateFunction={() => this.showRecurrentMore()}
-            showMore={showAllRecurrentContributions}
-          />
-        ) : null}
+          {/* Competitions */}
+          {userProfile.treecounter.competitions.length > 0 ? (
+            <MyCompetitions
+              onCompetitionClick={this.onCompetitionClick}
+              navigation={this.props.navigation}
+              competitions={userProfile.treecounter.competitions}
+            />
+          ) : null}
 
-        {/* Competitions */}
-        {userProfile.treecounter.competitions.length > 0 ? (
-          <MyCompetitions
-            onCompetitionClick={this.onCompetitionClick}
-            navigation={this.props.navigation}
-            competitions={userProfile.treecounter.competitions}
-          />
-        ) : null}
+          {/* Plant Projects of TPO  */}
+          {userProfile.plantProjects ? (
+            <Text style={styles.sectionTitle}>{i18n.t('label.projects')}</Text>
+          ) : null}
+          <ScrollView>
+            {userProfile.plantProjects
+              ? userProfile.plantProjects.map(project => (
+                  <PlantProjectSnippet
+                    key={'projectFull' + project.id}
+                    onMoreClick={id =>
+                      this.onPlantProjectClick(id, project.name)
+                    }
+                    plantProject={project}
+                    onSelectClickedFeaturedProjects={id =>
+                      this.onPlantProjectClick(id, project.name)
+                    }
+                    showMoreButton={false}
+                    tpoName={project.tpo_name}
+                    navigation={this.props.navigation}
+                  />
+                ))
+              : null}
+          </ScrollView>
 
-        {/* Plant Projects of TPO  */}
-        {userProfile.plantProjects ? (
-          <Text style={styles.sectionTitle}>{i18n.t('label.projects')}</Text>
-        ) : null}
-        <ScrollView>
-          {userProfile.plantProjects
-            ? userProfile.plantProjects.map(project => (
-                <PlantProjectSnippet
-                  key={'projectFull' + project.id}
-                  onMoreClick={id => this.onPlantProjectClick(id, project.name)}
-                  plantProject={project}
-                  onSelectClickedFeaturedProjects={id =>
-                    this.onPlantProjectClick(id, project.name)
-                  }
-                  showMoreButton={false}
-                  tpoName={project.tpo_name}
-                  navigation={this.props.navigation}
-                />
-              ))
-            : null}
-        </ScrollView>
+          {this.props.userContributions.length ? (
+            <View style={{ marginTop: 20 }}>
+              <Text style={styles.sectionTitle}>
+                {i18n.t('label.my_trees')}
+              </Text>
 
-        {this.props.userContributions.length ? (
-          <View contentContainerStyle={{ paddingBottom: 72, marginTop: 20 }}>
-            <Text style={styles.sectionTitle}>{i18n.t('label.my_trees')}</Text>
-
-            {/* <NativeMapView
+              {/* <NativeMapView
               mode={'multiple-trees'}
               mapStyle={{ height: 200 }}
               geometry={null}
@@ -509,27 +543,28 @@ export default class UserHome extends Component {
                 parentProps.openModel(props);
               }}
             /> */}
-            <ContributionCardList
-              contributions={this.props.userContributions}
-              deleteContribution={this.props.deleteContribution}
-              showAllContributions={showAllContributions}
+              <ContributionCardList
+                contributions={this.props.userContributions}
+                deleteContribution={this.props.deleteContribution}
+                showAllContributions={showAllContributions}
+              />
+            </View>
+          ) : null}
+
+          {this.props.userContributions &&
+          this.props.userContributions.length > 3 ? (
+            <ToggleButton
+              updateFunction={() => this.readMore()}
+              showMore={showAllContributions}
             />
-          </View>
-        ) : null}
+          ) : null}
 
-        {this.props.userContributions &&
-        this.props.userContributions.length > 3 ? (
-          <ToggleButton
-            updateFunction={() => this.readMore()}
-            showMore={showAllContributions}
-          />
-        ) : null}
-
-        {/* <RenderIndividualsList
+          {/* <RenderIndividualsList
           navigation={this.props.navigation}
           gifts={userProfile.treecounter.gifts}
         /> */}
-      </ScrollView>
+        </ScrollView>
+      </>
     );
   }
 }

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { SafeAreaView, StyleSheet, Dimensions, View } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
-
 import StaticTabbar from './StaticTabbar';
+import i18n from '../../locales/i18n';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Tabbar extends React.PureComponent {
@@ -13,31 +12,31 @@ export default class Tabbar extends React.PureComponent {
       {
         id: 0,
         name: 'earth',
-        title: 'World',
+        title: i18n.t('label.menu_world'),
         route: 'app_homepage'
       },
       {
         id: 1,
         name: 'gift-outline',
-        title: 'Gift',
+        title: i18n.t('label.gift'),
         route: 'app_giftTrees'
       },
       {
         id: 2,
         name: 'heart-outline',
-        title: 'Donate',
+        title: i18n.t('label.donate'),
         route: 'app_donateTrees'
       },
       {
         id: 3,
         name: 'crown',
-        title: 'Compete',
+        title: i18n.t('label.compete'),
         route: 'app_competitions'
       },
       {
         id: 4,
         name: 'account-outline',
-        title: 'Me',
+        title: i18n.t('label.me'),
         route: 'app_userHome'
       }
     ];

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-    View, StyleSheet, TouchableWithoutFeedback, Animated, Dimensions, Text, Image
+    View, StyleSheet, TouchableWithoutFeedback, Dimensions, Text, Image
 } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { updateRoute } from './../../helpers/routerHelper/tabrouteHelper.native';

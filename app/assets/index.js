@@ -172,9 +172,6 @@ import tpoleaderboard from './images/tpoleaderboard.png';
 import individualsleaderboard from './images/individualsleaderboard.png';
 import companiesleaderboard from './images/companiesleaderboard.png';
 
-import crossBlack from './images/header/crossBlack.png';
-import crossWhite from './images/header/crossWhite.png';
-
 export {
   treelogo,
   germany,
@@ -342,8 +339,6 @@ export {
   outline_email,
   readmoreUp,
   readmoreDown,
-  crossBlack,
-  crossWhite,
   FAQsCover,
   countriesleaderboard,
   schooldleaderboard,

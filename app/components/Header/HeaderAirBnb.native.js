@@ -5,7 +5,8 @@ import {
   Image,
   BackHandler,
   View,
-  Platform
+  Platform,
+  SafeAreaView
 } from 'react-native';
 
 import { Dimensions } from 'react-native';
@@ -57,13 +58,13 @@ export default function HeaderAnimated(props) {
           left: 0,
           right: 0,
           backgroundColor: whiteColor,
-          height: Platform.OS === 'ios' ? 100 : 76,
+          height: Platform.OS === 'ios' ? 96 : 76,
           zIndex: 1000,
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'row',
           width: '100%',
-          paddingTop: Platform.OS === 'ios' ? 36 : 24,
+          paddingTop: Platform.OS === 'ios' ? 44 : 24,
           opacity: headerOpacityReverse
         }}
       >
@@ -100,13 +101,13 @@ export default function HeaderAnimated(props) {
           left: 0,
           right: 0,
           backgroundColor: transparent,
-          height: Platform.OS === 'ios' ? 100 : 76,
+          height: Platform.OS === 'ios' ? 96 : 76,
           zIndex: 999,
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'row',
           width: '100%',
-          paddingTop: Platform.OS === 'ios' ? 36 : 24
+          paddingTop: Platform.OS === 'ios' ? 44 : 24
         }}
       >
         <View

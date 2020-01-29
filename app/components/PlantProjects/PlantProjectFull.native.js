@@ -104,10 +104,10 @@ class PlantProjectFull extends React.Component {
     const backgroundColor = 'white';
 
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <StatusBar
           backgroundColor="rgba(52, 52, 52, 0.0)"
-          barStyle="dark-content"
+          barStyle={'dark-content'}
         />
         <HeaderAirBnb
           navigation={this.props.navigation}
@@ -176,7 +176,7 @@ class PlantProjectFull extends React.Component {
             </FullHeightButton>
           </View>
         ) : null}
-      </SafeAreaView>
+      </View>
     );
   }
 }

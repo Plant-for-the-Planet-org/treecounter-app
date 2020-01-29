@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Animated,
   TouchableOpacity,
-  Image,
   BackHandler,
   View,
   Platform,
@@ -53,16 +52,17 @@ export default function HeaderAnimated(props) {
     whiteWithShadow: {
       shadowColor: blackColor,
       shadowOpacity: 0.5,
-      shadowRadius: 1,
       // iOS
+      shadowRadius: 1,
       shadowOffset: {
         width: 0, // These can't both be 0
         height: 1 // i.e. the shadow has to be offset in some way
       },
       // Android
-      shadowOffset: {
-        width: 0, // Same rules apply from above
-        height: 1 // Can't both be 0
+      textShadowRadius: 1,
+      textShadowOffset: {
+        width: 0,
+        height: 1
       },
       fontSize: 32,
       height: 32,

@@ -50,6 +50,20 @@ class DonationTreesContainer extends PureComponent {
           }
         })
         .catch(error => console.log(error));
+    } else {
+      const { currentUserProfile } = this.props;
+      console.log(
+        'current user profile and suported tree counter',
+        currentUserProfile,
+        this.props.supportTreecounter.treecounterId
+      );
+      if (currentUserProfile && !this.props.supportTreecounter.treecounterId) {
+        currentUserProfile.supportedTreecounter &&
+          this.props.supportTreecounterAction({
+            id: currentUserProfile.supportedTreecounter.id,
+            displayName: currentUserProfile.supportedTreecounter.displayName
+          });
+      }
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -57,27 +71,37 @@ class DonationTreesContainer extends PureComponent {
       this.props.loadProject({ id: nextProps.selectedProject.id });
     }
   }
-  componentDidMount() {
+  async componentDidMount() {
     let selectedProjectId = undefined;
     if (this.props.match) {
       selectedProjectId = parseInt(this.props.match.params.id);
     }
-    if (this.props.navigation.getParam('id'))
+    if (this.props.navigation && this.props.navigation.getParam('id'))
       selectedProjectId = parseInt(this.props.navigation.getParam('id'));
     if (this.props.selectedProject && !this.props.selectedProject.tpoData) {
-      this.props.loadProject({ id: this.props.selectedProject.id });
+      await this.props.loadProject({ id: this.props.selectedProject.id });
     }
-    console.log(
-      ' in donation got selectedPlant project',
-      selectedProjectId,
-      this.props.navigation.getParam('id')
-    );
+
     // this causes a redraw
     typeof selectedProjectId == 'number' &&
       this.props.selectPlantProjectAction(selectedProjectId);
 
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
+    }
+  }
+  componentWillUnmount() {
+    const { currentUserProfile } = this.props;
+    console.log(
+      'current user profile unmounting donate trees container',
+      currentUserProfile
+    );
+    if (currentUserProfile) {
+      currentUserProfile.supportedTreecounter &&
+        this.props.supportTreecounterAction({
+          id: null,
+          displayName: null
+        });
     }
   }
   onTabChange = title => this.props.navigation.setParams({ titleParam: title });

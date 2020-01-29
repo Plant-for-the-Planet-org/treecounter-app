@@ -177,6 +177,10 @@ import schooldleaderboard from './images/schooldleaderboard.png';
 import tpoleaderboard from './images/tpoleaderboard.png';
 import individualsleaderboard from './images/individualsleaderboard.png';
 import companiesleaderboard from './images/companiesleaderboard.png';
+import donateIcon from './images/icons/donateIcon.png';
+import donateIconGreen from './images/icons/donateIconGreen.png';
+import competeIcon from './images/icons/competeIcon.png';
+import competeIconGreen from './images/icons/competeIconGreen.png';
 
 export {
   treelogo,
@@ -357,5 +361,9 @@ export {
   tpoleaderboard,
   individualsleaderboard,
   deleteOutlineWhite,
-  companiesleaderboard
+  companiesleaderboard,
+  donateIcon,
+  donateIconGreen,
+  competeIcon,
+  competeIconGreen
 };

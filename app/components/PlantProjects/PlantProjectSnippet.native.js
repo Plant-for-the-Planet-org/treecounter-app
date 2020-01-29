@@ -102,11 +102,11 @@ class PlantProjectSnippet extends PureComponent {
       location,
       countPlanted,
       countTarget,
-      survivalRate,
       currency,
       treeCost,
       taxDeduction: taxDeductibleCountries
     };
+    specsProps.survivalRate = survivalRate;
     let deducibleText1 = [];
     if (taxDeductibleCountries)
       for (let i = 0; i < taxDeductibleCountries.length; i++) {

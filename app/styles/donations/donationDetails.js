@@ -37,8 +37,8 @@ export default EStyleSheet.create({
     lineHeight: 24,
     color: '#4d5153',
     display: 'flex',
-    flexWrap: 'wrap',
-    maxWidth: '95%'
+    flexWrap: 'wrap'
+    //maxWidth: '95%'
   },
   projectAmountView: {
     display: 'flex',
@@ -52,8 +52,47 @@ export default EStyleSheet.create({
   projectAmountText: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 11,
+    color: '#4d5153'
+  },
+
+  // Project Details
+  noprojectDetails: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 20,
+    alignItems: 'center'
+  },
+  noprojectImage: {
+    height: 32,
+    width: 32,
+    borderRadius: 16,
+    backgroundColor: '#e0e0e0'
+  },
+  noprojectNameAmount: {
+    marginLeft: 10,
+    flexGrow: 1
+  },
+  noprojectName: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 18,
+    lineHeight: 24,
     color: '#4d5153',
-    marginLeft: 10
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  noprojectAmountView: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 10
+  },
+  noprojectAmountImage: {
+    height: 14,
+    width: 14
+  },
+  noprojectAmountText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 11,
+    color: '#4d5153'
   },
 
   // Gift Details
@@ -68,7 +107,8 @@ export default EStyleSheet.create({
     borderRadius: 16
   },
   giftNameAmount: {
-    marginLeft: 10
+    marginLeft: 10,
+    flexGrow: 1
   },
   giftName: {
     fontFamily: 'OpenSans-Regular',
@@ -198,20 +238,20 @@ export default EStyleSheet.create({
     color: '#4d5153'
   },
   repititionSelectorView: {
-    borderRadius: 7,
+    borderRadius: 15,
     backgroundColor: '#ffffff',
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#d5d5d5',
-    height: 54,
-    paddingVertical: 24,
+    height: 30,
+    paddingVertical: 8,
     paddingHorizontal: 12,
     justifyContent: 'center',
     alignItems: 'center',
     width: width * 0.26
   },
   selectedRepititionText: {
-    fontFamily: 'OpenSans-Bold',
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 14,
     lineHeight: 19,
     letterSpacing: 0,
@@ -219,10 +259,10 @@ export default EStyleSheet.create({
     color: '#ffffff'
   },
   repititionSelectedView: {
-    borderRadius: 7,
+    borderRadius: 15,
     backgroundColor: '#89b53a',
-    height: 54,
-    paddingVertical: 24,
+    height: 30,
+    paddingVertical: 8,
     paddingHorizontal: 12,
     justifyContent: 'center',
     alignItems: 'center',
@@ -268,6 +308,13 @@ export default EStyleSheet.create({
     lineHeight: 18,
     color: 'rgba(0, 0, 0, 0.6)',
     width: width * 0.7
+  },
+  isTaxDeductibleCountry: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 13,
+    lineHeight: 18,
+    color: '#87b738',
+    marginRight: 6
   },
   isTaxDeductibleView: {
     display: 'flex',

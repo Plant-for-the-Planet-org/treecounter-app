@@ -26,6 +26,17 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Header from './DonationDetailsComponents/Header';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import {
+  TaxReceipt,
+  CoverFee,
+  PaymentOption,
+  SelectFrequency,
+  PlantProjectDetails,
+  NoPlantProjectDetails,
+  SelectTreeCount,
+  CountryPicker
+} from './DonationDetailsComponents/donationComponents.native';
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
@@ -65,15 +76,79 @@ function DonationDetails(props) {
         ])}
       >
         {/* Plant Project Details */}
-        <PlantProjectDetails
-          treeCost={props.treeCost}
-          selectedCurrency={props.selectedCurrency}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: 20
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: 'OpenSans-SemiBold',
+              fontSize: 12,
+              lineHeight: 17,
+              letterSpacing: 0,
+              textAlign: 'left',
+              color: '#4d5153'
+            }}
+          >
+            DONATION TO
+          </Text>
+          {props.selectedProject ? (
+            <TouchableOpacity>
+              <Text
+                style={{
+                  fontFamily: 'OpenSans-SemiBold',
+                  fontSize: 12,
+                  lineHeight: 21,
+                  letterSpacing: 0,
+                  textAlign: 'right',
+                  color: '#89b53a'
+                }}
+              >
+                Change
+              </Text>
+            </TouchableOpacity>
+          ) : null}
+        </View>
+        {props.selectedProject ? (
+          <PlantProjectDetails
+            treeCost={props.treeCost}
+            selectedCurrency={props.selectedCurrency}
+            selectedProject={props.selectedProject}
+          />
+        ) : (
+          <NoPlantProjectDetails
+            treeCost={props.treeCost}
+            selectedCurrency={props.selectedCurrency}
+            selectedProject={props.selectedProject}
+          />
+        )}
+
+        <SelectTreeCount
+          treeCount={treeCount}
+          setTreeCount={setTreeCount}
           selectedProject={props.selectedProject}
         />
-
         {/* Donation Context */}
 
         {/* Gift Trees */}
+        <Text
+          style={{
+            fontFamily: 'OpenSans-SemiBold',
+            fontSize: 12,
+            lineHeight: 17,
+            letterSpacing: 0,
+            textAlign: 'left',
+            color: '#4d5153',
+            marginTop: 32
+          }}
+        >
+          GIFT RECIPIENT
+        </Text>
+
         <View style={styles.giftDetails}>
           <Image
             style={styles.giftImage}
@@ -83,7 +158,65 @@ function DonationDetails(props) {
           />
           <View style={styles.giftNameAmount}>
             <Text style={styles.giftName}>Sagar Aryal</Text>
-            <Text style={styles.giftRecipient}>Gift Recipient</Text>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text
+              style={{
+                fontFamily: 'OpenSans-Bold',
+                fontSize: 18,
+                lineHeight: 24,
+                letterSpacing: 0,
+                textAlign: 'right',
+                color: '#89b53a',
+                marginRight: 4
+              }}
+            >
+              50
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'OpenSans-Regular',
+                fontSize: 13,
+                lineHeight: 18,
+                letterSpacing: 0,
+                textAlign: 'right',
+                color: 'rgba(0, 0, 0, 0.6)',
+                marginRight: 12
+              }}
+            >
+              Trees
+            </Text>
+            <Icon name={'chevron-down'} size={14} color="#4d5153" />
+          </View>
+        </View>
+
+        <View style={styles.horizontalDivider} />
+
+        <View style={styles.giftDetails}>
+          <Image
+            style={styles.giftImage}
+            source={{
+              uri: getImageUrl('project', 'thumb', props.selectedProject.image)
+            }}
+          />
+          <View style={styles.giftNameAmount}>
+            <Text style={styles.giftName}>Sagar Aryal</Text>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text
+              style={{
+                fontFamily: 'OpenSans-Regular',
+                fontSize: 13,
+                lineHeight: 18,
+                letterSpacing: 0,
+                textAlign: 'right',
+                color: 'rgba(0, 0, 0, 0.6)',
+                marginRight: 12
+              }}
+            >
+              Select Trees
+            </Text>
+            <Icon name={'chevron-up'} size={14} color="#4d5153" />
           </View>
         </View>
 
@@ -95,30 +228,34 @@ function DonationDetails(props) {
 
         <View style={styles.horizontalDivider} />
 
-        <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
+        <TouchableOpacity>
+          <Text
+            style={{
+              fontFamily: 'OpenSans-SemiBold',
+              fontSize: 14,
+              lineHeight: 21,
+              letterSpacing: 0,
+              textAlign: 'left',
+              color: '#89b53a',
+              marginTop: 10
+            }}
+          >
+            Add another recipient
+          </Text>
+        </TouchableOpacity>
 
-        <View style={styles.horizontalDivider} />
+        <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
+        <View style={[styles.horizontalDivider, { width: '14%' }]} />
 
         {/* Commission Covering */}
         {treeCount ? (
-          <View style={styles.coverCommissionView}>
-            <Text style={styles.coverCommissionText}>
-              Help {props.selectedProject.tpoSlug} cover the credit card fee of{' '}
-              {formatNumber(
-                treeCount / 100 * 2.9 + 0.3,
-                null,
-                props.selectedCurrency
-              )}{' '}
-              (disabled by default)
-            </Text>
-            <Switch
-              style={styles.coverCommissionSwitch}
-              onValueChange={toggleSetCommission}
-              thumbColor={'#89b53a'}
-              trackColor={{ false: '#f2f2f7', true: 'rgba(137, 181, 58, 0.8)' }}
-              value={commissionSwitch}
-            />
-          </View>
+          <CoverFee
+            selectedProject={props.selectedProject.tpoSlug}
+            treeCount={treeCount}
+            selectedCurrency={props.selectedCurrency}
+            toggleSetCommission={toggleSetCommission}
+            commissionSwitch={commissionSwitch}
+          />
         ) : (
           <View
             style={{
@@ -162,20 +299,10 @@ function DonationDetails(props) {
         )}
 
         {/* Tax Receipt */}
-        {/* <Text style={styles.notTaxDeductible}>
-          This project does not issues tax deductions, if you are looking for
-          tax deductions, please select another project or contact project
-        </Text>
-        <View style={styles.isTaxDeductibleView}>
-          <Text style={styles.isTaxDeductibleText}>
-            I would like a tax receipt (if istaxdeductible)
-          </Text>
-          <Switch
-            style={styles.isTaxDeductibleSwitch}
-            onValueChange={toggleTaxReceipt}
-            value={taxReceiptSwitch}
-          />
-        </View> */}
+        <TaxReceipt
+          taxReceiptSwitch={taxReceiptSwitch}
+          toggleTaxReceipt={toggleTaxReceipt}
+        />
 
         {/* Payment Processed by */}
         {/* <Text style={styles.paymentProcessText}>
@@ -210,228 +337,6 @@ function DonationDetails(props) {
           navigation={props.navigation}
         />
       ) : null}
-    </View>
-  );
-}
-
-export function PaymentOption(props) {
-  return (
-    <View style={styles.bottomButtonView}>
-      <View style={styles.leftSection}>
-        <View style={styles.paymentTreeDetails}>
-          <Text style={styles.paymentTreeAmount}>
-            {formatNumber(
-              props.commissionSwitch
-                ? props.treeCost * props.treeCount +
-                  (props.treeCount / 100 * 2.9 + 0.3)
-                : props.treeCost * props.treeCount,
-              null,
-              props.selectedCurrency
-            )}
-          </Text>
-          <Text style={styles.paymentTreeCount}>
-            for {props.treeCount} trees
-          </Text>
-        </View>
-
-        {/* <TouchableOpacity style={styles.otherPaymentButton}>
-          <Text style={styles.otherPaymentText}>Other payment methods</Text>
-        </TouchableOpacity> */}
-        <View>
-          <Text style={styles.otherPaymentText}>Click Continue to proceed</Text>
-        </View>
-      </View>
-      <TouchableOpacity
-        onPress={() => {
-          updateStaticRoute('donor_details_form', props.navigation, {
-            treeCount: props.treeCount,
-            treeCost: props.treeCost,
-            selectedCurrency: props.selectedCurrency,
-            commissionSwitch: props.commissionSwitch,
-            navigation: props.navigation
-          });
-        }}
-        style={styles.continueButtonView}
-      >
-        <View style={{ alignItems: 'center' }}>
-          <Image
-            style={{ maxHeight: 24 }}
-            source={nextArrowWhite}
-            resizeMode="contain"
-          />
-          <Text style={styles.continueButtonText}>Continue</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-}
-
-export function PlantProjectDetails(props) {
-  return (
-    <View style={styles.projectDetails}>
-      <Image
-        style={styles.projectImage}
-        source={{
-          uri: getImageUrl('project', 'thumb', props.selectedProject.image)
-        }}
-      />
-      <View style={styles.projectNameAmount}>
-        <Text style={styles.projectName}>{props.selectedProject.name}</Text>
-        <View style={styles.projectAmountView}>
-          <Image style={styles.projectAmountImage} source={currencyIcon} />
-          <Text style={styles.projectAmountText}>
-            {formatNumber(props.treeCost, null, props.selectedCurrency)} per
-            tree
-          </Text>
-        </View>
-      </View>
-    </View>
-  );
-}
-
-export function CountryPicker(props) {
-  let data = [
-    {
-      label: 'Germany',
-      value: 'germany'
-    },
-    {
-      label: 'India',
-      value: 'india'
-    },
-    {
-      label: 'USA',
-      value: 'usa'
-    }
-  ];
-
-  const onChange = value => {
-    props.setCountryForTax(value);
-  };
-
-  return (
-    <View>
-      <Dropdown
-        ref={ref => (this.dropdown = ref)}
-        label={'Country'}
-        data={data}
-        onChangeText={onChange}
-        lineWidth={1}
-        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-      />
-    </View>
-  );
-}
-
-export function SelectTreeCount(props) {
-  const [customTreeCount, setCustomTreeCount] = React.useState(false);
-  let treeCountOptions;
-
-  if (props.selectedProject) {
-    if (
-      props.selectedProject.paymentSetup.treeCountOptions &&
-      props.selectedProject.paymentSetup.treeCountOptions.fixedTreeCountOptions
-    ) {
-      treeCountOptions =
-        props.selectedProject.paymentSetup.treeCountOptions
-          .fixedTreeCountOptions;
-    } else {
-      treeCountOptions = [10, 20, 50, 150];
-    }
-  }
-
-  return (
-    <View style={styles.treeCountSelector}>
-      {treeCountOptions.map(option => (
-        <TouchableOpacity
-          onPress={() => {
-            props.setTreeCount(option);
-            setCustomTreeCount(false);
-          }}
-          style={
-            props.treeCount === option
-              ? styles.selectedView
-              : styles.selectorView
-          }
-        >
-          <Text
-            style={
-              props.treeCount === option
-                ? styles.selectedTreeCountText
-                : styles.treeCountText
-            }
-          >
-            {option} Trees
-          </Text>
-        </TouchableOpacity>
-      ))}
-      {customTreeCount ? (
-        <View style={styles.customSelectedView}>
-          <TextInput
-            style={
-              customTreeCount
-                ? styles.treeCountTextInputSelected
-                : styles.treeCountTextInput
-            }
-            onChangeText={treeCount => props.setTreeCount(treeCount)}
-            value={props.treeCount}
-            keyboardType={'number-pad'}
-            autoFocus
-          />
-          <Text
-            style={
-              customTreeCount
-                ? styles.treeCountNumberSelected
-                : styles.treeCountNumber
-            }
-          >
-            Trees
-          </Text>
-        </View>
-      ) : (
-        <TouchableOpacity
-          onPress={() => {
-            setCustomTreeCount(true);
-            props.setTreeCount('');
-          }}
-          style={styles.customSelectorView}
-        >
-          <Text style={styles.customTreeCountText}>Custom Trees</Text>
-        </TouchableOpacity>
-      )}
-    </View>
-  );
-}
-
-export function SelectFrequency(props) {
-  let frequencyOptions = [
-    { label: 'One Time', value: 'once' },
-    { label: 'Monthly', value: 'monthly' },
-    { label: 'Yearly', value: 'yearly' }
-  ];
-  return (
-    <View style={styles.repititionSelector}>
-      {frequencyOptions.map(option => (
-        <TouchableOpacity
-          onPress={() => props.setFrequency(option.value)}
-          style={
-            props.frequency === option.value
-              ? styles.repititionSelectedView
-              : styles.repititionSelectorView
-          }
-        >
-          <Text
-            style={
-              props.frequency === option.value
-                ? styles.selectedRepititionText
-                : styles.repititionText
-            }
-          >
-            {option.label}
-          </Text>
-        </TouchableOpacity>
-      ))}
     </View>
   );
 }

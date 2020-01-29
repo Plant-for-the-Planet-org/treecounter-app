@@ -216,7 +216,7 @@ export default class UserHome extends Component {
   };
 
   render() {
-    const { userProfile } = this.props;
+    const { userProfile, navigation } = this.props;
     const profileType = userProfile.type;
     let {
       svgData,
@@ -234,6 +234,9 @@ export default class UserHome extends Component {
             top: Platform.OS === 'ios' ? 40 : 20,
             right: 20,
             position: 'absolute'
+          }}
+          onPress={() => {
+            navigation.openDrawer();
           }}
         >
           <Image source={settings} style={{ height: 20, width: 20 }} />

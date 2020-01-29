@@ -1,11 +1,10 @@
 import React from 'react';
 import {
   ScrollView,
-  View,
+  View
   // TouchableOpacity,
   // Text,
   // Image,
-  Linking
 } from 'react-native';
 import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
@@ -68,7 +67,7 @@ class UserContributionsDetails extends React.Component {
       redemptionCode,
       redemptionDate,
       plantProjectName,
-      tpoName,
+      // tpoName,
       giver,
       mayUpdate,
       contributionImages
@@ -80,7 +79,7 @@ class UserContributionsDetails extends React.Component {
 
     let plantedDate = undefined;
 
-    let dedicatedTo = undefined;
+    // let dedicatedTo = undefined;
     let contributionTypeText = undefined;
     let location = undefined;
     let contributerPrefix = undefined;

@@ -7,10 +7,13 @@ import styles from '../../styles/newUserContributions/userContributions';
 import EditIcon from '../../assets/images/pencil.png';
 import DeleteIcon from '../../assets/images/baseline_delete_outline.png';
 import ShareIcon from '../../assets/images/share.png';
-import ArrowRight from '../../assets/images/arrow-right.png';
-import CalendarIcon from '../../assets/images/green-calendar.png';
-import TreeIcon from '../../assets/images/green-tree.png';
-import { grayShareIcon, closeIcon } from '../../assets';
+// import ArrowRight from '../../assets/images/arrow-right.png';
+// import CalendarIcon from '../../assets/images/green-calendar.png';
+// import TreeIcon from '../../assets/images/green-tree.png';
+import {
+  // grayShareIcon,
+  closeIcon
+} from '../../assets';
 import i18n from '../../locales/i18n.js';
 import MapView, { Marker } from 'react-native-maps';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
@@ -54,7 +57,7 @@ export default class UserContributions extends React.Component {
     const {
       treeCount,
       location,
-      dedicatedTo,
+      // dedicatedTo,
       plantedDate,
       contributionTypeText,
       contributerPrefix,
@@ -66,7 +69,7 @@ export default class UserContributions extends React.Component {
     // console.log(this.props, 'this.props');
     // console.log('\x1b[45mcontributer \n', redemptionDate);
     // console.log('\x1b[0m');
-
+    const textColor = '#87B738';
     return (
       <View style={styles.container}>
         <View style={styles.mapView}>
@@ -124,13 +127,13 @@ export default class UserContributions extends React.Component {
             contributer && (
               <Text style={styles.subHeaderText}>
                 {contributerPrefix}
-                <Text style={{ color: '#87B738' }}> {contributer}</Text>
+                <Text style={{ color: textColor }}> {contributer}</Text>
               </Text>
             )}
           {location && (
             <Text style={styles.subHeaderText}>
               {i18n.t('label.planted_at')}
-              <Text style={{ color: '#87B738' }}>{location}</Text>
+              <Text style={{ color: textColor }}>{location}</Text>
             </Text>
           )}
 

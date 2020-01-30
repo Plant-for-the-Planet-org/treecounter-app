@@ -148,7 +148,7 @@ class Trillion extends PureComponent {
     return (
       <TabBar
         {...props}
-        style={[tabStyles.tabBar, { top: 80 }]}
+        style={[tabStyles.tabBar]}
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}
         indicatorStyle={tabStyles.textActive}
@@ -169,8 +169,7 @@ class Trillion extends PureComponent {
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 72,
-              backgroundColor: backgroundColor,
-              marginTop: 80
+              backgroundColor: backgroundColor
             }}
           >
             <View style={styles.parentContainer}>
@@ -413,6 +412,7 @@ class Trillion extends PureComponent {
         <>
           <HeaderStatic title={'Explore'} />
           <SafeAreaView />
+          <View style={{ marginTop: 80 }} />
           <TabView
             key="tabs"
             useNativeDriver

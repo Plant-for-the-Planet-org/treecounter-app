@@ -4,13 +4,14 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { Dimensions } from 'react-native';
+import { Dimensions, SafeAreaView } from 'react-native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import { updateStaticRoute } from '../../helpers/routerHelper';
+import HeaderStatic from './../Header/HeaderStatic';
 
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
@@ -81,7 +82,7 @@ class SelectPlantTabView extends PureComponent {
       <TabBar
         key="1"
         {...props}
-        style={styles.tabBar}
+        style={[styles.tabBar, { top: 80 }]}
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
@@ -142,13 +143,17 @@ class SelectPlantTabView extends PureComponent {
 
   render() {
     return (
-      <TabView
-        useNativeDriver
-        navigationState={this.state}
-        renderScene={this.renderSelectPlantScene}
-        renderTabBar={this.renderTabBar}
-        onIndexChange={this.handleIndexChange}
-      />
+      <>
+        <HeaderStatic title={'Projects'} />
+        <SafeAreaView />
+        <TabView
+          useNativeDriver
+          navigationState={this.state}
+          renderScene={this.renderSelectPlantScene}
+          renderTabBar={this.renderTabBar}
+          onIndexChange={this.handleIndexChange}
+        />
+      </>
     );
   }
 }

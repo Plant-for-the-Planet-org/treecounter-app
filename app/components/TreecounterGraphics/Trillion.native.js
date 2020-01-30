@@ -6,7 +6,8 @@ import {
   View,
   Dimensions,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  SafeAreaView
 } from 'react-native';
 import NavigationEvents from './importNavigationEvents';
 import { trillionCampaign } from '../../actions/trillionAction';
@@ -44,7 +45,7 @@ import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
-
+import HeaderStatic from './../Header/HeaderStatic';
 class Trillion extends PureComponent {
   constructor() {
     super();
@@ -147,7 +148,7 @@ class Trillion extends PureComponent {
     return (
       <TabBar
         {...props}
-        style={tabStyles.tabBar}
+        style={[tabStyles.tabBar, { top: 80 }]}
         tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={tabStyles.textStyle}
         indicatorStyle={tabStyles.textActive}
@@ -168,7 +169,8 @@ class Trillion extends PureComponent {
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 72,
-              backgroundColor: backgroundColor
+              backgroundColor: backgroundColor,
+              paddingTop: 80
             }}
           >
             <View style={styles.parentContainer}>
@@ -409,14 +411,18 @@ class Trillion extends PureComponent {
         />
       ) : null,
       this.state.loadSvg ? (
-        <TabView
-          key="tabs"
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this._renderScreen}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
-        />
+        <>
+          <HeaderStatic title={'Explore'} />
+          <SafeAreaView />
+          <TabView
+            key="tabs"
+            useNativeDriver
+            navigationState={this.state}
+            renderScene={this._renderScreen}
+            renderTabBar={this._renderTabBar}
+            onIndexChange={this._handleIndexChange}
+          />
+        </>
       ) : null
     ];
   }

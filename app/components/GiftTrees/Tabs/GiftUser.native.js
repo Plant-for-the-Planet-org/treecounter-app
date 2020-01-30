@@ -85,7 +85,7 @@ export default class GiftUser extends Component {
           resetScrollToCoords={{ x: 0, y: 0 }}
           scrollEnabled
         >
-          <View style={{ paddingLeft: 10 }}>
+          <View style={{ paddingLeft: 10, marginTop: 20 }}>
             <Text style={styles.description}>
               {i18n.t('label.search_user_desrcription')}
             </Text>

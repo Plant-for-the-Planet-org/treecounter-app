@@ -1,6 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Dimensions, Text, View, TouchableOpacity } from 'react-native';
+import {
+  Dimensions,
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView
+} from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar.native';
 import buttonStyles from '../../styles/common/button.native';
@@ -11,6 +17,9 @@ import ClosedCompetitions from './Tabs/closed.native'; // Shows all Archived com
 import MineCompetitions from './Tabs/mine.native'; // Shows my competitions
 import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured competitions
 import AllCompetitions from './Tabs/all.native'; // Shows all competitions
+
+import HeaderStatic from './../Header/HeaderStatic';
+
 const Layout = {
   window: {
     width: Dimensions.get('window').width
@@ -69,27 +78,37 @@ class Competiton extends React.Component {
 
   render() {
     return (
-      <View style={fullPageWhite}>
-        <TabView
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this._renderSelectPlantScene}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
-        />
+      <>
+        <SafeAreaView />
 
-        {/* Button to add new competitions(On each page) */}
-        <TouchableOpacity
-          style={buttonStyles.plusButton}
-          onPress={() => {
-            updateStaticRoute('app_create_competition', this.props.navigation, {
-              onCreateCompetition: this.props.onCreateCompetition
-            });
-          }}
-        >
-          <Text style={buttonStyles.plusButtonIcon}>+</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={[fullPageWhite, { paddingTop: 80 }]}>
+          <HeaderStatic title={'Competitions'} />
+
+          <TabView
+            useNativeDriver
+            navigationState={this.state}
+            renderScene={this._renderSelectPlantScene}
+            renderTabBar={this._renderTabBar}
+            onIndexChange={this._handleIndexChange}
+          />
+
+          {/* Button to add new competitions(On each page) */}
+          <TouchableOpacity
+            style={buttonStyles.plusButton}
+            onPress={() => {
+              updateStaticRoute(
+                'app_create_competition',
+                this.props.navigation,
+                {
+                  onCreateCompetition: this.props.onCreateCompetition
+                }
+              );
+            }}
+          >
+            <Text style={buttonStyles.plusButtonIcon}>+</Text>
+          </TouchableOpacity>
+        </View>
+      </>
     );
   }
 }

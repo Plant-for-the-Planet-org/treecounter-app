@@ -40,6 +40,7 @@ import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
 // import Icon from 'react-native-vector-icons/FontAwesome5';
+import MapView, { Marker } from 'react-native-maps';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -214,7 +215,46 @@ export default class UserHome extends Component {
       alert(error.message);
     }
   };
-
+  getMapComponent = userContributions => {
+    let mapViewLatLong = {
+      latitude: userContributions[userContributions.length - 1].geoLatitude,
+      longitude: userContributions[userContributions.length - 1].geoLongitude,
+      latitudeDelta: 0.00000922,
+      longitudeDelta: 0.0421
+    };
+    let markerStyle = {
+      width: 30,
+      height: 30,
+      backgroundColor: '#89b53a',
+      borderRadius: 50,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    };
+    let markerList = userContributions.map(oneContribution => {
+      return (
+        <Marker
+          coordinate={{
+            latitude: oneContribution.geoLatitude,
+            longitude: oneContribution.geoLongitude
+          }}
+        >
+          <View style={markerStyle}>
+            <Image source={Smalltreewhite} resizeMode={'contain'} />
+          </View>
+        </Marker>
+      );
+    });
+    return (
+      <MapView
+        mapType={'satellite'}
+        style={{ height: 250, flex: 1 }}
+        initialRegion={mapViewLatLong}
+      >
+        {markerList}
+      </MapView>
+    );
+  };
   render() {
     const { userProfile, navigation } = this.props;
     const profileType = userProfile.type;
@@ -473,7 +513,8 @@ export default class UserHome extends Component {
                   ) : null} */}
               </View>
             </View>
-          ) : null}
+          ) : // </View>
+          null}
 
           {/* Recurrent Donations */}
           {recurrentUserContributions.length ? (
@@ -531,11 +572,11 @@ export default class UserHome extends Component {
           </ScrollView>
 
           {this.props.userContributions.length ? (
-            <View style={{ marginTop: 20 }}>
+            <View contentContainerStyle={{ paddingBottom: 72, marginTop: 20 }}>
               <Text style={styles.sectionTitle}>
                 {i18n.t('label.my_trees')}
               </Text>
-
+              {this.getMapComponent(this.props.userContributions)}
               {/* <NativeMapView
               mode={'multiple-trees'}
               mapStyle={{ height: 200 }}

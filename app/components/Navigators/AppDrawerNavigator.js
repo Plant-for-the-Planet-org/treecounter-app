@@ -28,10 +28,10 @@ import ConfirmProfileDeletionModal from '../../components/EditUserProfile/Confir
 import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
 import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
-import BottomTabContainer from '../../containers/Menu/TabContainer';
+import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
+
 import GiftTrees from '../../containers/GiftTrees';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
-import RegisterTrees from '../../containers/RegisterTrees';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
 import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
@@ -286,9 +286,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
-      [getLocalRoute('app_registerTrees')]: {
-        screen: isLoggedIn ? RegisterTrees : LoginContainer
-      },
+      // [getLocalRoute('app_registerTrees')]: {
+      //   screen: isLoggedIn ? RegisterTrees : LoginContainer
+      // },
       [getLocalRoute('app_competitions')]: {
         screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
@@ -305,7 +305,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         animatedEnable: true,
         swipeEnable: false
       },
-      tabBarComponent: BottomTabContainer
+      tabBarComponent: NewBottomNavigator
     }
   );
 

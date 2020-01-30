@@ -10,7 +10,6 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import { linkExternal } from '../../assets/index';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-
 const BottomContent = () => {
   const widget = () => (
     <View style={{}}>
@@ -102,9 +101,7 @@ const BottomContent = () => {
     <View>
       <View style={styles.widgetHeaderContainer}>
         <View>
-          <Text style={styles.widgetHeaderText}>
-            Reforestation Opportunities
-          </Text>
+          <Text style={styles.widgetHeaderText}>Deforestation</Text>
         </View>
         <View>
           <Switch
@@ -114,13 +111,82 @@ const BottomContent = () => {
           />
         </View>
       </View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderColor: 'black',
+          borderWidth: 0
+        }}
+      >
+        <MultiSlider
+          values={[2001, 2015]}
+          onValuesChange={data => console.log(data)}
+          min={2001}
+          max={2018}
+          step={1}
+          allowOverlap={false}
+          customMarker={Marker}
+          trackStyle={{ height: 7, backgroundColor: 'silver' }}
+          selectedStyle={{ backgroundColor: '#dd9acd' }}
+          containerStyle={{}}
+        />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          flex: 1,
+          justifyContent: 'space-around',
+          borderColor: 'black',
+          borderWidth: 0
+        }}
+      >
+        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2001</Text>
+        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2004</Text>
+        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2007</Text>
+        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2010</Text>
+        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2012</Text>
+        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2016</Text>
+        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2018</Text>
+      </View>
+      <View style={[styles.addressContainer, { marginVertical: 20 }]}>
+        <View style={{ width: 50 }}>
+          <Image source={linkExternal} style={{ width: 25, height: 25 }} />
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text
+            style={styles.addressText}
+          >{`Global Forest Watch\nglobalforestwatch.org`}</Text>
+        </View>
+      </View>
+    </View>
+  );
+  let Marker = () => (
+    <View
+      style={{
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 1,
+        shadowRadius: 2,
+        elevation: 10,
+        width: 20,
+        height: 20,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4
+      }}
+    >
+      <View style={{ width: 6, height: 6, backgroundColor: 'black' }} />
     </View>
   );
   return (
-    <View showsVerticalScrollIndicator={false} style={styles.container}>
+    <View style={styles.container}>
       {widget()}
       {SecondWidget()}
       {SecondWidget()}
+      {slider()}
     </View>
   );
 };

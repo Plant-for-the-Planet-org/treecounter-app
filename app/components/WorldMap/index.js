@@ -6,7 +6,7 @@ import {
   State,
   TapGestureHandler
 } from 'react-native-gesture-handler';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import BottomContent from './BottomContent';
 
 const HEADER_HEIGHT = 50;
@@ -94,7 +94,7 @@ export class BottomSheet extends Component {
       }).start();
     }
   };
-  render() {
+  getMapComponent = () => {
     return (
       <View style={{ flex: 1 }}>
         <MapView
@@ -106,7 +106,25 @@ export class BottomSheet extends Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
-        />
+        >
+          <Marker coordinate={{ latitude: 37.78825, longitude: -122.4324 }}>
+            <View
+              style={{
+                width: 20,
+                height: 20,
+                backgroundColor: 'blue',
+                borderRadius: 50
+              }}
+            />
+          </Marker>
+        </MapView>
+      </View>
+    );
+  };
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        {this.getMapComponent()}
         <TapGestureHandler
           maxDurationMs={100000}
           ref={this.masterdrawer}

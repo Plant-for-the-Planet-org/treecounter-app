@@ -200,7 +200,7 @@ export default class UserHome extends Component {
       const result = await Share.share({
         message: `Hey check out my tree counter on Plant for the Planet ! https://www.trilliontreecampaign.org/t/${
           this.props.userProfile.treecounter.slug
-        }`
+          }`
       });
 
       if (result.action === Share.sharedAction) {
@@ -265,7 +265,6 @@ export default class UserHome extends Component {
       showAllRecurrentContributions,
       recurrentUserContributions
     } = this.state;
-
     console.log(recurrentUserContributions);
     return (
       <>
@@ -469,30 +468,30 @@ export default class UserHome extends Component {
                   //   ) : null
                 }
                 {userProfile.synopsis1 ||
-                userProfile.synopsis2 ||
-                userProfile.linkText ||
-                userProfile.url ? (
-                  <View>
-                    {userProfile.synopsis1 ? (
-                      <Text style={styles.footerText}>
-                        {userProfile.synopsis1}
-                      </Text>
-                    ) : null}
-                    {userProfile.synopsis2 ? (
-                      <Text style={styles.footerText}>
-                        {userProfile.synopsis2}
-                      </Text>
-                    ) : null}
-                    {userProfile.url ? (
-                      <Text
-                        style={styles.linkText}
-                        onPress={() => this._goToURL(userProfile.url)}
-                      >
-                        {userProfile.linkText || i18n.t('label.read_more')}
-                      </Text>
-                    ) : null}
-                  </View>
-                ) : null}
+                  userProfile.synopsis2 ||
+                  userProfile.linkText ||
+                  userProfile.url ? (
+                    <View>
+                      {userProfile.synopsis1 ? (
+                        <Text style={styles.footerText}>
+                          {userProfile.synopsis1}
+                        </Text>
+                      ) : null}
+                      {userProfile.synopsis2 ? (
+                        <Text style={styles.footerText}>
+                          {userProfile.synopsis2}
+                        </Text>
+                      ) : null}
+                      {userProfile.url ? (
+                        <Text
+                          style={styles.linkText}
+                          onPress={() => this._goToURL(userProfile.url)}
+                        >
+                          {userProfile.linkText || i18n.t('label.read_more')}
+                        </Text>
+                      ) : null}
+                    </View>
+                  ) : null}
                 {/* {
                 (userProfile.synopsis1 && userProfile.synopsis1.length > 250) ||
                   (userProfile.synopsis2 && userProfile.synopsis2.length > 250) ||
@@ -515,7 +514,7 @@ export default class UserHome extends Component {
               </View>
             </View>
           ) : // </View>
-          null}
+            null}
 
           {/* Recurrent Donations */}
           {recurrentUserContributions.length ? (
@@ -531,52 +530,9 @@ export default class UserHome extends Component {
             </View>
           ) : null}
 
-          {recurrentUserContributions &&
-          recurrentUserContributions.length > 3 ? (
-            <ToggleButton
-              updateFunction={() => this.showRecurrentMore()}
-              showMore={showAllRecurrentContributions}
-            />
-          ) : null}
-
-          {/* Competitions */}
-          {userProfile.treecounter.competitions.length > 0 ? (
-            <MyCompetitions
-              onCompetitionClick={this.onCompetitionClick}
-              navigation={this.props.navigation}
-              competitions={userProfile.treecounter.competitions}
-            />
-          ) : null}
-
-          {/* Plant Projects of TPO  */}
-          {userProfile.plantProjects ? (
-            <Text style={styles.sectionTitle}>{i18n.t('label.projects')}</Text>
-          ) : null}
-          <ScrollView>
-            {userProfile.plantProjects
-              ? userProfile.plantProjects.map(project => (
-                  <PlantProjectSnippet
-                    key={'projectFull' + project.id}
-                    onMoreClick={id =>
-                      this.onPlantProjectClick(id, project.name)
-                    }
-                    plantProject={project}
-                    onSelectClickedFeaturedProjects={id =>
-                      this.onPlantProjectClick(id, project.name)
-                    }
-                    showMoreButton={false}
-                    tpoName={project.tpo_name}
-                    navigation={this.props.navigation}
-                  />
-                ))
-              : null}
-          </ScrollView>
-
           {this.props.userContributions.length ? (
             <View contentContainerStyle={{ paddingBottom: 72, marginTop: 20 }}>
-              <Text style={styles.sectionTitle}>
-                {i18n.t('label.my_trees')}
-              </Text>
+              <Text style={styles.sectionTitle}>{i18n.t('label.my_trees')}</Text>
               {this.getMapComponent(this.props.userContributions)}
               {/* <NativeMapView
               mode={'multiple-trees'}
@@ -597,12 +553,12 @@ export default class UserHome extends Component {
           ) : null}
 
           {this.props.userContributions &&
-          this.props.userContributions.length > 3 ? (
-            <ToggleButton
-              updateFunction={() => this.readMore()}
-              showMore={showAllContributions}
-            />
-          ) : null}
+            this.props.userContributions.length > 3 ? (
+              <ToggleButton
+                updateFunction={() => this.readMore()}
+                showMore={showAllContributions}
+              />
+            ) : null}
 
           {/* <RenderIndividualsList
           navigation={this.props.navigation}
@@ -671,15 +627,15 @@ function MyCompetitions(props) {
       >
         {competitions.length > 0
           ? competitions.map(competition => (
-              <CompetitionSnippet
-                key={'competition' + competition.id}
-                onMoreClick={id =>
-                  props.onCompetitionClick(id, competition.name)
-                }
-                competition={competition}
-                type="all"
-              />
-            ))
+            <CompetitionSnippet
+              key={'competition' + competition.id}
+              onMoreClick={id =>
+                props.onCompetitionClick(id, competition.name)
+              }
+              competition={competition}
+              type="all"
+            />
+          ))
           : null}
       </ScrollView>
     </View>

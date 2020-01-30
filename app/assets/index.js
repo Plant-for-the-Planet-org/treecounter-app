@@ -171,6 +171,10 @@ import schooldleaderboard from './images/schooldleaderboard.png';
 import tpoleaderboard from './images/tpoleaderboard.png';
 import individualsleaderboard from './images/individualsleaderboard.png';
 import companiesleaderboard from './images/companiesleaderboard.png';
+import donateIcon from './images/icons/donateIcon.png';
+import donateIconGreen from './images/icons/donateIconGreen.png';
+import competeIcon from './images/icons/competeIcon.png';
+import competeIconGreen from './images/icons/competeIconGreen.png';
 
 import share from './images/icons/share.png';
 import coupon from './images/icons/coupon.png';
@@ -354,5 +358,9 @@ export {
   share,
   coupon,
   registerTree,
-  settings
+  settings,
+  donateIcon,
+  donateIconGreen,
+  competeIcon,
+  competeIconGreen
 };

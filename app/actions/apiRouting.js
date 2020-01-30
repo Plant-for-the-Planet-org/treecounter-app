@@ -32,7 +32,7 @@ export const getLocalRoute = (routeName, params) => {
 
 export const getImageUrl = (category, variant, imageName) => {
   // const { scheme, host } = context;
-  console.log(getCdnMediaUrl());
+  // console.log(getCdnMediaUrl());
 
   return `${getCdnMediaUrl().cache}/${category}/${variant}/${imageName}`;
 };

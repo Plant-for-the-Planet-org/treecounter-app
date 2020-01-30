@@ -63,6 +63,8 @@ import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeade
 import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
 import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
+import RegisterTrees from '../../containers/RegisterTrees';
+
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -286,9 +288,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
-      // [getLocalRoute('app_registerTrees')]: {
-      //   screen: isLoggedIn ? RegisterTrees : LoginContainer
-      // },
+      [getLocalRoute('app_registerTrees')]: {
+        screen: isLoggedIn ? RegisterTrees : LoginContainer
+      },
       [getLocalRoute('app_competitions')]: {
         screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },

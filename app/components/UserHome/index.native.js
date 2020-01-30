@@ -41,6 +41,7 @@ import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 import MapView, { Marker } from 'react-native-maps';
+import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 
 export default class UserHome extends Component {
   constructor(props) {

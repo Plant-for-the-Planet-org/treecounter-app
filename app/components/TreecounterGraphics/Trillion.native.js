@@ -170,7 +170,7 @@ class Trillion extends PureComponent {
             contentContainerStyle={{
               paddingBottom: 72,
               backgroundColor: backgroundColor,
-              paddingTop: 80
+              marginTop: 80
             }}
           >
             <View style={styles.parentContainer}>
@@ -352,8 +352,7 @@ class Trillion extends PureComponent {
                 {
                   padding: 16,
                   marginLeft: 8,
-                  marginRight: 8,
-                  marginTop: 20
+                  marginRight: 8
                 }
               ]}
             >

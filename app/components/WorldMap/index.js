@@ -16,7 +16,7 @@ import {
 import { treesmarker } from '../../assets/index.js';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import BottomContent from './BottomContent';
-
+import MapComponent from './Map';
 const HEADER_HEIGHT = 50;
 const windowHeight = Dimensions.get('window').height;
 const SNAP_POINTS_FROM_TOP = [50, windowHeight * 0.4, windowHeight * 0.8];
@@ -102,103 +102,10 @@ export class BottomSheet extends Component {
       }).start();
     }
   };
-  getMapComponent = () => {
-    return (
-      <View style={{ flex: 1 }}>
-        <MapView
-          mapType={'satellite'}
-          style={{ flex: 1 }}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }}
-        >
-          <Marker coordinate={{ latitude: 37.78825, longitude: -122.4324 }}>
-            <View
-              style={{
-                position: 'absolute',
-                width: 20,
-                height: 20,
-                backgroundColor: '#093988',
-                borderRadius: 50
-              }}
-            />
-            <Callout tooltip={true}>
-              <View
-                style={{
-                  backgroundColor: 'white',
-                  borderColor: 'lightgray',
-                  borderWidth: 2,
-                  paddingVertical: 10,
-                  paddingHorizontal: 10,
-                  borderRadius: 10
-                }}
-              >
-                <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ fontFamily: 'OpenSans-Bold', color: 'black' }}>
-                    Haider
-                  </Text>
-                  <Text
-                    style={{ fontFamily: 'OpenSans-SemiBold', color: 'black' }}
-                  >
-                    {' '}
-                    Ali
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderWidth: 0,
-                    borderColor: 'red'
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontFamily: 'OpenSans-Bold',
-                      color: '#89b53a',
-                      fontSize: 18
-                    }}
-                  >
-                    10
-                  </Text>
-                  <Text
-                    style={{ height: 20, marginHorizontal: 10, height: 30 }}
-                  >
-                    <Image source={treesmarker} />
-                  </Text>
-                  <View
-                    style={{
-                      backgroundColor: '#f2f2f7',
-                      paddingHorizontal: 20,
-                      paddingVertical: 5,
-                      borderRadius: 30
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: '#4d5153',
-                        fontFamily: 'OpenSans-Regular'
-                      }}
-                    >
-                      Donate
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </Callout>
-          </Marker>
-        </MapView>
-      </View>
-    );
-  };
   render() {
     return (
       <View style={{ flex: 1 }}>
-        {this.getMapComponent()}
+        <MapComponent />
         <TapGestureHandler
           maxDurationMs={100000}
           ref={this.masterdrawer}

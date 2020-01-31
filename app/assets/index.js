@@ -172,6 +172,7 @@ import tpoleaderboard from './images/tpoleaderboard.png';
 import individualsleaderboard from './images/individualsleaderboard.png';
 import companiesleaderboard from './images/companiesleaderboard.png';
 import linkExternal from './images/icons/linkexternal.png';
+import treesmarker from './images/treesmarker.png';
 export {
   treelogo,
   germany,
@@ -346,5 +347,6 @@ export {
   individualsleaderboard,
   deleteOutlineWhite,
   companiesleaderboard,
-  linkExternal
+  linkExternal,
+  treesmarker
 };

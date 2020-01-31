@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
-import { Animated, StyleSheet, Text, View, Dimensions } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Image
+} from 'react-native';
 import {
   PanGestureHandler,
   NativeViewGestureHandler,
   State,
   TapGestureHandler
 } from 'react-native-gesture-handler';
-import MapView, { Marker } from 'react-native-maps';
+import { treesmarker } from '../../assets/index.js';
+import MapView, { Marker, Callout } from 'react-native-maps';
 import BottomContent from './BottomContent';
 
 const HEADER_HEIGHT = 50;
@@ -110,12 +118,78 @@ export class BottomSheet extends Component {
           <Marker coordinate={{ latitude: 37.78825, longitude: -122.4324 }}>
             <View
               style={{
+                position: 'absolute',
                 width: 20,
                 height: 20,
-                backgroundColor: 'blue',
+                backgroundColor: '#093988',
                 borderRadius: 50
               }}
             />
+            <Callout tooltip={true}>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  borderColor: 'lightgray',
+                  borderWidth: 2,
+                  paddingVertical: 10,
+                  paddingHorizontal: 10,
+                  borderRadius: 10
+                }}
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ fontFamily: 'OpenSans-Bold', color: 'black' }}>
+                    Haider
+                  </Text>
+                  <Text
+                    style={{ fontFamily: 'OpenSans-SemiBold', color: 'black' }}
+                  >
+                    {' '}
+                    Ali
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderWidth: 0,
+                    borderColor: 'red'
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: 'OpenSans-Bold',
+                      color: '#89b53a',
+                      fontSize: 18
+                    }}
+                  >
+                    10
+                  </Text>
+                  <Text
+                    style={{ height: 20, marginHorizontal: 10, height: 30 }}
+                  >
+                    <Image source={treesmarker} />
+                  </Text>
+                  <View
+                    style={{
+                      backgroundColor: '#f2f2f7',
+                      paddingHorizontal: 20,
+                      paddingVertical: 5,
+                      borderRadius: 30
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: '#4d5153',
+                        fontFamily: 'OpenSans-Regular'
+                      }}
+                    >
+                      Donate
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </Callout>
           </Marker>
         </MapView>
       </View>

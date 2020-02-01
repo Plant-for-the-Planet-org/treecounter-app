@@ -1,10 +1,11 @@
 import React from 'react';
 import {
   ScrollView,
-  View
+  View,
   // TouchableOpacity,
   // Text,
   // Image,
+  Linking
 } from 'react-native';
 import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
@@ -17,8 +18,8 @@ import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCaro
 import { getLocalRoute } from '../../../actions/apiRouting';
 // import { downloadGreen, sendWhite, closeIcon } from '../../../assets';
 // import styles from '../../../styles/newUserContributions/userContributions';
-// import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
-// import { updateStaticRoute } from './../../../helpers/routerHelper';
+import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
+import { updateStaticRoute } from './../../../helpers/routerHelper';
 import { BackHandler } from 'react-native';
 
 class UserContributionsDetails extends React.Component {
@@ -40,7 +41,9 @@ class UserContributionsDetails extends React.Component {
       this.handleBackButtonClick
     );
   }
-
+  _goToURL = url => {
+    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+  };
   handleBackButtonClick() {
     this.props.navigation.goBack(null);
     return true;
@@ -60,6 +63,7 @@ class UserContributionsDetails extends React.Component {
       givee,
       // eslint-disable-next-line no-unused-vars
       giveeSlug,
+      giftRecipient,
       cardType,
       contributionType,
       plantProjectId,
@@ -70,23 +74,60 @@ class UserContributionsDetails extends React.Component {
       // tpoName,
       giver,
       mayUpdate,
-      contributionImages
+      contributionImages,
+      treeType
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
+    let plantedProject = undefined;
 
-    console.log('\x1b[45mthis.props.contribution \n', this.props.contribution);
+    // if (this.props.plantedProject !== undefined)) {
+    //   plantedProject = this.props.plantedProject;
+    //   console.log('plantedProject', plantedProject.tpoData);
+    // }
+
+    console.log(
+      '\x1b[45mthis.props.plantProjects \n',
+      this.props.plantProjects
+    );
     console.log('\x1b[0m');
 
     let plantedDate = undefined;
 
     // let dedicatedTo = undefined;
-    let contributionTypeText = undefined;
     let location = undefined;
     let contributerPrefix = undefined;
     let contributer = undefined;
     // let isSinglePlanted = false;
     let contributionOrPlantedImages = contributionImages;
     let selectedPlantProjectDetails = undefined;
+    let headerText = undefined;
+
+    if (treeType === null) {
+      if (treeCount > 1) {
+        headerText = treeCount + ' ' + i18n.t('label.usr_contribution_tree');
+      } else {
+        headerText =
+          treeCount + ' ' + i18n.t('label.usr_contribution_single_tree');
+      }
+    } else if (treeType !== null) {
+      if (treeCount > 1) {
+        headerText =
+          treeCount +
+          ' ' +
+          treeType.charAt(0).toUpperCase() +
+          treeType.slice(1) +
+          ' ' +
+          i18n.t('label.usr_contribution_tree');
+      } else {
+        headerText =
+          treeCount +
+          ' ' +
+          treeType.charAt(0).toUpperCase() +
+          treeType.slice(1) +
+          ' ' +
+          i18n.t('label.usr_contribution_single_tree');
+      }
+    }
 
     if (plantDate) {
       plantedDate = formatDateForContribution(plantDate);
@@ -96,7 +137,7 @@ class UserContributionsDetails extends React.Component {
     }
     if (cardType === 'planting') {
       // contributionTypeText = i18n.t('label.usr_contribution_planted');
-      contributionTypeText = '';
+      // headerText = headerText;
       // TODO: check if this is a logic error, as this var is never used!
       // isSinglePlanted = treeCount > 1 ? false : true;
     } else if (cardType === 'donation') {
@@ -114,7 +155,8 @@ class UserContributionsDetails extends React.Component {
         }
       }
 
-      contributionTypeText = i18n.t('label.donated');
+      headerText = headerText + ' ' + i18n.t('label.donated');
+
       if (plantProjectName) {
         // location = `${plantProjectName} by ${tpoName ? tpoName : ''}`;
         location = plantProjectName;
@@ -123,7 +165,7 @@ class UserContributionsDetails extends React.Component {
       if (plantProjectName) {
         location = plantProjectName;
       }
-      contributionTypeText = i18n.t('label.received');
+      headerText = headerText + ' ' + i18n.t('label.gifted');
       contributerPrefix = i18n.t('label.usr_contribution_from');
       contributer = giver;
     }
@@ -133,13 +175,12 @@ class UserContributionsDetails extends React.Component {
       contributer = givee;
       if (isGift) {
         // dedicatedTo = i18n.t('label.usr_contribution_from');
-        contributionTypeText = i18n.t('label.gifted');
       }
     }
 
     if (isGift && giver) {
       contributer = giver;
-      contributionTypeText = i18n.t('label.received');
+      headerText = headerText + ' ' + i18n.t('label.received');
       contributerPrefix = i18n.t('label.usr_contribution_from');
     }
     if (redemptionCode && givee) {
@@ -147,7 +188,7 @@ class UserContributionsDetails extends React.Component {
       if (plantProjectName) {
         location = plantProjectName;
       }
-      contributionTypeText = i18n.t('label.usr_contribution_redeemed');
+      headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
     }
 
     const backgroundColor = '#fff';
@@ -162,7 +203,7 @@ class UserContributionsDetails extends React.Component {
           contributer={contributer}
           plantedDate={plantedDate}
           showDelete={contributionType == 'planting'}
-          contributionTypeText={contributionTypeText}
+          headerText={headerText}
           onClickDelete={() => {
             this.props.navigation.navigate('delete_contribution', {
               deleteContribution: () =>
@@ -210,25 +251,26 @@ class UserContributionsDetails extends React.Component {
           <View style={{ marginHorizontal: 20, marginTop: 30 }}>
             <Measurements
               measurements={this.props.contribution.contributionMeasurements}
+              isPlanting={contributionType === 'planting' ? true : false}
             />
           </View>
         ) : null}
 
         <View style={{ marginTop: 20 }} />
 
-        {/* {this.props.contribution.contributionType === 'donation' ? (
+        {this.props.plantProjects && this.props.plantProjects[0].tpoData ? (
           <AccordionContactInfo
             navigation={this.props.navigation}
-            slug={'edenprojects'}
+            slug={this.props.plantProjects[0].tpoData.treecounterSlug}
             updateStaticRoute={updateStaticRoute}
-            url={'edenprojects.org'}
-            _goToURL={_goToURL}
-            email={'email@email.com'}
-            address={'edenprojects'}
-            name={this.props.contribution.plantProjectName}
-            title={this.props.contribution.plantProjectName}
+            url={this.props.plantProjects[0].url}
+            _goToURL={this._goToURL}
+            email={this.props.plantProjects[0].tpoData.email}
+            address={this.props.plantProjects[0].tpoData.address}
+            name={this.props.plantProjects[0].tpoData.name}
+            title={this.props.plantProjects[0].tpoData.name}
           />
-        ) : null} */}
+        ) : null}
 
         {/* <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={() => {}} style={{}}>
@@ -260,10 +302,6 @@ class UserContributionsDetails extends React.Component {
     );
   }
 }
-
-// const _goToURL = url => {
-//   Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
-// };
 
 UserContributionsDetails.propTypes = {
   userProfileId: PropTypes.number.isRequired,

@@ -57,9 +57,10 @@ export default class UserContributions extends React.Component {
     const {
       treeCount,
       location,
+      headerText,
       // dedicatedTo,
       plantedDate,
-      contributionTypeText,
+
       contributerPrefix,
       contributer,
       showDelete,
@@ -90,14 +91,7 @@ export default class UserContributions extends React.Component {
         </View>
         <View style={styles.header}>
           {treeCount && treeCount > 0 ? (
-            <Text style={styles.treeCount}>
-              {treeCount > 1
-                ? `${treeCount} ${i18n.t('label.usr_contribution_tree')} `
-                : `${treeCount} ${i18n.t(
-                    'label.usr_contribution_single_tree'
-                  )} `}
-              {contributionTypeText}
-            </Text>
+            <Text style={styles.treeCount}>{headerText}</Text>
           ) : null}
           <View style={{ flexDirection: 'row' }}>
             {showDelete ? (
@@ -199,7 +193,6 @@ UserContributions.PropTypes = {
   plantedDate: PropTypes.string,
   onClickDelete: PropTypes.func,
   onClickEdit: PropTypes.func,
-  contributionTypeText: PropTypes.string,
   showDelete: PropTypes.bool,
   mayUpdate: PropTypes.bool
 };

@@ -198,9 +198,10 @@ export default class UserHome extends Component {
   onShare = async () => {
     try {
       const result = await Share.share({
-        message: `Hey check out my tree counter on Plant for the Planet ! https://www.trilliontreecampaign.org/t/${
-          this.props.userProfile.treecounter.slug
-        }`
+        message: i18n.t('label.shareuserprofile', {
+          displayName: this.props.userProfile.treecounter.displayName,
+          slug: this.props.userProfile.treecounter.slug
+        })
       });
 
       if (result.action === Share.sharedAction) {
@@ -269,9 +270,10 @@ export default class UserHome extends Component {
     return (
       <View style={{ elevation: 1 }}>
         <SafeAreaView />
+
         <TouchableOpacity
           style={{
-            top: Platform.OS === 'ios' ? 40 : 20,
+            top: Platform.OS === 'ios' ? 60 : 20,
             right: 20,
             position: 'absolute',
             zIndex: 10000,
@@ -533,7 +535,7 @@ export default class UserHome extends Component {
           ) : null}
 
           {this.props.userContributions.length ? (
-            <View contentContainerStyle={{ paddingBottom: 72, marginTop: 20 }}>
+            <View style={{ paddingBottom: 72, marginTop: 20 }}>
               <Text style={styles.sectionTitle}>
                 {i18n.t('label.my_trees')}
               </Text>

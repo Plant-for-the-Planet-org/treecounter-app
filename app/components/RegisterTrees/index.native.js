@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
 import React, { Component } from 'react';
-import { Text, PixelRatio, SafeAreaView } from 'react-native';
+import { Text, PixelRatio, SafeAreaView, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { TabBar, TabView } from 'react-native-tab-view';
 import CardLayout from '../Common/Card';
@@ -13,7 +13,6 @@ import styles from '../../styles/register_trees.native';
 import { Dimensions } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
 export default class RegisterTrees extends Component {
   routes = [
     {
@@ -110,33 +109,34 @@ export default class RegisterTrees extends Component {
     console.log('this.props===----===--=-=-=->', this.props);
     return (
       <>
-        <SafeAreaView />
-        <KeyboardAwareScrollView
-          enableOnAndroid
-          contentContailnerStyle={{ justifyContent: 'center' }}
-          extraHeight={66}
-          keyboardShouldPersistTaps={'handled'}
-          extraScrollHeight={50}
-          enableResetScrollToCoords={false}
-        >
-          <CardLayout style={{ flex: 1 }}>
-            <Text style={styles.ufpTrees}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <KeyboardAwareScrollView
+            enableOnAndroid
+            contentContailnerStyle={{ justifyContent: 'center' }}
+            extraHeight={66}
+            keyboardShouldPersistTaps={'handled'}
+            extraScrollHeight={50}
+            enableResetScrollToCoords={false}
+          >
+            <CardLayout>
+              {/* <Text style={styles.ufpTrees}>
               {i18n.t('label.register_trees')}
-            </Text>
-            <Text style={styles.textStyle}>
-              {i18n.t('label.register_trees_description')}
-            </Text>
-          </CardLayout>
+            </Text> */}
+              <Text style={styles.textStyle}>
+                {i18n.t('label.register_trees_description')}
+              </Text>
+            </CardLayout>
 
-          <TabView
-            useNativeDriver
-            ref="registerTreeForm"
-            navigationState={this.state}
-            renderScene={this._renderScene.bind(this)}
-            renderTabBar={props => this._renderTabBar(props)}
-            onIndexChange={this._handleIndexChange}
-          />
-        </KeyboardAwareScrollView>
+            <TabView
+              useNativeDriver
+              ref="registerTreeForm"
+              navigationState={this.state}
+              renderScene={this._renderScene.bind(this)}
+              renderTabBar={props => this._renderTabBar(props)}
+              onIndexChange={this._handleIndexChange}
+            />
+          </KeyboardAwareScrollView>
+        </SafeAreaView>
       </>
     );
   }

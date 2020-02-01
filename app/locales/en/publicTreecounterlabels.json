@@ -5,5 +5,6 @@
   "contributor": "Contributor",
   "planted_trees": "Planted Trees",
   "target": "Target",
-  "support_trees_to": "Support trees to {{user}}"
+  "support_trees_to": "Support trees to {{user}}",
+  "shareuserprofile": "Meet {{displayName}} on Plant-for-the-Planet App https://www.trilliontreecampaign.org/t/{{slug}}"
 }

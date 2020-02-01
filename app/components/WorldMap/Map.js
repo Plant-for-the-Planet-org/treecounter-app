@@ -14,28 +14,11 @@ const MapComponent = () => {
           latitude: 37.78825,
           longitude: -122.4324,
           latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
+          longitudeDelta: 0.00421
         }}
       >
         <Marker coordinate={{ latitude: 37.78825, longitude: -122.4324 }}>
           <View style={styles.markerDot} />
-          <Callout tooltip={true}>
-            <View style={styles.callOutBubbleCont}>
-              <View style={styles.fullNameCont}>
-                <Text style={styles.firstNameText}>Haider</Text>
-                <Text style={styles.lastNameText}> Ali</Text>
-              </View>
-              <View style={styles.bottomCont}>
-                <Text style={styles.numberOfTrees}>10</Text>
-                <Text style={styles.imageTree}>
-                  <Image source={treesmarker} />
-                </Text>
-                <View style={styles.donateBtnCont}>
-                  <Text style={styles.donateText}>Donate</Text>
-                </View>
-              </View>
-            </View>
-          </Callout>
         </Marker>
       </MapView>
     </View>

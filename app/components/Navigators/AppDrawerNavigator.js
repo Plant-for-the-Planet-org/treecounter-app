@@ -11,6 +11,7 @@ import ForgotPasswordContainer from '../../containers/Authentication/ForgotPassw
 import TargetContainer from '../../containers/TargetContainer';
 import DonationTreesContainer from '../../containers/DonateTrees';
 import DonorDetailsContainer from '../../containers/DonateTrees/donorDetails';
+import DonationStep3 from '../DonateTrees/DonationStep3';
 
 import { getLocalRoute } from '../../actions/apiRouting';
 import styles from '../../styles/header.native';
@@ -332,6 +333,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['donor_details_form']: {
         screen: DonorDetailsContainer
+      },
+      ['payment_details_form']: {
+        screen: DonationStep3,
+        navigationOptions: { header: null }
       },
       ['app_pledge_events']: {
         screen: PledgeEvents

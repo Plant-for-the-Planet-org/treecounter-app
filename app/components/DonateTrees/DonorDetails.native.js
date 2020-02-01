@@ -28,6 +28,7 @@ import {
 } from '../../assets';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
@@ -275,7 +276,7 @@ export function PaymentOption(props) {
       </View>
       <TouchableOpacity
         onPress={() => {
-          updateStaticRoute('donor_details_form', props.navigation);
+          updateStaticRoute('payment_details_form', props.navigation);
         }}
         style={styles.continueButtonView}
       >

@@ -181,6 +181,17 @@ import donateIconGreen from './images/icons/donateIconGreen.png';
 import competeIcon from './images/icons/competeIcon.png';
 import competeIconGreen from './images/icons/competeIconGreen.png';
 
+import visa from './images/icons/visa.png';
+import googlePay from './images/icons/googlePay.png';
+import sepa from './images/icons/sepa.png';
+import applePay from './images/icons/applePay.png';
+import paypal from './images/icons/paypal.png';
+import masterCard from './images/icons/masterCard.png';
+import americanExpress from './images/icons/americanExpress.png';
+import discover from './images/icons/discover.png';
+import paypalLogo from './images/icons/paypalLogo.png';
+import creditCard from './images/icons/creditCard.png';
+import creditCardBack from './images/icons/creditCardBack.png';
 export {
   treelogo,
   germany,
@@ -363,5 +374,16 @@ export {
   donateIcon,
   donateIconGreen,
   competeIcon,
-  competeIconGreen
+  competeIconGreen,
+  visa,
+  googlePay,
+  applePay,
+  sepa,
+  masterCard,
+  paypal,
+  americanExpress,
+  discover,
+  paypalLogo,
+  creditCard,
+  creditCardBack
 };

@@ -483,5 +483,41 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 40
+  },
+
+  contactDetailsAddress: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+
+  //
+  sectionRightButton: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 12,
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'right',
+    color: '#89b53a'
+  },
+  sectionTitle: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 12,
+    lineHeight: 17,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginBottom: 10
+  },
+  sectionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 30
   }
 });

@@ -76,40 +76,11 @@ function DonationDetails(props) {
         ])}
       >
         {/* Plant Project Details */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: 20
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: 'OpenSans-SemiBold',
-              fontSize: 12,
-              lineHeight: 17,
-              letterSpacing: 0,
-              textAlign: 'left',
-              color: '#4d5153'
-            }}
-          >
-            DONATION TO
-          </Text>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>DONATION TO</Text>
           {props.selectedProject ? (
             <TouchableOpacity>
-              <Text
-                style={{
-                  fontFamily: 'OpenSans-SemiBold',
-                  fontSize: 12,
-                  lineHeight: 21,
-                  letterSpacing: 0,
-                  textAlign: 'right',
-                  color: '#89b53a'
-                }}
-              >
-                Change
-              </Text>
+              <Text style={styles.sectionRightButton}>Change</Text>
             </TouchableOpacity>
           ) : null}
         </View>
@@ -135,17 +106,7 @@ function DonationDetails(props) {
         {/* Donation Context */}
 
         {/* Gift Trees */}
-        <Text
-          style={{
-            fontFamily: 'OpenSans-SemiBold',
-            fontSize: 12,
-            lineHeight: 17,
-            letterSpacing: 0,
-            textAlign: 'left',
-            color: '#4d5153',
-            marginTop: 32
-          }}
-        >
+        <Text style={[styles.sectionTitle, { marginTop: 20 }]}>
           GIFT RECIPIENT
         </Text>
 
@@ -303,6 +264,31 @@ function DonationDetails(props) {
           taxReceiptSwitch={taxReceiptSwitch}
           toggleTaxReceipt={toggleTaxReceipt}
         />
+
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>CONTACT DETAILS</Text>
+          {props.selectedProject ? (
+            <TouchableOpacity>
+              <Text style={styles.sectionRightButton}>Edit</Text>
+            </TouchableOpacity>
+          ) : null}
+        </View>
+        <View>
+          <Text style={styles.contactDetailsAddress}>Company Name</Text>
+          <Text style={styles.contactDetailsAddress}>
+            Am Bahnhof 1, Uffing am Staffelsee, DE
+          </Text>
+          <Text style={styles.contactDetailsAddress}>sagar@aryal.me</Text>
+        </View>
+
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>PAYMENT METHOD</Text>
+          {props.selectedProject ? (
+            <TouchableOpacity>
+              <Text style={styles.sectionRightButton}>Change</Text>
+            </TouchableOpacity>
+          ) : null}
+        </View>
 
         {/* Payment Processed by */}
         {/* <Text style={styles.paymentProcessText}>

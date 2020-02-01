@@ -16,12 +16,12 @@ class UserContributionsDetailsContainer extends React.Component {
   static navigationOptions = {
     header: null
   };
-  componentDidMount() {
-    let contribution = this.getContribution();
-    if (contribution.plantProjectId !== null) {
-      this.props.loadProject({ id: contribution.plantProjectId });
-    }
-  }
+  // componentDidMount() {
+  //   let contribution = this.getContribution();
+  //   if (contribution.plantProjectId !== null) {
+  //     this.props.loadProject({ id: contribution.plantProjectId });
+  //   }
+  // }
 
   getContribution(props = this.props) {
     let contribution = null;
@@ -34,10 +34,10 @@ class UserContributionsDetailsContainer extends React.Component {
   }
 
   render() {
-    let plantedProject;
-    if (this.props.entities.hasOwnProperty('plantProject')) {
-      plantedProject = this.props.entities.plantProject;
-    }
+    // let plantedProject;
+    // if (this.props.entities.hasOwnProperty('plantProject')) {
+    //   plantedProject = this.props.entities.plantProject;
+    // }
     return (
       <UserContributionsDetails
         navigation={this.props.navigation}

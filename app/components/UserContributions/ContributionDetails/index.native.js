@@ -258,7 +258,9 @@ class UserContributionsDetails extends React.Component {
 
         <View style={{ marginTop: 20 }} />
 
-        {this.props.plantProjects && this.props.plantProjects[0].tpoData ? (
+        {this.props.plantProjects &&
+        this.props.plantProjects.length > 0 &&
+        this.props.plantProjects[0].tpoData ? (
           <AccordionContactInfo
             navigation={this.props.navigation}
             slug={this.props.plantProjects[0].tpoData.treecounterSlug}

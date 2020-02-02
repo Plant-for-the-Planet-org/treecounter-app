@@ -139,7 +139,7 @@ export default class UserContributions extends React.Component {
             )}
           {location && (
             <Text style={styles.subHeaderText}>
-              {i18n.t('label.planted_at')}
+              {i18n.t('label.planted_by')}
               <Text style={{ color: textColor }}>{location}</Text>
             </Text>
           )}

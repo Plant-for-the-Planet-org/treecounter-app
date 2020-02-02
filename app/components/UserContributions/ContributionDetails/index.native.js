@@ -143,6 +143,8 @@ class UserContributionsDetails extends React.Component {
       for (let i = 0; i <= plantProjects.length; ) {
         if (plantProjects[i].id === plantProjectId) {
           selectedPlantProjectDetails = plantProjects[i];
+          contributionOrPlantedImages =
+            selectedPlantProjectDetails.plantProjectImages;
           break;
         }
       }
@@ -152,9 +154,6 @@ class UserContributionsDetails extends React.Component {
       //     selectedPlantProjectDetails.plantProjectImages;
       //   ndviUid = selectedPlantProjectDetails.ndviUid;
       // }
-      contributionOrPlantedImages =
-        selectedPlantProjectDetails.plantProjectImages;
-      console.log('contributionOrPlantedImages', contributionOrPlantedImages);
     }
     if (cardType === 'planting') {
       // contributionTypeText = i18n.t('label.usr_contribution_planted');
@@ -178,21 +177,24 @@ class UserContributionsDetails extends React.Component {
     }
 
     if (isGift && givee) {
-      headerText = headerText + ' ' + i18n.t('label.gifted');
-      contributerPrefix = i18n.t('label.usr_contribution_to');
+      if (contributionType === 'planting') {
+        contributerPrefix = i18n.t('label.usr_contribution_dedicated_to');
+      } else {
+        headerText = headerText + ' ' + i18n.t('label.gifted');
+        contributerPrefix = i18n.t('label.usr_contribution_to');
+      }
       contributer = givee;
       // if (isGift) {
       //   // dedicatedTo = i18n.t('label.usr_contribution_from');
       // }
     }
 
-    if (isGift && giver) {
+    if (giver) {
       contributer = giver;
       headerText = headerText + ' ' + i18n.t('label.received');
       contributerPrefix = i18n.t('label.usr_contribution_from');
     }
     if (redemptionCode && givee) {
-      plantedDate = formatDateForContribution(redemptionDate);
       if (plantProjectName) {
         location = plantProjectName;
       }
@@ -200,8 +202,8 @@ class UserContributionsDetails extends React.Component {
     }
     if (treeScientificName) {
       treeClassification = treeScientificName;
-      if(treeSpecies){
-        treeClassification = treeClassification + " "+ treeSpecies
+      if (treeSpecies) {
+        treeClassification = treeClassification + ' ' + treeSpecies;
       }
     }
 

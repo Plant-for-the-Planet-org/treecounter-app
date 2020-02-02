@@ -16,12 +16,12 @@ class UserContributionsDetailsContainer extends React.Component {
   static navigationOptions = {
     header: null
   };
-  // componentDidMount() {
-  //   let contribution = this.getContribution();
-  //   if (contribution.plantProjectId !== null) {
-  //     this.props.loadProject({ id: contribution.plantProjectId });
-  //   }
-  // }
+  componentDidMount() {
+    let contribution = this.getContribution();
+    if (contribution.plantProjectId !== null) {
+      this.props.loadProject({ id: contribution.plantProjectId });
+    }
+  }
 
   getContribution(props = this.props) {
     let contribution = null;
@@ -44,7 +44,7 @@ class UserContributionsDetailsContainer extends React.Component {
         userProfileId={this.props.userProfileId}
         contribution={this.getContribution()}
         plantProjects={this.props.plantProjects}
-        plantedProject={this.props.selectedProject}
+        // plantedProject={plantedProject}
         deleteContribution={this.props.deleteContribution}
       />
     );
@@ -54,8 +54,8 @@ class UserContributionsDetailsContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     userProfileId: currentUserProfileIdSelector(state),
-    plantProjects: getAllPlantProjectsSelector(state),
-    entities: plantProjectsSelector(state)
+    plantProjects: getAllPlantProjectsSelector(state)
+    // entities: plantProjectsSelector(state)
   };
 };
 

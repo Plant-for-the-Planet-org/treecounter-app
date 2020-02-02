@@ -60,7 +60,7 @@ export default class UserContributions extends React.Component {
       headerText,
       // dedicatedTo,
       plantedDate,
-
+      treeClassification,
       contributerPrefix,
       contributer,
       showDelete,
@@ -117,6 +117,19 @@ export default class UserContributions extends React.Component {
         </View>
 
         <View style={styles.subHeadContainer}>
+          {treeClassification && (
+            <Text style={styles.subHeaderText}>{treeClassification}</Text>
+          )}
+          {/* {contribution.contributionType === 'planting' ? (
+            contribution.treeClassification ? (
+              <Text style={styles.subHeaderText}>
+                {contribution.treeClassification}
+                {contribution.treeSpecies ? (
+                  <Text> {contribution.treeSpecies}</Text>
+                ) : null}
+              </Text>
+            ) : null
+          ) : null} */}
           {contributerPrefix &&
             contributer && (
               <Text style={styles.subHeaderText}>
@@ -130,17 +143,6 @@ export default class UserContributions extends React.Component {
               <Text style={{ color: textColor }}>{location}</Text>
             </Text>
           )}
-
-          {contribution.contributionType === 'planting' ? (
-            contribution.treeClassification ? (
-              <Text style={styles.subHeaderText}>
-                {contribution.treeClassification}
-                {contribution.treeSpecies ? (
-                  <Text> {contribution.treeSpecies}</Text>
-                ) : null}
-              </Text>
-            ) : null
-          ) : null}
         </View>
 
         {/* <View style={{ flex: 2 }}>

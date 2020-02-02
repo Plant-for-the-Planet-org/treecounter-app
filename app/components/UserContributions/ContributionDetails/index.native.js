@@ -75,10 +75,12 @@ class UserContributionsDetails extends React.Component {
       giver,
       mayUpdate,
       contributionImages,
-      treeType
+      treeType,
+      treeSpecies,
+      treeScientificName
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
-    let plantedProject = undefined;
+    // let plantedProject = undefined;
 
     // if (this.props.plantedProject !== undefined)) {
     //   plantedProject = this.props.plantedProject;
@@ -89,6 +91,7 @@ class UserContributionsDetails extends React.Component {
       '\x1b[45mthis.props.plantProjects \n',
       this.props.plantProjects
     );
+    console.log('this.props.contribution \n', this.props.contribution);
     console.log('\x1b[0m');
 
     let plantedDate = undefined;
@@ -96,6 +99,7 @@ class UserContributionsDetails extends React.Component {
     // let dedicatedTo = undefined;
     let location = undefined;
     let contributerPrefix = undefined;
+    let treeClassification = undefined;
     let contributer = undefined;
     // let isSinglePlanted = false;
     let contributionOrPlantedImages = contributionImages;
@@ -135,26 +139,29 @@ class UserContributionsDetails extends React.Component {
     if (redemptionDate) {
       plantedDate = formatDateForContribution(redemptionDate);
     }
+    if (plantProjects.length > 0) {
+      for (let i = 0; i <= plantProjects.length; ) {
+        if (plantProjects[i].id === plantProjectId) {
+          selectedPlantProjectDetails = plantProjects[i];
+          break;
+        }
+      }
+      // if (selectedPlantProjectDetails.length > 0) {
+      //   selectedPlantProjectDetails = selectedPlantProjectDetails[0];
+      //   contributionOrPlantedImages =
+      //     selectedPlantProjectDetails.plantProjectImages;
+      //   ndviUid = selectedPlantProjectDetails.ndviUid;
+      // }
+      contributionOrPlantedImages =
+        selectedPlantProjectDetails.plantProjectImages;
+      console.log('contributionOrPlantedImages', contributionOrPlantedImages);
+    }
     if (cardType === 'planting') {
       // contributionTypeText = i18n.t('label.usr_contribution_planted');
       // headerText = headerText;
       // TODO: check if this is a logic error, as this var is never used!
       // isSinglePlanted = treeCount > 1 ? false : true;
     } else if (cardType === 'donation') {
-      if (plantProjects.length > 0) {
-        for (let i = 0; i <= plantProjects.length; ) {
-          if (plantProjects[i].id === plantProjectId) {
-            selectedPlantProjectDetails = plantProjects[i];
-          }
-        }
-        if (selectedPlantProjectDetails.length > 0) {
-          selectedPlantProjectDetails = selectedPlantProjectDetails[0];
-          contributionOrPlantedImages =
-            selectedPlantProjectDetails.plantProjectImages;
-          ndviUid = selectedPlantProjectDetails.ndviUid;
-        }
-      }
-
       headerText = headerText + ' ' + i18n.t('label.donated');
 
       if (plantProjectName) {
@@ -165,17 +172,18 @@ class UserContributionsDetails extends React.Component {
       if (plantProjectName) {
         location = plantProjectName;
       }
-      headerText = headerText + ' ' + i18n.t('label.gifted');
-      contributerPrefix = i18n.t('label.usr_contribution_from');
-      contributer = giver;
+      // headerText = headerText + ' ' + i18n.t('label.gifted');
+      // contributerPrefix = i18n.t('label.usr_contribution_from');
+      // contributer = giver;
     }
 
-    if (givee) {
+    if (isGift && givee) {
+      headerText = headerText + ' ' + i18n.t('label.gifted');
       contributerPrefix = i18n.t('label.usr_contribution_to');
       contributer = givee;
-      if (isGift) {
-        // dedicatedTo = i18n.t('label.usr_contribution_from');
-      }
+      // if (isGift) {
+      //   // dedicatedTo = i18n.t('label.usr_contribution_from');
+      // }
     }
 
     if (isGift && giver) {
@@ -190,6 +198,12 @@ class UserContributionsDetails extends React.Component {
       }
       headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
     }
+    if (treeScientificName) {
+      treeClassification = treeScientificName;
+      if(treeSpecies){
+        treeClassification = treeClassification + " "+ treeSpecies
+      }
+    }
 
     const backgroundColor = '#fff';
 
@@ -200,6 +214,7 @@ class UserContributionsDetails extends React.Component {
           treeCount={treeCount}
           location={location}
           contributerPrefix={contributerPrefix}
+          treeClassification={treeClassification}
           contributer={contributer}
           plantedDate={plantedDate}
           showDelete={contributionType == 'planting'}
@@ -256,22 +271,24 @@ class UserContributionsDetails extends React.Component {
           </View>
         ) : null}
 
-        <View style={{ marginTop: 20 }} />
+        {/* <View style={{ marginTop: 20 }} /> */}
 
         {this.props.plantProjects &&
         this.props.plantProjects.length > 0 &&
         this.props.plantProjects[0].tpoData ? (
-          <AccordionContactInfo
-            navigation={this.props.navigation}
-            slug={this.props.plantProjects[0].tpoData.treecounterSlug}
-            updateStaticRoute={updateStaticRoute}
-            url={this.props.plantProjects[0].url}
-            _goToURL={this._goToURL}
-            email={this.props.plantProjects[0].tpoData.email}
-            address={this.props.plantProjects[0].tpoData.address}
-            name={this.props.plantProjects[0].tpoData.name}
-            title={this.props.plantProjects[0].tpoData.name}
-          />
+          <View style={{ marginBottom: 30 }}>
+            <AccordionContactInfo
+              navigation={this.props.navigation}
+              slug={this.props.plantProjects[0].tpoData.treecounterSlug}
+              updateStaticRoute={updateStaticRoute}
+              url={this.props.plantProjects[0].url}
+              _goToURL={this._goToURL}
+              email={this.props.plantProjects[0].tpoData.email}
+              address={this.props.plantProjects[0].tpoData.address}
+              name={this.props.plantProjects[0].tpoData.name}
+              title={this.props.plantProjects[0].tpoData.name}
+            />
+          </View>
         ) : null}
 
         {/* <View style={styles.buttonGroup}>

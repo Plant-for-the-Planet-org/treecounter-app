@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
-import { Dimensions, Text } from 'react-native';
+import { Dimensions, Text, View } from 'react-native';
 import GiftToUser from './Tabs/GiftUser';
 import GiftEmail from './Tabs/GiftEmail';
 
@@ -48,21 +48,38 @@ export default class GiftTabView extends Component {
     return (
       <TabBar
         {...props}
-        style={styles.tabBar}
-        labelStyle={styles.textStyle}
-        indicatorStyle={styles.textActive}
-        tabStyle={{ width: 'auto' }}
+        style={[styles.tabBar]}
+        tabStyle={{ width: 'auto', padding: 0 }}
+        indicatorStyle={{ backgroundColor: '#fff' }}
         renderLabel={({ route, focused, color }) => (
-          <Text
-            style={{
-              color: focused ? '#89b53a' : '#aba2a2',
-              fontSize: 11,
-              fontFamily: 'OpenSans-SemiBold',
-              textTransform: 'capitalize'
-            }}
-          >
-            {route.title}
-          </Text>
+          <View style={{ textAlign: 'left', marginRight: 24 }}>
+            <Text
+              style={{
+                color: focused ? '#89b53a' : '#4d5153',
+                fontSize: 13,
+                fontFamily: 'OpenSans-SemiBold',
+                textTransform: 'capitalize',
+                textAlign: 'left'
+              }}
+            >
+              {route.title}
+            </Text>
+            {focused ? (
+              <View
+                style={[
+                  {
+                    width: '100%',
+                    marginTop: 11,
+                    backgroundColor: '#89b53a',
+                    height: 3,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
+                    color: '#89b53a'
+                  }
+                ]}
+              />
+            ) : null}
+          </View>
         )}
       />
     );

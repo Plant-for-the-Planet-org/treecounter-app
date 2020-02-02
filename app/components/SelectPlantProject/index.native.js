@@ -82,21 +82,38 @@ class SelectPlantTabView extends PureComponent {
       <TabBar
         key="1"
         {...props}
-        labelStyle={styles.textStyle}
-        indicatorStyle={styles.textActive}
         style={[styles.tabBar]}
-        tabStyle={{ width: 'auto' }}
+        tabStyle={{ width: 'auto', padding: 0 }}
+        indicatorStyle={{ backgroundColor: '#fff' }}
         renderLabel={({ route, focused, color }) => (
-          <Text
-            style={{
-              color: focused ? '#89b53a' : '#aba2a2',
-              fontSize: 11,
-              fontFamily: 'OpenSans-SemiBold',
-              textTransform: 'capitalize'
-            }}
-          >
-            {route.title}
-          </Text>
+          <View style={{ textAlign: 'left', marginRight: 24 }}>
+            <Text
+              style={{
+                color: focused ? '#89b53a' : '#4d5153',
+                fontSize: 13,
+                fontFamily: 'OpenSans-SemiBold',
+                textTransform: 'capitalize',
+                textAlign: 'left'
+              }}
+            >
+              {route.title}
+            </Text>
+            {focused ? (
+              <View
+                style={[
+                  {
+                    width: '100%',
+                    marginTop: 11,
+                    backgroundColor: '#89b53a',
+                    height: 3,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
+                    color: '#89b53a'
+                  }
+                ]}
+              />
+            ) : null}
+          </View>
         )}
       />
     ];
@@ -158,7 +175,7 @@ class SelectPlantTabView extends PureComponent {
       <>
         <HeaderStatic title={'Projects'} />
         <SafeAreaView />
-        <View style={{ marginTop: 80 }} />
+        <View style={{ marginTop: 56 }} />
         <TabView
           useNativeDriver
           navigationState={this.state}

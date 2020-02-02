@@ -7,7 +7,8 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  SafeAreaView
+  SafeAreaView,
+  StatusBar
 } from 'react-native';
 import NavigationEvents from './importNavigationEvents';
 import { trillionCampaign } from '../../actions/trillionAction';
@@ -149,19 +150,37 @@ class Trillion extends PureComponent {
       <TabBar
         {...props}
         style={[tabStyles.tabBar]}
-        tabStyle={{ width: 'auto' }}
-        indicatorStyle={tabStyles.textActive}
+        tabStyle={{ width: 'auto', padding: 0 }}
+        indicatorStyle={{ backgroundColor: '#fff' }}
         renderLabel={({ route, focused, color }) => (
-          <Text
-            style={{
-              color: focused ? '#89b53a' : '#aba2a2',
-              fontSize: 11,
-              fontFamily: 'OpenSans-SemiBold',
-              textTransform: 'capitalize'
-            }}
-          >
-            {route.title}
-          </Text>
+          <View style={{ textAlign: 'left', marginRight: 24 }}>
+            <Text
+              style={{
+                color: focused ? '#89b53a' : '#4d5153',
+                fontSize: 13,
+                fontFamily: 'OpenSans-SemiBold',
+                textTransform: 'capitalize',
+                textAlign: 'left'
+              }}
+            >
+              {route.title}
+            </Text>
+            {focused ? (
+              <View
+                style={[
+                  {
+                    width: '100%',
+                    marginTop: 11,
+                    backgroundColor: '#89b53a',
+                    height: 3,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
+                    color: '#89b53a'
+                  }
+                ]}
+              />
+            ) : null}
+          </View>
         )}
       />
     );
@@ -183,6 +202,7 @@ class Trillion extends PureComponent {
               backgroundColor: backgroundColor
             }}
           >
+            <StatusBar backgroundColor="white" barStyle="dark-content" />
             <View style={styles.parentContainer}>
               {/* Trillion Tree Events Title */}
               {/* {this.props.pledgeEvents &&
@@ -199,11 +219,15 @@ class Trillion extends PureComponent {
               {/* Featured events horizontal ScrollView */}
               {this.props.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents ? (
-                <View style={{ marginTop: 24 }}>
+                <View>
                   <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ paddingRight: 20 }}
+                    contentContainerStyle={{
+                      paddingRight: 20,
+                      marginTop:
+                        this.props.pledgeEvents.pledgeEvents.length > 0 ? 24 : 0
+                    }}
                   >
                     {this.props.pledgeEvents.pledgeEvents.map(
                       featuredEvents => (
@@ -421,9 +445,10 @@ class Trillion extends PureComponent {
       ) : null,
       this.state.loadSvg ? (
         <>
-          <HeaderStatic title={'Explore'} />
           <SafeAreaView />
-          <View style={{ marginTop: 80 }} />
+
+          <HeaderStatic title={'Explore'} />
+          <View style={{ marginTop: 56 }} />
           <TabView
             key="tabs"
             useNativeDriver

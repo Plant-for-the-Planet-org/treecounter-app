@@ -29,7 +29,7 @@ export default function HeaderStatic(props) {
         left: 0,
         right: 0,
         backgroundColor: whiteColor,
-        height: 80,
+        height: 56,
         zIndex: 5000,
         // alignItems: 'center',
         display: 'flex',
@@ -46,7 +46,7 @@ export default function HeaderStatic(props) {
       >
         <Text
           style={{
-            fontFamily: 'OpenSans-Bold',
+            fontFamily: 'OpenSans-ExtraBold',
             fontSize: 27,
             lineHeight: 40,
             letterSpacing: 0,

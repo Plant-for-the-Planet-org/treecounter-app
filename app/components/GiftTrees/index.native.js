@@ -17,7 +17,7 @@ export default class GiftTrees extends Component {
       <>
         <HeaderStatic title={'Gift Trees'} />
         <SafeAreaView />
-        <View style={{ height: 80 }} />
+        <View style={{ height: 56 }} />
         <GiftTabView openProjects={this.openProjects} {...this.props} />
       </>
     );

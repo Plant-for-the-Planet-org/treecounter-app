@@ -21,7 +21,7 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
         super(props);
         const { tabs } = this.props;
         this.state = {
-            selectedTab: 0
+            selectedTab: 4
         }
     }
 
@@ -44,8 +44,8 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
                     tabs.map((tab, key) => {
                         const tabWidth = width / tabs.length;
                         const cursor = tabWidth * key;
-                        console.log('Tab value ---', tab);
-                        console.log('Key value ---', key);
+                        // console.log('Tab value ---', tab);
+                        // console.log('Key value ---', key);
 
                         const iconColor = key === this.state.selectedTab ? '#89b53a' : "#4d5153";
                         return (

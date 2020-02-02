@@ -62,8 +62,7 @@ class UserContributionsDetails extends React.Component {
       plantDate,
       givee,
       // eslint-disable-next-line no-unused-vars
-      giveeSlug,
-      giftRecipient,
+      // giveeSlug,
       cardType,
       contributionType,
       plantProjectId,

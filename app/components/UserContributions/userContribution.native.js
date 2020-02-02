@@ -64,8 +64,8 @@ export default class UserContributions extends React.Component {
       contributerPrefix,
       contributer,
       showDelete,
-      mayUpdate,
-      contribution
+      mayUpdate
+      // contribution
     } = props;
     // console.log(this.props, 'this.props');
     // console.log('\x1b[45mcontributer \n', redemptionDate);
@@ -110,9 +110,9 @@ export default class UserContributions extends React.Component {
                 <Image style={styles.image} source={EditIcon} />
               </TouchableOpacity>
             ) : null}
-            <TouchableOpacity onPress={() => {}} style={styles.button}>
+            {/* <TouchableOpacity onPress={() => {}} style={styles.button}>
               <Image style={styles.image} source={ShareIcon} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
 

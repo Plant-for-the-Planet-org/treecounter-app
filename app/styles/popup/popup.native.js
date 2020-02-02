@@ -2,7 +2,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 import { isAndroid } from '../../utils/utils';
 
-
 const backgroundColor = 'rgba(0,0,0,0.46)';
 const Layout = {
   window: {

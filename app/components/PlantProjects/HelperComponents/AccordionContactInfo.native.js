@@ -60,7 +60,9 @@ export default class AccordionContactInfo extends Component {
           }}
         >
           <Text style={[styles.accordionTitle, { color: textColor }]}>
-            {i18n.t('label.contact_details')}
+            {this.props.title
+              ? this.props.title
+              : i18n.t('label.contact_details')}
           </Text>
           <Icon
             name={iconName}

@@ -14,8 +14,7 @@ export default EStyleSheet.create({
     paddingBottom: 10
   },
   flexContainer: {
-    flexGrow: 1,
-    marginTop: 80
+    flexGrow: 1
   },
 
   headerView: {

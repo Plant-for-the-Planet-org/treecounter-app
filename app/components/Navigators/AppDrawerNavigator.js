@@ -288,9 +288,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
-      [getLocalRoute('app_registerTrees')]: {
-        screen: isLoggedIn ? RegisterTrees : LoginContainer
-      },
+      // [getLocalRoute('app_registerTrees')]: {
+      //   screen: isLoggedIn ? RegisterTrees : LoginContainer
+      // },
       [getLocalRoute('app_competitions')]: {
         screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
@@ -337,6 +337,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_pledge_events']: {
         screen: PledgeEvents
+      },
+      ['app_registerTrees']: {
+        screen: isLoggedIn ? RegisterTrees : LoginContainer,
+        navigationOptions: { header: null }
       },
       ['app_pledge_form']: {
         screen: MakePledgeForm

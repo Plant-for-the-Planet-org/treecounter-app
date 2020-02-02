@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { Dimensions, SafeAreaView } from 'react-native';
+import { Dimensions, SafeAreaView, Text, View } from 'react-native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
@@ -82,10 +82,22 @@ class SelectPlantTabView extends PureComponent {
       <TabBar
         key="1"
         {...props}
-        style={[styles.tabBar, { top: 80 }]}
-        tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
+        style={[styles.tabBar]}
+        tabStyle={{ width: 'auto' }}
+        renderLabel={({ route, focused, color }) => (
+          <Text
+            style={{
+              color: focused ? '#89b53a' : '#aba2a2',
+              fontSize: 11,
+              fontFamily: 'OpenSans-SemiBold',
+              textTransform: 'capitalize'
+            }}
+          >
+            {route.title}
+          </Text>
+        )}
       />
     ];
   };
@@ -146,6 +158,7 @@ class SelectPlantTabView extends PureComponent {
       <>
         <HeaderStatic title={'Projects'} />
         <SafeAreaView />
+        <View style={{ marginTop: 80 }} />
         <TabView
           useNativeDriver
           navigationState={this.state}

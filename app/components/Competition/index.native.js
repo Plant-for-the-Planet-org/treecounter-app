@@ -53,9 +53,21 @@ class Competiton extends React.Component {
         scrollEnabled
         {...props}
         style={styles.tabBar}
-        tabStyle={{ width: Layout.window.width / 3 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
+        tabStyle={{ width: 'auto' }}
+        renderLabel={({ route, focused, color }) => (
+          <Text
+            style={{
+              color: focused ? '#89b53a' : '#aba2a2',
+              fontSize: 11,
+              fontFamily: 'OpenSans-SemiBold',
+              textTransform: 'capitalize'
+            }}
+          >
+            {route.title}
+          </Text>
+        )}
       />
     );
   };

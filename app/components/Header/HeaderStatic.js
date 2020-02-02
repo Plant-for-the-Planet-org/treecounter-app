@@ -31,25 +31,33 @@ export default function HeaderStatic(props) {
         backgroundColor: whiteColor,
         height: 80,
         zIndex: 5000,
-        alignItems: 'center',
+        // alignItems: 'center',
         display: 'flex',
         flexDirection: 'row',
         width: '100%'
       }}
     >
-      <Text
+      <View
         style={{
-          fontFamily: 'OpenSans-Bold',
-          fontSize: 27,
-          lineHeight: 40,
-          letterSpacing: 0,
-          color: textColor,
-          textAlign: 'left',
-          left: 20
+          position: 'absolute',
+          left: 20,
+          bottom: 4
         }}
       >
-        {props.title}
-      </Text>
+        <Text
+          style={{
+            fontFamily: 'OpenSans-Bold',
+            fontSize: 27,
+            lineHeight: 40,
+            letterSpacing: 0,
+            color: textColor,
+            textAlign: 'left'
+          }}
+        >
+          {props.title}
+        </Text>
+      </View>
+
       <View
         style={{
           right: 24,

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
-import { Dimensions } from 'react-native';
+import { Dimensions, Text } from 'react-native';
 import GiftToUser from './Tabs/GiftUser';
 import GiftEmail from './Tabs/GiftEmail';
 
@@ -49,9 +49,21 @@ export default class GiftTabView extends Component {
       <TabBar
         {...props}
         style={styles.tabBar}
-        tabStyle={{ width: Layout.window.width / 2 }}
         labelStyle={styles.textStyle}
         indicatorStyle={styles.textActive}
+        tabStyle={{ width: 'auto' }}
+        renderLabel={({ route, focused, color }) => (
+          <Text
+            style={{
+              color: focused ? '#89b53a' : '#aba2a2',
+              fontSize: 11,
+              fontFamily: 'OpenSans-SemiBold',
+              textTransform: 'capitalize'
+            }}
+          >
+            {route.title}
+          </Text>
+        )}
       />
     );
   };

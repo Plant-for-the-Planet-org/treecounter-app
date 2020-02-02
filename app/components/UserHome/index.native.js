@@ -271,21 +271,6 @@ export default class UserHome extends Component {
       <View style={{ elevation: 1 }}>
         <SafeAreaView />
 
-        <TouchableOpacity
-          style={{
-            top: Platform.OS === 'ios' ? 60 : 20,
-            right: 20,
-            position: 'absolute',
-            zIndex: 10000,
-            elevation: 10
-          }}
-          onPress={() => {
-            navigation.openDrawer();
-          }}
-        >
-          <Image source={settings} style={{ height: 20, width: 20 }} />
-        </TouchableOpacity>
-
         <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
           <View>
             <View>
@@ -307,47 +292,25 @@ export default class UserHome extends Component {
                       {userProfile.lastname}
                     </Text>
                   </View>
-
-                  {/* <View style={[styles.buttonViewRow, { width: '100%' }]}>
-                  <View style={styles.userInfoProfileType}>
-                    <Image
-                      style={styles.profileTypeImage}
-                      resizeMode="contain"
-                      source={
-                        profileType === 'education'
-                          ? images['schoolIcon']
-                          : profileType === 'tpo'
-                            ? images['tpoIcon']
-                            : profileType === 'company'
-                              ? images['companyIcon']
-                              : images['individualIcon']
-                      }
-                    />
-                  </View>
-                  <TouchableOpacity
-                    style={[styles.primaryButton, { marginRight: 20 }]}
-                    onPress={() => {
-                      updateRoute('app_editProfile', this.props.navigation);
-                    }}
-                  >
-                    <Text style={styles.primaryButtonText}>
-                      {i18n.t('label.edit_profile')}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.secondaryButton}
-                    onPress={() => {
-                     // Function For Sharing to be written here
-                    }}
-                  >
-                    <Icon solid name={'paper-plane'} color="#89B53A" size={15} />
-                    <Text style={[styles.secondaryButtonText, { marginLeft: 6 }]}>
-                      {i18n.t('label.share')}
-                    </Text>
-                  </TouchableOpacity>
-                </View> */}
                 </View>
               </View>
+
+              <TouchableOpacity
+                style={{
+                  zIndex: 10000,
+                  elevation: 10,
+                  height: 20,
+                  width: 20,
+                  alignSelf: 'flex-end',
+                  right: 20,
+                  top: -182
+                }}
+                onPress={() => {
+                  navigation.openDrawer();
+                }}
+              >
+                <Image source={settings} style={{ height: 20, width: 20 }} />
+              </TouchableOpacity>
             </View>
             <View style={styles.svgContainer}>
               <SvgContainer
@@ -376,7 +339,7 @@ export default class UserHome extends Component {
             <TouchableOpacity
               style={styles.circleButton}
               onPress={() => {
-                updateRoute('app_registerTrees', this.props.navigation);
+                updateStaticRoute('app_registerTrees', this.props.navigation);
               }}
             >
               <View style={styles.circleButtonView}>

@@ -149,9 +149,20 @@ class Trillion extends PureComponent {
       <TabBar
         {...props}
         style={[tabStyles.tabBar]}
-        tabStyle={{ width: Layout.window.width / 2 }}
-        labelStyle={tabStyles.textStyle}
+        tabStyle={{ width: 'auto' }}
         indicatorStyle={tabStyles.textActive}
+        renderLabel={({ route, focused, color }) => (
+          <Text
+            style={{
+              color: focused ? '#89b53a' : '#aba2a2',
+              fontSize: 11,
+              fontFamily: 'OpenSans-SemiBold',
+              textTransform: 'capitalize'
+            }}
+          >
+            {route.title}
+          </Text>
+        )}
       />
     );
   };

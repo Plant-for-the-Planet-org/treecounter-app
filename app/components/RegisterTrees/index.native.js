@@ -11,7 +11,7 @@ import RegisterTreeTab from './RegisterTreeTab.native';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import styles from '../../styles/register_trees.native';
 import { Dimensions } from 'react-native';
-
+import HeaderNew from './../Header/HeaderNew';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 export default class RegisterTrees extends Component {
   routes = [
@@ -110,6 +110,8 @@ export default class RegisterTrees extends Component {
     return (
       <>
         <SafeAreaView style={{ flex: 1 }}>
+          <HeaderNew title={''} navigation={this.props.navigation} />
+
           <KeyboardAwareScrollView
             enableOnAndroid
             contentContailnerStyle={{ justifyContent: 'center' }}
@@ -119,9 +121,9 @@ export default class RegisterTrees extends Component {
             enableResetScrollToCoords={false}
           >
             <CardLayout>
-              {/* <Text style={styles.ufpTrees}>
-              {i18n.t('label.register_trees')}
-            </Text> */}
+              <Text style={[styles.ufpTrees, { marginTop: 40 }]}>
+                {i18n.t('label.register_trees')}
+              </Text>
               <Text style={styles.textStyle}>
                 {i18n.t('label.register_trees_description')}
               </Text>

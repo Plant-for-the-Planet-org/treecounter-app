@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import styles from '../../styles/newUserContributions/userContributions';
 
-import EditIcon from '../../assets/images/pencil.png';
-import DeleteIcon from '../../assets/images/baseline_delete_outline.png';
-import ShareIcon from '../../assets/images/share.png';
+import {editIcon, deleteIcon} from '../../assets';
+// import ShareIcon from '../../assets/images/share.png';
 // import ArrowRight from '../../assets/images/arrow-right.png';
 // import CalendarIcon from '../../assets/images/green-calendar.png';
 // import TreeIcon from '../../assets/images/green-tree.png';
@@ -99,7 +98,7 @@ export default class UserContributions extends React.Component {
                 onPress={props.onClickDelete}
                 style={styles.button}
               >
-                <Image style={styles.image} source={DeleteIcon} />
+                <Image style={styles.image} source={deleteIcon} />
               </TouchableOpacity>
             ) : null}
             {mayUpdate ? (
@@ -107,7 +106,7 @@ export default class UserContributions extends React.Component {
                 onPress={props.onClickEdit}
                 style={styles.button}
               >
-                <Image style={styles.image} source={EditIcon} />
+                <Image style={styles.image} source={editIcon} />
               </TouchableOpacity>
             ) : null}
             {/* <TouchableOpacity onPress={() => {}} style={styles.button}>

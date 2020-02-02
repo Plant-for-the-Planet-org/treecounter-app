@@ -181,6 +181,8 @@ import donateIcon from './images/icons/donateIcon.png';
 import donateIconGreen from './images/icons/donateIconGreen.png';
 import competeIcon from './images/icons/competeIcon.png';
 import competeIconGreen from './images/icons/competeIconGreen.png';
+import editIcon from "./images/pencil.png";
+import deleteIcon from "./images/baseline_delete_outline.png"
 
 export {
   treelogo,
@@ -365,5 +367,7 @@ export {
   donateIcon,
   donateIconGreen,
   competeIcon,
-  competeIconGreen
+  competeIconGreen,
+  editIcon,
+  deleteIcon,
 };

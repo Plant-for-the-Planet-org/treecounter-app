@@ -11,9 +11,10 @@ import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
 import Measurements from '../../Measurements/Measurements.native';
-import { formatDateForContribution } from '../../../utils/utils';
+import { formatDate } from '../../../utils/utils';
 import i18n from '../../../locales/i18n.js';
 import { withNavigation } from 'react-navigation';
+import VideoContainer from '../../../components/Common/VideoContainer';
 import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
 import { getLocalRoute } from '../../../actions/apiRouting';
 // import { downloadGreen, sendWhite, closeIcon } from '../../../assets';
@@ -21,6 +22,10 @@ import { getLocalRoute } from '../../../actions/apiRouting';
 import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
 import { BackHandler } from 'react-native';
+
+const _goToURL = url => {
+  Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+};
 
 class UserContributionsDetails extends React.Component {
   constructor(props) {
@@ -41,9 +46,7 @@ class UserContributionsDetails extends React.Component {
       this.handleBackButtonClick
     );
   }
-  _goToURL = url => {
-    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
-  };
+
   handleBackButtonClick() {
     this.props.navigation.goBack(null);
     return true;
@@ -79,19 +82,6 @@ class UserContributionsDetails extends React.Component {
       treeScientificName
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
-    // let plantedProject = undefined;
-
-    // if (this.props.plantedProject !== undefined)) {
-    //   plantedProject = this.props.plantedProject;
-    //   console.log('plantedProject', plantedProject.tpoData);
-    // }
-
-    console.log(
-      '\x1b[45mthis.props.plantProjects \n',
-      this.props.plantProjects
-    );
-    console.log('this.props.contribution \n', this.props.contribution);
-    console.log('\x1b[0m');
 
     let plantedDate = undefined;
 
@@ -104,6 +94,11 @@ class UserContributionsDetails extends React.Component {
     let contributionOrPlantedImages = contributionImages;
     let selectedPlantProjectDetails = undefined;
     let headerText = undefined;
+    let videoUrl = undefined;
+
+    console.log('\x1b[45mcontribution', this.props.contribution);
+    console.log('plantProjects', this.props.plantProjects);
+    console.log('\x1b[0m');
 
     if (treeType === null) {
       if (treeCount > 1) {
@@ -133,17 +128,20 @@ class UserContributionsDetails extends React.Component {
     }
 
     if (plantDate) {
-      plantedDate = formatDateForContribution(plantDate);
+      plantedDate = formatDate(plantDate, 'MMMM d,  yyyy');
     }
     if (redemptionDate) {
-      plantedDate = formatDateForContribution(redemptionDate);
+      plantedDate = formatDate(redemptionDate, 'MMMM d,  yyyy');
     }
     if (plantProjects.length > 0) {
       for (let i = 0; i <= plantProjects.length; ) {
         if (plantProjects[i].id === plantProjectId) {
           selectedPlantProjectDetails = plantProjects[i];
-          contributionOrPlantedImages =
-            selectedPlantProjectDetails.plantProjectImages;
+          videoUrl = selectedPlantProjectDetails.videoUrl;
+          if (cardType !== 'planted') {
+            contributionOrPlantedImages =
+              selectedPlantProjectDetails.plantProjectImages;
+          }
           break;
         }
       }
@@ -253,13 +251,13 @@ class UserContributionsDetails extends React.Component {
                 // borderWidth: 1
               }}
             >
-              {/* {videoUrl ? <VideoContainer url={videoUrl} /> : null} */}
+              {videoUrl ? <VideoContainer url={videoUrl} /> : null}
               {/* TODO Add thumbnail for video */}
               <PlantProjectImageCarousel
                 resizeMode={'cover'}
                 images={contributionOrPlantedImages}
                 aspectRatio={16 / 9}
-                // videoUrl={videoUrl}
+                videoUrl={videoUrl}
               />
             </ScrollView>
           )}
@@ -283,7 +281,7 @@ class UserContributionsDetails extends React.Component {
               slug={this.props.plantProjects[0].tpoData.treecounterSlug}
               updateStaticRoute={updateStaticRoute}
               url={this.props.plantProjects[0].url}
-              _goToURL={this._goToURL}
+              _goToURL={_goToURL}
               email={this.props.plantProjects[0].tpoData.email}
               address={this.props.plantProjects[0].tpoData.address}
               name={this.props.plantProjects[0].tpoData.name}

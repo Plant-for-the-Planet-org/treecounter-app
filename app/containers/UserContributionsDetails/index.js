@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import {
   getAllPlantProjectsSelector,
-  plantProjectsSelector
 } from '../../selectors';
 import UserContributionsDetails from '../../components/UserContributions/ContributionDetails/index.native';
 // Actions

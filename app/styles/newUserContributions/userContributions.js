@@ -27,7 +27,7 @@ export default EStyleSheet.create({
   },
   mapView: {
     width: '100%',
-    height: Dimensions.get('window').height * 2 / 5,
+    height: Dimensions.get('window').height * 0.4,
     position: 'relative'
   },
   closeIcon: {

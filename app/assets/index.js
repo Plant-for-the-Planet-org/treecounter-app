@@ -183,6 +183,7 @@ import competeIcon from './images/icons/competeIcon.png';
 import competeIconGreen from './images/icons/competeIconGreen.png';
 import editIcon from './images/pencil.png';
 import deleteIcon from './images/baseline_delete_outline.png';
+import redMyLocationIcon from './images/icons/locationIcon.png';
 
 export {
   treelogo,
@@ -369,5 +370,6 @@ export {
   competeIcon,
   competeIconGreen,
   editIcon,
-  deleteIcon
+  deleteIcon,
+  redMyLocationIcon
 };

@@ -170,8 +170,8 @@ export default class UserContributions extends React.Component {
                         getLocalRoute('app_treecounter'),
                         navigation,
                         {
-                          treeCounterId: contributionPersonSlug,
-                          titleParam: contributionPerson
+                          treeCounterId: plantProjectSlug,
+                          titleParam: plantProjectName
                         }
                       )
                     : null;
@@ -179,9 +179,6 @@ export default class UserContributions extends React.Component {
               >
                 <Text style={[styles.subHeaderText, { color: textColor }]}>
                   {plantProjectName}
-                </Text>
-                <Text style={[styles.subHeaderText, { color: textColor }]}>
-                  {plantProjectSlug}
                 </Text>
               </TouchableOpacity>
             </View>

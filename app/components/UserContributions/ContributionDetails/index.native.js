@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollView, View, Linking } from 'react-native';
+import { ScrollView, View, Linking, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import NDVI from '../../../containers/NDVI/NDVI';
+// import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
 import Measurements from '../../Measurements/Measurements.native';
 import { formatDate } from '../../../utils/utils';
@@ -10,6 +10,8 @@ import { withNavigation } from 'react-navigation';
 import VideoContainer from '../../../components/Common/VideoContainer';
 import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
 import { getLocalRoute } from '../../../actions/apiRouting';
+import { redMyLocationIcon } from '../../../assets';
+import styles from '../../../styles/newUserContributions/userContributions';
 // import styles from '../../../styles/newUserContributions/userContributions';
 import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
@@ -59,7 +61,7 @@ class UserContributionsDetails extends React.Component {
       Object.keys(this.props.contribution.contributionMeasurements).length > 0;
 
     // sets boolean value for ndviUid
-    let ndviUid = this.props.contribution && this.props.contribution.ndviUid;
+    // let ndviUid = this.props.contribution && this.props.contribution.ndviUid;
 
     const {
       treeCount,
@@ -75,18 +77,19 @@ class UserContributionsDetails extends React.Component {
       redemptionCode,
       redemptionDate,
       plantProjectName,
-      plantProjectSlug,
       mayUpdate,
       contributionImages,
       treeType,
       treeSpecies,
-      treeScientificName
+      treeScientificName,
+      geoLatitude,
+      geoLongitude
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
 
     // initializing variables
     let plantedDate = undefined;
-    // let plantProjectName = undefined;
+    let plantProjectSlug = this.props.contribution.plantProjectSlug;
     let contributionPersonPrefix = undefined;
     let treeClassification = undefined;
     let contributionPerson = undefined;
@@ -94,6 +97,8 @@ class UserContributionsDetails extends React.Component {
     let selectedPlantProjectDetails = undefined;
     let headerText = undefined;
     let videoUrl = undefined;
+    let hasGeoLocationError = undefined;
+    let locationErrorText = '';
     let contributionOrPlantedImages = contributionImages;
 
     console.log('\x1b[45mcontribution', this.props.contribution);
@@ -156,6 +161,7 @@ class UserContributionsDetails extends React.Component {
             contributionOrPlantedImages =
               selectedPlantProjectDetails.plantProjectImages;
           }
+          plantProjectSlug = selectedPlantProjectDetails.slug;
           break;
         }
       }
@@ -217,6 +223,16 @@ class UserContributionsDetails extends React.Component {
       }
     }
 
+    if (geoLatitude === geoLongitude) {
+      hasGeoLocationError = true;
+      if (contributionType === 'planting') {
+        locationErrorText =
+          'Coordinates for this tree registration is incorrect. Please update the registration with correct details.';
+      } else {
+        locationErrorText =
+          "Coordinates for this tree registration is incorrect. We've informed the project to update it.";
+      }
+    }
     const backgroundColor = '#fff';
 
     return (
@@ -278,6 +294,17 @@ class UserContributionsDetails extends React.Component {
               />
             </ScrollView>
           )}
+
+        {/* displays error message if geoLatitude and geoLongitude are same */}
+        {hasGeoLocationError ? (
+          <View style={styles.locationErrorContainer}>
+            <Image
+              style={[styles.icon, { marginRight: 20 }]}
+              source={redMyLocationIcon}
+            />
+            <Text style={styles.locationErrorText}>{locationErrorText}</Text>
+          </View>
+        ) : null}
 
         {/* displays measurements if available */}
         {/* if contribution type is planting gives Add Measurement button */}

@@ -1,11 +1,11 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
 
+const textColorDark = '#4D5153';
+const textColorLight = '#d5d5d5';
+const whiteColor = '#ffffff';
+
 export default EStyleSheet.create({
-  container: {
-    // paddingHorizontal: 20,
-    // paddingTop: 23
-  },
   header: {
     paddingHorizontal: 20,
     paddingTop: 23,
@@ -18,7 +18,7 @@ export default EStyleSheet.create({
     paddingHorizontal: 20
   },
   subHeaderText: {
-    color: '#4D5153',
+    color: textColorDark,
     fontSize: 18,
     fontFamily: 'OpenSans-SemiBold'
   },
@@ -44,22 +44,36 @@ export default EStyleSheet.create({
     bottom: -14,
     paddingVertical: 4,
     paddingHorizontal: 10,
-    backgroundColor: '#ffffff',
+    backgroundColor: whiteColor,
     borderRadius: 100,
-    borderColor: '#D5D5D5',
+    borderColor: textColorLight,
     borderWidth: 1
   },
   closeContainer: {
     width: 30,
     height: 30,
-    backgroundColor: '#ffffff',
+    backgroundColor: whiteColor,
     borderRadius: 100,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: textColorLight
   },
   plantedDate: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 14
+  },
+  locationErrorContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    marginBottom: 20
+  },
+  locationErrorText: {
+    color: '#ee6453',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    flex: 1,
+    flexWrap: 'wrap'
   },
   icon: {
     width: 24,
@@ -77,7 +91,7 @@ export default EStyleSheet.create({
   },
   treeCount: {
     fontSize: 27,
-    color: '#4D5153',
+    color: textColorDark,
     fontFamily: 'OpenSans-ExtraBold',
     flex: 1,
     flexWrap: 'wrap'
@@ -127,12 +141,12 @@ export default EStyleSheet.create({
   },
   plantedButtonWrapper: {
     alignItems: 'center',
-    backgroundColor: '#d5d5d5',
+    backgroundColor: textColorLight,
     borderBottomLeftRadius: 4
   },
   plantedText: {
     paddingVertical: 10,
-    color: '#4d5153'
+    color: textColorDark
   },
   itemContainer: {
     marginTop: 5,

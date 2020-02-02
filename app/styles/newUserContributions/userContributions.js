@@ -75,7 +75,9 @@ export default EStyleSheet.create({
   treeCount: {
     fontSize: 27,
     color: '#4D5153',
-    fontFamily: 'OpenSans-ExtraBold'
+    fontFamily: 'OpenSans-ExtraBold',
+    flex: 1,
+    flexWrap: 'wrap'
   },
   text: {
     fontSize: 14,

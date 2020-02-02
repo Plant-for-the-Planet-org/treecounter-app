@@ -312,7 +312,8 @@ class UserContributionsDetails extends React.Component {
           <View style={{ marginHorizontal: 20, marginTop: 30 }}>
             <Measurements
               measurements={this.props.contribution.contributionMeasurements}
-              isPlanting={contributionType === 'planting' ? true : false}
+              // isPlanting={contributionType === 'planting' ? true : false}
+              isPlanting={false}
             />
           </View>
         ) : null}

@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  ScrollView,
-  View,
-  // TouchableOpacity,
-  // Text,
-  // Image,
-  Linking
-} from 'react-native';
+import { ScrollView, View, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
@@ -17,7 +10,6 @@ import { withNavigation } from 'react-navigation';
 import VideoContainer from '../../../components/Common/VideoContainer';
 import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
 import { getLocalRoute } from '../../../actions/apiRouting';
-// import { downloadGreen, sendWhite, closeIcon } from '../../../assets';
 // import styles from '../../../styles/newUserContributions/userContributions';
 import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
@@ -34,6 +26,7 @@ class UserContributionsDetails extends React.Component {
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
+  // adds back button listener on component mount
   componentWillMount() {
     BackHandler.addEventListener(
       'hardwareBackPress',
@@ -41,6 +34,7 @@ class UserContributionsDetails extends React.Component {
     );
   }
 
+  // removes back button listener on component mount
   componentWillUnmount() {
     BackHandler.removeEventListener(
       'hardwareBackPress',
@@ -48,25 +42,32 @@ class UserContributionsDetails extends React.Component {
     );
   }
 
+  // handles back button press/gesture of device
   handleBackButtonClick() {
     this.props.navigation.goBack(null);
     return true;
   }
+
   render() {
     if (!this.props.contribution) {
       return null;
     }
 
+    // sets boolean value for hasMeasurements
     const hasMeasurements =
       this.props.contribution.contributionMeasurements &&
       Object.keys(this.props.contribution.contributionMeasurements).length > 0;
+
+    // sets boolean value for ndviUid
     let ndviUid = this.props.contribution && this.props.contribution.ndviUid;
+
     const {
       treeCount,
       plantDate,
       givee,
-      // eslint-disable-next-line no-unused-vars
-      // giveeSlug,
+      giveeSlug,
+      giver,
+      giverSlug,
       cardType,
       contributionType,
       plantProjectId,
@@ -74,8 +75,7 @@ class UserContributionsDetails extends React.Component {
       redemptionCode,
       redemptionDate,
       plantProjectName,
-      // tpoName,
-      giver,
+      plantProjectSlug,
       mayUpdate,
       contributionImages,
       treeType,
@@ -84,23 +84,24 @@ class UserContributionsDetails extends React.Component {
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
 
+    // initializing variables
     let plantedDate = undefined;
-
-    // let dedicatedTo = undefined;
-    let location = undefined;
-    let contributerPrefix = undefined;
+    // let plantProjectName = undefined;
+    let contributionPersonPrefix = undefined;
     let treeClassification = undefined;
-    let contributer = undefined;
-    // let isSinglePlanted = false;
-    let contributionOrPlantedImages = contributionImages;
+    let contributionPerson = undefined;
+    let contributionPersonSlug = undefined;
     let selectedPlantProjectDetails = undefined;
     let headerText = undefined;
     let videoUrl = undefined;
+    let contributionOrPlantedImages = contributionImages;
 
     console.log('\x1b[45mcontribution', this.props.contribution);
     console.log('plantProjects', this.props.plantProjects);
     console.log('\x1b[0m');
 
+    // sets the header text
+    // if treeType is null then header text is treecount and type of contribution
     if (treeType === null) {
       if (treeCount > 1) {
         headerText = treeCount + ' ' + i18n.t('label.usr_contribution_tree');
@@ -108,7 +109,11 @@ class UserContributionsDetails extends React.Component {
         headerText =
           treeCount + ' ' + i18n.t('label.usr_contribution_single_tree');
       }
-    } else if (treeType !== null) {
+    }
+
+    // if treeType is not null then header text is treecount, treeName and
+    // type of contribution
+    else if (treeType !== null) {
       if (treeCount > 1) {
         headerText =
           treeCount +
@@ -128,17 +133,25 @@ class UserContributionsDetails extends React.Component {
       }
     }
 
+    // formats the plant date in 'MMMM d,  yyyy' format
     if (plantDate) {
       plantedDate = formatDate(plantDate, 'MMMM d,  yyyy');
     }
     if (redemptionDate) {
       plantedDate = formatDate(redemptionDate, 'MMMM d,  yyyy');
     }
+
+    // selects the matching plant project with the contribution project id
     if (plantProjects.length > 0) {
       for (let i = 0; i <= plantProjects.length; ) {
         if (plantProjects[i].id === plantProjectId) {
           selectedPlantProjectDetails = plantProjects[i];
+
+          // takes video url from plant project
           videoUrl = selectedPlantProjectDetails.videoUrl;
+
+          // if card type in not planted the shows the image from
+          // plant projects else shows images from contribution if any
           if (cardType !== 'planted') {
             contributionOrPlantedImages =
               selectedPlantProjectDetails.plantProjectImages;
@@ -146,58 +159,57 @@ class UserContributionsDetails extends React.Component {
           break;
         }
       }
-      // if (selectedPlantProjectDetails.length > 0) {
-      //   selectedPlantProjectDetails = selectedPlantProjectDetails[0];
-      //   contributionOrPlantedImages =
-      //     selectedPlantProjectDetails.plantProjectImages;
-      //   ndviUid = selectedPlantProjectDetails.ndviUid;
-      // }
     }
-    if (cardType === 'planting') {
-      // contributionTypeText = i18n.t('label.usr_contribution_planted');
-      // headerText = headerText;
-      // TODO: check if this is a logic error, as this var is never used!
-      // isSinglePlanted = treeCount > 1 ? false : true;
-    } else if (cardType === 'donation') {
-      headerText = headerText + ' ' + i18n.t('label.donated');
 
-      if (plantProjectName) {
-        // location = `${plantProjectName} by ${tpoName ? tpoName : ''}`;
-        location = plantProjectName;
-      }
-    } else if (cardType === 'gift') {
-      if (plantProjectName) {
-        location = plantProjectName;
-      }
-      // headerText = headerText + ' ' + i18n.t('label.gifted');
-      // contributerPrefix = i18n.t('label.usr_contribution_from');
-      // contributer = giver;
+    // // adds planted by if plantProjectName is present
+    // if (plantProjectName) {
+    //   plantProjectName = plantProjectName;
+    // }
+    // adds donated to header text if cardtype id donation
+    if (cardType === 'donation') {
+      headerText = headerText + ' ' + i18n.t('label.donated');
     }
 
     if (isGift && givee) {
+      // if contribution type is planting and id Gift = true then contribution
+      // is dedicated
       if (contributionType === 'planting') {
-        contributerPrefix = i18n.t('label.usr_contribution_dedicated_to');
-      } else {
-        headerText = headerText + ' ' + i18n.t('label.gifted');
-        contributerPrefix = i18n.t('label.usr_contribution_to');
+        contributionPersonPrefix = i18n.t(
+          'label.usr_contribution_dedicated_to'
+        );
       }
-      contributer = givee;
-      // if (isGift) {
-      //   // dedicatedTo = i18n.t('label.usr_contribution_from');
-      // }
+      // contribution is gifted if contribution type is not planting
+      // and adds gifted to header text
+      else {
+        headerText = headerText + ' ' + i18n.t('label.gifted');
+        contributionPersonPrefix = i18n.t('label.usr_contribution_to');
+      }
+      // sets the contribution person name
+      contributionPerson = givee;
+
+      // sets slug if available
+      if (giveeSlug) {
+        contributionPersonSlug = giveeSlug;
+      }
     }
 
+    // if giver is present the header text adds contribution type to received
+    // and contribution prefix to "from"
     if (giver) {
-      contributer = giver;
+      contributionPerson = giver;
       headerText = headerText + ' ' + i18n.t('label.received');
-      contributerPrefix = i18n.t('label.usr_contribution_from');
-    }
-    if (redemptionCode && givee) {
-      if (plantProjectName) {
-        location = plantProjectName;
+      contributionPersonPrefix = i18n.t('label.usr_contribution_from');
+      if (giverSlug) {
+        contributionPersonSlug = giverSlug;
       }
+    }
+
+    // if there's redemptionCode the contribution type is set to redeemed
+    if (redemptionCode && givee) {
       headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
     }
+
+    // if there's scientific name then maps it
     if (treeScientificName) {
       treeClassification = treeScientificName;
       if (treeSpecies) {
@@ -212,10 +224,14 @@ class UserContributionsDetails extends React.Component {
         <UserContributions
           mayUpdate={mayUpdate}
           treeCount={treeCount}
-          location={location}
-          contributerPrefix={contributerPrefix}
+          plantProjectName={plantProjectName}
+          plantProjectSlug={plantProjectSlug}
+          contributionPersonPrefix={contributionPersonPrefix}
+          contributionPerson={contributionPerson}
+          contributionPersonSlug={contributionPersonSlug}
+          navigation={this.props.navigation}
+          updateStaticRoute={updateStaticRoute}
           treeClassification={treeClassification}
-          contributer={contributer}
           plantedDate={plantedDate}
           showDelete={contributionType == 'planting'}
           headerText={headerText}
@@ -240,6 +256,7 @@ class UserContributionsDetails extends React.Component {
           contribution={this.props.contribution}
         />
 
+        {/* displays image carousel if any image or video is available */}
         {contributionOrPlantedImages &&
           contributionOrPlantedImages.length > 0 && (
             <ScrollView
@@ -249,7 +266,6 @@ class UserContributionsDetails extends React.Component {
                 display: 'flex',
                 flexDirection: 'row',
                 marginVertical: 30
-                // borderWidth: 1
               }}
             >
               {videoUrl ? <VideoContainer url={videoUrl} /> : null}
@@ -262,6 +278,9 @@ class UserContributionsDetails extends React.Component {
               />
             </ScrollView>
           )}
+
+        {/* displays measurements if available */}
+        {/* if contribution type is planting gives Add Measurement button */}
         {hasMeasurements ? (
           <View style={{ marginHorizontal: 20, marginTop: 30 }}>
             <Measurements
@@ -271,8 +290,8 @@ class UserContributionsDetails extends React.Component {
           </View>
         ) : null}
 
-        {/* <View style={{ marginTop: 20 }} /> */}
-
+        {/* displays project contact card if project is available 
+          in the contribution */}
         {this.props.plantProjects &&
         this.props.plantProjects.length > 0 &&
         this.props.plantProjects[0].tpoData ? (
@@ -291,6 +310,7 @@ class UserContributionsDetails extends React.Component {
           </View>
         ) : null}
 
+        {/* certificate and share button not required as of now */}
         {/* <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={() => {}} style={{}}>
             <View style={[styles.buttonContainer, styles.borderGreen]}>
@@ -312,11 +332,11 @@ class UserContributionsDetails extends React.Component {
           </TouchableOpacity>
         </View> */}
 
-        {ndviUid ? (
+        {/* {ndviUid ? (
           <View style={{ marginLeft: 8, marginRight: 8, marginTop: 20 }}>
             <NDVI ndviUid={ndviUid} />
           </View>
-        ) : null}
+        ) : null} */}
       </ScrollView>
     );
   }

@@ -22,6 +22,9 @@ export default EStyleSheet.create({
     fontSize: 18,
     fontFamily: 'OpenSans-SemiBold'
   },
+  subHeaderTextContainer: {
+    flexDirection: 'row'
+  },
   italic: {
     fontStyle: 'italic'
   },

@@ -23,6 +23,7 @@ import AccordionContactInfo from './../../PlantProjects/HelperComponents/Accordi
 import { updateStaticRoute } from './../../../helpers/routerHelper';
 import { BackHandler } from 'react-native';
 
+// eslint-disable-next-line no-underscore-dangle
 const _goToURL = url => {
   Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
 };

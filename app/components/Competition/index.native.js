@@ -5,9 +5,11 @@ import {
   Text,
   View,
   TouchableOpacity,
-  SafeAreaView,
+  // SafeAreaView,
   Animated
 } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+
 import { TabBar, TabView } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar.native';
 import buttonStyles from '../../styles/common/button.native';
@@ -121,10 +123,14 @@ class Competiton extends React.Component {
     });
     return (
       <>
-        <HeaderStack title={'Competitions'} scrollY={this.state.scrollY} />
-        <SafeAreaView />
-        <Animated.View style={{ marginTop: headerTop }} />
-
+        <SafeAreaView>
+          <HeaderStack
+            title={'Competitions'}
+            scrollY={this.state.scrollY}
+            pageName={'competitions'}
+          />
+          <Animated.View style={{ marginTop: headerTop }} />
+        </SafeAreaView>
         <TabView
           useNativeDriver
           navigationState={this.state}

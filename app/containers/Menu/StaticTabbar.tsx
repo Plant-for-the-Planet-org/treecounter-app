@@ -31,7 +31,7 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
         this.setState({
             selectedTab: index
         })
-        updateRoute(tabs[index].route, navigation, 0);
+        updateRoute(tabs[index].route, this.props.navigation, 0);
     }
 
     render() {

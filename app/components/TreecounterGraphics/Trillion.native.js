@@ -7,10 +7,11 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  SafeAreaView,
-  StatusBar,
+  // SafeAreaView,
   Animated
 } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+
 import NavigationEvents from './importNavigationEvents';
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
@@ -212,7 +213,7 @@ class Trillion extends PureComponent {
               }
             ])}
           >
-            <StatusBar backgroundColor="white" barStyle="dark-content" />
+            {/* <StatusBar backgroundColor="white" barStyle="dark-content" /> */}
             <View style={styles.parentContainer}>
               {/* Trillion Tree Events Title */}
               {/* {this.props.pledgeEvents &&
@@ -460,10 +461,11 @@ class Trillion extends PureComponent {
       ) : null,
       this.state.loadSvg ? (
         <>
-          <HeaderStack title={'Explore'} scrollY={this.state.scrollY} />
-          <SafeAreaView />
+          <SafeAreaView>
+            <Animated.View style={{ marginTop: headerTop }} />
 
-          <Animated.View style={{ marginTop: headerTop }} />
+            <HeaderStack title={'Explore'} scrollY={this.state.scrollY} />
+          </SafeAreaView>
           <TabView
             key="tabs"
             useNativeDriver

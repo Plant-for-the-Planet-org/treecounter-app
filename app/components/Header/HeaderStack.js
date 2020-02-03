@@ -6,6 +6,7 @@ import {
   Image,
   BackHandler,
   Animated,
+  Platform,
   SafeAreaView
 } from 'react-native';
 import { backArrow } from '../../assets';
@@ -32,69 +33,138 @@ export default function HeaderStack(props) {
     extrapolate: 'clamp'
   });
 
+  const headerTopIos = props.scrollY.interpolate({
+    inputRange: [0, 240],
+    outputRange: [props.pageName === 'competitions' ? 0 : -56, -112],
+    extrapolate: 'clamp'
+  });
+
   const textColor = '#4d5153';
   const whiteColor = 'white';
   const linkColor = '#89B53A';
+
   return (
     <>
-      <SafeAreaView>
-        <Animated.View
-          style={{
-            position: 'absolute',
-            top: headerTop,
-            left: 0,
-            right: 0,
-            backgroundColor: whiteColor,
-            height: 56,
-            zIndex: 5000,
-            // alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'row',
-            width: '100%'
-          }}
-        >
-          <View
+      {Platform.OS === 'ios' ? (
+        <SafeAreaView>
+          <Animated.View
             style={{
               position: 'absolute',
-              left: 20,
-              bottom: 4
+              top: headerTopIos,
+              left: 0,
+              right: 0,
+              backgroundColor: whiteColor,
+              height: 56,
+              zIndex: 5000,
+              // alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'row',
+              width: '100%'
             }}
           >
-            <Text
+            <View
               style={{
-                fontFamily: 'OpenSans-ExtraBold',
-                fontSize: 27,
-                lineHeight: 40,
-                letterSpacing: 0,
-                color: textColor,
-                textAlign: 'left'
+                position: 'absolute',
+                left: 20,
+                bottom: 4
               }}
             >
-              {props.title}
-            </Text>
-          </View>
-
-          <View
-            style={{
-              right: 24,
-              bottom: 24,
-              zIndex: 1002,
-              position: 'absolute'
-            }}
-          >
-            <TouchableItem onPress={props.rightLinkFunction}>
               <Text
                 style={{
-                  color: linkColor,
-                  fontFamily: 'OpenSans-SemiBold'
+                  fontFamily: 'OpenSans-ExtraBold',
+                  fontSize: 27,
+                  lineHeight: 40,
+                  letterSpacing: 0,
+                  color: textColor,
+                  textAlign: 'left'
                 }}
               >
-                {props.rightLink}
+                {props.title}
               </Text>
-            </TouchableItem>
-          </View>
-        </Animated.View>
-      </SafeAreaView>
+            </View>
+
+            <View
+              style={{
+                right: 24,
+                bottom: 24,
+                zIndex: 1002,
+                position: 'absolute'
+              }}
+            >
+              <TouchableItem onPress={props.rightLinkFunction}>
+                <Text
+                  style={{
+                    color: linkColor,
+                    fontFamily: 'OpenSans-SemiBold'
+                  }}
+                >
+                  {props.rightLink}
+                </Text>
+              </TouchableItem>
+            </View>
+          </Animated.View>
+        </SafeAreaView>
+      ) : (
+        <>
+          <SafeAreaView />
+          <Animated.View
+            style={{
+              position: 'absolute',
+              top: headerTop,
+              left: 0,
+              right: 0,
+              backgroundColor: whiteColor,
+              height: 56,
+              zIndex: 5000,
+              // alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'row',
+              width: '100%'
+            }}
+          >
+            <View
+              style={{
+                position: 'absolute',
+                left: 20,
+                bottom: 4
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: 'OpenSans-ExtraBold',
+                  fontSize: 27,
+                  lineHeight: 40,
+                  letterSpacing: 0,
+                  color: textColor,
+                  textAlign: 'left'
+                }}
+              >
+                {props.title}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                right: 24,
+                bottom: 24,
+                zIndex: 1002,
+                position: 'absolute'
+              }}
+            >
+              <TouchableItem onPress={props.rightLinkFunction}>
+                <Text
+                  style={{
+                    color: linkColor,
+                    fontFamily: 'OpenSans-SemiBold'
+                  }}
+                >
+                  {props.rightLink}
+                </Text>
+              </TouchableItem>
+            </View>
+          </Animated.View>
+        </>
+      )}
     </>
   );
 }

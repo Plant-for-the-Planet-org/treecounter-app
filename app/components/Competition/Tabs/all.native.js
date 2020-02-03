@@ -103,10 +103,7 @@ export default class AllCompetitions extends Component {
     let { showAllCompetitions } = this.state;
     return (
       <ScrollView
-        contentContainerStyle={[
-          scrollStyle.styleContainer,
-          { paddingBottom: 72 }
-        ]}
+        contentContainerStyle={[{ paddingBottom: 72 }]}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}

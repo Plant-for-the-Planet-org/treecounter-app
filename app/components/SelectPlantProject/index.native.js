@@ -181,9 +181,10 @@ class SelectPlantTabView extends PureComponent {
     });
     return (
       <>
-        <HeaderStatic title={'Projects'} scrollY={this.state.scrollY} />
-        <SafeAreaView />
-        <Animated.View style={{ marginTop: headerTop }} />
+        <SafeAreaView>
+          <HeaderStatic title={'Projects'} scrollY={this.state.scrollY} />
+          <Animated.View style={{ marginTop: headerTop }} />
+        </SafeAreaView>
         <TabView
           useNativeDriver
           navigationState={this.state}

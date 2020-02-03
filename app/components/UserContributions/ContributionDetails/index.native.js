@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
 import Measurements from '../../Measurements/Measurements.native';
-import { formatDate } from '../../../utils/utils';
+import { formatDate, delimitNumber } from '../../../utils/utils';
 import i18n from '../../../locales/i18n.js';
 import { withNavigation } from 'react-navigation';
 import VideoContainer from '../../../components/Common/VideoContainer';
@@ -109,7 +109,10 @@ class UserContributionsDetails extends React.Component {
     // if treeType is null then header text is treecount and type of contribution
     if (treeType === null) {
       if (treeCount > 1) {
-        headerText = treeCount + ' ' + i18n.t('label.usr_contribution_tree');
+        headerText =
+          delimitNumber(treeCount) +
+          ' ' +
+          i18n.t('label.usr_contribution_tree');
       } else {
         headerText =
           treeCount + ' ' + i18n.t('label.usr_contribution_single_tree');

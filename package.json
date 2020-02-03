@@ -50,7 +50,6 @@
     "intl": "1.2.5",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.10",
-    "metro": "^0.56.4",
     "normalizr": "^3.2.4",
     "number-to-words": "^1.2.3",
     "prop-types": "^15.7.2",

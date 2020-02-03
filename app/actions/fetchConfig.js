@@ -47,6 +47,11 @@ export function fetchConfig() {
       .then(data => {
         console.log('============== Got config fetched data:', data.data);
         cdnMedia = data.data.cdnMedia;
+
+        // fake data manipulation for debug purpose, please remove this when debug finishes
+        data.data.currency = 'USD';
+        // debug code ends
+
         if (data.data && data.data.currency) {
           currency = data.data.currency;
           supportedCurrency.includes(data.data.currency) &&

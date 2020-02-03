@@ -8,7 +8,8 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
-  StatusBar
+  StatusBar,
+  Animated
 } from 'react-native';
 import NavigationEvents from './importNavigationEvents';
 import { trillionCampaign } from '../../actions/trillionAction';
@@ -46,7 +47,7 @@ import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
-import HeaderStatic from './../Header/HeaderStatic';
+import HeaderStack from './../Header/HeaderStack';
 class Trillion extends PureComponent {
   constructor() {
     super();
@@ -61,7 +62,8 @@ class Trillion extends PureComponent {
         { key: 'world', title: i18n.t('label.world') },
         { key: 'leaderBoard', title: i18n.t('label.leaderboard') }
       ],
-      index: 0
+      index: 0,
+      scrollY: new Animated.Value(0)
     };
   }
 
@@ -201,6 +203,14 @@ class Trillion extends PureComponent {
               paddingBottom: 72,
               backgroundColor: backgroundColor
             }}
+            scrollEventThrottle={24}
+            onScroll={Animated.event([
+              {
+                nativeEvent: {
+                  contentOffset: { y: this.state.scrollY }
+                }
+              }
+            ])}
           >
             <StatusBar backgroundColor="white" barStyle="dark-content" />
             <View style={styles.parentContainer}>
@@ -427,6 +437,11 @@ class Trillion extends PureComponent {
   };
 
   render() {
+    const headerTop = this.state.scrollY.interpolate({
+      inputRange: [0, 120],
+      outputRange: [56, 0],
+      extrapolate: 'clamp'
+    });
     return [
       this.props.navigation ? (
         <NavigationEvents
@@ -447,8 +462,8 @@ class Trillion extends PureComponent {
         <>
           <SafeAreaView />
 
-          <HeaderStatic title={'Explore'} />
-          <View style={{ marginTop: 56 }} />
+          <HeaderStack title={'Explore'} scrollY={this.state.scrollY} />
+          <Animated.View style={{ marginTop: headerTop }} />
           <TabView
             key="tabs"
             useNativeDriver

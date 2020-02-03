@@ -259,7 +259,7 @@ export default class UserHome extends Component {
   };
   render() {
     const { userProfile, navigation } = this.props;
-    const profileType = userProfile.type;
+    // const profileType = userProfile.type;
     let {
       svgData,
       showAllContributions,
@@ -395,45 +395,6 @@ export default class UserHome extends Component {
                 </TouchableOpacity>
               </View>
               <View>
-                {
-                  // userProfile.synopsis1 ||
-                  //   userProfile.synopsis2 ||
-                  //   userProfile.linkText ||
-                  //   userProfile.url ? (
-                  //     <View>
-                  //       {userProfile.synopsis1 ? (
-                  //         <Text style={styles.footerText}>
-                  //           {/* {userProfile.synopsis1} */}
-                  //           {this.state.readMore
-                  //             ? userProfile.synopsis1
-                  //             : userProfile.synopsis1
-                  //               ? userProfile.synopsis1.substring(0, 250) +
-                  //               (userProfile.synopsis1.length > 250 ? '...' : '')
-                  //               : ''}
-                  //         </Text>
-                  //       ) : null}
-                  //       {userProfile.synopsis2 ? (
-                  //         <Text style={styles.footerText}>
-                  //           {/* {userProfile.synopsis2} */}
-                  //           {this.state.readMore
-                  //             ? userProfile.synopsis2
-                  //             : userProfile.synopsis2 && userProfile.synopsis1.length < 250
-                  //               ? userProfile.synopsis2.substring(0, 250 - userProfile.synopsis1.length) +
-                  //               (userProfile.synopsis2.length > 250 - userProfile.synopsis1.length ? '...' : '')
-                  //               : ''}
-                  //         </Text>
-                  //       ) : null}
-                  //       {userProfile.url ? (
-                  //         <Text
-                  //           style={styles.linkText}
-                  //           onPress={() => this._goToURL(userProfile.url)}
-                  //         >
-                  //           {userProfile.linkText || i18n.t('label.read_more')}
-                  //         </Text>
-                  //       ) : null}
-                  //     </View>
-                  //   ) : null
-                }
                 {userProfile.synopsis1 ||
                 userProfile.synopsis2 ||
                 userProfile.linkText ||
@@ -459,29 +420,9 @@ export default class UserHome extends Component {
                     ) : null}
                   </View>
                 ) : null}
-                {/* {
-                (userProfile.synopsis1 && userProfile.synopsis1.length > 250) ||
-                  (userProfile.synopsis2 && userProfile.synopsis2.length > 250) ||
-                  ((userProfile.synopsis1 ? userProfile.synopsis1.length : 0) + (userProfile.linkText ? userProfile.linkText.length : 0)) > 250 ? (
-                    <TouchableOpacity onPress={() => this.setReadMore()}>
-                      <View style={styles.readmoreButtonView}>
-                        <View style={{ height: 8 }}>
-                          <Image
-                            source={this.state.readMore ? readmoreUp : readmoreDown}
-                            style={{ height: 8, width: 15 }}
-                            resizeMode={'contain'}
-                          />
-                        </View>
-                        <Text style={styles.readMoreText}>
-                          {this.state.readMore ? i18n.t('label.read_less') : i18n.t('label.read_more')}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  ) : null} */}
               </View>
             </View>
-          ) : // </View>
-          null}
+          ) : null}
 
           {/* Recurrent Donations */}
           {recurrentUserContributions.length ? (
@@ -503,16 +444,7 @@ export default class UserHome extends Component {
                 {i18n.t('label.my_trees')}
               </Text>
               {this.getMapComponent(this.props.userContributions)}
-              {/* <NativeMapView
-              mode={'multiple-trees'}
-              mapStyle={{ height: 200 }}
-              geometry={null}
-              address={parentProps.address}
-              geoLocation={geoLocation}
-              onPress={() => {
-                parentProps.openModel(props);
-              }}
-            /> */}
+
               <ContributionCardList
                 contributions={this.props.userContributions}
                 deleteContribution={this.props.deleteContribution}

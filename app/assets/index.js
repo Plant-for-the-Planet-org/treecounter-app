@@ -165,14 +165,28 @@ import backArrow from './images/icons/backArrow.png';
 import redeemImage from './images/redeemImage.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
+import grayCalendar from './images/grayCalendar.png';
+import upArrow from './images/icons/up_arrow.png';
+import grayShareIcon from './images/icons/gray_share_icon.png';
+import closeIcon from './images/icons/close.png';
+import downloadGreen from './images/icons/download_green.png';
+import sendWhite from './images/icons/send_white.png';
 import FAQsCover from './images/FAQs.png';
 import countriesleaderboard from './images/countriesleaderboard.png';
 import schooldleaderboard from './images/schooldleaderboard.png';
 import tpoleaderboard from './images/tpoleaderboard.png';
 import individualsleaderboard from './images/individualsleaderboard.png';
 import companiesleaderboard from './images/companiesleaderboard.png';
+import donateIcon from './images/icons/donateIcon.png';
+import donateIconGreen from './images/icons/donateIconGreen.png';
+import competeIcon from './images/icons/competeIcon.png';
+import competeIconGreen from './images/icons/competeIconGreen.png';
+import editIcon from './images/pencil.png';
+import deleteIcon from './images/baseline_delete_outline.png';
+import redMyLocationIcon from './images/icons/locationIcon.png';
 import linkExternal from './images/icons/linkexternal.png';
 import treesmarker from './images/treesmarker.png';
+
 export {
   treelogo,
   germany,
@@ -340,6 +354,12 @@ export {
   outline_email,
   readmoreUp,
   readmoreDown,
+  grayCalendar,
+  upArrow,
+  grayShareIcon,
+  closeIcon,
+  downloadGreen,
+  sendWhite,
   FAQsCover,
   countriesleaderboard,
   schooldleaderboard,
@@ -347,6 +367,13 @@ export {
   individualsleaderboard,
   deleteOutlineWhite,
   companiesleaderboard,
+  donateIcon,
+  donateIconGreen,
+  competeIcon,
+  competeIconGreen,
+  editIcon,
+  deleteIcon,
+  redMyLocationIcon,
   linkExternal,
   treesmarker
 };

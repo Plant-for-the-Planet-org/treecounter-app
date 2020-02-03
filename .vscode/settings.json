@@ -2,7 +2,6 @@
   // Format a file on save. A formatter must be available, the file must not be auto-saved, and editor must not be shutting down.
   "editor.formatOnSave": true,
   "javascript.format.enable": true,
-  "prettier.eslintIntegration": true,
   "java.configuration.updateBuildConfiguration": "automatic",
   "eslint.workingDirectories": ["./"]
 }

@@ -50,6 +50,20 @@ class DonationTreesContainer extends PureComponent {
           }
         })
         .catch(error => console.log(error));
+    } else {
+      const { currentUserProfile } = this.props;
+      console.log(
+        'current user profile and suported tree counter',
+        currentUserProfile,
+        this.props.supportTreecounter.treecounterId
+      );
+      if (currentUserProfile && !this.props.supportTreecounter.treecounterId) {
+        currentUserProfile.supportedTreecounter &&
+          this.props.supportTreecounterAction({
+            id: currentUserProfile.supportedTreecounter.id,
+            displayName: currentUserProfile.supportedTreecounter.displayName
+          });
+      }
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -74,6 +88,20 @@ class DonationTreesContainer extends PureComponent {
 
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
+    }
+  }
+  componentWillUnmount() {
+    const { currentUserProfile } = this.props;
+    console.log(
+      'current user profile unmounting donate trees container',
+      currentUserProfile
+    );
+    if (currentUserProfile) {
+      currentUserProfile.supportedTreecounter &&
+        this.props.supportTreecounterAction({
+          id: null,
+          displayName: null
+        });
     }
   }
   onTabChange = title => this.props.navigation.setParams({ titleParam: title });

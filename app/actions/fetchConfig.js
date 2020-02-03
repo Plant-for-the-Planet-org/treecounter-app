@@ -9,17 +9,21 @@ import { find } from 'lodash';
 import { setCurrencyAction } from './globalCurrency';
 // import { setCdnMedia } from '../reducers/configReducer';
 let cdnMedia = {};
+let currency = '';
 export function fetchLocation() {
   return dispatch => {
+    console.log('got preferred currency', getItemSync('preferredCurrency'));
     if (!getItemSync('preferredCurrency')) {
       getRequest('public_ipstack')
         .then(data => {
-          // console.log('Got location fetch ip', data);
-          const foundLocation = find(countryCodes, {
-            countryCode: data.data.country_code
-          });
-          supportedCurrency.includes(foundLocation.code) &&
-            dispatch(setCurrencyAction(foundLocation.code));
+          console.log('Got location fetch ip', data);
+          if (data.data && data.data.countryCode) {
+            const foundLocation = find(countryCodes, {
+              countryCode: data.data.country_code
+            });
+            supportedCurrency.includes(foundLocation.code) &&
+              dispatch(setCurrencyAction(foundLocation.code));
+          }
         })
 
         .catch(error => {
@@ -28,17 +32,26 @@ export function fetchLocation() {
     }
   };
 }
+
+export function getCurrency() {
+  return currency;
+}
+
 export function getCdnMediaUrl() {
   return cdnMedia;
 }
 export function fetchConfig() {
-  return () => {
+  return dispatch => {
     // if (!getItemSync('preferredCurrency')) {
     getRequest('config_get')
       .then(data => {
-        console.log('Got config fetch data:', data.data);
+        console.log('============== Got config fetched data:', data.data);
         cdnMedia = data.data.cdnMedia;
-
+        if (data.data && data.data.currency) {
+          currency = data.data.currency;
+          supportedCurrency.includes(data.data.currency) &&
+            dispatch(setCurrencyAction(data.data.currency));
+        }
         // for now we are not storing those in redux, please uncomment this when you need these urls in your components
         // dispatch(setCdnMedia(data.data.cdnMedia));
       })

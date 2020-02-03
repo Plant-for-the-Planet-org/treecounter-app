@@ -2,7 +2,7 @@ const routes = require('../server/routes/fos_js_routes.json');
 import Routing from './router.min.js';
 import { context } from '../config';
 import { getLocale } from './getLocale';
-import { getCdnMediaUrl } from './fetchLocation';
+import { getCdnMediaUrl } from './fetchConfig';
 Routing.setRoutingData(routes);
 
 export const getApiRoute = async (routeName, params) => {

@@ -165,6 +165,12 @@ import backArrow from './images/icons/backArrow.png';
 import redeemImage from './images/redeemImage.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
+import grayCalendar from './images/grayCalendar.png';
+import upArrow from './images/icons/up_arrow.png';
+import grayShareIcon from './images/icons/gray_share_icon.png';
+import closeIcon from './images/icons/close.png';
+import downloadGreen from './images/icons/download_green.png';
+import sendWhite from './images/icons/send_white.png';
 import FAQsCover from './images/FAQs.png';
 import countriesleaderboard from './images/countriesleaderboard.png';
 import schooldleaderboard from './images/schooldleaderboard.png';
@@ -175,6 +181,9 @@ import donateIcon from './images/icons/donateIcon.png';
 import donateIconGreen from './images/icons/donateIconGreen.png';
 import competeIcon from './images/icons/competeIcon.png';
 import competeIconGreen from './images/icons/competeIconGreen.png';
+import editIcon from './images/pencil.png';
+import deleteIcon from './images/baseline_delete_outline.png';
+import redMyLocationIcon from './images/icons/locationIcon.png';
 
 import share from './images/icons/share.png';
 import coupon from './images/icons/coupon.png';
@@ -348,6 +357,12 @@ export {
   outline_email,
   readmoreUp,
   readmoreDown,
+  grayCalendar,
+  upArrow,
+  grayShareIcon,
+  closeIcon,
+  downloadGreen,
+  sendWhite,
   FAQsCover,
   countriesleaderboard,
   schooldleaderboard,
@@ -362,5 +377,8 @@ export {
   donateIcon,
   donateIconGreen,
   competeIcon,
-  competeIconGreen
+  competeIconGreen,
+  editIcon,
+  deleteIcon,
+  redMyLocationIcon
 };

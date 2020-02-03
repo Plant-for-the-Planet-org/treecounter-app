@@ -12,10 +12,17 @@ export default class Measurements extends Component {
   }
 
   render() {
-    const measurements = this.props.measurements;
+    const { measurements, isPlanting } = this.props;
     return (
       <View>
-        <Text style={styles.title}>{i18n.t('label.measurement')}</Text>
+        <View style={styles.measurementHeadContainer}>
+          <Text style={styles.measurementText}>
+            {i18n.t('label.measurement')}
+          </Text>
+          {isPlanting && (
+            <Text style={styles.addMeasurement}>Add Measurement</Text>
+          )}
+        </View>
         <View style={styles.container}>
           {measurements &&
             measurements.map((measurement, index) => (

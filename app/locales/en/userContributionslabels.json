@@ -29,6 +29,7 @@
   "donated_on": "Donated on {{date}}",
   "planted_by": "Planted by {{tpo}}",
   "planted_on": "Planted on {{date}}",
+  "planted_at": "Planted at {{location}}",
   "added_on": "Added on {{date}}",
   "dedicated_to": "Dedicated to",
   "dedicated_to_person": "Dedicated to {{person}}",
@@ -42,11 +43,16 @@
   "cm_wide": "cm wide",
   "usr_contribution_tree": "Trees",
   "usr_contribution_single_tree": "Tree",
-  "usr_contribution_dedicated_to": " Dedicated to",
+  "usr_contribution_dedicated_to": "Dedicated to",
   "usr_contribution_planted": "Planted",
   "usr_contribution_redeemed": "Redeemed",
   "usr_contribution_dedicate": "Dedicated",
+  "usr_contribution_from": "From",
+  "usr_contribution_to": "To",
   "gifted_from_person": "Gift from {{person}}",
   "gifted_to_person": "Gift to {{person}} ",
-  "active_recurrent_donations": "Active Recurrent Donations"
+  "active_recurrent_donations": "Active Recurrent Donations",
+  "donated": "Donated",
+  "received": "Received",
+  "gifted": "Gifted"
 }

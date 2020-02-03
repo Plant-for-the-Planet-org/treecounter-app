@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
 import Measurements from '../../Measurements/Measurements.native';
-import { formatDate, delimitNumber } from '../../../utils/utils';
+import { formatDate, delimitNumbers } from '../../../utils/utils';
 import i18n from '../../../locales/i18n.js';
 import { withNavigation } from 'react-navigation';
 import VideoContainer from '../../../components/Common/VideoContainer';
@@ -110,12 +110,14 @@ class UserContributionsDetails extends React.Component {
     if (treeType === null) {
       if (treeCount > 1) {
         headerText =
-          delimitNumber(treeCount) +
+          delimitNumbers(treeCount) +
           ' ' +
           i18n.t('label.usr_contribution_tree');
       } else {
         headerText =
-          treeCount + ' ' + i18n.t('label.usr_contribution_single_tree');
+          delimitNumbers(treeCount) +
+          ' ' +
+          i18n.t('label.usr_contribution_single_tree');
       }
     }
 
@@ -124,7 +126,7 @@ class UserContributionsDetails extends React.Component {
     else if (treeType !== null) {
       if (treeCount > 1) {
         headerText =
-          treeCount +
+          delimitNumbers(treeCount) +
           ' ' +
           treeType.charAt(0).toUpperCase() +
           treeType.slice(1) +
@@ -132,7 +134,7 @@ class UserContributionsDetails extends React.Component {
           i18n.t('label.usr_contribution_tree');
       } else {
         headerText =
-          treeCount +
+          delimitNumbers(treeCount) +
           ' ' +
           treeType.charAt(0).toUpperCase() +
           treeType.slice(1) +

@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { Dimensions, SafeAreaView, Text, View } from 'react-native';
+import { Dimensions, SafeAreaView, Text, View, Animated } from 'react-native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
@@ -29,7 +29,8 @@ class SelectPlantTabView extends PureComponent {
         { key: 'featured', title: i18n.t('label.featured') },
         { key: 'list', title: i18n.t('label.list') }
       ],
-      index: 0
+      index: 0,
+      scrollY: new Animated.Value(0)
     };
     this.onSelectProjects = this.onSelectProjects.bind(this);
   }
@@ -152,6 +153,7 @@ class SelectPlantTabView extends PureComponent {
             {...props}
             jumpTo={jumpTo}
             index={this.state.index}
+            scrollY={this.state.scrollY}
           />
         ) : null;
       case 'list':
@@ -163,6 +165,7 @@ class SelectPlantTabView extends PureComponent {
             {...props}
             jumpTo={jumpTo}
             index={this.state.index}
+            scrollY={this.state.scrollY}
           />
         );
       default:
@@ -171,11 +174,16 @@ class SelectPlantTabView extends PureComponent {
   };
 
   render() {
+    const headerTop = this.state.scrollY.interpolate({
+      inputRange: [0, 120],
+      outputRange: [56, 0],
+      extrapolate: 'clamp'
+    });
     return (
       <>
-        <HeaderStatic title={'Projects'} />
+        <HeaderStatic title={'Projects'} scrollY={this.state.scrollY} />
         <SafeAreaView />
-        <View style={{ marginTop: 56 }} />
+        <Animated.View style={{ marginTop: headerTop }} />
         <TabView
           useNativeDriver
           navigationState={this.state}

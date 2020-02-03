@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { FlatList, View, RefreshControl } from 'react-native';
+import { FlatList, View, RefreshControl, Animated } from 'react-native';
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/selectplantproject/list.native';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
@@ -120,6 +120,14 @@ class ListViewProjects extends PureComponent {
               tintColor={'#89b53a'}
             />
           }
+          scrollEventThrottle={24}
+          onScroll={Animated.event([
+            {
+              nativeEvent: {
+                contentOffset: { y: this.props.scrollY }
+              }
+            }
+          ])}
         />
       </View>
     );

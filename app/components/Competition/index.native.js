@@ -5,7 +5,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  SafeAreaView
+  SafeAreaView,
+  Animated
 } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar.native';
@@ -18,7 +19,7 @@ import MineCompetitions from './Tabs/mine.native'; // Shows my competitions
 import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured competitions
 import AllCompetitions from './Tabs/all.native'; // Shows all competitions
 
-import HeaderStatic from './../Header/HeaderStatic';
+import HeaderStack from './../Header/HeaderStack';
 
 const Layout = {
   window: {
@@ -37,7 +38,8 @@ class Competiton extends React.Component {
         { key: 'mine', title: i18n.t('label.mine_competitions') },
         { key: 'closed', title: i18n.t('label.archived_competitions') }
       ],
-      index: 0 // It refers to the selected tab, 0 goes for featured
+      index: 0, // It refers to the selected tab, 0 goes for featured
+      scrollY: new Animated.Value(0)
     };
   }
 
@@ -93,50 +95,55 @@ class Competiton extends React.Component {
   _renderSelectPlantScene = ({ route }) => {
     switch (route.key) {
       case 'mine':
-        return <MineCompetitions {...this.props} />;
+        return (
+          <MineCompetitions {...this.props} scrollY={this.state.scrollY} />
+        );
       case 'featured':
-        return <FeaturedCompetitions {...this.props} />;
+        return (
+          <FeaturedCompetitions {...this.props} scrollY={this.state.scrollY} />
+        );
       case 'all':
-        return <AllCompetitions {...this.props} />;
+        return <AllCompetitions {...this.props} scrollY={this.state.scrollY} />;
       case 'closed':
-        return <ClosedCompetitions {...this.props} />;
+        return (
+          <ClosedCompetitions {...this.props} scrollY={this.state.scrollY} />
+        );
       default:
         return null;
     }
   };
 
   render() {
+    const headerTop = this.state.scrollY.interpolate({
+      inputRange: [0, 120],
+      outputRange: [56, 0],
+      extrapolate: 'clamp'
+    });
     return (
       <>
+        <HeaderStack title={'Competitions'} scrollY={this.state.scrollY} />
         <SafeAreaView />
+        <Animated.View style={{ marginTop: headerTop }} />
 
-        <View style={[fullPageWhite, { paddingTop: 56 }]}>
-          <HeaderStatic title={'Competitions'} />
+        <TabView
+          useNativeDriver
+          navigationState={this.state}
+          renderScene={this._renderSelectPlantScene}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
 
-          <TabView
-            useNativeDriver
-            navigationState={this.state}
-            renderScene={this._renderSelectPlantScene}
-            renderTabBar={this._renderTabBar}
-            onIndexChange={this._handleIndexChange}
-          />
-
-          {/* Button to add new competitions(On each page) */}
-          <TouchableOpacity
-            style={buttonStyles.plusButton}
-            onPress={() => {
-              updateStaticRoute(
-                'app_create_competition',
-                this.props.navigation,
-                {
-                  onCreateCompetition: this.props.onCreateCompetition
-                }
-              );
-            }}
-          >
-            <Text style={buttonStyles.plusButtonIcon}>+</Text>
-          </TouchableOpacity>
-        </View>
+        {/* Button to add new competitions(On each page) */}
+        <TouchableOpacity
+          style={buttonStyles.plusButton}
+          onPress={() => {
+            updateStaticRoute('app_create_competition', this.props.navigation, {
+              onCreateCompetition: this.props.onCreateCompetition
+            });
+          }}
+        >
+          <Text style={buttonStyles.plusButtonIcon}>+</Text>
+        </TouchableOpacity>
       </>
     );
   }

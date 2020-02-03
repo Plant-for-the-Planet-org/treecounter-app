@@ -460,9 +460,9 @@ class Trillion extends PureComponent {
       ) : null,
       this.state.loadSvg ? (
         <>
+          <HeaderStack title={'Explore'} scrollY={this.state.scrollY} />
           <SafeAreaView />
 
-          <HeaderStack title={'Explore'} scrollY={this.state.scrollY} />
           <Animated.View style={{ marginTop: headerTop }} />
           <TabView
             key="tabs"

@@ -2,7 +2,14 @@
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { FlatList, View, Image, Text, RefreshControl } from 'react-native';
+import {
+  FlatList,
+  View,
+  Image,
+  Text,
+  RefreshControl,
+  Animated
+} from 'react-native';
 
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
@@ -134,6 +141,14 @@ export default class FeaturedProjects extends PureComponent {
               titleColor="#fff"
             />
           }
+          scrollEventThrottle={24}
+          onScroll={Animated.event([
+            {
+              nativeEvent: {
+                contentOffset: { y: this.props.scrollY }
+              }
+            }
+          ])}
         />
       </View>
     );

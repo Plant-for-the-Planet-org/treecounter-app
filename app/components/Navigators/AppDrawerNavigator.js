@@ -285,20 +285,17 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_homepage')]: {
         screen: Trillion
       },
-      [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
-      },
-      // [getLocalRoute('app_registerTrees')]: {
-      //   screen: isLoggedIn ? RegisterTrees : LoginContainer
-      // },
-      [getLocalRoute('app_competitions')]: {
-        screen: isLoggedIn ? CompetitionContainer : LoginContainer
+      [getLocalRoute('app_giftTrees')]: {
+        screen: GiftTrees
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
       },
-      [getLocalRoute('app_giftTrees')]: {
-        screen: GiftTrees
+      [getLocalRoute('app_competitions')]: {
+        screen: isLoggedIn ? CompetitionContainer : LoginContainer
+      },
+      [getLocalRoute('app_userHome')]: {
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer
       }
     },
     {

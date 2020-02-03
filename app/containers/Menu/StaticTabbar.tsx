@@ -21,7 +21,7 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
         super(props);
         const { tabs } = this.props;
         this.state = {
-            selectedTab: 4
+            selectedTab: 0
         }
     }
 
@@ -37,7 +37,7 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
     render() {
         const { onPress } = this;
         const { tabs } = this.props;
-
+        console.log('Navigation', this.props.navigation);
         return (
             <View style={styles.container}>
                 {

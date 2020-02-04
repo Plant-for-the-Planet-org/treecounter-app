@@ -48,7 +48,7 @@ import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
-import HeaderStack from './../Header/HeaderStack';
+import HeaderStatic from './../Header/HeaderStatic';
 class Trillion extends PureComponent {
   constructor() {
     super();
@@ -462,9 +462,9 @@ class Trillion extends PureComponent {
       this.state.loadSvg ? (
         <>
           <SafeAreaView>
-            <Animated.View style={{ marginTop: headerTop }} />
+            <Animated.View style={{ marginTop: 56 }} />
 
-            <HeaderStack title={'Explore'} scrollY={this.state.scrollY} />
+            <HeaderStatic title={'Explore'} scrollY={this.state.scrollY} />
           </SafeAreaView>
           <TabView
             key="tabs"

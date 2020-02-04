@@ -21,7 +21,7 @@ import MineCompetitions from './Tabs/mine.native'; // Shows my competitions
 import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured competitions
 import AllCompetitions from './Tabs/all.native'; // Shows all competitions
 
-import HeaderStack from './../Header/HeaderStack';
+import HeaderStatic from './../Header/HeaderStatic';
 
 const Layout = {
   window: {
@@ -124,12 +124,12 @@ class Competiton extends React.Component {
     return (
       <>
         <SafeAreaView>
-          <HeaderStack
+          <HeaderStatic
             title={'Competitions'}
             scrollY={this.state.scrollY}
             pageName={'competitions'}
           />
-          <Animated.View style={{ marginTop: headerTop }} />
+          <Animated.View style={{ marginTop: 56 }} />
         </SafeAreaView>
         <TabView
           useNativeDriver

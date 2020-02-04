@@ -59,12 +59,12 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
                                             <Text style={key === this.state.selectedTab ? styles.donateTabTextGreen : styles.donateTabText}>{tab.title}</Text>
                                         </View>) : key === 3 ? (
                                             <View style={[styles.donatetab]}>
-                                                <Image source={key === this.state.selectedTab ? competeIconGreen : competeIcon} style={{ height: 25, width: 25 }} />
+                                                <Image source={key === this.state.selectedTab ? competeIconGreen : competeIcon} style={{ height: 24, width: 24 }} />
                                                 <Text style={key === this.state.selectedTab ? styles.tabTextGreen : styles.tabText}>{tab.title}</Text>
                                             </View>
                                         ) :
                                             (<View style={[styles.tab]}>
-                                                <Icon name={tab.name} color={iconColor} size={25} />
+                                                <Icon name={tab.name} color={iconColor} size={21} />
                                                 <Text style={key === this.state.selectedTab ? styles.tabTextGreen : styles.tabText}>{tab.title}</Text>
                                             </View>)}
 

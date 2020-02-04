@@ -164,6 +164,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
               onChange={this.handleTreeCountChange}
               treeCountOptions={treeCountOptions}
               defaultTreeCount={this.state.selectedTreeCount}
+              selectedProject={this.props.selectedProject}
             />
           </View>
 

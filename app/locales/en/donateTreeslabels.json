@@ -22,5 +22,7 @@
   "donation_detail": "Donation Details",
   "donor_detail": "Donor Details",
   "try_again": "Try again",
-  "return_home": "Return Home"
+  "return_home": "Return Home",
+  "donate_trees_text": "Trees",
+  "custom_tree": "Custom Trees"
 }

@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { Text, View, Animated } from 'react-native';
+import { Text, View, Animated, Platform } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import GiftTabView from './GiftTabs';
 import HeaderStatic from './../Header/HeaderStatic';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 export default class GiftTrees extends Component {

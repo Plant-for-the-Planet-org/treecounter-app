@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Text, View, TouchableOpacity, Animated } from 'react-native';
+import { Text, View, TouchableOpacity, Animated, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import { TabBar, TabView } from 'react-native-tab-view';

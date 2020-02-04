@@ -205,6 +205,7 @@ export default class UserContributions extends React.Component {
         <PopupNative
           isOpen={showDeleteConfirmation}
           animationType={'fade'}
+          clickOutClose
           containerStyle={{
             height:
               Platform.OS === 'android'

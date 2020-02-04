@@ -2,17 +2,11 @@
 import React, { Component } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
-import { Dimensions, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import GiftToUser from './Tabs/GiftUser';
 import GiftEmail from './Tabs/GiftEmail';
 
 import i18n from '../../locales/i18n';
-
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
 
 export default class GiftTabView extends Component {
   constructor(props) {
@@ -45,17 +39,20 @@ export default class GiftTabView extends Component {
   };
 
   _renderTabBar = props => {
+    const focusedColor = '#89b53a';
+    const normalColor = '#4d5153';
+    const colorWhite = '#fff';
     return (
       <TabBar
         {...props}
         style={[styles.tabBar]}
         tabStyle={{ width: 'auto', padding: 0 }}
-        indicatorStyle={{ backgroundColor: '#fff' }}
-        renderLabel={({ route, focused, color }) => (
+        indicatorStyle={{ backgroundColor: colorWhite }}
+        renderLabel={({ route, focused }) => (
           <View style={{ textAlign: 'left', marginRight: 24 }}>
             <Text
               style={{
-                color: focused ? '#89b53a' : '#4d5153',
+                color: focused ? focusedColor : normalColor,
                 fontSize: 13,
                 fontFamily: 'OpenSans-SemiBold',
                 textTransform: 'capitalize',
@@ -70,11 +67,11 @@ export default class GiftTabView extends Component {
                   {
                     width: '100%',
                     marginTop: 11,
-                    backgroundColor: '#89b53a',
+                    backgroundColor: focusedColor,
                     height: 3,
                     borderTopLeftRadius: 3,
                     borderTopRightRadius: 3,
-                    color: '#89b53a'
+                    color: focusedColor
                   }
                 ]}
               />

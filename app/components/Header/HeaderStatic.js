@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  BackHandler,
-  SafeAreaView,
-  Platform
-} from 'react-native';
-import { backArrow } from '../../assets';
+import { Text, View, BackHandler, SafeAreaView, Platform } from 'react-native';
 import TouchableItem from '../Common/TouchableItem.native';
 
 export default function HeaderStatic(props) {
@@ -32,7 +23,7 @@ export default function HeaderStatic(props) {
     <SafeAreaView
       style={{
         position: 'absolute',
-        top: Platform.OS === 'ios' ? 56 : 0,
+        top: Platform.OS === 'ios' ? 24 : 0,
         left: 0,
         right: 0,
         backgroundColor: whiteColor,

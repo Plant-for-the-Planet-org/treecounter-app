@@ -9,7 +9,6 @@ import {
   FlatList,
   Animated
 } from 'react-native';
-import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
 import { trees } from './../../../assets';

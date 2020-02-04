@@ -9,9 +9,7 @@ import {
   Linking,
   TouchableOpacity,
   Share,
-  SafeAreaView,
-  Platform
-  // FlatList
+  SafeAreaView
 } from 'react-native';
 import {
   readmoreDown,
@@ -29,13 +27,11 @@ import { getLocalRoute } from './../../actions/apiRouting';
 
 import styles from '../../styles/user-home';
 // import tabStyles from '../../styles/common/tabbar';
-import * as images from '../../assets';
 
 // import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList.native';
-import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
@@ -501,47 +497,47 @@ function ToggleButton(props) {
   );
 }
 
-function MyCompetitions(props) {
-  const competitions = props.competitions;
-  return (
-    <View style={{ paddingVertical: 20, marginTop: 20 }}>
-      <View style={styles.competitionsContainer}>
-        <Text style={styles.dedicatedTitle}>
-          {i18n.t('label.my_competitions')}
-        </Text>
-        <TouchableOpacity>
-          <Text
-            style={styles.dedicatedEdit}
-            onPress={() => {
-              updateRoute('app_competitions', props.navigation);
-            }}
-          >
-            {i18n.t('label.view_all')}
-          </Text>
-        </TouchableOpacity>
-      </View>
+// function MyCompetitions(props) {
+//   const competitions = props.competitions;
+//   return (
+//     <View style={{ paddingVertical: 20, marginTop: 20 }}>
+//       <View style={styles.competitionsContainer}>
+//         <Text style={styles.dedicatedTitle}>
+//           {i18n.t('label.my_competitions')}
+//         </Text>
+//         <TouchableOpacity>
+//           <Text
+//             style={styles.dedicatedEdit}
+//             onPress={() => {
+//               updateRoute('app_competitions', props.navigation);
+//             }}
+//           >
+//             {i18n.t('label.view_all')}
+//           </Text>
+//         </TouchableOpacity>
+//       </View>
 
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingLeft: 20 }}
-      >
-        {competitions.length > 0
-          ? competitions.map(competition => (
-              <CompetitionSnippet
-                key={'competition' + competition.id}
-                onMoreClick={id =>
-                  props.onCompetitionClick(id, competition.name)
-                }
-                competition={competition}
-                type="all"
-              />
-            ))
-          : null}
-      </ScrollView>
-    </View>
-  );
-}
+//       <ScrollView
+//         horizontal
+//         showsHorizontalScrollIndicator={false}
+//         contentContainerStyle={{ paddingLeft: 20 }}
+//       >
+//         {competitions.length > 0
+//           ? competitions.map(competition => (
+//             <CompetitionSnippet
+//               key={'competition' + competition.id}
+//               onMoreClick={id =>
+//                 props.onCompetitionClick(id, competition.name)
+//               }
+//               competition={competition}
+//               type="all"
+//             />
+//           ))
+//           : null}
+//       </ScrollView>
+//     </View>
+//   );
+// }
 
 function DedicatedTrees(props) {
   return (

@@ -76,7 +76,7 @@ class RegisterTreesContainer extends PureComponent {
         <RegisterTrees
           key="register-tree"
           ref="registerTrees"
-          navigation={this.props}
+          navigation={this.props.navigation}
           onSubmit={this.onSubmit}
           schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
           schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}

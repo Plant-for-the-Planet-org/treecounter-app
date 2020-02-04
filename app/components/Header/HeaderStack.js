@@ -2,15 +2,11 @@ import React from 'react';
 import {
   Text,
   View,
-  TouchableOpacity,
-  Image,
   BackHandler,
   Animated,
   Platform,
   SafeAreaView
 } from 'react-native';
-import { backArrow } from '../../assets';
-// import { SafeAreaView } from 'react-navigation';
 import TouchableItem from '../Common/TouchableItem.native';
 
 export default function HeaderStack(props) {

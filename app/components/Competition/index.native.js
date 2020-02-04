@@ -1,19 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import {
-  Dimensions,
-  Text,
-  View,
-  TouchableOpacity,
-  // SafeAreaView,
-  Animated
-} from 'react-native';
+import { Text, View, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import { TabBar, TabView } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar.native';
 import buttonStyles from '../../styles/common/button.native';
-import { fullPageWhite } from '../../styles/common/common_styles';
 import i18n from '../../locales/i18n';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import ClosedCompetitions from './Tabs/closed.native'; // Shows all Archived competitions
@@ -22,12 +14,6 @@ import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured com
 import AllCompetitions from './Tabs/all.native'; // Shows all competitions
 
 import HeaderStatic from './../Header/HeaderStatic';
-
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
 
 class Competiton extends React.Component {
   constructor(props) {
@@ -52,18 +38,22 @@ class Competiton extends React.Component {
 
   // Tabbar represents the top header with the different tab items
   _renderTabBar = props => {
+    const focusedColor = '#89b53a';
+    const normalColor = '#4d5153';
+    const colorWhite = '#fff';
+    const colorGreen = '#89b53a';
     return (
       <TabBar
         scrollEnabled
         {...props}
         style={[styles.tabBar]}
         tabStyle={{ width: 'auto', padding: 0 }}
-        indicatorStyle={{ backgroundColor: '#fff' }}
-        renderLabel={({ route, focused, color }) => (
+        indicatorStyle={{ backgroundColor: colorWhite }}
+        renderLabel={({ route, focused }) => (
           <View style={{ textAlign: 'left', marginRight: 24 }}>
             <Text
               style={{
-                color: focused ? '#89b53a' : '#4d5153',
+                color: focused ? focusedColor : normalColor,
                 fontSize: 13,
                 fontFamily: 'OpenSans-SemiBold',
                 textTransform: 'capitalize',
@@ -78,11 +68,11 @@ class Competiton extends React.Component {
                   {
                     width: '100%',
                     marginTop: 11,
-                    backgroundColor: '#89b53a',
+                    backgroundColor: colorGreen,
                     height: 3,
                     borderTopLeftRadius: 3,
                     borderTopRightRadius: 3,
-                    color: '#89b53a'
+                    color: colorGreen
                   }
                 ]}
               />
@@ -116,11 +106,11 @@ class Competiton extends React.Component {
   };
 
   render() {
-    const headerTop = this.state.scrollY.interpolate({
-      inputRange: [0, 120],
-      outputRange: [56, 0],
-      extrapolate: 'clamp'
-    });
+    // const headerTop = this.state.scrollY.interpolate({
+    //   inputRange: [0, 120],
+    //   outputRange: [56, 0],
+    //   extrapolate: 'clamp'
+    // });
     return (
       <>
         <SafeAreaView style={{ flex: 1 }}>

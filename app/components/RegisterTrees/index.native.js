@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
 import React, { Component } from 'react';
-import { Text, PixelRatio, SafeAreaView, BackHandler } from 'react-native';
+import { Text, PixelRatio, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import { TabBar, TabView } from 'react-native-tab-view';
 import CardLayout from '../Common/Card';
@@ -54,6 +54,8 @@ export default class RegisterTrees extends Component {
   }
 
   _renderTabBar = props => {
+    const normalColor = '#4d5153';
+
     return (
       <TabBar
         {...props}
@@ -68,7 +70,7 @@ export default class RegisterTrees extends Component {
             <Text
               style={[
                 styles.tabBarTextStyle,
-                { color: focused ? route.color : '#4d5153' }
+                { color: focused ? route.color : normalColor }
               ]}
             >
               {route.title}

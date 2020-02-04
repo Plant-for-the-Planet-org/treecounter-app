@@ -7,7 +7,8 @@ import {
   Image,
   TouchableOpacity,
   // SafeAreaView,
-  Animated
+  Animated,
+  Platform
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
@@ -462,7 +463,9 @@ class Trillion extends PureComponent {
               title={'Explore'}
               navigation={this.props.navigation}
             />
-            <Animated.View style={{ marginTop: 56 }} />
+            <Animated.View
+              style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+            />
 
             <TabView
               key="tabs"

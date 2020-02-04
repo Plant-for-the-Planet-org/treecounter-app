@@ -120,7 +120,9 @@ class Competiton extends React.Component {
             pageName={'competitions'}
             navigation={this.props.navigation}
           />
-          <Animated.View style={{ marginTop: 56 }} />
+          <Animated.View
+            style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+          />
           <TabView
             useNativeDriver
             navigationState={this.state}

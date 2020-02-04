@@ -131,13 +131,14 @@ export default EStyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around'
+    justifyContent: 'flex-start',
+    marginBottom: 20
   },
   selectorView: {
     borderRadius: 7,
     backgroundColor: '#ffffff',
     borderStyle: 'solid',
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#d5d5d5',
     height: 54,
     paddingVertical: 24,
@@ -145,7 +146,8 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 16,
-    width: width * 0.24
+    width: width * 0.24,
+    marginRight: 15
   },
   treeCountText: {
     fontFamily: 'OpenSans-Regular',
@@ -158,8 +160,12 @@ export default EStyleSheet.create({
     maxWidth: 42
   },
   selectedView: {
+    marginRight: 15,
     borderRadius: 7,
-    backgroundColor: '#89b53a',
+    borderColor: '#89b53a',
+    borderWidth: 2,
+    backgroundColor: '#fff',
+    color: '#89b53a',
     height: 54,
     paddingVertical: 24,
     paddingHorizontal: 12,
@@ -174,7 +180,7 @@ export default EStyleSheet.create({
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: 'center',
-    color: '#ffffff',
+    color: '#89b53a',
     display: 'flex',
     flexWrap: 'wrap',
     maxWidth: 42
@@ -182,35 +188,14 @@ export default EStyleSheet.create({
 
   // Custom Tree Count Selector
   customSelectorView: {
-    borderRadius: 7,
-    backgroundColor: '#ffffff',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#d5d5d5',
-    height: 54,
-    paddingVertical: 24,
-    paddingHorizontal: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 16,
-    flexGrow: 1,
-    width: width * 0.55,
-    marginBottom: 10
+    width: width * 0.35
   },
   customSelectedView: {
-    borderRadius: 7,
-    backgroundColor: '#89b53a',
-    height: 54,
-    paddingVertical: 12,
-    paddingHorizontal: 24,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 16,
-    flexGrow: 1,
-    width: width * 0.55,
+    width: width * 0.35,
     display: 'flex',
-    flexDirection: 'row',
-    marginBottom: 10
+    flexDirection: 'row'
   },
   customTreeCountText: {
     fontFamily: 'OpenSans-Regular',
@@ -440,12 +425,14 @@ export default EStyleSheet.create({
     color: '#fff'
   },
   treeCountTextInputSelected: {
-    borderColor: 'white',
+    borderColor: '#89b53a',
     borderWidth: 0,
     borderBottomWidth: 1,
-    padding: 0,
+    padding: 1,
     width: 50,
-    color: '#fff'
+    color: '#89b53a',
+    height: 24,
+    marginRight: 2
   },
   treeCountNumber: {
     fontSize: 14,

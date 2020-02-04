@@ -17,7 +17,6 @@ class TreeCountSelector extends React.Component {
 
     this.state = {
       isFixed: true,
-      treeCount: fixedDefaultTreeCount,
       fixedTreeCount: variableDefaultTreeCount,
       variableTreeCount: fixedDefaultTreeCount,
       variableAmount: props.treeCountToAmount(variableDefaultTreeCount),
@@ -78,12 +77,8 @@ class TreeCountSelector extends React.Component {
     this.setState(newState);
 
     this.props.onChange({
-      treeCount: newState.isFixed
-        ? newState.fixedTreeCount
-        : newState.variableTreeCount,
-      amount: newState.isFixed
-        ? this.props.treeCountToAmount(newState.fixedTreeCount)
-        : newState.variableAmount
+      treeCount: newState.variableTreeCount,
+      amount: newState.variableAmount
     });
   }
   getFormattedNumber(treeCount, symbol) {

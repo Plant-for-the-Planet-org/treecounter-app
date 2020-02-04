@@ -10,13 +10,18 @@ export function SelectTreeCount(props) {
   if (props.selectedProject) {
     if (
       props.selectedProject.paymentSetup.treeCountOptions &&
-      props.selectedProject.paymentSetup.treeCountOptions.fixedTreeCountOptions
+      props.selectedProject.paymentSetup.treeCountOptions.option1
     ) {
-      treeCountOptions =
-        props.selectedProject.paymentSetup.treeCountOptions
-          .fixedTreeCountOptions;
+      const {
+        option1,
+        option2,
+        option3
+      } = props.selectedProject.paymentSetup.treeCountOptions;
+      const d = props.selectedProject.paymentSetup.treeCountOptions.default;
+      treeCountOptions = [d, option1, option2, option3].filter(a => a);
+      d && props.setTreeCount(d);
     } else {
-      treeCountOptions = [10, 20, 50, 150];
+      treeCountOptions = [10, 25, 50, 100];
     }
   }
 
@@ -43,12 +48,12 @@ export function SelectTreeCount(props) {
                 : styles.treeCountText
             }
           >
-            {option} {i18n.t('label.donate_trees')}
+            {option} {i18n.t('label.donate_trees_text')}
           </Text>
         </TouchableOpacity>
       ))}
       {customTreeCount ? (
-        <View style={styles.customSelectedView}>
+        <View style={[styles.selectedView, styles.customSelectedView]}>
           <TextInput
             style={
               customTreeCount
@@ -56,27 +61,29 @@ export function SelectTreeCount(props) {
                 : styles.treeCountTextInput
             }
             onChangeText={treeCount => props.setTreeCount(treeCount)}
-            value={props.treeCount}
+            value={props.treeCount.toString()}
             keyboardType={'number-pad'}
             autoFocus
           />
           <Text
             style={
               customTreeCount
-                ? styles.treeCountNumberSelected
+                ? styles.selectedTreeCountText
                 : styles.treeCountNumber
             }
           >
-            {i18n.t('label.donate_trees')}
+            {i18n.t('label.donate_trees_text')}
           </Text>
         </View>
       ) : (
         <TouchableOpacity
           onPress={() => {
             setCustomTreeCount(true);
-            props.setTreeCount('');
+            const a = treeCountOptions[treeCountOptions.length - 1] + 50;
+            console.log(a);
+            props.setTreeCount(a);
           }}
-          style={styles.customSelectorView}
+          style={[styles.selectorView]}
         >
           <Text style={styles.customTreeCountText}>
             {i18n.t('label.custom_tree')}

@@ -312,7 +312,7 @@ export default class UserHome extends Component {
                 <Image source={settings} style={{ height: 20, width: 20 }} />
               </TouchableOpacity>
             </View>
-            <View style={styles.svgContainer}>
+            <View style={[styles.svgContainer, { marginTop: -20 }]}>
               <SvgContainer
                 {...svgData}
                 onToggle={toggleVal => this.updateSvg(toggleVal)}

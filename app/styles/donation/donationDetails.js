@@ -423,7 +423,7 @@ export default EStyleSheet.create({
   treeCountTextInputSelected: {
     borderColor: '#89b53a',
     borderWidth: 0,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0,
     padding: 1,
     width: 50,
     color: '#89b53a',

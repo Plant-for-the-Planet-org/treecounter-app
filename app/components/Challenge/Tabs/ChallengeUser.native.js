@@ -198,7 +198,7 @@ class ChallengeUser extends Component {
             challengeStatus={this.props.challengeStatus}
           />
         </ScrollView>
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </View>
     );
   }

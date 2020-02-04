@@ -62,7 +62,7 @@ class AboutUs extends Component {
             title={i18n.t('label.open_source_license')}
           />
         </ScrollView>
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </View>
     );
   }

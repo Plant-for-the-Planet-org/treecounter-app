@@ -209,7 +209,7 @@ class ChallengeEmail extends Component {
             challengeStatus={this.props.challengeStatus}
           />
         </KeyboardAwareScrollView>
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </View>
     );
   }

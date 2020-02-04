@@ -244,9 +244,17 @@ export default class RegisterTreeTab extends PureComponent {
             headerText={i18n.t(
               'label.register_tree_tpo_no_plant_project_header'
             )}
-            bodyText={i18n.t(
-              'label.register_tree_tpo_no_plant_project_description'
-            )}
+            bodyText={
+              <Text
+                style={{
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 14,
+                  lineHeight: 26
+                }}
+              >
+                {i18n.t('label.register_tree_tpo_no_plant_project_description')}
+              </Text>
+            }
             onCancel={() => {
               updateRoute('app_userHome', this.props.navigation.navigation);
             }}

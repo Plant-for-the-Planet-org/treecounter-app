@@ -12,12 +12,13 @@ const PopupNative = props => {
       elevation="10"
     >
       <View style={[styles.containerWrapper, props.containerWrapper]}>
-        <View style={styles.container}>
+        <View style={[styles.container, props.containerStyle]}>
           <View style={styles.headerContainer}>
             <Text style={styles.headerTextStyle}>{props.headerText}</Text>
           </View>
-          <View style={styles.bodyContainer}>
-            <Text style={styles.bodyTextStyle}>{props.bodyText}</Text>
+          <View style={[styles.bodyContainer, styles.bodyTextStyle]}>
+            {/*<Text style={styles.bodyTextStyle}>{props.bodyText}</Text>*/}
+            {props.bodyText}
           </View>
           <View style={styles.buttonContainer}>
             <TouchableWithoutFeedback
@@ -37,7 +38,9 @@ const PopupNative = props => {
               }}
             >
               <View style={styles.applyButtonContainer}>
-                <Text style={styles.applyButtonTextStyle}>
+                <Text
+                  style={[styles.applyButtonTextStyle, props.applyTextStyle]}
+                >
                   {props.applyText}
                 </Text>
               </View>

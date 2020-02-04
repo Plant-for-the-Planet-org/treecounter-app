@@ -53,7 +53,6 @@ export default EStyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginBottom: 15,
     marginRight: 24
   },
   cancelButtonTextStyle: {

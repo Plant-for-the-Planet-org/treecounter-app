@@ -4,7 +4,6 @@ import {
   ScrollView,
   Text,
   View,
-  Dimensions,
   Image,
   TouchableOpacity,
   // SafeAreaView,
@@ -459,7 +458,10 @@ class Trillion extends PureComponent {
       this.state.loadSvg ? (
         <>
           <SafeAreaView style={{ flex: 1 }}>
-            <HeaderStatic title={'Explore'} />
+            <HeaderStatic
+              title={'Explore'}
+              navigation={this.props.navigation}
+            />
             <Animated.View style={{ marginTop: 56 }} />
 
             <TabView

@@ -118,6 +118,7 @@ class Competiton extends React.Component {
             title={'Competitions'}
             scrollY={this.state.scrollY}
             pageName={'competitions'}
+            navigation={this.props.navigation}
           />
           <Animated.View style={{ marginTop: 56 }} />
           <TabView

@@ -4,7 +4,8 @@ import TouchableItem from '../Common/TouchableItem.native';
 
 export default function HeaderStatic(props) {
   let navigateBack = () => {
-    props.navigation.goBack();
+    // props.navigation.goBack();
+    BackHandler.exitApp();
     return true;
   };
 

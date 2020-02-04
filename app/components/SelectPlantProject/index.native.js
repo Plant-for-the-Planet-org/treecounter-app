@@ -179,7 +179,11 @@ class SelectPlantTabView extends PureComponent {
     return (
       <>
         <SafeAreaView style={{ flex: 1 }}>
-          <HeaderStatic title={'Projects'} scrollY={this.state.scrollY} />
+          <HeaderStatic
+            title={'Projects'}
+            scrollY={this.state.scrollY}
+            navigation={this.props.navigation}
+          />
           <Animated.View style={{ marginTop: 56 }} />
 
           <TabView

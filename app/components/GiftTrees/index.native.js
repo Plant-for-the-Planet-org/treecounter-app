@@ -18,7 +18,10 @@ export default class GiftTrees extends Component {
     return (
       <>
         <SafeAreaView style={{ flex: 1 }}>
-          <HeaderStatic title={'Gift Trees'} />
+          <HeaderStatic
+            title={'Gift Trees'}
+            navigation={this.props.navigation}
+          />
           <View style={{ height: 56 }} />
           <GiftTabView openProjects={this.openProjects} {...this.props} />
         </SafeAreaView>

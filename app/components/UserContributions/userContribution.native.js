@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import i18n from '../../locales/i18n.js';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  Platform
+} from 'react-native';
 import styles from '../../styles/newUserContributions/userContributions';
 // import ShareIcon from '../../assets/images/share.png';
 import { editIcon, deleteIcon, closeIcon } from '../../assets';
@@ -9,11 +16,12 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
 import MapView, { Marker } from 'react-native-maps';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
+import PopupNative from '../Common/ModalDialog/Popup.native';
 
 export default class UserContributions extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { showDeleteConfirmation: false };
   }
 
   _handleIndexChange = index => this.setState({ index });
@@ -43,7 +51,9 @@ export default class UserContributions extends React.Component {
       </MapView>
     );
   };
+
   render() {
+    const { showDeleteConfirmation } = this.state;
     const props = this.props;
     const {
       treeCount,
@@ -62,6 +72,7 @@ export default class UserContributions extends React.Component {
     } = props;
 
     const textColor = '#87B738';
+    const deleteConfirmColor = '#ee6453';
     return (
       <View style={styles.container}>
         {/* ===== Map View starts ===== */}
@@ -100,7 +111,11 @@ export default class UserContributions extends React.Component {
             {/* shows delete icon if there is delete feature */}
             {showDelete ? (
               <TouchableOpacity
-                onPress={props.onClickDelete}
+                onPress={() => {
+                  this.setState({
+                    showDeleteConfirmation: true
+                  });
+                }}
                 style={styles.button}
               >
                 <Image style={styles.image} source={deleteIcon} />
@@ -185,6 +200,47 @@ export default class UserContributions extends React.Component {
           )}
         </View>
         {/* ===== Header and Sub header ends ===== */}
+
+        {/*  Delete confirmation popup */}
+        <PopupNative
+          isOpen={showDeleteConfirmation}
+          animationType={'fade'}
+          clickOutClose
+          containerStyle={{
+            height:
+              Platform.OS === 'android'
+                ? Dimensions.get('window').height * 0.31
+                : Dimensions.get('window').height * 0.24
+          }}
+          headerText={i18n.t('label.my_trees_delete_confirm')}
+          bodyText={
+            <View>
+              <Text
+                style={{
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 14,
+                  lineHeight: 26
+                }}
+              >
+                {i18n.t('label.deletion_warning_summary_contribution')}
+              </Text>
+            </View>
+          }
+          onCancel={() => {
+            this.setState({
+              showDeleteConfirmation: false
+            });
+          }}
+          cancelText={i18n.t('label.cancel')}
+          applyText={i18n.t('label.delete')}
+          applyTextStyle={{ color: deleteConfirmColor }}
+          onApply={() => {
+            props.onClickDelete();
+            this.setState({
+              showDeleteConfirmation: false
+            });
+          }}
+        />
       </View>
     );
   }

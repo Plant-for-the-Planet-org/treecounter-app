@@ -17,10 +17,18 @@ export async function initLocale() {
   cache.locale = await guessLocale();
 }
 
-export async function getLocale() {
+export async function getLocaleAsync() {
   // console.log('getLocale', cache.locale);
   if (!cache.locale) {
     await initLocale();
+  }
+  return cache.locale;
+}
+
+export function getLocale() {
+  // console.log('getLocale', cache.locale);
+  if (!cache.locale) {
+    initLocale();
   }
   return cache.locale;
 }

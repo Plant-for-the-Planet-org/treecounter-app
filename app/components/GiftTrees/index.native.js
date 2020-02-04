@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import GiftTabView from './GiftTabs';
 import HeaderStatic from './../Header/HeaderStatic';
-import { View, SafeAreaView } from 'react-native';
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+
 export default class GiftTrees extends Component {
   constructor(props) {
     super(props);
@@ -15,10 +17,11 @@ export default class GiftTrees extends Component {
   render() {
     return (
       <>
-        <HeaderStatic title={'Gift Trees'} />
-        <SafeAreaView />
-        <View style={{ height: 56 }} />
-        <GiftTabView openProjects={this.openProjects} {...this.props} />
+        <SafeAreaView style={{ flex: 1 }}>
+          <HeaderStatic title={'Gift Trees'} />
+          <View style={{ height: 56 }} />
+          <GiftTabView openProjects={this.openProjects} {...this.props} />
+        </SafeAreaView>
       </>
     );
   }

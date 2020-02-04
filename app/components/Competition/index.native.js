@@ -123,33 +123,37 @@ class Competiton extends React.Component {
     });
     return (
       <>
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
           <HeaderStatic
             title={'Competitions'}
             scrollY={this.state.scrollY}
             pageName={'competitions'}
           />
           <Animated.View style={{ marginTop: 56 }} />
-        </SafeAreaView>
-        <TabView
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this._renderSelectPlantScene}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
-        />
+          <TabView
+            useNativeDriver
+            navigationState={this.state}
+            renderScene={this._renderSelectPlantScene}
+            renderTabBar={this._renderTabBar}
+            onIndexChange={this._handleIndexChange}
+          />
 
-        {/* Button to add new competitions(On each page) */}
-        <TouchableOpacity
-          style={buttonStyles.plusButton}
-          onPress={() => {
-            updateStaticRoute('app_create_competition', this.props.navigation, {
-              onCreateCompetition: this.props.onCreateCompetition
-            });
-          }}
-        >
-          <Text style={buttonStyles.plusButtonIcon}>+</Text>
-        </TouchableOpacity>
+          {/* Button to add new competitions(On each page) */}
+          <TouchableOpacity
+            style={buttonStyles.plusButton}
+            onPress={() => {
+              updateStaticRoute(
+                'app_create_competition',
+                this.props.navigation,
+                {
+                  onCreateCompetition: this.props.onCreateCompetition
+                }
+              );
+            }}
+          >
+            <Text style={buttonStyles.plusButtonIcon}>+</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
       </>
     );
   }

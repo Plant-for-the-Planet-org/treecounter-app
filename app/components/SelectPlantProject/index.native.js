@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { Dimensions, SafeAreaView, Text, View, Animated } from 'react-native';
+import { Dimensions, Text, View, Animated } from 'react-native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
@@ -12,6 +12,7 @@ import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderStatic from './../Header/HeaderStatic';
+import { SafeAreaView } from 'react-navigation';
 
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
@@ -181,17 +182,18 @@ class SelectPlantTabView extends PureComponent {
     });
     return (
       <>
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
           <HeaderStatic title={'Projects'} scrollY={this.state.scrollY} />
           <Animated.View style={{ marginTop: 56 }} />
+
+          <TabView
+            useNativeDriver
+            navigationState={this.state}
+            renderScene={this.renderSelectPlantScene}
+            renderTabBar={this.renderTabBar}
+            onIndexChange={this.handleIndexChange}
+          />
         </SafeAreaView>
-        <TabView
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this.renderSelectPlantScene}
-          renderTabBar={this.renderTabBar}
-          onIndexChange={this.handleIndexChange}
-        />
       </>
     );
   }

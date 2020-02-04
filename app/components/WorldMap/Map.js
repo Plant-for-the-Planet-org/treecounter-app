@@ -13,8 +13,8 @@ const MapComponent = () => {
         initialRegion={{
           latitude: 37.78825,
           longitude: -122.4324,
-          latitudeDelta: 0.0,
-          longitudeDelta: 0.0
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0922
         }}
       >
         <Marker coordinate={{ latitude: 37.78825, longitude: -122.4324 }}>

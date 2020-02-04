@@ -24,7 +24,6 @@ import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
 import UserContributionDetails from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
-import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
 import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
@@ -210,25 +209,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const deleteContributionNavigator = createStackNavigator(
-    {
-      ['delete_contribution']: {
-        screen: ConfirmContributionDeletionModal
-      }
-    },
-    {
-      headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    }
-  );
+
   const welcomeScreenNavigator = createStackNavigator(
     {
       ['welcome_screen']: { screen: WelcomScreenSlider }
@@ -428,7 +409,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       searchNavigator: searchNavigator,
       deleteProfileNavigator,
-      deleteContributionNavigator,
       welcomeScreenNavigator
     },
     {

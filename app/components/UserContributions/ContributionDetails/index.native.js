@@ -257,13 +257,11 @@ class UserContributionsDetails extends React.Component {
           showDelete={contributionType == 'planting'}
           headerText={headerText}
           onClickDelete={() => {
-            this.props.navigation.navigate('delete_contribution', {
-              deleteContribution: () =>
-                this.props.deleteContribution(
-                  this.props.contribution.id,
-                  this.props.navigation
-                )
-            });
+            this.props.deleteContribution(
+              this.props.contribution.id,
+              this.props.navigation
+            );
+            this.props.navigation.goBack();
           }}
           onClickEdit={() => {
             this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
@@ -323,7 +321,7 @@ class UserContributionsDetails extends React.Component {
           </View>
         ) : null}
 
-        {/* displays project contact card if project is available 
+        {/* displays project contact card if project is available
           in the contribution */}
         {this.props.plantProjects &&
         this.props.plantProjects.length > 0 &&

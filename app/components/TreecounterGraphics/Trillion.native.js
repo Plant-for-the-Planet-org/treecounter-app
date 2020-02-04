@@ -36,12 +36,6 @@ import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from './../../selectors';
 
 import { trees } from './../../assets';
-
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
 import tabStyles from '../../styles/common/tabbar';
 import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
@@ -149,17 +143,20 @@ class Trillion extends PureComponent {
   };
 
   _renderTabBar = props => {
+    const focusedColor = '#89b53a';
+    const normalColor = '#4d5153';
+    const colorWhite = '#fff';
     return (
       <TabBar
         {...props}
         style={[tabStyles.tabBar]}
         tabStyle={{ width: 'auto', padding: 0 }}
-        indicatorStyle={{ backgroundColor: '#fff' }}
-        renderLabel={({ route, focused, color }) => (
+        indicatorStyle={{ backgroundColor: colorWhite }}
+        renderLabel={({ route, focused }) => (
           <View style={{ textAlign: 'left', marginRight: 24 }}>
             <Text
               style={{
-                color: focused ? '#89b53a' : '#4d5153',
+                color: focused ? focusedColor : normalColor,
                 fontSize: 13,
                 fontFamily: 'OpenSans-SemiBold',
                 textTransform: 'capitalize',
@@ -174,11 +171,11 @@ class Trillion extends PureComponent {
                   {
                     width: '100%',
                     marginTop: 11,
-                    backgroundColor: '#89b53a',
+                    backgroundColor: focusedColor,
                     height: 3,
                     borderTopLeftRadius: 3,
                     borderTopRightRadius: 3,
-                    color: '#89b53a'
+                    color: focusedColor
                   }
                 ]}
               />
@@ -438,11 +435,11 @@ class Trillion extends PureComponent {
   };
 
   render() {
-    const headerTop = this.state.scrollY.interpolate({
-      inputRange: [0, 120],
-      outputRange: [56, 0],
-      extrapolate: 'clamp'
-    });
+    // const headerTop = this.state.scrollY.interpolate({
+    //   inputRange: [0, 120],
+    //   outputRange: [56, 0],
+    //   extrapolate: 'clamp'
+    // });
     return [
       this.props.navigation ? (
         <NavigationEvents

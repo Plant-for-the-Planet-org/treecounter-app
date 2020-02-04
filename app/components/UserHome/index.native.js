@@ -33,7 +33,7 @@ import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList.native';
 import i18n from '../../locales/i18n';
-import CompetitionSnippet from './app/CompetitionSnippet';
+// // import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 import MapView, { Marker } from 'react-native-maps';
@@ -236,6 +236,7 @@ export default class UserHome extends Component {
             latitude: oneContribution.geoLatitude,
             longitude: oneContribution.geoLongitude
           }}
+          key={oneContribution.id}
         >
           <View style={markerStyle}>
             <Image source={Smalltreewhite} resizeMode={'contain'} />
@@ -281,12 +282,12 @@ export default class UserHome extends Component {
                 <View style={styles.userInfo}>
                   <View style={styles.userInfoName}>
                     <Text style={styles.nameStyle}>
-                      {userProfile.firstname}
+                      {userProfile.displayName}
                     </Text>
-                    <Text style={styles.nameStyle2}>
+                    {/* <Text style={styles.nameStyle2}>
                       {' '}
                       {userProfile.lastname}
-                    </Text>
+                    </Text> */}
                   </View>
                 </View>
               </View>
@@ -524,7 +525,7 @@ function ToggleButton(props) {
 //       >
 //         {competitions.length > 0
 //           ? competitions.map(competition => (
-//             <CompetitionSnippet
+//<CompetitionSnippet
 //               key={'competition' + competition.id}
 //               onMoreClick={id =>
 //                 props.onCompetitionClick(id, competition.name)

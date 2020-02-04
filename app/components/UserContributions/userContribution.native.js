@@ -204,11 +204,12 @@ export default class UserContributions extends React.Component {
         {/*  Delete confirmation popup */}
         <PopupNative
           isOpen={showDeleteConfirmation}
+          animationType={'fade'}
           containerStyle={{
             height:
               Platform.OS === 'android'
-                ? Dimensions.get('window').height * 0.38
-                : Dimensions.get('window').height * 0.3
+                ? Dimensions.get('window').height * 0.31
+                : Dimensions.get('window').height * 0.24
           }}
           headerText={i18n.t('label.my_trees_delete_confirm')}
           bodyText={
@@ -221,15 +222,6 @@ export default class UserContributions extends React.Component {
                 }}
               >
                 {i18n.t('label.deletion_warning_summary_contribution')}
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'OpenSans-Regular',
-                  fontSize: 14,
-                  lineHeight: 26
-                }}
-              >
-                {i18n.t('label.delete_my_trees_action')}
               </Text>
             </View>
           }

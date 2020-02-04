@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const PopupNative = props => {
   return (
     <Modal
-      animationType={'slide'}
+      animationType={props.animationType || 'slide'}
       transparent
       visible={props.isOpen}
       elevation="10"

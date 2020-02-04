@@ -417,7 +417,7 @@ export default class DonateTrees extends React.PureComponent {
           useNativeDriver
           onIndexChange={this.function_handleIndexChange}
         />
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </SafeAreaView>
     );
   }

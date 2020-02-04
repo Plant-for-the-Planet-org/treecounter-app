@@ -131,7 +131,7 @@ export default EStyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    justifyContent: 'space-around'
   },
   selectorView: {
     borderRadius: 7,
@@ -194,7 +194,8 @@ export default EStyleSheet.create({
     alignItems: 'center',
     marginTop: 16,
     flexGrow: 1,
-    width: width * 0.6
+    width: width * 0.55,
+    marginBottom: 10
   },
   customSelectedView: {
     borderRadius: 7,
@@ -206,9 +207,10 @@ export default EStyleSheet.create({
     alignItems: 'center',
     marginTop: 16,
     flexGrow: 1,
-    width: width * 0.6,
+    width: width * 0.55,
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 10
   },
   customTreeCountText: {
     fontFamily: 'OpenSans-Regular',

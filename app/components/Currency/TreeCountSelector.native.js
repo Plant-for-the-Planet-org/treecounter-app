@@ -1,24 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import { Text, TextInput, View } from 'react-native';
 import styles from '../../styles/currencies/treeCounterSelector';
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel
-} from 'react-native-simple-radio-button';
-import { formatNumber, delimitNumbers } from '../../utils/utils';
-import {
-  TaxReceipt,
-  CoverFee,
-  PaymentOption,
-  SelectFrequency,
-  PlantProjectDetails,
-  NoPlantProjectDetails,
-  SelectTreeCount,
-  CountryPicker
-} from './DonationDetailsComponents/donationComponents.native';
+import { formatNumber } from '../../utils/utils';
+import { SelectTreeCount } from './DonationDetailsComponents/donationComponents.native';
+import { View } from 'react-native';
 
 class TreeCountSelector extends React.Component {
   constructor(props) {

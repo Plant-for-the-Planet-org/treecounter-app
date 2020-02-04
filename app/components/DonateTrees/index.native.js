@@ -306,23 +306,21 @@ export default class DonateTrees extends React.PureComponent {
         return this.props.selectedTpo &&
           currencies &&
           this.props.selectedProject ? (
-          [
-            <TreeCountCurrencySelector
-              treeCost={selectedProject.treeCost}
-              rates={currencies.currency_rates[selectedProject.currency].rates}
-              giftTreeCounterName={this.state.giftTreeCounterName}
-              selectedProject={selectedProject}
-              fees={paymentFee}
-              supportTreecounter={this.props.supportTreecounter}
-              showNextButton
-              currencies={currencies.currency_names} // TODO: connect to data from API
-              selectedCurrency={this.determineDefaultCurrency()}
-              treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
-              onNextClick={this.Tab2validated}
-              selectedTreeCount={this.state.selectedTreeCount}
-              onChange={this.handleTreeCountCurrencyChange}
-            />
-          ]
+          <TreeCountCurrencySelector
+            treeCost={selectedProject.treeCost}
+            rates={currencies.currency_rates[selectedProject.currency].rates}
+            giftTreeCounterName={this.state.giftTreeCounterName}
+            selectedProject={selectedProject}
+            fees={paymentFee}
+            supportTreecounter={this.props.supportTreecounter}
+            showNextButton
+            currencies={currencies.currency_names} // TODO: connect to data from API
+            selectedCurrency={this.determineDefaultCurrency()}
+            treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
+            onNextClick={this.Tab2validated}
+            selectedTreeCount={this.state.selectedTreeCount}
+            onChange={this.handleTreeCountCurrencyChange}
+          />
         ) : (
           <LoadingIndicator contentLoader screen="defaultLoader" />
         );

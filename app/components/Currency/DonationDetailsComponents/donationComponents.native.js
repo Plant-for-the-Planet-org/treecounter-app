@@ -26,7 +26,7 @@ export function SelectTreeCount(props) {
   }
 
   return (
-    <View style={styles.treeCountSelector}>
+    <View style={[styles.treeCountSelector, { marginLeft: 8 }]}>
       {treeCountOptions.map(option => (
         <TouchableOpacity
           onPress={() => {
@@ -42,13 +42,22 @@ export function SelectTreeCount(props) {
           key={option}
         >
           <Text
-            style={
+            style={[
               props.treeCount === option
                 ? styles.selectedTreeCountText
                 : styles.treeCountText
-            }
+            ]}
           >
-            {option} {i18n.t('label.donate_trees_text')}
+            <Text>{option}</Text>
+          </Text>
+          <Text
+            style={[
+              props.treeCount === option
+                ? styles.selectedTreeCountText
+                : styles.treeCountText
+            ]}
+          >
+            <Text>{i18n.t('label.donate_trees_text')}</Text>
           </Text>
         </TouchableOpacity>
       ))}
@@ -83,7 +92,7 @@ export function SelectTreeCount(props) {
             console.log(a);
             props.setTreeCount(a);
           }}
-          style={[styles.selectorView]}
+          style={[styles.selectorView, styles.customSelectorView]}
         >
           <Text style={styles.customTreeCountText}>
             {i18n.t('label.custom_tree')}

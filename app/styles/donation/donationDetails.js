@@ -155,7 +155,7 @@ export default EStyleSheet.create({
     color: '#4d5153',
     display: 'flex',
     flexWrap: 'wrap',
-    maxWidth: 42
+    maxWidth: 62
   },
   selectedView: {
     marginRight: 15,
@@ -179,17 +179,17 @@ export default EStyleSheet.create({
     color: '#89b53a',
     display: 'flex',
     flexWrap: 'wrap',
-    maxWidth: 42
+    maxWidth: 82
   },
 
   // Custom Tree Count Selector
   customSelectorView: {
-    width: width * 0.35
+    width: width * 0.45
   },
   customSelectedView: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: width * 0.35,
+    width: width * 0.45,
     display: 'flex',
     flexDirection: 'row'
   },

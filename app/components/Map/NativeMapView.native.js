@@ -632,13 +632,7 @@ class NativeMapView extends Component {
         Platform.OS === 'android' ? androidEdgePadding : iosEdgePadding;
       return edgePadding;
     };
-    console.log(
-      'this.props.mapStyle',
-      this.props.mapStyle,
-      { width: this.state.width, marginBottom: this.state.mapMargin },
-      setMapPadding(),
-      mapStyle
-    );
+
     return (
       <MapView
         //mapType={'satellite'}

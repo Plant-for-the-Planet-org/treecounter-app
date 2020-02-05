@@ -241,7 +241,7 @@ class UserContributionsDetails extends React.Component {
     const backgroundColor = '#fff';
 
     return (
-      <ScrollView style={{ backgroundColor: { backgroundColor }, flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <UserContributions
           mayUpdate={mayUpdate}
           treeCount={treeCount}
@@ -274,75 +274,75 @@ class UserContributionsDetails extends React.Component {
           }}
           contribution={this.props.contribution}
         />
+        <ScrollView>
+          {/* displays image carousel if any image or video is available */}
+          {contributionOrPlantedImages &&
+            contributionOrPlantedImages.length > 0 && (
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  marginVertical: 30
+                }}
+              >
+                {videoUrl ? <VideoContainer url={videoUrl} /> : null}
+                {/* TODO Add thumbnail for video */}
+                <PlantProjectImageCarousel
+                  resizeMode={'cover'}
+                  images={contributionOrPlantedImages}
+                  aspectRatio={16 / 9}
+                  videoUrl={videoUrl}
+                />
+              </ScrollView>
+            )}
 
-        {/* displays image carousel if any image or video is available */}
-        {contributionOrPlantedImages &&
-          contributionOrPlantedImages.length > 0 && (
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                marginVertical: 30
-              }}
-            >
-              {videoUrl ? <VideoContainer url={videoUrl} /> : null}
-              {/* TODO Add thumbnail for video */}
-              <PlantProjectImageCarousel
-                resizeMode={'cover'}
-                images={contributionOrPlantedImages}
-                aspectRatio={16 / 9}
-                videoUrl={videoUrl}
+          {/* displays error message if geoLatitude and geoLongitude are same */}
+          {hasGeoLocationError ? (
+            <View style={styles.locationErrorContainer}>
+              <Image
+                style={[styles.icon, { marginRight: 20 }]}
+                source={redMyLocationIcon}
               />
-            </ScrollView>
-          )}
+              <Text style={styles.locationErrorText}>{locationErrorText}</Text>
+            </View>
+          ) : null}
 
-        {/* displays error message if geoLatitude and geoLongitude are same */}
-        {hasGeoLocationError ? (
-          <View style={styles.locationErrorContainer}>
-            <Image
-              style={[styles.icon, { marginRight: 20 }]}
-              source={redMyLocationIcon}
-            />
-            <Text style={styles.locationErrorText}>{locationErrorText}</Text>
-          </View>
-        ) : null}
+          {/* displays measurements if available */}
+          {/* if contribution type is planting gives Add Measurement button */}
+          {hasMeasurements ? (
+            <View style={{ marginHorizontal: 20, marginTop: 30 }}>
+              <Measurements
+                measurements={this.props.contribution.contributionMeasurements}
+                // isPlanting={contributionType === 'planting' ? true : false}
+                isPlanting={false}
+              />
+            </View>
+          ) : null}
 
-        {/* displays measurements if available */}
-        {/* if contribution type is planting gives Add Measurement button */}
-        {hasMeasurements ? (
-          <View style={{ marginHorizontal: 20, marginTop: 30 }}>
-            <Measurements
-              measurements={this.props.contribution.contributionMeasurements}
-              // isPlanting={contributionType === 'planting' ? true : false}
-              isPlanting={false}
-            />
-          </View>
-        ) : null}
-
-        {/* displays project contact card if project is available
+          {/* displays project contact card if project is available
           in the contribution */}
-        {this.props.plantProjects &&
-        this.props.plantProjects.length > 0 &&
-        this.props.plantProjects[0].tpoData ? (
-          <View style={{ marginBottom: 30 }}>
-            <AccordionContactInfo
-              navigation={this.props.navigation}
-              slug={this.props.plantProjects[0].tpoData.treecounterSlug}
-              updateStaticRoute={updateStaticRoute}
-              url={this.props.plantProjects[0].url}
-              _goToURL={_goToURL}
-              email={this.props.plantProjects[0].tpoData.email}
-              address={this.props.plantProjects[0].tpoData.address}
-              name={this.props.plantProjects[0].tpoData.name}
-              title={this.props.plantProjects[0].tpoData.name}
-            />
-          </View>
-        ) : null}
+          {this.props.plantProjects &&
+          this.props.plantProjects.length > 0 &&
+          this.props.plantProjects[0].tpoData ? (
+            <View style={{ marginBottom: 30 }}>
+              <AccordionContactInfo
+                navigation={this.props.navigation}
+                slug={this.props.plantProjects[0].tpoData.treecounterSlug}
+                updateStaticRoute={updateStaticRoute}
+                url={this.props.plantProjects[0].url}
+                _goToURL={_goToURL}
+                email={this.props.plantProjects[0].tpoData.email}
+                address={this.props.plantProjects[0].tpoData.address}
+                name={this.props.plantProjects[0].tpoData.name}
+                title={this.props.plantProjects[0].tpoData.name}
+              />
+            </View>
+          ) : null}
 
-        {/* certificate and share button not required as of now */}
-        {/* <View style={styles.buttonGroup}>
+          {/* certificate and share button not required as of now */}
+          {/* <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={() => {}} style={{}}>
             <View style={[styles.buttonContainer, styles.borderGreen]}>
               <Image style={{ width: 16, height: 16 }} source={downloadGreen} />
@@ -363,12 +363,13 @@ class UserContributionsDetails extends React.Component {
           </TouchableOpacity>
         </View> */}
 
-        {/* {ndviUid ? (
+          {/* {ndviUid ? (
           <View style={{ marginLeft: 8, marginRight: 8, marginTop: 20 }}>
             <NDVI ndviUid={ndviUid} />
           </View>
         ) : null} */}
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   }
 }

@@ -14,7 +14,7 @@ import { Linking, SafeAreaView } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
-import TabContainer from '../../containers/Menu/TabContainer';
+// import TabContainer from '../../containers/Menu/TabContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 
 export default class DonateTrees extends React.PureComponent {
@@ -417,7 +417,7 @@ export default class DonateTrees extends React.PureComponent {
           useNativeDriver
           onIndexChange={this.function_handleIndexChange}
         />
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </SafeAreaView>
     );
   }

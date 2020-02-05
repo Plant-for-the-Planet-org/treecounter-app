@@ -131,7 +131,7 @@ export default EStyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     marginBottom: 20
   },
   selectorView: {
@@ -144,8 +144,9 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 16,
-    width: width * 0.24,
-    marginRight: 15
+    width: width * 0.26,
+    marginRight: 10,
+    flexGrow: 1
   },
   treeCountText: {
     fontFamily: 'OpenSans-Regular',
@@ -155,7 +156,7 @@ export default EStyleSheet.create({
     color: '#4d5153',
     display: 'flex',
     flexWrap: 'wrap',
-    maxWidth: 42
+    maxWidth: 62
   },
   selectedView: {
     marginRight: 15,
@@ -168,7 +169,9 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 16,
-    width: width * 0.24
+    marginRight: 10,
+    flexGrow: 1,
+    width: width * 0.26
   },
   selectedTreeCountText: {
     fontFamily: 'OpenSans-Bold',
@@ -178,18 +181,20 @@ export default EStyleSheet.create({
     textAlign: 'center',
     color: '#89b53a',
     display: 'flex',
-    flexWrap: 'wrap',
-    maxWidth: 42
+    flexWrap: 'wrap'
+    //maxWidth: 82
   },
 
   // Custom Tree Count Selector
   customSelectorView: {
-    width: width * 0.35
+    flexGrow: 2,
+    width: width * 0.54
   },
   customSelectedView: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: width * 0.35,
+    flexGrow: 2,
+    width: width * 0.54,
     display: 'flex',
     flexDirection: 'row'
   },

@@ -144,8 +144,9 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 16,
-    width: width * 0.24,
-    marginRight: 15
+    width: width * 0.26,
+    marginRight: 10,
+    flexGrow: 1
   },
   treeCountText: {
     fontFamily: 'OpenSans-Regular',
@@ -168,7 +169,9 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 16,
-    flexGrow: 1
+    marginRight: 10,
+    flexGrow: 1,
+    width: width * 0.26
   },
   selectedTreeCountText: {
     fontFamily: 'OpenSans-Bold',
@@ -184,14 +187,14 @@ export default EStyleSheet.create({
 
   // Custom Tree Count Selector
   customSelectorView: {
-    flexGrow: 1
-    //width: width * 0.45
+    flexGrow: 2,
+    width: width * 0.54
   },
   customSelectedView: {
     justifyContent: 'center',
     alignItems: 'center',
-    flexGrow: 1,
-    //width: width * 0.45,
+    flexGrow: 2,
+    width: width * 0.54,
     display: 'flex',
     flexDirection: 'row'
   },

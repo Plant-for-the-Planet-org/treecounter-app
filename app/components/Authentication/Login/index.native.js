@@ -131,7 +131,7 @@ export default class Login extends Component {
                     {
                       backgroundColor: backgroundColor,
                       padding: 24,
-                      paddingTop: Platform.OS === 'ios' ? 120 : 80,
+                      paddingTop: Platform.OS === 'ios' ? 150 : 80,
                       minHeight: '100%'
                     }
                   ]}

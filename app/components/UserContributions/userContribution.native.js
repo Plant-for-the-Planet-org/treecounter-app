@@ -33,6 +33,7 @@ export default class UserContributions extends React.Component {
     }`;
     return (
       <NativeMapView
+        mapType={'standard'}
         mode={'single-tree'}
         geoLocation={geoLatLong}
         searchPlacesBox={false}

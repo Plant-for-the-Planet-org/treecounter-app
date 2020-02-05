@@ -589,7 +589,8 @@ class NativeMapView extends Component {
       // rotateEnabled: this.props.fullScreen,
       // zoomEnabled: this.props.fullScreen,
       // loadingEnabled: false,
-      showsUserLocation: false
+      showsUserLocation: false,
+      mapType: this.props.mapType
     };
     const {
       editing,
@@ -640,9 +641,9 @@ class NativeMapView extends Component {
     );
     return (
       <MapView
-        // mapType={'standard'}
+        //mapType={'standard'}
         ref={ref => (this.map = ref)}
-        provider={PROVIDER_GOOGLE}
+        //provider={PROVIDER_GOOGLE}
         //provider={this.props.provider}
         style={[
           this.props.mapStyle,
@@ -656,7 +657,7 @@ class NativeMapView extends Component {
         onLongPress={e => this.onDoublePress(e)}
         onMarkerPress={e => this.onDoublePress(e)}
         onRegionChangeComplete={this.onRegionChange}
-        customMapStyle={mapStyle}
+        //customMapStyle={mapStyle}
         {...mapOptions}
       >
         {this.props.mode === 'multiple-trees' &&

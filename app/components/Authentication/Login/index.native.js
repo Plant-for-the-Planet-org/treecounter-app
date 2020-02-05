@@ -157,7 +157,7 @@ export default class Login extends Component {
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      autoCorrect="false"
+                      autoCorrect={false}
                       returnKeyType="next"
                       onChangeText={props.handleChange('_username')}
                       onBlur={props.handleBlur('_username')}

@@ -33,13 +33,13 @@ export default class UserContributions extends React.Component {
     }`;
     return (
       <NativeMapView
-        mapType={'standard'}
+        mapType={'satellite'}
         mode={'single-tree'}
         geoLocation={geoLatLong}
         searchPlacesBox={false}
         mapStyle={{
-          height: Dimensions.get('window').height * 0.4,
-          marginBottom: 1
+          height: Dimensions.get('window').height * 0.4
+          // marginBottom:
         }}
         mapPadding={{ top: 0, right: 0, bottom: 14, left: 0 }}
         customMapStyle={mapStyle}

@@ -625,7 +625,7 @@ class NativeMapView extends Component {
         right: 0,
         bottom: this.props.fullScreen
           ? height * 0.1
-          : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.012),
+          : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.02),
         left: 0
       };
       const edgePadding =
@@ -641,7 +641,7 @@ class NativeMapView extends Component {
     );
     return (
       <MapView
-        //mapType={'standard'}
+        //mapType={'satellite'}
         ref={ref => (this.map = ref)}
         //provider={PROVIDER_GOOGLE}
         //provider={this.props.provider}

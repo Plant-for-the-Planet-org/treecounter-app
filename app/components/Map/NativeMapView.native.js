@@ -625,7 +625,7 @@ class NativeMapView extends Component {
         right: 0,
         bottom: this.props.fullScreen
           ? height * 0.1
-          : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.02),
+          : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.05),
         left: 0
       };
       const edgePadding =

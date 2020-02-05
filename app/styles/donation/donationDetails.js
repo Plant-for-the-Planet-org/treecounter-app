@@ -159,7 +159,6 @@ export default EStyleSheet.create({
     maxWidth: 62
   },
   selectedView: {
-    marginRight: 15,
     borderRadius: 7,
     borderColor: '#89b53a',
     borderWidth: 2,

@@ -14,8 +14,6 @@ import styles from '../../styles/newUserContributions/userContributions';
 import { editIcon, deleteIcon, closeIcon } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
-import MapView, { Marker } from 'react-native-maps';
-import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import PopupNative from '../Common/ModalDialog/Popup.native';
 import NativeMapView, { mapStyle } from '../Map/NativeMapView.native';
 

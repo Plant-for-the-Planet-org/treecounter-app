@@ -19,6 +19,7 @@ import ImagePicker from 'react-native-image-picker';
 import buttonStyles from '../../../styles/common/button.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
+import CardLayout from '../../Common/Card';
 
 export const FormikForm = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
@@ -126,32 +127,40 @@ export const FormikForm = props => {
                 setFieldValue={props.setFieldValue}
               />
             </KeyboardAwareScrollView>
+            <CardLayout
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              {buttonType === 'competition' ? (
+                <TouchableOpacity
+                  style={buttonStyles.actionButtonTouchable}
+                  onPress={props.handleSubmit}
+                >
+                  <View style={buttonStyles.actionButtonView}>
+                    <Text style={buttonStyles.actionButtonText}>
+                      {i18n.t('label.create_competition')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ) : null}
 
-            {buttonType === 'competition' ? (
-              <TouchableOpacity
-                style={buttonStyles.actionButtonTouchable}
-                onPress={props.handleSubmit}
-              >
-                <View style={buttonStyles.actionButtonView}>
-                  <Text style={buttonStyles.actionButtonText}>
-                    {i18n.t('label.create_competition')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ) : null}
-
-            {buttonType === '>' ? (
-              <TouchableOpacity
-                style={buttonStyles.actionButtonSmallTouchable}
-                onPress={props.handleSubmit}
-              >
-                <Image
-                  source={forward}
-                  resizeMode="cover"
-                  style={buttonStyles.actionButtonSmallImage}
-                />
-              </TouchableOpacity>
-            ) : null}
+              {buttonType === '>' ? (
+                <TouchableOpacity
+                  style={buttonStyles.actionButtonSmallTouchable}
+                  onPress={props.handleSubmit}
+                >
+                  <Image
+                    source={forward}
+                    resizeMode="cover"
+                    style={buttonStyles.actionButtonSmallImage}
+                  />
+                </TouchableOpacity>
+              ) : null}
+            </CardLayout>
           </View>
         </>
       )}
@@ -182,7 +191,6 @@ export function AccessPicker(props) {
   return (
     <View>
       <Dropdown
-        ref={ref => (this.dropdown = ref)}
         label={i18n.t('label.competition_access')}
         data={data}
         onChangeText={onChange}

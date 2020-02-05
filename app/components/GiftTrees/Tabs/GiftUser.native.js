@@ -14,6 +14,7 @@ import i18n from '../../../locales/i18n';
 import styles from '../../../styles/gifttrees/giftrees';
 import buttonStyles from '../../../styles/common/button.native';
 import { forward } from './../../../assets';
+import CardLayout from '../../Common/Card';
 export default class GiftUser extends Component {
   constructor(props) {
     super(props);
@@ -106,37 +107,50 @@ export default class GiftUser extends Component {
             placeholder={i18n.t('label.gift_message')}
           />
         </KeyboardAwareScrollView>
-        {this.state.buttonType === 'next' ? (
-          <TouchableOpacity
-            style={[
-              buttonStyles.actionButtonTouchable,
-              { top: undefined, bottom: '14%' }
-            ]}
-            onPress={this.onNextClick}
-          >
-            <View style={buttonStyles.actionButtonView}>
-              <Text style={buttonStyles.actionButtonText}>
-                {i18n.t('label.next')}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ) : null}
+        <CardLayout
+          style={[
+            {
+              top: undefined,
+              bottom: '14%',
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }
+          ]}
+        >
+          {this.state.buttonType === 'next' ? (
+            <TouchableOpacity
+              style={[
+                buttonStyles.actionButtonTouchable,
+                { top: undefined, bottom: '14%' }
+              ]}
+              onPress={this.onNextClick}
+            >
+              <View style={buttonStyles.actionButtonView}>
+                <Text style={buttonStyles.actionButtonText}>
+                  {i18n.t('label.next')}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ) : null}
 
-        {this.state.buttonType === '>' ? (
-          <TouchableOpacity
-            style={[
-              buttonStyles.actionButtonSmallTouchable,
-              { top: undefined, bottom: '20%' }
-            ]}
-            onPress={this.onNextClick}
-          >
-            <Image
-              source={forward}
-              resizeMode="cover"
-              style={buttonStyles.actionButtonSmallImage}
-            />
-          </TouchableOpacity>
-        ) : null}
+          {this.state.buttonType === '>' ? (
+            <TouchableOpacity
+              style={[
+                buttonStyles.actionButtonSmallTouchable,
+                { top: undefined, bottom: '20%' }
+              ]}
+              onPress={this.onNextClick}
+            >
+              <Image
+                source={forward}
+                resizeMode="cover"
+                style={buttonStyles.actionButtonSmallImage}
+              />
+            </TouchableOpacity>
+          ) : null}
+        </CardLayout>
       </View>
     );
   }

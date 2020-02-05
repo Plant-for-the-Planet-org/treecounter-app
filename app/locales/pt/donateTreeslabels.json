@@ -15,5 +15,6 @@
   "individual_name": "Individual",
   "next": "Próximo",
   "delete_project": "Excluir projeto",
-  "thankyou_planting": "Obrigado por plantar {{count}} árvores conosco! Enviamos um e-mail de confirmação para você. Se sua doação foi para um projeto dedutível de impostos, você receberá um e-mail com um recibo da doação em breve."
+  "thankyou_planting": "Obrigado por plantar {{count}} árvores conosco! Enviamos um e-mail de confirmação para você. Se sua doação foi para um projeto dedutível de impostos, você receberá um e-mail com um recibo da doação em breve.",
+  "donate_trees_text": "Árvores"
 }

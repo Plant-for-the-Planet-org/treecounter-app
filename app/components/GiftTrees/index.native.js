@@ -4,6 +4,7 @@ import GiftTabView from './GiftTabs';
 import HeaderStatic from './../Header/HeaderStatic';
 import { View, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import i18n from '../../locales/i18n';
 
 export default class GiftTrees extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class GiftTrees extends Component {
       <>
         <SafeAreaView style={{ flex: 1 }}>
           <HeaderStatic
-            title={'Gift Trees'}
+            title={i18n.t('label.gift_trees')}
             navigation={this.props.navigation}
           />
           <View style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }} />

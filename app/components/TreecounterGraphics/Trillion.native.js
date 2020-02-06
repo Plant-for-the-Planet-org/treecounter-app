@@ -460,7 +460,7 @@ class Trillion extends PureComponent {
         <>
           <SafeAreaView style={{ flex: 1 }}>
             <HeaderStatic
-              title={'Explore'}
+              title={i18n.t('label.explore')}
               navigation={this.props.navigation}
             />
             <Animated.View

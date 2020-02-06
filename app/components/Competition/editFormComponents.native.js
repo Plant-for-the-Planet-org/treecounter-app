@@ -55,7 +55,9 @@ export const FormikForm = props => {
               resetScrollToCoords={{ x: 0, y: 0 }}
               scrollEnabled
             >
-              <Text style={styles.add_competition_title}>Edit Competition</Text>
+              <Text style={styles.add_competition_title}>
+                {i18n.t('label.edit_competition')}
+              </Text>
               <View>
                 <TextField
                   label={i18n.t('label.competition_name')}

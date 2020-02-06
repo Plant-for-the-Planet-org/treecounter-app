@@ -40,7 +40,6 @@ export default class UserContributions extends React.Component {
         mapStyle={{
           height: Dimensions.get('window').height * 0.4
           // marginBottom:
-          // , position: 'absolute'
         }}
         mapPadding={{ top: 0, right: 0, bottom: 14, left: 0 }}
         customMapStyle={mapStyle}

@@ -72,7 +72,7 @@ class UserContributionsDetails extends React.Component {
       giverSlug,
       cardType,
       contributionType,
-      plantProjectId,
+      // plantProjectId,
       isGift,
       redemptionCode,
       redemptionDate,
@@ -94,7 +94,7 @@ class UserContributionsDetails extends React.Component {
     let treeClassification = undefined;
     let contributionPerson = undefined;
     let contributionPersonSlug = undefined;
-    let selectedPlantProjectDetails = undefined;
+    // let selectedPlantProjectDetails = undefined;
     let headerText = undefined;
     let videoUrl = undefined;
     let hasGeoLocationError = undefined;

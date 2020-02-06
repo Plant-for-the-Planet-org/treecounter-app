@@ -1,21 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 
-import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import userHomeStyles from '../../styles/user-home.native';
 import UserProfileImage from '../Common/UserProfileImage';
 
-import * as images from '../../assets';
-
 const TreecounterHeader = ({
   caption,
-  profileType,
   logo,
-  isUserFollowerBool,
   /* isUserLoggedIn, */
-  showFollow,
-  followChanged,
+  // showFollow,
+  // followChanged,
   containerStyle
 }) => {
   return (

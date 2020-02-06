@@ -10,7 +10,6 @@ import {
   SafeAreaView,
   Image
 } from 'react-native';
-import SupportButton from './SupportButton';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
@@ -20,11 +19,9 @@ import { delimitNumbers } from '../../utils/utils';
 import stylesPublicPage from '../../styles/public-page';
 import i18n from '../../locales/i18n.js';
 import HeaderNew from './../Header/HeaderNew.native';
-import FullHeightButton from '../Common/Button/FullHeightButton';
 import { isMyself, isUserFollower, amISupporting } from './utils';
 import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
-import styles from '../../styles/selectplantproject/selectplantproject-full';
 import { white_heart } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 
@@ -144,11 +141,11 @@ class PublicTreeCounter extends React.Component {
     const isUserLoggedIn = null !== currentUserProfile;
     const showFollow = !isMyself(treecounter, currentUserProfile);
 
-    const supportProps = {
-      active: !amISupporting(treecounter, currentUserProfile),
-      isUserLoggedIn,
-      caption
-    };
+    // const supportProps = {
+    //   active: !amISupporting(treecounter, currentUserProfile),
+    //   isUserLoggedIn,
+    //   caption
+    // };
     const headerProps = {
       caption,
       profileType: profileType,

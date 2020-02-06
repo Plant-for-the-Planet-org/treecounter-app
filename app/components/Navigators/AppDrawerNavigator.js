@@ -24,7 +24,6 @@ import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
 import UserContributionDetails from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
-import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
 import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
@@ -126,7 +125,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
       ['about_us']: { screen: AboutUsContainer },
-      ['contribution_details']: { screen: UserContributionDetails },
+
       ['license_info_list']: { screen: LicenseInfoList },
       [getLocalRoute('app_imprint')]: {
         screen: ImprintContainer
@@ -208,25 +207,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const deleteContributionNavigator = createStackNavigator(
-    {
-      ['delete_contribution']: {
-        screen: ConfirmContributionDeletionModal
-      }
-    },
-    {
-      headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    }
-  );
+
   const welcomeScreenNavigator = createStackNavigator(
     {
       ['welcome_screen']: { screen: WelcomScreenSlider }
@@ -354,6 +335,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       ['app_unfulfilled_pledge_events']: {
         screen: UnfulfilledPledgeEvents
       },
+      ['contribution_details']: {
+        screen: UserContributionDetails
+      },
       ['app_redeem']: {
         screen: isLoggedIn ? RedemptionContainer : LoginContainer,
         path: 'redeem/:type/:code'
@@ -419,7 +403,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       searchNavigator: searchNavigator,
       deleteProfileNavigator,
-      deleteContributionNavigator,
       welcomeScreenNavigator
     },
     {

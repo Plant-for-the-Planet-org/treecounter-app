@@ -6,8 +6,8 @@ import TouchableItem from '../../Common/TouchableItem.native';
 const CardLayout = ({ children, style, onPress, withoutShadow }) => (
   <TouchableItem
     style={[
-      withoutShadow ? styles.cardContainerWithoutShadow : styles.cardContainer,      style,
-
+      withoutShadow ? styles.cardContainerWithoutShadow : styles.cardContainer,
+      style
     ]}
     onPress={onPress}
   >

@@ -22,5 +22,7 @@
   "donation_detail": "Spendeninfo",
   "donor_detail": "Spenderinfo",
   "try_again": "Noch einmal versuchen",
-  "return_home": "Zurück zur Startseite"
+  "return_home": "Zurück zur Startseite",
+  "donate_trees_text": "Bäume",
+  "custom_tree": "Benutzerdefiniert"
 }

@@ -20,31 +20,21 @@ const TreecounterHeader = ({
 }) => {
   return (
     <View style={[userHomeStyles.userProfileContainer, containerStyle]}>
-      <UserProfileImage profileImage={logo} />
+      <UserProfileImage
+        imageStyle={userHomeStyles.userProfileImage}
+        profileImage={logo}
+      />
       <View style={userHomeStyles.userInfo}>
         <View style={userHomeStyles.userInfoName}>
           <Text style={userHomeStyles.nameStyle}>{caption}</Text>
         </View>
         <View style={userHomeStyles.userInfoProfileType}>
-          <Image
-            style={userHomeStyles.profileTypeImage}
-            resizeMode="contain"
-            source={
-              profileType === 'education'
-                ? images['schoolIcon']
-                : profileType === 'tpo'
-                  ? images['tpoIcon']
-                  : profileType === 'company'
-                    ? images['companyIcon']
-                    : images['individualIcon']
-            }
-          />
-          {showFollow ? (
+          {/* {showFollow ? (
             <FollowLabelButton
               isSubscribed={isUserFollowerBool}
               onClick={() => followChanged()}
             />
-          ) : null}
+          ) : null} */}
         </View>
       </View>
     </View>

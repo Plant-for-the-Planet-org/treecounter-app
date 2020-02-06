@@ -125,7 +125,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: ActivateAccountContainer
       },
       ['pickup_profile_modal']: ProfilePickerModal,
-      [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
       ['about_us']: { screen: AboutUsContainer },
 
       ['license_info_list']: { screen: LicenseInfoList },
@@ -316,6 +315,11 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       ['app_pledge_events']: {
         screen: PledgeEvents
       },
+      [getLocalRoute('app_treecounter')]: {
+        screen: PublicTreeCounterContainer,
+        navigationOptions: { header: null }
+      },
+
       ['app_registerTrees']: {
         screen: isLoggedIn ? RegisterTrees : LoginContainer,
         navigationOptions: { header: null }

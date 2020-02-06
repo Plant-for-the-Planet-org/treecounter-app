@@ -293,150 +293,170 @@ class ContributionCard extends React.Component {
 
     let styles = myTreesStyle(labelColor, borderColor);
 
-    return contributionType === 'donation' ? (
-      <TouchableOpacity
-        style={styles.singleRedeemObject}
-        onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
-        }}
-      >
-        <View>
-          {plantDate ? (
-            <View style={styles.redeemObjectDate}>
-              <Text style={styles.redeemObjectDateText}>
-                {formatDate(plantDate)}
-              </Text>
-            </View>
-          ) : null}
+    renderCard = () => {
+      if (contributionType === 'donation') {
+        return (
+          <TouchableOpacity
+            style={styles.singleRedeemObject}
+            onPress={() => {
+              this.props.navigation.navigate('contribution_details', {
+                contribution,
+                titleParam: plantProjectName || tpoName || treeSpecies
+              });
+            }}
+          >
+            <View>
+              {plantDate ? (
+                <View style={styles.redeemObjectDate}>
+                  <Text style={styles.redeemObjectDateText}>
+                    {formatDate(plantDate)}
+                  </Text>
+                </View>
+              ) : null}
 
-          <View style={styles.redeemObjectTreesContainer}>
-            <View style={styles.row1}>
-              <Text style={styles.redeemObjectTitle}>Tree Donation</Text>
-              <Text style={styles.redeemObjectTrees}>
-                {delimitNumbers(treeCount)}
-              </Text>
-            </View>
-            <View style={styles.row2}>
-              <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-              <Text style={styles.redeemObjectSubTitle}>
-                {treeCount > 1 ? i18n.t('label.trees') : i18n.t('label.tree')}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    ) : contributionType === 'planting' ? (
-      <TouchableOpacity
-        style={styles.singleRedeemObject}
-        onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
-        }}
-      >
-        <View>
-          {plantDate ? (
-            <View style={styles.redeemObjectDate}>
-              <Text style={styles.redeemObjectDateText}>
-                {formatDate(plantDate)}
-              </Text>
-            </View>
-          ) : null}
-
-          <View style={styles.redeemObjectTreesContainer}>
-            <View style={styles.row1}>
-              <Text style={styles.redeemObjectTitle}>Registered Trees</Text>
-              <Text style={styles.redeemObjectTrees}>
-                {delimitNumbers(treeCount)}
-              </Text>
-            </View>
-            <View style={styles.row2}>
-              <Text style={styles.redeemObjectSubTitle}>
-                {plantProjectLine}
-              </Text>
-              <Text style={styles.redeemObjectSubTitle}>
-                {treeCount > 1 ? i18n.t('label.trees') : i18n.t('label.tree')}
-              </Text>
-            </View>
-            {dedicateActionLine ? (
-              <View style={styles.row2}>
-                <Text style={styles.redeemObjectSubTitle}>
-                  {dedicateActionLine}
-                </Text>
+              <View style={styles.redeemObjectTreesContainer}>
+                <View style={styles.row1}>
+                  <Text style={styles.redeemObjectTitle}>Tree Donation</Text>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                  </Text>
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {treeCount > 1
+                      ? i18n.t('label.trees')
+                      : i18n.t('label.tree')}
+                  </Text>
+                </View>
               </View>
-            ) : null}
-          </View>
-        </View>
-      </TouchableOpacity>
-    ) : contribution.type === 'tpo-coupon' ? (
-      <TouchableOpacity
-        style={styles.singleRedeemObject}
-        onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
-        }}
-      >
-        <View>
-          {redemptionDate ? (
-            <View style={styles.redeemObjectDate}>
-              <Text style={styles.redeemObjectDateText}>
-                {formatDate(redemptionDate)}
-              </Text>
             </View>
-          ) : null}
+          </TouchableOpacity>
+        );
+      } else if (contributionType === 'planting') {
+        return (
+          <TouchableOpacity
+            style={styles.singleRedeemObject}
+            onPress={() => {
+              this.props.navigation.navigate('contribution_details', {
+                contribution,
+                titleParam: plantProjectName || tpoName || treeSpecies
+              });
+            }}
+          >
+            <View>
+              {plantDate ? (
+                <View style={styles.redeemObjectDate}>
+                  <Text style={styles.redeemObjectDateText}>
+                    {formatDate(plantDate)}
+                  </Text>
+                </View>
+              ) : null}
 
-          <View style={styles.redeemObjectTreesContainer}>
-            <View style={styles.row1}>
-              <Text style={styles.redeemObjectTitle}>Redeemed Trees</Text>
-              <Text style={styles.redeemObjectTrees}>
-                {delimitNumbers(treeCount)}
-              </Text>
+              <View style={styles.redeemObjectTreesContainer}>
+                <View style={styles.row1}>
+                  <Text style={styles.redeemObjectTitle}>Registered Trees</Text>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                  </Text>
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {plantProjectLine}
+                  </Text>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {treeCount > 1
+                      ? i18n.t('label.trees')
+                      : i18n.t('label.tree')}
+                  </Text>
+                </View>
+                {dedicateActionLine ? (
+                  <View style={styles.row2}>
+                    <Text style={styles.redeemObjectSubTitle}>
+                      {dedicateActionLine}
+                    </Text>
+                  </View>
+                ) : null}
+              </View>
             </View>
-            <View style={styles.row2}>
-              <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-              <Text style={styles.redeemObjectSubTitle}>
-                {treeCount > 1 ? i18n.t('label.trees') : i18n.t('label.tree')}
-              </Text>
+          </TouchableOpacity>
+        );
+      } else if (contribution.type === 'tpo-coupon') {
+        return (
+          <TouchableOpacity
+            style={styles.singleRedeemObject}
+            onPress={() => {
+              this.props.navigation.navigate('contribution_details', {
+                contribution,
+                titleParam: plantProjectName || tpoName || treeSpecies
+              });
+            }}
+          >
+            <View>
+              {redemptionDate ? (
+                <View style={styles.redeemObjectDate}>
+                  <Text style={styles.redeemObjectDateText}>
+                    {formatDate(redemptionDate)}
+                  </Text>
+                </View>
+              ) : null}
+
+              <View style={styles.redeemObjectTreesContainer}>
+                <View style={styles.row1}>
+                  <Text style={styles.redeemObjectTitle}>Redeemed Trees</Text>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                  </Text>
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {treeCount > 1
+                      ? i18n.t('label.trees')
+                      : i18n.t('label.tree')}
+                  </Text>
+                </View>
+              </View>
             </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    ) : (
-      <TouchableOpacity
-        style={styles.singleRedeemObject}
-        onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
-        }}
-      >
-        <View>
-          <View style={styles.redeemObjectTreesContainer}>
-            <View style={styles.row1}>
-              <Text style={styles.redeemObjectTitle}>
-                Gift from {contribution.giverName}
-              </Text>
-              <Text style={styles.redeemObjectTrees}>
-                {delimitNumbers(treeCount)}
-              </Text>
+          </TouchableOpacity>
+        );
+      } else {
+        return (
+          <TouchableOpacity
+            style={styles.singleRedeemObject}
+            onPress={() => {
+              this.props.navigation.navigate('contribution_details', {
+                contribution,
+                titleParam: plantProjectName || tpoName || treeSpecies
+              });
+            }}
+          >
+            <View>
+              <View style={styles.redeemObjectTreesContainer}>
+                <View style={styles.row1}>
+                  <Text style={styles.redeemObjectTitle}>
+                    Gift from {contribution.giverName}
+                  </Text>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                  </Text>
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {treeCount > 1
+                      ? i18n.t('label.trees')
+                      : i18n.t('label.tree')}
+                  </Text>
+                </View>
+              </View>
             </View>
-            <View style={styles.row2}>
-              <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-              <Text style={styles.redeemObjectSubTitle}>
-                {treeCount > 1 ? i18n.t('label.trees') : i18n.t('label.tree')}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
+          </TouchableOpacity>
+        );
+      }
+    };
+
+    return renderCard();
   }
 }
 

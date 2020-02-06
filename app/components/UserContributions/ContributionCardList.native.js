@@ -14,6 +14,7 @@ const ContributionCardList = props => {
               contribution={contribution}
               deleteContribution={deleteContribution}
               key={contribution.id}
+              navigation={props.navigation}
             />
           )
       )
@@ -26,6 +27,7 @@ const ContributionCardList = props => {
                 contribution={contribution}
                 deleteContribution={deleteContribution}
                 key={contribution.id}
+                navigation={props.navigation}
               />
             )
         );

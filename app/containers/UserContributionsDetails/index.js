@@ -74,5 +74,5 @@ UserContributionsDetailsContainer.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   navigation: PropTypes.any,
   deleteContribution: PropTypes.func,
-  plantProjects: PropTypes.object
+  plantProjects: PropTypes.any
 };

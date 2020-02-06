@@ -101,9 +101,9 @@ class UserContributionsDetails extends React.Component {
     let locationErrorText = '';
     let contributionOrPlantedImages = contributionImages;
 
-    console.log('\x1b[45mcontribution', this.props.contribution);
-    console.log('plantProjects', this.props.plantProjects);
-    console.log('\x1b[0m');
+    // console.log('\x1b[45mcontribution', this.props.contribution);
+    // console.log('plantProjects', this.props.plantProjects);
+    // console.log('\x1b[0m');
 
     // sets the header text
     // if treeType is null then header text is treecount and type of contribution
@@ -377,7 +377,7 @@ UserContributionsDetails.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   navigation: PropTypes.any,
   contribution: PropTypes.object.isRequired,
-  plantProjects: PropTypes.object,
+  plantProjects: PropTypes.any,
   deleteContribution: PropTypes.func
 };
 

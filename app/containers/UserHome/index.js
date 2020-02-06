@@ -25,7 +25,7 @@ class UserHomeContainer extends React.Component {
   }
   render() {
     const { treecounterData, currentUserProfile, navigation } = this.props;
-    console.log(this.state.loadSvg);
+    //console.log(this.state.loadSvg);
 
     return [
       navigation ? (

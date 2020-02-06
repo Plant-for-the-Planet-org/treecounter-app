@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { postDirectRequest } from '../../utils/api';
-import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 import {
   profile,
   country,
@@ -155,10 +154,6 @@ class SearchAutosuggest extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ treecounterLookupAction }, dispatch);
-};
 
 SearchAutosuggest.propTypes = {
   onChangeName: PropTypes.func,

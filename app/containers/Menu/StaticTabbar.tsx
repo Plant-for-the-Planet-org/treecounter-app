@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-    View, StyleSheet, TouchableWithoutFeedback, Dimensions, Text, Image, TouchableHighlight
+    View, StyleSheet, TouchableWithoutFeedback, Dimensions, Text, Image
 } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { updateRoute } from './../../helpers/routerHelper/tabrouteHelper.native';
@@ -50,7 +50,7 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
                         const iconColor = key === this.state.selectedTab ? '#89b53a' : "#4d5153";
                         return (
                             <React.Fragment {...{ key }}>
-                                <TouchableHighlight underlayColor="rgba(147,191,69,.25)" style={{ paddingHorizontal: 12 }} onPress={() => onPress(key)}>
+                                <TouchableWithoutFeedback onPress={() => onPress(key)}>
                                     {key === 2 ?
                                         (<View style={[styles.donatetab]}>
                                             <View style={{ height: 72, width: 72, borderRadius: 36, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', bottom: 10 }}>
@@ -68,7 +68,7 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
                                                 <Text style={key === this.state.selectedTab ? styles.tabTextGreen : styles.tabText}>{tab.title}</Text>
                                             </View>)}
 
-                                </TouchableHighlight>
+                                </TouchableWithoutFeedback>
                             </React.Fragment>
                         );
                     })
@@ -81,8 +81,6 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        justifyContent: 'space-around',
-        height: 64
     },
     tab: {
         flex: 1,

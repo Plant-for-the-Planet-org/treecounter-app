@@ -14,7 +14,6 @@ import i18n from '../../../locales/i18n';
 import styles from '../../../styles/gifttrees/giftrees';
 import buttonStyles from '../../../styles/common/button.native';
 import { forward } from './../../../assets';
-import CardLayout from '../../Common/Card';
 export default class GiftUser extends Component {
   constructor(props) {
     super(props);

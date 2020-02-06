@@ -282,7 +282,7 @@ export default class UserHome extends Component {
                 <View style={styles.userInfo}>
                   <View style={styles.userInfoName}>
                     <Text style={styles.nameStyle}>
-                      {userProfile.displayName}
+                      {userProfile.treecounter.displayName}
                     </Text>
                     {/* <Text style={styles.nameStyle2}>
                       {' '}

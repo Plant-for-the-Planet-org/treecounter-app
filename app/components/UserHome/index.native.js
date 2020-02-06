@@ -436,7 +436,7 @@ export default class UserHome extends Component {
           ) : null}
 
           {this.props.userContributions.length ? (
-            <View style={{ paddingBottom: 72, marginTop: 20 }}>
+            <View style={{ marginTop: 20 }}>
               <Text style={styles.sectionTitle}>
                 {i18n.t('label.my_trees')}
               </Text>

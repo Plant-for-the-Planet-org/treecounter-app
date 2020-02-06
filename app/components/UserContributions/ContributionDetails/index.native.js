@@ -152,24 +152,32 @@ class UserContributionsDetails extends React.Component {
     }
 
     // selects the matching plant project with the contribution project id
-    if (plantProjects.length > 0) {
-      for (let i = 0; i <= plantProjects.length; ) {
-        if (plantProjects[i].id === plantProjectId) {
-          selectedPlantProjectDetails = plantProjects[i];
+    // if (plantProjects.length > 0) {
+    //   for (let i = 0; i <= plantProjects.length; ) {
+    //     if (plantProjects[i].id === plantProjectId) {
+    //       selectedPlantProjectDetails = plantProjects[i];
 
-          // takes video url from plant project
-          videoUrl = selectedPlantProjectDetails.videoUrl;
+    //       // takes video url from plant project
+    //       videoUrl = selectedPlantProjectDetails.videoUrl;
 
-          // if card type in not planted the shows the image from
-          // plant projects else shows images from contribution if any
-          if (cardType !== 'planted') {
-            contributionOrPlantedImages =
-              selectedPlantProjectDetails.plantProjectImages;
-          }
-          plantProjectSlug = selectedPlantProjectDetails.slug;
-          break;
-        }
+    //       // if card type in not planted the shows the image from
+    //       // plant projects else shows images from contribution if any
+    //       if (cardType !== 'planted') {
+    //         contributionOrPlantedImages =
+    //           selectedPlantProjectDetails.plantProjectImages;
+    //       }
+    //       plantProjectSlug = selectedPlantProjectDetails.slug;
+    //       break;
+    //     }
+    //   }
+    // }
+
+    if (plantProjects[0]) {
+      videoUrl = plantProjects[0].videoUrl;
+      if (cardType !== 'planted') {
+        contributionOrPlantedImages = plantProjects[0].plantProjectImages;
       }
+      plantProjectSlug = plantProjects[0].slug;
     }
 
     // // adds planted by if plantProjectName is present

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import {
   cameraSolid,
@@ -24,9 +24,13 @@ export const FormikForm = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     competitionFormSchema
   );
-
-  const buttonType = props.buttonType;
-
+  const [buttonType, setButtonType] = useState(props.buttonType);
+  useEffect(
+    () => {
+      setButtonType(props.buttonType);
+    },
+    [props.buttonType]
+  );
   return (
     <Formik
       initialValues={props.initialValues}
@@ -126,10 +130,12 @@ export const FormikForm = props => {
                 setFieldValue={props.setFieldValue}
               />
             </KeyboardAwareScrollView>
-
             {buttonType === 'competition' ? (
               <TouchableOpacity
-                style={buttonStyles.actionButtonTouchable}
+                style={[
+                  buttonStyles.actionButtonTouchable,
+                  { top: undefined, bottom: '1%', padding: 20 }
+                ]}
                 onPress={props.handleSubmit}
               >
                 <View style={buttonStyles.actionButtonView}>
@@ -142,7 +148,10 @@ export const FormikForm = props => {
 
             {buttonType === '>' ? (
               <TouchableOpacity
-                style={buttonStyles.actionButtonSmallTouchable}
+                style={[
+                  buttonStyles.actionButtonSmallTouchable,
+                  { top: undefined, bottom: '2%' }
+                ]}
                 onPress={props.handleSubmit}
               >
                 <Image
@@ -182,7 +191,6 @@ export function AccessPicker(props) {
   return (
     <View>
       <Dropdown
-        ref={ref => (this.dropdown = ref)}
         label={i18n.t('label.competition_access')}
         data={data}
         onChangeText={onChange}

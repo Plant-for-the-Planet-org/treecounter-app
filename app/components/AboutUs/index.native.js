@@ -5,7 +5,7 @@ import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
-import TabContainer from '../../containers/Menu/TabContainer';
+// import TabContainer from '../../containers/Menu/TabContainer';
 //const LicenseInfo = require('./LicenseInfo.json');
 
 //Run license-checker --production  --json > license.json to fetch license info from package.json:
@@ -62,7 +62,7 @@ class AboutUs extends Component {
             title={i18n.t('label.open_source_license')}
           />
         </ScrollView>
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </View>
     );
   }

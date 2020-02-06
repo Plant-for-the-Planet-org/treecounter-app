@@ -4,8 +4,7 @@ import mapTemplateStyle from '../../styles/mapTemplate.native';
 import MapboxMap from '../Map/NativeMapView.native';
 
 export function MapTemplate(locals) {
-  let errorBlockStyle = locals.stylesheet && locals.stylesheet.
-    errorBlock;
+  let errorBlockStyle = locals.stylesheet && locals.stylesheet.errorBlock;
   const error =
     locals.hasError && locals.error ? (
       <Text accessibilityLiveRegion="polite" style={errorBlockStyle}>

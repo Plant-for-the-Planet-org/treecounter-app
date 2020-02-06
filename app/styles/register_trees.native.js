@@ -259,5 +259,8 @@ export default EStyleSheet.create({
         rotate: '45deg'
       }
     ]
+  },
+  buttonContainer: {
+    marginTop: 30
   }
 });

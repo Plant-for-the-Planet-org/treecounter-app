@@ -120,7 +120,7 @@ export default class Login extends Component {
           {props => (
             <>
               <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : null}
+                //behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={{
                   minHeight: '100%'
                 }}
@@ -131,15 +131,15 @@ export default class Login extends Component {
                     {
                       backgroundColor: backgroundColor,
                       padding: 24,
-                      paddingTop: Platform.OS === 'ios' ? 120 : 80,
+                      paddingTop: Platform.OS === 'ios' ? 110 : 80,
                       minHeight: '100%'
                     }
                   ]}
                   enableOnAndroid
                   keyboardDismissMode="on-drag"
-                  keyboardShouldPersistTaps="always"
+                  //  keyboardShouldPersistTaps="always"
                   resetScrollToCoords={{ x: 0, y: 0 }}
-                  scrollEnabled
+                  //  scrollEnabled
                 >
                   <Text style={styles.loginTitle}>
                     {i18n.t('label.log-in')}
@@ -157,6 +157,7 @@ export default class Login extends Component {
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      autoCorrect={false}
                       returnKeyType="next"
                       onChangeText={props.handleChange('_username')}
                       onBlur={props.handleBlur('_username')}

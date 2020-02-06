@@ -24,13 +24,12 @@ import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
 import UserContributionDetails from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
-import ConfirmContributionDeletionModal from '../../components/UserContributions/ConfirmDelete';
 import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
-import BottomTabContainer from '../../containers/Menu/TabContainer';
+import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
+
 import GiftTrees from '../../containers/GiftTrees';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
-import RegisterTrees from '../../containers/RegisterTrees';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
 import EditUserProfile from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
@@ -126,7 +125,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       ['pickup_profile_modal']: ProfilePickerModal,
       [getLocalRoute('app_treecounter')]: PublicTreeCounterContainer,
       ['about_us']: { screen: AboutUsContainer },
-      ['contribution_details']: { screen: UserContributionDetails },
+
       ['license_info_list']: { screen: LicenseInfoList },
       [getLocalRoute('app_imprint')]: {
         screen: ImprintContainer
@@ -208,25 +207,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const deleteContributionNavigator = createStackNavigator(
-    {
-      ['delete_contribution']: {
-        screen: ConfirmContributionDeletionModal
-      }
-    },
-    {
-      headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    }
-  );
+
   const welcomeScreenNavigator = createStackNavigator(
     {
       ['welcome_screen']: { screen: WelcomScreenSlider }
@@ -286,9 +267,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_userHome')]: {
         screen: isLoggedIn ? UserHomeContainer : LoginContainer
       },
-      [getLocalRoute('app_registerTrees')]: {
-        screen: isLoggedIn ? RegisterTrees : LoginContainer
-      },
+      // [getLocalRoute('app_registerTrees')]: {
+      //   screen: isLoggedIn ? RegisterTrees : LoginContainer
+      // },
       [getLocalRoute('app_competitions')]: {
         screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
@@ -305,7 +286,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         animatedEnable: true,
         swipeEnable: false
       },
-      tabBarComponent: BottomTabContainer
+      tabBarComponent: NewBottomNavigator
     }
   );
 
@@ -353,6 +334,9 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_unfulfilled_pledge_events']: {
         screen: UnfulfilledPledgeEvents
+      },
+      ['contribution_details']: {
+        screen: UserContributionDetails
       },
       ['app_redeem']: {
         screen: isLoggedIn ? RedemptionContainer : LoginContainer,
@@ -419,7 +403,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       searchNavigator: searchNavigator,
       deleteProfileNavigator,
-      deleteContributionNavigator,
       welcomeScreenNavigator
     },
     {

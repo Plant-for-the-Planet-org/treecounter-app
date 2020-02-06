@@ -44,7 +44,11 @@ export default class RegisterTrees extends Component {
     this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
 
-  _handleIndexChange = index => this.setState({ index });
+  _handleIndexChange = index =>
+    this.setState({
+      index,
+      mode: index === 0 ? 'single-tree' : 'multiple-trees'
+    });
 
   handleGeoLocationChange(/* geoLocation */) {
     //console.log(geoLocation);

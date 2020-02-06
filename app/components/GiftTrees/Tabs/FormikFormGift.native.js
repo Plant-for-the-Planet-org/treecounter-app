@@ -77,7 +77,7 @@ export default class FormikFormGift extends Component {
                   resetScrollToCoords={{ x: 0, y: 0 }}
                   scrollEnabled
                 >
-                  <View style={{ paddingBottom: 0 }}>
+                  <View style={{ paddingTop: 20, paddingBottom: 0 }}>
                     <Text style={styles.add_competition_title}>
                       {i18n.t('label.gift_receipient')}
                     </Text>

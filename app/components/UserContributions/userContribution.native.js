@@ -1,104 +1,246 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import i18n from '../../locales/i18n.js';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  Platform
+} from 'react-native';
 import styles from '../../styles/newUserContributions/userContributions';
-
-import EditIcon from '../../assets/images/pencil.png';
-import DeleteIcon from '../../assets/images/baseline_delete_outline.png';
-import ArrowRight from '../../assets/images/arrow-right.png';
-import CalendarIcon from '../../assets/images/green-calendar.png';
-import TreeIcon from '../../assets/images/green-tree.png';
+// import ShareIcon from '../../assets/images/share.png';
+import { editIcon, deleteIcon, closeIcon } from '../../assets';
+import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
+import MapView, { Marker } from 'react-native-maps';
+import Smalltreewhite from '../../assets/images/smalltreewhite.png';
+import PopupNative from '../Common/ModalDialog/Popup.native';
 
 export default class UserContributions extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
+    this.state = { showDeleteConfirmation: false };
   }
 
   _handleIndexChange = index => this.setState({ index });
 
+  getMapComponent = ({ geoLongitude, geoLatitude }) => {
+    let dummyLatLong = {
+      latitude: geoLatitude,
+      longitude: geoLongitude,
+      latitudeDelta: 0.0000922,
+      longitudeDelta: 0.00421
+    };
+    let markerLatLong = {
+      latitude: geoLatitude,
+      longitude: geoLongitude
+    };
+    return (
+      <MapView
+        mapType={'satellite'}
+        style={{ flex: 1 }}
+        initialRegion={dummyLatLong}
+      >
+        <Marker coordinate={markerLatLong}>
+          <View style={styles.markerCircle}>
+            <Image source={Smalltreewhite} resizeMode={'contain'} />
+          </View>
+        </Marker>
+      </MapView>
+    );
+  };
+
   render() {
+    const { showDeleteConfirmation } = this.state;
     const props = this.props;
     const {
       treeCount,
-      location,
-      dedicatedTo,
+      plantProjectName,
+      plantProjectSlug,
+      headerText,
       plantedDate,
-      contributionTypeText,
+      treeClassification,
+      contributionPersonPrefix,
+      contributionPerson,
+      contributionPersonSlug,
+      navigation,
+      updateStaticRoute,
       showDelete,
       mayUpdate
     } = props;
 
+    const textColor = '#87B738';
+    const deleteConfirmColor = '#ee6453';
     return (
       <View style={styles.container}>
-        <View style={{ flex: 2, paddingTop: 20 }}>
-          {treeCount && treeCount > 0 ? (
-            <Text style={styles.treeCount}>
-              {treeCount > 1
-                ? `${treeCount} ${i18n.t('label.usr_contribution_tree')}`
-                : `${treeCount} ${i18n.t(
-                    'label.usr_contribution_single_tree'
-                  )}`}
-            </Text>
-          ) : null}
-          {location ? (
-            <View style={styles.itemContainer}>
-              <Image source={TreeIcon} style={styles.icon} />
-              <Text
-                style={{
-                  ...styles.text,
-                  maxWidth: showDelete ? '50%' : '100%'
-                }}
-              >
-                {location}
-              </Text>
-            </View>
-          ) : null}
+        {/* ===== Map View starts ===== */}
+        <View style={styles.mapView}>
+          {/* get the map component */}
+          {this.getMapComponent(this.props.contribution)}
 
-          {dedicatedTo ? (
-            <View style={styles.itemContainer}>
-              <Image source={ArrowRight} style={styles.icon} />
-              <Text style={{ ...styles.text }}>{dedicatedTo}</Text>
+          {/* close icon - goes back to previous screen */}
+          <TouchableOpacity
+            onPress={props.onClickClose}
+            style={[styles.button, styles.closeIcon]}
+          >
+            <View style={styles.closeContainer}>
+              <Image style={{ width: 16, height: 16 }} source={closeIcon} />
             </View>
-          ) : null}
+          </TouchableOpacity>
 
+          {/* maps the date */}
           {plantedDate ? (
-            <View style={styles.itemContainer}>
-              <Image source={CalendarIcon} style={styles.icon} />
-              <Text style={{ ...styles.text }}>{plantedDate}</Text>
+            <View style={styles.dateContainer}>
+              <Text style={styles.plantedDate}>{plantedDate}</Text>
             </View>
           ) : null}
         </View>
+        {/* ===== Map View Ends ===== */}
 
-        <View style={styles.buttonsWrapper}>
-          <TouchableOpacity style={styles.plantedButtonWrapper}>
-            {!!contributionTypeText && (
-              <Text style={styles.plantedText}>{contributionTypeText}</Text>
-            )}
-          </TouchableOpacity>
+        {/* ===== Header and Sub header starts ===== */}
+        <View style={styles.header}>
+          {/* maps the tree count with contribution type : Gifted, Donated, Received */}
+          {treeCount && treeCount > 0 ? (
+            <Text style={styles.treeCount}>{headerText}</Text>
+          ) : null}
 
-          <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
+          {/* maps the different icons : delete, edit and share */}
+          <View style={{ flexDirection: 'row' }}>
+            {/* shows delete icon if there is delete feature */}
             {showDelete ? (
               <TouchableOpacity
-                onPress={props.onClickDelete}
+                onPress={() => {
+                  this.setState({
+                    showDeleteConfirmation: true
+                  });
+                }}
                 style={styles.button}
               >
-                <Image style={styles.image} source={DeleteIcon} />
+                <Image style={styles.image} source={deleteIcon} />
               </TouchableOpacity>
             ) : null}
+
+            {/* shows edit icon if there is edit feature */}
             {mayUpdate ? (
               <TouchableOpacity
                 onPress={props.onClickEdit}
                 style={styles.button}
               >
-                <Image style={styles.image} source={EditIcon} />
+                <Image style={styles.image} source={editIcon} />
               </TouchableOpacity>
             ) : null}
+
+            {/* shows share icon as of now does nothing */}
+            {/* <TouchableOpacity onPress={() => {}} style={styles.button}>
+              <Image style={styles.image} source={ShareIcon} />
+            </TouchableOpacity> */}
           </View>
         </View>
+
+        <View style={styles.subHeadContainer}>
+          {/* maps the tree's genus and species if any */}
+          {treeClassification && (
+            <Text style={styles.subHeaderText}>{treeClassification}</Text>
+          )}
+
+          {/* maps the contributionPerson type and name of contributionPerson if any */}
+          {contributionPersonPrefix &&
+            contributionPerson && (
+              <View style={styles.subHeaderTextContainer}>
+                <Text style={styles.subHeaderText}>
+                  {contributionPersonPrefix}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    updateStaticRoute(
+                      getLocalRoute('app_treecounter'),
+                      navigation,
+                      {
+                        treeCounterId: contributionPersonSlug,
+                        titleParam: contributionPerson
+                      }
+                    );
+                  }}
+                >
+                  <Text style={[styles.subHeaderText, { color: textColor }]}>
+                    {' '}
+                    {contributionPerson}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+
+          {/* maps the project name by whom it was planted if any */}
+          {plantProjectName && (
+            <View style={styles.subHeaderTextContainer}>
+              <Text style={styles.subHeaderText}>
+                {i18n.t('label.planted_by')}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  plantProjectSlug
+                    ? updateStaticRoute(
+                        getLocalRoute('app_treecounter'),
+                        navigation,
+                        {
+                          treeCounterId: plantProjectSlug,
+                          titleParam: plantProjectName
+                        }
+                      )
+                    : null;
+                }}
+              >
+                <Text style={[styles.subHeaderText, { color: textColor }]}>
+                  {plantProjectName}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+        {/* ===== Header and Sub header ends ===== */}
+
+        {/*  Delete confirmation popup */}
+        <PopupNative
+          isOpen={showDeleteConfirmation}
+          animationType={'fade'}
+          clickOutClose
+          containerStyle={{
+            height:
+              Platform.OS === 'android'
+                ? Dimensions.get('window').height * 0.31
+                : Dimensions.get('window').height * 0.24
+          }}
+          headerText={i18n.t('label.my_trees_delete_confirm')}
+          bodyText={
+            <View>
+              <Text
+                style={{
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 14,
+                  lineHeight: 26
+                }}
+              >
+                {i18n.t('label.deletion_warning_summary_contribution')}
+              </Text>
+            </View>
+          }
+          onCancel={() => {
+            this.setState({
+              showDeleteConfirmation: false
+            });
+          }}
+          cancelText={i18n.t('label.cancel')}
+          applyText={i18n.t('label.delete')}
+          applyTextStyle={{ color: deleteConfirmColor }}
+          onApply={() => {
+            props.onClickDelete();
+            this.setState({
+              showDeleteConfirmation: false
+            });
+          }}
+        />
       </View>
     );
   }
@@ -106,12 +248,16 @@ export default class UserContributions extends React.Component {
 
 UserContributions.PropTypes = {
   treeCount: PropTypes.number,
-  location: PropTypes.string,
-  dedicatedTo: PropTypes.string,
+  plantProjectName: PropTypes.string,
+  plantProjectSlug: PropTypes.string,
+  headerText: PropTypes.string,
   plantedDate: PropTypes.string,
   onClickDelete: PropTypes.func,
   onClickEdit: PropTypes.func,
-  contributionTypeText: PropTypes.string,
   showDelete: PropTypes.bool,
-  mayUpdate: PropTypes.bool
+  mayUpdate: PropTypes.bool,
+  treeClassification: PropTypes.string,
+  contributionPersonPrefix: PropTypes.string,
+  contributionPerson: PropTypes.string,
+  contributionPersonSlug: PropTypes.string
 };

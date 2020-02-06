@@ -106,11 +106,12 @@ export default class GiftUser extends Component {
             placeholder={i18n.t('label.gift_message')}
           />
         </KeyboardAwareScrollView>
+
         {this.state.buttonType === 'next' ? (
           <TouchableOpacity
             style={[
               buttonStyles.actionButtonTouchable,
-              { top: undefined, bottom: '14%' }
+              { top: undefined, bottom: '1%', padding: 20 }
             ]}
             onPress={this.onNextClick}
           >
@@ -126,7 +127,7 @@ export default class GiftUser extends Component {
           <TouchableOpacity
             style={[
               buttonStyles.actionButtonSmallTouchable,
-              { top: undefined, bottom: '20%' }
+              { top: undefined, bottom: '2%' }
             ]}
             onPress={this.onNextClick}
           >

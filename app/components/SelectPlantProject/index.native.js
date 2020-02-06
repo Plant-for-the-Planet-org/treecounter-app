@@ -180,7 +180,7 @@ class SelectPlantTabView extends PureComponent {
       <>
         <SafeAreaView style={{ flex: 1 }}>
           <HeaderStatic
-            title={'Projects'}
+            title={i18n.t('label.projects')}
             scrollY={this.state.scrollY}
             navigation={this.props.navigation}
           />

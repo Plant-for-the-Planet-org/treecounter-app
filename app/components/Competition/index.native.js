@@ -115,7 +115,7 @@ class Competiton extends React.Component {
       <>
         <SafeAreaView style={{ flex: 1 }}>
           <HeaderStatic
-            title={'Competitions'}
+            title={i18n.t('label.competitions')}
             scrollY={this.state.scrollY}
             pageName={'competitions'}
             navigation={this.props.navigation}

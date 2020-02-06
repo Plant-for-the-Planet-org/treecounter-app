@@ -20,6 +20,11 @@ export function initLocale() {
   registerLocale(cache.locale, localeObjects[cache.locale]);
 }
 
+// this is just to be compatible with getLocale.native.js
+export function getLocaleAsync() {
+  return getLocale();
+}
+
 export function getLocale() {
   // console.log('getLocale', cache.locale);
   if (!cache.locale) {

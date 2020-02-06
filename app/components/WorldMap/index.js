@@ -32,7 +32,11 @@ export class BottomSheet extends Component {
     const END = SNAP_POINTS_FROM_TOP[SNAP_POINTS_FROM_TOP.length - 1];
 
     this.state = {
-      lastSnap: END
+      lastSnap: END,
+      plantedTrees: true,
+      reforestationOpportunites: true,
+      currentForest: true,
+      desforestion: false
     };
 
     this._lastScrollYValue = 0;
@@ -102,10 +106,25 @@ export class BottomSheet extends Component {
       }).start();
     }
   };
+  toggleSwitch = key => {
+    console.log(key, 'key 123123');
+    this.setState({ [key]: !this.state[key] });
+  };
   render() {
+    const {
+      plantedTrees,
+      reforestationOpportunites,
+      currentForest,
+      desforestion
+    } = this.state;
     return (
       <View style={{ flex: 1 }}>
-        <MapComponent />
+        <MapComponent
+          plantedTrees={plantedTrees}
+          reforestationOpportunites={reforestationOpportunites}
+          currentForest={currentForest}
+          desforestion={desforestion}
+        />
         <TapGestureHandler
           maxDurationMs={100000}
           ref={this.masterdrawer}
@@ -153,7 +172,15 @@ export class BottomSheet extends Component {
                       onScrollBeginDrag={this._onRegisterLastScroll}
                       scrollEventThrottle={1}
                     >
-                      <BottomContent />
+                      <BottomContent
+                        toggleSwitch={this.toggleSwitch}
+                        plantedTreesSwitchValue={this.state.plantedTrees}
+                        reforestationOppSwitchValue={
+                          this.state.reforestationOpportunites
+                        }
+                        currentForestSwitchValue={this.state.currentForest}
+                        desforestionSwitchValue={this.state.desforestion}
+                      />
                     </Animated.ScrollView>
                   </NativeViewGestureHandler>
                 </Animated.View>

@@ -10,8 +10,14 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import { linkExternal } from '../../assets/index';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-const BottomContent = () => {
-  const widget = () => (
+const BottomContent = ({
+  toggleSwitch,
+  plantedTreesSwitchValue,
+  reforestationOppSwitchValue,
+  currentForestSwitchValue,
+  desforestionSwitchValue
+}) => {
+  const plantedTrees = () => (
     <View style={{}}>
       <View style={styles.widgetHeaderContainer}>
         <View>
@@ -19,8 +25,9 @@ const BottomContent = () => {
         </View>
         <View>
           <Switch
+            onValueChange={() => toggleSwitch('plantedTrees')}
+            value={plantedTreesSwitchValue}
             thumbColor={'#89b53a'}
-            value={true}
             trackColor={{ true: 'rgba(137, 181, 58, 0.8)', false: 'green' }}
           />
         </View>
@@ -48,7 +55,7 @@ const BottomContent = () => {
       </View>
     </View>
   );
-  const SecondWidget = () => (
+  const reforestationOpportunities = () => (
     <View>
       <View style={styles.widgetHeaderContainer}>
         <View>
@@ -59,7 +66,55 @@ const BottomContent = () => {
         <View>
           <Switch
             thumbColor={'#89b53a'}
-            value={true}
+            onValueChange={() => toggleSwitch('reforestationOpportunites')}
+            value={reforestationOppSwitchValue}
+            trackColor={{ true: 'rgba(137, 181, 58, 0.8)', false: 'green' }}
+          />
+        </View>
+      </View>
+      <View style={styles.gradientContainer}>
+        <Text style={styles.greenText}>Low</Text>
+        <LinearGradient
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          colors={['#cbfc73', '#5b801d']}
+          style={{
+            flex: 0.9,
+            height: 10,
+            borderRadius: 10,
+            marginHorizontal: 10
+          }}
+        />
+        <Text style={styles.greenText}>High Tree Density</Text>
+      </View>
+      <View style={{ marginVertical: 20 }}>
+        <Text
+          style={styles.descText}
+        >{`3.04 trillion trees currently exist globally. Down from six trillion trees before humans started cutting down forests, about 11,000 years ago. The map shows the number of trees per km2.`}</Text>
+      </View>
+      <View style={styles.addressContainer}>
+        <View style={{ width: 50 }}>
+          <Image source={linkExternal} style={{ width: 25, height: 25 }} />
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text
+            style={styles.addressText}
+          >{`Bastin, J. F. et al. (2019) The Global Tree Restoration Potential. Science 365(6448), 76-79.`}</Text>
+        </View>
+      </View>
+    </View>
+  );
+  const currentForests = () => (
+    <View>
+      <View style={styles.widgetHeaderContainer}>
+        <View>
+          <Text style={styles.widgetHeaderText}>Current Forests</Text>
+        </View>
+        <View>
+          <Switch
+            onValueChange={() => toggleSwitch('currentForest')}
+            thumbColor={'#89b53a'}
+            value={currentForestSwitchValue}
             trackColor={{ true: 'rgba(137, 181, 58, 0.8)', false: 'green' }}
           />
         </View>
@@ -97,7 +152,7 @@ const BottomContent = () => {
     </View>
   );
 
-  const slider = () => (
+  const deforestation = () => (
     <View>
       <View style={styles.widgetHeaderContainer}>
         <View>
@@ -105,8 +160,9 @@ const BottomContent = () => {
         </View>
         <View>
           <Switch
+            onValueChange={() => toggleSwitch('desforestion')}
             thumbColor={'#89b53a'}
-            value={true}
+            value={desforestionSwitchValue}
             trackColor={{ true: 'rgba(137, 181, 58, 0.8)', false: 'green' }}
           />
         </View>
@@ -183,10 +239,10 @@ const BottomContent = () => {
   );
   return (
     <View style={styles.container}>
-      {widget()}
-      {SecondWidget()}
-      {SecondWidget()}
-      {slider()}
+      {plantedTrees()}
+      {reforestationOpportunities()}
+      {currentForests()}
+      {deforestation()}
     </View>
   );
 };

@@ -107,50 +107,38 @@ export default class GiftUser extends Component {
             placeholder={i18n.t('label.gift_message')}
           />
         </KeyboardAwareScrollView>
-        <CardLayout
-          style={[
-            {
-              top: undefined,
-              bottom: '14%',
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }
-          ]}
-        >
-          {this.state.buttonType === 'next' ? (
-            <TouchableOpacity
-              style={[
-                buttonStyles.actionButtonTouchable,
-                { top: undefined, bottom: '14%' }
-              ]}
-              onPress={this.onNextClick}
-            >
-              <View style={buttonStyles.actionButtonView}>
-                <Text style={buttonStyles.actionButtonText}>
-                  {i18n.t('label.next')}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ) : null}
 
-          {this.state.buttonType === '>' ? (
-            <TouchableOpacity
-              style={[
-                buttonStyles.actionButtonSmallTouchable,
-                { top: undefined, bottom: '20%' }
-              ]}
-              onPress={this.onNextClick}
-            >
-              <Image
-                source={forward}
-                resizeMode="cover"
-                style={buttonStyles.actionButtonSmallImage}
-              />
-            </TouchableOpacity>
-          ) : null}
-        </CardLayout>
+        {this.state.buttonType === 'next' ? (
+          <TouchableOpacity
+            style={[
+              buttonStyles.actionButtonTouchable,
+              { top: undefined, bottom: '1%', padding: 20 }
+            ]}
+            onPress={this.onNextClick}
+          >
+            <View style={buttonStyles.actionButtonView}>
+              <Text style={buttonStyles.actionButtonText}>
+                {i18n.t('label.next')}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ) : null}
+
+        {this.state.buttonType === '>' ? (
+          <TouchableOpacity
+            style={[
+              buttonStyles.actionButtonSmallTouchable,
+              { top: undefined, bottom: '2%' }
+            ]}
+            onPress={this.onNextClick}
+          >
+            <Image
+              source={forward}
+              resizeMode="cover"
+              style={buttonStyles.actionButtonSmallImage}
+            />
+          </TouchableOpacity>
+        ) : null}
       </View>
     );
   }

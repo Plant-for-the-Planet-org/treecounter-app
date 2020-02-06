@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import {
   cameraSolid,
@@ -19,15 +19,18 @@ import ImagePicker from 'react-native-image-picker';
 import buttonStyles from '../../../styles/common/button.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'react-native-material-dropdown';
-import CardLayout from '../../Common/Card';
 
 export const FormikForm = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     competitionFormSchema
   );
-
-  const buttonType = props.buttonType;
-
+  const [buttonType, setButtonType] = useState(props.buttonType);
+  useEffect(
+    () => {
+      setButtonType(props.buttonType);
+    },
+    [props.buttonType]
+  );
   return (
     <Formik
       initialValues={props.initialValues}
@@ -127,40 +130,37 @@ export const FormikForm = props => {
                 setFieldValue={props.setFieldValue}
               />
             </KeyboardAwareScrollView>
-            <CardLayout
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              {buttonType === 'competition' ? (
-                <TouchableOpacity
-                  style={buttonStyles.actionButtonTouchable}
-                  onPress={props.handleSubmit}
-                >
-                  <View style={buttonStyles.actionButtonView}>
-                    <Text style={buttonStyles.actionButtonText}>
-                      {i18n.t('label.create_competition')}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ) : null}
+            {buttonType === 'competition' ? (
+              <TouchableOpacity
+                style={[
+                  buttonStyles.actionButtonTouchable,
+                  { top: undefined, bottom: '1%', padding: 20 }
+                ]}
+                onPress={props.handleSubmit}
+              >
+                <View style={buttonStyles.actionButtonView}>
+                  <Text style={buttonStyles.actionButtonText}>
+                    {i18n.t('label.create_competition')}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ) : null}
 
-              {buttonType === '>' ? (
-                <TouchableOpacity
-                  style={buttonStyles.actionButtonSmallTouchable}
-                  onPress={props.handleSubmit}
-                >
-                  <Image
-                    source={forward}
-                    resizeMode="cover"
-                    style={buttonStyles.actionButtonSmallImage}
-                  />
-                </TouchableOpacity>
-              ) : null}
-            </CardLayout>
+            {buttonType === '>' ? (
+              <TouchableOpacity
+                style={[
+                  buttonStyles.actionButtonSmallTouchable,
+                  { top: undefined, bottom: '2%' }
+                ]}
+                onPress={props.handleSubmit}
+              >
+                <Image
+                  source={forward}
+                  resizeMode="cover"
+                  style={buttonStyles.actionButtonSmallImage}
+                />
+              </TouchableOpacity>
+            ) : null}
           </View>
         </>
       )}

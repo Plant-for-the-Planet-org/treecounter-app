@@ -56,6 +56,8 @@ export function fetchConfig() {
           currency = data.data.currency;
           supportedCurrency.includes(data.data.currency) &&
             dispatch(setCurrencyAction(data.data.currency));
+        } else {
+          dispatch(fetchLocation());
         }
         // for now we are not storing those in redux, please uncomment this when you need these urls in your components
         // dispatch(setCdnMedia(data.data.cdnMedia));

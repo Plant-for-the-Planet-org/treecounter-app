@@ -17,25 +17,26 @@ import BurgerMenu from '../Header/BurgerMenu';
 import HeaderRight from '../Header/HeaderFields';
 
 import i18n from '../../locales/i18n';
+
+import EmptyContainer from '../../containers/Authentication/EmptyContainer';
 import FAQContainer from '../../containers/FAQ';
-import UserContributions from '../../containers/UserContributions';
+import UserContributionsContainer from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
-import UserContributionDetails from '../../containers/UserContributionsDetails';
+import UserContributionsDetailsContainer from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
 import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
-
-import GiftTrees from '../../containers/GiftTrees';
+import GiftTreesContainer from '../../containers/GiftTrees';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
-import EditUserProfile from '../../containers/EditUserProfile';
+import EditUserProfileContainer from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import SelectedPlantProject from '../../containers/SelectedPlantProject';
-import SelectedCompetition from '../../containers/SelectedCompetition';
+import SelectedPlantProjectContainer from '../../containers/SelectedPlantProject';
+import SelectedCompetitionContainer from '../../containers/SelectedCompetition';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
@@ -62,7 +63,7 @@ import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeade
 import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
 import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
-import RegisterTrees from '../../containers/RegisterTrees';
+import RegisterTreesContainer from '../../containers/RegisterTrees';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -106,8 +107,11 @@ const headerLabels = {
 export const getAppNavigator = function(isLoggedIn, userProfile) {
   const baseNavigator = createStackNavigator(
     {
+      ['empty']: {
+        screen: EmptyContainer
+      },
       [getLocalRoute('app_editProfile')]: {
-        screen: isLoggedIn ? EditUserProfile : LoginContainer
+        screen: isLoggedIn ? EditUserProfileContainer : LoginContainer
       },
       [getLocalRoute('app_passwordSent')]: {
         screen: EmailSentContainer
@@ -116,7 +120,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: SignUpContainer
       },
       [getLocalRoute('app_myTrees')]: {
-        screen: UserContributions
+        screen: UserContributionsContainer
       },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
@@ -124,10 +128,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       [getLocalRoute('app_accountActivation')]: {
         screen: ActivateAccountContainer
       },
-      ['pickup_profile_modal']: ProfilePickerModal,
-      ['about_us']: { screen: AboutUsContainer },
-
-      ['license_info_list']: { screen: LicenseInfoList },
+      ['pickup_profile_modal']: {
+        screen: ProfilePickerModal
+      },
+      ['about_us']: {
+        screen: AboutUsContainer
+      },
+      ['license_info_list']: {
+        screen: LicenseInfoList
+      },
       [getLocalRoute('app_imprint')]: {
         screen: ImprintContainer
       },
@@ -137,11 +146,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       // [getLocalRoute('app_claim')]: {
       //   screen: RedemptionContainer
       // },
-      [getLocalRoute('app_editTrees')]: EditUserContributionContainer,
+      [getLocalRoute('app_editTrees')]: {
+        screen: EditUserContributionContainer
+      },
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer
       },
-      [getLocalRoute('app_challenge')]: ChallengeContainer,
+      [getLocalRoute('app_challenge')]: {
+        screen: ChallengeContainer
+      },
       ['app_gift_projects']: {
         screen: SelectPlantProjectContainer
       },
@@ -266,7 +279,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: Trillion
       },
       [getLocalRoute('app_giftTrees')]: {
-        screen: GiftTrees
+        screen: GiftTreesContainer
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
@@ -299,13 +312,14 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: SelectPlantProjectContainer
       },
       [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProject
+        screen: SelectedPlantProjectContainer
       },
       [getLocalRoute('app_competition')]: {
-        screen: isLoggedIn ? SelectedCompetition : LoginContainer
+        screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer
       },
-      [getLocalRoute('app_faq')]: FAQContainer,
-
+      [getLocalRoute('app_faq')]: {
+        screen: FAQContainer
+      },
       [getLocalRoute('app_editCompetition')]: {
         screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
       },
@@ -319,9 +333,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: PublicTreeCounterContainer,
         navigationOptions: { header: null }
       },
-
       ['app_registerTrees']: {
-        screen: isLoggedIn ? RegisterTrees : LoginContainer,
+        screen: isLoggedIn ? RegisterTreesContainer : LoginContainer,
         navigationOptions: { header: null }
       },
       ['app_pledge_form']: {
@@ -346,7 +359,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: UnfulfilledPledgeEvents
       },
       ['contribution_details']: {
-        screen: UserContributionDetails
+        screen: UserContributionsDetailsContainer
       },
       ['app_redeem']: {
         screen: isLoggedIn ? RedemptionContainer : LoginContainer,

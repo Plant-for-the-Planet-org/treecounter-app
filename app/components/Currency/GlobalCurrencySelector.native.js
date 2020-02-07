@@ -1,7 +1,14 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { PureComponent } from 'react';
 // import t from 'tcomb-form-native';
-import { Text, View, Platform, ScrollView, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Platform,
+  ScrollView,
+  FlatList,
+  Image
+} from 'react-native';
 import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
 import { currentUserProfileSelector, getCurrency } from '../../selectors/index';
@@ -13,6 +20,8 @@ import { connect } from 'react-redux';
 import { currencySort } from './utils';
 import { currenciesSelector } from '../../selectors';
 import { fetchCurrencies } from '../../actions/currencies';
+import { getCountryFlagImageUrl } from '../../actions/apiRouting';
+import countryCodes from '../../assets/countryCodes.json';
 import {
   getPreferredCurrency,
   setCurrencyAction
@@ -92,6 +101,8 @@ class GlobalCurrencySelector extends PureComponent {
       show: false
     });
   };
+  getCountryCode = currency =>
+    countryCodes.find(c => c.code == currency.value) || {};
   isActive = currency => currency.value == this.state.preferredCurrency;
   _keyExtractor = d => d.value;
   _renderItem = ({ item: currency }) => {
@@ -105,7 +116,16 @@ class GlobalCurrencySelector extends PureComponent {
           key={currency.value}
           style={{ flexDirection: 'row', marginLeft: 10 }}
         >
-          <Icon name="flag" size={32} color={defaultColor} style={{}} />
+          <Image
+            source={{
+              uri: getCountryFlagImageUrl(
+                this.getCountryCode(currency).countryCode,
+                'png',
+                256
+              )
+            }}
+            style={{ width: 30, height: 20, alignSelf: 'center' }}
+          />
           <Text
             style={{
               padding: 10,
@@ -143,11 +163,7 @@ class GlobalCurrencySelector extends PureComponent {
   render() {
     const { show } = this.props;
     const currenciesArray = this.getCurrencyNames();
-    console.log(
-      'preferred currency;',
-      this.state.preferredCurrency,
-      currenciesArray
-    );
+
     return (
       <View style={{ backgroundColor: backgroundColor, flex: 1, margin: 20 }}>
         <View style={{ backgroundColor: 'white', flex: 1, padding: 10 }}>

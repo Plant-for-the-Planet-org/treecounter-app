@@ -429,7 +429,7 @@ export default EStyleSheet.create({
     borderWidth: 0,
     borderBottomWidth: 0,
     padding: 1,
-    width: 50,
+    width: 75,
     color: '#89b53a',
     height: 24,
     marginRight: 2

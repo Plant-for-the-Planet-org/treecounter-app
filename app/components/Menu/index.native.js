@@ -9,10 +9,15 @@ import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import UserProfileImage from '../Common/UserProfileImage.native';
+import Modal from 'react-native-modalbox';
+import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector.native';
 
 //   icons.target_outline;
 
 export default class Menu extends Component {
+  state = {
+    showCurrencyModal: false
+  };
   static propTypes = {
     menuData: PropTypes.array.isRequired,
     onPress: PropTypes.func,
@@ -21,7 +26,9 @@ export default class Menu extends Component {
     navigation: PropTypes.any,
     lastRoute: PropTypes.any
   };
-
+  hideCurrencyModal = () => {
+    this.setState({ showCurrencyModal: false });
+  };
   componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.lastRoute != this.props.lastRoute) {
       updateRoute(
@@ -164,6 +171,12 @@ export default class Menu extends Component {
   render() {
     return (
       <SafeAreaView style={styles.outerContainer}>
+        {this.state.showCurrencyModal ? (
+          <GlobalCurrencySelector
+            hideCurrencyModal={this.hideCurrencyModal.bind(this)}
+            show={this.state.showCurrencyModal}
+          />
+        ) : null}
         {this.props.userProfile ? (
           <TouchableItem
             style={styles.topProfileContainer}
@@ -203,6 +216,13 @@ export default class Menu extends Component {
         )}
         <ScrollView style={styles.sideNavigationActionMenuContainer}>
           <View style={styles.centerMenu}>
+            <LargeMenuItem
+              onPress={() => {
+                this.setState({ showCurrencyModal: true });
+              }}
+              title={i18n.t('label.select_currency')}
+              iconUrl={icons.faqs}
+            />
             {this.props.userProfile ? (
               <LargeMenuItem
                 onPress={this.onPressMenu.bind(this, {

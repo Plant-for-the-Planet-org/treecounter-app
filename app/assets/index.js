@@ -191,6 +191,7 @@ import share from './images/icons/share.png';
 import coupon from './images/icons/coupon.png';
 import registerTree from './images/icons/registerTree.png';
 import settings from './images/icons/settings.png';
+import white_heart from './images/icons/white_heart.png';
 
 export {
   treelogo,
@@ -383,5 +384,6 @@ export {
   editIcon,
   deleteIcon,
   redMyLocationIcon,
-  newSearchIcon
+  newSearchIcon,
+  white_heart
 };

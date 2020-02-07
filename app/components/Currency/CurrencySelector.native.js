@@ -7,7 +7,7 @@ import { getCurrency } from '../../selectors';
 import { Dropdown } from 'react-native-material-dropdown';
 import { currencySort } from './utils';
 
-class CurrencySelector extends React.Component {
+class CurrencySelector extends React.PureComponent {
   constructor(props) {
     super(props);
     let { selectedCurrency, globalCurrency } = props;
@@ -22,15 +22,16 @@ class CurrencySelector extends React.Component {
       // this.props.onChange(this.state.selectedCurrency);
     }
   }
-  // componentWillReceiveProps(nextProps) {
-  //   console.log('next props currency', nextProps);
-  //   if (
-  //     nextProps.globalCurrency &&
-  //     nextProps.globalCurrency.currency !== this.state.selectedCurrency
-  //   ) {
-  //     this.props.onChange(nextProps.globalCurrency.currency);
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    console.log('next props currency', nextProps);
+    if (
+      nextProps.globalCurrency &&
+      nextProps.globalCurrency.currency !== this.state.selectedCurrency
+    ) {
+      this.setState({ selectedCurrency: nextProps.globalCurrency.currency });
+      this.props.onChange(nextProps.globalCurrency.currency);
+    }
+  }
   render() {
     const { currencies } = this.props;
     const { selectedCurrency } = this.state;
@@ -82,7 +83,7 @@ CurrencySelector.propTypes = {
   currencies: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired
 };
-// const mapStateToProps = state => ({
-//   globalCurrency: getCurrency(state)
-// });
-export default CurrencySelector; //connect(mapStateToProps)(CurrencySelector);
+const mapStateToProps = state => ({
+  globalCurrency: getCurrency(state)
+});
+export default connect(mapStateToProps)(CurrencySelector);

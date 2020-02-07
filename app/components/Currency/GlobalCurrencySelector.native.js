@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 // import t from 'tcomb-form-native';
 import {
   Text,
@@ -31,7 +31,7 @@ import { getCdnMedia } from '../../reducers/configReducer';
 const backgroundColor = 'gray';
 const activeColor = '#89b53a';
 const defaultColor = '#4d5153';
-class GlobalCurrencySelector extends PureComponent {
+class GlobalCurrencySelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,9 +41,14 @@ class GlobalCurrencySelector extends PureComponent {
     // this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     // this.updateState = this.updateState.bind(this);
   }
-  async componentWillReceiveProps(nextProps) {
-    if (!nextProps.userProfile) {
-      this.props.setCurrencyAction(this.state.preferredCurrency);
+  componentWillReceiveProps(nextProps) {
+    if (this.state.preferredCurrency != nextProps.globalCurrency.currency) {
+      this.setState({ preferredCurrency: nextProps.globalCurrency.currency });
+    } else if (
+      !nextProps.userProfile &&
+      this.state.preferredCurrency != nextProps.globalCurrency.currency
+    ) {
+      //this.state.preferredCurrency && this.props.setCurrencyAction(this.state.preferredCurrency);
     } else {
       nextProps.userProfile &&
         nextProps.userProfile.currency &&
@@ -52,7 +57,7 @@ class GlobalCurrencySelector extends PureComponent {
     }
 
     if (!nextProps.currencies.currencies) {
-      await this.props.fetchCurrencies();
+      this.props.fetchCurrencies();
     }
   }
   async componentWillMount() {
@@ -62,6 +67,9 @@ class GlobalCurrencySelector extends PureComponent {
     if (!this.props.currencies.currencies) {
       let curreniesData = await this.props.fetchCurrencies();
       console.log('got fron fetch', curreniesData);
+    }
+    if (!this.state.preferredCurrency && this.props.globalCurrency.currency) {
+      this.setState({ preferredCurrency: this.props.globalCurrency.currency });
     }
     console.log('setting', this.state);
     this.state.preferredCurrency &&
@@ -89,7 +97,7 @@ class GlobalCurrencySelector extends PureComponent {
         ];
   }
   handleCurrencyChange(selectedOption) {
-    console.log(selectedOption);
+    console.log('handle currency change', selectedOption);
     this.updateState({ preferredCurrency: selectedOption });
     this.props.setCurrencyAction(selectedOption);
     this.props.userProfile &&
@@ -162,7 +170,7 @@ class GlobalCurrencySelector extends PureComponent {
   render() {
     const { show } = this.props;
     const currenciesArray = this.getCurrencyNames();
-
+    console.log('this state', this.state);
     return (
       <View style={{ backgroundColor: backgroundColor, flex: 1, margin: 20 }}>
         <View style={{ backgroundColor: 'white', flex: 1, padding: 10 }}>

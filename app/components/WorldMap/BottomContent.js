@@ -28,7 +28,7 @@ const BottomContent = ({
             onValueChange={() => toggleSwitch('plantedTrees')}
             value={plantedTreesSwitchValue}
             thumbColor={'#89b53a'}
-            trackColor={{ true: 'rgba(137, 181, 58, 0.8)', false: 'green' }}
+            trackColor={{ true: '#eae9ef', false: 'rgba(137, 181, 58, 0.8)' }}
           />
         </View>
       </View>
@@ -68,7 +68,7 @@ const BottomContent = ({
             thumbColor={'#89b53a'}
             onValueChange={() => toggleSwitch('reforestationOpportunites')}
             value={reforestationOppSwitchValue}
-            trackColor={{ true: 'rgba(137, 181, 58, 0.8)', false: 'green' }}
+            trackColor={{ true: '#eae9ef', false: 'rgba(137, 181, 58, 0.8)' }}
           />
         </View>
       </View>
@@ -115,7 +115,7 @@ const BottomContent = ({
             onValueChange={() => toggleSwitch('currentForest')}
             thumbColor={'#89b53a'}
             value={currentForestSwitchValue}
-            trackColor={{ true: 'rgba(137, 181, 58, 0.8)', false: 'green' }}
+            trackColor={{ true: '#eae9ef', false: 'rgba(137, 181, 58, 0.8)' }}
           />
         </View>
       </View>
@@ -163,7 +163,7 @@ const BottomContent = ({
             onValueChange={() => toggleSwitch('desforestion')}
             thumbColor={'#89b53a'}
             value={desforestionSwitchValue}
-            trackColor={{ true: 'rgba(137, 181, 58, 0.8)', false: 'green' }}
+            trackColor={{ true: '#eae9ef', false: 'rgba(137, 181, 58, 0.8)' }}
           />
         </View>
       </View>

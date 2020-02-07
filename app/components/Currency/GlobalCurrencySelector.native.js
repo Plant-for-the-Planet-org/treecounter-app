@@ -35,12 +35,11 @@ class GlobalCurrencySelector extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      preferredCurrency: props.globalCurrency.currency || 'EUR',
+      preferredCurrency: props.globalCurrency.currency,
       show: props.show
     };
-    console.log(props.globalCurrency);
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
-    this.updateState = this.updateState.bind(this);
+    // this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
+    // this.updateState = this.updateState.bind(this);
   }
   async componentWillReceiveProps(nextProps) {
     if (!nextProps.userProfile) {
@@ -169,9 +168,9 @@ class GlobalCurrencySelector extends PureComponent {
         <View style={{ backgroundColor: 'white', flex: 1, padding: 10 }}>
           <Modal
             isOpen={show}
-            position={'top'}
+            position={'bottom'}
             onClosed={this.onClosed}
-            backdropPressToClose={false}
+            backdropPressToClose={true}
             coverScreen
             keyboardTopOffset={0}
             swipeToClose={true}

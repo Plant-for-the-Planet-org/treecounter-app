@@ -22,15 +22,15 @@ class CurrencySelector extends React.Component {
       // this.props.onChange(this.state.selectedCurrency);
     }
   }
-  componentWillReceiveProps(nextProps) {
-    console.log('next props currency', nextProps);
-    if (
-      nextProps.globalCurrency &&
-      nextProps.globalCurrency.currency !== this.state.selectedCurrency
-    ) {
-      this.props.onChange(nextProps.globalCurrency.currency);
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   console.log('next props currency', nextProps);
+  //   if (
+  //     nextProps.globalCurrency &&
+  //     nextProps.globalCurrency.currency !== this.state.selectedCurrency
+  //   ) {
+  //     this.props.onChange(nextProps.globalCurrency.currency);
+  //   }
+  // }
   render() {
     const { currencies } = this.props;
     const { selectedCurrency } = this.state;
@@ -70,7 +70,7 @@ class CurrencySelector extends React.Component {
         selectedItemColor="rgba(104,96,96, 0.8)"
         labelExtractor={item => i18n.t(item.text)}
         valueExtractor={item => item.value}
-        onChangeText={item => onChange(item)}
+        onChangeText={item => this.props.onChange(item)}
         data={currenciesDropdownFormat}
       />
     );
@@ -82,7 +82,7 @@ CurrencySelector.propTypes = {
   currencies: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired
 };
-const mapStateToProps = state => ({
-  globalCurrency: getCurrency(state)
-});
-export default connect(mapStateToProps)(CurrencySelector);
+// const mapStateToProps = state => ({
+//   globalCurrency: getCurrency(state)
+// });
+export default CurrencySelector; //connect(mapStateToProps)(CurrencySelector);

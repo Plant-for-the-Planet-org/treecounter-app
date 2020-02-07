@@ -171,12 +171,6 @@ export default class Menu extends Component {
   render() {
     return (
       <SafeAreaView style={styles.outerContainer}>
-        {this.state.showCurrencyModal ? (
-          <GlobalCurrencySelector
-            hideCurrencyModal={this.hideCurrencyModal.bind(this)}
-            show={this.state.showCurrencyModal}
-          />
-        ) : null}
         {this.props.userProfile ? (
           <TouchableItem
             style={styles.topProfileContainer}
@@ -295,6 +289,12 @@ export default class Menu extends Component {
               iconUrl={icons.faqs}
             />
           </View>
+          {
+            <GlobalCurrencySelector
+              hideCurrencyModal={this.hideCurrencyModal.bind(this)}
+              show={this.state.showCurrencyModal}
+            />
+          }
         </ScrollView>
 
         <View style={styles.sideNavigationActionMenuContainer}>

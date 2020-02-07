@@ -215,7 +215,7 @@ export default class Menu extends Component {
                 this.setState({ showCurrencyModal: true });
               }}
               title={i18n.t('label.select_currency')}
-              iconUrl={icons.faqs}
+              iconUrl={icons.dollar}
             />
             {this.props.userProfile ? (
               <LargeMenuItem

@@ -207,8 +207,23 @@ class GlobalCurrencySelector extends Component {
                 />
               </TouchableItem>
             </View>
+            <View>
+              <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
+                Featured Currenies
+              </Text>
+              <FlatList
+                data={currenciesArray.slice(0, 2)}
+                keyExtractor={this._keyExtractor}
+                renderItem={this._renderItem}
+              />
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
+                All Currencies
+              </Text>
+            </View>
             <FlatList
-              data={currenciesArray}
+              data={currenciesArray.slice(2)}
               keyExtractor={this._keyExtractor}
               renderItem={this._renderItem}
             />

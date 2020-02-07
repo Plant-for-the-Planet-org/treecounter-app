@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import SearchBar from './SearchBar';
@@ -76,7 +76,7 @@ class SearchLayout extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Header>
+        <View>
           <SearchBar
             onChangeQuery={this.onChangeTextDelayed}
             onSubmit={this._handleSubmit}
@@ -93,7 +93,7 @@ class SearchLayout extends React.Component {
               this.props.searchInputTintColor || this.props.headerTintColor
             }
           />
-        </Header>
+        </View>
 
         {this.state.q ? (
           <ScrollView style={{ paddingBottom: 15 }}>

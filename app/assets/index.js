@@ -101,6 +101,8 @@ import svgBackground from './svgAssets/svg_background.png';
 import darkTree from './images/darkTree.png';
 import imageUpload from './images/icons/upload_image.png';
 import iosSearchGrey from './images/icons/search_grey.png';
+import newSearchIcon from './images/icons/newSearchIcon.png';
+
 import logout from './images/icons/logout.png';
 import faqs from './images/icons/faqs.png';
 import iosInformation from './images/icons/ios_information.png';
@@ -380,5 +382,6 @@ export {
   competeIconGreen,
   editIcon,
   deleteIcon,
-  redMyLocationIcon
+  redMyLocationIcon,
+  newSearchIcon
 };

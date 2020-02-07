@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, BackHandler, SafeAreaView, Platform } from 'react-native';
 import TouchableItem from '../Common/TouchableItem.native';
-
+import HeaderRight from './HeaderSearch.native';
 export default function HeaderStatic(props) {
   let navigateBack = () => {
     // props.navigation.goBack();
@@ -65,7 +65,7 @@ export default function HeaderStatic(props) {
           position: 'absolute'
         }}
       >
-        <TouchableItem onPress={props.rightLinkFunction}>
+        {/* <TouchableItem onPress={props.rightLinkFunction}>
           <Text
             style={{
               color: linkColor,
@@ -74,7 +74,10 @@ export default function HeaderStatic(props) {
           >
             {props.rightLink}
           </Text>
-        </TouchableItem>
+        </TouchableItem> */}
+        {props.showSearch ? (
+          <HeaderRight navigation={props.navigation} />
+        ) : null}
       </View>
     </SafeAreaView>
   );

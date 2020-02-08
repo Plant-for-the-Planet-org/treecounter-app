@@ -72,7 +72,7 @@ class UserContributionsDetails extends React.Component {
       giverSlug,
       cardType,
       contributionType,
-      // plantProjectId,
+      plantProjectId,
       isGift,
       redemptionCode,
       redemptionDate,
@@ -264,6 +264,7 @@ class UserContributionsDetails extends React.Component {
           plantedDate={plantedDate}
           showDelete={contributionType == 'planting'}
           headerText={headerText}
+          plantProjectId={plantProjectId}
           onClickDelete={() => {
             this.props.deleteContribution(
               this.props.contribution.id,

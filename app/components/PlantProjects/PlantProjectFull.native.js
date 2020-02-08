@@ -16,6 +16,7 @@ import { formatNumber } from '../../utils/utils';
 import { connect } from 'react-redux';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 import { bindActionCreators } from 'redux';
+import NumberFormat from '../Common/NumberFormat.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -124,11 +125,15 @@ class PlantProjectFull extends React.Component {
             <View style={styles.centeredContentContainer}>
               <View>
                 <Text style={[styles.cost]}>
-                  {formatNumber(
+                  {/* {formatNumber(
                     plantProject.treeCost,
                     null,
                     plantProject.currency
-                  )}
+                  )} */}
+                  <NumberFormat
+                    data={plantProject.treeCost}
+                    currency={plantProject.currency}
+                  />
                 </Text>
               </View>
 

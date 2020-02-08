@@ -26,6 +26,7 @@ import {
   getPreferredCurrency,
   setCurrencyAction
 } from '../../actions/globalCurrency';
+import { updateUserProfile } from '../../actions/updateUserProfile';
 import { getCdnMedia } from '../../reducers/configReducer';
 
 const backgroundColor = 'gray';
@@ -38,10 +39,11 @@ class GlobalCurrencySelector extends Component {
       preferredCurrency: props.globalCurrency.currency,
       show: props.show
     };
-    // this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
-    // this.updateState = this.updateState.bind(this);
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
   componentWillReceiveProps(nextProps) {
+    console.log('next props in global', nextProps);
     if (this.state.preferredCurrency != nextProps.globalCurrency.currency) {
       this.setState({ preferredCurrency: nextProps.globalCurrency.currency });
     } else if (
@@ -49,7 +51,8 @@ class GlobalCurrencySelector extends Component {
       this.state.preferredCurrency != nextProps.globalCurrency.currency
     ) {
       //this.state.preferredCurrency && this.props.setCurrencyAction(this.state.preferredCurrency);
-    } else {
+    }
+    {
       nextProps.userProfile &&
         nextProps.userProfile.currency &&
         this.setState({ preferredCurrency: nextProps.userProfile.currency }) &&
@@ -62,6 +65,10 @@ class GlobalCurrencySelector extends Component {
   }
   async componentWillMount() {
     // this.setState({ preferredCurrency: getPreferredCurrency() });
+    this.props.userProfile &&
+      this.rops.userProfile.currency &&
+      this.setState({ preferredCurrency: this.props.userProfile.currency }) &&
+      this.props.setCurrencyAction(nextProps.userProfile.currency);
   }
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
@@ -209,7 +216,7 @@ class GlobalCurrencySelector extends Component {
             </View>
             <View>
               <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
-                Featured Currenies
+                {i18n.t('label.featured_currencies')}
               </Text>
               <FlatList
                 data={currenciesArray.slice(0, 2)}
@@ -219,7 +226,7 @@ class GlobalCurrencySelector extends Component {
             </View>
             <View style={{ marginTop: 10 }}>
               <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
-                All Currencies
+                {i18n.t('label.all_currencies')}
               </Text>
             </View>
             <FlatList
@@ -236,7 +243,7 @@ class GlobalCurrencySelector extends Component {
 const mapStateToProps = state => {
   return {
     globalCurrency: getCurrency(state),
-    currentUserProfile: currentUserProfileSelector(state),
+    userProfile: currentUserProfileSelector(state),
     currencies: currenciesSelector(state)
   };
 };
@@ -245,7 +252,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchCurrencies,
-      setCurrencyAction
+      setCurrencyAction,
+      updateUserProfile
     },
     dispatch
   );

@@ -42,5 +42,7 @@
   "datePickerTitle": "Pick a date",
   "datePickerCancel": "Cancel",
   "datePickerConfirm": "Confirm",
-  "select_currency": "Select Currency"
+  "select_currency": "Select Currency",
+  "featured_currencies": "Featured Currencies",
+  "all_currencies": "All Currencies"
 }

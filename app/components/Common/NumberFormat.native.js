@@ -9,15 +9,20 @@ const NumberFormat = ({
   locale,
   currency,
   userProfile,
-  currencies
-  // globalCurrency
+  currencies,
+  globalCurrency,
+  force
 }) => {
-  if (!userProfile && currency) {
+  if (!userProfile) {
     userProfile = {
-      currency: currency
+      // we use redux currency or use EUR if not found for now, dont use localstorage currency for now
+      currency: globalCurrency.currency || 'EUR'
     };
   }
-
+  if (force && currency) {
+    // force use provided currency
+    userProfile.currency = currency;
+  }
   return formatNumber(data, locale, currency, userProfile, currencies);
 };
 

@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 import { getCurrency } from '../../selectors';
 import { Dropdown } from 'react-native-material-dropdown';
 import { currencySort } from './utils';
-
+import { currentUserProfileSelector } from '../../selectors/index';
+import { bindActionCreators } from 'redux';
+import { setCurrencyAction } from '../../actions/globalCurrency';
 class CurrencySelector extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -18,8 +20,12 @@ class CurrencySelector extends React.PureComponent {
   }
   componentDidMount() {
     if (this.props.globalCurrency) {
-      // this.setState({ selectedCurrency: this.props.globalCurrency.currency });
-      // this.props.onChange(this.state.selectedCurrency);
+      this.setState(
+        { selectedCurrency: this.props.globalCurrency.currency },
+        () => {
+          this.props.onChange(this.state.selectedCurrency);
+        }
+      );
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -31,6 +37,12 @@ class CurrencySelector extends React.PureComponent {
       this.setState({ selectedCurrency: nextProps.globalCurrency.currency });
       this.props.onChange(nextProps.globalCurrency.currency);
     }
+    // if (nextProps.userProfile &&
+    //   nextProps.userProfile.currency) {
+    //   this.setState({ preferredCurrency: nextProps.userProfile.currency });
+    //   this.props.setCurrencyAction(nextProps.userProfile.currency);
+    //   this.props.onChange(nextProps.userProfile.currency);
+    // }
   }
   render() {
     const { currencies } = this.props;
@@ -84,6 +96,15 @@ CurrencySelector.propTypes = {
   onChange: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  globalCurrency: getCurrency(state)
+  globalCurrency: getCurrency(state),
+  userProfile: currentUserProfileSelector(state)
 });
-export default connect(mapStateToProps)(CurrencySelector);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      setCurrencyAction
+    },
+    dispatch
+  );
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencySelector);

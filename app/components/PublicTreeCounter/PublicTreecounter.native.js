@@ -162,7 +162,7 @@ class PublicTreeCounter extends React.Component {
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
           <HeaderNew title={''} navigation={this.props.navigation} />
           <View style={stylesPublicPage.header}>
             <TreecounterHeader

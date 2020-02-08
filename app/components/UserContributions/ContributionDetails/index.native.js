@@ -251,7 +251,8 @@ class UserContributionsDetails extends React.Component {
     return (
       <ScrollView style={{ backgroundColor: { backgroundColor }, flex: 1 }}>
         <UserContributions
-          mayUpdate={mayUpdate}
+          //mayUpdate={mayUpdate}
+          mayUpdate={contributionType == 'planting'} //Allow editing all registered entries
           treeCount={treeCount}
           plantProjectName={plantProjectName}
           plantProjectSlug={plantProjectSlug}

@@ -1,16 +1,8 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { Component } from 'react';
 // import t from 'tcomb-form-native';
-import {
-  Text,
-  View,
-  Platform,
-  ScrollView,
-  FlatList,
-  Image
-} from 'react-native';
+import { Text, View, FlatList, Image } from 'react-native';
 import Modal from 'react-native-modalbox';
-import PropTypes from 'prop-types';
 import { currentUserProfileSelector, getCurrency } from '../../selectors/index';
 import i18n from '../../locales/i18n';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -22,12 +14,8 @@ import { currenciesSelector } from '../../selectors';
 import { fetchCurrencies } from '../../actions/currencies';
 import { getCountryFlagImageUrl } from '../../actions/apiRouting';
 import countryCodes from '../../assets/countryCodes.json';
-import {
-  getPreferredCurrency,
-  setCurrencyAction
-} from '../../actions/globalCurrency';
+import { setCurrencyAction } from '../../actions/globalCurrency';
 import { updateUserProfile } from '../../actions/updateUserProfile';
-import { getCdnMedia } from '../../reducers/configReducer';
 
 const backgroundColor = 'gray';
 const activeColor = '#89b53a';
@@ -68,7 +56,7 @@ class GlobalCurrencySelector extends Component {
     this.props.userProfile &&
       this.rops.userProfile.currency &&
       this.setState({ preferredCurrency: this.props.userProfile.currency }) &&
-      this.props.setCurrencyAction(nextProps.userProfile.currency);
+      this.props.setCurrencyAction(this.props.userProfile.currency);
   }
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
@@ -118,8 +106,8 @@ class GlobalCurrencySelector extends Component {
   getCountryCode = currency =>
     countryCodes.find(c => c.code == currency.value) || {};
   isActive = currency => currency.value == this.state.preferredCurrency;
-  _keyExtractor = d => d.value;
-  _renderItem = ({ item: currency }) => {
+  keyExtractor = d => d.value;
+  renderItem = ({ item: currency }) => {
     return (
       <TouchableItem
         onPress={() => {
@@ -185,10 +173,10 @@ class GlobalCurrencySelector extends Component {
             isOpen={show}
             position={'bottom'}
             onClosed={this.onClosed}
-            backdropPressToClose={true}
+            backdropPressToClose
             coverScreen
             keyboardTopOffset={0}
-            swipeToClose={true}
+            swipeToClose
           >
             <View
               style={{
@@ -220,8 +208,8 @@ class GlobalCurrencySelector extends Component {
               </Text>
               <FlatList
                 data={currenciesArray.slice(0, 2)}
-                keyExtractor={this._keyExtractor}
-                renderItem={this._renderItem}
+                keyExtractor={this.keyExtractor}
+                renderItem={this.renderItem}
               />
             </View>
             <View style={{ marginTop: 10 }}>
@@ -231,8 +219,8 @@ class GlobalCurrencySelector extends Component {
             </View>
             <FlatList
               data={currenciesArray.slice(2)}
-              keyExtractor={this._keyExtractor}
-              renderItem={this._renderItem}
+              keyExtractor={this.keyExtractor}
+              renderItem={this.renderItem}
             />
           </Modal>
         </View>

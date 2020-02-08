@@ -12,7 +12,6 @@ import { ScrollView } from 'react-native';
 import { right_arrow_button } from '../../assets';
 import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
-import { formatNumber } from '../../utils/utils';
 import { connect } from 'react-redux';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 import { bindActionCreators } from 'redux';

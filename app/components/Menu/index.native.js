@@ -9,7 +9,6 @@ import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import UserProfileImage from '../Common/UserProfileImage.native';
-import Modal from 'react-native-modalbox';
 import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector.native';
 
 //   icons.target_outline;

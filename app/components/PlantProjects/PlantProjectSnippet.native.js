@@ -20,7 +20,6 @@ import {
 } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { formatNumber } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
 // import CardLayout from '../Common/Card';
 import NumberFormat from '../Common/NumberFormat.native';

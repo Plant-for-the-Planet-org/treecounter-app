@@ -462,7 +462,7 @@ class Trillion extends PureComponent {
             <HeaderStatic
               title={i18n.t('label.explore')}
               navigation={this.props.navigation}
-              showSearch={true}
+              showSearch
             />
             <Animated.View
               style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}

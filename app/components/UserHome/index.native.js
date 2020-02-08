@@ -22,13 +22,14 @@ import {
   settings
 } from './../../assets/';
 import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
-import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
+// import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import { getLocalRoute } from './../../actions/apiRouting';
-import { delimitNumbers } from './../../utils/utils';
-import { getImageUrl } from './../../actions/apiRouting';
+// import { delimitNumbers } from './../../utils/utils';
+// import { getImageUrl } from './../../actions/apiRouting';
 
 import styles from '../../styles/user-home';
 // import tabStyles from '../../styles/common/tabbar';
+import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 
 // import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
@@ -37,7 +38,7 @@ import ContributionCardList from '../UserContributions/ContributionCardList.nati
 import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
-import Icon from 'react-native-vector-icons/FontAwesome5';
+// import Icon from 'react-native-vector-icons/FontAwesome5';
 import MapView, { Marker } from 'react-native-maps';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 

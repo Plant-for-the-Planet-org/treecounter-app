@@ -5,7 +5,11 @@ import { Image, View, TouchableOpacity, BackHandler } from 'react-native';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
-import { newSearchIcon, iosNotificationWhite, shareIcon } from '../../assets';
+import {
+  newSearchIcon,
+  // iosNotificationWhite,
+  shareIcon
+} from '../../assets';
 import { Share } from 'react-native';
 
 export default class HeaderRight extends Component {
@@ -90,7 +94,11 @@ export default class HeaderRight extends Component {
     });
   }
   render() {
-    const { navigation, userProfile, isLoggedIn } = this.props;
+    const {
+      navigation
+      // userProfile,
+      // isLoggedIn
+    } = this.props;
     return (
       <View
         style={{

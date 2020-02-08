@@ -25,8 +25,8 @@ import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 import { white_heart } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
-import styles from '../../styles/user-home';
-import { getImageUrl } from './../../actions/apiRouting';
+// import styles from '../../styles/user-home';
+// import { getImageUrl } from './../../actions/apiRouting';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {

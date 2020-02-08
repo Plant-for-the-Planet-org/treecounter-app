@@ -293,7 +293,7 @@ class ContributionCard extends React.Component {
 
     let styles = myTreesStyle(labelColor, borderColor);
 
-    renderCard = () => {
+    let renderCard = () => {
       if (contributionType === 'donation') {
         return (
           <TouchableOpacity

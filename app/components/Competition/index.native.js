@@ -118,7 +118,7 @@ class Competiton extends React.Component {
             title={i18n.t('label.competitions')}
             scrollY={this.state.scrollY}
             pageName={'competitions'}
-            showSearch={true}
+            showSearch
             navigation={this.props.navigation}
           />
           <Animated.View

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, BackHandler, SafeAreaView, Platform } from 'react-native';
-import TouchableItem from '../Common/TouchableItem.native';
+// import TouchableItem from '../Common/TouchableItem.native';
 import HeaderRight from './HeaderSearch.native';
 export default function HeaderStatic(props) {
   let navigateBack = () => {
@@ -19,7 +19,7 @@ export default function HeaderStatic(props) {
 
   const textColor = '#4d5153';
   const whiteColor = 'white';
-  const linkColor = '#89B53A';
+  // const linkColor = '#89B53A';
   return (
     <SafeAreaView
       style={{

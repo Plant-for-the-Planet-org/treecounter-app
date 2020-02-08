@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Share,
   SafeAreaView
+  //FlatList
 } from 'react-native';
 import {
   readmoreDown,
@@ -20,10 +21,10 @@ import {
   settings
 } from './../../assets/';
 import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
-// import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
+import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import { getLocalRoute } from './../../actions/apiRouting';
-// import { delimitNumbers } from './../../utils/utils';
-// import { getImageUrl } from './../../actions/apiRouting';
+import { delimitNumbers } from './../../utils/utils';
+import { getImageUrl } from './../../actions/apiRouting';
 
 import styles from '../../styles/user-home';
 // import tabStyles from '../../styles/common/tabbar';
@@ -33,9 +34,9 @@ import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList.native';
 import i18n from '../../locales/i18n';
-// // import CompetitionSnippet from './app/CompetitionSnippet';
+import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
-// import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import MapView, { Marker } from 'react-native-maps';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 
@@ -263,7 +264,7 @@ export default class UserHome extends Component {
       showAllRecurrentContributions,
       recurrentUserContributions
     } = this.state;
-    console.log(recurrentUserContributions);
+    console.log(userProfile);
     return (
       <View style={{ elevation: 1 }}>
         <SafeAreaView />
@@ -435,6 +436,39 @@ export default class UserHome extends Component {
             </View>
           ) : null}
 
+          {/* Competitions */}
+          {userProfile.treecounter.competitions.length > 0 ? (
+            <MyCompetitions
+              onCompetitionClick={this.onCompetitionClick}
+              navigation={this.props.navigation}
+              competitions={userProfile.treecounter.competitions}
+            />
+          ) : null}
+
+          {/* Plant Projects of TPO  */}
+          {userProfile.plantProjects ? (
+            <Text style={styles.sectionTitle}>{i18n.t('label.projects')}</Text>
+          ) : null}
+          <ScrollView>
+            {userProfile.plantProjects
+              ? userProfile.plantProjects.map(project => (
+                  <PlantProjectSnippet
+                    key={'projectFull' + project.id}
+                    onMoreClick={id =>
+                      this.onPlantProjectClick(id, project.name)
+                    }
+                    plantProject={project}
+                    onSelectClickedFeaturedProjects={id =>
+                      this.onPlantProjectClick(id, project.name)
+                    }
+                    showMoreButton={false}
+                    tpoName={project.tpo_name}
+                    navigation={this.props.navigation}
+                  />
+                ))
+              : null}
+          </ScrollView>
+
           {this.props.userContributions.length ? (
             <View style={{ marginTop: 20 }}>
               <Text style={styles.sectionTitle}>
@@ -459,9 +493,9 @@ export default class UserHome extends Component {
           ) : null}
 
           {/* <RenderIndividualsList
-          navigation={this.props.navigation}
-          gifts={userProfile.treecounter.gifts}
-        /> */}
+            navigation={this.props.navigation}
+            gifts={userProfile.treecounter.gifts}
+          /> */}
         </ScrollView>
       </View>
     );
@@ -498,47 +532,47 @@ function ToggleButton(props) {
   );
 }
 
-// function MyCompetitions(props) {
-//   const competitions = props.competitions;
-//   return (
-//     <View style={{ paddingVertical: 20, marginTop: 20 }}>
-//       <View style={styles.competitionsContainer}>
-//         <Text style={styles.dedicatedTitle}>
-//           {i18n.t('label.my_competitions')}
-//         </Text>
-//         <TouchableOpacity>
-//           <Text
-//             style={styles.dedicatedEdit}
-//             onPress={() => {
-//               updateRoute('app_competitions', props.navigation);
-//             }}
-//           >
-//             {i18n.t('label.view_all')}
-//           </Text>
-//         </TouchableOpacity>
-//       </View>
+function MyCompetitions(props) {
+  const competitions = props.competitions;
+  return (
+    <View style={{ paddingVertical: 20, marginTop: 20 }}>
+      <View style={styles.competitionsContainer}>
+        <Text style={styles.dedicatedTitle}>
+          {i18n.t('label.my_competitions')}
+        </Text>
+        <TouchableOpacity>
+          <Text
+            style={styles.dedicatedEdit}
+            onPress={() => {
+              updateRoute('app_competitions', props.navigation);
+            }}
+          >
+            {i18n.t('label.view_all')}
+          </Text>
+        </TouchableOpacity>
+      </View>
 
-//       <ScrollView
-//         horizontal
-//         showsHorizontalScrollIndicator={false}
-//         contentContainerStyle={{ paddingLeft: 20 }}
-//       >
-//         {competitions.length > 0
-//           ? competitions.map(competition => (
-//<CompetitionSnippet
-//               key={'competition' + competition.id}
-//               onMoreClick={id =>
-//                 props.onCompetitionClick(id, competition.name)
-//               }
-//               competition={competition}
-//               type="all"
-//             />
-//           ))
-//           : null}
-//       </ScrollView>
-//     </View>
-//   );
-// }
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingLeft: 20 }}
+      >
+        {competitions.length > 0
+          ? competitions.map(competition => (
+              <CompetitionSnippet
+                key={'competition' + competition.id}
+                onMoreClick={id =>
+                  props.onCompetitionClick(id, competition.name)
+                }
+                competition={competition}
+                type="all"
+              />
+            ))
+          : null}
+      </ScrollView>
+    </View>
+  );
+}
 
 function DedicatedTrees(props) {
   return (

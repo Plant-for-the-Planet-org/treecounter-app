@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Image
+  // FlatList
 } from 'react-native';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -24,6 +25,8 @@ import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 import { white_heart } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
+import styles from '../../styles/user-home';
+import { getImageUrl } from './../../actions/apiRouting';
 
 class PublicTreeCounter extends React.Component {
   constructor(props) {
@@ -301,6 +304,15 @@ class PublicTreeCounter extends React.Component {
               </CardLayout>
             ) : null}
           </View>
+          {/* {
+            treecounter.directChildren ? (
+              <GroupTreeCounter
+                navigation={this.props.navigation}
+                // gifts={userProfile.treecounter.gifts}
+                children={treecounter.directChildren}
+              />
+            ) : null
+          } */}
         </ScrollView>
         <View
           style={[
@@ -359,3 +371,74 @@ PublicTreeCounter.propTypes = {
 };
 
 export default PublicTreeCounter;
+
+// function GroupTreeCounter(props) {
+//   const { children, navigation } = props;
+//   const onPressListItem = (treeCounterId) => {
+//     if (treeCounterId) {
+//       navigation.navigate(getLocalRoute('app_treecounter'), {
+//         treeCounterId: treeCounterId,
+//       });
+//     }
+//   };
+//   let index = 0;
+
+//   console.log('Children', children)
+//   if (children) {
+//     return (
+//       <View style={{ marginTop: 20 }}>
+//         <Text style={styles.sectionTitle}>My Supporters</Text>
+//         {Object.keys(children).map(childrenId => {
+//           return (
+//             index++ ,
+//             <TouchableOpacity
+//               onPress={() => {
+//                 onPressListItem(childrenId);
+//               }}
+//               style={styles.oneContryContainer}
+//             >
+//               <View style={styles.indexContainer}>
+//                 <Text style={styles.indexText}>{index}</Text>
+//               </View>
+//               <View style={styles.countryFlagContainer}>
+//                 <Image
+//                   style={styles.countryFlagImage}
+//                   source={{
+//                     uri: getImageUrl('profile', 'avatar', children[childrenId].displayName)
+//                   }}
+//                 />
+//               </View>
+//               <View style={styles.countryBody}>
+//                 <Text numberOfLines={2} style={styles.countryNameText}>
+//                   {children[childrenId].displayName
+//                     ? children[childrenId].displayName
+//                     : i18n.t('label.anonymous')}
+//                 </Text>
+//                 <Text style={styles.treesText}>
+//                   <Text style={styles.treesCounter}>
+//                     {delimitNumbers(
+//                       parseInt(
+//                         children[childrenId]
+//                           .countPlanted
+//                       )
+//                     )}{' '}
+//                   </Text>
+//                   {i18n.t('label.trees')}
+//                 </Text>
+//               </View>
+//             </TouchableOpacity>
+//           );
+//         })}
+
+//       </View>
+//     );
+//   } else {
+//     return (
+//       <>
+//         <CountryLoader />
+//         <CountryLoader />
+//         <CountryLoader />
+//       </>
+//     );
+//   }
+// }

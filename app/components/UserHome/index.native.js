@@ -9,7 +9,8 @@ import {
   Linking,
   TouchableOpacity,
   Share,
-  SafeAreaView
+  SafeAreaView,
+  RefreshControl
   //FlatList
 } from 'react-native';
 import {
@@ -59,7 +60,8 @@ export default class UserHome extends Component {
       showAllContributions: false,
       showAllRecurrentContributions: false,
       recurrentUserContributions: [],
-      readMore: false
+      readMore: false,
+      refreshing: false
     };
   }
   componentDidMount() {
@@ -76,6 +78,20 @@ export default class UserHome extends Component {
       recurrentUserContributions: recurrentUserContributions
     });
   }
+
+  onRefresh = () => {
+    this.setState({
+      refreshing: true
+    });
+    this.props.userProfile;
+    this.props.treecounterData;
+    this.props.userContributions;
+
+    this.setState({
+      refreshing: false
+    });
+  };
+
   componentWillReceiveProps(nextProps) {
     const { treecounterData, userProfile } = nextProps;
     if (treecounterData) {
@@ -269,7 +285,15 @@ export default class UserHome extends Component {
       <View style={{ elevation: 1 }}>
         <SafeAreaView />
 
-        <ScrollView contentContainerStyle={{ paddingBottom: 72 }}>
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 72 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh}
+            />
+          }
+        >
           <View>
             <View>
               <View style={styles.userProfileContainer}>

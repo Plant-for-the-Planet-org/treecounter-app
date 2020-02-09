@@ -18,7 +18,6 @@ import HeaderRight from '../Header/HeaderFields';
 
 import i18n from '../../locales/i18n';
 
-import EmptyContainer from '../../containers/Authentication/EmptyContainer';
 import FAQContainer from '../../containers/FAQ';
 import UserContributionsContainer from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
@@ -105,86 +104,6 @@ const headerLabels = {
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
-  const baseNavigator = createStackNavigator(
-    {
-      ['empty']: {
-        screen: EmptyContainer
-      },
-      [getLocalRoute('app_editProfile')]: {
-        screen: isLoggedIn ? EditUserProfileContainer : LoginContainer
-      },
-      [getLocalRoute('app_passwordSent')]: {
-        screen: EmailSentContainer
-      },
-      [getLocalRoute('app_signup')]: {
-        screen: SignUpContainer
-      },
-      [getLocalRoute('app_myTrees')]: {
-        screen: UserContributionsContainer
-      },
-      [getLocalRoute('app_forgotPassword')]: {
-        screen: ForgotPasswordContainer
-      },
-      [getLocalRoute('app_accountActivation')]: {
-        screen: ActivateAccountContainer
-      },
-      ['pickup_profile_modal']: {
-        screen: ProfilePickerModal
-      },
-      ['about_us']: {
-        screen: AboutUsContainer
-      },
-      ['license_info_list']: {
-        screen: LicenseInfoList
-      },
-      [getLocalRoute('app_imprint')]: {
-        screen: ImprintContainer
-      },
-      [getLocalRoute('app_privacy')]: {
-        screen: PrivacyContainer
-      },
-      // [getLocalRoute('app_claim')]: {
-      //   screen: RedemptionContainer
-      // },
-      [getLocalRoute('app_editTrees')]: {
-        screen: EditUserContributionContainer
-      },
-      [getLocalRoute('app_target')]: {
-        screen: isLoggedIn ? TargetContainer : LoginContainer
-      },
-      [getLocalRoute('app_challenge')]: {
-        screen: ChallengeContainer
-      },
-      ['app_gift_projects']: {
-        screen: SelectPlantProjectContainer
-      },
-      [getLocalRoute('app_accountActivate')]: {
-        screen: SuccessfullActivatedContainer,
-        path: getLocalRoute('app_accountActivate') + '/:token'
-      },
-      [getLocalRoute('app_resetPassword')]: {
-        screen: ResetPasswordContainer,
-        path: getLocalRoute('app_resetPassword') + '/:token'
-      },
-      ['app_pledge_events']: {
-        screen: PledgeEvents
-      },
-      ['app_pledge_form']: {
-        screen: MakePledgeForm
-      },
-      ['app_create_competition']: {
-        screen: createCompeition
-      }
-    },
-    {
-      headerMode: 'none',
-      defaultNavigationOptions: (/*{ navigation }*/) => {
-        return {
-          header: null
-        };
-      }
-    }
-  );
   const searchNavigator = createStackNavigator(
     {
       Search: {
@@ -307,7 +226,71 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: ApptabNavigator,
         navigationOptions: { header: null }
       },
-      Base: baseNavigator,
+      [getLocalRoute('app_editProfile')]: {
+        screen: isLoggedIn ? EditUserProfileContainer : LoginContainer
+      },
+      [getLocalRoute('app_passwordSent')]: {
+        screen: EmailSentContainer
+      },
+      [getLocalRoute('app_signup')]: {
+        screen: SignUpContainer
+      },
+      [getLocalRoute('app_myTrees')]: {
+        screen: UserContributionsContainer
+      },
+      [getLocalRoute('app_forgotPassword')]: {
+        screen: ForgotPasswordContainer
+      },
+      [getLocalRoute('app_accountActivation')]: {
+        screen: ActivateAccountContainer
+      },
+      ['pickup_profile_modal']: {
+        screen: ProfilePickerModal
+      },
+      ['about_us']: {
+        screen: AboutUsContainer
+      },
+      ['license_info_list']: {
+        screen: LicenseInfoList
+      },
+      [getLocalRoute('app_imprint')]: {
+        screen: ImprintContainer
+      },
+      [getLocalRoute('app_privacy')]: {
+        screen: PrivacyContainer
+      },
+      // [getLocalRoute('app_claim')]: {
+      //   screen: RedemptionContainer
+      // },
+      [getLocalRoute('app_editTrees')]: {
+        screen: EditUserContributionContainer
+      },
+      [getLocalRoute('app_target')]: {
+        screen: isLoggedIn ? TargetContainer : LoginContainer
+      },
+      [getLocalRoute('app_challenge')]: {
+        screen: ChallengeContainer
+      },
+      ['app_gift_projects']: {
+        screen: SelectPlantProjectContainer
+      },
+      [getLocalRoute('app_accountActivate')]: {
+        screen: SuccessfullActivatedContainer,
+        path: getLocalRoute('app_accountActivate') + '/:token'
+      },
+      [getLocalRoute('app_resetPassword')]: {
+        screen: ResetPasswordContainer,
+        path: getLocalRoute('app_resetPassword') + '/:token'
+      },
+      ['app_pledge_events']: {
+        screen: PledgeEvents
+      },
+      ['app_pledge_form']: {
+        screen: MakePledgeForm
+      },
+      ['app_create_competition']: {
+        screen: createCompeition
+      },
       ['app_supportTrees']: {
         screen: SelectPlantProjectContainer
       },

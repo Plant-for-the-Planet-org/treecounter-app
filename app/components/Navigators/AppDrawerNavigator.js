@@ -282,12 +282,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: ResetPasswordContainer,
         path: getLocalRoute('app_resetPassword') + '/:token'
       },
-      ['app_pledge_events']: {
-        screen: PledgeEvents
-      },
-      ['app_pledge_form']: {
-        screen: MakePledgeForm
-      },
       ['app_create_competition']: {
         screen: createCompeition
       },

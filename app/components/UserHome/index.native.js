@@ -39,6 +39,8 @@ import i18n from '../../locales/i18n';
 import MapView, { Marker } from 'react-native-maps';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 
+console.log = () => {};
+
 export default class UserHome extends Component {
   constructor(props) {
     super(props);

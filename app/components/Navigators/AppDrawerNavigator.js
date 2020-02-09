@@ -3,7 +3,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
-import { Animated } from 'react-native';
+import { Animated, Image } from 'react-native';
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
@@ -64,6 +64,14 @@ import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard
 import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  donateIcon,
+  donateIconGreen,
+  competeIconGreen,
+  competeIcon
+} from './../../assets';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -272,23 +280,53 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
 
     return title;
   };
-
+  const tintColor = '#4d5153';
   const ApptabNavigator = createBottomTabNavigator(
     {
       [getLocalRoute('app_homepage')]: {
-        screen: Trillion
+        screen: Trillion,
+        navigationOptions: {
+          title: i18n.t('label.menu_world'),
+          tabBarIcon: ({ tintColor }) => (
+            <Icon name="earth" color={tintColor} size={21} />
+          )
+        }
       },
       [getLocalRoute('app_giftTrees')]: {
-        screen: GiftTreesContainer
+        screen: GiftTreesContainer,
+        navigationOptions: {
+          title: i18n.t('label.gift'),
+          tabBarIcon: ({ tintColor }) => (
+            <Icon name="gift-outline" color={tintColor} size={21} />
+          )
+        }
       },
       [getLocalRoute('app_donateTrees')]: {
-        screen: SelectPlantProjectContainer
+        screen: SelectPlantProjectContainer,
+        navigationOptions: {
+          title: i18n.t('label.donate'),
+          tabBarIcon: ({ tintColor }) => (
+            <Icon name="heart-outline" color={tintColor} size={21} />
+          )
+        }
       },
       [getLocalRoute('app_competitions')]: {
-        screen: isLoggedIn ? CompetitionContainer : LoginContainer
+        screen: isLoggedIn ? CompetitionContainer : LoginContainer,
+        navigationOptions: {
+          title: i18n.t('label.compete'),
+          tabBarIcon: ({ tintColor }) => (
+            <Icon name="crown" color={tintColor} size={21} />
+          )
+        }
       },
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer,
+        navigationOptions: {
+          title: i18n.t('label.me'),
+          tabBarIcon: ({ tintColor }) => (
+            <Icon name="account-outline" color={tintColor} size={21} />
+          )
+        }
       }
     },
     {
@@ -296,8 +334,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         tabBarPosition: 'bottom',
         animatedEnable: true,
         swipeEnable: false
-      },
-      tabBarComponent: NewBottomNavigator
+      }
+      // tabBarComponent: NewBottomNavigator
     }
   );
 

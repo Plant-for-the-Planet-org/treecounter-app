@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import SingleRating from './SingleRating';
-import BottomAction from './BottomAction';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import { find } from 'lodash';
+import { debug } from '../../debug';
+import SingleRating from './SingleRating';
+import BottomAction from './BottomAction';
 import { pushStaticRoute } from './../../helpers/routerHelper';
 import { formatDate } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
 import UserProfileImage from '../Common/UserProfileImage';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { find } from 'lodash';
 import styles from '../../styles/review.native';
+
 export default class SingleReview extends Component {
   constructor(props) {
     super(props);
-    console.log('single props', props);
+    debug('single props', props);
     this.close = this.close.bind(this);
     this.state = {
       reviewIndexes: props.reviewIndexes
@@ -24,7 +26,7 @@ export default class SingleReview extends Component {
     nextProps.reviewIndexes
       ? this.setState({ reviewIndexes: nextProps.reviewIndexes })
       : '';
-    console.log('got new props: in single reviews:', nextProps);
+    debug('got new props: in single reviews:', nextProps);
   }
   close() {
     this.RBSheet.close();
@@ -50,7 +52,7 @@ export default class SingleReview extends Component {
   }
   render() {
     let { review, navigation } = this.props;
-    // console.log('in single props in render', this.props);
+    // debug('in single props in render', this.props);
     const { reviewIndexScores } = review;
     const { reviewIndexes } = this.state;
     return (

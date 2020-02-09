@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { WebMap } from 'react-arcgis';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 
 class MapContributions extends PureComponent {
   // state = {
@@ -62,7 +63,7 @@ class MapContributions extends PureComponent {
         .queryFeatures(query)
         .then(featureSet => {
           if (!this._mounted) return;
-          console.log(
+          debug(
             '############ MapContributions featureSet: ',
             featureSet.features
           );
@@ -71,7 +72,7 @@ class MapContributions extends PureComponent {
           // });
           view.goTo(featureSet.features);
         })
-        .catch(error => console.log(error.message));
+        .catch(error => debug(error.message));
     }
     // this.setState({ map, view, status: 'loaded' });
   };

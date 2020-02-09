@@ -11,6 +11,7 @@ import {
   Image
   // FlatList
 } from 'react-native';
+import { debug } from '../../debug';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
@@ -54,7 +55,7 @@ class PublicTreeCounter extends React.Component {
   }
 
   onPlantProjectSelected(selectedPlantProjectId) {
-    console.log('on plant project seected', selectedPlantProjectId);
+    debug('on plant project seected', selectedPlantProjectId);
     this.props.selectPlantProjectIdAction(selectedPlantProjectId);
     this.props.route('app_donateTrees');
   }
@@ -351,11 +352,11 @@ class PublicTreeCounter extends React.Component {
       if (supported) {
         Linking.openURL(url);
       } else {
-        console.log("Don't know how to open URI: " + url);
+        debug("Don't know how to open URI: " + url);
       }
     });
 */
-    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+    Linking.openURL(url).catch(err => debug('Cannot open URI', err));
   }
 }
 
@@ -383,7 +384,7 @@ export default PublicTreeCounter;
 //   };
 //   let index = 0;
 
-//   console.log('Children', children)
+//   debug('Children', children)
 //   if (children) {
 //     return (
 //       <View style={{ marginTop: 20 }}>

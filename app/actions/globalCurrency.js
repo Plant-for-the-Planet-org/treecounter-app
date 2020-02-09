@@ -1,7 +1,9 @@
+// import { debug } from '../debug';
 import { saveItem, getItemSync } from '../stores/localStorage';
 import { setCurrency } from '../reducers/currencyReducer';
 import { context } from '../config';
 import { getLocale } from './getLocale';
+
 let cache = { currency: '' };
 
 export function getPreferredCurrency() {
@@ -12,7 +14,7 @@ export function getPreferredCurrency() {
 }
 
 function guess() {
-  console.log('locale', getLocale());
+  // debug('locale', getLocale());
   cache.currency =
     getLocale() == 'de'
       ? 'EUR'

@@ -2,15 +2,15 @@
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-
+import { withNavigation } from 'react-navigation';
+import _ from 'lodash';
+import { debug } from '../../debug';
 import SearchBar from './SearchBar';
 import Header from './Header.native';
 import { getSuggestions } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
-import { withNavigation } from 'react-navigation';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/header/search_layout.native';
-import _ from 'lodash';
 import UserProfileImage from '../Common/UserProfileImage';
 
 class SearchLayout extends React.Component {
@@ -40,9 +40,9 @@ class SearchLayout extends React.Component {
     getSuggestions(q)
       .then(suggestions => {
         this.setState({ q: suggestions });
-        //console.log('suggestions', suggestions);
+        //debug('suggestions', suggestions);
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   };
 
   redirectToResult(suggestion) {

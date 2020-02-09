@@ -10,16 +10,14 @@ import {
   Linking
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
-
+import { debug } from '../../debug';
 import styles from '../../styles/user-home';
 import tabStyles from '../../styles/common/tabbar';
 import * as images from '../../assets';
-
 import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList';
-
 import i18n from '../../locales/i18n';
 
 const Layout = {
@@ -217,11 +215,11 @@ export default class UserHome extends Component {
       if (supported) {
         Linking.openURL(url);
       } else {
-        //console.log("Don't know how to open URI: " + url);
+        //debug("Don't know how to open URI: " + url);
       }
     });
 */
-    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+    Linking.openURL(url).catch(err => debug('Cannot open URI', err));
   }
 
   render() {

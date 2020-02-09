@@ -12,7 +12,7 @@ const getToastConfig = function(timeout) {
 };
 export class NotificationManager {
   static success(message, title, timeOut) {
-    //console.log(message, title);
+    //debug(message, title);
     Toast.show(title + (message ? '\n ' + message : ''), {
       ...getToastConfig(timeOut),
       backgroundColor: 'rgba(90, 159, 70, 1)'
@@ -20,7 +20,7 @@ export class NotificationManager {
   }
 
   static error(message, title, timeOut) {
-    //console.log(message, title);
+    //debug(message, title);
     Toast.show(title + (message ? '\n ' + message : ''), {
       ...getToastConfig(timeOut),
       backgroundColor: 'rgba(171, 51, 50, 1)'

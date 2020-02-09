@@ -1,5 +1,6 @@
 const routes = require('../server/routes/fos_js_routes.json');
 import Routing from './router.min.js';
+import { debug } from '../debug';
 import { context } from '../config';
 import { getLocaleAsync } from './getLocale';
 import { getCdnMediaUrl } from './fetchLocation';
@@ -8,7 +9,7 @@ Routing.setRoutingData(routes);
 export const getApiRoute = async (routeName, params) => {
   const { scheme, host, base: baseUrl } = context;
   let locale = await getLocaleAsync();
-  console.log('-------------------- Api calling with ', locale);
+  debug('-------------------- Api calling with ', locale);
   const serverName = `${scheme}://${host}`;
   params =
     'api_login_check' === routeName
@@ -32,7 +33,7 @@ export const getLocalRoute = (routeName, params) => {
 
 export const getImageUrl = (category, variant, imageName) => {
   // const { scheme, host } = context;
-  // console.log(getCdnMediaUrl());
+  // debug(getCdnMediaUrl());
 
   return `${getCdnMediaUrl().cache}/${category}/${variant}/${imageName}`;
 };

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { debug } from '../../../debug';
 import { globe, rocket, tree_outline, outline_email } from '../../../assets';
 import styles from '../../../styles/selectplantproject/plant-details.native';
 import i18n from '../../../locales/i18n';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { getISOToCountryName } from '../../../helpers/utils';
+
 export default class AccordionContactInfo extends Component {
   state = {
     showInfo: true
@@ -26,7 +28,7 @@ export default class AccordionContactInfo extends Component {
           value = address[item];
         }
       } catch (error) {
-        console.log(error);
+        debug(error);
       }
       str.push(value);
     });

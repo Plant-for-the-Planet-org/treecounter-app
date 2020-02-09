@@ -1,4 +1,5 @@
 import React from 'react';
+import { debug } from '../../debug';
 import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
 
@@ -51,7 +52,7 @@ export function FilePickerTemplate(locals) {
           className="browse-button"
           onClick={
             (/* e */) => {
-              console.log('clicked Browse', this && this.refs);
+              debug('clicked Browse', this && this.refs);
             }
           }
         >

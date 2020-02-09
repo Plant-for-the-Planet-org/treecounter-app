@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { debug } from '../../../debug';
 import { getDocumentTitle } from '../../../helpers/utils';
 
 const TextHeading = ({ children }) => {
@@ -15,7 +16,7 @@ const TextHeading = ({ children }) => {
         document.title = getDocumentTitle(children);
       }
     } catch (err) {
-      console.log(err);
+      debug(err);
     }
   }
   return <h2 className="pftp-text-heading">{children}</h2>;

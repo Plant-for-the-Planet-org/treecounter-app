@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import { debug } from '../debug';
 
 export const loadState = async () => {
   try {
@@ -17,7 +18,7 @@ export const saveState = async state => {
     const serializedState = JSON.stringify(state);
     await AsyncStorage.setItem('state', serializedState);
   } catch (err) {
-    console.log(err);
+    debug(err);
   }
 };
 
@@ -51,7 +52,7 @@ export const getItemSync = async key => {
 };
 export const clearStorage = async () => {
   //const welcomeKey = await fetchItem('welcome');
-  //console.log(welcomeKey);
+  //debug(welcomeKey);
   await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
   //saveItem('welcome', welcomeKey);
 };

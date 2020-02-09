@@ -13,6 +13,8 @@ import {
   RefreshControl
   //FlatList
 } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import { debug } from '../../debug';
 import {
   readmoreDown,
   readmoreUp,
@@ -26,11 +28,9 @@ import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
 import { getLocalRoute } from './../../actions/apiRouting';
 // import { delimitNumbers } from './../../utils/utils';
 // import { getImageUrl } from './../../actions/apiRouting';
-
 import styles from '../../styles/user-home';
 // import tabStyles from '../../styles/common/tabbar';
 import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
-
 // import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
@@ -39,7 +39,6 @@ import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
 // import Icon from 'react-native-vector-icons/FontAwesome5';
-import MapView, { Marker } from 'react-native-maps';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 
 export default class UserHome extends Component {
@@ -188,7 +187,7 @@ export default class UserHome extends Component {
   }
 
   _goToURL(url) {
-    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+    Linking.openURL(url).catch(err => debug('Cannot open URI', err));
   }
 
   readMore() {
@@ -281,7 +280,7 @@ export default class UserHome extends Component {
       showAllRecurrentContributions,
       recurrentUserContributions
     } = this.state;
-    console.log(userProfile);
+    debug(userProfile);
     return (
       <View style={{ elevation: 1 }}>
         <SafeAreaView />

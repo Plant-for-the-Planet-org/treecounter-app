@@ -5,7 +5,7 @@ export function updateRoute(routeName, navigation, id, params) {
   try {
     route = getLocalRoute(routeName);
   } catch (err) {
-    //console.log('routing error', err);
+    //debug('routing error', err);
   }
 
   if (id === 0) {

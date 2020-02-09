@@ -1,12 +1,14 @@
 import React from 'react';
 import { ScrollView, View, Linking, Image, Text } from 'react-native';
+import { BackHandler } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
+import { debug } from '../../../debug';
 // import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
 import Measurements from '../../Measurements/Measurements.native';
 import { formatDate, delimitNumbers } from '../../../utils/utils';
 import i18n from '../../../locales/i18n.js';
-import { withNavigation } from 'react-navigation';
 import VideoContainer from '../../../components/Common/VideoContainer';
 import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
 import { getLocalRoute } from '../../../actions/apiRouting';
@@ -15,11 +17,10 @@ import styles from '../../../styles/newUserContributions/userContributions';
 // import styles from '../../../styles/newUserContributions/userContributions';
 import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
-import { BackHandler } from 'react-native';
 
 // eslint-disable-next-line no-underscore-dangle
 const _goToURL = url => {
-  Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+  Linking.openURL(url).catch(err => debug('Cannot open URI', err));
 };
 
 class UserContributionsDetails extends React.Component {
@@ -101,9 +102,9 @@ class UserContributionsDetails extends React.Component {
     let locationErrorText = '';
     let contributionOrPlantedImages = contributionImages;
 
-    // console.log('\x1b[45mcontribution', this.props.contribution);
-    // console.log('plantProjects', this.props.plantProjects);
-    // console.log('\x1b[0m');
+    // debug('\x1b[45mcontribution', this.props.contribution);
+    // debug('plantProjects', this.props.plantProjects);
+    // debug('\x1b[0m');
 
     // sets the header text
     // if treeType is null then header text is treecount and type of contribution

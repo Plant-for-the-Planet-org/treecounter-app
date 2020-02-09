@@ -10,8 +10,12 @@ import {
   Animated,
   Platform
 } from 'react-native';
+import { TabView, TabBar } from 'react-native-tab-view';
 import { SafeAreaView } from 'react-navigation';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import NavigationEvents from './importNavigationEvents';
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
@@ -19,23 +23,18 @@ import svgStyles from '../../styles/common/treecounter_svg';
 import styles from '../../styles/trillion.native';
 import { pledgeEventSelector, entitiesSelector } from '../../selectors';
 import LoadingIndicator from '../Common/LoadingIndicator';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import { bindActionCreators } from 'redux';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 // import Leaderboard from '../../containers/Leaderboard';
 import Leaderboard from '../LeaderboardRefresh/LeaderBoard/leaderboard';
-import { TabView, TabBar } from 'react-native-tab-view';
 import { getLocalRoute } from '../../actions/apiRouting';
 import {
   fetchpledgeEventsAction,
   fetchPublicPledgesAction
 } from '../../actions/pledgeEventsAction';
-import { loadUserProfile } from './../../actions/loadUserProfileAction';
-import { currentUserProfileSelector } from './../../selectors';
-
-import { trees } from './../../assets';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import { currentUserProfileSelector } from '../../selectors';
+import { trees } from '../../assets';
 import tabStyles from '../../styles/common/tabbar';
 import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
@@ -43,6 +42,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
 import HeaderStatic from './../Header/HeaderStatic';
+
 class Trillion extends PureComponent {
   constructor() {
     super();
@@ -83,7 +83,7 @@ class Trillion extends PureComponent {
         saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
       .catch(error => {
-        console.log(error);
+        debug(error);
         fetchItem(Constants.storageKeys.svgData).then(svgData => {
           try {
             svgData = JSON.parse(svgData);
@@ -95,7 +95,7 @@ class Trillion extends PureComponent {
               });
             }
           } catch (err) {
-            //console.log(error);
+            //debug(error);
           }
         });
       });
@@ -103,7 +103,7 @@ class Trillion extends PureComponent {
     this.props.fetchpledgeEventsAction();
 
     if (this.props.userProfile) {
-      console.log('User Logged in');
+      debug('User Logged in');
     } else {
       fetchItem('pledgedEvent')
         .then(data => {
@@ -113,7 +113,7 @@ class Trillion extends PureComponent {
             this.props.fetchPublicPledgesAction(stringPledges);
           }
         })
-        .catch(error => console.log(error));
+        .catch(error => debug(error));
     }
   }
 
@@ -123,7 +123,7 @@ class Trillion extends PureComponent {
       JSON.stringify(this.props.entities.eventPledge)
     ) {
       if (this.props.userProfile) {
-        console.log('User Logged in');
+        debug('User Logged in');
       } else {
         fetchItem('pledgedEvent')
           .then(data => {
@@ -133,7 +133,7 @@ class Trillion extends PureComponent {
               this.props.fetchPublicPledgesAction(stringPledges);
             }
           })
-          .catch(error => console.log(error));
+          .catch(error => debug(error));
       }
     }
   }
@@ -190,7 +190,7 @@ class Trillion extends PureComponent {
     const { navigation /* , userProfile, isLoggedIn */ } = this.props;
     const backgroundColor = 'white';
     const { contentLoader } = this.state;
-    // console.log(this.props.pledgeEvents);
+    // debug(this.props.pledgeEvents);
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (

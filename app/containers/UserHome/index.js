@@ -2,18 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-
 import NavigationEvents from './importNavigationEvents';
 import { deleteContribution } from '../../actions/EditMyTree';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-
 import {
   userTreecounterDataSelector,
   currentUserProfileSelector,
   currentUserProfileIdSelector,
   sortedUserContributionsSelector
 } from '../../selectors';
-
 import UserHome from '../../components/UserHome';
 
 class UserHomeContainer extends React.Component {
@@ -25,7 +22,7 @@ class UserHomeContainer extends React.Component {
   }
   render() {
     const { treecounterData, currentUserProfile, navigation } = this.props;
-    //console.log(this.state.loadSvg);
+    //debug(this.state.loadSvg);
 
     return [
       navigation ? (

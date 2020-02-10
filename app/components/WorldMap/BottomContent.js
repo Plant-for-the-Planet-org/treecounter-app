@@ -18,7 +18,7 @@ const BottomContent = ({
   desforestionSwitchValue
 }) => {
   const plantedTrees = () => (
-    <View style={{}}>
+    <View>
       <View style={styles.widgetHeaderContainer}>
         <View>
           <Text style={styles.widgetHeaderText}>Planted Trees</Text>
@@ -198,13 +198,13 @@ const BottomContent = ({
           borderWidth: 0
         }}
       >
-        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2001</Text>
-        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2004</Text>
-        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2007</Text>
-        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2010</Text>
-        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2012</Text>
-        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2016</Text>
-        <Text style={{ fontFamily: 'OpenSans-Regular' }}>2018</Text>
+        <Text style={styles.yearsText}>2001</Text>
+        <Text style={styles.yearsText}>2004</Text>
+        <Text style={styles.yearsText}>2007</Text>
+        <Text style={styles.yearsText}>2010</Text>
+        <Text style={styles.yearsText}>2012</Text>
+        <Text style={styles.yearsText}>2016</Text>
+        <Text style={styles.yearsText}>2018</Text>
       </View>
       <View style={[styles.addressContainer, { marginVertical: 20 }]}>
         <View style={{ width: 50 }}>
@@ -219,22 +219,8 @@ const BottomContent = ({
     </View>
   );
   let Marker = () => (
-    <View
-      style={{
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 1,
-        shadowRadius: 2,
-        elevation: 10,
-        width: 20,
-        height: 20,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 4
-      }}
-    >
-      <View style={{ width: 6, height: 6, backgroundColor: 'black' }} />
+    <View style={styles.markerContainer}>
+      <View style={styles.marker} />
     </View>
   );
   return (
@@ -252,6 +238,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     marginHorizontal: 20
+  },
+  marker: {
+    width: 6,
+    height: 6,
+    backgroundColor: 'black'
+  },
+  yearsText: {
+    fontFamily: 'OpenSans-Regular'
+  },
+  markerContainer: {
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    elevation: 10,
+    width: 20,
+    height: 20,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4
   },
   widgetHeaderContainer: {
     height: 30,

@@ -203,7 +203,7 @@ const ProjectSingleLoader = () => (
       height={HEIGHT * 1.5}
       width={WIDTH}
       speed={2}
-      primaryColor="#E1E2E2"
+      primaryColor="#f3f3f3"
       secondaryColor="#ecebeb"
     >
       <Rect x="0" y="0" rx="10" ry="0" width="100%" height="200" />

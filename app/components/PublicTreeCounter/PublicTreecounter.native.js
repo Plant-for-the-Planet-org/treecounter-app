@@ -11,6 +11,7 @@ import {
   Image
   // FlatList
 } from 'react-native';
+import { backArrow } from './../../assets';
 import { debug } from '../../debug';
 import TreecounterHeader from './TreecounterHeader';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -167,7 +168,24 @@ class PublicTreeCounter extends React.Component {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
-          <HeaderNew title={''} navigation={this.props.navigation} />
+          {/* <HeaderNew title={''} navigation={this.props.navigation} /> */}
+          <TouchableOpacity
+            style={{
+              height: 36,
+              zIndex: 1001,
+              width: 36,
+              left: 24,
+              top: 12,
+              justifyContent: 'center'
+            }}
+            onPress={() => this.props.navigation.goBack()}
+          >
+            <Image
+              source={backArrow}
+              resizeMode="contain"
+              style={{ height: 18, width: 18.48, alignSelf: 'flex-start' }}
+            />
+          </TouchableOpacity>
           <View style={stylesPublicPage.header}>
             <TreecounterHeader
               {...headerProps}

@@ -49,7 +49,12 @@ const UserDetails = ({
             <a data-tip data-for="dedicate-trees-icon">
               <img src={questionmark_orange} />
             </a>
-            <ReactTooltip id="dedicate-trees-icon" effect="solid" type="dark">
+            <ReactTooltip
+              id="dedicate-trees-icon"
+              place="left"
+              effect="solid"
+              type="dark"
+            >
               <span className="tooltip-text">
                 {i18n.t('label.dedicate_tootltip')}
               </span>

@@ -68,7 +68,8 @@ export default class UserContributions extends React.Component {
       navigation,
       updateStaticRoute,
       showDelete,
-      mayUpdate
+      mayUpdate,
+      plantProjectId
     } = props;
 
     const textColor = '#87B738';
@@ -181,14 +182,10 @@ export default class UserContributions extends React.Component {
               <TouchableOpacity
                 onPress={() => {
                   plantProjectSlug
-                    ? updateStaticRoute(
-                        getLocalRoute('app_treecounter'),
-                        navigation,
-                        {
-                          treeCounterId: plantProjectSlug,
-                          titleParam: plantProjectName
-                        }
-                      )
+                    ? navigation.navigate(getLocalRoute('app_treecounter'), {
+                        treeCounterId: plantProjectId,
+                        titleParam: plantProjectName
+                      })
                     : null;
                 }}
               >

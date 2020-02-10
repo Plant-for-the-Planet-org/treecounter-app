@@ -6,28 +6,30 @@ import {
   Dimensions,
   ScrollView
 } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { debug } from '../../debug';
 import SingleReview from './SingleReview';
 import { getReviewIndexes } from '../../actions/reviews';
 // import { ScrollView } from 'react-native-gesture-handler';
-const { width } = Dimensions.get('window');
-import { pushStaticRoute } from './../../helpers/routerHelper';
+import { pushStaticRoute } from '../../helpers/routerHelper';
 import {
   selectedPlantProjectSelector,
   selectedReviewsSelector,
   currentUserProfileSelector
 } from '../../selectors';
-import { connect } from 'react-redux';
 import { deleteReview } from '../../actions/reviews';
-import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import NumberFormat from '../Common/NumberFormat';
 import SingleRating from './SingleRating';
 import styles from '../../styles/review.native';
 
+const { width } = Dimensions.get('window');
+
 class Reviews extends Component {
   constructor(props) {
     super(props);
-    console.log('reviews props:', props);
+    debug('reviews props:', props);
 
     this.state = {
       reviewIndexes: []
@@ -36,10 +38,10 @@ class Reviews extends Component {
   async componentWillMount() {
     try {
       const { data } = await getReviewIndexes();
-      console.log('indexs', data);
+      debug('indexs', data);
       this.setState({ reviewIndexes: data });
     } catch (err) {
-      console.log('eror on reviewindex', err);
+      debug('eror on reviewindex', err);
     }
   }
   isReviewer() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
 import { redeemImage, forward } from '../../assets';
@@ -13,14 +14,14 @@ import {
   ActivityIndicator,
   Platform
 } from 'react-native';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
-import HeaderNew from './../Header/HeaderNew.native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // import { SafeAreaView } from 'react-navigation';
 import { Formik } from 'formik';
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import HeaderNew from './../Header/HeaderNew.native';
 import buttonStyles from '../../styles/common/button.native';
-import { Dimensions } from 'react-native';
+
 const height = Dimensions.get('window').height;
 export default function Redemption(props) {
   const [scrollY] = React.useState(new Animated.Value(0));
@@ -100,7 +101,7 @@ export default function Redemption(props) {
         //     }).then(res => {
         //       if (res.data.status === "error") {
         //         setFormError(res.data.errorText)
-        //         console.log(res.data.errorText)
+        //         debug(res.data.errorText)
         //       } else {
         //         setFormError('')
         //       }

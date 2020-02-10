@@ -4,7 +4,7 @@ import {
   deleteAuthenticatedRequest,
   postAuthenticatedRequest
 } from '../utils/api';
-import { debug } from '../debug/index';
+import { debug } from '../debug';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import { reviewsSchema, plantProjectSchema } from '../schemas/index';
 import { normalize } from 'normalizr';
@@ -24,7 +24,7 @@ export function addReview(review) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve) {
-      console.log('review:', review, review.id);
+      debug('review:', review, review.id);
 
       postAuthenticatedRequest('review_post', review)
         .then(res => {
@@ -32,13 +32,13 @@ export function addReview(review) {
           debug(res);
           let { review, plantProject } = res.data.merge;
           debug(review);
-          console.log('Normalize:', normalize(review, [reviewsSchema]));
+          debug('Normalize:', normalize(review, [reviewsSchema]));
           dispatch(mergeEntities(normalize(review, [reviewsSchema])));
           // TODO: we need to fix to add entry to plant project and userprofile
           // let reviews = [...plantProject.reviews];
-          // console.log('pmatProject:', plantProject);
+          // debug('pmatProject:', plantProject);
           // plantProject.reviews = [reviews, review];
-          // console.log('pmatProject:', normalize(plantProject, [plantProjectSchema]));
+          // debug('pmatProject:', normalize(plantProject, [plantProjectSchema]));
           dispatch(
             mergeEntities(normalize(plantProject, [plantProjectSchema]))
           );
@@ -63,12 +63,12 @@ export function deleteReview(reviewId) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
-      console.log('delete review ', reviewId);
+      debug('delete review ', reviewId);
       deleteAuthenticatedRequest('review_delete', {
         review: reviewId
       })
         .then(res => {
-          console.log(res.data);
+          debug(res.data);
           const { review } = res.data.delete;
           try {
             dispatch(deleteEntity({ reviews: review }));
@@ -109,13 +109,13 @@ export function updateReview(review) {
     return new Promise(function(resolve, reject) {
       let reviewId = review.id;
       delete review.id;
-      console.log('putting', review);
+      debug('putting', review);
 
       putAuthenticatedRequest('review_put', review, {
         review: reviewId
       })
         .then(res => {
-          console.log('updated reviews:', res.data);
+          debug('updated reviews:', res.data);
           let { review, plantProject } = res.data.merge;
           try {
             dispatch(mergeEntities(normalize(review, [reviewsSchema])));
@@ -130,7 +130,7 @@ export function updateReview(review) {
               // dispatch(deleteEntity(deleteContent));
             }
           } catch (err) {
-            console.err(err);
+            console.error(err);
           }
           NotificationManager.success(
             i18n.t('label.review_updated_successfully'),

@@ -101,6 +101,8 @@ import svgBackground from './svgAssets/svg_background.png';
 import darkTree from './images/darkTree.png';
 import imageUpload from './images/icons/upload_image.png';
 import iosSearchGrey from './images/icons/search_grey.png';
+import newSearchIcon from './images/icons/newSearchIcon.png';
+
 import logout from './images/icons/logout.png';
 import faqs from './images/icons/faqs.png';
 import iosInformation from './images/icons/ios_information.png';
@@ -184,6 +186,12 @@ import competeIconGreen from './images/icons/competeIconGreen.png';
 import editIcon from './images/pencil.png';
 import deleteIcon from './images/baseline_delete_outline.png';
 import redMyLocationIcon from './images/icons/locationIcon.png';
+
+import share from './images/icons/share.png';
+import coupon from './images/icons/coupon.png';
+import registerTree from './images/icons/registerTree.png';
+import settings from './images/icons/settings.png';
+import white_heart from './images/icons/white_heart.png';
 
 export {
   treelogo,
@@ -365,11 +373,17 @@ export {
   individualsleaderboard,
   deleteOutlineWhite,
   companiesleaderboard,
+  share,
+  coupon,
+  registerTree,
+  settings,
   donateIcon,
   donateIconGreen,
   competeIcon,
   competeIconGreen,
   editIcon,
   deleteIcon,
-  redMyLocationIcon
+  redMyLocationIcon,
+  newSearchIcon,
+  white_heart
 };

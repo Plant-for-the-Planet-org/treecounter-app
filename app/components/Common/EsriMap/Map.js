@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as esriLoader from 'esri-loader';
+import { debug } from '../../debug';
 
 export default class Map extends Component {
   constructor(props) {
@@ -132,8 +133,8 @@ export default class Map extends Component {
 
           function setLocation(long, lat) {
             // set form values
-            console.log('latitude: ' + lat);
-            console.log('longitude: ' + long);
+            debug('latitude: ' + lat);
+            debug('longitude: ' + long);
             drawMarker(long, lat, redSymbol);
           }
           function drawMarker(long, lat, symbol) {
@@ -147,20 +148,20 @@ export default class Map extends Component {
             )
               .then(response => response.json())
               .then(res => {
-                console.log('Selected country: ', res.address.CountryCode);
+                debug('Selected country: ', res.address.CountryCode);
                 mapThis.props.onMapsClick({
                   latitude: lat,
                   longitude: long,
                   country: res.address.CountryCode
                 });
               })
-              .catch(err => console.log(err));
+              .catch(err => debug(err));
           }
 
           function Marker() {
             if (!mapThis.props.hasOwnProperty('pins')) return;
 
-            console.log('Loading pins', mapThis.props);
+            debug('Loading pins', mapThis.props);
 
             mapThis.props.pins.forEach(pin => {
               let symbol = new esri.symbol.PictureMarkerSymbol(

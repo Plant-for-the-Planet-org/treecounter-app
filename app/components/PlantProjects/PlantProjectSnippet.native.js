@@ -91,7 +91,7 @@ class PlantProjectSnippet extends PureComponent {
     } else {
       projectImage = plantProjectImages && plantProjectImages.find(() => true);
     }
-    // console.log('project image', projectImage);
+    // debug('project image', projectImage);
     const teaserProps = {
       tpoName: this.props.tpoName,
       projectName,
@@ -122,6 +122,7 @@ class PlantProjectSnippet extends PureComponent {
           ? leafGray
           : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
+
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
         <View style={[styles.projectSnippetContainer]} withoutShadow>

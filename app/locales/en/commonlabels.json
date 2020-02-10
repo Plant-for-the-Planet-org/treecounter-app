@@ -44,5 +44,7 @@
   "datePickerConfirm": "Confirm",
   "select_currency": "Select Currency",
   "featured_currencies": "Featured Currencies",
-  "all_currencies": "All Currencies"
+  "all_currencies": "All Currencies",
+  "view_all": "View All",
+  "share": "Share"
 }

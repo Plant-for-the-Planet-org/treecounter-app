@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import CardLayout from '../Common/Card';
 import ContentHeader from '../Common/ContentHeader';
@@ -31,7 +31,7 @@ class TpoDonationPlantProjectSelector extends React.Component {
     this.state = { currentPlantProjectId: defaultPlantProjectId };
   }
   componentWillReceiveProps(nextProps) {
-    console.log('got in receive props', nextProps);
+    debug('got in receive props', nextProps);
     if (nextProps.plantProjects && nextProps.plantProjects.length) {
       let defaultPlantProjectId = nextProps.defaultPlantProjectId;
       if (Array.isArray(nextProps.plantProjects)) {

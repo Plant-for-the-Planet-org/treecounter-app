@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-// import i18n from '../../locales/i18n.js';
-import { currencySort } from './utils';
+import Select from 'react-select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { debug } from '../../debug';
+// import i18n from '../../locales/i18n.js';
+import { currencySort } from './utils';
 import { currenciesSelector } from '../../selectors';
 import { fetchCurrencies } from '../../actions/currencies';
-import Select from 'react-select';
 import {
   getPreferredCurrency,
   setCurrencyAction
@@ -93,9 +94,9 @@ class GlobalCurrencySelector extends Component {
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
       let curreniesData = await this.props.fetchCurrencies();
-      console.log('got fron fetch', curreniesData);
+      debug('got fron fetch', curreniesData);
     }
-    console.log('setting', this.state);
+    debug('setting', this.state);
     this.state.preferredCurrency &&
       this.props.setCurrencyAction(this.state.preferredCurrency);
   }
@@ -117,7 +118,7 @@ class GlobalCurrencySelector extends Component {
         ];
   }
   handleCurrencyChange(selectedOption) {
-    console.log(selectedOption);
+    debug(selectedOption);
     this.updateState({ preferredCurrency: selectedOption.value });
     this.props.setCurrencyAction(selectedOption.value);
     this.props.userProfile &&

@@ -6,7 +6,8 @@ import {
   View,
   Image,
   RefreshControl,
-  FlatList
+  FlatList,
+  Animated
 } from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
@@ -112,6 +113,19 @@ export default class FeaturedCompetitions extends Component {
             onRefresh={this.onRefresh}
           />
         }
+        scrollEventThrottle={24}
+        onScroll={Animated.event(
+          [
+            {
+              nativeEvent: {
+                contentOffset: { y: this.props.scrollY }
+              }
+            }
+          ],
+          {
+            useNativeDriver: false
+          }
+        )}
       >
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>

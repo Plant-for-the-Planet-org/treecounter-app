@@ -18,7 +18,7 @@ import {
   treecounterSchema,
   plantProjectSchema
 } from '../schemas';
-import { debug } from '../debug/index';
+import { debug } from '../debug';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
 

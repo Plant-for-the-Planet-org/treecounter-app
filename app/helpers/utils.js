@@ -1,3 +1,6 @@
+import _ from 'lodash';
+import * as Yup from 'yup';
+import { debug } from '../debug';
 import { postDirectRequest } from '../../app/utils/api';
 import {
   profile,
@@ -21,10 +24,8 @@ import {
   leaderboards_company_grey,
   leaderboards_company_green
 } from '../assets';
-import _ from 'lodash';
 import { getErrorView } from '../server/validator';
 import countryCodes from '../assets/countryCodes.json';
-import * as Yup from 'yup';
 import i18n from '../locales/i18n';
 
 /*
@@ -123,9 +124,9 @@ export function queryParamsToObject(queryParams) {
         '"}'
     );
   } catch (err) {
-    console.log(err);
+    debug(err);
   }
-  console.log('object to return ', returnObject);
+  debug('object to return ', returnObject);
   return returnObject;
 }
 
@@ -134,13 +135,13 @@ export function objectToQueryParams(objectValue) {
     .map(key => key + '=' + objectValue[key])
     .join('&');
 
-  console.log('object to return ', valueString);
+  debug('object to return ', valueString);
   return valueString;
 }
 
 // credits to https://itnext.io/create-date-from-mysql-datetime-format-in-javascript-912111d57599
 export function getDateFromMySQL(dateTime) {
-  console.log('getDateFromMySQL', dateTime);
+  debug('getDateFromMySQL', dateTime);
   if (dateTime) {
     let dateTimeParts = dateTime.split(/[- :]/);
     dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
@@ -151,7 +152,7 @@ export function getDateFromMySQL(dateTime) {
 }
 
 export function formatDateToMySQL(date) {
-  console.log('formatDateToMySQL', date);
+  debug('formatDateToMySQL', date);
 
   let dd = date.getDate();
   let mm = date.getMonth() + 1; //January is 0!
@@ -596,7 +597,7 @@ export function generateFormikSchemaFromFormSchema(
   schemaObj = { properties: {}, required: [] },
   fields = []
 ) {
-  console.log('schemaObj====>', schemaObj);
+  debug('schemaObj====>', schemaObj);
   let validationSchemaGenerated = {};
   Object.keys(schemaObj.properties).map(key => {
     if (fields.length === 0 || fields.indexOf(key) !== -1) {
@@ -611,7 +612,7 @@ export function generateFormikSchemaFromFormSchema(
           prepareSchema = prepareSchema.array(
             generateFormikSchemaFromFormSchema(property.items, fields)
           );
-          console.log('prepareSchema====>', prepareSchema);
+          debug('prepareSchema====>', prepareSchema);
         } else if (property.type === 'object') {
           prepareSchema = generateFormikSchemaFromFormSchema(property, fields);
         } else {

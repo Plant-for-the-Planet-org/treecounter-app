@@ -1,3 +1,4 @@
+import { debug } from '../debug';
 import { getRequest } from '../utils/api';
 import { setPledgeEvents } from '../reducers/pledgeEventReducer';
 import { eventPledgeSchema } from '../schemas';
@@ -8,7 +9,7 @@ export function fetchpledgeEventsAction() {
   return dispatch => {
     getRequest('public_pledgeEvents_get')
       .then(val => dispatch(setPledgeEvents(val.data)))
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   };
 }
 
@@ -21,6 +22,6 @@ export function fetchPublicPledgesAction(pledgeTokens) {
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, [eventPledgeSchema])));
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   };
 }

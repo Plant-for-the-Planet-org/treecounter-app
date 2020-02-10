@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import {
   selectedPlantProjectSelector,
@@ -26,7 +27,6 @@ import {
 } from '../../actions/donateAction';
 import { loadProject } from '../../actions/loadTposAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
-
 import { updateRoute } from '../../helpers/routerHelper';
 import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
@@ -38,7 +38,7 @@ class DonationTreesContainer extends PureComponent {
     if (match && match.params && match.params.slug) {
       postDirectRequest('/suggest', 'q=' + match.params.slug)
         .then(_suggestions => {
-          console.log('sugessions', _suggestions);
+          debug('sugessions', _suggestions);
           if (
             _suggestions.data.length &&
             _suggestions.data[0].slug == match.params.slug
@@ -49,10 +49,10 @@ class DonationTreesContainer extends PureComponent {
             });
           }
         })
-        .catch(error => console.log(error));
+        .catch(error => debug(error));
     } else {
       const { currentUserProfile } = this.props;
-      console.log(
+      debug(
         'current user profile and suported tree counter',
         currentUserProfile,
         this.props.supportTreecounter.treecounterId
@@ -92,7 +92,7 @@ class DonationTreesContainer extends PureComponent {
   }
   componentWillUnmount() {
     const { currentUserProfile } = this.props;
-    console.log(
+    debug(
       'current user profile unmounting donate trees container',
       currentUserProfile
     );

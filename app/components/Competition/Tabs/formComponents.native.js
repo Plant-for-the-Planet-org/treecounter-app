@@ -6,19 +6,20 @@ import {
   forward,
   circleDelete
 } from '../../../assets';
+import { Formik } from 'formik';
+import { TextField } from 'react-native-material-textfield';
+import ImagePicker from 'react-native-image-picker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Dropdown } from 'react-native-material-dropdown';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import { debug } from '../../../debug';
 import styles from '../../../styles/competition/competition-form.native';
 import { formatDateToMySQL } from './../../../helpers/utils';
 import { formatDate } from './../../../utils/utils';
-import DateTimePicker from 'react-native-modal-datetime-picker';
 import i18n from '../../../locales/i18n';
-import { Formik } from 'formik';
-import { TextField } from 'react-native-material-textfield';
 import competitionFormSchema from './../../../server/formSchemas/competition';
 import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
-import ImagePicker from 'react-native-image-picker';
 import buttonStyles from '../../../styles/common/button.native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Dropdown } from 'react-native-material-dropdown';
 
 export const FormikForm = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
@@ -243,9 +244,9 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
                 props.setFieldValue(
                   'imageFile',
@@ -262,9 +263,9 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
                 props.setFieldValue(
                   'imageFile',

@@ -12,7 +12,7 @@ import footerlabels from './footerlabels.json';
 import forgotPasswordlabels from './forgotPasswordlabels.json';
 import giftTreeslabels from './giftTreeslabels.json';
 import headerlabels from './headerlabels.json';
-import leaderboradlabels from './leaderboradlabels.json';
+import leaderboardlabels from './leaderboardlabels.json';
 import loginlabels from './loginlabels.json';
 import manageProjectlabels from './manageProjectlabels.json';
 import menulabels from './menulabels.json';
@@ -58,7 +58,7 @@ export default {
   ...forgotPasswordlabels,
   ...giftTreeslabels,
   ...headerlabels,
-  ...leaderboradlabels,
+  ...leaderboardlabels,
   ...loginlabels,
   ...manageProjectlabels,
   ...menulabels,

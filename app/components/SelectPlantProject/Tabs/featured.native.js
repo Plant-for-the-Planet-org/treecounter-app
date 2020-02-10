@@ -130,7 +130,7 @@ export default class FeaturedProjects extends PureComponent {
         />
       </View>
     );
-    console.log('featuredProjects', featuredProjects);
+    debug('featuredProjects', featuredProjects);
     return (
       <View style={styles.flexContainer}>
         {!loader ? (

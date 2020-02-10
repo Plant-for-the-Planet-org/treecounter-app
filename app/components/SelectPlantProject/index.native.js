@@ -126,7 +126,6 @@ class SelectPlantTabView extends PureComponent {
         ) : null;
       case 'list':
         console.log('list active', index, this.props.plantProjects);
-
         return (
           <ListProjects
             onSelectProjects={this.onSelectProjects}

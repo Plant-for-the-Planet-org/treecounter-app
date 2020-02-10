@@ -197,22 +197,30 @@ const ProjectListLoader = () => (
 );
 
 const ProjectSingleLoader = () => (
-  <ContentLoader
-    height={550}
-    width={500}
-    speed={3}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
-  >
-    <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="215" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="240" rx="10" ry="10" width="250" height="20" />
-    <Rect x="100" y="270" rx="10" ry="10" width="300" height="180" />
-    <Rect x="100" y="460" rx="10" ry="10" width="140" height="20" />
-    <Rect x="100" y="490" rx="10" ry="10" width="300" height="20" />
-    <Rect x="100" y="520" rx="10" ry="10" width="250" height="20" />
-  </ContentLoader>
+  <ScrollView>
+    <ContentLoader
+      height={HEIGHT * 1.5}
+      width={WIDTH}
+      speed={3}
+      primaryColor="#E1E2E2"
+      secondaryColor="#ecebeb"
+    >
+      <Rect x="0" y="0" rx="10" ry="0" width="100%" height="200" />
+      <Rect x="0" y="210" rx="10" ry="0" width="100%" height="30" />
+      <Rect x="20" y="250" rx="10" ry="5" width="75%" height="30" />
+      <Circle cx="65" cy="350" r="50" />
+      <Circle cx="135" cy="320" r="10" />
+      <Circle cx="135" cy="350" r="10" />
+      <Circle cx="135" cy="380" r="10" />
+      <Rect x="159" y="315" rx="4" ry="4" width="180" height="10" />
+      <Rect x="159" y="345" rx="4" ry="4" width="180" height="10" />
+      <Rect x="159" y="375" rx="4" ry="4" width="180" height="10" />
+      <Rect x="20" y="420" rx="10" ry="5" width="75%" height="180" />
+      <Rect x="310" y="420" rx="10" ry="5" width="100" height="180" />
+      <Rect x="20" y="620" rx="10" ry="5" width="75%" height="30" />
+      <Rect x="20" y="670" rx="10" ry="5" width="90%" height="30" />
+    </ContentLoader>
+  </ScrollView>
 );
 
 {
@@ -306,7 +314,7 @@ const ContentLoading = props => {
       {screen === 'competitionSingleLoader' && <CompetitionSingleLoader />}
       {screen === 'projectListLoader' && <ProjectListLoader />}
       {screen === 'worldLoader' && <InitialContentLoader />}
-      {screen === 'projectSingleLoader' && <ProjectSingleLoader />}
+      {screen === 'ProjectSingleLoader' && <ProjectSingleLoader />}
       {screen === 'PledgeEvents' && <PledgeEventsContentLoader />}
       {screen === 'ProjectsLoading' && <ProjectsLoading />}
     </View>
@@ -326,4 +334,4 @@ const loadingIndicatorStyle = {
 }
 export default ContentLoading;
 
-export { ProjectsLoading };
+export { ProjectSingleLoader };

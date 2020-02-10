@@ -10,6 +10,8 @@ import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 import { trees } from './../../../assets';
 import i18n from '../../../locales/i18n.js';
+import LoadingIndicator from '../../Common/LoadingIndicator.native';
+
 export default class FeaturedProjects extends PureComponent {
   constructor(props) {
     super(props);
@@ -22,8 +24,12 @@ export default class FeaturedProjects extends PureComponent {
       isFetching: false,
       page: parseInt(props.plantProjects.length / this.perPage),
       initiated: false,
-      shouldLoad: props.plantProjects.length != this.perPage
+      shouldLoad: props.plantProjects.length != this.perPage,
+      loader: true
     };
+  }
+  componentDidMount() {
+    setTimeout(() => this.setState({ loader: false }), 2000);
   }
   onRefresh() {
     if (!this.state.isFetching && this.state.shouldLoad)
@@ -99,6 +105,7 @@ export default class FeaturedProjects extends PureComponent {
   );
 
   render() {
+    const { loader } = this.state;
     let featuredProjects = orderBy(
       this.props.plantProjects.filter(project => project.isFeatured),
       'created'
@@ -116,25 +123,30 @@ export default class FeaturedProjects extends PureComponent {
         />
       </View>
     );
+    console.log('featuredProjects', featuredProjects);
     return (
       <View style={styles.flexContainer}>
-        <FlatList
-          contentContainerStyle={{
-            ...flatListContainerStyle
-          }}
-          ListHeaderComponent={Header}
-          data={featuredProjects.sort((a, b) => a.id - b.id)}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderItem}
-          onEndReached={this.fetchMore}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.isFetching}
-              onRefresh={this.onRefresh.bind(this)}
-              titleColor="#fff"
-            />
-          }
-        />
+        {!loader ? (
+          <FlatList
+            contentContainerStyle={{
+              ...flatListContainerStyle
+            }}
+            ListHeaderComponent={Header}
+            data={featuredProjects.sort((a, b) => a.id - b.id)}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderItem}
+            onEndReached={this.fetchMore}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.isFetching}
+                onRefresh={this.onRefresh.bind(this)}
+                titleColor="#fff"
+              />
+            }
+          />
+        ) : (
+          <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
+        )}
       </View>
     );
   }

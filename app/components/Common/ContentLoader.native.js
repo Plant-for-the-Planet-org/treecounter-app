@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, Image } from 'react-native';
+import { View, Dimensions, Image, ScrollView } from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
 import { treelogo } from '../../assets/index';
@@ -265,9 +265,32 @@ const PledgeEventsContentLoader = () => (
     </View>
   </ContentLoader>
 );
+
+const ProjectsLoading = () => (
+  <ScrollView>
+    <ContentLoader
+      height={HEIGHT * 1.2}
+      width={WIDTH}
+      speed={3}
+      primaryColor="#E1E2E2"
+      secondaryColor="#ecebeb"
+    >
+      <Rect x="30" y="3" rx="3" ry="3" width="85%" height="180" />
+      <Rect x="30" y="200" rx="3" ry="3" width="75%" height="30" />
+      <Rect x="30" y="240" rx="3" ry="3" width="35%" height="20" />
+      <Rect x="30" y="270" rx="3" ry="3" width="60%" height="20" />
+      <Rect x="30" y="300" rx="3" ry="3" width="85%" height="20" />
+      <Rect x="30" y="340" rx="3" ry="3" width="85%" height="180" />
+      <Rect x="30" y="540" rx="3" ry="3" width="75%" height="30" />
+      <Rect x="30" y="580" rx="3" ry="3" width="35%" height="20" />
+      <Rect x="30" y="610" rx="3" ry="3" width="60%" height="20" />
+      <Rect x="30" y="640" rx="3" ry="3" width="85%" height="20" />
+    </ContentLoader>
+  </ScrollView>
+);
+
 const ContentLoading = props => {
   const { screen } = props;
-  console.log(screen, 'screenscreenscreenscreenscreenscreen');
   return (
     <View style={loadingIndicatorStyle}>
       {screen === 'AppHome' && <WorldLoader />}
@@ -285,6 +308,7 @@ const ContentLoading = props => {
       {screen === 'worldLoader' && <InitialContentLoader />}
       {screen === 'projectSingleLoader' && <ProjectSingleLoader />}
       {screen === 'PledgeEvents' && <PledgeEventsContentLoader />}
+      {screen === 'ProjectsLoading' && <ProjectsLoading />}
     </View>
   );
 };
@@ -302,4 +326,4 @@ const loadingIndicatorStyle = {
 }
 export default ContentLoading;
 
-export { WorldLoader };
+export { ProjectsLoading };

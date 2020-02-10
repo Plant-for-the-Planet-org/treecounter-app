@@ -49,7 +49,7 @@ export function fetchConfig() {
         cdnMedia = data.data.cdnMedia;
 
         // fake data manipulation for debug purpose, please remove this when debug finishes
-        data.data.currency = 'USD';
+        // data.data.currency = 'USD';
         // debug code ends
 
         if (data.data && data.data.currency) {

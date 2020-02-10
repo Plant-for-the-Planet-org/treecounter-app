@@ -10,7 +10,7 @@ const CompetitionLoader = () => (
   <ContentLoader
     height={HEIGHT}
     width={WIDTH}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -28,7 +28,7 @@ const SingleCompetitionLoader = () => (
   <ContentLoader
     height={HEIGHT}
     width={WIDTH}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -59,7 +59,7 @@ const WorldLoader = () => (
   <ContentLoader
     height={HEIGHT}
     width={WIDTH}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -88,7 +88,7 @@ const InitialContentLoader = () => (
     <ContentLoader
       height={HEIGHT}
       width={WIDTH}
-      speed={3}
+      speed={2}
       primaryColor="#f3f3f3"
       secondaryColor="#ecebeb"
     >
@@ -107,7 +107,7 @@ const ProfileLoader = () => (
   <ContentLoader
     height={550}
     width={500}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -125,7 +125,7 @@ const PublicProfileLoader = () => (
   <ContentLoader
     height={550}
     width={500}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -144,7 +144,7 @@ const CompetitionListLoader = () => (
   <ContentLoader
     height={550}
     width={500}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -163,7 +163,7 @@ const CompetitionSingleLoader = () => (
   <ContentLoader
     height={550}
     width={500}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -182,7 +182,7 @@ const ProjectListLoader = () => (
   <ContentLoader
     height={550}
     width={500}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -202,7 +202,7 @@ const ProjectSingleLoader = () => (
     <ContentLoader
       height={HEIGHT * 1.5}
       width={WIDTH}
-      speed={3}
+      speed={2}
       primaryColor="#E1E2E2"
       secondaryColor="#ecebeb"
     >
@@ -238,7 +238,7 @@ const PublicTreeCounterContentLoader = () => (
   <ContentLoader
     height={HEIGHT}
     width={WIDTH}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -252,7 +252,7 @@ const PledgeEventsContentLoader = () => (
   <ContentLoader
     height={HEIGHT}
     width={WIDTH}
-    speed={3}
+    speed={2}
     primaryColor="#f3f3f3"
     secondaryColor="#ecebeb"
   >
@@ -280,7 +280,7 @@ const ProjectsLoading = () => (
     <ContentLoader
       height={HEIGHT * 1.2}
       width={WIDTH}
-      speed={3}
+      speed={2}
       primaryColor="#E1E2E2"
       secondaryColor="#ecebeb"
     >

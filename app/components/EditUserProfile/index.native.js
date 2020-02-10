@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { Text, View, ScrollView } from 'react-native';
-import tabBarStyles from '../../styles/common/tabbar.native';
 import t from 'tcomb-form-native';
+import { debug } from '../../debug';
+import tabBarStyles from '../../styles/common/tabbar.native';
 import { parsedSchema } from '../../server/parsedSchemas/editProfile';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -103,7 +104,7 @@ export default class EditUserProfile extends Component {
           <Text>{i18n.t('label.same_password_error')}</Text>
         );
       } catch (err) {
-        console.log(err);
+        debug(err);
       }
     } else if (profileType == 'image') {
       schemaOptions.fields.imageFile.template = ProfileImagePickerTemplate;

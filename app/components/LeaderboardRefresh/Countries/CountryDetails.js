@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView
 } from 'react-native';
+import { debug } from '../../../debug';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
@@ -30,7 +31,7 @@ const CountryDetails = ({ navigation }) => {
       const caption = navigation.getParam('caption');
       setQueryResult(null);
       setSection(caption);
-      console.log(section, subSection, caption, 'Sections');
+      debug(section, subSection, caption, 'Sections');
       LeaderBoardDataAction({
         section,
         orderBy: orderBy,
@@ -46,7 +47,7 @@ const CountryDetails = ({ navigation }) => {
             setQueryResult(success.data.data);
         },
         error => {
-          console.log(error);
+          debug(error);
         }
       );
     },

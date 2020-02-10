@@ -1,5 +1,6 @@
 import { getItemSync } from '../stores/localStorage';
 import { getRequest } from '../utils/api';
+import { debug } from '../debug';
 // Source: This is absolutely static data
 import countryCodes from '../assets/countryCodes.json';
 // Source: https://trilliontreecampaign.org/public/v1.1/en/currencies > rates
@@ -14,7 +15,7 @@ export function fetchLocation() {
     if (!getItemSync('preferredCurrency')) {
       getRequest('public_ipstack')
         .then(data => {
-          // console.log('Got location fetch ip', data);
+          // debug('Got location fetch ip', data);
           const foundLocation = find(countryCodes, {
             countryCode: data.data.country_code
           });
@@ -36,7 +37,7 @@ export function fetchConfig() {
     // if (!getItemSync('preferredCurrency')) {
     getRequest('config_get')
       .then(data => {
-        console.log('Got config fetch data:', data.data);
+        debug('Got config fetch data:', data.data);
         cdnMedia = data.data.cdnMedia;
 
         // for now we are not storing those in redux, please uncomment this when you need these urls in your components

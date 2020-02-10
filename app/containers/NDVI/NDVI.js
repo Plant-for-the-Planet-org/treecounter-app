@@ -1,6 +1,7 @@
 import React from 'react';
-import { NDVIAction } from '../../actions/NDVIAction';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
+import { NDVIAction } from '../../actions/NDVIAction';
 import NDVI from '../../components/NDVI';
 import mockDataPoints from '../../components/NDVI/mockDataPoints';
 import LoadingIndicators from '../../components/Common/LoadingIndicator';
@@ -32,11 +33,11 @@ class NDVIContainer extends React.Component {
           //   loading: false,
           //   dataPoints: mockDataPoints
           // });
-          console.log(err);
+          debug(err);
         }
       },
       error => {
-        console.log(error);
+        debug(error);
         this.setState({
           loading: false,
           dataPoints: { dataPoints: mockDataPoints }

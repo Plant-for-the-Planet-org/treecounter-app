@@ -8,7 +8,7 @@ import {
   Image,
   ScrollView
 } from 'react-native';
-
+import { debug } from '../../debug';
 import VideoContainer from '../../components/Common/VideoContainer';
 // import NDVI from '../../containers/NDVI/NDVI';
 import i18n from '../../locales/i18n';
@@ -16,8 +16,8 @@ import styles from '../../styles/selectplantproject/plant-details.native';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import AccordionContactInfo from './HelperComponents/AccordionContactInfo.native';
-
 import { readmoreDown, readmoreUp } from '../../assets';
+
 const cleanUrl = url => {
   url = (url || '').trim();
   if (url) {
@@ -204,11 +204,11 @@ const _goToURL = url => {
     if (supported) {
       Linking.openURL(url);
     } else {
-      console.log('Cannot open URI: ' + url);
+      debug('Cannot open URI: ' + url);
     }
   });
 */
-  Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+  Linking.openURL(url).catch(err => debug('Cannot open URI', err));
 };
 
 PlantProjectDetails.propTypes = {

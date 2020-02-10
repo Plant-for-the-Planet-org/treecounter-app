@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import CardLayout from '../Common/Card';
 import PaymentSelector from './PaymentSelector';
 import { check_green, attention } from '../../assets';
@@ -107,10 +108,10 @@ export default class AppPayments extends Component {
                   }}
                   donationId={paymentInfo.id}
                   onFailure={data =>
-                    console.log('/////////////////// payment failure ', data)
+                    debug('/////////////////// payment failure ', data)
                   }
                   onError={data =>
-                    console.log('/////////////////// payment error ', data)
+                    debug('/////////////////// payment error ', data)
                   }
                 />
               ) : null}

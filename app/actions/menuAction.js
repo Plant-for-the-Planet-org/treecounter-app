@@ -1,5 +1,4 @@
 import { normalize } from 'normalizr';
-
 import { debug } from '../debug';
 import i18n from '../locales/i18n.js';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';

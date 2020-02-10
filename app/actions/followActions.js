@@ -1,10 +1,10 @@
 import { normalize } from 'normalizr';
-
+import { debug } from '../debug';
 import { postAuthenticatedRequest } from '../utils/api';
 import { mergeEntities } from '../reducers/entitiesReducer';
-
 import { treecounterSchema } from '../schemas';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+
 export function followUser(id) {
   const request = postAuthenticatedRequest('followSubscribe_post', {
     _format: 'json',
@@ -19,7 +19,7 @@ export function followUser(id) {
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        console.log(err);
+        debug(err);
         dispatch(setProgressModelState(false));
       });
   };
@@ -39,7 +39,7 @@ export function unfollowUser(id) {
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        console.log(err);
+        debug(err);
         dispatch(setProgressModelState(false));
       });
   };

@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 // currently tipsi-stripe is removed from package.json as (1) it is unused and (2) the native support modules did not compile with Android
 import stripe, { PaymentCardTextField } from 'tipsi-stripe';
+import { debug } from '../../../debug';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import i18n from '../../../locales/i18n';
+
 const colors = {
   color: '#449aeb',
   borderColor: '#000'
@@ -59,15 +61,15 @@ export default class StripeCC extends Component {
           token.card.id = token.card.cardId;
           this.props.setLoading(false);
           this.props.onSuccess(token);
-          //console.log(token);
+          //debug(token);
         })
         .catch(err => {
-          console.log(err);
+          debug(err);
           this.props.setLoading(false);
           this.props.onError();
         });
 
-      //console.log('pay via card');
+      //debug('pay via card');
     } else {
       NotificationManager.error(
         i18n.t('label.please_enter_card_details'),

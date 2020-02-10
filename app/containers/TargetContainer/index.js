@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import { schemaOptions } from '../../server/parsedSchemas/target';
 import Target from '../../components/Target';
 import { SubmitTarget } from '../../actions/targetAction';
@@ -17,7 +18,7 @@ class TargetContainer extends React.Component {
     this.onSubmitTarget = this.onSubmitTarget.bind(this);
   }
   onSubmitTarget = () => {
-    console.log(this.refs.targetContainer.refs.setTargetForm.validate());
+    debug(this.refs.targetContainer.refs.setTargetForm.validate());
     let value = this.refs.targetContainer.refs.setTargetForm.getValue();
     if (value) {
       this.props

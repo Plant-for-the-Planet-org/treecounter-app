@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loadUserProfile } from './../../actions/loadUserProfileAction';
+import { debug } from '../../debug';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import {
   fetchPledgesAction,
   postPledge,
@@ -10,15 +11,13 @@ import {
   updatePledge
 } from '../../actions/pledgeAction';
 import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
-import { fetchItem } from './../../stores/localStorage';
-
+import { fetchItem } from '../../stores/localStorage';
 import {
   pledgesSelector,
   pledgeEventSelector,
   currentUserProfileSelector,
   entitiesSelector
 } from '../../selectors';
-
 import Pledge from '../../components/Pledge';
 
 class PledgeContainer extends Component {
@@ -40,7 +39,7 @@ class PledgeContainer extends Component {
             this.props.fetchPublicPledgesAction(stringPledges);
           }
         })
-        .catch(console.log('Trying to get user pledges'));
+        .catch(debug('Trying to get user pledges'));
     }
     this.getMyPledge();
   }
@@ -62,7 +61,7 @@ class PledgeContainer extends Component {
             }
             this.getMyPledge();
           })
-          .catch(console.log('No pledges made by user'));
+          .catch(debug('No pledges made by user'));
       }
       this.getMyPledge();
     }

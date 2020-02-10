@@ -14,7 +14,8 @@ const ListProjects = ({
   onMoreClick,
   placeholderTextColor,
   loadProjects,
-  index
+  index,
+  scrollY
 }) => {
   const [search, setSearch] = useState('');
   // memoized: refilters if plantProjects or search string changes
@@ -66,6 +67,7 @@ const ListProjects = ({
           onMoreClick={onMoreClick}
           loadProjects={loadProjects}
           index={index}
+          scrollY={scrollY}
         />
       </View>
     </View>

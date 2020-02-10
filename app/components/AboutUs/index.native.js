@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { debug } from '../../debug';
 import { LargeMenuItem } from '../Menu/MenuItem.native';
 import { ScrollView, View, Linking } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -21,7 +22,7 @@ class AboutUs extends Component {
       );
     }
 */
-    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+    Linking.openURL(url).catch(err => debug('Cannot open URI', err));
   };
 
   render() {
@@ -32,7 +33,7 @@ class AboutUs extends Component {
         <ScrollView>
           <LargeMenuItem
             onPress={() => {
-              //  console.log('open change log');
+              //  debug('open change log');
             }}
             title={version}
           />
@@ -50,7 +51,7 @@ class AboutUs extends Component {
           />
           <LargeMenuItem
             onPress={() => {
-              // console.log('open Third party here');
+              // debug('open Third party here');
               //TODO: this a is temporary solution until someone fixes the LicenseInfo component and updates LicenseInfo.json
               this.openGateWay(
                 'https://github.com/Plant-for-the-Planet-org/treecounter-app/network/dependencies'

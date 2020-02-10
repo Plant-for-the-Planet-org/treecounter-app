@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Dimensions, Image, ScrollView } from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
+import { debug } from '../../debug';
 import { treelogo } from '../../assets/index';
 const HEIGHT = Dimensions.get('window').height;
 const WIDTH = Dimensions.get('window').width;
@@ -299,6 +300,7 @@ const ProjectsLoading = () => (
 
 const ContentLoading = props => {
   const { screen } = props;
+  debug(screen, 'screenscreenscreenscreenscreenscreen');
   return (
     <View style={loadingIndicatorStyle}>
       {screen === 'AppHome' && <WorldLoader />}

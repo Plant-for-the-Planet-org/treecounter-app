@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { debug } from '../../../debug';
 import styles from '../../../styles/donation/donationDetails';
 import i18n from '../../../locales/i18n';
 
@@ -30,7 +31,7 @@ export function SelectTreeCount(props) {
       {treeCountOptions.map(option => (
         <TouchableOpacity
           onPress={() => {
-            console.log('selecting option', option);
+            debug('selecting option', option);
             props.setTreeCount(option);
             setCustomTreeCount(false);
           }}
@@ -89,7 +90,7 @@ export function SelectTreeCount(props) {
           onPress={() => {
             setCustomTreeCount(true);
             const a = treeCountOptions[treeCountOptions.length - 1] + 50;
-            console.log(a);
+            debug(a);
             props.setTreeCount(a);
           }}
           style={[styles.selectorView, styles.customSelectorView]}

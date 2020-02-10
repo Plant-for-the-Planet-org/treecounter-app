@@ -2,6 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Dimensions, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import WebView from 'react-native-webview';
+import { debug } from '../../debug';
 const width = Dimensions.get('window').width;
 
 import { PureComponent } from 'react';
@@ -49,7 +50,7 @@ class VideoContainer extends React.Component {
     }
     if (videoId) {
       this.setState({ videoId });
-      console.log(this.state);
+      debug(this.state);
     }
   }
 

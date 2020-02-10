@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, SafeAreaView, Text, Linking } from 'react-native';
-import { LargeMenuItem } from './MenuItem.native';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import styles from '../../styles/menu.native';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 import * as icons from '../../assets';
@@ -9,6 +9,7 @@ import i18n from '../../locales/i18n.js';
 import { getLocalRoute } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import UserProfileImage from '../Common/UserProfileImage.native';
+import { LargeMenuItem } from './MenuItem.native';
 
 //   icons.target_outline;
 
@@ -41,7 +42,7 @@ export default class Menu extends Component {
         }
       })
       .catch(e => {
-        console.log(e);
+        debug(e);
       });
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
@@ -89,7 +90,7 @@ export default class Menu extends Component {
   resetStackToProperRoute = url => {
     // Do Whatever you need to do within your app to redirect users to the proper route
     let urlBreak = url.split('/');
-    //console.log(urlBreak);
+    //debug(urlBreak);
     const { navigation } = this.props;
     if (
       urlBreak.indexOf('account-activate') !== -1 ||
@@ -256,7 +257,7 @@ export default class Menu extends Component {
                 onPress={this.onPressMenu.bind(this, {
                   uri: 'pickup_profile_modal'
                 })}
-                title={'Community'}
+                title={i18n.t('label.community')}
                 details={
                   this.props.userProfile.supportedTreecounter &&
                   this.props.userProfile.supportedTreecounter.displayName

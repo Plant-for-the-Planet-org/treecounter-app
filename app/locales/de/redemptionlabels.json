@@ -15,5 +15,6 @@
   "add_my_trees": "Zu meinen Bäumen hinzufügen",
   "already_redeemed_trees": "Sie haben diesen Code bereits eingelöst. Bitte versuchen Sie es mit einem anderen.",
   "RedeemxTrees": "{{treeCount}} Bäume einlösen",
-  "Redeem1Tree": "{{treeCount}} Baum einlösen"
+  "Redeem1Tree": "{{treeCount}} Baum einlösen",
+  "redeem_trees_button": "Bäume einlösen"
 }

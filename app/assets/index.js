@@ -193,6 +193,12 @@ import registerTree from './images/icons/registerTree.png';
 import settings from './images/icons/settings.png';
 import white_heart from './images/icons/white_heart.png';
 
+import me from './images/icons/LeaderboardIcons/me.png';
+import organisation from './images/icons/LeaderboardIcons/organisation.png';
+import school from './images/icons/LeaderboardIcons/school.png';
+import tpo from './images/icons/LeaderboardIcons/tpo.png';
+import world from './images/icons/LeaderboardIcons/world.png';
+
 export {
   treelogo,
   germany,
@@ -385,5 +391,10 @@ export {
   deleteIcon,
   redMyLocationIcon,
   newSearchIcon,
-  white_heart
+  white_heart,
+  me,
+  organisation,
+  world,
+  school,
+  tpo
 };

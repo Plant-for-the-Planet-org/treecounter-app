@@ -256,7 +256,7 @@ export default class Menu extends Component {
                 onPress={this.onPressMenu.bind(this, {
                   uri: 'pickup_profile_modal'
                 })}
-                title={'Community'}
+                title={i18n.t('label.community')}
                 details={
                   this.props.userProfile.supportedTreecounter &&
                   this.props.userProfile.supportedTreecounter.displayName

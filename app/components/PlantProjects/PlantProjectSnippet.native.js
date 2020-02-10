@@ -122,6 +122,7 @@ class PlantProjectSnippet extends PureComponent {
           ? leafGray
           : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
+
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
         <View style={[styles.projectSnippetContainer]} withoutShadow>

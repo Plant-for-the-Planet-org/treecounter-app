@@ -94,16 +94,16 @@ class UserContributionsDetails extends React.Component {
     let treeClassification = undefined;
     let contributionPerson = undefined;
     let contributionPersonSlug = undefined;
-    let selectedPlantProjectDetails = undefined;
+    // let selectedPlantProjectDetails = undefined;
     let headerText = undefined;
     let videoUrl = undefined;
     let hasGeoLocationError = undefined;
     let locationErrorText = '';
     let contributionOrPlantedImages = contributionImages;
 
-    console.log('\x1b[45mcontribution', this.props.contribution);
-    console.log('plantProjects', this.props.plantProjects);
-    console.log('\x1b[0m');
+    // console.log('\x1b[45mcontribution', this.props.contribution);
+    // console.log('plantProjects', this.props.plantProjects);
+    // console.log('\x1b[0m');
 
     // sets the header text
     // if treeType is null then header text is treecount and type of contribution
@@ -152,24 +152,32 @@ class UserContributionsDetails extends React.Component {
     }
 
     // selects the matching plant project with the contribution project id
-    if (plantProjects.length > 0) {
-      for (let i = 0; i <= plantProjects.length; ) {
-        if (plantProjects[i].id === plantProjectId) {
-          selectedPlantProjectDetails = plantProjects[i];
+    // if (plantProjects.length > 0) {
+    //   for (let i = 0; i <= plantProjects.length; ) {
+    //     if (plantProjects[i].id === plantProjectId) {
+    //       selectedPlantProjectDetails = plantProjects[i];
 
-          // takes video url from plant project
-          videoUrl = selectedPlantProjectDetails.videoUrl;
+    //       // takes video url from plant project
+    //       videoUrl = selectedPlantProjectDetails.videoUrl;
 
-          // if card type in not planted the shows the image from
-          // plant projects else shows images from contribution if any
-          if (cardType !== 'planted') {
-            contributionOrPlantedImages =
-              selectedPlantProjectDetails.plantProjectImages;
-          }
-          plantProjectSlug = selectedPlantProjectDetails.slug;
-          break;
-        }
+    //       // if card type in not planted the shows the image from
+    //       // plant projects else shows images from contribution if any
+    //       if (cardType !== 'planted') {
+    //         contributionOrPlantedImages =
+    //           selectedPlantProjectDetails.plantProjectImages;
+    //       }
+    //       plantProjectSlug = selectedPlantProjectDetails.slug;
+    //       break;
+    //     }
+    //   }
+    // }
+
+    if (plantProjects[0]) {
+      videoUrl = plantProjects[0].videoUrl;
+      if (cardType !== 'planted') {
+        contributionOrPlantedImages = plantProjects[0].plantProjectImages;
       }
+      plantProjectSlug = plantProjects[0].slug;
     }
 
     // // adds planted by if plantProjectName is present
@@ -256,6 +264,7 @@ class UserContributionsDetails extends React.Component {
           plantedDate={plantedDate}
           showDelete={contributionType == 'planting'}
           headerText={headerText}
+          plantProjectId={plantProjectId}
           onClickDelete={() => {
             this.props.deleteContribution(
               this.props.contribution.id,
@@ -377,7 +386,7 @@ UserContributionsDetails.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   navigation: PropTypes.any,
   contribution: PropTypes.object.isRequired,
-  plantProjects: PropTypes.object,
+  plantProjects: PropTypes.any,
   deleteContribution: PropTypes.func
 };
 

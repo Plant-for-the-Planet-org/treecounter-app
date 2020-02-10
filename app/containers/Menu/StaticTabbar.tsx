@@ -31,21 +31,21 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
         this.setState({
             selectedTab: index
         })
-        updateRoute(tabs[index].route, navigation, 0);
+        updateRoute(tabs[index].route, this.props.navigation, 0);
     }
 
     render() {
         const { onPress } = this;
         const { tabs } = this.props;
-
+        console.log('Navigation', this.props.navigation);
         return (
             <View style={styles.container}>
                 {
                     tabs.map((tab, key) => {
                         const tabWidth = width / tabs.length;
                         const cursor = tabWidth * key;
-                        console.log('Tab value ---', tab);
-                        console.log('Key value ---', key);
+                        // console.log('Tab value ---', tab);
+                        // console.log('Key value ---', key);
 
                         const iconColor = key === this.state.selectedTab ? '#89b53a' : "#4d5153";
                         return (

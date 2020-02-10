@@ -1,50 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 
-import FollowLabelButton from '../Common/Button/FollowLabelButton';
 import userHomeStyles from '../../styles/user-home.native';
 import UserProfileImage from '../Common/UserProfileImage';
 
-import * as images from '../../assets';
-
 const TreecounterHeader = ({
   caption,
-  profileType,
   logo,
-  isUserFollowerBool,
   /* isUserLoggedIn, */
-  showFollow,
-  followChanged,
+  // showFollow,
+  // followChanged,
   containerStyle
 }) => {
   return (
     <View style={[userHomeStyles.userProfileContainer, containerStyle]}>
-      <UserProfileImage profileImage={logo} />
+      <UserProfileImage
+        imageStyle={userHomeStyles.userProfileImage}
+        profileImage={logo}
+      />
       <View style={userHomeStyles.userInfo}>
         <View style={userHomeStyles.userInfoName}>
           <Text style={userHomeStyles.nameStyle}>{caption}</Text>
         </View>
         <View style={userHomeStyles.userInfoProfileType}>
-          <Image
-            style={userHomeStyles.profileTypeImage}
-            resizeMode="contain"
-            source={
-              profileType === 'education'
-                ? images['schoolIcon']
-                : profileType === 'tpo'
-                  ? images['tpoIcon']
-                  : profileType === 'company'
-                    ? images['companyIcon']
-                    : images['individualIcon']
-            }
-          />
-          {showFollow ? (
+          {/* {showFollow ? (
             <FollowLabelButton
               isSubscribed={isUserFollowerBool}
               onClick={() => followChanged()}
             />
-          ) : null}
+          ) : null} */}
         </View>
       </View>
     </View>

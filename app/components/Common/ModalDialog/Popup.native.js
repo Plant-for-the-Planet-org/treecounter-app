@@ -59,7 +59,7 @@ const PopupNative = props => {
 PopupNative.propTypes = {
   onCancel: PropTypes.func,
   onApply: PropTypes.func,
-  bodyText: PropTypes.string,
+  bodyText: PropTypes.any,
   applyText: PropTypes.string,
   cancelText: PropTypes.string,
   headerText: PropTypes.string,

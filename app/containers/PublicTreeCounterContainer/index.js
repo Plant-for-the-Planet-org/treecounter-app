@@ -12,6 +12,9 @@ import { followUser, unfollowUser } from '../../actions/followActions';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 
 class PublicTreecounterContainer extends Component {
+  static navigationOptions = {
+    header: null
+  };
   constructor() {
     super();
     this.state = {

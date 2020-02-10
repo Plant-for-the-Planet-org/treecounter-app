@@ -113,8 +113,8 @@ class CompetitionContainer extends React.Component {
       <LoadingIndicator contentLoader screen="Competition" />
     );
   }
+
   onMoreClick(id, name) {
-    //this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
       updateRoute('app_competition', navigation, 1, {

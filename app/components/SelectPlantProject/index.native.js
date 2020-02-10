@@ -1,25 +1,20 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-// import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { Dimensions } from 'react-native';
-// import TabContainer from '../../containers/Menu/TabContainer';
+import { Text, View, Animated, Platform } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import { updateStaticRoute } from '../../helpers/routerHelper';
+import HeaderStatic from './../Header/HeaderStatic';
+import { SafeAreaView } from 'react-navigation';
 
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
 
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
 class SelectPlantTabView extends PureComponent {
   constructor(props) {
     super(props);
@@ -28,7 +23,8 @@ class SelectPlantTabView extends PureComponent {
         { key: 'featured', title: i18n.t('label.featured') },
         { key: 'list', title: i18n.t('label.list') }
       ],
-      index: 0
+      index: 0,
+      scrollY: new Animated.Value(0)
     };
     this.onSelectProjects = this.onSelectProjects.bind(this);
   }
@@ -77,14 +73,46 @@ class SelectPlantTabView extends PureComponent {
   };
 
   renderTabBar = props => {
+    const focusedColor = '#89b53a';
+    const normalColor = '#4d5153';
+    const colorWhite = '#fff';
     return [
       <TabBar
         key="1"
         {...props}
-        style={styles.tabBar}
-        tabStyle={{ width: Layout.window.width / 2 }}
-        labelStyle={styles.textStyle}
-        indicatorStyle={styles.textActive}
+        style={[styles.tabBar]}
+        tabStyle={{ width: 'auto', padding: 0 }}
+        indicatorStyle={{ backgroundColor: colorWhite }}
+        renderLabel={({ route, focused }) => (
+          <View style={{ textAlign: 'left', marginRight: 24 }}>
+            <Text
+              style={{
+                color: focused ? focusedColor : normalColor,
+                fontSize: 13,
+                fontFamily: 'OpenSans-SemiBold',
+                textTransform: 'capitalize',
+                textAlign: 'left'
+              }}
+            >
+              {route.title}
+            </Text>
+            {focused ? (
+              <View
+                style={[
+                  {
+                    width: '100%',
+                    marginTop: 11,
+                    backgroundColor: focusedColor,
+                    height: 3,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
+                    color: focusedColor
+                  }
+                ]}
+              />
+            ) : null}
+          </View>
+        )}
       />
     ];
   };
@@ -122,6 +150,7 @@ class SelectPlantTabView extends PureComponent {
             {...props}
             jumpTo={jumpTo}
             index={this.state.index}
+            scrollY={this.state.scrollY}
           />
         ) : null;
       case 'list':
@@ -133,6 +162,7 @@ class SelectPlantTabView extends PureComponent {
             {...props}
             jumpTo={jumpTo}
             index={this.state.index}
+            scrollY={this.state.scrollY}
           />
         );
       default:
@@ -141,14 +171,32 @@ class SelectPlantTabView extends PureComponent {
   };
 
   render() {
+    // const headerTop = this.state.scrollY.interpolate({
+    //   inputRange: [0, 120],
+    //   outputRange: [56, 0],
+    //   extrapolate: 'clamp'
+    // });
     return (
-      <TabView
-        useNativeDriver
-        navigationState={this.state}
-        renderScene={this.renderSelectPlantScene}
-        renderTabBar={this.renderTabBar}
-        onIndexChange={this.handleIndexChange}
-      />
+      <>
+        <SafeAreaView style={{ flex: 1 }}>
+          <HeaderStatic
+            title={i18n.t('label.projects')}
+            scrollY={this.state.scrollY}
+            navigation={this.props.navigation}
+          />
+          <Animated.View
+            style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+          />
+
+          <TabView
+            useNativeDriver
+            navigationState={this.state}
+            renderScene={this.renderSelectPlantScene}
+            renderTabBar={this.renderTabBar}
+            onIndexChange={this.handleIndexChange}
+          />
+        </SafeAreaView>
+      </>
     );
   }
 }

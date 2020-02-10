@@ -18,19 +18,19 @@ import MapView, {
   PROVIDER_GOOGLE
 } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { context } from '../../config';
-
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { iosSearchGrey } from '../../assets';
-import RoundedButton from '../Common/Button/RoundButton.native';
 import { PERMISSIONS, request } from 'react-native-permissions';
 import Geolocation from '@react-native-community/geolocation';
 import { NotificationManager } from 'react-notifications';
-import i18n from '../../locales/i18n';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { isEqual } from 'lodash';
+import { debug } from '../../debug';
+import { context } from '../../config';
+import { iosSearchGrey } from '../../assets';
+import RoundedButton from '../Common/Button/RoundButton.native';
+import i18n from '../../locales/i18n';
 import buttonStyles from '../../styles/common/button.native';
 import markerImage from '../../assets/images/tree.png';
-import { isEqual } from 'lodash';
 
 const { googleMapApiKey } = context;
 const { width, height } = Dimensions.get('window');
@@ -322,7 +322,7 @@ function getQueryVariable(query, variable) {
 }
 
 export function encodeFormData(mode, mapPoint) {
-  console.log('Data in polygon', mapPoint);
+  debug('Data in polygon', mapPoint);
 
   if (!mapPoint) {
     return '';
@@ -337,15 +337,15 @@ export function encodeFormData(mode, mapPoint) {
       Array.isArray(mapPoint) &&
       mapPoint.length
     ) {
-      console.log('Data in polygon', mapPoint);
+      debug('Data in polygon', mapPoint);
       const polygon = mapPoint.map(polygonItem => {
         const data = polygonItem.coordinates.map(cord => {
-          console.log('cord', cord);
+          debug('cord', cord);
           return [cord.latitude, cord.longitude];
         });
         return data;
       });
-      console.log('polygon', polygon);
+      debug('polygon', polygon);
 
       /* const data = mapPoint.coordinates.map(cord => {
          return [cord.latitude, cord.longitude];
@@ -484,7 +484,7 @@ class NativeMapView extends Component {
         }, 1000);
       }
     );
-    console.log(' nextProps.address', nextProps.address);
+    debug(' nextProps.address', nextProps.address);
     nextProps.address && this.ref && this.ref.setAddressText(nextProps.address);
 
     // }
@@ -504,7 +504,7 @@ class NativeMapView extends Component {
     } else if (!this.isSingleTree) {
       const { editing, creatingHole } = this.state;
       if (!editing) {
-        console.log('clicked map');
+        debug('clicked map');
         this.setState({
           editing: {
             id: id++,
@@ -762,7 +762,7 @@ class NativeMapView extends Component {
         ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
       })
     ).then((/*response*/) => {
-      console.log('Location=====>', Geolocation);
+      debug('Location=====>', Geolocation);
       setTimeout(() => {
         Geolocation.getCurrentPosition(
           location => {
@@ -798,14 +798,14 @@ class NativeMapView extends Component {
             //   //   this.gotoCurrentLocation(region);
             //   // })
             // }
-            // console.log({
+            // debug({
             //   region,
             //   Sta: this.state.region,
             //   marker: this.state.markers
             // })
           },
           error => {
-            console.log('Errors===>', error);
+            debug('Errors===>', error);
             NotificationManager.error(
               i18n.t('label.location_permission_denied'),
               i18n.t('label.error'),
@@ -848,7 +848,7 @@ class NativeMapView extends Component {
           },
           editable: true,
           onPress: () => {
-            console.log('clicked');
+            debug('clicked');
           }
         }
       : {
@@ -956,8 +956,8 @@ class NativeMapView extends Component {
                 )}
                 onPress={(data, details = null) => {
                   // 'details' is provided when fetchDetails = true
-                  console.log('Details===>', details);
-                  console.log('Data===>', data);
+                  debug('Details===>', details);
+                  debug('Data===>', data);
                   this.gotoCurrentLocation(
                     {
                       latitude: details.geometry.location.lat,
@@ -1046,7 +1046,7 @@ class NativeMapView extends Component {
             </View>
           </TouchableOpacity>
         )}
-        {console.log('this.ref', this.ref)}
+        {debug('this.ref', this.ref)}
       </View>
     );
   }

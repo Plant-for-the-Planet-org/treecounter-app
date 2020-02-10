@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { debug } from '../../debug';
 import { updateRoute } from '../../helpers/routerHelper';
 import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
 import { currentUserProfileSelector } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { followUser, unfollowUser } from '../../actions/followActions';
-
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 
 class PublicTreecounterContainer extends Component {
@@ -37,7 +36,7 @@ class PublicTreecounterContainer extends Component {
 
   fetchAndSetSearchResult(props) {
     const { treecounterLookupAction } = props;
-    console.log('fetchAndSetSearchResult');
+    debug('fetchAndSetSearchResult');
     treecounterLookupAction(this.getTreeCounterId(props), this.props.navigation)
       .then(treecounter => {
         this.setState({
@@ -46,13 +45,13 @@ class PublicTreecounterContainer extends Component {
           id: treecounter.id
         });
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   }
   componentWillMount() {
     this.fetchAndSetSearchResult(this.props);
   }
   componentWillReceiveProps(nextProps) {
-    console.log('test, props', nextProps);
+    debug('test, props', nextProps);
     if (this.getTreeCounterId(this.props) === this.getTreeCounterId(nextProps))
       return;
     this.fetchAndSetSearchResult(nextProps);

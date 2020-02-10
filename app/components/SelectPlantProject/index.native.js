@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { Text, View, Animated, Platform } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import { debug } from '../../debug';
 import i18n from '../../locales/i18n.js';
 import styles from '../../styles/common/tabbar';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderStatic from './../Header/HeaderStatic';
-import { SafeAreaView } from 'react-navigation';
-
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
 
@@ -35,10 +35,10 @@ class SelectPlantTabView extends PureComponent {
     });
   }
   onSelectProjects(id) {
-    console.log('porps---', this.props);
+    debug('porps---', this.props);
     this.props.selectProject(id);
     const { navigation } = this.props;
-    console.log(
+    debug(
       '=======in selectplant project component... calling donate detail with',
       {
         userForm: navigation.getParam('userForm'),
@@ -57,7 +57,7 @@ class SelectPlantTabView extends PureComponent {
   };
 
   handleIndexChange = index => {
-    console.log('indicator index, ', index);
+    debug('indicator index, ', index);
     this.setState({ index: index });
     if (
       index &&
@@ -65,9 +65,9 @@ class SelectPlantTabView extends PureComponent {
     ) {
       try {
         // this.props.loadProjects();
-        //console.log('loaded projects in list', projects);
+        //debug('loaded projects in list', projects);
       } catch (error) {
-        console.log('error on lloading project on list', error);
+        debug('error on lloading project on list', error);
       }
     }
   };
@@ -142,7 +142,7 @@ class SelectPlantTabView extends PureComponent {
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        console.log('fatured active', index, this.props.plantProjects);
+        debug('fatured active', index, this.props.plantProjects);
         return this.props.plantProjects.filter(project => project.isFeatured)
           .length ? (
           <FeaturedProjects
@@ -154,7 +154,7 @@ class SelectPlantTabView extends PureComponent {
           />
         ) : null;
       case 'list':
-        console.log('list active', index, this.props.plantProjects);
+        debug('list active', index, this.props.plantProjects);
 
         return (
           <ListProjects

@@ -10,6 +10,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { debug } from '../../debug';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
@@ -19,6 +20,7 @@ import styles, {
 } from '../../styles/myTrees/user_contribution_card';
 import { formatDate, delimitNumbers } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
+
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -245,7 +247,7 @@ class ContributionCard extends React.Component {
 
   render() {
     let { contribution } = this.props;
-    console.log('Contribution', contribution);
+    debug('Contribution', contribution);
     let {
       treeCount,
       treeSpecies,

@@ -3,6 +3,7 @@ import en from 'date-fns/locale/en-US';
 import de from 'date-fns/locale/de';
 // import and register all locales used for 'react-datepicker'
 import { registerLocale } from 'react-datepicker';
+// import { debug } from '../debug';
 
 let cache = { locale: undefined };
 
@@ -26,7 +27,7 @@ export function getLocaleAsync() {
 }
 
 export function getLocale() {
-  // console.log('getLocale', cache.locale);
+  // debug('getLocale', cache.locale);
   if (!cache.locale) {
     initLocale();
   }

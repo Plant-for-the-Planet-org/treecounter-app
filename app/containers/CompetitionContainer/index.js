@@ -1,11 +1,11 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import Competiton from '../../components/Competition';
-import { updateRoute } from '../../helpers/routerHelper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { formatDateToMySQL } from './../../helpers/utils';
-
+import { debug } from '../../debug';
+import Competiton from '../../components/Competition';
+import { updateRoute } from '../../helpers/routerHelper';
+import { formatDateToMySQL } from '../../helpers/utils';
 import {
   createCompetition,
   enrollCompetition,
@@ -38,7 +38,7 @@ class CompetitionContainer extends React.Component {
         .createCompetition(newvalue, this.props.navigation)
         .then((/* success */) => {})
         .catch(err => {
-          console.log('err signup data', err);
+          debug('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
             err,
             this.state.competitionFormSchemaOptions
@@ -91,7 +91,7 @@ class CompetitionContainer extends React.Component {
   };
 
   render() {
-    console.log(this.props.contentloader, '**********************');
+    debug(this.props.contentloader, '**********************');
     const { contentloader } = this.props;
     return !contentloader ? (
       <Competiton

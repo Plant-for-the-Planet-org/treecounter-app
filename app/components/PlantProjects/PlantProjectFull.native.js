@@ -1,63 +1,64 @@
 import React from 'react';
+import { SafeAreaView, View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import { loadProject } from '../../actions/loadTposAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import { SafeAreaView, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
-import { ScrollView } from 'react-native';
 import { right_arrow_button } from '../../assets';
 import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
-import { connect } from 'react-redux';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
-import { bindActionCreators } from 'redux';
 // import TabContainer from '../../containers/Menu/TabContainer';
+
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
 class PlantProjectFull extends React.Component {
   async componentWillReceiveProps(nextProps) {
     try {
-      console.log('plantproject while receive props', nextProps.plantProject);
+      debug('plantproject while receive props', nextProps.plantProject);
       if (nextProps.plantProject && !nextProps.plantProject.tpoData) {
         // we dont have the details in store, fetch it
         const plantProject = await this.props.loadProject(
           nextProps.plantProject,
           {}
         );
-        console.log('fetched details plantproject in full', plantProject);
+        debug('fetched details plantproject in full', plantProject);
         // this.setState({ plantProject });
       }
     } catch (error) {
-      console.log(error);
+      debug(error);
     }
   }
   async componentDidMount() {
     try {
-      console.log('plantproject while did mount', this.props.plantProject);
+      debug('plantproject while did mount', this.props.plantProject);
       if (this.props.plantProject && !this.props.plantProject.tpoData) {
         // we dont have the details in store, fetch it
         const plantProject = await this.props.loadProject(
           this.props.plantProject,
           {}
         );
-        console.log('fetched details plantproject in full', plantProject);
+        debug('fetched details plantproject in full', plantProject);
         // this.setState({ plantProject });
       }
     } catch (error) {
-      console.log(error);
+      debug(error);
     }
   }
   render() {
     let { plantProject } = this.props;
 
     if (!plantProject || !plantProject.tpoData) return <LoadingIndicator />;
-    console.log('rendering with project:', plantProject);
+    debug('rendering with project:', plantProject);
     const {
       images,
       description,

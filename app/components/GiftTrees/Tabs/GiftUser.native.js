@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
   Keyboard
 } from 'react-native';
-import SearchUser from './SearchUser.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// import { debug } from '../../../debug';
+import SearchUser from './SearchUser.native';
 import i18n from '../../../locales/i18n';
 import styles from '../../../styles/gifttrees/giftrees';
 import buttonStyles from '../../../styles/common/button.native';
@@ -50,7 +51,7 @@ export default class GiftUser extends Component {
     });
   };
   onSearchResultClick(suggestion) {
-    // console.log('suggestion clicked', suggestion);
+    // debug('suggestion clicked', suggestion);
     this.setState({ selectedSuggestion: suggestion });
   }
   onNextClick() {

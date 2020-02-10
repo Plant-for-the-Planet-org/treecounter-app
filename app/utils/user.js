@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-
+import { debug } from '../debug';
 import { fetchItem, getItem, saveItem } from '../stores/localStorage';
 import { postRequest } from './api';
 
@@ -18,7 +18,7 @@ export const getAccessToken = async () => {
       }
     } catch (error) {
       // 400
-      console.log(`Failed to refresh token: ${error}`);
+      debug(`Failed to refresh token: ${error}`);
       return;
     }
   }

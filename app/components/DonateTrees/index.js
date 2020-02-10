@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import Slider from 'react-slick';
-
+import classNames from 'classnames';
+import { debug } from '../../debug';
 import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card';
@@ -13,7 +14,6 @@ import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_left_green, check_green, attention } from '../../assets';
 import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-import classNames from 'classnames';
 import {
   individualSchemaOptions,
   receiptIndividualFormSchema,
@@ -22,12 +22,10 @@ import {
 } from '../../server/parsedSchemas/donateTrees';
 import PlantProjectFull from '../PlantProjects/PlantProjectFull';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
-
 import i18n from '../../locales/i18n.js';
 import PaymentSelector from '../Payment/PaymentSelector';
 import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { paymentFee } from '../../helpers/utils';
-
 import donateTreesSchema from '../../server/formSchemas/donateTrees';
 
 let TCombForm = t.form.Form;
@@ -317,7 +315,7 @@ export default class DonateTrees extends Component {
   }
 
   render() {
-    console.log(this.props.currentUserProfile);
+    debug(this.props.currentUserProfile);
     // this is just for NextArrow displayNone
     let displayNone = classNames({
       'display-none': this.state.pageIndex === 3
@@ -581,13 +579,10 @@ export default class DonateTrees extends Component {
                         plantProjectName: plantProject.name
                       }}
                       onFailure={data =>
-                        console.log(
-                          '/////////////////// payment failure ',
-                          data
-                        )
+                        debug('/////////////////// payment failure ', data)
                       }
                       onError={data =>
-                        console.log('/////////////////// payment error ', data)
+                        debug('/////////////////// payment error ', data)
                       }
                     />
                   ) : null}

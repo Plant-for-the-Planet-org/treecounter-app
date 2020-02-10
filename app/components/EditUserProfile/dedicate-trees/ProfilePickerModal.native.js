@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-import styles from '../../../styles/profilepicker.native';
 import { View, ScrollView, Text } from 'react-native';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { debug } from '../../../debug';
+import styles from '../../../styles/profilepicker.native';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 import SearchUser from '../../GiftTrees/Tabs/SearchUser';
 import { currentUserProfileSelector } from '../../../selectors';
-
 import i18n from '../../../locales/i18n';
 import { updateProfileDedication } from '../../../actions/updateUserProfile';
-import { bindActionCreators } from 'redux';
 import CardLayout from '../../Common/Card';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import UserProfileImage from '../../Common/UserProfileImage.native';
@@ -22,7 +22,7 @@ class ProfilePickerModal extends Component {
   }
 
   onSearchResultClick(event) {
-    console.log(event);
+    debug(event);
     this.setState({ selectedSuggestion: event });
   }
 

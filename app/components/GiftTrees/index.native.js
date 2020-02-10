@@ -4,6 +4,7 @@ import GiftTabView from './GiftTabs';
 import HeaderStatic from './../Header/HeaderStatic';
 import { View, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+// import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 
 export default class GiftTrees extends Component {
@@ -12,7 +13,7 @@ export default class GiftTrees extends Component {
     this.openProjects = this.openProjects.bind(this);
   }
   openProjects(formValue, type) {
-    // console.log('Open Project called up ', formValue);
+    // debug('Open Project called up ', formValue);
     this.props.openProjects(formValue, type);
   }
   render() {

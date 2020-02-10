@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import Accordion from 'react-native-collapsible/Accordion';
+import { debug } from '../../debug';
 import { foldin, foldout } from '../../assets';
 import { Text, View, ScrollView, Image, Linking } from 'react-native';
 import styles from '../../styles/faq';
@@ -38,7 +38,7 @@ export default class LicenseInfoList extends Component {
         <TouchableItem
           onPress={() => {
             Linking.openURL(licenseFileUrl).catch(err => {
-              console.log(err);
+              debug(err);
             });
           }}
         >
@@ -48,7 +48,7 @@ export default class LicenseInfoList extends Component {
         <TouchableItem
           onPress={() => {
             Linking.openURL(repoPath).catch(err => {
-              console.log(err);
+              debug(err);
             });
           }}
         >

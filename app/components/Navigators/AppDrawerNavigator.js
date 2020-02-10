@@ -4,20 +4,18 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
 import { Animated } from 'react-native';
+import { debug } from '../../debug';
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import TargetContainer from '../../containers/TargetContainer';
 import DonationTreesContainer from '../../containers/DonateTrees';
-
 import { getLocalRoute } from '../../actions/apiRouting';
 import styles from '../../styles/header.native';
 import BurgerMenu from '../Header/BurgerMenu';
 import HeaderRight from '../Header/HeaderFields';
-
 import i18n from '../../locales/i18n';
-
 import FAQContainer from '../../containers/FAQ';
 import UserContributionsContainer from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
@@ -186,7 +184,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         }
       }
     } catch (err) {
-      console.log(err);
+      debug(err);
     }
 
     return title;

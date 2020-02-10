@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import { login } from '../../actions/authActions';
 import { updateRoute } from '../../helpers/routerHelper';
 import Login from '../../components/Authentication/Login/index';
@@ -26,7 +26,7 @@ class LoginContainer extends React.Component {
 
   onPress = (recaptchaToken, refreshToken) => {
     let result = this.refs.loginContainer.refs.loginForm.validate();
-    console.log(result);
+    debug(result);
     let value = this.refs.loginContainer.refs.loginForm.getValue();
     if (value) {
       this.onClick(value, recaptchaToken, refreshToken);
@@ -34,7 +34,7 @@ class LoginContainer extends React.Component {
   };
 
   onClick(value, recaptchaToken, refreshToken) {
-    console.log(this.refs.loginContainer.refs.loginForm.validate());
+    debug(this.refs.loginContainer.refs.loginForm.validate());
     let formValue = this.refs.loginContainer.refs.loginForm.getValue();
     if (formValue) {
       this.props
@@ -42,7 +42,7 @@ class LoginContainer extends React.Component {
         .then(val => val)
         .catch(err => {
           if (refreshToken) refreshToken();
-          console.log('err signup data', err);
+          debug('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
             err,
             this.state.schemaOptions

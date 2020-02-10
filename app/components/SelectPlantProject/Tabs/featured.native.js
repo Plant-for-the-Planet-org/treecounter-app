@@ -10,13 +10,14 @@ import {
   RefreshControl,
   Animated
 } from 'react-native';
-
+import { debug } from '../../../debug';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/selectplantproject/featured.native';
 import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
 import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 import { trees } from './../../../assets';
 import i18n from '../../../locales/i18n.js';
+
 export default class FeaturedProjects extends PureComponent {
   constructor(props) {
     super(props);
@@ -51,7 +52,7 @@ export default class FeaturedProjects extends PureComponent {
   }
   async componentWillReceiveProps(nextProps) {
     if (nextProps.index == 0 && !this.state.initiated) {
-      console.log(
+      debug(
         'component got index calling in featured=======================================================',
         nextProps
       );
@@ -62,7 +63,7 @@ export default class FeaturedProjects extends PureComponent {
     }
   }
   fetchMore = () => {
-    console.log('this. should load in fetch more', this.state.shouldLoad);
+    debug('this. should load in fetch more', this.state.shouldLoad);
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ page: this.state.page + 1 }, async () => {
         try {
@@ -74,7 +75,7 @@ export default class FeaturedProjects extends PureComponent {
             shouldLoad: data.length == this.perPage,
             plantProjects: [...this.state.plantProjects, ...data]
           });
-          console.log('Got from fetch more:', data, this.perPage);
+          debug('Got from fetch more:', data, this.perPage);
         } catch (error) {
           this.setState({ isFetching: false, shouldLoad: false });
         }

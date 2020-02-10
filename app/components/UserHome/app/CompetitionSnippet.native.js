@@ -1,9 +1,9 @@
 import React from 'react';
+import { debug } from '../../../debug';
 import styles from '../../../styles/user-home';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { getImageUrl } from './../../../actions/apiRouting';
 import { delimitNumbers } from './../../../utils/utils';
-
 import i18n from '../../../locales/i18n.js';
 
 class CompetitionSnippet extends React.Component {
@@ -17,7 +17,7 @@ class CompetitionSnippet extends React.Component {
 
   containerPress(id) {
     if (this.props.onMoreClick) {
-      console.log(this.props.onMoreClick, 'this.props.onMoreClick');
+      debug(this.props.onMoreClick, 'this.props.onMoreClick');
       this.props.onMoreClick(id);
     }
   }

@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr';
-
+import { debug } from '../debug';
 import {
   postAuthenticatedRequest,
   postRequest,
@@ -36,9 +36,9 @@ export function attachCardToCostumer(paymentMethod) {
     });
     request
       .then(() => {
-        console.log('method attached');
+        debug('method attached');
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   };
 }
 
@@ -61,7 +61,7 @@ export function createPaymentDonation(plantProjectId, requestData, loggedIn) {
         dispatch(setProgressModelState(false));
       })
       .catch(error => {
-        console.log(error);
+        debug(error);
         dispatch(setProgressModelState(false));
       });
   };
@@ -86,7 +86,7 @@ export function createPaymentGift(plantProjectId, requestData, loggedIn) {
         dispatch(setProgressModelState(false));
       })
       .catch(error => {
-        console.log(error);
+        debug(error);
         dispatch(setProgressModelState(false));
       });
   };
@@ -134,7 +134,7 @@ export function finalizeDonation(donationId, loggedIn) {
         dispatch(setProgressModelState(false));
       })
       .catch(error => {
-        console.log(error);
+        debug(error);
         dispatch(setProgressModelState(false));
       });
   };
@@ -198,7 +198,7 @@ export function paymentClear() {
 
 //             dispatch(paymentSuccess({ status: true, message: 'success' }));
 //             dispatch(setProgressModelState(false));
-//             //   console.log(`Thank you for planting ${
+//             //   debug(`Thank you for planting ${
 //             //     contribution.treeCount
 //             //   } trees with us!
 //             // Your donation has been registered as: ${contribution.uid}
@@ -273,7 +273,7 @@ export function paymentClear() {
 
 //             dispatch(paymentSuccess({ status: true, message: 'success' }));
 //             dispatch(setProgressModelState(false));
-//             //   console.log(`Thank you for planting ${
+//             //   debug(`Thank you for planting ${
 //             //     contribution.treeCount
 //             //   } trees with us!
 //             // Your donation has been registered as: ${contribution.uid}

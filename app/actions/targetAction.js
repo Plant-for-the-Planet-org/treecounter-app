@@ -1,5 +1,4 @@
 import { normalize } from 'normalizr';
-
 import { debug } from '../debug/index';
 import { updateRoute } from '../helpers/routerHelper';
 import { mergeEntities } from '../reducers/entitiesReducer';

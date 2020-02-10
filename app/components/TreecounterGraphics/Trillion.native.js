@@ -4,10 +4,18 @@ import {
   ScrollView,
   Text,
   View,
-  Dimensions,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  // SafeAreaView,
+  Animated,
+  Platform
 } from 'react-native';
+import { TabView, TabBar } from 'react-native-tab-view';
+import { SafeAreaView } from 'react-navigation';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import NavigationEvents from './importNavigationEvents';
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
@@ -15,35 +23,25 @@ import svgStyles from '../../styles/common/treecounter_svg';
 import styles from '../../styles/trillion.native';
 import { pledgeEventSelector, entitiesSelector } from '../../selectors';
 import LoadingIndicator from '../Common/LoadingIndicator';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import { bindActionCreators } from 'redux';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 // import Leaderboard from '../../containers/Leaderboard';
 import Leaderboard from '../LeaderboardRefresh/LeaderBoard/leaderboard';
-import { TabView, TabBar } from 'react-native-tab-view';
 import { getLocalRoute } from '../../actions/apiRouting';
 import {
   fetchpledgeEventsAction,
   fetchPublicPledgesAction
 } from '../../actions/pledgeEventsAction';
-import { loadUserProfile } from './../../actions/loadUserProfileAction';
-import { currentUserProfileSelector } from './../../selectors';
-
-import { trees } from './../../assets';
-
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import { currentUserProfileSelector } from '../../selectors';
+import { trees } from '../../assets';
 import tabStyles from '../../styles/common/tabbar';
 import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
 import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
+import HeaderStatic from './../Header/HeaderStatic';
 
 class Trillion extends PureComponent {
   constructor() {
@@ -59,7 +57,8 @@ class Trillion extends PureComponent {
         { key: 'world', title: i18n.t('label.world') },
         { key: 'leaderBoard', title: i18n.t('label.leaderboard') }
       ],
-      index: 0
+      index: 0,
+      scrollY: new Animated.Value(0)
     };
   }
 
@@ -84,7 +83,7 @@ class Trillion extends PureComponent {
         saveItem(Constants.storageKeys.svgData, JSON.stringify(svgData));
       })
       .catch(error => {
-        console.log(error);
+        debug(error);
         fetchItem(Constants.storageKeys.svgData).then(svgData => {
           try {
             svgData = JSON.parse(svgData);
@@ -96,7 +95,7 @@ class Trillion extends PureComponent {
               });
             }
           } catch (err) {
-            //console.log(error);
+            //debug(error);
           }
         });
       });
@@ -104,7 +103,7 @@ class Trillion extends PureComponent {
     this.props.fetchpledgeEventsAction();
 
     if (this.props.userProfile) {
-      console.log('User Logged in');
+      debug('User Logged in');
     } else {
       fetchItem('pledgedEvent')
         .then(data => {
@@ -114,7 +113,7 @@ class Trillion extends PureComponent {
             this.props.fetchPublicPledgesAction(stringPledges);
           }
         })
-        .catch(error => console.log(error));
+        .catch(error => debug(error));
     }
   }
 
@@ -124,7 +123,7 @@ class Trillion extends PureComponent {
       JSON.stringify(this.props.entities.eventPledge)
     ) {
       if (this.props.userProfile) {
-        console.log('User Logged in');
+        debug('User Logged in');
       } else {
         fetchItem('pledgedEvent')
           .then(data => {
@@ -134,7 +133,7 @@ class Trillion extends PureComponent {
               this.props.fetchPublicPledgesAction(stringPledges);
             }
           })
-          .catch(error => console.log(error));
+          .catch(error => debug(error));
       }
     }
   }
@@ -144,13 +143,45 @@ class Trillion extends PureComponent {
   };
 
   _renderTabBar = props => {
+    const focusedColor = '#89b53a';
+    const normalColor = '#4d5153';
+    const colorWhite = '#fff';
     return (
       <TabBar
         {...props}
-        style={tabStyles.tabBar}
-        tabStyle={{ width: Layout.window.width / 2 }}
-        labelStyle={tabStyles.textStyle}
-        indicatorStyle={tabStyles.textActive}
+        style={[tabStyles.tabBar]}
+        tabStyle={{ width: 'auto', padding: 0 }}
+        indicatorStyle={{ backgroundColor: colorWhite }}
+        renderLabel={({ route, focused }) => (
+          <View style={{ textAlign: 'left', marginRight: 24 }}>
+            <Text
+              style={{
+                color: focused ? focusedColor : normalColor,
+                fontSize: 13,
+                fontFamily: 'OpenSans-SemiBold',
+                textTransform: 'capitalize',
+                textAlign: 'left'
+              }}
+            >
+              {route.title}
+            </Text>
+            {focused ? (
+              <View
+                style={[
+                  {
+                    width: '100%',
+                    marginTop: 11,
+                    backgroundColor: focusedColor,
+                    height: 3,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
+                    color: focusedColor
+                  }
+                ]}
+              />
+            ) : null}
+          </View>
+        )}
       />
     );
   };
@@ -159,7 +190,7 @@ class Trillion extends PureComponent {
     const { navigation /* , userProfile, isLoggedIn */ } = this.props;
     const backgroundColor = 'white';
     const { contentLoader } = this.state;
-    // console.log(this.props.pledgeEvents);
+    // debug(this.props.pledgeEvents);
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (
@@ -170,7 +201,16 @@ class Trillion extends PureComponent {
               paddingBottom: 72,
               backgroundColor: backgroundColor
             }}
+            scrollEventThrottle={24}
+            onScroll={Animated.event([
+              {
+                nativeEvent: {
+                  contentOffset: { y: this.state.scrollY }
+                }
+              }
+            ])}
           >
+            {/* <StatusBar backgroundColor="white" barStyle="dark-content" /> */}
             <View style={styles.parentContainer}>
               {/* Trillion Tree Events Title */}
               {/* {this.props.pledgeEvents &&
@@ -187,11 +227,15 @@ class Trillion extends PureComponent {
               {/* Featured events horizontal ScrollView */}
               {this.props.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents ? (
-                <View style={{ marginTop: 24 }}>
+                <View>
                   <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ paddingRight: 20 }}
+                    contentContainerStyle={{
+                      paddingRight: 20,
+                      marginTop:
+                        this.props.pledgeEvents.pledgeEvents.length > 0 ? 24 : 0
+                    }}
                   >
                     {this.props.pledgeEvents.pledgeEvents.map(
                       featuredEvents => (
@@ -350,8 +394,7 @@ class Trillion extends PureComponent {
                 {
                   padding: 16,
                   marginLeft: 8,
-                  marginRight: 8,
-                  marginTop: 20
+                  marginRight: 8
                 }
               ]}
             >
@@ -392,6 +435,11 @@ class Trillion extends PureComponent {
   };
 
   render() {
+    // const headerTop = this.state.scrollY.interpolate({
+    //   inputRange: [0, 120],
+    //   outputRange: [56, 0],
+    //   extrapolate: 'clamp'
+    // });
     return [
       this.props.navigation ? (
         <NavigationEvents
@@ -409,14 +457,27 @@ class Trillion extends PureComponent {
         />
       ) : null,
       this.state.loadSvg ? (
-        <TabView
-          key="tabs"
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this._renderScreen}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
-        />
+        <>
+          <SafeAreaView style={{ flex: 1 }}>
+            <HeaderStatic
+              title={i18n.t('label.explore')}
+              navigation={this.props.navigation}
+              showSearch
+            />
+            <Animated.View
+              style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+            />
+
+            <TabView
+              key="tabs"
+              useNativeDriver
+              navigationState={this.state}
+              renderScene={this._renderScreen}
+              renderTabBar={this._renderTabBar}
+              onIndexChange={this._handleIndexChange}
+            />
+          </SafeAreaView>
+        </>
       ) : null
     ];
   }

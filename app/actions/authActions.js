@@ -1,6 +1,6 @@
 import { updateRoute } from '../helpers/routerHelper';
 import { loadUserProfile } from './loadUserProfileAction';
-import { debug } from '../debug/index';
+import { debug } from '../debug';
 import { createAction } from 'redux-actions';
 import { clearStorage } from '../stores/localStorage';
 import { postRequest, postActivateLinkRequest } from '../utils/api';
@@ -97,7 +97,7 @@ export function sendEmail(/* navigation = undefined */) {
   return (/* dispatch */) => {
     postActivateLinkRequest('auth_sendActivationLink_post')
       .then((/* res */) => {
-        // console.log(res);
+        // debug(res);
       })
       .catch(err => debug(err));
   };
@@ -124,7 +124,7 @@ export function setAccessDenied(data, params, path, navigation = undefined) {
         // NotificationManager.success(statusText, i18n.t('label.success'), 5000);
       })
       .catch(error => {
-        console.log(error);
+        debug(error);
         // NotificationManager.error(error.response.data.message, i18n.t('label.error'), 5000);
       });
   };

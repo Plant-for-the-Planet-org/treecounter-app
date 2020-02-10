@@ -2,14 +2,13 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import RegisterTrees from '../../components/RegisterTrees';
 import { registerTree } from '../../actions/registerTree';
 import { userTreecounterSelector } from '../../selectors/index';
 import { mergeContributionImages } from '../../helpers/utils';
 import { currentUserProfileSelector } from '../../selectors/index';
 import NavigationEvents from './importNavigationEvents';
-
 import {
   schemaOptionsSingleTree,
   schemaOptionsMultipleTrees
@@ -29,7 +28,7 @@ class RegisterTreesContainer extends PureComponent {
     /* registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
     let value = registerTreeForm.getValue() || registerTreeForm;*/
-    console.log('got the form value:register form:', value);
+    debug('got the form value:register form:', value);
 
     if (value) {
       value = mergeContributionImages(value);
@@ -76,7 +75,7 @@ class RegisterTreesContainer extends PureComponent {
         <RegisterTrees
           key="register-tree"
           ref="registerTrees"
-          navigation={this.props}
+          navigation={this.props.navigation}
           onSubmit={this.onSubmit}
           schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
           schemaOptionsMultipleTrees={this.state.schemaOptionsMultipleTrees}

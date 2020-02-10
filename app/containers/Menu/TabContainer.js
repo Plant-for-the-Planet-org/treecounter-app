@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { View } from 'react-native';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import { currentUserProfileSelector } from '../../selectors';
 import { toggleSideNavAction } from '../../actions/setSideNavAction';
 import { clearSupport } from '../../actions/supportTreecounterAction';
 import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
-
 import {
   PublicSideMenuSchema,
   AuthenticatedSideMenuSchema
@@ -35,7 +34,7 @@ class BottomTabContainer extends Component {
         try {
           this.setState({ schema: JSON.parse(data) });
         } catch (err) {
-          console.log(err);
+          debug(err);
         }
       }
     });
@@ -48,7 +47,7 @@ class BottomTabContainer extends Component {
                 JSON.stringify(success[0].menuItems)
               );
           },
-          error => console.log(error)
+          error => debug(error)
         )
       : PublicSideMenuSchema('mobile.bottom').subscribe(
           success => {
@@ -59,10 +58,10 @@ class BottomTabContainer extends Component {
                 JSON.stringify(success[0].menuItems)
               );
             } else {
-              console.log('error in fetching side menu');
+              debug('error in fetching side menu');
             }
           },
-          error => console.log(error)
+          error => debug(error)
         );
   }
 
@@ -71,11 +70,11 @@ class BottomTabContainer extends Component {
       nextProps.loggedIn
         ? AuthenticatedSideMenuSchema('mobile.bottom').subscribe(
             success => this.setState({ schema: success, loading: false }),
-            error => console.log(error)
+            error => debug(error)
           )
         : PublicSideMenuSchema('mobile.bottom').subscribe(
             success => this.setState({ schema: success, loading: false }),
-            error => console.log(error)
+            error => debug(error)
           );
     }
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
-
+import { debug } from '../../../debug';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
 import CardLayout from '../../Common/Card';
@@ -35,7 +35,7 @@ export default class SignUp extends Component {
         }
       },
       onError: e => {
-        console.log(e);
+        debug(e);
       }
     });
   }

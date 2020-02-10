@@ -1,21 +1,20 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
+import { Linking, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
-import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import { TabView } from 'react-native-tab-view';
-
+import { debug } from '../../debug';
 import i18n from '../../locales/i18n.js';
-
+import TreeCountCurrencySelector from '../Currency/TreeCountCurrencySelector';
 import RecieptTabsView from './receiptTabs';
-
 import { renderDottedTabbar } from '../../components/Common/Tabs/dottedtabbar';
 // import PaymentSelector from '../Payment/PaymentSelector';
-import { Linking, SafeAreaView } from 'react-native';
 import { paymentFee } from '../../helpers/utils';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
-import TabContainer from '../../containers/Menu/TabContainer';
+// import TabContainer from '../../containers/Menu/TabContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
+
 export default class DonateTrees extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -72,15 +71,11 @@ export default class DonateTrees extends React.PureComponent {
         }
       })
       .catch(err => {
-        console.log(err);
+        debug(err);
       });
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
-    console.log(
-      'got user form',
-      this.props.navigation.getParam('userForm'),
-      params
-    );
+    debug('got user form', this.props.navigation.getParam('userForm'), params);
     if (params !== undefined && params.giftMethod === 'invitation') {
       this.setState({
         giftTreeCounterName:
@@ -95,7 +90,7 @@ export default class DonateTrees extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     // const { navigation } = this.props;
     if (nextProps.selectedProject) {
-      console.log(
+      debug(
         'nextProps.selectedProject.paymentSetup',
         nextProps.selectedProject.paymentSetup
       );
@@ -157,7 +152,7 @@ export default class DonateTrees extends React.PureComponent {
       );
     }
 */
-    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+    Linking.openURL(url).catch(err => debug('Cannot open URI', err));
   };
 
   getFees() {
@@ -416,7 +411,7 @@ export default class DonateTrees extends React.PureComponent {
           useNativeDriver
           onIndexChange={this.function_handleIndexChange}
         />
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </SafeAreaView>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { debug } from '../../debug';
 import { info } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
 import i18n from '../../locales/i18n.js';
@@ -31,7 +32,7 @@ class BodyErrorBoundary extends React.Component {
   componentDidCatch(error, info) {
     this.secondsRemaining = 30;
     this.setState({ hasErrorOccurred: true, seconds: 30 }, this.startCountDown);
-    console.log(error, info);
+    debug(error, info);
 
     // You can also log the error to an error reporting service
     // logErrorToMyService(error, info);

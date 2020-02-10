@@ -10,6 +10,7 @@ import {
   Dimensions
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { debug } from ',,/../../debug';
 import loginFormSchema from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
@@ -80,9 +81,9 @@ export default class Login extends Component {
     if (this.state.formValue) {
       Keyboard.dismiss();
 
-      console.log('Form value', this.state.formValue);
+      debug('Form value', this.state.formValue);
     }
-    console.log('Form value', this.state.formValue);
+    debug('Form value', this.state.formValue);
     // eslint-disable-next-line no-underscore-dangle
     this.props.onPress(this.state.formValue);
   };
@@ -120,7 +121,7 @@ export default class Login extends Component {
           {props => (
             <>
               <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : null}
+                //behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={{
                   minHeight: '100%'
                 }}
@@ -131,15 +132,15 @@ export default class Login extends Component {
                     {
                       backgroundColor: backgroundColor,
                       padding: 24,
-                      paddingTop: Platform.OS === 'ios' ? 120 : 80,
+                      paddingTop: Platform.OS === 'ios' ? 110 : 80,
                       minHeight: '100%'
                     }
                   ]}
                   enableOnAndroid
                   keyboardDismissMode="on-drag"
-                  keyboardShouldPersistTaps="always"
+                  //  keyboardShouldPersistTaps="always"
                   resetScrollToCoords={{ x: 0, y: 0 }}
-                  scrollEnabled
+                  //  scrollEnabled
                 >
                   <Text style={styles.loginTitle}>
                     {i18n.t('label.log-in')}
@@ -157,6 +158,7 @@ export default class Login extends Component {
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      autoCorrect={false}
                       returnKeyType="next"
                       onChangeText={props.handleChange('_username')}
                       onBlur={props.handleBlur('_username')}

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import { updateRoute } from '../../helpers/routerHelper';
 import { SignUp } from '../../components/Authentication';
 import { signUp } from '../../actions/signupActions';
@@ -25,7 +25,7 @@ class SignUpContainer extends React.Component {
   }
 
   onSignUpClicked = (profileType, token, refreshToken) => {
-    console.log(this.refs.signupContainer.refs.signupForm.validate());
+    debug(this.refs.signupContainer.refs.signupForm.validate());
     let formValue = this.refs.signupContainer.refs.signupForm.getValue();
     if (formValue) {
       this.props
@@ -33,7 +33,7 @@ class SignUpContainer extends React.Component {
         .then((/* success */) => {})
         .catch(err => {
           if (refreshToken) refreshToken();
-          console.log('err signup data', err);
+          debug('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
             err,
             this.state.schemaOptions[profileType]

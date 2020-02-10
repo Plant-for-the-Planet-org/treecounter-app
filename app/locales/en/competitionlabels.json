@@ -1,5 +1,6 @@
 {
   "competitions": "Competitions",
+  "my_competitions": "My Competitions",
   "mine_competitions": "Mine",
   "featured_competitions": "Featured",
   "all_competitions": "All",
@@ -49,5 +50,7 @@
   "add_competition": "Add Competition",
   "add_image": "Add Image",
   "confirm_delete_message": "Are you sure you want to delete this Competition ? There's no undo button.",
-  "competetions_404_message": "We do not yet support competitions in your browser, please use our iOS or Android app to get access to the competitions."
+  "competetions_404_message": "We do not yet support competitions in your browser, please use our iOS or Android app to get access to the competitions.",
+  "goal": "Goal",
+  "active": "Active"
 }

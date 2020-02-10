@@ -3,8 +3,10 @@ import {
     View, StyleSheet, TouchableWithoutFeedback, Dimensions, Text, Image
 } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { updateRoute } from './../../helpers/routerHelper/tabrouteHelper.native';
-import { donateIcon, donateIconGreen, competeIconGreen, competeIcon } from './../../assets';
+import { debug } from '../../debug';
+import { updateRoute } from '../../helpers/routerHelper/tabrouteHelper.native';
+import { donateIcon, donateIconGreen, competeIconGreen, competeIcon } from '../../assets';
+
 const width = Dimensions.get('window').width;
 
 interface Tab {
@@ -31,21 +33,21 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
         this.setState({
             selectedTab: index
         })
-        updateRoute(tabs[index].route, navigation, 0);
+        updateRoute(tabs[index].route, this.props.navigation, 0);
     }
 
     render() {
         const { onPress } = this;
         const { tabs } = this.props;
-
+        debug('Navigation', this.props.navigation);
         return (
             <View style={styles.container}>
                 {
                     tabs.map((tab, key) => {
                         const tabWidth = width / tabs.length;
                         const cursor = tabWidth * key;
-                        console.log('Tab value ---', tab);
-                        console.log('Key value ---', key);
+                        // debug('Tab value ---', tab);
+                        // debug('Key value ---', key);
 
                         const iconColor = key === this.state.selectedTab ? '#89b53a' : "#4d5153";
                         return (
@@ -59,12 +61,12 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
                                             <Text style={key === this.state.selectedTab ? styles.donateTabTextGreen : styles.donateTabText}>{tab.title}</Text>
                                         </View>) : key === 3 ? (
                                             <View style={[styles.donatetab]}>
-                                                <Image source={key === this.state.selectedTab ? competeIconGreen : competeIcon} style={{ height: 25, width: 25 }} />
+                                                <Image source={key === this.state.selectedTab ? competeIconGreen : competeIcon} style={{ height: 24, width: 24 }} />
                                                 <Text style={key === this.state.selectedTab ? styles.tabTextGreen : styles.tabText}>{tab.title}</Text>
                                             </View>
                                         ) :
                                             (<View style={[styles.tab]}>
-                                                <Icon name={tab.name} color={iconColor} size={25} />
+                                                <Icon name={tab.name} color={iconColor} size={21} />
                                                 <Text style={key === this.state.selectedTab ? styles.tabTextGreen : styles.tabText}>{tab.title}</Text>
                                             </View>)}
 

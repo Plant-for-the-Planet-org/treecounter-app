@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import Menu from '../../components/Menu';
 import {
   currentUserProfileSelector,
@@ -11,7 +11,6 @@ import {
 import { toggleSideNavAction } from '../../actions/setSideNavAction';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { clearSupport } from '../../actions/supportTreecounterAction';
-
 // Actions
 import { logoutUser } from '../../actions/authActions';
 import {
@@ -32,17 +31,17 @@ class SideMenuContainer extends Component {
       this.props.loggedIn
         ? AuthenticatedSideMenuSchema('web.main').subscribe(
             success => this.setState({ schema: success, loading: false }),
-            error => console.log(error)
+            error => debug(error)
           )
         : PublicSideMenuSchema('web.main').subscribe(
             success => {
               if (success && success instanceof Array) {
                 this.setState({ schema: success, loading: false });
               } else {
-                console.log('error in fetching side menu');
+                debug('error in fetching side menu');
               }
             },
-            error => console.log(error)
+            error => debug(error)
           );
     } else {
       this.setState({ loading: false });
@@ -54,11 +53,11 @@ class SideMenuContainer extends Component {
       nextProps.loggedIn
         ? AuthenticatedSideMenuSchema('web.main').subscribe(
             success => this.setState({ schema: success, loading: false }),
-            error => console.log(error)
+            error => debug(error)
           )
         : PublicSideMenuSchema('web.main').subscribe(
             success => this.setState({ schema: success, loading: false }),
-            error => console.log(error)
+            error => debug(error)
           );
     }
   }

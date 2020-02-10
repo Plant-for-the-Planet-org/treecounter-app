@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import MapContributionCapture from './MapContributionCapture';
-
 import { context } from '../../config';
 
 const ArcGISContributionCaptureMap = ({ geoLocation, onLocationSelected }) => {
   const webMapId = context.mapIds.inventory;
-  console.log('ArcGISContributionCaptureMap: webMapId', webMapId);
-  console.log('ArcGISContributionCaptureMap: geoLocation', geoLocation);
+  debug('ArcGISContributionCaptureMap: webMapId', webMapId);
+  debug('ArcGISContributionCaptureMap: geoLocation', geoLocation);
   return (
     <div className="map-container">
       <MapContributionCapture

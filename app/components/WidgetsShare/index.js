@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import TextHeading from '../../components/Common/Heading/TextHeading';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import i18n from '../../locales/i18n.js';
@@ -41,7 +42,7 @@ export default class WidgetShare extends PureComponent {
   };
 
   render() {
-    console.log(this.props);
+    debug(this.props);
     const widgetCode = `
     <blockquote
       data-treecounterId="${this.props.currentUserProfile.treecounter.slug}"

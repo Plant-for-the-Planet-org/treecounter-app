@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
+import { debug } from '../../debug';
 import { getImageUrl } from '../../actions/apiRouting';
 import styles from '../../styles/competition/competition-full.native';
 import CardLayout from '../Common/Card';
@@ -49,7 +50,7 @@ class CompetitionFull extends React.Component {
       button2 = null;
     const competitionDetail = this.props.competitionDetail;
 
-    console.log(' CompetitionFull ', competitionDetail);
+    debug(' CompetitionFull ', competitionDetail);
     let participantCount = 0,
       requestCount = 0,
       // eslint-disable-next-line no-unused-vars

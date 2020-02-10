@@ -1,6 +1,7 @@
 import { getLanguages } from 'react-native-i18n';
 import en from 'date-fns/locale/en-US';
 import de from 'date-fns/locale/de';
+// import { debug } from '../debug';
 
 let cache = { locale: undefined };
 
@@ -18,7 +19,7 @@ export async function initLocale() {
 }
 
 export async function getLocaleAsync() {
-  // console.log('getLocale', cache.locale);
+  // debug('getLocale', cache.locale);
   if (!cache.locale) {
     await initLocale();
   }
@@ -26,7 +27,7 @@ export async function getLocaleAsync() {
 }
 
 export function getLocale() {
-  // console.log('getLocale', cache.locale);
+  // debug('getLocale', cache.locale);
   if (!cache.locale) {
     initLocale();
   }

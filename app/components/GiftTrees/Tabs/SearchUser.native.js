@@ -1,16 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
-
+import { withNavigation } from 'react-navigation';
+import _ from 'lodash';
 import SearchBar from '../../../components/Header/SearchBar';
 import Header from '../../../components/Header/Header';
 import { getSuggestions } from '../../../helpers/utils';
-import { withNavigation } from 'react-navigation';
+import { debug } from '../../../debug';
 import i18n from '../../../locales/i18n';
 import styles from '../../../styles/header/search_layout';
 import searchBarStyles from '../../../styles/header/search_bar';
-
-import _ from 'lodash';
 import UserProfileImage from '../../Common/UserProfileImage';
 
 class SearchUser extends React.Component {
@@ -45,7 +44,7 @@ class SearchUser extends React.Component {
       .then(suggestions => {
         this.setState({ q: suggestions });
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
     this.setState({ selectedSuggestionName: null });
   };
 

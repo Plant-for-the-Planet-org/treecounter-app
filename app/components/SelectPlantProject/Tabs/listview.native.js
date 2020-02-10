@@ -1,13 +1,14 @@
 /* eslint-disable no-underscore-dangle */
-import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { FlatList, View, RefreshControl } from 'react-native';
+import { FlatList, View, RefreshControl, Animated } from 'react-native';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { debug } from '../../../debug';
 import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
 import styles from '../../../styles/selectplantproject/list.native';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
 
 class ListViewProjects extends PureComponent {
@@ -40,7 +41,7 @@ class ListViewProjects extends PureComponent {
   }
   async componentWillReceiveProps(nextProps) {
     if (nextProps.index && !this.state.initiated) {
-      console.log(
+      debug(
         'component got index list =======================================================',
         nextProps
       );
@@ -48,7 +49,7 @@ class ListViewProjects extends PureComponent {
       try {
         const data = await this.props.loadProjects('all', {});
         this.setState({ isFetching: false, plantProjects: data }, () => {
-          console.log(
+          debug(
             'component updated with data first time list =======================================================',
             this.state
           );
@@ -61,7 +62,7 @@ class ListViewProjects extends PureComponent {
   fetchMore = () => {
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ page: this.state.page + 1 }, async () => {
-        console.log('fettch more list calling load');
+        debug('fettch more list calling load');
         try {
           const data = await this.props.loadProjects('all', {
             page: this.state.page
@@ -71,7 +72,7 @@ class ListViewProjects extends PureComponent {
             shouldLoad: data.length == this.perPage,
             plantProjects: [...this.state.plantProjects, ...data]
           });
-          console.log('Got from fetch more:', data);
+          debug('Got from fetch more:', data);
         } catch (error) {
           this.setState({ isFetching: false });
         }
@@ -120,6 +121,14 @@ class ListViewProjects extends PureComponent {
               tintColor={'#89b53a'}
             />
           }
+          scrollEventThrottle={24}
+          onScroll={Animated.event([
+            {
+              nativeEvent: {
+                contentOffset: { y: this.props.scrollY }
+              }
+            }
+          ])}
         />
       </View>
     );

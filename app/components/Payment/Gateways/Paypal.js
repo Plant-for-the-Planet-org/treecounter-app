@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import scriptLoader from 'react-async-script-loader';
 import classnames from 'classnames';
-
+import { debug } from '../../../debug';
 import { payment_paypal, payment_arrow } from '../../../assets';
 
 class Paypal extends React.Component {
@@ -60,10 +60,7 @@ class Paypal extends React.Component {
       [mode]: account.authorization.client_id
     };
     const invoice_number = `ttc-${donationId}`;
-    console.log(
-      'invoice we are sending to paypal as donationId:',
-      invoice_number
-    );
+    debug('invoice we are sending to paypal as donationId:', invoice_number);
     const payment = () => {
       return paypal.rest.payment.create(mode, CLIENT, {
         transactions: [

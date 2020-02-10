@@ -13,7 +13,7 @@ import { userPlantProjectsSelector } from './index';
 import { sortedUserPlantProjectsSelector } from './index';
 import { activePlantProjectsSelector } from './index';
 import { unusedPlantProjectsSelector } from './index';
-import { debug } from '../debug/index';
+import { debug } from '../debug';
 
 const SelectorTest = ({ state }) => {
   debug(

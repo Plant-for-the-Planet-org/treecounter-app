@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import PropTypes from 'prop-types';
 import Select, { components } from 'react-select';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { debug } from '../../debug';
 import * as images from '../../assets';
 import planetLogo from '../../assets/svgAssets/Planet-Logo.svg';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 import { allowedUrls } from '../../config/socialShare';
-import { FacebookShareButton, TwitterShareButton } from 'react-share';
 import { saveItem } from '../../stores/localStorage';
 import { getLocale } from '../../actions/getLocale';
 import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector';
 import { updateUserProfile } from '../../actions/updateUserProfile';
-import { bindActionCreators } from 'redux';
+
 const { Option, SingleValue } = components;
 const IconOption = props => (
   <Option {...props}>
@@ -150,7 +152,7 @@ class Menu extends Component {
           </TwitterShareButton>
           {/* <Link
             to={getLocalRoute('app_widgetBuilder')}
-            onClick={() => console.log('redirect_widget_share')}
+            onClick={() => debug('redirect_widget_share')}
           >
             <img src={images.webProgramming} />
           </Link> */}
@@ -165,7 +167,7 @@ class Menu extends Component {
     this.setState({
       selectedLanguage: selectedOption
     });
-    console.log('change');
+    debug('change');
     saveItem('language', selectedOption.value);
     this.props.userProfile
       ? this.props

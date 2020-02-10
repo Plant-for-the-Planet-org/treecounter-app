@@ -42,6 +42,8 @@
   "datePickerTitle": "Pick a date",
   "datePickerCancel": "Cancel",
   "datePickerConfirm": "Confirm",
-  "view_all": "View All",
+  "view_all": "View all",
+  "show_all": "Show all",
+  "show_less": "Show less",
   "share": "Share"
 }

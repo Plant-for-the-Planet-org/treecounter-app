@@ -256,9 +256,16 @@ export default class Login extends Component {
                             : {}
                         ]}
                       >
-                        <Text style={styles.actionButtonText}>
-                          {i18n.t('label.login')}
-                        </Text>
+                        {this.state.loadButton ? (
+                          <ActivityIndicator
+                            size="large"
+                            color={backgroundColor}
+                          />
+                        ) : (
+                          <Text style={styles.actionButtonText}>
+                            {i18n.t('label.login')}
+                          </Text>
+                        )}
                       </View>
                     </TouchableOpacity>
                   ) : null}

@@ -453,7 +453,6 @@ class NativeMapView extends Component {
 
   onPropsUpdate = nextProps => {
     // if (!nextProps.fullScreen) {
-
     const { geoLocation, mode, geometry } = nextProps;
     const marker =
       this.isSingleTree && geoLocation
@@ -584,13 +583,14 @@ class NativeMapView extends Component {
 
   renderPolygon() {
     const mapOptions = {
-      scrollEnabled: this.props.fullScreen,
+      // scrollEnabled: this.props.fullScreen,
       // cacheEnabled: !this.props.fullScreen,
-      liteMode: !this.props.fullScreen,
-      rotateEnabled: this.props.fullScreen,
-      zoomEnabled: this.props.fullScreen,
+      // liteMode: !this.props.fullScreen,
+      // rotateEnabled: this.props.fullScreen,
+      // zoomEnabled: this.props.fullScreen,
       // loadingEnabled: false,
-      showsUserLocation: false
+      showsUserLocation: false,
+      mapType: this.props.mapType
     };
     const {
       editing,
@@ -621,20 +621,29 @@ class NativeMapView extends Component {
         left: 0
       };
       const androidEdgePadding = {
-        top: 0,
+        top: mapPaddingTop * 0.5,
         right: 0,
         bottom: this.props.fullScreen
-          ? height * 0.1
-          : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.012),
+          ? screen.height >= 700
+            ? PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.034)
+            : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.05)
+          : screen.height * 0.025,
         left: 0
       };
       const edgePadding =
         Platform.OS === 'android' ? androidEdgePadding : iosEdgePadding;
       return edgePadding;
     };
+    console.log(
+      'this.props.mapStyle',
+      this.props.mapStyle,
+      { width: this.state.width, marginBottom: this.state.mapMargin },
+      setMapPadding(),
+      mapStyle
+    );
     return (
       <MapView
-        // mapType={'standard'}
+        //mapType={'satellite'}
         ref={ref => (this.map = ref)}
         provider={PROVIDER_GOOGLE}
         //provider={this.props.provider}
@@ -650,7 +659,7 @@ class NativeMapView extends Component {
         onLongPress={e => this.onDoublePress(e)}
         onMarkerPress={e => this.onDoublePress(e)}
         onRegionChangeComplete={this.onRegionChange}
-        customMapStyle={mapStyle}
+        //customMapStyle={mapStyle}
         {...mapOptions}
       >
         {this.props.mode === 'multiple-trees' &&
@@ -832,7 +841,6 @@ class NativeMapView extends Component {
 
   render() {
     const { fullScreen, onContinue, mode, onPress } = this.props;
-
     const inputProps = fullScreen
       ? {
           onFocus: () => {
@@ -870,111 +878,113 @@ class NativeMapView extends Component {
               />
             </View>
           )}
-        {this.renderComp(
-          <TouchableWithoutFeedback
-            onPress={e => {
-              this.onPress(e);
-            }}
-          >
-            <View
-              style={
-                fullScreen
-                  ? [styles.inputContainerFullScreen]
-                  : styles.inputContainer
-              }
-            >
-              <GooglePlacesAutocomplete
-                listViewDisplayed={this.state.shouldDisplayListView}
-                keyboardShouldPersistTaps={'always'}
-                placeholder={i18n.t('label.map_search_placeholder')}
-                minLength={2}
-                autoFocus={false}
-                fetchDetails={true}
-                ref={ref => (this.ref = ref)}
-                placeholderTextColor={'#4d5153'}
-                // listViewDisplayed="auto"
-                returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-                keyboardAppearance={'light'}
-                styles={{
-                  textInputContainer: {
-                    borderTopWidth: 0,
-                    borderBottomWidth: 0,
-                    width: '100%',
-                    borderRadius: 25,
-                    backgroundColor: 'transparent',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  },
-                  textInput: {
-                    backgroundColor: 'transparent',
-                    marginLeft: 0,
-                    marginTop: 0,
-                    marginBottom: 0,
-                    marginRight: 5,
-                    height: 44,
-                    fontSize: 14,
-                    borderRadius: 7,
-                    color: '#4d5153',
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    overflow: 'hidden',
-                    lineHeight: 18
-                  },
-                  predefinedPlacesDescription: {
-                    color: '#1faadb'
-                  },
-                  container: {
-                    borderColor: '#aaaaaa',
-                    justifyContent: 'center'
-                  },
-                  poweredContainer: {
-                    display: 'none'
+        {this.props.searchPlacesBox
+          ? this.renderComp(
+              <TouchableWithoutFeedback
+                onPress={e => {
+                  this.onPress(e);
+                }}
+              >
+                <View
+                  style={
+                    fullScreen
+                      ? [styles.inputContainerFullScreen]
+                      : styles.inputContainer
                   }
-                }}
-                debounce={200}
-                nearbyPlacesAPI="GooglePlacesSearch"
-                query={{
-                  // available options: https://developers.google.com/places/web-service/autocomplete
-                  key: googleMapApiKey,
-                  language: i18n.language // language of the results
-                }}
-                currentLocation={false}
-                renderLeftButton={() => (
-                  <Image
-                    source={iosSearchGrey}
-                    style={{
-                      width: 19,
-                      height: 19,
-                      marginLeft: 16,
-                      resizeMode: 'cover',
-                      color: '#4d5153'
+                >
+                  <GooglePlacesAutocomplete
+                    listViewDisplayed={this.state.shouldDisplayListView}
+                    keyboardShouldPersistTaps={'always'}
+                    placeholder={i18n.t('label.map_search_placeholder')}
+                    minLength={2}
+                    autoFocus={false}
+                    fetchDetails={true}
+                    ref={ref => (this.ref = ref)}
+                    placeholderTextColor={'#4d5153'}
+                    // listViewDisplayed="auto"
+                    returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
+                    keyboardAppearance={'light'}
+                    styles={{
+                      textInputContainer: {
+                        borderTopWidth: 0,
+                        borderBottomWidth: 0,
+                        width: '100%',
+                        borderRadius: 25,
+                        backgroundColor: 'transparent',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                      },
+                      textInput: {
+                        backgroundColor: 'transparent',
+                        marginLeft: 0,
+                        marginTop: 0,
+                        marginBottom: 0,
+                        marginRight: 5,
+                        height: 44,
+                        fontSize: 14,
+                        borderRadius: 7,
+                        color: '#4d5153',
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        textAlign: 'center',
+                        overflow: 'hidden',
+                        lineHeight: 18
+                      },
+                      predefinedPlacesDescription: {
+                        color: '#1faadb'
+                      },
+                      container: {
+                        borderColor: '#aaaaaa',
+                        justifyContent: 'center'
+                      },
+                      poweredContainer: {
+                        display: 'none'
+                      }
                     }}
+                    debounce={200}
+                    nearbyPlacesAPI="GooglePlacesSearch"
+                    query={{
+                      // available options: https://developers.google.com/places/web-service/autocomplete
+                      key: googleMapApiKey,
+                      language: i18n.language // language of the results
+                    }}
+                    currentLocation={false}
+                    renderLeftButton={() => (
+                      <Image
+                        source={iosSearchGrey}
+                        style={{
+                          width: 19,
+                          height: 19,
+                          marginLeft: 16,
+                          resizeMode: 'cover',
+                          color: '#4d5153'
+                        }}
+                      />
+                    )}
+                    onPress={(data, details = null) => {
+                      // 'details' is provided when fetchDetails = true
+                      debug('Details===>', details);
+                      debug('Data===>', data);
+                      this.gotoCurrentLocation(
+                        {
+                          latitude: details.geometry.location.lat,
+                          longitude: details.geometry.location.lng,
+                          latitudeDelta: LATITUDE_DELTA,
+                          longitudeDelta: LONGITUDE_DELTA
+                        },
+                        data.description,
+                        true
+                      );
+                    }}
+                    defaultValue={!fullScreen && this.props.address}
+                    textInputProps={inputProps}
                   />
-                )}
-                onPress={(data, details = null) => {
-                  // 'details' is provided when fetchDetails = true
-                  debug('Details===>', details);
-                  debug('Data===>', data);
-                  this.gotoCurrentLocation(
-                    {
-                      latitude: details.geometry.location.lat,
-                      longitude: details.geometry.location.lng,
-                      latitudeDelta: LATITUDE_DELTA,
-                      longitudeDelta: LONGITUDE_DELTA
-                    },
-                    data.description,
-                    true
-                  );
-                }}
-                defaultValue={!fullScreen && this.props.address}
-                textInputProps={inputProps}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-        )}
+                </View>
+              </TouchableWithoutFeedback>
+            )
+          : null}
 
         {!!(this.state.markers.length || this.state.editing) &&
           !this.isSingleTree && (
@@ -1062,11 +1072,13 @@ NativeMapView.propTypes = {
   geometry: PropTypes.any,
   geoLocation: PropTypes.any,
   mode: PropTypes.any,
-  provider: ProviderPropType
+  provider: ProviderPropType,
+  searchPlacesBox: PropTypes.bool
 };
 
 NativeMapView.defaultProps = {
   fullScreen: false,
+  searchPlacesBox: true,
   onPress: () => {},
   location: {
     latitude: LATITUDE,
@@ -1077,3 +1089,4 @@ NativeMapView.defaultProps = {
 };
 
 export default NativeMapView;
+export { mapStyle };

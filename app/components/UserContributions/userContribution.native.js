@@ -14,9 +14,8 @@ import styles from '../../styles/newUserContributions/userContributions';
 import { editIcon, deleteIcon, closeIcon } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
-import MapView, { Marker } from 'react-native-maps';
-import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import PopupNative from '../Common/ModalDialog/Popup.native';
+import NativeMapView, { mapStyle } from '../Map/NativeMapView.native';
 
 export default class UserContributions extends React.Component {
   constructor(props) {
@@ -26,29 +25,25 @@ export default class UserContributions extends React.Component {
 
   _handleIndexChange = index => this.setState({ index });
 
-  getMapComponent = ({ geoLongitude, geoLatitude }) => {
-    let dummyLatLong = {
-      latitude: geoLatitude,
-      longitude: geoLongitude,
-      latitudeDelta: 0.0000922,
-      longitudeDelta: 0.00421
-    };
-    let markerLatLong = {
-      latitude: geoLatitude,
-      longitude: geoLongitude
-    };
+  getMapComponent = userContribution => {
+    let geoLatLong = `geoLongitude=${
+      userContribution.geoLongitude
+    }&geoLatitude=${userContribution.geoLatitude}&country=${
+      userContribution.country
+    }`;
     return (
-      <MapView
+      <NativeMapView
         mapType={'satellite'}
-        style={{ flex: 1 }}
-        initialRegion={dummyLatLong}
-      >
-        <Marker coordinate={markerLatLong}>
-          <View style={styles.markerCircle}>
-            <Image source={Smalltreewhite} resizeMode={'contain'} />
-          </View>
-        </Marker>
-      </MapView>
+        mode={'single-tree'}
+        geoLocation={geoLatLong}
+        searchPlacesBox={false}
+        mapStyle={{
+          height: Dimensions.get('window').height * 0.4
+          // marginBottom:
+        }}
+        mapPadding={{ top: 0, right: 0, bottom: 14, left: 0 }}
+        customMapStyle={mapStyle}
+      />
     );
   };
 

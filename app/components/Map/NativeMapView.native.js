@@ -11,7 +11,12 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import PropTypes from 'prop-types';
-import MapView, { Marker, Polygon, ProviderPropType } from 'react-native-maps';
+import MapView, {
+  Marker,
+  Polygon,
+  ProviderPropType,
+  PROVIDER_GOOGLE
+} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { PERMISSIONS, request } from 'react-native-permissions';
@@ -638,7 +643,7 @@ class NativeMapView extends Component {
       <MapView
         //mapType={'satellite'}
         ref={ref => (this.map = ref)}
-        //provider={PROVIDER_GOOGLE}
+        provider={PROVIDER_GOOGLE}
         //provider={this.props.provider}
         style={[
           this.props.mapStyle,

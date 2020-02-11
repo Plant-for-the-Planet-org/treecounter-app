@@ -1,3 +1,5 @@
+/* processing values from environment */
+
 console.log('Environment: ', process.env.env);
 export const initialProps = {
   mediaPath: process.env.mediaPath // relative URI on server, where images are located (further sub-paths must be specified in application)

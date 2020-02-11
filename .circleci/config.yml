@@ -53,18 +53,6 @@ jobs:
           name: Install npm
           command: npm install
       - run:
-          name: Setup local configuration
-          command: |
-            source $ENV_VARS
-            echo $SERVER_URL
-            cp .env.sample .env
-            cp app/config/index.js.dist app/config/index.js
-            sed -i "s/test.trilliontreecampaign.org/$SERVER_URL/" app/config/index.js
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]
-            then
-              sed -i "s/debug: true/debug: false/" app/config/index.js
-            fi
-      - run:
           name: Build web client
           command: |
             source $ENV_VARS
@@ -146,18 +134,6 @@ jobs:
               ssh $HOST "cd $WD_REACT; git checkout devel"
               ssh $HOST "cd $WD_REACT; git merge devel"
             fi
-      - run:
-          name: Setup local configuration
-          command: |
-            source $ENV_VARS
-            echo $SERVER_URL
-            ssh $HOST "cd $WD_REACT; cp .env.sample .env"
-            ssh $HOST "cd $WD_REACT; cp app/config/index.js.dist app/config/index.js"
-            ssh $HOST "cd $WD_REACT; sed -i 's/test.trilliontreecampaign.org/'$SERVER_URL'/' app/config/index.js"
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]
-            then
-              ssh $HOST "cd $WD_REACT; sed -i 's/debug: true/debug: false/' app/config/index.js"
-            fi
       # - run:
       #     name: Build web client
       #     command: |
@@ -193,11 +169,6 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run:
-          name: Setup local configuration
-          command: |
-            cp .env.sample .env
-            cp app/config/index.js.dist app/config/index.js
       - run:
           name: Linting
           command: npm run lint:errors

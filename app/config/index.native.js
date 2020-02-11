@@ -1,11 +1,3 @@
-/**
- * CREATE A COPY OF THIS FILE AND NAME IT: index.js
- */
-
-/**
- * Parameters that are provided by the server to initialize the App.
- */
-
 import config from 'react-native-config';
 
 console.log('react-native config', config);

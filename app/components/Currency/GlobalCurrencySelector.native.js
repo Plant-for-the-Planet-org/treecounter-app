@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 // import t from 'tcomb-form-native';
 import { Text, View, FlatList, Image, TextInput } from 'react-native';
 import Modal from 'react-native-modalbox';
@@ -16,7 +16,7 @@ import { getCountryFlagImageUrl } from '../../actions/apiRouting';
 import countryCodes from '../../assets/countryCodes.json';
 import { setCurrencyAction } from '../../actions/globalCurrency';
 import { updateUserProfile } from '../../actions/updateUserProfile';
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const backgroundColor = '#e4e4e4';
 const activeColor = '#74ba00';
@@ -63,7 +63,7 @@ class GlobalCurrencySelector extends Component {
   }
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
-      let curreniesData = await this.props.fetchCurrencies();
+      await this.props.fetchCurrencies();
     }
     if (!this.state.preferredCurrency && this.props.globalCurrency.currency) {
       this.setState({ preferredCurrency: this.props.globalCurrency.currency });

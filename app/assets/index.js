@@ -174,11 +174,6 @@ import closeIcon from './images/icons/close.png';
 import downloadGreen from './images/icons/download_green.png';
 import sendWhite from './images/icons/send_white.png';
 import FAQsCover from './images/FAQs.png';
-import countriesleaderboard from './images/countriesleaderboard.png';
-import schooldleaderboard from './images/schooldleaderboard.png';
-import tpoleaderboard from './images/tpoleaderboard.png';
-import individualsleaderboard from './images/individualsleaderboard.png';
-import companiesleaderboard from './images/companiesleaderboard.png';
 import donateIcon from './images/icons/donateIcon.png';
 import donateIconGreen from './images/icons/donateIconGreen.png';
 import competeIcon from './images/icons/competeIcon.png';
@@ -373,12 +368,7 @@ export {
   downloadGreen,
   sendWhite,
   FAQsCover,
-  countriesleaderboard,
-  schooldleaderboard,
-  tpoleaderboard,
-  individualsleaderboard,
   deleteOutlineWhite,
-  companiesleaderboard,
   share,
   coupon,
   registerTree,

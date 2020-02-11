@@ -174,11 +174,6 @@ import closeIcon from './images/icons/close.png';
 import downloadGreen from './images/icons/download_green.png';
 import sendWhite from './images/icons/send_white.png';
 import FAQsCover from './images/FAQs.png';
-import countriesleaderboard from './images/countriesleaderboard.png';
-import schooldleaderboard from './images/schooldleaderboard.png';
-import tpoleaderboard from './images/tpoleaderboard.png';
-import individualsleaderboard from './images/individualsleaderboard.png';
-import companiesleaderboard from './images/companiesleaderboard.png';
 import donateIcon from './images/icons/donateIcon.png';
 import donateIconGreen from './images/icons/donateIconGreen.png';
 import competeIcon from './images/icons/competeIcon.png';
@@ -192,6 +187,12 @@ import coupon from './images/icons/coupon.png';
 import registerTree from './images/icons/registerTree.png';
 import settings from './images/icons/settings.png';
 import white_heart from './images/icons/white_heart.png';
+
+import me from './images/icons/LeaderboardIcons/me.png';
+import organisation from './images/icons/LeaderboardIcons/organisation.png';
+import school from './images/icons/LeaderboardIcons/school.png';
+import tpo from './images/icons/LeaderboardIcons/tpo.png';
+import world from './images/icons/LeaderboardIcons/world.png';
 
 export {
   treelogo,
@@ -367,12 +368,7 @@ export {
   downloadGreen,
   sendWhite,
   FAQsCover,
-  countriesleaderboard,
-  schooldleaderboard,
-  tpoleaderboard,
-  individualsleaderboard,
   deleteOutlineWhite,
-  companiesleaderboard,
   share,
   coupon,
   registerTree,
@@ -385,5 +381,10 @@ export {
   deleteIcon,
   redMyLocationIcon,
   newSearchIcon,
-  white_heart
+  white_heart,
+  me,
+  organisation,
+  world,
+  school,
+  tpo
 };

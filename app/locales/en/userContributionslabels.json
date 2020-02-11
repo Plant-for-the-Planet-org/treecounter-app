@@ -54,5 +54,8 @@
   "active_recurrent_donations": "Active Recurrent Donations",
   "donated": "Donated",
   "received": "Received",
-  "gifted": "Gifted"
+  "gifted": "Gifted",
+  "registered_trees": "Registered Trees",
+  "tree_donation": "Tree Donation",
+  "redeemed_trees": "Redeemed Trees"
 }

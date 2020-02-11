@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 // import t from 'tcomb-form-native';
-import { Text, View, FlatList, Image } from 'react-native';
+import { Text, View, FlatList, Image, TextInput } from 'react-native';
 import Modal from 'react-native-modalbox';
 import { currentUserProfileSelector, getCurrency } from '../../selectors/index';
 import i18n from '../../locales/i18n';
@@ -16,14 +16,18 @@ import { getCountryFlagImageUrl } from '../../actions/apiRouting';
 import countryCodes from '../../assets/countryCodes.json';
 import { setCurrencyAction } from '../../actions/globalCurrency';
 import { updateUserProfile } from '../../actions/updateUserProfile';
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
-const backgroundColor = 'gray';
-const activeColor = '#89b53a';
-const defaultColor = '#4d5153';
+const backgroundColor = '#e4e4e4';
+const activeColor = '#74ba00';
+const defaultColor = '#676c6e';
+
 class GlobalCurrencySelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      focus: 0,
+      search: '',
       preferredCurrency: props.globalCurrency.currency,
       show: props.show
     };
@@ -31,7 +35,6 @@ class GlobalCurrencySelector extends Component {
     this.updateState = this.updateState.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    console.log('next props in global', nextProps);
     if (this.state.preferredCurrency != nextProps.globalCurrency.currency) {
       this.setState({ preferredCurrency: nextProps.globalCurrency.currency });
     } else if (
@@ -61,12 +64,10 @@ class GlobalCurrencySelector extends Component {
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
       let curreniesData = await this.props.fetchCurrencies();
-      console.log('got fron fetch', curreniesData);
     }
     if (!this.state.preferredCurrency && this.props.globalCurrency.currency) {
       this.setState({ preferredCurrency: this.props.globalCurrency.currency });
     }
-    console.log('setting', this.state);
     this.state.preferredCurrency &&
       this.props.setCurrencyAction(this.state.preferredCurrency);
   }
@@ -78,12 +79,20 @@ class GlobalCurrencySelector extends Component {
     return this.props.currencies.currencies
       ? currencySort(
           Object.keys(this.props.currencies.currencies.currency_names)
-        ).map(currency => {
-          return {
-            value: currency,
-            label: this.props.currencies.currencies.currency_names[currency]
-          };
-        })
+        )
+          .map(currency => {
+            return {
+              value: currency,
+              label: this.props.currencies.currencies.currency_names[currency]
+            };
+          })
+          .filter(
+            currency =>
+              currency.value.includes(this.state.search.toUpperCase()) ||
+              currency.label
+                .toLowerCase()
+                .includes(this.state.search.toLowerCase())
+          )
       : [
           {
             value: this.state.preferredCurrency,
@@ -91,8 +100,10 @@ class GlobalCurrencySelector extends Component {
           }
         ];
   }
+  setSearch(text = '') {
+    this.state.search !== text && this.setState({ search: text });
+  }
   handleCurrencyChange(selectedOption) {
-    console.log('handle currency change', selectedOption);
     this.updateState({ preferredCurrency: selectedOption });
     this.props.setCurrencyAction(selectedOption);
     this.props.userProfile &&
@@ -126,7 +137,7 @@ class GlobalCurrencySelector extends Component {
                 256
               )
             }}
-            style={{ width: 30, height: 20, alignSelf: 'center' }}
+            style={{ width: 24, height: 16, alignSelf: 'center' }}
           />
           <Text
             style={{
@@ -165,66 +176,111 @@ class GlobalCurrencySelector extends Component {
   render() {
     const { show } = this.props;
     const currenciesArray = this.getCurrencyNames();
-    console.log('this state', this.state);
     return (
-      <View style={{ backgroundColor: backgroundColor, flex: 1, margin: 20 }}>
-        <View style={{ backgroundColor: 'white', flex: 1, padding: 10 }}>
-          <Modal
-            isOpen={show}
-            position={'bottom'}
-            onClosed={this.onClosed}
-            backdropPressToClose
-            coverScreen
-            keyboardTopOffset={0}
-            swipeToClose
+      <Modal
+        isOpen={show}
+        position={'left'}
+        onClosed={this.onClosed}
+        backdropPressToClose
+        coverScreen
+        keyboardTopOffset={0}
+        swipeToClose
+      >
+        <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
+          {/* <Text style={{ marginLeft: 10, paddingTop: 5, color: defaultColor }}>Currency</Text> */}
+          <View
+            style={{
+              backgroundColor: 'white',
+              flex: 1,
+              padding: 10,
+              paddingTop: 3,
+              margin: 10
+            }}
           >
             <View
               style={{
-                height: 70,
-                opacity: 1
+                height: 45,
+                opacity: 1,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                margin: 10,
+                marginLeft: 20
               }}
             >
               <TouchableItem
                 // key={button.type}
                 style={{
-                  height: 70
+                  width: 50,
+                  padding: 10
                 }}
                 onPress={this.onClosed}
               >
-                <Icon
-                  name="close"
-                  size={32}
-                  color="#4d5153"
-                  style={{
-                    top: 25,
-                    left: 18
+                <Icon name="close" size={30} color="#4d5153" />
+              </TouchableItem>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  borderColor: '#4d5153',
+                  borderWidth: this.state.focus,
+                  borderRadius: 20,
+                  marginRight: 20
+                }}
+              >
+                <TextInput
+                  style={{ height: 40, flex: 1, paddingLeft: 20 }}
+                  onChangeText={text => {
+                    this.setSearch(text);
+                  }}
+                  value={this.state.search}
+                  placeholder={'Search'}
+                  placeholderTextColor={'#4d5153'}
+                  onFocus={() => {
+                    this.setState({ focus: 1 });
+                  }}
+                  onBlur={() => {
+                    this.setState({ focus: 0 });
                   }}
                 />
-              </TouchableItem>
+                <TouchableItem
+                  style={{
+                    width: 30
+                  }}
+                  onPress={() => {
+                    this.setSearch();
+                  }}
+                >
+                  <Icon name="close" size={24} color="#4d5153" />
+                </TouchableItem>
+              </View>
             </View>
-            <View>
-              <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
-                {i18n.t('label.featured_currencies')}
-              </Text>
+            <ScrollView>
+              <View>
+                <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
+                  {i18n.t('label.featured_currencies')}
+                </Text>
+                <FlatList
+                  data={currenciesArray.slice(0, 2)}
+                  keyExtractor={this.keyExtractor}
+                  renderItem={this.renderItem}
+                />
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
+                  {i18n.t('label.all_currencies')}
+                </Text>
+              </View>
               <FlatList
-                data={currenciesArray.slice(0, 2)}
+                data={currenciesArray.slice(2)}
                 keyExtractor={this.keyExtractor}
                 renderItem={this.renderItem}
               />
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
-                {i18n.t('label.all_currencies')}
-              </Text>
-            </View>
-            <FlatList
-              data={currenciesArray.slice(2)}
-              keyExtractor={this.keyExtractor}
-              renderItem={this.renderItem}
-            />
-          </Modal>
+            </ScrollView>
+          </View>
         </View>
-      </View>
+      </Modal>
     );
   }
 }

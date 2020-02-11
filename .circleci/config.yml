@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Install packages
           command: |
-            sudo apt-get update && apt-get install -y gettext-base
+            sudo apt-get update && sudo apt-get install -y gettext-base
       # ID_RSA has been set up in project settings as base64 encoded content of 'id_rsa' file
       # https://circleci.com/gh/Plant-for-the-Planet-org/treecounter-platform/edit#env-vars
       - run:
@@ -169,7 +169,7 @@ jobs:
       - run:
           name: Install packages
           command: |
-            sudo apt-get update && apt-get install -y gettext-base
+            sudo apt-get update && sudo apt-get install -y gettext-base
       - run:
           name: Update npm
           command: 'sudo npm install -g npm@latest'

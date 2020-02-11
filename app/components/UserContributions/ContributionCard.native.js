@@ -318,7 +318,9 @@ class ContributionCard extends React.Component {
 
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
-                  <Text style={styles.redeemObjectTitle}>Tree Donation</Text>
+                  <Text style={styles.redeemObjectTitle}>
+                    {i18n.t('label.tree_donation')}
+                  </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
                   </Text>
@@ -357,7 +359,9 @@ class ContributionCard extends React.Component {
 
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
-                  <Text style={styles.redeemObjectTitle}>Registered Trees</Text>
+                  <Text style={styles.redeemObjectTitle}>
+                    {i18n.t('label.registered_trees')}
+                  </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
                   </Text>
@@ -405,7 +409,9 @@ class ContributionCard extends React.Component {
 
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
-                  <Text style={styles.redeemObjectTitle}>Redeemed Trees</Text>
+                  <Text style={styles.redeemObjectTitle}>
+                    {i18n.t('label.redeemed_trees')}
+                  </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
                   </Text>
@@ -437,7 +443,7 @@ class ContributionCard extends React.Component {
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    Gift from {contribution.giverName}
+                    {i18n.t('label.gifted_from_person', contribution.giverName)}
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}

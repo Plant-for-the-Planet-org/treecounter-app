@@ -1,7 +1,8 @@
 import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { debug } from '../../debug';
 import styles from '../../styles/competition/competition-full.native';
 import UserProfileImage from '../Common/UserProfileImage.native';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
@@ -20,7 +21,7 @@ class CompetitionParticipant extends React.Component {
       id: this.props.competitor.treecounterId,
       displayName: this.props.competitor.treecounterDisplayName
     };
-    console.log('support button pressed');
+    debug('support button pressed');
     this.props.supportTreecounterAction(supportObject);
     updateRoute('app_supportTrees', this.props.navigation, 55, {
       titleParam: i18n.t('label.support_to', {

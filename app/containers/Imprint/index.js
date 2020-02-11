@@ -1,7 +1,8 @@
 import React from 'react';
+import _ from 'lodash';
+import { debug } from '../../debug';
 import Imprint from '../../components/Imprint';
 import { ImprintAction } from '../../actions/imprintAction';
-import _ from 'lodash';
 
 class ImprintContainer extends React.Component {
   constructor() {
@@ -22,13 +23,13 @@ class ImprintContainer extends React.Component {
             imprints: imprint
           });
         } catch (err) {
-          console.log(err);
+          debug(err);
           this.setState({
             loading: false
           });
         }
       },
-      error => console.log(error)
+      error => debug(error)
     );
   }
   render() {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Dimensions, View, Text } from 'react-native';
-import { getPDFUrl } from '../../actions/apiRouting';
 import Pdf from 'react-native-pdf';
+import { debug } from '../../debug';
+import { getPDFUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
 
 export default class PDFViewer extends React.Component {
@@ -9,13 +10,13 @@ export default class PDFViewer extends React.Component {
     super(props);
     let { params } = this.props.navigation.state;
     this.state = { uri: params ? params.url : this.props.url, cache: true };
-    console.log();
+    debug();
   }
 
   render() {
     const source = { ...this.state, uri: getPDFUrl(this.state.uri) };
     let instance = this;
-    console.log(this.state);
+    debug(this.state);
     return (
       <View style={styles.container}>
         {!this.state.uri ? (
@@ -25,10 +26,10 @@ export default class PDFViewer extends React.Component {
             enablePaging
             source={source}
             onLoadComplete={numberOfPages => {
-              console.log(`number of pages: ${numberOfPages}`);
+              debug(`number of pages: ${numberOfPages}`);
             }}
             onPageChanged={page => {
-              console.log(`current page: ${page}`);
+              debug(`current page: ${page}`);
             }}
             onError={() => {
               instance.setState({ uri: '' });

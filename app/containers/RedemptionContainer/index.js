@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import Redemption from '../../components/Redemption/index';
 import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
@@ -68,7 +69,7 @@ class RedemptionContainer extends Component {
           });
         },
         error => {
-          console.log(error);
+          debug(error);
         }
       );
     } else if (isCode && !isLoggedIn) {
@@ -174,7 +175,7 @@ class RedemptionContainer extends Component {
           }
         },
         error => {
-          console.log(error);
+          debug(error);
         }
       );
     }

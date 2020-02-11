@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import MapLayerSelector from './MapLayerSelector';
 import ArcGISExploreMap from '../Map/ArcGISExploreMap';
 import i18n from '../../locales/i18n';
@@ -45,7 +46,7 @@ export default class MapTab extends React.Component {
   render() {
     const { mapInfo } = this.props;
 
-    console.log('mapInfo ', mapInfo);
+    debug('mapInfo ', mapInfo);
     return (
       <div className="map-tab__container">
         <MapLayerSelector

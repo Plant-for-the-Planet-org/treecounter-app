@@ -15,5 +15,6 @@
   "add_my_trees": "Add to my Trees",
   "already_redeemed_trees": "You have already Redeemed this code, please try another.",
   "RedeemxTrees": "Redeem {{treeCount}} Trees",
-  "Redeem1Tree": "Redeem {{treeCount}} Tree"
+  "Redeem1Tree": "Redeem {{treeCount}} Tree",
+  "redeem_trees_button": "Redeem Trees"
 }

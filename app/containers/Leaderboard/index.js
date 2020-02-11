@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import Leaderboard from '../../components/Leaderboard';
 import {
   ExploreDataAction,
   LeaderBoardDataAction
 } from '../../actions/exploreAction';
-import PropTypes from 'prop-types';
 import { updateRoute, replaceRoute } from '../../helpers/routerHelper';
 import i18n from '../../locales/i18n';
 import { objectToQueryParams, queryParamsToObject } from '../../helpers/utils';
@@ -64,7 +65,7 @@ class LeaderBoardContainer extends React.Component {
     orderBy = this.state.sortingQueryParam.orderBy,
     period = this.state.sortingQueryParam.period
   ) {
-    console.log(
+    debug(
       section,
       orderBy,
       period,
@@ -73,7 +74,7 @@ class LeaderBoardContainer extends React.Component {
     );
     LeaderBoardDataAction({ section, orderBy, period, subSection }).then(
       success => {
-        console.log(success, 'SUCCESSS');
+        debug(success, 'SUCCESSS');
         if (
           success.data &&
           success.data instanceof Object &&
@@ -86,7 +87,7 @@ class LeaderBoardContainer extends React.Component {
         }
       },
       error => {
-        console.log(error);
+        debug(error);
       }
     );
   }
@@ -145,7 +146,7 @@ class LeaderBoardContainer extends React.Component {
   };
 
   componentWillReceiveProps(nextProps /*, nextState*/) {
-    console.log('__componentWillReceiveProps__');
+    debug('__componentWillReceiveProps__');
 
     if (!this.props.navigation) {
       const { match } = nextProps;
@@ -236,15 +237,12 @@ class LeaderBoardContainer extends React.Component {
         });
         this.sendSearchQuery();
       },
-      error => console.log(error)
+      error => debug(error)
     );
   }
 
   render() {
-    console.log(
-      this.props.handleScrollAnimation,
-      'this.props LeaderBoardContainer'
-    );
+    debug(this.props.handleScrollAnimation, 'this.props LeaderBoardContainer');
     return (
       <Leaderboard
         ref={'leaderBoard'}

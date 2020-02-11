@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import { challenge, challengeStatus } from '../../actions/challengeActions';
-
 import { updateRoute } from '../../helpers/routerHelper';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import {
   userChallengesSelector,
   currentUserProfileSelector
 } from '../../selectors';
-
 import Challenge from '../../components/Challenge/createChallenge';
 
 class ChallengeContainer extends Component {
@@ -44,7 +42,7 @@ class ChallengeContainer extends Component {
         });
       })
       .catch(err => {
-        console.log(err.response.data);
+        debug(err.response.data);
         this.setState({
           error: err.response.data.minTarget
         });

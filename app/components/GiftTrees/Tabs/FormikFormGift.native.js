@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import { Formik } from 'formik';
+import { TextField } from 'react-native-material-textfield';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
+import { debug } from '../../../debug';
 import { forward } from '../../../assets';
 import styles from '../../../styles/competition/competition-form.native';
 import stylesGift from '../../../styles/gifttrees/giftrees';
 import i18n from '../../../locales/i18n';
-import { Formik } from 'formik';
-import { TextField } from 'react-native-material-textfield';
 import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
 import buttonStyles from '../../../styles/common/button.native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import giftInvitationFormSchema from '../../../server/formSchemas/giftTrees';
 
 export default class FormikFormGift extends Component {
@@ -51,7 +52,7 @@ export default class FormikFormGift extends Component {
     let { props } = this;
 
     const backgroundColor = 'rgba(137, 181, 58, 0.19)';
-    console.log('buttonType', this.buttonType);
+    debug('buttonType', this.buttonType);
     return (
       <Formik
         initialValues={props.initialValues}
@@ -64,7 +65,7 @@ export default class FormikFormGift extends Component {
           let isValid = props;
           return (
             <>
-              {console.log('isValid', isValid)}
+              {debug('isValid', isValid)}
               <View style={styles.view_container}>
                 <KeyboardAwareScrollView
                   contentContainerStyle={[

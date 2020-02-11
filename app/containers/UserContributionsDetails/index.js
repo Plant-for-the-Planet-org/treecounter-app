@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import {
-  getAllPlantProjectsSelector,
-} from '../../selectors';
+import { getAllPlantProjectsSelector } from '../../selectors';
 import UserContributionsDetails from '../../components/UserContributions/ContributionDetails/index.native';
 // Actions
 import { currentUserProfileIdSelector } from '../../selectors/index';
@@ -76,5 +74,5 @@ UserContributionsDetailsContainer.propTypes = {
   userProfileId: PropTypes.number.isRequired,
   navigation: PropTypes.any,
   deleteContribution: PropTypes.func,
-  plantProjects: PropTypes.object
+  plantProjects: PropTypes.any
 };

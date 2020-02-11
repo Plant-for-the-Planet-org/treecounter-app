@@ -1,3 +1,4 @@
+import { debug } from '../debug';
 import {
   getRequest,
   postRequest,
@@ -32,7 +33,7 @@ export function fetchPledgesAction(eventSlug, createTimeout = false) {
       .then(res => {
         dispatch(fetchPledges(res.data));
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
     if (createTimeout) {
       let timeoutID = setInterval(
         () =>
@@ -43,10 +44,10 @@ export function fetchPledgesAction(eventSlug, createTimeout = false) {
             .then(res => {
               dispatch(fetchPledges(res.data));
             })
-            .catch(error => console.log(error)),
+            .catch(error => debug(error)),
         30000
       );
-      console.log('setTimeout', timeoutID);
+      debug('setTimeout', timeoutID);
       dispatch(saveTimeoutID(timeoutID));
     }
   };
@@ -67,7 +68,7 @@ export function postPledge(data, params, loggedIn) {
             dispatch(
               mergeEntities(normalize(userProfile[0], userProfileSchema))
             );
-            console.log(res.data);
+            debug(res.data);
           })
           .catch(error => {
             NotificationManager.error(
@@ -97,7 +98,7 @@ export function updatePledge(data, params, loggedIn) {
     loggedIn
       ? putAuthenticatedRequest('eventPledgeAuthed_put', data, params)
           .then(res => {
-            console.log(res.data);
+            debug(res.data);
             const { eventPledge, pledgeEvent } = res.data.merge;
             dispatch(
               mergeEntities(normalize(pledgeEvent, [pledgeEventSchema]))
@@ -107,18 +108,18 @@ export function updatePledge(data, params, loggedIn) {
             );
             return res.data;
           })
-          .catch(error => console.log(error))
+          .catch(error => debug(error))
       : putRequest('eventPledge_put', data, params)
           .then(res => {
             return res.data;
           })
-          .catch(error => console.log(error));
+          .catch(error => debug(error));
   };
 }
 
 async function getLocalStorageItem(key, res) {
   const token = res.data.token;
-  console.log(token);
+  debug(token);
   try {
     let pledgesArray = await fetchItem(key).catch(() => {
       saveItem(key, []);
@@ -132,13 +133,13 @@ async function getLocalStorageItem(key, res) {
       saveItem(key, JSON.stringify(newPledgesArray));
     } // No existing pledges
     else {
-      console.log('No existing pledges found');
+      debug('No existing pledges found');
       pledgesArray = [];
       let newPledgesArray = pledgesArray;
       newPledgesArray.push(token);
       saveItem(key, JSON.stringify(newPledgesArray));
     }
-    //console.log(showAsyncStorageContentInDev());
+    //debug(showAsyncStorageContentInDev());
     fetchItem('pledgedEvent')
       .then(data => {
         if (typeof data !== 'undefined' && data.length > 0) {
@@ -147,16 +148,16 @@ async function getLocalStorageItem(key, res) {
           fetchPublicPledgesAction(stringPledges);
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   } catch (error) {
-    console.log(error);
+    debug(error);
   }
 }
 
 export function clearTimeoutAction(id) {
   return dispatch => {
     clearInterval(id);
-    console.log('clearTimeout', id);
+    debug('clearTimeout', id);
     dispatch(clearTimeoutID());
   };
 }

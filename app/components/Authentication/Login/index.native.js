@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
   Platform,
   KeyboardAvoidingView,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { debug } from ',,/../../debug';
 import loginFormSchema from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
@@ -25,7 +27,8 @@ export default class Login extends Component {
 
     this.state = {
       hidePassword: true,
-      shortHeight: 401
+      shortHeight: 401,
+      loadButton: false
     };
   }
 
@@ -80,9 +83,9 @@ export default class Login extends Component {
     if (this.state.formValue) {
       Keyboard.dismiss();
 
-      console.log('Form value', this.state.formValue);
+      debug('Form value', this.state.formValue);
     }
-    console.log('Form value', this.state.formValue);
+    debug('Form value', this.state.formValue);
     // eslint-disable-next-line no-underscore-dangle
     this.props.onPress(this.state.formValue);
   };
@@ -106,6 +109,9 @@ export default class Login extends Component {
           }}
           ref={'loginForm'}
           onSubmit={values => {
+            this.setState({
+              loadButton: true
+            });
             const formValue = {
               // eslint-disable-next-line no-underscore-dangle
               _username: values._username,
@@ -114,6 +120,14 @@ export default class Login extends Component {
             };
 
             this.props.onPress(formValue);
+
+            setTimeout(
+              () =>
+                this.setState({
+                  loadButton: false
+                }),
+              3000
+            );
           }}
           validationSchema={this.validationSchema}
         >
@@ -242,9 +256,16 @@ export default class Login extends Component {
                             : {}
                         ]}
                       >
-                        <Text style={styles.actionButtonText}>
-                          {i18n.t('label.login')}
-                        </Text>
+                        {this.state.loadButton ? (
+                          <ActivityIndicator
+                            size="large"
+                            color={backgroundColor}
+                          />
+                        ) : (
+                          <Text style={styles.actionButtonText}>
+                            {i18n.t('label.login')}
+                          </Text>
+                        )}
                       </View>
                     </TouchableOpacity>
                   ) : null}
@@ -263,9 +284,16 @@ export default class Login extends Component {
                         !props.isValid ? { backgroundColor: lockedButton } : {}
                       ]}
                     >
-                      <Text style={styles.actionButtonText}>
-                        {i18n.t('label.login')}
-                      </Text>
+                      {this.state.loadButton ? (
+                        <ActivityIndicator
+                          size="large"
+                          color={backgroundColor}
+                        />
+                      ) : (
+                        <Text style={styles.actionButtonText}>
+                          {i18n.t('label.login')}
+                        </Text>
+                      )}
                     </View>
                   </TouchableOpacity>
                 ) : null}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { debug } from '../../debug';
 import AppPayment from '../../components/Payment/AppPayments';
 import { getPaymentInfo } from '../../actions/paymentAction';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
@@ -21,7 +21,7 @@ class AppPaymentContainer extends Component {
           paymentInfo: data
         });
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   }
   render() {
     return (

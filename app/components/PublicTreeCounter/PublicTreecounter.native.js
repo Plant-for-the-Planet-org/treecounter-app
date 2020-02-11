@@ -21,7 +21,7 @@ import stylesHome from '../../styles/user-home';
 import { delimitNumbers } from '../../utils/utils';
 import stylesPublicPage from '../../styles/public-page';
 import i18n from '../../locales/i18n.js';
-import HeaderNew from './../Header/HeaderNew.native';
+// import HeaderNew from './../Header/HeaderNew.native';
 import { isMyself, isUserFollower } from './utils';
 import PlantProjectSnippet from '../PlantProjects/PlantProjectSnippet';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';

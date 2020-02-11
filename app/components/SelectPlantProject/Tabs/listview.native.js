@@ -10,6 +10,7 @@ import styles from '../../../styles/selectplantproject/list.native';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
+import LoadingIndicator from '../../Common/LoadingIndicator.native';
 
 class ListViewProjects extends PureComponent {
   constructor(props) {
@@ -23,6 +24,7 @@ class ListViewProjects extends PureComponent {
       shouldLoad: true
     };
   }
+
   onRefresh() {
     this.setState({ isFetching: true, page: 1 }, async () => {
       try {
@@ -45,7 +47,7 @@ class ListViewProjects extends PureComponent {
         'component got index list =======================================================',
         nextProps
       );
-      this.setState({ initiated: true });
+      this.setState({ initiated: true, isFetching: true });
       try {
         const data = await this.props.loadProjects('all', {});
         this.setState({ isFetching: false, plantProjects: data }, () => {
@@ -103,33 +105,38 @@ class ListViewProjects extends PureComponent {
   );
 
   render() {
+    const { isFetching } = this.state;
     return (
       <View style={{ height: '100%' }}>
-        <FlatList
-          contentContainerStyle={{
-            ...flatListContainerStyle
-          }}
-          data={this.state.plantProjects}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderItem}
-          onEndReached={this.fetchMore}
-          onEndReachedThreshold={3}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.isFetching}
-              onRefresh={this.onRefresh.bind(this)}
-              tintColor={'#89b53a'}
-            />
-          }
-          scrollEventThrottle={24}
-          onScroll={Animated.event([
-            {
-              nativeEvent: {
-                contentOffset: { y: this.props.scrollY }
-              }
+        {!isFetching ? (
+          <FlatList
+            contentContainerStyle={{
+              ...flatListContainerStyle
+            }}
+            data={this.state.plantProjects}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderItem}
+            onEndReached={this.fetchMore}
+            onEndReachedThreshold={3}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.isFetching}
+                onRefresh={this.onRefresh.bind(this)}
+                tintColor={'#89b53a'}
+              />
             }
-          ])}
-        />
+            scrollEventThrottle={24}
+            onScroll={Animated.event([
+              {
+                nativeEvent: {
+                  contentOffset: { y: this.props.scrollY }
+                }
+              }
+            ])}
+          />
+        ) : (
+          <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
+        )}
       </View>
     );
   }

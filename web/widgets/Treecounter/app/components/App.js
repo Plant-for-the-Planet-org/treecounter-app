@@ -4,7 +4,7 @@ import TreecounterGraphicsText from '../../../../../app/components/TreecounterGr
 import SecondaryButton from '../../../../../app/components/Common/Button/SecondaryButton';
 import { SideMenuImage } from '../../../../../app/assets';
 import PropTypes from 'prop-types';
-import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
+// import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
 import i18n from '../../../../../app/locales/i18n.js';
 import { getLocalRoute } from '../../../../../app/actions/apiRouting';
 import TreecounterHeader from '../../../../../app/components/PublicTreeCounter/TreecounterHeader';
@@ -112,7 +112,8 @@ export default class App extends Component {
           {/* Apply CSS hooks here */}
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
-          <style>{ReactTooltipStyle}</style>
+          {/* TODO: removed as not existing any more, replace with something else?
+             <style>{ReactTooltipStyle}</style> */}
           <div className="pftp-widget-row">
             <div className={'pftp-widget-img__container'}>
               {this.props.showGraphics && (

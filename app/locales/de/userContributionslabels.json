@@ -51,6 +51,7 @@
   "usr_contribution_to": "An",
   "gifted_from_person": "Geschenk von {{person}}",
   "gifted_to_person": "Geschenk an {{person}}",
+  "active_recurrent_donations": "Aktive Dauerspenden",
   "donated": "Gespendet",
   "received": "Empfangen",
   "gifted": "Geschenkt"

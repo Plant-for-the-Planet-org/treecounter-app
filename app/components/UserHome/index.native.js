@@ -549,7 +549,7 @@ function ToggleButton(props) {
           resizeMode={'contain'}
         />
         <Text style={styles.showMoreText}>
-          {showMore ? 'Show less' : 'Show all'}
+          {showMore ? i18n.t('label.show_less') : i18n.t('label.show_all')}
         </Text>
       </TouchableOpacity>
     </View>

@@ -11,12 +11,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import PropTypes from 'prop-types';
-import MapView, {
-  Marker,
-  Polygon,
-  ProviderPropType,
-  PROVIDER_GOOGLE
-} from 'react-native-maps';
+import MapView, { Marker, Polygon, ProviderPropType } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { PERMISSIONS, request } from 'react-native-permissions';

@@ -9,7 +9,7 @@
     "build": "webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail ",
     "build:server": "webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
     "start-prod-server": "webpack --config ./web/config/webpack.server.config.js  --progress --profile --bail && node_modules/.bin/live-server web/server",
-    "build:prod_server": "NODE_ENV='production' webpack --config ./web/config/webpack.prod_server.config.js --progress --profile --bail; rm web/server/*.map",
+    "build:prod_server": "source .env.production && webpack --config ./web/config/webpack.prod_server.config.js --env.bugsnagApiKey=$bugsnagApiKey --progress --profile --bail; rm web/server/*.map",
     "precommit": "lint-staged",
     "lint": "eslint app",
     "lint:errors": "eslint app --quiet",

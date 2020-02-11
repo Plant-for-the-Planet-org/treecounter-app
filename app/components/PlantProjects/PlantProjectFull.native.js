@@ -22,6 +22,10 @@ import LoadingIndicator from '../Common/LoadingIndicator.native';
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
 class PlantProjectFull extends React.Component {
+  state = { loader: true };
+  componentWillMount() {
+    setTimeout(() => this.setState({ loader: false }), 2000);
+  }
   async componentWillReceiveProps(nextProps) {
     try {
       debug('plantproject while receive props', nextProps.plantProject);
@@ -72,6 +76,7 @@ class PlantProjectFull extends React.Component {
       tpoName,
       ndviUid
     } = plantProject;
+    const { loader } = this.state;
     let tpo = plantProject.tpoData || {};
     const detailsProps = {
       description,
@@ -90,7 +95,7 @@ class PlantProjectFull extends React.Component {
     const navigation = this.props.navigation;
     const backgroundColor = 'white';
 
-    return (
+    return !loader ? (
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
@@ -147,6 +152,10 @@ class PlantProjectFull extends React.Component {
           </View>
         ) : null}
       </SafeAreaView>
+    ) : (
+      <View style={{ flex: 1, marginTop: -20 }}>
+        <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
+      </View>
     );
   }
 }

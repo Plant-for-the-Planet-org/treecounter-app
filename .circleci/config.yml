@@ -53,6 +53,15 @@ jobs:
           name: Install npm
           command: npm install
       - run:
+          name: Setup local configuration
+          command: |
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]
+            then
+              envsubst < .env.deploy > .env.production
+            else
+              envsubst < .env.deploy > .env.develop
+            fi
+      - run:
           name: Build web client
           command: |
             source $ENV_VARS
@@ -172,6 +181,15 @@ jobs:
       - run:
           name: Linting
           command: npm run lint:errors
+      - run:
+          name: Setup local configuration
+          command: |
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]
+            then
+              envsubst < .env.deploy > .env.production
+            else
+              envsubst < .env.deploy > .env.develop
+            fi
       - run:
           name: Build web client
           command: mkdir -p ./web/server && npm run build:server

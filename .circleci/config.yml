@@ -160,7 +160,8 @@ jobs:
             else
               export debug=true
             fi
-            envsubst < .env.deploy > .env.production
+            ssh $HOST "cd $WD_REACT; envsubst < .env.deploy > .env.production"
+
       # - run:
       #     name: Build web client
       #     command: |

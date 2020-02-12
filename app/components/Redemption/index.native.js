@@ -59,6 +59,7 @@ export default function Redemption(props) {
   }, []);
 
   const white = '#ffffff';
+  const lockedButton = 'rgba(137, 181, 58, 0.19)';
 
   return (
     <View style={styles.mainContainer}>
@@ -177,7 +178,12 @@ export default function Redemption(props) {
                 ]}
                 onPress={props.handleSubmit}
               >
-                <View style={buttonStyles.actionButtonView}>
+                <View
+                  style={[
+                    buttonStyles.actionButtonView,
+                    !props.isValid ? { backgroundColor: lockedButton } : {}
+                  ]}
+                >
                   {loadButton ? (
                     <ActivityIndicator size="large" color={white} />
                   ) : (
@@ -193,7 +199,8 @@ export default function Redemption(props) {
               <TouchableOpacity
                 style={[
                   buttonStyles.actionButtonSmallTouchable,
-                  { bottom: '8%', right: '8%' }
+                  { bottom: '8%', right: '8%' },
+                  !props.isValid ? { backgroundColor: lockedButton } : {}
                 ]}
                 onPress={props.handleSubmit}
               >

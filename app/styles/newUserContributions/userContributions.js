@@ -56,9 +56,9 @@ export default EStyleSheet.create({
     backgroundColor: whiteColor,
     borderRadius: 100,
     justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: textColorLight
+    alignItems: 'center'
+    // borderWidth: 1,
+    // borderColor: textColorLight
   },
   plantedDate: {
     fontFamily: 'OpenSans-Regular',

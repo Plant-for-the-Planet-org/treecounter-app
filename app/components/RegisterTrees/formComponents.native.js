@@ -244,7 +244,7 @@ export const FormikFormTree = props => {
                             style={isMultipleTree ? styles.formNameFields : ''}
                           >
                             <TextField
-                              label={i18n.t('label.tree_count')}
+                              label={i18n.t('label.number_of_trees')}
                               ref={input => {
                                 inputs['treeCount'] = input;
                               }}
@@ -865,6 +865,7 @@ export function CompetitionDatePicker(props) {
         titleIOS={i18n.t('label.datePickerTitle')}
         cancelTextIOS={i18n.t('label.datePickerCancel')}
         confirmTextIOS={i18n.t('label.datePickerConfirm')}
+        pickerContainerStyleIOS={{ color: '#89B53A' }}
       />
     </View>
   );

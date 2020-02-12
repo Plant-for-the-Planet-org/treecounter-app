@@ -642,7 +642,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 1.49.4;
+				MARKETING_VERSION = 1.49.41;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -685,7 +685,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 1.49.4;
+				MARKETING_VERSION = 1.49.41;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

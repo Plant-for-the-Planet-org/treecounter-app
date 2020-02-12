@@ -74,7 +74,7 @@ const SchoolsLeaderBoard = ({ navigation }) => {
                     source={{
                       uri: getImageUrl(
                         'profile',
-                        'avatar',
+                        'thumb',
                         item.contributorAvatar
                       )
                     }}

@@ -88,7 +88,7 @@
     "react-native-material-textfield": "^0.16.1",
     "react-native-modal-datetime-picker": "^7.6.0",
     "react-native-modalbox": "^2.0.0",
-    "react-native-pdf": "^6.0.0",
+    "react-native-pdf": "^6.0.1",
     "react-native-permissions": "^2.0.5",
     "react-native-popover-tooltip": "^1.1.4",
     "react-native-ratings": "^6.3.1",

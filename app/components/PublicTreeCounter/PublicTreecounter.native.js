@@ -167,25 +167,27 @@ class PublicTreeCounter extends React.Component {
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
+        <TouchableOpacity
+          style={{
+            height: 36,
+            zIndex: 1001,
+            width: 36,
+            left: 24,
+            top: 12,
+            justifyContent: 'center',
+            position: 'absolute'
+          }}
+          onPress={() => this.props.navigation.goBack()}
+        >
+          <Image
+            source={backArrow}
+            resizeMode="contain"
+            style={{ height: 18, width: 18.48, alignSelf: 'flex-start' }}
+          />
+        </TouchableOpacity>
         <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
           {/* <HeaderNew title={''} navigation={this.props.navigation} /> */}
-          <TouchableOpacity
-            style={{
-              height: 36,
-              zIndex: 1001,
-              width: 36,
-              left: 24,
-              top: 12,
-              justifyContent: 'center'
-            }}
-            onPress={() => this.props.navigation.goBack()}
-          >
-            <Image
-              source={backArrow}
-              resizeMode="contain"
-              style={{ height: 18, width: 18.48, alignSelf: 'flex-start' }}
-            />
-          </TouchableOpacity>
+
           <View style={stylesPublicPage.header}>
             <TreecounterHeader
               {...headerProps}

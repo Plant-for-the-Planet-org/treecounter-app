@@ -204,6 +204,8 @@ android {
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 100000 + defaultConfig.versionCode
+            } else {
+                output.versionCodeOverride = 9 * 100000 + defaultConfig.versionCode
             }
         }
     }

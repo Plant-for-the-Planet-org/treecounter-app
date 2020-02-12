@@ -35,6 +35,10 @@ jobs:
               echo 'export SERVER_URL="devel.trilliontreecampaign.org"' >>  $ENV_VARS
             fi
             cat $ENV_VARS
+      - run:
+          name: Install packages
+          command: |
+            sudo apt-get update && sudo apt-get install -y gettext-base
       # ID_RSA has been set up in project settings as base64 encoded content of 'id_rsa' file
       # https://circleci.com/gh/Plant-for-the-Planet-org/treecounter-platform/edit#env-vars
       - run:
@@ -56,13 +60,14 @@ jobs:
           name: Setup local configuration
           command: |
             source $ENV_VARS
-            echo $SERVER_URL
-            cp .env.sample .env
-            cp app/config/index.js.dist app/config/index.js
-            sed -i "s/test.trilliontreecampaign.org/$SERVER_URL/" app/config/index.js
+            export host=$SERVER_URL
             if [[ "${CIRCLE_BRANCH}" == "master" ]]
             then
-              sed -i "s/debug: true/debug: false/" app/config/index.js
+              export debug=
+              envsubst < .env.deploy > .env.production
+            else
+              export debug=true
+              envsubst < .env.deploy > .env.develop
             fi
       - run:
           name: Build web client
@@ -116,12 +121,11 @@ jobs:
               echo 'export SERVER_URL="devel.trilliontreecampaign.org"' >>  $ENV_VARS
             fi
             cat $ENV_VARS
-
       # add SSH support
       - run:
           name: Install packages
           command: |
-            apk update && apk add openssh
+            apk update && apk add openssh & apk add gettext-base
       # ID_RSA has been set up in project settings as base64 encoded content of 'id_rsa' file
       # https://circleci.com/gh/Plant-for-the-Planet-org/treecounter-platform/edit#env-vars
       - run:
@@ -150,13 +154,14 @@ jobs:
           name: Setup local configuration
           command: |
             source $ENV_VARS
-            echo $SERVER_URL
-            ssh $HOST "cd $WD_REACT; cp .env.sample .env"
-            ssh $HOST "cd $WD_REACT; cp app/config/index.js.dist app/config/index.js"
-            ssh $HOST "cd $WD_REACT; sed -i 's/test.trilliontreecampaign.org/'$SERVER_URL'/' app/config/index.js"
+            export host=$SERVER_URL
             if [[ "${CIRCLE_BRANCH}" == "master" ]]
             then
-              ssh $HOST "cd $WD_REACT; sed -i 's/debug: true/debug: false/' app/config/index.js"
+              export debug=
+              envsubst < .env.deploy > .env.production
+            else
+              export debug=true
+              envsubst < .env.deploy > .env.develop
             fi
       # - run:
       #     name: Build web client
@@ -179,6 +184,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install packages
+          command: |
+            sudo apt-get update && sudo apt-get install -y gettext-base
+      - run:
           name: Update npm
           command: 'sudo npm install -g npm@latest'
       - run:
@@ -194,13 +203,19 @@ jobs:
           paths:
             - node_modules
       - run:
-          name: Setup local configuration
-          command: |
-            cp .env.sample .env
-            cp app/config/index.js.dist app/config/index.js
-      - run:
           name: Linting
           command: npm run lint:errors
+      - run:
+          name: Setup local configuration
+          command: |
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]
+            then
+              export debug=
+              envsubst < .env.deploy > .env.production
+            else
+              export debug=true
+              envsubst < .env.deploy > .env.develop
+            fi
       - run:
           name: Build web client
           command: mkdir -p ./web/server && npm run build:server

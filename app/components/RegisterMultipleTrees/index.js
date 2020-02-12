@@ -34,7 +34,7 @@ const Location = () => (
           <View style={styles.markerCircle}>
             <Text style={styles.markerText}>A</Text>
           </View>
-          <View style={{ width: 5, height: 40, backgroundColor: '#78B806' }} />
+          <View style={styles.markerStick} />
         </View>
       </Marker>
     </MapView>
@@ -47,6 +47,12 @@ const Location = () => (
 );
 
 const styles = StyleSheet.create({
+  markerStick: {
+    width: 5,
+    height: 40,
+    backgroundColor: '#78B806',
+    borderRadius: 10
+  },
   bottomBtnContainer: {
     position: 'absolute',
     bottom: 10,

@@ -1,10 +1,37 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity
+} from 'react-native';
 import Header from '../Header/BackHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import ImagePicker from 'react-native-image-picker';
 
-const CaptureImage = () => {
+const RegisterTreesCaptureImage = ({
+  onPressContinueAfterSeletImage,
+  updateImageURI
+}) => {
+  const [imageURI, setImageURI] = useState(null);
+
+  const options = {
+    storageOptions: {
+      skipBackup: true,
+      path: 'images'
+    }
+  };
+
+  let onPressCamera = () => {
+    ImagePicker.launchCamera(options, response => {
+      setImageURI(response.uri);
+      updateImageURI(response.uri);
+    });
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <Header />
@@ -18,17 +45,21 @@ const CaptureImage = () => {
         <View style={{ flex: 1 }}>
           <Image
             source={{
-              uri:
-                'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+              uri: imageURI
+                ? imageURI
+                : 'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
             }}
             resizeMode={'contain'}
             style={styles.image}
           />
-          <View style={styles.cameraContainer}>
+          <TouchableOpacity
+            onPress={onPressCamera}
+            style={styles.cameraContainer}
+          >
             <View style={styles.cameraIcon}>
               <Icon name={'camera-alt'} color={'#000'} size={23} />
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
       <View>
@@ -40,7 +71,10 @@ const CaptureImage = () => {
           <PrimaryButton buttonStyle={styles.backBtnStyle}>
             <Text style={styles.backBtn}>{'Back'}</Text>
           </PrimaryButton>
-          <PrimaryButton buttonStyle={styles.buttonStyle}>
+          <PrimaryButton
+            onClick={onPressContinueAfterSeletImage}
+            buttonStyle={styles.buttonStyle}
+          >
             <Text style={styles.continueBtn}>{'Continue'}</Text>
           </PrimaryButton>
         </View>
@@ -132,4 +166,4 @@ const styles = StyleSheet.create({
     color: '#89b53a'
   }
 });
-export default CaptureImage;
+export default RegisterTreesCaptureImage;

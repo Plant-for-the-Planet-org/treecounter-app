@@ -1,111 +1,74 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import MapView, { Geojson, Marker } from 'react-native-maps';
-import Header from '../Header/BackHeader';
-import PrimaryButton from '../Common/Button/PrimaryButton';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import RegisterTreesCaptureImage from './CaptureImage';
+import RegisterTreesMap from './Map';
 
-const Location = () => (
-  <View style={{ flex: 1 }}>
-    <Header />
-    <View style={styles.subHeaderContainer}>
-      <Text style={styles.subHeaderText}>Location A</Text>
-      <Text
-        style={styles.subHeadingText}
-      >{`Please draw your planting area.\nYou can add one or more polygons.`}</Text>
+const ALPHABETS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const RegisterMultipleTrees = () => {
+  const [location, setLocation] = useState(ALPHABETS[0]);
+  const [coordinates, setCoordinates] = useState([
+    {
+      latitude: 35.746512259918504,
+      longitude: 79.453125,
+      location: 'A',
+      imageURI: ''
+    }
+  ]);
+  const [isRegisterTreesMap, setisRegisterTreesMap] = useState(true);
+
+  // [35.746512259918504, 79.453125, 'A']
+
+  let upDateMarker = (latlong, index) => {
+    let marker = coordinates.slice(index, 1);
+    marker.latitude = latlong.latitude;
+    marker.longitude = latlong.longitude;
+    coordinates.splice(index, 1, marker);
+    setCoordinates(coordinates);
+  };
+
+  let updateImageURI = (uri, index) => {
+    let marker = coordinates.slice(index, 1);
+    marker.imageURI = uri;
+    coordinates.splice(index, 1, marker);
+    setCoordinates(coordinates);
+  };
+
+  let toggleIsRegisterTreesMap = () => {
+    setisRegisterTreesMap(!isRegisterTreesMap);
+  };
+
+  let onPressContinueAfterSeletImage = () => {
+    console.log('onPressContinueAfterSeletImage');
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      {isRegisterTreesMap ? (
+        <RegisterTreesMap
+          toggleIsRegisterTreesMap={toggleIsRegisterTreesMap}
+          upDateMarker={upDateMarker}
+          location={location}
+          coordinates={coordinates}
+        />
+      ) : (
+        <RegisterTreesCaptureImage
+          updateImageURI={updateImageURI}
+          onPressContinueAfterSeletImage={onPressContinueAfterSeletImage}
+        />
+      )}
     </View>
-    <MapView
-      initialRegion={{
-        latitude: 24.995607335811723,
-        longitude: 67.05481767654419,
-        latitudeDelta: 0.00922,
-        longitudeDelta: 0.0421
-      }}
-      mapType={'satellite'}
-      style={{ flex: 1 }}
-    >
-      <Marker
-        draggable
-        coordinate={{
-          latitude: 24.995607335811723,
-          longitude: 67.05481767654419
-        }}
-      >
-        <View style={styles.markerContainer}>
-          <View style={styles.markerCircle}>
-            <Text style={styles.markerText}>A</Text>
-          </View>
-          <View style={styles.markerStick} />
-        </View>
-      </Marker>
-    </MapView>
-    <View style={styles.bottomBtnContainer}>
-      <PrimaryButton buttonStyle={styles.buttonStyle}>
-        <Text style={styles.continueBtn}>{'Select Location & Continue'}</Text>
-      </PrimaryButton>
-    </View>
-  </View>
-);
+  );
+};
 
-const styles = StyleSheet.create({
-  markerStick: {
-    width: 5,
-    height: 40,
-    backgroundColor: '#78B806',
-    borderRadius: 10
-  },
-  bottomBtnContainer: {
-    position: 'absolute',
-    bottom: 10,
-    width: '100%',
-    alignItems: 'center'
-  },
-  markerCircle: {
-    width: 30,
-    height: 30,
-    backgroundColor: '#78B806',
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  markerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  subHeaderContainer: {
-    marginHorizontal: 15
-  },
-  subHeaderText: {
-    fontSize: 27,
-    fontFamily: 'OpenSans-Bold',
-    lineHeight: 40,
-    color: '#4d5153'
-  },
-  markerText: {
-    color: 'white'
-  },
-  subHeadingText: {
-    fontSize: 18,
-    fontFamily: 'OpenSans-Regular',
-    lineHeight: 24,
-    color: '#4d5153',
-    marginVertical: 15
-  },
-  buttonStyle: {
-    width: 240,
-    height: 52,
-    borderRadius: 100,
-    backgroundColor: '#89b53a'
-  },
-  continueBtn: {
-    width: 72,
-    height: 22,
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 16,
-    lineHeight: 22,
-    letterSpacing: 0.21,
-    textAlign: 'center',
-    color: '#ffffff'
-  }
-});
+export default RegisterMultipleTrees;
 
-export default Location;
+// coordinates
+/*
+    coordinates : {
+        latitude : "",
+         longitude : "",
+        location  :"",
+        URI : ""
+
+    }
+*/

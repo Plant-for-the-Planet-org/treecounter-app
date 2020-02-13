@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import MapView, { Marker, Geojson, Polygon } from 'react-native-maps';
+import MapView, { Marker, Geojson, Polygon, Polyline } from 'react-native-maps';
 import Header from '../Header/BackHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 
@@ -10,13 +10,19 @@ const RegisterTreesMap = ({
   upDateMarker,
   toggleIsRegisterTreesMap
 }) => {
-  let polygenCoordinates = coordinates.map(x => {
-    return {
-      latitude: x.latitude,
-      longitude: x.longitude
-    };
-  });
-  // console.log('coordinates', coordinates)
+  const [polygonLatLong, setPolygonLatLong] = useState([]);
+  const [isPolygon, setIsPolygon] = useState(false);
+  useEffect(
+    () => {
+      let polygenCoordinates = coordinates.map(x => ({
+        latitude: x.latitude,
+        longitude: x.longitude
+      }));
+      setPolygonLatLong(polygenCoordinates);
+    },
+    [coordinates]
+  );
+
   return (
     <View style={{ flex: 1 }}>
       <Header />
@@ -36,35 +42,51 @@ const RegisterTreesMap = ({
         mapType={'satellite'}
         style={{ flex: 1 }}
       >
-        <Polygon
-          strokeColor={'#fff'}
-          strokeWidth={2}
-          coordinates={polygenCoordinates}
-        />
-        {coordinates.map((oneMarker, index) => {
-          return (
-            <Marker
-              key={index}
-              onDragEnd={({ nativeEvent }) => {
-                upDateMarker(nativeEvent.coordinate, index);
-              }}
-              draggable
-              coordinate={{
-                latitude: oneMarker.latitude,
-                longitude: oneMarker.longitude
-              }}
-            >
-              <View style={styles.markerContainer}>
-                <View style={styles.markerCircle}>
-                  <Text style={styles.markerText}>{oneMarker.location}</Text>
-                </View>
-                <View style={styles.markerStick} />
+        {isPolygon ? (
+          <Polygon
+            strokeColor={'#fff'}
+            strokeWidth={3}
+            coordinates={polygonLatLong}
+          />
+        ) : (
+          <Polyline
+            strokeColor={'#fff'}
+            strokeWidth={3}
+            coordinates={polygonLatLong}
+          />
+        )}
+        {coordinates.map((oneMarker, index) => (
+          <Marker
+            key={index}
+            onDragEnd={({ nativeEvent }) =>
+              upDateMarker(nativeEvent.coordinate, index)
+            }
+            draggable
+            coordinate={{
+              latitude: oneMarker.latitude,
+              longitude: oneMarker.longitude
+            }}
+          >
+            <View style={styles.markerContainer}>
+              <View style={styles.markerCircle}>
+                <Text style={styles.markerText}>{oneMarker.location}</Text>
               </View>
-            </Marker>
-          );
-        })}
+              <View style={styles.markerStick} />
+            </View>
+          </Marker>
+        ))}
       </MapView>
       <View style={styles.bottomBtnContainer}>
+        {coordinates.length > 2 ? (
+          <PrimaryButton
+            onClick={() => setIsPolygon(true)}
+            buttonStyle={styles.whiteBtnStyle}
+          >
+            <Text style={[styles.continueBtn, styles.whiteBtnText]}>
+              {'Select & complete Polygon'}
+            </Text>
+          </PrimaryButton>
+        ) : null}
         <PrimaryButton
           onClick={toggleIsRegisterTreesMap}
           buttonStyle={styles.buttonStyle}
@@ -88,6 +110,14 @@ const styles = StyleSheet.create({
     bottom: 10,
     width: '100%',
     alignItems: 'center'
+  },
+  whiteBtnStyle: {
+    width: 240,
+    borderRadius: 100,
+    backgroundColor: '#fff'
+  },
+  whiteBtnText: {
+    color: '#89b53a'
   },
   markerCircle: {
     width: 30,

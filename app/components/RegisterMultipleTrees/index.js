@@ -5,7 +5,6 @@ import RegisterTreesMap from './Map';
 
 const ALPHABETS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const RegisterMultipleTrees = () => {
-  const [location, setLocation] = useState(ALPHABETS[0]);
   const [coordinates, setCoordinates] = useState([
     {
       latitude: 35.746512259918504,
@@ -16,20 +15,18 @@ const RegisterMultipleTrees = () => {
   ]);
   const [isRegisterTreesMap, setisRegisterTreesMap] = useState(true);
 
-  // [35.746512259918504, 79.453125, 'A']
-
   let upDateMarker = (latlong, index) => {
-    let marker = coordinates.slice(index, 1);
+    let marker = coordinates[index];
     marker.latitude = latlong.latitude;
     marker.longitude = latlong.longitude;
     coordinates.splice(index, 1, marker);
-    setCoordinates(coordinates);
+    setCoordinates([...coordinates]);
   };
 
-  let updateImageURI = (uri, index) => {
-    let marker = coordinates.slice(index, 1);
+  let updateImageURI = uri => {
+    let marker = coordinates[coordinates.length - 1];
     marker.imageURI = uri;
-    coordinates.splice(index, 1, marker);
+    coordinates.splice(coordinates.length - 1, 1, marker);
     setCoordinates(coordinates);
   };
 
@@ -38,20 +35,29 @@ const RegisterMultipleTrees = () => {
   };
 
   let onPressContinueAfterSeletImage = () => {
-    console.log('onPressContinueAfterSeletImage');
+    let dummyCoordinates = {
+      latitude: 35.746512259918504,
+      longitude: 79.453125,
+      location: ALPHABETS[coordinates.length],
+      imageURI: ''
+    };
+    coordinates.push(dummyCoordinates);
+    setCoordinates(coordinates);
+    toggleIsRegisterTreesMap();
   };
 
   return (
     <View style={{ flex: 1 }}>
       {isRegisterTreesMap ? (
         <RegisterTreesMap
+          location={coordinates[coordinates.length - 1].location}
           toggleIsRegisterTreesMap={toggleIsRegisterTreesMap}
           upDateMarker={upDateMarker}
-          location={location}
           coordinates={coordinates}
         />
       ) : (
         <RegisterTreesCaptureImage
+          coordinates={coordinates[coordinates.length - 1]}
           updateImageURI={updateImageURI}
           onPressContinueAfterSeletImage={onPressContinueAfterSeletImage}
         />

@@ -14,7 +14,8 @@ import ImagePicker from 'react-native-image-picker';
 
 const RegisterTreesCaptureImage = ({
   onPressContinueAfterSeletImage,
-  updateImageURI
+  updateImageURI,
+  coordinates
 }) => {
   const [imageURI, setImageURI] = useState(null);
 
@@ -25,10 +26,10 @@ const RegisterTreesCaptureImage = ({
     }
   };
 
-  let onPressCamera = () => {
+  let onPressCamera = index => {
     ImagePicker.launchCamera(options, response => {
       setImageURI(response.uri);
-      updateImageURI(response.uri);
+      updateImageURI(response.uri, index);
     });
   };
 
@@ -36,7 +37,9 @@ const RegisterTreesCaptureImage = ({
     <View style={{ flex: 1 }}>
       <Header />
       <View style={styles.subHeaderContainer}>
-        <Text style={styles.subHeaderText}>Location A</Text>
+        <Text style={styles.subHeaderText}>{`Location ${
+          coordinates.location
+        }`}</Text>
         <Text
           style={styles.subHeadingText}
         >{`PLease take a picture facing planted trees.`}</Text>
@@ -47,13 +50,13 @@ const RegisterTreesCaptureImage = ({
             source={{
               uri: imageURI
                 ? imageURI
-                : 'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                : 'https://cdn2.vectorstock.com/i/1000x1000/17/61/select-image-vector-11591761.jpg'
             }}
             resizeMode={'contain'}
             style={styles.image}
           />
           <TouchableOpacity
-            onPress={onPressCamera}
+            onPress={() => onPressCamera()}
             style={styles.cameraContainer}
           >
             <View style={styles.cameraIcon}>

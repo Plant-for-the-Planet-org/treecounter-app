@@ -137,14 +137,18 @@ class GlobalCurrencySelector extends Component {
                 256
               )
             }}
-            style={{ width: 24, height: 16, alignSelf: 'center' }}
+            style={{ width: 16, height: 10, alignSelf: 'center' }}
           />
           <Text
             style={{
-              padding: 10,
-              width: '17%',
-              fontSize: 15,
+              width: 60,
+              paddingLeft: 20,
+              paddingTop: 15,
+              paddingBottom: 15,
               fontWeight: 'bold',
+              fontFamily: 'OpenSans-Bold',
+              fontSize: 16,
+              lineHeight: 22,
               color: this.isActive(currency) ? activeColor : defaultColor
             }}
           >
@@ -152,8 +156,12 @@ class GlobalCurrencySelector extends Component {
           </Text>
           <Text
             style={{
-              padding: 10,
-              width: '45%',
+              padding: 15,
+              paddingLeft: 5,
+              lineHeight: 22,
+              flex: 1,
+              fontFamily: 'OpenSans-Regular',
+              fontSize: 16,
               color: this.isActive(currency) ? activeColor : defaultColor
             }}
           >
@@ -165,6 +173,7 @@ class GlobalCurrencySelector extends Component {
               size={32}
               color="#89b53a"
               style={{
+                alignSelf: 'flex-end',
                 marginLeft: 5
               }}
             />
@@ -194,7 +203,8 @@ class GlobalCurrencySelector extends Component {
               flex: 1,
               padding: 10,
               paddingTop: 3,
-              margin: 10
+              margin: 15,
+              marginBottom: 5
             }}
           >
             <View
@@ -258,7 +268,14 @@ class GlobalCurrencySelector extends Component {
             </View>
             <ScrollView>
               <View>
-                <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontFamily: 'OpenSans-Bold',
+                    fontSize: 16,
+                    margin: 10
+                  }}
+                >
                   {i18n.t('label.featured_currencies')}
                 </Text>
                 <FlatList
@@ -268,7 +285,14 @@ class GlobalCurrencySelector extends Component {
                 />
               </View>
               <View style={{ marginTop: 10 }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 17, margin: 10 }}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontFamily: 'OpenSans-Bold',
+                    fontSize: 16,
+                    margin: 10
+                  }}
+                >
                   {i18n.t('label.all_currencies')}
                 </Text>
               </View>

@@ -166,33 +166,57 @@ export default function Redemption(props) {
             </KeyboardAwareScrollView>
 
             {buttonType === 'validate' ? (
-              <TouchableOpacity
-                style={[
-                  buttonStyles.actionButtonTouchable,
-                  { alignSelf: 'center', paddingHorizontal: 24 },
-                  Platform.OS === 'ios'
-                    ? height < 500
-                      ? { bottom: '14%' }
-                      : { bottom: '6%' }
-                    : null
-                ]}
-                onPress={props.handleSubmit}
-              >
+              !props.isValid ? (
                 <View
                   style={[
-                    buttonStyles.actionButtonView,
-                    !props.isValid ? { backgroundColor: lockedButton } : {}
+                    buttonStyles.actionButtonTouchable,
+                    { alignSelf: 'center', paddingHorizontal: 24 },
+                    Platform.OS === 'ios'
+                      ? height < 500
+                        ? { bottom: '14%' }
+                        : { bottom: '6%' }
+                      : null
                   ]}
                 >
-                  {loadButton ? (
-                    <ActivityIndicator size="large" color={white} />
-                  ) : (
-                    <Text style={buttonStyles.actionButtonText}>
-                      {i18n.t('label.validate_code')}
-                    </Text>
-                  )}
+                  <View
+                    style={[
+                      buttonStyles.actionButtonView,
+                      { backgroundColor: lockedButton }
+                    ]}
+                  >
+                    {loadButton ? (
+                      <ActivityIndicator size="large" color={white} />
+                    ) : (
+                      <Text style={buttonStyles.actionButtonText}>
+                        {i18n.t('label.validate_code')}
+                      </Text>
+                    )}
+                  </View>
                 </View>
-              </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={[
+                    buttonStyles.actionButtonTouchable,
+                    { alignSelf: 'center', paddingHorizontal: 24 },
+                    Platform.OS === 'ios'
+                      ? height < 500
+                        ? { bottom: '14%' }
+                        : { bottom: '6%' }
+                      : null
+                  ]}
+                  onPress={props.handleSubmit}
+                >
+                  <View style={[buttonStyles.actionButtonView]}>
+                    {loadButton ? (
+                      <ActivityIndicator size="large" color={white} />
+                    ) : (
+                      <Text style={buttonStyles.actionButtonText}>
+                        {i18n.t('label.validate_code')}
+                      </Text>
+                    )}
+                  </View>
+                </TouchableOpacity>
+              )
             ) : null}
 
             {buttonType === '>' ? (

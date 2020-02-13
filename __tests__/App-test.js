@@ -48,14 +48,7 @@ jest.mock('react-native-gesture-handler', () => {
 jest.mock('react-native-reanimated', () => {});
 jest.mock('react-native-tab-view', () => {});
 jest.mock('react-native-device-info', () => {});
-//jest.mock('@react-native-community/async-storage');
 jest.mock('react-navigation-drawer', () => {});
-jest.mock('react-navigation-redux-helpers', () => {
-  return {
-    createReactNavigationReduxMiddleware: jest.fn(),
-    createReduxBoundAddListener: jest.fn()
-  };
-});
 jest.mock('react-native-image-picker', () => {});
 jest.mock('deprecated-react-native-listview', () => {});
 jest.mock('react-native-document-picker', () => {});
@@ -66,6 +59,7 @@ jest.mock('react-native-vector-icons/FontAwesome', () => {
     loadFont: jest.fn()
   };
 });
+jest.mock('@react-native-community/viewpager', () => {});
 
 // eslint-disable-next-line no-undef
 it('renders correctly', () => {

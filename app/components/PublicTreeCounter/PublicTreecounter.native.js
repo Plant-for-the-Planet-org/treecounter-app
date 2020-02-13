@@ -167,19 +167,18 @@ class PublicTreeCounter extends React.Component {
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <SafeAreaView>
-          <TouchableOpacity
-            style={{
-              height: 36,
-              zIndex: 1001,
-              width: 36,
-              left: 24,
-              top: 12,
-              justifyContent: 'center',
-              position: 'absolute'
-            }}
-            onPress={() => this.props.navigation.goBack()}
-          >
+        <SafeAreaView
+          style={{
+            height: 36,
+            zIndex: 1001,
+            width: 36,
+            left: 24,
+            top: Platform.OS === 'ios' ? 36 : 12,
+            justifyContent: 'center',
+            position: 'absolute'
+          }}
+        >
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
             <Image
               source={backArrow}
               resizeMode="contain"

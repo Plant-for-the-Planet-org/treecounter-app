@@ -55,18 +55,8 @@ const RegisterTreeForm = () => {
             </Text>
           </View>
         ))}
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            borderRadius: 5,
-            borderColor: '#c4c0c0',
-            borderWidth: 1,
-            paddingHorizontal: 15,
-            marginTop: 20
-          }}
-        >
-          <Text style={styles.label}>{`On Site Registration`}</Text>
+        <View style={styles.exportGeojson}>
+          <Text style={styles.label}>{`Export GeoJson`}</Text>
         </View>
       </View>
       <View style={{ marginVertical: 30 }} />
@@ -77,6 +67,15 @@ const RegisterTreeForm = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  exportGeojson: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    borderColor: '#c4c0c0',
+    borderWidth: 1,
+    paddingHorizontal: 15,
+    marginTop: 20
   },
   subContainer: {
     flexDirection: 'row',

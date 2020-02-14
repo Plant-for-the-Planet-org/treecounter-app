@@ -9,6 +9,8 @@ const RegisterMultipleTrees = () => {
   const [coordinates, setCoordinates] = useState([]);
   const [isRegisterTreesMap, setisRegisterTreesMap] = useState(true);
   const [currentLocation, setCurrentLocation] = useState({});
+  const [isPolygon, setIsPolygon] = useState(false);
+
   useEffect(() => {
     Geolocation.getCurrentPosition(
       //Will give you the current location
@@ -82,12 +84,15 @@ const RegisterMultipleTrees = () => {
               ? coordinates[coordinates.length - 1].location
               : ''
           }
+          setIsPolygon={setIsPolygon}
+          isPolygon={isPolygon}
           toggleIsRegisterTreesMap={toggleIsRegisterTreesMap}
           upDateMarker={upDateMarker}
           coordinates={coordinates}
         />
       ) : (
         <RegisterTreesCaptureImage
+          isPolygon={isPolygon}
           coordinates={coordinates[coordinates.length - 1]}
           updateImageURI={updateImageURI}
           onPressContinueAfterSeletImage={onPressContinueAfterSeletImage}

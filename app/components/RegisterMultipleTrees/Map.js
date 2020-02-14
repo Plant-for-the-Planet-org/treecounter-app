@@ -8,10 +8,11 @@ const RegisterTreesMap = ({
   location,
   coordinates,
   upDateMarker,
-  toggleIsRegisterTreesMap
+  toggleIsRegisterTreesMap,
+  isPolygon,
+  setIsPolygon
 }) => {
   const [polygonLatLong, setPolygonLatLong] = useState([]);
-  const [isPolygon, setIsPolygon] = useState(false);
   useEffect(
     () => {
       let polygenCoordinates = coordinates.map(x => ({

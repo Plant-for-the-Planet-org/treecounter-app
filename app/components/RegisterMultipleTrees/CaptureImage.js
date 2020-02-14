@@ -15,7 +15,8 @@ import ImagePicker from 'react-native-image-picker';
 const RegisterTreesCaptureImage = ({
   onPressContinueAfterSeletImage,
   updateImageURI,
-  coordinates
+  coordinates,
+  isPolygon
 }) => {
   const [imageURI, setImageURI] = useState(null);
 
@@ -31,6 +32,12 @@ const RegisterTreesCaptureImage = ({
       setImageURI(response.uri);
       updateImageURI(response.uri, index);
     });
+  };
+
+  let onPressDone = () => {
+    isPolygon
+      ? alert('navigate to Multiple Register Screen')
+      : onPressContinueAfterSeletImage();
   };
 
   return (
@@ -74,11 +81,10 @@ const RegisterTreesCaptureImage = ({
           <PrimaryButton buttonStyle={styles.backBtnStyle}>
             <Text style={styles.backBtn}>{'Back'}</Text>
           </PrimaryButton>
-          <PrimaryButton
-            onClick={onPressContinueAfterSeletImage}
-            buttonStyle={styles.buttonStyle}
-          >
-            <Text style={styles.continueBtn}>{'Continue'}</Text>
+          <PrimaryButton onClick={onPressDone} buttonStyle={styles.buttonStyle}>
+            <Text style={styles.continueBtn}>
+              {isPolygon ? 'Done' : 'Continue'}
+            </Text>
           </PrimaryButton>
         </View>
       </View>

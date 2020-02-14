@@ -22,7 +22,16 @@ const RegisterTreesMap = ({
     },
     [coordinates]
   );
-
+  let initiallatLong = {
+    latitude: coordinates.length
+      ? coordinates[coordinates.length - 1].latitude
+      : 35.746512259918504,
+    longitude: coordinates.length
+      ? coordinates[coordinates.length - 1].longitude
+      : 79.453125,
+    latitudeDelta: 0.0000922,
+    longitudeDelta: 0.00421
+  };
   return (
     <View style={{ flex: 1 }}>
       <Header />
@@ -33,12 +42,7 @@ const RegisterTreesMap = ({
         >{`Please draw your planting area.\nYou can add one or more polygons.`}</Text>
       </View>
       <MapView
-        initialRegion={{
-          latitude: 35.746512259918504,
-          longitude: 79.453125,
-          latitudeDelta: 0.922,
-          longitudeDelta: 0.421
-        }}
+        initialRegion={initiallatLong}
         mapType={'satellite'}
         style={{ flex: 1 }}
       >

@@ -1,19 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import RegisterTreesCaptureImage from './CaptureImage';
 import RegisterTreesMap from './Map';
+import Geolocation from '@react-native-community/geolocation';
 
 const ALPHABETS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const RegisterMultipleTrees = () => {
-  const [coordinates, setCoordinates] = useState([
-    {
-      latitude: 35.746512259918504,
-      longitude: 79.453125,
-      location: 'A',
-      imageURI: ''
-    }
-  ]);
+  const [coordinates, setCoordinates] = useState([]);
   const [isRegisterTreesMap, setisRegisterTreesMap] = useState(true);
+  const [currentLocation, setCurrentLocation] = useState({});
+  useEffect(() => {
+    Geolocation.getCurrentPosition(
+      //Will give you the current location
+      position => {
+        setCoordinates([
+          ...coordinates,
+          ...[
+            {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              location: ALPHABETS[coordinates.length],
+              imageURI: ''
+            }
+          ]
+        ]);
+        console.log(position, 'position');
+      },
+      error => alert(error.message),
+      { enableHighAccuracy: false, timeout: 25000, maximumAge: 3600000 }
+    );
+  }, []);
 
   let upDateMarker = (latlong, index) => {
     let marker = coordinates[index];
@@ -35,22 +51,37 @@ const RegisterMultipleTrees = () => {
   };
 
   let onPressContinueAfterSeletImage = () => {
-    let dummyCoordinates = {
-      latitude: 35.746512259918504,
-      longitude: 79.453125,
-      location: ALPHABETS[coordinates.length],
-      imageURI: ''
-    };
-    coordinates.push(dummyCoordinates);
-    setCoordinates(coordinates);
-    toggleIsRegisterTreesMap();
+    Geolocation.getCurrentPosition(
+      //Will give you the current location
+      position => {
+        setCoordinates([
+          ...coordinates,
+          ...[
+            {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              location: ALPHABETS[coordinates.length],
+              imageURI: ''
+            }
+          ]
+        ]);
+        toggleIsRegisterTreesMap();
+        console.log(position, 'position');
+      },
+      error => alert(error.message),
+      { enableHighAccuracy: false, timeout: 25000, maximumAge: 3600000 }
+    );
   };
-
+  console.log(coordinates);
   return (
     <View style={{ flex: 1 }}>
       {isRegisterTreesMap ? (
         <RegisterTreesMap
-          location={coordinates[coordinates.length - 1].location}
+          location={
+            coordinates.length
+              ? coordinates[coordinates.length - 1].location
+              : ''
+          }
           toggleIsRegisterTreesMap={toggleIsRegisterTreesMap}
           upDateMarker={upDateMarker}
           coordinates={coordinates}

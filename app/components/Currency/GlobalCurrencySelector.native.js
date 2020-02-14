@@ -20,7 +20,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const backgroundColor = '#e4e4e4';
 const activeColor = '#74ba00';
-const defaultColor = '#676c6e';
+const defaultColor = '#4d5153';
 
 class GlobalCurrencySelector extends Component {
   constructor(props) {
@@ -127,7 +127,11 @@ class GlobalCurrencySelector extends Component {
       >
         <View
           key={currency.value}
-          style={{ flexDirection: 'row', marginLeft: 10 }}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginVertical: 12
+          }}
         >
           <Image
             source={{
@@ -137,15 +141,12 @@ class GlobalCurrencySelector extends Component {
                 256
               )
             }}
-            style={{ width: 16, height: 10, alignSelf: 'center' }}
+            style={{ width: 16, height: 10 }}
           />
           <Text
             style={{
               width: 60,
               paddingLeft: 20,
-              paddingTop: 15,
-              paddingBottom: 15,
-              fontWeight: 'bold',
               fontFamily: 'OpenSans-Bold',
               fontSize: 16,
               lineHeight: 22,
@@ -156,8 +157,7 @@ class GlobalCurrencySelector extends Component {
           </Text>
           <Text
             style={{
-              padding: 15,
-              paddingLeft: 5,
+              paddingLeft: 12,
               lineHeight: 22,
               flex: 1,
               fontFamily: 'OpenSans-Regular',
@@ -170,10 +170,9 @@ class GlobalCurrencySelector extends Component {
           {this.isActive(currency) && (
             <Icon
               name="done"
-              size={32}
+              size={24}
               color="#89b53a"
               style={{
-                alignSelf: 'flex-end',
                 marginLeft: 5
               }}
             />
@@ -201,29 +200,21 @@ class GlobalCurrencySelector extends Component {
             style={{
               backgroundColor: 'white',
               flex: 1,
-              padding: 10,
-              paddingTop: 3,
-              margin: 15,
-              marginBottom: 5
+              paddingHorizontal: 24
             }}
           >
             <View
               style={{
-                height: 45,
+                // height: 45,
                 opacity: 1,
                 flexDirection: 'row',
-                justifyContent: 'center',
                 alignItems: 'center',
-                margin: 10,
-                marginLeft: 20
+                marginTop: 40,
+                marginBottom: 20
               }}
             >
               <TouchableItem
                 // key={button.type}
-                style={{
-                  width: 50,
-                  padding: 10
-                }}
                 onPress={this.onClosed}
               >
                 <Icon name="close" size={30} color="#4d5153" />
@@ -236,17 +227,18 @@ class GlobalCurrencySelector extends Component {
                   borderColor: '#4d5153',
                   borderWidth: this.state.focus,
                   borderRadius: 20,
-                  marginRight: 20
+                  marginLeft: 20
                 }}
               >
                 <TextInput
-                  style={{ height: 40, flex: 1, paddingLeft: 20 }}
+                  style={{ height: 40, width: '84%' }}
                   onChangeText={text => {
                     this.setSearch(text);
                   }}
                   value={this.state.search}
                   placeholder={'Search'}
                   placeholderTextColor={'#4d5153'}
+                  fontFamily="OpenSans-SemiBold"
                   onFocus={() => {
                     this.setState({ focus: 1 });
                   }}
@@ -270,10 +262,11 @@ class GlobalCurrencySelector extends Component {
               <View>
                 <Text
                   style={{
-                    fontWeight: 'bold',
                     fontFamily: 'OpenSans-Bold',
                     fontSize: 16,
-                    margin: 10
+                    color: defaultColor,
+                    marginTop: 20,
+                    marginBottom: 10
                   }}
                 >
                   {i18n.t('label.featured_currencies')}
@@ -284,13 +277,14 @@ class GlobalCurrencySelector extends Component {
                   renderItem={this.renderItem}
                 />
               </View>
-              <View style={{ marginTop: 10 }}>
+              <View>
                 <Text
                   style={{
-                    fontWeight: 'bold',
                     fontFamily: 'OpenSans-Bold',
                     fontSize: 16,
-                    margin: 10
+                    color: defaultColor,
+                    marginTop: 12,
+                    marginBottom: 10
                   }}
                 >
                   {i18n.t('label.all_currencies')}

@@ -34,7 +34,7 @@ import { getPaymentStatus } from '../../reducers/paymentStatus';
 import { postDirectRequest } from '../../utils/api';
 
 class DonationTreesContainer extends PureComponent {
-  state = { context: null };
+  state = { context: {} };
   componentWillMount() {
     const { supportTreecounterAction, match } = this.props;
     if (match && match.params && match.params.slug) {

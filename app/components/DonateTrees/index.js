@@ -143,6 +143,9 @@ export default class DonateTrees extends Component {
         state.selectedTreeCount = nextTreeCount;
       }
     }
+    if (nextProps.context.treeCount) {
+      state.selectedTreeCount = nextProps.context.treeCount;
+    }
     this.setState(state);
   }
 

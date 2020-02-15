@@ -158,7 +158,7 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: '13%',
+    bottom: 20,
     left: '80%'
   },
   plusButtonIcon: { fontSize: 30, color: '#fff' },

@@ -217,7 +217,7 @@ class PlantProjectSnippet extends PureComponent {
                   </View>
                 ) : null}
 
-                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                {/* <View style={{ flexDirection: 'row', marginTop: 10 }}>
                   <Image
                     source={survival_grey}
                     style={{
@@ -226,6 +226,8 @@ class PlantProjectSnippet extends PureComponent {
                       marginRight: 10
                     }}
                   />
+                  
+                  
                   <View style={styles.survivalText}>
                     <View style={{ flexDirection: 'row' }}>
                       <Text style={styles.survivalText}>
@@ -253,7 +255,7 @@ class PlantProjectSnippet extends PureComponent {
                       ) : null}
                     </View>
                   </View>
-                </View>
+                </View> */}
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <View style={{ flexDirection: 'row', marginTop: 10 }}>

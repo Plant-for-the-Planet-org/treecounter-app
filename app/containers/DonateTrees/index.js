@@ -75,6 +75,7 @@ class DonationTreesContainer extends PureComponent {
     let selectedProjectId = undefined;
     if (this.props.match) {
       selectedProjectId = parseInt(this.props.match.params.id);
+      await this.props.loadProject({ id: selectedProjectId });
     }
     if (this.props.navigation && this.props.navigation.getParam('id'))
       selectedProjectId = parseInt(this.props.navigation.getParam('id'));
@@ -113,6 +114,12 @@ class DonationTreesContainer extends PureComponent {
     this.props.donate(donationContribution, plantProjectId, profile);
 
   render() {
+    if (this.props.match) {
+      const {
+        params: { id }
+      } = this.props.match;
+      if (id && !this.props.selectedProject) return null;
+    }
     return (
       <DonateTrees
         ref={'donateTreesContainer'}

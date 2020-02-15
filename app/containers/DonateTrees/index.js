@@ -127,6 +127,12 @@ class DonationTreesContainer extends PureComponent {
     this.props.donate(donationContribution, plantProjectId, profile);
 
   render() {
+    if (this.props.match) {
+      const {
+        params: { id }
+      } = this.props.match;
+      if (id && !this.props.selectedProject) return null;
+    }
     return (
       <DonateTrees
         ref={'donateTreesContainer'}

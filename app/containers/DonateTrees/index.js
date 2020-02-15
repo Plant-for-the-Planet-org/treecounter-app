@@ -23,7 +23,8 @@ import { fetchCurrencies } from '../../actions/currencies';
 import {
   paymentClear,
   createPaymentGift,
-  createPaymentDonation
+  createPaymentDonation,
+  getContext
 } from '../../actions/donateAction';
 import { loadProject } from '../../actions/loadTposAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
@@ -33,6 +34,7 @@ import { getPaymentStatus } from '../../reducers/paymentStatus';
 import { postDirectRequest } from '../../utils/api';
 
 class DonationTreesContainer extends PureComponent {
+  state = { context: null };
   componentWillMount() {
     const { supportTreecounterAction, match } = this.props;
     if (match && match.params && match.params.slug) {
@@ -74,7 +76,19 @@ class DonationTreesContainer extends PureComponent {
   async componentDidMount() {
     let selectedProjectId = undefined;
     if (this.props.match) {
-      selectedProjectId = parseInt(this.props.match.params.id);
+      try {
+        selectedProjectId = parseInt(this.props.match.params.id);
+        const { context } = this.props.match.params;
+        if (context) {
+          let contextData = await getContext({ context });
+          console.log('context data', contextData);
+          const { plantProject } = contextData;
+          this.setState({ context: contextData });
+          if (plantProject) selectedProjectId = parseInt(plantProject);
+        }
+      } catch (error) {
+        console.log('error', error);
+      }
     }
     if (this.props.navigation && this.props.navigation.getParam('id'))
       selectedProjectId = parseInt(this.props.navigation.getParam('id'));
@@ -132,6 +146,7 @@ class DonationTreesContainer extends PureComponent {
         supportTreecounter={this.props.supportTreecounter}
         updateRoute={this.updateRoute}
         updateUserProfile={this.props.updateUserProfile}
+        context={this.state.context}
         {...this.props}
       />
     );

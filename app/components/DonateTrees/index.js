@@ -101,12 +101,12 @@ export default class DonateTrees extends Component {
     } else {
       modeReceipt = '';
     }
-
+    const { context = {} } = props;
     this.state = {
       pageIndex: 0,
       modeReceipt: modeReceipt,
       selectedCurrency: 'USD', // TODO: should be initialized via this.determineDefaultCurrency()
-      selectedTreeCount: 0,
+      selectedTreeCount: context.treeCount || 0,
       selectedAmount: 0,
       form: {
         recipientType: modeReceipt,

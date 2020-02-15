@@ -145,6 +145,21 @@ export function paymentClear() {
   };
 }
 
+export function getContext(payloads) {
+  let request = getRequest('public_donationContext_decrypt', {
+    contextToken: payloads.context,
+    version: 'v1.4'
+  });
+  return request
+    .then(response => {
+      console.log(' got token data;', response.data);
+      return response.data;
+    })
+    .catch(error => {
+      debug(error);
+    });
+}
+
 // export function donate(donationContribution, plantProjectId, loggedIn) {
 //   let route = loggedIn ? 'donationContribution_post' : 'donate_post';
 

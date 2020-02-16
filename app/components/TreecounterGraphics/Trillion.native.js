@@ -441,21 +441,21 @@ class Trillion extends PureComponent {
     //   extrapolate: 'clamp'
     // });
     return [
-      this.props.navigation ? (
-        <NavigationEvents
-          onWillFocus={
-            (/* payload */) => {
-              this.setState({ loadSvg: true });
-            }
-          }
-          onWillBlur={
-            (/* payload */) => {
-              this.setState({ loadSvg: false });
-            }
-          }
-          key="navigation-events"
-        />
-      ) : null,
+      // this.props.navigation ? (
+      //   <NavigationEvents
+      //     onWillFocus={
+      //       (/* payload */) => {
+      //         this.setState({ loadSvg: true });
+      //       }
+      //     }
+      //     onWillBlur={
+      //       (/* payload */) => {
+      //         this.setState({ loadSvg: false });
+      //       }
+      //     }
+      //     key="navigation-events"
+      //   />
+      // ) : null,
       this.state.loadSvg ? (
         <>
           <SafeAreaView style={{ flex: 1 }}>

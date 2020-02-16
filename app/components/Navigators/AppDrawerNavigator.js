@@ -132,6 +132,7 @@ function AppStack(isLoggedIn) {
         name="BaseNav"
         component={MyTabs}
         initialParams={{ isLoggedIn: isLoggedIn }}
+        options={{ headerShown: false }}
       />
 
       <Stack3.Screen
@@ -283,9 +284,10 @@ function App(isLoggedIn, userProfile) {
           component={WelcomeStack}
         />
         <Drawer.Screen
-          name="app_navigator"
+          name="/"
           component={AppStack}
           initialParams={{ isLoggedIn: isLoggedIn }}
+          options={{ headerShown: false }}
         />
 
         <Drawer.Screen

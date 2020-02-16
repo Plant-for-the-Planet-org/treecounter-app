@@ -1,10 +1,14 @@
-import { createDrawerNavigator } from 'react-navigation-drawer';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import React from 'react';
-import { Animated } from 'react-native';
-import { debug } from '../../debug';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// Drawer Navigator Screens
+import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
+import SearchLayout from '../Header/SearchLayout';
+import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
+
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
@@ -19,11 +23,8 @@ import i18n from '../../locales/i18n';
 import FAQContainer from '../../containers/FAQ';
 import UserContributionsContainer from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
-import SearchLayout from '../Header/SearchLayout';
 import AboutUsContainer from '../../containers/AboutUs';
 import UserContributionsDetailsContainer from '../../containers/UserContributionsDetails';
-import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
-import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
 import GiftTreesContainer from '../../containers/GiftTrees';
@@ -62,352 +63,234 @@ import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/Individual
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
 
-const headerLabels = {
-  [getLocalRoute('app_login')]: 'label.login',
-  [getLocalRoute('app_signup')]: 'label.signUp',
-  [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
-  [getLocalRoute('app_target')]: 'label.set_target',
-  [getLocalRoute('app_donateTrees')]: 'label.projects',
-  [getLocalRoute('app_faq')]: 'label.faqs',
-  [getLocalRoute('app_myTrees')]: 'label.my_trees',
-  [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
-  [getLocalRoute('app_homepage')]: 'label.trillion_tree_campaign_app_header',
-  [getLocalRoute('app_explore')]: 'label.explore',
-  [getLocalRoute('app_userHome')]: 'Trillion Tree Campaign',
-  [getLocalRoute('app_editTrees')]: 'label.edit_trees',
-  [getLocalRoute('app_editProfile')]: 'label.edit_profile',
-  [getLocalRoute('app_competitions')]: 'label.competitions',
-  [getLocalRoute('app_claim')]: 'label.claim_trees',
-  [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
-  [getLocalRoute('app_selectProject')]: 'label.projects',
-  [getLocalRoute('app_competition')]: '',
-  [getLocalRoute('app_editCompetition')]: '',
-  [getLocalRoute('app_imprint')]: 'label.imprint',
-  [getLocalRoute('app_privacy')]: 'label.data_protection',
-  [getLocalRoute('app_challenge')]: 'label.challenge_heading',
-  [getLocalRoute('app_resetPassword')]: 'label.reset_ur_password',
-  ['about_us']: 'label.about_us',
-  ['tab-navigation']: 'Tab Navigation',
-  ['license_info_list']: 'label.open_source_license',
-  ['delete_profile_confirm']: 'label.delete_profile',
-  ['delete_contribution']: 'label.delete_contribution',
-  ['app_donate_detail']: 'label.donate',
-  ['app_gift_projects']: 'label.gift_trees',
-  ['pickup_profile_modal']: 'label.dedicate_trees_to',
-  ['app_pledge_events']: 'label.pledges',
-  ['app_create_competition']: '',
-  ['app_unfulfilled_pledge_events']: 'label.pledges',
-  ['app_pledge_form']: 'label.pledgeToPlant',
-  ['app_pledge_update_form']: 'label.updatePledge'
-};
+const Stack = createStackNavigator();
+const Stack1 = createStackNavigator();
+const Stack2 = createStackNavigator();
+const Stack3 = createStackNavigator();
 
-export const getAppNavigator = function(isLoggedIn, userProfile) {
-  const searchNavigator = createStackNavigator(
-    {
-      Search: {
-        screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
-      }
-    },
-    {
-      headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    }
+const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
+
+function WelcomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Welcome"
+        component={WelcomScreenSlider}
+      />
+    </Stack.Navigator>
   );
-  const deleteProfileNavigator = createStackNavigator(
-    {
-      ['delete_profile_confirm']: { screen: ConfirmProfileDeletionModal }
-    },
-    {
-      headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    }
+}
+function deleteProfileNavigator() {
+  return (
+    <Stack1.Navigator>
+      <Stack.Screen
+        name="delete_profile_confirm"
+        component={ConfirmProfileDeletionModal}
+      />
+    </Stack1.Navigator>
   );
+}
 
-  const welcomeScreenNavigator = createStackNavigator(
-    {
-      ['welcome_screen']: { screen: WelcomScreenSlider }
-    },
-    {
-      headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
-      navigationOptions: {
-        gesturesEnabled: false
-      }
-    }
+function searchNavigator() {
+  return (
+    <Stack2.Navigator>
+      <Stack.Screen
+        name="searchNavigator"
+        component={ConfirmProfileDeletionModal}
+      />
+    </Stack2.Navigator>
   );
-  const getTitle = function(navigation) {
-    let title = navigation.getParam('titleParam');
-    try {
-      if (!title) {
-        title = i18n.t(headerLabels[navigation.state.routeName]);
-      }
-      if (!title) {
-        const index = navigation.state.index;
-        if (
-          index > -1 &&
-          navigation.state.routes &&
-          navigation.state.routes.length > 0
-        ) {
-          const route = navigation.state.routes[index];
-          if (route.routeName === '/home') {
-            title = userProfile.fullname;
-          } else {
-            title = i18n.t(headerLabels[route.routeName]);
-            if (route.params) {
-              const childTitle = route.params.titleParam;
-              if (childTitle) {
-                title = childTitle;
-              }
-            }
-          }
-        }
-      }
-    } catch (err) {
-      debug(err);
-    }
+}
 
-    return title;
-  };
-
-  const ApptabNavigator = createBottomTabNavigator(
-    {
-      [getLocalRoute('app_homepage')]: {
-        screen: Trillion
-      },
-      [getLocalRoute('app_giftTrees')]: {
-        screen: GiftTreesContainer
-      },
-      [getLocalRoute('app_donateTrees')]: {
-        screen: SelectPlantProjectContainer
-      },
-      [getLocalRoute('app_competitions')]: {
-        screen: isLoggedIn ? CompetitionContainer : LoginContainer
-      },
-      [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
-      }
-    },
-    {
-      tabBarOptions: {
-        tabBarPosition: 'bottom',
-        animatedEnable: true,
-        swipeEnable: false
-      },
-      tabBarComponent: NewBottomNavigator
-    }
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="app_homepage" component={Trillion} />
+      <Tab.Screen name="app_giftTrees" component={GiftTreesContainer} />
+      <Tab.Screen
+        name="app_donateTrees"
+        component={SelectPlantProjectContainer}
+      />
+      <Tab.Screen
+        name="app_competitions"
+        component={isLoggedIn ? CompetitionContainer : LoginContainer}
+      />
+      <Tab.Screen
+        name="app_userHome"
+        component={isLoggedIn ? UserHomeContainer : LoginContainer}
+      />
+    </Tab.Navigator>
   );
+}
 
-  const appStackNavigator = createStackNavigator(
-    {
-      Tab: {
-        screen: ApptabNavigator,
-        navigationOptions: { header: null }
-      },
-      [getLocalRoute('app_editProfile')]: {
-        screen: isLoggedIn ? EditUserProfileContainer : LoginContainer
-      },
-      [getLocalRoute('app_passwordSent')]: {
-        screen: EmailSentContainer
-      },
-      [getLocalRoute('app_signup')]: {
-        screen: SignUpContainer
-      },
-      [getLocalRoute('app_myTrees')]: {
-        screen: UserContributionsContainer
-      },
-      [getLocalRoute('app_forgotPassword')]: {
-        screen: ForgotPasswordContainer
-      },
-      [getLocalRoute('app_accountActivation')]: {
-        screen: ActivateAccountContainer
-      },
-      ['pickup_profile_modal']: {
-        screen: ProfilePickerModal
-      },
-      ['about_us']: {
-        screen: AboutUsContainer
-      },
-      ['license_info_list']: {
-        screen: LicenseInfoList
-      },
-      [getLocalRoute('app_imprint')]: {
-        screen: ImprintContainer
-      },
-      [getLocalRoute('app_privacy')]: {
-        screen: PrivacyContainer
-      },
-      // [getLocalRoute('app_claim')]: {
-      //   screen: RedemptionContainer
-      // },
-      [getLocalRoute('app_editTrees')]: {
-        screen: EditUserContributionContainer
-      },
-      [getLocalRoute('app_target')]: {
-        screen: isLoggedIn ? TargetContainer : LoginContainer
-      },
-      [getLocalRoute('app_challenge')]: {
-        screen: ChallengeContainer
-      },
-      ['app_gift_projects']: {
-        screen: SelectPlantProjectContainer
-      },
-      [getLocalRoute('app_accountActivate')]: {
-        screen: SuccessfullActivatedContainer,
-        path: getLocalRoute('app_accountActivate') + '/:token'
-      },
-      [getLocalRoute('app_resetPassword')]: {
-        screen: ResetPasswordContainer,
-        path: getLocalRoute('app_resetPassword') + '/:token'
-      },
-      ['app_create_competition']: {
-        screen: createCompeition
-      },
-      ['app_supportTrees']: {
-        screen: SelectPlantProjectContainer
-      },
-      [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProjectContainer
-      },
-      [getLocalRoute('app_competition')]: {
-        screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer
-      },
-      [getLocalRoute('app_faq')]: {
-        screen: FAQContainer
-      },
-      [getLocalRoute('app_editCompetition')]: {
-        screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
-      },
-      ['app_donate_detail']: {
-        screen: DonationTreesContainer
-      },
-      ['app_pledge_events']: {
-        screen: PledgeEvents
-      },
-      [getLocalRoute('app_treecounter')]: {
-        screen: PublicTreeCounterContainer,
-        navigationOptions: { header: null }
-      },
-      ['app_registerTrees']: {
-        screen: isLoggedIn ? RegisterTreesContainer : LoginContainer,
-        navigationOptions: { header: null }
-      },
-      ['app_pledge_form']: {
-        screen: MakePledgeForm
-      },
-      ['app_reviews']: {
-        screen: Reviews
-      },
-      [getLocalRoute('app_login')]: {
-        screen: LoginContainer
-      },
-      ['app_add_review']: {
-        screen: AddReview
-      },
-      ['app_view_pdf']: {
-        screen: PDFViewer
-      },
-      ['app_pledge_update_form']: {
-        screen: UpdatePledgeEvent
-      },
-      ['app_unfulfilled_pledge_events']: {
-        screen: UnfulfilledPledgeEvents
-      },
-      ['contribution_details']: {
-        screen: UserContributionsDetailsContainer
-      },
-      ['app_redeem']: {
-        screen: isLoggedIn ? RedemptionContainer : LoginContainer,
-        path: 'redeem/:type/:code'
-      },
-      ['app_claim']: {
-        screen: isLoggedIn ? RedemptionContainer : LoginContainer,
-        path: 'claim/:type/:code'
-      },
-      ['redeem_add_trees']: {
-        screen: AddTrees
-      },
-      ['countries_leaderboard']: {
-        screen: CountriesLeaderBoard,
-        navigationOptions: { header: null }
-      },
-      ['country_details_leaderboard']: {
-        screen: CountryDetails,
-        navigationOptions: { header: null }
-      },
-      ['companies_leaderboard']: {
-        screen: CompaniesLeaderBoard,
-        navigationOptions: { header: null }
-      },
-      ['schools_leaderboard']: {
-        screen: SchoolsLeaderBoard,
-        navigationOptions: { header: null }
-      },
-      ['individuals_leaderboard']: {
-        screen: IndividualsLeaderBoard,
-        navigationOptions: { header: null }
-      },
-      ['tpo_LeaderBoard']: {
-        screen: tpoLeaderBoard,
-        navigationOptions: { header: null }
-      }
-    },
-    {
-      defaultNavigationOptions: ({ navigation }) => {
-        let navigationConfig = {
-          headerStyle: styles.container,
-          headerTitleStyle: { paddingRight: 16 },
-          headerTintColor: '#fff',
-          headerBackTitle: null,
-          title: getTitle(navigation),
-          headerRight: (
-            <HeaderRight navigation={navigation} userProfile={userProfile} />
-          )
-        };
+function AppStack(isLoggedIn) {
+  return (
+    <Stack3.Navigator>
+      <Stack3.screen name="BaseNav" component={MyTabs} />
 
-        if (navigation.state.routeName === 'Tab') {
-          navigationConfig.headerLeft = <BurgerMenu navigation={navigation} />;
-        }
-        return navigationConfig;
-      }
-    }
+      <Stack3.screen
+        name="app_editProfile"
+        component={isLoggedIn ? EditUserProfileContainer : LoginContainer}
+      />
+      <Stack3.screen
+        name="app_myTrees"
+        component={UserContributionsContainer}
+      />
+      <Stack3.screen
+        name="pickup_profile_modal"
+        component={ProfilePickerModal}
+      />
+      <Stack3.screen
+        name="app_editTrees"
+        component={EditUserContributionContainer}
+      />
+      <Stack3.screen
+        name="app_treecounter"
+        component={PublicTreeCounterContainer}
+      />
+      <Stack3.screen
+        name="contribution_details"
+        component={UserContributionsDetailsContainer}
+      />
+
+      <Stack3.screen
+        name="app_target"
+        component={isLoggedIn ? TargetContainer : LoginContainer}
+      />
+      <Stack3.screen name="app_challenge" component={ChallengeContainer} />
+      <Stack3.screen
+        name="app_gift_projects"
+        component={SelectPlantProjectContainer}
+      />
+      <Stack3.screen
+        name="app_supportTrees"
+        component={SelectPlantProjectContainer}
+      />
+      <Stack3.screen
+        name="app_selectProject"
+        component={SelectedPlantProjectContainer}
+      />
+      <Stack3.screen
+        name="app_donate_detail"
+        component={DonationTreesContainer}
+      />
+      <Stack3.screen
+        name="app_registerTrees"
+        component={isLoggedIn ? RegisterTreesContainer : LoginContainer}
+      />
+      <Stack3.screen name="app_view_pdf" component={PDFViewer} />
+
+      <Stack3.screen name="app_faq" component={FAQContainer} />
+      <Stack3.screen name="license_info_list" component={LicenseInfoList} />
+      <Stack3.screen name="about_us" component={AboutUsContainer} />
+      <Stack3.screen name="app_imprint" component={ImprintContainer} />
+      <Stack3.screen name="app_privacy" component={PrivacyContainer} />
+
+      <Stack3.screen name="app_reviews" component={Reviews} />
+      <Stack3.screen name="app_add_review" component={AddReview} />
+
+      <Stack3.screen
+        name="app_editCompetition"
+        component={isLoggedIn ? EditCompetitionContainer : LoginContainer}
+      />
+      <Stack3.screen
+        name="app_create_competition"
+        component={createCompeition}
+      />
+      <Stack3.screen
+        name="app_competition"
+        component={isLoggedIn ? SelectedCompetitionContainer : LoginContainer}
+      />
+
+      <Stack3.screen
+        name="app_pledge_update_form"
+        component={UpdatePledgeEvent}
+      />
+      <Stack3.screen
+        name="app_unfulfilled_pledge_events"
+        component={UnfulfilledPledgeEvents}
+      />
+      <Stack3.screen name="app_pledge_form" component={MakePledgeForm} />
+      <Stack3.screen name="app_pledge_events" component={PledgeEvents} />
+
+      <Stack3.screen
+        name="app_accountActivate"
+        component={SuccessfullActivatedContainer}
+      />
+      <Stack3.screen
+        name="app_resetPassword"
+        component={ResetPasswordContainer}
+      />
+      <Stack3.screen name="app_login" component={LoginContainer} />
+      <Stack3.screen
+        name="app_forgotPassword"
+        component={ForgotPasswordContainer}
+      />
+      <Stack3.screen
+        name="app_accountActivation"
+        component={ActivateAccountContainer}
+      />
+      <Stack3.screen name="app_passwordSent" component={EmailSentContainer} />
+      <Stack3.screen name="app_signup" component={SignUpContainer} />
+
+      <Stack3.screen name="redeem_add_trees" component={AddTrees} />
+      <Stack3.screen
+        name="app_redeem"
+        component={isLoggedIn ? RedemptionContainer : LoginContainer}
+      />
+      <Stack3.screen
+        name="app_claim"
+        component={isLoggedIn ? RedemptionContainer : LoginContainer}
+      />
+
+      <Stack3.screen
+        name="countries_leaderboard"
+        component={CountriesLeaderBoard}
+      />
+      <Stack3.screen
+        name="country_details_leaderboard"
+        component={CountryDetails}
+      />
+      <Stack3.screen
+        name="companies_leaderboard"
+        component={CompaniesLeaderBoard}
+      />
+      <Stack3.screen
+        name="schools_leaderboard"
+        component={SchoolsLeaderBoard}
+      />
+      <Stack3.screen
+        name="individuals_leaderboard"
+        component={IndividualsLeaderBoard}
+      />
+      <Stack3.screen name="tpo_LeaderBoard" component={tpoLeaderBoard} />
+    </Stack3.Navigator>
   );
+}
 
-  const AppNavigator = createDrawerNavigator(
-    {
-      appStackNavigator: {
-        screen: appStackNavigator,
-        path: ''
-      },
-      searchNavigator: searchNavigator,
-      deleteProfileNavigator,
-      welcomeScreenNavigator
-    },
-    {
-      initialRouteName: 'appStackNavigator',
-      gesturesEnabled: false,
-      contentComponent: SideMenuContainer
-    }
+function App(isLoggedIn, userProfile) {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen
+          name="app_navigator"
+          component={AppStack}
+          initialParams={{ isLoggedIn: isLoggedIn }}
+        />
+        <Drawer.Screen
+          name="welcome_screen_navigator"
+          component={WelcomeStack}
+        />
+        <Drawer.Screen
+          name="delete_profile_navigator"
+          component={deleteProfileNavigator}
+        />
+        <Drawer.Screen name="search_navigator" component={searchNavigator} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
-  return createAppContainer(AppNavigator);
-};
+}
+
+export default App;

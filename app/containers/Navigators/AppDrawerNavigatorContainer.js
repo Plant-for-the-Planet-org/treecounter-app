@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { getAppNavigator } from '../../components/Navigators/AppDrawerNavigator';
+import App from '../../components/Navigators/AppDrawerNavigator';
 import { getAccessToken } from '../../utils/user';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from '../../selectors';
@@ -58,10 +58,7 @@ class AppDrawerNavigatorContainer extends Component {
       return false;
     }
     // shouldComponentUpdate should be pure !!
-    this._AppNavigator = getAppNavigator(
-      nextState.isLoggedIn,
-      nextProps.userProfile
-    );
+    this._AppNavigator = App(nextState.isLoggedIn, nextProps.userProfile);
     return true;
   }
   async componentWillMount() {
@@ -90,15 +87,16 @@ class AppDrawerNavigatorContainer extends Component {
   render() {
     if (!this.state.loading) {
       if (!this._AppNavigator) {
-        this._AppNavigator = getAppNavigator(
-          this.state.isLoggedIn,
-          this.props.userProfile
-        );
+        this._AppNavigator = App(this.state.isLoggedIn, this.props.userProfile);
       }
 
       return (
         <View style={{ flex: 1 }}>
-          <this._AppNavigator />
+          {/* <this._AppNavigator /> */}
+          <App
+            isLoggedIn={this.state.isLoggedIn}
+            userProfile={this.props.userProfile}
+          />
         </View>
       );
     }

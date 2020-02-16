@@ -20,26 +20,36 @@ class UserHomeContainer extends React.Component {
       loadSvg: true
     };
   }
+
+  componentDidMount() {
+    this.props.navigation.addListener('focus', () => {
+      this.setState({ loadSvg: true });
+    });
+
+    this.props.navigation.addListener('blur', () => {
+      this.setState({ loadSvg: false });
+    });
+  }
   render() {
     const { treecounterData, currentUserProfile, navigation } = this.props;
     //debug(this.state.loadSvg);
 
     return [
-      navigation ? (
-        <NavigationEvents
-          onWillFocus={
-            (/* payload */) => {
-              this.setState({ loadSvg: true });
-            }
-          }
-          onWillBlur={
-            (/* payload */) => {
-              this.setState({ loadSvg: false });
-            }
-          }
-          key="navigation-events"
-        />
-      ) : null,
+      // navigation ? (
+      //   <NavigationEvents
+      //     onWillFocus={
+      //       (/* payload */) => {
+      //         this.setState({ loadSvg: true });
+      //       }
+      //     }
+      //     onWillBlur={
+      //       (/* payload */) => {
+      //         this.setState({ loadSvg: false });
+      //       }
+      //     }
+      //     key="navigation-events"
+      //   />
+      // ) : null,
       this.state.loadSvg ? (
         <UserHome
           key="user-home"

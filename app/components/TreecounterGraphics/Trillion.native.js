@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { debug } from '../../debug';
-import NavigationEvents from './importNavigationEvents';
+import { NavigationEvents } from 'react-navigation';
 import { trillionCampaign } from '../../actions/trillionAction';
 import SvgContainer from '../Common/SvgContainer';
 import svgStyles from '../../styles/common/treecounter_svg';
@@ -115,6 +115,14 @@ class Trillion extends PureComponent {
         })
         .catch(error => debug(error));
     }
+
+    this.props.navigation.addListener('focus', () => {
+      this.setState({ loadSvg: true });
+    });
+
+    this.props.navigation.addListener('blur', () => {
+      this.setState({ loadSvg: false });
+    });
   }
 
   componentDidUpdate(prevProps) {

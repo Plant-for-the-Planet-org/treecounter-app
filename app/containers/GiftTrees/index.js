@@ -33,6 +33,14 @@ class GiftTreesContainer extends Component {
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
+
+    this.props.navigation.addListener('focus', () => {
+      this.setState({ loadSvg: true });
+    });
+
+    this.props.navigation.addListener('blur', () => {
+      this.setState({ loadSvg: false });
+    });
   }
   openProjects(formValue, type) {
     let title = '';
@@ -55,21 +63,21 @@ class GiftTreesContainer extends Component {
   render() {
     // let flag = this.props.currentUserProfile ? true : false;
     return [
-      this.props.navigation ? (
-        <NavigationEvents
-          onWillFocus={
-            (/* payload */) => {
-              this.setState({ reloadTab: true });
-            }
-          }
-          onWillBlur={
-            (/* payload */) => {
-              this.setState({ reloadTab: false });
-            }
-          }
-          key="navigation-events"
-        />
-      ) : null,
+      // this.props.navigation ? (
+      //   <NavigationEvents
+      //     onWillFocus={
+      //       (/* payload */) => {
+      //         this.setState({ reloadTab: true });
+      //       }
+      //     }
+      //     onWillBlur={
+      //       (/* payload */) => {
+      //         this.setState({ reloadTab: false });
+      //       }
+      //     }
+      //     key="navigation-events"
+      //   />
+      // ) : null,
       this.state.reloadTab ? (
         <GiftTrees
           selectedProject={this.props.selectedProject}

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
+// import { withNavigation } from 'react-navigation';
 import _ from 'lodash';
 import SearchBar from '../../../components/Header/SearchBar';
 import Header from '../../../components/Header/Header';
@@ -155,4 +155,4 @@ class SearchUser extends React.Component {
   }
 }
 
-export default withNavigation(SearchUser);
+export default SearchUser;

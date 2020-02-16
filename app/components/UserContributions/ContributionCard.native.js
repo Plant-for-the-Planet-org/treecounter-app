@@ -9,7 +9,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+// import { withNavigation } from 'react-navigation';
 import { debug } from '../../debug';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
@@ -508,4 +508,4 @@ ActionButton.propTypes = {
   navigation: PropTypes.any
 };
 
-export default withNavigation(ContributionCard);
+export default ContributionCard;

@@ -106,19 +106,19 @@ function searchNavigator() {
 
 function MyTabs(isLoggedIn) {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="app_homepage" component={Trillion} />
-      <Tab.Screen name="app_giftTrees" component={GiftTreesContainer} />
+    <Tab.Navigator tabBar={NewBottomNavigator}>
+      <Tab.Screen name="/" component={Trillion} />
+      <Tab.Screen name="/gift-trees" component={GiftTreesContainer} />
       <Tab.Screen
-        name="app_donateTrees"
+        name="/donate-trees"
         component={SelectPlantProjectContainer}
       />
       <Tab.Screen
-        name="app_competitions"
+        name="/competitions"
         component={isLoggedIn ? CompetitionContainer : LoginContainer}
       />
       <Tab.Screen
-        name="app_userHome"
+        name="/home"
         component={isLoggedIn ? UserHomeContainer : LoginContainer}
       />
     </Tab.Navigator>

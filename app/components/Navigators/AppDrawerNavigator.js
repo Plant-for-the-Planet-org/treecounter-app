@@ -125,147 +125,147 @@ function MyTabs() {
   );
 }
 
-function AppStack(isLoggedIn) {
+function AppStack({ isLoggedIn }) {
   return (
     <Stack3.Navigator>
-      <Stack3.screen name="BaseNav" component={MyTabs} />
+      <Stack3.Screen name="BaseNav" component={MyTabs} />
 
-      <Stack3.screen
+      <Stack3.Screen
         name="app_editProfile"
         component={isLoggedIn ? EditUserProfileContainer : LoginContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_myTrees"
         component={UserContributionsContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="pickup_profile_modal"
         component={ProfilePickerModal}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_editTrees"
         component={EditUserContributionContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_treecounter"
         component={PublicTreeCounterContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="contribution_details"
         component={UserContributionsDetailsContainer}
       />
 
-      <Stack3.screen
+      <Stack3.Screen
         name="app_target"
         component={isLoggedIn ? TargetContainer : LoginContainer}
       />
-      <Stack3.screen name="app_challenge" component={ChallengeContainer} />
-      <Stack3.screen
+      <Stack3.Screen name="app_challenge" component={ChallengeContainer} />
+      <Stack3.Screen
         name="app_gift_projects"
         component={SelectPlantProjectContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_supportTrees"
         component={SelectPlantProjectContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_selectProject"
         component={SelectedPlantProjectContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_donate_detail"
         component={DonationTreesContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_registerTrees"
         component={isLoggedIn ? RegisterTreesContainer : LoginContainer}
       />
-      <Stack3.screen name="app_view_pdf" component={PDFViewer} />
+      <Stack3.Screen name="app_view_pdf" component={PDFViewer} />
 
-      <Stack3.screen name="app_faq" component={FAQContainer} />
-      <Stack3.screen name="license_info_list" component={LicenseInfoList} />
-      <Stack3.screen name="about_us" component={AboutUsContainer} />
-      <Stack3.screen name="app_imprint" component={ImprintContainer} />
-      <Stack3.screen name="app_privacy" component={PrivacyContainer} />
+      <Stack3.Screen name="app_faq" component={FAQContainer} />
+      <Stack3.Screen name="license_info_list" component={LicenseInfoList} />
+      <Stack3.Screen name="about_us" component={AboutUsContainer} />
+      <Stack3.Screen name="app_imprint" component={ImprintContainer} />
+      <Stack3.Screen name="app_privacy" component={PrivacyContainer} />
 
-      <Stack3.screen name="app_reviews" component={Reviews} />
-      <Stack3.screen name="app_add_review" component={AddReview} />
+      <Stack3.Screen name="app_reviews" component={Reviews} />
+      <Stack3.Screen name="app_add_review" component={AddReview} />
 
-      <Stack3.screen
+      <Stack3.Screen
         name="app_editCompetition"
         component={isLoggedIn ? EditCompetitionContainer : LoginContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_create_competition"
         component={createCompeition}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_competition"
         component={isLoggedIn ? SelectedCompetitionContainer : LoginContainer}
       />
 
-      <Stack3.screen
+      <Stack3.Screen
         name="app_pledge_update_form"
         component={UpdatePledgeEvent}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_unfulfilled_pledge_events"
         component={UnfulfilledPledgeEvents}
       />
-      <Stack3.screen name="app_pledge_form" component={MakePledgeForm} />
-      <Stack3.screen name="app_pledge_events" component={PledgeEvents} />
+      <Stack3.Screen name="app_pledge_form" component={MakePledgeForm} />
+      <Stack3.Screen name="app_pledge_events" component={PledgeEvents} />
 
-      <Stack3.screen
+      <Stack3.Screen
         name="app_accountActivate"
         component={SuccessfullActivatedContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_resetPassword"
         component={ResetPasswordContainer}
       />
-      <Stack3.screen name="app_login" component={LoginContainer} />
-      <Stack3.screen
+      <Stack3.Screen name="app_login" component={LoginContainer} />
+      <Stack3.Screen
         name="app_forgotPassword"
         component={ForgotPasswordContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_accountActivation"
         component={ActivateAccountContainer}
       />
-      <Stack3.screen name="app_passwordSent" component={EmailSentContainer} />
-      <Stack3.screen name="app_signup" component={SignUpContainer} />
+      <Stack3.Screen name="app_passwordSent" component={EmailSentContainer} />
+      <Stack3.Screen name="app_signup" component={SignUpContainer} />
 
-      <Stack3.screen name="redeem_add_trees" component={AddTrees} />
-      <Stack3.screen
+      <Stack3.Screen name="redeem_add_trees" component={AddTrees} />
+      <Stack3.Screen
         name="app_redeem"
         component={isLoggedIn ? RedemptionContainer : LoginContainer}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="app_claim"
         component={isLoggedIn ? RedemptionContainer : LoginContainer}
       />
 
-      <Stack3.screen
+      <Stack3.Screen
         name="countries_leaderboard"
         component={CountriesLeaderBoard}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="country_details_leaderboard"
         component={CountryDetails}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="companies_leaderboard"
         component={CompaniesLeaderBoard}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="schools_leaderboard"
         component={SchoolsLeaderBoard}
       />
-      <Stack3.screen
+      <Stack3.Screen
         name="individuals_leaderboard"
         component={IndividualsLeaderBoard}
       />
-      <Stack3.screen name="tpo_LeaderBoard" component={tpoLeaderBoard} />
+      <Stack3.Screen name="tpo_LeaderBoard" component={tpoLeaderBoard} />
     </Stack3.Navigator>
   );
 }

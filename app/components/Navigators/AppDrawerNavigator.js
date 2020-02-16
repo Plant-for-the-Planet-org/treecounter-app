@@ -104,7 +104,7 @@ function searchNavigator() {
   );
 }
 
-function MyTabs() {
+function MyTabs(isLoggedIn) {
   return (
     <Tab.Navigator>
       <Tab.Screen name="app_homepage" component={Trillion} />
@@ -125,10 +125,14 @@ function MyTabs() {
   );
 }
 
-function AppStack({ isLoggedIn }) {
+function AppStack(isLoggedIn) {
   return (
     <Stack3.Navigator>
-      <Stack3.Screen name="BaseNav" component={MyTabs} />
+      <Stack3.Screen
+        name="BaseNav"
+        component={MyTabs}
+        initialParams={{ isLoggedIn: isLoggedIn }}
+      />
 
       <Stack3.Screen
         name="app_editProfile"
@@ -275,14 +279,15 @@ function App(isLoggedIn, userProfile) {
     <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen
+          name="welcome_screen_navigator"
+          component={WelcomeStack}
+        />
+        <Drawer.Screen
           name="app_navigator"
           component={AppStack}
           initialParams={{ isLoggedIn: isLoggedIn }}
         />
-        <Drawer.Screen
-          name="welcome_screen_navigator"
-          component={WelcomeStack}
-        />
+
         <Drawer.Screen
           name="delete_profile_navigator"
           component={deleteProfileNavigator}

@@ -205,10 +205,12 @@ class LeaderBoardContainer extends React.Component {
             );
           }
           if (exploreData.timePeriods) {
-            timePeriodsInfo.timePeriods = exploreData.timePeriods;
-            timePeriodsInfo.timePeriodsKeys = Object.keys(
-              timePeriodsInfo.timePeriods
-            );
+            timePeriodsInfo.timePeriods = {
+              all: 'All Time',
+              '1w': 'This Week',
+              '1y': 'Last year'
+            };
+            timePeriodsInfo.timePeriodsKeys = ['all', '1w', '1y'];
           }
           if (exploreData.mapLayers) {
             mapInfo.mapLayers = exploreData.mapLayers;

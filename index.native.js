@@ -1,6 +1,8 @@
 import { AppRegistry } from 'react-native';
 import App from './app/components/App';
 import './ReactotronConfig';
+import CaptureMap from './app/components/RegisterMultipleTrees/CaptureMap';
+
 /* app.js */
 
 console.disableYellowBox = true;

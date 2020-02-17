@@ -16,7 +16,8 @@ const RegisterTreesCaptureImage = ({
   onPressContinueAfterSeletImage,
   updateImageURI,
   coordinates,
-  isPolygon
+  isPolygon,
+  toggleIsRegisterTreesMap
 }) => {
   const [imageURI, setImageURI] = useState(null);
 
@@ -78,7 +79,10 @@ const RegisterTreesCaptureImage = ({
           picture
         </Text>
         <View style={styles.bottomBtnContainer}>
-          <PrimaryButton buttonStyle={styles.backBtnStyle}>
+          <PrimaryButton
+            onClick={toggleIsRegisterTreesMap}
+            buttonStyle={styles.backBtnStyle}
+          >
             <Text style={styles.backBtn}>{'Back'}</Text>
           </PrimaryButton>
           <PrimaryButton onClick={onPressDone} buttonStyle={styles.buttonStyle}>

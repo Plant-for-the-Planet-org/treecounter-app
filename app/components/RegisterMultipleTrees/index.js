@@ -92,6 +92,7 @@ const RegisterMultipleTrees = () => {
         />
       ) : (
         <RegisterTreesCaptureImage
+          toggleIsRegisterTreesMap={toggleIsRegisterTreesMap}
           isPolygon={isPolygon}
           coordinates={coordinates[coordinates.length - 1]}
           updateImageURI={updateImageURI}

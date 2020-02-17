@@ -1,8 +1,28 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Header from '../Header/BackHeader';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const RegisterTreeForm = () => {
+  const [coordinates, setCoordinates] = useState(null);
+
+  useEffect(() => {
+    getCoordinates();
+  }, []);
+
+  let getCoordinates = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@coordinates');
+      if (value !== null) {
+        console.log(JSON.parse(value), 'getCoordinates');
+        setCoordinates(JSON.parse(value));
+      }
+    } catch (e) {
+      console.log(e, 'catchcatch');
+
+      // error reading value
+    }
+  };
   return (
     <ScrollView style={styles.container}>
       <Header />
@@ -43,18 +63,24 @@ const RegisterTreeForm = () => {
           <Text style={styles.label}>{`Polygon A`}</Text>
           <Text style={styles.labelAction}>{`Edit`}</Text>
         </View>
-        {[1, 1].map(x => (
-          <View style={styles.polygonSubContainer}>
-            <View style={styles.coordinatesCont}>
-              <Text style={styles.coordinates}>Coordinates A</Text>
-              <Text style={styles.coordinatesContAction}>Edit</Text>
-            </View>
-            <Text style={styles.coordinatesNumber}>84.31356,21.3456</Text>
-            <Text style={[styles.coordinatesNumber, styles.textGreen]}>
-              Add Images
-            </Text>
-          </View>
-        ))}
+        {coordinates
+          ? coordinates.map((x, i) => (
+              <View key={i} style={styles.polygonSubContainer}>
+                <View style={styles.coordinatesCont}>
+                  <Text style={styles.coordinates}>{`Coordinates ${
+                    x.location
+                  }`}</Text>
+                  <Text style={styles.coordinatesContAction}>Edit</Text>
+                </View>
+                <Text style={styles.coordinatesNumber}>{`${x.latitude.toFixed(
+                  5
+                )}, ${x.longitude.toFixed(5)}`}</Text>
+                <Text style={[styles.coordinatesNumber, styles.textGreen]}>
+                  Add Images
+                </Text>
+              </View>
+            ))
+          : null}
         <View style={styles.exportGeojson}>
           <Text style={styles.label}>{`Export GeoJson`}</Text>
         </View>

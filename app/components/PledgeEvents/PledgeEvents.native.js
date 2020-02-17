@@ -22,6 +22,8 @@ import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { fetchItem } from './../../stores/localStorage';
 import { delimitNumbers } from './../../utils/utils';
+import { CommonActions } from '@react-navigation/native';
+
 import {
   fetchPledgesAction,
   postPledge,
@@ -49,7 +51,7 @@ class PledgeEvents extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchPledgesAction(this.props.navigation.getParam('slug'), true);
+    this.props.fetchPledgesAction(this.props.route.params?.slug, true);
     this.getMyPledge();
     if (this.props.currentUserProfile) {
       this.setState({
@@ -74,7 +76,7 @@ class PledgeEvents extends Component {
       JSON.stringify(prevProps.pledges) !== JSON.stringify(this.props.pledges)
     ) {
       this.setState({
-        slug: this.props.navigation.getParam('slug')
+        slug: this.props.route.params?.slug
       });
       if (this.props.currentUserProfile) {
         this.setState({
@@ -93,9 +95,16 @@ class PledgeEvents extends Component {
       }
       this.getMyPledge();
     }
-    if (this.props.navigation.getParam('plantProject').id !== -1) {
+    if (this.props.route.params?.plantProject.id !== -1) {
       this.RBSheet.open();
-      this.props.navigation.getParam('plantProject').id = -1;
+      // this.props.route.params?.plantProject.id = -1;
+      navigation.dispatch(
+        CommonActions.setParams({
+          plantProject: {
+            id: -1
+          }
+        })
+      );
     }
     if (this.props.pledges && this.props.pledges.image && this.state.loading) {
       this.setState({

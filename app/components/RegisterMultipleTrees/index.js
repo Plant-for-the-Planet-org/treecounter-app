@@ -3,15 +3,19 @@ import { View, Text } from 'react-native';
 import RegisterTreesCaptureImage from './CaptureImage';
 import RegisterTreesMap from './Map';
 import Geolocation from '@react-native-community/geolocation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const ALPHABETS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
 const RegisterMultipleTrees = () => {
   const [coordinates, setCoordinates] = useState([]);
   const [isRegisterTreesMap, setisRegisterTreesMap] = useState(true);
   const [currentLocation, setCurrentLocation] = useState({});
   const [isPolygon, setIsPolygon] = useState(false);
-
+  const [mapUri, setMapUri] = useState(undefined);
   useEffect(() => {
+    getCoordinates();
+    getMapUri();
     Geolocation.getCurrentPosition(
       //Will give you the current location
       position => {
@@ -32,6 +36,31 @@ const RegisterMultipleTrees = () => {
       { enableHighAccuracy: false, timeout: 25000, maximumAge: 3600000 }
     );
   }, []);
+
+  let getMapUri = async () => {
+    try {
+      const mapuri = await AsyncStorage.getItem('@mapuri');
+      if (mapuri !== null) {
+        setMapUri(mapuri);
+        console.log(mapuri, 'mapuri');
+        // value previously stored
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  let getCoordinates = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@coordinates');
+      if (value !== null) {
+        console.log(JSON.parse(value), 'getCoordinates');
+        // value previously stored
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
 
   let upDateMarker = (latlong, index) => {
     let marker = coordinates[index];
@@ -74,11 +103,24 @@ const RegisterMultipleTrees = () => {
       { enableHighAccuracy: false, timeout: 25000, maximumAge: 3600000 }
     );
   };
+
+  let onPressDoneAfterPolygon = async () => {
+    console.log('coordinates', coordinates);
+
+    try {
+      await AsyncStorage.setItem('@coordinates', JSON.stringify(coordinates));
+      alert('data successfully stored');
+    } catch (e) {
+      // saving error
+    }
+  };
+
   console.log(coordinates);
   return (
     <View style={{ flex: 1 }}>
       {isRegisterTreesMap ? (
         <RegisterTreesMap
+          mapUri={mapUri}
           location={
             coordinates.length
               ? coordinates[coordinates.length - 1].location
@@ -92,6 +134,7 @@ const RegisterMultipleTrees = () => {
         />
       ) : (
         <RegisterTreesCaptureImage
+          onPressDoneAfterPolygon={onPressDoneAfterPolygon}
           toggleIsRegisterTreesMap={toggleIsRegisterTreesMap}
           isPolygon={isPolygon}
           coordinates={coordinates[coordinates.length - 1]}

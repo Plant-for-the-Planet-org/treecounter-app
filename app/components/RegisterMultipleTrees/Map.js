@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import MapView, { Marker, Geojson, Polygon, Polyline } from 'react-native-maps';
+import MapView, {
+  Marker,
+  Geojson,
+  Polygon,
+  Polyline,
+  LocalTile
+} from 'react-native-maps';
 import Header from '../Header/BackHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 
@@ -10,7 +16,8 @@ const RegisterTreesMap = ({
   upDateMarker,
   toggleIsRegisterTreesMap,
   isPolygon,
-  setIsPolygon
+  setIsPolygon,
+  mapUri
 }) => {
   const [polygonLatLong, setPolygonLatLong] = useState([]);
   useEffect(
@@ -47,6 +54,7 @@ const RegisterTreesMap = ({
         mapType={'satellite'}
         style={{ flex: 1 }}
       >
+        {mapUri ? <LocalTile pathTemplate={mapUri} /> : null}
         {isPolygon ? (
           <Polygon
             strokeColor={'#fff'}

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import MapView, { Marker, LocalTile } from 'react-native-maps';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class CaptureMap extends React.Component {
   takeSnapshot = () => {
@@ -11,10 +12,17 @@ class CaptureMap extends React.Component {
       quality: 1, // image quality: 0..1 (only relevant for jpg, default: 1)
       result: 'file' // result types: 'file', 'base64' (default: 'file')
     });
-    snapshot.then(uri => {
+    snapshot.then(async uri => {
       console.log(uri);
+      try {
+        await AsyncStorage.setItem('@mapuri', uri);
+        alert('Map saved success');
+      } catch (e) {
+        // saving error
+      }
     });
   };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -36,28 +44,17 @@ class CaptureMap extends React.Component {
             }
           />
         </MapView>
-        <View
-          style={{
-            width: 3,
-            height: '80%',
-            borderColor: 'black',
-            borderWidth: 2,
-            position: 'absolute',
-            zIndex: -300,
-            left: 20
-          }}
-        />
+
         <TouchableOpacity
           style={{ marginVertical: 20 }}
           onPress={this.takeSnapshot}
         >
           <Text style={{ textAlign: 'center', color: 'black' }}>
-            Take Snapshot
+            Take Map Snap
           </Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
-
 export default CaptureMap;

@@ -17,7 +17,8 @@ const RegisterTreesCaptureImage = ({
   updateImageURI,
   coordinates,
   isPolygon,
-  toggleIsRegisterTreesMap
+  toggleIsRegisterTreesMap,
+  onPressDoneAfterPolygon
 }) => {
   const [imageURI, setImageURI] = useState(null);
 
@@ -36,9 +37,7 @@ const RegisterTreesCaptureImage = ({
   };
 
   let onPressDone = () => {
-    isPolygon
-      ? alert('navigate to Multiple Register Screen')
-      : onPressContinueAfterSeletImage();
+    isPolygon ? onPressDoneAfterPolygon() : onPressContinueAfterSeletImage();
   };
 
   return (

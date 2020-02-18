@@ -26,7 +26,6 @@ const RegisterTreeForm1 = () => {
   };
 
   let onChangeNameOfTree = (value, index) => {
-    console.log(value, index, 'value, indexvalue, index');
     let specie = species[index];
     specie.nameOfTree = value;
     species.splice(index, 1, specie);
@@ -38,11 +37,6 @@ const RegisterTreeForm1 = () => {
     specie.treeCount = value;
     species.splice(index, 1, specie);
     setSpecies([...species]);
-  };
-
-  let handleConfirmDataTimePikker = (e, date) => {
-    setPlantingDate(date);
-    setDatePickerVisibility(false);
   };
 
   return (
@@ -57,23 +51,11 @@ const RegisterTreeForm1 = () => {
       <View style={{ marginHorizontal: 15 }}>
         <TouchableOpacity
           onPress={showDatePickerToggle}
-          style={{
-            borderBottomWidth: 2,
-            borderColor: '#7E8284',
-            marginVertical: 15
-          }}
+          style={styles.labelContainer}
         >
-          <Text style={{ color: '#4d5153', fontFamily: 'OpenSans-Regular' }}>
-            Plantation Date
-          </Text>
+          <Text style={styles.label}>Plantation Date</Text>
           <View style={{ marginVertical: 5 }}>
-            <Text
-              style={{
-                color: '#4d5153',
-                fontSize: 18,
-                fontFamily: 'OpenSans-Regular'
-              }}
-            >
+            <Text style={styles.labelValue}>
               {plantingDate
                 ? new Date(plantingDate).toDateString()
                 : 'Select Planting Date'}
@@ -103,11 +85,8 @@ const RegisterTreeForm1 = () => {
             ))
           : null}
         <View>
-          <Text
-            onPress={onPressAddSpecies}
-            style={{ color: '#FF8378', fontSize: 16, marginVertical: 15 }}
-          >
-            + Add Species
+          <Text onPress={onPressAddSpecies} style={styles.addSpecieText}>
+            {'+ Add Species'}
           </Text>
         </View>
         <View style={{ alignItems: 'center' }}>
@@ -131,17 +110,9 @@ const SpeciesForm = ({
     <View>
       <TouchableOpacity
         onPress={() => setIsDisplayFull(!isDisplayFull)}
-        style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+        style={styles.subContainer}
       >
-        <Text
-          style={{
-            fontSize: 18,
-            fontFamily: 'OpenSans-SemiBold',
-            lineHeight: 24,
-            color: '#4d5153',
-            marginVertical: 15
-          }}
-        >
+        <Text style={styles.specieNameHeader}>
           {specie.nameOfTree || 'Specie 1'}
         </Text>
         <Text style={[styles.labelAction, styles.textBlack]}>
@@ -154,51 +125,26 @@ const SpeciesForm = ({
           />
         </Text>
       </TouchableOpacity>
-
       {isDisplayFull ? (
         <>
-          <View
-            style={{
-              borderBottomWidth: 2,
-              borderColor: '#7E8284',
-              marginVertical: 15
-            }}
-          >
-            <Text style={{ color: '#4d5153', fontFamily: 'OpenSans-Regular' }}>
-              Name of Trees
-            </Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Name of Trees</Text>
             <View style={{ marginVertical: 5 }}>
               <TextInput
                 onChangeText={value => onChangeNameOfTree(value, index)}
                 value={specie.nameOfTree}
-                style={{
-                  color: '#4d5153',
-                  fontSize: 18,
-                  fontFamily: 'OpenSans-Regular'
-                }}
+                style={styles.inputText}
               />
             </View>
           </View>
-          <View
-            style={{
-              borderBottomWidth: 2,
-              borderColor: '#7E8284',
-              marginVertical: 15
-            }}
-          >
-            <Text style={{ color: '#4d5153', fontFamily: 'OpenSans-Regular' }}>
-              Tree Count
-            </Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Tree Count</Text>
             <View style={{ marginVertical: 5 }}>
               <TextInput
                 keyboardType={'number-pad'}
                 onChangeText={value => onChangeTextTreeCount(value, index)}
-                value={specie.treeCount}
-                style={{
-                  color: '#4d5153',
-                  fontSize: 18,
-                  fontFamily: 'OpenSans-Regular'
-                }}
+                value={String(specie.treeCount)}
+                style={styles.inputText}
               />
             </View>
           </View>
@@ -211,6 +157,37 @@ const SpeciesForm = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  addSpecieText: {
+    color: '#FF8378',
+    fontSize: 16,
+    marginVertical: 15
+  },
+  inputLabel: {
+    color: '#4d5153',
+    fontFamily: 'OpenSans-Regular'
+  },
+  inputText: {
+    color: '#4d5153',
+    fontSize: 18,
+    fontFamily: 'OpenSans-Regular'
+  },
+  inputContainer: {
+    borderBottomWidth: 2,
+    borderColor: '#7E8284',
+    marginVertical: 15
+  },
+  specieNameHeader: {
+    fontSize: 18,
+    fontFamily: 'OpenSans-SemiBold',
+    lineHeight: 24,
+    color: '#4d5153',
+    marginVertical: 15
+  },
+  labelContainer: {
+    borderBottomWidth: 2,
+    borderColor: '#7E8284',
+    marginVertical: 15
   },
   exportGeojson: {
     flexDirection: 'row',
@@ -227,6 +204,11 @@ const styles = StyleSheet.create({
   },
   textGreen: {
     color: '#78B806'
+  },
+  labelValue: {
+    color: '#4d5153',
+    fontSize: 18,
+    fontFamily: 'OpenSans-Regular'
   },
   subHeadingText: {
     fontSize: 18,
@@ -245,11 +227,9 @@ const styles = StyleSheet.create({
     color: '#78B806'
   },
   label: {
-    fontSize: 18,
-    fontFamily: 'OpenSans-SemiBold',
     lineHeight: 24,
     color: '#4d5153',
-    marginVertical: 15
+    fontFamily: 'OpenSans-Regular'
   },
   numberOfTrees: {
     fontFamily: 'OpenSans-Bold',

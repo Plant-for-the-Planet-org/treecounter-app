@@ -267,7 +267,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: EditUserContributionContainer
       },
       [getLocalRoute('app_target')]: {
-        screen: isLoggedIn ? TargetContainer : LoginContainer
+        screen: isLoggedIn ? TargetContainer : LoginContainer,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_challenge')]: {
         screen: ChallengeContainer

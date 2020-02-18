@@ -50,6 +50,7 @@ class TargetContainer extends React.Component {
         treecounter={this.props.treecounter}
         schemaOptions={this.state.schemaOptions}
         onSubmitTarget={this.onSubmitTarget}
+        navigation={this.props.navigation}
       />
     );
   }

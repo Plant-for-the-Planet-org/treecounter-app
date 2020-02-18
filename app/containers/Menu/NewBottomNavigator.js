@@ -43,10 +43,37 @@ export default class Tabbar extends React.PureComponent {
     return (
       <>
         <View {...{ height, width }}>
-          <View style={StyleSheet.absoluteFill}>
+          <View
+            style={[
+              StyleSheet.absoluteFill,
+              {
+                borderTopWidth: 1,
+                borderTopColor: '#d5d5d5',
+                zIndex: 10,
+                backgroundColor: '#fff'
+              }
+            ]}
+          >
             <StaticTabbar {...{ tabs }} navigation={this.props.navigation} />
           </View>
+          <View
+            style={{
+              position: 'absolute',
+              alignSelf: 'center',
+              zIndex: 9,
+              height: 72,
+              width: 72,
+              borderRadius: 36,
+              backgroundColor: 'white',
+              alignItems: 'center',
+              justifyContent: 'center',
+              bottom: 16,
+              borderColor: '#d5d5d5',
+              borderWidth: 1
+            }}
+          />
         </View>
+
         <SafeAreaView style={styles.container} />
       </>
     );

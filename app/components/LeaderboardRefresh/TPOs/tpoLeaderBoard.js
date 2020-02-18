@@ -74,7 +74,7 @@ const tpoLeaderBoard = ({ navigation }) => {
                     source={{
                       uri: getImageUrl(
                         'profile',
-                        'avatar',
+                        'thumb',
                         item.contributorAvatar
                       )
                     }}

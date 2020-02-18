@@ -246,7 +246,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: ProfilePickerModal
       },
       ['about_us']: {
-        screen: AboutUsContainer
+        screen: AboutUsContainer,
+        navigationOptions: { header: null }
       },
       ['license_info_list']: {
         screen: LicenseInfoList

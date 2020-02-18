@@ -8,6 +8,7 @@ import { withNavigation } from 'react-navigation';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 //const LicenseInfo = require('./LicenseInfo.json');
+import HeaderNew from './../Header/HeaderNew.native';
 
 //Run license-checker --production  --json > license.json to fetch license info from package.json:
 //Copy paste required and specific license info in LicenseInfo.json file under app or web specific
@@ -30,7 +31,12 @@ class AboutUs extends Component {
     // const buildNumber = DeviceInfo.getBuildNumber();
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView>
+        <HeaderNew
+          title={i18n.t('label.information')}
+          navigation={this.props.navigation}
+        />
+
+        <ScrollView style={{ marginTop: 120 }}>
           <LargeMenuItem
             onPress={() => {
               //  debug('open change log');

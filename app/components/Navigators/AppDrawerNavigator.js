@@ -257,7 +257,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       [getLocalRoute('app_privacy')]: {
-        screen: PrivacyContainer
+        screen: PrivacyContainer,
+        navigationOptions: { header: null }
       },
       // [getLocalRoute('app_claim')]: {
       //   screen: RedemptionContainer

@@ -253,7 +253,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: LicenseInfoList
       },
       [getLocalRoute('app_imprint')]: {
-        screen: ImprintContainer
+        screen: ImprintContainer,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_privacy')]: {
         screen: PrivacyContainer

@@ -243,7 +243,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: ActivateAccountContainer
       },
       ['pickup_profile_modal']: {
-        screen: ProfilePickerModal
+        screen: ProfilePickerModal,
+        navigationOptions: { header: null }
       },
       ['about_us']: {
         screen: AboutUsContainer,

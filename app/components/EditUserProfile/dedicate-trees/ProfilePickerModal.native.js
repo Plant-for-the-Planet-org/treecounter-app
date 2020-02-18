@@ -14,6 +14,7 @@ import CardLayout from '../../Common/Card';
 import scrollStyle from '../../../styles/common/scrollStyle';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 import { delimitNumbers } from '../../../utils/utils';
+import HeaderNew from '../../Header/HeaderNew.native';
 
 class ProfilePickerModal extends Component {
   constructor(props) {
@@ -93,7 +94,16 @@ class ProfilePickerModal extends Component {
 
     return (
       <View>
-        <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+        <HeaderNew
+          navigation={this.props.navigation}
+          title={i18n.t('label.dedicate_trees')}
+        />
+        <ScrollView
+          contentContainerStyle={[
+            scrollStyle.styleContainer,
+            { marginTop: 100 }
+          ]}
+        >
           <View>
             {this.state.editMode ? pickupProfileView : null}
             {currentUserProfile.supportedTreecounter ? (

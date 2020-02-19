@@ -5,7 +5,9 @@ import styles from '../../../styles/donation/donationDetails';
 import i18n from '../../../locales/i18n';
 
 export function SelectTreeCount(props) {
-  const [customTreeCount, setCustomTreeCount] = React.useState(false);
+  const [customTreeCount, setCustomTreeCount] = React.useState(
+    props.treeCount ? true : false
+  );
   let treeCountOptions;
 
   if (props.selectedProject) {
@@ -20,11 +22,15 @@ export function SelectTreeCount(props) {
       } = props.selectedProject.paymentSetup.treeCountOptions;
       const d = props.selectedProject.paymentSetup.treeCountOptions.default;
       treeCountOptions = [d, option1, option2, option3].filter(a => a);
-      d && props.setTreeCount(d);
+      !props.treeCount && d && props.setTreeCount(d);
+      props.treeCount &&
+        setCustomTreeCount(treeCountOptions.includes(props.treeCount));
     } else {
       treeCountOptions = [10, 25, 50, 100];
     }
   }
+  console.log('props in Select tree count', props);
+  // props.treeCount && (setCustomTreeCount(true));
 
   return (
     <View style={[styles.treeCountSelector, { marginLeft: 8 }]}>

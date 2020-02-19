@@ -98,7 +98,8 @@ const headerLabels = {
   ['app_create_competition']: '',
   ['app_unfulfilled_pledge_events']: 'label.pledges',
   ['app_pledge_form']: 'label.pledgeToPlant',
-  ['app_pledge_update_form']: 'label.updatePledge'
+  ['app_pledge_update_form']: 'label.updatePledge',
+  ['app_donateTrees_context']: 'label.donate'
 };
 
 export const getAppNavigator = function(isLoggedIn, userProfile) {
@@ -300,6 +301,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
+      },
+      [getLocalRoute('app_donateTrees_context')]: {
+        screen: DonationTreesContainer,
+        path: 'c/:context'
       },
       ['app_pledge_events']: {
         screen: PledgeEvents

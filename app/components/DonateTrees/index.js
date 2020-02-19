@@ -143,9 +143,11 @@ export default class DonateTrees extends Component {
         state.selectedTreeCount = nextTreeCount;
       }
     }
+    debug('component donate trees', nextProps.context);
     if (nextProps.context.treeCount) {
       state.selectedTreeCount = nextProps.context.treeCount;
     }
+    debug('component donate trees', state);
     this.setState(state);
   }
 
@@ -520,6 +522,7 @@ export default class DonateTrees extends Component {
                       }
                       selectedTreeCount={this.state.selectedTreeCount}
                       onChange={this.handleTreeCountCurrencyChange}
+                      context={this.props.context}
                     />
                   ) : null}
                 </div>

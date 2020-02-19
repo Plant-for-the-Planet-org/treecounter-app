@@ -88,6 +88,7 @@ class TreeCountCurrencySelector extends React.Component {
           onChange={this.handleTreeCountChange}
           treeCountOptions={treeCountOptions}
           defaultTreeCount={this.state.selectedTreeCount}
+          context={this.props.context}
         />
       </div>
     );

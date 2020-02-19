@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import 'react-native-gesture-handler';
-
+import { Linking } from 'react-native';
 import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
 import GlobalErrorBoundary from '../ErrorBoundry/globalErrorBoundry';
@@ -14,7 +14,11 @@ export default class App extends Component {
     super();
     store = configureStore();
   }
-
+  componentDidMount() {
+    Linking.addEventListener('url', url => {
+      console.log('===========================', url);
+    });
+  }
   render() {
     return (
       <Provider store={store}>

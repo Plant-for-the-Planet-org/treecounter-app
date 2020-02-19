@@ -114,6 +114,11 @@ export default class DonateTrees extends React.PureComponent {
         }
       }
     }
+    debug('component donate trees', nextProps.context);
+    if (nextProps.context.treeCount) {
+      const selectedTreeCount = nextProps.context.treeCount;
+      this.setState({ selectedTreeCount: selectedTreeCount });
+    }
     if (
       nextProps.paymentStatus &&
       nextProps.paymentStatus.contribution &&
@@ -314,6 +319,7 @@ export default class DonateTrees extends React.PureComponent {
             onNextClick={this.Tab2validated}
             selectedTreeCount={this.state.selectedTreeCount}
             onChange={this.handleTreeCountCurrencyChange}
+            context={this.props.context}
           />
         ) : (
           <LoadingIndicator contentLoader screen="defaultLoader" />

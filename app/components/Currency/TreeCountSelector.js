@@ -7,21 +7,24 @@ class TreeCountSelector extends React.Component {
   constructor(props) {
     super(props);
 
-    const {
+    let {
       fixedDefaultTreeCount,
       variableDefaultTreeCount
     } = props.treeCountOptions;
-
+    const { treeCount } = props.context;
+    treeCount && (variableDefaultTreeCount = treeCount);
     this.state = {
-      isFixed: true,
+      isFixed: !treeCount,
       fixedTreeCount: fixedDefaultTreeCount,
       variableTreeCount: variableDefaultTreeCount,
       variableAmount: props.treeCountToAmount(variableDefaultTreeCount)
     };
 
     props.onChange({
-      treeCount: fixedDefaultTreeCount,
-      amount: this.props.treeCountToAmount(fixedDefaultTreeCount)
+      treeCount: treeCount ? treeCount : fixedDefaultTreeCount,
+      amount: this.props.treeCountToAmount(
+        treeCount ? treeCount : fixedDefaultTreeCount
+      )
     });
 
     this.handleFixedTreeCountChange = this.handleFixedTreeCountChange.bind(

@@ -28,6 +28,7 @@ export const getLocalRoute = (routeName, params) => {
   const url = `${baseUrl}${Routing.generate(routeName, {
     ...params
   })}`;
+  console.log('url from getlocal route', url);
   return url;
 };
 

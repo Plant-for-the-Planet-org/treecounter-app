@@ -81,14 +81,38 @@ class DonationTreesContainer extends PureComponent {
         const { context } = this.props.match.params;
         if (context) {
           let contextData = await getContext({ context });
-          console.log('context data', contextData);
+          debug('context data', contextData);
           const { plantProject } = contextData;
           this.setState({ context: contextData });
           if (plantProject) selectedProjectId = parseInt(plantProject);
+          if (contextData.treecounter) {
+            this.props.supportTreecounterAction({
+              id: contextData.treecounter,
+              displayName: contextData.treecounter
+            });
+          }
         }
+        selectedProjectId &&
+          (await this.props.loadProject({ id: selectedProjectId }));
       } catch (error) {
-        console.log('error', error);
+        debug('error', error);
       }
+    }
+    if (this.props.navigation && this.props.navigation.getParam('context')) {
+      const context = this.props.navigation.getParam('context');
+      let contextData = await getContext({ context });
+      debug('context data', contextData);
+      const { plantProject } = contextData;
+      this.setState({ context: contextData });
+      if (plantProject) selectedProjectId = parseInt(plantProject);
+      if (contextData.treecounter) {
+        this.props.supportTreecounterAction({
+          id: contextData.treecounter,
+          displayName: contextData.treecounter
+        });
+      }
+      selectedProjectId &&
+        (await this.props.loadProject({ id: selectedProjectId }));
     }
     if (this.props.navigation && this.props.navigation.getParam('id'))
       selectedProjectId = parseInt(this.props.navigation.getParam('id'));

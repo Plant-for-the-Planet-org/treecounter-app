@@ -11,7 +11,7 @@ import {
 import { getImageUrl } from '../../actions/apiRouting';
 import {
   location_grey,
-  survival_grey,
+  // survival_grey,
   tax_grey,
   leaf,
   leafGray
@@ -117,13 +117,13 @@ class PlantProjectSnippetDetails extends PureComponent {
       treeCost,
       taxDeductibleCountries
     };
-    const survivalRateLeaf =
-      survivalRateStatus == 'verified'
-        ? leaf
-        : survivalRateStatus == 'self-reported'
-          ? leafGray
-          : null;
-    const survivalColor = survivalRateStatus == 'verified' ? '#89b53a' : 'gray';
+    // const survivalRateLeaf =
+    //   survivalRateStatus == 'verified'
+    //     ? leaf
+    //     : survivalRateStatus == 'self-reported'
+    //       ? leafGray
+    //       : null;
+    // const survivalColor = survivalRateStatus == 'verified' ? '#89b53a' : 'gray';
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
-import styles from '../../styles/common/tabbar';
 import { Dimensions, View, Text, Platform } from 'react-native';
 import ChallengeUser from './Tabs/ChallengeUser';
 import ChallengeEmail from './Tabs/ChallengeEmail';
@@ -9,12 +8,6 @@ import tabStyles from '../../styles/common/tabbar';
 import HeaderStatic from './../Header/HeaderStatic';
 import { SafeAreaView } from 'react-navigation';
 import i18n from '../../locales/i18n';
-
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
 
 export default class ChallengeTabView extends Component {
   constructor(props) {

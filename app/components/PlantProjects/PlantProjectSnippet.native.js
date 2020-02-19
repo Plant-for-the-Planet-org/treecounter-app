@@ -13,7 +13,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import {
   // tick,
   location_grey,
-  survival_grey,
+  // survival_grey,
   tax_grey,
   leaf,
   leafGray
@@ -115,12 +115,12 @@ class PlantProjectSnippet extends PureComponent {
         );
       }
     deducibleText1 = deducibleText1.join(', ') + '.';
-    const survivalRateLeaf =
-      survivalRateStatus == 'verified'
-        ? leaf
-        : survivalRateStatus == 'self-reported'
-          ? leafGray
-          : null;
+    // const survivalRateLeaf =
+    //   survivalRateStatus == 'verified'
+    //     ? leaf
+    //     : survivalRateStatus == 'self-reported'
+    //       ? leafGray
+    //       : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
 
     return (

@@ -5,7 +5,6 @@ import { TabView, TabBar } from 'react-native-tab-view';
 import { Text, View, ScrollView, Platform } from 'react-native';
 import t from 'tcomb-form-native';
 import { debug } from '../../debug';
-import tabBarStyles from '../../styles/common/tabbar.native';
 import { parsedSchema } from '../../server/parsedSchemas/editProfile';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';

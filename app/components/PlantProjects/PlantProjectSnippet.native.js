@@ -13,10 +13,10 @@ import { getImageUrl } from '../../actions/apiRouting';
 import {
   // tick,
   location_grey,
-  survival_grey,
-  tax_grey,
-  leaf,
-  leafGray
+  // survival_grey,
+  tax_grey
+  // leaf,
+  // leafGray
 } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
@@ -115,12 +115,12 @@ class PlantProjectSnippet extends PureComponent {
         );
       }
     deducibleText1 = deducibleText1.join(', ') + '.';
-    const survivalRateLeaf =
-      survivalRateStatus == 'verified'
-        ? leaf
-        : survivalRateStatus == 'self-reported'
-          ? leafGray
-          : null;
+    // const survivalRateLeaf =
+    //   survivalRateStatus == 'verified'
+    //     ? leaf
+    //     : survivalRateStatus == 'self-reported'
+    //       ? leafGray
+    //       : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
 
     return (

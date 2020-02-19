@@ -1,6 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
-import { ScrollView } from 'react-native';
+import {} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -8,7 +7,7 @@ import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import { loadProject } from '../../actions/loadTposAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View, Text, Animated, StatusBar } from 'react-native';
+import { View, Text, Animated, StatusBar, SafeAreaView } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';

@@ -7,7 +7,14 @@ import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import { loadProject } from '../../actions/loadTposAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View, Text, Animated, StatusBar, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  Animated,
+  StatusBar,
+  SafeAreaView,
+  ScrollView
+} from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
@@ -33,9 +40,7 @@ class PlantProjectFull extends React.Component {
     };
   }
   state = { loader: true };
-  componentWillMount() {
-    setTimeout(() => this.setState({ loader: false }), 2000);
-  }
+
   async componentWillReceiveProps(nextProps) {
     try {
       debug('plantproject while receive props', nextProps.plantProject);
@@ -70,6 +75,7 @@ class PlantProjectFull extends React.Component {
   }
   componentWillMount() {
     StatusBar.setTranslucent(true);
+    setTimeout(() => this.setState({ loader: false }), 2000);
   }
   componentWillUnmount() {
     StatusBar.setTranslucent(false);

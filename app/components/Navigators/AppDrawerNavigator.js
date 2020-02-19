@@ -287,7 +287,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: SelectPlantProjectContainer
       },
       [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProjectContainer
+        screen: SelectedPlantProjectContainer,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer

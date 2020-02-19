@@ -225,7 +225,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       [getLocalRoute('app_editProfile')]: {
-        screen: isLoggedIn ? EditUserProfileContainer : LoginContainer
+        screen: isLoggedIn ? EditUserProfileContainer : LoginContainer,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_passwordSent')]: {
         screen: EmailSentContainer

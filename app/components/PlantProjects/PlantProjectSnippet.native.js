@@ -14,9 +14,9 @@ import {
   // tick,
   location_grey,
   // survival_grey,
-  tax_grey,
-  leaf,
-  leafGray
+  tax_grey
+  // leaf,
+  // leafGray
 } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
@@ -66,8 +66,8 @@ class PlantProjectSnippet extends PureComponent {
       allowDonations,
       image,
       reviewScore: plantProjectRating,
-      reviews,
-      survivalRateStatus
+      reviews
+      // survivalRateStatus
       // description,
       // homepageUrl: homepageUrl,
       // homepageCaption: homepageCaption,

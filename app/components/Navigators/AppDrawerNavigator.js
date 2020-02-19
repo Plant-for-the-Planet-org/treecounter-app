@@ -273,7 +273,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       [getLocalRoute('app_challenge')]: {
-        screen: ChallengeContainer
+        screen: ChallengeContainer,
+        navigationOptions: { header: null }
       },
       ['app_gift_projects']: {
         screen: SelectPlantProjectContainer

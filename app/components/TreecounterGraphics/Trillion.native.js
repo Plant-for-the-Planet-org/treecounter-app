@@ -388,7 +388,7 @@ class Trillion extends PureComponent {
                 </CardLayout>
               ) : null} */}
 
-            <View
+            {/* <View
               style={[
                 styles.cardContainer,
                 {
@@ -422,7 +422,7 @@ class Trillion extends PureComponent {
                   {i18n.t('label.searchProjectButton')}
                 </Text>
               </TouchableOpacity>
-            </View>
+            </View> */}
           </ScrollView>
         );
       }

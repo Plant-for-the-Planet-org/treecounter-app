@@ -106,9 +106,28 @@ const RegisterMultipleTrees = () => {
 
   let onPressDoneAfterPolygon = async () => {
     console.log('coordinates', coordinates);
-
+    let GeoJSONObj = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Polygon',
+            coordinates: [
+              [
+                ...coordinates.map(x => [x.longitude, x.latitude]),
+                [coordinates[0].longitude, coordinates[0].latitude]
+              ]
+            ]
+          }
+        }
+      ]
+    };
+    let polygonData = { geoJSON: GeoJSONObj, coordinates: coordinates };
+    console.log(polygonData, 'dummyGeoJSONObj');
     try {
-      await AsyncStorage.setItem('@coordinates', JSON.stringify(coordinates));
+      await AsyncStorage.setItem('@coordinates', JSON.stringify(polygonData));
       alert('data successfully stored');
     } catch (e) {
       // saving error

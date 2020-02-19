@@ -105,7 +105,10 @@ function getConfig(prodEnv) {
         filename: prodEnv ? '[name].[hash].css' : '[name].css',
         chunkFilename: prodEnv ? '[id].[hash].css' : '[id].css'
       }),
-      new Dotenv()
+      new Dotenv({
+        path: (!prodEnv && '.env.develop') || (prodEnv && '.env.production'),
+        safe: false
+      })
     ]
   };
   return config;

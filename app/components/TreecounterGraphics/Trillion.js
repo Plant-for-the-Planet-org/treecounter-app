@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { debug } from '../../debug';
 import { trillionCampaign } from '../../actions/trillionAction';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import SvgContainer from '../Common/SvgContainer';
@@ -10,10 +13,7 @@ import TextBlock from '../Common/Text/TextBlock';
 import i18n from '../../locales/i18n.js';
 import { getImageUrl } from '../../actions/apiRouting';
 import { pledgeEventSelector } from '../../selectors';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
-import { bindActionCreators } from 'redux';
 
 class Trillion extends Component {
   constructor() {
@@ -42,7 +42,7 @@ class Trillion extends Component {
           loading: false
         });
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   }
 
   componentDidUpdate(prevProps) {

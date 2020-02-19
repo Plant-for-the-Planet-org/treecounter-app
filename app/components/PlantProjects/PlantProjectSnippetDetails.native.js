@@ -222,7 +222,7 @@ class PlantProjectSnippetDetails extends PureComponent {
                   </View>
                 ) : null}
 
-                <View style={styles.iconTextRow}>
+                {/* <View style={styles.iconTextRow}>
                   <Image source={survival_grey} style={styles.iconImage} />
                   <View
                     style={[
@@ -298,7 +298,7 @@ class PlantProjectSnippetDetails extends PureComponent {
                       </TouchableOpacity>
                     ) : null}
                   </View>
-                </View>
+                </View> */}
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <View style={{ flexDirection: 'row', marginTop: 10 }}>

@@ -8,21 +8,20 @@ import {
   Animated
 } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
-import styles from './../../styles/pledgeevents/pledgeevents.native';
-import { forward } from './../../assets';
-import { updatePledge } from './../../actions/pledgeAction';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import CheckBox from 'react-native-check-box';
-
-import i18n from '../../locales/i18n';
 import { connect } from 'react-redux';
-import { currentUserProfileSelector } from './../../selectors';
 import { bindActionCreators } from 'redux';
 import { Formik } from 'formik';
 import { SafeAreaView } from 'react-navigation';
-
+import { debug } from '../../debug';
+import styles from './../../styles/pledgeevents/pledgeevents.native';
+import { forward } from './../../assets';
+import { updatePledge } from './../../actions/pledgeAction';
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import { loadUserProfile } from './../../actions/loadUserProfileAction';
+import i18n from '../../locales/i18n';
+import { currentUserProfileSelector } from './../../selectors';
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
@@ -123,7 +122,7 @@ class MakePledgeForm extends Component {
                 treeCount: values.treeCount,
                 isAnonymous: this.state.isAnonymous
               };
-              console.log(data);
+              debug(data);
               // Update pledge using token
 
               this.props.updatePledge(

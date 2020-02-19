@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import { editCompetition, deleteCompetition } from '../../actions/competition';
 import EditCompetition from '../../components/Competition/EditCompetition.native';
 import { handleServerResponseError } from '../../helpers/utils';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
-import { formatDateToMySQL } from './../../helpers/utils';
+import { formatDateToMySQL } from '../../helpers/utils';
 
 class EditCompetitionContainer extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class EditCompetitionContainer extends Component {
     }
   }
   editCompetition(value, params) {
-    console.log(value);
+    debug(value);
     let json = {
       name: value.name,
       goal: value.goal,
@@ -55,7 +55,7 @@ class EditCompetitionContainer extends Component {
       .editCompetition(json, params, this.props.navigation)
       .then((/* success */) => {})
       .catch(err => {
-        console.log('err signup data', err);
+        debug('err signup data', err);
         let newSchemaOptions = handleServerResponseError(
           err,
           this.state.competitionFormSchemaOptions

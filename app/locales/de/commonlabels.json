@@ -41,5 +41,9 @@
   "donation_id_missing_error": "Spenden-ID fehlt",
   "datePickerTitle": "Datum Wählen",
   "datePickerCancel": "Stornieren",
-  "datePickerConfirm": "Bestätigen"
+  "datePickerConfirm": "Bestätigen",
+  "view_all": "Zeige alle",
+  "show_all": "Zeige alle",
+  "show_less": "Zeige weniger",
+  "share": "Teile"
 }

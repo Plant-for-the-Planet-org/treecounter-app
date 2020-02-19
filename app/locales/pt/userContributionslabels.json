@@ -17,7 +17,5 @@
   "select_file": "Selecione um arquivo do computador",
   "browse": "Procurar",
   "upload_profile_picture": "Adicionar nova foto",
-  "dedicated_to": "Dedicado à",
-  "gifted_from_person": "Presente de {{person}}",
-  "gifted_to_person": "Presente para {{person}}"
+  "dedicated_to": "Dedicado à"
 }

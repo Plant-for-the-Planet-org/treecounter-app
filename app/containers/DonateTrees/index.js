@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import {
   selectedPlantProjectSelector,
@@ -26,7 +27,6 @@ import {
 } from '../../actions/donateAction';
 import { loadProject } from '../../actions/loadTposAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
-
 import { updateRoute } from '../../helpers/routerHelper';
 import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
@@ -38,7 +38,7 @@ class DonationTreesContainer extends PureComponent {
     if (match && match.params && match.params.slug) {
       postDirectRequest('/suggest', 'q=' + match.params.slug)
         .then(_suggestions => {
-          console.log('sugessions', _suggestions);
+          debug('sugessions', _suggestions);
           if (
             _suggestions.data.length &&
             _suggestions.data[0].slug == match.params.slug
@@ -49,10 +49,10 @@ class DonationTreesContainer extends PureComponent {
             });
           }
         })
-        .catch(error => console.log(error));
+        .catch(error => debug(error));
     } else {
       const { currentUserProfile } = this.props;
-      console.log(
+      debug(
         'current user profile and suported tree counter',
         currentUserProfile,
         this.props.supportTreecounter.treecounterId
@@ -75,6 +75,7 @@ class DonationTreesContainer extends PureComponent {
     let selectedProjectId = undefined;
     if (this.props.match) {
       selectedProjectId = parseInt(this.props.match.params.id);
+      await this.props.loadProject({ id: selectedProjectId });
     }
     if (this.props.navigation && this.props.navigation.getParam('id'))
       selectedProjectId = parseInt(this.props.navigation.getParam('id'));
@@ -92,7 +93,7 @@ class DonationTreesContainer extends PureComponent {
   }
   componentWillUnmount() {
     const { currentUserProfile } = this.props;
-    console.log(
+    debug(
       'current user profile unmounting donate trees container',
       currentUserProfile
     );
@@ -113,6 +114,12 @@ class DonationTreesContainer extends PureComponent {
     this.props.donate(donationContribution, plantProjectId, profile);
 
   render() {
+    if (this.props.match) {
+      const {
+        params: { id }
+      } = this.props.match;
+      if (id && !this.props.selectedProject) return null;
+    }
     return (
       <DonateTrees
         ref={'donateTreesContainer'}

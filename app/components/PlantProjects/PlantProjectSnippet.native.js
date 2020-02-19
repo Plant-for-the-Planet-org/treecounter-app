@@ -91,7 +91,7 @@ class PlantProjectSnippet extends PureComponent {
     } else {
       projectImage = plantProjectImages && plantProjectImages.find(() => true);
     }
-    // console.log('project image', projectImage);
+    // debug('project image', projectImage);
     const teaserProps = {
       tpoName: this.props.tpoName,
       projectName,
@@ -122,6 +122,7 @@ class PlantProjectSnippet extends PureComponent {
           ? leafGray
           : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
+
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
         <View style={[styles.projectSnippetContainer]} withoutShadow>
@@ -216,7 +217,7 @@ class PlantProjectSnippet extends PureComponent {
                   </View>
                 ) : null}
 
-                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                {/* <View style={{ flexDirection: 'row', marginTop: 10 }}>
                   <Image
                     source={survival_grey}
                     style={{
@@ -225,6 +226,8 @@ class PlantProjectSnippet extends PureComponent {
                       marginRight: 10
                     }}
                   />
+                  
+                  
                   <View style={styles.survivalText}>
                     <View style={{ flexDirection: 'row' }}>
                       <Text style={styles.survivalText}>
@@ -252,7 +255,7 @@ class PlantProjectSnippet extends PureComponent {
                       ) : null}
                     </View>
                   </View>
-                </View>
+                </View> */}
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <View style={{ flexDirection: 'row', marginTop: 10 }}>

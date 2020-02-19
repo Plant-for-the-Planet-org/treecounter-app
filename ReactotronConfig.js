@@ -1,18 +1,13 @@
 import Reactotron from 'reactotron-react-js';
 import { reactotronRedux } from 'reactotron-redux';
 
-const reactotron = Reactotron.configure().use(reactotronRedux());
-
+let reactotron;
 if (process.env.NODE_ENV === 'development') {
-  reactotron.connect(); // let's connect!
-  // uncomment the following lines and use the command
-  //    adb reverse tcp:9090 tcp:9090
+  reactotron = Reactotron.configure()
+    .use(reactotronRedux())
+    .connect(); // let's connect!
   // to make it work with an Android emulator:
-  // .connect({
-  //   enabled: true,
-  //   host: '10.1.0.22', // server ip
-  //   port: 9090
-  // }); // let's connect!
+  // adb reverse tcp:9090 tcp:9090
 }
 
 export default reactotron;

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import HTMLView from 'react-native-htmlview';
 import { Text, View, Linking } from 'react-native';
 import ListView from 'deprecated-react-native-listview';
+import { debug } from '../../debug';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
@@ -75,12 +76,12 @@ export default class Imprint extends Component {
                 ? `${context.scheme}://${context.host}${url}`
                 : url;
             } catch (err) {
-              //console.log(err);
+              //debug(err);
             }
 
-            //  console.log('clicked link: ', url);
+            //  debug('clicked link: ', url);
             Linking.openURL(url).catch(err => {
-              console.log(err);
+              debug(err);
             });
           }}
         />

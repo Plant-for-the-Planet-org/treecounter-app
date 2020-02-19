@@ -1,4 +1,9 @@
 apply plugin: "com.android.application"
+project.ext.envConfigFiles = [
+        staging   : ".env.staging",
+        production: ".env.production",
+        develop   : ".env.develop",
+]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
@@ -83,9 +88,9 @@ if (propfile.exists()) {
 }
 
 project.ext.react = [
-    entryFile: "index.native.js",
-    enableHermes: false,
-    root: "../../",
+        entryFile   : "index.native.js",
+        enableHermes: false,
+        root        : "../../",
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -144,22 +149,22 @@ android {
         applicationId "org.pftp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 22
-        versionName "1.3.0"
+        versionCode 25
+        versionName "1.3.1"
         ndk {
             abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
         // manifestPlaceholders = [googleMapApiKey: project.env.get("googleMapApiKey")]
     }
     signingConfigs {
-      release {
-          if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
-              storeFile file(MYAPP_RELEASE_STORE_FILE)
-              storePassword properties.getProperty("MYAPP_RELEASE_STORE_PASSWORD")
-              keyAlias MYAPP_RELEASE_KEY_ALIAS
-              keyPassword properties.getProperty("MYAPP_RELEASE_KEY_PASSWORD")
-          }
-      }
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword properties.getProperty("MYAPP_RELEASE_STORE_PASSWORD")
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword properties.getProperty("MYAPP_RELEASE_KEY_PASSWORD")
+            }
+        }
     }
     splits {
         abi {
@@ -176,28 +181,43 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    flavorDimensions "env"
+
+    productFlavors {
+        staging {
+            dimension "env"
+        }
+        production {
+            dimension "env"
+        }
+        develop {
+            dimension "env"
+        }
+    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // https://developer.android.com/studio/build/configure-apk-splits.html
-            def versionCodes = ["armeabi-v7a":5, "x86":6, "arm64-v8a": 7, "x86_64": 8]
+            def versionCodes = ["armeabi-v7a": 5, "x86": 6, "arm64-v8a": 7, "x86_64": 8]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 100000 + defaultConfig.versionCode
+            } else {
+                output.versionCodeOverride = 9 * 100000 + defaultConfig.versionCode
             }
         }
     }
 
-     packagingOptions {
-       pickFirst 'lib/x86/libc++_shared.so'
-       pickFirst 'lib/x86_64/libjsc.so'
-       pickFirst 'lib/arm64-v8a/libjsc.so'
-       pickFirst 'lib/arm64-v8a/libc++_shared.so'
-       pickFirst 'lib/x86_64/libc++_shared.so'
-       pickFirst 'lib/armeabi-v7a/libc++_shared.so'
-     }
+    packagingOptions {
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libjsc.so'
+        pickFirst 'lib/arm64-v8a/libjsc.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    }
 }
 
 dependencies {
@@ -207,9 +227,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03'
     if (useIntlJsc) {
-         implementation 'org.webkit:android-jsc-intl:+'
+        implementation 'org.webkit:android-jsc-intl:+'
     } else {
-         implementation 'org.webkit:android-jsc:+'
+        implementation 'org.webkit:android-jsc:+'
     }
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

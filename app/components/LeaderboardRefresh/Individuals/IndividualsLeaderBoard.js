@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView
 } from 'react-native';
+import { debug } from '../../../debug';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
@@ -39,10 +40,10 @@ const IndividualsLeaderBoard = ({ navigation }) => {
             success.data.data
           )
             setQueryResult(success.data.data);
-          console.log(success.data.data, 'success.data.data');
+          debug(success.data.data, 'success.data.data');
         },
         error => {
-          console.log(error);
+          debug(error);
         }
       );
     },
@@ -74,7 +75,7 @@ const IndividualsLeaderBoard = ({ navigation }) => {
                     source={{
                       uri: getImageUrl(
                         'profile',
-                        'avatar',
+                        'thumb',
                         item.contributorAvatar
                       )
                     }}
@@ -115,7 +116,7 @@ const IndividualsLeaderBoard = ({ navigation }) => {
       });
     }
   };
-  console.log('queryresult', queryresult);
+  debug('queryresult', queryresult);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header navigation={navigation} />

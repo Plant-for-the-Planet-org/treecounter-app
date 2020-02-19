@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView
 } from 'react-native';
+import { debug } from '../../../debug';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
@@ -41,7 +42,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
             setQueryResult(success.data.data);
         },
         error => {
-          console.log(error);
+          debug(error);
         }
       );
     },
@@ -73,7 +74,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
                     source={{
                       uri: getImageUrl(
                         'profile',
-                        'avatar',
+                        'thumb',
                         item.contributorAvatar
                       )
                     }}
@@ -114,7 +115,7 @@ const CompaniesLeaderBoard = ({ navigation }) => {
       });
     }
   };
-  console.log('queryresult', queryresult);
+  debug('queryresult', queryresult);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header navigation={navigation} />

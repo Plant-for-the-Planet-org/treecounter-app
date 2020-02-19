@@ -8,7 +8,8 @@ export default EStyleSheet.create({
   },
   parentContainer: {
     flexDirection: 'column',
-    flex: 1
+    flex: 1,
+    zIndex: 1000
   },
   contentContainer: {
     margin: 15,

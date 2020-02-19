@@ -1,10 +1,11 @@
 import React from 'react';
+import t from 'tcomb-form';
+import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card';
-import t from 'tcomb-form';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
-import PropTypes from 'prop-types';
 import UserProfileImage from '../Common/UserProfileImage';
 import {
   parsedSchema,
@@ -20,7 +21,6 @@ import {
   UserPasswordUpdateTemplate
 } from './PlantProjectUserProfileTemplates';
 import LoadingIndicator from '../Common/LoadingIndicator';
-
 import { ProfilePic } from '../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
@@ -127,7 +127,7 @@ export default class EditUserProfile extends React.Component {
 
   changeEmail = () => {
     let formRef = 'change_email';
-    console.log(this.refs[formRef].validate());
+    debug(this.refs[formRef].validate());
 
     let value = this.refs[formRef].getValue();
     this.props.updateEmail(value);
@@ -142,7 +142,7 @@ export default class EditUserProfile extends React.Component {
           <div className="error-msg">{i18n.t('label.same_password_error')}</div>
         );
       } catch (err) {
-        console.log(err);
+        debug(err);
       }
     }
 

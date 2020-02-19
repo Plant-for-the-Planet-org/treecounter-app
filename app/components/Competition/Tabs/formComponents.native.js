@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import {
   cameraSolid,
@@ -6,27 +6,32 @@ import {
   forward,
   circleDelete
 } from '../../../assets';
+import { Formik } from 'formik';
+import { TextField } from 'react-native-material-textfield';
+import ImagePicker from 'react-native-image-picker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Dropdown } from 'react-native-material-dropdown';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import { debug } from '../../../debug';
 import styles from '../../../styles/competition/competition-form.native';
 import { formatDateToMySQL } from './../../../helpers/utils';
 import { formatDate } from './../../../utils/utils';
-import DateTimePicker from 'react-native-modal-datetime-picker';
 import i18n from '../../../locales/i18n';
-import { Formik } from 'formik';
-import { TextField } from 'react-native-material-textfield';
 import competitionFormSchema from './../../../server/formSchemas/competition';
 import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
-import ImagePicker from 'react-native-image-picker';
 import buttonStyles from '../../../styles/common/button.native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Dropdown } from 'react-native-material-dropdown';
 
 export const FormikForm = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     competitionFormSchema
   );
-
-  const buttonType = props.buttonType;
-
+  const [buttonType, setButtonType] = useState(props.buttonType);
+  useEffect(
+    () => {
+      setButtonType(props.buttonType);
+    },
+    [props.buttonType]
+  );
   return (
     <Formik
       initialValues={props.initialValues}
@@ -126,10 +131,12 @@ export const FormikForm = props => {
                 setFieldValue={props.setFieldValue}
               />
             </KeyboardAwareScrollView>
-
             {buttonType === 'competition' ? (
               <TouchableOpacity
-                style={buttonStyles.actionButtonTouchable}
+                style={[
+                  buttonStyles.actionButtonTouchable,
+                  { top: undefined, bottom: '1%', padding: 20 }
+                ]}
                 onPress={props.handleSubmit}
               >
                 <View style={buttonStyles.actionButtonView}>
@@ -142,7 +149,10 @@ export const FormikForm = props => {
 
             {buttonType === '>' ? (
               <TouchableOpacity
-                style={buttonStyles.actionButtonSmallTouchable}
+                style={[
+                  buttonStyles.actionButtonSmallTouchable,
+                  { top: undefined, bottom: '2%' }
+                ]}
                 onPress={props.handleSubmit}
               >
                 <Image
@@ -182,7 +192,6 @@ export function AccessPicker(props) {
   return (
     <View>
       <Dropdown
-        ref={ref => (this.dropdown = ref)}
         label={i18n.t('label.competition_access')}
         data={data}
         onChangeText={onChange}
@@ -235,9 +244,9 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
                 props.setFieldValue(
                   'imageFile',
@@ -254,9 +263,9 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
                 props.setFieldValue(
                   'imageFile',

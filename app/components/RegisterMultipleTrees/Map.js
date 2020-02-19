@@ -9,6 +9,7 @@ import MapView, {
 } from 'react-native-maps';
 import Header from '../Header/BackHeader';
 import PrimaryButton from '../Common/Button/PrimaryButton';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const RegisterTreesMap = ({
   location,
@@ -40,6 +41,13 @@ const RegisterTreesMap = ({
     latitudeDelta: 0.0000922,
     longitudeDelta: 0.00421
   };
+
+  let setPolygonToTrue = async () => {
+    setIsPolygon(true);
+    await AsyncStorage.setItem('@isPolygon', JSON.stringify(true));
+  };
+
+  console.log(isPolygon, 'at Map');
   return (
     <View style={{ flex: 1 }}>
       <Header />
@@ -92,7 +100,7 @@ const RegisterTreesMap = ({
       <View style={styles.bottomBtnContainer}>
         {coordinates.length > 2 ? (
           <PrimaryButton
-            onClick={() => setIsPolygon(true)}
+            onClick={setPolygonToTrue}
             buttonStyle={styles.whiteBtnStyle}
           >
             <Text style={[styles.continueBtn, styles.whiteBtnText]}>

@@ -39,7 +39,6 @@ const RegisterTreesCaptureImage = ({
   let onPressDone = () => {
     isPolygon ? onPressDoneAfterPolygon() : onPressContinueAfterSeletImage();
   };
-
   return (
     <View style={{ flex: 1 }}>
       <Header />
@@ -55,9 +54,11 @@ const RegisterTreesCaptureImage = ({
         <View style={{ flex: 1 }}>
           <Image
             source={{
-              uri: imageURI
-                ? imageURI
-                : 'https://cdn2.vectorstock.com/i/1000x1000/17/61/select-image-vector-11591761.jpg'
+              uri: coordinates.imageURI
+                ? coordinates.imageURI
+                : imageURI
+                  ? imageURI
+                  : 'https://cdn2.vectorstock.com/i/1000x1000/17/61/select-image-vector-11591761.jpg'
             }}
             resizeMode={'contain'}
             style={styles.image}

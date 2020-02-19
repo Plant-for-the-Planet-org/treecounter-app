@@ -16,25 +16,6 @@ const RegisterMultipleTrees = () => {
   useEffect(() => {
     getCoordinates();
     getMapUri();
-    Geolocation.getCurrentPosition(
-      //Will give you the current location
-      position => {
-        setCoordinates([
-          ...coordinates,
-          ...[
-            {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              location: ALPHABETS[coordinates.length],
-              imageURI: ''
-            }
-          ]
-        ]);
-        console.log(position, 'position');
-      },
-      error => alert(error.message),
-      { enableHighAccuracy: false, timeout: 25000, maximumAge: 3600000 }
-    );
   }, []);
 
   let getMapUri = async () => {
@@ -42,7 +23,6 @@ const RegisterMultipleTrees = () => {
       const mapuri = await AsyncStorage.getItem('@mapuri');
       if (mapuri !== null) {
         setMapUri(mapuri);
-        console.log(mapuri, 'mapuri');
         // value previously stored
       }
     } catch (e) {
@@ -52,14 +32,42 @@ const RegisterMultipleTrees = () => {
 
   let getCoordinates = async () => {
     try {
-      const value = await AsyncStorage.getItem('@coordinates');
+      let value = await AsyncStorage.getItem('@coordinates');
       if (value !== null) {
-        console.log(JSON.parse(value), 'getCoordinates');
+        value = JSON.parse(value);
+        setCoordinates([...value]);
+        AsyncStorage.getItem('@isPolygon').then(data => {
+          setIsPolygon(JSON.parse(data));
+        });
         // value previously stored
+      } else {
+        Geolocation.getCurrentPosition(
+          //Will give you the current location
+          position => {
+            setCoordinates([
+              ...coordinates,
+              ...[
+                {
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+                  location: ALPHABETS[coordinates.length],
+                  imageURI: ''
+                }
+              ]
+            ]);
+          },
+          error => alert(error.message),
+          { enableHighAccuracy: false, timeout: 25000, maximumAge: 3600000 }
+        );
       }
     } catch (e) {
       // error reading value
     }
+  };
+
+  let setCoordinatesToAsyncStorage = async coordinatess => {
+    await AsyncStorage.setItem('@coordinates', JSON.stringify(coordinatess));
+    await AsyncStorage.setItem('@isPolygon', JSON.stringify(isPolygon));
   };
 
   let upDateMarker = (latlong, index) => {
@@ -68,6 +76,7 @@ const RegisterMultipleTrees = () => {
     marker.longitude = latlong.longitude;
     coordinates.splice(index, 1, marker);
     setCoordinates([...coordinates]);
+    setCoordinatesToAsyncStorage(coordinates);
   };
 
   let updateImageURI = uri => {
@@ -75,6 +84,7 @@ const RegisterMultipleTrees = () => {
     marker.imageURI = uri;
     coordinates.splice(coordinates.length - 1, 1, marker);
     setCoordinates(coordinates);
+    setCoordinatesToAsyncStorage(coordinates);
   };
 
   let toggleIsRegisterTreesMap = () => {
@@ -97,6 +107,7 @@ const RegisterMultipleTrees = () => {
           ]
         ]);
         toggleIsRegisterTreesMap();
+        setCoordinatesToAsyncStorage(coordinates);
         console.log(position, 'position');
       },
       error => alert(error.message),
@@ -105,7 +116,6 @@ const RegisterMultipleTrees = () => {
   };
 
   let onPressDoneAfterPolygon = async () => {
-    console.log('coordinates', coordinates);
     let GeoJSONObj = {
       type: 'FeatureCollection',
       features: [
@@ -127,30 +137,32 @@ const RegisterMultipleTrees = () => {
     let polygonData = { geoJSON: GeoJSONObj, coordinates: coordinates };
     console.log(polygonData, 'dummyGeoJSONObj');
     try {
-      await AsyncStorage.setItem('@coordinates', JSON.stringify(polygonData));
+      await AsyncStorage.setItem('@polygonData', JSON.stringify(polygonData));
       alert('data successfully stored');
     } catch (e) {
       // saving error
     }
   };
 
-  console.log(coordinates);
+  console.log('coordinates', coordinates);
   return (
     <View style={{ flex: 1 }}>
       {isRegisterTreesMap ? (
-        <RegisterTreesMap
-          mapUri={mapUri}
-          location={
-            coordinates.length
-              ? coordinates[coordinates.length - 1].location
-              : ''
-          }
-          setIsPolygon={setIsPolygon}
-          isPolygon={isPolygon}
-          toggleIsRegisterTreesMap={toggleIsRegisterTreesMap}
-          upDateMarker={upDateMarker}
-          coordinates={coordinates}
-        />
+        coordinates.length > 0 ? (
+          <RegisterTreesMap
+            mapUri={mapUri}
+            location={
+              coordinates.length
+                ? coordinates[coordinates.length - 1].location
+                : ''
+            }
+            setIsPolygon={setIsPolygon}
+            isPolygon={isPolygon}
+            toggleIsRegisterTreesMap={toggleIsRegisterTreesMap}
+            upDateMarker={upDateMarker}
+            coordinates={coordinates}
+          />
+        ) : null
       ) : (
         <RegisterTreesCaptureImage
           onPressDoneAfterPolygon={onPressDoneAfterPolygon}

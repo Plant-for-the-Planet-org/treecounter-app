@@ -87,7 +87,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
                       </View>
                     )}
                   </View>
-                  <Text style={[styles.tressCounter, {}]}>
+                  <Text style={styles.tressCounter}>
                     {delimitNumbers(item.planted)}{' '}
                     <Text style={styles.tressText}>
                       {i18n.t('label.trees')}

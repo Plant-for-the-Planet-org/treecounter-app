@@ -20,8 +20,8 @@ export default EStyleSheet.create({
     alignItems: 'center'
   },
   userProfileImage: {
-    borderWidth: 4,
-    borderColor: '#F4F2F7',
+    // borderWidth: 4,
+    // borderColor: '#F4F2F7',
     width: 100,
     height: 100,
     borderRadius: 50

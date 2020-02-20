@@ -87,7 +87,9 @@ const tpoLeaderBoard = ({ navigation }) => {
                     </Text>
                     {!isPrivate ? null : (
                       <View>
-                        <Text style={styles.privateText}>PRIVATE</Text>
+                        <Text style={styles.privateText}>
+                          {i18n.t('label.private')}
+                        </Text>
                       </View>
                     )}
                   </View>

@@ -18,7 +18,7 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 import TouchableItem from '../Common/TouchableItem.native';
 import { getLocalRoute } from '../../actions/apiRouting';
 import tabStyles from '../../styles/common/tabbar';
-import HeaderStatic from './../Header/HeaderStatic';
+import HeaderNew from './../Header/HeaderNew';
 import { SafeAreaView } from 'react-navigation';
 
 const Form = t.form.Form;
@@ -240,14 +240,31 @@ export default class EditUserProfile extends Component {
   };
 
   render() {
+    const textColor = '#4d5153';
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <HeaderStatic
+        {/* <HeaderStatic
           title={i18n.t('label.edit_profile')}
           navigation={this.props.navigation}
           showBackButton
-        />
-        <View style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }} />
+        /> */}
+        <HeaderNew title={''} navigation={this.props.navigation} />
+
+        <View style={{ marginTop: Platform.OS === 'ios' ? 24 : 60 }} />
+        <Text
+          style={{
+            fontFamily: 'OpenSans-ExtraBold',
+            fontSize: 27,
+            lineHeight: 40,
+            letterSpacing: 0,
+            textAlign: 'left',
+            color: textColor,
+            left: 20
+          }}
+        >
+          {i18n.t('label.edit_profile')}
+        </Text>
+
         <TabView
           ref={'tabView'}
           useNativeDriver

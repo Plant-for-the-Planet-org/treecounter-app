@@ -5,7 +5,7 @@ import ChallengeUser from './Tabs/ChallengeUser';
 import ChallengeEmail from './Tabs/ChallengeEmail';
 import { challengeFormSchemaOptions } from '../../server/parsedSchemas/challenge';
 import tabStyles from '../../styles/common/tabbar';
-import HeaderStatic from './../Header/HeaderStatic';
+import HeaderNew from './../Header/HeaderNew';
 import { SafeAreaView } from 'react-navigation';
 import i18n from '../../locales/i18n';
 
@@ -117,14 +117,29 @@ export default class ChallengeTabView extends Component {
   };
 
   render() {
+    const textColor = '#4d5153';
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <HeaderStatic
+        {/* <HeaderStatic
           title={i18n.t('label.challenge_heading')}
           navigation={this.props.navigation}
           showBackButton
-        />
-        <View style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }} />
+        /> */}
+        <HeaderNew title={''} navigation={this.props.navigation} />
+        <View style={{ marginTop: Platform.OS === 'ios' ? 24 : 60 }} />
+        <Text
+          style={{
+            fontFamily: 'OpenSans-ExtraBold',
+            fontSize: 27,
+            lineHeight: 40,
+            letterSpacing: 0,
+            textAlign: 'left',
+            color: textColor,
+            left: 20
+          }}
+        >
+          {i18n.t('label.challenge_heading')}
+        </Text>
         <TabView
           useNativeDriver
           navigationState={this.state}

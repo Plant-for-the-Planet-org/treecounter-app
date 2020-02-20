@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { debug } from '../../debug';
 import { LargeMenuItem } from '../Menu/MenuItem.native';
-import { ScrollView, View, Linking } from 'react-native';
+import { ScrollView, View, Linking, Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
@@ -36,7 +36,7 @@ class AboutUs extends Component {
           navigation={this.props.navigation}
         />
 
-        <ScrollView style={{ marginTop: 120 }}>
+        <ScrollView style={{ marginTop: Platform.OS === 'ios' ? 160 : 120 }}>
           <LargeMenuItem
             onPress={() => {
               //  debug('open change log');

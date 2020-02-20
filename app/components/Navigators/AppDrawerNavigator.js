@@ -329,7 +329,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: LoginContainer
       },
       ['app_add_review']: {
-        screen: AddReview
+        screen: AddReview,
+        navigationOptions: { header: null }
       },
       ['app_view_pdf']: {
         screen: PDFViewer

@@ -33,5 +33,6 @@
   "get_device_location": "Position des Geräts ermitteln",
   "map_under_construction": "Wir arbeiten an einer Kartendarstellung.",
   "location_permission_denied": "Zugriff auf Standort verweigert. Bitte öffne die Einstellungen und erlaube dieser App den Zugriff auf den aktuellen Standort.",
-  "map_search_placeholder": "Finde einen Ort zum Pflanzen"
+  "map_search_placeholder": "Finde einen Ort zum Pflanzen",
+  "number_of_trees": "Anzahl Bäume"
 }

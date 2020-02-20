@@ -100,7 +100,7 @@ export default EStyleSheet.create({
     lineHeight: 24,
     flex: 1,
     borderWidth: 0,
-    borderColor: 'red',
+    borderColor: 'green',
     paddingHorizontal: 10
   },
   tressCounter: {
@@ -119,11 +119,16 @@ export default EStyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 10,
-    fontFamily: 'OpenSans-Bold'
+    fontFamily: 'OpenSans-Bold',
+    color: '#4C5153',
+    width: 90,
+    textAlign: 'center'
   },
   countryNameCont: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    borderWidth: 0,
+    borderColor: 'red'
+    // justifyContent: 'space-around'
   }
 });

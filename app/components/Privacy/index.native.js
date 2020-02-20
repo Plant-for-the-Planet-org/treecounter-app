@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HTMLView from 'react-native-htmlview';
-import { Text, View, Linking } from 'react-native';
+import { Text, View, Linking, Platform } from 'react-native';
 import ListView from 'deprecated-react-native-listview';
 import { debug } from '../../debug';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -103,7 +103,7 @@ export default class Privacy extends Component {
           dataSource={this.state.dataSource}
           renderRow={this._renderContent}
           //renderSectionHeader={this._renderHeader}
-          style={{ marginTop: 120 }}
+          style={{ marginTop: Platform.OS === 'ios' ? 160 : 120 }}
         />
       </>
     );

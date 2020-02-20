@@ -77,9 +77,18 @@ const CountriesLeaderBoard = ({ navigation }) => {
                   />
                 </View>
                 <View style={styles.countryBody}>
-                  <Text numberOfLines={2} style={styles.countryNameText}>
-                    {item.caption}
-                  </Text>
+                  <View style={styles.countryNameCont}>
+                    <Text numberOfLines={2} style={styles.countryNameText}>
+                      {item.caption}
+                    </Text>
+                    {!isPrivate ? null : (
+                      <View>
+                        <Text style={styles.privateText}>
+                          {i18n.t('label.private')}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
                   <Text style={styles.tressCounter}>
                     {delimitNumbers(item.planted)}{' '}
                     <Text style={styles.tressText}>

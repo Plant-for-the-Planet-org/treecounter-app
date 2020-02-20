@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Platform } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import { targetFormSchema } from '../../server/parsedSchemas/target';
 import styles from '../../styles/login.native';
@@ -33,7 +33,9 @@ export default class Target extends Component {
             title={i18n.t('label.set_target')}
             navigation={this.props.navigation}
           />
-          <CardLayout style={{ flex: 1, marginTop: 100 }}>
+          <CardLayout
+            style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 140 : 100 }}
+          >
             <Form
               ref={'setTargetForm'}
               type={targetFormSchema}

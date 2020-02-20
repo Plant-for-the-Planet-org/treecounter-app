@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, Platform } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -101,7 +101,7 @@ class ProfilePickerModal extends Component {
         <ScrollView
           contentContainerStyle={[
             scrollStyle.styleContainer,
-            { marginTop: 100 }
+            { marginTop: Platform.OS === 'ios' ? 140 : 100 }
           ]}
         >
           <View>

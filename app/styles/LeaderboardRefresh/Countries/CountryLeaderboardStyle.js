@@ -98,10 +98,11 @@ export default EStyleSheet.create({
     fontSize: 18,
     color: '#4d5153',
     lineHeight: 24,
-    flex: 1,
+    // flex: 1,
     borderWidth: 0,
     borderColor: 'green',
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    maxWidth: '50%'
   },
   tressCounter: {
     fontFamily: 'OpenSans-Regular',
@@ -126,6 +127,7 @@ export default EStyleSheet.create({
   },
   countryNameCont: {
     flexDirection: 'row',
+    // flex: 1,
     alignItems: 'center',
     borderWidth: 0,
     borderColor: 'red'

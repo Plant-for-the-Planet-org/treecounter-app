@@ -175,14 +175,18 @@ const CompanyListItem = ({ onPressListItem, item, index }) => {
       </View>
       <View style={styles.countryBody}>
         <View style={styles.countryNameCont}>
-          <Text numberOfLines={2} style={styles.countryNameText}>
+          <Text
+            numberOfLines={2}
+            style={[
+              styles.countryNameText,
+              { maxWidth: isPress ? '50%' : '100%' }
+            ]}
+          >
             {item.caption}
           </Text>
           {isPress ? (
-            <View style={{}}>
-              <Text style={[styles.privateText, {}]}>
-                {i18n.t('label.private')}
-              </Text>
+            <View>
+              <Text style={styles.privateText}>{i18n.t('label.private')}</Text>
             </View>
           ) : null}
         </View>

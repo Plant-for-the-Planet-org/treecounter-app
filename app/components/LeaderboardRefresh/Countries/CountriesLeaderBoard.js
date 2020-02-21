@@ -78,7 +78,13 @@ const CountriesLeaderBoard = ({ navigation }) => {
                 </View>
                 <View style={styles.countryBody}>
                   <View style={styles.countryNameCont}>
-                    <Text numberOfLines={2} style={styles.countryNameText}>
+                    <Text
+                      numberOfLines={2}
+                      style={[
+                        styles.countryNameText,
+                        { maxWidth: isPress ? '50%' : '100%' }
+                      ]}
+                    >
                       {item.caption}
                     </Text>
                     {!isPrivate ? null : (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Keyboard } from 'react-native';
+import { View, Keyboard, Platform } from 'react-native';
 import { FormikForm } from './formComponents.native';
 import HeaderNew from './../../Header/HeaderNew.native';
 

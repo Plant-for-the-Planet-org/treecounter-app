@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { TabView, TabBar } from 'react-native-tab-view';
-import { Text, View, ScrollView, Platform } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import t from 'tcomb-form-native';
 import { debug } from '../../debug';
 import { parsedSchema } from '../../server/parsedSchemas/editProfile';

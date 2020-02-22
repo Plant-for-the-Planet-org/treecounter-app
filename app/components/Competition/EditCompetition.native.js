@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { getDateFromMySQL } from './../../helpers/utils';
 import HeaderNew from './../Header/HeaderNew.native';
 
-import { View, Keyboard } from 'react-native';
+import { View, Keyboard, Platform } from 'react-native';
 import { FormikForm } from './editFormComponents.native';
 
 function EditCompetition(props) {

@@ -242,7 +242,7 @@ export function AccessPicker(props) {
   const onChange = value => {
     props.setFieldValue('access', value);
   };
-  let dropdown;
+  let dropdown = '';
   return (
     <View>
       <Dropdown

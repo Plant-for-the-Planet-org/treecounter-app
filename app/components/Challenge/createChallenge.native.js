@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
-import { View, Text, Platform } from 'react-native';
+import { View, Text } from 'react-native';
 import ChallengeUser from './Tabs/ChallengeUser';
 import ChallengeEmail from './Tabs/ChallengeEmail';
 import { challengeFormSchemaOptions } from '../../server/parsedSchemas/challenge';

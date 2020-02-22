@@ -242,10 +242,11 @@ export function AccessPicker(props) {
   const onChange = value => {
     props.setFieldValue('access', value);
   };
+  let dropdown;
   return (
     <View>
       <Dropdown
-        ref={ref => (this.dropdown = ref)}
+        ref={ref => (dropdown = ref)}
         label={i18n.t('label.competition_access')}
         data={data}
         onChangeText={onChange}

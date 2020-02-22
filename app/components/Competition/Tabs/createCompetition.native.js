@@ -27,8 +27,8 @@ export default function createCompetition(props) {
     );
     // clean up
     return () => {
-      this.keyboardDidShowListener.remove();
-      this.keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
     };
   }, []);
   const style = { backgroundColor: 'white', flex: 1 };

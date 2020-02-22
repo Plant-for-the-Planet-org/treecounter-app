@@ -304,7 +304,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: FAQContainer
       },
       [getLocalRoute('app_editCompetition')]: {
-        screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
+        screen: isLoggedIn ? EditCompetitionContainer : LoginContainer,
+        navigationOptions: { header: null }
       },
       ['app_donate_detail']: {
         screen: DonationTreesContainer

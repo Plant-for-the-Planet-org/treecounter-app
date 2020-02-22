@@ -136,7 +136,7 @@ class GlobalCurrencySelector extends Component {
           <Image
             source={{
               uri: getCountryFlagImageUrl(
-                this.getCountryCode(currency).countryCode,
+                this.getCountryCode(currency).currencyCountryFlag,
                 'png',
                 256
               )

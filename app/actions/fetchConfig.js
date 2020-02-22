@@ -13,7 +13,7 @@ let cdnMedia = {};
 let currency = '';
 export function fetchLocation() {
   return dispatch => {
-    console.log('got preferred currency', getItemSync('preferredCurrency'));
+    // console.log('got preferred currency', getItemSync('preferredCurrency'));
     if (!getItemSync('preferredCurrency')) {
       getRequest('public_ipstack')
         .then(data => {

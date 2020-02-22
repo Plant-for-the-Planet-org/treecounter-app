@@ -57,7 +57,7 @@ class GlobalCurrencySelector extends Component {
   async componentWillMount() {
     // this.setState({ preferredCurrency: getPreferredCurrency() });
     this.props.userProfile &&
-      this.rops.userProfile.currency &&
+      this.props.userProfile.currency &&
       this.setState({ preferredCurrency: this.props.userProfile.currency }) &&
       this.props.setCurrencyAction(this.props.userProfile.currency);
   }
@@ -225,7 +225,7 @@ class GlobalCurrencySelector extends Component {
                   alignItems: 'center',
                   flexDirection: 'row',
                   borderColor: '#4d5153',
-                  borderWidth: this.state.focus,
+                  borderWidth: this.state.search ? 1 : this.state.focus,
                   borderRadius: 20,
                   marginLeft: 20
                 }}
@@ -254,7 +254,9 @@ class GlobalCurrencySelector extends Component {
                     this.setSearch();
                   }}
                 >
-                  <Icon name="close" size={24} color="#4d5153" />
+                  {this.state.search ? (
+                    <Icon name="close" size={24} color="#4d5153" />
+                  ) : null}
                 </TouchableItem>
               </View>
             </View>

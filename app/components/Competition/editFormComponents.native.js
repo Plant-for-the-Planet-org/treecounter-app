@@ -242,6 +242,7 @@ export function AccessPicker(props) {
   const onChange = value => {
     props.setFieldValue('access', value);
   };
+  // eslint-disable-next-line
   let dropdown = '';
   return (
     <View>

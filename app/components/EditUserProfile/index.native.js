@@ -250,7 +250,7 @@ export default class EditUserProfile extends Component {
         /> */}
         <HeaderNew title={''} navigation={this.props.navigation} />
 
-        <View style={{ marginTop: Platform.OS === 'ios' ? 24 : 60 }} />
+        <View style={{ marginTop: 60 }} />
         <Text
           style={{
             fontFamily: 'OpenSans-ExtraBold',

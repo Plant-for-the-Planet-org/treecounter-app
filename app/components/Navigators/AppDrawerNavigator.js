@@ -288,7 +288,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         path: getLocalRoute('app_resetPassword') + '/:token'
       },
       ['app_create_competition']: {
-        screen: createCompeition
+        screen: createCompeition,
+        navigationOptions: { header: null }
       },
       ['app_supportTrees']: {
         screen: SelectPlantProjectContainer

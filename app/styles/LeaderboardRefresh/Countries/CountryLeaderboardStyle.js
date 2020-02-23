@@ -116,21 +116,17 @@ export default EStyleSheet.create({
     fontWeight: 'normal'
   },
   privateText: {
-    backgroundColor: '#E1E2E2',
+    backgroundColor: '#f2f2f7',
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 6,
     borderRadius: 10,
     fontFamily: 'OpenSans-Bold',
-    color: '#4C5153',
+    color: '#87b738',
     width: 90,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 11
   },
   countryNameCont: {
-    flexDirection: 'row',
-    // flex: 1,
-    alignItems: 'center',
-    borderWidth: 0,
-    borderColor: 'red'
-    // justifyContent: 'space-around'
+    flexDirection: 'row'
   }
 });

@@ -17,6 +17,7 @@ import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { getImageUrl } from '../../../actions/apiRouting';
 import Header from '../../Header/BackHeader';
+import GetRandomImage from '../../../utils/getRandomImage';
 
 const CompaniesLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
@@ -165,12 +166,16 @@ const CompanyListItem = ({ onPressListItem, item, index }) => {
         <Text style={styles.indexText}>{index + 1}</Text>
       </View>
       <View style={styles.countryFlagContainer}>
-        <Image
-          style={styles.countryFlagImage}
-          source={{
-            uri: getImageUrl('profile', 'avatar', item.contributorAvatar)
-          }}
-        />
+        {item.contributorAvatar ? (
+          <Image
+            style={styles.countryFlagImage}
+            source={{
+              uri: getImageUrl('profile', 'avatar', item.contributorAvatar)
+            }}
+          />
+        ) : (
+          <GetRandomImage name={item.caption} />
+        )}
       </View>
       <View style={styles.countryBody}>
         <View style={styles.countryNameCont}>

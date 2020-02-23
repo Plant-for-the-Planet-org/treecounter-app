@@ -17,6 +17,7 @@ import { getLocalRoute } from '../../../actions/apiRouting';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
 import { getImageUrl } from '../../../actions/apiRouting';
 import Header from '../../Header/BackHeader';
+import GetRandomImage from '../../../utils/getRandomImage';
 
 const IndividualsLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
@@ -160,7 +161,7 @@ const CompanyListItem = ({ onPressListItem, item, index }) => {
       onPress={() =>
         !isPrivate
           ? onPressListItem(item.treecounterId, item.caption)
-          : setIsPress(true)
+          : setIsPress(!isPress)
       }
       style={styles.oneContryContainer}
     >
@@ -168,15 +169,19 @@ const CompanyListItem = ({ onPressListItem, item, index }) => {
         <Text style={styles.indexText}>{index + 1}</Text>
       </View>
       <View style={styles.countryFlagContainer}>
-        <Image
-          style={styles.countryFlagImage}
-          source={{
-            uri: getImageUrl('profile', 'avatar', item.contributorAvatar)
-          }}
-        />
+        {item.contributorAvatar ? (
+          <Image
+            style={styles.countryFlagImage}
+            source={{
+              uri: getImageUrl('profile', 'avatar', item.contributorAvatar)
+            }}
+          />
+        ) : (
+          <GetRandomImage name={item.caption} />
+        )}
       </View>
       <View style={styles.countryBody}>
-        <View style={styles.countryNameCont}>
+        <View style={[styles.countryNameCont, { alignItems: 'baseline' }]}>
           <Text
             numberOfLines={2}
             style={[

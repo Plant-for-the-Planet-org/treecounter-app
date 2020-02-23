@@ -95,16 +95,16 @@ class UserContributionsDetails extends React.Component {
     let treeClassification = undefined;
     let contributionPerson = undefined;
     let contributionPersonSlug = undefined;
-    // let selectedPlantProjectDetails = undefined;
+    let selectedPlantProjectDetails = undefined;
     let headerText = undefined;
     let videoUrl = undefined;
     let hasGeoLocationError = undefined;
     let locationErrorText = '';
     let contributionOrPlantedImages = contributionImages;
 
-    // debug('\x1b[45mcontribution', this.props.contribution);
-    // debug('plantProjects', this.props.plantProjects);
-    // debug('\x1b[0m');
+    debug('\x1b[45mcontribution', this.props.contribution);
+    debug('plantProjects', this.props.plantProjects);
+    debug('\x1b[0m');
 
     // sets the header text
     // if treeType is null then header text is treecount and type of contribution
@@ -152,33 +152,33 @@ class UserContributionsDetails extends React.Component {
       plantedDate = formatDate(redemptionDate, 'MMMM d,  yyyy');
     }
 
-    // selects the matching plant project with the contribution project id
-    // if (plantProjects.length > 0) {
-    //   for (let i = 0; i <= plantProjects.length; ) {
-    //     if (plantProjects[i].id === plantProjectId) {
-    //       selectedPlantProjectDetails = plantProjects[i];
-
-    //       // takes video url from plant project
-    //       videoUrl = selectedPlantProjectDetails.videoUrl;
-
-    //       // if card type in not planted the shows the image from
-    //       // plant projects else shows images from contribution if any
-    //       if (cardType !== 'planted') {
-    //         contributionOrPlantedImages =
-    //           selectedPlantProjectDetails.plantProjectImages;
-    //       }
-    //       plantProjectSlug = selectedPlantProjectDetails.slug;
-    //       break;
-    //     }
-    //   }
-    // }
-
     if (plantProjects[0]) {
       videoUrl = plantProjects[0].videoUrl;
       if (cardType !== 'planted') {
         contributionOrPlantedImages = plantProjects[0].plantProjectImages;
       }
       plantProjectSlug = plantProjects[0].slug;
+    }
+
+    if (plantProjects.length > 0) {
+      for (let i = 0; i < plantProjects.length; i++) {
+        if (plantProjects[i].id === plantProjectId) {
+          selectedPlantProjectDetails = plantProjects[i];
+          break;
+        }
+      }
+      if (
+        selectedPlantProjectDetails &&
+        selectedPlantProjectDetails.length > 0
+      ) {
+        selectedPlantProjectDetails = selectedPlantProjectDetails[0];
+        videoUrl = selectedPlantProjectDetails.videoUrl;
+        if (cardType !== 'planted') {
+          contributionOrPlantedImages =
+            selectedPlantProjectDetails.plantProjectImages;
+        }
+        plantProjectSlug = selectedPlantProjectDetails.slug;
+      }
     }
 
     // // adds planted by if plantProjectName is present
@@ -333,20 +333,18 @@ class UserContributionsDetails extends React.Component {
 
         {/* displays project contact card if project is available
           in the contribution */}
-        {this.props.plantProjects &&
-        this.props.plantProjects.length > 0 &&
-        this.props.plantProjects[0].tpoData ? (
+        {selectedPlantProjectDetails && selectedPlantProjectDetails.tpoData ? (
           <View style={{ marginBottom: 30 }}>
             <AccordionContactInfo
               navigation={this.props.navigation}
-              slug={this.props.plantProjects[0].tpoData.treecounterSlug}
+              slug={selectedPlantProjectDetails.tpoData.treecounterSlug}
               updateStaticRoute={updateStaticRoute}
-              url={this.props.plantProjects[0].url}
+              url={selectedPlantProjectDetails.url}
               _goToURL={_goToURL}
-              email={this.props.plantProjects[0].tpoData.email}
-              address={this.props.plantProjects[0].tpoData.address}
-              name={this.props.plantProjects[0].tpoData.name}
-              title={this.props.plantProjects[0].tpoData.name}
+              email={selectedPlantProjectDetails.tpoData.email}
+              address={selectedPlantProjectDetails.tpoData.address}
+              name={selectedPlantProjectDetails.tpoData.name}
+              title={selectedPlantProjectDetails.tpoData.name}
             />
           </View>
         ) : null}

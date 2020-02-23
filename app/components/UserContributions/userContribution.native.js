@@ -145,49 +145,51 @@ export default class UserContributions extends React.Component {
           {contributionPersonPrefix &&
             contributionPerson && (
               <View style={styles.subHeaderTextContainer}>
-                <Text style={styles.subHeaderText}>
-                  {contributionPersonPrefix}
-                </Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    updateStaticRoute(
-                      getLocalRoute('app_treecounter'),
-                      navigation,
-                      {
-                        treeCounterId: contributionPersonSlug,
-                        titleParam: contributionPerson
-                      }
-                    );
-                  }}
-                >
-                  <Text style={[styles.subHeaderText, { color: textColor }]}>
+                <Text>
+                  <Text style={styles.subHeaderText}>
+                    {contributionPersonPrefix}
+                  </Text>
+                  <Text
+                    onPress={() => {
+                      updateStaticRoute(
+                        getLocalRoute('app_treecounter'),
+                        navigation,
+                        {
+                          treeCounterId: contributionPersonSlug,
+                          titleParam: contributionPerson
+                        }
+                      );
+                    }}
+                    style={[styles.subHeaderText, { color: textColor }]}
+                  >
                     {' '}
                     {contributionPerson}
                   </Text>
-                </TouchableOpacity>
+                </Text>
               </View>
             )}
 
           {/* maps the project name by whom it was planted if any */}
           {plantProjectName && (
             <View style={styles.subHeaderTextContainer}>
-              <Text style={styles.subHeaderText}>
-                {i18n.t('label.planted_by')}
-              </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  plantProjectSlug
-                    ? navigation.navigate(getLocalRoute('app_treecounter'), {
-                        treeCounterId: plantProjectId,
-                        titleParam: plantProjectName
-                      })
-                    : null;
-                }}
-              >
-                <Text style={[styles.subHeaderText, { color: textColor }]}>
+              <Text>
+                <Text style={styles.subHeaderText}>
+                  {i18n.t('label.planted_by')}
+                </Text>
+                <Text
+                  onPress={() => {
+                    plantProjectSlug
+                      ? navigation.navigate(getLocalRoute('app_treecounter'), {
+                          treeCounterId: plantProjectId,
+                          titleParam: plantProjectName
+                        })
+                      : null;
+                  }}
+                  style={[styles.subHeaderText, { color: textColor }]}
+                >
                   {plantProjectName}
                 </Text>
-              </TouchableOpacity>
+              </Text>
             </View>
           )}
         </View>

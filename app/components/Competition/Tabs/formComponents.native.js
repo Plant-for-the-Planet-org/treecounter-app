@@ -307,7 +307,9 @@ export function CompetitionDatePicker(props) {
         onConfirm={date => {
           (date = date || props.endDate),
             setShowDatePicker(false),
-            props.setFieldValue('endDate', date);
+            props.setFieldValue(
+              formatDate(formatDateToMySQL(new Date(date)), 'yyyy-MM-dd')
+            );
         }}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}

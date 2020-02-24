@@ -103,9 +103,9 @@ class UserContributionsDetails extends React.Component {
     let locationErrorText = '';
     let contributionOrPlantedImages = contributionImages;
 
-    debug('\x1b[45mcontribution', this.props.contribution);
-    debug('plantProjects', this.props.plantProjects);
-    debug('\x1b[0m');
+    // debug('\x1b[45mcontribution', this.props.contribution);
+    // debug('plantProjects', this.props.plantProjects);
+    // debug('\x1b[0m');
 
     // sets the header text
     // if treeType is null then header text is treecount and type of contribution

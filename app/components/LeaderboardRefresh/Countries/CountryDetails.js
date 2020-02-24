@@ -60,46 +60,13 @@ const CountryDetails = ({ navigation }) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           data={queryresult}
-          renderItem={({ item, index }) => {
-            const isPrivate = 'mayPublish' in item && !item.mayPublish;
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  !isPrivate
-                    ? onPressListItem(item.treecounterId, item.caption)
-                    : undefined;
-                }}
-                style={styles.oneContryContainer}
-              >
-                <View style={styles.indexContainer}>
-                  <Text style={styles.indexText}>{index + 1}</Text>
-                </View>
-                <View style={styles.countryFlagContainer}>
-                  <Image
-                    style={styles.countryFlagImage}
-                    source={{
-                      uri: getImageUrl(
-                        'profile',
-                        'avatar',
-                        item.contributorAvatar
-                      )
-                    }}
-                  />
-                </View>
-                <View style={styles.countryBody}>
-                  <Text numberOfLines={2} style={styles.countryNameText}>
-                    {item.caption}
-                  </Text>
-                  <Text style={styles.tressCounter}>
-                    {delimitNumbers(item.planted)}{' '}
-                    <Text style={styles.tressText}>
-                      {i18n.t('label.trees')}
-                    </Text>
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
+          renderItem={({ item, index }) => (
+            <CompanyListItem
+              onPressListItem={onPressListItem}
+              item={item}
+              index={index}
+            />
+          )}
         />
       );
     } else {
@@ -181,6 +148,56 @@ const CountryDetails = ({ navigation }) => {
         <View style={styles.countriesListContainer}>{renderList()}</View>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const CompanyListItem = ({ onPressListItem, item, index }) => {
+  const [isPress, setIsPress] = useState(false);
+  const isPrivate = 'mayPublish' in item && !item.mayPublish;
+  console.log(isPress, 'isPressisPress');
+  return (
+    <TouchableOpacity
+      onPress={() =>
+        !isPrivate
+          ? onPressListItem(item.treecounterId, item.caption)
+          : setIsPress(true)
+      }
+      style={styles.oneContryContainer}
+    >
+      <View style={styles.indexContainer}>
+        <Text style={styles.indexText}>{index + 1}</Text>
+      </View>
+      <View style={styles.countryFlagContainer}>
+        <Image
+          style={styles.countryFlagImage}
+          source={{
+            uri: getImageUrl('profile', 'avatar', item.contributorAvatar)
+          }}
+        />
+      </View>
+      <View style={styles.countryBody}>
+        <View style={styles.countryNameCont}>
+          <Text
+            numberOfLines={2}
+            style={[
+              styles.countryNameText,
+              { maxWidth: isPress ? '50%' : '100%' }
+            ]}
+          >
+            {item.caption}
+          </Text>
+          {isPress ? (
+            <View>
+              <Text style={styles.privateText}>{i18n.t('label.private')}</Text>
+            </View>
+          ) : null}
+        </View>
+        <Text style={styles.tressCounter}>
+          {delimitNumbers(item.planted)}{' '}
+          <Text style={styles.tressText}>{i18n.t('label.trees')}</Text>
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

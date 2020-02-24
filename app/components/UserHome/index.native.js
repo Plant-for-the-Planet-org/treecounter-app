@@ -231,11 +231,21 @@ export default class UserHome extends Component {
     }
   };
   getMapComponent = userContributions => {
+    console.log(userContributions, 'userContributions');
+    setTimeout(() => {
+      this.mapRef.fitToCoordinates(
+        userContributions.map(x => ({
+          latitude: x.geoLatitude,
+          longitude: x.geoLongitude
+        })),
+        false // not animated
+      );
+    }, 1000);
     let mapViewLatLong = {
       latitude: userContributions[userContributions.length - 1].geoLatitude,
       longitude: userContributions[userContributions.length - 1].geoLongitude,
-      latitudeDelta: 0.00000922,
-      longitudeDelta: 0.0421
+      latitudeDelta: 0.015 * 5000,
+      longitudeDelta: 0.0121 * 5000
     };
     let markerStyle = {
       width: 30,
@@ -246,24 +256,25 @@ export default class UserHome extends Component {
       justifyContent: 'center',
       alignItems: 'center'
     };
-    let markerList = userContributions.map(oneContribution => {
-      return (
-        <Marker
-          coordinate={{
-            latitude: oneContribution.geoLatitude,
-            longitude: oneContribution.geoLongitude
-          }}
-          key={oneContribution.id}
-        >
-          <View style={markerStyle}>
-            <Image source={Smalltreewhite} resizeMode={'contain'} />
-          </View>
-        </Marker>
-      );
-    });
+    let markerList = userContributions.map(oneContribution => (
+      <Marker
+        identifier={String(oneContribution.id)}
+        coordinate={{
+          latitude: oneContribution.geoLatitude,
+          longitude: oneContribution.geoLongitude
+        }}
+        key={oneContribution.id}
+      >
+        <View style={markerStyle}>
+          <Image source={Smalltreewhite} resizeMode={'contain'} />
+        </View>
+      </Marker>
+    ));
     return (
       <MapView
-        mapType={'satellite'}
+        ref={ref => {
+          this.mapRef = ref;
+        }}
         provider={PROVIDER_GOOGLE}
         style={{ height: 250, flex: 1 }}
         initialRegion={mapViewLatLong}

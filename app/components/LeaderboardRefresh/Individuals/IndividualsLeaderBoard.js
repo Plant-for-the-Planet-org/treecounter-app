@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
-  Image,
   FlatList,
   TouchableOpacity,
   ScrollView,
@@ -12,10 +11,8 @@ import { debug } from '../../../debug';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
-import { delimitNumbers } from '../../../utils/utils';
 import { getLocalRoute } from '../../../actions/apiRouting';
 import { LeaderBoardDataAction } from '../../../actions/exploreAction';
-import { getImageUrl } from '../../../actions/apiRouting';
 import Header from '../../Header/BackHeader';
 import { CompanyListItem } from '../TPOs/tpoLeaderBoard';
 

@@ -151,8 +151,8 @@ const tpoLeaderBoard = ({ navigation }) => {
 };
 const CompanyListItem = ({ onPressListItem, item, index }) => {
   const [isPress, setIsPress] = useState(false);
-  const isPrivate = 'mayPublish' in item && !item.mayPublish;
   const [strr, setStrr] = useState(null);
+  const isPrivate = 'mayPublish' in item && !item.mayPublish;
 
   let onTextLayout = ({ nativeEvent: { lines } }) => {
     if (lines.length > 1) {
@@ -206,20 +206,17 @@ const CompanyListItem = ({ onPressListItem, item, index }) => {
           )}
           <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
             {strr
-              ? strr.map((x, i) => {
-                  console.log(x.text, ' strr.map strr.map');
-                  return (
-                    <Text
-                      key={i}
-                      style={[
-                        styles.countryNameText,
-                        { maxWidth: isPress ? '100%' : '100%' }
-                      ]}
-                    >
-                      {x.text}
-                    </Text>
-                  );
-                })
+              ? strr.map((x, i) => (
+                  <Text
+                    key={i}
+                    style={[
+                      styles.countryNameText,
+                      { maxWidth: isPress ? '100%' : '100%' }
+                    ]}
+                  >
+                    {x.text}
+                  </Text>
+                ))
               : null}
             {isPress ? (
               <Text style={styles.privateText}>{i18n.t('label.private')}</Text>

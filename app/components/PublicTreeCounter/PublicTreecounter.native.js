@@ -9,8 +9,7 @@ import {
   Linking,
   TouchableOpacity,
   SafeAreaView,
-  Image,
-  Platform
+  Image
   // FlatList
 } from 'react-native';
 import { backArrow } from './../../assets';

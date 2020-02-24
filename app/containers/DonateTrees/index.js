@@ -75,7 +75,8 @@ class DonationTreesContainer extends PureComponent {
     let selectedProjectId = undefined;
     if (this.props.match) {
       selectedProjectId = parseInt(this.props.match.params.id);
-      await this.props.loadProject({ id: selectedProjectId });
+      selectedProjectId &&
+        (await this.props.loadProject({ id: selectedProjectId }));
     }
     if (this.props.navigation && this.props.navigation.getParam('id'))
       selectedProjectId = parseInt(this.props.navigation.getParam('id'));

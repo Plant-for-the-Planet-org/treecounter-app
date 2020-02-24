@@ -231,7 +231,6 @@ export default class UserHome extends Component {
     }
   };
   getMapComponent = userContributions => {
-    console.log(userContributions, 'userContributions');
     setTimeout(() => {
       this.mapRef.fitToCoordinates(
         userContributions.map(x => ({

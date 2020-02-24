@@ -84,8 +84,7 @@ class UserContributionsDetails extends React.Component {
       treeSpecies,
       treeScientificName,
       geoLatitude,
-      geoLongitude,
-      tpoName
+      geoLongitude
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
 

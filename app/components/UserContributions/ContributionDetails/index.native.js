@@ -84,7 +84,8 @@ class UserContributionsDetails extends React.Component {
       treeSpecies,
       treeScientificName,
       geoLatitude,
-      geoLongitude
+      geoLongitude,
+      tpoName
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
 
@@ -102,9 +103,9 @@ class UserContributionsDetails extends React.Component {
     let locationErrorText = '';
     let contributionOrPlantedImages = contributionImages;
 
-    // debug('\x1b[45mcontribution', this.props.contribution);
-    // debug('plantProjects', this.props.plantProjects);
-    // debug('\x1b[0m');
+    debug('\x1b[45mcontribution', this.props.contribution);
+    debug('plantProjects', this.props.plantProjects);
+    debug('\x1b[0m');
 
     // sets the header text
     // if treeType is null then header text is treecount and type of contribution
@@ -152,13 +153,13 @@ class UserContributionsDetails extends React.Component {
       plantedDate = formatDate(redemptionDate, 'MMMM d,  yyyy');
     }
 
-    if (plantProjects[0]) {
-      videoUrl = plantProjects[0].videoUrl;
-      if (cardType !== 'planted') {
-        contributionOrPlantedImages = plantProjects[0].plantProjectImages;
-      }
-      plantProjectSlug = plantProjects[0].slug;
-    }
+    // if (plantProjects[0]) {
+    //   videoUrl = plantProjects[0].videoUrl;
+    //   if (cardType !== 'planted') {
+    //     contributionOrPlantedImages = plantProjects[0].plantProjectImages;
+    //   }
+    //   plantProjectSlug = plantProjects[0].slug;
+    // }
 
     if (plantProjects.length > 0) {
       for (let i = 0; i < plantProjects.length; i++) {
@@ -167,11 +168,7 @@ class UserContributionsDetails extends React.Component {
           break;
         }
       }
-      if (
-        selectedPlantProjectDetails &&
-        selectedPlantProjectDetails.length > 0
-      ) {
-        selectedPlantProjectDetails = selectedPlantProjectDetails[0];
+      if (selectedPlantProjectDetails) {
         videoUrl = selectedPlantProjectDetails.videoUrl;
         if (cardType !== 'planted') {
           contributionOrPlantedImages =
@@ -239,12 +236,15 @@ class UserContributionsDetails extends React.Component {
 
     if (geoLatitude === geoLongitude) {
       hasGeoLocationError = true;
+      locationErrorText = i18n.t('label.geolocation_default_error');
       if (contributionType === 'planting') {
         locationErrorText =
-          'Coordinates for this tree registration is incorrect. Please update the registration with correct details.';
+          locationErrorText + ' ' + i18n.t('label.geolocation_error_by_user');
       } else {
         locationErrorText =
-          "Coordinates for this tree registration is incorrect. We've informed the project to update it.";
+          locationErrorText +
+          ' ' +
+          i18n.t('label.geolocation_error_by_project');
       }
     }
     const backgroundColor = '#fff';
@@ -286,27 +286,32 @@ class UserContributionsDetails extends React.Component {
         />
 
         {/* displays image carousel if any image or video is available */}
-        {contributionOrPlantedImages &&
-          contributionOrPlantedImages.length > 0 && (
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                marginVertical: 30
-              }}
-            >
-              {videoUrl ? <VideoContainer url={videoUrl} /> : null}
-              {/* TODO Add thumbnail for video */}
-              <PlantProjectImageCarousel
-                resizeMode={'cover'}
-                images={contributionOrPlantedImages}
-                aspectRatio={16 / 9}
-                videoUrl={videoUrl}
-              />
-            </ScrollView>
-          )}
+        {(videoUrl ||
+          (contributionOrPlantedImages &&
+            contributionOrPlantedImages.length > 0)) && (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              marginVertical: 30
+            }}
+          >
+            {/* {debug('\x1b[46m \x1b[30m video', videoUrl)} */}
+            {videoUrl ? <VideoContainer url={videoUrl} /> : null}
+            {/* TODO Add thumbnail for video */}
+            {contributionOrPlantedImages &&
+              contributionOrPlantedImages.length > 0 && (
+                <PlantProjectImageCarousel
+                  resizeMode={'cover'}
+                  images={contributionOrPlantedImages}
+                  aspectRatio={16 / 9}
+                  videoUrl={videoUrl}
+                />
+              )}
+          </ScrollView>
+        )}
 
         {/* displays error message if geoLatitude and geoLongitude are same */}
         {hasGeoLocationError ? (

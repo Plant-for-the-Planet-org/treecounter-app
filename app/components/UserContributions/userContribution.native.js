@@ -70,7 +70,7 @@ export default class UserContributions extends React.Component {
     const textColor = '#87B738';
     const deleteConfirmColor = '#ee6453';
     return (
-      <View style={styles.container}>
+      <View>
         {/* ===== Map View starts ===== */}
         <View style={styles.mapView}>
           {/* get the map component */}
@@ -144,53 +144,49 @@ export default class UserContributions extends React.Component {
           {/* maps the contributionPerson type and name of contributionPerson if any */}
           {contributionPersonPrefix &&
             contributionPerson && (
-              <View style={styles.subHeaderTextContainer}>
-                <Text>
-                  <Text style={styles.subHeaderText}>
-                    {contributionPersonPrefix}
-                  </Text>
-                  <Text
-                    onPress={() => {
-                      updateStaticRoute(
-                        getLocalRoute('app_treecounter'),
-                        navigation,
-                        {
-                          treeCounterId: contributionPersonSlug,
-                          titleParam: contributionPerson
-                        }
-                      );
-                    }}
-                    style={[styles.subHeaderText, { color: textColor }]}
-                  >
-                    {' '}
-                    {contributionPerson}
-                  </Text>
+              // <View style={styles.subHeaderTextContainer}>
+              <Text style={styles.subHeaderText}>
+                <Text>{contributionPersonPrefix}</Text>
+                <Text
+                  onPress={() => {
+                    updateStaticRoute(
+                      getLocalRoute('app_treecounter'),
+                      navigation,
+                      {
+                        treeCounterId: contributionPersonSlug,
+                        titleParam: contributionPerson
+                      }
+                    );
+                  }}
+                  style={{ color: textColor }}
+                >
+                  {' '}
+                  {contributionPerson}
                 </Text>
-              </View>
+              </Text>
+              // </View>
             )}
 
           {/* maps the project name by whom it was planted if any */}
           {plantProjectName && (
-            <View style={styles.subHeaderTextContainer}>
-              <Text>
-                <Text style={styles.subHeaderText}>
-                  {i18n.t('label.planted_by')}
-                </Text>
-                <Text
-                  onPress={() => {
-                    plantProjectSlug
-                      ? navigation.navigate(getLocalRoute('app_treecounter'), {
-                          treeCounterId: plantProjectId,
-                          titleParam: plantProjectName
-                        })
-                      : null;
-                  }}
-                  style={[styles.subHeaderText, { color: textColor }]}
-                >
-                  {plantProjectName}
-                </Text>
+            // <View style={styles.subHeaderTextContainer}>
+            <Text style={styles.subHeaderText}>
+              <Text>{i18n.t('label.planted_at')}</Text>
+              <Text
+                onPress={() => {
+                  plantProjectSlug
+                    ? navigation.navigate(getLocalRoute('app_selectProject'), {
+                        treeCounterId: plantProjectId,
+                        titleParam: plantProjectName
+                      })
+                    : null;
+                }}
+                style={{ color: textColor }}
+              >
+                {plantProjectName}
               </Text>
-            </View>
+            </Text>
+            // </View>
           )}
         </View>
         {/* ===== Header and Sub header ends ===== */}

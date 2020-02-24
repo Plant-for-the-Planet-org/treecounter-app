@@ -57,5 +57,8 @@
   "gifted": "Gifted",
   "registered_trees": "Registered Trees",
   "tree_donation": "Tree Donation",
-  "redeemed_trees": "Redeemed Trees"
+  "redeemed_trees": "Redeemed Trees",
+  "geolocation_default_error": "Coordinates for this tree registration is incorrect.",
+  "geolocation_error_by_user": "Please update the registration with correct details.",
+  "geolocation_error_by_project": "We've informed the project to update it."
 }

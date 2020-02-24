@@ -98,10 +98,11 @@ export default EStyleSheet.create({
     fontSize: 18,
     color: '#4d5153',
     lineHeight: 24,
-    flex: 1,
+    // flex: 1,
     borderWidth: 0,
-    borderColor: 'red',
-    paddingHorizontal: 10
+    borderColor: 'green',
+    paddingHorizontal: 10,
+    maxWidth: '50%'
   },
   tressCounter: {
     fontFamily: 'OpenSans-Regular',
@@ -115,15 +116,17 @@ export default EStyleSheet.create({
     fontWeight: 'normal'
   },
   privateText: {
-    backgroundColor: '#E1E2E2',
+    backgroundColor: '#f2f2f7',
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 6,
     borderRadius: 10,
-    fontFamily: 'OpenSans-Bold'
+    fontFamily: 'OpenSans-Bold',
+    color: '#87b738',
+    width: 90,
+    textAlign: 'center',
+    fontSize: 11
   },
   countryNameCont: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around'
+    flexDirection: 'row'
   }
 });

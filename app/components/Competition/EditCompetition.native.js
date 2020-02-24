@@ -5,8 +5,9 @@ import { fetchCompetitionDetail } from '../../actions/competition';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getDateFromMySQL } from './../../helpers/utils';
+import HeaderNew from './../Header/HeaderNew.native';
 
-import { View, Keyboard } from 'react-native';
+import { View, Keyboard, Platform } from 'react-native';
 import { FormikForm } from './editFormComponents.native';
 
 function EditCompetition(props) {
@@ -20,12 +21,14 @@ function EditCompetition(props) {
     setButtonType('competition');
   };
 
+  let keyboardDidShowListener;
+  let keyboardDidHideListener;
   useEffect(() => {
-    this.keyboardDidShowListener = Keyboard.addListener(
+    keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       keyboardDidShow
     );
-    this.keyboardDidHideListener = Keyboard.addListener(
+    keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       keyboardDidHide
     );
@@ -36,8 +39,8 @@ function EditCompetition(props) {
 
     // clean up
     return () => {
-      this.keyboardDidShowListener.remove();
-      this.keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
     };
   }, []);
   let formValue = {};
@@ -47,6 +50,8 @@ function EditCompetition(props) {
   const style = { backgroundColor: 'white', flex: 1 };
   return (
     <View style={style}>
+      <HeaderNew title={''} navigation={props.navigation} />
+      <View style={{ marginTop: Platform.OS === 'ios' ? 80 : 40 }} />
       <FormikForm
         buttonType={buttonType}
         onEditCompetition={props.editCompetition}

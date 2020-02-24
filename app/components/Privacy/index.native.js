@@ -2,12 +2,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HTMLView from 'react-native-htmlview';
-import { Text, View, Linking } from 'react-native';
+import { Text, View, Linking, Platform } from 'react-native';
 import ListView from 'deprecated-react-native-listview';
 import { debug } from '../../debug';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
+import i18n from '../../locales/i18n';
+import HeaderNew from './../Header/HeaderNew.native';
 
 export default class Privacy extends Component {
   constructor(props) {
@@ -92,11 +94,18 @@ export default class Privacy extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderContent}
-        renderSectionHeader={this._renderHeader}
-      />
+      <>
+        <HeaderNew
+          title={i18n.t('label.data_protection')}
+          navigation={this.props.navigation}
+        />
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderContent}
+          //renderSectionHeader={this._renderHeader}
+          style={{ marginTop: Platform.OS === 'ios' ? 160 : 120 }}
+        />
+      </>
     );
   }
 }

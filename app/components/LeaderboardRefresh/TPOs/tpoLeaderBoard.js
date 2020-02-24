@@ -152,7 +152,25 @@ const tpoLeaderBoard = ({ navigation }) => {
 const CompanyListItem = ({ onPressListItem, item, index }) => {
   const [isPress, setIsPress] = useState(false);
   const isPrivate = 'mayPublish' in item && !item.mayPublish;
-  console.log(isPress, 'isPressisPress');
+  const [strr, setStrr] = useState(null);
+
+  let onTextLayout = ({ nativeEvent: { lines } }) => {
+    if (lines.length > 1) {
+      let twoLines = lines.slice(0, 2);
+      let secondTrimLine = twoLines[1].text.slice(
+        0,
+        twoLines[0].text.length / 2
+      );
+      twoLines[1].text = secondTrimLine + '...';
+      setStrr([...twoLines]);
+    } else {
+      // slice 6 chars
+      let fisrtLine = lines[0].text.slice(0, 12);
+      lines[0].text = fisrtLine;
+      setStrr(lines);
+    }
+  };
+
   return (
     <TouchableOpacity
       onPress={() =>
@@ -175,20 +193,38 @@ const CompanyListItem = ({ onPressListItem, item, index }) => {
       </View>
       <View style={styles.countryBody}>
         <View style={styles.countryNameCont}>
-          <Text
-            numberOfLines={2}
-            style={[
-              styles.countryNameText,
-              { maxWidth: isPress ? '50%' : '100%' }
-            ]}
-          >
-            {item.caption}
-          </Text>
-          {isPress ? (
-            <View>
+          {strr ? null : (
+            <Text
+              onTextLayout={onTextLayout}
+              style={[
+                styles.countryNameText,
+                { maxWidth: isPress ? '50%' : '100%' }
+              ]}
+            >
+              {item.caption}
+            </Text>
+          )}
+          <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
+            {strr
+              ? strr.map((x, i) => {
+                  console.log(x.text, ' strr.map strr.map');
+                  return (
+                    <Text
+                      key={i}
+                      style={[
+                        styles.countryNameText,
+                        { maxWidth: isPress ? '100%' : '100%' }
+                      ]}
+                    >
+                      {x.text}
+                    </Text>
+                  );
+                })
+              : null}
+            {isPress ? (
               <Text style={styles.privateText}>{i18n.t('label.private')}</Text>
-            </View>
-          ) : null}
+            ) : null}
+          </View>
         </View>
         <Text style={styles.tressCounter}>
           {delimitNumbers(item.planted)}{' '}
@@ -198,5 +234,5 @@ const CompanyListItem = ({ onPressListItem, item, index }) => {
     </TouchableOpacity>
   );
 };
-
+export { CompanyListItem };
 export default tpoLeaderBoard;

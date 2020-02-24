@@ -116,19 +116,19 @@ export default EStyleSheet.create({
     fontWeight: 'normal'
   },
   privateText: {
-    backgroundColor: '#E1E2E2',
+    backgroundColor: '#F2F2F7',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 10,
     fontFamily: 'OpenSans-Bold',
-    color: '#4C5153',
-    width: 90,
+    color: '#87B738',
+    // width: 90,
     textAlign: 'center'
   },
   countryNameCont: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // flex: 1,
-    alignItems: 'center',
+    // alignItems: 'center',
     borderWidth: 0,
     borderColor: 'red'
     // justifyContent: 'space-around'

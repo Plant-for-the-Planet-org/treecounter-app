@@ -7,15 +7,7 @@ import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import { loadProject } from '../../actions/loadTposAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import {
-  View,
-  Text,
-  Animated,
-  StatusBar,
-  SafeAreaView,
-  ScrollView,
-  Dimensions
-} from 'react-native';
+import { View, Text, Animated, StatusBar, ScrollView } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
@@ -24,13 +16,6 @@ import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
-
-const Layout = {
-  window: {
-    height: Dimensions.get('window').height - (56 + 70 + 20),
-    width: Dimensions.get('window').width
-  }
-};
 import HeaderAirBnb from '../Header/HeaderAirBnb.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 

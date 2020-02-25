@@ -1,3 +1,4 @@
+// eslint-disable no-prototype-builtins
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
@@ -49,6 +50,7 @@ class CompetitionFull extends React.Component {
       button = null,
       button2 = null;
     const competitionDetail = this.props.competitionDetail;
+
     const hasEnrollments = competitionDetail
       ? competitionDetail.hasOwnProperty('allEnrollments')
       : false;

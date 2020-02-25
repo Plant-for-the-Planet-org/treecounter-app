@@ -63,6 +63,7 @@ export default class UserHome extends Component {
       readMore: false,
       refreshing: false
     };
+    this.mapView = React.createRef();
   }
   componentDidMount() {
     let { userContributions } = this.props;
@@ -230,22 +231,14 @@ export default class UserHome extends Component {
       alert(error.message);
     }
   };
-  getMapComponent = userContributions => {
-    setTimeout(() => {
-      this.mapRef.fitToCoordinates(
-        userContributions.map(x => ({
-          latitude: x.geoLatitude,
-          longitude: x.geoLongitude
-        })),
-        false // not animated
-      );
-    }, 1000);
+  getMapComponent = (userContributions, mapView) => {
     let mapViewLatLong = {
       latitude: userContributions[userContributions.length - 1].geoLatitude,
       longitude: userContributions[userContributions.length - 1].geoLongitude,
-      latitudeDelta: 0.015 * 5000,
-      longitudeDelta: 0.0121 * 5000
+      latitudeDelta: 0.015,
+      longitudeDelta: 0.0121
     };
+    console.log(mapViewLatLong, 'mapViewLatLong');
     let markerStyle = {
       width: 30,
       height: 30,
@@ -269,11 +262,20 @@ export default class UserHome extends Component {
         </View>
       </Marker>
     ));
+
+    let onMapReady = () => {
+      mapView.fitToCoordinates(
+        userContributions.map(x => ({
+          latitude: x.geoLatitude,
+          longitude: x.geoLongitude
+        }))
+      );
+    };
+    console.log(mapView, 'mapViewmapView');
     return (
       <MapView
-        ref={ref => {
-          this.mapRef = ref;
-        }}
+        onMapReady={onMapReady}
+        ref={ref => (mapView = ref)}
         provider={PROVIDER_GOOGLE}
         style={{ height: 250, flex: 1 }}
         initialRegion={mapViewLatLong}
@@ -515,8 +517,7 @@ export default class UserHome extends Component {
               <Text style={styles.sectionTitle}>
                 {i18n.t('label.my_trees')}
               </Text>
-              {this.getMapComponent(this.props.userContributions)}
-
+              {this.getMapComponent(this.props.userContributions, this.mapView)}
               <ContributionCardList
                 contributions={this.props.userContributions}
                 deleteContribution={this.props.deleteContribution}

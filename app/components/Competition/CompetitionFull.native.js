@@ -1,4 +1,4 @@
-// eslint-disable no-prototype-builtins
+/* eslint-disable no-prototype-builtins */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';

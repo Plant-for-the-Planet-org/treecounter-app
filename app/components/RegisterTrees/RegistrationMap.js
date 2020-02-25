@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { loadModules } from 'react-arcgis';
+import { loadModules } from 'esri-loader';
 import ArcGISContributionCaptureMap from '../Map/ArcGISContributionCaptureMap';
 
 class RegistrationMap extends React.Component {

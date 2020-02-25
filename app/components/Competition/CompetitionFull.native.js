@@ -49,7 +49,9 @@ class CompetitionFull extends React.Component {
       button = null,
       button2 = null;
     const competitionDetail = this.props.competitionDetail;
-    const hasEnrollments = competitionDetail.hasOwnProperty('allEnrollments');
+    const hasEnrollments = competitionDetail
+      ? competitionDetail.hasOwnProperty('allEnrollments')
+      : false;
 
     debug(' CompetitionFull ', competitionDetail);
     let participantCount = 0,

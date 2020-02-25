@@ -16,7 +16,7 @@ import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
-import HeaderAirBnb from '../Header/HeaderAirBnb.native';
+import HeaderFullPages from '../Header/HeaderFullPages.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 
 /**
@@ -116,7 +116,7 @@ class PlantProjectFull extends React.Component {
           barStyle={'dark-content'}
           styleContainer={{ marginTop: Platform.OS === 'ios' ? -20 : 0 }}
         />
-        <HeaderAirBnb
+        <HeaderFullPages
           navigation={this.props.navigation}
           title={''}
           scrollY={this.state.scrollY}

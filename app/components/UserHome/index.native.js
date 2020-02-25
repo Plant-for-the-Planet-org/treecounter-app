@@ -40,7 +40,7 @@ import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -248,6 +248,22 @@ export default class UserHome extends Component {
       justifyContent: 'center',
       alignItems: 'center'
     };
+
+    let fullScreenIcon = (
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 10,
+          right: 10,
+          padding: 15,
+          backgroundColor: '#fff',
+          borderRadius: 50
+        }}
+      >
+        <Icon name={'fullscreen'} size={30} color={'#4C5153'} />
+      </View>
+    );
+
     let markerList = userContributions.map(oneContribution => (
       <Marker
         identifier={String(oneContribution.id)}
@@ -273,15 +289,18 @@ export default class UserHome extends Component {
     };
     console.log(mapView, 'mapViewmapView');
     return (
-      <MapView
-        onMapReady={onMapReady}
-        ref={ref => (mapView = ref)}
-        provider={PROVIDER_GOOGLE}
-        style={{ height: 250, flex: 1 }}
-        initialRegion={mapViewLatLong}
-      >
-        {markerList}
-      </MapView>
+      <View style={{ flex: 1 }}>
+        <MapView
+          onMapReady={onMapReady}
+          ref={ref => (mapView = ref)}
+          provider={PROVIDER_GOOGLE}
+          style={{ height: 250, flex: 1 }}
+          initialRegion={mapViewLatLong}
+        >
+          {markerList}
+        </MapView>
+        {fullScreenIcon}
+      </View>
     );
   };
   render() {

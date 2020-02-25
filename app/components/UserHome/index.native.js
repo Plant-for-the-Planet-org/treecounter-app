@@ -10,8 +10,8 @@ import {
   TouchableOpacity,
   Share,
   SafeAreaView,
-  RefreshControl
-  //FlatList
+  RefreshControl,
+  FlatList
 } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { debug } from '../../debug';
@@ -485,23 +485,29 @@ export default class UserHome extends Component {
             <Text style={styles.sectionTitle}>{i18n.t('label.projects')}</Text>
           ) : null}
           <ScrollView>
-            {userProfile.plantProjects
-              ? userProfile.plantProjects.map(project => (
-                  <PlantProjectSnippet
-                    key={'projectFull' + project.id}
-                    onMoreClick={id =>
-                      this.onPlantProjectClick(id, project.name)
-                    }
-                    plantProject={project}
-                    onSelectClickedFeaturedProjects={id =>
-                      this.onPlantProjectClick(id, project.name)
-                    }
-                    showMoreButton={false}
-                    tpoName={project.tpo_name}
-                    navigation={this.props.navigation}
-                  />
-                ))
-              : null}
+            {userProfile.plantProjects ? (
+              <FlatList
+                data={userProfile.plantProjects}
+                renderItem={({ item }) => {
+                  let project = item;
+                  return (
+                    <PlantProjectSnippet
+                      key={'projectFull' + project.id}
+                      onMoreClick={id =>
+                        this.onPlantProjectClick(id, project.name)
+                      }
+                      plantProject={project}
+                      onSelectClickedFeaturedProjects={id =>
+                        this.onPlantProjectClick(id, project.name)
+                      }
+                      showMoreButton={false}
+                      tpoName={project.tpo_name}
+                      navigation={this.props.navigation}
+                    />
+                  );
+                }}
+              />
+            ) : null}
           </ScrollView>
 
           {this.props.userContributions.length ? (
@@ -592,18 +598,25 @@ function MyCompetitions(props) {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingLeft: 20 }}
       >
-        {competitions.length > 0
-          ? competitions.map(competition => (
-              <CompetitionSnippet
-                key={'competition' + competition.id}
-                onMoreClick={id =>
-                  props.onCompetitionClick(id, competition.name)
-                }
-                competition={competition}
-                type="all"
-              />
-            ))
-          : null}
+        {competitions.length > 0 ? (
+          <FlatList
+            horizontal
+            data={competitions}
+            renderItem={({ item }) => {
+              let competition = item;
+              return (
+                <CompetitionSnippet
+                  key={'competition' + competition.id}
+                  onMoreClick={id =>
+                    props.onCompetitionClick(id, competition.name)
+                  }
+                  competition={competition}
+                  type="all"
+                />
+              );
+            }}
+          />
+        ) : null}
       </ScrollView>
     </View>
   );

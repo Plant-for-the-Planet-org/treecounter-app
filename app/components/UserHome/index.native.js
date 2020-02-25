@@ -41,6 +41,9 @@ import CompetitionSnippet from './app/CompetitionSnippet';
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FullMapComponent from './FullMapComponent';
+import Modal from 'react-native-modalbox';
+
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +54,7 @@ export default class UserHome extends Component {
       svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
+      isFullMapComponentShow: false,
       svgData: svgData,
       routes: [
         { key: 'home', title: i18n.t('label.home') },
@@ -122,7 +126,8 @@ export default class UserHome extends Component {
     const shouldUpdate =
       JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
       nextState.index !== this.state.index ||
-      nextState.showAllContributions !== this.state.showAllContributions;
+      nextState.showAllContributions !== this.state.showAllContributions ||
+      nextState.isFullMapComponentShow !== this.state.isFullMapComponentShow;
     return shouldUpdate;
   }
 
@@ -231,7 +236,8 @@ export default class UserHome extends Component {
       alert(error.message);
     }
   };
-  getMapComponent = (userContributions, mapView) => {
+
+  getMapComponent = (userContributions, mapView, isFullMapComponentShow) => {
     let mapViewLatLong = {
       latitude: userContributions[userContributions.length - 1].geoLatitude,
       longitude: userContributions[userContributions.length - 1].geoLongitude,
@@ -250,7 +256,12 @@ export default class UserHome extends Component {
     };
 
     let fullScreenIcon = (
-      <View
+      <TouchableOpacity
+        onPress={() => {
+          this.setState({
+            isFullMapComponentShow: !this.state.isFullMapComponentShow
+          });
+        }}
         style={{
           position: 'absolute',
           bottom: 10,
@@ -261,7 +272,7 @@ export default class UserHome extends Component {
         }}
       >
         <Icon name={'fullscreen'} size={30} color={'#4C5153'} />
-      </View>
+      </TouchableOpacity>
     );
 
     let markerList = userContributions.map(oneContribution => (
@@ -304,19 +315,35 @@ export default class UserHome extends Component {
     );
   };
   render() {
+    console.log(
+      this.state.isFullMapComponentShow,
+      'this.state.isFullMapComponentShow'
+    );
     const { userProfile, navigation } = this.props;
     // const profileType = userProfile.type;
-    let {
+    const {
       svgData,
       showAllContributions,
       showAllRecurrentContributions,
-      recurrentUserContributions
+      recurrentUserContributions,
+      isFullMapComponentShow
     } = this.state;
     debug(userProfile);
     return (
       <View style={{ elevation: 1 }}>
+        {isFullMapComponentShow ? (
+          <View
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              zIndex: 1000
+            }}
+          >
+            <FullMapComponent />
+          </View>
+        ) : null}
         <SafeAreaView />
-
         <ScrollView
           contentContainerStyle={{ paddingBottom: 72 }}
           refreshControl={
@@ -536,7 +563,11 @@ export default class UserHome extends Component {
               <Text style={styles.sectionTitle}>
                 {i18n.t('label.my_trees')}
               </Text>
-              {this.getMapComponent(this.props.userContributions, this.mapView)}
+              {this.getMapComponent(
+                this.props.userContributions,
+                this.mapView,
+                this.state.isFullMapComponentShow
+              )}
               <ContributionCardList
                 contributions={this.props.userContributions}
                 deleteContribution={this.props.deleteContribution}

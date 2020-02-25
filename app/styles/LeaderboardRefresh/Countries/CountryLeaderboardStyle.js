@@ -91,22 +91,42 @@ export default EStyleSheet.create({
     borderRadius: 100
   },
   countryBody: {
-    flex: 0.7
+    flex: 1
   },
   countryNameText: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 18,
     color: '#4d5153',
-    lineHeight: 24
+    lineHeight: 24,
+    // flex: 1,
+    borderWidth: 0,
+    borderColor: 'green',
+    paddingHorizontal: 10,
+    maxWidth: '50%'
   },
   tressCounter: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 13,
     color: '#4d5153',
     fontWeight: 'bold',
-    lineHeight: 25
+    lineHeight: 25,
+    paddingHorizontal: 10
   },
   tressText: {
     fontWeight: 'normal'
+  },
+  privateText: {
+    backgroundColor: '#f2f2f7',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 10,
+    fontFamily: 'OpenSans-Bold',
+    color: '#87b738',
+    width: 90,
+    textAlign: 'center',
+    fontSize: 11
+  },
+  countryNameCont: {
+    flexDirection: 'row'
   }
 });

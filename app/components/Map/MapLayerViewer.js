@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import * as React from 'react';
-import { WebMap, loadModules } from 'react-arcgis';
+import { WebMap } from '@esri/react-arcgis';
+import { loadModules } from 'esri-loader';
 import PropTypes from 'prop-types';
 import { debug } from '../../debug';
 import { mapCollapse, mapExpand } from '../../assets';

@@ -226,8 +226,8 @@ class PlantProjectSnippet extends PureComponent {
                       marginRight: 10
                     }}
                   />
-                  
-                  
+
+
                   <View style={styles.survivalText}>
                     <View style={{ flexDirection: 'row' }}>
                       <Text style={styles.survivalText}>

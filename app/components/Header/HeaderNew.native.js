@@ -62,7 +62,7 @@ export default function HeaderNew(props) {
       >
         <Text
           style={{
-            fontFamily: 'OpenSans-Bold',
+            fontFamily: 'OpenSans-ExtraBold',
             fontSize: 27,
             lineHeight: 40,
             letterSpacing: 0,

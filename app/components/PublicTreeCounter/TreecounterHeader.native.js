@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 
 import userHomeStyles from '../../styles/user-home.native';
 import UserProfileImage from '../Common/UserProfileImage';
+import GetRandomImage from './../../utils/getRandomImage';
 
 const TreecounterHeader = ({
   caption,
@@ -15,10 +16,15 @@ const TreecounterHeader = ({
 }) => {
   return (
     <View style={[userHomeStyles.userProfileContainer, containerStyle]}>
-      <UserProfileImage
-        imageStyle={userHomeStyles.userProfileImage}
-        profileImage={logo}
-      />
+      {logo ? (
+        <UserProfileImage
+          imageStyle={userHomeStyles.userProfileImage}
+          profileImage={logo}
+        />
+      ) : (
+        <GetRandomImage name={caption} />
+      )}
+
       <View style={userHomeStyles.userInfo}>
         <View style={userHomeStyles.userInfoName}>
           <Text style={userHomeStyles.nameStyle}>{caption}</Text>

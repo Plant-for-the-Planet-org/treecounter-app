@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import PropTypes from 'prop-types';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Platform } from 'react-native';
 import i18n from '../../locales/i18n.js';
 import { targetFormSchema } from '../../server/parsedSchemas/target';
 import styles from '../../styles/login.native';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
-
+import HeaderNew from './../Header/HeaderNew.native';
 let Form = t.form.Form;
 
 export default class Target extends Component {
@@ -29,7 +29,13 @@ export default class Target extends Component {
     return (
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.container}>
-          <CardLayout style={{ flex: 1 }}>
+          <HeaderNew
+            title={i18n.t('label.set_target')}
+            navigation={this.props.navigation}
+          />
+          <CardLayout
+            style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 140 : 100 }}
+          >
             <Form
               ref={'setTargetForm'}
               type={targetFormSchema}

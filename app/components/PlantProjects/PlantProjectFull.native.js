@@ -13,7 +13,8 @@ import {
   Animated,
   StatusBar,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
@@ -24,6 +25,12 @@ import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 
+const Layout = {
+  window: {
+    height: Dimensions.get('window').height - (56 + 70 + 20),
+    width: Dimensions.get('window').width
+  }
+};
 import HeaderAirBnb from '../Header/HeaderAirBnb.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 
@@ -118,10 +125,11 @@ class PlantProjectFull extends React.Component {
     const backgroundColor = 'white';
 
     return !loader ? (
-      <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <StatusBar
           backgroundColor="rgba(52, 52, 52, 0.0)"
           barStyle={'dark-content'}
+          styleContainer={{ marginTop: Platform.OS === 'ios' ? -20 : 0 }}
         />
         <HeaderAirBnb
           navigation={this.props.navigation}
@@ -190,7 +198,7 @@ class PlantProjectFull extends React.Component {
             </FullHeightButton>
           </View>
         ) : null}
-      </SafeAreaView>
+      </View>
     ) : (
       <View style={{ flex: 1, marginTop: -20 }}>
         <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />

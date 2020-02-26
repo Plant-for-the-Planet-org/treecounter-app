@@ -255,7 +255,7 @@ export default class RegisterTreeTab extends PureComponent {
               </Text>
             }
             onCancel={() => {
-              updateRoute('app_userHome', this.props.navigation.navigation);
+              updateRoute('app_userHome', this.props.navigation);
             }}
             cancelText={i18n.t('label.go_back')}
             applyText={i18n.t('label.add_project')}

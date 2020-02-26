@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  singleTreeRegisterFormSchema,
-  schemaOptionsSingleTree,
-  multipleTreesRegisterFormSchema,
-  schemaOptionsMultipleTrees
-} from '../../server/parsedSchemas/registerTrees';
 import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab.native';
 import i18n from '../../locales/i18n.js';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
@@ -52,21 +46,10 @@ export default class EditUserContribution extends Component {
         enableResetScrollToCoords={false}
       >
         <RegisterTreeTab
-          buttonTitle={i18n.t('label.update')}
           onRegister={this.props.onSubmit}
           mode={this.state.mode}
           plantProjects={this.plantProjects}
-          schemaType={
-            this.state.mode == 'single-tree'
-              ? singleTreeRegisterFormSchema
-              : multipleTreesRegisterFormSchema
-          }
           isTpo={isTpo(this.props.currentUserProfile)}
-          schemaOptions={
-            this.state.mode == 'single-tree'
-              ? schemaOptionsSingleTree
-              : schemaOptionsMultipleTrees
-          }
           value={this.props.userContribution}
           isEdit
         />

@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React, { PureComponent } from 'react';
-import { WebMap } from 'react-arcgis';
+import { WebMap } from '@esri/react-arcgis';
 import PropTypes from 'prop-types';
-import { loadModules } from 'react-arcgis';
+import { loadModules } from 'esri-loader';
 import i18n from '../../locales/i18n.js';
 
 class MapContributionCapture extends PureComponent {

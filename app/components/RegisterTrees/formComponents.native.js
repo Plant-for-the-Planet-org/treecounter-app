@@ -39,24 +39,15 @@ export const FormikFormTree = props => {
   const [geometry, setGeometry] = useState(props.geometry);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
   const [initValue, setInitValue] = useState(props.initialValues);
-  useEffect(
-    () => {
-      setGeometry(props.geometry);
-    },
-    [props.geometry]
-  );
-  useEffect(
-    () => {
-      setInitValue(props.initialValues);
-    },
-    [props]
-  );
-  useEffect(
-    () => {
-      setGeoLocation(props.geoLocation);
-    },
-    [props.geoLocation]
-  );
+  useEffect(() => {
+    setGeometry(props.geometry);
+  }, [props.geometry]);
+  useEffect(() => {
+    setInitValue(props.initialValues);
+  }, [props]);
+  useEffect(() => {
+    setGeoLocation(props.geoLocation);
+  }, [props.geoLocation]);
 
   const parentProps = props;
   const isMultipleTree = props.mode === 'multiple-trees';
@@ -132,7 +123,7 @@ export const FormikFormTree = props => {
                             color: '#4d5153'
                           }}
                         >
-                          {i18n.t('label.register_tree_tpo_label')}
+                          {i18n.t('label.register_tree_tpo_label')}{' '}
                           <TouchableWithoutFeedback
                             onPress={() => {
                               inputEl &&
@@ -152,8 +143,7 @@ export const FormikFormTree = props => {
                                 ? parentProps.plantProjects[0].text
                                 : filter(parentProps.plantProjects, {
                                     value: props.values.plantProject
-                                  })[0].text}
-                              {`   `}
+                                  })[0].text}{' '}
                               <Icon
                                 name="angle-down"
                                 size={20}

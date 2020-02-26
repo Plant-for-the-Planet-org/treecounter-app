@@ -18,11 +18,11 @@ class TargetContainer extends React.Component {
     this.onSubmitTarget = this.onSubmitTarget.bind(this);
   }
   onSubmitTarget = () => {
-    console.log(
+    debug(
       '\x1b[45m targetCOntainer',
       this.refs.targetContainer.refs.setTargetForm.validate
     );
-    console.log('\x1b[0m');
+    debug('\x1b[0m');
     debug(this.refs.targetContainer.refs.setTargetForm.validate());
     let value = this.refs.targetContainer.refs.setTargetForm.getValue();
     if (value) {

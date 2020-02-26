@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RegisterTreeTab from '../RegisterTrees/RegisterTreeTab.native';
-import i18n from '../../locales/i18n.js';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 

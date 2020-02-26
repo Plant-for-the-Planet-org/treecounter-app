@@ -7,9 +7,9 @@ import {
   Image,
   Dimensions
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView from 'react-native-maps';
-import { tree_1 } from '../../assets/index';
+import { tree_1, donateIcon } from '../../assets/index';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 
 const { width, height } = Dimensions.get('window');
@@ -29,46 +29,8 @@ let markerStyle = {
 
 export default class FullMapComponent extends Component {
   state = {
-    markers: [
-      {
-        coordinate: {
-          latitude: 45.524548,
-          longitude: -122.6749817
-        },
-        title: 'Best Place',
-        description: 'This is the best place in Portland'
-      },
-      {
-        coordinate: {
-          latitude: 45.524698,
-          longitude: -122.6655507
-        },
-        title: 'Second Best Place',
-        description: 'This is the second best place in Portland'
-      },
-      {
-        coordinate: {
-          latitude: 45.5230786,
-          longitude: -122.6701034
-        },
-        title: 'Third Best Place',
-        description: 'This is the third best place in Portland'
-      },
-      {
-        coordinate: {
-          latitude: 45.521016,
-          longitude: -122.6561917
-        },
-        title: 'Fourth Best Place',
-        description: 'This is the fourth best place in Portland'
-      }
-    ],
-    region: {
-      latitude: 45.52220671242907,
-      longitude: -122.6653281029795,
-      latitudeDelta: 0.04864195044303443,
-      longitudeDelta: 0.040142817690068
-    }
+    markers: [],
+    region: null
   };
 
   componentWillMount() {
@@ -76,6 +38,30 @@ export default class FullMapComponent extends Component {
     this.animation = new Animated.Value(0);
   }
   componentDidMount() {
+    const { normalizeDataForFullMap } = this.props;
+
+    this.setState(
+      {
+        markers: this.props.normalizeDataForFullMap,
+        region: this.props.region
+      },
+      () => {
+        console.log(
+          this.state.markers[0].coordinate,
+          'this.state.markers[0].coordinate,'
+        );
+        setTimeout(() => {
+          this.map.animateToRegion(
+            {
+              ...this.state.markers[0].coordinate,
+              latitudeDelta: 75,
+              longitudeDelta: 75
+            },
+            350
+          );
+        }, 2000);
+      }
+    );
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
@@ -92,11 +78,13 @@ export default class FullMapComponent extends Component {
         if (this.index !== index) {
           this.index = index;
           const { coordinate } = this.state.markers[index];
+          console.log(coordinate, 'coordinate');
           this.map.animateToRegion(
             {
-              ...coordinate,
-              latitudeDelta: this.state.region.latitudeDelta,
-              longitudeDelta: this.state.region.longitudeDelta
+              latitude: coordinate.latitude,
+              longitude: coordinate.longitude,
+              latitudeDelta: 75,
+              longitudeDelta: 75
             },
             350
           );
@@ -106,24 +94,33 @@ export default class FullMapComponent extends Component {
   }
 
   render() {
+    console.log(this.state.markers);
     return (
       <View style={styles.container}>
-        <MapView
-          ref={map => (this.map = map)}
-          initialRegion={this.state.region}
-          style={styles.container}
-        >
-          {this.state.markers.map((marker, index) => (
-            <MapView.Marker key={index} coordinate={marker.coordinate}>
-              <Animated.View style={[styles.markerWrap]}>
-                <Animated.View style={[styles.ring]} />
-                <View style={markerStyle}>
-                  <Image source={Smalltreewhite} resizeMode={'contain'} />
-                </View>
-              </Animated.View>
-            </MapView.Marker>
-          ))}
-        </MapView>
+        {this.state.region ? (
+          <MapView
+            ref={map => (this.map = map)}
+            initialRegion={this.state.region}
+            style={styles.container}
+          >
+            {this.state.markers.map((marker, index) => (
+              <MapView.Marker
+                key={index}
+                coordinate={{
+                  latitude: marker.coordinate.latitude,
+                  longitude: marker.coordinate.longitude
+                }}
+              >
+                <Animated.View style={[styles.markerWrap]}>
+                  <Animated.View style={[styles.ring]} />
+                  <View style={markerStyle}>
+                    <Image source={Smalltreewhite} resizeMode={'contain'} />
+                  </View>
+                </Animated.View>
+              </MapView.Marker>
+            ))}
+          </MapView>
+        ) : null}
         <Animated.ScrollView
           horizontal
           scrollEventThrottle={1}
@@ -147,17 +144,24 @@ export default class FullMapComponent extends Component {
           {this.state.markers.map((marker, index) => (
             <View style={styles.card} key={index}>
               <View style={styles.textContent}>
-                <ListItem />
+                <ListItem marker={marker} />
               </View>
             </View>
           ))}
         </Animated.ScrollView>
+        <Icon
+          onPress={this.props.toogleIsFullMapComponentShow}
+          name={'keyboard-arrow-down'}
+          size={40}
+          color={'#000'}
+          style={{ position: 'absolute', top: 20, left: 20 }}
+        />
       </View>
     );
   }
 }
 
-const ListItem = () => {
+const ListItem = ({ marker }) => {
   return (
     <View
       style={{
@@ -193,9 +197,7 @@ const ListItem = () => {
           </Text>
         </View>
       </View>
-      <View
-        style={{ justifyContent: 'center', alignItems: 'center', margin: 20 }}
-      >
+      <View style={{ justifyContent: 'center', alignItems: 'flex-end' }}>
         <View
           style={{
             flexDirection: 'row',
@@ -212,7 +214,7 @@ const ListItem = () => {
               color: '#89b53a'
             }}
           >
-            1
+            {marker.treeCount}
           </Text>
           <Image
             source={tree_1}
@@ -250,7 +252,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
     height: CARD_HEIGHT,
-    width: width * 0.85,
+    width: width * 0.8,
     overflow: 'hidden',
     borderWidth: 0,
     borderColor: 'red'

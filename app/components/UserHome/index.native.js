@@ -83,7 +83,6 @@ export default class UserHome extends Component {
       recurrentUserContributions: recurrentUserContributions
     });
   }
-
   onRefresh = () => {
     this.setState({
       refreshing: true
@@ -236,6 +235,10 @@ export default class UserHome extends Component {
       alert(error.message);
     }
   };
+  toogleIsFullMapComponentShow = () =>
+    this.setState({
+      isFullMapComponentShow: !this.state.isFullMapComponentShow
+    });
 
   getMapComponent = (userContributions, mapView, isFullMapComponentShow) => {
     let mapViewLatLong = {
@@ -257,11 +260,7 @@ export default class UserHome extends Component {
 
     let fullScreenIcon = (
       <TouchableOpacity
-        onPress={() => {
-          this.setState({
-            isFullMapComponentShow: !this.state.isFullMapComponentShow
-          });
-        }}
+        onPress={this.toogleIsFullMapComponentShow}
         style={{
           position: 'absolute',
           bottom: 10,
@@ -314,12 +313,21 @@ export default class UserHome extends Component {
       </View>
     );
   };
+
+  toNormalizeData = userContributions => {
+    return userContributions.map(x => ({
+      coordinate: {
+        latitude: x.geoLatitude,
+        longitude: x.geoLongitude
+      },
+      title: 'Best Place',
+      description: 'This is the best place in Portland',
+      treeCount: x.treeCount
+    }));
+  };
+
   render() {
-    console.log(
-      this.state.isFullMapComponentShow,
-      'this.state.isFullMapComponentShow'
-    );
-    const { userProfile, navigation } = this.props;
+    const { userProfile, navigation, userContributions } = this.props;
     // const profileType = userProfile.type;
     const {
       svgData,
@@ -329,6 +337,14 @@ export default class UserHome extends Component {
       isFullMapComponentShow
     } = this.state;
     debug(userProfile);
+    const normalizeDataForFullMap = this.toNormalizeData(userContributions);
+    let mapViewLatLong = {
+      latitude: userContributions[userContributions.length - 1].geoLatitude,
+      longitude: userContributions[userContributions.length - 1].geoLongitude,
+      latitudeDelta: 0.015,
+      longitudeDelta: 0.0121
+    };
+    console.log(normalizeDataForFullMap, 'this.props.userContributions');
     return (
       <View style={{ elevation: 1 }}>
         {isFullMapComponentShow ? (
@@ -340,7 +356,11 @@ export default class UserHome extends Component {
               zIndex: 1000
             }}
           >
-            <FullMapComponent />
+            <FullMapComponent
+              toogleIsFullMapComponentShow={this.toogleIsFullMapComponentShow}
+              region={mapViewLatLong}
+              normalizeDataForFullMap={normalizeDataForFullMap}
+            />
           </View>
         ) : null}
         <SafeAreaView />

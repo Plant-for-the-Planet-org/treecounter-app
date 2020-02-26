@@ -202,6 +202,7 @@ import forest from './images/trees/forest.png';
 import fields from './images/trees/fields.png';
 import beach from './images/trees/beach.png';
 
+import tree_1 from './images/icons/tree_1.png';
 export {
   treelogo,
   germany,
@@ -401,5 +402,6 @@ export {
   forest,
   hills,
   mountains,
-  spruce
+  spruce,
+  tree_1
 };

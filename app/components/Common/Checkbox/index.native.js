@@ -49,7 +49,7 @@ class CheckBox extends React.Component {
   }
 }
 
-CheckBox.PropTypes = {
+CheckBox.propTypes = {
   title: PropTypes.string,
   checkBoxState: PropTypes.bool.isRequired,
   onValueChange: PropTypes.func.isRequired

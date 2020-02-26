@@ -43,7 +43,7 @@ import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullMapComponent from './FullMapComponent';
 import Modal from 'react-native-modalbox';
-
+import { mapStyle } from './FullMapComponent';
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -306,6 +306,7 @@ export default class UserHome extends Component {
           provider={PROVIDER_GOOGLE}
           style={{ height: 250, flex: 1 }}
           initialRegion={mapViewLatLong}
+          customMapStyle={mapStyle}
         >
           {markerList}
         </MapView>

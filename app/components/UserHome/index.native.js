@@ -43,7 +43,7 @@ import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullMapComponent from './FullMapComponent';
 import Modal from 'react-native-modalbox';
-
+import { mapStyle } from './FullMapComponent';
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -82,7 +82,6 @@ export default class UserHome extends Component {
       recurrentUserContributions: recurrentUserContributions
     });
   }
-
   onRefresh = () => {
     this.setState({
       refreshing: true
@@ -234,6 +233,10 @@ export default class UserHome extends Component {
       alert(error.message);
     }
   };
+  toogleIsFullMapComponentShow = () =>
+    this.setState({
+      isFullMapComponentShow: !this.state.isFullMapComponentShow
+    });
 
   getMapComponent = (userContributions, mapView) => {
     let mapViewLatLong = {
@@ -303,6 +306,7 @@ export default class UserHome extends Component {
           provider={PROVIDER_GOOGLE}
           style={{ height: 250, flex: 1 }}
           initialRegion={mapViewLatLong}
+          customMapStyle={mapStyle}
         >
           {markerList}
         </MapView>
@@ -310,8 +314,21 @@ export default class UserHome extends Component {
       </View>
     );
   };
+
+  toNormalizeData = userContributions => {
+    return userContributions.map(x => ({
+      coordinate: {
+        latitude: x.geoLatitude,
+        longitude: x.geoLongitude
+      },
+      title: 'Best Place',
+      description: 'This is the best place in Portland',
+      treeCount: x.treeCount
+    }));
+  };
+
   render() {
-    const { userProfile, navigation } = this.props;
+    const { userProfile, navigation, userContributions } = this.props;
     // const profileType = userProfile.type;
     const {
       svgData,
@@ -320,6 +337,14 @@ export default class UserHome extends Component {
       recurrentUserContributions
     } = this.state;
     debug(userProfile);
+    const normalizeDataForFullMap = this.toNormalizeData(userContributions);
+    let mapViewLatLong = {
+      latitude: userContributions[userContributions.length - 1].geoLatitude,
+      longitude: userContributions[userContributions.length - 1].geoLongitude,
+      latitudeDelta: 0.015,
+      longitudeDelta: 0.0121
+    };
+    console.log(normalizeDataForFullMap, 'this.props.userContributions');
     return (
       <View style={{ elevation: 1 }}>
         <SafeAreaView />

@@ -1,10 +1,26 @@
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, Dimensions, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Dimensions, View, Text } from 'react-native';
 import StaticTabbar from './StaticTabbar';
 import i18n from '../../locales/i18n';
+import NetInfo from '@react-native-community/netinfo';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Tabbar extends React.PureComponent {
+  state = {
+    isConnected: true,
+    isInternetReachable: true
+  };
+  componentDidMount() {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+      this.setState({
+        isConnected: state.isConnected,
+        isInternetReachable: state.isInternetReachable
+      });
+    });
+    unsubscribe();
+  }
   render() {
     const { width } = Dimensions.get('window');
     const height = 64;
@@ -74,7 +90,23 @@ export default class Tabbar extends React.PureComponent {
           />
         </View>
 
-        <SafeAreaView style={styles.container} />
+        {this.state.isConnected && this.state.isInternetReachable ? (
+          <SafeAreaView style={styles.container} />
+        ) : (
+          <View
+            style={{
+              width: '100%',
+              height: 48,
+              backgroundColor: '#3498db',
+              justifyContent: 'center'
+            }}
+          >
+            <Text style={[styles.noInternetText]}>
+              {i18n.t('label.noInternet')}
+            </Text>
+            {/* <Text style={styles.noInternetText}>{i18n.t('label.someFunctionality')}</Text> */}
+          </View>
+        )}
       </>
     );
   }
@@ -83,5 +115,11 @@ export default class Tabbar extends React.PureComponent {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white'
+  },
+  noInternetText: {
+    color: '#fff',
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 12,
+    alignSelf: 'center'
   }
 });

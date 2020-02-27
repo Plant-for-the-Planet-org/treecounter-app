@@ -1,8 +1,16 @@
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, Dimensions, View, Text } from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Dimensions,
+  View,
+  Text,
+  TouchableOpacity
+} from 'react-native';
 import StaticTabbar from './StaticTabbar';
 import i18n from '../../locales/i18n';
 import NetInfo from '@react-native-community/netinfo';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Tabbar extends React.PureComponent {
@@ -10,7 +18,7 @@ export default class Tabbar extends React.PureComponent {
     isConnected: true,
     isInternetReachable: true
   };
-  componentDidMount() {
+  checkInternet = () => {
     const unsubscribe = NetInfo.addEventListener(state => {
       console.log('Connection type', state.type);
       console.log('Is connected?', state.isConnected);
@@ -20,6 +28,9 @@ export default class Tabbar extends React.PureComponent {
       });
     });
     unsubscribe();
+  };
+  componentDidMount() {
+    this.checkInternet();
   }
   render() {
     const { width } = Dimensions.get('window');
@@ -93,19 +104,23 @@ export default class Tabbar extends React.PureComponent {
         {this.state.isConnected && this.state.isInternetReachable ? (
           <SafeAreaView style={styles.container} />
         ) : (
-          <View
+          <TouchableOpacity
+            onPress={() => this.checkInternet()}
             style={{
               width: '100%',
               height: 48,
               backgroundColor: '#3498db',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              flexDirection: 'row',
+              alignItems: 'center'
             }}
           >
             <Text style={[styles.noInternetText]}>
               {i18n.t('label.noInternet')}
             </Text>
+            <Icon name={'refresh'} size={18} color={'white'} />
             {/* <Text style={styles.noInternetText}>{i18n.t('label.someFunctionality')}</Text> */}
-          </View>
+          </TouchableOpacity>
         )}
       </>
     );
@@ -120,6 +135,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'OpenSans-SemiBold',
     fontSize: 12,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginRight: 6
   }
 });

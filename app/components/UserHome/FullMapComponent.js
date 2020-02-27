@@ -5,7 +5,8 @@ import {
   View,
   Animated,
   Image,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView from 'react-native-maps';
@@ -38,6 +39,10 @@ export default class FullMapComponent extends Component {
     this.animation = new Animated.Value(0);
   }
   componentDidMount() {
+    this.initiateComponent();
+  }
+
+  initiateComponent = () => {
     const { normalizeDataForFullMap } = this.props;
 
     this.setState(
@@ -91,7 +96,7 @@ export default class FullMapComponent extends Component {
         }
       }, 10);
     });
-  }
+  };
 
   render() {
     console.log(this.state.markers);
@@ -104,22 +109,24 @@ export default class FullMapComponent extends Component {
             style={styles.container}
             customMapStyle={mapStyle}
           >
-            {this.state.markers.map((marker, index) => (
-              <MapView.Marker
-                key={index}
-                coordinate={{
-                  latitude: marker.coordinate.latitude,
-                  longitude: marker.coordinate.longitude
-                }}
-              >
-                <Animated.View style={[styles.markerWrap]}>
-                  <Animated.View style={[styles.ring]} />
-                  <View style={markerStyle}>
-                    <Image source={Smalltreewhite} resizeMode={'contain'} />
-                  </View>
-                </Animated.View>
-              </MapView.Marker>
-            ))}
+            {this.state.markers.length
+              ? this.state.markers.map((marker, index) => (
+                  <MapView.Marker
+                    key={index}
+                    coordinate={{
+                      latitude: marker.coordinate.latitude,
+                      longitude: marker.coordinate.longitude
+                    }}
+                  >
+                    <Animated.View style={[styles.markerWrap]}>
+                      <Animated.View style={[styles.ring]} />
+                      <View style={markerStyle}>
+                        <Image source={Smalltreewhite} resizeMode={'contain'} />
+                      </View>
+                    </Animated.View>
+                  </MapView.Marker>
+                ))
+              : null}
           </MapView>
         ) : null}
         <Animated.ScrollView
@@ -142,13 +149,15 @@ export default class FullMapComponent extends Component {
           style={styles.scrollView}
           contentContainerStyle={styles.endPadding}
         >
-          {this.state.markers.map((marker, index) => (
-            <View style={styles.card} key={index}>
-              <View style={styles.textContent}>
-                <ListItem marker={marker} />
-              </View>
-            </View>
-          ))}
+          {this.state.markers.length
+            ? this.state.markers.map((marker, index) => (
+                <View style={styles.card} key={index}>
+                  <View style={styles.textContent}>
+                    <ListItem marker={marker} />
+                  </View>
+                </View>
+              ))
+            : null}
         </Animated.ScrollView>
         <Icon
           onPress={this.props.toogleIsFullMapComponentShow}
@@ -157,6 +166,36 @@ export default class FullMapComponent extends Component {
           color={'#000'}
           style={{ position: 'absolute', top: 20, left: 20 }}
         />
+        <TouchableOpacity
+          onPress={this.props.toogleIsFullMapComponentShow}
+          style={{
+            position: 'absolute',
+            bottom: 200,
+            right: 20,
+            padding: 15,
+            backgroundColor: '#fff',
+            borderRadius: 50,
+            zIndex: 2000,
+            elevation: 6
+          }}
+        >
+          <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={this.initiateComponent}
+          style={{
+            position: 'absolute',
+            bottom: 270,
+            right: 20,
+            padding: 15,
+            backgroundColor: '#fff',
+            borderRadius: 50,
+            zIndex: 2000,
+            elevation: 6
+          }}
+        >
+          <Icon name={'my-location'} size={30} color={'#4C5153'} />
+        </TouchableOpacity>
       </View>
     );
   }

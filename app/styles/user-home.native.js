@@ -19,6 +19,14 @@ export default EStyleSheet.create({
     marginBottom: 10,
     alignItems: 'center'
   },
+  fullScreenIcon: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 50
+  },
   userProfileImage: {
     // borderWidth: 4,
     // borderColor: '#F4F2F7',

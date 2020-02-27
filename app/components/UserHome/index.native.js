@@ -41,8 +41,6 @@ import CompetitionSnippet from './app/CompetitionSnippet';
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import FullMapComponent from './FullMapComponent';
-import Modal from 'react-native-modalbox';
 import { mapStyle } from './FullMapComponent';
 export default class UserHome extends Component {
   constructor(props) {
@@ -258,14 +256,7 @@ export default class UserHome extends Component {
             userContributions
           });
         }}
-        style={{
-          position: 'absolute',
-          bottom: 10,
-          right: 10,
-          padding: 15,
-          backgroundColor: '#fff',
-          borderRadius: 50
-        }}
+        style={styles.fullScreenIcon}
       >
         <Icon name={'fullscreen'} size={30} color={'#4C5153'} />
       </TouchableOpacity>
@@ -324,7 +315,7 @@ export default class UserHome extends Component {
   };
 
   render() {
-    const { userProfile, navigation, userContributions } = this.props;
+    const { userProfile, navigation } = this.props;
     // const profileType = userProfile.type;
     const {
       svgData,

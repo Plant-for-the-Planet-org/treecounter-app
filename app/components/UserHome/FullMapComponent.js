@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView from 'react-native-maps';
-import { tree_1, donateIcon } from '../../assets/index';
+import { tree_1 } from '../../assets/index';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 
 const { width, height } = Dimensions.get('window');

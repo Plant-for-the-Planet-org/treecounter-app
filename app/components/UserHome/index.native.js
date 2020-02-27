@@ -241,7 +241,6 @@ export default class UserHome extends Component {
       latitudeDelta: 0.015,
       longitudeDelta: 0.0121
     };
-    console.log(mapViewLatLong, 'mapViewLatLong');
     let markerStyle = {
       width: 30,
       height: 30,
@@ -295,7 +294,6 @@ export default class UserHome extends Component {
         }))
       );
     };
-    console.log(mapView, 'mapViewmapView');
     return (
       <View style={{ flex: 1 }}>
         <MapView
@@ -342,7 +340,6 @@ export default class UserHome extends Component {
       latitudeDelta: 0.015,
       longitudeDelta: 0.0121
     };
-    console.log(normalizeDataForFullMap, 'this.props.userContributions');
     return (
       <View style={{ elevation: 1 }}>
         <SafeAreaView />

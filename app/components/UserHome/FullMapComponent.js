@@ -84,7 +84,6 @@ export default class FullMapComponent extends Component {
             if (this.index !== index) {
               this.index = index;
               const oneContribution = this.state.markers[index];
-              console.log(oneContribution, 'oneContribution 32132132');
               this.map.animateToRegion(
                 {
                   latitude: oneContribution.geoLatitude,
@@ -112,7 +111,6 @@ export default class FullMapComponent extends Component {
   };
 
   render() {
-    console.log(this.state.markers);
     const { navigation } = this.props;
 
     return (
@@ -184,35 +182,17 @@ export default class FullMapComponent extends Component {
           name={'keyboard-arrow-down'}
           size={40}
           color={'#000'}
-          style={{ position: 'absolute', top: 20, left: 20 }}
+          style={styles.downArrowIcon}
         />
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={{
-            position: 'absolute',
-            bottom: 200,
-            right: 20,
-            padding: 15,
-            backgroundColor: '#fff',
-            borderRadius: 50,
-            zIndex: 2000,
-            elevation: 6
-          }}
+          style={styles.fullScreenExitIcon}
         >
           <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={this.initiateComponent}
-          style={{
-            position: 'absolute',
-            bottom: 270,
-            right: 20,
-            padding: 15,
-            backgroundColor: '#fff',
-            borderRadius: 50,
-            zIndex: 2000,
-            elevation: 6
-          }}
+          style={styles.myLocationIcon}
         >
           <Icon name={'my-location'} size={30} color={'#4C5153'} />
         </TouchableOpacity>
@@ -225,62 +205,22 @@ const ListItem = ({ marker, toNavigateUserContributionDetail }) => {
   return (
     <TouchableOpacity
       onPress={() => toNavigateUserContributionDetail(marker)}
-      style={{
-        flex: 1,
-        marginVertical: 10,
-        marginHorizontal: 10,
-        flexDirection: 'row'
-      }}
+      style={styles.cardContainer}
     >
       <View style={{ flex: 1 }}>
         <View>
-          <Text
-            style={{
-              fontFamily: 'OpenSans-Bold',
-              fontSize: 18,
-              lineHeight: 24,
-              color: '#4d5153'
-            }}
-          >
-            Gift to Sam William
-          </Text>
+          <Text style={styles.cardHeaderText}>Gift to Sam William</Text>
         </View>
         <View style={{ marginVertical: 5 }}>
-          <Text
-            style={{
-              fontFamily: 'OpenSans-Regular',
-              fontSize: 14,
-              lineHeight: 24,
-              color: '#4d5153'
-            }}
-          >
+          <Text style={styles.subHeaderText}>
             Planted by Eden Reforestation Projects
           </Text>
         </View>
       </View>
-      <View style={{ justifyContent: 'center', alignItems: 'flex-end' }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: 'OpenSans-Bold',
-              fontSize: 25,
-              lineHeight: 35,
-              marginHorizontal: 2,
-              color: '#89b53a'
-            }}
-          >
-            {marker.treeCount}
-          </Text>
-          <Image
-            source={tree_1}
-            style={{ width: 18, height: 20, marginHorizontal: 2 }}
-          />
+      <View style={styles.treeCont}>
+        <View style={styles.subCont}>
+          <Text style={styles.treeCountText}>{marker.treeCount}</Text>
+          <Image source={tree_1} style={styles.treeIcon} />
         </View>
       </View>
     </TouchableOpacity>
@@ -292,6 +232,70 @@ export { ListItem };
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  treeCountText: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 25,
+    lineHeight: 35,
+    marginHorizontal: 2,
+    color: '#89b53a'
+  },
+  treeIcon: {
+    width: 18,
+    height: 20,
+    marginHorizontal: 2
+  },
+  subCont: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  treeCount: {
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  },
+  cardHeaderText: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 18,
+    lineHeight: 24,
+    color: '#4d5153'
+  },
+  subHeaderText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    lineHeight: 24,
+    color: '#4d5153'
+  },
+  cardContainer: {
+    flex: 1,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    flexDirection: 'row'
+  },
+  downArrowIcon: {
+    position: 'absolute',
+    top: 20,
+    left: 20
+  },
+  myLocationIcon: {
+    position: 'absolute',
+    bottom: 270,
+    right: 20,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    zIndex: 2000,
+    elevation: 6
+  },
+  fullScreenExitIcon: {
+    position: 'absolute',
+    bottom: 200,
+    right: 20,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    zIndex: 2000,
+    elevation: 6
   },
   scrollView: {
     position: 'absolute',

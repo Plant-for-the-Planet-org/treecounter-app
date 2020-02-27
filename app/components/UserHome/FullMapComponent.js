@@ -29,9 +29,14 @@ let markerStyle = {
 };
 
 export default class FullMapComponent extends Component {
+  constructor() {
+    super();
+    this.arr = [];
+  }
   state = {
     markers: [],
-    region: null
+    region: null,
+    dynamicIndex: 0
   };
 
   componentWillMount() {
@@ -110,6 +115,14 @@ export default class FullMapComponent extends Component {
     });
   };
 
+  onPressMarker = index => {
+    this.scrollview_ref.getNode().scrollTo({
+      x: this.arr[index],
+      y: 0,
+      animated: true
+    });
+  };
+
   render() {
     const { navigation } = this.props;
 
@@ -125,6 +138,7 @@ export default class FullMapComponent extends Component {
             {this.state.markers.length
               ? this.state.markers.map((marker, index) => (
                   <MapView.Marker
+                    onPress={() => this.onPressMarker(index)}
                     key={index}
                     coordinate={{
                       latitude: marker.geoLatitude,
@@ -143,6 +157,9 @@ export default class FullMapComponent extends Component {
           </MapView>
         ) : null}
         <Animated.ScrollView
+          ref={ref => {
+            this.scrollview_ref = ref;
+          }}
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
@@ -164,7 +181,15 @@ export default class FullMapComponent extends Component {
         >
           {this.state.markers.length
             ? this.state.markers.map((marker, index) => (
-                <View style={styles.card} key={index}>
+                <View
+                  onLayout={({ nativeEvent }) => {
+                    const layout = nativeEvent.layout;
+                    console.log(layout, 'event 13213');
+                    this.arr[index] = layout.x;
+                  }}
+                  style={styles.card}
+                  key={index}
+                >
                   <View style={styles.textContent}>
                     <ListItem
                       marker={marker}

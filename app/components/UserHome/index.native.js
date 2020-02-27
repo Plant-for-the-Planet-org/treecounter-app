@@ -333,13 +333,6 @@ export default class UserHome extends Component {
       recurrentUserContributions
     } = this.state;
     debug(userProfile);
-    const normalizeDataForFullMap = this.toNormalizeData(userContributions);
-    let mapViewLatLong = {
-      latitude: userContributions[userContributions.length - 1].geoLatitude,
-      longitude: userContributions[userContributions.length - 1].geoLongitude,
-      latitudeDelta: 0.015,
-      longitudeDelta: 0.0121
-    };
     return (
       <View style={{ elevation: 1 }}>
         <SafeAreaView />
@@ -367,10 +360,6 @@ export default class UserHome extends Component {
                     <Text style={styles.nameStyle}>
                       {userProfile.treecounter.displayName}
                     </Text>
-                    {/* <Text style={styles.nameStyle2}>
-                      {' '}
-                      {userProfile.lastname}
-                    </Text> */}
                   </View>
                 </View>
               </View>

@@ -54,7 +54,6 @@ export default class UserHome extends Component {
       svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
-      isFullMapComponentShow: false,
       svgData: svgData,
       routes: [
         { key: 'home', title: i18n.t('label.home') },
@@ -126,8 +125,7 @@ export default class UserHome extends Component {
     const shouldUpdate =
       JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
       nextState.index !== this.state.index ||
-      nextState.showAllContributions !== this.state.showAllContributions ||
-      nextState.isFullMapComponentShow !== this.state.isFullMapComponentShow;
+      nextState.showAllContributions !== this.state.showAllContributions;
     return shouldUpdate;
   }
 
@@ -237,7 +235,7 @@ export default class UserHome extends Component {
     }
   };
 
-  getMapComponent = (userContributions, mapView, isFullMapComponentShow) => {
+  getMapComponent = (userContributions, mapView) => {
     let mapViewLatLong = {
       latitude: userContributions[userContributions.length - 1].geoLatitude,
       longitude: userContributions[userContributions.length - 1].geoLongitude,
@@ -258,9 +256,7 @@ export default class UserHome extends Component {
     let fullScreenIcon = (
       <TouchableOpacity
         onPress={() => {
-          this.setState({
-            isFullMapComponentShow: !this.state.isFullMapComponentShow
-          });
+          updateRoute('my_trees_fullMap', this.props.navigation);
         }}
         style={{
           position: 'absolute',
@@ -315,34 +311,17 @@ export default class UserHome extends Component {
     );
   };
   render() {
-    console.log(
-      this.state.isFullMapComponentShow,
-      'this.state.isFullMapComponentShow'
-    );
     const { userProfile, navigation } = this.props;
     // const profileType = userProfile.type;
     const {
       svgData,
       showAllContributions,
       showAllRecurrentContributions,
-      recurrentUserContributions,
-      isFullMapComponentShow
+      recurrentUserContributions
     } = this.state;
     debug(userProfile);
     return (
       <View style={{ elevation: 1 }}>
-        {isFullMapComponentShow ? (
-          <View
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              zIndex: 1000
-            }}
-          >
-            <FullMapComponent />
-          </View>
-        ) : null}
         <SafeAreaView />
         <ScrollView
           contentContainerStyle={{ paddingBottom: 72 }}
@@ -563,11 +542,7 @@ export default class UserHome extends Component {
               <Text style={styles.sectionTitle}>
                 {i18n.t('label.my_trees')}
               </Text>
-              {this.getMapComponent(
-                this.props.userContributions,
-                this.mapView,
-                this.state.isFullMapComponentShow
-              )}
+              {this.getMapComponent(this.props.userContributions, this.mapView)}
               <ContributionCardList
                 contributions={this.props.userContributions}
                 deleteContribution={this.props.deleteContribution}

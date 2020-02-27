@@ -259,7 +259,10 @@ export default class UserHome extends Component {
     let fullScreenIcon = (
       <TouchableOpacity
         onPress={() => {
-          updateRoute('my_trees_fullMap', this.props.navigation);
+          updateRoute('my_trees_fullMap', this.props.navigation, undefined, {
+            userContributions,
+            toogleIsFullMapComponentShow: this.toogleIsFullMapComponentShow
+          });
         }}
         style={{
           position: 'absolute',

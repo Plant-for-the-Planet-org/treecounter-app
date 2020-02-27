@@ -43,12 +43,17 @@ export default class FullMapComponent extends Component {
   }
 
   initiateComponent = () => {
-    const { normalizeDataForFullMap } = this.props;
-
+    const { navigation } = this.props;
+    let userContributions = navigation.getParam('userContributions');
     this.setState(
       {
-        markers: this.props.normalizeDataForFullMap,
-        region: this.props.region
+        markers: userContributions,
+        region: {
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }
       },
       () => {
         console.log(
@@ -58,44 +63,48 @@ export default class FullMapComponent extends Component {
         setTimeout(() => {
           this.map.animateToRegion(
             {
-              ...this.state.markers[0].coordinate,
+              ...{
+                latitude: this.state.markers[0].geoLatitude,
+                longitude: this.state.markers[0].geoLongitude
+              },
               latitudeDelta: 75,
               longitudeDelta: 75
             },
             350
           );
         }, 2000);
+
+        this.animation.addListener(({ value }) => {
+          let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+          if (index >= this.state.markers.length) {
+            index = this.state.markers.length - 1;
+          }
+          if (index <= 0) {
+            index = 0;
+          }
+
+          clearTimeout(this.regionTimeout);
+          this.regionTimeout = setTimeout(() => {
+            if (this.index !== index) {
+              this.index = index;
+              const oneContribution = this.state.markers[index];
+              console.log(oneContribution, 'oneContribution 32132132');
+              this.map.animateToRegion(
+                {
+                  latitude: oneContribution.geoLatitude,
+                  longitude: oneContribution.geoLongitude,
+                  latitudeDelta: 75,
+                  longitudeDelta: 75
+                },
+                350
+              );
+            }
+          }, 10);
+        });
       }
     );
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
-    this.animation.addListener(({ value }) => {
-      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
-      if (index >= this.state.markers.length) {
-        index = this.state.markers.length - 1;
-      }
-      if (index <= 0) {
-        index = 0;
-      }
-
-      clearTimeout(this.regionTimeout);
-      this.regionTimeout = setTimeout(() => {
-        if (this.index !== index) {
-          this.index = index;
-          const { coordinate } = this.state.markers[index];
-          console.log(coordinate, 'coordinate');
-          this.map.animateToRegion(
-            {
-              latitude: coordinate.latitude,
-              longitude: coordinate.longitude,
-              latitudeDelta: 75,
-              longitudeDelta: 75
-            },
-            350
-          );
-        }
-      }, 10);
-    });
   };
 
   render() {
@@ -114,8 +123,8 @@ export default class FullMapComponent extends Component {
                   <MapView.Marker
                     key={index}
                     coordinate={{
-                      latitude: marker.coordinate.latitude,
-                      longitude: marker.coordinate.longitude
+                      latitude: marker.geoLatitude,
+                      longitude: marker.geoLongitude
                     }}
                   >
                     <Animated.View style={[styles.markerWrap]}>

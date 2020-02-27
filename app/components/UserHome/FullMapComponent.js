@@ -109,6 +109,8 @@ export default class FullMapComponent extends Component {
 
   render() {
     console.log(this.state.markers);
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         {this.state.region ? (
@@ -169,14 +171,14 @@ export default class FullMapComponent extends Component {
             : null}
         </Animated.ScrollView>
         <Icon
-          onPress={this.props.toogleIsFullMapComponentShow}
+          onPress={() => navigation.goBack()}
           name={'keyboard-arrow-down'}
           size={40}
           color={'#000'}
           style={{ position: 'absolute', top: 20, left: 20 }}
         />
         <TouchableOpacity
-          onPress={this.props.toogleIsFullMapComponentShow}
+          onPress={() => navigation.goBack()}
           style={{
             position: 'absolute',
             bottom: 200,

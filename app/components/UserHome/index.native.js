@@ -233,10 +233,6 @@ export default class UserHome extends Component {
       alert(error.message);
     }
   };
-  toogleIsFullMapComponentShow = () =>
-    this.setState({
-      isFullMapComponentShow: !this.state.isFullMapComponentShow
-    });
 
   getMapComponent = (userContributions, mapView) => {
     let mapViewLatLong = {
@@ -260,8 +256,7 @@ export default class UserHome extends Component {
       <TouchableOpacity
         onPress={() => {
           updateRoute('my_trees_fullMap', this.props.navigation, undefined, {
-            userContributions,
-            toogleIsFullMapComponentShow: this.toogleIsFullMapComponentShow
+            userContributions
           });
         }}
         style={{

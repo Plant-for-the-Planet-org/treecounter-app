@@ -56,10 +56,6 @@ export default class FullMapComponent extends Component {
         }
       },
       () => {
-        console.log(
-          this.state.markers[0].coordinate,
-          'this.state.markers[0].coordinate,'
-        );
         setTimeout(() => {
           this.map.animateToRegion(
             {
@@ -107,6 +103,14 @@ export default class FullMapComponent extends Component {
     // We should just debounce the event listener here
   };
 
+  toNavigateUserContributionDetail = contribution => {
+    let { plantProjectName, tpoName, treeSpecies } = contribution;
+    this.props.navigation.navigate('contribution_details', {
+      contribution,
+      titleParam: plantProjectName || tpoName || treeSpecies
+    });
+  };
+
   render() {
     console.log(this.state.markers);
     const { navigation } = this.props;
@@ -131,9 +135,9 @@ export default class FullMapComponent extends Component {
                   >
                     <Animated.View style={[styles.markerWrap]}>
                       <Animated.View style={[styles.ring]} />
-                      <View style={markerStyle}>
+                      <TouchableOpacity style={markerStyle}>
                         <Image source={Smalltreewhite} resizeMode={'contain'} />
-                      </View>
+                      </TouchableOpacity>
                     </Animated.View>
                   </MapView.Marker>
                 ))
@@ -164,7 +168,12 @@ export default class FullMapComponent extends Component {
             ? this.state.markers.map((marker, index) => (
                 <View style={styles.card} key={index}>
                   <View style={styles.textContent}>
-                    <ListItem marker={marker} />
+                    <ListItem
+                      marker={marker}
+                      toNavigateUserContributionDetail={
+                        this.toNavigateUserContributionDetail
+                      }
+                    />
                   </View>
                 </View>
               ))
@@ -212,9 +221,10 @@ export default class FullMapComponent extends Component {
   }
 }
 
-const ListItem = ({ marker }) => {
+const ListItem = ({ marker, toNavigateUserContributionDetail }) => {
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => toNavigateUserContributionDetail(marker)}
       style={{
         flex: 1,
         marginVertical: 10,
@@ -273,7 +283,7 @@ const ListItem = ({ marker }) => {
           />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

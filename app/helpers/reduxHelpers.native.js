@@ -1,13 +1,12 @@
 import {
   createReactNavigationReduxMiddleware,
-  createReduxBoundAddListener
+  createReduxContainer
 } from 'react-navigation-redux-helpers';
 
 const drawerNavMiddleware = createReactNavigationReduxMiddleware(
-  'drawerRoot',
   state => state.appDrawer
 );
 
-const drawerRootListener = createReduxBoundAddListener('drawerRoot');
+const drawerRootListener = createReduxContainer('drawerRoot');
 
 export { drawerNavMiddleware, drawerRootListener };

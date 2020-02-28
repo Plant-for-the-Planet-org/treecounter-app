@@ -8,6 +8,7 @@ export const initialProps = {
 export const context = {
   scheme: process.env.scheme,
   host: process.env.host,
+  api_url: process.env.api_url,
   base: process.env.base, // API base url. Debug mode off: "" on: "/app_dev.php" (requires login)
   debug: process.env.debug, // local console debugging switch
   currency: process.env.currency,

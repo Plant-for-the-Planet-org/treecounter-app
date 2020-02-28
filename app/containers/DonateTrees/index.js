@@ -36,7 +36,7 @@ class DonationTreesContainer extends PureComponent {
   componentWillMount() {
     const { supportTreecounterAction, match } = this.props;
     if (match && match.params && match.params.slug) {
-      postDirectRequest('/suggest', 'q=' + match.params.slug)
+      postDirectRequest('/suggest.php', 'q=' + match.params.slug)
         .then(_suggestions => {
           debug('sugessions', _suggestions);
           if (
@@ -179,9 +179,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  DonationTreesContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DonationTreesContainer);
 
 DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,

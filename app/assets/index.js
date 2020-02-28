@@ -203,6 +203,8 @@ import fields from './images/trees/fields.png';
 import beach from './images/trees/beach.png';
 
 import tree_1 from './images/icons/tree_1.png';
+import smalltreewhite from '../assets/images/smalltreewhite.png';
+
 export {
   treelogo,
   germany,
@@ -403,5 +405,6 @@ export {
   hills,
   mountains,
   spruce,
-  tree_1
+  tree_1,
+  smalltreewhite
 };

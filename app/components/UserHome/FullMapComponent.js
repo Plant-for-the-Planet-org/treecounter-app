@@ -10,8 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView from 'react-native-maps';
-import { tree_1 } from '../../assets/index';
-import Smalltreewhite from '../../assets/images/smalltreewhite.png';
+import { tree_1, smalltreewhite } from '../../assets/index';
 
 const { width, height } = Dimensions.get('window');
 
@@ -123,6 +122,10 @@ export default class FullMapComponent extends Component {
     });
   };
 
+  onLayoutMarker = ({ nativeEvent }) => {
+    this.arr[index] = nativeEvent.layout.x;
+  };
+
   render() {
     const { navigation } = this.props;
 
@@ -148,7 +151,7 @@ export default class FullMapComponent extends Component {
                     <Animated.View style={[styles.markerWrap]}>
                       <Animated.View style={[styles.ring]} />
                       <TouchableOpacity style={markerStyle}>
-                        <Image source={Smalltreewhite} resizeMode={'contain'} />
+                        <Image source={smalltreewhite} resizeMode={'contain'} />
                       </TouchableOpacity>
                     </Animated.View>
                   </MapView.Marker>
@@ -182,11 +185,7 @@ export default class FullMapComponent extends Component {
           {this.state.markers.length
             ? this.state.markers.map((marker, index) => (
                 <View
-                  onLayout={({ nativeEvent }) => {
-                    const layout = nativeEvent.layout;
-                    console.log(layout, 'event 13213');
-                    this.arr[index] = layout.x;
-                  }}
+                  onLayout={this.onLayoutMarker}
                   style={styles.card}
                   key={index}
                 >

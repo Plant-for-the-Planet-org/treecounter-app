@@ -329,9 +329,7 @@ export function encodeFormData(mode, mapPoint) {
   }
   if (mode) {
     if (mode === 'single-tree' && Array.isArray(mapPoint) && mapPoint.length) {
-      return `geoLatitude=${mapPoint[0].coordinate.latitude}&geoLongitude=${
-        mapPoint[0].coordinate.longitude
-      }`;
+      return `geoLatitude=${mapPoint[0].coordinate.latitude}&geoLongitude=${mapPoint[0].coordinate.longitude}`;
     } else if (
       mode === 'multiple-trees' &&
       Array.isArray(mapPoint) &&
@@ -690,7 +688,7 @@ class NativeMapView extends Component {
           this.state.markers.map(marker => (
             <Marker
               // image={markerImage}
-              key={marker.key}
+              key={marker.key || 0}
               coordinate={marker.coordinate}
             >
               <Image
@@ -869,15 +867,14 @@ class NativeMapView extends Component {
     return this.renderComp(
       <View style={fullScreen ? styles.fullScreenContainer : styles.container}>
         {this.renderPolygon()}
-        {fullScreen &&
-          this.isSingleTree && (
-            <View style={styles.markerFixed}>
-              <Image
-                style={fullScreen ? styles.markerFullScreen : styles.marker}
-                source={markerImage}
-              />
-            </View>
-          )}
+        {fullScreen && this.isSingleTree && (
+          <View style={styles.markerFixed}>
+            <Image
+              style={fullScreen ? styles.markerFullScreen : styles.marker}
+              source={markerImage}
+            />
+          </View>
+        )}
         {this.props.searchPlacesBox
           ? this.renderComp(
               <TouchableWithoutFeedback
@@ -958,8 +955,8 @@ class NativeMapView extends Component {
                           width: 19,
                           height: 19,
                           marginLeft: 16,
-                          resizeMode: 'cover',
-                          color: '#4d5153'
+                          resizeMode: 'cover'
+                          // color: '#4d5153'
                         }}
                       />
                     )}
@@ -1038,9 +1035,7 @@ class NativeMapView extends Component {
                   onContinue(
                     this.state.mode === 'single-tree'
                       ? encodeFormData(mode, this.state.markers)
-                      : `geoLatitude=${
-                          this.state.region.latitude
-                        }&geoLongitude=${this.state.region.longitude}`,
+                      : `geoLatitude=${this.state.region.latitude}&geoLongitude=${this.state.region.longitude}`,
                     encodeFormData(mode, this.state.polygons),
                     mode,
                     this.state.address
@@ -1064,8 +1059,8 @@ class NativeMapView extends Component {
 
 NativeMapView.propTypes = {
   mapStyle: PropTypes.object,
-  onContinue: PropTypes.func.isRequired,
-  navigation: PropTypes.func.isRequired,
+  onContinue: PropTypes.func,
+  navigation: PropTypes.func,
   onPress: PropTypes.func,
   fullScreen: PropTypes.bool,
   location: PropTypes.any,

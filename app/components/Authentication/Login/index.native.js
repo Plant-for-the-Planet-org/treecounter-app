@@ -205,7 +205,9 @@ export default class Login extends Component {
                         ref={input => {
                           this.passwordTextInput = input;
                         }}
-                        onSubmitEditing={props.isValid && props.handleSubmit}
+                        onSubmitEditing={
+                          props.isValid ? props.handleSubmit : null
+                        }
                       />
                       <TouchableOpacity
                         onPress={() => this.togglePassword()}
@@ -246,7 +248,7 @@ export default class Login extends Component {
                         styles.actionButtonTouchable,
                         { marginLeft: 24, marginRight: 24 }
                       ]}
-                      onPress={props.isValid && props.handleSubmit}
+                      onPress={props.isValid ? props.handleSubmit : null}
                     >
                       <View
                         style={[
@@ -276,7 +278,7 @@ export default class Login extends Component {
                       styles.actionButtonTouchable,
                       { marginLeft: 24, marginRight: 24, paddingHorizontal: 24 }
                     ]}
-                    onPress={props.isValid && props.handleSubmit}
+                    onPress={props.isValid ? props.handleSubmit : null}
                   >
                     <View
                       style={[

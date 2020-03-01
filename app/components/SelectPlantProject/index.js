@@ -247,38 +247,40 @@ class SelectPlantProject extends Component {
           </div>
           <Slider {...settings}>
             {featuredProjects.length !== 0
-              ? featuredProjects.sort((a, b) => a.id - b.id).map(project => {
-                  {
-                    /* debug(project); */
-                  }
-                  return (
-                    <CardLayout
-                      className="plant_project_content"
-                      key={project.created}
-                    >
-                      <PlantProjectFull
-                        onViewMoreClick={() =>
-                          this.setState({
-                            imageViewMore: !this.state.imageViewMore
-                          })
-                        }
-                        callExpanded={() => this.callExpanded()}
-                        expanded={false}
-                        plantProject={project}
-                        tpoName={project.tpoName}
-                      />
-                      <div className="select-project_button__container">
-                        <PrimaryButton
-                          onClick={() =>
-                            this.onSelectClickedFeaturedProjects(project.id)
+              ? featuredProjects
+                  .sort((a, b) => a.id - b.id)
+                  .map(project => {
+                    {
+                      /* debug(project); */
+                    }
+                    return (
+                      <CardLayout
+                        className="plant_project_content"
+                        key={project.id}
+                      >
+                        <PlantProjectFull
+                          onViewMoreClick={() =>
+                            this.setState({
+                              imageViewMore: !this.state.imageViewMore
+                            })
                           }
-                        >
-                          {i18n.t('label.donate_trees_cap')}
-                        </PrimaryButton>
-                      </div>
-                    </CardLayout>
-                  );
-                })
+                          callExpanded={() => this.callExpanded()}
+                          expanded={false}
+                          plantProject={project}
+                          tpoName={project.tpoName}
+                        />
+                        <div className="select-project_button__container">
+                          <PrimaryButton
+                            onClick={() =>
+                              this.onSelectClickedFeaturedProjects(project.id)
+                            }
+                          >
+                            {i18n.t('label.donate_trees_cap')}
+                          </PrimaryButton>
+                        </div>
+                      </CardLayout>
+                    );
+                  })
               : null}
           </Slider>
         </div>

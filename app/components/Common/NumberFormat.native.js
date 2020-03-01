@@ -10,13 +10,13 @@ const NumberFormat = ({
   currency,
   userProfile,
   currencies,
-  globalCurrency,
+  context,
   force
 }) => {
   if (!userProfile) {
     userProfile = {
       // we use redux currency or use EUR if not found for now, dont use localstorage currency for now
-      currency: globalCurrency.currency || 'EUR'
+      currency: context.currency || 'EUR'
     };
   }
   if (force && currency) {

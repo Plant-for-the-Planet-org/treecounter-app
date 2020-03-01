@@ -132,6 +132,9 @@ export function orderPlantProject(data, params) {
 }
 
 export function updateUserProfile(data, profileType, forcePromisify) {
+  console.log('\x1b[45m \n\n');
+  console.log(data, profileType, forcePromisify);
+  console.log('\n\n \x1b[0m');
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {

@@ -1,7 +1,15 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { Component } from 'react';
 // import t from 'tcomb-form-native';
-import { Text, View, FlatList, Image, TextInput } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Image,
+  TextInput,
+  ActivityIndicator,
+  StyleSheet
+} from 'react-native';
 import Modal from 'react-native-modalbox';
 import { currentUserProfileSelector, getCurrency } from '../../selectors/index';
 import i18n from '../../locales/i18n';
@@ -17,10 +25,39 @@ import countryCodes from '../../assets/countryCodes.json';
 import { setCurrencyAction } from '../../actions/globalCurrency';
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import { ScrollView } from 'react-native-gesture-handler';
+import { getProgressModelState } from '../../reducers/modelDialogReducer';
 
 const backgroundColor = '#e4e4e4';
 const activeColor = '#74ba00';
 const defaultColor = '#4d5153';
+
+const Loader = () => {
+  return (
+    <View style={[styles.loaderContainer]}>
+      <View style={styles.loaderContent}>
+        <View
+          style={[
+            styles.loaderContent,
+            { paddingVertical: 30, paddingHorizontal: 10 }
+          ]}
+        >
+          <ActivityIndicator size={80} color={activeColor} />
+          <Text
+            style={{
+              color: '#4D5153',
+              fontFamily: 'OpenSans-SemiBold',
+              fontSize: 18,
+              marginTop: 30,
+              textAlign: 'center'
+            }}
+          >
+            Setting up your default currency
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
+};
 
 class GlobalCurrencySelector extends Component {
   constructor(props) {
@@ -145,7 +182,7 @@ class GlobalCurrencySelector extends Component {
           />
           <Text
             style={{
-              width: 60,
+              width: 70,
               paddingLeft: 20,
               fontFamily: 'OpenSans-Bold',
               fontSize: 16,
@@ -182,6 +219,8 @@ class GlobalCurrencySelector extends Component {
     );
   };
   render() {
+    console.log('\x1b[46m progressModelState', this.props.progressModelState);
+    console.log('\x1b[0m');
     const { show } = this.props;
     const currenciesArray = this.getCurrencyNames();
     return (
@@ -194,6 +233,7 @@ class GlobalCurrencySelector extends Component {
         keyboardTopOffset={0}
         swipeToClose
       >
+        {this.props.progressModelState ? <Loader /> : null}
         <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
           {/* <Text style={{ marginLeft: 10, paddingTop: 5, color: defaultColor }}>Currency</Text> */}
           <View
@@ -308,7 +348,8 @@ const mapStateToProps = state => {
   return {
     globalCurrency: getCurrency(state),
     userProfile: currentUserProfileSelector(state),
-    currencies: currenciesSelector(state)
+    currencies: currenciesSelector(state),
+    progressModelState: getProgressModelState(state)
   };
 };
 
@@ -323,6 +364,26 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  GlobalCurrencySelector
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GlobalCurrencySelector);
+
+const styles = StyleSheet.create({
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#111',
+    opacity: 0.8,
+    zIndex: 1,
+    ...StyleSheet.absoluteFillObject
+  },
+  loaderContent: {
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    // padding: 40
+    width: 240
+    // height: 200
+  }
+});

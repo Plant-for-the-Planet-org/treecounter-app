@@ -6,11 +6,15 @@ import styles from '../../styles/menu.native';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 import * as icons from '../../assets';
 import i18n from '../../locales/i18n.js';
-import { getLocalRoute } from '../../actions/apiRouting';
+import {
+  getLocalRoute,
+  getCountryFlagImageUrl
+} from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import UserProfileImage from '../Common/UserProfileImage.native';
 import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector.native';
 import { LargeMenuItem } from './MenuItem.native';
+import countryCodes from '../../assets/countryCodes.json';
 
 //   icons.target_outline;
 
@@ -168,6 +172,8 @@ export default class Menu extends Component {
     updateRoute('app_userHome', navigation, 0);
   };
 
+  getCountryCode = currency => countryCodes.find(c => c.code == currency) || {};
+
   render() {
     return (
       <SafeAreaView style={styles.outerContainer}>
@@ -215,7 +221,15 @@ export default class Menu extends Component {
                 this.setState({ showCurrencyModal: true });
               }}
               title={i18n.t('label.select_currency')}
-              iconUrl={icons.dollar}
+              iconUrl={{
+                uri: getCountryFlagImageUrl(
+                  this.getCountryCode(this.props.preferredCurrency.currency)
+                    .currencyCountryFlag,
+                  'png',
+                  256
+                )
+              }}
+              // iconUrl={icons.dollar}
             />
             {this.props.userProfile ? (
               <LargeMenuItem

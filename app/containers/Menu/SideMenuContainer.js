@@ -6,7 +6,8 @@ import { debug } from '../../debug';
 import Menu from '../../components/Menu';
 import {
   currentUserProfileSelector,
-  userTreecounterSelector
+  userTreecounterSelector,
+  getCurrency
 } from '../../selectors/index';
 import { toggleSideNavAction } from '../../actions/setSideNavAction';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
@@ -85,6 +86,7 @@ class SideMenuContainer extends Component {
         logoutUser={this.props.logoutUser}
         pathname={pathname}
         lastRoute={this.props.lastRoute}
+        preferredCurrency={this.props.preferredCurrency}
       />
     );
   }
@@ -95,7 +97,8 @@ const mapStateToProps = state => ({
   loggedIn: currentUserProfileSelector(state) !== null,
   userProfile: currentUserProfileSelector(state),
   lastRoute: state.lastRouteState.lastRoute,
-  treecounter: userTreecounterSelector(state)
+  treecounter: userTreecounterSelector(state),
+  preferredCurrency: getCurrency(state)
 });
 
 const mapDispatchToProps = dispatch => {

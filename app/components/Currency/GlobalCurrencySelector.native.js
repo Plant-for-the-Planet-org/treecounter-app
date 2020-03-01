@@ -219,8 +219,6 @@ class GlobalCurrencySelector extends Component {
     );
   };
   render() {
-    console.log('\x1b[46m progressModelState', this.props.progressModelState);
-    console.log('\x1b[0m');
     const { show } = this.props;
     const currenciesArray = this.getCurrencyNames();
     return (

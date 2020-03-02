@@ -263,7 +263,6 @@ class GlobalCurrencySelector extends Component {
                   alignItems: 'center',
                   flexDirection: 'row',
                   borderColor: '#4d5153',
-                  borderWidth: this.state.search ? 1 : this.state.focus,
                   borderRadius: 20,
                   marginLeft: 20
                 }}
@@ -277,12 +276,6 @@ class GlobalCurrencySelector extends Component {
                   placeholder={'Search'}
                   placeholderTextColor={'#4d5153'}
                   fontFamily="OpenSans-SemiBold"
-                  onFocus={() => {
-                    this.setState({ focus: 1 });
-                  }}
-                  onBlur={() => {
-                    this.setState({ focus: 0 });
-                  }}
                 />
                 <TouchableItem
                   style={{

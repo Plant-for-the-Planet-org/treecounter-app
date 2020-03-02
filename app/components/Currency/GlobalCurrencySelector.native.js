@@ -233,7 +233,6 @@ class GlobalCurrencySelector extends Component {
       >
         {this.props.progressModelState ? <Loader /> : null}
         <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
-          {/* <Text style={{ marginLeft: 10, paddingTop: 5, color: defaultColor }}>Currency</Text> */}
           <View
             style={{
               backgroundColor: 'white',
@@ -243,7 +242,6 @@ class GlobalCurrencySelector extends Component {
           >
             <View
               style={{
-                // height: 45,
                 opacity: 1,
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -251,10 +249,7 @@ class GlobalCurrencySelector extends Component {
                 marginBottom: 20
               }}
             >
-              <TouchableItem
-                // key={button.type}
-                onPress={this.onClosed}
-              >
+              <TouchableItem onPress={this.onClosed}>
                 <Icon name="close" size={30} color="#4d5153" />
               </TouchableItem>
               <View
@@ -293,17 +288,19 @@ class GlobalCurrencySelector extends Component {
             </View>
             <ScrollView>
               <View>
-                <Text
-                  style={{
-                    fontFamily: 'OpenSans-Bold',
-                    fontSize: 16,
-                    color: defaultColor,
-                    marginTop: 20,
-                    marginBottom: 10
-                  }}
-                >
-                  {i18n.t('label.featured_currencies')}
-                </Text>
+                {this.state.search ? null : (
+                  <Text
+                    style={{
+                      fontFamily: 'OpenSans-Bold',
+                      fontSize: 16,
+                      color: defaultColor,
+                      marginTop: 20,
+                      marginBottom: 10
+                    }}
+                  >
+                    {i18n.t('label.featured_currencies')}
+                  </Text>
+                )}
                 <FlatList
                   data={currenciesArray.slice(0, 2)}
                   keyExtractor={this.keyExtractor}
@@ -311,17 +308,19 @@ class GlobalCurrencySelector extends Component {
                 />
               </View>
               <View>
-                <Text
-                  style={{
-                    fontFamily: 'OpenSans-Bold',
-                    fontSize: 16,
-                    color: defaultColor,
-                    marginTop: 12,
-                    marginBottom: 10
-                  }}
-                >
-                  {i18n.t('label.all_currencies')}
-                </Text>
+                {this.state.search ? null : (
+                  <Text
+                    style={{
+                      fontFamily: 'OpenSans-Bold',
+                      fontSize: 16,
+                      color: defaultColor,
+                      marginTop: 12,
+                      marginBottom: 10
+                    }}
+                  >
+                    {i18n.t('label.all_currencies')}
+                  </Text>
+                )}
               </View>
               <FlatList
                 data={currenciesArray.slice(2)}

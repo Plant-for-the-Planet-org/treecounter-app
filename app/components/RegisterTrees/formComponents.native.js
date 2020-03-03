@@ -242,7 +242,8 @@ export const FormikFormTree = props => {
                                 showClassification &&
                                   focusTheField('treeClassifications');
                               }}
-                              value={props.values.treeCount}
+                              value={'' + props.values.treeCount}
+                              keyboardType="numeric"
                               tintColor={'#4d5153'}
                               titleFontSize={12}
                               labelFontSize={12}
@@ -553,7 +554,7 @@ export class AddMeasurements extends React.Component {
     const { measurementView, elementMasument } = this.state;
     const { props } = this.props;
     return (
-      <View>
+      <View key="form">
         {measurementView &&
           measurementView.map((item, index) => {
             return (

@@ -231,7 +231,7 @@ export default class UserContributions extends React.Component {
   }
 }
 
-UserContributions.PropTypes = {
+UserContributions.propTypes = {
   treeCount: PropTypes.number,
   plantProjectName: PropTypes.string,
   plantProjectSlug: PropTypes.string,

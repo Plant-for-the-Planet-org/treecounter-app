@@ -18,11 +18,6 @@ const { width, height } = Dimensions.get('window');
 const CARD_HEIGHT = 150;
 const CARD_WIDTH = CARD_HEIGHT;
 
-let markerStyle = {
-  width: 40,
-  height: 40
-};
-
 export default class FullMapComponent extends Component {
   constructor() {
     super();
@@ -150,7 +145,7 @@ export default class FullMapComponent extends Component {
                       <TouchableOpacity style={markerStyle}>
                         <Image
                           source={markerImage}
-                          style={markerStyle}
+                          style={{ width: 40, height: 40 }}
                           resizeMode={'contain'}
                         />
                       </TouchableOpacity>
@@ -165,9 +160,7 @@ export default class FullMapComponent extends Component {
             this.scrollview_ref = ref;
           }}
           horizontal
-          //scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
-          //snapToInterval={CARD_WIDTH}
           onScroll={Animated.event(
             [
               {

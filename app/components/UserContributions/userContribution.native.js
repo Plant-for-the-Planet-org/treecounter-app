@@ -26,11 +26,7 @@ export default class UserContributions extends React.Component {
   _handleIndexChange = index => this.setState({ index });
 
   getMapComponent = userContribution => {
-    let geoLatLong = `geoLongitude=${
-      userContribution.geoLongitude
-    }&geoLatitude=${userContribution.geoLatitude}&country=${
-      userContribution.country
-    }`;
+    let geoLatLong = `geoLongitude=${userContribution.geoLongitude}&geoLatitude=${userContribution.geoLatitude}&country=${userContribution.country}`;
     return (
       <NativeMapView
         mapType={'satellite'}
@@ -142,31 +138,30 @@ export default class UserContributions extends React.Component {
           )}
 
           {/* maps the contributionPerson type and name of contributionPerson if any */}
-          {contributionPersonPrefix &&
-            contributionPerson && (
-              <View style={styles.subHeaderTextContainer}>
-                <Text style={styles.subHeaderText}>
-                  {contributionPersonPrefix}
+          {contributionPersonPrefix && contributionPerson && (
+            <View style={styles.subHeaderTextContainer}>
+              <Text style={styles.subHeaderText}>
+                {contributionPersonPrefix}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  updateStaticRoute(
+                    getLocalRoute('app_treecounter'),
+                    navigation,
+                    {
+                      treeCounterId: contributionPersonSlug,
+                      titleParam: contributionPerson
+                    }
+                  );
+                }}
+              >
+                <Text style={[styles.subHeaderText, { color: textColor }]}>
+                  {' '}
+                  {contributionPerson}
                 </Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    updateStaticRoute(
-                      getLocalRoute('app_treecounter'),
-                      navigation,
-                      {
-                        treeCounterId: contributionPersonSlug,
-                        titleParam: contributionPerson
-                      }
-                    );
-                  }}
-                >
-                  <Text style={[styles.subHeaderText, { color: textColor }]}>
-                    {' '}
-                    {contributionPerson}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )}
+              </TouchableOpacity>
+            </View>
+          )}
 
           {/* maps the project name by whom it was planted if any */}
           {plantProjectName && (
@@ -238,7 +233,7 @@ export default class UserContributions extends React.Component {
   }
 }
 
-UserContributions.PropTypes = {
+UserContributions.propTypes = {
   treeCount: PropTypes.number,
   plantProjectName: PropTypes.string,
   plantProjectSlug: PropTypes.string,

@@ -242,13 +242,8 @@ export default class UserHome extends Component {
       longitudeDelta: 0.0121
     };
     let markerStyle = {
-      width: 40,
-      height: 40,
-      backgroundColor: '#89b53a',
-      borderRadius: 50,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
+      width: 30,
+      height: 30
     };
 
     let fullScreenIcon = (
@@ -273,19 +268,18 @@ export default class UserHome extends Component {
         }}
         key={oneContribution.id}
       >
-        <View style={markerStyle}>
-          <Image source={markerImage} resizeMode={'contain'} />
+        <View>
+          <Image
+            source={markerImage}
+            style={markerStyle}
+            resizeMode={'contain'}
+          />
         </View>
       </Marker>
     ));
 
     let onMapReady = () => {
-      mapView.fitToCoordinates(
-        userContributions.map(x => ({
-          latitude: x.geoLatitude,
-          longitude: x.geoLongitude
-        }))
-      );
+      mapView.fitToSuppliedMarkers(userContributions.map(x => String(x.id)));
     };
     return (
       <View style={{ flex: 1 }}>

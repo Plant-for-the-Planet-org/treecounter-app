@@ -21,11 +21,6 @@ const CARD_WIDTH = CARD_HEIGHT;
 let markerStyle = {
   width: 30,
   height: 30
-  // backgroundColor: '#89b53a',
-  // borderRadius: 50,
-  // flex: 1,
-  // justifyContent: 'center',
-  // alignItems: 'center'
 };
 
 export default class FullMapComponent extends Component {
@@ -142,7 +137,6 @@ export default class FullMapComponent extends Component {
             {this.state.markers.length
               ? this.state.markers.map((marker, index) => (
                   <MapView.Marker
-                    onPress={() => this.onPressMarker(index)}
                     key={index}
                     coordinate={{
                       latitude: marker.geoLatitude,
@@ -150,14 +144,16 @@ export default class FullMapComponent extends Component {
                     }}
                   >
                     <Animated.View style={[]}>
-                      <Animated.View style={[]} />
-                      {/* <TouchableOpacity style={markerStyle}> */}
-                      <Image
-                        source={markerImage}
+                      <TouchableOpacity
+                        onPress={() => this.onPressMarker(index)}
                         style={markerStyle}
-                        resizeMode={'contain'}
-                      />
-                      {/* </TouchableOpacity> */}
+                      >
+                        <Image
+                          source={markerImage}
+                          style={markerStyle}
+                          resizeMode={'contain'}
+                        />
+                      </TouchableOpacity>
                     </Animated.View>
                   </MapView.Marker>
                 ))

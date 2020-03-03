@@ -142,10 +142,13 @@ export default class FullMapComponent extends Component {
                     }}
                   >
                     <Animated.View style={[]}>
-                      <TouchableOpacity style={markerStyle}>
+                      <TouchableOpacity>
                         <Image
                           source={markerImage}
-                          style={{ width: 40, height: 40 }}
+                          style={{
+                            width: 40,
+                            height: 40
+                          }}
                           resizeMode={'contain'}
                         />
                       </TouchableOpacity>

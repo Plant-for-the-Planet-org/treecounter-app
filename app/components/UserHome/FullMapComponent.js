@@ -14,7 +14,7 @@ import { tree_1, smalltreewhite } from '../../assets/index';
 
 const { width, height } = Dimensions.get('window');
 
-const CARD_HEIGHT = height / 4;
+const CARD_HEIGHT = 150;
 const CARD_WIDTH = CARD_HEIGHT;
 
 let markerStyle = {
@@ -122,7 +122,7 @@ export default class FullMapComponent extends Component {
     });
   };
 
-  onLayoutMarker = ({ nativeEvent }) => {
+  onLayoutMarker = ({ nativeEvent }, index) => {
     this.arr[index] = nativeEvent.layout.x;
   };
 
@@ -164,9 +164,9 @@ export default class FullMapComponent extends Component {
             this.scrollview_ref = ref;
           }}
           horizontal
-          scrollEventThrottle={1}
+          //scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
-          snapToInterval={CARD_WIDTH}
+          //snapToInterval={CARD_WIDTH}
           onScroll={Animated.event(
             [
               {
@@ -185,7 +185,7 @@ export default class FullMapComponent extends Component {
           {this.state.markers.length
             ? this.state.markers.map((marker, index) => (
                 <View
-                  onLayout={this.onLayoutMarker}
+                  onLayout={e => this.onLayoutMarker(e, index)}
                   style={styles.card}
                   key={index}
                 >

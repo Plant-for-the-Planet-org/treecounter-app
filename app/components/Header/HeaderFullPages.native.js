@@ -5,11 +5,13 @@ import {
   BackHandler,
   View,
   Platform,
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native';
 
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { closeHBlack, closeHWhite, shareBlack, shareWhite } from '../../assets';
 
 const Layout = {
   window: {
@@ -46,6 +48,10 @@ export default function HeaderAnimated(props) {
       BackHandler.removeEventListener('hardwareBackPress', navigateBack);
     };
   });
+
+  // let shareFunction =()=> {
+
+  // }
 
   const blackColor = 'black';
   const styles = StyleSheet.create({
@@ -87,6 +93,7 @@ export default function HeaderAnimated(props) {
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'row',
+          justifyContent: 'space-between',
           width: '100%',
           paddingTop: Platform.OS === 'ios' ? 44 : 24,
           opacity: headerOpacityReverse
@@ -110,13 +117,39 @@ export default function HeaderAnimated(props) {
             }}
             onPress={() => props.navigation.goBack()}
           >
-            <Icon
-              name="clear"
-              color="black"
+            <Image
+              source={closeHBlack}
               style={{
-                fontSize: 32,
-                height: 32,
-                width: 32,
+                height: 24,
+                width: 24,
+                alignSelf: 'center'
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            height: 48,
+            width: 48,
+            justifyContent: 'center',
+            marginRight: 12
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              height: 38,
+              width: 38,
+              zIndex: 1001,
+              justifyContent: 'center',
+              alignSelf: 'center'
+            }}
+            onPress={() => props.navigation.goBack()}
+          >
+            <Image
+              source={shareBlack}
+              style={{
+                height: 24,
+                width: 24,
                 alignSelf: 'center'
               }}
             />
@@ -133,6 +166,7 @@ export default function HeaderAnimated(props) {
           height: Platform.OS === 'ios' ? 96 : 76,
           zIndex: 999,
           alignItems: 'center',
+          justifyContent: 'space-between',
           display: 'flex',
           flexDirection: 'row',
           width: '100%',
@@ -157,7 +191,42 @@ export default function HeaderAnimated(props) {
             }}
             onPress={() => props.navigation.goBack()}
           >
-            <Icon name="clear" color="white" style={styles.whiteWithShadow} />
+            <Image
+              source={closeHWhite}
+              style={{
+                height: 24,
+                width: 24,
+                alignSelf: 'center'
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            height: 48,
+            width: 48,
+            justifyContent: 'center',
+            marginRight: 12
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              height: 38,
+              width: 38,
+              zIndex: 1001,
+              justifyContent: 'center',
+              alignSelf: 'center'
+            }}
+            onPress={() => props.navigation.goBack()}
+          >
+            <Image
+              source={shareWhite}
+              style={{
+                height: 24,
+                width: 24,
+                alignSelf: 'center'
+              }}
+            />
           </TouchableOpacity>
         </View>
       </Animated.View>

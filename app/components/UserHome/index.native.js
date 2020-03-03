@@ -42,6 +42,8 @@ import CompetitionSnippet from './app/CompetitionSnippet';
 import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { mapStyle } from './FullMapComponent';
+import { markerImage } from '../../assets/index.js';
+
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -240,8 +242,8 @@ export default class UserHome extends Component {
       longitudeDelta: 0.0121
     };
     let markerStyle = {
-      width: 30,
-      height: 30,
+      width: 40,
+      height: 40,
       backgroundColor: '#89b53a',
       borderRadius: 50,
       flex: 1,
@@ -272,7 +274,7 @@ export default class UserHome extends Component {
         key={oneContribution.id}
       >
         <View style={markerStyle}>
-          <Image source={Smalltreewhite} resizeMode={'contain'} />
+          <Image source={markerImage} resizeMode={'contain'} />
         </View>
       </Marker>
     ));

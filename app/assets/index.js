@@ -204,6 +204,7 @@ import beach from './images/trees/beach.png';
 
 import tree_1 from './images/icons/tree_1.png';
 import smalltreewhite from '../assets/images/smalltreewhite.png';
+import markerImage from './images/tree.png';
 
 export {
   treelogo,
@@ -406,5 +407,6 @@ export {
   mountains,
   spruce,
   tree_1,
-  smalltreewhite
+  smalltreewhite,
+  markerImage
 };

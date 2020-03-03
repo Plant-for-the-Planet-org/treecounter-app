@@ -11,6 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView from 'react-native-maps';
 import { tree_1, smalltreewhite } from '../../assets/index';
+import { markerImage } from '../../assets/index.js';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,12 +20,12 @@ const CARD_WIDTH = CARD_HEIGHT;
 
 let markerStyle = {
   width: 30,
-  height: 30,
-  backgroundColor: '#89b53a',
-  borderRadius: 50,
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center'
+  height: 30
+  // backgroundColor: '#89b53a',
+  // borderRadius: 50,
+  // flex: 1,
+  // justifyContent: 'center',
+  // alignItems: 'center'
 };
 
 export default class FullMapComponent extends Component {
@@ -148,11 +149,15 @@ export default class FullMapComponent extends Component {
                       longitude: marker.geoLongitude
                     }}
                   >
-                    <Animated.View style={[styles.markerWrap]}>
-                      <Animated.View style={[styles.ring]} />
-                      <TouchableOpacity style={markerStyle}>
-                        <Image source={smalltreewhite} resizeMode={'contain'} />
-                      </TouchableOpacity>
+                    <Animated.View style={[]}>
+                      <Animated.View style={[]} />
+                      {/* <TouchableOpacity style={markerStyle}> */}
+                      <Image
+                        source={markerImage}
+                        style={markerStyle}
+                        resizeMode={'contain'}
+                      />
+                      {/* </TouchableOpacity> */}
                     </Animated.View>
                   </MapView.Marker>
                 ))

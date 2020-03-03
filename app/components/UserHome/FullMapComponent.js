@@ -111,11 +111,13 @@ export default class FullMapComponent extends Component {
   };
 
   onPressMarker = index => {
-    this.scrollview_ref.getNode().scrollTo({
-      x: this.arr[index],
-      y: 0,
-      animated: true
-    });
+    // setTimeout(() => {
+    //   this.scrollview_ref.getNode().scrollTo({
+    //     x: this.arr[index],
+    //     // y: 0,
+    //     animated: false
+    //   });
+    // }, 1000)
   };
 
   onLayoutMarker = ({ nativeEvent }, index) => {
@@ -137,6 +139,7 @@ export default class FullMapComponent extends Component {
             {this.state.markers.length
               ? this.state.markers.map((marker, index) => (
                   <MapView.Marker
+                    onPress={() => this.onPressMarker(index)}
                     key={index}
                     coordinate={{
                       latitude: marker.geoLatitude,
@@ -144,10 +147,7 @@ export default class FullMapComponent extends Component {
                     }}
                   >
                     <Animated.View style={[]}>
-                      <TouchableOpacity
-                        // onPress={() => this.onPressMarker(index)}
-                        style={markerStyle}
-                      >
+                      <TouchableOpacity style={markerStyle}>
                         <Image
                           source={markerImage}
                           style={markerStyle}
@@ -202,13 +202,12 @@ export default class FullMapComponent extends Component {
               ))
             : null}
         </Animated.ScrollView>
-        <Icon
-          onPress={() => navigation.goBack()}
-          name={'keyboard-arrow-down'}
-          size={40}
-          color={'#000'}
+        <TouchableOpacity
           style={styles.downArrowIcon}
-        />
+          onPress={() => navigation.goBack()}
+        >
+          <Icon name={'close'} size={25} color={'#000'} />
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.fullScreenExitIcon}
@@ -257,6 +256,11 @@ export { ListItem };
 const styles = StyleSheet.create({
   container: {
     flex: 1
+
+    // position: 'absolute',
+    // top: 0, left: 0,
+    // width: '100%',
+    // height: Dimensions.get('window').height
   },
   treeCountText: {
     fontFamily: 'OpenSans-Bold',
@@ -299,8 +303,11 @@ const styles = StyleSheet.create({
   },
   downArrowIcon: {
     position: 'absolute',
-    top: 20,
-    left: 20
+    top: Platform.OS == 'ios' ? 45 : 20,
+    left: 30,
+    backgroundColor: 'white',
+    borderRadius: 30,
+    padding: 5
   },
   myLocationIcon: {
     position: 'absolute',
@@ -310,7 +317,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 50,
     zIndex: 2000,
-    elevation: 6
+    elevation: 6,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   fullScreenExitIcon: {
     position: 'absolute',
@@ -320,7 +329,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 50,
     zIndex: 2000,
-    elevation: 6
+    elevation: 6,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   scrollView: {
     position: 'absolute',

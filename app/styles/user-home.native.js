@@ -25,7 +25,9 @@ export default EStyleSheet.create({
     right: 10,
     padding: 15,
     backgroundColor: '#fff',
-    borderRadius: 50
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   userProfileImage: {
     // borderWidth: 4,

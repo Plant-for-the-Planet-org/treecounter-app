@@ -51,6 +51,17 @@ class UserContributionsDetails extends React.Component {
     return true;
   }
 
+  // navigates to selected plant project screen on click of plant project link
+  // and sets the selected plant project id in the redux state
+  onPlantProjectClick = (plantProjectId, plantProjectName) => {
+    this.props.selectPlantProjectAction(plantProjectId);
+
+    this.props.navigation.navigate(getLocalRoute('app_selectProject'), {
+      treeCounterId: plantProjectId,
+      titleParam: plantProjectName
+    });
+  };
+
   render() {
     if (!this.props.contribution) {
       return null;
@@ -101,10 +112,6 @@ class UserContributionsDetails extends React.Component {
     let hasGeoLocationError = undefined;
     let locationErrorText = '';
     let contributionOrPlantedImages = contributionImages;
-
-    // debug('\x1b[45mcontribution', this.props.contribution);
-    // debug('plantProjects', this.props.plantProjects);
-    // debug('\x1b[0m');
 
     // sets the header text
     // if treeType is null then header text is treecount and type of contribution
@@ -265,6 +272,7 @@ class UserContributionsDetails extends React.Component {
           showDelete={contributionType == 'planting'}
           headerText={headerText}
           plantProjectId={plantProjectId}
+          onPlantProjectClick={this.onPlantProjectClick}
           onClickDelete={() => {
             this.props.deleteContribution(
               this.props.contribution.id,

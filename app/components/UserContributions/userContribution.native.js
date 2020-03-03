@@ -26,11 +26,7 @@ export default class UserContributions extends React.Component {
   _handleIndexChange = index => this.setState({ index });
 
   getMapComponent = userContribution => {
-    let geoLatLong = `geoLongitude=${
-      userContribution.geoLongitude
-    }&geoLatitude=${userContribution.geoLatitude}&country=${
-      userContribution.country
-    }`;
+    let geoLatLong = `geoLongitude=${userContribution.geoLongitude}&geoLatitude=${userContribution.geoLatitude}&country=${userContribution.country}`;
     return (
       <NativeMapView
         mapType={'satellite'}
@@ -142,30 +138,29 @@ export default class UserContributions extends React.Component {
           )}
 
           {/* maps the contributionPerson type and name of contributionPerson if any */}
-          {contributionPersonPrefix &&
-            contributionPerson && (
-              // <View style={styles.subHeaderTextContainer}>
-              <Text style={styles.subHeaderText}>
-                <Text>{contributionPersonPrefix}</Text>
-                <Text
-                  onPress={() => {
-                    updateStaticRoute(
-                      getLocalRoute('app_treecounter'),
-                      navigation,
-                      {
-                        treeCounterId: contributionPersonSlug,
-                        titleParam: contributionPerson
-                      }
-                    );
-                  }}
-                  style={{ color: textColor }}
-                >
-                  {' '}
-                  {contributionPerson}
-                </Text>
+          {contributionPersonPrefix && contributionPerson && (
+            // <View style={styles.subHeaderTextContainer}>
+            <Text style={styles.subHeaderText}>
+              <Text>{contributionPersonPrefix}</Text>
+              <Text
+                onPress={() => {
+                  updateStaticRoute(
+                    getLocalRoute('app_treecounter'),
+                    navigation,
+                    {
+                      treeCounterId: contributionPersonSlug,
+                      titleParam: contributionPerson
+                    }
+                  );
+                }}
+                style={{ color: textColor }}
+              >
+                {' '}
+                {contributionPerson}
               </Text>
-              // </View>
-            )}
+            </Text>
+            // </View>
+          )}
 
           {/* maps the project name by whom it was planted if any */}
           {plantProjectName && (
@@ -175,10 +170,10 @@ export default class UserContributions extends React.Component {
               <Text
                 onPress={() => {
                   plantProjectSlug
-                    ? navigation.navigate(getLocalRoute('app_selectProject'), {
-                        treeCounterId: plantProjectId,
-                        titleParam: plantProjectName
-                      })
+                    ? this.props.onPlantProjectClick(
+                        plantProjectId,
+                        plantProjectName
+                      )
                     : null;
                 }}
                 style={{ color: textColor }}

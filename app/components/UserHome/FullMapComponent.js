@@ -145,7 +145,7 @@ export default class FullMapComponent extends Component {
                   >
                     <Animated.View style={[]}>
                       <TouchableOpacity
-                        onPress={() => this.onPressMarker(index)}
+                        // onPress={() => this.onPressMarker(index)}
                         style={markerStyle}
                       >
                         <Image

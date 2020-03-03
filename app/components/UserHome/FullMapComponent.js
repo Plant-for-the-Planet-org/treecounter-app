@@ -19,8 +19,8 @@ const CARD_HEIGHT = 150;
 const CARD_WIDTH = CARD_HEIGHT;
 
 let markerStyle = {
-  width: 30,
-  height: 30
+  width: 40,
+  height: 40
 };
 
 export default class FullMapComponent extends Component {

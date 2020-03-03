@@ -242,8 +242,8 @@ export default class UserHome extends Component {
       longitudeDelta: 0.0121
     };
     let markerStyle = {
-      width: 30,
-      height: 30
+      width: 40,
+      height: 40
     };
 
     let fullScreenIcon = (

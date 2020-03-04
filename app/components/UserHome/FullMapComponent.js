@@ -6,14 +6,15 @@ import {
   Animated,
   Image,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView from 'react-native-maps';
-import { tree_1, smalltreewhite } from '../../assets/index';
+import { tree_1 } from '../../assets/index';
 import { markerImage } from '../../assets/index.js';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const CARD_HEIGHT = 150;
 const CARD_WIDTH = CARD_HEIGHT;
@@ -38,11 +39,9 @@ export default class FullMapComponent extends Component {
   }
 
   initiateComponent = () => {
-    const { navigation } = this.props;
-    let userContributions = navigation.getParam('userContributions');
     this.setState(
       {
-        markers: userContributions,
+        markers: this.props.userContributions,
         region: {
           latitude: 37.78825,
           longitude: -122.4324,
@@ -105,12 +104,13 @@ export default class FullMapComponent extends Component {
     });
   };
 
-  onPressMarker = index => {
+  onPressMarker = () => {
+    // console.log(this.arr[index], 'this.arr[index]')
     // setTimeout(() => {
     //   this.scrollview_ref.getNode().scrollTo({
     //     x: this.arr[index],
     //     // y: 0,
-    //     animated: false
+    //     // animated: false
     //   });
     // }, 1000)
   };
@@ -120,8 +120,6 @@ export default class FullMapComponent extends Component {
   };
 
   render() {
-    const { navigation } = this.props;
-
     return (
       <View style={styles.container}>
         {this.state.region ? (
@@ -201,12 +199,12 @@ export default class FullMapComponent extends Component {
         </Animated.ScrollView>
         <TouchableOpacity
           style={styles.downArrowIcon}
-          onPress={() => navigation.goBack()}
+          onPress={this.props.toggleIsFullMapComp}
         >
-          <Icon name={'close'} size={25} color={'#000'} />
+          <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={this.props.toggleIsFullMapComp}
           style={styles.fullScreenExitIcon}
         >
           <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />

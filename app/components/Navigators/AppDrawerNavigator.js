@@ -206,7 +206,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+        screen: isLoggedIn ? UserHomeContainer : LoginContainer,
+        navigationOptions: { tabBarVisible: isLoggedIn ? false : true }
       }
     },
     {

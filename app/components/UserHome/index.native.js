@@ -43,6 +43,8 @@ import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { mapStyle } from './FullMapComponent';
 import { markerImage } from '../../assets/index.js';
+import Modal from 'react-native-modalbox';
+import FullMapComponent from './FullMapComponent';
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -54,6 +56,7 @@ export default class UserHome extends Component {
       svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
+      isFullMapComponentModal: false,
       svgData: svgData,
       routes: [
         { key: 'home', title: i18n.t('label.home') },
@@ -124,7 +127,8 @@ export default class UserHome extends Component {
     const shouldUpdate =
       JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
       nextState.index !== this.state.index ||
-      nextState.showAllContributions !== this.state.showAllContributions;
+      nextState.showAllContributions !== this.state.showAllContributions ||
+      nextState.isFullMapComponentModal !== this.state.isFullMapComponentModal;
     return shouldUpdate;
   }
 
@@ -234,6 +238,16 @@ export default class UserHome extends Component {
     }
   };
 
+  toggleIsFullMapComp = () => {
+    console.log(
+      this.state.isFullMapComponentModal,
+      'this.state.isFullMapComponentModal'
+    );
+    this.setState({
+      isFullMapComponentModal: !this.state.isFullMapComponentModal
+    });
+  };
+
   getMapComponent = (userContributions, mapView) => {
     let mapViewLatLong = {
       latitude: userContributions[userContributions.length - 1].geoLatitude,
@@ -248,11 +262,7 @@ export default class UserHome extends Component {
 
     let fullScreenIcon = (
       <TouchableOpacity
-        onPress={() => {
-          updateRoute('my_trees_fullMap', this.props.navigation, undefined, {
-            userContributions
-          });
-        }}
+        onPress={this.toggleIsFullMapComp}
         style={styles.fullScreenIcon}
       >
         <Icon name={'fullscreen'} size={30} color={'#4C5153'} />
@@ -319,12 +329,24 @@ export default class UserHome extends Component {
       svgData,
       showAllContributions,
       showAllRecurrentContributions,
-      recurrentUserContributions
+      recurrentUserContributions,
+      isFullMapComponentModal
     } = this.state;
     debug(userProfile);
     return (
       <View style={{ elevation: 1 }}>
         <SafeAreaView />
+        <Modal
+          swipeToClose={false}
+          style={{ flex: 1 }}
+          isOpen={isFullMapComponentModal}
+        >
+          <FullMapComponent
+            toggleIsFullMapComp={this.toggleIsFullMapComp}
+            navigation={this.props.navigation}
+            userContributions={this.props.userContributions}
+          />
+        </Modal>
         <ScrollView
           contentContainerStyle={{ paddingBottom: 72 }}
           refreshControl={

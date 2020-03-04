@@ -8,7 +8,8 @@ import {
   Image,
   TextInput,
   ActivityIndicator,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from 'react-native';
 import Modal from 'react-native-modalbox';
 import { currentUserProfileSelector, getCurrency } from '../../selectors/index';
@@ -33,8 +34,15 @@ const defaultColor = '#4d5153';
 
 const Loader = () => {
   return (
-    <View style={[styles.loaderContainer]}>
-      <View style={styles.loaderContent}>
+    <>
+      <View style={[styles.loaderContainer]} />
+      <View
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
         <View
           style={[
             styles.loaderContent,
@@ -55,7 +63,7 @@ const Loader = () => {
           </Text>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 
@@ -238,7 +246,7 @@ class CurrencySelectorList extends Component {
                 opacity: 1,
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginTop: 40,
+                marginTop: Platform.OS === 'ios' ? 54 : 20,
                 marginBottom: 20
               }}
             >
@@ -365,6 +373,7 @@ const styles = StyleSheet.create({
   loaderContent: {
     backgroundColor: '#ffffff',
     borderRadius: 8,
+    zIndex: 2,
     // padding: 40
     width: 240
     // height: 200

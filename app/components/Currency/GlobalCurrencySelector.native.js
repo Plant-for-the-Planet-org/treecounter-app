@@ -8,7 +8,8 @@ import {
   Image,
   TextInput,
   ActivityIndicator,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from 'react-native';
 import Modal from 'react-native-modalbox';
 import { currentUserProfileSelector, getCurrency } from '../../selectors/index';
@@ -245,7 +246,7 @@ class GlobalCurrencySelector extends Component {
                 opacity: 1,
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginTop: 40,
+                marginTop: Platform.OS === 'ios' ? 54 : 20,
                 marginBottom: 20
               }}
             >
@@ -286,7 +287,7 @@ class GlobalCurrencySelector extends Component {
                 </TouchableItem>
               </View>
             </View>
-            <ScrollView>
+            <ScrollView style={{ marginBottom: 20 }}>
               <View>
                 {this.state.search ? null : (
                   <Text

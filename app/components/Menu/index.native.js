@@ -12,7 +12,7 @@ import {
 } from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import UserProfileImage from '../Common/UserProfileImage.native';
-import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector.native';
+// import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector.native';
 import { LargeMenuItem } from './MenuItem.native';
 import countryCodes from '../../assets/countryCodes.json';
 import CurrencySelector from '../Common/CurrencySelectorList.native';

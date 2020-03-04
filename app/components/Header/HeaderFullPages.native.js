@@ -6,9 +6,10 @@ import {
   View,
   Platform,
   StyleSheet,
-  Image
+  Image,
+  Share
 } from 'react-native';
-
+import i18n from '../../locales/i18n';
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { closeHBlack, closeHWhite, shareBlack, shareWhite } from '../../assets';
@@ -49,9 +50,29 @@ export default function HeaderAnimated(props) {
     };
   });
 
-  // let shareFunction =()=> {
-
-  // }
+  let onShare = async (entityType, entityName, url) => {
+    try {
+      if (entityType === 'projects') {
+        const result = await Share.share({
+          message: i18n.t('label.shareProject', {
+            entityName: entityName,
+            url: url
+          })
+        });
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
+        }
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   const blackColor = 'black';
   const styles = StyleSheet.create({
@@ -143,7 +164,9 @@ export default function HeaderAnimated(props) {
               justifyContent: 'center',
               alignSelf: 'center'
             }}
-            onPress={() => props.navigation.goBack()}
+            onPress={() =>
+              onShare(props.entityType, props.entityName, props.url)
+            }
           >
             <Image
               source={shareBlack}
@@ -217,7 +240,9 @@ export default function HeaderAnimated(props) {
               justifyContent: 'center',
               alignSelf: 'center'
             }}
-            onPress={() => props.navigation.goBack()}
+            onPress={() =>
+              onShare(props.entityType, props.entityName, props.url)
+            }
           >
             <Image
               source={shareWhite}

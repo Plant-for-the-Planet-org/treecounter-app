@@ -17,6 +17,9 @@ import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 import HeaderFullPages from '../Header/HeaderFullPages.native';
+import { context } from '../../config';
+import { getLocalRoute } from './../../actions/apiRouting';
+
 // import TabContainer from '../../containers/Menu/TabContainer';
 
 /**
@@ -120,6 +123,16 @@ class PlantProjectFull extends React.Component {
           navigation={this.props.navigation}
           title={''}
           scrollY={this.state.scrollY}
+          entityType={'projects'}
+          entityName={tpoName}
+          url={
+            context.scheme +
+            '://' +
+            context.host +
+            getLocalRoute('app_selectProject', {
+              plantProjectId: 5
+            })
+          }
         />
         <ScrollView
           contentContainerStyle={[

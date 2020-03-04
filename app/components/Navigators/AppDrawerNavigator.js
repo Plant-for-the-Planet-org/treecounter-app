@@ -232,7 +232,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: EmailSentContainer
       },
       [getLocalRoute('app_signup')]: {
-        screen: SignUpContainer
+        screen: SignUpContainer,
+        path: 'signup'
       },
       [getLocalRoute('app_myTrees')]: {
         screen: UserContributionsContainer
@@ -262,15 +263,13 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: PrivacyContainer,
         navigationOptions: { header: null }
       },
-      // [getLocalRoute('app_claim')]: {
-      //   screen: RedemptionContainer
-      // },
       [getLocalRoute('app_editTrees')]: {
         screen: EditUserContributionContainer
       },
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer,
-        navigationOptions: { header: null }
+        navigationOptions: { header: null },
+        path: 'target'
       },
       [getLocalRoute('app_challenge')]: {
         screen: ChallengeContainer,
@@ -294,9 +293,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       ['app_supportTrees']: {
         screen: SelectPlantProjectContainer
       },
-      [getLocalRoute('app_selectProject')]: {
+      ['app_selectProject']: {
         screen: SelectedPlantProjectContainer,
-        navigationOptions: { header: null }
+        navigationOptions: { header: null },
+        path: 'project/:projectName'
       },
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer

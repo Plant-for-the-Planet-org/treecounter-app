@@ -279,12 +279,9 @@ export default class UserHome extends Component {
     ));
 
     let onMapReady = () => {
-      () =>
-        setTimeout(() => {
-          mapView.fitToSuppliedMarkers(
-            userContributions.map(x => String(x.id))
-          );
-        }, 1000);
+      setTimeout(() => {
+        mapView.fitToSuppliedMarkers(userContributions.map(x => String(x.id)));
+      }, 1000);
     };
     return (
       <View style={{ flex: 1 }}>

@@ -126,6 +126,7 @@ export default class FullMapComponent extends Component {
       <View style={styles.container}>
         {this.state.region ? (
           <MapView
+            provider={MapView.PROVIDER_GOOGLE}
             ref={map => (this.map = map)}
             initialRegion={this.state.region}
             style={styles.container}

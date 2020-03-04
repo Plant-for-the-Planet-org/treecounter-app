@@ -40,7 +40,8 @@ const Loader = () => {
         style={{
           ...StyleSheet.absoluteFillObject,
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          zIndex: 2
         }}
       >
         <View
@@ -373,9 +374,6 @@ const styles = StyleSheet.create({
   loaderContent: {
     backgroundColor: '#ffffff',
     borderRadius: 8,
-    zIndex: 2,
-    // padding: 40
     width: 240
-    // height: 200
   }
 });

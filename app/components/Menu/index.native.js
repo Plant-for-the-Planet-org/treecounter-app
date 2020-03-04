@@ -15,6 +15,7 @@ import UserProfileImage from '../Common/UserProfileImage.native';
 import GlobalCurrencySelector from '../Currency/GlobalCurrencySelector.native';
 import { LargeMenuItem } from './MenuItem.native';
 import countryCodes from '../../assets/countryCodes.json';
+import CurrencySelector from '../Common/CurrencySelectorList.native';
 
 //   icons.target_outline;
 
@@ -174,6 +175,13 @@ export default class Menu extends Component {
 
   getCountryCode = currency => countryCodes.find(c => c.code == currency) || {};
 
+  handleCurrencyChange = selectedOption => {
+    // this.setState({ preferredCurrency: selectedOption });
+    this.props.setCurrencyAction(selectedOption);
+    this.props.userProfile &&
+      this.props.updateUserProfile({ currency: selectedOption }, 'currency');
+  };
+
   render() {
     return (
       <SafeAreaView style={styles.outerContainer}>
@@ -303,12 +311,17 @@ export default class Menu extends Component {
               iconUrl={icons.faqs}
             />
           </View>
-          {
-            <GlobalCurrencySelector
+
+          <CurrencySelector
+            hideCurrencyModal={this.hideCurrencyModal}
+            show={this.state.showCurrencyModal}
+            handleCurrencyChange={this.handleCurrencyChange}
+          />
+          {/* <GlobalCurrencySelector
               hideCurrencyModal={this.hideCurrencyModal.bind(this)}
               show={this.state.showCurrencyModal}
-            />
-          }
+              handleCurrencyChange={handleCurrencyChange}
+            /> */}
         </ScrollView>
 
         <View style={styles.sideNavigationActionMenuContainer}>

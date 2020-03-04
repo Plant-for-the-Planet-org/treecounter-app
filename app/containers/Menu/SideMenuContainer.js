@@ -9,11 +9,13 @@ import {
   userTreecounterSelector,
   getCurrency
 } from '../../selectors/index';
+import { setCurrencyAction } from '../../actions/globalCurrency';
 import { toggleSideNavAction } from '../../actions/setSideNavAction';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { clearSupport } from '../../actions/supportTreecounterAction';
 // Actions
 import { logoutUser } from '../../actions/authActions';
+import { updateUserProfile } from '../../actions/updateUserProfile';
 import {
   PublicSideMenuSchema,
   AuthenticatedSideMenuSchema
@@ -74,19 +76,10 @@ class SideMenuContainer extends Component {
 
     return this.state.loading ? null : (
       <Menu
-        isOpen={this.props.isOpen}
-        userProfile={this.props.userProfile}
+        {...this.props}
         menuData={this.state.schema}
-        navigation={this.props.navigation}
-        treecounter={this.props.treecounter}
         path={path}
-        selectPlantProjectAction={this.props.selectPlantProjectAction}
-        toggleSideNavAction={this.props.toggleSideNavAction}
-        clearSupport={this.props.clearSupport}
-        logoutUser={this.props.logoutUser}
         pathname={pathname}
-        lastRoute={this.props.lastRoute}
-        preferredCurrency={this.props.preferredCurrency}
       />
     );
   }
@@ -103,7 +96,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { logoutUser, toggleSideNavAction, clearSupport, selectPlantProjectAction },
+    {
+      logoutUser,
+      toggleSideNavAction,
+      clearSupport,
+      selectPlantProjectAction,
+      setCurrencyAction,
+      updateUserProfile
+    },
     dispatch
   );
 };

@@ -17,7 +17,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import TouchableItem from '../../components/Common/TouchableItem';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { currencySort } from './utils';
+import { currencySort } from '../../utils/currency';
 import { currenciesSelector } from '../../selectors';
 import { fetchCurrencies } from '../../actions/currencies';
 import { getCountryFlagImageUrl } from '../../actions/apiRouting';
@@ -59,18 +59,13 @@ const Loader = () => {
   );
 };
 
-class GlobalCurrencySelector extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      focus: 0,
-      search: '',
-      preferredCurrency: props.globalCurrency.currency,
-      show: props.show
-    };
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
-    this.updateState = this.updateState.bind(this);
-  }
+class CurrencySelectorList extends Component {
+  state = {
+    focus: 0,
+    search: '',
+    preferredCurrency: this.props.globalCurrency.currency,
+    show: this.props.show
+  };
   componentWillReceiveProps(nextProps) {
     if (this.state.preferredCurrency != nextProps.globalCurrency.currency) {
       this.setState({ preferredCurrency: nextProps.globalCurrency.currency });
@@ -108,9 +103,6 @@ class GlobalCurrencySelector extends Component {
     this.state.preferredCurrency &&
       this.props.setCurrencyAction(this.state.preferredCurrency);
   }
-  updateState(data) {
-    this.setState(data);
-  }
 
   getCurrencyNames() {
     return this.props.currencies.currencies
@@ -137,16 +129,16 @@ class GlobalCurrencySelector extends Component {
           }
         ];
   }
-  setSearch(text = '') {
+  setSearch = (text = '') => {
     this.state.search !== text && this.setState({ search: text });
-  }
-  handleCurrencyChange(selectedOption) {
-    this.updateState({ preferredCurrency: selectedOption });
+  };
+  handleCurrencyChange = selectedOption => {
+    this.setState({ preferredCurrency: selectedOption });
     this.props.handleCurrencyChange(selectedOption);
     // this.props.setCurrencyAction(selectedOption);
     // this.props.userProfile &&
     //   this.props.updateUserProfile({ currency: selectedOption }, 'currency');
-  }
+  };
   onClosed = () => {
     this.props.hideCurrencyModal({
       show: false
@@ -358,7 +350,7 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GlobalCurrencySelector);
+)(CurrencySelectorList);
 
 const styles = StyleSheet.create({
   loaderContainer: {

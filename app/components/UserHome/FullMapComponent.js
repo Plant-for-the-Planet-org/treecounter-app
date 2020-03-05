@@ -10,9 +10,10 @@ import {
   Platform
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import MapView from 'react-native-maps';
+import MapView, { LocalTile } from 'react-native-maps';
 import { tree_1 } from '../../assets/index';
 import { markerImage } from '../../assets/index.js';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const { width } = Dimensions.get('window');
 
@@ -27,12 +28,16 @@ export default class FullMapComponent extends Component {
   state = {
     markers: [],
     region: null,
-    dynamicIndex: 0
+    dynamicIndex: 0,
+    mapuri: ''
   };
 
   componentWillMount() {
     this.index = 0;
     this.animation = new Animated.Value(0);
+    AsyncStorage.getItem('@mapuri', uri => {
+      this.setState({ uri: uri });
+    });
   }
   componentDidMount() {
     this.initiateComponent();
@@ -120,6 +125,9 @@ export default class FullMapComponent extends Component {
   };
 
   render() {
+    const { isFullMapComponentModal } = this.props;
+    console.log(this.state.uri, 'render at ');
+
     return (
       <View style={styles.container}>
         {this.state.region ? (
@@ -130,6 +138,11 @@ export default class FullMapComponent extends Component {
             style={styles.container}
             customMapStyle={mapStyle}
           >
+            <LocalTile
+              pathTemplate={
+                'file:///data/user/0/org.pftp/cache/AirMapSnapshot1348530162.png'
+              }
+            />
             {this.state.markers.length
               ? this.state.markers.map((marker, index) => (
                   <MapView.Marker
@@ -140,7 +153,7 @@ export default class FullMapComponent extends Component {
                       longitude: marker.geoLongitude
                     }}
                   >
-                    <Animated.View style={[]}>
+                    <Animated.View>
                       <TouchableOpacity>
                         <Image
                           source={markerImage}
@@ -157,64 +170,70 @@ export default class FullMapComponent extends Component {
               : null}
           </MapView>
         ) : null}
-        <Animated.ScrollView
-          ref={ref => {
-            this.scrollview_ref = ref;
-          }}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          onScroll={Animated.event(
-            [
-              {
-                nativeEvent: {
-                  contentOffset: {
-                    x: this.animation
+        {isFullMapComponentModal ? (
+          <Animated.ScrollView
+            ref={ref => {
+              this.scrollview_ref = ref;
+            }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {
+                      x: this.animation
+                    }
                   }
                 }
-              }
-            ],
-            { useNativeDriver: true }
-          )}
-          style={styles.scrollView}
-          contentContainerStyle={styles.endPadding}
-        >
-          {this.state.markers.length
-            ? this.state.markers.map((marker, index) => (
-                <View
-                  onLayout={e => this.onLayoutMarker(e, index)}
-                  style={styles.card}
-                  key={index}
-                >
-                  <View style={styles.textContent}>
-                    <ListItem
-                      marker={marker}
-                      toNavigateUserContributionDetail={
-                        this.toNavigateUserContributionDetail
-                      }
-                    />
+              ],
+              { useNativeDriver: true }
+            )}
+            style={styles.scrollView}
+            contentContainerStyle={styles.endPadding}
+          >
+            {this.state.markers.length
+              ? this.state.markers.map((marker, index) => (
+                  <View
+                    onLayout={e => this.onLayoutMarker(e, index)}
+                    style={styles.card}
+                    key={index}
+                  >
+                    <View style={styles.textContent}>
+                      <ListItem
+                        marker={marker}
+                        toNavigateUserContributionDetail={
+                          this.toNavigateUserContributionDetail
+                        }
+                      />
+                    </View>
                   </View>
-                </View>
-              ))
-            : null}
-        </Animated.ScrollView>
-        <TouchableOpacity
-          style={styles.downArrowIcon}
-          onPress={this.props.toggleIsFullMapComp}
-        >
-          <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={this.props.toggleIsFullMapComp}
-          style={styles.fullScreenExitIcon}
-        >
-          <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={this.initiateComponent}
-          style={styles.myLocationIcon}
-        >
-          <Icon name={'my-location'} size={30} color={'#4C5153'} />
-        </TouchableOpacity>
+                ))
+              : null}
+          </Animated.ScrollView>
+        ) : null}
+        {isFullMapComponentModal ? (
+          <>
+            <TouchableOpacity
+              style={styles.downArrowIcon}
+              onPress={this.props.toggleIsFullMapComp}
+            >
+              <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.props.toggleIsFullMapComp}
+              style={styles.fullScreenExitIcon}
+            >
+              <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.initiateComponent}
+              style={styles.myLocationIcon}
+            >
+              <Icon name={'my-location'} size={30} color={'#4C5153'} />
+            </TouchableOpacity>
+          </>
+        ) : null}
       </View>
     );
   }

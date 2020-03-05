@@ -11,9 +11,12 @@ import {
   Share,
   SafeAreaView,
   RefreshControl,
-  FlatList
+  FlatList,
+  Dimensions,
+  findNodeHandle
 } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import AsyncStorage from '@react-native-community/async-storage';
+import MapView, { Marker, PROVIDER_GOOGLE, LocalTile } from 'react-native-maps';
 import { debug } from '../../debug';
 import {
   readmoreDown,
@@ -45,7 +48,7 @@ import { mapStyle } from './FullMapComponent';
 import { markerImage } from '../../assets/index.js';
 import Modal from 'react-native-modalbox';
 import FullMapComponent from './FullMapComponent';
-
+import MapExpandable from './MapExpandable';
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -239,10 +242,10 @@ export default class UserHome extends Component {
   };
 
   toggleIsFullMapComp = () => {
-    console.log(
-      this.state.isFullMapComponentModal,
-      'this.state.isFullMapComponentModal'
-    );
+    this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
+      this.scrollRef.scrollTo({ x: 0, y: y, animated: true });
+    });
+
     this.setState({
       isFullMapComponentModal: !this.state.isFullMapComponentModal
     });
@@ -250,8 +253,8 @@ export default class UserHome extends Component {
 
   getMapComponent = (userContributions, mapView) => {
     let mapViewLatLong = {
-      latitude: userContributions[userContributions.length - 1].geoLatitude,
-      longitude: userContributions[userContributions.length - 1].geoLongitude,
+      latitude: userContributions[0].geoLatitude,
+      longitude: userContributions[0].geoLongitude,
       latitudeDelta: 0.015,
       longitudeDelta: 0.0121
     };
@@ -289,37 +292,44 @@ export default class UserHome extends Component {
     ));
 
     let onMapReady = () => {
-      setTimeout(() => {
-        mapView.fitToSuppliedMarkers(userContributions.map(x => String(x.id)));
-      }, 1000);
+      const snapshot = mapView.takeSnapshot({
+        width: 300, // optional, when omitted the view-width is used
+        height: 300, // optional, when omitted the view-height is used
+        //region: {.},    // iOS only, optional region to render
+        format: 'png', // image formats: 'png', 'jpg' (default: 'png')
+        quality: 0.8, // image quality: 0..1 (only relevant for jpg, default: 1)
+        result: 'file' // result types: 'file', 'base64' (default: 'file')
+      });
+      snapshot.then(uri => {
+        console.log(uri, '@mapuri');
+        this.setState({ mapSnapshot: uri });
+        AsyncStorage.setItem('@mapuri', uri);
+      });
+      // setTimeout(() => {
+      //   mapView.fitToSuppliedMarkers(userContributions.map(x => String(x.id)));
+      // }, 1000);
     };
+    const { isFullMapComponentModal } = this.state;
     return (
-      <View style={{ flex: 1 }}>
-        <MapView
-          onMapReady={onMapReady}
-          ref={ref => (mapView = ref)}
-          provider={PROVIDER_GOOGLE}
-          style={{ height: 250, flex: 1 }}
-          initialRegion={mapViewLatLong}
-          customMapStyle={mapStyle}
-        >
-          {markerList}
-        </MapView>
-        {fullScreenIcon}
+      <View
+        ref={ref => (this.mapParent = ref)}
+        style={{
+          flex: 1,
+          height: isFullMapComponentModal
+            ? Dimensions.get('window').height
+            : 250
+        }}
+      >
+        <FullMapComponent
+          isFullMapComponentModal={isFullMapComponentModal}
+          toggleIsFullMapComp={this.toggleIsFullMapComp}
+          navigation={this.props.navigation}
+          userContributions={this.props.userContributions}
+        />
+
+        {!isFullMapComponentModal ? fullScreenIcon : null}
       </View>
     );
-  };
-
-  toNormalizeData = userContributions => {
-    return userContributions.map(x => ({
-      coordinate: {
-        latitude: x.geoLatitude,
-        longitude: x.geoLongitude
-      },
-      title: 'Best Place',
-      description: 'This is the best place in Portland',
-      treeCount: x.treeCount
-    }));
   };
 
   render() {
@@ -336,7 +346,7 @@ export default class UserHome extends Component {
     return (
       <View style={{ elevation: 1 }}>
         <SafeAreaView />
-        <Modal
+        {/* <Modal
           swipeToClose={false}
           style={{ flex: 1 }}
           isOpen={isFullMapComponentModal}
@@ -346,8 +356,9 @@ export default class UserHome extends Component {
             navigation={this.props.navigation}
             userContributions={this.props.userContributions}
           />
-        </Modal>
+        </Modal> */}
         <ScrollView
+          ref={ref => (this.scrollRef = ref)}
           contentContainerStyle={{ paddingBottom: 72 }}
           refreshControl={
             <RefreshControl

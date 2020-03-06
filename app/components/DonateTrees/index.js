@@ -134,10 +134,11 @@ export default class DonateTrees extends Component {
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
           .fixedDefaultTreeCount;
-      const currentTreeCount = this.props.selectedProject
-        ? this.props.selectedProject.paymentSetup.treeCountOptions
-            .fixedDefaultTreeCount
-        : null;
+      const currentTreeCount =
+        this.props.selectedProject && this.props.selectedProject.paymentSetup
+          ? this.props.selectedProject.paymentSetup.treeCountOptions
+              .fixedDefaultTreeCount
+          : null;
 
       if (nextTreeCount !== currentTreeCount) {
         state.selectedTreeCount = nextTreeCount;

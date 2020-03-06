@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Platform,
   ScrollView,
   Text,
   View,
@@ -26,6 +27,7 @@ import {
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/review.native';
 // import { find } from 'lodash';
+import HeaderNew from './../../Header/HeaderNew.native';
 
 const { width } = Dimensions.get('window');
 
@@ -134,6 +136,14 @@ class AddReview extends Component {
         }}
       >
         {/*Header*/}
+        <HeaderNew
+          title={
+            this.state.review.id
+              ? i18n.t('label.edit_project_review')
+              : i18n.t('label.add_project_review')
+          }
+          navigation={this.props.navigation}
+        />
         <View
           style={{
             backgroundColor: 'white',
@@ -144,14 +154,10 @@ class AddReview extends Component {
             style={{
               width: width * 0.88,
               marginLeft: width * 0.06,
-              backgroundColor: 'white'
+              backgroundColor: 'white',
+              marginTop: Platform.OS === 'ios' ? 140 : 100
             }}
           >
-            <Text style={styles.reviewPageTitle}>
-              {this.state.review.id
-                ? i18n.t('label.edit_project_review')
-                : i18n.t('label.add_project_review')}
-            </Text>
             <Text style={styles.reviewPageSubTitle}>
               {this.props.selectedPlantProject.name}
             </Text>

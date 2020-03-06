@@ -24,35 +24,28 @@ const CountryDetails = ({ navigation }) => {
   const [section, setSection] = useState('');
   const [orderBy] = useState('planted');
 
-  useEffect(
-    () => {
-      const section = navigation.getParam('section');
-      const subSection = navigation.getParam('subSection');
-      const caption = navigation.getParam('caption');
-      setQueryResult(null);
-      setSection(caption);
-      debug(section, subSection, caption, 'Sections');
-      LeaderBoardDataAction({
-        section,
-        orderBy: orderBy,
-        period: period,
-        subSection: subSection
-      }).then(
-        success => {
-          if (
-            success.data &&
-            success.data instanceof Object &&
-            success.data.data
-          )
-            setQueryResult(success.data.data);
-        },
-        error => {
-          debug(error);
-        }
-      );
-    },
-    [period]
-  );
+  useEffect(() => {
+    const section = navigation.getParam('section');
+    const subSection = navigation.getParam('subSection');
+    const caption = navigation.getParam('caption');
+    setQueryResult(null);
+    setSection(caption);
+    debug(section, subSection, caption, 'Sections');
+    LeaderBoardDataAction({
+      section,
+      orderBy: orderBy,
+      period: period,
+      subSection: subSection
+    }).then(
+      success => {
+        if (success.data && success.data instanceof Object && success.data.data)
+          setQueryResult(success.data.data);
+      },
+      error => {
+        debug(error);
+      }
+    );
+  }, [period]);
 
   const renderList = () => {
     if (queryresult) {
@@ -154,7 +147,7 @@ const CountryDetails = ({ navigation }) => {
 const CompanyListItem = ({ onPressListItem, item, index }) => {
   const [isPress, setIsPress] = useState(false);
   const isPrivate = 'mayPublish' in item && !item.mayPublish;
-  console.log(isPress, 'isPressisPress');
+  debug(isPress, 'isPressisPress');
   return (
     <TouchableOpacity
       onPress={() =>

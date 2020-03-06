@@ -13,7 +13,7 @@ class PrivacyContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     PrivacyAction().then(
       success => {
         try {

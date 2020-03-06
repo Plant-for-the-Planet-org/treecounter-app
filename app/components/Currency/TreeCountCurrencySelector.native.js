@@ -27,7 +27,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
     this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTreeCount !== this.state.selectedTreeCount) {
       this.setState({
         selectedTreeCount: nextProps.selectedTreeCount
@@ -108,7 +108,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
                 {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
               </View>
             ) : this.props.supportTreecounter &&
-            this.props.supportTreecounter.displayName ? (
+              this.props.supportTreecounter.displayName ? (
               <View
                 style={{
                   flexDirection: 'row',

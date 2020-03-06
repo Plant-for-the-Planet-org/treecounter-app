@@ -15,7 +15,7 @@ class ActivateAccountContainer extends React.Component {
     };
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     let email = await fetchItem('email');
     this.setState({
       email: email

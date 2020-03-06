@@ -23,7 +23,7 @@ export default class Menu extends Component {
     lastRoute: PropTypes.any
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.lastRoute != this.props.lastRoute) {
       updateRoute(
         nextProps.lastRoute.routeName,

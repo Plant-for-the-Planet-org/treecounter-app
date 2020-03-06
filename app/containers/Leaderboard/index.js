@@ -145,7 +145,7 @@ class LeaderBoardContainer extends React.Component {
     }
   };
 
-  componentWillReceiveProps(nextProps /*, nextState*/) {
+  UNSAFE_componentWillReceiveProps(nextProps /*, nextState*/) {
     debug('__componentWillReceiveProps__');
 
     if (!this.props.navigation) {

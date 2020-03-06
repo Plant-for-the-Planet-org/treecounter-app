@@ -133,7 +133,7 @@ export default class GiftTrees extends Component {
     this.updateSelectProject = this.updateSelectProject.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject) {
       this.setState({
         showSelectProject: false
@@ -199,7 +199,7 @@ export default class GiftTrees extends Component {
   componentWillUnmount() {
     this.props.paymentClear();
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.state.context && this.state.context.slug) {
       this.getSuggestionAndSet(this.state.context.slug);
     }

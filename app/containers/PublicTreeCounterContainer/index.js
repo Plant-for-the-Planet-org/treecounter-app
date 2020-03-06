@@ -47,10 +47,10 @@ class PublicTreecounterContainer extends Component {
       })
       .catch(error => debug(error));
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.fetchAndSetSearchResult(this.props);
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     debug('test, props', nextProps);
     if (this.getTreeCounterId(this.props) === this.getTreeCounterId(nextProps))
       return;
@@ -95,9 +95,10 @@ const mapStateToProps = state => ({
   currentUserProfile: currentUserProfileSelector(state)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  PublicTreecounterContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PublicTreecounterContainer);
 
 import PropTypes from 'prop-types';
 PublicTreecounterContainer.propTypes = {

@@ -45,7 +45,7 @@ export default class UserHome extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { treecounterData, userProfile } = nextProps;
     if (treecounterData) {
       let svgData = { ...treecounterData, type: userProfile.type };
@@ -144,10 +144,10 @@ export default class UserHome extends Component {
                         profileType === 'education'
                           ? images['schoolIcon']
                           : profileType === 'tpo'
-                            ? images['tpoIcon']
-                            : profileType === 'company'
-                              ? images['companyIcon']
-                              : images['individualIcon']
+                          ? images['tpoIcon']
+                          : profileType === 'company'
+                          ? images['companyIcon']
+                          : images['individualIcon']
                       }
                     />
                   </View>

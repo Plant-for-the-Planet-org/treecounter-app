@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import {
   selectedPlantProjectIdSelector,
@@ -8,33 +8,31 @@ import {
   selectedTpoSelector,
   currentUserProfileSelector
 } from '../../selectors';
-import { updateStaticRoute } from '../../helpers/routerHelper';
+import {updateStaticRoute} from '../../helpers/routerHelper';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
-import { loadProject } from '../../actions/loadTposAction';
+import {loadProject} from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
 } from '../../actions/selectPlantProjectAction';
 
 const SelectedPlantProjectContainer = props => {
-  if (!props.selectedProject) {
-    if (props.selectedPlantProjectId) {
-      let project = props.loadProject(
-        { id: props.selectedPlantProjectId },
-        { loading: true }
-      );
-      console.log('FF Found ID from Project List', project);
-    }
+
+  React.useEffect(() => {
     if (props.navigation.state.params.projectName) {
-      let project = props.loadProject(
-        { id: props.navigation.state.params.projectName },
-        { loading: true }
+        props.loadProject(
+          {id:  props.navigation.state.params.projectName || props.selectedPlantProjectId },
+          {loading: true}
+        );
+    } else {
+      props.loadProject(
+        {id: props.selectedPlantProjectId },
+        {loading: true}
       );
-      console.log('FF Found ID from Deep Linking', project);
     }
-  }
-  selectProject = id => {
-    const { navigation } = props;
+  },[props.navigation.state.params.projectName]);
+  const selectProject = id => {
+    const {navigation} = props;
     props.selectPlantProjectAction(id);
     if (navigation) {
       updateStaticRoute('app_donate_detail', navigation, {
@@ -44,7 +42,8 @@ const SelectedPlantProjectContainer = props => {
       });
     }
   };
-  return props.selectedProject ? (
+
+  return (
     <PlantProjectFull
       {...props}
       plantProject={props.selectedProject}
@@ -52,9 +51,7 @@ const SelectedPlantProjectContainer = props => {
       selectProject={id => selectProject(id)}
       currentUserProfile={props.currentUserProfile}
     />
-  ) : (
-    alert('Not Found')
-  );
+  )
 };
 SelectedPlantProjectContainer.navigationOptions = () => ({
   headerMode: 'none'

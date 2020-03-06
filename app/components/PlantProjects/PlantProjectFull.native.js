@@ -36,7 +36,7 @@ class PlantProjectFull extends React.Component {
   }
   state = { loader: true };
 
-  async componentWillReceiveProps(nextProps) {
+  /*async componentWillReceiveProps(nextProps) {
     try {
       debug('plantproject while receive props', nextProps.plantProject);
       if (nextProps.plantProject && !nextProps.plantProject.tpoData) {
@@ -67,7 +67,8 @@ class PlantProjectFull extends React.Component {
     } catch (error) {
       debug(error);
     }
-  }
+  }*/
+
   componentWillMount() {
     StatusBar.setTranslucent(true);
     setTimeout(() => this.setState({ loader: false }), 2000);

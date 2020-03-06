@@ -293,7 +293,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       ['app_supportTrees']: {
         screen: SelectPlantProjectContainer
       },
-      ['app_selectProject']: {
+      [getLocalRoute('app_selectProject')]: {
         screen: SelectedPlantProjectContainer,
         navigationOptions: { header: null },
         path: 'project/:projectName'

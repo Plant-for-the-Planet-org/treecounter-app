@@ -164,7 +164,7 @@ export default class GiftTrees extends Component {
   getSuggestionAndSet(value) {
     debug('calling', value);
     const { updatePageIndex, updateSelectProject, suggestionClicked } = this;
-    postDirectRequest('/suggest', 'q=' + value.trim())
+    postDirectRequest('/suggest.php', 'q=' + value.trim())
       .then(_suggestions => {
         debug('sugessions', _suggestions);
         if (_suggestions.data.length && _suggestions.data[0].slug == value) {

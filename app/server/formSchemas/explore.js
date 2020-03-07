@@ -27,8 +27,7 @@ export default {
   },
   timePeriods: {
     all: 'all time',
-    '1y': 'last year',
-    '1w': 'last week',
+    '1-year': 'last year',
     '5-years': 'last 5 years'
   }
 };

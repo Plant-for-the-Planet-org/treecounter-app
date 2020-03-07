@@ -61,6 +61,7 @@ jobs:
           command: |
             source $ENV_VARS
             export host=$SERVER_URL
+            export api_url=$scheme://$host
             if [[ "${CIRCLE_BRANCH}" == "master" ]]
             then
               export debug=

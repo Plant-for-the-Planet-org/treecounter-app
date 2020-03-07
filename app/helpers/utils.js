@@ -176,7 +176,7 @@ const getSuggestionValue = suggestion => `${suggestion.name}`;
 
 export function getSuggestions(value, raw) {
   return new Promise((resolve, reject) => {
-    postDirectRequest('/suggest', 'q=' + value.trim()).then(result => {
+    postDirectRequest('/suggest.php', 'q=' + value.trim()).then(result => {
       let jdata = result.data;
       if (raw) {
         return resolve(jdata);
@@ -190,7 +190,7 @@ export function getSuggestions(value, raw) {
       if (jdata) {
         resolve(jdata.filter(person => regex.test(getSuggestionValue(person))));
       } else {
-        reject(new Error(`/suggest returned nothing: ${jdata}`));
+        reject(new Error(`/suggest.php returned nothing: ${jdata}`));
       }
     });
   });

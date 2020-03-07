@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import UserContributionsDetails from '../../components/UserContributions/ContributionDetails/index.native';
 // Actions
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+
 import { currentUserProfileIdSelector } from '../../selectors/index';
 import { deleteContribution } from '../../actions/EditMyTree';
 import { loadProject } from '../../actions/loadTposAction';
@@ -41,7 +43,7 @@ class UserContributionsDetailsContainer extends React.Component {
         userProfileId={this.props.userProfileId}
         contribution={this.getContribution()}
         plantProjects={this.props.plantProjects}
-        // plantedProject={plantedProject}
+        selectPlantProjectAction={this.props.selectPlantProjectAction}
         deleteContribution={this.props.deleteContribution}
       />
     );
@@ -60,15 +62,17 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       deleteContribution,
-      loadProject
+      loadProject,
+      selectPlantProjectAction
     },
     dispatch
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  UserContributionsDetailsContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserContributionsDetailsContainer);
 
 UserContributionsDetailsContainer.propTypes = {
   userProfileId: PropTypes.number.isRequired,

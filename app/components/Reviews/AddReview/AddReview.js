@@ -52,7 +52,7 @@ class AddReview extends Component {
       this.submitted && this.validate();
     });
   }
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     try {
       const { data } = await getReviewIndexes();
       debug('indexs', data);

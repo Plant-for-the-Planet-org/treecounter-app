@@ -28,7 +28,7 @@ class Paypal extends React.Component {
     }
   }
 
-  componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
+  UNSAFE_componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
     const isLoadedButWasntLoadedBefore =
       !this.state.showButton && !this.props.isScriptLoaded && isScriptLoaded;
 

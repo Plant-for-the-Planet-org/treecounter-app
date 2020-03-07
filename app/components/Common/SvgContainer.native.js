@@ -27,7 +27,7 @@ export default class SvgContainer extends Component {
     this.RotateClouds2ValueHolder = new Animated.Value(0);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let { planted, target } = nextProps;
     if (this.props.planted !== planted || this.props.target !== target) {
       let plantedWidth = this.calculatePlantedWidth(planted, target, 112);
@@ -54,7 +54,7 @@ export default class SvgContainer extends Component {
     if (target === 0) {
       return total;
     } else {
-      return total * planted / target;
+      return (total * planted) / target;
     }
   }
 
@@ -62,7 +62,7 @@ export default class SvgContainer extends Component {
     if (target === 0) {
       return 72;
     } else {
-      return Math.round(72 * planted / target);
+      return Math.round((72 * planted) / target);
     }
   }
 

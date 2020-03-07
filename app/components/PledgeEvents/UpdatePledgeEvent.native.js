@@ -41,7 +41,7 @@ class MakePledgeForm extends Component {
     oldTreeCount: ''
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.validationSchema = generateFormikSchemaFromFormSchema(
       pledgeFormSchema,
       ['firstname', 'lastname', 'treeCount']

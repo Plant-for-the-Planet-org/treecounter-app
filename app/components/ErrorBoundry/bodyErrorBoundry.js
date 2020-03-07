@@ -24,7 +24,7 @@ class BodyErrorBoundary extends React.Component {
     this.setState({ hasErrorOccurred: false, seconds: 30 });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.location !== nextProps.location) {
       this.onRouteChanged();
     }

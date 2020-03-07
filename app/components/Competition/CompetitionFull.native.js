@@ -368,8 +368,9 @@ class CompetitionFull extends React.Component {
                     <View style={styles.headingParticipantContainer}>
                       {/* Participant Total Count */}
                       <Text style={snippetStyles.textHeadingParticipants}>
-                        {i18n.t('label.participants')} ({competitionDetail &&
-                          competitionDetail.competitorCount})
+                        {i18n.t('label.participants')} (
+                        {competitionDetail && competitionDetail.competitorCount}
+                        )
                       </Text>
                       {/* Participant Total Count Ends */}
                     </View>
@@ -377,27 +378,24 @@ class CompetitionFull extends React.Component {
                       <View>
                         {/* Participant Details */}
                         {hasEnrollments &&
-                          competitionDetail.allEnrollments.map(
-                            (top, index) =>
-                              top.status === 'enrolled' ? (
-                                <CompetitionParticipant
-                                  competitor={top}
-                                  index={index}
-                                  type="participants"
-                                  navigation={this.props.navigation}
-                                  treeCounter={this.props.treeCounter}
-                                  competitionDetail={competitionDetail}
-                                  confirmPart={id => this.props.confirmPart(id)}
-                                  declinePart={id => this.props.declinePart(id)}
-                                  cancelInvite={id =>
-                                    this.props.cancelInvite(id)
-                                  }
-                                  supportTreecounterAction={
-                                    this.props.supportTreecounterAction
-                                  }
-                                  key={index}
-                                />
-                              ) : null
+                          competitionDetail.allEnrollments.map((top, index) =>
+                            top.status === 'enrolled' ? (
+                              <CompetitionParticipant
+                                competitor={top}
+                                index={index}
+                                type="participants"
+                                navigation={this.props.navigation}
+                                treeCounter={this.props.treeCounter}
+                                competitionDetail={competitionDetail}
+                                confirmPart={id => this.props.confirmPart(id)}
+                                declinePart={id => this.props.declinePart(id)}
+                                cancelInvite={id => this.props.cancelInvite(id)}
+                                supportTreecounterAction={
+                                  this.props.supportTreecounterAction
+                                }
+                                key={index}
+                              />
+                            ) : null
                           )}
                         {/* Participant Details Ends */}
                       </View>
@@ -417,8 +415,9 @@ class CompetitionFull extends React.Component {
                     <View style={styles.headingParticipantContainer}>
                       {/* Total Requests  */}
                       <Text style={snippetStyles.textHeadingParticipants}>
-                        {i18n.t('label.requests_to_join')} ({competitionDetail &&
-                          competitionDetail.competitorCount})
+                        {i18n.t('label.requests_to_join')} (
+                        {competitionDetail && competitionDetail.competitorCount}
+                        )
                       </Text>
                       {/* Total Requests Ends */}
                     </View>
@@ -426,27 +425,24 @@ class CompetitionFull extends React.Component {
                       <View>
                         {/* Requseters Details */}
                         {hasEnrollments &&
-                          competitionDetail.allEnrollments.map(
-                            (top, index) =>
-                              top.status === 'pending' ? (
-                                <CompetitionParticipant
-                                  competitor={top}
-                                  index={index}
-                                  type="request_join"
-                                  navigation={this.props.navigation}
-                                  treeCounter={this.props.treeCounter}
-                                  competitionDetail={competitionDetail}
-                                  confirmPart={id => this.props.confirmPart(id)}
-                                  declinePart={id => this.props.declinePart(id)}
-                                  cancelInvite={id =>
-                                    this.props.cancelInvite(id)
-                                  }
-                                  supportTreecounterAction={
-                                    this.props.supportTreecounterAction
-                                  }
-                                  key={index}
-                                />
-                              ) : null
+                          competitionDetail.allEnrollments.map((top, index) =>
+                            top.status === 'pending' ? (
+                              <CompetitionParticipant
+                                competitor={top}
+                                index={index}
+                                type="request_join"
+                                navigation={this.props.navigation}
+                                treeCounter={this.props.treeCounter}
+                                competitionDetail={competitionDetail}
+                                confirmPart={id => this.props.confirmPart(id)}
+                                declinePart={id => this.props.declinePart(id)}
+                                cancelInvite={id => this.props.cancelInvite(id)}
+                                supportTreecounterAction={
+                                  this.props.supportTreecounterAction
+                                }
+                                key={index}
+                              />
+                            ) : null
                           )}
                         {/* Requseters Details Ends */}
                       </View>
@@ -478,27 +474,24 @@ class CompetitionFull extends React.Component {
                           addstyles={{ width: '90%' }}
                         />
                         {hasEnrollments &&
-                          competitionDetail.allEnrollments.map(
-                            (top, index) =>
-                              top.status === 'invited' ? (
-                                <CompetitionParticipant
-                                  competitor={top}
-                                  index={index}
-                                  type="invite"
-                                  navigation={this.props.navigation}
-                                  treeCounter={this.props.treeCounter}
-                                  competitionDetail={competitionDetail}
-                                  confirmPart={id => this.props.confirmPart(id)}
-                                  declinePart={id => this.props.declinePart(id)}
-                                  cancelInvite={id =>
-                                    this.props.cancelInvite(id)
-                                  }
-                                  supportTreecounterAction={
-                                    this.props.supportTreecounterAction
-                                  }
-                                  key={index}
-                                />
-                              ) : null
+                          competitionDetail.allEnrollments.map((top, index) =>
+                            top.status === 'invited' ? (
+                              <CompetitionParticipant
+                                competitor={top}
+                                index={index}
+                                type="invite"
+                                navigation={this.props.navigation}
+                                treeCounter={this.props.treeCounter}
+                                competitionDetail={competitionDetail}
+                                confirmPart={id => this.props.confirmPart(id)}
+                                declinePart={id => this.props.declinePart(id)}
+                                cancelInvite={id => this.props.cancelInvite(id)}
+                                supportTreecounterAction={
+                                  this.props.supportTreecounterAction
+                                }
+                                key={index}
+                              />
+                            ) : null
                           )}
                       </View>
                     </View>
@@ -522,29 +515,26 @@ class CompetitionFull extends React.Component {
                     <View style={styles.topCompetitorContainer}>
                       <View>
                         {hasEnrollments &&
-                          competitionDetail.allEnrollments.map(
-                            (top, index) =>
-                              top.status === 'invited' &&
-                              top.treecounterSlug ===
-                                this.props.treeCounter.slug ? (
-                                <CompetitionParticipant
-                                  competitor={top}
-                                  index={index}
-                                  type="request_join"
-                                  navigation={this.props.navigation}
-                                  treeCounter={this.props.treeCounter}
-                                  competitionDetail={competitionDetail}
-                                  confirmPart={id => this.props.confirmPart(id)}
-                                  declinePart={id => this.props.declinePart(id)}
-                                  cancelInvite={id =>
-                                    this.props.cancelInvite(id)
-                                  }
-                                  supportTreecounterAction={
-                                    this.props.supportTreecounterAction
-                                  }
-                                  key={index}
-                                />
-                              ) : null
+                          competitionDetail.allEnrollments.map((top, index) =>
+                            top.status === 'invited' &&
+                            top.treecounterSlug ===
+                              this.props.treeCounter.slug ? (
+                              <CompetitionParticipant
+                                competitor={top}
+                                index={index}
+                                type="request_join"
+                                navigation={this.props.navigation}
+                                treeCounter={this.props.treeCounter}
+                                competitionDetail={competitionDetail}
+                                confirmPart={id => this.props.confirmPart(id)}
+                                declinePart={id => this.props.declinePart(id)}
+                                cancelInvite={id => this.props.cancelInvite(id)}
+                                supportTreecounterAction={
+                                  this.props.supportTreecounterAction
+                                }
+                                key={index}
+                              />
+                            ) : null
                           )}
                       </View>
                     </View>

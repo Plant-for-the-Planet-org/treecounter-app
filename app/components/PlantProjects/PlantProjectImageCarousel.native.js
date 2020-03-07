@@ -16,7 +16,7 @@ const width = Dimensions.get('window').width;
 class PlantProjectImageCarousel extends Component {
   imageCarousel;
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     // StatusBar.setBarStyle('dark-content');
   }
 

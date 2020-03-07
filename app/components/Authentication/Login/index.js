@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import { ReCaptcha, loadReCaptcha } from 'recaptcha-v3-react';
-import uuid from 'uuidv4';
+import { uuid } from 'uuidv4';
 import { debug } from '../../../debug';
 import { loginFormSchema } from '../../../server/parsedSchemas/login';
 import PrimaryButton from '../../Common/Button/PrimaryButton';

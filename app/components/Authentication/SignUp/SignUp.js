@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
+import { ReCaptcha, loadReCaptcha } from 'recaptcha-v3-react';
+import { uuid } from 'uuidv4';
 import { debug } from '../../../debug';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
@@ -9,8 +11,6 @@ import SignUpType from './SignUpType';
 import { SignupJustMe, SignupOrganization } from '../../../assets';
 import { signupFormSchema } from '../../../server/parsedSchemas/signup';
 import i18n from '../../../locales/i18n.js';
-import { ReCaptcha, loadReCaptcha } from 'recaptcha-v3-react';
-import uuid from 'uuidv4';
 
 let TCombForm = t.form.Form;
 

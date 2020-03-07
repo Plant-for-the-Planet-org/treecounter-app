@@ -442,7 +442,7 @@ class NativeMapView extends Component {
     this.gotoLocation();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps, this.props)) {
       this.onPropsUpdate(nextProps);
       this.ref && this.ref.setAddressText(nextProps.address);

@@ -30,7 +30,7 @@ class UserContributionsDetails extends React.Component {
   }
 
   // adds back button listener on component mount
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackButtonClick

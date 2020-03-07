@@ -41,7 +41,7 @@ class ListViewProjects extends PureComponent {
       }
     });
   }
-  async componentWillReceiveProps(nextProps) {
+  async UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.index && !this.state.initiated) {
       debug(
         'component got index list =======================================================',

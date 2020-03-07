@@ -37,7 +37,7 @@ class ChallengeUser extends Component {
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!this.props.challengeSuccess && nextProps.challengeSuccess) {
       let currentYear = new Date().getFullYear(),
         years = [];

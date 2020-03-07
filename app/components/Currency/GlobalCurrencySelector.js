@@ -74,7 +74,7 @@ class GlobalCurrencySelector extends Component {
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.updateState = this.updateState.bind(this);
   }
-  async componentWillReceiveProps(nextProps) {
+  async UNSAFE_componentWillReceiveProps(nextProps) {
     if (!nextProps.userProfile) {
       this.props.setCurrencyAction(this.state.preferredCurrency);
     } else {
@@ -88,7 +88,7 @@ class GlobalCurrencySelector extends Component {
       await this.props.fetchCurrencies();
     }
   }
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     this.setState({ preferredCurrency: getPreferredCurrency() });
   }
   async componentDidMount() {
@@ -169,9 +169,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  GlobalCurrencySelector
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GlobalCurrencySelector);
 GlobalCurrencySelector.propTypes = {
   currencies: PropTypes.object,
   updateUserProfile: PropTypes.func,

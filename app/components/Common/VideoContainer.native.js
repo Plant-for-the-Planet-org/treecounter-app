@@ -31,7 +31,7 @@ class VideoContainer extends React.Component {
       playing: false
     };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let videoId = undefined;
     if (this.props.url) {
       let ID = '';
@@ -97,9 +97,7 @@ class VideoContainer extends React.Component {
             allowsFullscreenVideo
             javaScriptEnabled
             source={{
-              uri: `https://www.youtube.com/embed/${
-                this.state.videoId
-              }?autoplay=1&rel=0&showinfo=1&controls=1&fullscreen=1`
+              uri: `https://www.youtube.com/embed/${this.state.videoId}?autoplay=1&rel=0&showinfo=1&controls=1&fullscreen=1`
             }}
             startInLoadingState
             mediaPlaybackRequiresUserAction={false}

@@ -52,7 +52,7 @@ class SelectPlantProject extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState(this.initialStateFromProps(this.props));
   }
 
@@ -81,7 +81,7 @@ class SelectPlantProject extends Component {
     }
     this.setState(this.initialStateFromProps(this.props));
   }
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     this.setState(this.initialStateFromProps(props));
   }
 

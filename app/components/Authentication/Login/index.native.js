@@ -37,7 +37,7 @@ export default class Login extends Component {
       hidePassword: !this.state.hidePassword
     });
   };
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.validationSchema = generateFormikSchemaFromFormSchema(loginFormSchema);
 
     this.keyboardDidShowListener = Keyboard.addListener(

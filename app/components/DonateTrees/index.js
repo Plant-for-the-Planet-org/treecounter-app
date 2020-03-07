@@ -126,7 +126,7 @@ export default class DonateTrees extends Component {
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let state = {
       showSelectProject: !nextProps.selectedProject
     };

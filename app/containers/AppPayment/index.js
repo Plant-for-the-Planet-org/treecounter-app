@@ -14,7 +14,7 @@ class AppPaymentContainer extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     getPaymentInfo(this.props.match.params.donationContribution)
       .then(({ data }) => {
         this.setState({

@@ -5,13 +5,11 @@ import {
   BackHandler,
   View,
   Platform,
-  StyleSheet,
   Image,
   Share
 } from 'react-native';
 import i18n from '../../locales/i18n';
 import { Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { closeHBlack, closeHWhite, shareBlack, shareWhite } from '../../assets';
 
 const Layout = {
@@ -73,30 +71,6 @@ export default function HeaderAnimated(props) {
       alert(error.message);
     }
   };
-
-  const blackColor = 'black';
-  const styles = StyleSheet.create({
-    whiteWithShadow: {
-      shadowColor: blackColor,
-      shadowOpacity: 0.5,
-      // iOS
-      shadowRadius: 1,
-      shadowOffset: {
-        width: 0, // These can't both be 0
-        height: 1 // i.e. the shadow has to be offset in some way
-      },
-      // Android
-      textShadowRadius: 1,
-      textShadowOffset: {
-        width: 0,
-        height: 1
-      },
-      fontSize: 32,
-      height: 32,
-      width: 32,
-      alignSelf: 'center'
-    }
-  });
 
   const whiteColor = 'white';
   const transparent = 'rgba(52, 52, 52, 0.0)';

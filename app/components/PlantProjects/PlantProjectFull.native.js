@@ -7,7 +7,7 @@ import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import { loadProject } from '../../actions/loadTposAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View, Text, Animated, StatusBar, ScrollView } from 'react-native';
+import { View, Platform, Text, Animated, StatusBar, ScrollView } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';

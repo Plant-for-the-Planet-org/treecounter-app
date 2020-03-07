@@ -41,7 +41,7 @@ export default class MineCompetitions extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     if (allCompetitions !== this.props.allCompetitions) {
       let myCompetitions = [];

@@ -17,7 +17,7 @@ class FAQContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     FAQAction().then(
       success => {
         const faqs = _.sortBy(success.data, ['position', 'id']);

@@ -8,6 +8,8 @@ import { debug } from '../../debug';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
+import HeaderNew from './../Header/HeaderNew.native';
+import i18n from '../../locales/i18n';
 
 export default class Imprint extends Component {
   constructor(props) {
@@ -22,7 +24,7 @@ export default class Imprint extends Component {
       )
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -92,11 +94,18 @@ export default class Imprint extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderContent}
-        renderSectionHeader={this._renderHeader}
-      />
+      <>
+        <HeaderNew
+          title={i18n.t('label.imprint')}
+          navigation={this.props.navigation}
+        />
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderContent}
+          renderSectionHeader={this._renderHeader}
+          style={{ marginTop: 120 }}
+        />
+      </>
     );
   }
 }

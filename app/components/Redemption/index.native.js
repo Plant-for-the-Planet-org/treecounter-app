@@ -59,6 +59,7 @@ export default function Redemption(props) {
   }, []);
 
   const white = '#ffffff';
+  const lockedButton = 'rgba(137, 181, 58, 0.19)';
 
   return (
     <View style={styles.mainContainer}>
@@ -165,35 +166,65 @@ export default function Redemption(props) {
             </KeyboardAwareScrollView>
 
             {buttonType === 'validate' ? (
-              <TouchableOpacity
-                style={[
-                  buttonStyles.actionButtonTouchable,
-                  { alignSelf: 'center', paddingHorizontal: 24 },
-                  Platform.OS === 'ios'
-                    ? height < 500
-                      ? { bottom: '14%' }
-                      : { bottom: '6%' }
-                    : null
-                ]}
-                onPress={props.handleSubmit}
-              >
-                <View style={buttonStyles.actionButtonView}>
-                  {loadButton ? (
-                    <ActivityIndicator size="large" color={white} />
-                  ) : (
-                    <Text style={buttonStyles.actionButtonText}>
-                      {i18n.t('label.validate_code')}
-                    </Text>
-                  )}
+              !props.isValid ? (
+                <View
+                  style={[
+                    buttonStyles.actionButtonTouchable,
+                    { alignSelf: 'center', paddingHorizontal: 24 },
+                    Platform.OS === 'ios'
+                      ? height < 500
+                        ? { bottom: '14%' }
+                        : { bottom: '6%' }
+                      : null
+                  ]}
+                >
+                  <View
+                    style={[
+                      buttonStyles.actionButtonView,
+                      { backgroundColor: lockedButton }
+                    ]}
+                  >
+                    {loadButton ? (
+                      <ActivityIndicator size="large" color={white} />
+                    ) : (
+                      <Text style={buttonStyles.actionButtonText}>
+                        {i18n.t('label.validate_code')}
+                      </Text>
+                    )}
+                  </View>
                 </View>
-              </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={[
+                    buttonStyles.actionButtonTouchable,
+                    { alignSelf: 'center', paddingHorizontal: 24 },
+                    Platform.OS === 'ios'
+                      ? height < 500
+                        ? { bottom: '14%' }
+                        : { bottom: '6%' }
+                      : null
+                  ]}
+                  onPress={props.handleSubmit}
+                >
+                  <View style={[buttonStyles.actionButtonView]}>
+                    {loadButton ? (
+                      <ActivityIndicator size="large" color={white} />
+                    ) : (
+                      <Text style={buttonStyles.actionButtonText}>
+                        {i18n.t('label.validate_code')}
+                      </Text>
+                    )}
+                  </View>
+                </TouchableOpacity>
+              )
             ) : null}
 
             {buttonType === '>' ? (
               <TouchableOpacity
                 style={[
                   buttonStyles.actionButtonSmallTouchable,
-                  { bottom: '8%', right: '8%' }
+                  { bottom: '8%', right: '8%' },
+                  !props.isValid ? { backgroundColor: lockedButton } : {}
                 ]}
                 onPress={props.handleSubmit}
               >

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Keyboard } from 'react-native';
+import { View, Keyboard, Platform } from 'react-native';
 import { FormikForm } from './formComponents.native';
+import HeaderNew from './../../Header/HeaderNew.native';
 
 export default function createCompetition(props) {
   const [buttonType, setButtonType] = useState('competition');
@@ -13,25 +14,29 @@ export default function createCompetition(props) {
     setButtonType('competition');
   };
 
+  let keyboardDidShowListener;
+  let keyboardDidHideListener;
   useEffect(() => {
-    this.keyboardDidShowListener = Keyboard.addListener(
+    keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       keyboardDidShow
     );
-    this.keyboardDidHideListener = Keyboard.addListener(
+    keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       keyboardDidHide
     );
     // clean up
     return () => {
-      this.keyboardDidShowListener.remove();
-      this.keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
     };
   }, []);
   const style = { backgroundColor: 'white', flex: 1 };
 
   return (
     <View style={style}>
+      <HeaderNew title={''} navigation={props.navigation} />
+      <View style={{ marginTop: Platform.OS === 'ios' ? 80 : 40 }} />
       <FormikForm
         buttonType={buttonType}
         onCreateCompetition={props.navigation.getParam('onCreateCompetition')}

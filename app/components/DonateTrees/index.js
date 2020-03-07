@@ -126,18 +126,19 @@ export default class DonateTrees extends Component {
     this.determineDefaultCurrency = this.determineDefaultCurrency.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let state = {
       showSelectProject: !nextProps.selectedProject
     };
-    if (nextProps.selectedProject) {
+    if (nextProps.selectedProject && nextProps.selectedProject.paymentSetup) {
       const nextTreeCount =
         nextProps.selectedProject.paymentSetup.treeCountOptions
           .fixedDefaultTreeCount;
-      const currentTreeCount = this.props.selectedProject
-        ? this.props.selectedProject.paymentSetup.treeCountOptions
-            .fixedDefaultTreeCount
-        : null;
+      const currentTreeCount =
+        this.props.selectedProject && this.props.selectedProject.paymentSetup
+          ? this.props.selectedProject.paymentSetup.treeCountOptions
+              .fixedDefaultTreeCount
+          : null;
 
       if (nextTreeCount !== currentTreeCount) {
         state.selectedTreeCount = nextTreeCount;

@@ -14,9 +14,8 @@ import styles from '../../styles/newUserContributions/userContributions';
 import { editIcon, deleteIcon, closeIcon } from '../../assets';
 import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
-import MapView, { Marker } from 'react-native-maps';
-import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import PopupNative from '../Common/ModalDialog/Popup.native';
+import NativeMapView, { mapStyle } from '../Map/NativeMapView.native';
 
 export default class UserContributions extends React.Component {
   constructor(props) {
@@ -26,29 +25,21 @@ export default class UserContributions extends React.Component {
 
   _handleIndexChange = index => this.setState({ index });
 
-  getMapComponent = ({ geoLongitude, geoLatitude }) => {
-    let dummyLatLong = {
-      latitude: geoLatitude,
-      longitude: geoLongitude,
-      latitudeDelta: 0.0000922,
-      longitudeDelta: 0.00421
-    };
-    let markerLatLong = {
-      latitude: geoLatitude,
-      longitude: geoLongitude
-    };
+  getMapComponent = userContribution => {
+    let geoLatLong = `geoLongitude=${userContribution.geoLongitude}&geoLatitude=${userContribution.geoLatitude}&country=${userContribution.country}`;
     return (
-      <MapView
+      <NativeMapView
         mapType={'satellite'}
-        style={{ flex: 1 }}
-        initialRegion={dummyLatLong}
-      >
-        <Marker coordinate={markerLatLong}>
-          <View style={styles.markerCircle}>
-            <Image source={Smalltreewhite} resizeMode={'contain'} />
-          </View>
-        </Marker>
-      </MapView>
+        mode={'single-tree'}
+        geoLocation={geoLatLong}
+        searchPlacesBox={false}
+        mapStyle={{
+          height: Dimensions.get('window').height * 0.4
+          // marginBottom:
+        }}
+        mapPadding={{ top: 0, right: 0, bottom: 14, left: 0 }}
+        customMapStyle={mapStyle}
+      />
     );
   };
 
@@ -75,7 +66,7 @@ export default class UserContributions extends React.Component {
     const textColor = '#87B738';
     const deleteConfirmColor = '#ee6453';
     return (
-      <View style={styles.container}>
+      <View>
         {/* ===== Map View starts ===== */}
         <View style={styles.mapView}>
           {/* get the map component */}
@@ -147,53 +138,50 @@ export default class UserContributions extends React.Component {
           )}
 
           {/* maps the contributionPerson type and name of contributionPerson if any */}
-          {contributionPersonPrefix &&
-            contributionPerson && (
-              <View style={styles.subHeaderTextContainer}>
-                <Text style={styles.subHeaderText}>
-                  {contributionPersonPrefix}
-                </Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    updateStaticRoute(
-                      getLocalRoute('app_treecounter'),
-                      navigation,
-                      {
-                        treeCounterId: contributionPersonSlug,
-                        titleParam: contributionPerson
-                      }
-                    );
-                  }}
-                >
-                  <Text style={[styles.subHeaderText, { color: textColor }]}>
-                    {' '}
-                    {contributionPerson}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )}
+          {contributionPersonPrefix && contributionPerson && (
+            // <View style={styles.subHeaderTextContainer}>
+            <Text style={styles.subHeaderText}>
+              <Text>{contributionPersonPrefix}</Text>
+              <Text
+                onPress={() => {
+                  updateStaticRoute(
+                    getLocalRoute('app_treecounter'),
+                    navigation,
+                    {
+                      treeCounterId: contributionPersonSlug,
+                      titleParam: contributionPerson
+                    }
+                  );
+                }}
+                style={{ color: textColor }}
+              >
+                {' '}
+                {contributionPerson}
+              </Text>
+            </Text>
+            // </View>
+          )}
 
           {/* maps the project name by whom it was planted if any */}
           {plantProjectName && (
-            <View style={styles.subHeaderTextContainer}>
-              <Text style={styles.subHeaderText}>
-                {i18n.t('label.planted_by')}
-              </Text>
-              <TouchableOpacity
+            // <View style={styles.subHeaderTextContainer}>
+            <Text style={styles.subHeaderText}>
+              <Text>{i18n.t('label.planted_at')}</Text>
+              <Text
                 onPress={() => {
                   plantProjectSlug
-                    ? navigation.navigate(getLocalRoute('app_treecounter'), {
-                        treeCounterId: plantProjectId,
-                        titleParam: plantProjectName
-                      })
+                    ? this.props.onPlantProjectClick(
+                        plantProjectId,
+                        plantProjectName
+                      )
                     : null;
                 }}
+                style={{ color: textColor }}
               >
-                <Text style={[styles.subHeaderText, { color: textColor }]}>
-                  {plantProjectName}
-                </Text>
-              </TouchableOpacity>
-            </View>
+                {plantProjectName}
+              </Text>
+            </Text>
+            // </View>
           )}
         </View>
         {/* ===== Header and Sub header ends ===== */}
@@ -243,7 +231,7 @@ export default class UserContributions extends React.Component {
   }
 }
 
-UserContributions.PropTypes = {
+UserContributions.propTypes = {
   treeCount: PropTypes.number,
   plantProjectName: PropTypes.string,
   plantProjectSlug: PropTypes.string,

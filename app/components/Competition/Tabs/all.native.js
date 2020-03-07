@@ -23,7 +23,7 @@ export default class AllCompetitions extends Component {
       refreshing: false
     };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let { allCompetitions } = this.props;
     let showAllCompetitions = [];
     let CurrentDate = new Date();
@@ -46,7 +46,7 @@ export default class AllCompetitions extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     let showAllCompetitions = [];
     let CurrentDate = new Date();

@@ -13,7 +13,7 @@ import {
   RefreshControl
   //FlatList
 } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { debug } from '../../debug';
 import {
   readmoreDown,
@@ -92,7 +92,7 @@ export default class UserHome extends Component {
     });
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { treecounterData, userProfile } = nextProps;
     if (treecounterData) {
       let svgData = { ...treecounterData, type: userProfile.type };
@@ -264,6 +264,7 @@ export default class UserHome extends Component {
     return (
       <MapView
         mapType={'satellite'}
+        provider={PROVIDER_GOOGLE}
         style={{ height: 250, flex: 1 }}
         initialRegion={mapViewLatLong}
       >

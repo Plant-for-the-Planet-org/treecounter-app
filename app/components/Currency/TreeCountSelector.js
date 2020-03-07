@@ -38,7 +38,7 @@ class TreeCountSelector extends React.Component {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.currency !== nextProps.currency) {
       this.handleVariableTreeCountChange(this.state.variableTreeCount);
     }

@@ -242,10 +242,12 @@ export function AccessPicker(props) {
   const onChange = value => {
     props.setFieldValue('access', value);
   };
+  // eslint-disable-next-line
+  let dropdown = '';
   return (
     <View>
       <Dropdown
-        ref={ref => (this.dropdown = ref)}
+        ref={ref => (dropdown = ref)}
         label={i18n.t('label.competition_access')}
         data={data}
         onChangeText={onChange}
@@ -378,7 +380,9 @@ export function CompetitionDatePicker(props) {
         onConfirm={date => {
           (date = date || props.endDate),
             setShowDatePicker(false),
-            props.setFieldValue('endDate', date);
+            props.setFieldValue(
+              formatDate(formatDateToMySQL(new Date(date)), 'yyyy-MM-dd')
+            );
         }}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}

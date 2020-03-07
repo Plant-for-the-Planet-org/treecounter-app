@@ -14,7 +14,7 @@ export default class RedirectedPrivateAcceptEmail extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.acceptChallenge();
   }
   render() {

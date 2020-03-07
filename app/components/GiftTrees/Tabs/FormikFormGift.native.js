@@ -18,7 +18,7 @@ export default class FormikFormGift extends Component {
 
     this.state = { buttonType: 'next' };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.validationSchema = generateFormikSchemaFromFormSchema(
       giftInvitationFormSchema.properties.giftInvitation
     );

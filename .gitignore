@@ -32,7 +32,7 @@ ios/tmp.xcconfig
 #
 .env*
 !.env.sample
-
+!.env.deploy
 # Android/IntelliJ
 #
 build/
@@ -57,5 +57,3 @@ coverage
 #app build
 web/prod
 web/server
-app/config/index.js
-app/config/index.js.env.*

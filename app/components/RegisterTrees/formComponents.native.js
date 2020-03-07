@@ -39,24 +39,15 @@ export const FormikFormTree = props => {
   const [geometry, setGeometry] = useState(props.geometry);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
   const [initValue, setInitValue] = useState(props.initialValues);
-  useEffect(
-    () => {
-      setGeometry(props.geometry);
-    },
-    [props.geometry]
-  );
-  useEffect(
-    () => {
-      setInitValue(props.initialValues);
-    },
-    [props]
-  );
-  useEffect(
-    () => {
-      setGeoLocation(props.geoLocation);
-    },
-    [props.geoLocation]
-  );
+  useEffect(() => {
+    setGeometry(props.geometry);
+  }, [props.geometry]);
+  useEffect(() => {
+    setInitValue(props.initialValues);
+  }, [props]);
+  useEffect(() => {
+    setGeoLocation(props.geoLocation);
+  }, [props.geoLocation]);
 
   const parentProps = props;
   const isMultipleTree = props.mode === 'multiple-trees';
@@ -132,7 +123,7 @@ export const FormikFormTree = props => {
                             color: '#4d5153'
                           }}
                         >
-                          {i18n.t('label.register_tree_tpo_label')}
+                          {i18n.t('label.register_tree_tpo_label')}{' '}
                           <TouchableWithoutFeedback
                             onPress={() => {
                               inputEl &&
@@ -152,8 +143,7 @@ export const FormikFormTree = props => {
                                 ? parentProps.plantProjects[0].text
                                 : filter(parentProps.plantProjects, {
                                     value: props.values.plantProject
-                                  })[0].text}
-                              {`   `}
+                                  })[0].text}{' '}
                               <Icon
                                 name="angle-down"
                                 size={20}
@@ -244,7 +234,7 @@ export const FormikFormTree = props => {
                             style={isMultipleTree ? styles.formNameFields : ''}
                           >
                             <TextField
-                              label={i18n.t('label.tree_count')}
+                              label={i18n.t('label.number_of_trees')}
                               ref={input => {
                                 inputs['treeCount'] = input;
                               }}
@@ -252,7 +242,8 @@ export const FormikFormTree = props => {
                                 showClassification &&
                                   focusTheField('treeClassifications');
                               }}
-                              value={props.values.treeCount}
+                              value={'' + props.values.treeCount}
+                              keyboardType="numeric"
                               tintColor={'#4d5153'}
                               titleFontSize={12}
                               labelFontSize={12}
@@ -563,7 +554,7 @@ export class AddMeasurements extends React.Component {
     const { measurementView, elementMasument } = this.state;
     const { props } = this.props;
     return (
-      <View>
+      <View key="form">
         {measurementView &&
           measurementView.map((item, index) => {
             return (
@@ -865,6 +856,7 @@ export function CompetitionDatePicker(props) {
         titleIOS={i18n.t('label.datePickerTitle')}
         cancelTextIOS={i18n.t('label.datePickerCancel')}
         confirmTextIOS={i18n.t('label.datePickerConfirm')}
+        pickerContainerStyleIOS={{ color: '#89B53A' }}
       />
     </View>
   );

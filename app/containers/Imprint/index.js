@@ -13,7 +13,7 @@ class ImprintContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     ImprintAction().then(
       success => {
         try {
@@ -34,7 +34,11 @@ class ImprintContainer extends React.Component {
   }
   render() {
     return (
-      <Imprint imprints={this.state.imprints} loading={this.state.loading} />
+      <Imprint
+        imprints={this.state.imprints}
+        loading={this.state.loading}
+        navigation={this.props.navigation}
+      />
     );
   }
 }

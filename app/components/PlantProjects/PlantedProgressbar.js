@@ -32,7 +32,7 @@ class PlantedProgressBar extends React.Component {
             style={{
               width: treeCountWidth + '%',
               display: 'block',
-              'padding-right': 0,
+              paddingRight: 0,
               position: 'absolute'
             }}
           />
@@ -46,7 +46,7 @@ class PlantedProgressBar extends React.Component {
           </div>
 
           {!this.props.hideTargetImage ? (
-            <div className="targetContainer" style={{ 'z-index': '999' }}>
+            <div className="targetContainer" style={{ zIndex: '999' }}>
               <div className="treePlantedtext">
                 {countTarget ? delimitNumbers(countTarget) : null}
               </div>

@@ -65,7 +65,7 @@ class BottomTabContainer extends Component {
         );
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.loggedIn !== this.props.loggedIn) {
       nextProps.loggedIn
         ? AuthenticatedSideMenuSchema('mobile.bottom').subscribe(

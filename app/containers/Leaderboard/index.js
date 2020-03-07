@@ -207,9 +207,9 @@ class LeaderBoardContainer extends React.Component {
           if (exploreData.timePeriods) {
             // manually override in client as backend API call /exploreData is not adapted
             timePeriodsInfo.timePeriods = {
-              all: 'All Time',
-              '1w': 'This Week',
-              '1y': 'Last year'
+              '1w': i18n.t('label.lbr_c_this_week'),
+              '1y': i18n.t('label.lbr_c_year'),
+              'all': i18n.t('label.lbr_c_all_time')
             };
             timePeriodsInfo.timePeriodsKeys = Object.keys(
               timePeriodsInfo.timePeriods

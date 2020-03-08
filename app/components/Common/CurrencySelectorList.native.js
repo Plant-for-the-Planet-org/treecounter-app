@@ -71,41 +71,55 @@ class CurrencySelectorList extends Component {
   state = {
     focus: 0,
     search: '',
-    preferredCurrency: this.props.globalCurrency.currency,
+    preferredCurrency: this.props.selectedCurrency
+      ? this.props.selectedCurrency
+      : this.props.globalCurrency.currency,
     show: this.props.show
   };
-  componentWillReceiveProps(nextProps) {
-    if (this.state.preferredCurrency != nextProps.globalCurrency.currency) {
-      this.setState({ preferredCurrency: nextProps.globalCurrency.currency });
-    } else if (
-      !nextProps.userProfile &&
-      this.state.preferredCurrency != nextProps.globalCurrency.currency
-    ) {
-      //this.state.preferredCurrency && this.props.setCurrencyAction(this.state.preferredCurrency);
-    }
-    {
-      nextProps.userProfile &&
-        nextProps.userProfile.currency &&
-        this.setState({ preferredCurrency: nextProps.userProfile.currency }) &&
-        this.props.setCurrencyAction(nextProps.userProfile.currency);
-    }
+  // componentWillReceiveProps(nextProps) {
+  //   if (
+  //     // nextProps.selectedCurrency &&
+  //     this.state.preferredCurrency !== nextProps.selectedCurrency
+  //   ) {
+  //     this.setState({ preferredCurrency: nextProps.selectedCurrency });
+  //   } else if (
+  //     this.state.preferredCurrency !== nextProps.globalCurrency.currency
+  //   ) {
+  //     this.setState({ preferredCurrency: nextProps.globalCurrency.currency });
+  //   } else if (
+  //     !nextProps.userProfile &&
+  //     this.state.preferredCurrency != nextProps.globalCurrency.currency
+  //   ) {
+  //     //this.state.preferredCurrency && this.props.setCurrencyAction(this.state.preferredCurrency);
+  //   }
+  //   // {
+  //   //   nextProps.userProfile &&
+  //   //     nextProps.userProfile.currency &&
+  //   //     this.setState({ preferredCurrency: nextProps.userProfile.currency }) &&
+  //   //     this.props.setCurrencyAction(nextProps.userProfile.currency);
+  //   // }
 
-    if (!nextProps.currencies.currencies) {
-      this.props.fetchCurrencies();
-    }
-  }
-  async componentWillMount() {
-    // this.setState({ preferredCurrency: getPreferredCurrency() });
-    this.props.userProfile &&
-      this.props.userProfile.currency &&
-      this.setState({ preferredCurrency: this.props.userProfile.currency }) &&
-      this.props.setCurrencyAction(this.props.userProfile.currency);
-  }
+  //   if (!nextProps.currencies.currencies) {
+  //     this.props.fetchCurrencies();
+  //   }
+  // }
+  // async componentWillMount() {
+  //   // this.setState({ preferredCurrency: getPreferredCurrency() });
+  //   this.props.userProfile &&
+  //     this.props.userProfile.currency &&
+  //     this.setState({ preferredCurrency: this.props.userProfile.currency }) &&
+  //     this.props.setCurrencyAction(this.props.userProfile.currency);
+  // }
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
       await this.props.fetchCurrencies();
     }
-    if (!this.state.preferredCurrency && this.props.globalCurrency.currency) {
+    if (!this.state.preferredCurrency && this.props.selectedCurrency) {
+      this.setState({ preferredCurrency: this.props.selectedCurrency });
+    } else if (
+      !this.state.preferredCurrency &&
+      this.props.globalCurrency.currency
+    ) {
       this.setState({ preferredCurrency: this.props.globalCurrency.currency });
     }
     this.state.preferredCurrency &&

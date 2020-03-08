@@ -29,7 +29,6 @@ class TreeCountCurrencySelector extends React.PureComponent {
 
     this.calculateAmount = this.calculateAmount.bind(this);
     this.calculateTreeCount = this.calculateTreeCount.bind(this);
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
   }
 
@@ -45,11 +44,11 @@ class TreeCountCurrencySelector extends React.PureComponent {
     this.setState({ showCurrencyModal: false });
   };
 
-  handleCurrencyChange(currency) {
+  handleCurrencyChange = currency => {
     this.updateStateAndParent({ selectedCurrency: currency });
     this.setState({ currencyName: this.getCountryCode(currency).currency });
     this.hideCurrencyModal();
-  }
+  };
 
   getCountryCode = currency => countryCodes.find(c => c.code == currency) || {};
 
@@ -181,12 +180,12 @@ class TreeCountCurrencySelector extends React.PureComponent {
             hideCurrencyModal={this.hideCurrencyModal}
             show={this.state.showCurrencyModal}
             handleCurrencyChange={this.handleCurrencyChange}
+            selectedCurrency={this.state.selectedCurrency}
           />
 
           {/* <CurrencySelector
             currencies={currencies}
             onChange={this.handleCurrencyChange}
-            selectedCurrency={this.state.selectedCurrency}
           /> */}
 
           <View style={{ width: Dimensions.get('window').width - 30 }}>

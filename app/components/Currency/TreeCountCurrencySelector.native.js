@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Dimensions, View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // import { debug } from '../../debug';
-import CurrencySelector from './CurrencySelector.native';
+// import CurrencySelector from './CurrencySelector.native';
 import TreeCountSelector from './TreeCountSelector';
 import CurrencySelectorList from '../Common/CurrencySelectorList.native';
 import CardLayout from '../Common/Card';
@@ -88,7 +88,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
   }
 
   render() {
-    const { currencies, treeCountOptions } = this.props;
+    const { treeCountOptions } = this.props;
     // debug('Tree Count currency selector called up');
     return (
       <KeyboardAwareScrollView

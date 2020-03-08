@@ -142,7 +142,11 @@ class PlantProjectSnippetDetails extends PureComponent {
                 resizeMode={'cover'}
               />
             </View>
-          ) : null}
+          ) : (
+            <View
+              style={{ height: '40%', width: '100%', backgroundColor: '#000' }}
+            ></View>
+          )}
           <PlantedProgressBar
             countPlanted={specsProps.countPlanted}
             countTarget={specsProps.countTarget}

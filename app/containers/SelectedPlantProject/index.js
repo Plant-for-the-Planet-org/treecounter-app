@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
 import {
   selectedPlantProjectIdSelector,
   selectedPlantProjectSelector,
@@ -10,39 +9,26 @@ import {
   currentUserProfileSelector
 } from '../../selectors';
 import { updateStaticRoute } from '../../helpers/routerHelper';
-import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
+import PlantProjectSingle from '../../components/PlantProjects/PlantProjectSingle';
 import { loadProject } from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
 } from '../../actions/selectPlantProjectAction';
 
-class SelectedPlantProjectContainer extends Component {
-  static navigationOptions = {
-    header: null
-  };
-  constructor(props) {
-    super(props);
-    this.selectProject = this.selectProject.bind(this);
-  }
-  async componentDidMount() {
-    //  this.props.selectPlantProjectAction(1);
-
-    if (!this.props.selectedProject) {
-      let project = await this.props.loadProject(
-        { id: this.props.selectedPlantProjectId },
+const SelectedPlantProjectContainer = props => {
+  React.useEffect(() => {
+    if (props.match) {
+      props.loadProject(
+        { id: props.match.params.projectSlug },
         { loading: true }
       );
-      debug('project found in selected plant project', project);
     }
-  }
+  }, [props.match.params.projectSlug]);
 
-  onTabChange(/* title */) {
-    // this.props.navigation.setParams({ titleParam: title });
-  }
-  selectProject(id) {
-    const { navigation } = this.props;
-    this.props.selectPlantProjectAction(id);
+  const selectProject = id => {
+    const { navigation } = props;
+    props.selectPlantProjectAction(id);
     if (navigation) {
       updateStaticRoute('app_donate_detail', navigation, {
         id: id,
@@ -50,28 +36,22 @@ class SelectedPlantProjectContainer extends Component {
         giftMethod: navigation.getParam('giftMethod')
       });
     }
-  }
-  render() {
-    debug(
-      'got id from nav param, and from redux',
-      this.props.navigation.getParam('id'),
-      this.props.selectedProject
-    );
-    if (this.props.selectedProject) {
-      return (
-        <PlantProjectFull
-          {...this.props}
-          plantProject={this.props.selectedProject}
-          tpoName={this.props.selectedTpo ? this.props.selectedTpo.name : null}
-          selectProject={id => this.selectProject(id)}
-          currentUserProfile={this.props.currentUserProfile}
-        />
-      );
-    } else {
-      return null;
-    }
-  }
-}
+  };
+
+  return props.selectedProject ? (
+    <PlantProjectSingle
+      {...props}
+      expanded
+      plantProject={props.selectedProject}
+      tpoName={props.selectedTpo ? props.selectedTpo.name : null}
+      selectProject={id => selectProject(id)}
+      currentUserProfile={props.currentUserProfile}
+    />
+  ) : null;
+};
+SelectedPlantProjectContainer.navigationOptions = () => ({
+  headerMode: 'none'
+});
 
 const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),

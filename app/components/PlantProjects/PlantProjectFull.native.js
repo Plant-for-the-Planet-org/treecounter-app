@@ -7,7 +7,14 @@ import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import { loadProject } from '../../actions/loadTposAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import { View, Platform, Text, Animated, StatusBar, ScrollView } from 'react-native';
+import {
+  View,
+  Platform,
+  Text,
+  Animated,
+  StatusBar,
+  ScrollView
+} from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
@@ -130,10 +137,11 @@ class PlantProjectFull extends React.Component {
             context.scheme +
             '://' +
             context.host +
-            getLocalRoute('app_selectProject', {
-              plantProjectId: 5
-            })
+            getLocalRoute('app_selectedProject') +
+            '/' +
+            this.props.plantProject.id
           }
+          appurl={'weplant://project/' + this.props.plantProject.id}
         />
         <ScrollView
           contentContainerStyle={[

@@ -48,13 +48,14 @@ export default function HeaderAnimated(props) {
     };
   });
 
-  let onShare = async (entityType, entityName, url) => {
+  let onShare = async (entityType, entityName, url, appurl) => {
     try {
       if (entityType === 'projects') {
         const result = await Share.share({
           message: i18n.t('label.shareProject', {
             entityName: entityName,
-            url: url
+            url: url,
+            appurl: appurl
           })
         });
         if (result.action === Share.sharedAction) {
@@ -139,7 +140,12 @@ export default function HeaderAnimated(props) {
               alignSelf: 'center'
             }}
             onPress={() =>
-              onShare(props.entityType, props.entityName, props.url)
+              onShare(
+                props.entityType,
+                props.entityName,
+                props.url,
+                props.appurl
+              )
             }
           >
             <Image

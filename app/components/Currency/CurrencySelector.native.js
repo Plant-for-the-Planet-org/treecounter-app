@@ -29,7 +29,6 @@ class CurrencySelector extends React.PureComponent {
     }
   }
   componentWillReceiveProps(nextProps) {
-    // console.log('next props currency', nextProps);
     if (
       nextProps.globalCurrency &&
       nextProps.globalCurrency.currency !== this.state.selectedCurrency

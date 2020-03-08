@@ -181,6 +181,7 @@ export default class Menu extends Component {
     this.props.setCurrencyAction(selectedOption);
     this.props.userProfile &&
       this.props.updateUserProfile({ currency: selectedOption }, 'currency');
+    this.hideCurrencyModal();
   };
 
   render() {

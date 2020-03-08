@@ -1,16 +1,7 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { Component } from 'react';
 // import t from 'tcomb-form-native';
-import {
-  Text,
-  View,
-  FlatList,
-  Image,
-  TextInput,
-  ActivityIndicator,
-  StyleSheet,
-  Platform
-} from 'react-native';
+import { Text, View, FlatList, Image, TextInput, Platform } from 'react-native';
 import Modal from 'react-native-modalbox';
 import { currentUserProfileSelector, getCurrency } from '../../selectors/index';
 import i18n from '../../locales/i18n';
@@ -32,42 +23,6 @@ const backgroundColor = '#e4e4e4';
 const activeColor = '#74ba00';
 const defaultColor = '#4d5153';
 
-const Loader = () => {
-  return (
-    <>
-      <View style={[styles.loaderContainer]} />
-      <View
-        style={{
-          ...StyleSheet.absoluteFillObject,
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 2
-        }}
-      >
-        <View
-          style={[
-            styles.loaderContent,
-            { paddingVertical: 30, paddingHorizontal: 10 }
-          ]}
-        >
-          <ActivityIndicator size={80} color={activeColor} />
-          <Text
-            style={{
-              color: '#4D5153',
-              fontFamily: 'OpenSans-SemiBold',
-              fontSize: 18,
-              marginTop: 30,
-              textAlign: 'center'
-            }}
-          >
-            Setting up your default currency
-          </Text>
-        </View>
-      </View>
-    </>
-  );
-};
-
 class CurrencySelectorList extends Component {
   state = {
     focus: 0,
@@ -77,40 +32,6 @@ class CurrencySelectorList extends Component {
       : this.props.globalCurrency.currency,
     show: this.props.show
   };
-  // componentWillReceiveProps(nextProps) {
-  //   if (
-  //     // nextProps.selectedCurrency &&
-  //     this.state.preferredCurrency !== nextProps.selectedCurrency
-  //   ) {
-  //     this.setState({ preferredCurrency: nextProps.selectedCurrency });
-  //   } else if (
-  //     this.state.preferredCurrency !== nextProps.globalCurrency.currency
-  //   ) {
-  //     this.setState({ preferredCurrency: nextProps.globalCurrency.currency });
-  //   } else if (
-  //     !nextProps.userProfile &&
-  //     this.state.preferredCurrency != nextProps.globalCurrency.currency
-  //   ) {
-  //     //this.state.preferredCurrency && this.props.setCurrencyAction(this.state.preferredCurrency);
-  //   }
-  //   // {
-  //   //   nextProps.userProfile &&
-  //   //     nextProps.userProfile.currency &&
-  //   //     this.setState({ preferredCurrency: nextProps.userProfile.currency }) &&
-  //   //     this.props.setCurrencyAction(nextProps.userProfile.currency);
-  //   // }
-
-  //   if (!nextProps.currencies.currencies) {
-  //     this.props.fetchCurrencies();
-  //   }
-  // }
-  // async componentWillMount() {
-  //   // this.setState({ preferredCurrency: getPreferredCurrency() });
-  //   this.props.userProfile &&
-  //     this.props.userProfile.currency &&
-  //     this.setState({ preferredCurrency: this.props.userProfile.currency }) &&
-  //     this.props.setCurrencyAction(this.props.userProfile.currency);
-  // }
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
       await this.props.fetchCurrencies();
@@ -158,9 +79,6 @@ class CurrencySelectorList extends Component {
   handleCurrencyChange = selectedOption => {
     this.setState({ preferredCurrency: selectedOption });
     this.props.handleCurrencyChange(selectedOption);
-    // this.props.setCurrencyAction(selectedOption);
-    // this.props.userProfile &&
-    //   this.props.updateUserProfile({ currency: selectedOption }, 'currency');
   };
   onClosed = () => {
     this.props.hideCurrencyModal({
@@ -247,7 +165,6 @@ class CurrencySelectorList extends Component {
         keyboardTopOffset={0}
         swipeToClose
       >
-        {this.props.progressModelState ? <Loader /> : null}
         <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
           <View
             style={{
@@ -374,20 +291,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CurrencySelectorList);
-
-const styles = StyleSheet.create({
-  loaderContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#111',
-    opacity: 0.8,
-    zIndex: 1,
-    ...StyleSheet.absoluteFillObject
-  },
-  loaderContent: {
-    backgroundColor: '#ffffff',
-    borderRadius: 8,
-    width: 240
-  }
-});

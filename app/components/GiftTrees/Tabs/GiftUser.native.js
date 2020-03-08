@@ -23,7 +23,7 @@ export default class GiftUser extends Component {
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
     this.state = { form: {}, buttonType: 'next' };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       this._keyboardDidShow

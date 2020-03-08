@@ -60,7 +60,7 @@ export default class SignUp extends Component {
     }
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setSignupType(this.props);
   }
 

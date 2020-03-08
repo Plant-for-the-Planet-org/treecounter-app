@@ -48,6 +48,7 @@
   "select_currency": "Select Currency",
   "featured_currencies": "Featured Currencies",
   "all_currencies": "All Currencies",
-  "view_all": "View All",
-  "share": "Share"
+  "share": "Share",
+  "noInternet": "Cannot connect to internet. You maybe offline",
+  "someFunctionality": "Some functionalities may be unavailable offline"
 }

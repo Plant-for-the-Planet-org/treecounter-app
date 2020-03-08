@@ -51,8 +51,8 @@ class SearchUser extends React.Component {
     if (
       this.props.onSearchResultClick &&
       !this.isMyself(suggestion, this.props.currentUserProfile) &&
-      (this.props.alreadyInvited &&
-        !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited))
+      this.props.alreadyInvited &&
+      !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited)
     ) {
       this.props.onSearchResultClick(suggestion);
       this.setState({
@@ -71,7 +71,7 @@ class SearchUser extends React.Component {
       );
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.searchSuggestion === '') {
       this.setState({
         selectedSuggestionName: ''

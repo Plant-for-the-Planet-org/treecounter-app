@@ -34,10 +34,10 @@ import { getPaymentStatus } from '../../reducers/paymentStatus';
 import { postDirectRequest } from '../../utils/api';
 
 class DonationTreesContainer extends PureComponent {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { supportTreecounterAction, match } = this.props;
     if (match && match.params && match.params.slug) {
-      postDirectRequest('/suggest', 'q=' + match.params.slug)
+      postDirectRequest('/suggest.php', 'q=' + match.params.slug)
         .then(_suggestions => {
           debug('sugessions', _suggestions);
           if (
@@ -67,7 +67,7 @@ class DonationTreesContainer extends PureComponent {
       }
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject && !nextProps.selectedProject.tpoData) {
       this.props.loadProject({ id: nextProps.selectedProject.id });
     }

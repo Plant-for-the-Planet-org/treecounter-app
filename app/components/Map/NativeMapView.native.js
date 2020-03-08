@@ -442,7 +442,7 @@ class NativeMapView extends Component {
     this.gotoLocation();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps, this.props)) {
       this.onPropsUpdate(nextProps);
       this.ref && this.ref.setAddressText(nextProps.address);
@@ -632,7 +632,7 @@ class NativeMapView extends Component {
         Platform.OS === 'android' ? androidEdgePadding : iosEdgePadding;
       return edgePadding;
     };
-    console.log(
+    debug(
       'this.props.mapStyle',
       this.props.mapStyle,
       { width: this.state.width, marginBottom: this.state.mapMargin },

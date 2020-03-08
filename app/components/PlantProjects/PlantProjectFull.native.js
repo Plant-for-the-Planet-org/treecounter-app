@@ -23,10 +23,10 @@ import LoadingIndicator from '../Common/LoadingIndicator.native';
  */
 class PlantProjectFull extends React.Component {
   state = { loader: true };
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     setTimeout(() => this.setState({ loader: false }), 2000);
   }
-  async componentWillReceiveProps(nextProps) {
+  async UNSAFE_componentWillReceiveProps(nextProps) {
     try {
       debug('plantproject while receive props', nextProps.plantProject);
       if (nextProps.plantProject && !nextProps.plantProject.tpoData) {

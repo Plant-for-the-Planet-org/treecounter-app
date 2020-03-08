@@ -97,7 +97,7 @@ export default class RegisterTreeTab extends PureComponent {
     }, 1500);
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       mode: nextProps.mode
     });

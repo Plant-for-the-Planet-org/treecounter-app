@@ -55,7 +55,7 @@ export default class App extends Component {
       this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
 
     if (treecounter) {

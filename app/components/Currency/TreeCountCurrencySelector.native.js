@@ -32,7 +32,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
     this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTreeCount !== this.state.selectedTreeCount) {
       this.setState({
         selectedTreeCount: nextProps.selectedTreeCount

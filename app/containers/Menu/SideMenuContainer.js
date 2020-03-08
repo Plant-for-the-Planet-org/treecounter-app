@@ -29,7 +29,7 @@ class SideMenuContainer extends Component {
       loading: true
     };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (!this.props.navigation) {
       this.props.loggedIn
         ? AuthenticatedSideMenuSchema('web.main').subscribe(
@@ -51,7 +51,7 @@ class SideMenuContainer extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.loggedIn !== this.props.loggedIn && !this.props.navigation) {
       nextProps.loggedIn
         ? AuthenticatedSideMenuSchema('web.main').subscribe(

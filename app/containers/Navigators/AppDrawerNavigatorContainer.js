@@ -50,7 +50,8 @@ class AppDrawerNavigatorContainer extends Component {
     if (
       (nextState.loading === this.state.loading &&
         nextState.isLoggedIn === this.state.isLoggedIn &&
-        (!nextProps.userProfile && !this.props.userProfile)) ||
+        !nextProps.userProfile &&
+        !this.props.userProfile) ||
       (nextProps.userProfile &&
         this.props.userProfile &&
         nextProps.userProfile.id === this.props.userProfile.id)
@@ -64,7 +65,7 @@ class AppDrawerNavigatorContainer extends Component {
     );
     return true;
   }
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
     if (isLoggedIn) {
@@ -79,7 +80,7 @@ class AppDrawerNavigatorContainer extends Component {
     }
     this.props.fetchpledgeEventsAction();
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.userProfile !== this.props.userProfile) {
       let isLoggedIn = null !== nextProps.userProfile;
       if (isLoggedIn !== this.state.isLoggedIn) {
@@ -132,6 +133,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  AppDrawerNavigatorContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AppDrawerNavigatorContainer);

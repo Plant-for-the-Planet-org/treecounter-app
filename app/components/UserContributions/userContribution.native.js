@@ -66,7 +66,7 @@ export default class UserContributions extends React.Component {
     const textColor = '#87B738';
     const deleteConfirmColor = '#ee6453';
     return (
-      <View style={styles.container}>
+      <View>
         {/* ===== Map View starts ===== */}
         <View style={styles.mapView}>
           {/* get the map component */}
@@ -139,11 +139,10 @@ export default class UserContributions extends React.Component {
 
           {/* maps the contributionPerson type and name of contributionPerson if any */}
           {contributionPersonPrefix && contributionPerson && (
-            <View style={styles.subHeaderTextContainer}>
-              <Text style={styles.subHeaderText}>
-                {contributionPersonPrefix}
-              </Text>
-              <TouchableOpacity
+            // <View style={styles.subHeaderTextContainer}>
+            <Text style={styles.subHeaderText}>
+              <Text>{contributionPersonPrefix}</Text>
+              <Text
                 onPress={() => {
                   updateStaticRoute(
                     getLocalRoute('app_treecounter'),
@@ -154,36 +153,35 @@ export default class UserContributions extends React.Component {
                     }
                   );
                 }}
+                style={{ color: textColor }}
               >
-                <Text style={[styles.subHeaderText, { color: textColor }]}>
-                  {' '}
-                  {contributionPerson}
-                </Text>
-              </TouchableOpacity>
-            </View>
+                {' '}
+                {contributionPerson}
+              </Text>
+            </Text>
+            // </View>
           )}
 
           {/* maps the project name by whom it was planted if any */}
           {plantProjectName && (
-            <View style={styles.subHeaderTextContainer}>
-              <Text style={styles.subHeaderText}>
-                {i18n.t('label.planted_by')}
-              </Text>
-              <TouchableOpacity
+            // <View style={styles.subHeaderTextContainer}>
+            <Text style={styles.subHeaderText}>
+              <Text>{i18n.t('label.planted_at')}</Text>
+              <Text
                 onPress={() => {
                   plantProjectSlug
-                    ? navigation.navigate(getLocalRoute('app_treecounter'), {
-                        treeCounterId: plantProjectId,
-                        titleParam: plantProjectName
-                      })
+                    ? this.props.onPlantProjectClick(
+                        plantProjectId,
+                        plantProjectName
+                      )
                     : null;
                 }}
+                style={{ color: textColor }}
               >
-                <Text style={[styles.subHeaderText, { color: textColor }]}>
-                  {plantProjectName}
-                </Text>
-              </TouchableOpacity>
-            </View>
+                {plantProjectName}
+              </Text>
+            </Text>
+            // </View>
           )}
         </View>
         {/* ===== Header and Sub header ends ===== */}

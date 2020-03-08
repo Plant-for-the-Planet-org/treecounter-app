@@ -34,7 +34,8 @@ export default class Menu extends Component {
   hideCurrencyModal = () => {
     this.setState({ showCurrencyModal: false });
   };
-  componentWillReceiveProps(nextProps) {
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.lastRoute != this.props.lastRoute) {
       updateRoute(
         nextProps.lastRoute.routeName,

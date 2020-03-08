@@ -35,7 +35,7 @@ class Reviews extends Component {
       reviewIndexes: []
     };
   }
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     try {
       const { data } = await getReviewIndexes();
       debug('indexs', data);
@@ -103,18 +103,20 @@ class Reviews extends Component {
 
         {/*All Reviews*/}
         <View style={{ paddingTop: 20, backgroundColor: 'white' }}>
-          {this.props.reviews.sort((b, a) => a.id - b.id).map(review => {
-            return (
-              <SingleReview
-                currentUserProfile={this.props.currentUserProfile}
-                deleteReview={this.props.deleteReview}
-                navigation={this.props.navigation}
-                key={review.id}
-                review={review}
-                reviewIndexes={this.state.reviewIndexes}
-              />
-            );
-          })}
+          {this.props.reviews
+            .sort((b, a) => a.id - b.id)
+            .map(review => {
+              return (
+                <SingleReview
+                  currentUserProfile={this.props.currentUserProfile}
+                  deleteReview={this.props.deleteReview}
+                  navigation={this.props.navigation}
+                  key={review.id}
+                  review={review}
+                  reviewIndexes={this.state.reviewIndexes}
+                />
+              );
+            })}
         </View>
 
         {/* All Reviews Ended */}

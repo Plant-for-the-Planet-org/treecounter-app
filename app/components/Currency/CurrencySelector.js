@@ -27,7 +27,7 @@ class CurrencySelector extends React.Component {
     let { currencies } = this.props;
     this.setState({ currenciesArray: currencySort(Object.keys(currencies)) });
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // debug('next props currency', nextProps);
     if (
       nextProps.globalCurrency &&

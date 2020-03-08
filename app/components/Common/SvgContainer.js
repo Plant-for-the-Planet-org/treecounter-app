@@ -38,7 +38,7 @@ export default class SvgContainer extends PureComponent {
     this.renderedTreeIds = [];
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!nextProps.id) {
       return;
     }
@@ -190,7 +190,7 @@ export default class SvgContainer extends PureComponent {
     );
 
     const timer = window.setInterval(() => {
-      currentAngleLength = currentTick / maxTicks * maxAngleLength;
+      currentAngleLength = (currentTick / maxTicks) * maxAngleLength;
       let sectionName = this.getSectionNameForAngle(sectionAngleLengthRanges)(
         currentAngleLength
       );
@@ -300,7 +300,7 @@ export default class SvgContainer extends PureComponent {
   }
 
   convertTreesToAngle(trees, total, maxAngle) {
-    return trees / total * maxAngle;
+    return (trees / total) * maxAngle;
   }
 
   /**

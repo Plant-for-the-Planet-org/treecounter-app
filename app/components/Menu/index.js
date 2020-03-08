@@ -114,7 +114,7 @@ class Menu extends Component {
     );
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     let language = await getLocale();
     let option = statusOptions.filter(option => option.value === language)[0];
     this.setState({ selectedLanguage: option });
@@ -202,52 +202,47 @@ class Menu extends Component {
               )}
             </span>
             <ul className="app-container__sidenav--list" key={element.sequence}>
-              {element.menuItems.map(
-                (menuItem, index) =>
-                  menuItem.enabled ? (
-                    <li
-                      className={
+              {element.menuItems.map((menuItem, index) =>
+                menuItem.enabled ? (
+                  <li
+                    className={
+                      menuItem.uri.substr(menuItem.uri.lastIndexOf('/') + 1) ===
+                        path ||
+                      (pathname.indexOf('leaderboard') + 1 &&
                         menuItem.uri.substr(
                           menuItem.uri.lastIndexOf('/') + 1
-                        ) === path ||
-                        (pathname.indexOf('leaderboard') + 1 &&
-                          menuItem.uri.substr(
-                            menuItem.uri.lastIndexOf('/') + 1
-                          ) === 'explore')
-                          ? 'menu_item_selected'
-                          : 'menu_item_unselected'
-                      }
-                      key={index + ' ' + element.sequence + menuItem.sequence}
-                    >
-                      <img
-                        src={
-                          menuItem.icon && menuItem.icon !== 'none'
-                            ? menuItem.uri.substr(
+                        ) === 'explore')
+                        ? 'menu_item_selected'
+                        : 'menu_item_unselected'
+                    }
+                    key={index + ' ' + element.sequence + menuItem.sequence}
+                  >
+                    <img
+                      src={
+                        menuItem.icon && menuItem.icon !== 'none'
+                          ? menuItem.uri.substr(
+                              menuItem.uri.lastIndexOf('/') + 1
+                            ) === path ||
+                            (pathname.indexOf('leaderboard') + 1 &&
+                              menuItem.uri.substr(
                                 menuItem.uri.lastIndexOf('/') + 1
-                              ) === path ||
-                              (pathname.indexOf('leaderboard') + 1 &&
-                                menuItem.uri.substr(
-                                  menuItem.uri.lastIndexOf('/') + 1
-                                ) === 'explore')
-                              ? images[menuItem.icon + '_red']
-                              : images[menuItem.icon]
-                            : null
-                        }
-                        className="menu-icon"
-                      />
-                      <Link
-                        to={menuItem.uri}
-                        onClick={() => this.linkClicked()}
-                      >
-                        {menuItem.caption}
-                      </Link>
-                    </li>
-                  ) : (
-                    <li key={'' + element.sequence + menuItem.sequence}>
-                      <i className="material-icons">{'folder_open'}</i>
-                      <a>{menuItem.caption}</a>
-                    </li>
-                  )
+                              ) === 'explore')
+                            ? images[menuItem.icon + '_red']
+                            : images[menuItem.icon]
+                          : null
+                      }
+                      className="menu-icon"
+                    />
+                    <Link to={menuItem.uri} onClick={() => this.linkClicked()}>
+                      {menuItem.caption}
+                    </Link>
+                  </li>
+                ) : (
+                  <li key={'' + element.sequence + menuItem.sequence}>
+                    <i className="material-icons">{'folder_open'}</i>
+                    <a>{menuItem.caption}</a>
+                  </li>
+                )
               )}
             </ul>
           </div>
@@ -281,9 +276,7 @@ class Menu extends Component {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://apps.apple.com/app/plant-for-the-planet/id${
-              context['ios'].appId
-            }`}
+            href={`https://apps.apple.com/app/plant-for-the-planet/id${context['ios'].appId}`}
           >
             <img src={images['appleStoreBadge_' + userLang]} />
           </a>
@@ -292,9 +285,7 @@ class Menu extends Component {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://play.google.com/store/apps/details?id=${
-              context['android'].appId
-            }`}
+            href={`https://play.google.com/store/apps/details?id=${context['android'].appId}`}
           >
             <img src={images['googlePlayBadge_' + userLang]} />
           </a>

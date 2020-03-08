@@ -55,7 +55,7 @@ export default class FeaturedProjects extends PureComponent {
         }
       });
   }
-  async componentWillReceiveProps(nextProps) {
+  async UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.index == 0 && !this.state.initiated) {
       debug(
         'component got index calling in featured=======================================================',

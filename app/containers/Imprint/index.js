@@ -13,7 +13,7 @@ class ImprintContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     ImprintAction().then(
       success => {
         try {

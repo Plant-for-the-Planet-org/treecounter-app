@@ -21,7 +21,7 @@ export default class Redemption extends Component {
     };
     this.onChange = this.onChange.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({ value: nextProps.code });
   }
   onSetRedemption() {

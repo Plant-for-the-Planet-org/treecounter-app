@@ -155,14 +155,14 @@ export default class FullMapComponent extends Component {
 
   render() {
     const { isFullMapComponentModal } = this.props;
-    console.log(this.state.uri, 'render at ');
+    console.log(this.props.toggleIsFullMapComp, 'toggleIsFullMapComp Full');
 
     return (
       <View style={styles.container}>
         {this.state.region ? (
           <AnimatedViews
             isFullMapComponentModal={this.props.isFullMapComponentModal}
-            toggleIsFullMapComp={this.toggleIsFullMapComp}
+            toggleIsFullMapComp={this.props.toggleIsFullMapComp}
             navigation={this.props.navigation}
             userContributions={this.props.userContributions}
           />

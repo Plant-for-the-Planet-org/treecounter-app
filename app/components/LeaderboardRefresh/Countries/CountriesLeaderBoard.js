@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView
 } from 'react-native';
+import { debug } from '../../../debug';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
@@ -22,31 +23,24 @@ const CountriesLeaderBoard = ({ navigation }) => {
   const [period, setPeriod] = useState('1w');
   const [orderBy] = useState('planted');
 
-  useEffect(
-    () => {
-      setQueryResult(null);
-      const section = navigation.getParam('category');
-      LeaderBoardDataAction({
-        section,
-        orderBy,
-        period,
-        subSection: undefined
-      }).then(
-        success => {
-          if (
-            success.data &&
-            success.data instanceof Object &&
-            success.data.data
-          )
-            setQueryResult(success.data.data);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    },
-    [period]
-  );
+  useEffect(() => {
+    setQueryResult(null);
+    const section = navigation.getParam('category');
+    LeaderBoardDataAction({
+      section,
+      orderBy,
+      period,
+      subSection: undefined
+    }).then(
+      success => {
+        if (success.data && success.data instanceof Object && success.data.data)
+          setQueryResult(success.data.data);
+      },
+      error => {
+        debug(error);
+      }
+    );
+  }, [period]);
   const renderCountryList = () => {
     if (queryresult) {
       return (
@@ -76,9 +70,18 @@ const CountriesLeaderBoard = ({ navigation }) => {
                   />
                 </View>
                 <View style={styles.countryBody}>
-                  <Text numberOfLines={2} style={styles.countryNameText}>
-                    {item.caption}
-                  </Text>
+                  <View style={styles.countryNameCont}>
+                    <Text numberOfLines={2} style={[styles.countryNameText]}>
+                      {item.caption}
+                    </Text>
+                    {!isPrivate ? null : (
+                      <View>
+                        <Text style={styles.privateText}>
+                          {i18n.t('label.private')}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
                   <Text style={styles.tressCounter}>
                     {delimitNumbers(item.planted)}{' '}
                     <Text style={styles.tressText}>
@@ -112,7 +115,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
       caption
     });
   };
-  console.log('queryresult', queryresult);
+  debug('queryresult', queryresult);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header navigation={navigation} />

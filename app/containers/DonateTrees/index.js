@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import {
+  selectedPlantProjectIdSelector,
   selectedPlantProjectSelector,
   selectedTpoSelector,
   currentUserProfileSelector,
@@ -26,22 +28,21 @@ import {
 } from '../../actions/donateAction';
 import { loadProject } from '../../actions/loadTposAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
-
 import { updateRoute } from '../../helpers/routerHelper';
 import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 import { postDirectRequest } from '../../utils/api';
 
-class DonationTreesContainer extends Component {
+class DonationTreesContainer extends PureComponent {
   static navigationOptions = {
     header: null
   };
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { supportTreecounterAction, match } = this.props;
     if (match && match.params && match.params.slug) {
-      postDirectRequest('/suggest', 'q=' + match.params.slug)
+      postDirectRequest('/suggest.php', 'q=' + match.params.slug)
         .then(_suggestions => {
-          console.log('sugessions', _suggestions);
+          debug('sugessions', _suggestions);
           if (
             _suggestions.data.length &&
             _suggestions.data[0].slug == match.params.slug
@@ -52,10 +53,10 @@ class DonationTreesContainer extends Component {
             });
           }
         })
-        .catch(error => console.log(error));
+        .catch(error => debug(error));
     } else {
       const { currentUserProfile } = this.props;
-      console.log(
+      debug(
         'current user profile and suported tree counter',
         currentUserProfile,
         this.props.supportTreecounter.treecounterId
@@ -69,7 +70,7 @@ class DonationTreesContainer extends Component {
       }
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject && !nextProps.selectedProject.tpoData) {
       this.props.loadProject({ id: nextProps.selectedProject.id });
     }
@@ -78,7 +79,12 @@ class DonationTreesContainer extends Component {
     let selectedProjectId = undefined;
     if (this.props.match) {
       selectedProjectId = parseInt(this.props.match.params.id);
+    } else {
+      selectedProjectId = this.props.selectedPlantProjectId;
     }
+    selectedProjectId &&
+      (await this.props.loadProject({ id: selectedProjectId }));
+
     if (this.props.navigation && this.props.navigation.getParam('id'))
       selectedProjectId = parseInt(this.props.navigation.getParam('id'));
     if (this.props.selectedProject && !this.props.selectedProject.tpoData) {
@@ -95,7 +101,7 @@ class DonationTreesContainer extends Component {
   }
   componentWillUnmount() {
     const { currentUserProfile } = this.props;
-    console.log(
+    debug(
       'current user profile unmounting donate trees container',
       currentUserProfile
     );
@@ -116,6 +122,12 @@ class DonationTreesContainer extends Component {
     this.props.donate(donationContribution, plantProjectId, profile);
 
   render() {
+    if (this.props.match) {
+      const {
+        params: { id }
+      } = this.props.match;
+      if (id && !this.props.selectedProject) return null;
+    }
     return (
       <DonateTrees
         ref={'donateTreesContainer'}
@@ -150,7 +162,8 @@ const mapStateToProps = state => {
     currentUserProfile: currentUserProfileSelector(state),
     supportTreecounter: supportedTreecounterSelector(state),
     currencies: currenciesSelector(state),
-    paymentStatus: getPaymentStatus(state)
+    paymentStatus: getPaymentStatus(state),
+    selectedPlantProjectId: selectedPlantProjectIdSelector(state)
   };
 };
 
@@ -175,9 +188,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  DonationTreesContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DonationTreesContainer);
 
 DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,

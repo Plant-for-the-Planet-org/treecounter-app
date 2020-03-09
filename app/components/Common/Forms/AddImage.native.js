@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { debug } from '../../../debug';
 import { cameraSolid, imageGallery, circleDelete } from '../../../assets';
 import styles from '../../../styles/competition/competition-form.native';
 import i18n from '../../../locales/i18n';
@@ -20,7 +21,7 @@ const AddImage = props => {
   };
 
   const renderAsset = (image, index) => {
-    console.log(image);
+    debug(image);
     return (
       <View
         key={index}
@@ -54,11 +55,11 @@ const AddImage = props => {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
-                console.log('ImagePicker data: ', response.data);
+                debug('ImagePicker data: ', response.data);
                 props.updateImages('data:image/jpeg;base64,' + response.data);
               }
             });
@@ -71,9 +72,9 @@ const AddImage = props => {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
                 props.updateImages('data:image/jpeg;base64,' + response.data);
               }

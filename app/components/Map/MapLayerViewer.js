@@ -1,7 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import * as React from 'react';
-import { WebMap, loadModules } from 'react-arcgis';
+import { WebMap } from '@esri/react-arcgis';
+import { loadModules } from 'esri-loader';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import { mapCollapse, mapExpand } from '../../assets';
 import i18n from '../../locales/i18n.js';
 
@@ -41,11 +43,11 @@ class MapLayerView extends React.Component {
     loadModules(['esri/core/urlUtils', 'esri/config'])
       // .then(([urlUtils, esriConfig]) => {
       // const proxyUrl = `${context.scheme}://${context.host}/esri/proxy.php`;
-      // console.log('proxyUrl: ', proxyUrl);
+      // debug('proxyUrl: ', proxyUrl);
       //
       // //const corsEnabledServer =`${context.host}:80`;
       // const corsEnabledServer = `treecounter.plant-for-the-planet.org`;
-      // console.log('corsEnabledServer: ', corsEnabledServer);
+      // debug('corsEnabledServer: ', corsEnabledServer);
       //
       // esriConfig.request.corsEnabledServers.push(corsEnabledServer);
       // esriConfig.request.proxyUrl = '/esri/proxy.php';
@@ -113,7 +115,7 @@ class MapLayerView extends React.Component {
   }
 
   handleLoad = (map, view) => {
-    console.debug('WebMap.onLoad', this._mounted, map);
+    debug('WebMap.onLoad', this._mounted, map);
     if (this._mounted) {
       map.layers.forEach(layer => {
         layer.visible = this.props.layers.includes(layer.title);
@@ -123,7 +125,7 @@ class MapLayerView extends React.Component {
   };
 
   handleFail = e => {
-    console.debug('WebMap.onFail', this._mounted, e);
+    debug('WebMap.onFail', this._mounted, e);
     if (this._mounted) {
       this.setState({ status: 'failed' });
     }

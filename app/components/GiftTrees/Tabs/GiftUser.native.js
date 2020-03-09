@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
   Keyboard
 } from 'react-native';
-import SearchUser from './SearchUser.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// import { debug } from '../../../debug';
+import SearchUser from './SearchUser.native';
 import i18n from '../../../locales/i18n';
 import styles from '../../../styles/gifttrees/giftrees';
 import buttonStyles from '../../../styles/common/button.native';
@@ -22,7 +23,7 @@ export default class GiftUser extends Component {
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
     this.state = { form: {}, buttonType: 'next' };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       this._keyboardDidShow
@@ -50,7 +51,7 @@ export default class GiftUser extends Component {
     });
   };
   onSearchResultClick(suggestion) {
-    // console.log('suggestion clicked', suggestion);
+    // debug('suggestion clicked', suggestion);
     this.setState({ selectedSuggestion: suggestion });
   }
   onNextClick() {
@@ -85,7 +86,7 @@ export default class GiftUser extends Component {
           resetScrollToCoords={{ x: 0, y: 0 }}
           scrollEnabled
         >
-          <View style={{ paddingLeft: 10 }}>
+          <View style={{ paddingLeft: 10, marginTop: 20 }}>
             <Text style={styles.description}>
               {i18n.t('label.search_user_desrcription')}
             </Text>
@@ -106,11 +107,12 @@ export default class GiftUser extends Component {
             placeholder={i18n.t('label.gift_message')}
           />
         </KeyboardAwareScrollView>
+
         {this.state.buttonType === 'next' ? (
           <TouchableOpacity
             style={[
               buttonStyles.actionButtonTouchable,
-              { top: undefined, bottom: '14%' }
+              { top: undefined, bottom: '1%', padding: 20 }
             ]}
             onPress={this.onNextClick}
           >
@@ -126,7 +128,7 @@ export default class GiftUser extends Component {
           <TouchableOpacity
             style={[
               buttonStyles.actionButtonSmallTouchable,
-              { top: undefined, bottom: '20%' }
+              { top: undefined, bottom: '2%' }
             ]}
             onPress={this.onNextClick}
           >

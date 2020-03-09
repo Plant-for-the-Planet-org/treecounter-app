@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import GiftTabView from './GiftTabs';
+import HeaderStatic from './../Header/HeaderStatic';
+import { View, Platform } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+// import { debug } from '../../debug';
+import i18n from '../../locales/i18n';
 
 export default class GiftTrees extends Component {
   constructor(props) {
@@ -8,11 +13,22 @@ export default class GiftTrees extends Component {
     this.openProjects = this.openProjects.bind(this);
   }
   openProjects(formValue, type) {
-    // console.log('Open Project called up ', formValue);
+    // debug('Open Project called up ', formValue);
     this.props.openProjects(formValue, type);
   }
   render() {
-    return <GiftTabView openProjects={this.openProjects} {...this.props} />;
+    return (
+      <>
+        <SafeAreaView style={{ flex: 1 }}>
+          <HeaderStatic
+            title={i18n.t('label.gift_trees')}
+            navigation={this.props.navigation}
+          />
+          <View style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }} />
+          <GiftTabView openProjects={this.openProjects} {...this.props} />
+        </SafeAreaView>
+      </>
+    );
   }
 }
 

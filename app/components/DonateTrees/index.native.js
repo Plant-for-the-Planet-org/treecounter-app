@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
+import { Linking, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import i18n from '../../locales/i18n.js';
 // import PaymentSelector from '../Payment/PaymentSelector';

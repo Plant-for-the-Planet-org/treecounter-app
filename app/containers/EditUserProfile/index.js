@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import EditUserProfile from '../../components/EditUserProfile';
 import { currentUserProfileSelector } from '../../selectors/index';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import {
   updateUserProfile,
   updatePlantProject,
@@ -11,7 +13,6 @@ import {
   deleteUserProfile,
   updateUserEmail
 } from '../../actions/updateUserProfile';
-import { bindActionCreators } from 'redux';
 import i18n from '../../locales/i18n.js';
 import { NotificationManager } from '../../notification/PopupNotificaiton/notificationManager';
 import { logoutUser } from '../../actions/authActions';
@@ -57,7 +58,7 @@ class EditUserProfileContainer extends React.Component {
             }
           })
           .catch(error => {
-            console.log(error);
+            debug(error);
           });
       });
     } else {
@@ -79,10 +80,7 @@ class EditUserProfileContainer extends React.Component {
   }
 
   deleteProfile = () => {
-    console.log(
-      'call Profile Deletion API here',
-      this.props.currentUserProfile
-    );
+    debug('call Profile Deletion API here', this.props.currentUserProfile);
     this.props
       .deleteUserProfile(this.props.currentUserProfile.id)
       .then((/* data */) => {
@@ -119,12 +117,12 @@ class EditUserProfileContainer extends React.Component {
             err.response.data.errors.children.newEmail.errors
               ? err.response.data.errors.children.newEmail.errors[0]
               : err.response.data.errors.children.newEmail.children.first
-                ? err.response.data.errors.children.newEmail.children.first
-                    .errors[0]
-                : err.response.data.errors.children.newEmail.children.second
-                  ? err.response.data.errors.children.newEmail.children.second
-                      .errors[0]
-                  : 'label.error',
+              ? err.response.data.errors.children.newEmail.children.first
+                  .errors[0]
+              : err.response.data.errors.children.newEmail.children.second
+              ? err.response.data.errors.children.newEmail.children.second
+                  .errors[0]
+              : 'label.error',
             i18n.t('label.error'),
             5000
           );
@@ -197,7 +195,7 @@ class EditUserProfileContainer extends React.Component {
     const imageForm =
       (formRefs && formRefs['image']) ||
       this.refs.EditUserProfileContainer.refs['image'];
-    console.log(profileForm.validate());
+    debug(profileForm.validate());
     let value = profileForm.getValue();
 
     let imageValue = undefined;
@@ -282,9 +280,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  EditUserProfileContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditUserProfileContainer);
 
 EditUserProfileContainer.propTypes = {
   updateUserProfile: PropTypes.func,

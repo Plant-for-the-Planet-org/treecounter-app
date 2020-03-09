@@ -14,24 +14,22 @@ const ListProjects = ({
   onMoreClick,
   placeholderTextColor,
   loadProjects,
-  index
+  index,
+  scrollY
 }) => {
   const [search, setSearch] = useState('');
   // memoized: refilters if plantProjects or search string changes
-  const filteredProjects = useMemo(
-    () => {
-      if (!search) {
-        return plantProjects;
-      }
-      const s = search.toLocaleLowerCase();
-      return plantProjects.filter(
-        project =>
-          project.name.toLowerCase().includes(s) ||
-          project.tpo_name.toLowerCase().includes(s)
-      );
-    },
-    [plantProjects, search]
-  );
+  const filteredProjects = useMemo(() => {
+    if (!search) {
+      return plantProjects;
+    }
+    const s = search.toLocaleLowerCase();
+    return plantProjects.filter(
+      project =>
+        project.name.toLowerCase().includes(s) ||
+        project.tpo_name.toLowerCase().includes(s)
+    );
+  }, [plantProjects, search]);
 
   return (
     <View key={'listViewProject'} style={styles.flexContainer}>
@@ -59,15 +57,16 @@ const ListProjects = ({
         </View>
       </View> */}
 
-      <View style={styles.listViewContainer}>
-        <ListViewProjects
-          projects={filteredProjects}
-          selectProject={selectProject}
-          onMoreClick={onMoreClick}
-          loadProjects={loadProjects}
-          index={index}
-        />
-      </View>
+      {/* <View style={styles.listViewContainer}> */}
+      <ListViewProjects
+        projects={filteredProjects}
+        selectProject={selectProject}
+        onMoreClick={onMoreClick}
+        loadProjects={loadProjects}
+        index={index}
+        scrollY={scrollY}
+      />
+      {/* </View> */}
     </View>
   );
 };

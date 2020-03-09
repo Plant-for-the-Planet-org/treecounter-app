@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
-
+import { debug } from '../../../debug';
 import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
 import { getSuggestions } from '../../../helpers/utils';
@@ -44,15 +44,15 @@ class SearchUser extends React.Component {
       .then(suggestions => {
         this.setState({ q: suggestions });
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   };
 
   _onNavigationClick(suggestion) {
     if (
       this.props.onSearchResultClick &&
       !this.isMyself(suggestion, this.props.currentUserProfile) &&
-      (this.props.alreadyInvited &&
-        !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited))
+      this.props.alreadyInvited &&
+      !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited)
     ) {
       this.props.onSearchResultClick(suggestion);
       this.setState({
@@ -71,7 +71,7 @@ class SearchUser extends React.Component {
       );
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.searchSuggestion === '') {
       this.setState({
         selectedSuggestionName: ''

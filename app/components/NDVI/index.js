@@ -115,9 +115,9 @@ export default class NDVI extends Component {
     let gradient = this.GradientRef;
     let percentage = 50;
     if (point > 0) {
-      percentage = point * 100 / 2 + 50;
+      percentage = (point * 100) / 2 + 50;
     } else {
-      percentage = 100 - (Math.abs(point) * 100 / 2 + 50);
+      percentage = 100 - ((Math.abs(point) * 100) / 2 + 50);
     }
     let i;
     for (i = 0; i < colorStops.length; i++) {
@@ -128,7 +128,7 @@ export default class NDVI extends Component {
 
     let lowerIndex = i == 1 ? 0 : i - 1;
     let upperIndex = lowerIndex + 1;
-    let percentageWidth = percentage / 100 * gradient.offsetWidth;
+    let percentageWidth = (percentage / 100) * gradient.offsetWidth;
     let value =
       (percentageWidth / (gradient.offsetWidth / (colorStops.length - 1))) % 1;
 
@@ -137,7 +137,7 @@ export default class NDVI extends Component {
       colorStops[upperIndex].color,
       value
     );
-    // console.log(color);
+    // debug(color);
     return `rgb(${color.join(',')})`;
   };
 

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import _ from 'lodash';
+import { debug } from '../../debug';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
 import CardLayout from '../Common/Card';
@@ -16,11 +19,8 @@ import DescriptionHeading from '../Common/Heading/DescriptionHeading';
 import { delimitNumbers } from '../../utils/utils';
 import NumberFormat from '../Common/NumberFormat';
 import { sortProjectsByPrice } from '../../utils/currency';
-import _ from 'lodash';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 class SelectPlantProject extends Component {
   static data = {
@@ -52,7 +52,7 @@ class SelectPlantProject extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState(this.initialStateFromProps(this.props));
   }
 
@@ -81,7 +81,7 @@ class SelectPlantProject extends Component {
     }
     this.setState(this.initialStateFromProps(this.props));
   }
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     this.setState(this.initialStateFromProps(props));
   }
 
@@ -90,7 +90,7 @@ class SelectPlantProject extends Component {
       plantProjects,
       currencies: { currencies }
     } = props;
-    console.log('Pojects featured:', plantProjects);
+    debug('Pojects featured:', plantProjects);
     let featuredProjects = plantProjects.filter(project => project.isFeatured);
     featuredProjects = _.orderBy(featuredProjects, 'id');
     featuredProjects.length && featuredProjects.push(featuredProjects[0]);
@@ -175,7 +175,7 @@ class SelectPlantProject extends Component {
         modalProject: project
       });
     } catch (error) {
-      console.log('load details error', error);
+      debug('load details error', error);
     }
   }
 
@@ -247,38 +247,40 @@ class SelectPlantProject extends Component {
           </div>
           <Slider {...settings}>
             {featuredProjects.length !== 0
-              ? featuredProjects.sort((a, b) => a.id - b.id).map(project => {
-                  {
-                    /* console.log(project); */
-                  }
-                  return (
-                    <CardLayout
-                      className="plant_project_content"
-                      key={project.created}
-                    >
-                      <PlantProjectFull
-                        onViewMoreClick={() =>
-                          this.setState({
-                            imageViewMore: !this.state.imageViewMore
-                          })
-                        }
-                        callExpanded={() => this.callExpanded()}
-                        expanded={false}
-                        plantProject={project}
-                        tpoName={project.tpoName}
-                      />
-                      <div className="select-project_button__container">
-                        <PrimaryButton
-                          onClick={() =>
-                            this.onSelectClickedFeaturedProjects(project.id)
+              ? featuredProjects
+                  .sort((a, b) => a.id - b.id)
+                  .map(project => {
+                    {
+                      /* debug(project); */
+                    }
+                    return (
+                      <CardLayout
+                        className="plant_project_content"
+                        key={project.id}
+                      >
+                        <PlantProjectFull
+                          onViewMoreClick={() =>
+                            this.setState({
+                              imageViewMore: !this.state.imageViewMore
+                            })
                           }
-                        >
-                          {i18n.t('label.donate_trees_cap')}
-                        </PrimaryButton>
-                      </div>
-                    </CardLayout>
-                  );
-                })
+                          callExpanded={() => this.callExpanded()}
+                          expanded={false}
+                          plantProject={project}
+                          tpoName={project.tpoName}
+                        />
+                        <div className="select-project_button__container">
+                          <PrimaryButton
+                            onClick={() =>
+                              this.onSelectClickedFeaturedProjects(project.id)
+                            }
+                          >
+                            {i18n.t('label.donate_trees_cap')}
+                          </PrimaryButton>
+                        </div>
+                      </CardLayout>
+                    );
+                  })
               : null}
           </Slider>
         </div>

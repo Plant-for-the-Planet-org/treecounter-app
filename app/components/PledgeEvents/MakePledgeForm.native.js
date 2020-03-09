@@ -9,21 +9,20 @@ import {
   Animated
 } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import CheckBox from 'react-native-check-box';
+import { SafeAreaView } from 'react-navigation';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Formik } from 'formik';
+import { debug } from '../../debug';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
 import { postPledge } from './../../actions/pledgeAction';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
-import { SafeAreaView } from 'react-navigation';
-
 import i18n from '../../locales/i18n';
-import { connect } from 'react-redux';
-import CheckBox from 'react-native-check-box';
 import { currentUserProfileSelector } from './../../selectors';
-import { bindActionCreators } from 'redux';
-
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
@@ -45,7 +44,7 @@ class MakePledgeForm extends Component {
     scrollY: new Animated.Value(0)
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.validationSchema = generateFormikSchemaFromFormSchema(
       pledgeFormSchema,
       ['firstname', 'lastname', 'email', 'treeCount']
@@ -123,7 +122,7 @@ class MakePledgeForm extends Component {
                   treeCount: values.treeCount,
                   isAnonymous: this.state.isAnonymous
                 };
-                console.log(data);
+                debug(data);
                 const params = this.props.navigation.getParam('slug');
                 this.props.postPledge(
                   data,

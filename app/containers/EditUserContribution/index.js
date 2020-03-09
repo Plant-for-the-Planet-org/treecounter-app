@@ -3,7 +3,6 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { editTree } from '../../actions/EditMyTree';
 import EditUserContribution from '../../components/EditUserContribution';
 import {
@@ -21,7 +20,7 @@ class EditUserContributionsContainer extends React.Component {
   _userContribution = null;
 
   onSubmit = (mode, value) => {
-    //console.log('OnSubmit====>', registerTreeForm);
+    //debug('OnSubmit====>', registerTreeForm);
     /*registerTreeForm =
       registerTreeForm || this.refs.editTrees.refs.editTreeForm;
     let value = registerTreeForm.getValue();*/
@@ -88,9 +87,10 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ editTree }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  EditUserContributionsContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditUserContributionsContainer);
 
 EditUserContributionsContainer.propTypes = {
   userContributions: PropTypes.array.isRequired,

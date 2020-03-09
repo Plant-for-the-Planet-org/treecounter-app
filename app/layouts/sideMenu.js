@@ -6,7 +6,7 @@ const PublicSideMenuSchema = menuNameParam => {
   return new Observable(observe => {
     getRequest('public_menu_get', {
       category: menuNameParam,
-      version: 'v1.4'
+      version: 'v1.1'
     })
       .then(({ data }) => {
         observe.next(data);
@@ -20,7 +20,7 @@ const AuthenticatedSideMenuSchema = menuNameParam => {
   return new Observable(observe => {
     getAuthenticatedRequest('data_menu_get', {
       category: menuNameParam,
-      version: 'v1.4'
+      version: 'v1.1'
     })
       .then(({ data }) => {
         observe.next(data);

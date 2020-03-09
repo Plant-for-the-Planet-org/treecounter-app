@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
-
+import { debug } from '../../debug';
 import Tabs from '../Common/Tabs';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import TextHeading from '../Common/Heading/TextHeading';
@@ -14,6 +14,7 @@ import i18n from '../../locales/i18n.js';
 import DescriptionHeading from '../../components/Common/Heading/DescriptionHeading';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import { getSelectTemplate } from '../../components/Templates/SelectTemplate';
+
 let TCombForm = t.form.Form;
 
 const getSingleTreeLayout = (
@@ -135,8 +136,8 @@ export default class RegisterTrees extends Component {
         this.state.plantProject !== ''
           ? this.state.plantProject
           : getPlantProjectEnum(this.props.currentUserProfile).length > 0
-            ? getPlantProjectEnum(this.props.currentUserProfile)[0].value
-            : null;
+          ? getPlantProjectEnum(this.props.currentUserProfile)[0].value
+          : null;
     }
 
     this.props.onSubmit(
@@ -152,7 +153,7 @@ export default class RegisterTrees extends Component {
   }
 
   handleGeoLocationChange(geoLocation) {
-    console.log(geoLocation);
+    debug(geoLocation);
   }
 
   onFormChangeSingle = value => {

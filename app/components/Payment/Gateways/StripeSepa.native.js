@@ -1,11 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { debug } from '../../debug';
 import i18n from '../../../locales/i18n';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 // currently tipsi-stripe is removed from package.json as (1) it is unused and (2) the native support modules did not compile with Android
 import stripe from 'tipsi-stripe';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
+
 const colors = {
   color: '#449aeb',
   borderColor: '#000'
@@ -55,7 +57,7 @@ export default class StripeSepa extends Component {
     stripe
       .createSourceWithParams(params)
       .then(token => {
-        //console.log('token Test', token);
+        //debug('token Test', token);
         token.sepa_debit = token.sepaDebitDetails;
         token.type = 'sepa_debit';
         //TODO hkurra it will start working once this will get merged
@@ -66,7 +68,7 @@ export default class StripeSepa extends Component {
         this.props.onSuccess(token);
       })
       .catch(err => {
-        console.log(err);
+        debug(err);
       });
   };
 
@@ -88,7 +90,7 @@ export default class StripeSepa extends Component {
           underlineColorAndroid={'transparent'}
           onChangeText={value => {
             this._iban = value;
-            //console.log(value);
+            //debug(value);
           }}
           autoCapitalize={'sentences'}
           allowFontScaling

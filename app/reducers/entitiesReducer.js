@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import merge from 'lodash/merge';
 import get from 'lodash/get';
 import set from 'lodash/set';
-import { debug } from '../debug/index';
+import { debug } from '../debug';
 
 export const initialState = {
   userProfile: null,

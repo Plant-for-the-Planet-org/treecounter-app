@@ -2,11 +2,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HTMLView from 'react-native-htmlview';
-import { Text, View, Linking } from 'react-native';
+import { Text, View, Linking, Platform } from 'react-native';
 import ListView from 'deprecated-react-native-listview';
+import { debug } from '../../debug';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
+import i18n from '../../locales/i18n';
+import HeaderNew from './../Header/HeaderNew.native';
 
 export default class Privacy extends Component {
   constructor(props) {
@@ -21,7 +24,7 @@ export default class Privacy extends Component {
       )
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -75,12 +78,12 @@ export default class Privacy extends Component {
                 ? `${context.scheme}://${context.host}${url}`
                 : url;
             } catch (err) {
-              //console.log(err);
+              //debug(err);
             }
 
-            // console.log('clicked link: ', url);
+            // debug('clicked link: ', url);
             Linking.openURL(url).catch(err => {
-              console.log(err);
+              debug(err);
             });
           }}
         />
@@ -91,11 +94,18 @@ export default class Privacy extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderContent}
-        renderSectionHeader={this._renderHeader}
-      />
+      <>
+        <HeaderNew
+          title={i18n.t('label.data_protection')}
+          navigation={this.props.navigation}
+        />
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderContent}
+          //renderSectionHeader={this._renderHeader}
+          style={{ marginTop: Platform.OS === 'ios' ? 160 : 120 }}
+        />
+      </>
     );
   }
 }

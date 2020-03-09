@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { v1 as uuidv1 } from 'uuid';
-
+import { debug } from '../debug';
 import { fetchItem, saveItem } from '../stores/localStorage';
 import { getAccessToken } from './user';
 import { getApiRoute } from '../actions/apiRouting';
@@ -113,7 +113,7 @@ export async function postRequest(
   recaptcha = false
 ) {
   let url = await getApiRoute(route, params);
-  console.log(url);
+  debug(url);
   return await axios
     .post(url, data, await getHeaders(authenticated, recaptcha))
     .then(checkStatus)
@@ -122,8 +122,8 @@ export async function postRequest(
 }
 
 export async function postDirectRequest(path, data, authenticated = false) {
-  const { scheme, host } = context;
-  const serverName = `${scheme}://${host}`;
+  const { api_url } = context;
+  const serverName = `${api_url}`;
   const url = `${serverName}${path}`;
   return await axios
     .post(url, data, await getHeaders(authenticated))
@@ -168,7 +168,7 @@ export async function deleteAuthenticatedRequest(route, params) {
  * @param {endPoint} params
  */
 export async function getExternalRequest(params) {
-  console.log('calling getexternal', params);
+  debug('calling getexternal', params);
   return await axios
     .get(params.endPoint)
     .then(checkStatus)

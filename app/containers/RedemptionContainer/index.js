@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import Redemption from '../../components/Redemption/index';
 import { currentUserProfileSelector } from '../../selectors';
 import { updateRoute } from '../../helpers/routerHelper';
@@ -68,7 +69,7 @@ class RedemptionContainer extends Component {
           });
         },
         error => {
-          console.log(error);
+          debug(error);
         }
       );
     } else if (isCode && !isLoggedIn) {
@@ -101,7 +102,7 @@ class RedemptionContainer extends Component {
     let isCode = this.state.code ? true : false;
     this.callSetState(isCode, isLoggedIn, this.state.code, this.state.type);
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.match && this.props.match) {
       if (
         nextProps.match !== this.props.match ||
@@ -174,7 +175,7 @@ class RedemptionContainer extends Component {
           }
         },
         error => {
-          console.log(error);
+          debug(error);
         }
       );
     }
@@ -246,9 +247,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  RedemptionContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RedemptionContainer);
 
 RedemptionContainer.propTypes = {
   match: PropTypes.object,

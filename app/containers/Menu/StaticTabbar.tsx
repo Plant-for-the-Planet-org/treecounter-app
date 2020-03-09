@@ -3,8 +3,10 @@ import {
     View, StyleSheet, TouchableWithoutFeedback, Dimensions, Text, Image
 } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { updateRoute } from './../../helpers/routerHelper/tabrouteHelper.native';
-import { donateIcon, donateIconGreen, competeIconGreen, competeIcon } from './../../assets';
+import { debug } from '../../debug';
+import { updateRoute } from '../../helpers/routerHelper/tabrouteHelper.native';
+import { donateIcon, donateIconGreen, competeIconGreen, competeIcon } from '../../assets';
+
 const width = Dimensions.get('window').width;
 
 interface Tab {
@@ -31,48 +33,53 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
         this.setState({
             selectedTab: index
         })
-        updateRoute(tabs[index].route, navigation, 0);
+        updateRoute(tabs[index].route, this.props.navigation, 0);
     }
 
     render() {
         const { onPress } = this;
         const { tabs } = this.props;
-
+        debug('Navigation', this.props.navigation);
         return (
-            <View style={styles.container}>
-                {
-                    tabs.map((tab, key) => {
-                        const tabWidth = width / tabs.length;
-                        const cursor = tabWidth * key;
-                        console.log('Tab value ---', tab);
-                        console.log('Key value ---', key);
+            <View>
+                <View style={styles.container}>
 
-                        const iconColor = key === this.state.selectedTab ? '#89b53a' : "#4d5153";
-                        return (
-                            <React.Fragment {...{ key }}>
-                                <TouchableWithoutFeedback onPress={() => onPress(key)}>
-                                    {key === 2 ?
-                                        (<View style={[styles.donatetab]}>
-                                            <View style={{ height: 72, width: 72, borderRadius: 36, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', bottom: 10 }}>
-                                                <Image source={key === this.state.selectedTab ? donateIconGreen : donateIcon} style={{ height: 36, width: 36 }} />
-                                            </View>
-                                            <Text style={key === this.state.selectedTab ? styles.donateTabTextGreen : styles.donateTabText}>{tab.title}</Text>
-                                        </View>) : key === 3 ? (
-                                            <View style={[styles.donatetab]}>
-                                                <Image source={key === this.state.selectedTab ? competeIconGreen : competeIcon} style={{ height: 25, width: 25 }} />
-                                                <Text style={key === this.state.selectedTab ? styles.tabTextGreen : styles.tabText}>{tab.title}</Text>
-                                            </View>
-                                        ) :
-                                            (<View style={[styles.tab]}>
-                                                <Icon name={tab.name} color={iconColor} size={25} />
-                                                <Text style={key === this.state.selectedTab ? styles.tabTextGreen : styles.tabText}>{tab.title}</Text>
-                                            </View>)}
+                    {
+                        tabs.map((tab, key) => {
+                            const tabWidth = width / tabs.length;
+                            const cursor = tabWidth * key;
+                            // debug('Tab value ---', tab);
+                            // debug('Key value ---', key);
 
-                                </TouchableWithoutFeedback>
-                            </React.Fragment>
-                        );
-                    })
-                }
+                            const iconColor = key === this.state.selectedTab ? '#89b53a' : "#4d5153";
+                            return (
+                                <React.Fragment {...{ key }}>
+                                    <TouchableWithoutFeedback onPress={() => onPress(key)}>
+                                        {key === 2 ?
+                                            (<View style={[styles.donatetab]}>
+                                                <View style={{ height: 72, width: 72, borderRadius: 36, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', bottom: 10 }}>
+                                                    <Image source={key === this.state.selectedTab ? donateIconGreen : donateIcon} style={{ height: 36, width: 36 }} />
+                                                </View>
+                                                <Text style={key === this.state.selectedTab ? styles.donateTabTextGreen : styles.donateTabText}>{tab.title}</Text>
+                                            </View>) : key === 3 ? (
+                                                <View style={[styles.donatetab]}>
+                                                    <Image source={key === this.state.selectedTab ? competeIconGreen : competeIcon} style={{ height: 24, width: 24 }} />
+                                                    <Text style={key === this.state.selectedTab ? styles.tabTextGreen : styles.tabText}>{tab.title}</Text>
+                                                </View>
+                                            ) :
+                                                (<View style={[styles.tab]}>
+                                                    <Icon name={tab.name} color={iconColor} size={21} />
+                                                    <Text style={key === this.state.selectedTab ? styles.tabTextGreen : styles.tabText}>{tab.title}</Text>
+                                                </View>)}
+
+                                    </TouchableWithoutFeedback>
+                                </React.Fragment>
+                            );
+                        })
+                    }
+
+                </View>
+
             </View>
         );
     }
@@ -93,6 +100,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 64,
+        zIndex: 12
     },
     tabText: {
         fontSize: 10,

@@ -6,7 +6,8 @@ import {
   Text,
   View,
   RefreshControl,
-  FlatList
+  FlatList,
+  Animated
 } from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import scrollStyle from '../../../styles/common/scrollStyle.native';
@@ -40,7 +41,7 @@ export default class MineCompetitions extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     if (allCompetitions !== this.props.allCompetitions) {
       let myCompetitions = [];
@@ -103,6 +104,14 @@ export default class MineCompetitions extends Component {
             onRefresh={this.onRefresh}
           />
         }
+        scrollEventThrottle={24}
+        onScroll={Animated.event([
+          {
+            nativeEvent: {
+              contentOffset: { y: this.props.scrollY }
+            }
+          }
+        ])}
       >
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>

@@ -1,3 +1,4 @@
+// import { debug } from '../debug';
 import { getLocale, localeObjects } from '../actions/getLocale';
 import { Intl } from '../locales/Intl';
 import i18n from '../locales/i18n.js';
@@ -23,11 +24,11 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
   locale = locale || getLocale();
   try {
     let style = { maximumFractionDigits: 2 };
-    // console.log('got numberformat', data, locale, currency, style, userProfile);
+    // debug('got numberformat', data, locale, currency, style, userProfile);
     if (currency) {
       style.style = 'currency';
       style.currency = currency;
-      //console.log('cu', currency, userProfile);
+      //debug('cu', currency, userProfile);
       if (userProfile && userProfile.currency) {
         style.currency = userProfile.currency;
         if (
@@ -44,7 +45,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
         }
       }
     }
-    // console.log('got numberformat', data, locale, currency, style, userProfile);
+    // debug('got numberformat', data, locale, currency, style, userProfile);
     return new Intl.NumberFormat(locale, style).format(data);
   } catch (error) {
     console.error(error);
@@ -54,7 +55,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
 
 export function formatDate(date, style = 'dd MMM yyyy', locale) {
   locale = locale || getLocale();
-  //console.log('formatDate', date, style, locale);
+  //debug('formatDate', date, style, locale);
 
   if (date) {
     return format(parseISO(date), style, {
@@ -109,7 +110,7 @@ export function convertNumber(number, useDigits) {
   let pow = Math.pow;
   let powerOfUsedDigits = pow(10, useDigits);
   let roundedNumber =
-    Math.round(number * powerOfUsedDigits / pow(10, digitsInGroup)) /
+    Math.round((number * powerOfUsedDigits) / pow(10, digitsInGroup)) /
     powerOfUsedDigits;
   let isSingular = roundedNumber == 1 ? 1 : 0;
   return (

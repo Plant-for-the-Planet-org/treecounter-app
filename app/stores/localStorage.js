@@ -1,3 +1,5 @@
+import { debug } from '../debug';
+
 export const loadState = () => {
   return new Promise(function(resolve, reject) {
     try {
@@ -17,7 +19,7 @@ export const saveState = state => {
     const serializedState = JSON.stringify(state);
     window.localStorage.setItem('state', serializedState);
   } catch (err) {
-    console.log(err);
+    debug(err);
   }
 };
 

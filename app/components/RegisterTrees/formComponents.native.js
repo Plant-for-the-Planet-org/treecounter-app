@@ -9,23 +9,24 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import { Switch } from 'react-native-switch';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import { Formik } from 'formik';
+import { TextField } from 'react-native-material-textfield';
+import ImagePicker from 'react-native-image-picker';
+import { Dropdown } from 'react-native-material-dropdown';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { filter } from 'lodash';
+import { debug } from '../../debug';
 import { cameraSolid, imageGallery, deleteOutlineWhite } from '../../assets';
 import styles from '../../styles/register_trees.native';
 import { formatDateToMySQL } from './../../helpers/utils';
 import { formatDate } from './../../utils/utils';
-import DateTimePicker from 'react-native-modal-datetime-picker';
 import i18n from '../../locales/i18n';
-import { Formik } from 'formik';
-import { TextField } from 'react-native-material-textfield';
 import schemaOptionsMultiple from '../../server/formSchemas/registerTrees';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
-import ImagePicker from 'react-native-image-picker';
 import buttonStyles from '../../styles/common/button.native';
-import { Dropdown } from 'react-native-material-dropdown';
 import NativeMapView from '../Map/NativeMapView.native';
 import CardLayout from '../Common/Card';
-import { filter } from 'lodash';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { getImageUrl } from '../../actions/apiRouting';
 
 export const FormikFormTree = props => {
@@ -38,24 +39,15 @@ export const FormikFormTree = props => {
   const [geometry, setGeometry] = useState(props.geometry);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
   const [initValue, setInitValue] = useState(props.initialValues);
-  useEffect(
-    () => {
-      setGeometry(props.geometry);
-    },
-    [props.geometry]
-  );
-  useEffect(
-    () => {
-      setInitValue(props.initialValues);
-    },
-    [props]
-  );
-  useEffect(
-    () => {
-      setGeoLocation(props.geoLocation);
-    },
-    [props.geoLocation]
-  );
+  useEffect(() => {
+    setGeometry(props.geometry);
+  }, [props.geometry]);
+  useEffect(() => {
+    setInitValue(props.initialValues);
+  }, [props]);
+  useEffect(() => {
+    setGeoLocation(props.geoLocation);
+  }, [props.geoLocation]);
 
   const parentProps = props;
   const isMultipleTree = props.mode === 'multiple-trees';
@@ -131,7 +123,7 @@ export const FormikFormTree = props => {
                             color: '#4d5153'
                           }}
                         >
-                          {i18n.t('label.register_tree_tpo_label')}
+                          {i18n.t('label.register_tree_tpo_label')}{' '}
                           <TouchableWithoutFeedback
                             onPress={() => {
                               inputEl &&
@@ -151,8 +143,7 @@ export const FormikFormTree = props => {
                                 ? parentProps.plantProjects[0].text
                                 : filter(parentProps.plantProjects, {
                                     value: props.values.plantProject
-                                  })[0].text}
-                              {`   `}
+                                  })[0].text}{' '}
                               <Icon
                                 name="angle-down"
                                 size={20}
@@ -243,7 +234,7 @@ export const FormikFormTree = props => {
                             style={isMultipleTree ? styles.formNameFields : ''}
                           >
                             <TextField
-                              label={i18n.t('label.tree_count')}
+                              label={i18n.t('label.number_of_trees')}
                               ref={input => {
                                 inputs['treeCount'] = input;
                               }}
@@ -251,7 +242,8 @@ export const FormikFormTree = props => {
                                 showClassification &&
                                   focusTheField('treeClassifications');
                               }}
-                              value={props.values.treeCount}
+                              value={'' + props.values.treeCount}
+                              keyboardType="numeric"
                               tintColor={'#4d5153'}
                               titleFontSize={12}
                               labelFontSize={12}
@@ -486,7 +478,7 @@ export class AddMeasurements extends React.Component {
       showMeasurement: false,
       elementMasument: contributionMeasurements || []
     };
-    console.log(
+    debug(
       'props.props.value.contributionMeasurements',
       props.props &&
         props.props.values &&
@@ -496,7 +488,7 @@ export class AddMeasurements extends React.Component {
       contributionMeasurements.length &&
         contributionMeasurements.map((item, index) => {
           this._addMeasurementView(true, index, item, contributionMeasurements);
-          console.log('measurementView', this.state.elementMasument);
+          debug('measurementView', this.state.elementMasument);
         });
 
       this._addMeasurementView();
@@ -547,14 +539,14 @@ export class AddMeasurements extends React.Component {
     }
   };
   onChangeHandler = (field, value, index) => {
-    console.log('this.elementMasument', field, value, index);
+    debug('this.elementMasument', field, value, index);
 
     this.elementMasument[index][field] = value;
     this.setState({
       elementMasument: this.elementMasument
     });
     //this.props.handleChange(field, value);
-    console.log('this.elementMasument', this.elementMasument);
+    debug('this.elementMasument', this.elementMasument);
     this.props.handleChange(this.elementMasument);
   };
 
@@ -562,7 +554,7 @@ export class AddMeasurements extends React.Component {
     const { measurementView, elementMasument } = this.state;
     const { props } = this.props;
     return (
-      <View>
+      <View key="form">
         {measurementView &&
           measurementView.map((item, index) => {
             return (
@@ -747,7 +739,7 @@ export function AddImage(props) {
   };
 
   const renderAsset = (image, index) => {
-    console.log('Images====>', image);
+    debug('Images====>', image);
     return (
       <View key={index} style={[{ position: 'relative', marginRight: 8 }]}>
         <Image
@@ -790,9 +782,9 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
                 props.setFieldValue('contributionImages', [
                   {
@@ -810,9 +802,9 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
                 props.setFieldValue('contributionImages', [
                   {
@@ -864,6 +856,7 @@ export function CompetitionDatePicker(props) {
         titleIOS={i18n.t('label.datePickerTitle')}
         cancelTextIOS={i18n.t('label.datePickerCancel')}
         confirmTextIOS={i18n.t('label.datePickerConfirm')}
+        pickerContainerStyleIOS={{ color: '#89B53A' }}
       />
     </View>
   );

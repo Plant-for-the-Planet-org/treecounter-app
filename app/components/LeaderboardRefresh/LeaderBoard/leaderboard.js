@@ -3,13 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../../styles/LeaderboardRefresh/Leaderboard/leaderboardstyles';
 import i18n from '../../../locales/i18n';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
-import {
-  countriesleaderboard,
-  schooldleaderboard,
-  tpoleaderboard,
-  individualsleaderboard,
-  companiesleaderboard
-} from '../../../assets/index';
+import { world, school, tpo, me, organisation } from '../../../assets/index';
 const Leaderboard = ({ navigation }) => {
   const navigateTo = (category, routeName) => {
     updateRoute(routeName, navigation, undefined, { category });
@@ -21,11 +15,7 @@ const Leaderboard = ({ navigation }) => {
           onPress={() => navigateTo('country', 'countries_leaderboard')}
           style={styles.widgetContainer}
         >
-          <Image
-            style={styles.image}
-            source={countriesleaderboard}
-            resizeMode={'contain'}
-          />
+          <Image style={styles.image} source={world} resizeMode={'contain'} />
           <View style={styles.widgetTitleContainer}>
             <Text style={styles.widgetTitle}>
               {i18n.t('label.lbr_countries')}
@@ -38,7 +28,7 @@ const Leaderboard = ({ navigation }) => {
         >
           <Image
             style={styles.image}
-            source={companiesleaderboard}
+            source={organisation}
             resizeMode={'contain'}
           />
           <View style={styles.widgetTitleContainer}>
@@ -53,11 +43,7 @@ const Leaderboard = ({ navigation }) => {
           onPress={() => navigateTo('individual', 'individuals_leaderboard')}
           style={styles.widgetContainer}
         >
-          <Image
-            style={styles.image}
-            source={individualsleaderboard}
-            resizeMode={'contain'}
-          />
+          <Image style={styles.image} source={me} resizeMode={'contain'} />
           <View style={styles.widgetTitleContainer}>
             <Text style={styles.widgetTitle}>
               {i18n.t('label.lbr_individuals')}
@@ -68,11 +54,7 @@ const Leaderboard = ({ navigation }) => {
           onPress={() => navigateTo('education', 'schools_leaderboard')}
           style={styles.widgetContainer}
         >
-          <Image
-            style={styles.image}
-            source={schooldleaderboard}
-            resizeMode={'contain'}
-          />
+          <Image style={styles.image} source={school} resizeMode={'contain'} />
           <View style={styles.widgetTitleContainer}>
             <Text style={styles.widgetTitle}>
               {i18n.t('label.lbr_schools')}
@@ -85,11 +67,7 @@ const Leaderboard = ({ navigation }) => {
           onPress={() => navigateTo('tpo', 'tpo_LeaderBoard')}
           style={styles.widgetContainer}
         >
-          <Image
-            style={styles.image}
-            source={tpoleaderboard}
-            resizeMode={'contain'}
-          />
+          <Image style={styles.image} source={tpo} resizeMode={'contain'} />
           <View style={[styles.widgetTitleContainer, { width: 277 }]}>
             <Text style={styles.widgetTitle}>
               {i18n.t('label.lbr_tree_planting_organizations')}

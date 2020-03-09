@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Dimensions, View, Text } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// import { debug } from '../../debug';
 import CurrencySelector from './CurrencySelector';
 import TreeCountSelector from './TreeCountSelector';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
-import { Dimensions, View, Text } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject.native';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class TreeCountCurrencySelector extends React.PureComponent {
   constructor(props) {
@@ -27,7 +27,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
     this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTreeCount !== this.state.selectedTreeCount) {
       this.setState({
         selectedTreeCount: nextProps.selectedTreeCount // Changing the Tree Count State
@@ -82,7 +82,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
 
   render() {
     const { currencies, treeCountOptions } = this.props;
-    // console.log('Tree Count currency selector called up');
+    // debug('Tree Count currency selector called up');
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 35 }}
@@ -115,7 +115,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
                 {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
               </View>
             ) : this.props.supportTreecounter && // Check whether context is Support Participant
-            this.props.supportTreecounter.displayName ? (
+              this.props.supportTreecounter.displayName ? (
               <View
                 style={{
                   flexDirection: 'row',
@@ -172,6 +172,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
               onChange={this.handleTreeCountChange}
               treeCountOptions={treeCountOptions}
               defaultTreeCount={this.state.selectedTreeCount}
+              selectedProject={this.props.selectedProject}
             />
           </View>
 

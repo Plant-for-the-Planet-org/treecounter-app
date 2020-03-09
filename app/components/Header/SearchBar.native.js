@@ -3,7 +3,7 @@ import React from 'react';
 import { LayoutAnimation, Text, TextInput, View, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-import { iosSearchGreen } from '../../assets';
+import { newSearchIcon } from '../../assets';
 import styles, {
   SearchContainerWidth
 } from '../../styles/header/search_bar.native';
@@ -14,7 +14,7 @@ import i18n from '../../locales/i18n.js';
 const SearchIcon = () => (
   <View style={styles.searchIconContainer}>
     <Image
-      source={iosSearchGreen}
+      source={newSearchIcon}
       resizeMode="contain"
       style={styles.searchIcon}
     />
@@ -45,7 +45,7 @@ class SearchBar extends React.PureComponent {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.inputValue &&
       nextProps.inputValue.toLowerCase().includes(this.state.text.toLowerCase())

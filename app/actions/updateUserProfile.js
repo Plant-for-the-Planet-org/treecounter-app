@@ -3,7 +3,7 @@ import {
   deleteAuthenticatedRequest,
   postAuthenticatedRequest
 } from '../utils/api';
-import { debug } from '../debug/index';
+import { debug } from '../debug';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import {
   userProfileSchema,

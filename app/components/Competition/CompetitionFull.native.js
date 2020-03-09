@@ -1,6 +1,8 @@
+/* eslint-disable no-prototype-builtins */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
+import { debug } from '../../debug';
 import { getImageUrl } from '../../actions/apiRouting';
 import styles from '../../styles/competition/competition-full.native';
 import CardLayout from '../Common/Card';
@@ -49,7 +51,11 @@ class CompetitionFull extends React.Component {
       button2 = null;
     const competitionDetail = this.props.competitionDetail;
 
-    console.log(' CompetitionFull ', competitionDetail);
+    const hasEnrollments = competitionDetail
+      ? competitionDetail.hasOwnProperty('allEnrollments')
+      : false;
+
+    debug(' CompetitionFull ', competitionDetail);
     let participantCount = 0,
       requestCount = 0,
       // eslint-disable-next-line no-unused-vars
@@ -362,16 +368,17 @@ class CompetitionFull extends React.Component {
                     <View style={styles.headingParticipantContainer}>
                       {/* Participant Total Count */}
                       <Text style={snippetStyles.textHeadingParticipants}>
-                        {i18n.t('label.participants')} ({competitionDetail &&
-                          competitionDetail.competitorCount})
+                        {i18n.t('label.participants')} (
+                        {competitionDetail && competitionDetail.competitorCount}
+                        )
                       </Text>
                       {/* Participant Total Count Ends */}
                     </View>
                     <View style={snippetStyles.topCompetitorContainer}>
                       <View>
                         {/* Participant Details */}
-                        {competitionDetail.allEnrollments.map(
-                          (top, index) =>
+                        {hasEnrollments &&
+                          competitionDetail.allEnrollments.map((top, index) =>
                             top.status === 'enrolled' ? (
                               <CompetitionParticipant
                                 competitor={top}
@@ -389,7 +396,7 @@ class CompetitionFull extends React.Component {
                                 key={index}
                               />
                             ) : null
-                        )}
+                          )}
                         {/* Participant Details Ends */}
                       </View>
                     </View>
@@ -408,16 +415,17 @@ class CompetitionFull extends React.Component {
                     <View style={styles.headingParticipantContainer}>
                       {/* Total Requests  */}
                       <Text style={snippetStyles.textHeadingParticipants}>
-                        {i18n.t('label.requests_to_join')} ({competitionDetail &&
-                          competitionDetail.competitorCount})
+                        {i18n.t('label.requests_to_join')} (
+                        {competitionDetail && competitionDetail.competitorCount}
+                        )
                       </Text>
                       {/* Total Requests Ends */}
                     </View>
                     <View style={styles.topCompetitorContainer}>
                       <View>
                         {/* Requseters Details */}
-                        {competitionDetail.allEnrollments.map(
-                          (top, index) =>
+                        {hasEnrollments &&
+                          competitionDetail.allEnrollments.map((top, index) =>
                             top.status === 'pending' ? (
                               <CompetitionParticipant
                                 competitor={top}
@@ -435,7 +443,7 @@ class CompetitionFull extends React.Component {
                                 key={index}
                               />
                             ) : null
-                        )}
+                          )}
                         {/* Requseters Details Ends */}
                       </View>
                     </View>
@@ -465,8 +473,8 @@ class CompetitionFull extends React.Component {
                           hideCompetitions
                           addstyles={{ width: '90%' }}
                         />
-                        {competitionDetail.allEnrollments.map(
-                          (top, index) =>
+                        {hasEnrollments &&
+                          competitionDetail.allEnrollments.map((top, index) =>
                             top.status === 'invited' ? (
                               <CompetitionParticipant
                                 competitor={top}
@@ -484,7 +492,7 @@ class CompetitionFull extends React.Component {
                                 key={index}
                               />
                             ) : null
-                        )}
+                          )}
                       </View>
                     </View>
                   </View>
@@ -506,8 +514,8 @@ class CompetitionFull extends React.Component {
                     </View>
                     <View style={styles.topCompetitorContainer}>
                       <View>
-                        {competitionDetail.allEnrollments.map(
-                          (top, index) =>
+                        {hasEnrollments &&
+                          competitionDetail.allEnrollments.map((top, index) =>
                             top.status === 'invited' &&
                             top.treecounterSlug ===
                               this.props.treeCounter.slug ? (
@@ -527,7 +535,7 @@ class CompetitionFull extends React.Component {
                                 key={index}
                               />
                             ) : null
-                        )}
+                          )}
                       </View>
                     </View>
                   </View>

@@ -10,8 +10,7 @@ Welcome to this repository which contains the code of the web clients and the na
 
 ## Configuration
 
-Copy `app/config/index.js.dist` to `app/config/index.js`
-Copy `.env.sample` to `.env` and add the necessary API keys for your environment.
+Copy `.env.develop.sample` to `.env.develop` and add the necessary API keys for your development environment.
 Install nvm following instructions from https://github.com/nvm-sh/nvm#install--update-script
 Run `nvm install && nvm use` to install and use required version of node.
 
@@ -30,7 +29,6 @@ To run the app as prod, useful for testing features like (hashed js/css):
   ```
   npm run start-prod-server
   ```
-
 
 ## iOS Setup
 

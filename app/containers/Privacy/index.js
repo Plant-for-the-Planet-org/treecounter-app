@@ -1,7 +1,9 @@
 import React from 'react';
+import _ from 'lodash';
+import { debug } from '../../debug';
 import Privacy from '../../components/Privacy';
 import { PrivacyAction } from '../../actions/privacyAction';
-import _ from 'lodash';
+
 class PrivacyContainer extends React.Component {
   constructor() {
     super();
@@ -11,7 +13,7 @@ class PrivacyContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     PrivacyAction().then(
       success => {
         try {
@@ -21,16 +23,20 @@ class PrivacyContainer extends React.Component {
             privacy: privacy
           });
         } catch (err) {
-          console.log(err);
+          debug(err);
         }
       },
-      error => console.log(error)
+      error => debug(error)
     );
   }
 
   render() {
     return (
-      <Privacy privacies={this.state.privacy} loading={this.state.loading} />
+      <Privacy
+        privacies={this.state.privacy}
+        loading={this.state.loading}
+        navigation={this.props.navigation}
+      />
     );
   }
 }

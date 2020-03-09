@@ -11,7 +11,7 @@ class PlantProjectImageCarousel extends PureComponent {
     super(props);
     this.state = { showViewMore: false, viewItems: [], offset: this.itemsSize };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { projectImages } = this.props;
     if (projectImages && projectImages.length > 0) {
       if (projectImages.length < this.state.offset) {

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { denormalize } from 'normalizr';
-
+import { debug } from '../debug';
 import {
   userProfileSchema,
   plantProjectSchema,
@@ -53,8 +53,7 @@ export const pledgeEventSelector = state => getPledgeEvents(state);
 export const selectedCompetitionIdSelector = state =>
   getCompetitionDetail(state);
 function logSelectorUpdate(selectorName, args = 'None') {
-  const debug = false;
-  debug && console.log('SELECTOR: ' + selectorName, args);
+  debug('SELECTOR: ' + selectorName, args);
 }
 
 /**

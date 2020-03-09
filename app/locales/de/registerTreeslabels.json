@@ -16,12 +16,12 @@
   "geo_location": "Geo-Standort",
   "add_images": "Bilder hinzufügen",
   "add_classification": "Klassifizierung",
-  "tree_classification": "Baum Klassifizierung",
+  "tree_classification": "Baumklassifizierung",
   "tree_scientific_name": "Wissenschaftlicher Baumname",
   "add_measurements": "Messwerte hinzufügen",
   "remove_measurements": "Messwerte entfernen",
-  "tree_diameter": "Baumdurchmesser (cm)",
-  "tree_height": "Baumhöhe (m)",
+  "tree_diameter": "Baumdurchmesser",
+  "tree_height": "Baumhöhe",
   "measurement_date": "Messdatum",
   "heading_register_trees": "Registriere gepflanzte Bäume",
   "register_description": "Hast du mit deinen eigenen Händen neue Bäume gepflanzt? Dann verewige sie hier. Die Bäume erscheinen in deinem Wald und werden in unserem Welt-Baumzähler mitgezählt. Unter \"Mein Wald\" kannst du deine Einträge später auch noch bearbeiten oder löschen.",
@@ -33,5 +33,6 @@
   "get_device_location": "Position des Geräts ermitteln",
   "map_under_construction": "Wir arbeiten an einer Kartendarstellung.",
   "location_permission_denied": "Zugriff auf Standort verweigert. Bitte öffne die Einstellungen und erlaube dieser App den Zugriff auf den aktuellen Standort.",
-  "map_search_placeholder": "Finde einen Ort zum Pflanzen"
+  "map_search_placeholder": "Finde einen Ort zum Pflanzen",
+  "number_of_trees": "Anzahl Bäume"
 }

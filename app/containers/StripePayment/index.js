@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { StripeProvider, Elements } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
-import InjectedCheckoutForm from '../../components/StripePayment/CheckoutForm';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { debug } from '../../debug';
+import InjectedCheckoutForm from '../../components/StripePayment/CheckoutForm';
 import {
   fillCard,
   attachCardToCostumer,
   handlePay,
   finalizeDonation
 } from '../../actions/donateAction';
-
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 
 class StripePayment extends Component {
@@ -19,13 +19,13 @@ class StripePayment extends Component {
   };
 
   onError = err => {
-    console.log('error happend:');
-    console.log(err);
+    debug('error happend:');
+    debug(err);
   };
 
   onSuccess = success => {
-    console.log('success happend:');
-    console.log(success);
+    debug('success happend:');
+    debug(success);
   };
 
   render() {
@@ -33,8 +33,8 @@ class StripePayment extends Component {
     const donationId = props.donationId
       ? props.donationId
       : props.paymentStatus && props.paymentStatus.contribution
-        ? props.paymentStatus.contribution[0].id
-        : null;
+      ? props.paymentStatus.contribution[0].id
+      : null;
     return (
       <StripeProvider stripe={props.stripe}>
         <Elements>

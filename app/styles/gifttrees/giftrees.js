@@ -39,6 +39,7 @@ export default EStyleSheet.create({
   },
   description: {
     fontSize: 16,
-    color: '#4d5153'
+    color: '#4d5153',
+    fontFamily: 'OpenSans-Regular'
   }
 });

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { debug } from '../../debug';
 import styles from '../../styles/review.native';
+
 // const { width, height } = Dimensions.get('window');
 export function GenerateStar(fill, score = 0) {
   let repeater = Array(fill ? Number(score) : 5 - Number(score)).fill(1);
-  // console.log('repeater', repeater);
+  // debug('repeater', repeater);
   const color = fill ? '#89b53a' : '#d3d3d3';
   return repeater.map((data, index) => (
     <Icon
@@ -19,7 +21,7 @@ export function GenerateStar(fill, score = 0) {
 }
 export default class SingleRating extends Component {
   render() {
-    console.log('single rating', this.props);
+    debug('single rating', this.props);
     return (
       <View
         style={{

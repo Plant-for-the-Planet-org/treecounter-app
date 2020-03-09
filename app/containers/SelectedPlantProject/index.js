@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
+import { debug } from '../../debug';
 import {
   selectedPlantProjectIdSelector,
   selectedPlantProjectSelector,
@@ -30,7 +30,7 @@ class SelectedPlantProjectContainer extends Component {
         { id: this.props.selectedPlantProjectId },
         { loading: true }
       );
-      console.log('project found in selected plant project', project);
+      debug('project found in selected plant project', project);
     }
   }
 
@@ -49,7 +49,7 @@ class SelectedPlantProjectContainer extends Component {
     }
   }
   render() {
-    console.log(
+    debug(
       'got id from nav param, and from redux',
       this.props.navigation.getParam('id'),
       this.props.selectedProject
@@ -88,9 +88,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  SelectedPlantProjectContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectedPlantProjectContainer);
 
 SelectedPlantProjectContainer.propTypes = {
   selectedProject: PropTypes.object,

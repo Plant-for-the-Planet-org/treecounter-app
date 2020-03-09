@@ -1,3 +1,4 @@
+import { debug } from '../debug';
 import {
   getAuthenticatedRequest,
   postAuthenticatedRequest
@@ -16,7 +17,7 @@ export function NotificationAction() {
         dispatch(userFeedsSynced(res.data));
       })
       .catch(error => {
-        console.log(error);
+        debug(error);
       });
   };
 }
@@ -29,7 +30,7 @@ export function moreNotificationAction(id) {
         dispatch(userFeedsSyncedMore(res.data));
       })
       .catch(error => {
-        console.log(error);
+        debug(error);
       });
   };
 }
@@ -44,7 +45,7 @@ export function markSeenNotificationAction(id) {
         dispatch(userFeedsSyncedMarkRead(res.data));
       })
       .catch(error => {
-        console.log(error);
+        debug(error);
       });
   };
 }

@@ -25,12 +25,13 @@ import { updateRoute } from '../helpers/routerHelper';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import i18n from '../locales/i18n.js';
 
-export function fetchCompetitions(category) {
+export function fetchCompetitions(category, page) {
   return dispatch => {
-    dispatch(setContentLoaderState(true));
+    // dispatch(setContentLoaderState(true));
     return getAuthenticatedRequest('competitions_get', {
       category: category,
-      limit: 100
+      page: page,
+      limit: 10
     })
       .then(res => {
         dispatch(

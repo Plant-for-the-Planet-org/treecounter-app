@@ -153,3 +153,11 @@ class Competiton extends React.Component {
   }
 }
 export default Competiton;
+
+/* ------------------
+
+This is the entry point for the Competitions for the app -
+
+Data needed on this page
+
+------------------- */

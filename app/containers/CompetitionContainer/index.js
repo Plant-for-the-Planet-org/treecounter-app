@@ -43,24 +43,19 @@ class CompetitionContainer extends React.Component {
             err,
             this.state.competitionFormSchemaOptions
           );
-          this.setState(
-            {
-              competitionFormSchemaOptions: {
-                ...newSchemaOptions
-              }
+          this.setState({
+            competitionFormSchemaOptions: {
+              ...newSchemaOptions
             }
-            // () => {
-            //   formRef.validate();
-            // }
-          );
+          });
         });
     }
   };
   componentDidMount() {
     this.props.fetchCompetitions('featured');
-    this.props.fetchCompetitions('all');
-    this.props.fetchCompetitions('archived');
-    this.props.fetchMineCompetitions();
+    // this.props.fetchCompetitions('all');
+    // this.props.fetchCompetitions('archived');
+    // this.props.fetchMineCompetitions();
   }
   leaveCompetition(id) {
     this.props.leaveCompetition(id);
@@ -77,8 +72,12 @@ class CompetitionContainer extends React.Component {
     }
   }
 
+  fetchCompetitions = async (category, page) => {
+    this.props.fetchCompetitions(category, page);
+  };
+
   updateAllCompetitions = async () => {
-    return this.props.fetchCompetitions('all');
+    this.props.fetchCompetitions('all');
   };
   updateFeaturedCompetitions = async () => {
     return this.props.fetchCompetitions('featured');
@@ -108,6 +107,9 @@ class CompetitionContainer extends React.Component {
         updateFeaturedCompetitions={this.updateFeaturedCompetitions}
         updateMineCompetitions={this.updateMineCompetitions}
         updateArchivedCompetitions={this.updateArchivedCompetitions}
+        fetchCompetitions={(category, page) =>
+          this.fetchCompetitions(category, page)
+        }
       />
     ) : (
       <LoadingIndicator contentLoader screen="Competition" />
@@ -143,9 +145,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  CompetitionContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CompetitionContainer);
 CompetitionContainer.propTypes = {
   navigation: PropTypes.any,
   fetchCompetitions: PropTypes.any,

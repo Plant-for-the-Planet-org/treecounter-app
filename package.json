@@ -138,7 +138,6 @@
     "tcomb-form-native": "^0.6.20",
     "tcomb-json-schema": "^0.3.2",
     "uuid": "^7.0.1",
-    "uuidv4": "^6.0.5",
     "yup": "^0.28.1"
   },
   "devDependencies": {

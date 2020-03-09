@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import { ReCaptcha, loadReCaptcha } from 'recaptcha-v3-react';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { debug } from '../../../debug';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
@@ -27,7 +27,7 @@ export default class SignUp extends Component {
   componentDidMount() {
     loadReCaptcha({
       key: '6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF',
-      id: uuid(),
+      id: uuidv4(),
       onSuccess: () => {
         let gBatch = document.getElementsByClassName('grecaptcha-badge');
         if (gBatch.length > 0) {

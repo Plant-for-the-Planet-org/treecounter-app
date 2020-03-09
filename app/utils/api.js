@@ -1,5 +1,4 @@
 import axios from 'axios';
-import 'react-native-get-random-values';
 import { v1 as uuidv1 } from 'uuid';
 import { debug } from '../debug';
 import { fetchItem, saveItem } from '../stores/localStorage';

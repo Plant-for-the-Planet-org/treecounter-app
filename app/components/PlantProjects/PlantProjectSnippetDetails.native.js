@@ -125,6 +125,11 @@ class PlantProjectSnippetDetails extends PureComponent {
     //       : null;
     // const survivalColor = survivalRateStatus == 'verified' ? '#89b53a' : 'gray';
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
+    const noImageStyle = {
+      height: '40%',
+      width: '100%',
+      backgroundColor: '#000'
+    };
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
         <View style={[styles.projectSnippetContainer]}>
@@ -143,9 +148,7 @@ class PlantProjectSnippetDetails extends PureComponent {
               />
             </View>
           ) : (
-            <View
-              style={{ height: '40%', width: '100%', backgroundColor: '#000' }}
-            ></View>
+            <View style={noImageStyle} />
           )}
           <PlantedProgressBar
             countPlanted={specsProps.countPlanted}

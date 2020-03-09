@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { debug } from '../../debug';
 import { loadProject } from '../../actions/loadTposAction';
 import PlantProjectSpecs from './PlantProjectSpecs';
-import SeeMoreToggle from '../Common/SeeMoreToggle';
 import PlantProjectDetails from './PlantProjectDetails';
 import i18n from '../../locales/i18n';
 import { queryParamsToObject } from '../../helpers/utils';

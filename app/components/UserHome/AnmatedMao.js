@@ -1,5 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, Animated } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Animated,
+  FlatList,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 
 import MapView, {
   ProviderPropType,
@@ -17,6 +25,8 @@ import { currentUserProfileIdSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllPlantProjectsSelector } from '../../selectors';
+import { markerImage } from '../../assets/index.js';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const screen = Dimensions.get('window');
 
@@ -176,6 +186,7 @@ class AnimatedViews extends React.Component {
       scrollX,
       scale,
       translateY,
+      markers: null,
       region: {
         latitude: 45.5230786,
         longitude: -122.6701034,
@@ -187,26 +198,42 @@ class AnimatedViews extends React.Component {
 
   onMapReady = () => {
     console.log(this.props.userContributions);
-    console.log(markers, 'markersmarkersmarkers');
     const { panX, panY, scrollY } = this.state;
     let markers = this.props.userContributions;
     const animations = markers.map((m, i) =>
       getMarkerState(panX, panY, scrollY, i)
     );
 
-    this.setState({
-      animations,
-      markers,
-      region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.922,
-        longitudeDelta: 0.421
+    this.setState(
+      {
+        animations,
+        markers,
+        region: {
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.922,
+          longitudeDelta: 0.421
+        }
+      },
+      () => {
+        setTimeout(() => {
+          this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)));
+          // this.mapView.animateToRegion(
+          //     {
+          //         latitude: markers[0].geoLatitude,
+          //         longitude: markers[0].geoLongitude,
+          //         latitudeDelta: 0.922,
+          //         longitudeDelta: 0.421
+          //     },
+          //     350
+          // );
+        }, 3000);
       }
-    });
+    );
   };
 
   componentDidMount() {
+    console.log(this.props.isFullMapComponentModal, 'componentDidMount');
     // console.log(this.props.userContributions, 'userContributions')
     // const { region, panX, panY, scrollX, markers } = this.state;
     // panX.addListener(this.onPanXChange);
@@ -330,23 +357,48 @@ class AnimatedViews extends React.Component {
       index = 0;
     }
 
-    // clearTimeout(this.regionTimeout);
-    // this.regionTimeout = setTimeout(() => {
-    //     if (this.index !== index) {
-    //         this.index = index;
-    //         const oneContribution = this.state.markers[index];
-    //         console.log(oneContribution)
-    //         this.map.animateToRegion(
-    //             {
-    //                 ...oneContribution.coordinate,
-    //                 latitudeDelta: 0.00095,
-    //                 longitudeDelta: 0.0095
-    //             },
-    //             350
-    //         );
-    //     }
-    // }, 10);
+    clearTimeout(this.regionTimeout);
+    this.regionTimeout = setTimeout(() => {
+      if (this.index !== index) {
+        this.index = index;
+        const oneContribution = this.state.markers[index];
+        console.log(oneContribution);
+        this.mapView.animateToRegion(
+          {
+            latitude: oneContribution.geoLatitude,
+            longitude: oneContribution.geoLongitude,
+            latitudeDelta: 0.00095,
+            longitudeDelta: 0.0095
+          },
+          350
+        );
+      }
+    }, 10);
   };
+  initiateComponent = () => {
+    this.mapView.animateToRegion(
+      {
+        latitude: this.state.markers[0].geoLatitude,
+        longitude: this.state.markers[0].geoLongitude,
+        latitudeDelta: 0.00095,
+        longitudeDelta: 0.0095
+      },
+      350
+    );
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isFullMapComponentModal) {
+      this.mapView.animateToRegion(
+        {
+          latitude: this.state.markers[0].geoLatitude,
+          longitude: this.state.markers[0].geoLongitude,
+          latitudeDelta: 0.00095,
+          longitudeDelta: 0.0095
+        },
+        350
+      );
+    }
+  }
 
   render() {
     const {
@@ -367,18 +419,27 @@ class AnimatedViews extends React.Component {
           customMapStyle={mapStyle}
           provider={this.props.provider}
           style={styles.map}
-          region={region}
-          // onRegionChange={this.onRegionChange}
+          initialRegion={region}
         >
           {markers
             ? markers.map((marker, i) => (
                 <Marker
+                  identifier={String(marker.id)}
                   key={marker.id}
                   coordinate={{
                     latitude: marker.geoLatitude,
                     longitude: marker.geoLongitude
                   }}
-                />
+                >
+                  <Image
+                    source={markerImage}
+                    style={{
+                      width: 40,
+                      height: 40
+                    }}
+                    resizeMode={'contain'}
+                  />
+                </Marker>
               ))
             : null}
         </MapView>
@@ -428,6 +489,28 @@ class AnimatedViews extends React.Component {
             </View>
           </PanController>
         ) : null}
+        {this.props.isFullMapComponentModal ? (
+          <>
+            <TouchableOpacity
+              style={styles.downArrowIcon}
+              onPress={this.props.toggleIsFullMapComp}
+            >
+              <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.props.toggleIsFullMapComp}
+              style={styles.fullScreenExitIcon}
+            >
+              <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.initiateComponent}
+              style={styles.myLocationIcon}
+            >
+              <Icon name={'my-location'} size={30} color={'#4C5153'} />
+            </TouchableOpacity>
+          </>
+        ) : null}
       </View>
     );
   }
@@ -467,10 +550,43 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 5,
     borderColor: '#000',
-    zIndex: 4000
+    zIndex: 4000,
+    marginTop: -5
     // borderColor: 'gray',
     // borderWidth: 1,
     // elevation: 4
+  },
+  downArrowIcon: {
+    position: 'absolute',
+    top: Platform.OS == 'ios' ? 45 : 20,
+    left: 30,
+    backgroundColor: 'white',
+    borderRadius: 30,
+    padding: 5
+  },
+  myLocationIcon: {
+    position: 'absolute',
+    bottom: 270,
+    right: 20,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    // zIndex: 2000,
+    elevation: 6,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  fullScreenExitIcon: {
+    position: 'absolute',
+    bottom: 200,
+    right: 20,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    // zIndex: 2000,
+    elevation: 6,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

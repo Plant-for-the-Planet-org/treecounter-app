@@ -84,18 +84,18 @@ export default class FullMapComponent extends Component {
       }
       // () => {
       //   setTimeout(() => {
-      //     this.map.animateToRegion(
-      //       {
-      //         ...{
-      //           latitude: this.state.markers[0].geoLatitude,
-      //           longitude: this.state.markers[0].geoLongitude
-      //         },
-      //         latitudeDelta: 75,
-      //         longitudeDelta: 75
+      //   this.map.animateToRegion(
+      //     {
+      //       ...{
+      //         latitude: this.state.markers[0].geoLatitude,
+      //         longitude: this.state.markers[0].geoLongitude
       //       },
-      //       350
-      //     );
-      //   }, 2000);
+      //       latitudeDelta: 75,
+      //       longitudeDelta: 75
+      //     },
+      //     350
+      //   );
+      // }, 2000);
 
       //   this.animation.addListener(({ value }) => {
       //     console.log('valuevaluevaluevalue', value)
@@ -246,28 +246,6 @@ export default class FullMapComponent extends Component {
             </Animated.ScrollView>
           ) : null
         } */}
-        {isFullMapComponentModal ? (
-          <>
-            <TouchableOpacity
-              style={styles.downArrowIcon}
-              onPress={this.props.toggleIsFullMapComp}
-            >
-              <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.props.toggleIsFullMapComp}
-              style={styles.fullScreenExitIcon}
-            >
-              <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.initiateComponent}
-              style={styles.myLocationIcon}
-            >
-              <Icon name={'my-location'} size={30} color={'#4C5153'} />
-            </TouchableOpacity>
-          </>
-        ) : null}
       </View>
     );
   }

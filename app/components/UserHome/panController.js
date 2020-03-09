@@ -235,7 +235,6 @@ class PanController extends React.Component {
     snapSpacing
   ) {
     anim.flattenOffset();
-    console.log(anim, 'anim');
     if (anim._value < min) {
       if (this.props.onOvershoot) {
         this.props.onOvershoot(); // TODO: what args should we pass to this

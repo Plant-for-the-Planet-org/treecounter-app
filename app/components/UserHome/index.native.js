@@ -254,12 +254,6 @@ export default class UserHome extends Component {
   };
 
   getMapComponent = (userContributions, mapView) => {
-    let mapViewLatLong = {
-      latitude: userContributions[0].geoLatitude,
-      longitude: userContributions[0].geoLongitude,
-      latitudeDelta: 0.015,
-      longitudeDelta: 0.0121
-    };
     let markerStyle = {
       width: 40,
       height: 40
@@ -293,24 +287,6 @@ export default class UserHome extends Component {
       </Marker>
     ));
 
-    let onMapReady = () => {
-      const snapshot = mapView.takeSnapshot({
-        width: 300, // optional, when omitted the view-width is used
-        height: 300, // optional, when omitted the view-height is used
-        //region: {.},    // iOS only, optional region to render
-        format: 'png', // image formats: 'png', 'jpg' (default: 'png')
-        quality: 0.8, // image quality: 0..1 (only relevant for jpg, default: 1)
-        result: 'file' // result types: 'file', 'base64' (default: 'file')
-      });
-      snapshot.then(uri => {
-        console.log(uri, '@mapuri');
-        this.setState({ mapSnapshot: uri });
-        AsyncStorage.setItem('@mapuri', uri);
-      });
-      // setTimeout(() => {
-      //   mapView.fitToSuppliedMarkers(userContributions.map(x => String(x.id)));
-      // }, 1000);
-    };
     const { isFullMapComponentModal } = this.state;
     return (
       <View

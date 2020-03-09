@@ -68,27 +68,27 @@ export default class UserContributions extends React.Component {
     return (
       <View style={styles.container}>
         {/* ===== Map View starts ===== */}
-        <View style={styles.mapView}>
-          {/* get the map component */}
-          {this.getMapComponent(this.props.contribution)}
+        {/* <View style={styles.mapView}> */}
+        {/* get the map component */}
+        {/* {this.getMapComponent(this.props.contribution)} */}
 
-          {/* close icon - goes back to previous screen */}
-          <TouchableOpacity
+        {/* close icon - goes back to previous screen */}
+        {/* <TouchableOpacity
             onPress={props.onClickClose}
             style={[styles.button, styles.closeIcon]}
           >
             <View style={styles.closeContainer}>
               <Image style={{ width: 16, height: 16 }} source={closeIcon} />
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
-          {/* maps the date */}
-          {plantedDate ? (
-            <View style={styles.dateContainer}>
-              <Text style={styles.plantedDate}>{plantedDate}</Text>
-            </View>
-          ) : null}
-        </View>
+        {/* maps the date */}
+        {plantedDate ? (
+          <View style={styles.dateContainer}>
+            <Text style={styles.plantedDate}>{plantedDate}</Text>
+          </View>
+        ) : null}
+        {/* </View> */}
         {/* ===== Map View Ends ===== */}
 
         {/* ===== Header and Sub header starts ===== */}

@@ -49,6 +49,8 @@ import { markerImage } from '../../assets/index.js';
 import Modal from 'react-native-modalbox';
 import FullMapComponent from './FullMapComponent';
 import MapExpandable from './MapExpandable';
+import BottomSheet from './bottomSheet';
+
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -358,6 +360,7 @@ export default class UserHome extends Component {
           />
         </Modal> */}
         <ScrollView
+          scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}
           contentContainerStyle={{ paddingBottom: 72 }}
           refreshControl={

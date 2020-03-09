@@ -21,6 +21,7 @@ class UserContributionsDetailsContainer extends React.Component {
   }
 
   getContribution(props = this.props) {
+    console.log(props, 'props');
     let contribution = null;
     if (props.match) {
       contribution = props.match.params.contribution;

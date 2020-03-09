@@ -42,13 +42,15 @@ export default EStyleSheet.create({
   dateContainer: {
     position: 'absolute',
     left: 20,
-    bottom: -14,
+    marginTop: 5,
     paddingVertical: 4,
     paddingHorizontal: 10,
     backgroundColor: whiteColor,
     borderRadius: 100,
     borderColor: textColorLight,
     borderWidth: 1
+    // width: 130,
+    // textAlign: 'center'
   },
   closeContainer: {
     width: 30,
@@ -91,6 +93,7 @@ export default EStyleSheet.create({
     height: 40
   },
   treeCount: {
+    marginVertical: 15,
     fontSize: 27,
     color: textColorDark,
     fontFamily: 'OpenSans-ExtraBold',

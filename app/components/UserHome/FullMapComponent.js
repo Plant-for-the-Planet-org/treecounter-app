@@ -7,14 +7,15 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  Platform
+  Platform,
+  PanResponder
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView, { LocalTile } from 'react-native-maps';
 import { tree_1 } from '../../assets/index';
 import { markerImage } from '../../assets/index.js';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import AnimatedViews from './AnmatedMao';
 const { width } = Dimensions.get('window');
 
 const CARD_HEIGHT = 150;
@@ -24,20 +25,47 @@ export default class FullMapComponent extends Component {
   constructor() {
     super();
     this.arr = [];
+    this.state = {
+      markers: [],
+      region: null,
+      dynamicIndex: 0,
+      mapuri: '',
+      pan: new Animated.ValueXY()
+    };
+
+    this._panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      // onPanResponderGrant: (e, gestureState) => {
+      //     this.setState({ isAddNewSession: true })
+      // },
+      onPanResponderMove: Animated.event([
+        null,
+        {
+          //Step 3
+
+          dx: this.state.pan.x,
+          dy: this.state.pan.y
+        }
+      ])
+      // onPanResponderRelease: (e, gesture) => {
+      //     this.setState({ isAddNewSessionModal: true },
+
+      //     )
+      //     Animated.spring(
+      //         this.state.pan,
+      //         { toValue: { x: 0, y: 0 } }     //To default position you can delete this animated.spring()
+      //     ).start();
+      //     this.setState({ isAddNewSession: false })
+      // },
+    });
   }
-  state = {
-    markers: [],
-    region: null,
-    dynamicIndex: 0,
-    mapuri: ''
-  };
 
   componentWillMount() {
-    this.index = 0;
-    this.animation = new Animated.Value(0);
-    AsyncStorage.getItem('@mapuri', uri => {
-      this.setState({ uri: uri });
-    });
+    // this.index = 0;
+    // this.animation = new Animated.Value(0);
+    // AsyncStorage.getItem('@mapuri', uri => {
+    //   this.setState({ uri: uri });
+    // });
   }
   componentDidMount() {
     this.initiateComponent();
@@ -50,52 +78,53 @@ export default class FullMapComponent extends Component {
         region: {
           latitude: 37.78825,
           longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
+          latitudeDelta: 0.922,
+          longitudeDelta: 0.421
         }
-      },
-      () => {
-        setTimeout(() => {
-          this.map.animateToRegion(
-            {
-              ...{
-                latitude: this.state.markers[0].geoLatitude,
-                longitude: this.state.markers[0].geoLongitude
-              },
-              latitudeDelta: 75,
-              longitudeDelta: 75
-            },
-            350
-          );
-        }, 2000);
-
-        this.animation.addListener(({ value }) => {
-          let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
-          if (index >= this.state.markers.length) {
-            index = this.state.markers.length - 1;
-          }
-          if (index <= 0) {
-            index = 0;
-          }
-
-          clearTimeout(this.regionTimeout);
-          this.regionTimeout = setTimeout(() => {
-            if (this.index !== index) {
-              this.index = index;
-              const oneContribution = this.state.markers[index];
-              this.map.animateToRegion(
-                {
-                  latitude: oneContribution.geoLatitude,
-                  longitude: oneContribution.geoLongitude,
-                  latitudeDelta: 75,
-                  longitudeDelta: 75
-                },
-                350
-              );
-            }
-          }, 10);
-        });
       }
+      // () => {
+      //   setTimeout(() => {
+      //     this.map.animateToRegion(
+      //       {
+      //         ...{
+      //           latitude: this.state.markers[0].geoLatitude,
+      //           longitude: this.state.markers[0].geoLongitude
+      //         },
+      //         latitudeDelta: 75,
+      //         longitudeDelta: 75
+      //       },
+      //       350
+      //     );
+      //   }, 2000);
+
+      //   this.animation.addListener(({ value }) => {
+      //     console.log('valuevaluevaluevalue', value)
+      //     let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      //     if (index >= this.state.markers.length) {
+      //       index = this.state.markers.length - 1;
+      //     }
+      //     if (index <= 0) {
+      //       index = 0;
+      //     }
+
+      //     clearTimeout(this.regionTimeout);
+      //     this.regionTimeout = setTimeout(() => {
+      //       if (this.index !== index) {
+      //         this.index = index;
+      //         const oneContribution = this.state.markers[index];
+      //         this.map.animateToRegion(
+      //           {
+      //             latitude: oneContribution.geoLatitude,
+      //             longitude: oneContribution.geoLongitude,
+      //             latitudeDelta: 75,
+      //             longitudeDelta: 75
+      //           },
+      //           350
+      //         );
+      //       }
+      //     }, 10);
+      //   });
+      // }
     );
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
@@ -131,69 +160,73 @@ export default class FullMapComponent extends Component {
     return (
       <View style={styles.container}>
         {this.state.region ? (
-          <MapView
-            provider={MapView.PROVIDER_GOOGLE}
-            ref={map => (this.map = map)}
-            initialRegion={this.state.region}
-            style={styles.container}
-            customMapStyle={mapStyle}
-          >
-            <LocalTile
-              pathTemplate={
-                'file:///data/user/0/org.pftp/cache/AirMapSnapshot1348530162.png'
-              }
-            />
-            {this.state.markers.length
-              ? this.state.markers.map((marker, index) => (
-                  <MapView.Marker
-                    onPress={() => this.onPressMarker(index)}
-                    key={index}
-                    coordinate={{
-                      latitude: marker.geoLatitude,
-                      longitude: marker.geoLongitude
-                    }}
-                  >
-                    <Animated.View>
-                      <TouchableOpacity>
-                        <Image
-                          source={markerImage}
-                          style={{
-                            width: 40,
-                            height: 40
-                          }}
-                          resizeMode={'contain'}
-                        />
-                      </TouchableOpacity>
-                    </Animated.View>
-                  </MapView.Marker>
-                ))
-              : null}
-          </MapView>
-        ) : null}
-        {isFullMapComponentModal ? (
-          <Animated.ScrollView
-            ref={ref => {
-              this.scrollview_ref = ref;
-            }}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            onScroll={Animated.event(
-              [
-                {
-                  nativeEvent: {
-                    contentOffset: {
-                      x: this.animation
+          <AnimatedViews
+            isFullMapComponentModal={this.props.isFullMapComponentModal}
+            toggleIsFullMapComp={this.toggleIsFullMapComp}
+            navigation={this.props.navigation}
+            userContributions={this.props.userContributions}
+          />
+        ) : // <MapView
+        //   provider={MapView.PROVIDER_GOOGLE}
+        //   ref={map => (this.map = map)}
+        //   initialRegion={this.state.region}
+        //   style={styles.container}
+        //   customMapStyle={mapStyle}
+        // >
+        //   {this.state.markers.length
+        //     ? this.state.markers.map((marker, index) => (
+        //       <MapView.Marker
+        //         onPress={() => this.onPressMarker(index)}
+        //         key={index}
+        //         coordinate={{
+        //           latitude: marker.geoLatitude,
+        //           longitude: marker.geoLongitude
+        //         }}
+        //       >
+        //         <Animated.View>
+        //           <TouchableOpacity>
+        //             <Image
+        //               source={markerImage}
+        //               style={{
+        //                 width: 40,
+        //                 height: 40
+        //               }}
+        //               resizeMode={'contain'}
+        //             />
+        //           </TouchableOpacity>
+        //         </Animated.View>
+        //       </MapView.Marker>
+        //     ))
+        //     : null}
+        // </MapView>
+        null}
+        {/* {
+          isFullMapComponentModal ? (
+            <Animated.ScrollView
+              alwaysBounceVertical
+              ref={ref => {
+                this.scrollview_ref = ref;
+              }}
+              horizontal
+
+              showsHorizontalScrollIndicator={false}
+              onScroll={Animated.event(
+                [
+                  {
+                    nativeEvent: {
+                      contentOffset: {
+                        x: this.animation
+                      }
                     }
                   }
-                }
-              ],
-              { useNativeDriver: true }
-            )}
-            style={styles.scrollView}
-            contentContainerStyle={styles.endPadding}
-          >
-            {this.state.markers.length
-              ? this.state.markers.map((marker, index) => (
+                ],
+                { useNativeDriver: true }
+              )}
+              style={styles.scrollView}
+              contentContainerStyle={styles.endPadding}
+            >
+              {this.state.markers.length
+                ? this.state.markers.map((marker, index) => (
                   <View
                     onLayout={e => this.onLayoutMarker(e, index)}
                     style={styles.card}
@@ -209,9 +242,10 @@ export default class FullMapComponent extends Component {
                     </View>
                   </View>
                 ))
-              : null}
-          </Animated.ScrollView>
-        ) : null}
+                : null}
+            </Animated.ScrollView>
+          ) : null
+        } */}
         {isFullMapComponentModal ? (
           <>
             <TouchableOpacity
@@ -241,7 +275,7 @@ export default class FullMapComponent extends Component {
 
 const ListItem = ({ marker, toNavigateUserContributionDetail }) => {
   return (
-    <TouchableOpacity
+    <View
       onPress={() => toNavigateUserContributionDetail(marker)}
       style={styles.cardContainer}
     >
@@ -261,7 +295,7 @@ const ListItem = ({ marker, toNavigateUserContributionDetail }) => {
           <Image source={tree_1} style={styles.treeIcon} />
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 

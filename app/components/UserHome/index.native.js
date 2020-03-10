@@ -43,8 +43,6 @@ import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList.native';
 import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
-// import NativeMapView from './../Map/NativeMapView'
-// import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullMapComponent from './FullMapComponent';
 
@@ -256,12 +254,7 @@ export default class UserHome extends Component {
     });
   };
 
-  getMapComponent = (userContributions, mapView) => {
-    let markerStyle = {
-      width: 40,
-      height: 40
-    };
-
+  getMapComponent = () => {
     let fullScreenIcon = (
       <TouchableOpacity
         onPress={this.toggleIsFullMapComp}
@@ -296,7 +289,6 @@ export default class UserHome extends Component {
 
   render() {
     const { userProfile, navigation } = this.props;
-    // const profileType = userProfile.type;
     const {
       svgData,
       showAllContributions,
@@ -308,17 +300,7 @@ export default class UserHome extends Component {
     return (
       <View style={{ elevation: 1 }}>
         <SafeAreaView />
-        {/* <Modal
-          swipeToClose={false}
-          style={{ flex: 1 }}
-          isOpen={isFullMapComponentModal}
-        >
-          <FullMapComponent
-            toggleIsFullMapComp={this.toggleIsFullMapComp}
-            navigation={this.props.navigation}
-            userContributions={this.props.userContributions}
-          />
-        </Modal> */}
+
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}

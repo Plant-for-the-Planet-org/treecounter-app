@@ -4,15 +4,12 @@ import {
   View,
   Dimensions,
   Animated,
-  FlatList,
   Image,
   TouchableOpacity
 } from 'react-native';
 
 import MapView, {
   ProviderPropType,
-  // Animated as AnimatedMap,
-  AnimatedRegion,
   Marker,
   PROVIDER_GOOGLE
 } from 'react-native-maps';
@@ -31,8 +28,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const screen = Dimensions.get('window');
 
 const ASPECT_RATIO = screen.width / screen.height;
-const LATITUDE = 37.78825;
-const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
@@ -220,131 +215,10 @@ class AnimatedViews extends React.Component {
           try {
             this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)));
           } catch (e) {}
-          // this.mapView.animateToRegion(
-          //     {
-          //         latitude: markers[0].geoLatitude,
-          //         longitude: markers[0].geoLongitude,
-          //         latitudeDelta: 0.922,
-          //         longitudeDelta: 0.421
-          //     },
-          //     350
-          // );
         }, 3000);
       }
     );
   };
-
-  componentDidMount() {
-    console.log(this.props.isFullMapComponentModal, 'componentDidMount');
-    // console.log(this.props.userContributions, 'userContributions')
-    // const { region, panX, panY, scrollX, markers } = this.state;
-    // panX.addListener(this.onPanXChange);
-    // panY.addListener(this.onPanYChange);
-    // region.stopAnimation();
-    // region
-    //     .timing({
-    //         latitude: scrollX.interpolate({
-    //             inputRange: markers.map((m, i) => i * SNAP_WIDTH),
-    //             outputRange: markers.map(m => m.coordinate.latitude),
-    //         }),
-    //         longitude: scrollX.interpolate({
-    //             inputRange: markers.map((m, i) => i * SNAP_WIDTH),
-    //             outputRange: markers.map(m => m.coordinate.longitude),
-    //         }),
-    //         duration: 0,
-    //     })
-    //     .start();
-  }
-
-  onStartShouldSetPanResponder = e => {
-    // we only want to move the view if they are starting the gesture on top
-    // of the view, so this calculates that and returns true if so. If we return
-    // false, the gesture should get passed to the map view appropriately.
-    const { panY } = this.state;
-    const { pageY } = e.nativeEvent;
-    const topOfMainWindow = ITEM_PREVIEW_HEIGHT + panY.__getValue();
-    const topOfTap = screen.height - pageY;
-    console.log(topOfTap < topOfMainWindow);
-    return true;
-  };
-
-  onMoveShouldSetPanResponder = e => {
-    const { panY } = this.state;
-    const { pageY } = e.nativeEvent;
-    const topOfMainWindow = ITEM_PREVIEW_HEIGHT + panY.__getValue();
-    const topOfTap = screen.height - pageY;
-
-    return true;
-  };
-
-  onPanXChange = ({ value }) => {
-    const { index } = this.state;
-    const newIndex = Math.floor((-1 * value + SNAP_WIDTH / 2) / SNAP_WIDTH);
-    if (index !== newIndex) {
-      this.setState({ index: newIndex });
-    }
-  };
-
-  onPanYChange = ({ value }) => {
-    // const {
-    //     canMoveHorizontal,
-    //     region,
-    //     scrollY,
-    //     scrollX,
-    //     markers,
-    //     index,
-    // } = this.state;
-    // const shouldBeMovable = Math.abs(value) < 2;
-    // if (shouldBeMovable !== canMoveHorizontal) {
-    //     this.setState({ canMoveHorizontal: shouldBeMovable });
-    //     if (!shouldBeMovable) {
-    //         const { coordinate } = markers[index];
-    //         region.stopAnimation();
-    //         region
-    //             .timing({
-    //                 latitude: scrollY.interpolate({
-    //                     inputRange: [0, BREAKPOINT1],
-    //                     outputRange: [
-    //                         coordinate.latitude,
-    //                         coordinate.latitude - LATITUDE_DELTA * 0.5 * 0.375,
-    //                     ],
-    //                     extrapolate: 'clamp',
-    //                 }),
-    //                 latitudeDelta: scrollY.interpolate({
-    //                     inputRange: [0, BREAKPOINT1],
-    //                     outputRange: [LATITUDE_DELTA, LATITUDE_DELTA * 0.5],
-    //                     extrapolate: 'clamp',
-    //                 }),
-    //                 longitudeDelta: scrollY.interpolate({
-    //                     inputRange: [0, BREAKPOINT1],
-    //                     outputRange: [LONGITUDE_DELTA, LONGITUDE_DELTA * 0.5],
-    //                     extrapolate: 'clamp',
-    //                 }),
-    //                 duration: 0,
-    //             })
-    //             .start();
-    //     } else {
-    // region.stopAnimation();
-    // region
-    //     .timing({
-    //         latitude: scrollX.interpolate({
-    //             inputRange: markers.map((m, i) => i * SNAP_WIDTH),
-    //             outputRange: markers.map(m => m.coordinate.latitude),
-    //         }),
-    //         longitude: scrollX.interpolate({
-    //             inputRange: markers.map((m, i) => i * SNAP_WIDTH),
-    //             outputRange: markers.map(m => m.coordinate.longitude),
-    //         }),
-    //         duration: 0,
-    //     })
-    //     .start();
-    // }
-    // }
-  };
-
-  onRegionChange(/* region */) {
-    // this.state.region.setValue(region);
-  }
 
   _getValue = (x, spacing) => {
     // let index = Math.floor(value / 150 + 0.3);
@@ -364,7 +238,6 @@ class AnimatedViews extends React.Component {
       if (this.index !== index) {
         this.index = index;
         const oneContribution = this.state.markers[index];
-        console.log(oneContribution);
         try {
           this.mapView.animateToRegion(
             {
@@ -417,7 +290,6 @@ class AnimatedViews extends React.Component {
       markers,
       region
     } = this.state;
-    console.log(this.mapView, 'this.props.isFullMapComponentModal');
 
     return (
       <View style={styles.container}>
@@ -531,25 +403,16 @@ AnimatedViews.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    // ...StyleSheet.absoluteFillObject,
     flex: 1
   },
   itemContainer: {
-    // height: 250,
-    // borderColor: 'green',
-    // borderWidth: 3,
     backgroundColor: '#F0F0F0',
     flexDirection: 'row',
     paddingHorizontal: ITEM_SPACING / 2 + ITEM_PREVIEW
-    // position: 'absolute',
-    // top: screen.height - ITEM_PREVIEW_HEIGHT - 64,
-    // paddingTop: screen.height - ITEM_PREVIEW_HEIGHT - 64,
-    // paddingTop: !ANDROID ? 0 : screen.height - ITEM_PREVIEW_HEIGHT - 64,
   },
   map: {
     backgroundColor: 'transparent',
     flex: 1
-    // ...StyleSheet.absoluteFillObject,
   },
   item: {
     width: ITEM_WIDTH,
@@ -561,9 +424,6 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     zIndex: 4000,
     marginTop: -5
-    // borderColor: 'gray',
-    // borderWidth: 1,
-    // elevation: 4
   },
   downArrowIcon: {
     position: 'absolute',
@@ -580,7 +440,6 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: '#fff',
     borderRadius: 50,
-    // zIndex: 2000,
     elevation: 6,
     justifyContent: 'center',
     alignItems: 'center'
@@ -592,7 +451,6 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: '#fff',
     borderRadius: 50,
-    // zIndex: 2000,
     elevation: 6,
     justifyContent: 'center',
     alignItems: 'center'
@@ -603,7 +461,6 @@ const mapStateToProps = state => {
   return {
     userProfileId: currentUserProfileIdSelector(state),
     plantProjects: getAllPlantProjectsSelector(state)
-    // entities: plantProjectsSelector(state)
   };
 };
 

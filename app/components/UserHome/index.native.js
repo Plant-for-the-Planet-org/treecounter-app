@@ -45,14 +45,8 @@ import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
 // import NativeMapView from './../Map/NativeMapView'
 // import Icon from 'react-native-vector-icons/FontAwesome5';
-import Smalltreewhite from '../../assets/images/smalltreewhite.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { mapStyle } from './FullMapComponent';
-import { markerImage } from '../../assets/index.js';
-import Modal from 'react-native-modalbox';
 import FullMapComponent from './FullMapComponent';
-import MapExpandable from './MapExpandable';
-import BottomSheet from './bottomSheet';
 
 export default class UserHome extends Component {
   constructor(props) {

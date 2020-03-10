@@ -297,7 +297,7 @@ export default class UserHome extends Component {
     debug(userProfile);
     return (
       <View style={{ elevation: 1 }}>
-        <SafeAreaView />
+        {!isFullMapComponentModal ? <SafeAreaView /> : null}
 
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}

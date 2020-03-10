@@ -18,7 +18,6 @@ import MapView, {
 } from 'react-native-maps';
 import MapvView from 'react-native-maps';
 import PanController from './panController';
-import PriceMarker from './AnimatedPriceMarker';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 import { deleteContribution } from '../../actions/EditMyTree';
 import { loadProject } from '../../actions/loadTposAction';
@@ -218,7 +217,9 @@ class AnimatedViews extends React.Component {
       },
       () => {
         setTimeout(() => {
-          this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)));
+          try {
+            this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)));
+          } catch (e) {}
           // this.mapView.animateToRegion(
           //     {
           //         latitude: markers[0].geoLatitude,

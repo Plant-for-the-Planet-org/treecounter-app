@@ -15,7 +15,7 @@ import MapView, { LocalTile } from 'react-native-maps';
 import { tree_1 } from '../../assets/index';
 import { markerImage } from '../../assets/index.js';
 import AsyncStorage from '@react-native-community/async-storage';
-import AnimatedViews from './AnmatedMao';
+import AnimatedViews from './AnmatedMap';
 const { width } = Dimensions.get('window');
 
 const CARD_HEIGHT = 150;

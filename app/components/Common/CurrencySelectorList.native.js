@@ -201,7 +201,7 @@ class CurrencySelectorList extends Component {
                     this.setSearch(text);
                   }}
                   value={this.state.search}
-                  placeholder={'Search'}
+                  placeholder={i18n.t('label.searchshort')}
                   placeholderTextColor={'#4d5153'}
                   fontFamily="OpenSans-SemiBold"
                 />

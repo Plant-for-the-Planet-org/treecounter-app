@@ -5,7 +5,8 @@ import {
   Dimensions,
   Animated,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 
 import MapView, {
@@ -13,7 +14,6 @@ import MapView, {
   Marker,
   PROVIDER_GOOGLE
 } from 'react-native-maps';
-import MapvView from 'react-native-maps';
 import PanController from './panController';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 import { deleteContribution } from '../../actions/EditMyTree';
@@ -214,7 +214,9 @@ class AnimatedViews extends React.Component {
         setTimeout(() => {
           try {
             this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)));
-          } catch (e) {}
+          } catch (e) {
+            console.log('Nothing');
+          }
         }, 3000);
       }
     );
@@ -248,7 +250,9 @@ class AnimatedViews extends React.Component {
             },
             350
           );
-        } catch (e) {}
+        } catch (e) {
+          console.log('Nothing');
+        }
       }
     }, 10);
   };
@@ -263,7 +267,9 @@ class AnimatedViews extends React.Component {
         },
         350
       );
-    } catch (e) {}
+    } catch (e) {
+      console.log('Nothing');
+    }
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.isFullMapComponentModal) {
@@ -277,7 +283,9 @@ class AnimatedViews extends React.Component {
           },
           350
         );
-      } catch (e) {}
+      } catch (e) {
+        console.log('Nothing');
+      }
     }
   }
 
@@ -302,7 +310,7 @@ class AnimatedViews extends React.Component {
           initialRegion={region}
         >
           {markers
-            ? markers.map((marker, i) => (
+            ? markers.map(marker => (
                 <Marker
                   identifier={String(marker.id)}
                   key={marker.id}
@@ -357,7 +365,7 @@ class AnimatedViews extends React.Component {
                       ]}
                     >
                       <UserContributionsDetails
-                        isFromUserProfile={true}
+                        isFromUserProfile
                         userProfileId={this.props.userProfileId}
                         navigation={this.props.navigation}
                         contribution={marker}

@@ -18,8 +18,6 @@ import {
   Platform,
   UIManager
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import MapView, { Marker, PROVIDER_GOOGLE, LocalTile } from 'react-native-maps';
 import { debug } from '../../debug';
 import {
   readmoreDown,

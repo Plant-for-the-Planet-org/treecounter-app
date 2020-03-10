@@ -13,7 +13,10 @@ import {
   RefreshControl,
   FlatList,
   Dimensions,
-  findNodeHandle
+  findNodeHandle,
+  LayoutAnimation,
+  Platform,
+  UIManager
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import MapView, { Marker, PROVIDER_GOOGLE, LocalTile } from 'react-native-maps';
@@ -75,6 +78,10 @@ export default class UserHome extends Component {
       refreshing: false
     };
     this.mapView = React.createRef();
+
+    if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
   }
   componentDidMount() {
     let { userContributions } = this.props;
@@ -244,6 +251,8 @@ export default class UserHome extends Component {
   };
 
   toggleIsFullMapComp = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
     this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
       this.scrollRef.scrollTo({ x: 0, y: y, animated: true });
     });
@@ -267,25 +276,6 @@ export default class UserHome extends Component {
         <Icon name={'fullscreen'} size={30} color={'#4C5153'} />
       </TouchableOpacity>
     );
-
-    let markerList = userContributions.map(oneContribution => (
-      <Marker
-        identifier={String(oneContribution.id)}
-        coordinate={{
-          latitude: oneContribution.geoLatitude,
-          longitude: oneContribution.geoLongitude
-        }}
-        key={oneContribution.id}
-      >
-        <View>
-          <Image
-            source={markerImage}
-            style={markerStyle}
-            resizeMode={'contain'}
-          />
-        </View>
-      </Marker>
-    ));
 
     const { isFullMapComponentModal } = this.state;
     return (

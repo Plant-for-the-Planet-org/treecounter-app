@@ -16,7 +16,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n.js';
 import PopupNative from '../Common/ModalDialog/Popup.native';
 import NativeMapView, { mapStyle } from '../Map/NativeMapView.native';
-
+import { PROVIDER_GOOGLE } from 'react-native-maps';
 export default class UserContributions extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +29,7 @@ export default class UserContributions extends React.Component {
     let geoLatLong = `geoLongitude=${userContribution.geoLongitude}&geoLatitude=${userContribution.geoLatitude}&country=${userContribution.country}`;
     return (
       <NativeMapView
+        provider={PROVIDER_GOOGLE}
         mapType={'satellite'}
         mode={'single-tree'}
         geoLocation={geoLatLong}
@@ -60,7 +61,8 @@ export default class UserContributions extends React.Component {
       updateStaticRoute,
       showDelete,
       mayUpdate,
-      plantProjectId
+      plantProjectId,
+      isFromUserProfile
     } = props;
 
     const textColor = '#87B738';
@@ -68,29 +70,47 @@ export default class UserContributions extends React.Component {
     return (
       <View style={styles.container}>
         {/* ===== Map View starts ===== */}
-        {/* <View style={styles.mapView}> */}
-        {/* get the map component */}
-        {/* {this.getMapComponent(this.props.contribution)} */}
+        {!isFromUserProfile ? (
+          <View style={styles.mapView}>
+            {/* get the map component */}
+            {this.getMapComponent(this.props.contribution)}
 
-        {/* close icon - goes back to previous screen */}
-        {/* <TouchableOpacity
-            onPress={props.onClickClose}
-            style={[styles.button, styles.closeIcon]}
-          >
-            <View style={styles.closeContainer}>
-              <Image style={{ width: 16, height: 16 }} source={closeIcon} />
-            </View>
-          </TouchableOpacity> */}
-
+            {/* close icon - goes back to previous screen */}
+            <TouchableOpacity
+              onPress={props.onClickClose}
+              style={[styles.button, styles.closeIcon]}
+            >
+              <View style={styles.closeContainer}>
+                <Image style={{ width: 16, height: 16 }} source={closeIcon} />
+              </View>
+            </TouchableOpacity>
+            {/* maps the date */}
+            {plantedDate ? (
+              <View
+                style={[
+                  isFromUserProfile
+                    ? styles.dateContainer
+                    : styles.dateContainerWithoutMap
+                ]}
+              >
+                <Text style={styles.plantedDate}>{plantedDate}</Text>
+              </View>
+            ) : null}
+          </View>
+        ) : null}
+        {/* ===== Map View Ends ===== */}
         {/* maps the date */}
-        {plantedDate ? (
-          <View style={styles.dateContainer}>
+        {isFromUserProfile && plantedDate ? (
+          <View
+            style={[
+              isFromUserProfile
+                ? styles.dateContainer
+                : styles.dateContainerWithoutMap
+            ]}
+          >
             <Text style={styles.plantedDate}>{plantedDate}</Text>
           </View>
         ) : null}
-        {/* </View> */}
-        {/* ===== Map View Ends ===== */}
-
         {/* ===== Header and Sub header starts ===== */}
         <View style={styles.header}>
           {/* maps the tree count with contribution type : Gifted, Donated, Received */}

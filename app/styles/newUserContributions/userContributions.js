@@ -52,6 +52,17 @@ export default EStyleSheet.create({
     // width: 130,
     // textAlign: 'center'
   },
+  dateContainerWithoutMap: {
+    position: 'absolute',
+    left: 20,
+    bottom: -14,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    backgroundColor: whiteColor,
+    borderRadius: 100,
+    borderColor: textColorLight,
+    borderWidth: 1
+  },
   closeContainer: {
     width: 30,
     height: 30,
@@ -122,7 +133,7 @@ export default EStyleSheet.create({
     borderRadius: 100,
     padding: 14,
     alignItems: 'center',
-    width: Dimensions.get('window').width * 42 / 100
+    width: (Dimensions.get('window').width * 42) / 100
   },
   borderGreen: {
     borderWidth: 1,

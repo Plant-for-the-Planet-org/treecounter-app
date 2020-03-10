@@ -252,6 +252,7 @@ class UserContributionsDetails extends React.Component {
     return (
       <ScrollView style={{ backgroundColor: { backgroundColor }, flex: 1 }}>
         <UserContributions
+          isFromUserProfile={this.props.isFromUserProfile}
           mayUpdate={mayUpdate}
           treeCount={treeCount}
           plantProjectName={plantProjectName}
@@ -286,27 +287,26 @@ class UserContributionsDetails extends React.Component {
         />
 
         {/* displays image carousel if any image or video is available */}
-        {contributionOrPlantedImages &&
-          contributionOrPlantedImages.length > 0 && (
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                marginVertical: 30
-              }}
-            >
-              {videoUrl ? <VideoContainer url={videoUrl} /> : null}
-              {/* TODO Add thumbnail for video */}
-              <PlantProjectImageCarousel
-                resizeMode={'cover'}
-                images={contributionOrPlantedImages}
-                aspectRatio={16 / 9}
-                videoUrl={videoUrl}
-              />
-            </ScrollView>
-          )}
+        {contributionOrPlantedImages && contributionOrPlantedImages.length > 0 && (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              marginVertical: 30
+            }}
+          >
+            {videoUrl ? <VideoContainer url={videoUrl} /> : null}
+            {/* TODO Add thumbnail for video */}
+            <PlantProjectImageCarousel
+              resizeMode={'cover'}
+              images={contributionOrPlantedImages}
+              aspectRatio={16 / 9}
+              videoUrl={videoUrl}
+            />
+          </ScrollView>
+        )}
 
         {/* displays error message if geoLatitude and geoLongitude are same */}
         {hasGeoLocationError ? (

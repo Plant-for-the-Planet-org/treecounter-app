@@ -13,7 +13,8 @@ import MapView, {
   ProviderPropType,
   // Animated as AnimatedMap,
   AnimatedRegion,
-  Marker
+  Marker,
+  PROVIDER_GOOGLE
 } from 'react-native-maps';
 import MapvView from 'react-native-maps';
 import PanController from './panController';
@@ -363,31 +364,22 @@ class AnimatedViews extends React.Component {
         this.index = index;
         const oneContribution = this.state.markers[index];
         console.log(oneContribution);
-        this.mapView.animateToRegion(
-          {
-            latitude: oneContribution.geoLatitude,
-            longitude: oneContribution.geoLongitude,
-            latitudeDelta: 0.00095,
-            longitudeDelta: 0.0095
-          },
-          350
-        );
+        try {
+          this.mapView.animateToRegion(
+            {
+              latitude: oneContribution.geoLatitude,
+              longitude: oneContribution.geoLongitude,
+              latitudeDelta: 0.00095,
+              longitudeDelta: 0.0095
+            },
+            350
+          );
+        } catch (e) {}
       }
     }, 10);
   };
   initiateComponent = () => {
-    this.mapView.animateToRegion(
-      {
-        latitude: this.state.markers[0].geoLatitude,
-        longitude: this.state.markers[0].geoLongitude,
-        latitudeDelta: 0.00095,
-        longitudeDelta: 0.0095
-      },
-      350
-    );
-  };
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isFullMapComponentModal) {
+    try {
       this.mapView.animateToRegion(
         {
           latitude: this.state.markers[0].geoLatitude,
@@ -397,6 +389,21 @@ class AnimatedViews extends React.Component {
         },
         350
       );
+    } catch (e) {}
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isFullMapComponentModal) {
+      try {
+        this.mapView.animateToRegion(
+          {
+            latitude: this.state.markers[0].geoLatitude,
+            longitude: this.state.markers[0].geoLongitude,
+            latitudeDelta: 0.00095,
+            longitudeDelta: 0.0095
+          },
+          350
+        );
+      } catch (e) {}
     }
   }
 
@@ -417,7 +424,7 @@ class AnimatedViews extends React.Component {
           onMapReady={this.onMapReady}
           ref={map => (this.mapView = map)}
           customMapStyle={mapStyle}
-          provider={this.props.provider}
+          provider={PROVIDER_GOOGLE}
           style={styles.map}
           initialRegion={region}
         >
@@ -477,6 +484,7 @@ class AnimatedViews extends React.Component {
                       ]}
                     >
                       <UserContributionsDetails
+                        isFromUserProfile={true}
                         userProfileId={this.props.userProfileId}
                         navigation={this.props.navigation}
                         contribution={marker}

@@ -33,12 +33,13 @@ export default function HeaderStatic(props) {
     <SafeAreaView
       style={{
         position: 'absolute',
-        top: Platform.OS === 'ios' ? 30 : 0,
+        //top: Platform.OS === 'ios' ? 1 : 0,
         left: 0,
         right: 0,
         backgroundColor: whiteColor,
-        height: 56,
-        zIndex: 5000,
+        height: Platform.OS === 'ios' ? 100 : 56,
+        zIndex: -1,
+        backgroundColor: '#FF5236',
         // alignItems: 'center',
         display: 'flex',
         flexDirection: 'row',

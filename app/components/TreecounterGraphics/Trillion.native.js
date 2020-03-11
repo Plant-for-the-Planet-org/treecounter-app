@@ -465,7 +465,7 @@ class Trillion extends PureComponent {
               showSearch
             />
             <Animated.View
-              style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+              style={{ marginTop: Platform.OS === 'ios' ? 56 : 56 }}
             />
 
             <TabView

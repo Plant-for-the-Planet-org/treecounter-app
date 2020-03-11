@@ -88,9 +88,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  SelectedPlantProjectContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectedPlantProjectContainer);
 
 SelectedPlantProjectContainer.propTypes = {
   selectedProject: PropTypes.object,

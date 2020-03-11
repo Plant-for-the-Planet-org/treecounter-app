@@ -122,8 +122,8 @@ export async function postRequest(
 }
 
 export async function postDirectRequest(path, data, authenticated = false) {
-  const { scheme, host } = context;
-  const serverName = `${scheme}://${host}`;
+  const { api_url } = context;
+  const serverName = `${api_url}`;
   const url = `${serverName}${path}`;
   return await axios
     .post(url, data, await getHeaders(authenticated))

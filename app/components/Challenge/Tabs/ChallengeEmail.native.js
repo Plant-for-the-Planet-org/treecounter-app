@@ -58,7 +58,7 @@ class ChallengeEmail extends Component {
     this.onNextClick = this.onNextClick.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!this.props.challengeSuccess && nextProps.challengeSuccess) {
       let currentYear = new Date().getFullYear(),
         years = [];

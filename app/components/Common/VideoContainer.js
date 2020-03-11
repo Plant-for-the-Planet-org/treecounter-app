@@ -8,7 +8,7 @@ class VideoContainer extends React.Component {
     super(props);
     this.state = { videoId: null };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.url) {
       let ID = '';
       let url;

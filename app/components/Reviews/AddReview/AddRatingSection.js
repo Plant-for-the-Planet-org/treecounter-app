@@ -40,7 +40,7 @@ export default class AddRatingSection extends Component {
     this.deleteImage = this.deleteImage.bind(this);
     debug('after merging props in add rating', this.state);
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.reviewIndexes &&
       !Object.keys(this.state.reviewIndexScores).length
@@ -305,11 +305,10 @@ export default class AddRatingSection extends Component {
             title={i18n.t('label.add_pictures')}
             updateImages={this.updateImages}
             deleteImage={this.deleteImage}
-            images={this.state.reviewImages.map(
-              data =>
-                data.imageFile
-                  ? data.imageFile
-                  : getImageUrl('review', 'medium', data.image)
+            images={this.state.reviewImages.map(data =>
+              data.imageFile
+                ? data.imageFile
+                : getImageUrl('review', 'medium', data.image)
             )}
           />
 

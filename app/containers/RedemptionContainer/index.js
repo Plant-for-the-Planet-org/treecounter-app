@@ -102,7 +102,7 @@ class RedemptionContainer extends Component {
     let isCode = this.state.code ? true : false;
     this.callSetState(isCode, isLoggedIn, this.state.code, this.state.type);
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.match && this.props.match) {
       if (
         nextProps.match !== this.props.match ||
@@ -247,9 +247,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  RedemptionContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RedemptionContainer);
 
 RedemptionContainer.propTypes = {
   match: PropTypes.object,

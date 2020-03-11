@@ -20,11 +20,12 @@ export default EStyleSheet.create({
   subHeaderText: {
     color: textColorDark,
     fontSize: 18,
-    fontFamily: 'OpenSans-SemiBold'
+    fontFamily: 'OpenSans-SemiBold',
+    flex: 1,
+    flexWrap: 'wrap'
   },
   subHeaderTextContainer: {
-    flexDirection: 'row',
-    maxWidth: '90%'
+    // flexDirection: 'row',
   },
   italic: {
     fontStyle: 'italic'

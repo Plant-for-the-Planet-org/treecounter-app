@@ -51,7 +51,7 @@ class PublicTreeCounter extends React.Component {
     this.props.route('app_donateTrees');
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
     if (treecounter) {
       let svgData = {

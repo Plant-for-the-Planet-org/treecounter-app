@@ -44,7 +44,7 @@ class MakePledgeForm extends Component {
     scrollY: new Animated.Value(0)
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.validationSchema = generateFormikSchemaFromFormSchema(
       pledgeFormSchema,
       ['firstname', 'lastname', 'email', 'treeCount']

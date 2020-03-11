@@ -24,31 +24,24 @@ const tpoLeaderBoard = ({ navigation }) => {
   const [period, setPeriod] = useState('1w');
   const [orderBy] = useState('planted');
 
-  useEffect(
-    () => {
-      setQueryResult(null);
-      const section = navigation.getParam('category');
-      LeaderBoardDataAction({
-        section,
-        orderBy,
-        period,
-        subSection: undefined
-      }).then(
-        success => {
-          if (
-            success.data &&
-            success.data instanceof Object &&
-            success.data.data
-          )
-            setQueryResult(success.data.data);
-        },
-        error => {
-          debug(error);
-        }
-      );
-    },
-    [period]
-  );
+  useEffect(() => {
+    setQueryResult(null);
+    const section = navigation.getParam('category');
+    LeaderBoardDataAction({
+      section,
+      orderBy,
+      period,
+      subSection: undefined
+    }).then(
+      success => {
+        if (success.data && success.data instanceof Object && success.data.data)
+          setQueryResult(success.data.data);
+      },
+      error => {
+        debug(error);
+      }
+    );
+  }, [period]);
   const renderOrganizationsList = () => {
     if (queryresult) {
       return (
@@ -153,7 +146,7 @@ const tpoLeaderBoard = ({ navigation }) => {
 const CompanyListItem = ({ onPressListItem, item, index }) => {
   const [isPress, setIsPress] = useState(false);
   const isPrivate = 'mayPublish' in item && !item.mayPublish;
-  console.log(isPress, 'isPressisPress');
+  debug(isPress, 'isPressisPress');
   return (
     <TouchableOpacity
       onPress={() =>

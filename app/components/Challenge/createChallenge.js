@@ -131,7 +131,7 @@ export default class Challenge extends Component {
       checked: event.target.value
     });
   };
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
       NotificationManager.error(
         i18n.t('label.challenge_error', {

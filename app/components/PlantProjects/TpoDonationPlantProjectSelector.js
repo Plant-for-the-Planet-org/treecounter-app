@@ -30,7 +30,7 @@ class TpoDonationPlantProjectSelector extends React.Component {
 
     this.state = { currentPlantProjectId: defaultPlantProjectId };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     debug('got in receive props', nextProps);
     if (nextProps.plantProjects && nextProps.plantProjects.length) {
       let defaultPlantProjectId = nextProps.defaultPlantProjectId;

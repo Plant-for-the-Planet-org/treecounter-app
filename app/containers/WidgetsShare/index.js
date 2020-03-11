@@ -15,7 +15,7 @@ class WidgetShareContainer extends React.PureComponent {
     this.state = {};
   }
 
-  componentWillMount() {}
+  UNSAFE_componentWillMount() {}
 
   render() {
     return (

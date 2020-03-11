@@ -30,7 +30,7 @@ class UserContributionsDetails extends React.Component {
   }
 
   // adds back button listener on component mount
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackButtonClick
@@ -50,6 +50,17 @@ class UserContributionsDetails extends React.Component {
     this.props.navigation.goBack(null);
     return true;
   }
+
+  // navigates to selected plant project screen on click of plant project link
+  // and sets the selected plant project id in the redux state
+  onPlantProjectClick = (plantProjectId, plantProjectName) => {
+    this.props.selectPlantProjectAction(plantProjectId);
+
+    this.props.navigation.navigate(getLocalRoute('app_selectProject'), {
+      treeCounterId: plantProjectId,
+      titleParam: plantProjectName
+    });
+  };
 
   render() {
     if (!this.props.contribution) {
@@ -95,16 +106,12 @@ class UserContributionsDetails extends React.Component {
     let treeClassification = undefined;
     let contributionPerson = undefined;
     let contributionPersonSlug = undefined;
-    // let selectedPlantProjectDetails = undefined;
+    let selectedPlantProjectDetails = undefined;
     let headerText = undefined;
     let videoUrl = undefined;
     let hasGeoLocationError = undefined;
     let locationErrorText = '';
     let contributionOrPlantedImages = contributionImages;
-
-    // debug('\x1b[45mcontribution', this.props.contribution);
-    // debug('plantProjects', this.props.plantProjects);
-    // debug('\x1b[0m');
 
     // sets the header text
     // if treeType is null then header text is treecount and type of contribution
@@ -152,33 +159,29 @@ class UserContributionsDetails extends React.Component {
       plantedDate = formatDate(redemptionDate, 'MMMM d,  yyyy');
     }
 
-    // selects the matching plant project with the contribution project id
-    // if (plantProjects.length > 0) {
-    //   for (let i = 0; i <= plantProjects.length; ) {
-    //     if (plantProjects[i].id === plantProjectId) {
-    //       selectedPlantProjectDetails = plantProjects[i];
-
-    //       // takes video url from plant project
-    //       videoUrl = selectedPlantProjectDetails.videoUrl;
-
-    //       // if card type in not planted the shows the image from
-    //       // plant projects else shows images from contribution if any
-    //       if (cardType !== 'planted') {
-    //         contributionOrPlantedImages =
-    //           selectedPlantProjectDetails.plantProjectImages;
-    //       }
-    //       plantProjectSlug = selectedPlantProjectDetails.slug;
-    //       break;
-    //     }
+    // if (plantProjects[0]) {
+    //   videoUrl = plantProjects[0].videoUrl;
+    //   if (cardType !== 'planted') {
+    //     contributionOrPlantedImages = plantProjects[0].plantProjectImages;
     //   }
+    //   plantProjectSlug = plantProjects[0].slug;
     // }
 
-    if (plantProjects[0]) {
-      videoUrl = plantProjects[0].videoUrl;
-      if (cardType !== 'planted') {
-        contributionOrPlantedImages = plantProjects[0].plantProjectImages;
+    if (plantProjects.length > 0) {
+      for (let i = 0; i < plantProjects.length; i++) {
+        if (plantProjects[i].id === plantProjectId) {
+          selectedPlantProjectDetails = plantProjects[i];
+          break;
+        }
       }
-      plantProjectSlug = plantProjects[0].slug;
+      if (selectedPlantProjectDetails) {
+        videoUrl = selectedPlantProjectDetails.videoUrl;
+        if (cardType !== 'planted') {
+          contributionOrPlantedImages =
+            selectedPlantProjectDetails.plantProjectImages;
+        }
+        plantProjectSlug = selectedPlantProjectDetails.slug;
+      }
     }
 
     // // adds planted by if plantProjectName is present
@@ -239,12 +242,15 @@ class UserContributionsDetails extends React.Component {
 
     if (geoLatitude === geoLongitude) {
       hasGeoLocationError = true;
+      locationErrorText = i18n.t('label.geolocation_default_error');
       if (contributionType === 'planting') {
         locationErrorText =
-          'Coordinates for this tree registration is incorrect. Please update the registration with correct details.';
+          locationErrorText + ' ' + i18n.t('label.geolocation_error_by_user');
       } else {
         locationErrorText =
-          "Coordinates for this tree registration is incorrect. We've informed the project to update it.";
+          locationErrorText +
+          ' ' +
+          i18n.t('label.geolocation_error_by_project');
       }
     }
     const backgroundColor = '#fff';
@@ -267,6 +273,7 @@ class UserContributionsDetails extends React.Component {
           showDelete={contributionType == 'planting'}
           headerText={headerText}
           plantProjectId={plantProjectId}
+          onPlantProjectClick={this.onPlantProjectClick}
           onClickDelete={() => {
             this.props.deleteContribution(
               this.props.contribution.id,
@@ -287,7 +294,9 @@ class UserContributionsDetails extends React.Component {
         />
 
         {/* displays image carousel if any image or video is available */}
-        {contributionOrPlantedImages && contributionOrPlantedImages.length > 0 && (
+        {(videoUrl ||
+          (contributionOrPlantedImages &&
+            contributionOrPlantedImages.length > 0)) && (
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -297,14 +306,18 @@ class UserContributionsDetails extends React.Component {
               marginVertical: 30
             }}
           >
+            {/* {debug('\x1b[46m \x1b[30m video', videoUrl)} */}
             {videoUrl ? <VideoContainer url={videoUrl} /> : null}
             {/* TODO Add thumbnail for video */}
-            <PlantProjectImageCarousel
-              resizeMode={'cover'}
-              images={contributionOrPlantedImages}
-              aspectRatio={16 / 9}
-              videoUrl={videoUrl}
-            />
+            {contributionOrPlantedImages &&
+              contributionOrPlantedImages.length > 0 && (
+                <PlantProjectImageCarousel
+                  resizeMode={'cover'}
+                  images={contributionOrPlantedImages}
+                  aspectRatio={16 / 9}
+                  videoUrl={videoUrl}
+                />
+              )}
           </ScrollView>
         )}
 
@@ -333,20 +346,18 @@ class UserContributionsDetails extends React.Component {
 
         {/* displays project contact card if project is available
           in the contribution */}
-        {this.props.plantProjects &&
-        this.props.plantProjects.length > 0 &&
-        this.props.plantProjects[0].tpoData ? (
+        {selectedPlantProjectDetails && selectedPlantProjectDetails.tpoData ? (
           <View style={{ marginBottom: 30 }}>
             <AccordionContactInfo
               navigation={this.props.navigation}
-              slug={this.props.plantProjects[0].tpoData.treecounterSlug}
+              slug={selectedPlantProjectDetails.tpoData.treecounterSlug}
               updateStaticRoute={updateStaticRoute}
-              url={this.props.plantProjects[0].url}
+              url={selectedPlantProjectDetails.url}
               _goToURL={_goToURL}
-              email={this.props.plantProjects[0].tpoData.email}
-              address={this.props.plantProjects[0].tpoData.address}
-              name={this.props.plantProjects[0].tpoData.name}
-              title={this.props.plantProjects[0].tpoData.name}
+              email={selectedPlantProjectDetails.tpoData.email}
+              address={selectedPlantProjectDetails.tpoData.address}
+              name={selectedPlantProjectDetails.tpoData.name}
+              title={selectedPlantProjectDetails.tpoData.name}
             />
           </View>
         ) : null}

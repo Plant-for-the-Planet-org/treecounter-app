@@ -3,6 +3,7 @@ import { currentUserProfileSelector } from '../../selectors';
 import { connect } from 'react-redux';
 import { currenciesSelector, getCurrency } from '../../selectors';
 import { formatNumber } from '../../utils/utils';
+import { context } from '../../config';
 
 const NumberFormat = ({
   data,
@@ -16,7 +17,7 @@ const NumberFormat = ({
   if (!userProfile) {
     userProfile = {
       // we use redux currency or use EUR if not found for now, dont use localstorage currency for now
-      currency: globalCurrency.currency || 'EUR'
+      currency: globalCurrency.currency || context.currency
     };
   }
   if (force && currency) {

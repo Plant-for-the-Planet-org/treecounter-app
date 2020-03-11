@@ -233,9 +233,9 @@
   {
     "country": "Samoa",
     "countryCode": "WS",
-    "currency": "Euros",
-    "code": "EUR",
-    "currencyCountryFlag": "EU"
+    "currency": "Tala",
+    "code": "WST",
+    "currencyCountryFlag": "WS"
   },
   {
     "country": "San Marino",
@@ -1613,7 +1613,7 @@
     "country": "Zambia",
     "countryCode": "ZM",
     "currency": "Kwacha",
-    "code": "ZMK",
+    "code": "ZMW",
     "currencyCountryFlag": "ZM"
   },
   {

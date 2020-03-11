@@ -1,1 +1,8 @@
-{ }
+{
+  "has_dedicated": "Todos los árboles que plantes, a excepción de los regalos, se dedicarán a {{user}}. Aunque los árboles aparecerán en ambos contadores de árboles, sólo contarán una vez en el contador de árboles global.",
+  "has_not_dedicated": "Regalando árboles a amigos, compañeros u organizaciones, ayudas a alcanzar su objetivo de plantación.",
+  "dedicate_tootltip": "Todos los árboles que plantes, registres o dones a partir de ahora estarán dedicados al usuario seleccionado. Puedes cambiar la persona a la que te gustaría dedicar árboles en cualquier momento. En el caso de regalar árboles, los árboles sólo se dedicarán al destinatario del regalo.",
+  "pick_profile": "Seleccionar perfil",
+  "dedicate_trees": "Dedicar mis árboles a",
+  "dedicate_my_trees": "Dedicar mis árboles"
+}

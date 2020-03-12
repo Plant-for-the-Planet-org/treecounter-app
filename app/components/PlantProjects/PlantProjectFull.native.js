@@ -24,8 +24,6 @@ import scrollStyle from '../../styles/common/scrollStyle.native';
 import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 import HeaderFullPages from '../Header/HeaderFullPages.native';
-import { context } from '../../config';
-import { getLocalRoute } from './../../actions/apiRouting';
 
 // import TabContainer from '../../containers/Menu/TabContainer';
 

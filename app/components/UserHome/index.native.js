@@ -283,7 +283,7 @@ export default class UserHome extends Component {
     } = this.state;
     debug(userProfile);
     return (
-      <View style={{ elevation: 1 }}>
+      <View style={{ elevation: 1, backgroundColor: 'white' }}>
         <SafeAreaView />
 
         <ScrollView
@@ -310,10 +310,6 @@ export default class UserHome extends Component {
                     <Text style={styles.nameStyle}>
                       {userProfile.treecounter.displayName}
                     </Text>
-                    {/* <Text style={styles.nameStyle2}>
-                      {' '}
-                      {userProfile.lastname}
-                    </Text> */}
                   </View>
                 </View>
               </View>
@@ -335,7 +331,7 @@ export default class UserHome extends Component {
                 <Image source={settings} style={{ height: 20, width: 20 }} />
               </TouchableOpacity>
             </View>
-            <View style={[styles.svgContainer, { marginTop: -20 }]}>
+            <View style={[styles.svgContainer, { marginTop: -50 }]}>
               <SvgContainer
                 {...svgData}
                 onToggle={toggleVal => this.updateSvg(toggleVal)}
@@ -419,30 +415,30 @@ export default class UserHome extends Component {
               </View>
               <View>
                 {userProfile.synopsis1 ||
-                userProfile.synopsis2 ||
-                userProfile.linkText ||
-                userProfile.url ? (
-                  <View>
-                    {userProfile.synopsis1 ? (
-                      <Text style={styles.footerText}>
-                        {userProfile.synopsis1}
-                      </Text>
-                    ) : null}
-                    {userProfile.synopsis2 ? (
-                      <Text style={styles.footerText}>
-                        {userProfile.synopsis2}
-                      </Text>
-                    ) : null}
-                    {userProfile.url ? (
-                      <Text
-                        style={styles.linkText}
-                        onPress={() => this._goToURL(userProfile.url)}
-                      >
-                        {userProfile.linkText || i18n.t('label.read_more')}
-                      </Text>
-                    ) : null}
-                  </View>
-                ) : null}
+                  userProfile.synopsis2 ||
+                  userProfile.linkText ||
+                  userProfile.url ? (
+                    <View>
+                      {userProfile.synopsis1 ? (
+                        <Text style={styles.footerText}>
+                          {userProfile.synopsis1}
+                        </Text>
+                      ) : null}
+                      {userProfile.synopsis2 ? (
+                        <Text style={styles.footerText}>
+                          {userProfile.synopsis2}
+                        </Text>
+                      ) : null}
+                      {userProfile.url ? (
+                        <Text
+                          style={styles.linkText}
+                          onPress={() => this._goToURL(userProfile.url)}
+                        >
+                          {userProfile.linkText || i18n.t('label.read_more')}
+                        </Text>
+                      ) : null}
+                    </View>
+                  ) : null}
               </View>
             </View>
           ) : null}
@@ -477,20 +473,20 @@ export default class UserHome extends Component {
           <ScrollView>
             {userProfile.plantProjects
               ? userProfile.plantProjects.map(project => (
-                  <PlantProjectSnippet
-                    key={'projectFull' + project.id}
-                    onMoreClick={id =>
-                      this.onPlantProjectClick(id, project.name)
-                    }
-                    plantProject={project}
-                    onSelectClickedFeaturedProjects={id =>
-                      this.onPlantProjectClick(id, project.name)
-                    }
-                    showMoreButton={false}
-                    tpoName={project.tpo_name}
-                    navigation={this.props.navigation}
-                  />
-                ))
+                <PlantProjectSnippet
+                  key={'projectFull' + project.id}
+                  onMoreClick={id =>
+                    this.onPlantProjectClick(id, project.name)
+                  }
+                  plantProject={project}
+                  onSelectClickedFeaturedProjects={id =>
+                    this.onPlantProjectClick(id, project.name)
+                  }
+                  showMoreButton={false}
+                  tpoName={project.tpo_name}
+                  navigation={this.props.navigation}
+                />
+              ))
               : null}
           </ScrollView>
 
@@ -510,12 +506,12 @@ export default class UserHome extends Component {
           ) : null}
 
           {this.props.userContributions &&
-          this.props.userContributions.length > 3 ? (
-            <ToggleButton
-              updateFunction={() => this.readMore()}
-              showMore={showAllContributions}
-            />
-          ) : null}
+            this.props.userContributions.length > 3 ? (
+              <ToggleButton
+                updateFunction={() => this.readMore()}
+                showMore={showAllContributions}
+              />
+            ) : null}
 
           {/* <RenderIndividualsList
             navigation={this.props.navigation}
@@ -584,15 +580,15 @@ function MyCompetitions(props) {
       >
         {competitions.length > 0
           ? competitions.map(competition => (
-              <CompetitionSnippet
-                key={'competition' + competition.id}
-                onMoreClick={id =>
-                  props.onCompetitionClick(id, competition.name)
-                }
-                competition={competition}
-                type="all"
-              />
-            ))
+            <CompetitionSnippet
+              key={'competition' + competition.id}
+              onMoreClick={id =>
+                props.onCompetitionClick(id, competition.name)
+              }
+              competition={competition}
+              type="all"
+            />
+          ))
           : null}
       </ScrollView>
     </View>

@@ -60,6 +60,9 @@ jest.mock('react-native-vector-icons/FontAwesome', () => {
   };
 });
 jest.mock('@react-native-community/viewpager', () => {});
+jest.mock('@react-native-community/masked-view', () => {});
+jest.mock('@react-native-community/datetimepicker', () => {});
+jest.mock('@react-native-community/netinfo', () => {});
 
 // eslint-disable-next-line no-undef
 it('renders correctly', () => {

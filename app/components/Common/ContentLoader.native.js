@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, Image, ScrollView } from 'react-native';
+import { View, Dimensions, Image, ScrollView, Platform } from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
 import { debug } from '../../debug';
@@ -325,7 +325,7 @@ const ContentLoading = props => {
 const loadingIndicatorStyle = {
   flex: 1,
   alignItems: 'center',
-  marginTop: '5%'
+  marginTop: Platform.OS === 'ios' ? HEIGHT * 0.1 : HEIGHT * 0.05
 };
 {
   /*const containerStyle = {

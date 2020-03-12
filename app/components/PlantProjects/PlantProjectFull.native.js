@@ -133,15 +133,6 @@ class PlantProjectFull extends React.Component {
           scrollY={this.state.scrollY}
           entityType={'projects'}
           entityName={tpoName}
-          url={
-            context.scheme +
-            '://' +
-            context.host +
-            getLocalRoute('app_selectedProject') +
-            '/' +
-            this.props.plantProject.id
-          }
-          appurl={'weplant://project/' + this.props.plantProject.id}
         />
         <ScrollView
           contentContainerStyle={[

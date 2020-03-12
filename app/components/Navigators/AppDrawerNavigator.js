@@ -80,6 +80,7 @@ const headerLabels = {
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.projects',
+  [getLocalRoute('app_selectedProject')]: 'label.project',
   [getLocalRoute('app_competition')]: '',
   [getLocalRoute('app_editCompetition')]: '',
   [getLocalRoute('app_imprint')]: 'label.imprint',
@@ -294,9 +295,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: SelectPlantProjectContainer
       },
       [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProjectContainer,
+        screen: SelectPlantProjectContainer,
         navigationOptions: { header: null },
-        path: 'project/:projectName'
       },
       [getLocalRoute('app_selectedProject')]: {
         screen: SelectedPlantProjectContainer,

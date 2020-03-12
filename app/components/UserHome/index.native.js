@@ -143,7 +143,7 @@ export default class UserHome extends Component {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
-      updateRoute('app_selectProject', navigation, 1, {
+      updateRoute('app_selectedProject', navigation, 1, {
         userForm: navigation.getParam('userForm'),
         titleParam: name
       });

@@ -17,20 +17,23 @@ import {
 } from '../../actions/selectPlantProjectAction';
 
 const SelectedPlantProjectContainer = props => {
-
-  React.useEffect(() => {
-    if (props.navigation.state.params.projectName) {
-        props.loadProject(
-          {id:  props.navigation.state.params.projectName || props.selectedPlantProjectId },
-          {loading: true}
-        );
+  const getProjectDetails = async (projectSlug) => {
+    if (projectSlug) {
+      const project = await props.loadProject(
+        { id: projectSlug || props.selectedPlantProjectId },
+        { loading: true }
+      );
+      props.selectPlantProjectAction(project.id);
     } else {
       props.loadProject(
-        {id: props.selectedPlantProjectId },
+        {id: props.selectedPlantProjectId},
         {loading: true}
       );
     }
-  },[props.navigation.state.params.projectName]);
+  };
+  React.useEffect(() => {
+    getProjectDetails(props.navigation.state.params.projectName);
+  }, [props.navigation.state.params.projectName]);
   const selectProject = id => {
     const {navigation} = props;
     props.selectPlantProjectAction(id);
@@ -51,8 +54,9 @@ const SelectedPlantProjectContainer = props => {
       selectProject={id => selectProject(id)}
       currentUserProfile={props.currentUserProfile}
     />
-  )
+  );
 };
+
 SelectedPlantProjectContainer.navigationOptions = () => ({
   headerMode: 'none'
 });

@@ -298,6 +298,11 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         navigationOptions: { header: null },
         path: 'project/:projectName'
       },
+      [getLocalRoute('app_selectedProject')]: {
+        screen: SelectedPlantProjectContainer,
+        navigationOptions: { header: null },
+        path: 'project/:projectSlug'
+      },
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer
       },

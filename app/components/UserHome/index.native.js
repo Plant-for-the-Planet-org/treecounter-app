@@ -282,8 +282,9 @@ export default class UserHome extends Component {
       recurrentUserContributions
     } = this.state;
     debug(userProfile);
+    const white = 'white';
     return (
-      <View style={{ elevation: 1, backgroundColor: 'white' }}>
+      <View style={{ elevation: 1, backgroundColor: white }}>
         <SafeAreaView />
 
         <ScrollView

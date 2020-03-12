@@ -4,6 +4,7 @@ import { getRequest } from '../utils/api';
 import { tpoSchema, plantProjectSchema } from '../schemas/index';
 import { mergeEntities } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
+import { setSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
 
 export function loadProjects(category = 'all', options = {}) {
   const request = getRequest('plantProjects_get', {
@@ -12,7 +13,7 @@ export function loadProjects(category = 'all', options = {}) {
   });
   return dispatch => {
     !options.page && dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       request
         .then(res => {
           // debug(res);
@@ -54,10 +55,11 @@ export function loadProject(plantProject, options = {}) {
   const request = getRequest('plantProject_get', { uid: plantProject.id });
   return dispatch => {
     options.loading && dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       request
         .then(res => {
           debug('========================', res.data);
+          dispatch(setSelectedPlantProjectId(parseInt(plantProject.id)));
           dispatch(mergeEntities(normalize(res.data, plantProjectSchema)));
           dispatch(mergeEntities(normalize(res.data.tpoData, tpoSchema)));
           options.loading && dispatch(setProgressModelState(false));

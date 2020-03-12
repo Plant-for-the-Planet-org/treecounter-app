@@ -73,3 +73,27 @@ export function loadProject(plantProject, options = {}) {
     });
   };
 }
+
+
+export function loadProjectWeb(param, options = {}) {
+  const request = getRequest('plantProject_get', { uid: param.id });
+  return dispatch => {
+    options.loading && dispatch(setProgressModelState(true));
+    return new Promise(function (resolve, reject) {
+      request
+        .then(res => {
+          debug('========================', res.data);
+          dispatch(setSelectedPlantProjectId(parseInt(res.data.id)));
+          dispatch(mergeEntities(normalize(res.data, plantProjectSchema)));
+          dispatch(mergeEntities(normalize(res.data.tpoData, tpoSchema)));
+          options.loading && dispatch(setProgressModelState(false));
+          resolve(res.data);
+        })
+        .catch(error => {
+          debug(error);
+          options.loading && dispatch(setProgressModelState(false));
+          reject(error);
+        });
+    });
+  };
+}

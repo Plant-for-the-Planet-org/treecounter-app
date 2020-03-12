@@ -10,7 +10,7 @@ import {
 } from '../../selectors';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import PlantProjectSingle from '../../components/PlantProjects/PlantProjectSingle';
-import { loadProject } from '../../actions/loadTposAction';
+import { loadProject, loadProjectWeb } from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
@@ -19,7 +19,7 @@ import {
 const SelectedPlantProjectContainer = props => {
   React.useEffect(() => {
     if (props.match) {
-      props.loadProject(
+      props.loadProjectWeb(
         { id: props.match.params.projectSlug },
         { loading: true }
       );
@@ -65,7 +65,8 @@ const mapDispatchToProps = dispatch => {
     {
       clearPlantProject,
       selectPlantProjectAction,
-      loadProject
+      loadProject,
+      loadProjectWeb
     },
     dispatch
   );

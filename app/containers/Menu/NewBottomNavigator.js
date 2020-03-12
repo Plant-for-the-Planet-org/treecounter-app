@@ -17,7 +17,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 export default class Tabbar extends React.PureComponent {
   state = {
     isConnected: true,
-    isInternetReachable: true
   };
   checkInternet = () => {
     const unsubscribe = NetInfo.addEventListener(state => {
@@ -25,12 +24,14 @@ export default class Tabbar extends React.PureComponent {
       debug('Is connected?', state.isConnected);
       this.setState({
         isConnected: state.isConnected,
-        isInternetReachable: state.isInternetReachable
       });
     });
     unsubscribe();
   };
   componentDidMount() {
+    this.checkInternet();
+  }
+  componentDidUpdate() {
     this.checkInternet();
   }
   render() {
@@ -102,27 +103,27 @@ export default class Tabbar extends React.PureComponent {
           />
         </View>
 
-        {this.state.isConnected && this.state.isInternetReachable ? (
+        {this.state.isConnected ? (
           <SafeAreaView style={styles.container} />
         ) : (
-          <TouchableOpacity
-            onPress={() => this.checkInternet()}
-            style={{
-              width: '100%',
-              height: 48,
-              backgroundColor: '#3498db',
-              justifyContent: 'center',
-              flexDirection: 'row',
-              alignItems: 'center'
-            }}
-          >
-            <Text style={[styles.noInternetText]}>
-              {i18n.t('label.noInternet')}
-            </Text>
-            <Icon name={'refresh'} size={18} color={'white'} />
-            {/* <Text style={styles.noInternetText}>{i18n.t('label.someFunctionality')}</Text> */}
-          </TouchableOpacity>
-        )}
+            <TouchableOpacity
+              onPress={() => this.checkInternet()}
+              style={{
+                width: '100%',
+                height: 48,
+                backgroundColor: '#bdc3c7',
+                justifyContent: 'center',
+                flexDirection: 'row',
+                alignItems: 'center'
+              }}
+            >
+              <Text style={[styles.noInternetText]}>
+                {i18n.t('label.noInternet')}
+              </Text>
+              <Icon name={'refresh'} size={18} color={'#353b48'} />
+              {/* <Text style={styles.noInternetText}>{i18n.t('label.someFunctionality')}</Text> */}
+            </TouchableOpacity>
+          )}
       </>
     );
   }
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   noInternetText: {
-    color: '#fff',
+    color: '#353b48',
     fontFamily: 'OpenSans-SemiBold',
     fontSize: 12,
     alignSelf: 'center',

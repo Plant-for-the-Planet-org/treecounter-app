@@ -244,6 +244,7 @@ export default class UserHome extends Component {
   toggleIsFullMapComp = (
     singleContributionIDShouldNull /*  if true set id to null*/
   ) => {
+    console.log('toggleIsFullMapComp');
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
     this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
@@ -309,7 +310,9 @@ export default class UserHome extends Component {
     debug(userProfile);
     return (
       <View style={{ elevation: 1 }}>
-        {!isFullMapComponentModal ? <SafeAreaView /> : null}
+        {!isFullMapComponentModal ? (
+          <SafeAreaView forceinset={{ bottom: 'always' }} />
+        ) : null}
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}
@@ -528,6 +531,7 @@ export default class UserHome extends Component {
                 {i18n.t('label.my_trees')}
               </Text>
               {this.getMapComponent(this.props.userContributions, this.mapView)}
+
               <ContributionCardList
                 onPressSingleContribution={this.onPressSingleContribution}
                 contributions={this.props.userContributions}

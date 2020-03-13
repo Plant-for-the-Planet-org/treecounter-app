@@ -224,7 +224,7 @@ class PanController extends React.Component {
       }
     }
     val = val - anim._offset;
-    if (val < -(HEIGHT * 0.2)) {
+    if (val < -(HEIGHT * 0.0)) {
       return;
     }
     anim.setValue(val);

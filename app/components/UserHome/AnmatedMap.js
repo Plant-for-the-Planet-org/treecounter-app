@@ -6,7 +6,9 @@ import {
   Animated,
   Image,
   TouchableOpacity,
-  Platform
+  Platform,
+  Text,
+  SafeAreaView
 } from 'react-native';
 
 import MapView, {
@@ -17,6 +19,7 @@ import MapView, {
 import PanController from './panController';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 import { deleteContribution } from '../../actions/EditMyTree';
+import { formatDate, delimitNumbers } from '../../utils/utils';
 import { loadProject } from '../../actions/loadTposAction';
 import { currentUserProfileIdSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
@@ -24,12 +27,15 @@ import { bindActionCreators } from 'redux';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { markerImage } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { tree_1 } from '../../assets/index';
+import i18n from '../../locales/i18n';
 
 const screen = Dimensions.get('window');
-const { height: HEIGHT, width: WIDTH } = screen;
+const { height: HEIGHT, width: width } = screen;
 const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const CARD_HEIGHT = 100;
 
 const ITEM_SPACING = 10;
 const ITEM_PREVIEW = 10;
@@ -208,8 +214,8 @@ class AnimatedViews extends React.Component {
         region: {
           latitude: 37.78825,
           longitude: -122.4324,
-          latitudeDelta: 0.922,
-          longitudeDelta: 0.421
+          latitudeDelta: 0.00095,
+          longitudeDelta: 0.0095
         }
       },
       () => {
@@ -314,15 +320,8 @@ class AnimatedViews extends React.Component {
 
     if (nextProps.isFullMapComponentModal) {
       try {
-        this.mapView.animateToRegion(
-          {
-            latitude: this.state.markers[0].geoLatitude,
-            longitude: this.state.markers[0].geoLongitude,
-            latitudeDelta: 0.00095,
-            longitudeDelta: 0.0095
-          },
-          350
-        );
+        console.log('nextProps.isFullMapComponentModal');
+        this.initiateComponent();
       } catch (e) {
         console.log(e, 'Nothing');
       }
@@ -390,12 +389,16 @@ class AnimatedViews extends React.Component {
     console.log(activeMarker, 'activeMarker -------');
     return (
       <View style={styles.container}>
+        {/* <SafeAreaView forceInset={{ bottom: 'always' }} /> */}
         <MapView
           onMapReady={this.onMapReady}
           ref={map => (this.mapView = map)}
           customMapStyle={mapStyle}
           provider={PROVIDER_GOOGLE}
-          style={styles.map}
+          style={[
+            styles.map,
+            { flex: this.state.singleContributionID ? 0.5 : 1 }
+          ]}
           initialRegion={region}
         >
           {markers
@@ -424,7 +427,10 @@ class AnimatedViews extends React.Component {
           <PanController
             _getValue={this._getValue}
             style={{
-              flex: this.state.singleContributionID ? 1.5 : 0.3
+              flex: this.state.singleContributionID ? 1.5 : 0.3,
+              position: 'absolute',
+              bottom: 50,
+              backgroundColor: 'transparent'
             }}
             vertical
             horizontal={canMoveHorizontal}
@@ -444,6 +450,7 @@ class AnimatedViews extends React.Component {
                       key={marker.id}
                       style={[
                         styles.item,
+                        { backgroundColor: 'transparent' },
                         {
                           transform: [
                             { translateY: animations[i].translateY },
@@ -453,21 +460,30 @@ class AnimatedViews extends React.Component {
                         }
                       ]}
                     >
-                      <UserContributionsDetails
-                        onPressHeader={() => this.onPressHeader(marker.id)}
-                        isFromUserProfile
-                        userProfileId={this.props.userProfileId}
-                        navigation={this.props.navigation}
-                        contribution={marker}
-                        plantProjects={this.props.plantProjects}
-                        deleteContribution={this.props.deleteContribution}
-                      />
+                      {/* <UserContributionsDetails
+                      onPressHeader={() => this.onPressHeader(marker.id)}
+                      isFromUserProfile
+                      userProfileId={this.props.userProfileId}
+                      navigation={this.props.navigation}
+                      contribution={marker}
+                      plantProjects={this.props.plantProjects}
+                      deleteContribution={this.props.deleteContribution}
+                    /> */}
+                      <View style={styles.card} key={i}>
+                        <View style={styles.textContent}>
+                          <ListItem
+                            onPressHeader={this.onPressHeader}
+                            marker={marker}
+                          />
+                        </View>
+                      </View>
                     </Animated.View>
                   ))
                 : null}
             </View>
           </PanController>
         ) : null}
+        <SafeAreaView />
         {this.props.isFullMapComponentModal ? (
           <>
             <TouchableOpacity
@@ -519,26 +535,187 @@ class AnimatedViews extends React.Component {
   }
 }
 
+const ListItem = ({ marker, onPressHeader }) => {
+  let headerText = undefined;
+
+  const {
+    treeCount,
+    plantDate,
+    givee,
+    giveeSlug,
+    giver,
+    giverSlug,
+    cardType,
+    contributionType,
+    plantProjectId,
+    isGift,
+    redemptionCode,
+    redemptionDate,
+    plantProjectName,
+    mayUpdate,
+    contributionImages,
+    treeType,
+    treeSpecies,
+    treeScientificName,
+    geoLatitude,
+    geoLongitude
+  } = marker;
+
+  if (treeType === null) {
+    if (treeCount > 1) {
+      headerText =
+        delimitNumbers(treeCount) + ' ' + i18n.t('label.usr_contribution_tree');
+    } else {
+      headerText =
+        delimitNumbers(treeCount) +
+        ' ' +
+        i18n.t('label.usr_contribution_single_tree');
+    }
+  } else if (treeType !== null) {
+    if (treeCount > 1) {
+      headerText =
+        delimitNumbers(treeCount) +
+        ' ' +
+        treeType.charAt(0).toUpperCase() +
+        treeType.slice(1) +
+        ' ' +
+        i18n.t('label.usr_contribution_tree');
+    } else {
+      headerText =
+        delimitNumbers(treeCount) +
+        ' ' +
+        treeType.charAt(0).toUpperCase() +
+        treeType.slice(1) +
+        ' ' +
+        i18n.t('label.usr_contribution_single_tree');
+    }
+  }
+
+  if (cardType === 'donation') {
+    headerText = headerText + ' ' + i18n.t('label.donated');
+  }
+  if (isGift && givee) {
+    // if contribution type is planting and id Gift = true then contribution
+    // is dedicated
+    if (contributionType === 'planting') {
+      // contributionPersonPrefix = i18n.t(
+      //   'label.usr_contribution_dedicated_to'
+      // );
+    }
+    // contribution is gifted if contribution type is not planting
+    // and adds gifted to header text
+    else {
+      headerText = headerText + ' ' + i18n.t('label.gifted');
+      // contributionPersonPrefix = i18n.t('label.usr_contribution_to');
+    }
+    // sets the contribution person name
+    // contributionPerson = givee;
+
+    // sets slug if available
+    if (giveeSlug) {
+      // contributionPersonSlug = giveeSlug;
+    }
+  }
+
+  if (giver) {
+    // contributionPerson = giver;
+    headerText = headerText + ' ' + i18n.t('label.received');
+    // contributionPersonPrefix = i18n.t('label.usr_contribution_from');
+    if (giverSlug) {
+      // contributionPersonSlug = giverSlug;
+    }
+  }
+  if (redemptionCode && givee) {
+    headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
+  }
+
+  console.log(headerText, 'headerTextheaderTextheaderText');
+
+  return (
+    <TouchableOpacity
+      onPress={() => onPressHeader(marker.id)}
+      style={styles.cardContainer}
+    >
+      <View style={{ flex: 1 }}>
+        <View>
+          <Text style={styles.cardHeaderText}>{headerText}</Text>
+        </View>
+        {/* <View style={{ marginVertical: 5 }}>
+          <Text style={styles.subHeaderText}>
+            Planted by Eden Reforestation Projects
+          </Text>
+        </View> */}
+      </View>
+      <View style={styles.treeCont}>
+        <View style={styles.subCont}>
+          <Text style={styles.treeCountText}>{marker.treeCount}</Text>
+          <Image source={tree_1} style={styles.treeIcon} />
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
 AnimatedViews.propTypes = {
   provider: ProviderPropType
 };
 
 const styles = StyleSheet.create({
+  treeCountText: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 25,
+    lineHeight: 35,
+    marginHorizontal: 2,
+    color: '#89b53a'
+  },
+  treeIcon: {
+    width: 18,
+    height: 20,
+    marginHorizontal: 2
+  },
+  subCont: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  treeCount: {
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  },
+  cardHeaderText: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 18,
+    lineHeight: 24,
+    color: '#4d5153'
+  },
+  subHeaderText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    lineHeight: 24,
+    color: '#4d5153'
+  },
+  cardContainer: {
+    flex: 1,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    flexDirection: 'row'
+  },
   container: {
     flex: 1
   },
   itemContainer: {
-    backgroundColor: '#F0F0F0',
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     paddingHorizontal: ITEM_SPACING / 2 + ITEM_PREVIEW
   },
   map: {
     backgroundColor: 'transparent',
     flex: 1
+    // position: 'absolute', height: '100%'
   },
   item: {
     width: ITEM_WIDTH,
-    height: screen.height + 2 * ITEM_PREVIEW_HEIGHT,
+    // height: screen.height + 2 * ITEM_PREVIEW_HEIGHT,
     backgroundColor: 'white',
     marginHorizontal: ITEM_SPACING / 2,
     overflow: 'hidden',
@@ -576,6 +753,25 @@ const styles = StyleSheet.create({
     elevation: 6,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  card: {
+    padding: 10,
+    elevation: 2,
+    backgroundColor: '#FFF',
+    marginHorizontal: 8,
+    shadowColor: '#000',
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x: 2, y: -2 },
+    height: CARD_HEIGHT,
+    width: width * 0.9,
+    overflow: 'hidden',
+    borderWidth: 0,
+    borderColor: 'red',
+    borderRadius: 4
+  },
+  textContent: {
+    flex: 1
   }
 });
 

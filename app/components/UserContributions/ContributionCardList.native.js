@@ -4,13 +4,19 @@ import { FlatList } from 'react-native';
 import ContributionCard from './ContributionCard';
 
 const ContributionCardList = props => {
-  const { contributions, deleteContribution, showAllContributions } = props;
+  const {
+    contributions,
+    deleteContribution,
+    showAllContributions,
+    onPressSingleContribution
+  } = props;
 
   return contributions.length > 3 && showAllContributions ? (
     <FlatList
       data={contributions}
       renderItem={({ item }) => (
         <ContributionCard
+          onPressSingleContribution={onPressSingleContribution}
           contribution={item}
           deleteContribution={deleteContribution}
           key={item.id}
@@ -23,6 +29,7 @@ const ContributionCardList = props => {
       data={contributions.slice(0, 3)}
       renderItem={({ item }) => (
         <ContributionCard
+          onPressSingleContribution={onPressSingleContribution}
           contribution={item}
           deleteContribution={deleteContribution}
           key={item.id}

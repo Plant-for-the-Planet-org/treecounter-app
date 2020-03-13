@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { View, Animated, PanResponder } from 'react-native';
+import { View, Animated, PanResponder, Dimensions } from 'react-native';
+
+const { height: HEIGHT, width: WIDTH } = Dimensions.get('window');
 
 const ModePropType = PropTypes.oneOf(['decay', 'snap', 'spring-origin']);
 const OvershootPropType = PropTypes.oneOf(['spring', 'clamp']);
@@ -222,6 +224,9 @@ class PanController extends React.Component {
       }
     }
     val = val - anim._offset;
+    if (val < -(HEIGHT * 0.2)) {
+      return;
+    }
     anim.setValue(val);
   }
 

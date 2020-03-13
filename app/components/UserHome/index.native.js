@@ -54,6 +54,7 @@ export default class UserHome extends Component {
       svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
+      singleContributionID: undefined,
       isFullMapComponentModal: false,
       svgData: svgData,
       routes: [
@@ -240,7 +241,9 @@ export default class UserHome extends Component {
     }
   };
 
-  toggleIsFullMapComp = () => {
+  toggleIsFullMapComp = (
+    singleContributionIDShouldNull /*  if true set id to null*/
+  ) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
     this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
@@ -248,7 +251,10 @@ export default class UserHome extends Component {
     });
 
     this.setState({
-      isFullMapComponentModal: !this.state.isFullMapComponentModal
+      isFullMapComponentModal: !this.state.isFullMapComponentModal,
+      singleContributionID: singleContributionIDShouldNull
+        ? null
+        : this.state.singleContributionID
     });
   };
 
@@ -274,15 +280,21 @@ export default class UserHome extends Component {
         }}
       >
         <FullMapComponent
+          singleContributionID={this.state.singleContributionID}
           isFullMapComponentModal={isFullMapComponentModal}
           toggleIsFullMapComp={this.toggleIsFullMapComp}
           navigation={this.props.navigation}
           userContributions={this.props.userContributions}
         />
-
         {!isFullMapComponentModal ? fullScreenIcon : null}
       </View>
     );
+  };
+
+  onPressSingleContribution = id => {
+    this.setState({ singleContributionID: id }, () => {
+      this.toggleIsFullMapComp();
+    });
   };
 
   render() {
@@ -298,7 +310,6 @@ export default class UserHome extends Component {
     return (
       <View style={{ elevation: 1 }}>
         {!isFullMapComponentModal ? <SafeAreaView /> : null}
-
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}
@@ -518,6 +529,7 @@ export default class UserHome extends Component {
               </Text>
               {this.getMapComponent(this.props.userContributions, this.mapView)}
               <ContributionCardList
+                onPressSingleContribution={this.onPressSingleContribution}
                 contributions={this.props.userContributions}
                 deleteContribution={this.props.deleteContribution}
                 showAllContributions={showAllContributions}

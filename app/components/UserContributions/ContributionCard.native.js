@@ -301,10 +301,11 @@ class ContributionCard extends React.Component {
           <TouchableOpacity
             style={styles.singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate('contribution_details', {
-                contribution,
-                titleParam: plantProjectName || tpoName || treeSpecies
-              });
+              this.props.onPressSingleContribution(contribution.id);
+              // this.props.navigation.navigate('contribution_details', {
+              //   contribution,
+              //   titleParam: plantProjectName || tpoName || treeSpecies
+              // });
             }}
           >
             <View>
@@ -342,10 +343,11 @@ class ContributionCard extends React.Component {
           <TouchableOpacity
             style={styles.singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate('contribution_details', {
-                contribution,
-                titleParam: plantProjectName || tpoName || treeSpecies
-              });
+              this.props.onPressSingleContribution(contribution.id);
+              // this.props.navigation.navigate('contribution_details', {
+              //   contribution,
+              //   titleParam: plantProjectName || tpoName || treeSpecies
+              // });
             }}
           >
             <View>
@@ -392,10 +394,11 @@ class ContributionCard extends React.Component {
           <TouchableOpacity
             style={styles.singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate('contribution_details', {
-                contribution,
-                titleParam: plantProjectName || tpoName || treeSpecies
-              });
+              this.props.onPressSingleContribution(contribution.id);
+              // this.props.navigation.navigate('contribution_details', {
+              //   contribution,
+              //   titleParam: plantProjectName || tpoName || treeSpecies
+              // });
             }}
           >
             <View>
@@ -433,10 +436,11 @@ class ContributionCard extends React.Component {
           <TouchableOpacity
             style={styles.singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate('contribution_details', {
-                contribution,
-                titleParam: plantProjectName || tpoName || treeSpecies
-              });
+              this.props.onPressSingleContribution(contribution.id);
+              // this.props.navigation.navigate('contribution_details', {
+              //   contribution,
+              //   titleParam: plantProjectName || tpoName || treeSpecies
+              // });
             }}
           >
             <View>

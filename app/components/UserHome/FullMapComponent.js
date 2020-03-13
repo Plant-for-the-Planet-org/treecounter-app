@@ -9,11 +9,13 @@ export default ({
   isFullMapComponentModal,
   toggleIsFullMapComp,
   navigation,
-  userContributions
+  userContributions,
+  singleContributionID
 }) => {
   return (
     <View style={styles.container}>
       <AnimatedViews
+        singleContributionID={singleContributionID}
         isFullMapComponentModal={isFullMapComponentModal}
         toggleIsFullMapComp={toggleIsFullMapComp}
         navigation={navigation}

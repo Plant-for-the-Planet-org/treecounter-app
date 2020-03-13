@@ -26,7 +26,11 @@ export default class UserContributions extends React.Component {
   _handleIndexChange = index => this.setState({ index });
 
   getMapComponent = userContribution => {
-    let geoLatLong = `geoLongitude=${userContribution.geoLongitude}&geoLatitude=${userContribution.geoLatitude}&country=${userContribution.country}`;
+    let geoLatLong = `geoLongitude=${
+      userContribution.geoLongitude
+    }&geoLatitude=${userContribution.geoLatitude}&country=${
+      userContribution.country
+    }`;
     return (
       <NativeMapView
         provider={PROVIDER_GOOGLE}
@@ -158,29 +162,31 @@ export default class UserContributions extends React.Component {
           )}
 
           {/* maps the contributionPerson type and name of contributionPerson if any */}
-          {contributionPersonPrefix && contributionPerson && (
-            // <View style={styles.subHeaderTextContainer}>
-            <Text style={styles.subHeaderText}>
-              <Text>{contributionPersonPrefix}</Text>
-              <Text
-                onPress={() => {
-                  updateStaticRoute(
-                    getLocalRoute('app_treecounter'),
-                    navigation,
-                    {
-                      treeCounterId: contributionPersonSlug,
-                      titleParam: contributionPerson
-                    }
-                  );
-                }}
-                style={{ color: textColor }}
-              >
-                {' '}
-                {contributionPerson}
-              </Text>
-            </Text>
-            // </View>
-          )}
+          {contributionPersonPrefix &&
+            contributionPerson && (
+              <View style={styles.subHeaderTextContainer}>
+                <Text style={styles.subHeaderText}>
+                  {contributionPersonPrefix}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    updateStaticRoute(
+                      getLocalRoute('app_treecounter'),
+                      navigation,
+                      {
+                        treeCounterId: contributionPersonSlug,
+                        titleParam: contributionPerson
+                      }
+                    );
+                  }}
+                >
+                  <Text style={[styles.subHeaderText, { color: textColor }]}>
+                    {' '}
+                    {contributionPerson}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
 
           {/* maps the project name by whom it was planted if any */}
           {plantProjectName && (

@@ -26,7 +26,7 @@ import { markerImage } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const screen = Dimensions.get('window');
-
+const { height: HEIGHT, width: WIDTH } = screen;
 const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
@@ -187,7 +187,9 @@ class AnimatedViews extends React.Component {
         longitude: -122.6701034,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
-      }
+      },
+
+      singleContributionID: props.singleContributionID
     };
   }
 
@@ -268,10 +270,48 @@ class AnimatedViews extends React.Component {
         350
       );
     } catch (e) {
-      console.log('Nothing');
+      console.log('Nothing 2');
     }
   };
   componentWillReceiveProps(nextProps) {
+    console.log(
+      nextProps.singleContributionID,
+      'nextProps.singleContributionID -----'
+    );
+    if (this.state.singleContributionID == null) {
+      if (nextProps.singleContributionID !== this.state.singleContributionID) {
+        this.setState(
+          { singleContributionID: nextProps.singleContributionID },
+          () => {
+            try {
+              if (nextProps.singleContributionID) {
+                let activeMarker = this.state.markers.find(
+                  x => x.id == nextProps.singleContributionID
+                );
+                console.log(
+                  nextProps.singleContributionID,
+                  this.state.markers,
+                  activeMarker,
+                  '284 -----------'
+                );
+                this.mapView.animateToRegion(
+                  {
+                    latitude: activeMarker.geoLatitude,
+                    longitude: activeMarker.geoLongitude,
+                    latitudeDelta: 0.00095,
+                    longitudeDelta: 0.0095
+                  },
+                  350
+                );
+              }
+            } catch (e) {
+              console.log(e, 'Nothing 1');
+            }
+          }
+        );
+      }
+    }
+
     if (nextProps.isFullMapComponentModal) {
       try {
         this.mapView.animateToRegion(
@@ -284,10 +324,55 @@ class AnimatedViews extends React.Component {
           350
         );
       } catch (e) {
-        console.log('Nothing');
+        console.log(e, 'Nothing');
       }
     }
   }
+  // static getDerivedStateFromProps(props,state){
+  // console.log(props.singleContributionID ,state, 'getDerivedStateFromProps')
+  //   if(!state.singleContributionID){
+  //     return {
+  //       singleContributionID : props.singleContributionID
+  //     }
+  //   }
+  // }
+  // shouldcomponentupdate(nextProps, nextState){
+
+  // }
+  // componentDidMount (){
+  //   if(this.props.singleContributionID){
+  //     this.setState({
+  //       singleContributionID : this.props.singleContributionID
+  //     })
+  //   }
+  // }
+  onPressHeader = id => {
+    //
+    // Set single Contribution ID To display
+    // alert("Bao rami")
+    // this.props.toggleIsFullMapComp()
+    console.log(this.state.singleContributionID);
+    console.log(id);
+    if (id) {
+      this.setState({ singleContributionID: id });
+    } else {
+      if (this.state.singleContributionID) {
+        console.log('set to undefined yar');
+        this.setState({ singleContributionID: undefined });
+      } else {
+        this.props.toggleIsFullMapComp(true);
+        setTimeout(() => {
+          try {
+            this.mapView.fitToSuppliedMarkers(
+              this.state.markers.map(x => String(x.id))
+            );
+          } catch (e) {
+            console.log(e, 'Nothing');
+          }
+        }, 3000);
+      }
+    }
+  };
 
   render() {
     const {
@@ -298,7 +383,11 @@ class AnimatedViews extends React.Component {
       markers,
       region
     } = this.state;
-
+    let activeMarker =
+      this.state.markers !== null
+        ? this.state.markers.find(x => x.id == this.state.singleContributionID)
+        : null;
+    console.log(activeMarker, 'activeMarker -------');
     return (
       <View style={styles.container}>
         <MapView
@@ -335,7 +424,7 @@ class AnimatedViews extends React.Component {
           <PanController
             _getValue={this._getValue}
             style={{
-              flex: 0.5
+              flex: this.state.singleContributionID ? 1.5 : 0.3
             }}
             vertical
             horizontal={canMoveHorizontal}
@@ -365,6 +454,7 @@ class AnimatedViews extends React.Component {
                       ]}
                     >
                       <UserContributionsDetails
+                        onPressHeader={() => this.onPressHeader(marker.id)}
                         isFromUserProfile
                         userProfileId={this.props.userProfileId}
                         navigation={this.props.navigation}
@@ -382,12 +472,12 @@ class AnimatedViews extends React.Component {
           <>
             <TouchableOpacity
               style={styles.downArrowIcon}
-              onPress={this.props.toggleIsFullMapComp}
+              onPress={() => this.onPressHeader()}
             >
               <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={this.props.toggleIsFullMapComp}
+              onPress={() => this.onPressHeader()}
               style={styles.fullScreenExitIcon}
             >
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
@@ -399,6 +489,30 @@ class AnimatedViews extends React.Component {
               <Icon name={'my-location'} size={30} color={'#4C5153'} />
             </TouchableOpacity>
           </>
+        ) : null}
+        {activeMarker ? (
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: '100%',
+              height: HEIGHT * 0.7,
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              zindex: 10000
+            }}
+          >
+            {this.state.markers ? (
+              <UserContributionsDetails
+                isFromUserProfile
+                userProfileId={this.props.userProfileId}
+                navigation={this.props.navigation}
+                contribution={activeMarker}
+                plantProjects={this.props.plantProjects}
+                deleteContribution={this.props.deleteContribution}
+              />
+            ) : null}
+          </View>
         ) : null}
       </View>
     );

@@ -1,5 +1,13 @@
 import React from 'react';
-import { ScrollView, View, Linking, Image, Text } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Linking,
+  Image,
+  Text,
+  TouchableOpacity,
+  SafeAreaView
+} from 'react-native';
 import { BackHandler } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
@@ -254,72 +262,68 @@ class UserContributionsDetails extends React.Component {
       }
     }
     const backgroundColor = '#fff';
-
+    console.log(this.props.contribution, 'this.props.contribution');
     return (
       <ScrollView style={{ backgroundColor: { backgroundColor }, flex: 1 }}>
-        <UserContributions
-          isFromUserProfile={this.props.isFromUserProfile}
-          mayUpdate={mayUpdate}
-          treeCount={treeCount}
-          plantProjectName={plantProjectName}
-          plantProjectSlug={plantProjectSlug}
-          contributionPersonPrefix={contributionPersonPrefix}
-          contributionPerson={contributionPerson}
-          contributionPersonSlug={contributionPersonSlug}
-          navigation={this.props.navigation}
-          updateStaticRoute={updateStaticRoute}
-          treeClassification={treeClassification}
-          plantedDate={plantedDate}
-          showDelete={contributionType == 'planting'}
-          headerText={headerText}
-          plantProjectId={plantProjectId}
-          onPlantProjectClick={this.onPlantProjectClick}
-          onClickDelete={() => {
-            this.props.deleteContribution(
-              this.props.contribution.id,
-              this.props.navigation
-            );
-            this.props.navigation.goBack();
-          }}
-          onClickEdit={() => {
-            this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-              selectedTreeId: this.props.contribution.id,
-              contribution: this.props.contribution
-            });
-          }}
-          onClickClose={() => {
-            this.props.navigation.goBack();
-          }}
-          contribution={this.props.contribution}
-        />
+        <TouchableOpacity onPress={this.props.onPressHeader}>
+          <UserContributions
+            isFromUserProfile={this.props.isFromUserProfile}
+            mayUpdate={mayUpdate}
+            treeCount={treeCount}
+            plantProjectName={plantProjectName}
+            plantProjectSlug={plantProjectSlug}
+            contributionPersonPrefix={contributionPersonPrefix}
+            contributionPerson={contributionPerson}
+            contributionPersonSlug={contributionPersonSlug}
+            navigation={this.props.navigation}
+            updateStaticRoute={updateStaticRoute}
+            treeClassification={treeClassification}
+            plantedDate={plantedDate}
+            showDelete={contributionType == 'planting'}
+            headerText={headerText}
+            plantProjectId={plantProjectId}
+            onClickDelete={() => {
+              this.props.deleteContribution(
+                this.props.contribution.id,
+                this.props.navigation
+              );
+              this.props.navigation.goBack();
+            }}
+            onClickEdit={() => {
+              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
+                selectedTreeId: this.props.contribution.id,
+                contribution: this.props.contribution
+              });
+            }}
+            onClickClose={() => {
+              this.props.navigation.goBack();
+            }}
+            contribution={this.props.contribution}
+          />
+        </TouchableOpacity>
 
         {/* displays image carousel if any image or video is available */}
-        {(videoUrl ||
-          (contributionOrPlantedImages &&
-            contributionOrPlantedImages.length > 0)) && (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              marginVertical: 30
-            }}
-          >
-            {/* {debug('\x1b[46m \x1b[30m video', videoUrl)} */}
-            {videoUrl ? <VideoContainer url={videoUrl} /> : null}
-            {/* TODO Add thumbnail for video */}
-            {contributionOrPlantedImages &&
-              contributionOrPlantedImages.length > 0 && (
-                <PlantProjectImageCarousel
-                  resizeMode={'cover'}
-                  images={contributionOrPlantedImages}
-                  aspectRatio={16 / 9}
-                  videoUrl={videoUrl}
-                />
-              )}
-          </ScrollView>
-        )}
+        {contributionOrPlantedImages &&
+          contributionOrPlantedImages.length > 0 && (
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                marginVertical: 30
+              }}
+            >
+              {videoUrl ? <VideoContainer url={videoUrl} /> : null}
+              {/* TODO Add thumbnail for video */}
+              <PlantProjectImageCarousel
+                resizeMode={'cover'}
+                images={contributionOrPlantedImages}
+                aspectRatio={16 / 9}
+                videoUrl={videoUrl}
+              />
+            </ScrollView>
+          )}
 
         {/* displays error message if geoLatitude and geoLongitude are same */}
         {hasGeoLocationError ? (

@@ -25,6 +25,10 @@ jobs:
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_prod"' >>  $ENV_VARS
               echo 'export SERVER_URL="www.trilliontreecampaign.org"' >>  $ENV_VARS
+            elif [[ "${CIRCLE_BRANCH}" == "develop" ]]
+            then
+              echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_development"' >>  $ENV_VARS
+              echo 'export SERVER_URL="development.trilliontreecampaign.org"' >>  $ENV_VARS
             elif [[ "${CIRCLE_BRANCH}" == "staging" ]] || [[ "${CIRCLE_BRANCH}" == "test" ]]
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_${CIRCLE_BRANCH}"' >>  $ENV_VARS
@@ -246,6 +250,7 @@ workflows:
           filters:
             branches:
               only:
+                - develop
                 - master
                 - test
                 - staging
@@ -264,7 +269,6 @@ workflows:
           filters:
             branches:
               only:
-                - develop
                 - /^feature\/.*/
                 - /^hotfix\/.*/
                 - /^release\/.*/

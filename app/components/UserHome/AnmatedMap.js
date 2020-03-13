@@ -362,9 +362,9 @@ class AnimatedViews extends React.Component {
         this.props.toggleIsFullMapComp(true);
         setTimeout(() => {
           try {
-            this.mapView.fitToSuppliedMarkers(
-              this.state.markers.map(x => String(x.id))
-            );
+            // this.mapView.fitToSuppliedMarkers(
+            //   this.state.markers.map(x => String(x.id))
+            // );
           } catch (e) {
             console.log(e, 'Nothing');
           }

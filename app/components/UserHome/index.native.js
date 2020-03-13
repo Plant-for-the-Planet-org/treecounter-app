@@ -298,7 +298,7 @@ export default class UserHome extends Component {
     });
   };
 
-  render() {
+  getWholeComponent() {
     const { userProfile, navigation } = this.props;
     const {
       svgData,
@@ -310,9 +310,7 @@ export default class UserHome extends Component {
     debug(userProfile);
     return (
       <View style={{ elevation: 1 }}>
-        {!isFullMapComponentModal ? (
-          <SafeAreaView forceinset={{ bottom: 'always' }} />
-        ) : null}
+        {!isFullMapComponentModal ? <SafeAreaView /> : null}
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}
@@ -556,6 +554,16 @@ export default class UserHome extends Component {
         </ScrollView>
       </View>
     );
+  }
+
+  render() {
+    return this.getWholeComponent();
+
+    // !this.state.isFullMapComponentModal ?
+    //   (<SafeAreaView>
+    //     {this.getWholeComponent()}
+    //   </SafeAreaView>)
+    //   : <View>{this.getWholeComponent()}</View>
   }
 }
 

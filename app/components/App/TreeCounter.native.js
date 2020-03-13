@@ -4,7 +4,6 @@
  */
 
 import React, { Component } from 'react';
-import { View } from 'react-native';
 //TODO import this first to avoid any init issue of i18n
 import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNavigatorContainer';
 import { connect } from 'react-redux';
@@ -24,12 +23,12 @@ class App extends Component {
   render() {
     const backgroundColor = 'transparent';
     return (
-      <View
+      <SafeAreaView
         forceInset={{ top: 'never', bottom: 'always' }}
         style={{ flex: 1, backgroundColor: backgroundColor }}
       >
         <AppDrawerNavigatorContainer uriPrefix={'weplant://'} />
-      </View>
+      </SafeAreaView>
     );
   }
 }

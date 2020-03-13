@@ -13,27 +13,44 @@ import i18n from '../../locales/i18n';
 import NetInfo from '@react-native-community/netinfo';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+let unsubscribe = null;
+
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Tabbar extends React.PureComponent {
   state = {
     isConnected: true,
   };
-  checkInternet = () => {
-    const unsubscribe = NetInfo.addEventListener(state => {
+
+  checkInternet() {
+    NetInfo.fetch().then(state => {
       debug('Connection type', state.type);
       debug('Is connected?', state.isConnected);
       this.setState({
         isConnected: state.isConnected,
       });
     });
-    unsubscribe();
   };
+  subscribeCheckInternet() {
+    unsubscribe = NetInfo.addEventListener(state => {
+      debug('Connection type', state.type);
+      debug('Is connected?', state.isConnected);
+      this.setState({
+        isConnected: state.isConnected,
+      });
+    });
+  };
+  unsubscribeCheckInternet() {
+    if (unsubscribe) {
+      unsubscribe();
+    }
+  }
   componentDidMount() {
-    this.checkInternet();
+    this.subscribeCheckInternet();
   }
-  componentDidUpdate() {
-    this.checkInternet();
+  componentWillUnmount() {
+    this.unsubscribeCheckInternet();
   }
+
   render() {
     const { width } = Dimensions.get('window');
     const height = 64;

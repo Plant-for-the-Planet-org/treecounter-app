@@ -29,7 +29,7 @@ export default class Tabbar extends React.PureComponent {
         isConnected: state.isConnected,
       });
     });
-  };
+  }
   subscribeCheckInternet() {
     unsubscribe = NetInfo.addEventListener(state => {
       debug('Connection type', state.type);
@@ -38,7 +38,7 @@ export default class Tabbar extends React.PureComponent {
         isConnected: state.isConnected,
       });
     });
-  };
+  }
   unsubscribeCheckInternet() {
     if (unsubscribe) {
       unsubscribe();

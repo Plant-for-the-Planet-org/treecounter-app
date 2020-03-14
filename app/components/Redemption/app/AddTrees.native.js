@@ -34,7 +34,7 @@ export default function AddTrees(props) {
             seterrorText(true);
             setloadButton(false);
           } else {
-            updateRoute('app_myTrees', props.navigation);
+            updateRoute('app_userHome', props.navigation);
             setloadButton(false);
           }
         });
@@ -63,10 +63,10 @@ export default function AddTrees(props) {
               {i18n.t('label.already_redeemed_trees')}
             </Text>
           ) : (
-            <Text style={styles.subheaderTrees}>
-              {i18n.t('label.trees_in_code')}
-            </Text>
-          )}
+              <Text style={styles.subheaderTrees}>
+                {i18n.t('label.trees_in_code')}
+              </Text>
+            )}
         </View>
         <ScrollView>
           {/* Single Redeem Object */}
@@ -113,10 +113,10 @@ export default function AddTrees(props) {
             {loadButton ? (
               <ActivityIndicator size="large" color={white} />
             ) : (
-              <Text style={buttonStyles.actionButtonText}>
-                {i18n.t('label.add_my_trees')}
-              </Text>
-            )}
+                <Text style={buttonStyles.actionButtonText}>
+                  {i18n.t('label.add_my_trees')}
+                </Text>
+              )}
           </View>
         </TouchableOpacity>
       </View>

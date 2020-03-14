@@ -1,3 +1,7 @@
 {
-  "welcome_scrn_3_already_have_an_account": "¿Ya tienes una cuenta?"
+  "welcome_scrn_3_heading": "Un contador de árbol\npara tus árboles",
+  "welcome_scrn_3_sub_heading": "Has pensado alguna vez\ncomenzar a crear tu propio bosque\npara salvar algunos árboles?",
+  "welcome_scrn_3_continue": "Continuar",
+  "welcome_scrn_3_already_have_an_account": "¿Ya tienes una cuenta?",
+  "welcome_scrn_3_sign_in": "Registrarse"
 }

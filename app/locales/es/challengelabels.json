@@ -1,1 +1,23 @@
-{ }
+{
+  "challenge_edit_description": "¿Quién plantará el bosque más grande? ¡Desafía a tus amigos y compañeros de trabajo o participa en alguna de las competiciones en curso! ",
+  "from": "de",
+  "indefinite": "Indefinido",
+  "to": "para",
+  "accept": "Aceptar",
+  "reject": "Rechazar",
+  "sent": "Enviado",
+  "accepted": "Aceptado",
+  "declined": "Rehusar",
+  "challenge_accept": "Has aceptado el desafío.",
+  "challenge_deny": "Has rechazado el reto",
+  "challenge_error": "El objetivo actual de {{user}} es {{target}} árboles. Por favor ingrese un número máyor.",
+  "search_user": "Buscar un usuario ...",
+  "email": "Correo electrónico",
+  "year": "Año",
+  "challenge_create_successfully": "Desafío creado exitosamente",
+  "please_select_user": "Por favor seleccione usuario",
+  "please_select_year": "Por favor seleccione el año",
+  "could_not_add_user": "No se pudo agregar usuario",
+  "name_is_required": "Se requiere el nombre",
+  "goal_is_required": "Se requiere un desafío"
+}

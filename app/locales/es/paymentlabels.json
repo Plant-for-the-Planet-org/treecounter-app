@@ -1,11 +1,24 @@
 {
+  "amount": "Importe de la donación",
   "creditCard": "Tarjeta de crédito",
+  "confirm": "Confirmo que pagaré la cantidad de {{amount}}{{currency}} a la siguiente cuenta.",
   "bank_transfer": "Transferencia bancaria",
   "pay_via": "Pagar mediante transferencia bancaria",
-  "pay": "Paga",
-  "stripe_sepa_des1": "Al proporcionar su IBAN y confirmar este pago, usted está autorizando",
-  "stripe_sepa_des2": "y Stripe, nuestro proveedor de servicios de pago, para enviar instrucciones a su banco para debitar su cuenta de acuerdo con esas instrucciones. Tiene derecho a un reembolso de su banco en los términos y condiciones de su acuerdo con su banco. Se debe reclamar un reembolso dentro de las 8 semanas a partir de la fecha en que se debitó su cuenta.",
+  "pay": "Pagar",
+  "choose": "Escoger",
+  "card": "Tarjeta",
+  "last4": "Últimos 4 dígitos",
+  "save_for_later": "Añade este método de pago a mi cuenta para futuras donaciones",
+  "sepa_debit": "SEPA Débito directo",
+  "stripe_sepa_des1": "Al proporcionar tu IBAN y confirmar este pago, estás autorizando",
+  "stripe_sepa_des2": "y Stripe, nuestro proveedor de servicios de pago, para que envíe instrucciones a tu banco para que lo cargue en tu cuenta de acuerdo con esas instrucciones. Tienes derecho al reembolso según los términos y condiciones del acuerdo con su banco. La devolución debe reclamarse en un plazo de 8 semanas a partir de la fecha en que se efectuó el cargo en tu cuenta.",
   "pay_via_sepa": "Pague con SEPA",
   "contact_firstname": "Nombre",
-  "contact_lastname": "Apellido"
+  "contact_lastname": "Apellidos",
+  "donate_to": "Donaciones a {{name}}",
+  "payment_failed": "Pago rechazado",
+  "go_back_to_app": "Volver a la aplicación Plant-for-the-Planet",
+  "please_confirm": "Por favor confirmar",
+  "please_enter_card_details": "Por favor ingresa los datos correctos de la tarjeta",
+  "please_enter_iban": "Por favor ingresa el IBAN correcto"
 }

@@ -49,6 +49,6 @@
   "featured_currencies": "Featured Currencies",
   "all_currencies": "All Currencies",
   "share": "Share",
-  "noInternet": "Cannot connect to internet. You maybe offline",
+  "noInternet": "You maybe offline",
   "someFunctionality": "Some functionalities may be unavailable offline"
 }

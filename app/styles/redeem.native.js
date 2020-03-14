@@ -4,7 +4,7 @@ const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 export default EStyleSheet.create({
   safeAreaViewContainer: { flex: 1, backgroundColor: 'white' },
-  mainContainer: { flex: 1 },
+  mainContainer: { flex: 1, backgroundColor: 'white' },
   loadingContainer: {
     flex: 1,
     alignItems: 'center'

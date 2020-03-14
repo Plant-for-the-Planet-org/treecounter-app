@@ -12,7 +12,6 @@ import { flatListContainerStyle } from '../../../styles/selectplantproject/selec
 import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
 import LoadingIndicator from '../../Common/LoadingIndicator.native';
 
-import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
 class ListViewProjects extends PureComponent {
   constructor(props) {
     super(props);
@@ -136,8 +135,8 @@ class ListViewProjects extends PureComponent {
             ])}
           />
         ) : (
-          <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
-        )}
+            <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
+          )}
       </View>
     );
   }

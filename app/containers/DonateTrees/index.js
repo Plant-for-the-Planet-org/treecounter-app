@@ -33,7 +33,7 @@ import DonateTrees from '../../components/DonateTrees';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
 import { postDirectRequest } from '../../utils/api';
 
-class DonationTreesContainer extends PureComponent {
+class DonationTreesContainer extends Component {
   static navigationOptions = {
     header: null
   };

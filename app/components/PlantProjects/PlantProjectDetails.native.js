@@ -19,7 +19,6 @@ import styles from '../../styles/selectplantproject/plant-details.native';
 import PlantProjectImageCarousel from './PlantProjectImageCarousel';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import AccordionContactInfo from './HelperComponents/AccordionContactInfo.native';
-import { readmoreDown, readmoreUp } from '../../assets';
 
 const cleanUrl = url => {
   url = (url || '').trim();
@@ -103,9 +102,9 @@ const PlantProjectDetails = ({
           {readMore
             ? description
             : description
-            ? description.substring(0, 250) +
+              ? description.substring(0, 250) +
               (description.length > 250 ? '...' : '')
-            : ''}
+              : ''}
         </Text>
         {description && description.length > 250 ? (
           <TouchableOpacity onPress={() => setReadMore(!readMore)}>
@@ -123,19 +122,19 @@ const PlantProjectDetails = ({
                 </Text>
               </View>
             ) : (
-              <View style={styles.readmoreButtonView}>
-                <View style={{ height: 8 }}>
-                  <Image
-                    source={readmoreDown}
-                    style={{ height: 8, width: 15 }}
-                    resizeMode={'contain'}
-                  />
+                <View style={styles.readmoreButtonView}>
+                  <View style={{ height: 8 }}>
+                    <Image
+                      source={readmoreDown}
+                      style={{ height: 8, width: 15 }}
+                      resizeMode={'contain'}
+                    />
+                  </View>
+                  <Text style={styles.readMoreText}>
+                    {i18n.t('label.read_more')}
+                  </Text>
                 </View>
-                <Text style={styles.readMoreText}>
-                  {i18n.t('label.read_more')}
-                </Text>
-              </View>
-            )}
+              )}
           </TouchableOpacity>
         ) : null}
         {/* <Text style={styles.descriptionText}>

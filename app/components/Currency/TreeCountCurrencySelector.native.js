@@ -116,33 +116,33 @@ class TreeCountCurrencySelector extends React.PureComponent {
               </View>
             ) : this.props.supportTreecounter && // Check whether context is Support Participant
               this.props.supportTreecounter.displayName ? (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  width: '100%'
-                }}
-              >
-                <Text numberOfLines={1} ellipsizeMode={'tail'}>
-                  <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
-                  <Text style={styles.selectedProjectCol}>
-                    {' '}
-                    {i18n.t('label.trees')}
-                  </Text>{' '}
-                  {i18n.t('label.support_to', {
-                    name: this.props.supportTreecounter.displayName
-                  })}
-                </Text>
-                {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
-              </View>
-            ) : (
-              <View style={styles.selectedProjectRow}>
-                <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
-                <Text style={styles.selectedProjectCol}>
-                  {i18n.t('label.trees')}
-                </Text>
-              </View>
-            )}
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      width: '100%'
+                    }}
+                  >
+                    <Text numberOfLines={1} ellipsizeMode={'tail'}>
+                      <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
+                      <Text style={styles.selectedProjectCol}>
+                        {' '}
+                        {i18n.t('label.trees')}
+                      </Text>{' '}
+                      {i18n.t('label.support_to', {
+                        name: this.props.supportTreecounter.displayName
+                      })}
+                    </Text>
+                    {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
+                  </View>
+                ) : (
+                  <View style={styles.selectedProjectRow}>
+                    <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
+                    <Text style={styles.selectedProjectCol}>
+                      {i18n.t('label.trees')}
+                    </Text>
+                  </View>
+                )}
 
             <View style={styles.selectedProjectRow}>
               <Text>

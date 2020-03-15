@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
 
 export default EStyleSheet.create({
   // Pledge Tab View Styles
@@ -357,5 +358,49 @@ export default EStyleSheet.create({
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153'
+  },
+  imageContainer: {
+    width: '100%',
+    height: Dimensions.get('window').height * 0.4,
+    position: 'relative'
+  },
+  closeContainer: {
+    width: 30,
+    height: 30,
+    backgroundColor: '#ffffff',
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  closeIcon: {
+    position: 'absolute',
+    top: 30,
+    left: 14
+  },
+  treeImage: {
+    width: '100%',
+    height: Dimensions.get('window').height * 0.4
+  },
+  thankYouContainer: {
+    padding: 20
+  },
+  thankyouText: {
+    color: '#4D5153',
+    fontFamily: 'OpenSans-ExtraBold',
+    fontSize: 27
+  },
+  thankyouMessage: {
+    color: '#4D5153',
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 18,
+    marginTop: 4
+  },
+  thankyouButton: {
+    position: 'absolute',
+    bottom: 14,
+    width: '86%'
+  },
+  donateThankYouContainer: {
+    flex: 1
   }
 });

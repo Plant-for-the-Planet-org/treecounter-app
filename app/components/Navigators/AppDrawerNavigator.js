@@ -64,6 +64,7 @@ import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard
 import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
+import DonateThankYou from '../DonateTrees/DonateThankyou.native';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -388,6 +389,10 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['tpo_LeaderBoard']: {
         screen: tpoLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['donate_thankyou']: {
+        screen: DonateThankYou,
         navigationOptions: { header: null }
       }
     },

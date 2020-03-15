@@ -24,5 +24,6 @@
   "try_again": "Try again",
   "return_home": "Return Home",
   "donate_trees_text": "Trees",
-  "custom_tree": "Custom Trees"
+  "custom_tree": "Custom Trees",
+  "thankyou_message": "Your {{treeCount}} {{treePossessive}} will be planted by {{plantedBy}} as soon as possible."
 }

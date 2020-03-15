@@ -1,8 +1,14 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { closeIcon } from '../../assets';
 import styles from './../../styles/donation/donation.native';
-import { donateThankyou } from '../../assets';
+import {
+  donateThankyou,
+  deciduousTree,
+  planetLogo,
+  sendGreen,
+  downloadGreen
+} from '../../assets';
 import PrimaryButton from '../Common/Button/PrimaryButton.native';
 import i18n from '../../locales/i18n';
 
@@ -12,11 +18,14 @@ export default function DonateThankYou(props) {
   let plantedBy = getParam('plantedBy');
   let treePossessive = treeCount > 1 ? 'trees' : 'tree';
   return (
-    <View style={styles.donateThankYouContainer}>
+    <ScrollView style={styles.donateThankYouContainer}>
       {/* ===== Image starts ===== */}
-      <View style={[styles.imageContainer]}>
+      <View style={[styles.imageContainer, styles.height36, styles.height20]}>
         {/* close icon - goes back to previous screen */}
-        <Image source={donateThankyou} style={styles.treeImage} />
+        <Image
+          source={donateThankyou}
+          style={[styles.treeImage, styles.height36, styles.height20]}
+        />
         <TouchableOpacity
           onPress={() => props.navigation.goBack()}
           style={styles.closeIcon}
@@ -38,9 +47,51 @@ export default function DonateThankYou(props) {
           })}
         </Text>
       </View>
-      <PrimaryButton onClick={() => {}} buttonStyle={styles.thankyouButton}>
+
+      {/* ========= Share container STARTS ========== */}
+      <View style={styles.shareDonationContainer}>
+        <Image source={deciduousTree} style={styles.shareImageTree} />
+        <View style={styles.pfpLogoContainer}>
+          <Image source={planetLogo} style={styles.pfpLogo} />
+        </View>
+        <Text style={styles.shareTextMessage}>
+          Felix Finkbeiner donated 50 Trees to Eden Reforestation Kenya
+        </Text>
+        <Text style={styles.shareTextCaption}>Plant trees at weplant.app</Text>
+
+        {/* ========== Floating Share button group STARTS ========= */}
+        <View style={styles.shareButtonGroup}>
+          <TouchableOpacity onPress={() => {}} style={{}}>
+            <View
+              style={[
+                {
+                  borderRadius: 100,
+                  padding: 14,
+                  backgroundColor: '#ffffff'
+                },
+                styles.borderGreen
+              ]}
+            >
+              <Image
+                style={{ width: 14, height: 14, padding: 10 }}
+                source={downloadGreen}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}} style={{}}>
+            <View style={[styles.buttonContainer, styles.borderGreen]}>
+              <Image style={{ width: 24, height: 24 }} source={sendGreen} />
+              <Text style={styles.borderedButtonText}>Share</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        {/* ========== Floating Share button group ENDS ========= */}
+      </View>
+      {/* ========= Share container ENDS ========== */}
+
+      {/* <PrimaryButton onClick={() => {}} buttonStyle={styles.thankyouButton}>
         {i18n.t('label.donation_detail')}
-      </PrimaryButton>
-    </View>
+      </PrimaryButton> */}
+    </ScrollView>
   );
 }

@@ -178,6 +178,7 @@ import grayShareIcon from './images/icons/gray_share_icon.png';
 import closeIcon from './images/icons/close.png';
 import downloadGreen from './images/icons/download_green.png';
 import sendWhite from './images/icons/send_white.png';
+import sendGreen from './images/icons/send_green.png';
 import FAQsCover from './images/FAQs.png';
 import donateIcon from './images/icons/donateIcon.png';
 import donateIconGreen from './images/icons/donateIconGreen.png';
@@ -219,6 +220,7 @@ import paypalLogo from './images/icons/paypalLogo.png';
 import creditCard from './images/icons/creditCard.png';
 import creditCardBack from './images/icons/creditCardBack.png';
 import donateThankyou from './images/DonateThankyou.png';
+import deciduousTree from './images/deciduous-tree.png';
 export {
   treelogo,
   germany,
@@ -397,6 +399,7 @@ export {
   closeIcon,
   downloadGreen,
   sendWhite,
+  sendGreen,
   FAQsCover,
   deleteOutlineWhite,
   share,
@@ -435,5 +438,6 @@ export {
   hills,
   mountains,
   spruce,
-  donateThankyou
+  donateThankyou,
+  deciduousTree
 };

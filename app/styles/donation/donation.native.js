@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
 
 export default EStyleSheet.create({
   // Pledge Tab View Styles
@@ -357,5 +358,128 @@ export default EStyleSheet.create({
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153'
+  },
+  imageContainer: {
+    width: '100%',
+    position: 'relative'
+  },
+  height40: {
+    height: Dimensions.get('window').height * 0.36
+  },
+  height20: {
+    height: Dimensions.get('window').height * 0.2
+  },
+  closeContainer: {
+    width: 30,
+    height: 30,
+    backgroundColor: '#ffffff',
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  closeIcon: {
+    position: 'absolute',
+    top: 30,
+    left: 14
+  },
+  treeImage: {
+    width: '100%'
+  },
+  thankYouContainer: {
+    padding: 20
+  },
+  thankyouText: {
+    color: '#4D5153',
+    fontFamily: 'OpenSans-ExtraBold',
+    fontSize: 27
+  },
+  thankyouMessage: {
+    color: '#4D5153',
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 18,
+    marginTop: 4
+  },
+  thankyouButton: {
+    position: 'absolute',
+    bottom: 14,
+    width: '86%'
+  },
+  donateThankYouContainer: {
+    flex: 1,
+    backgroundColor: '#ffffff'
+  },
+  shareDonationContainer: {
+    backgroundColor: '#F2F2F7',
+    borderColor: '#F2F2F7',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginHorizontal: 20,
+    marginTop: 24,
+    marginBottom: 60,
+    paddingHorizontal: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 40,
+    paddingBottom: 26,
+    position: 'relative'
+  },
+  shareImageTree: {
+    width: 120,
+    height: 120,
+    marginBottom: 36
+  },
+  shareTextMessage: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 18,
+    lineHeight: 40,
+    textAlign: 'center'
+  },
+  shareTextCaption: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 10,
+    lineHeight: 40,
+    textAlign: 'center'
+  },
+  pfpLogoContainer: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    width: 54,
+    height: 54,
+    padding: 6,
+    backgroundColor: '#ffffff',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#ffffff'
+  },
+  pfpLogo: {
+    width: '100%',
+    height: '100%'
+  },
+  shareButtonGroup: {
+    flexDirection: 'row',
+    width: '70%',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: -26
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    borderRadius: 100,
+    paddingVertical: 14,
+    paddingHorizontal: 22,
+    alignItems: 'center',
+    backgroundColor: '#ffffff'
+  },
+  borderGreen: {
+    borderWidth: 1,
+    borderColor: '#89B53A'
+  },
+  borderedButtonText: {
+    fontFamily: 'OpenSans-SemiBold',
+    color: '#89B53A',
+    fontSize: 16,
+    marginLeft: 10
   }
 });

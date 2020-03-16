@@ -25,6 +25,7 @@ import styles from './../../styles/donation/donation.native';
 import i18n from '../../locales/i18n';
 import CreditCardForm from './CreditCardForm';
 import SepaAccountForm from './SepaAccountForm';
+import { updateStaticRoute } from './../../helpers/routerHelper';
 
 export default class DonationStep3 extends Component {
   state = {
@@ -74,7 +75,7 @@ export default class DonationStep3 extends Component {
           contentContainerStyle={styles.pageScrollView}
           keyboardDismissMode="on-drag"
           resetScrollToCoords={{ x: 0, y: 0 }}
-          scrollEnabled={true}
+          scrollEnabled
         >
           <View style={styles.pageView}>
             <Text style={styles.pageTitle}>Payment</Text>
@@ -194,10 +195,10 @@ export default class DonationStep3 extends Component {
             </View>
             <TouchableOpacity
               onPress={() => {
-                updateStaticRoute(
-                  getLocalRoute('app_donate_detail2'),
-                  this.props.navigation
-                );
+                updateStaticRoute('donate_thankyou', this.props.navigation, {
+                  treeCount: 4,
+                  plantedBy: 'Eden Reforestation Project'
+                });
               }}
             >
               <View

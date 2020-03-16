@@ -63,8 +63,8 @@ export default EStyleSheet.create({
     marginTop: 8
   },
   giftImage: {
-    maxWidth: 180,
-    maxHeight: 206.77,
+    maxWidth: 246,
+    maxHeight: 158,
     alignSelf: 'center',
     marginTop: 24
   },

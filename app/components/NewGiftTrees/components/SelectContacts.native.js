@@ -96,16 +96,22 @@ const SelectContacts = (props) => {
             />
             <ScrollView style={{ paddingHorizontal: 20, backgroundColor: 'white', marginTop: Platform.OS === 'ios' ? 110 : 70 }}>
 
-                <Text style={{
-                    fontFamily: "OpenSans-Bold",
-                    fontSize: 27,
-                    lineHeight: 40,
-                    letterSpacing: 0,
-                    textAlign: "left",
-                    color: '#4d5153'
-                }}>{i18n.t('label.gift_trees')}</Text>
-                <Text style={styles.nGiftDesc}>{i18n.t('label.gift_tree_description_new')}</Text>
-                <Text style={styles.selectContactTitle}>Select Contacts</Text>
+                {!isSearch ? (
+                    <>
+                        <Text style={{
+                            fontFamily: "OpenSans-Bold",
+                            fontSize: 27,
+                            lineHeight: 40,
+                            letterSpacing: 0,
+                            textAlign: "left",
+                            color: '#4d5153'
+                        }}>{i18n.t('label.gift_trees')}</Text>
+
+                        <Text style={styles.nGiftDesc}>{i18n.t('label.gift_tree_description_new')}</Text>
+                    </>
+                ) : null}
+
+                <Text style={styles.selectContactTitle}>Select Contact</Text>
 
                 <FlatList
                     data={contacts}

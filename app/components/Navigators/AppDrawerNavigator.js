@@ -66,6 +66,7 @@ import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
 import SelectContacts from '../NewGiftTrees/components/SelectContacts.native';
 import GiftEmail from '../NewGiftTrees/components/GiftEmail.native';
+import DonateThankYou from '../DonateTrees/DonateThankyou.native';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -400,6 +401,10 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       ['tpo_LeaderBoard']: {
         screen: tpoLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['donate_thankyou']: {
+        screen: DonateThankYou,
         navigationOptions: { header: null }
       }
     },

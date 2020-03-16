@@ -91,7 +91,7 @@ class PanController extends React.Component {
           horizontal && !vertical ? 'x' : vertical && !horizontal ? 'y' : null;
       },
 
-      onPanResponderMove: (_, { dx, dy, x0, y0 }) => {
+      onPanResponderMove: (arg, { dx, dy, x0, y0 }) => {
         let {
           panX,
           panY,
@@ -119,7 +119,7 @@ class PanController extends React.Component {
         const dir = this.direction;
 
         if (this.props.onPanResponderMove) {
-          this.props.onPanResponderMove(_, { dx, dy, x0, y0 });
+          this.props.onPanResponderMove(arg, { dx, dy, x0, y0 });
         }
 
         if (horizontal && (!lockDirection || dir === 'x')) {
@@ -135,7 +135,7 @@ class PanController extends React.Component {
         }
       },
 
-      onPanResponderRelease: (_, { vx, vy, dx, dy }) => {
+      onPanResponderRelease: (arg, { vx, vy, dx, dy }) => {
         let {
           panX,
           panY,

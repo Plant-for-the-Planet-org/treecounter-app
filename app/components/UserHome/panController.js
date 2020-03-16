@@ -58,9 +58,9 @@ class PanController extends React.Component {
   //     };
   // },
 
-  _responder = null;
-  _listener = null;
-  _direction = null;
+  responder = null;
+  listener = null;
+  direction = null;
 
   constructor(props) {
     super(props);
@@ -75,7 +75,7 @@ class PanController extends React.Component {
   }
 
   componentWillMount() {
-    this._responder = PanResponder.create({
+    this.responder = PanResponder.create({
       onStartShouldSetPanResponder: this.props.onStartShouldSetPanResponder,
       onMoveShouldSetPanResponder: this.props.onMoveShouldSetPanResponder,
       onPanResponderGrant: (...args) => {
@@ -87,7 +87,7 @@ class PanController extends React.Component {
         this.handleResponderGrant(panX, xMode);
         //this.handleResponderGrant(panY, yMode);
 
-        this._direction =
+        this.direction =
           horizontal && !vertical ? 'x' : vertical && !horizontal ? 'y' : null;
       },
 
@@ -105,18 +105,18 @@ class PanController extends React.Component {
           directionLockDistance
         } = this.props;
 
-        if (!this._direction) {
+        if (!this.direction) {
           const dx2 = dx * dx;
           const dy2 = dy * dy;
           if (dx2 + dy2 > directionLockDistance) {
-            this._direction = dx2 > dy2 ? 'x' : 'y';
+            this.direction = dx2 > dy2 ? 'x' : 'y';
             if (this.props.onDirectionChange) {
-              this.props.onDirectionChange(this._direction, { dx, dy, x0, y0 });
+              this.props.onDirectionChange(this.direction, { dx, dy, x0, y0 });
             }
           }
         }
 
-        const dir = this._direction;
+        const dir = this.direction;
 
         if (this.props.onPanResponderMove) {
           this.props.onPanResponderMove(_, { dx, dy, x0, y0 });
@@ -154,7 +154,7 @@ class PanController extends React.Component {
 
         let cancel = false;
 
-        const dir = this._direction;
+        const dir = this.direction;
 
         if (this.props.onRelease) {
           cancel = this.props.onRelease({ vx, vy, dx, dy }) === false;
@@ -194,7 +194,7 @@ class PanController extends React.Component {
             );
         }
 
-        this._direction =
+        this.direction =
           horizontal && !vertical ? 'x' : vertical && !horizontal ? 'y' : null;
       }
     });
@@ -318,12 +318,12 @@ class PanController extends React.Component {
       ...this.props.momentumDecayConfig,
       velocity
     }).start(() => {
-      anim.removeListener(this._listener);
+      anim.removeListener(this.listener);
     });
 
-    this._listener = anim.addListener(({ value }) => {
+    this.listener = anim.addListener(({ value }) => {
       if (value < min) {
-        anim.removeListener(this._listener);
+        anim.removeListener(this.listener);
         if (this.props.onOvershoot) {
           this.props.onOvershoot(); // TODO: what args should we pass to this
         }
@@ -340,7 +340,7 @@ class PanController extends React.Component {
             break;
         }
       } else if (value > max) {
-        anim.removeListener(this._listener);
+        anim.removeListener(this.listener);
         if (this.props.onOvershoot) {
           this.props.onOvershoot(); // TODO: what args should we pass to this
         }
@@ -367,7 +367,7 @@ class PanController extends React.Component {
     const bounds = [endX - spacing / 2, endX + spacing / 2];
     const endV = this.velocityAtBounds(anim._value, velocity, bounds);
 
-    this._listener = anim.addListener(({ value }) => {
+    this.listener = anim.addListener(({ value }) => {
       this.props._getValue(endX, spacing);
       if (value > bounds[0] && value < bounds[1]) {
         Animated.spring(anim, {
@@ -381,7 +381,7 @@ class PanController extends React.Component {
       ...this.props.momentumDecayConfig,
       velocity
     }).start(() => {
-      anim.removeListener(this._listener);
+      anim.removeListener(this.listener);
     });
   };
 
@@ -446,7 +446,7 @@ class PanController extends React.Component {
   // },
 
   render() {
-    return <View {...this.props} {...this._responder.panHandlers} />;
+    return <View {...this.props} {...this.responder.panHandlers} />;
   }
 }
 

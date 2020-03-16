@@ -358,9 +358,9 @@ class AnimatedViews extends React.Component {
         this.props.toggleIsFullMapComp(true);
         setTimeout(() => {
           try {
-            // this.mapView.fitToSuppliedMarkers(
-            //   this.state.markers.map(x => String(x.id))
-            // );
+            this.mapView.fitToSuppliedMarkers(
+              this.state.markers.map(x => String(x.id))
+            );
           } catch (e) {
             // console.log(e, 'Nothing');
           }
@@ -456,15 +456,7 @@ class AnimatedViews extends React.Component {
                       }
                     ]}
                   >
-                    {/* <UserContributionsDetails
-                      onPressHeader={() => this.onPressHeader(marker.id)}
-                      isFromUserProfile
-                      userProfileId={this.props.userProfileId}
-                      navigation={this.props.navigation}
-                      contribution={marker}
-                      plantProjects={this.props.plantProjects}
-                      deleteContribution={this.props.deleteContribution}
-                    /> */}
+
                     <View style={styles.card} key={i}>
                       <View style={styles.textContent}>
                         <ListItem

@@ -492,7 +492,7 @@ class AnimatedViews extends React.Component {
             >
               <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>
-            {this.state.singleContributionID ? <><TouchableOpacity
+            {!this.state.singleContributionID ? <><TouchableOpacity
               onPress={() => this.onPressHeader()}
               style={styles.fullScreenExitIcon}
             >

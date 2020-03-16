@@ -403,24 +403,24 @@ class AnimatedViews extends React.Component {
         >
           {markers
             ? markers.map(marker => (
-                <Marker
-                  identifier={String(marker.id)}
-                  key={marker.id}
-                  coordinate={{
-                    latitude: marker.geoLatitude,
-                    longitude: marker.geoLongitude
+              <Marker
+                identifier={String(marker.id)}
+                key={marker.id}
+                coordinate={{
+                  latitude: marker.geoLatitude,
+                  longitude: marker.geoLongitude
+                }}
+              >
+                <Image
+                  source={markerImage}
+                  style={{
+                    width: 40,
+                    height: 40
                   }}
-                >
-                  <Image
-                    source={markerImage}
-                    style={{
-                      width: 40,
-                      height: 40
-                    }}
-                    resizeMode={'contain'}
-                  />
-                </Marker>
-              ))
+                  resizeMode={'contain'}
+                />
+              </Marker>
+            ))
             : null}
         </MapView>
         {this.props.isFullMapComponentModal ? (
@@ -446,21 +446,21 @@ class AnimatedViews extends React.Component {
             <View style={styles.itemContainer}>
               {markers
                 ? markers.map((marker, i) => (
-                    <Animated.View
-                      key={marker.id}
-                      style={[
-                        styles.item,
-                        { backgroundColor: 'transparent' },
-                        {
-                          transform: [
-                            { translateY: animations[i].translateY },
-                            { translateX: animations[i].translateX },
-                            { scale: animations[i].scale }
-                          ]
-                        }
-                      ]}
-                    >
-                      {/* <UserContributionsDetails
+                  <Animated.View
+                    key={marker.id}
+                    style={[
+                      styles.item,
+                      { backgroundColor: 'transparent' },
+                      {
+                        transform: [
+                          { translateY: animations[i].translateY },
+                          { translateX: animations[i].translateX },
+                          { scale: animations[i].scale }
+                        ]
+                      }
+                    ]}
+                  >
+                    {/* <UserContributionsDetails
                       onPressHeader={() => this.onPressHeader(marker.id)}
                       isFromUserProfile
                       userProfileId={this.props.userProfileId}
@@ -469,16 +469,16 @@ class AnimatedViews extends React.Component {
                       plantProjects={this.props.plantProjects}
                       deleteContribution={this.props.deleteContribution}
                     /> */}
-                      <View style={styles.card} key={i}>
-                        <View style={styles.textContent}>
-                          <ListItem
-                            onPressHeader={this.onPressHeader}
-                            marker={marker}
-                          />
-                        </View>
+                    <View style={styles.card} key={i}>
+                      <View style={styles.textContent}>
+                        <ListItem
+                          onPressHeader={this.onPressHeader}
+                          marker={marker}
+                        />
                       </View>
-                    </Animated.View>
-                  ))
+                    </View>
+                  </Animated.View>
+                ))
                 : null}
             </View>
           </PanController>
@@ -492,18 +492,18 @@ class AnimatedViews extends React.Component {
             >
               <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>
-            <TouchableOpacity
+            {this.state.singleContributionID ? <><TouchableOpacity
               onPress={() => this.onPressHeader()}
               style={styles.fullScreenExitIcon}
             >
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.initiateComponent}
-              style={styles.myLocationIcon}
-            >
-              <Icon name={'my-location'} size={30} color={'#4C5153'} />
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={this.initiateComponent}
+                style={styles.myLocationIcon}
+              >
+                <Icon name={'my-location'} size={30} color={'#4C5153'} />
+              </TouchableOpacity></> : null}
           </>
         ) : null}
         {activeMarker ? (

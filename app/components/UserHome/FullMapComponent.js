@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions, Platform } from 'react-native';
-import AnimatedViews from './AnmatedMap';
+import AnimatedViews from './AnimatedMap';
 const { width } = Dimensions.get('window');
 
 const CARD_HEIGHT = 150;

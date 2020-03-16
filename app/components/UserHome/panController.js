@@ -224,10 +224,10 @@ class PanController extends React.Component {
       }
     }
     val = val - anim._offset;
-    if (val < -(HEIGHT * 0.0)) {
+    if (val < (HEIGHT * 0.0)) {
       return;
     }
-    anim.setValue(val);
+    // anim.setValue(val);
   }
 
   handleResponderRelease(
@@ -400,7 +400,7 @@ class PanController extends React.Component {
       x =
         x0 +
         (vx / (1 - this.deceleration)) *
-          (1 - Math.exp(-(1 - this.deceleration) * t));
+        (1 - Math.exp(-(1 - this.deceleration) * t));
       if (Math.abs(x - x1) < 0.1) {
         x1 = x;
         break;
@@ -420,7 +420,7 @@ class PanController extends React.Component {
       x =
         x0 +
         (vx / (1 - this.deceleration)) *
-          (1 - Math.exp(-(1 - this.deceleration) * t));
+        (1 - Math.exp(-(1 - this.deceleration) * t));
       vf = (x - x1) / 16;
       if (x > bounds[0] && x < bounds[1]) {
         break;

@@ -200,7 +200,6 @@ class AnimatedViews extends React.Component {
   }
 
   onMapReady = () => {
-    console.log(this.props.userContributions);
     const { panX, panY, scrollY } = this.state;
     let markers = this.props.userContributions;
     const animations = markers.map((m, i) =>
@@ -223,7 +222,6 @@ class AnimatedViews extends React.Component {
           try {
             this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)));
           } catch (e) {
-            console.log('Nothing');
           }
         }, 3000);
       }
@@ -259,7 +257,7 @@ class AnimatedViews extends React.Component {
             350
           );
         } catch (e) {
-          console.log('Nothing');
+          // console.log('Nothing');
         }
       }
     }, 10);
@@ -276,14 +274,14 @@ class AnimatedViews extends React.Component {
         350
       );
     } catch (e) {
-      console.log('Nothing 2');
+      // console.log('Nothing 2');
     }
   };
   componentWillReceiveProps(nextProps) {
-    console.log(
-      nextProps.singleContributionID,
-      'nextProps.singleContributionID -----'
-    );
+    // console.log(
+    //   nextProps.singleContributionID,
+    //   'nextProps.singleContributionID -----'
+    // );
     if (this.state.singleContributionID == null) {
       if (nextProps.singleContributionID !== this.state.singleContributionID) {
         this.setState(
@@ -294,12 +292,12 @@ class AnimatedViews extends React.Component {
                 let activeMarker = this.state.markers.find(
                   x => x.id == nextProps.singleContributionID
                 );
-                console.log(
-                  nextProps.singleContributionID,
-                  this.state.markers,
-                  activeMarker,
-                  '284 -----------'
-                );
+                // console.log(
+                //   nextProps.singleContributionID,
+                //   this.state.markers,
+                //   activeMarker,
+                //   '284 -----------'
+                // );
                 this.mapView.animateToRegion(
                   {
                     latitude: activeMarker.geoLatitude,
@@ -311,7 +309,7 @@ class AnimatedViews extends React.Component {
                 );
               }
             } catch (e) {
-              console.log(e, 'Nothing 1');
+              // console.log(e, 'Nothing 1');
             }
           }
         );
@@ -320,10 +318,8 @@ class AnimatedViews extends React.Component {
 
     if (nextProps.isFullMapComponentModal) {
       try {
-        console.log('nextProps.isFullMapComponentModal');
         this.initiateComponent();
       } catch (e) {
-        console.log(e, 'Nothing');
       }
     }
   }
@@ -350,13 +346,13 @@ class AnimatedViews extends React.Component {
     // Set single Contribution ID To display
     // alert("Bao rami")
     // this.props.toggleIsFullMapComp()
-    console.log(this.state.singleContributionID);
-    console.log(id);
+    // console.log(this.state.singleContributionID);
+    // console.log(id);
     if (id) {
       this.setState({ singleContributionID: id });
     } else {
       if (this.state.singleContributionID) {
-        console.log('set to undefined yar');
+        // console.log('set to undefined yar');
         this.setState({ singleContributionID: undefined });
       } else {
         this.props.toggleIsFullMapComp(true);
@@ -366,7 +362,7 @@ class AnimatedViews extends React.Component {
             //   this.state.markers.map(x => String(x.id))
             // );
           } catch (e) {
-            console.log(e, 'Nothing');
+            // console.log(e, 'Nothing');
           }
         }, 3000);
       }
@@ -386,7 +382,7 @@ class AnimatedViews extends React.Component {
       this.state.markers !== null
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
         : null;
-    console.log(activeMarker, 'activeMarker -------');
+    // console.log(activeMarker, 'activeMarker -------');
     return (
       <View style={styles.container}>
         {/* <SafeAreaView forceInset={{ bottom: 'always' }} /> */}
@@ -619,7 +615,7 @@ const ListItem = ({ marker, onPressHeader }) => {
     headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
   }
 
-  console.log(headerText, 'headerTextheaderTextheaderText');
+  // console.log(headerText, 'headerTextheaderTextheaderText');
 
   return (
     <TouchableOpacity
@@ -630,11 +626,6 @@ const ListItem = ({ marker, onPressHeader }) => {
         <View>
           <Text style={styles.cardHeaderText}>{headerText}</Text>
         </View>
-        {/* <View style={{ marginVertical: 5 }}>
-          <Text style={styles.subHeaderText}>
-            Planted by Eden Reforestation Projects
-          </Text>
-        </View> */}
       </View>
       <View style={styles.treeCont}>
         <View style={styles.subCont}>

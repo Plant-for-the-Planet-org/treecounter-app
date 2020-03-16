@@ -1,14 +1,17 @@
-import React from 'react';
-import { Text, View, TouchableOpacity, Image, BackHandler } from 'react-native';
+import React, { useRef } from 'react';
+import { Text, View, TouchableOpacity, Image, BackHandler, TextInput } from 'react-native';
 import { backArrow } from './../../assets';
 import { SafeAreaView } from 'react-navigation';
 import TouchableItem from './../Common/TouchableItem.native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function HeaderNew(props) {
   let navigateBack = () => {
     props.navigation.goBack();
     return true;
   };
+  const inputEl = useRef('');
+
 
   React.useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', navigateBack);
@@ -17,6 +20,11 @@ export default function HeaderNew(props) {
       BackHandler.removeEventListener('hardwareBackPress', navigateBack);
     };
   });
+
+  const clearSearch = () => {
+    inputEl.current.clear(),
+      props.toggleIsSearch(false)
+  }
 
   const textColor = '#4d5153';
   const whiteColor = 'white';
@@ -73,25 +81,86 @@ export default function HeaderNew(props) {
           {props.title}
         </Text>
       </View>
-      <View
-        style={{
-          right: 24,
-          bottom: 24,
-          zIndex: 1002,
-          position: 'absolute'
-        }}
-      >
-        <TouchableItem onPress={props.rightLinkFunction}>
-          <Text
+
+      {props.rightLink ? (
+        <View
+          style={{
+            right: 24,
+            bottom: 24,
+            zIndex: 1002,
+            position: 'absolute'
+          }}
+        >
+          <TouchableItem onPress={props.rightLinkFunction}>
+            <Text
+              style={{
+                color: linkColor,
+                fontFamily: 'OpenSans-SemiBold'
+              }}
+            >
+              {props.rightLink}
+            </Text>
+          </TouchableItem>
+        </View>
+      ) : null}
+      {
+        props.isSearch ? (
+          <TextInput
             style={{
-              color: linkColor,
-              fontFamily: 'OpenSans-SemiBold'
+              borderBottomColor: 'gray',
+              borderBottomWidth: 1,
+              marginLeft: 44,
+              width: 220,
+              height: 40,
+              fontFamily: 'OpenSans-Regular'
             }}
-          >
-            {props.rightLink}
-          </Text>
-        </TouchableItem>
-      </View>
+            ref={inputEl}
+            onChangeText={text => props.searchContact(text)}
+            value={props.searchText}
+            placeholder={props.searchPlaceholder}
+
+          />
+        ) : null
+      }
+      {
+        props.searchPlaceholder ? (
+          props.isSearch ?
+            <TouchableOpacity
+              onPress={() => clearSearch()}
+              style={{
+                right: 20,
+                bottom: 24,
+                zIndex: 1002,
+                position: 'absolute'
+              }}>
+              <Icon
+                name="times"
+                size={18}
+                color="#4d5153"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+            : (
+
+              <TouchableOpacity
+                onPress={() => props.toggleIsSearch(true)}
+                style={{
+                  right: 20,
+                  bottom: 24,
+                  zIndex: 1002,
+                  position: 'absolute'
+                }}>
+                <Icon
+                  name="search"
+                  size={18}
+                  color="#4d5153"
+                  style={{ marginLeft: 10 }}
+                />
+              </TouchableOpacity>
+            )
+        ) : null
+      }
+
     </SafeAreaView>
   );
 }

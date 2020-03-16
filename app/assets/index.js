@@ -218,6 +218,8 @@ import discover from './images/icons/discover.png';
 import paypalLogo from './images/icons/paypalLogo.png';
 import creditCard from './images/icons/creditCard.png';
 import creditCardBack from './images/icons/creditCardBack.png';
+
+import giftplant from './images/gifttrees/giftplant.png'
 export {
   treelogo,
   germany,
@@ -433,5 +435,6 @@ export {
   forest,
   hills,
   mountains,
-  spruce
+  spruce,
+  giftplant
 };

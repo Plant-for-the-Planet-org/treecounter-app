@@ -69,6 +69,7 @@
     "react-native-check-box": "^2.1.7",
     "react-native-collapsible": "^1.5.1",
     "react-native-config": "^0.12.0",
+    "react-native-contacts": "^5.1.0",
     "react-native-content-loader": "^0.1.6",
     "react-native-credit-card-input": "^0.4.1",
     "react-native-device-info": "^5.5.3",

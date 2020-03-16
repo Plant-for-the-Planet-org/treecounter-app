@@ -64,6 +64,8 @@ import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard
 import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
+import SelectContacts from '../NewGiftTrees/components/SelectContacts.native';
+import GiftEmail from '../NewGiftTrees/components/GiftEmail.native';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -103,7 +105,7 @@ const headerLabels = {
   ['app_pledge_update_form']: 'label.updatePledge'
 };
 
-export const getAppNavigator = function(isLoggedIn, userProfile) {
+export const getAppNavigator = function (isLoggedIn, userProfile) {
   const searchNavigator = createStackNavigator(
     {
       Search: {
@@ -158,7 +160,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const getTitle = function(navigation) {
+  const getTitle = function (navigation) {
     let title = navigation.getParam('titleParam');
     try {
       if (!title) {
@@ -255,6 +257,16 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       },
       ['license_info_list']: {
         screen: LicenseInfoList
+      },
+
+      ['select_contacts_gift']: {
+        screen: SelectContacts,
+        navigationOptions: { header: null }
+      },
+
+      ['gift_user_email']: {
+        screen: GiftEmail,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_imprint')]: {
         screen: ImprintContainer,

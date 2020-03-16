@@ -201,7 +201,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: Trillion
       },
       [getLocalRoute('app_giftTrees')]: {
-        screen: GiftTreesContainer
+        screen: GiftTreesContainer,
+        navigationOptions: { tabBarVisible: false }
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
@@ -264,7 +265,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: SelectContacts,
         navigationOptions: { header: null }
       },
-
       ['gift_user_email']: {
         screen: GiftEmail,
         navigationOptions: { header: null }

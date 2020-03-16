@@ -48,7 +48,7 @@ export default EStyleSheet.create({
 
   nMainContainer: {
     backgroundColor: 'white',
-    marginTop: Platform.OS === 'ios' ? 24 : 56,
+    marginTop: Platform.OS === 'ios' ? 30 : 70,
     paddingLeft: 20,
     paddingRight: 20,
     height: '100%'

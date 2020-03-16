@@ -1,20 +1,28 @@
 import React from 'react'
 import { View, Text, Image, ScrollView, Platform, TouchableOpacity } from 'react-native'
-import styles from './../../styles/gifttrees/giftrees'
-import HeaderStatic from './../Header/HeaderStatic';
+import styles from '../../styles/gifttrees/giftrees'
 import i18n from '../../locales/i18n';
 import { SafeAreaView } from 'react-navigation';
 import { giftplant } from '../../assets';
-import { updateStaticRoute } from './../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import HeaderNew from '../Header/HeaderNew';
 
 const NewGiftTrees = (props) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <HeaderStatic
-                title={i18n.t('label.gift_trees')}
+            <HeaderNew
+                title={''}
                 navigation={props.navigation}
             />
             <View style={styles.nMainContainer}>
+                <Text style={{
+                    fontFamily: "OpenSans-Bold",
+                    fontSize: 27,
+                    lineHeight: 40,
+                    letterSpacing: 0,
+                    textAlign: "left",
+                    color: '#4d5153'
+                }}>{i18n.t('label.gift_trees')}</Text>
                 <Text style={styles.nGiftDesc}>{i18n.t('label.gift_tree_description_new')}</Text>
                 <Image source={giftplant} style={styles.giftImage} />
                 <View style={{ position: 'absolute', bottom: '12%', width: '100%', alignSelf: 'center' }}>

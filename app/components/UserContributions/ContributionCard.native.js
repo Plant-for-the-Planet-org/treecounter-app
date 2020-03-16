@@ -74,21 +74,21 @@ class ContributionCard extends React.Component {
         ) : null}
         {measurementsAvailable
           ? section.contributionMeasurements.map((measurement, index) => {
-              return (
-                <View style={styles.actionBar} key={`measurement-${index}`}>
-                  <Text>{formatDate(measurement.measurementDate)}</Text>
-                  <Text>
-                    {_.padStart(
-                      (measurement.height * 10).toFixed(1) + ' ' + 'mm',
-                      10
-                    )}
-                  </Text>
-                  <Text>
-                    {_.padStart(measurement.diameter + ' ' + 'cm', 10)}
-                  </Text>
-                </View>
-              );
-            })
+            return (
+              <View style={styles.actionBar} key={`measurement-${index}`}>
+                <Text>{formatDate(measurement.measurementDate)}</Text>
+                <Text>
+                  {_.padStart(
+                    (measurement.height * 10).toFixed(1) + ' ' + 'mm',
+                    10
+                  )}
+                </Text>
+                <Text>
+                  {_.padStart(measurement.diameter + ' ' + 'cm', 10)}
+                </Text>
+              </View>
+            );
+          })
           : null}
       </View>
     );
@@ -135,26 +135,26 @@ class ContributionCard extends React.Component {
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <Text key={`donateActionLine_10`}>
-            {i18n.t('label.gifted_on_to', {
-              date: formatDate(plantDate)
-            })}
-          </Text>,
-          <Text
-            key={`donateActionLine_11`}
-            onPress={() =>
-              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug,
-                titleParam: givee
-              })
-            }
-          >
-            {givee}
-          </Text>
-        ]
+        <Text key={`donateActionLine_10`}>
+          {i18n.t('label.gifted_on_to', {
+            date: formatDate(plantDate)
+          })}
+        </Text>,
+        <Text
+          key={`donateActionLine_11`}
+          onPress={() =>
+            this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+              treeCounterId: giveeSlug,
+              titleParam: givee
+            })
+          }
+        >
+          {givee}
+        </Text>
+      ]
       : i18n.t('label.donated_on', {
-          date: formatDate(plantDate)
-        });
+        date: formatDate(plantDate)
+      });
   }
 
   tpoLine(tpoName) {
@@ -176,73 +176,73 @@ class ContributionCard extends React.Component {
   dedicateActionLine(isGift, givee, giveeSlug) {
     return isGift
       ? [
-          <Text key={`dedicateActionLine_11`}>
-            {i18n.t('label.dedicated_to')}
-          </Text>,
-          <Text
-            key={`dedicateActionLine_12`}
-            onPress={() =>
-              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug,
-                titleParam: givee
-              })
-            }
-          >
-            {' ' + givee}
-          </Text>
-        ]
+        <Text key={`dedicateActionLine_11`}>
+          {i18n.t('label.dedicated_to')}
+        </Text>,
+        <Text
+          key={`dedicateActionLine_12`}
+          onPress={() =>
+            this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+              treeCounterId: giveeSlug,
+              titleParam: givee
+            })
+          }
+        >
+          {' ' + givee}
+        </Text>
+      ]
       : '';
   }
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && givee
       ? [
-          <Text key={`redeemActionLine_11`}>
-            {i18n.t('label.given_on_by', {
-              date: formatDate(redemptionDate)
-            })}
-          </Text>,
-          <Text
-            key={`redeemActionLine_12`}
-            onPress={() =>
-              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug,
-                titleParam: givee
-              })
-            }
-          >
-            {' ' + givee}
-          </Text>
-        ]
+        <Text key={`redeemActionLine_11`}>
+          {i18n.t('label.given_on_by', {
+            date: formatDate(redemptionDate)
+          })}
+        </Text>,
+        <Text
+          key={`redeemActionLine_12`}
+          onPress={() =>
+            this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+              treeCounterId: giveeSlug,
+              titleParam: givee
+            })
+          }
+        >
+          {' ' + givee}
+        </Text>
+      ]
       : redemptionCode
         ? i18n.t('label.redeemed_on', {
-            date: formatDate(redemptionDate)
-          })
+          date: formatDate(redemptionDate)
+        })
         : givee
           ? [
-              <Text key={`dedicated_on_by_11`}>
-                {i18n.t('label.dedicated_on_by', {
-                  date: formatDate(redemptionDate)
-                })}
-              </Text>,
-              <Text
-                key={`dedicated_on_by_12`}
-                onPress={() =>
-                  this.props.navigation.navigate(
-                    getLocalRoute('app_treecounter'),
-                    {
-                      treeCounterId: giveeSlug,
-                      titleParam: givee
-                    }
-                  )
-                }
-              >
-                {' ' + givee}
-              </Text>
-            ]
+            <Text key={`dedicated_on_by_11`}>
+              {i18n.t('label.dedicated_on_by', {
+                date: formatDate(redemptionDate)
+              })}
+            </Text>,
+            <Text
+              key={`dedicated_on_by_12`}
+              onPress={() =>
+                this.props.navigation.navigate(
+                  getLocalRoute('app_treecounter'),
+                  {
+                    treeCounterId: giveeSlug,
+                    titleParam: givee
+                  }
+                )
+              }
+            >
+              {' ' + givee}
+            </Text>
+          ]
           : i18n.t('label.dedicated_on', {
-              date: formatDate(redemptionDate)
-            });
+            date: formatDate(redemptionDate)
+          });
   }
 
   render() {
@@ -250,7 +250,6 @@ class ContributionCard extends React.Component {
     debug('Contribution', contribution);
     let {
       treeCount,
-      treeSpecies,
       plantProjectName,
       country,
       plantDate,

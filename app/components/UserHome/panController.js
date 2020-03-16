@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { View, Animated, PanResponder, Dimensions } from 'react-native';
 
-const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
+const { height: HEIGHT } = Dimensions.get('window');
 
 const ModePropType = PropTypes.oneOf(['decay', 'snap', 'spring-origin']);
 const OvershootPropType = PropTypes.oneOf(['spring', 'clamp']);
@@ -82,7 +82,7 @@ class PanController extends React.Component {
         if (this.props.onPanResponderGrant) {
           this.props.onPanResponderGrant(...args);
         }
-        let { panX, panY, horizontal, vertical, xMode, yMode } = this.props;
+        let { panX, horizontal, vertical, xMode } = this.props;
 
         this.handleResponderGrant(panX, xMode);
         //this.handleResponderGrant(panY, yMode);

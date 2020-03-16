@@ -19,7 +19,7 @@ import MapView, {
 import PanController from './panController';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 import { deleteContribution } from '../../actions/EditMyTree';
-import { formatDate, delimitNumbers } from '../../utils/utils';
+import { delimitNumbers } from '../../utils/utils';
 import { loadProject } from '../../actions/loadTposAction';
 import { currentUserProfileIdSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
@@ -41,7 +41,7 @@ const ITEM_SPACING = 10;
 const ITEM_PREVIEW = 10;
 const ITEM_WIDTH = screen.width - 2 * ITEM_SPACING - 2 * ITEM_PREVIEW;
 const SNAP_WIDTH = ITEM_WIDTH + ITEM_SPACING;
-const ITEM_PREVIEW_HEIGHT = 150;
+// const ITEM_PREVIEW_HEIGHT = 150;
 const SCALE_END = screen.width / ITEM_WIDTH;
 const BREAKPOINT1 = 246;
 const BREAKPOINT2 = 350;
@@ -230,7 +230,7 @@ class AnimatedViews extends React.Component {
     );
   };
 
-  _getValue = (x, spacing) => {
+  getValue = (x, spacing) => {
     // let index = Math.floor(value / 150 + 0.3);
     const plus = x % spacing < spacing / 2 ? 0 : spacing;
     let index = Math.round(x / spacing) * spacing + plus;
@@ -425,7 +425,7 @@ class AnimatedViews extends React.Component {
         </MapView>
         {this.props.isFullMapComponentModal ? (
           <PanController
-            _getValue={this._getValue}
+            _getValue={this.getValue}
             style={{
               flex: this.state.singleContributionID ? 1.5 : 0.3,
               position: 'absolute',
@@ -540,25 +540,15 @@ const ListItem = ({ marker, onPressHeader }) => {
 
   const {
     treeCount,
-    plantDate,
     givee,
     giveeSlug,
     giver,
     giverSlug,
     cardType,
     contributionType,
-    plantProjectId,
     isGift,
     redemptionCode,
-    redemptionDate,
-    plantProjectName,
-    mayUpdate,
-    contributionImages,
     treeType,
-    treeSpecies,
-    treeScientificName,
-    geoLatitude,
-    geoLongitude
   } = marker;
 
   if (treeType === null) {

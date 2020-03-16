@@ -6,7 +6,6 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  SafeAreaView
 } from 'react-native';
 import { BackHandler } from 'react-native';
 import { withNavigation } from 'react-navigation';

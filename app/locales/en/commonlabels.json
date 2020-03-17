@@ -46,6 +46,5 @@
   "show_all": "Show all",
   "show_less": "Show less",
   "share": "Share",
-  "noInternet": "Cannot connect to internet. You maybe offline",
-  "someFunctionality": "Some functionalities may be unavailable offline"
+  "noInternet": "You maybe offline"
 }

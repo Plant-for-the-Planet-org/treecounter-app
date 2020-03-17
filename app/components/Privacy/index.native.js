@@ -38,7 +38,7 @@ export default class Privacy extends Component {
   convertPrivacyArrayToMap(privacies) {
     const privacyHeadingMap = {}; // Create the blank map
 
-    privacies.forEach(function(privacyItem) {
+    privacies.forEach(function (privacyItem) {
       if (!privacyHeadingMap[privacyItem.heading]) {
         // Create an entry in the map for the category if it hasn't yet been created
         privacyHeadingMap[privacyItem.heading] = [];
@@ -94,19 +94,19 @@ export default class Privacy extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <>
-        <HeaderNew
-          title={i18n.t('label.data_protection')}
-          navigation={this.props.navigation}
-        />
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this._renderContent}
-          //renderSectionHeader={this._renderHeader}
-          style={{ marginTop: Platform.OS === 'ios' ? 160 : 120 }}
-        />
-      </>
-    );
+        <View style={{ backgroundColor: '#fff' }}>
+          <HeaderNew
+            title={i18n.t('label.data_protection')}
+            navigation={this.props.navigation}
+          />
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this._renderContent}
+            //renderSectionHeader={this._renderHeader}
+            style={{ marginTop: Platform.OS === 'ios' ? 160 : 120 }}
+          />
+        </View>
+      );
   }
 }
 

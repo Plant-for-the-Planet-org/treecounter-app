@@ -30,7 +30,7 @@ class AboutUs extends Component {
     const version = DeviceInfo.getReadableVersion();
     // const buildNumber = DeviceInfo.getBuildNumber();
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <HeaderNew
           title={i18n.t('label.information')}
           navigation={this.props.navigation}

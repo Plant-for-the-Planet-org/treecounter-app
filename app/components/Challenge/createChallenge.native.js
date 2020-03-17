@@ -21,7 +21,7 @@ export default class ChallengeTabView extends Component {
       index: 0
     };
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   indexChange(index) {
     this.setState({
@@ -119,7 +119,7 @@ export default class ChallengeTabView extends Component {
   render() {
     const textColor = '#4d5153';
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
         {/* <HeaderStatic
           title={i18n.t('label.challenge_heading')}
           navigation={this.props.navigation}

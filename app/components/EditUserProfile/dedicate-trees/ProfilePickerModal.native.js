@@ -93,14 +93,13 @@ class ProfilePickerModal extends Component {
     );
 
     return (
-      <View>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <HeaderNew
           navigation={this.props.navigation}
           title={i18n.t('label.dedicate_trees')}
         />
         <ScrollView
           contentContainerStyle={[
-            scrollStyle.styleContainer,
             { marginTop: Platform.OS === 'ios' ? 140 : 100 }
           ]}
         >
@@ -156,8 +155,8 @@ class ProfilePickerModal extends Component {
                 </CardLayout>
               </View>
             ) : (
-              pickupProfileView
-            )}
+                pickupProfileView
+              )}
           </View>
         </ScrollView>
       </View>

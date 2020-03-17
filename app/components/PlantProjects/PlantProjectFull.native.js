@@ -99,7 +99,6 @@ class PlantProjectFull extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
-            scrollStyle.styleContainer,
             {
               backgroundColor: backgroundColor
             }
@@ -153,10 +152,10 @@ class PlantProjectFull extends React.Component {
         ) : null}
       </SafeAreaView>
     ) : (
-      <View style={{ flex: 1, marginTop: -20 }}>
-        <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
-      </View>
-    );
+        <View style={{ flex: 1, marginTop: -20 }}>
+          <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
+        </View>
+      );
   }
 }
 

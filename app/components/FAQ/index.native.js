@@ -70,43 +70,43 @@ export default class FAQ extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <SafeAreaView style={{ flex: 1 }}>
-        <HeaderNew title={''} navigation={this.props.navigation} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+          <HeaderNew title={''} navigation={this.props.navigation} />
 
-        <ScrollView
-          contentContainerStyle={{ paddingBottom: 72, paddingTop: 80 }}
-        >
-          <Text
-            style={{
-              fontFamily: 'OpenSans-Bold',
-              fontSize: 27,
-              lineHeight: 40,
-              letterSpacing: 0,
-              textAlign: 'left',
-              color: textColor,
-              marginLeft: 24
-            }}
+          <ScrollView
+            contentContainerStyle={{ paddingBottom: 72, paddingTop: 80 }}
           >
-            {i18n.t('label.faq')}
-          </Text>
-          <Image
-            resizeMode="contain"
-            source={FAQsCover}
-            style={styles.faqcover}
-          />
-          <Accordion
-            activeSections={this.state.activeSections}
-            sections={this.props.faqs}
-            renderSectionTitle={this._renderSectionTitle}
-            renderHeader={this._renderHeader}
-            renderContent={this._renderContent}
-            touchableComponent={TouchableOpacity}
-            onChange={this._updateSections}
-          />
-        </ScrollView>
-        {/* <TabContainer {...this.props} /> */}
-      </SafeAreaView>
-    );
+            <Text
+              style={{
+                fontFamily: 'OpenSans-Bold',
+                fontSize: 27,
+                lineHeight: 40,
+                letterSpacing: 0,
+                textAlign: 'left',
+                color: textColor,
+                marginLeft: 24
+              }}
+            >
+              {i18n.t('label.faq')}
+            </Text>
+            <Image
+              resizeMode="contain"
+              source={FAQsCover}
+              style={styles.faqcover}
+            />
+            <Accordion
+              activeSections={this.state.activeSections}
+              sections={this.props.faqs}
+              renderSectionTitle={this._renderSectionTitle}
+              renderHeader={this._renderHeader}
+              renderContent={this._renderContent}
+              touchableComponent={TouchableOpacity}
+              onChange={this._updateSections}
+            />
+          </ScrollView>
+          {/* <TabContainer {...this.props} /> */}
+        </SafeAreaView>
+      );
   }
 }
 

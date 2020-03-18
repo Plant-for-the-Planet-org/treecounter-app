@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Platform,
   Text,
-  SafeAreaView, PixelRatio
+  SafeAreaView
 } from 'react-native';
 
 import MapView, {
@@ -31,19 +31,17 @@ import { tree_1 } from '../../assets/index';
 import i18n from '../../locales/i18n';
 
 const screen = Dimensions.get('window');
-const { height: HEIGHT, width: width } = screen;
+const { height: HEIGHT, } = screen;
 const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const CARD_HEIGHT = 100;
-const mapPaddingTop = screen.height * 0.1;
 
 
 const ITEM_SPACING = -5;
 const ITEM_PREVIEW = 18;
 const ITEM_WIDTH = screen.width - 2 * ITEM_SPACING - 2 * ITEM_PREVIEW;
 const SNAP_WIDTH = ITEM_WIDTH + ITEM_SPACING;
-const ITEM_PREVIEW_HEIGHT = 150;
 const SCALE_END = screen.width / ITEM_WIDTH;
 const BREAKPOINT1 = 246;
 const BREAKPOINT2 = 350;
@@ -203,7 +201,6 @@ class AnimatedViews extends React.Component {
 
 
   setMapPadding = () => {
-    console.log("screen.height * .2 ", screen.height * 0.12)
     return {
       top: 0,
       right: 0,
@@ -238,6 +235,7 @@ class AnimatedViews extends React.Component {
           try {
             this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)));
           } catch (e) {
+            console.log(JSON.stringify(e))
           }
         }, 3000);
       }
@@ -336,6 +334,7 @@ class AnimatedViews extends React.Component {
       try {
         this.initiateComponent();
       } catch (e) {
+        console.log(JSON.stringify(e))
       }
     }
   }

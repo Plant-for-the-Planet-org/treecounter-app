@@ -207,8 +207,8 @@ class AnimatedViews extends React.Component {
       top: 0,
       right: 0,
       bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ?
-        PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.1)
-        : PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.06) : 0,
+        5
+        : 150 : 0,
       left: 0
     };
   };
@@ -728,7 +728,7 @@ const styles = StyleSheet.create({
   },
   myLocationIcon: {
     position: 'absolute',
-    bottom: PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.1),
+    bottom: 220,
     right: 20,
     padding: 15,
     backgroundColor: '#fff',
@@ -739,7 +739,7 @@ const styles = StyleSheet.create({
   },
   fullScreenExitIcon: {
     position: 'absolute',
-    bottom: PixelRatio.getPixelSizeForLayoutSize(screen.height * 0.06),
+    bottom: 150,
     right: 20,
     padding: 15,
     backgroundColor: '#fff',

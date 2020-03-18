@@ -20,6 +20,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import tabStyles from '../../styles/common/tabbar';
 import HeaderNew from './../Header/HeaderNew';
 import { SafeAreaView } from 'react-navigation';
+import colors from '../../utils/contants';
 
 const Form = t.form.Form;
 function UserProfileTemplate(locals) {
@@ -242,7 +243,7 @@ export default class EditUserProfile extends Component {
   render() {
     const textColor = '#4d5153';
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
         {/* <HeaderStatic
           title={i18n.t('label.edit_profile')}
           navigation={this.props.navigation}

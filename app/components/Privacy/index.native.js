@@ -10,6 +10,7 @@ import { context } from '../../config';
 import styles from '../../styles/faq';
 import i18n from '../../locales/i18n';
 import HeaderNew from './../Header/HeaderNew.native';
+import colors from '../../utils/contants';
 
 export default class Privacy extends Component {
   constructor(props) {
@@ -94,7 +95,7 @@ export default class Privacy extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-        <View style={{ backgroundColor: '#fff' }}>
+        <View style={{ backgroundColor: colors.WHITE }}>
           <HeaderNew
             title={i18n.t('label.data_protection')}
             navigation={this.props.navigation}

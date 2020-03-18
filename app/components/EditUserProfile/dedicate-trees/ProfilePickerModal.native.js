@@ -11,10 +11,10 @@ import { currentUserProfileSelector } from '../../../selectors';
 import i18n from '../../../locales/i18n';
 import { updateProfileDedication } from '../../../actions/updateUserProfile';
 import CardLayout from '../../Common/Card';
-import scrollStyle from '../../../styles/common/scrollStyle';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 import { delimitNumbers } from '../../../utils/utils';
 import HeaderNew from '../../Header/HeaderNew.native';
+import colors from '../../../utils/contants';
 
 class ProfilePickerModal extends Component {
   constructor(props) {
@@ -93,7 +93,7 @@ class ProfilePickerModal extends Component {
     );
 
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View style={{ flex: 1, backgroundColor: colors.WHITE }}>
         <HeaderNew
           navigation={this.props.navigation}
           title={i18n.t('label.dedicate_trees')}

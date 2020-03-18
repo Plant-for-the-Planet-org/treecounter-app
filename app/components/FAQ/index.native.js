@@ -19,6 +19,7 @@ import { context } from '../../config';
 import styles from '../../styles/faq';
 import HeaderNew from './../Header/HeaderNew.native';
 import i18n from '../../locales/i18n.js';
+import colors from '../../utils/contants';
 
 export default class FAQ extends Component {
   state = {
@@ -70,7 +71,7 @@ export default class FAQ extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
           <HeaderNew title={''} navigation={this.props.navigation} />
 
           <ScrollView

@@ -8,6 +8,7 @@ import tabStyles from '../../styles/common/tabbar';
 import HeaderNew from './../Header/HeaderNew';
 import { SafeAreaView } from 'react-navigation';
 import i18n from '../../locales/i18n';
+import colors from "../../utils/contants";
 
 export default class ChallengeTabView extends Component {
   constructor(props) {
@@ -119,7 +120,7 @@ export default class ChallengeTabView extends Component {
   render() {
     const textColor = '#4d5153';
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
         {/* <HeaderStatic
           title={i18n.t('label.challenge_heading')}
           navigation={this.props.navigation}

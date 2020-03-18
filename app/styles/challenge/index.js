@@ -4,9 +4,9 @@ import { Platform } from 'react-native';
 export const centerTextInput =
   Platform.OS === 'android'
     ? {
-        paddingTop: 0,
-        paddingBottom: 0
-      }
+      paddingTop: 0,
+      paddingBottom: 0
+    }
     : {};
 
 const buttonStyle = {
@@ -65,7 +65,9 @@ const editProfileStyle = EStyleSheet.create({
   },
   moreButtonTextStyle: {
     color: '$textColor',
-    fontSize: 14
+    fontSize: 14,
+    height: 30,
+    marginTop: 10
   },
   statusLabel: {
     backgroundColor: '#e0e0e0',
@@ -128,7 +130,9 @@ const editProfileStyle = EStyleSheet.create({
   },
   buttonTextStyle: {
     fontSize: 14,
-    color: '#ffffff'
+    color: '#ffffff',
+    height: 30,
+    marginTop: 10
   },
   textPadding: {
     paddingLeft: 10,

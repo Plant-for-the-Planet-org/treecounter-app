@@ -27,7 +27,7 @@ export default class Target extends Component {
   }
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
           <HeaderNew
             title={i18n.t('label.set_target')}

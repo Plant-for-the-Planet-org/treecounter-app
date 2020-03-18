@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import { updateRoute } from '../../../helpers/routerHelper';
 import i18n from '../../../locales/i18n.js';
 import { delimitNumbers } from '../../../utils/utils';
+import colors from '../../../utils/constants';
 
 export default function AddTrees(props) {
   const [scrollY] = React.useState(new Animated.Value(0));
@@ -39,7 +40,7 @@ export default function AddTrees(props) {
           }
         });
   };
-  const white = '#ffffff';
+
   const treeCount = props.navigation.getParam('treeCount');
 
   return (
@@ -111,7 +112,7 @@ export default function AddTrees(props) {
         >
           <View style={buttonStyles.actionButtonView}>
             {loadButton ? (
-              <ActivityIndicator size="large" color={white} />
+              <ActivityIndicator size="large" color={colors.WHITE} />
             ) : (
                 <Text style={buttonStyles.actionButtonText}>
                   {i18n.t('label.add_my_trees')}

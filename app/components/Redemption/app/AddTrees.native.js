@@ -35,7 +35,7 @@ export default function AddTrees(props) {
             seterrorText(true);
             setloadButton(false);
           } else {
-            updateRoute('app_myTrees', props.navigation);
+            updateRoute('app_userHome', props.navigation);
             setloadButton(false);
           }
         });

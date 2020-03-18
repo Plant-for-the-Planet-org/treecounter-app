@@ -39,9 +39,9 @@ const CARD_HEIGHT = 100;
 const mapPaddingTop = screen.height * 0.1;
 
 
-const ITEM_SPACING = 10;
-const ITEM_PREVIEW = 10;
-const ITEM_WIDTH = screen.width - 2 * ITEM_SPACING - 2 * ITEM_PREVIEW;
+const ITEM_SPACING = -5;
+const ITEM_PREVIEW = 15;
+const ITEM_WIDTH = screen.width - 3 * ITEM_SPACING - 3 * ITEM_PREVIEW;
 const SNAP_WIDTH = ITEM_WIDTH + ITEM_SPACING;
 // const ITEM_PREVIEW_HEIGHT = 150;
 const SCALE_END = screen.width / ITEM_WIDTH;
@@ -755,7 +755,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
     height: CARD_HEIGHT,
-    width: width * 0.9,
+    // width: width * 0.9,
     overflow: 'hidden',
     borderWidth: 0,
     borderColor: 'red',

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Platform,
   Text,
-  SafeAreaView
+  SafeAreaView, PixelRatio
 } from 'react-native';
 
 import MapView, {
@@ -36,6 +36,8 @@ const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const CARD_HEIGHT = 100;
+const mapPaddingTop = screen.height * 0.1;
+
 
 const ITEM_SPACING = 10;
 const ITEM_PREVIEW = 10;
@@ -198,6 +200,18 @@ class AnimatedViews extends React.Component {
       singleContributionID: props.singleContributionID
     };
   }
+
+
+  setMapPadding = () => {
+    return {
+      top: 0,
+      right: 0,
+      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? screen.height * .2 : screen.height * 0.12 : 0,
+      left: 0
+    };
+  };
+
+
 
   onMapReady = () => {
     const { panX, panY, scrollY } = this.state;
@@ -387,13 +401,17 @@ class AnimatedViews extends React.Component {
       <View style={styles.container}>
         {/* <SafeAreaView forceInset={{ bottom: 'always' }} /> */}
         <MapView
+          mapPadding={this.setMapPadding()}
           onMapReady={this.onMapReady}
           ref={map => (this.mapView = map)}
           customMapStyle={mapStyle}
           provider={PROVIDER_GOOGLE}
           style={[
             styles.map,
-            { flex: this.state.singleContributionID ? 0.5 : 1 }
+            {
+              flex: this.state.singleContributionID ? 0.5 : 1,
+              // marginBottom: 100
+            }
           ]}
           initialRegion={region}
         >
@@ -425,7 +443,7 @@ class AnimatedViews extends React.Component {
             style={{
               flex: this.state.singleContributionID ? 1.5 : 0.3,
               position: 'absolute',
-              bottom: 50,
+              bottom: 0,
               backgroundColor: 'transparent'
             }}
             vertical
@@ -683,7 +701,7 @@ const styles = StyleSheet.create({
   },
   map: {
     backgroundColor: 'transparent',
-    flex: 1
+    flex: 1,
     // position: 'absolute', height: '100%'
   },
   item: {
@@ -707,7 +725,7 @@ const styles = StyleSheet.create({
   },
   myLocationIcon: {
     position: 'absolute',
-    bottom: 270,
+    bottom: screen.height * 0.20,
     right: 20,
     padding: 15,
     backgroundColor: '#fff',
@@ -718,7 +736,7 @@ const styles = StyleSheet.create({
   },
   fullScreenExitIcon: {
     position: 'absolute',
-    bottom: 200,
+    bottom: screen.height * 0.12,
     right: 20,
     padding: 15,
     backgroundColor: '#fff',

@@ -9,7 +9,6 @@ import {
   Linking,
   TouchableOpacity,
   Share,
-  SafeAreaView,
   RefreshControl,
   FlatList,
   Dimensions,
@@ -43,7 +42,7 @@ import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullMapComponent from './FullMapComponent';
-
+import SafeAreaView from 'react-native-safe-area-view';
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -309,8 +308,9 @@ export default class UserHome extends Component {
     } = this.state;
     debug(userProfile);
     return (
-      <View style={{ elevation: 1 }}>
-        {!isFullMapComponentModal ? <SafeAreaView /> : null}
+      <SafeAreaView style={{ elevation: 1, flex: 1 }} 
+      forceInset={{ bottom: !isFullMapComponentModal ? 'always' : 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>
+        {/* {!isFullMapComponentModal ? <SafeAreaView /> : null} */}
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}
@@ -442,30 +442,30 @@ export default class UserHome extends Component {
               </View>
               <View>
                 {userProfile.synopsis1 ||
-                userProfile.synopsis2 ||
-                userProfile.linkText ||
-                userProfile.url ? (
-                  <View>
-                    {userProfile.synopsis1 ? (
-                      <Text style={styles.footerText}>
-                        {userProfile.synopsis1}
-                      </Text>
-                    ) : null}
-                    {userProfile.synopsis2 ? (
-                      <Text style={styles.footerText}>
-                        {userProfile.synopsis2}
-                      </Text>
-                    ) : null}
-                    {userProfile.url ? (
-                      <Text
-                        style={styles.linkText}
-                        onPress={() => this._goToURL(userProfile.url)}
-                      >
-                        {userProfile.linkText || i18n.t('label.read_more')}
-                      </Text>
-                    ) : null}
-                  </View>
-                ) : null}
+                  userProfile.synopsis2 ||
+                  userProfile.linkText ||
+                  userProfile.url ? (
+                    <View>
+                      {userProfile.synopsis1 ? (
+                        <Text style={styles.footerText}>
+                          {userProfile.synopsis1}
+                        </Text>
+                      ) : null}
+                      {userProfile.synopsis2 ? (
+                        <Text style={styles.footerText}>
+                          {userProfile.synopsis2}
+                        </Text>
+                      ) : null}
+                      {userProfile.url ? (
+                        <Text
+                          style={styles.linkText}
+                          onPress={() => this._goToURL(userProfile.url)}
+                        >
+                          {userProfile.linkText || i18n.t('label.read_more')}
+                        </Text>
+                      ) : null}
+                    </View>
+                  ) : null}
               </View>
             </View>
           ) : null}
@@ -540,19 +540,19 @@ export default class UserHome extends Component {
           ) : null}
 
           {this.props.userContributions &&
-          this.props.userContributions.length > 3 ? (
-            <ToggleButton
-              updateFunction={() => this.readMore()}
-              showMore={showAllContributions}
-            />
-          ) : null}
+            this.props.userContributions.length > 3 ? (
+              <ToggleButton
+                updateFunction={() => this.readMore()}
+                showMore={showAllContributions}
+              />
+            ) : null}
 
           {/* <RenderIndividualsList
             navigation={this.props.navigation}
             gifts={userProfile.treecounter.gifts}
           /> */}
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   }
 

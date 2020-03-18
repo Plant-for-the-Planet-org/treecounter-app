@@ -203,10 +203,11 @@ class AnimatedViews extends React.Component {
 
 
   setMapPadding = () => {
+    console.log("screen.height * .2 ", screen.height * 0.12)
     return {
       top: 0,
       right: 0,
-      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? 5 : 150 : 0,
+      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? 180 : 150 : 0,
       left: 0
     };
   };

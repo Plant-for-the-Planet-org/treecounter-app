@@ -14,6 +14,7 @@ import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured com
 import AllCompetitions from './Tabs/all.native'; // Shows all competitions
 
 import HeaderStatic from './../Header/HeaderStatic';
+import colors from '../../utils/constants';
 
 class Competiton extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Competiton extends React.Component {
   _renderTabBar = props => {
     const focusedColor = '#89b53a';
     const normalColor = '#4d5153';
-    const colorWhite = '#fff';
+    const colorWhite = colors.WHITE;
     const colorGreen = '#89b53a';
     return (
       <TabBar

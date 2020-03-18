@@ -28,6 +28,7 @@ import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/review.native';
 // import { find } from 'lodash';
 import HeaderNew from './../../Header/HeaderNew.native';
+import colors from '../../../utils/constants';
 
 const { width } = Dimensions.get('window');
 
@@ -131,7 +132,7 @@ class AddReview extends Component {
       <ScrollView
         contentContainerStyle={{
           paddingBottom: 80,
-          backgroundColor: '#fff',
+          backgroundColor: colors.WHITE,
           flexGrow: 1
         }}
       >

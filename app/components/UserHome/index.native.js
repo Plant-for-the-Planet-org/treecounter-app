@@ -310,7 +310,6 @@ export default class UserHome extends Component {
     return (
       <SafeAreaView style={{ elevation: 1, flex: 1 }} 
       forceInset={{ bottom: !isFullMapComponentModal ? 'always' : 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>
-        {/* {!isFullMapComponentModal ? <SafeAreaView /> : null} */}
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}

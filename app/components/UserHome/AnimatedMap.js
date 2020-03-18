@@ -40,10 +40,10 @@ const mapPaddingTop = screen.height * 0.1;
 
 
 const ITEM_SPACING = -5;
-const ITEM_PREVIEW = 15;
-const ITEM_WIDTH = screen.width - 3 * ITEM_SPACING - 3 * ITEM_PREVIEW;
+const ITEM_PREVIEW = 18;
+const ITEM_WIDTH = screen.width - 2 * ITEM_SPACING - 2 * ITEM_PREVIEW;
 const SNAP_WIDTH = ITEM_WIDTH + ITEM_SPACING;
-// const ITEM_PREVIEW_HEIGHT = 150;
+const ITEM_PREVIEW_HEIGHT = 150;
 const SCALE_END = screen.width / ITEM_WIDTH;
 const BREAKPOINT1 = 246;
 const BREAKPOINT2 = 350;

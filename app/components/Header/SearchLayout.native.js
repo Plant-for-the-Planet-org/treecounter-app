@@ -12,6 +12,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/header/search_layout.native';
 import UserProfileImage from '../Common/UserProfileImage';
+import colors from '../../utils/contants';
 
 class SearchLayout extends React.Component {
   static SearchBar = SearchBar;
@@ -20,7 +21,7 @@ class SearchLayout extends React.Component {
   static defaultProps = {
     debounce: 500,
     headerBackgroundColor: '#b9d384',
-    headerTintColor: '#fff'
+    headerTintColor: colors.WHITE
   };
 
   state = {

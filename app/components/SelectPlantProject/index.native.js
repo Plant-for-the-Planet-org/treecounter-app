@@ -14,6 +14,7 @@ import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderStatic from './../Header/HeaderStatic';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
+import colors from '../../utils/contants';
 
 class SelectPlantTabView extends PureComponent {
   constructor(props) {
@@ -75,7 +76,7 @@ class SelectPlantTabView extends PureComponent {
   renderTabBar = props => {
     const focusedColor = '#89b53a';
     const normalColor = '#4d5153';
-    const colorWhite = '#fff';
+    const colorWhite = colors.WHITE;
     return [
       <TabBar
         key="1"
@@ -145,14 +146,14 @@ class SelectPlantTabView extends PureComponent {
         debug('fatured active', index, this.props.plantProjects);
         return this.props.plantProjects.filter(project => project.isFeatured)
           .length ? (
-          <FeaturedProjects
-            onSelectProjects={this.onSelectProjects}
-            {...props}
-            jumpTo={jumpTo}
-            index={this.state.index}
-            scrollY={this.state.scrollY}
-          />
-        ) : null;
+            <FeaturedProjects
+              onSelectProjects={this.onSelectProjects}
+              {...props}
+              jumpTo={jumpTo}
+              index={this.state.index}
+              scrollY={this.state.scrollY}
+            />
+          ) : null;
       case 'list':
         debug('list active', index, this.props.plantProjects);
 

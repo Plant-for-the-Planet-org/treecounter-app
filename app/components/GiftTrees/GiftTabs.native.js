@@ -7,6 +7,7 @@ import GiftToUser from './Tabs/GiftUser';
 import GiftEmail from './Tabs/GiftEmail';
 
 import i18n from '../../locales/i18n';
+import colors from '../../utils/contants';
 
 export default class GiftTabView extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class GiftTabView extends Component {
       index: 0
     };
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   indexChange(index) {
     this.setState({
@@ -41,13 +42,12 @@ export default class GiftTabView extends Component {
   _renderTabBar = props => {
     const focusedColor = '#89b53a';
     const normalColor = '#4d5153';
-    const colorWhite = '#fff';
     return (
       <TabBar
         {...props}
         style={[styles.tabBar]}
         tabStyle={{ width: 'auto', padding: 0 }}
-        indicatorStyle={{ backgroundColor: colorWhite }}
+        indicatorStyle={{ backgroundColor: colors.WHITE }}
         renderLabel={({ route, focused }) => (
           <View style={{ textAlign: 'left', marginRight: 24 }}>
             <Text

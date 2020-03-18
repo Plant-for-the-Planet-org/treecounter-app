@@ -3,6 +3,7 @@ import React from 'react';
 import { Animated, StyleSheet, View, BackHandler } from 'react-native';
 import { withNavigation, HeaderBackButton } from 'react-navigation';
 import styles from '../../styles/common/header.native';
+import colors from '../../utils/contants';
 
 class Header extends React.PureComponent {
   _navigateBack = () => {
@@ -18,7 +19,7 @@ class Header extends React.PureComponent {
     return (
       <HeaderBackButton
         onPress={this._navigateBack}
-        pressColorAndroid={this.props.tintColor || '#fff'}
+        pressColorAndroid={this.props.tintColor || colors.WHITE}
         tintColor={this.props.tintColor}
         title={this.props.backButtonTitle || null}
         truncatedTitle={this.props.backButtonTruncatedTitle || null}

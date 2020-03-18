@@ -7,8 +7,9 @@ import styles from '../../styles/selectplantproject/selectplantproject-snippet.n
 import { convertNumber, formatNumber } from '../../utils/utils';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import colors from '../../utils/contants';
 
-const flagIcon = <Icon name="flag" size={18} color="#ffffff" />;
+const flagIcon = <Icon name="flag" size={18} color={colors.WHITE} />;
 
 class PlantedProgressBar extends React.Component {
   constructor(props) {
@@ -40,21 +41,21 @@ class PlantedProgressBar extends React.Component {
             style={
               treeCountWidth > 0
                 ? {
-                    height: '100%',
-                    flexDirection: 'row',
-                    backgroundColor: colors.backgroundColor,
-                    borderColor: colors.borderColor,
-                    width: treeCountWidth + '%',
-                    paddingRight: 10,
-                    padding: 5,
-                    borderTopRightRadius: treeCountWidth < 100 ? 5 : 0,
-                    borderBottomRightRadius: treeCountWidth < 100 ? 5 : 7,
-                    borderWidth: 0.5,
-                    ...treePlantedChildContainerStyle
-                  }
+                  height: '100%',
+                  flexDirection: 'row',
+                  backgroundColor: colors.backgroundColor,
+                  borderColor: colors.borderColor,
+                  width: treeCountWidth + '%',
+                  paddingRight: 10,
+                  padding: 5,
+                  borderTopRightRadius: treeCountWidth < 100 ? 5 : 0,
+                  borderBottomRightRadius: treeCountWidth < 100 ? 5 : 7,
+                  borderWidth: 0.5,
+                  ...treePlantedChildContainerStyle
+                }
                 : {
-                    padding: 5
-                  }
+                  padding: 5
+                }
             }
           />
           <View

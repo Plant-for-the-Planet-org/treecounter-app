@@ -8,7 +8,7 @@ import tabStyles from '../../styles/common/tabbar';
 import HeaderNew from './../Header/HeaderNew';
 import { SafeAreaView } from 'react-navigation';
 import i18n from '../../locales/i18n';
-import colors from "../../utils/contants";
+import colors from '../../utils/contants';
 
 export default class ChallengeTabView extends Component {
   constructor(props) {
@@ -43,7 +43,6 @@ export default class ChallengeTabView extends Component {
   _renderTabBar = props => {
     const focusedColor = '#89b53a';
     const normalColor = '#4d5153';
-    const colorWhite = '#fff';
     return (
       <TabBar
         useNativeDriver
@@ -51,7 +50,7 @@ export default class ChallengeTabView extends Component {
         {...props}
         style={[tabStyles.tabBar]}
         tabStyle={{ width: 'auto', padding: 0 }}
-        indicatorStyle={{ backgroundColor: colorWhite }}
+        indicatorStyle={{ backgroundColor: colors.WHITE }}
         renderLabel={({ route, focused }) => (
           <View style={{ textAlign: 'left', marginRight: 24 }}>
             <Text

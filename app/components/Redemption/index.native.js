@@ -21,6 +21,7 @@ import { Formik } from 'formik';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderNew from './../Header/HeaderNew.native';
 import buttonStyles from '../../styles/common/button.native';
+import colors from '../../utils/contants.js';
 
 const height = Dimensions.get('window').height;
 export default function Redemption(props) {
@@ -58,7 +59,6 @@ export default function Redemption(props) {
     };
   }, []);
 
-  const white = '#ffffff';
   const lockedButton = 'rgba(137, 181, 58, 0.19)';
 
   return (
@@ -92,25 +92,25 @@ export default function Redemption(props) {
               }
             });
         }}
-        // validate={
-        //   values => {
-        //     let errors = {};
-        //     setFormError('')
-        //     props.validateCodeAction({
-        //       type: 'gift',
-        //       code: values.code
-        //     }).then(res => {
-        //       if (res.data.status === "error") {
-        //         setFormError(res.data.errorText)
-        //         debug(res.data.errorText)
-        //       } else {
-        //         setFormError('')
-        //       }
-        //     })
-        //     errors.code = formError;
-        //     return errors;
-        //   }
-        // }
+      // validate={
+      //   values => {
+      //     let errors = {};
+      //     setFormError('')
+      //     props.validateCodeAction({
+      //       type: 'gift',
+      //       code: values.code
+      //     }).then(res => {
+      //       if (res.data.status === "error") {
+      //         setFormError(res.data.errorText)
+      //         debug(res.data.errorText)
+      //       } else {
+      //         setFormError('')
+      //       }
+      //     })
+      //     errors.code = formError;
+      //     return errors;
+      //   }
+      // }
       >
         {props => (
           <>
@@ -185,38 +185,38 @@ export default function Redemption(props) {
                     ]}
                   >
                     {loadButton ? (
-                      <ActivityIndicator size="large" color={white} />
+                      <ActivityIndicator size="large" color={colors.WHITE} />
                     ) : (
-                      <Text style={buttonStyles.actionButtonText}>
-                        {i18n.t('label.validate_code')}
-                      </Text>
-                    )}
+                        <Text style={buttonStyles.actionButtonText}>
+                          {i18n.t('label.validate_code')}
+                        </Text>
+                      )}
                   </View>
                 </View>
               ) : (
-                <TouchableOpacity
-                  style={[
-                    buttonStyles.actionButtonTouchable,
-                    { alignSelf: 'center', paddingHorizontal: 24 },
-                    Platform.OS === 'ios'
-                      ? height < 500
-                        ? { bottom: '14%' }
-                        : { bottom: '6%' }
-                      : null
-                  ]}
-                  onPress={props.handleSubmit}
-                >
-                  <View style={[buttonStyles.actionButtonView]}>
-                    {loadButton ? (
-                      <ActivityIndicator size="large" color={white} />
-                    ) : (
-                      <Text style={buttonStyles.actionButtonText}>
-                        {i18n.t('label.validate_code')}
-                      </Text>
-                    )}
-                  </View>
-                </TouchableOpacity>
-              )
+                  <TouchableOpacity
+                    style={[
+                      buttonStyles.actionButtonTouchable,
+                      { alignSelf: 'center', paddingHorizontal: 24 },
+                      Platform.OS === 'ios'
+                        ? height < 500
+                          ? { bottom: '14%' }
+                          : { bottom: '6%' }
+                        : null
+                    ]}
+                    onPress={props.handleSubmit}
+                  >
+                    <View style={[buttonStyles.actionButtonView]}>
+                      {loadButton ? (
+                        <ActivityIndicator size="large" color={colors.WHITE} />
+                      ) : (
+                          <Text style={buttonStyles.actionButtonText}>
+                            {i18n.t('label.validate_code')}
+                          </Text>
+                        )}
+                    </View>
+                  </TouchableOpacity>
+                )
             ) : null}
 
             {buttonType === '>' ? (
@@ -229,14 +229,14 @@ export default function Redemption(props) {
                 onPress={props.handleSubmit}
               >
                 {loadButton ? (
-                  <ActivityIndicator size="large" color={white} />
+                  <ActivityIndicator size="large" color={colors.WHITE} />
                 ) : (
-                  <Image
-                    source={forward}
-                    resizeMode="cover"
-                    style={buttonStyles.actionButtonSmallImage}
-                  />
-                )}
+                    <Image
+                      source={forward}
+                      resizeMode="cover"
+                      style={buttonStyles.actionButtonSmallImage}
+                    />
+                  )}
               </TouchableOpacity>
             ) : null}
           </>

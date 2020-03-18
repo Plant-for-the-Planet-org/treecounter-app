@@ -11,6 +11,7 @@ import i18n from '../../../locales/i18n';
 import styles from '../../../styles/header/search_layout';
 import searchBarStyles from '../../../styles/header/search_bar';
 import UserProfileImage from '../../Common/UserProfileImage';
+import colors from '../../../utils/contants';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -19,7 +20,7 @@ class SearchUser extends React.Component {
   static defaultProps = {
     debounce: 500,
     headerBackgroundColor: '#b9d384',
-    headerTintColor: '#fff'
+    headerTintColor: colors.WHITE
   };
   constructor(props) {
     super(props);

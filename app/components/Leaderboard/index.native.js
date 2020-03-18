@@ -88,8 +88,8 @@ export default class Leaderboard extends Component {
                     onPress={
                       isPrivate
                         ? () => {
-                            return;
-                          }
+                          return;
+                        }
                         : this._handleItemPress
                     }
                     image={result.image}
@@ -106,8 +106,8 @@ export default class Leaderboard extends Component {
               })}
             </View>
           ) : (
-            <LoadingIndicator contentLoader screen="LeaderBoard" />
-          )}
+              <LoadingIndicator contentLoader screen="LeaderBoard" />
+            )}
         </CardLayout>
       );
 

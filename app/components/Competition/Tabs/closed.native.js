@@ -105,7 +105,6 @@ export default class ClosedCompetitions extends Component {
       <ScrollView
         contentContainerStyle={[
           scrollStyle.styleContainer,
-          { paddingBottom: 72 }
         ]}
         refreshControl={
           <RefreshControl

@@ -15,6 +15,7 @@ import { right_arrow_button } from '../../assets';
 import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
 import scrollStyle from '../../styles/common/scrollStyle.native';
 import NumberFormat from '../Common/NumberFormat.native';
+import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 
@@ -99,7 +100,6 @@ class PlantProjectFull extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
-            scrollStyle.styleContainer,
             {
               backgroundColor: backgroundColor
             }
@@ -157,10 +157,10 @@ class PlantProjectFull extends React.Component {
         ) : null}
       </SafeAreaView>
     ) : (
-      <View style={{ flex: 1, marginTop: -20 }}>
-        <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
-      </View>
-    );
+        <View style={{ flex: 1, marginTop: -20 }}>
+          <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
+        </View>
+      );
   }
 }
 

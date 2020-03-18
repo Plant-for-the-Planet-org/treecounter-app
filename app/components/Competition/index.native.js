@@ -14,7 +14,7 @@ import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured com
 import AllCompetitions from './Tabs/all.native'; // Shows all competitions
 
 import HeaderStatic from './../Header/HeaderStatic';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 class Competiton extends React.Component {
   constructor(props) {

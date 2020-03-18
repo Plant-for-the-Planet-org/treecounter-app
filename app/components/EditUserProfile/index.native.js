@@ -20,7 +20,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import tabStyles from '../../styles/common/tabbar';
 import HeaderNew from './../Header/HeaderNew';
 import { SafeAreaView } from 'react-navigation';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 const Form = t.form.Form;
 function UserProfileTemplate(locals) {

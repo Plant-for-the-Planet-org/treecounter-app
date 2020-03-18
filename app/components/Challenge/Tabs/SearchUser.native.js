@@ -11,7 +11,7 @@ import i18n from '../../../locales/i18n';
 import searchBarStyles from '../../../styles/header/search_bar.native';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import UserProfileImage from '../../Common/UserProfileImage';
-import colors from '../../../utils/contants';
+import colors from '../../../utils/constants';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;

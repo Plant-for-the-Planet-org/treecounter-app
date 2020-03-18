@@ -7,7 +7,7 @@ import GiftToUser from './Tabs/GiftUser';
 import GiftEmail from './Tabs/GiftEmail';
 
 import i18n from '../../locales/i18n';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 export default class GiftTabView extends Component {
   constructor(props) {

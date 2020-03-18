@@ -21,7 +21,7 @@ import { Formik } from 'formik';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderNew from './../Header/HeaderNew.native';
 import buttonStyles from '../../styles/common/button.native';
-import colors from '../../utils/contants.js';
+import colors from '../../utils/constants';
 
 const height = Dimensions.get('window').height;
 export default function Redemption(props) {

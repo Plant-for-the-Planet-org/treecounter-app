@@ -9,7 +9,7 @@ import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 //const LicenseInfo = require('./LicenseInfo.json');
 import HeaderNew from './../Header/HeaderNew.native';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 //Run license-checker --production  --json > license.json to fetch license info from package.json:
 //Copy paste required and specific license info in LicenseInfo.json file under app or web specific

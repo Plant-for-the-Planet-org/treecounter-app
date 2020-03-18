@@ -18,7 +18,7 @@ import { flatListContainerStyle } from '../../../styles/selectplantproject/selec
 import { trees } from './../../../assets';
 import i18n from '../../../locales/i18n.js';
 import LoadingIndicator from '../../Common/LoadingIndicator.native';
-import colors from '../../../utils/contants';
+import colors from '../../../utils/constants';
 
 export default class FeaturedProjects extends PureComponent {
   constructor(props) {

@@ -7,7 +7,7 @@ import styles from '../../styles/selectplantproject/selectplantproject-snippet.n
 import { convertNumber, formatNumber } from '../../utils/utils';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 const flagIcon = <Icon name="flag" size={18} color={colors.WHITE} />;
 

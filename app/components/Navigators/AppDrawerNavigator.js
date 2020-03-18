@@ -61,7 +61,7 @@ import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard
 import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',

@@ -10,7 +10,7 @@ import { context } from '../../config';
 import styles from '../../styles/faq';
 import HeaderNew from './../Header/HeaderNew.native';
 import i18n from '../../locales/i18n';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 export default class Imprint extends Component {
   constructor(props) {

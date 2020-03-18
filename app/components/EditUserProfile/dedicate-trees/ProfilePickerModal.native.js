@@ -14,7 +14,7 @@ import CardLayout from '../../Common/Card';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 import { delimitNumbers } from '../../../utils/utils';
 import HeaderNew from '../../Header/HeaderNew.native';
-import colors from '../../../utils/contants';
+import colors from '../../../utils/constants';
 
 class ProfilePickerModal extends Component {
   constructor(props) {

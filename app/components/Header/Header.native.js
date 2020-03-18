@@ -3,7 +3,7 @@ import React from 'react';
 import { Animated, StyleSheet, View, BackHandler } from 'react-native';
 import { withNavigation, HeaderBackButton } from 'react-navigation';
 import styles from '../../styles/common/header.native';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 class Header extends React.PureComponent {
   _navigateBack = () => {

@@ -8,7 +8,7 @@ import tabStyles from '../../styles/common/tabbar';
 import HeaderNew from './../Header/HeaderNew';
 import { SafeAreaView } from 'react-navigation';
 import i18n from '../../locales/i18n';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 export default class ChallengeTabView extends Component {
   constructor(props) {

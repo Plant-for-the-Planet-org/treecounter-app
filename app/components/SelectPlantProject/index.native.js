@@ -14,7 +14,7 @@ import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderStatic from './../Header/HeaderStatic';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 class SelectPlantTabView extends PureComponent {
   constructor(props) {

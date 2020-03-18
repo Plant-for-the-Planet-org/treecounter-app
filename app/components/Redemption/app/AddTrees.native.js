@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import { updateRoute } from '../../../helpers/routerHelper';
 import i18n from '../../../locales/i18n.js';
 import { delimitNumbers } from '../../../utils/utils';
-import colors from '../../../utils/contants';
+import colors from '../../../utils/constants';
 
 export default function AddTrees(props) {
   const [scrollY] = React.useState(new Animated.Value(0));

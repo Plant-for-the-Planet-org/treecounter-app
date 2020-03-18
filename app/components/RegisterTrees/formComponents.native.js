@@ -28,7 +28,7 @@ import buttonStyles from '../../styles/common/button.native';
 import NativeMapView from '../Map/NativeMapView.native';
 import CardLayout from '../Common/Card';
 import { getImageUrl } from '../../actions/apiRouting';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 export const FormikFormTree = props => {
   const [showClassification, setShowClassificationSwitch] = useState(

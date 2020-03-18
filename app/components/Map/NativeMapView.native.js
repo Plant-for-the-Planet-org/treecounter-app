@@ -31,7 +31,7 @@ import RoundedButton from '../Common/Button/RoundButton.native';
 import i18n from '../../locales/i18n';
 import buttonStyles from '../../styles/common/button.native';
 import markerImage from '../../assets/images/tree.png';
-import colors from '../../utils/contants';
+import colors from '../../utils/constants';
 
 const { googleMapApiKey } = context;
 const { width, height } = Dimensions.get('window');

@@ -443,7 +443,7 @@ class AnimatedViews extends React.Component {
             style={{
               flex: this.state.singleContributionID ? 1.5 : 0.3,
               position: 'absolute',
-              bottom: 0,
+              bottom: Platform.OS == 'ios' ? 0 : 40,
               backgroundColor: 'transparent'
             }}
             vertical
@@ -725,7 +725,7 @@ const styles = StyleSheet.create({
   },
   myLocationIcon: {
     position: 'absolute',
-    bottom: screen.height * 0.20,
+    bottom: '41%',
     right: 20,
     padding: 15,
     backgroundColor: '#fff',
@@ -736,7 +736,7 @@ const styles = StyleSheet.create({
   },
   fullScreenExitIcon: {
     position: 'absolute',
-    bottom: screen.height * 0.12,
+    bottom: '30%',
     right: 20,
     padding: 15,
     backgroundColor: '#fff',

@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <SafeAreaProvider style={{ flex: 1 }}>
         <SafeAreaView
-          forceInset={{ top: 'never', bottom: 'always' }}
+          forceInset={{ top: 'never', bottom: 'never' }}
           style={{ flex: 1, backgroundColor: backgroundColor }}
         >
           <AppDrawerNavigatorContainer uriPrefix={'weplant://'} />

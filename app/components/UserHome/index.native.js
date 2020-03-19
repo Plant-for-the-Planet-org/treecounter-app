@@ -307,6 +307,7 @@ export default class UserHome extends Component {
       isFullMapComponentModal
     } = this.state;
     debug(userProfile);
+    const white = 'white';
     return (
       <SafeAreaView style={{ elevation: 1, flex: 1 }} 
       forceInset={{ bottom: !isFullMapComponentModal ? 'always' : 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>
@@ -357,7 +358,7 @@ export default class UserHome extends Component {
                 <Image source={settings} style={{ height: 20, width: 20 }} />
               </TouchableOpacity>
             </View>
-            <View style={[styles.svgContainer, { marginTop: -20 }]}>
+            <View style={[styles.svgContainer, { marginTop: -50 }]}>
               <SvgContainer
                 {...svgData}
                 onToggle={toggleVal => this.updateSvg(toggleVal)}

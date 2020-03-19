@@ -1,5 +1,5 @@
 {
-  "mail_sent": "Acabamos de enviarle un correo electrónico.",
-  "secure_link": "Haga clic en el enlace que le enviamos para restablecer su contraseña. Si no recibió un correo electrónico, verifique su carpeta de spam.",
+  "mail_sent": "Acabamos de enviarte un correo electrónico.",
+  "secure_link": "Haz clic en el enlace que te enviamos para restablecer su contraseña. Si no recibiste un correo electrónico, verifique su carpeta de spam.",
   "try_again_login": "Intenta iniciar sesión de nuevo"
 }

@@ -6,7 +6,7 @@ const width = Dimensions.get('window').width;
 const squareDimension =
   Math.floor(
     Math.min(Dimensions.get('window').width, Dimensions.get('window').height) /
-      10
+    10
   ) * 10;
 
 export default EStyleSheet.create({
@@ -116,6 +116,7 @@ export default EStyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     padding: 20,
+    paddingTop: 0,
     justifyContent: 'space-around'
   },
   secondaryButton: {

@@ -61,6 +61,7 @@ import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard
 import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
+import colors from '../../utils/constants';
 
 import FullMapComponent from './../UserHome/FullMapComponent';
 const headerLabels = {
@@ -102,11 +103,11 @@ const headerLabels = {
   ['app_pledge_update_form']: 'label.updatePledge'
 };
 
-export const getAppNavigator = function(isLoggedIn, userProfile) {
+export const getAppNavigator = function (isLoggedIn, userProfile) {
   const searchNavigator = createStackNavigator(
     {
       Search: {
-        screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
+        screen: () => <SearchLayout searchInputUnderlineColorAndroid={colors.WHITE} />
       }
     },
     {
@@ -157,7 +158,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const getTitle = function(navigation) {
+  const getTitle = function (navigation) {
     let title = navigation.getParam('titleParam');
     try {
       if (!title) {
@@ -393,7 +394,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         let navigationConfig = {
           headerStyle: styles.container,
           headerTitleStyle: { paddingRight: 16 },
-          headerTintColor: '#fff',
+          headerTintColor: colors.WHITE,
           headerBackTitle: null,
           title: getTitle(navigation),
           headerRight: (

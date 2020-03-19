@@ -24,6 +24,7 @@ import styles from '../../../styles/newUserContributions/userContributions';
 // import styles from '../../../styles/newUserContributions/userContributions';
 import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
+import colors from '../../../utils/constants';
 
 // eslint-disable-next-line no-underscore-dangle
 const _goToURL = url => {
@@ -260,50 +261,47 @@ class UserContributionsDetails extends React.Component {
           i18n.t('label.geolocation_error_by_project');
       }
     }
-    const backgroundColor = '#fff';
-    console.log(this.props.contribution, 'this.props.contribution');
     return (
-      <ScrollView style={{ backgroundColor: { backgroundColor }, flex: 1 }}>
-        <TouchableOpacity onPress={this.props.onPressHeader}>
-          <UserContributions
-            isFromUserProfile={this.props.isFromUserProfile}
-            mayUpdate={mayUpdate}
-            treeCount={treeCount}
-            plantProjectName={plantProjectName}
-            plantProjectSlug={plantProjectSlug}
-            contributionPersonPrefix={contributionPersonPrefix}
-            contributionPerson={contributionPerson}
-            contributionPersonSlug={contributionPersonSlug}
-            navigation={this.props.navigation}
-            updateStaticRoute={updateStaticRoute}
-            treeClassification={treeClassification}
-            plantedDate={plantedDate}
-            showDelete={contributionType == 'planting'}
-            headerText={headerText}
-            plantProjectId={plantProjectId}
-            onClickDelete={() => {
-              this.props.deleteContribution(
-                this.props.contribution.id,
-                this.props.navigation
-              );
-              this.props.navigation.goBack();
-            }}
-            onClickEdit={() => {
-              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                selectedTreeId: this.props.contribution.id,
-                contribution: this.props.contribution
-              });
-            }}
-            onClickClose={() => {
-              this.props.navigation.goBack();
-            }}
-            contribution={this.props.contribution}
-          />
-        </TouchableOpacity>
+      <ScrollView style={{ backgroundColor: colors.WHITE, flex: 1 }}>
+        <UserContributions
+          mayUpdate={mayUpdate}
+          treeCount={treeCount}
+          plantProjectName={plantProjectName}
+          plantProjectSlug={plantProjectSlug}
+          contributionPersonPrefix={contributionPersonPrefix}
+          contributionPerson={contributionPerson}
+          contributionPersonSlug={contributionPersonSlug}
+          navigation={this.props.navigation}
+          updateStaticRoute={updateStaticRoute}
+          treeClassification={treeClassification}
+          plantedDate={plantedDate}
+          showDelete={contributionType == 'planting'}
+          headerText={headerText}
+          plantProjectId={plantProjectId}
+          onPlantProjectClick={this.onPlantProjectClick}
+          onClickDelete={() => {
+            this.props.deleteContribution(
+              this.props.contribution.id,
+              this.props.navigation
+            );
+            this.props.navigation.goBack();
+          }}
+          onClickEdit={() => {
+            this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
+              selectedTreeId: this.props.contribution.id,
+              contribution: this.props.contribution
+            });
+          }}
+          onClickClose={() => {
+            this.props.navigation.goBack();
+          }}
+          contribution={this.props.contribution}
+        />
 
         {/* displays image carousel if any image or video is available */}
-        {contributionOrPlantedImages &&
-          contributionOrPlantedImages.length > 0 && (
+        {(videoUrl ||
+          (contributionOrPlantedImages &&
+            contributionOrPlantedImages.length > 0)) && (
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -313,14 +311,18 @@ class UserContributionsDetails extends React.Component {
                 marginVertical: 30
               }}
             >
+              {/* {debug('\x1b[46m \x1b[30m video', videoUrl)} */}
               {videoUrl ? <VideoContainer url={videoUrl} /> : null}
               {/* TODO Add thumbnail for video */}
-              <PlantProjectImageCarousel
-                resizeMode={'cover'}
-                images={contributionOrPlantedImages}
-                aspectRatio={16 / 9}
-                videoUrl={videoUrl}
-              />
+              {contributionOrPlantedImages &&
+                contributionOrPlantedImages.length > 0 && (
+                  <PlantProjectImageCarousel
+                    resizeMode={'cover'}
+                    images={contributionOrPlantedImages}
+                    aspectRatio={16 / 9}
+                    videoUrl={videoUrl}
+                  />
+                )}
             </ScrollView>
           )}
 

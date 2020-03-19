@@ -10,7 +10,6 @@ import {
   Text,
   SafeAreaView
 } from 'react-native';
-
 import MapView, {
   ProviderPropType,
   Marker,
@@ -36,8 +35,6 @@ const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const CARD_HEIGHT = 100;
-
-
 const ITEM_SPACING = -5;
 const ITEM_PREVIEW = 18;
 const ITEM_WIDTH = screen.width - 2 * ITEM_SPACING - 2 * ITEM_PREVIEW;
@@ -108,12 +105,8 @@ function getMarkerState(panX, panY, scrollY, i) {
     extrapolate: 'clamp'
   });
 
-  // if i === index: [0 => 0]
-  // if i !== index: [0 => 1]
   opacity = Animated.multiply(isNotIndex, opacity);
 
-  // if i === index: [1 => 1]
-  // if i !== index: [1 => 0]
   opacity = opacity.interpolate({
     inputRange: [0, 1],
     outputRange: [1, 0]
@@ -199,7 +192,6 @@ class AnimatedViews extends React.Component {
     };
   }
 
-
   setMapPadding = () => {
     return {
       top: 0,
@@ -208,9 +200,6 @@ class AnimatedViews extends React.Component {
       left: 0
     };
   };
-
-
-
 
   onMapReady = () => {
     const { panX, panY, scrollY } = this.state;
@@ -243,7 +232,6 @@ class AnimatedViews extends React.Component {
   };
 
   getValue = (x, spacing) => {
-    // let index = Math.floor(value / 150 + 0.3);
     const plus = x % spacing < spacing / 2 ? 0 : spacing;
     let index = Math.round(x / spacing) * spacing + plus;
     index = Math.abs(index);
@@ -271,7 +259,7 @@ class AnimatedViews extends React.Component {
             350
           );
         } catch (e) {
-          // console.log('Nothing');
+          console.log(JSON.stringify(e))
         }
       }
     }, 10);
@@ -288,14 +276,10 @@ class AnimatedViews extends React.Component {
         350
       );
     } catch (e) {
-      // console.log('Nothing 2');
+      console.log(JSON.stringify(e))
     }
   };
   componentWillReceiveProps(nextProps) {
-    // console.log(
-    //   nextProps.singleContributionID,
-    //   'nextProps.singleContributionID -----'
-    // );
     if (this.state.singleContributionID == null) {
       if (nextProps.singleContributionID !== this.state.singleContributionID) {
         this.setState(
@@ -306,12 +290,6 @@ class AnimatedViews extends React.Component {
                 let activeMarker = this.state.markers.find(
                   x => x.id == nextProps.singleContributionID
                 );
-                // console.log(
-                //   nextProps.singleContributionID,
-                //   this.state.markers,
-                //   activeMarker,
-                //   '284 -----------'
-                // );
                 this.mapView.animateToRegion(
                   {
                     latitude: activeMarker.geoLatitude,
@@ -323,7 +301,7 @@ class AnimatedViews extends React.Component {
                 );
               }
             } catch (e) {
-              // console.log(e, 'Nothing 1');
+              console.log(JSON.stringify(e))
             }
           }
         );
@@ -338,36 +316,12 @@ class AnimatedViews extends React.Component {
       }
     }
   }
-  // static getDerivedStateFromProps(props,state){
-  // console.log(props.singleContributionID ,state, 'getDerivedStateFromProps')
-  //   if(!state.singleContributionID){
-  //     return {
-  //       singleContributionID : props.singleContributionID
-  //     }
-  //   }
-  // }
-  // shouldcomponentupdate(nextProps, nextState){
 
-  // }
-  // componentDidMount (){
-  //   if(this.props.singleContributionID){
-  //     this.setState({
-  //       singleContributionID : this.props.singleContributionID
-  //     })
-  //   }
-  // }
   onPressHeader = id => {
-    //
-    // Set single Contribution ID To display
-    // alert("Bao rami")
-    // this.props.toggleIsFullMapComp()
-    // console.log(this.state.singleContributionID);
-    // console.log(id);
     if (id) {
       this.setState({ singleContributionID: id });
     } else {
       if (this.state.singleContributionID) {
-        // console.log('set to undefined yar');
         this.setState({ singleContributionID: undefined });
       } else {
         this.props.toggleIsFullMapComp(true);
@@ -377,7 +331,7 @@ class AnimatedViews extends React.Component {
               this.state.markers.map(x => String(x.id))
             );
           } catch (e) {
-            // console.log(e, 'Nothing');
+            console.log(JSON.stringify(e))
           }
         }, 3000);
       }
@@ -397,23 +351,15 @@ class AnimatedViews extends React.Component {
       this.state.markers !== null
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
         : null;
-    // console.log(activeMarker, 'activeMarker -------');
     return (
       <View style={styles.container}>
-        {/* <SafeAreaView forceInset={{ bottom: 'always' }} /> */}
         <MapView
           mapPadding={this.setMapPadding()}
           onMapReady={this.onMapReady}
           ref={map => (this.mapView = map)}
           customMapStyle={mapStyle}
           provider={PROVIDER_GOOGLE}
-          style={[
-            styles.map,
-            {
-              flex: this.state.singleContributionID ? 0.5 : 1,
-              // marginBottom: 100
-            }
-          ]}
+          style={[styles.map, { flex: this.state.singleContributionID ? 0.5 : 1, }]}
           initialRegion={region}
         >
           {markers
@@ -475,7 +421,6 @@ class AnimatedViews extends React.Component {
                       }
                     ]}
                   >
-
                     <View style={styles.card} key={i}>
                       <View style={styles.textContent}>
                         <ListItem
@@ -544,20 +489,16 @@ class AnimatedViews extends React.Component {
 
 const ListItem = ({ marker, onPressHeader }) => {
   let headerText = undefined;
-
   const {
     treeCount,
     givee,
-    giveeSlug,
     giver,
-    giverSlug,
     cardType,
     contributionType,
     isGift,
     redemptionCode,
     treeType,
   } = marker;
-
   if (treeType === null) {
     if (treeCount > 1) {
       headerText =
@@ -592,42 +533,19 @@ const ListItem = ({ marker, onPressHeader }) => {
     headerText = headerText + ' ' + i18n.t('label.donated');
   }
   if (isGift && givee) {
-    // if contribution type is planting and id Gift = true then contribution
-    // is dedicated
     if (contributionType === 'planting') {
-      // contributionPersonPrefix = i18n.t(
-      //   'label.usr_contribution_dedicated_to'
-      // );
+      // do nothing
     }
-    // contribution is gifted if contribution type is not planting
-    // and adds gifted to header text
     else {
       headerText = headerText + ' ' + i18n.t('label.gifted');
-      // contributionPersonPrefix = i18n.t('label.usr_contribution_to');
-    }
-    // sets the contribution person name
-    // contributionPerson = givee;
-
-    // sets slug if available
-    if (giveeSlug) {
-      // contributionPersonSlug = giveeSlug;
     }
   }
-
   if (giver) {
-    // contributionPerson = giver;
     headerText = headerText + ' ' + i18n.t('label.received');
-    // contributionPersonPrefix = i18n.t('label.usr_contribution_from');
-    if (giverSlug) {
-      // contributionPersonSlug = giverSlug;
-    }
   }
   if (redemptionCode && givee) {
     headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
   }
-
-  // console.log(headerText, 'headerTextheaderTextheaderText');
-
   return (
     <TouchableOpacity
       onPress={() => onPressHeader(marker.id)}
@@ -703,11 +621,9 @@ const styles = StyleSheet.create({
   map: {
     backgroundColor: 'transparent',
     flex: 1,
-    // position: 'absolute', height: '100%'
   },
   item: {
     width: ITEM_WIDTH,
-    // height: screen.height + 2 * ITEM_PREVIEW_HEIGHT,
     backgroundColor: 'white',
     marginHorizontal: ITEM_SPACING / 2,
     overflow: 'hidden',
@@ -756,7 +672,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
     height: CARD_HEIGHT,
-    // width: width * 0.9,
     overflow: 'hidden',
     borderWidth: 0,
     borderColor: 'red',

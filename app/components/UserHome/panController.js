@@ -45,19 +45,6 @@ class PanController extends React.Component {
     //...PanResponderPropTypes,
   };
 
-  // getInitialState() {
-  //     //TODO:
-  //     // it's possible we want to move some props over to state.
-  //     // For example, xBounds/yBounds might need to be
-  //     // calculated/updated automatically
-  //     //
-  //     // This could also be done with a higher-order component
-  //     // that just massages props passed in...
-  //     return {
-  //
-  //     };
-  // },
-
   responder = null;
   listener = null;
   direction = null;

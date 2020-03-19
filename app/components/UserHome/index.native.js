@@ -27,14 +27,9 @@ import {
   settings
 } from './../../assets/';
 import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
-// import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import { getLocalRoute } from './../../actions/apiRouting';
-// import { delimitNumbers } from './../../utils/utils';
-// import { getImageUrl } from './../../actions/apiRouting';
 import styles from '../../styles/user-home';
-// import tabStyles from '../../styles/common/tabbar';
 import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
-// import CardLayout from '../Common/Card';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList.native';
@@ -45,13 +40,6 @@ import FullMapComponent from './FullMapComponent';
 import SafeAreaView from 'react-native-safe-area-view';
 import { withNavigation } from 'react-navigation'
 class UserHome extends Component {
-  // static navigationOptions = ({ navigation }) => {
-  //   console.log("props 9090909", navigation)
-  //   return {
-  //     tabBarVisible: false
-  //   }
-
-  // }
   constructor(props) {
     super(props);
 
@@ -310,7 +298,6 @@ class UserHome extends Component {
 
   getWholeComponent() {
     const { userProfile, navigation } = this.props;
-    console.log(navigation, 'navigation at renedr')
     const {
       svgData,
       showAllContributions,
@@ -319,11 +306,9 @@ class UserHome extends Component {
       isFullMapComponentModal
     } = this.state;
     debug(userProfile);
-    const white = 'white';
     return (
       <SafeAreaView style={{ elevation: 1, flex: 1 }}
         forceInset={{ bottom: !isFullMapComponentModal ? 'never' : 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>
-
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}
@@ -344,7 +329,6 @@ class UserHome extends Component {
                     profileImage={userProfile.image}
                   />
                 </View>
-
                 <View style={styles.userInfo}>
                   <View style={styles.userInfoName}>
                     <Text style={styles.nameStyle}>
@@ -353,17 +337,8 @@ class UserHome extends Component {
                   </View>
                 </View>
               </View>
-
               <TouchableOpacity
-                style={{
-                  zIndex: 10000,
-                  elevation: 10,
-                  height: 20,
-                  width: 20,
-                  alignSelf: 'flex-end',
-                  right: 20,
-                  top: -182
-                }}
+                style={styles.settingIconContainer}
                 onPress={() => {
                   navigation.openDrawer();
                 }}
@@ -571,12 +546,6 @@ class UserHome extends Component {
 
   render() {
     return this.getWholeComponent();
-
-    // !this.state.isFullMapComponentModal ?
-    //   (<SafeAreaView>
-    //     {this.getWholeComponent()}
-    //   </SafeAreaView>)
-    //   : <View>{this.getWholeComponent()}</View>
   }
 }
 
@@ -701,71 +670,4 @@ function DedicatedTrees(props) {
 }
 
 
-export default withNavigation(UserHome)
-
-
-// function RenderIndividualsList(props) {
-//   const { gifts, navigation } = props;
-//   const onPressListItem = (treeCounterId, title) => {
-//     if (treeCounterId) {
-//       navigation.navigate(getLocalRoute('app_treecounter'), {
-//         treeCounterId: treeCounterId,
-//         titleParam: title
-//       });
-//     }
-//   };
-//   if (gifts) {
-//     return (
-//       <View style={{ marginTop: 20 }}>
-//         <Text style={styles.sectionTitle}>My Supporters</Text>
-//         <FlatList
-//           showsVerticalScrollIndicator={false}
-//           data={gifts}
-//           renderItem={({ item, index }) => {
-//             return (
-//               <TouchableOpacity
-//                 onPress={() => {
-//                   onPressListItem(item.id, item.giverName);
-//                 }}
-//                 style={styles.oneContryContainer}
-//               >
-//                 <View style={styles.indexContainer}>
-//                   <Text style={styles.indexText}>{index + 1}</Text>
-//                 </View>
-//                 <View style={styles.countryFlagContainer}>
-//                   <Image
-//                     style={styles.countryFlagImage}
-//                     source={{
-//                       uri: getImageUrl('profile', 'avatar', item.giverAvatar)
-//                     }}
-//                   />
-//                 </View>
-//                 <View style={styles.countryBody}>
-//                   <Text numberOfLines={2} style={styles.countryNameText}>
-//                     {item.giverName
-//                       ? item.giverName
-//                       : i18n.t('label.anonymous')}
-//                   </Text>
-//                   <Text style={styles.treesText}>
-//                     <Text style={styles.treesCounter}>
-//                       {delimitNumbers(item.treeCount)}{' '}
-//                     </Text>
-//                     {i18n.t('label.trees')}
-//                   </Text>
-//                 </View>
-//               </TouchableOpacity>
-//             );
-//           }}
-//         />
-//       </View>
-//     );
-//   } else {
-//     return (
-//       <>
-//         <CountryLoader />
-//         <CountryLoader />
-//         <CountryLoader />
-//       </>
-//     );
-//   }
-// }
+export default withNavigation(UserHome);

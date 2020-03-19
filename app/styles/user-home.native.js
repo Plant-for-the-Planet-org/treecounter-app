@@ -14,6 +14,15 @@ export default EStyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
+  settingIconContainer: {
+    zIndex: 10000,
+    elevation: 10,
+    height: 20,
+    width: 20,
+    alignSelf: 'flex-end',
+    right: 20,
+    top: -182
+  },
   userProfileContainer: {
     padding: 10,
     marginBottom: 10,

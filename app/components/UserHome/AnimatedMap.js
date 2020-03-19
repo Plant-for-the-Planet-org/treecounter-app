@@ -406,7 +406,8 @@ class AnimatedViews extends React.Component {
             style={{
               flex: this.state.singleContributionID ? 1.5 : 0.3,
               position: 'absolute',
-              bottom: Platform.OS == 'ios' ? 0 : 40,
+              // bottom: 40,
+              bottom: 40,
               backgroundColor: 'transparent'
             }}
             vertical
@@ -456,7 +457,7 @@ class AnimatedViews extends React.Component {
           <>
             <TouchableOpacity
               style={styles.downArrowIcon}
-              onPress={() => this.onPressHeader(undefined, true)}
+              onPress={() => this.onPressHeader(undefined, this.props.isPressFromlist)}
             >
               <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>

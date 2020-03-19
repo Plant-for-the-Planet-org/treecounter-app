@@ -317,25 +317,40 @@ class AnimatedViews extends React.Component {
     }
   }
 
-  onPressHeader = id => {
-    if (id) {
-      this.setState({ singleContributionID: id });
+  onPressHeader = (id, isTopDownIconPress) => {
+    if (isTopDownIconPress) {
+      this.setState({ singleContributionID: undefined });
+      this.props.toggleIsFullMapComp(true);
+      setTimeout(() => {
+        try {
+          this.mapView.fitToSuppliedMarkers(
+            this.state.markers.map(x => String(x.id))
+          );
+        } catch (e) {
+          console.log(JSON.stringify(e))
+        }
+      }, 3000);
     } else {
-      if (this.state.singleContributionID) {
-        this.setState({ singleContributionID: undefined });
+      if (id) {
+        this.setState({ singleContributionID: id });
       } else {
-        this.props.toggleIsFullMapComp(true);
-        setTimeout(() => {
-          try {
-            this.mapView.fitToSuppliedMarkers(
-              this.state.markers.map(x => String(x.id))
-            );
-          } catch (e) {
-            console.log(JSON.stringify(e))
-          }
-        }, 3000);
+        if (this.state.singleContributionID) {
+          this.setState({ singleContributionID: undefined });
+        } else {
+          this.props.toggleIsFullMapComp(true);
+          setTimeout(() => {
+            try {
+              this.mapView.fitToSuppliedMarkers(
+                this.state.markers.map(x => String(x.id))
+              );
+            } catch (e) {
+              console.log(JSON.stringify(e))
+            }
+          }, 3000);
+        }
       }
     }
+
   };
 
   render() {
@@ -351,6 +366,7 @@ class AnimatedViews extends React.Component {
       this.state.markers !== null
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
         : null;
+    console.log('this.state.markers', this.state.markers)
     return (
       <View style={styles.container}>
         <MapView
@@ -440,7 +456,7 @@ class AnimatedViews extends React.Component {
           <>
             <TouchableOpacity
               style={styles.downArrowIcon}
-              onPress={() => this.onPressHeader()}
+              onPress={() => this.onPressHeader(undefined, true)}
             >
               <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>
@@ -534,7 +550,7 @@ const ListItem = ({ marker, onPressHeader }) => {
   }
   if (isGift && givee) {
     if (contributionType === 'planting') {
-      // do nothing
+      // do
     }
     else {
       headerText = headerText + ' ' + i18n.t('label.gifted');
@@ -546,6 +562,9 @@ const ListItem = ({ marker, onPressHeader }) => {
   if (redemptionCode && givee) {
     headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
   }
+
+  // console.log(headerText, "headerText")
+  // console.log(marker, "MARKer")
   return (
     <TouchableOpacity
       onPress={() => onPressHeader(marker.id)}

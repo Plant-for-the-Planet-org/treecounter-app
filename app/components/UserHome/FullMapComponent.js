@@ -7,11 +7,13 @@ export default ({
   toggleIsFullMapComp,
   navigation,
   userContributions,
-  singleContributionID
+  singleContributionID,
+  isPressFromlist
 }) => {
   return (
     <View style={styles.container}>
       <AnimatedViews
+        isPressFromlist={isPressFromlist}
         singleContributionID={singleContributionID}
         isFullMapComponentModal={isFullMapComponentModal}
         toggleIsFullMapComp={toggleIsFullMapComp}

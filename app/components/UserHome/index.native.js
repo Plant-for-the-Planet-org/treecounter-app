@@ -50,6 +50,7 @@ class UserHome extends Component {
       svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
+      isPressFromlist: false,
       singleContributionID: undefined,
       isFullMapComponentModal: false,
       svgData: svgData,
@@ -280,6 +281,7 @@ class UserHome extends Component {
         }}
       >
         <FullMapComponent
+          isPressFromlist={this.state.isPressFromlist}
           singleContributionID={this.state.singleContributionID}
           isFullMapComponentModal={isFullMapComponentModal}
           toggleIsFullMapComp={this.toggleIsFullMapComp}
@@ -292,7 +294,7 @@ class UserHome extends Component {
   };
 
   onPressSingleContribution = id => {
-    this.setState({ singleContributionID: id }, () => {
+    this.setState({ singleContributionID: id, isPressFromlist: true }, () => {
       this.toggleIsFullMapComp();
     });
   };

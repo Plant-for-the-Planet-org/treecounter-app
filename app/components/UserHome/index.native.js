@@ -38,7 +38,8 @@ import CompetitionSnippet from './app/CompetitionSnippet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullMapComponent from './FullMapComponent';
 import SafeAreaView from 'react-native-safe-area-view';
-import { withNavigation } from 'react-navigation'
+import { withNavigation } from 'react-navigation';
+import { fullscreen_icon } from '../../assets/index'
 class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -263,7 +264,7 @@ class UserHome extends Component {
         onPress={this.toggleIsFullMapComp}
         style={styles.fullScreenIcon}
       >
-        <Icon name={'fullscreen'} size={30} color={'#4C5153'} />
+        <Image source={fullscreen_icon} />
       </TouchableOpacity>
     );
 

@@ -32,11 +32,12 @@ export default EStyleSheet.create({
     position: 'absolute',
     bottom: 10,
     right: 10,
-    padding: 15,
+    padding: 11.25,
     backgroundColor: '#fff',
     borderRadius: 100,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+
   },
   userProfileImage: {
     // borderWidth: 4,

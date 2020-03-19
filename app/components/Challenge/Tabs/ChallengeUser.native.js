@@ -8,7 +8,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 import challengeStyles from '../../../styles/challenge';
-import TabContainer from '../../../containers/Menu/TabContainer';
+// import TabContainer from '../../../containers/Menu/TabContainer';
 import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import styles from '../../../styles/profilepicker.native';
@@ -37,7 +37,7 @@ class ChallengeUser extends Component {
     this.onSearchResultClick = this.onSearchResultClick.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!this.props.challengeSuccess && nextProps.challengeSuccess) {
       let currentYear = new Date().getFullYear(),
         years = [];
@@ -198,7 +198,7 @@ class ChallengeUser extends Component {
             challengeStatus={this.props.challengeStatus}
           />
         </ScrollView>
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </View>
     );
   }

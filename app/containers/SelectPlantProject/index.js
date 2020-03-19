@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import { updateRoute } from '../../helpers/routerHelper';
-
 import {
   getAllPlantProjectsSelector,
   currenciesSelector
@@ -59,7 +59,7 @@ class SelectPlantProjectContainer extends PureComponent {
         .length
     ) {
       let data = await this.props.loadProjects('featured');
-      console.log('===got data in await in did mount:', data);
+      debug('===got data in await in did mount:', data);
     }
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
@@ -72,7 +72,7 @@ class SelectPlantProjectContainer extends PureComponent {
     let plantProjects = this.props.plantProjects.filter(
       project => project.allowDonations
     );
-    console.log('==== plantprojects', plantProjects);
+    debug('==== plantprojects', plantProjects);
     return !plantProjects.length ? null : (
       <SelectPlantProject
         selectProject={this.selectPlantProjectAction}
@@ -92,7 +92,7 @@ class SelectPlantProjectContainer extends PureComponent {
     let project = this.props.plantProjects.find(
       project => project['id'] === id
     );
-    console.log(
+    debug(
       'project on more click=================',
       project,
       this.props.navigation.getParam('userForm')
@@ -114,7 +114,7 @@ class SelectPlantProjectContainer extends PureComponent {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
-      console.log(
+      debug(
         '---in selectplant project container... calling donate detail with',
         {
           id: id,

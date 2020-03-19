@@ -6,14 +6,15 @@ import {
   View,
   Image,
   RefreshControl,
-  FlatList
+  FlatList,
+  Animated
 } from 'react-native';
-import scrollStyle from '../../../styles/common/scrollStyle.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
 import { trees } from './../../../assets';
 import styles from '../../../styles/competition/competition-master.native';
 import i18n from '../../../locales/i18n';
+import scrollStyle from '../../../styles/common/scrollStyle.native';
 
 export default class AllCompetitions extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class AllCompetitions extends Component {
       refreshing: false
     };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let { allCompetitions } = this.props;
     let showAllCompetitions = [];
     let CurrentDate = new Date();
@@ -46,7 +47,7 @@ export default class AllCompetitions extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     let showAllCompetitions = [];
     let CurrentDate = new Date();
@@ -103,8 +104,7 @@ export default class AllCompetitions extends Component {
     return (
       <ScrollView
         contentContainerStyle={[
-          scrollStyle.styleContainer,
-          { paddingBottom: 72 }
+          scrollStyle.styleContainer
         ]}
         refreshControl={
           <RefreshControl
@@ -112,6 +112,14 @@ export default class AllCompetitions extends Component {
             onRefresh={this.onRefresh}
           />
         }
+        scrollEventThrottle={24}
+        onScroll={Animated.event([
+          {
+            nativeEvent: {
+              contentOffset: { y: this.props.scrollY }
+            }
+          }
+        ])}
       >
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>

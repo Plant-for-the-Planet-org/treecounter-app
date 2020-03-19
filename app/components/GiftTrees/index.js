@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import Slider from 'react-slick';
 import classNames from 'classnames';
-
+import { debug } from '../../debug';
 import Tabs from '../Common/Tabs';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card';
@@ -16,7 +16,6 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import { paymentFee } from '../../helpers/utils';
 import { getPreferredCurrency } from '../../actions/globalCurrency';
-
 import {
   individualSchemaOptions,
   receiptIndividualFormSchema,
@@ -134,7 +133,7 @@ export default class GiftTrees extends Component {
     this.updateSelectProject = this.updateSelectProject.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject) {
       this.setState({
         showSelectProject: false
@@ -163,18 +162,18 @@ export default class GiftTrees extends Component {
     this.setState({ showSelectProject: value });
   }
   getSuggestionAndSet(value) {
-    console.log('calling', value);
+    debug('calling', value);
     const { updatePageIndex, updateSelectProject, suggestionClicked } = this;
-    postDirectRequest('/suggest', 'q=' + value.trim())
+    postDirectRequest('/suggest.php', 'q=' + value.trim())
       .then(_suggestions => {
-        console.log('sugessions', _suggestions);
+        debug('sugessions', _suggestions);
         if (_suggestions.data.length && _suggestions.data[0].slug == value) {
           suggestionClicked(null, { suggestion: _suggestions.data[0] });
           updatePageIndex(1);
           updateSelectProject(true);
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   }
   handleTreeCountCurrencyChange(treeCountCurrencyData) {
     this.setState({
@@ -200,7 +199,7 @@ export default class GiftTrees extends Component {
   componentWillUnmount() {
     this.props.paymentClear();
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.state.context && this.state.context.slug) {
       this.getSuggestionAndSet(this.state.context.slug);
     }
@@ -586,10 +585,10 @@ export default class GiftTrees extends Component {
                     treeCount: this.state.selectedTreeCount
                   }}
                   onFailure={data =>
-                    console.log('/////////////////// payment failure ', data)
+                    debug('/////////////////// payment failure ', data)
                   }
                   onError={data =>
-                    console.log('/////////////////// payment error ', data)
+                    debug('/////////////////// payment error ', data)
                   }
                 />
               ) : null}

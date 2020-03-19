@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PlantedProgressBar from '../../../../../app/components/PlantProjects/PlantedProgressbar';
 import SecondaryButton from '../../../../../app/components/Common/Button/SecondaryButton';
 import { tree } from '../../../../../app/assets';
-
 import PropTypes from 'prop-types';
-import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
+// import ReactTooltipStyle from '../../../../../node_modules/react-tooltip/dist/style';
 import i18n from '../../../../../app/locales/i18n.js';
 import { getLocalRoute } from '../../../../../app/actions/apiRouting';
 
@@ -17,7 +16,7 @@ export default class App extends Component {
       planted: treecounter.countPlanted
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
     if (treecounter) {
       this.setState({
@@ -51,7 +50,8 @@ export default class App extends Component {
           {/* Apply CSS hooks here */}
           <style>{style}</style>
           {/* Apply React Tooltip Library CSS */}
-          <style>{ReactTooltipStyle}</style>
+          {/* TODO: removed as not existing any more, replace with something else?
+             <style>{ReactTooltipStyle}</style> */}
           <div className="widget-container" id={'widget-container'}>
             {this.props.showGraphics && (
               <div className={'pftp-widget-img__container'}>

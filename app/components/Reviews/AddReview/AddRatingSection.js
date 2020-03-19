@@ -11,17 +11,20 @@ import { AirbnbRating } from 'react-native-ratings';
 import ImagePicker from 'react-native-image-crop-picker';
 import DocumentPicker from 'react-native-document-picker';
 import { TextField } from 'react-native-material-textfield';
-import { attach } from './../../../assets';
 import RNFS from 'react-native-fs';
+import { debug } from '../../../debug';
+import { attach } from '../../../assets';
 import i18n from '../../../locales/i18n.js';
 import { getImageUrl } from '../../../actions/apiRouting';
-const { width } = Dimensions.get('window');
 import styles from '../../../styles/review.native';
 import AddImage from '../../Common/Forms/AddImage';
+
+const { width } = Dimensions.get('window');
+
 export default class AddRatingSection extends Component {
   constructor(props) {
     super(props);
-    console.log('props got in add rating:', props);
+    debug('props got in add rating:', props);
     let scoreObj = {};
     this.state = {
       id: props.review.id || undefined,
@@ -35,26 +38,26 @@ export default class AddRatingSection extends Component {
     };
     this.updateImages = this.updateImages.bind(this);
     this.deleteImage = this.deleteImage.bind(this);
-    console.log('after merging props in add rating', this.state);
+    debug('after merging props in add rating', this.state);
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.reviewIndexes &&
       !Object.keys(this.state.reviewIndexScores).length
     ) {
       let scoreObj = {};
       Object.keys(nextProps.reviewIndexes).map(index => {
-        console.log(index);
+        debug(index);
         scoreObj[index] = { score: 0 };
       });
       this.setState({ reviewIndexScores: scoreObj });
-      console.log('new props in add rating2', this.state);
+      debug('new props in add rating2', this.state);
     }
   }
   setStateAndUpdateParent(data) {
     this.setState(data, () => {
       this.props.onUpdate({ ...this.state });
-      console.log('setting on add rating:', this.state);
+      debug('setting on add rating:', this.state);
     });
   }
 
@@ -68,11 +71,11 @@ export default class AddRatingSection extends Component {
       forceJpg: true
     })
       .then(images => {
-        console.log('received image', images, images[0].data);
+        debug('received image', images, images[0].data);
         this.updateImages(images);
       })
       .catch(e => {
-        console.log('error', e);
+        debug('error', e);
       });
   }
   deleteImage(index) {
@@ -80,7 +83,7 @@ export default class AddRatingSection extends Component {
     let images = [...reviewImages];
     images = images.filter((data, i) => i !== index);
     reviewImages = [];
-    console.log(images, index, reviewImages);
+    debug(images, index, reviewImages);
     this.setStateAndUpdateParent({
       reviewImages: images
     });
@@ -95,7 +98,7 @@ export default class AddRatingSection extends Component {
         imageFile: image
       });
     });
-    console.log('updating review images:', reviewImages);
+    debug('updating review images:', reviewImages);
     this.setStateAndUpdateParent({
       reviewImages: reviewImages
     });
@@ -109,12 +112,12 @@ export default class AddRatingSection extends Component {
       includeBase64: true
     })
       .then(image => {
-        console.log('received image', image, image.data);
+        debug('received image', image, image.data);
         this.updateImages([image]);
       })
 
       .catch(e => {
-        console.log('error', e);
+        debug('error', e);
       });
   }
 
@@ -127,7 +130,7 @@ export default class AddRatingSection extends Component {
   }
 
   renderImage(image) {
-    console.log('image', image);
+    debug('image', image);
     return (
       <Image
         style={{ width: 200, height: 107, marginRight: 5, borderRadius: 2 }}
@@ -142,7 +145,7 @@ export default class AddRatingSection extends Component {
   async readContent(path) {
     RNFS.readFile(path, 'base64')
       .then(encoded => {
-        console.log('data', encoded);
+        debug('data', encoded);
         this.setStateAndUpdateParent({
           pdfFile: 'data:application/pdf;base64,' + encoded
         });
@@ -156,7 +159,7 @@ export default class AddRatingSection extends Component {
         type: [DocumentPicker.types.pdf],
         readContent: false
       });
-      console.log(
+      debug(
         'Found doc:',
         res.uri,
         res.type, // mime type
@@ -168,10 +171,10 @@ export default class AddRatingSection extends Component {
       this.readContent(res.uri);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
-        console.log('err', err);
+        debug('err', err);
         // User cancelled the picker, exit any dialogs or menus and move on
       } else {
-        console.log('err', err);
+        debug('err', err);
       }
     }
   }
@@ -185,12 +188,12 @@ export default class AddRatingSection extends Component {
       score: reviewIndexScores[type].score == rating ? 0 : rating
     };
     this.setStateAndUpdateParent({ reviewIndexScores });
-    console.log('rating', rating, type);
+    debug('rating', rating, type);
   }
   render() {
     let { reviewIndexes } = this.props;
     let { reviewIndexScores } = this.state;
-    console.log('index scores in add rating:', this.props);
+    debug('index scores in add rating:', this.props);
     const guideLineUrl =
       'https://startplanting.atlassian.net/wiki/spaces/PA/pages/25559041';
     return (
@@ -243,7 +246,7 @@ export default class AddRatingSection extends Component {
             lineWidth={1}
             blurOnSubmit={false}
             onChangeText={summary => {
-              console.log('summary', summary);
+              debug('summary', summary);
               this.setStateAndUpdateParent({ summary: summary });
             }}
             value={this.state.summary}
@@ -302,11 +305,10 @@ export default class AddRatingSection extends Component {
             title={i18n.t('label.add_pictures')}
             updateImages={this.updateImages}
             deleteImage={this.deleteImage}
-            images={this.state.reviewImages.map(
-              data =>
-                data.imageFile
-                  ? data.imageFile
-                  : getImageUrl('review', 'medium', data.image)
+            images={this.state.reviewImages.map(data =>
+              data.imageFile
+                ? data.imageFile
+                : getImageUrl('review', 'medium', data.image)
             )}
           />
 
@@ -324,7 +326,7 @@ export default class AddRatingSection extends Component {
           <Text
             onPress={() => {
               Linking.openURL(guideLineUrl).catch(err => {
-                console.log(err);
+                debug(err);
               });
             }}
             style={{

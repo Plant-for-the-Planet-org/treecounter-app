@@ -2,17 +2,12 @@
 import React, { Component } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar';
-import { Dimensions } from 'react-native';
+import { Text, View } from 'react-native';
 import GiftToUser from './Tabs/GiftUser';
 import GiftEmail from './Tabs/GiftEmail';
 
 import i18n from '../../locales/i18n';
-
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
+import colors from '../../utils/constants';
 
 export default class GiftTabView extends Component {
   constructor(props) {
@@ -26,7 +21,7 @@ export default class GiftTabView extends Component {
       index: 0
     };
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   indexChange(index) {
     this.setState({
@@ -45,13 +40,44 @@ export default class GiftTabView extends Component {
   };
 
   _renderTabBar = props => {
+    const focusedColor = '#89b53a';
+    const normalColor = '#4d5153';
     return (
       <TabBar
         {...props}
-        style={styles.tabBar}
-        tabStyle={{ width: Layout.window.width / 2 }}
-        labelStyle={styles.textStyle}
-        indicatorStyle={styles.textActive}
+        style={[styles.tabBar]}
+        tabStyle={{ width: 'auto', padding: 0 }}
+        indicatorStyle={{ backgroundColor: colors.WHITE }}
+        renderLabel={({ route, focused }) => (
+          <View style={{ textAlign: 'left', marginRight: 24 }}>
+            <Text
+              style={{
+                color: focused ? focusedColor : normalColor,
+                fontSize: 13,
+                fontFamily: 'OpenSans-SemiBold',
+                textTransform: 'capitalize',
+                textAlign: 'left'
+              }}
+            >
+              {route.title}
+            </Text>
+            {focused ? (
+              <View
+                style={[
+                  {
+                    width: '100%',
+                    marginTop: 11,
+                    backgroundColor: focusedColor,
+                    height: 3,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
+                    color: focusedColor
+                  }
+                ]}
+              />
+            ) : null}
+          </View>
+        )}
       />
     );
   };

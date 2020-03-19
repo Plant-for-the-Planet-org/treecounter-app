@@ -29,6 +29,7 @@
   "donated_on": "Gespendet am {{date}}",
   "planted_by": "Gepflanzt von {{tpo}}",
   "planted_on": "Gepflanzt am {{date}}",
+  "planted_at": "Gepflanzt am {{location}}",
   "added_on": "Hinzugefügt am {{date}}",
   "dedicated_to": "Gewidmet für",
   "dedicated_to_person": "{{person}} gewidmet",
@@ -46,6 +47,18 @@
   "usr_contribution_planted": "Gepflanzt",
   "usr_contribution_redeemed": "Eingelöst",
   "usr_contribution_dedicate": "Gewidmet",
+  "usr_contribution_from": "Von",
+  "usr_contribution_to": "An",
   "gifted_from_person": "Geschenk von {{person}}",
-  "gifted_to_person": "Geschenk an {{person}}"
+  "gifted_to_person": "Geschenk an {{person}}",
+  "active_recurrent_donations": "Aktive Dauerspenden",
+  "donated": "Gespendet",
+  "received": "Empfangen",
+  "gifted": "Geschenkt",
+  "registered_trees": "Registrierte Bäume",
+  "tree_donation": "Baumspende",
+  "redeemed_trees": "Eingelöste Bäume",
+  "geolocation_default_error": "Die Koordinaten für diese Baumregistrierung sind falsch.",
+  "geolocation_error_by_user": "Bitte aktualisiere die Registrierung mit korrekten Angaben.",
+  "geolocation_error_by_project": "Wir haben das Projekt informiert, sich zu aktualisieren."
 }

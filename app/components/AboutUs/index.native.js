@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { debug } from '../../debug';
 import { LargeMenuItem } from '../Menu/MenuItem.native';
-import { ScrollView, View, Linking } from 'react-native';
+import { ScrollView, View, Linking, Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
-import TabContainer from '../../containers/Menu/TabContainer';
+// import TabContainer from '../../containers/Menu/TabContainer';
 //const LicenseInfo = require('./LicenseInfo.json');
+import HeaderNew from './../Header/HeaderNew.native';
+import colors from '../../utils/constants';
 
 //Run license-checker --production  --json > license.json to fetch license info from package.json:
 //Copy paste required and specific license info in LicenseInfo.json file under app or web specific
@@ -21,18 +24,23 @@ class AboutUs extends Component {
       );
     }
 */
-    Linking.openURL(url).catch(err => console.log('Cannot open URI', err));
+    Linking.openURL(url).catch(err => debug('Cannot open URI', err));
   };
 
   render() {
     const version = DeviceInfo.getReadableVersion();
     // const buildNumber = DeviceInfo.getBuildNumber();
     return (
-      <View style={{ flex: 1 }}>
-        <ScrollView>
+      <View style={{ flex: 1, backgroundColor: colors.WHITE }}>
+        <HeaderNew
+          title={i18n.t('label.information')}
+          navigation={this.props.navigation}
+        />
+
+        <ScrollView style={{ marginTop: Platform.OS === 'ios' ? 160 : 120 }}>
           <LargeMenuItem
             onPress={() => {
-              //  console.log('open change log');
+              //  debug('open change log');
             }}
             title={version}
           />
@@ -50,7 +58,7 @@ class AboutUs extends Component {
           />
           <LargeMenuItem
             onPress={() => {
-              // console.log('open Third party here');
+              // debug('open Third party here');
               //TODO: this a is temporary solution until someone fixes the LicenseInfo component and updates LicenseInfo.json
               this.openGateWay(
                 'https://github.com/Plant-for-the-Planet-org/treecounter-app/network/dependencies'
@@ -62,7 +70,7 @@ class AboutUs extends Component {
             title={i18n.t('label.open_source_license')}
           />
         </ScrollView>
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </View>
     );
   }

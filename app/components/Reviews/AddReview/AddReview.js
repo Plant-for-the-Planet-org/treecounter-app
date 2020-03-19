@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Platform,
   ScrollView,
   Text,
   View,
@@ -7,29 +8,34 @@ import {
   Dimensions,
   Image
 } from 'react-native';
+// import { ScrollView } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { debug } from '../../../debug';
 import {
   selectedPlantProjectSelector,
   selectedReviewsSelector
 } from '../../../selectors';
-// import { ScrollView } from 'react-native-gesture-handler';
 import AddRatingSection from './AddRatingSection';
-const { width } = Dimensions.get('window');
 import { forward } from './../../../assets';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
-import { connect } from 'react-redux';
 import {
   addReview,
   updateReview,
   getReviewIndexes
 } from '../../../actions/reviews';
-import { bindActionCreators } from 'redux';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/review.native';
 // import { find } from 'lodash';
+import HeaderNew from './../../Header/HeaderNew.native';
+import colors from '../../../utils/constants';
+
+const { width } = Dimensions.get('window');
+
 class AddReview extends Component {
   constructor(props) {
     super(props);
-    console.log('props in add reviews', props);
+    debug('props in add reviews', props);
     this.state = {
       validationError: {},
       reviewIndexes: {},
@@ -43,26 +49,26 @@ class AddReview extends Component {
   }
   onUpdate(data) {
     this.setState({ review: data }, () => {
-      console.log('submitted', this.submitted);
+      debug('submitted', this.submitted);
       this.submitted && this.validate();
     });
   }
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     try {
       const { data } = await getReviewIndexes();
-      console.log('indexs', data);
+      debug('indexs', data);
       let obj = {};
       data.map(i => {
         obj[i.slug] = i;
       });
       this.setState({ reviewIndexes: obj });
     } catch (err) {
-      console.log('eror on reviewindex', err);
+      debug('eror on reviewindex', err);
     }
   }
   validate() {
     const { review } = this.state;
-    console.log('validating', review, !review.reviewIndexScores);
+    debug('validating', review, !review.reviewIndexScores);
     if (
       !review.reviewIndexScores ||
       !Object.keys(review.reviewIndexScores).filter(index =>
@@ -87,7 +93,7 @@ class AddReview extends Component {
     if (!this.validate()) return;
     const { review } = this.state;
 
-    console.log('review before submitting', review);
+    debug('review before submitting', review);
     try {
       if (this.state.review.id) {
         let {
@@ -121,16 +127,24 @@ class AddReview extends Component {
     }
   }
   render() {
-    console.log('state', this.state);
+    debug('state', this.state);
     return (
       <ScrollView
         contentContainerStyle={{
           paddingBottom: 80,
-          backgroundColor: '#fff',
+          backgroundColor: colors.WHITE,
           flexGrow: 1
         }}
       >
         {/*Header*/}
+        <HeaderNew
+          title={
+            this.state.review.id
+              ? i18n.t('label.edit_project_review')
+              : i18n.t('label.add_project_review')
+          }
+          navigation={this.props.navigation}
+        />
         <View
           style={{
             backgroundColor: 'white',
@@ -141,14 +155,10 @@ class AddReview extends Component {
             style={{
               width: width * 0.88,
               marginLeft: width * 0.06,
-              backgroundColor: 'white'
+              backgroundColor: 'white',
+              marginTop: Platform.OS === 'ios' ? 140 : 100
             }}
           >
-            <Text style={styles.reviewPageTitle}>
-              {this.state.review.id
-                ? i18n.t('label.edit_project_review')
-                : i18n.t('label.add_project_review')}
-            </Text>
             <Text style={styles.reviewPageSubTitle}>
               {this.props.selectedPlantProject.name}
             </Text>
@@ -172,7 +182,7 @@ class AddReview extends Component {
         <TouchableOpacity
           style={styles.pledgeSmallButton}
           onPress={() => {
-            console.log('plant project', this.props.selectedPlantProject);
+            debug('plant project', this.props.selectedPlantProject);
             this.create();
           }}
         >

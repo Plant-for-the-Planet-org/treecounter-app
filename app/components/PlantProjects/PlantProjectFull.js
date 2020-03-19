@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import { loadProject } from '../../actions/loadTposAction';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
@@ -11,9 +14,8 @@ import PlantedProgressBar from './PlantedProgressbar';
 import { tick } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
 import NumberFormat from '../Common/NumberFormat';
-import { connect } from 'react-redux';
 // import LoadingIndicator from '../Common/LoadingIndicator.native';
-import { bindActionCreators } from 'redux';
+
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
@@ -48,10 +50,7 @@ class PlantProjectFull extends React.Component {
         this.props.plantProject
       );
       this.setState({ plantProject });
-      console.log(
-        'fetched details plantproject n plan project full',
-        plantProject
-      );
+      debug('fetched details plantproject n plan project full', plantProject);
     }
   }
   toggleExpanded() {

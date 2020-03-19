@@ -26,7 +26,7 @@ export default class App extends Component {
       imageViewMore: false
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
     if (treecounter) {
       let svgData = {

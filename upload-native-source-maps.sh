@@ -1,6 +1,7 @@
 #/bin/bash
 
-BUGSNAG_API_KEY=6f2971a9b077662912f61ae602716afd
+source .env.production
+BUGSNAG_API_KEY=$bugsnagApiKey
 PACKAGE_VERSION=$(cat package.json \
   | grep version \
   | head -1 \

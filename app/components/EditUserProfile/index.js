@@ -1,10 +1,11 @@
 import React from 'react';
+import t from 'tcomb-form';
+import PropTypes from 'prop-types';
+import { debug } from '../../debug';
 import TextHeading from '../Common/Heading/TextHeading';
 import CardLayout from '../Common/Card';
-import t from 'tcomb-form';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import SecondaryButton from '../Common/Button/SecondaryButton';
-import PropTypes from 'prop-types';
 import UserProfileImage from '../Common/UserProfileImage';
 import {
   parsedSchema,
@@ -20,7 +21,6 @@ import {
   UserPasswordUpdateTemplate
 } from './PlantProjectUserProfileTemplates';
 import LoadingIndicator from '../Common/LoadingIndicator';
-
 import { ProfilePic } from '../../assets';
 import { getImageUrl } from '../../actions/apiRouting';
 import FollowLabelButton from '../Common/Button/FollowLabelButton';
@@ -40,7 +40,7 @@ export default class EditUserProfile extends React.Component {
         props.currentUserProfile.plantProjects) || [emptyProjectInfo]
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       plantProjects: (nextProps &&
         nextProps.currentUserProfile &&
@@ -127,7 +127,7 @@ export default class EditUserProfile extends React.Component {
 
   changeEmail = () => {
     let formRef = 'change_email';
-    console.log(this.refs[formRef].validate());
+    debug(this.refs[formRef].validate());
 
     let value = this.refs[formRef].getValue();
     this.props.updateEmail(value);
@@ -142,7 +142,7 @@ export default class EditUserProfile extends React.Component {
           <div className="error-msg">{i18n.t('label.same_password_error')}</div>
         );
       } catch (err) {
-        console.log(err);
+        debug(err);
       }
     }
 
@@ -344,55 +344,54 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
 
-        {treeCounter &&
-          treeCounter.followeeIds && (
-            <CardLayout className="user-profile__form-group">
-              <div className="form-group__heading">
-                {i18n.t('label.subscribed')}
-              </div>
-              {this.props.followeeList && this.props.followeeList.length > 0 ? (
-                <div className="follow-container">
-                  {this.props.followeeList.map(follow => (
-                    <div className="follow-container-row" key={follow.id}>
-                      <div className="col col1">
-                        <img
-                          src={
-                            follow.userProfile.image
-                              ? getImageUrl(
-                                  'profile',
-                                  'thumb',
-                                  follow.userProfile.image
-                                )
-                              : ProfilePic
-                          }
-                          className="image-rounded-border"
-                        />
-                      </div>
-                      <div
-                        className="col col2"
-                        onClick={() => {
-                          updateRoute('app_treecounter', null, follow.id, {
-                            treecounter: follow.id
-                          });
-                        }}
-                      >
-                        {follow.displayName}
-                      </div>
-                      <div className="col col3">
-                        <FollowLabelButton
-                          label={i18n.t('label.unsubscribe')}
-                          isSubscribed
-                          onClick={() => this.props.unfollowUser(follow.id)}
-                        />
-                      </div>
+        {treeCounter && treeCounter.followeeIds && (
+          <CardLayout className="user-profile__form-group">
+            <div className="form-group__heading">
+              {i18n.t('label.subscribed')}
+            </div>
+            {this.props.followeeList && this.props.followeeList.length > 0 ? (
+              <div className="follow-container">
+                {this.props.followeeList.map(follow => (
+                  <div className="follow-container-row" key={follow.id}>
+                    <div className="col col1">
+                      <img
+                        src={
+                          follow.userProfile.image
+                            ? getImageUrl(
+                                'profile',
+                                'thumb',
+                                follow.userProfile.image
+                              )
+                            : ProfilePic
+                        }
+                        className="image-rounded-border"
+                      />
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <LoadingIndicator />
-              )}
-            </CardLayout>
-          )}
+                    <div
+                      className="col col2"
+                      onClick={() => {
+                        updateRoute('app_treecounter', null, follow.id, {
+                          treecounter: follow.id
+                        });
+                      }}
+                    >
+                      {follow.displayName}
+                    </div>
+                    <div className="col col3">
+                      <FollowLabelButton
+                        label={i18n.t('label.unsubscribe')}
+                        isSubscribed
+                        onClick={() => this.props.unfollowUser(follow.id)}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <LoadingIndicator />
+            )}
+          </CardLayout>
+        )}
         <div className="delete-profile__button">
           <SecondaryButton
             onClick={() => {

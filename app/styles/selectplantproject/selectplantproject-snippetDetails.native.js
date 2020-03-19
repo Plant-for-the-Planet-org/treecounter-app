@@ -152,7 +152,8 @@ export default EStyleSheet.create({
     fontSize: 12,
     flexWrap: 'wrap',
     fontFamily: 'OpenSans-Regular',
-    color: '$cardTextColor'
+    color: '$cardTextColor',
+    maxWidth: '80%'
   },
   costTextContainer: {
     backgroundColor: '#f2f2f7',

@@ -11,7 +11,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-check-box';
 import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
-import TabContainer from '../../../containers/Menu/TabContainer';
+// import TabContainer from '../../../containers/Menu/TabContainer';
 
 import challengeStyles from '../../../styles/challenge';
 import styles from '../../../styles/register_trees.native';
@@ -58,7 +58,7 @@ class ChallengeEmail extends Component {
     this.onNextClick = this.onNextClick.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!this.props.challengeSuccess && nextProps.challengeSuccess) {
       let currentYear = new Date().getFullYear(),
         years = [];
@@ -209,7 +209,7 @@ class ChallengeEmail extends Component {
             challengeStatus={this.props.challengeStatus}
           />
         </KeyboardAwareScrollView>
-        <TabContainer {...this.props} />
+        {/* <TabContainer {...this.props} /> */}
       </View>
     );
   }

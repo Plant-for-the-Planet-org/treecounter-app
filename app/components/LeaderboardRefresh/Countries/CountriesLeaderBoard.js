@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView
 } from 'react-native';
+import { debug } from '../../../debug';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
@@ -41,7 +42,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
             setQueryResult(success.data.data);
         },
         error => {
-          console.log(error);
+          debug(error);
         }
       );
     },
@@ -76,9 +77,18 @@ const CountriesLeaderBoard = ({ navigation }) => {
                   />
                 </View>
                 <View style={styles.countryBody}>
-                  <Text numberOfLines={2} style={styles.countryNameText}>
-                    {item.caption}
-                  </Text>
+                  <View style={styles.countryNameCont}>
+                    <Text numberOfLines={2} style={[styles.countryNameText]}>
+                      {item.caption}
+                    </Text>
+                    {!isPrivate ? null : (
+                      <View>
+                        <Text style={styles.privateText}>
+                          {i18n.t('label.private')}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
                   <Text style={styles.tressCounter}>
                     {delimitNumbers(item.planted)}{' '}
                     <Text style={styles.tressText}>
@@ -112,7 +122,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
       caption
     });
   };
-  console.log('queryresult', queryresult);
+  debug('queryresult', queryresult);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header navigation={navigation} />

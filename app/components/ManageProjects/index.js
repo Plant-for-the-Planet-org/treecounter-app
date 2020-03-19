@@ -142,7 +142,7 @@ export default class ManageProjects extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let plantProjects = (nextProps &&
       nextProps.currentUserProfile &&
       nextProps.currentUserProfile.plantProjects) || [emptyProjectInfo];

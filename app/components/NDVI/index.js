@@ -137,7 +137,7 @@ export default class NDVI extends Component {
       colorStops[upperIndex].color,
       value
     );
-    // console.log(color);
+    // debug(color);
     return `rgb(${color.join(',')})`;
   };
 

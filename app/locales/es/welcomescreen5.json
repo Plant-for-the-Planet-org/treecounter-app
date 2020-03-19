@@ -1,3 +1,7 @@
 {
-  "welcome_scrn_5_already_have_an_account": "¿Ya tienes una cuenta?"
+  "welcome_scrn_5_heading": "Seguimiento de los\nárboles que has plantado",
+  "welcome_scrn_5_continue": "Continuar",
+  "welcome_scrn_5_create_an_account": "Crea una cuenta",
+  "welcome_scrn_5_already_have_an_account": "¿Ya tienes una cuenta?",
+  "welcome_scrn_5_sign_in": "Iniciar sesión"
 }

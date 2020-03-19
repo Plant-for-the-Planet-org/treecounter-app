@@ -1,28 +1,29 @@
 import React, { useState } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Formik } from 'formik';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import { TextField } from 'react-native-material-textfield';
+import { Dropdown } from 'react-native-material-dropdown';
+import ImagePicker from 'react-native-image-picker';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { debug } from '../../debug';
 import { cameraSolid, imageGallery, forward, circleDelete } from '../../assets';
 import styles from '../../styles/competition/competition-form.native';
 import { formatDateToMySQL } from '../../helpers/utils';
 import { formatDate } from '../../utils/utils';
-import DateTimePicker from 'react-native-modal-datetime-picker';
 import i18n from '../../locales/i18n';
-import { Formik } from 'formik';
-import { TextField } from 'react-native-material-textfield';
 import competitionFormSchema from '../../server/formSchemas/competition';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 import buttonStyles from '../../styles/common/button.native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { getImageUrl } from '../../actions/apiRouting';
-import { Dropdown } from 'react-native-material-dropdown';
 import { updateRoute } from '../../helpers/routerHelper';
-import ImagePicker from 'react-native-image-picker';
-import RBSheet from 'react-native-raw-bottom-sheet';
 
 export const FormikForm = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     competitionFormSchema
   );
-  console.log('validation schema', validationSchema);
+  debug('validation schema', validationSchema);
   const buttonType = props.buttonType;
 
   const handleDelete = () => {
@@ -31,7 +32,7 @@ export const FormikForm = props => {
       .onDeleteCompetition(props.competition_id)
       .then((/* success */) => {})
       .catch(err => {
-        console.log('Error', err);
+        debug('Error', err);
       });
     updateRoute('app_competitions', props.navigation);
   };
@@ -55,7 +56,9 @@ export const FormikForm = props => {
               resetScrollToCoords={{ x: 0, y: 0 }}
               scrollEnabled
             >
-              <Text style={styles.add_competition_title}>Edit Competition</Text>
+              <Text style={styles.add_competition_title}>
+                {i18n.t('label.edit_competition')}
+              </Text>
               <View>
                 <TextField
                   label={i18n.t('label.competition_name')}
@@ -239,10 +242,12 @@ export function AccessPicker(props) {
   const onChange = value => {
     props.setFieldValue('access', value);
   };
+  // eslint-disable-next-line
+  let dropdown = '';
   return (
     <View>
       <Dropdown
-        ref={ref => (this.dropdown = ref)}
+        ref={ref => (dropdown = ref)}
         label={i18n.t('label.competition_access')}
         data={data}
         onChangeText={onChange}
@@ -317,9 +322,9 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
                 props.setFieldValue(
                   'imageFile',
@@ -336,9 +341,9 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                console.log('User cancelled image picker');
+                debug('User cancelled image picker');
               } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else {
                 props.setFieldValue(
                   'imageFile',
@@ -375,7 +380,9 @@ export function CompetitionDatePicker(props) {
         onConfirm={date => {
           (date = date || props.endDate),
             setShowDatePicker(false),
-            props.setFieldValue('endDate', date);
+            props.setFieldValue(
+              formatDate(formatDateToMySQL(new Date(date)), 'yyyy-MM-dd')
+            );
         }}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}

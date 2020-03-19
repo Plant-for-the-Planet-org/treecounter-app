@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TextBlock from '../Common/Text/TextBlock';
+// import { debug } from '../../debug';
 import i18n from '../../locales/i18n.js';
 import { currencySort } from './utils';
 import { getCurrency } from '../../selectors';
@@ -26,8 +27,8 @@ class CurrencySelector extends React.Component {
     let { currencies } = this.props;
     this.setState({ currenciesArray: currencySort(Object.keys(currencies)) });
   }
-  componentWillReceiveProps(nextProps) {
-    // console.log('next props currency', nextProps);
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    // debug('next props currency', nextProps);
     if (
       nextProps.globalCurrency &&
       nextProps.globalCurrency.currency !== this.state.selectedCurrency
@@ -36,10 +37,10 @@ class CurrencySelector extends React.Component {
     }
   }
   handleChange(value) {
-    // console.log('changed locally', value);
+    // debug('changed locally', value);
     this.setState({ selectedCurrency: value });
     this.props.onChange(value);
-    // console.log('changed locally', this.state.selectedCurrency);
+    // debug('changed locally', this.state.selectedCurrency);
   }
   render() {
     return (

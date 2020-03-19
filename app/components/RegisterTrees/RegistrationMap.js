@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { loadModules } from 'react-arcgis';
+import { loadModules } from 'esri-loader';
 import ArcGISContributionCaptureMap from '../Map/ArcGISContributionCaptureMap';
 
 class RegistrationMap extends React.Component {
@@ -63,7 +63,7 @@ class RegistrationMap extends React.Component {
       //   // MAKE SURE THE FEATURE WAS CREATED //
       //   // https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#FeatureEditResult
       //   const addFeatureResult = applyEditsResults.addFeatureResults[0];
-      //   console.log(addFeatureResult);
+      //   debug(addFeatureResult);
       // });
     });
   }

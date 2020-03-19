@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import _ from 'lodash';
+import { debug } from '../../debug';
 import FAQ from '../../components/FAQ';
 import { FAQAction } from '../../actions/faqAction';
-import _ from 'lodash';
 
 class FAQContainer extends React.Component {
   static navigationOptions = {
@@ -17,7 +17,7 @@ class FAQContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     FAQAction().then(
       success => {
         const faqs = _.sortBy(success.data, ['position', 'id']);
@@ -26,7 +26,7 @@ class FAQContainer extends React.Component {
           faqs
         });
       },
-      error => console.log(error)
+      error => debug(error)
     );
   }
 

@@ -1,21 +1,20 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Dimensions, Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Animated, Platform } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+
 import { TabBar, TabView } from 'react-native-tab-view';
 import styles from '../../styles/common/tabbar.native';
 import buttonStyles from '../../styles/common/button.native';
-import { fullPageWhite } from '../../styles/common/common_styles';
 import i18n from '../../locales/i18n';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import ClosedCompetitions from './Tabs/closed.native'; // Shows all Archived competitions
 import MineCompetitions from './Tabs/mine.native'; // Shows my competitions
 import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured competitions
 import AllCompetitions from './Tabs/all.native'; // Shows all competitions
-const Layout = {
-  window: {
-    width: Dimensions.get('window').width
-  }
-};
+
+import HeaderStatic from './../Header/HeaderStatic';
+import colors from '../../utils/constants';
 
 class Competiton extends React.Component {
   constructor(props) {
@@ -28,7 +27,8 @@ class Competiton extends React.Component {
         { key: 'mine', title: i18n.t('label.mine_competitions') },
         { key: 'closed', title: i18n.t('label.archived_competitions') }
       ],
-      index: 0 // It refers to the selected tab, 0 goes for featured
+      index: 0, // It refers to the selected tab, 0 goes for featured
+      scrollY: new Animated.Value(0)
     };
   }
 
@@ -39,14 +39,47 @@ class Competiton extends React.Component {
 
   // Tabbar represents the top header with the different tab items
   _renderTabBar = props => {
+    const focusedColor = '#89b53a';
+    const normalColor = '#4d5153';
+    const colorWhite = colors.WHITE;
+    const colorGreen = '#89b53a';
     return (
       <TabBar
         scrollEnabled
         {...props}
-        style={styles.tabBar}
-        tabStyle={{ width: Layout.window.width / 3 }}
-        labelStyle={styles.textStyle}
-        indicatorStyle={styles.textActive}
+        style={[styles.tabBar]}
+        tabStyle={{ width: 'auto', padding: 0 }}
+        indicatorStyle={{ backgroundColor: colorWhite }}
+        renderLabel={({ route, focused }) => (
+          <View style={{ textAlign: 'left', marginRight: 24 }}>
+            <Text
+              style={{
+                color: focused ? focusedColor : normalColor,
+                fontSize: 13,
+                fontFamily: 'OpenSans-SemiBold',
+                textTransform: 'capitalize',
+                textAlign: 'left'
+              }}
+            >
+              {route.title}
+            </Text>
+            {focused ? (
+              <View
+                style={[
+                  {
+                    width: '100%',
+                    marginTop: 11,
+                    backgroundColor: colorGreen,
+                    height: 3,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
+                    color: colorGreen
+                  }
+                ]}
+              />
+            ) : null}
+          </View>
+        )}
       />
     );
   };
@@ -55,41 +88,68 @@ class Competiton extends React.Component {
   _renderSelectPlantScene = ({ route }) => {
     switch (route.key) {
       case 'mine':
-        return <MineCompetitions {...this.props} />;
+        return (
+          <MineCompetitions {...this.props} scrollY={this.state.scrollY} />
+        );
       case 'featured':
-        return <FeaturedCompetitions {...this.props} />;
+        return (
+          <FeaturedCompetitions {...this.props} scrollY={this.state.scrollY} />
+        );
       case 'all':
-        return <AllCompetitions {...this.props} />;
+        return <AllCompetitions {...this.props} scrollY={this.state.scrollY} />;
       case 'closed':
-        return <ClosedCompetitions {...this.props} />;
+        return (
+          <ClosedCompetitions {...this.props} scrollY={this.state.scrollY} />
+        );
       default:
         return null;
     }
   };
 
   render() {
+    // const headerTop = this.state.scrollY.interpolate({
+    //   inputRange: [0, 120],
+    //   outputRange: [56, 0],
+    //   extrapolate: 'clamp'
+    // });
     return (
-      <View style={fullPageWhite}>
-        <TabView
-          useNativeDriver
-          navigationState={this.state}
-          renderScene={this._renderSelectPlantScene}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
-        />
+      <>
+        <SafeAreaView style={{ flex: 1 }}>
+          <HeaderStatic
+            title={i18n.t('label.competitions')}
+            scrollY={this.state.scrollY}
+            pageName={'competitions'}
+            showSearch
+            navigation={this.props.navigation}
+          />
+          <Animated.View
+            style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+          />
+          <TabView
+            useNativeDriver
+            navigationState={this.state}
+            renderScene={this._renderSelectPlantScene}
+            renderTabBar={this._renderTabBar}
+            onIndexChange={this._handleIndexChange}
+          />
 
-        {/* Button to add new competitions(On each page) */}
-        <TouchableOpacity
-          style={buttonStyles.plusButton}
-          onPress={() => {
-            updateStaticRoute('app_create_competition', this.props.navigation, {
-              onCreateCompetition: this.props.onCreateCompetition
-            });
-          }}
-        >
-          <Text style={buttonStyles.plusButtonIcon}>+</Text>
-        </TouchableOpacity>
-      </View>
+          {/* Button to add new competitions(On each page) */}
+          <TouchableOpacity
+            style={buttonStyles.plusButton}
+            onPress={() => {
+              updateStaticRoute(
+                'app_create_competition',
+                this.props.navigation,
+                {
+                  onCreateCompetition: this.props.onCreateCompetition
+                }
+              );
+            }}
+          >
+            <Text style={buttonStyles.plusButtonIcon}>+</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </>
     );
   }
 }

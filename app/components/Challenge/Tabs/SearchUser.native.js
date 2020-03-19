@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
-
+import { debug } from '../../../debug';
 import SearchBar from '../../../components/Header/SearchBar.native';
 import Header from '../../../components/Header/Header.native';
 import { getSuggestions } from '../../../helpers/utils';
@@ -11,6 +11,7 @@ import i18n from '../../../locales/i18n';
 import searchBarStyles from '../../../styles/header/search_bar.native';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import UserProfileImage from '../../Common/UserProfileImage';
+import colors from '../../../utils/constants';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -19,7 +20,7 @@ class SearchUser extends React.Component {
   static defaultProps = {
     debounce: 500,
     headerBackgroundColor: '#b9d384',
-    headerTintColor: '#fff'
+    headerTintColor: colors.WHITE
   };
   constructor(props) {
     super(props);
@@ -44,15 +45,15 @@ class SearchUser extends React.Component {
       .then(suggestions => {
         this.setState({ q: suggestions });
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   };
 
   _onNavigationClick(suggestion) {
     if (
       this.props.onSearchResultClick &&
       !this.isMyself(suggestion, this.props.currentUserProfile) &&
-      (this.props.alreadyInvited &&
-        !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited))
+      this.props.alreadyInvited &&
+      !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited)
     ) {
       this.props.onSearchResultClick(suggestion);
       this.setState({
@@ -71,7 +72,7 @@ class SearchUser extends React.Component {
       );
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.searchSuggestion === '') {
       this.setState({
         selectedSuggestionName: ''

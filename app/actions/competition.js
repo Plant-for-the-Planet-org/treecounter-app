@@ -76,7 +76,7 @@ export function confirmPart(id) {
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        console.log(err);
+        debug(err);
         dispatch(setProgressModelState(false));
       });
   };
@@ -111,7 +111,7 @@ export function cancelInvite(id) {
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        console.log(err);
+        debug(err);
         dispatch(setProgressModelState(false));
       });
   };
@@ -166,7 +166,7 @@ export function createCompetition(value, navigation) {
           //   competition: res.data.merge.competition[0].id,
           //   titleParam: res.data.merge.competition[0].name
           // });
-          console.log(updateRoute('app_competitions', navigation || dispatch));
+          debug(updateRoute('app_competitions', navigation || dispatch));
           updateRoute('app_competitions', navigation || dispatch);
           resolve(res.data);
           dispatch(setProgressModelState(false));
@@ -349,7 +349,7 @@ export function invitePart(competition, competitor) {
         dispatch(setProgressModelState(false));
       })
       .catch(err => {
-        console.log(err);
+        debug(err);
         dispatch(setProgressModelState(false));
       });
   };

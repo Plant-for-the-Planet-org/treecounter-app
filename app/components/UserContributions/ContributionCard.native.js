@@ -7,9 +7,10 @@ import {
   Image,
   Text,
   View,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { debug } from '../../debug';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
@@ -18,8 +19,8 @@ import styles, {
   myTreesStyle
 } from '../../styles/myTrees/user_contribution_card';
 import { formatDate, delimitNumbers } from '../../utils/utils';
-import CardLayout from '../Common/Card';
 import { getISOToCountryName } from '../../helpers/utils';
+
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -246,24 +247,19 @@ class ContributionCard extends React.Component {
 
   render() {
     let { contribution } = this.props;
+    debug('Contribution', contribution);
     let {
       treeCount,
       treeSpecies,
       plantProjectName,
       country,
-      isGift,
       plantDate,
       givee,
       giveeSlug,
       tpoName,
-      mayUpdate,
       cardType,
       contributionType,
-      registrationDate,
-      redemptionCode,
       redemptionDate
-      // contributionImages,
-      // ndviUid
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };
@@ -272,23 +268,23 @@ class ContributionCard extends React.Component {
     //   'see-more__active': this.state.viewExpanded
     // });
 
-    let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
+    // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
-    let donateActionLine = this.donateActionLine(
-      isGift,
-      plantDate,
-      givee,
-      giveeSlug
-    );
+    // let donateActionLine = this.donateActionLine(
+    //   isGift,
+    //   plantDate,
+    //   givee,
+    //   giveeSlug
+    // );
     let tpoLine = this.tpoLine(tpoName);
-    let plantActionLine = this.plantActionLine(plantDate, registrationDate);
+    // let plantActionLine = this.plantActionLine(plantDate, registrationDate);
     let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
-    let redeemActionLine = this.redeemActionLine(
-      redemptionCode,
-      redemptionDate,
-      givee,
-      giveeSlug
-    );
+    // let redeemActionLine = this.redeemActionLine(
+    //   redemptionCode,
+    //   redemptionDate,
+    //   givee,
+    //   giveeSlug
+    // );
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
     let borderColor =
       contributionType == 'donation'
@@ -299,206 +295,176 @@ class ContributionCard extends React.Component {
 
     let styles = myTreesStyle(labelColor, borderColor);
 
-    return contributionType === 'donation' ? (
-      <CardLayout
-        style={styles.addPadding}
-        onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
-        }}
-      >
-        <View style={[styles.leftBorder, styles.leftColorBorder]} />
-        {treeCountLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
-          >
-            {treeCountLine}
-          </Text>
-        ) : null}
-        {plantProjectLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantProjectLine}
-          </Text>
-        ) : null}
-        {donateActionLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {donateActionLine}
-          </Text>
-        ) : null}
-        {tpoLine ? (
-          <Text numberOfLines={1} style={styles.restrictTextLength}>
-            {tpoLine}
-          </Text>
-        ) : null}
-        {mayUpdate ? (
-          <Text
-            style={styles.updateTextStyle}
+    let renderCard = () => {
+      if (contributionType === 'donation') {
+        return (
+          <TouchableOpacity
+            style={styles.singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                selectedTreeId: contribution.id,
-                contribution
+              this.props.navigation.navigate('contribution_details', {
+                contribution,
+                titleParam: plantProjectName || tpoName || treeSpecies
               });
             }}
           >
-            {i18n.t('label.update')}
-          </Text>
-        ) : null}
-        <View style={styles.labelStyle}>
-          <Text style={styles.labelTextStyle}>
-            {cardType && cardType.length > 0
-              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-              : ''}
-          </Text>
-        </View>
-      </CardLayout>
-    ) : contributionType === 'planting' ? (
-      <TouchableHighlight
-        underlayColor={'transparent'}
-        onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
-        }}
-      >
-        <CardLayout style={[styles.addPadding, styles.minHeight]}>
-          <View style={[styles.leftBorder, styles.leftColorBorder]} />
-          {treeCountLine ? (
-            <Text
-              numberOfLines={1}
-              style={[styles.boldText, styles.gap, styles.restrictTextLength]}
-            >
-              {treeCountLine}
-            </Text>
-          ) : null}
-          {plantProjectLine ? (
-            <Text
-              numberOfLines={1}
-              style={[styles.gap, styles.restrictTextLength]}
-            >
-              {plantProjectLine}
-            </Text>
-          ) : null}
-          {plantActionLine ? (
-            <Text
-              numberOfLines={2}
-              style={[styles.gap, styles.restrictTextLength]}
-            >
-              {plantActionLine}
-            </Text>
-          ) : null}
-          {dedicateActionLine ? (
-            <Text numberOfLines={1} style={styles.restrictTextLength}>
-              {dedicateActionLine}
-            </Text>
-          ) : null}
-          <Text
-            style={styles.deleteTextStyle}
+            <View>
+              {plantDate ? (
+                <View style={styles.redeemObjectDate}>
+                  <Text style={styles.redeemObjectDateText}>
+                    {formatDate(plantDate)}
+                  </Text>
+                </View>
+              ) : null}
+
+              <View style={styles.redeemObjectTreesContainer}>
+                <View style={styles.row1}>
+                  <Text style={styles.redeemObjectTitle}>
+                    {i18n.t('label.tree_donation')}
+                  </Text>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                  </Text>
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {treeCount > 1
+                      ? i18n.t('label.trees')
+                      : i18n.t('label.tree')}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        );
+      } else if (contributionType === 'planting') {
+        return (
+          <TouchableOpacity
+            style={styles.singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate('delete_contribution', {
-                deleteContribution: () =>
-                  this.props.deleteContribution(
-                    contribution.id,
-                    this.props.navigation
-                  )
+              this.props.navigation.navigate('contribution_details', {
+                contribution,
+                titleParam: plantProjectName || tpoName || treeSpecies
               });
             }}
           >
-            {i18n.t('label.delete')}
-          </Text>
-          {mayUpdate ? (
-            <Text
-              style={styles.updateTextStyle}
-              onPress={() => {
-                this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                  selectedTreeId: contribution.id,
-                  contribution
-                });
-              }}
-            >
-              {i18n.t('label.update')}
-            </Text>
-          ) : null}
-          <View style={styles.labelStyle}>
-            <Text style={styles.labelTextStyle}>
-              {cardType && cardType.length > 0
-                ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-                : ''}
-            </Text>
-          </View>
-        </CardLayout>
-      </TouchableHighlight>
-    ) : (
-      <CardLayout
-        style={styles.addPadding}
-        onPress={() => {
-          this.props.navigation.navigate('contribution_details', {
-            contribution,
-            titleParam: plantProjectName || tpoName || treeSpecies
-          });
-        }}
-      >
-        <View style={[styles.leftBorder, styles.leftColorBorder]} />
-        {treeCountLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.boldText, styles.gap, styles.restrictTextLength]}
-          >
-            {treeCountLine}
-          </Text>
-        ) : null}
-        {plantProjectLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {plantProjectLine}
-          </Text>
-        ) : null}
-        {redeemActionLine ? (
-          <Text
-            numberOfLines={1}
-            style={[styles.gap, styles.restrictTextLength]}
-          >
-            {redeemActionLine}
-          </Text>
-        ) : null}
-        {tpoLine ? (
-          <Text numberOfLines={1} style={styles.restrictTextLength}>
-            {tpoLine}
-          </Text>
-        ) : null}
-        {mayUpdate ? (
-          <Text
-            style={styles.updateTextStyle}
+            <View>
+              {plantDate ? (
+                <View style={styles.redeemObjectDate}>
+                  <Text style={styles.redeemObjectDateText}>
+                    {formatDate(plantDate)}
+                  </Text>
+                </View>
+              ) : null}
+
+              <View style={styles.redeemObjectTreesContainer}>
+                <View style={styles.row1}>
+                  <Text style={styles.redeemObjectTitle}>
+                    {i18n.t('label.registered_trees')}
+                  </Text>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                  </Text>
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {plantProjectLine}
+                  </Text>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {treeCount > 1
+                      ? i18n.t('label.trees')
+                      : i18n.t('label.tree')}
+                  </Text>
+                </View>
+                {dedicateActionLine ? (
+                  <View style={styles.row2}>
+                    <Text style={styles.redeemObjectSubTitle}>
+                      {dedicateActionLine}
+                    </Text>
+                  </View>
+                ) : null}
+              </View>
+            </View>
+          </TouchableOpacity>
+        );
+      } else if (contribution.type === 'tpo-coupon') {
+        return (
+          <TouchableOpacity
+            style={styles.singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-                selectedTreeId: contribution.id,
-                contribution
+              this.props.navigation.navigate('contribution_details', {
+                contribution,
+                titleParam: plantProjectName || tpoName || treeSpecies
               });
             }}
           >
-            {i18n.t('label.update')}
-          </Text>
-        ) : null}
-        <View style={styles.labelStyle}>
-          <Text style={styles.labelTextStyle}>
-            {cardType && cardType.length > 0
-              ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-              : ''}
-          </Text>
-        </View>
-      </CardLayout>
-    );
+            <View>
+              {redemptionDate ? (
+                <View style={styles.redeemObjectDate}>
+                  <Text style={styles.redeemObjectDateText}>
+                    {formatDate(redemptionDate)}
+                  </Text>
+                </View>
+              ) : null}
+
+              <View style={styles.redeemObjectTreesContainer}>
+                <View style={styles.row1}>
+                  <Text style={styles.redeemObjectTitle}>
+                    {i18n.t('label.redeemed_trees')}
+                  </Text>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                  </Text>
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {treeCount > 1
+                      ? i18n.t('label.trees')
+                      : i18n.t('label.tree')}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        );
+      } else {
+        return (
+          <TouchableOpacity
+            style={styles.singleRedeemObject}
+            onPress={() => {
+              this.props.navigation.navigate('contribution_details', {
+                contribution,
+                titleParam: plantProjectName || tpoName || treeSpecies
+              });
+            }}
+          >
+            <View>
+              <View style={styles.redeemObjectTreesContainer}>
+                <View style={styles.row1}>
+                  <Text style={styles.redeemObjectTitle}>
+                    {i18n.t('label.gifted_from_person', contribution.giverName)}
+                  </Text>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                  </Text>
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  <Text style={styles.redeemObjectSubTitle}>
+                    {treeCount > 1
+                      ? i18n.t('label.trees')
+                      : i18n.t('label.tree')}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        );
+      }
+    };
+
+    return renderCard();
   }
 }
 

@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import { View, ScrollView, Text, Platform } from 'react-native';
 import { PropTypes } from 'prop-types';
-import styles from '../../../styles/profilepicker.native';
-import { View, ScrollView, Text } from 'react-native';
-import PrimaryButton from '../../Common/Button/PrimaryButton';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { debug } from '../../../debug';
+import styles from '../../../styles/profilepicker.native';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
 import SearchUser from '../../GiftTrees/Tabs/SearchUser';
 import { currentUserProfileSelector } from '../../../selectors';
-
 import i18n from '../../../locales/i18n';
 import { updateProfileDedication } from '../../../actions/updateUserProfile';
-import { bindActionCreators } from 'redux';
 import CardLayout from '../../Common/Card';
-import scrollStyle from '../../../styles/common/scrollStyle';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 import { delimitNumbers } from '../../../utils/utils';
+import HeaderNew from '../../Header/HeaderNew.native';
+import colors from '../../../utils/constants';
 
 class ProfilePickerModal extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class ProfilePickerModal extends Component {
   }
 
   onSearchResultClick(event) {
-    console.log(event);
+    debug(event);
     this.setState({ selectedSuggestion: event });
   }
 
@@ -92,8 +93,16 @@ class ProfilePickerModal extends Component {
     );
 
     return (
-      <View>
-        <ScrollView contentContainerStyle={scrollStyle.styleContainer}>
+      <View style={{ flex: 1, backgroundColor: colors.WHITE }}>
+        <HeaderNew
+          navigation={this.props.navigation}
+          title={i18n.t('label.dedicate_trees')}
+        />
+        <ScrollView
+          contentContainerStyle={[
+            { marginTop: Platform.OS === 'ios' ? 140 : 100 }
+          ]}
+        >
           <View>
             {this.state.editMode ? pickupProfileView : null}
             {currentUserProfile.supportedTreecounter ? (
@@ -146,8 +155,8 @@ class ProfilePickerModal extends Component {
                 </CardLayout>
               </View>
             ) : (
-              pickupProfileView
-            )}
+                pickupProfileView
+              )}
           </View>
         </ScrollView>
       </View>

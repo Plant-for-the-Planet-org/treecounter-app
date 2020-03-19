@@ -1,7 +1,8 @@
 import React from 'react';
-import WidgetShare from '../../components/WidgetsShare';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { debug } from '../../debug';
+import WidgetShare from '../../components/WidgetsShare';
 import { currentUserProfileSelector } from '../../selectors';
 import { context } from '../../config';
 
@@ -14,7 +15,7 @@ class WidgetShareContainer extends React.PureComponent {
     this.state = {};
   }
 
-  componentWillMount() {}
+  UNSAFE_componentWillMount() {}
 
   render() {
     return (
@@ -27,7 +28,7 @@ class WidgetShareContainer extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  debug(state);
   return {
     currentUserProfile: currentUserProfileSelector(state)
   };

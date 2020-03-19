@@ -1,5 +1,6 @@
 {
   "competitions": "Wettbewerbe",
+  "my_competitions": "Meine Wettbewerbe",
   "mine_competitions": "Meine",
   "featured_competitions": "Ausgewählte",
   "all_competitions": "Alle",
@@ -49,5 +50,7 @@
   "add_competition": "Wettbewerb hinzufügen",
   "add_image": "Bild hinzufügen",
   "confirm_delete_message": "Möchten Sie diesen Wettbewerb wirklich löschen? Es gibt keine Schaltfläche zum Rückgängigmachen.",
-  "competetions_404_message": "Wir unterstützen noch keine Wettbewerbe im Browser. Verwende unsere iOS- oder Android-App, um auf die Wettbewerbe zuzugreifen."
+  "competetions_404_message": "Wir unterstützen noch keine Wettbewerbe im Browser. Verwende unsere iOS- oder Android-App, um auf die Wettbewerbe zuzugreifen.",
+  "goal": "Ziel",
+  "active": "Aktiv"
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { debug } from '../../debug';
 import SuccessfullyActivatedAccount from '../../components/Authentication/SuccessfullyActivated';
 import { accountActivate } from '../../actions/signupActions';
-import { connect } from 'react-redux';
 
 class SuccessfullyActivatedContainer extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class SuccessfullyActivatedContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (
       this.props.navigation
         ? this.props.navigation.getParam('token')
@@ -30,7 +30,7 @@ class SuccessfullyActivatedContainer extends React.Component {
           this.setState({ success: true });
         })
         .catch(err => {
-          console.log(err);
+          debug(err);
           this.setState({ success: false });
         });
     } else {
@@ -51,9 +51,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(
-  SuccessfullyActivatedContainer
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SuccessfullyActivatedContainer);
 
 SuccessfullyActivatedContainer.propTypes = {
   match: PropTypes.shape({

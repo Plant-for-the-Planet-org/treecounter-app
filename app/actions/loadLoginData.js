@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr';
-
+import { debug } from '../debug';
 import { getAuthenticatedRequest } from '../utils/api';
 import { userProfileSchema } from '../schemas/index';
 import { mergeEntities } from '../reducers/entitiesReducer';
@@ -13,6 +13,6 @@ export function loadLoginData() {
         dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
         dispatch(setCurrentUserProfileId(res.data.id));
       })
-      .catch(error => console.log(error));
+      .catch(error => debug(error));
   };
 }

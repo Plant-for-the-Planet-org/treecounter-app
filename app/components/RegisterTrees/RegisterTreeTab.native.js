@@ -83,8 +83,7 @@ export default class RegisterTreeTab extends PureComponent {
           [
             {
               text: i18n.t('label.go_back'),
-              onPress: () =>
-                updateRoute('app_userHome', this.props.navigation.navigation)
+              onPress: () => updateRoute('app_userHome', this.props.navigation)
             },
 
             {
@@ -98,7 +97,7 @@ export default class RegisterTreeTab extends PureComponent {
     }, 1500);
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       mode: nextProps.mode
     });
@@ -156,10 +155,6 @@ export default class RegisterTreeTab extends PureComponent {
   };
 
   render() {
-    /*const schemaOptionsMultiple = {
-      template: getFormLayoutTemplate(this.props.mode, this.props.isTpo),
-      ...this.props.schemaOptions
-    };*/
     const {
       isOpen,
       geometry,
@@ -244,11 +239,19 @@ export default class RegisterTreeTab extends PureComponent {
             headerText={i18n.t(
               'label.register_tree_tpo_no_plant_project_header'
             )}
-            bodyText={i18n.t(
-              'label.register_tree_tpo_no_plant_project_description'
-            )}
+            bodyText={
+              <Text
+                style={{
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 14,
+                  lineHeight: 26
+                }}
+              >
+                {i18n.t('label.register_tree_tpo_no_plant_project_description')}
+              </Text>
+            }
             onCancel={() => {
-              updateRoute('app_userHome', this.props.navigation.navigation);
+              updateRoute('app_userHome', this.props.navigation);
             }}
             cancelText={i18n.t('label.go_back')}
             applyText={i18n.t('label.add_project')}
@@ -336,11 +339,8 @@ export default class RegisterTreeTab extends PureComponent {
 RegisterTreeTab.propTypes = {
   mode: PropTypes.string.isRequired,
   onRegister: PropTypes.func,
-  schemaType: PropTypes.any.isRequired,
-  schemaOptions: PropTypes.any.isRequired,
   value: PropTypes.any,
   plantProjects: PropTypes.any,
-  buttonTitle: PropTypes.string,
   isTpo: PropTypes.bool,
   isEdit: PropTypes.bool
 };

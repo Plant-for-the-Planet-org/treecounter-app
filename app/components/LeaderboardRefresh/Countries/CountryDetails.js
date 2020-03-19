@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView
 } from 'react-native';
+import { debug } from '../../../debug';
 import CountryLoader from '../../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
 import styles from '../../../styles/LeaderboardRefresh/Countries/CountryLeaderboardStyle';
 import i18n from '../../../locales/i18n';
@@ -23,35 +24,28 @@ const CountryDetails = ({ navigation }) => {
   const [section, setSection] = useState('');
   const [orderBy] = useState('planted');
 
-  useEffect(
-    () => {
-      const section = navigation.getParam('section');
-      const subSection = navigation.getParam('subSection');
-      const caption = navigation.getParam('caption');
-      setQueryResult(null);
-      setSection(caption);
-      console.log(section, subSection, caption, 'Sections');
-      LeaderBoardDataAction({
-        section,
-        orderBy: orderBy,
-        period: period,
-        subSection: subSection
-      }).then(
-        success => {
-          if (
-            success.data &&
-            success.data instanceof Object &&
-            success.data.data
-          )
-            setQueryResult(success.data.data);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    },
-    [period]
-  );
+  useEffect(() => {
+    const section = navigation.getParam('section');
+    const subSection = navigation.getParam('subSection');
+    const caption = navigation.getParam('caption');
+    setQueryResult(null);
+    setSection(caption);
+    debug(section, subSection, caption, 'Sections');
+    LeaderBoardDataAction({
+      section,
+      orderBy: orderBy,
+      period: period,
+      subSection: subSection
+    }).then(
+      success => {
+        if (success.data && success.data instanceof Object && success.data.data)
+          setQueryResult(success.data.data);
+      },
+      error => {
+        debug(error);
+      }
+    );
+  }, [period]);
 
   const renderList = () => {
     if (queryresult) {
@@ -59,46 +53,13 @@ const CountryDetails = ({ navigation }) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           data={queryresult}
-          renderItem={({ item, index }) => {
-            const isPrivate = 'mayPublish' in item && !item.mayPublish;
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  !isPrivate
-                    ? onPressListItem(item.treecounterId, item.caption)
-                    : undefined;
-                }}
-                style={styles.oneContryContainer}
-              >
-                <View style={styles.indexContainer}>
-                  <Text style={styles.indexText}>{index + 1}</Text>
-                </View>
-                <View style={styles.countryFlagContainer}>
-                  <Image
-                    style={styles.countryFlagImage}
-                    source={{
-                      uri: getImageUrl(
-                        'profile',
-                        'avatar',
-                        item.contributorAvatar
-                      )
-                    }}
-                  />
-                </View>
-                <View style={styles.countryBody}>
-                  <Text numberOfLines={2} style={styles.countryNameText}>
-                    {item.caption}
-                  </Text>
-                  <Text style={styles.tressCounter}>
-                    {delimitNumbers(item.planted)}{' '}
-                    <Text style={styles.tressText}>
-                      {i18n.t('label.trees')}
-                    </Text>
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
+          renderItem={({ item, index }) => (
+            <CompanyListItem
+              onPressListItem={onPressListItem}
+              item={item}
+              index={index}
+            />
+          )}
         />
       );
     } else {
@@ -180,6 +141,56 @@ const CountryDetails = ({ navigation }) => {
         <View style={styles.countriesListContainer}>{renderList()}</View>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const CompanyListItem = ({ onPressListItem, item, index }) => {
+  const [isPress, setIsPress] = useState(false);
+  const isPrivate = 'mayPublish' in item && !item.mayPublish;
+  debug(isPress, 'isPressisPress');
+  return (
+    <TouchableOpacity
+      onPress={() =>
+        !isPrivate
+          ? onPressListItem(item.treecounterId, item.caption)
+          : setIsPress(true)
+      }
+      style={styles.oneContryContainer}
+    >
+      <View style={styles.indexContainer}>
+        <Text style={styles.indexText}>{index + 1}</Text>
+      </View>
+      <View style={styles.countryFlagContainer}>
+        <Image
+          style={styles.countryFlagImage}
+          source={{
+            uri: getImageUrl('profile', 'avatar', item.contributorAvatar)
+          }}
+        />
+      </View>
+      <View style={styles.countryBody}>
+        <View style={styles.countryNameCont}>
+          <Text
+            numberOfLines={2}
+            style={[
+              styles.countryNameText,
+              { maxWidth: isPress ? '50%' : '100%' }
+            ]}
+          >
+            {item.caption}
+          </Text>
+          {isPress ? (
+            <View>
+              <Text style={styles.privateText}>{i18n.t('label.private')}</Text>
+            </View>
+          ) : null}
+        </View>
+        <Text style={styles.tressCounter}>
+          {delimitNumbers(item.planted)}{' '}
+          <Text style={styles.tressText}>{i18n.t('label.trees')}</Text>
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

@@ -7,20 +7,21 @@ import {
   Image,
   Animated
 } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import RBSheet from 'react-native-raw-bottom-sheet';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import PledgeTabView from './PledgeTabView.native';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
-import { bindActionCreators } from 'redux';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from './../../actions/loadUserProfileAction';
 import { fetchItem } from './../../stores/localStorage';
-import { SafeAreaView } from 'react-navigation';
 import { delimitNumbers } from './../../utils/utils';
-
 import {
   fetchPledgesAction,
   postPledge,
@@ -32,10 +33,10 @@ import {
   entitiesSelector,
   currentUserProfileSelector
 } from '../../selectors';
-import RBSheet from 'react-native-raw-bottom-sheet';
 import LoadingIndicator from './../Common/LoadingIndicator';
 import { nextArrowWhite } from '../../assets';
 import HeaderAnimatedImage from './../Header/HeaderAnimatedImage.native';
+
 class PledgeEvents extends Component {
   static navigationOptions = {
     header: null
@@ -63,7 +64,7 @@ class PledgeEvents extends Component {
             this.props.fetchPublicPledgesAction(stringPledges);
           }
         })
-        .catch(error => console.log(error));
+        .catch(error => debug(error));
     }
     this.getMyPledge();
   }
@@ -88,7 +89,7 @@ class PledgeEvents extends Component {
               this.props.fetchPublicPledgesAction(stringPledges);
             }
           })
-          .catch(error => console.log(error));
+          .catch(error => debug(error));
       }
       this.getMyPledge();
     }

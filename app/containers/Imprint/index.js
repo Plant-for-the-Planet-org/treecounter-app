@@ -1,7 +1,8 @@
 import React from 'react';
+import _ from 'lodash';
+import { debug } from '../../debug';
 import Imprint from '../../components/Imprint';
 import { ImprintAction } from '../../actions/imprintAction';
-import _ from 'lodash';
 
 class ImprintContainer extends React.Component {
   constructor() {
@@ -12,7 +13,7 @@ class ImprintContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     ImprintAction().then(
       success => {
         try {
@@ -22,18 +23,22 @@ class ImprintContainer extends React.Component {
             imprints: imprint
           });
         } catch (err) {
-          console.log(err);
+          debug(err);
           this.setState({
             loading: false
           });
         }
       },
-      error => console.log(error)
+      error => debug(error)
     );
   }
   render() {
     return (
-      <Imprint imprints={this.state.imprints} loading={this.state.loading} />
+      <Imprint
+        imprints={this.state.imprints}
+        loading={this.state.loading}
+        navigation={this.props.navigation}
+      />
     );
   }
 }

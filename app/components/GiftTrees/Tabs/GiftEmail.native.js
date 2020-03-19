@@ -11,7 +11,7 @@ export default class GiftEmail extends Component {
     this.state = { buttonType: 'next' };
   }
   render() {
-    const style = { backgroundColor: 'white', flex: 1 };
+    const style = { backgroundColor: 'white', flex: 1, paddingTop: 20 };
     return (
       <View style={style}>
         <FormikFormGift

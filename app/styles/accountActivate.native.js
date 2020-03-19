@@ -15,7 +15,7 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     alignItems: 'center',
-    backgroundColor: '$backgroundScreen'
+    backgroundColor: 'white'
   },
   boldText: {
     fontWeight: 'bold',

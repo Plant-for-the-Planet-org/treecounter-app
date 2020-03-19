@@ -25,7 +25,7 @@ class TreeCountCurrencySelector extends React.Component {
       amount: this.calculateAmount(this.state.selectedTreeCount)
     });
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTreeCount !== this.state.selectedTreeCount) {
       this.setState({
         selectedTreeCount: nextProps.selectedTreeCount

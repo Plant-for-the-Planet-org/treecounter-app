@@ -41,5 +41,10 @@
   "donation_id_missing_error": "donation id is missing",
   "datePickerTitle": "Pick a date",
   "datePickerCancel": "Cancel",
-  "datePickerConfirm": "Confirm"
+  "datePickerConfirm": "Confirm",
+  "view_all": "View all",
+  "show_all": "Show all",
+  "show_less": "Show less",
+  "share": "Share",
+  "noInternet": "You maybe offline"
 }

@@ -5,7 +5,6 @@ import {
   Linking,
   Image,
   Text,
-  TouchableOpacity,
 } from 'react-native';
 import { BackHandler } from 'react-native';
 import { withNavigation } from 'react-navigation';

@@ -43,7 +43,15 @@ import CompetitionSnippet from './app/CompetitionSnippet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullMapComponent from './FullMapComponent';
 import SafeAreaView from 'react-native-safe-area-view';
-export default class UserHome extends Component {
+import { withNavigation } from 'react-navigation'
+class UserHome extends Component {
+  // static navigationOptions = ({ navigation }) => {
+  //   console.log("props 9090909", navigation)
+  //   return {
+  //     tabBarVisible: false
+  //   }
+
+  // }
   constructor(props) {
     super(props);
 
@@ -255,6 +263,9 @@ export default class UserHome extends Component {
       singleContributionID: singleContributionIDShouldNull
         ? null
         : this.state.singleContributionID
+    }, () => {
+      console.log(this.props.navigation)
+      this.props.navigation.setParams({ isFullMapComponentModal: this.state.isFullMapComponentModal })
     });
   };
 
@@ -299,6 +310,7 @@ export default class UserHome extends Component {
 
   getWholeComponent() {
     const { userProfile, navigation } = this.props;
+    console.log(navigation, 'navigation at renedr')
     const {
       svgData,
       showAllContributions,
@@ -309,8 +321,8 @@ export default class UserHome extends Component {
     debug(userProfile);
     const white = 'white';
     return (
-      <SafeAreaView style={{ elevation: 1, flex: 1 }} 
-      forceInset={{ bottom: !isFullMapComponentModal ? 'always' : 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>
+      <SafeAreaView style={{ elevation: 1, flex: 1 }}
+        forceInset={{ bottom: !isFullMapComponentModal ? 'always' : 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}
@@ -686,6 +698,10 @@ function DedicatedTrees(props) {
     </View>
   );
 }
+
+
+export default withNavigation(UserHome)
+
 
 // function RenderIndividualsList(props) {
 //   const { gifts, navigation } = props;

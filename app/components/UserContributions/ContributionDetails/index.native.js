@@ -264,6 +264,7 @@ class UserContributionsDetails extends React.Component {
     return (
       <ScrollView style={{ backgroundColor: colors.WHITE, flex: 1 }}>
         <UserContributions
+          isFromUserProfile={this.props.isFromUserProfile}
           mayUpdate={mayUpdate}
           treeCount={treeCount}
           plantProjectName={plantProjectName}

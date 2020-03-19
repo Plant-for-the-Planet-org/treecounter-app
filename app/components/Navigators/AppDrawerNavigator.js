@@ -207,8 +207,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer,
-        navigationOptions: { tabBarVisible: isLoggedIn ? false : true }
+        screen: isLoggedIn ? () => <UserHomeContainer isLoggedIn={isLoggedIn} /> : LoginContainer,
+        navigationOptions: ({ navigation }) => ({ tabBarVisible: isLoggedIn ? navigation.state.params ? navigation.state.params.isFullMapComponentModal ? false : true : true : true })
       }
     },
     {

@@ -322,7 +322,7 @@ class UserHome extends Component {
     const white = 'white';
     return (
       <SafeAreaView style={{ elevation: 1, flex: 1 }}
-        forceInset={{ bottom: !isFullMapComponentModal ? 'always' : 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>
+        forceInset={{ bottom: 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}

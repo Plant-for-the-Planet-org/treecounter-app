@@ -43,7 +43,5 @@
   "view_all": "Ver todo",
   "show_all": "Mostrar todo",
   "show_less": "Mostrar menos",
-  "share": "Compartir",
-  "noInternet": "No puede conectarse a Internet. Tal vez esté desconectado",
-  "someFunctionality": "Algunas funciones pueden no estar disponibles sin conexión a internet"
+  "share": "Compartir"
 }

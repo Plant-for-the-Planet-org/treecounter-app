@@ -521,7 +521,6 @@ class UserHome extends Component {
                 {i18n.t('label.my_trees')}
               </Text>
               {this.getMapComponent(this.props.userContributions, this.mapView)}
-
               <ContributionCardList
                 onPressSingleContribution={this.onPressSingleContribution}
                 contributions={this.props.userContributions}

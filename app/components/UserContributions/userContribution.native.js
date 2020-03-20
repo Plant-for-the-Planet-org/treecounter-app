@@ -28,9 +28,9 @@ export default class UserContributions extends React.Component {
   getMapComponent = userContribution => {
     let geoLatLong = `geoLongitude=${
       userContribution.geoLongitude
-    }&geoLatitude=${userContribution.geoLatitude}&country=${
+      }&geoLatitude=${userContribution.geoLatitude}&country=${
       userContribution.country
-    }`;
+      }`;
     return (
       <NativeMapView
         provider={PROVIDER_GOOGLE}
@@ -164,11 +164,25 @@ export default class UserContributions extends React.Component {
           {/* maps the contributionPerson type and name of contributionPerson if any */}
           {contributionPersonPrefix &&
             contributionPerson && (
-              <View style={styles.subHeaderTextContainer}>
+              <View style={[styles.subHeaderTextContainer, { flexWrap: 'wrap' }]}>
                 <Text style={styles.subHeaderText}>
                   {contributionPersonPrefix}
-                </Text>
-                <TouchableOpacity
+                  <Text
+                    onPress={() => {
+                      updateStaticRoute(
+                        getLocalRoute('app_treecounter'),
+                        navigation,
+                        {
+                          treeCounterId: contributionPersonSlug,
+                          titleParam: contributionPerson
+                        }
+                      );
+                    }}
+                    style={[styles.subHeaderText, { color: textColor }]}>
+                    {' '}
+                    {contributionPerson}
+                  </Text>
+                  {/* <TouchableOpacity
                   onPress={() => {
                     updateStaticRoute(
                       getLocalRoute('app_treecounter'),
@@ -180,26 +194,24 @@ export default class UserContributions extends React.Component {
                     );
                   }}
                 >
-                  <Text style={[styles.subHeaderText, { color: textColor }]}>
-                    {' '}
-                    {contributionPerson}
-                  </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                </Text>
+
               </View>
             )}
 
           {/* maps the project name by whom it was planted if any */}
           {plantProjectName && (
             // <View style={styles.subHeaderTextContainer}>
-            <Text style={styles.subHeaderText}>
+            <Text style={[styles.subHeaderText, { flexWrap: 'wrap' }]}>
               <Text>{i18n.t('label.planted_at')}</Text>
               <Text
                 onPress={() => {
                   plantProjectSlug
                     ? this.props.onPlantProjectClick(
-                        plantProjectId,
-                        plantProjectName
-                      )
+                      plantProjectId,
+                      plantProjectName
+                    )
                     : null;
                 }}
                 style={{ color: textColor }}

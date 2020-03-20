@@ -29,7 +29,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { tree_1 } from '../../assets/index';
 import i18n from '../../locales/i18n';
 import { getISOToCountryName } from '../../helpers/utils';
-
+import ContributionCard from '../UserContributions/ContributionCard.native'
 
 const screen = Dimensions.get('window');
 const { height: HEIGHT, } = screen;
@@ -437,13 +437,12 @@ class AnimatedViews extends React.Component {
                       }
                     ]}
                   >
+
                     <View style={styles.card} key={i}>
-                      <View style={styles.textContent}>
-                        <ListItem
-                          onPressHeader={this.onPressHeader}
-                          marker={marker}
-                        />
-                      </View>
+                      <ContributionCard
+                        isFromAnimatredCardList={true}
+                        contribution={marker}
+                      />
                     </View>
                   </Animated.View>
                 ))

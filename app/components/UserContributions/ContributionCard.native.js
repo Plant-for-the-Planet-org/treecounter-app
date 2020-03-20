@@ -294,18 +294,20 @@ class ContributionCard extends React.Component {
           : '#ec6453';
 
     let styles = myTreesStyle(labelColor, borderColor);
-
+    let singleRedeemObject = [styles.singleRedeemObject, { borderBottomWidth: this.props.isFromAnimatredCardList ? 0 : 1 }]
     let renderCard = () => {
+      const { isFromAnimatredCardList } = this.props
       if (contributionType === 'donation') {
+        console.log(i18n.t('label.tree_donation'), 'CONTRIBUTIONCARD')
         return (
           <TouchableOpacity
-            style={styles.singleRedeemObject}
+            style={singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution.id);
             }}
           >
             <View>
-              {plantDate ? (
+              {plantDate && !isFromAnimatredCardList ? (
                 <View style={styles.redeemObjectDate}>
                   <Text style={styles.redeemObjectDateText}>
                     {formatDate(plantDate)}
@@ -335,15 +337,16 @@ class ContributionCard extends React.Component {
           </TouchableOpacity>
         );
       } else if (contributionType === 'planting') {
+        console.log(i18n.t('label.registered_trees'), 'CONTRIBUTIONCARD')
         return (
           <TouchableOpacity
-            style={styles.singleRedeemObject}
+            style={singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution.id);
             }}
           >
             <View>
-              {plantDate ? (
+              {plantDate && !isFromAnimatredCardList ? (
                 <View style={styles.redeemObjectDate}>
                   <Text style={styles.redeemObjectDateText}>
                     {formatDate(plantDate)}
@@ -382,15 +385,16 @@ class ContributionCard extends React.Component {
           </TouchableOpacity>
         );
       } else if (contribution.type === 'tpo-coupon') {
+        console.log(i18n.t('label.redeemed_trees'), 'CONTRIBUTIONCARD')
         return (
           <TouchableOpacity
-            style={styles.singleRedeemObject}
+            style={singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution.id);
             }}
           >
             <View>
-              {redemptionDate ? (
+              {redemptionDate && !isFromAnimatredCardList ? (
                 <View style={styles.redeemObjectDate}>
                   <Text style={styles.redeemObjectDateText}>
                     {formatDate(redemptionDate)}
@@ -420,9 +424,10 @@ class ContributionCard extends React.Component {
           </TouchableOpacity>
         );
       } else {
+        console.log(i18n.t('label.gifted_from_person') + contribution.giverName, 'CONTRIBUTIONCARD', 'tpoLine= ', tpoLine)
         return (
           <TouchableOpacity
-            style={styles.singleRedeemObject}
+            style={singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution.id);
             }}

@@ -10,7 +10,7 @@ const ContributionCardList = props => {
     showAllContributions,
     onPressSingleContribution
   } = props;
-
+  console.log('ContributionCardList')
   return contributions.length > 3 && showAllContributions ? (
     <FlatList
       data={contributions}
@@ -25,19 +25,19 @@ const ContributionCardList = props => {
       )}
     />
   ) : (
-    <FlatList
-      data={contributions.slice(0, 3)}
-      renderItem={({ item }) => (
-        <ContributionCard
-          onPressSingleContribution={onPressSingleContribution}
-          contribution={item}
-          deleteContribution={deleteContribution}
-          key={item.id}
-          navigation={props.navigation}
-        />
-      )}
-    />
-  );
+      <FlatList
+        data={contributions.slice(0, 3)}
+        renderItem={({ item }) => (
+          <ContributionCard
+            onPressSingleContribution={onPressSingleContribution}
+            contribution={item}
+            deleteContribution={deleteContribution}
+            key={item.id}
+            navigation={props.navigation}
+          />
+        )}
+      />
+    );
 };
 
 ContributionCardList.propTypes = {

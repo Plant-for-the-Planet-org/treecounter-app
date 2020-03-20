@@ -24,7 +24,7 @@ export const myTreesStyle = (color, borderColor) =>
       marginLeft : 2, height: 20, width : 30, 
     }, 
     treeImage :{
-      height: 25
+      height: 20
     },
     contributionContainer: {
       borderWidth: 1,

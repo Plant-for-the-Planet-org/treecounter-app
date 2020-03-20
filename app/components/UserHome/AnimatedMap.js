@@ -9,7 +9,6 @@ import {
   Platform,
   Text,
   SafeAreaView,
-
 } from 'react-native';
 import MapView, {
   ProviderPropType,
@@ -368,7 +367,6 @@ class AnimatedViews extends React.Component {
       this.state.markers !== null
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
         : null;
-    console.log('this.state.markers', this.state.markers)
     return (
       <View style={styles.container}>
         <MapView
@@ -424,7 +422,6 @@ class AnimatedViews extends React.Component {
             onMoveShouldSetPanResponder={() => true}
           >
             <View style={styles.itemContainer}>
-
               {markers
                 ? markers.map((marker, i) => (
                   <Animated.View
@@ -487,15 +484,7 @@ class AnimatedViews extends React.Component {
         ) : null}
         {activeMarker ? (
           <View
-            style={{
-              backgroundColor: 'white',
-              width: '100%',
-              height: HEIGHT * 0.7,
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              zindex: 10000
-            }}
+            style={styles.userContributionsDetailsFullViewCont}
           >
             {this.state.markers ? (
               <UserContributionsDetails
@@ -514,105 +503,19 @@ class AnimatedViews extends React.Component {
   }
 }
 
-const ListItem = ({ marker, onPressHeader }) => {
-
-  let tpoLine = (tpoName) => {
-    return tpoName ? i18n.t('label.planted_by', { tpo: tpoName }) : '';
-  }
-
-  let headerText = undefined;
-
-  const {
-    treeCount,
-    givee,
-    giver,
-    cardType,
-    contributionType,
-    isGift,
-    redemptionCode,
-    treeType,
-    tpoName,
-    plantProjectName,
-    country,
-    giverName
-  } = marker;
-
-  if (treeType === null) {
-    // if (treeCount > 1) {
-    //   headerText =
-    //     delimitNumbers(treeCount) + ' ' + i18n.t('label.usr_contribution_tree');
-    // } else {
-    //   headerText =
-    //     delimitNumbers(treeCount) +
-    //     ' ' +
-    //     i18n.t('label.usr_contribution_single_tree');
-    // }
-  } else if (treeType !== null) {
-    // if (treeCount > 1) {
-    //   headerText =
-    //     delimitNumbers(treeCount) +
-    //     ' ' +
-    //     treeType.charAt(0).toUpperCase() +
-    //     treeType.slice(1) +
-    //     ' ' +
-    //     i18n.t('label.usr_contribution_tree');
-    // } else {
-    //   headerText =
-    //     delimitNumbers(treeCount) +
-    //     ' ' +
-    //     treeType.charAt(0).toUpperCase() +
-    //     treeType.slice(1) +
-    //     ' ' +
-    //     i18n.t('label.usr_contribution_single_tree');
-    // }
-  }
-  let plantProjectLine = (plantProjectName, country) => {
-    return country && getISOToCountryName(country).country;
-  }
-  let tpoline = tpoLine(tpoName);
-  let plantProjectline = plantProjectLine(plantProjectName, country);
-
-  if (contributionType === 'donation') {
-    headerText = plantProjectline + ' ' + i18n.t('label.tree_donation');
-  } else if (contributionType === 'planting') {
-    headerText = plantProjectline + ' ' + i18n.t('label.registered_trees')
-  } else if (marker.type === 'tpo-coupon') {
-    headerText = tpoline + ' ' + i18n.t('label.redeemed_trees')
-  } else {
-    headerText = tpoline + ' ' + i18n.t('label.gifted_from_person') + giverName
-  }
-
-
-  // console.log(headerText, "headerText")
-  // console.log(marker, "MARKer")
-
-  console.log(tpoline, 'tpoLinetpoLinetpoLinetpoLine')
-  console.log(plantProjectline, 'plantProjectline')
-  return (
-    <TouchableOpacity
-      onPress={() => onPressHeader(marker.id)}
-      style={styles.cardContainer}
-    >
-      <View style={{ flex: 1, }}>
-        <View>
-          <Text numberOfLines={2} style={styles.cardHeaderText}>{headerText}</Text>
-        </View>
-      </View>
-      <View style={styles.treeCont}>
-        <View style={styles.subCont}>
-          <Text style={styles.treeCountText}>{marker.treeCount}</Text>
-          <Image source={tree_1} style={styles.treeIcon} />
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
-
 AnimatedViews.propTypes = {
   provider: ProviderPropType
 };
 
 const styles = StyleSheet.create({
+  userContributionsDetailsFullViewCont: {
+    backgroundColor: 'white',
+    width: '100%',
+    height: HEIGHT * 0.7,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+  },
   treeCountText: {
     fontFamily: 'OpenSans-Bold',
     fontSize: 25,

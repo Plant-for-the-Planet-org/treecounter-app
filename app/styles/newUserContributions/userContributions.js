@@ -43,7 +43,8 @@ export default EStyleSheet.create({
   dateContainer: {
     position: 'absolute',
     left: 20,
-    marginTop: 5,
+    marginTop: -15,
+    zIndex: 10,
     paddingVertical: 4,
     paddingHorizontal: 10,
     backgroundColor: whiteColor,

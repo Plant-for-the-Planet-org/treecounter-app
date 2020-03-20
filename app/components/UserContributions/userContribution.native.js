@@ -73,6 +73,7 @@ export default class UserContributions extends React.Component {
     const deleteConfirmColor = '#ee6453';
     return (
       <View>
+
         {/* ===== Map View starts ===== */}
         {!isFromUserProfile ? (
           <View style={styles.mapView}>
@@ -115,7 +116,9 @@ export default class UserContributions extends React.Component {
             <Text style={styles.plantedDate}>{plantedDate}</Text>
           </View>
         ) : null}
+
         {/* ===== Header and Sub header starts ===== */}
+
         <View style={styles.header}>
           {/* maps the tree count with contribution type : Gifted, Donated, Received */}
           {treeCount && treeCount > 0 ? (

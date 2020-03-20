@@ -17,6 +17,8 @@ import i18n from '../../locales/i18n.js';
 import PopupNative from '../Common/ModalDialog/Popup.native';
 import NativeMapView, { mapStyle } from '../Map/NativeMapView.native';
 import { PROVIDER_GOOGLE } from 'react-native-maps';
+import colors from '../../utils/constants';
+
 export default class UserContributions extends React.Component {
   constructor(props) {
     super(props);
@@ -72,7 +74,7 @@ export default class UserContributions extends React.Component {
     const textColor = '#87B738';
     const deleteConfirmColor = '#ee6453';
     return (
-      <View style={{ backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: colors.WHITE }}>
 
         {/* ===== Map View starts ===== */}
         {!isFromUserProfile ? (

@@ -242,7 +242,6 @@ class AnimatedViews extends React.Component {
     if (index <= 0) {
       index = 0;
     }
-    console.log("Current Index", index)
     // clearTimeout(tempTimeOut)
     // let tempTimeOut = setTimeout(() => {
       if (index >= this.state.mapIndex) {
@@ -443,7 +442,7 @@ class AnimatedViews extends React.Component {
             }}
             vertical
             horizontal={canMoveHorizontal}
-            xMode="snap"
+            xMode={'snap'}
             snapSpacingX={SNAP_WIDTH}
             yBounds={[-1 * screen.height, 0]}
             xBounds={[-screen.width * (markers.length - 1), 0]}
@@ -474,7 +473,7 @@ class AnimatedViews extends React.Component {
                     <View style={styles.card} key={i}>
                       <ContributionCard
                         onPressSingleContribution={this.onPressHeader}
-                        isFromAnimatredCardList={true}
+                        isFromAnimatredCardList
                         contribution={marker}
                       />
                     </View>

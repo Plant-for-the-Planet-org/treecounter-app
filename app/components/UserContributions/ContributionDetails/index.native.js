@@ -263,8 +263,9 @@ class UserContributionsDetails extends React.Component {
       }
     }
     return (
-      <ScrollView style={{ backgroundColor: 'transparent', flex: 1 }} contentContainerStyle={{ marginTop: 20 }}>
+      <ScrollView style={styles.scrollViewContainer} contentContainerStyle={{ marginTop: 20 }}>
         <View style={{ backgroundColor: colors.WHITE, height: height }}>
+          
 
           <UserContributions
             isFromUserProfile={this.props.isFromUserProfile}

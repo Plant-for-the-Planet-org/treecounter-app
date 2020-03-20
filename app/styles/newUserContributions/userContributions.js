@@ -6,6 +6,9 @@ const textColorLight = '#d5d5d5';
 const whiteColor = '#ffffff';
 
 export default EStyleSheet.create({
+  scrollViewContainer :{
+    backgroundColor: 'transparent', flex: 1 
+  },
   header: {
     paddingHorizontal: 20,
     paddingTop: 23,

@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Platform,
   Text,
-  SafeAreaView
+  SafeAreaView,
+
 } from 'react-native';
 import MapView, {
   ProviderPropType,
@@ -174,6 +175,7 @@ class AnimatedViews extends React.Component {
     });
 
     this.state = {
+      isSatellite: false,
       panX,
       panY,
       index: 0,
@@ -370,6 +372,7 @@ class AnimatedViews extends React.Component {
     return (
       <View style={styles.container}>
         <MapView
+          mapType={this.state.isSatellite ? 'satellite' : undefined}
           mapPadding={this.setMapPadding()}
           onMapReady={this.onMapReady}
           ref={map => (this.mapView = map)}
@@ -421,6 +424,7 @@ class AnimatedViews extends React.Component {
             onMoveShouldSetPanResponder={() => true}
           >
             <View style={styles.itemContainer}>
+
               {markers
                 ? markers.map((marker, i) => (
                   <Animated.View
@@ -437,9 +441,9 @@ class AnimatedViews extends React.Component {
                       }
                     ]}
                   >
-
                     <View style={styles.card} key={i}>
                       <ContributionCard
+                        onPressSingleContribution={this.onPressHeader}
                         isFromAnimatredCardList={true}
                         contribution={marker}
                       />
@@ -471,6 +475,13 @@ class AnimatedViews extends React.Component {
               >
                 <Icon name={'my-location'} size={30} color={'#4C5153'} />
               </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
+                style={styles.satellite}
+              >
+                <Icon name={'satellite'} size={30} color={'#4C5153'} />
+              </TouchableOpacity>
+
             </> : null}
           </>
         ) : null}
@@ -685,6 +696,17 @@ const styles = StyleSheet.create({
   fullScreenExitIcon: {
     position: 'absolute',
     bottom: 150,
+    right: 20,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    elevation: 6,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  satellite: {
+    position: 'absolute',
+    bottom: 290,
     right: 20,
     padding: 15,
     backgroundColor: '#fff',

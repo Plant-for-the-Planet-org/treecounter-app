@@ -72,7 +72,7 @@ export default class UserContributions extends React.Component {
     const textColor = '#87B738';
     const deleteConfirmColor = '#ee6453';
     return (
-      <View>
+      <View style={{ backgroundColor: 'white' }}>
 
         {/* ===== Map View starts ===== */}
         {!isFromUserProfile ? (

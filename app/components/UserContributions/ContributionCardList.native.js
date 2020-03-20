@@ -10,7 +10,7 @@ const ContributionCardList = props => {
     showAllContributions,
     onPressSingleContribution
   } = props;
-  console.log('ContributionCardList')
+  // console.log('ContributionCardList')
   return contributions.length > 3 && showAllContributions ? (
     <FlatList
       data={contributions}

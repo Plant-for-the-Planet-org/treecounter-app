@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   Platform,
-  Text,
   SafeAreaView,
 } from 'react-native';
 import MapView, {
@@ -18,7 +17,6 @@ import MapView, {
 import PanController from './panController';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 import { deleteContribution } from '../../actions/EditMyTree';
-import { delimitNumbers } from '../../utils/utils';
 import { loadProject } from '../../actions/loadTposAction';
 import { currentUserProfileIdSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
@@ -26,9 +24,6 @@ import { bindActionCreators } from 'redux';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { markerImage } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { tree_1 } from '../../assets/index';
-import i18n from '../../locales/i18n';
-import { getISOToCountryName } from '../../helpers/utils';
 import ContributionCard from '../UserContributions/ContributionCard.native'
 
 const screen = Dimensions.get('window');
@@ -174,6 +169,8 @@ class AnimatedViews extends React.Component {
     });
 
     this.state = {
+      mapIndex : 3,
+      markersList: [],
       isSatellite: false,
       panX,
       panY,
@@ -190,7 +187,6 @@ class AnimatedViews extends React.Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       },
-
       singleContributionID: props.singleContributionID
     };
   }
@@ -239,12 +235,41 @@ class AnimatedViews extends React.Component {
     let index = Math.round(x / spacing) * spacing + plus;
     index = Math.abs(index);
     index = Math.floor(index / ITEM_WIDTH + 0.3);
+
     if (index >= this.state.markers.length) {
       index = this.state.markers.length - 1;
     }
     if (index <= 0) {
       index = 0;
     }
+    console.log("Current Index", index)
+    // clearTimeout(tempTimeOut)
+    // let tempTimeOut = setTimeout(() => {
+      if (index >= this.state.mapIndex) {
+        this.setState({ mapIndex : this.state.mapIndex + 3},()=>{
+          console.log(this.state.mapIndex,'this.state.mapIndex')
+        })
+      }
+    // },250
+    // )
+    // alert(index)
+    // const panX = new Animated.Value(0);
+    // const panY = new Animated.Value(0);
+    // this.animation = new Animated.Value(0);
+
+    // const scrollY = panY.interpolate({
+    //   inputRange: [-1, 1],
+    //   outputRange: [1, -1]
+    // });
+    // let markers = this.state.markers.slice(index - 1, 5);
+    // const animations = markers.map((m, i) =>
+    //   getMarkerState(panX, panY, scrollY, i)
+    // );
+    // this.setState({
+    //   panX,
+    //   panY, scrollY, animations, markersList: markers
+    // })
+    // }, 250)
 
     clearTimeout(this.regionTimeout);
     this.regionTimeout = setTimeout(() => {
@@ -278,6 +303,7 @@ class AnimatedViews extends React.Component {
         },
         350
       );
+      this.setState({ markersList: this.state.markers.slice(0, 3) })
     } catch (e) {
       console.log(JSON.stringify(e))
     }
@@ -361,16 +387,21 @@ class AnimatedViews extends React.Component {
       animations,
       canMoveHorizontal,
       markers,
-      region
+      region,
     } = this.state;
     let activeMarker =
       this.state.markers !== null
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
         : null;
+    let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
     return (
       <View style={styles.container}>
         <MapView
-          mapType={this.state.isSatellite ? 'satellite' : undefined}
+          rotateEnabled={isContribution}
+          scrollEnabled={isContribution}
+          pitchEnabled={isContribution}
+          zoomEnabled={isContribution}
+          mapType={this.state.isSatellite ? 'satellite' : 'standard'}
           mapPadding={this.setMapPadding()}
           onMapReady={this.onMapReady}
           ref={map => (this.mapView = map)}
@@ -423,8 +454,10 @@ class AnimatedViews extends React.Component {
           >
             <View style={styles.itemContainer}>
               {markers
-                ? markers.map((marker, i) => (
-                  <Animated.View
+                ? markers.map((marker, i) => {
+                  console.log(i, this.state.mapIndex,'------ this.state.mapIndex--------' )
+                  return (
+                    i <= this.state.mapIndex ? <Animated.View
                     key={marker.id}
                     style={[
                       styles.item,
@@ -445,8 +478,9 @@ class AnimatedViews extends React.Component {
                         contribution={marker}
                       />
                     </View>
-                  </Animated.View>
-                ))
+                  </Animated.View> : <Animated.View key={marker.id}/>
+                    )
+                })
                 : null}
             </View>
           </PanController>
@@ -509,12 +543,11 @@ AnimatedViews.propTypes = {
 
 const styles = StyleSheet.create({
   userContributionsDetailsFullViewCont: {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     width: '100%',
     height: HEIGHT * 0.7,
     position: 'absolute',
     bottom: 0,
-    left: 0,
   },
   treeCountText: {
     fontFamily: 'OpenSans-Bold',
@@ -556,7 +589,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'transparent'
   },
   itemContainer: {
     backgroundColor: 'transparent',

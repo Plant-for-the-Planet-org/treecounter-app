@@ -44,7 +44,7 @@ export default EStyleSheet.create({
     position: 'absolute',
     left: 20,
     marginTop: -15,
-    zIndex: 10,
+    zIndex: 10000,
     paddingVertical: 4,
     paddingHorizontal: 10,
     backgroundColor: whiteColor,

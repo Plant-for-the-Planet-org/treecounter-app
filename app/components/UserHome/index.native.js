@@ -35,7 +35,6 @@ import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList.native';
 import i18n from '../../locales/i18n';
 import CompetitionSnippet from './app/CompetitionSnippet';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullMapComponent from './FullMapComponent';
 import SafeAreaView from 'react-native-safe-area-view';
 import { withNavigation } from 'react-navigation';
@@ -242,7 +241,7 @@ class UserHome extends Component {
     singleContributionIDShouldNull, /*  if true set id to null*/
 
   ) => {
-    console.log('toggleIsFullMapComp');
+    // console.log('toggleIsFullMapComp');
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
     this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
@@ -309,7 +308,6 @@ class UserHome extends Component {
       recurrentUserContributions,
       isFullMapComponentModal
     } = this.state;
-    debug(userProfile);
     return (
       <SafeAreaView style={{ elevation: 1, flex: 1 }}
         forceInset={{ bottom: !isFullMapComponentModal ? 'never' : 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>

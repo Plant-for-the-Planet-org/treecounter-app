@@ -20,7 +20,7 @@ import styles, {
 } from '../../styles/myTrees/user_contribution_card';
 import { formatDate, delimitNumbers } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
-
+import { multiple_trees , tree_1} from '../../assets/index'
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -322,6 +322,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
+                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={{ marginLeft : 2,width : 30, height: 20, borderWidth : 0, borderColor : 'red' }} /> : <Image resizeMode={'contain'} source={tree_1} style={{ marginLeft : 2,width : 30, height: 20, borderWidth : 0, borderColor : 'red' }} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -361,6 +362,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
+                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={{ marginLeft : 2,width : 30, height: 20, borderWidth : 0, borderColor : 'red' }} /> : <Image resizeMode={'contain'} source={tree_1} style={{ marginLeft : 2,width : 30, height: 20, borderWidth : 0, borderColor : 'red' }} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -409,6 +411,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
+                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={{ marginLeft : 2,width : 30, height: 20, borderWidth : 0, borderColor : 'red' }} /> : <Image resizeMode={'contain'} source={tree_1} style={{ marginLeft : 2,width : 30, height: 20, borderWidth : 0, borderColor : 'red' }} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -440,6 +443,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
+                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={{ marginLeft : 2,width : 30, height: 20, borderWidth : 0, borderColor : 'red' }} /> : <Image resizeMode={'contain'} source={tree_1} style={{ marginLeft : 0,width : 20, height: 20, borderWidth : 0, borderColor : 'red' }} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>

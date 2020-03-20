@@ -205,7 +205,9 @@ import beach from './images/trees/beach.png';
 import tree_1 from './images/icons/tree_1.png';
 import smalltreewhite from '../assets/images/smalltreewhite.png';
 import markerImage from './images/tree.png';
-import fullscreen_icon from './images/fullscreen_icon.png'
+import fullscreen_icon from './images/fullscreen_icon.png';
+import multiple_trees from './images/multiple_trees.png'
+
 export {
   treelogo,
   germany,
@@ -409,5 +411,6 @@ export {
   tree_1,
   smalltreewhite,
   markerImage,
-  fullscreen_icon
+  fullscreen_icon,
+  multiple_trees
 };

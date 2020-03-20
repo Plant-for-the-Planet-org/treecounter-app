@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const getHeaderText = function(padding, margin) {
+const getHeaderText = function (padding, margin) {
   return {
     fontSize: 16,
     fontWeight: '500',
@@ -155,7 +155,7 @@ export const myTreesStyle = (color, borderColor) =>
 
     // New Design
 
-    singleRedeemObject: { borderBottomWidth: 1, borderBottomColor: '#d5d5d5' },
+    singleRedeemObject: { backgroundColor: 'white', borderBottomWidth: 1, borderBottomColor: '#d5d5d5' },
     redeemObjectDate: {
       backgroundColor: '#f7f7f7',
       height: 40,

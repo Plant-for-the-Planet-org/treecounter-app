@@ -247,7 +247,6 @@ class ContributionCard extends React.Component {
 
   render() {
     let { contribution } = this.props;
-    debug('Contribution', contribution);
     let {
       treeCount,
       plantProjectName,
@@ -303,10 +302,6 @@ class ContributionCard extends React.Component {
             style={styles.singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution.id);
-              // this.props.navigation.navigate('contribution_details', {
-              //   contribution,
-              //   titleParam: plantProjectName || tpoName || treeSpecies
-              // });
             }}
           >
             <View>
@@ -345,10 +340,6 @@ class ContributionCard extends React.Component {
             style={styles.singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution.id);
-              // this.props.navigation.navigate('contribution_details', {
-              //   contribution,
-              //   titleParam: plantProjectName || tpoName || treeSpecies
-              // });
             }}
           >
             <View>
@@ -396,10 +387,6 @@ class ContributionCard extends React.Component {
             style={styles.singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution.id);
-              // this.props.navigation.navigate('contribution_details', {
-              //   contribution,
-              //   titleParam: plantProjectName || tpoName || treeSpecies
-              // });
             }}
           >
             <View>
@@ -438,17 +425,13 @@ class ContributionCard extends React.Component {
             style={styles.singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution.id);
-              // this.props.navigation.navigate('contribution_details', {
-              //   contribution,
-              //   titleParam: plantProjectName || tpoName || treeSpecies
-              // });
             }}
           >
             <View>
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    {i18n.t('label.gifted_from_person', contribution.giverName)}
+                    {i18n.t('label.gifted_from_person') + contribution.giverName}
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}

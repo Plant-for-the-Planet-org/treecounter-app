@@ -20,6 +20,12 @@ export const myTreesStyle = (color, borderColor) =>
       flex: 1,
       paddingVertical: 20
     },
+    multipleTrees : {
+      marginLeft : 2, height: 20, width : 30, 
+    }, 
+    treeImage :{
+      height: 25
+    },
     contributionContainer: {
       borderWidth: 1,
       borderLeftWidth: 4,

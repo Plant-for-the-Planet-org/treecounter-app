@@ -267,7 +267,7 @@ class ContributionCard extends React.Component {
 
     // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
-    // console.log(plantProjectLine, 'plantProjectLine')
+    console.log(plantProjectLine, 'plantProjectLine')
     // let donateActionLine = this.donateActionLine(
     //   isGift,
     //   plantDate,
@@ -277,7 +277,7 @@ class ContributionCard extends React.Component {
     let tpoLine = this.tpoLine(tpoName);
     // let plantActionLine = this.plantActionLine(plantDate, registrationDate);
     let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
-    // console.log(dedicateActionLine, 'dedicateActionLine')
+    console.log(dedicateActionLine, 'dedicateActionLine')
     // let redeemActionLine = this.redeemActionLine(
     //   redemptionCode,
     //   redemptionDate,
@@ -297,7 +297,7 @@ class ContributionCard extends React.Component {
     let renderCard = () => {
       const { isFromAnimatredCardList } = this.props
       if (contributionType === 'donation') {
-        // console.log(i18n.t('label.tree_donation'), 'CONTRIBUTIONCARD')
+        console.log(i18n.t('label.tree_donation'), 'CONTRIBUTIONCARD')
         return (
           <TouchableOpacity
             style={singleRedeemObject}
@@ -321,7 +321,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={{ marginLeft : 2,width : 30, height: 20, }} /> : <Image resizeMode={'contain'} source={tree_1} style={{ marginLeft : 2,width : 30, height: 20}} />}
+                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'}   source={tree_1} style={styles.treeImage} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -337,7 +337,7 @@ class ContributionCard extends React.Component {
           </TouchableOpacity>
         );
       } else if (contributionType === 'planting') {
-        // console.log(i18n.t('label.registered_trees'), 'CONTRIBUTIONCARD')
+        console.log(i18n.t('label.registered_trees'), 'CONTRIBUTIONCARD')
         return (
           <TouchableOpacity
             style={singleRedeemObject}
@@ -361,7 +361,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={{ marginLeft : 2,width : 30, height: 20, }} /> : <Image resizeMode={'contain'} source={tree_1} style={{ marginLeft : 2,width : 30, height: 20, }} />}
+                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} />  : <Image resizeMode={'contain'}  source={tree_1} style={styles.treeImage} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -386,7 +386,7 @@ class ContributionCard extends React.Component {
           </TouchableOpacity>
         );
       } else if (contribution.type === 'tpo-coupon') {
-        // console.log(i18n.t('label.redeemed_trees'), 'CONTRIBUTIONCARD')
+        console.log(i18n.t('label.redeemed_trees'), 'CONTRIBUTIONCARD')
         return (
           <TouchableOpacity
             style={singleRedeemObject}
@@ -410,7 +410,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={{ marginLeft : 2,width : 30, height: 20, }} /> : <Image resizeMode={'contain'} source={tree_1} style={{ marginLeft : 2,width : 30, height: 20, }} />}
+                    {treeCount > 1?  <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image  resizeMode={'contain'}  source={tree_1} style={styles.treeImage} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -442,7 +442,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={{ marginLeft : 2,width : 30, height: 20, borderWidth : 0, borderColor : 'red' }} /> : <Image resizeMode={'contain'} source={tree_1} style={{ marginLeft : 0,width : 20, height: 20, }} />}
+                    {treeCount > 1?  <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} />  : <Image resizeMode={'contain'}  source={tree_1} style={styles.treeImage} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>

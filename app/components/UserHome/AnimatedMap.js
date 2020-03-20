@@ -28,6 +28,8 @@ import { markerImage } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { tree_1 } from '../../assets/index';
 import i18n from '../../locales/i18n';
+import { getISOToCountryName } from '../../helpers/utils';
+
 
 const screen = Dimensions.get('window');
 const { height: HEIGHT, } = screen;
@@ -469,7 +471,8 @@ class AnimatedViews extends React.Component {
                 style={styles.myLocationIcon}
               >
                 <Icon name={'my-location'} size={30} color={'#4C5153'} />
-              </TouchableOpacity></> : null}
+              </TouchableOpacity>
+            </> : null}
           </>
         ) : null}
         {activeMarker ? (
@@ -502,7 +505,13 @@ class AnimatedViews extends React.Component {
 }
 
 const ListItem = ({ marker, onPressHeader }) => {
+
+  let tpoLine = (tpoName) => {
+    return tpoName ? i18n.t('label.planted_by', { tpo: tpoName }) : '';
+  }
+
   let headerText = undefined;
+
   const {
     treeCount,
     givee,
@@ -512,65 +521,71 @@ const ListItem = ({ marker, onPressHeader }) => {
     isGift,
     redemptionCode,
     treeType,
+    tpoName,
+    plantProjectName,
+    country,
+    giverName
   } = marker;
+
   if (treeType === null) {
-    if (treeCount > 1) {
-      headerText =
-        delimitNumbers(treeCount) + ' ' + i18n.t('label.usr_contribution_tree');
-    } else {
-      headerText =
-        delimitNumbers(treeCount) +
-        ' ' +
-        i18n.t('label.usr_contribution_single_tree');
-    }
+    // if (treeCount > 1) {
+    //   headerText =
+    //     delimitNumbers(treeCount) + ' ' + i18n.t('label.usr_contribution_tree');
+    // } else {
+    //   headerText =
+    //     delimitNumbers(treeCount) +
+    //     ' ' +
+    //     i18n.t('label.usr_contribution_single_tree');
+    // }
   } else if (treeType !== null) {
-    if (treeCount > 1) {
-      headerText =
-        delimitNumbers(treeCount) +
-        ' ' +
-        treeType.charAt(0).toUpperCase() +
-        treeType.slice(1) +
-        ' ' +
-        i18n.t('label.usr_contribution_tree');
-    } else {
-      headerText =
-        delimitNumbers(treeCount) +
-        ' ' +
-        treeType.charAt(0).toUpperCase() +
-        treeType.slice(1) +
-        ' ' +
-        i18n.t('label.usr_contribution_single_tree');
-    }
+    // if (treeCount > 1) {
+    //   headerText =
+    //     delimitNumbers(treeCount) +
+    //     ' ' +
+    //     treeType.charAt(0).toUpperCase() +
+    //     treeType.slice(1) +
+    //     ' ' +
+    //     i18n.t('label.usr_contribution_tree');
+    // } else {
+    //   headerText =
+    //     delimitNumbers(treeCount) +
+    //     ' ' +
+    //     treeType.charAt(0).toUpperCase() +
+    //     treeType.slice(1) +
+    //     ' ' +
+    //     i18n.t('label.usr_contribution_single_tree');
+    // }
+  }
+  let plantProjectLine = (plantProjectName, country) => {
+    return country && getISOToCountryName(country).country;
+  }
+  let tpoline = tpoLine(tpoName);
+  let plantProjectline = plantProjectLine(plantProjectName, country);
+
+  if (contributionType === 'donation') {
+    headerText = plantProjectline + ' ' + i18n.t('label.tree_donation');
+  } else if (contributionType === 'planting') {
+    headerText = plantProjectline + ' ' + i18n.t('label.registered_trees')
+  } else if (marker.type === 'tpo-coupon') {
+    headerText = tpoline + ' ' + i18n.t('label.redeemed_trees')
+  } else {
+    headerText = tpoline + ' ' + i18n.t('label.gifted_from_person') + giverName
   }
 
-  if (cardType === 'donation') {
-    headerText = headerText + ' ' + i18n.t('label.donated');
-  }
-  if (isGift && givee) {
-    if (contributionType === 'planting') {
-      // do
-    }
-    else {
-      headerText = headerText + ' ' + i18n.t('label.gifted');
-    }
-  }
-  if (giver) {
-    headerText = headerText + ' ' + i18n.t('label.received');
-  }
-  if (redemptionCode && givee) {
-    headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
-  }
 
   // console.log(headerText, "headerText")
   // console.log(marker, "MARKer")
+
+  console.log(tpoline, 'tpoLinetpoLinetpoLinetpoLine')
+  console.log(plantProjectline, 'plantProjectline')
   return (
     <TouchableOpacity
       onPress={() => onPressHeader(marker.id)}
       style={styles.cardContainer}
     >
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, }}>
         <View>
-          <Text style={styles.cardHeaderText}>{headerText}</Text>
+          <Text numberOfLines={2} style={styles.cardHeaderText}>{headerText}</Text>
         </View>
       </View>
       <View style={styles.treeCont}>
@@ -624,7 +639,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
     marginVertical: 10,
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     flexDirection: 'row'
   },
   container: {

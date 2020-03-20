@@ -317,8 +317,8 @@ class AnimatedViews extends React.Component {
     }
   }
 
-  onPressHeader = (id, isTopDownIconPress) => {
-    if (isTopDownIconPress) {
+  onPressHeader = id => {
+    if (this.props.isPressFromList) {
       this.setState({ singleContributionID: undefined });
       this.props.toggleIsFullMapComp(true);
       setTimeout(() => {
@@ -330,27 +330,25 @@ class AnimatedViews extends React.Component {
           console.log(JSON.stringify(e))
         }
       }, 3000);
+    }
+    if (id) {
+      this.setState({ singleContributionID: id });
     } else {
-      if (id) {
-        this.setState({ singleContributionID: id });
+      if (this.state.singleContributionID) {
+        this.setState({ singleContributionID: undefined });
       } else {
-        if (this.state.singleContributionID) {
-          this.setState({ singleContributionID: undefined });
-        } else {
-          this.props.toggleIsFullMapComp(true);
-          setTimeout(() => {
-            try {
-              this.mapView.fitToSuppliedMarkers(
-                this.state.markers.map(x => String(x.id))
-              );
-            } catch (e) {
-              console.log(JSON.stringify(e))
-            }
-          }, 3000);
-        }
+        this.props.toggleIsFullMapComp(true);
+        setTimeout(() => {
+          try {
+            this.mapView.fitToSuppliedMarkers(
+              this.state.markers.map(x => String(x.id))
+            );
+          } catch (e) {
+            console.log(JSON.stringify(e))
+          }
+        }, 3000);
       }
     }
-
   };
 
   render() {
@@ -406,7 +404,6 @@ class AnimatedViews extends React.Component {
             style={{
               flex: this.state.singleContributionID ? 1.5 : 0.3,
               position: 'absolute',
-              // bottom: 40,
               bottom: 40,
               backgroundColor: 'transparent'
             }}
@@ -457,7 +454,7 @@ class AnimatedViews extends React.Component {
           <>
             <TouchableOpacity
               style={styles.downArrowIcon}
-              onPress={() => this.onPressHeader(undefined, this.props.isPressFromlist)}
+              onPress={() => this.onPressHeader()}
             >
               <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>

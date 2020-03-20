@@ -269,6 +269,7 @@ class ContributionCard extends React.Component {
 
     // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
+    console.log(plantProjectLine, 'plantProjectLine')
     // let donateActionLine = this.donateActionLine(
     //   isGift,
     //   plantDate,
@@ -278,6 +279,7 @@ class ContributionCard extends React.Component {
     let tpoLine = this.tpoLine(tpoName);
     // let plantActionLine = this.plantActionLine(plantDate, registrationDate);
     let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
+    console.log(dedicateActionLine, 'dedicateActionLine')
     // let redeemActionLine = this.redeemActionLine(
     //   redemptionCode,
     //   redemptionDate,

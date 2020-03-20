@@ -50,7 +50,7 @@ class UserHome extends Component {
       svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
-      isPressFromlist: false,
+      isPressFromList: false,
       singleContributionID: undefined,
       isFullMapComponentModal: false,
       svgData: svgData,
@@ -239,7 +239,8 @@ class UserHome extends Component {
   };
 
   toggleIsFullMapComp = (
-    singleContributionIDShouldNull /*  if true set id to null*/
+    singleContributionIDShouldNull, /*  if true set id to null*/
+
   ) => {
     console.log('toggleIsFullMapComp');
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -252,9 +253,9 @@ class UserHome extends Component {
       isFullMapComponentModal: !this.state.isFullMapComponentModal,
       singleContributionID: singleContributionIDShouldNull
         ? null
-        : this.state.singleContributionID
+        : this.state.singleContributionID,
+      isPressFromList: singleContributionIDShouldNull ? false : true
     }, () => {
-      console.log(this.props.navigation)
       this.props.navigation.setParams({ isFullMapComponentModal: this.state.isFullMapComponentModal })
     });
   };
@@ -281,7 +282,7 @@ class UserHome extends Component {
         }}
       >
         <FullMapComponent
-          isPressFromlist={this.state.isPressFromlist}
+          isPressFromList={this.state.isPressFromList}
           singleContributionID={this.state.singleContributionID}
           isFullMapComponentModal={isFullMapComponentModal}
           toggleIsFullMapComp={this.toggleIsFullMapComp}
@@ -294,7 +295,7 @@ class UserHome extends Component {
   };
 
   onPressSingleContribution = id => {
-    this.setState({ singleContributionID: id, isPressFromlist: true }, () => {
+    this.setState({ singleContributionID: id, isPressFromList: true }, () => {
       this.toggleIsFullMapComp();
     });
   };

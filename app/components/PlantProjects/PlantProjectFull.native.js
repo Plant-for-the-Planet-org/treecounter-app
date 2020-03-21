@@ -13,9 +13,8 @@ import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
 import { right_arrow_button } from '../../assets';
 import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
-import scrollStyle from '../../styles/common/scrollStyle.native';
 import NumberFormat from '../Common/NumberFormat.native';
-import { formatNumber } from '../../utils/utils';
+// import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 

@@ -80,10 +80,15 @@ class CurrencySelectorList extends Component {
     this.setState({ preferredCurrency: selectedOption });
     this.props.handleCurrencyChange(selectedOption);
   };
+  // first close any open search, then close modal dialog
   onClosed = () => {
-    this.props.hideCurrencyModal({
-      show: false
-    });
+    this.state.search ? (
+      this.setSearch()
+    ) : (
+      this.props.hideCurrencyModal({
+        show: false
+      })
+    );
   };
   getCountryCode = currency =>
     countryCodes.find(c => c.code == currency.value) || {};
@@ -183,7 +188,12 @@ class CurrencySelectorList extends Component {
               }}
             >
               <TouchableItem onPress={this.onClosed}>
-                <Icon name="close" size={30} color="#4d5153" />
+                { this.state.search ? (
+                  <Icon name="arrow-back" size={30} color="black" />
+                ) : (
+                  <Icon name="close" size={30} color="#4d5153" />
+                ) }
+
               </TouchableItem>
               <View
                 style={{
@@ -205,18 +215,6 @@ class CurrencySelectorList extends Component {
                   placeholderTextColor={'#4d5153'}
                   fontFamily="OpenSans-SemiBold"
                 />
-                <TouchableItem
-                  style={{
-                    width: 30
-                  }}
-                  onPress={() => {
-                    this.setSearch();
-                  }}
-                >
-                  {this.state.search ? (
-                    <Icon name="close" size={24} color="#4d5153" />
-                  ) : null}
-                </TouchableItem>
               </View>
             </View>
             <ScrollView>

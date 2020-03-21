@@ -165,7 +165,7 @@ class CurrencySelectorList extends Component {
         keyboardTopOffset={0}
         swipeToClose
       >
-        <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
+        <View style={{ backgroundColor: backgroundColor, flex: 1, marginBottom: 20}}>
           <View
             style={{
               backgroundColor: 'white',

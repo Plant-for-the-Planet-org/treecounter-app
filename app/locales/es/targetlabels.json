@@ -1,1 +1,6 @@
-{ }
+{
+  "set_target": "Mi objetivo de plantación",
+  "update_target": "Mi objetivo de plantación",
+  "save": "Guardar",
+  "target_count": "Objetivo total del árboles"
+}

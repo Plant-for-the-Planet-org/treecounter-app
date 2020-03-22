@@ -10,6 +10,7 @@ import { context } from '../../config';
 import styles from '../../styles/faq';
 import HeaderNew from './../Header/HeaderNew.native';
 import i18n from '../../locales/i18n';
+import colors from '../../utils/constants';
 
 export default class Imprint extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ export default class Imprint extends Component {
   convertImprintArrayToMap(imprints) {
     const imprintTitleMap = {}; // Create the blank map
 
-    imprints.forEach(function(imprintItem) {
+    imprints.forEach(function (imprintItem) {
       if (!imprintTitleMap[imprintItem.title]) {
         // Create an entry in the map for the category if it hasn't yet been created
         imprintTitleMap[imprintItem.title] = [];
@@ -94,19 +95,19 @@ export default class Imprint extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <>
-        <HeaderNew
-          title={i18n.t('label.imprint')}
-          navigation={this.props.navigation}
-        />
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this._renderContent}
-          renderSectionHeader={this._renderHeader}
-          style={{ marginTop: 120 }}
-        />
-      </>
-    );
+        <View style={{ backgroundColor: colors.WHITE }}>
+          <HeaderNew
+            title={i18n.t('label.imprint')}
+            navigation={this.props.navigation}
+          />
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this._renderContent}
+            renderSectionHeader={this._renderHeader}
+            style={{ marginTop: 120 }}
+          />
+        </View>
+      );
   }
 }
 

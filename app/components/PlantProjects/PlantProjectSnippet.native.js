@@ -20,9 +20,9 @@ import {
 } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { formatNumber } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
 // import CardLayout from '../Common/Card';
+import NumberFormat from '../Common/NumberFormat.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
@@ -294,7 +294,11 @@ class PlantProjectSnippet extends PureComponent {
                   <View style={styles.costContainer}>
                     <View style={styles.costTextContainer}>
                       <Text style={[styles.costText]}>
-                        {formatNumber(specsProps.treeCost, null, currency)}
+                        {/* {formatNumber(specsProps.treeCost, null, currency)} */}
+                        <NumberFormat
+                          data={specsProps.treeCost}
+                          currency={currency}
+                        />
                       </Text>
                     </View>
 

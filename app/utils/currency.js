@@ -49,3 +49,21 @@ export const sortProjectsByPrice = (plantProjects, asc, currencies) => {
   }
   return sorted;
 };
+
+/**
+ * Accepts currency array to sort the curriencies list and returns the same
+ * @param {array} currenciesArray, currencies array
+ */
+export const currencySort = currenciesArray => {
+  currenciesArray.sort();
+
+  if (currenciesArray.indexOf('USD') > 0) {
+    currenciesArray.splice(currenciesArray.indexOf('USD'), 1);
+    currenciesArray.unshift('USD');
+  }
+  if (currenciesArray.indexOf('EUR') > 0) {
+    currenciesArray.splice(currenciesArray.indexOf('EUR'), 1);
+    currenciesArray.unshift('EUR');
+  }
+  return currenciesArray;
+};

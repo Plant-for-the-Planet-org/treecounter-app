@@ -5,8 +5,6 @@ import {
   View,
   Image,
   FlatList,
-  Animated,
-  ActivityIndicator,
   Dimensions
 } from 'react-native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
@@ -14,7 +12,6 @@ import PropTypes from 'prop-types';
 import { trees } from './../../../assets';
 import styles from '../../../styles/competition/competition-master.native';
 import i18n from '../../../locales/i18n';
-
 import ContentLoader from 'react-native-content-loader';
 import { Rect } from 'react-native-svg';
 const HEIGHT = Dimensions.get('window').height;

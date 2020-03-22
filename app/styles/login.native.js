@@ -69,9 +69,10 @@ export default EStyleSheet.create({
     backgroundColor: 'white'
   },
   container: {
-    width: '100%',
     padding: 15,
-    paddingTop: 30
+    paddingTop: 30,
+    backgroundColor: 'white',
+    flex: 1
   },
   headerContainer: {
     flexDirection: 'column',

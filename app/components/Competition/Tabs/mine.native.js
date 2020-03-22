@@ -96,7 +96,6 @@ export default class MineCompetitions extends Component {
       <ScrollView
         contentContainerStyle={[
           scrollStyle.styleContainer,
-          { paddingBottom: 72 }
         ]}
         refreshControl={
           <RefreshControl

@@ -28,13 +28,14 @@ import buttonStyles from '../../styles/common/button.native';
 import NativeMapView from '../Map/NativeMapView.native';
 import CardLayout from '../Common/Card';
 import { getImageUrl } from '../../actions/apiRouting';
+import colors from '../../utils/constants';
 
 export const FormikFormTree = props => {
   const [showClassification, setShowClassificationSwitch] = useState(
     (props.initialValues &&
       (props.initialValues.treeClassification ||
         props.initialValues.treeScientificName)) ||
-      false
+    false
   );
   const [geometry, setGeometry] = useState(props.geometry);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
@@ -68,17 +69,17 @@ export const FormikFormTree = props => {
     if (parentProps.isEdit) {
       const contributImage =
         props.values.contributionImages &&
-        props.values.contributionImages.length &&
-        props.values.contributionImages[0] &&
-        props.values.contributionImages[0].image
+          props.values.contributionImages.length &&
+          props.values.contributionImages[0] &&
+          props.values.contributionImages[0].image
           ? props.values.contributionImages[0].image
           : '';
       return (
         (contributImage &&
           getImageUrl('contribution', 'medium', contributImage)) ||
         (props.values.contributionImages &&
-        props.values.contributionImages.length &&
-        props.values.contributionImages[0].imageFile
+          props.values.contributionImages.length &&
+          props.values.contributionImages[0].imageFile
           ? props.values.contributionImages[0].imageFile
           : '')
       );
@@ -107,84 +108,84 @@ export const FormikFormTree = props => {
               <CardLayout style={{ marginTop: 9 }}>
                 {!parentProps.isEdit && parentProps.isTpo ? (
                   parentProps.plantProjects &&
-                  parentProps.plantProjects.length > 0 ? (
-                    <View
-                      style={{
-                        marginTop: 10,
-                        marginBottom: 10,
-                        position: 'relative'
-                      }}
-                    >
-                      <View>
-                        <Text
-                          style={{
-                            fontSize: 14,
-                            fontFamily: 'OpenSans-Regular',
-                            color: '#4d5153'
-                          }}
-                        >
-                          {i18n.t('label.register_tree_tpo_label')}{' '}
-                          <TouchableWithoutFeedback
-                            onPress={() => {
-                              inputEl &&
-                                inputEl.current &&
-                                inputEl.current.focus();
+                    parentProps.plantProjects.length > 0 ? (
+                      <View
+                        style={{
+                          marginTop: 10,
+                          marginBottom: 10,
+                          position: 'relative'
+                        }}
+                      >
+                        <View>
+                          <Text
+                            style={{
+                              fontSize: 14,
+                              fontFamily: 'OpenSans-Regular',
+                              color: '#4d5153'
                             }}
                           >
-                            <Text
-                              style={{
-                                color: '#87b738',
-                                fontFamily: 'OpenSans-Regular',
-                                textAlign: 'center'
+                            {i18n.t('label.register_tree_tpo_label')}{' '}
+                            <TouchableWithoutFeedback
+                              onPress={() => {
+                                inputEl &&
+                                  inputEl.current &&
+                                  inputEl.current.focus();
                               }}
                             >
-                              {!props.values.plantProject &&
-                              parentProps.plantProjects.length >= 1
-                                ? parentProps.plantProjects[0].text
-                                : filter(parentProps.plantProjects, {
+                              <Text
+                                style={{
+                                  color: '#87b738',
+                                  fontFamily: 'OpenSans-Regular',
+                                  textAlign: 'center'
+                                }}
+                              >
+                                {!props.values.plantProject &&
+                                  parentProps.plantProjects.length >= 1
+                                  ? parentProps.plantProjects[0].text
+                                  : filter(parentProps.plantProjects, {
                                     value: props.values.plantProject
                                   })[0].text}{' '}
-                              <Icon
-                                name="angle-down"
-                                size={20}
-                                color="#87b738"
-                              />
-                            </Text>
-                          </TouchableWithoutFeedback>
-                        </Text>
+                                <Icon
+                                  name="angle-down"
+                                  size={20}
+                                  color="#87b738"
+                                />
+                              </Text>
+                            </TouchableWithoutFeedback>
+                          </Text>
+                        </View>
+                        <Dropdown
+                          value={
+                            props.values.plantProject ||
+                            (parentProps.plantProjects.length >= 1 &&
+                              parentProps.plantProjects[0].value)
+                          }
+                          ref={inputEl}
+                          containerStyle={{
+                            height: 0,
+                            position: 'absolute',
+                            top: 0,
+                            width: '100%'
+                          }}
+                          onChangeText={props.handleChange('plantProject')}
+                          onBlur={props.handleBlur('plantProject')}
+                          inputContainerStyle={{
+                            borderBottomWidth: 0,
+                            display: 'none'
+                          }}
+                          label={i18n.t('label.plant_project')}
+                          dropdownOffset={{ top: 0 }}
+                          data={parentProps.plantProjects.map(item => {
+                            return { value: item.value, label: item.text };
+                          })}
+                        />
                       </View>
-                      <Dropdown
-                        value={
-                          props.values.plantProject ||
-                          (parentProps.plantProjects.length >= 1 &&
-                            parentProps.plantProjects[0].value)
-                        }
-                        ref={inputEl}
-                        containerStyle={{
-                          height: 0,
-                          position: 'absolute',
-                          top: 0,
-                          width: '100%'
-                        }}
-                        onChangeText={props.handleChange('plantProject')}
-                        onBlur={props.handleBlur('plantProject')}
-                        inputContainerStyle={{
-                          borderBottomWidth: 0,
-                          display: 'none'
-                        }}
-                        label={i18n.t('label.plant_project')}
-                        dropdownOffset={{ top: 0 }}
-                        data={parentProps.plantProjects.map(item => {
-                          return { value: item.value, label: item.text };
-                        })}
-                      />
-                    </View>
-                  ) : (
-                    <View />
-                  )
+                    ) : (
+                      <View />
+                    )
                 ) : (
-                  <View />
-                )}
+                    <View />
+                  )}
                 <View style={styles.formView}>
                   <View>
                     <View
@@ -286,11 +287,11 @@ export const FormikFormTree = props => {
                   <Text style={styles.formPlantingDescription}>
                     {parentProps.mode === 'multiple-trees'
                       ? i18n.t(
-                          'label.single_tree_planting_location_description'
-                        )
+                        'label.single_tree_planting_location_description'
+                      )
                       : i18n.t(
-                          'label.single_tree_planting_location_description'
-                        )}
+                        'label.single_tree_planting_location_description'
+                      )}
                   </Text>
                 </View>
               </CardLayout>
@@ -300,9 +301,9 @@ export const FormikFormTree = props => {
                     (parentProps.mode === 'single-tree' &&
                       props.touched.geoLocation &&
                       props.errors.geoLocation) ||
-                    (parentProps.mode === 'multiple-trees' &&
-                      props.touched.geometry &&
-                      props.errors.geometry)
+                      (parentProps.mode === 'multiple-trees' &&
+                        props.touched.geometry &&
+                        props.errors.geometry)
                       ? styles.errorView
                       : ''
                   }
@@ -481,8 +482,8 @@ export class AddMeasurements extends React.Component {
     debug(
       'props.props.value.contributionMeasurements',
       props.props &&
-        props.props.values &&
-        props.props.values.contributionMeasurements
+      props.props.values &&
+      props.props.values.contributionMeasurements
     );
     if (contributionMeasurements) {
       contributionMeasurements.length &&
@@ -563,7 +564,7 @@ export class AddMeasurements extends React.Component {
                   <Text style={styles.formClassificationLabel}>
                     {`${i18n.t('label.add_measurements')} ${
                       item.id <= 1 ? '' : item.id
-                    }`}
+                      }`}
                   </Text>
                   <View>
                     <CustomSwitch
@@ -716,7 +717,7 @@ export class CustomSwitch extends React.Component {
           backgroundInactive={'#c7c7c7'}
           circleActiveColor={'#89b53a'}
           innerCircleStyle={this.props.value ? '' : styles.masurmentSwitch}
-          circleInActiveColor={'#ffffff'}
+          circleInActiveColor={colors.WHITE}
           outerCircleStyle={{}} // style for outer animated circle
           switchLeftPx={Platform.OS === 'ios' ? 2 : 3} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
           switchRightPx={Platform.OS === 'ios' ? 2 : 3} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
@@ -745,7 +746,7 @@ export function AddImage(props) {
         <Image
           style={[styles.teaser__projectImage, { width: '95%', height: 150 }]}
           source={{ uri: image }}
-          // resizeMode={'cover'}
+        // resizeMode={'cover'}
         />
         <View style={[styles.competitionDeleteButton]}>
           <TouchableOpacity
@@ -758,7 +759,7 @@ export function AddImage(props) {
             />
             <Text
               style={{
-                color: '#fff',
+                color: colors.WHITE,
                 fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
                 lineHeight: 28

@@ -3,7 +3,7 @@ export default EStyleSheet.create({
   mainContainer: {
     // marginHorizontal: 15,
     flex: 1,
-    backgroundColor: 'transparent'
+    backgroundColor: 'white'
   },
   headerContainer: {
     marginVertical: 10
@@ -40,7 +40,7 @@ export default EStyleSheet.create({
     borderRadius: 60,
     paddingVertical: 5,
     width: 104,
-    marginHorizontal: 15
+    marginHorizontal: 8
   },
   activeChipText: {
     color: '#fff',
@@ -51,7 +51,7 @@ export default EStyleSheet.create({
     alignItems: 'center',
     borderRadius: 60,
     paddingVertical: 5,
-    marginHorizontal: 15,
+    marginHorizontal: 8,
     borderColor: '#4d5153',
     borderWidth: 1,
     width: 104

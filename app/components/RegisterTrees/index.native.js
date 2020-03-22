@@ -13,6 +13,7 @@ import RegisterTreeTab from './RegisterTreeTab.native';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import styles from '../../styles/register_trees.native';
 import HeaderNew from './../Header/HeaderNew';
+import colors from '../../utils/constants';
 
 export default class RegisterTrees extends Component {
   routes = [
@@ -112,7 +113,7 @@ export default class RegisterTrees extends Component {
     debug('this.props===----===--=-=-=->', this.props);
     return (
       <>
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
           <HeaderNew title={''} navigation={this.props.navigation} />
 
           <KeyboardAwareScrollView

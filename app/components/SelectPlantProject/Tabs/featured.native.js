@@ -18,6 +18,7 @@ import { flatListContainerStyle } from '../../../styles/selectplantproject/selec
 import { trees } from './../../../assets';
 import i18n from '../../../locales/i18n.js';
 import LoadingIndicator from '../../Common/LoadingIndicator.native';
+import colors from '../../../utils/constants';
 
 export default class FeaturedProjects extends PureComponent {
   constructor(props) {
@@ -147,7 +148,7 @@ export default class FeaturedProjects extends PureComponent {
               <RefreshControl
                 refreshing={this.state.isFetching}
                 onRefresh={this.onRefresh.bind(this)}
-                titleColor="#fff"
+                titleColor={colors.WHITE}
               />
             }
             scrollEventThrottle={24}
@@ -160,8 +161,8 @@ export default class FeaturedProjects extends PureComponent {
             ])}
           />
         ) : (
-          <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
-        )}
+            <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
+          )}
       </View>
     );
   }

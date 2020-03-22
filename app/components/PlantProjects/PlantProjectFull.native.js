@@ -1,5 +1,6 @@
 import React from 'react';
-import {} from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -7,14 +8,6 @@ import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import { loadProject } from '../../actions/loadTposAction';
 import { queryParamsToObject } from '../../helpers/utils';
-import {
-  View,
-  Platform,
-  Text,
-  Animated,
-  StatusBar,
-  ScrollView
-} from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
@@ -23,26 +16,17 @@ import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
 import NumberFormat from '../Common/NumberFormat.native';
 // import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
-import HeaderFullPages from '../Header/HeaderFullPages.native';
-import { context } from '../../config';
-import { getLocalRoute } from './../../actions/apiRouting';
 // import TabContainer from '../../containers/Menu/TabContainer';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
  */
 class PlantProjectFull extends React.Component {
-  constructor(props) {
-    super(props);
-    const plantProject = { ...props.plantProject };
-    this.state = {
-      plantProject,
-      scrollY: new Animated.Value(0)
-    };
-  }
   state = { loader: true };
-
-  /*async UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillMount() {
+    setTimeout(() => this.setState({ loader: false }), 2000);
+  }
+  async UNSAFE_componentWillReceiveProps(nextProps) {
     try {
       debug('plantproject while receive props', nextProps.plantProject);
       if (nextProps.plantProject && !nextProps.plantProject.tpoData) {
@@ -73,14 +57,6 @@ class PlantProjectFull extends React.Component {
     } catch (error) {
       debug(error);
     }
-  }*/
-
-  UNSAFE_componentWillMount() {
-    StatusBar.setTranslucent(true);
-    setTimeout(() => this.setState({ loader: false }), 2000);
-  }
-  componentWillUnmount() {
-    StatusBar.setTranslucent(false);
   }
   render() {
     let { plantProject } = this.props;
@@ -120,42 +96,13 @@ class PlantProjectFull extends React.Component {
     const backgroundColor = 'white';
 
     return !loader ? (
-      <View style={{ flex: 1 }}>
-        <StatusBar
-          backgroundColor="rgba(52, 52, 52, 0.0)"
-          barStyle={'dark-content'}
-          styleContainer={{ marginTop: Platform.OS === 'ios' ? -20 : 0 }}
-        />
-        <HeaderFullPages
-          navigation={this.props.navigation}
-          title={''}
-          scrollY={this.state.scrollY}
-          entityType={'projects'}
-          entityName={tpoName}
-          url={
-            context.scheme +
-            '://' +
-            context.host +
-            getLocalRoute('app_selectedProject') +
-            '/' +
-            this.props.plantProject.id
-          }
-        //  appurl={'weplant://project/' + this.props.plantProject.id}
-        />
+      <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
             {
               backgroundColor: backgroundColor
             }
           ]}
-          scrollEventThrottle={16}
-          onScroll={Animated.event([
-            {
-              nativeEvent: {
-                contentOffset: { y: this.state.scrollY }
-              }
-            }
-          ])}
         >
           <PlantProjectSnippetDetails
             key={'projectFull' + plantProject.id}
@@ -207,7 +154,7 @@ class PlantProjectFull extends React.Component {
             </FullHeightButton>
           </View>
         ) : null}
-      </View>
+      </SafeAreaView>
     ) : (
         <View style={{ flex: 1, marginTop: -20 }}>
           <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />

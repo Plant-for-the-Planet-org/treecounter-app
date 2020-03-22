@@ -28,6 +28,5 @@
   "about": "About",
   "contact_details": "Contact Details",
   "view_profile": "View Profile",
-  "read_less": "Read Less",
-  "shareProject": "Plant trees with {{entityName}} at {{url}}"
+  "read_less": "Read Less"
 }

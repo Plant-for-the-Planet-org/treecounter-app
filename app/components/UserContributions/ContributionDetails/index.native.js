@@ -57,7 +57,7 @@ class UserContributionsDetails extends React.Component {
   onPlantProjectClick = (plantProjectId, plantProjectName) => {
     this.props.selectPlantProjectAction(plantProjectId);
 
-    this.props.navigation.navigate(getLocalRoute('app_selectProject'), {
+    this.props.navigation.navigate(getLocalRoute('app_selectedProject'), {
       treeCounterId: plantProjectId,
       titleParam: plantProjectName
     });

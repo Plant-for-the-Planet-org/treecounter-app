@@ -202,6 +202,11 @@ import forest from './images/trees/forest.png';
 import fields from './images/trees/fields.png';
 import beach from './images/trees/beach.png';
 
+import closeHBlack from './images/header/closeBlack.png';
+import closeHWhite from './images/header/closeWhite.png';
+import shareBlack from './images/header/shareBlack.png';
+import shareWhite from './images/header/shareWhite.png';
+
 export {
   treelogo,
   germany,
@@ -401,5 +406,9 @@ export {
   forest,
   hills,
   mountains,
-  spruce
+  spruce,
+  closeHBlack,
+  closeHWhite,
+  shareBlack,
+  shareWhite
 };

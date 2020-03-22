@@ -23,7 +23,7 @@ export default EStyleSheet.create({
     borderWidth: 0
   },
   projectImageContainer: {
-    height: Layout.window.width * 0.7833,
+    height: Layout.window.width * 0.4,
     width: '100%',
     overflow: 'hidden',
     position: 'relative'

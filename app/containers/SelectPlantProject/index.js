@@ -53,14 +53,14 @@ class SelectPlantProjectContainer extends PureComponent {
   // }
 
   async componentDidMount() {
-  /*  if (
+    if (
       this.props.plantProjects &&
       !this.props.plantProjects.filter(plantProject => plantProject.isFeatured)
         .length
-    ) {*/
+    ) {
       let data = await this.props.loadProjects('featured');
       debug('===got data in await in did mount:', data);
-   // }
+    }
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
@@ -103,7 +103,7 @@ class SelectPlantProjectContainer extends PureComponent {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
-      updateRoute('app_selectedProject', navigation, 1, {
+      updateRoute('app_selectProject', navigation, 1, {
         userForm: navigation.getParam('userForm'),
         giftMethod: navigation.getParam('giftMethod'),
         titleParam: name

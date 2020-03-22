@@ -1,0 +1,8 @@
+.single-project-container{
+  width: 50%;
+  margin-top: 48px;
+  margin-bottom: 48px;
+  @include for-phone-only {
+    width: 100%;
+  }
+}

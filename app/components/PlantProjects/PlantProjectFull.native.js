@@ -20,7 +20,8 @@ import PlantProjectDetails from './PlantProjectDetails';
 import FullHeightButton from '../Common/Button/FullHeightButton';
 import { right_arrow_button } from '../../assets';
 import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
-import { formatNumber } from '../../utils/utils';
+import NumberFormat from '../Common/NumberFormat.native';
+// import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
 import HeaderFullPages from '../Header/HeaderFullPages.native';
 import { context } from '../../config';
@@ -181,11 +182,15 @@ class PlantProjectFull extends React.Component {
             <View style={styles.centeredContentContainer}>
               <View>
                 <Text style={[styles.cost]}>
-                  {formatNumber(
+                  {/* {formatNumber(
                     plantProject.treeCost,
                     null,
                     plantProject.currency
-                  )}
+                  )} */}
+                  <NumberFormat
+                    data={plantProject.treeCost}
+                    currency={plantProject.currency}
+                  />
                 </Text>
               </View>
 

@@ -113,7 +113,7 @@ const RedirectedPrivateAcceptEmail = lazy(() =>
 );
 
 import { initLocale } from '../../actions/getLocale';
-import { fetchLocation, fetchConfig } from '../../actions/fetchLocation';
+import { fetchConfig } from '../../actions/fetchConfig';
 import { fetchCurrencies } from '../../actions/currencies';
 
 // Class implementation
@@ -137,7 +137,6 @@ class TreeCounter extends Component {
       isCancelled: false
     };
     initLocale();
-    this.props.fetchLocation();
     this.props.fetchCurrencies();
     this.props.fetchConfig();
   }
@@ -437,7 +436,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchCurrencies,
-      fetchLocation,
       fetchConfig,
       loadUserProfile,
       NotificationAction,

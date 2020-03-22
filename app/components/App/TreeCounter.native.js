@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux';
 import { SafeAreaView } from 'react-navigation';
 import { initLocale } from '../../actions/getLocale.native.js';
 import { fetchCurrencies } from '../../actions/currencies';
-import { fetchConfig } from '../../actions/fetchLocation';
+import { fetchConfig } from '../../actions/fetchConfig';
 class App extends Component {
   componentDidMount() {
     initLocale();

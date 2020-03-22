@@ -6,14 +6,22 @@ import styles from '../../styles/menu.native';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
 import * as icons from '../../assets';
 import i18n from '../../locales/i18n.js';
-import { getLocalRoute } from '../../actions/apiRouting';
+import {
+  getLocalRoute,
+  getCountryFlagImageUrl
+} from '../../actions/apiRouting';
 import TouchableItem from '../../components/Common/TouchableItem.native';
 import UserProfileImage from '../Common/UserProfileImage.native';
 import { LargeMenuItem } from './MenuItem.native';
+import countryCodes from '../../assets/countryCodes.json';
+import CurrencySelector from '../Common/CurrencySelectorList.native';
 
 //   icons.target_outline;
 
 export default class Menu extends Component {
+  state = {
+    showCurrencyModal: false
+  };
   static propTypes = {
     menuData: PropTypes.array.isRequired,
     onPress: PropTypes.func,
@@ -21,6 +29,9 @@ export default class Menu extends Component {
     userProfile: PropTypes.any,
     navigation: PropTypes.any,
     lastRoute: PropTypes.any
+  };
+  hideCurrencyModal = () => {
+    this.setState({ showCurrencyModal: false });
   };
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -178,6 +189,16 @@ export default class Menu extends Component {
     updateRoute('app_userHome', navigation, 0);
   };
 
+  getCountryCode = currency => countryCodes.find(c => c.code == currency) || {};
+
+  handleCurrencyChange = selectedOption => {
+    // this.setState({ preferredCurrency: selectedOption });
+    this.props.setCurrencyAction(selectedOption);
+    this.props.userProfile &&
+      this.props.updateUserProfile({ currency: selectedOption }, 'currency');
+    this.hideCurrencyModal();
+  };
+
   render() {
     return (
       <SafeAreaView style={styles.outerContainer}>
@@ -220,6 +241,21 @@ export default class Menu extends Component {
         )}
         <ScrollView style={styles.sideNavigationActionMenuContainer}>
           <View style={styles.centerMenu}>
+            <LargeMenuItem
+              onPress={() => {
+                this.setState({ showCurrencyModal: true });
+              }}
+              title={i18n.t('label.select_currency')}
+              iconUrl={{
+                uri: getCountryFlagImageUrl(
+                  this.getCountryCode(this.props.preferredCurrency.currency)
+                    .currencyCountryFlag,
+                  'png',
+                  256
+                )
+              }}
+              // iconUrl={icons.dollar}
+            />
             {this.props.userProfile ? (
               <LargeMenuItem
                 onPress={this.onPressMenu.bind(this, {
@@ -292,6 +328,12 @@ export default class Menu extends Component {
               iconUrl={icons.faqs}
             />
           </View>
+
+          <CurrencySelector
+            hideCurrencyModal={this.hideCurrencyModal}
+            show={this.state.showCurrencyModal}
+            handleCurrencyChange={this.handleCurrencyChange}
+          />
         </ScrollView>
 
         <View style={styles.sideNavigationActionMenuContainer}>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -9,144 +9,45 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import PledgeTabView from './PledgeTabView.native';
 import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
 import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
-import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
-import { loadUserProfile } from './../../actions/loadUserProfileAction';
-import { fetchItem } from './../../stores/localStorage';
 import { delimitNumbers } from './../../utils/utils';
-import {
-  fetchPledgesAction,
-  postPledge,
-  clearTimeoutAction
-} from '../../actions/pledgeAction';
-import {
-  pledgesSelector,
-  pledgeEventSelector,
-  entitiesSelector,
-  currentUserProfileSelector
-} from '../../selectors';
 import LoadingIndicator from './../Common/LoadingIndicator';
 import { nextArrowWhite } from '../../assets';
 import HeaderAnimatedImage from './../Header/HeaderAnimatedImage.native';
 
-class PledgeEvents extends Component {
-  static navigationOptions = {
-    header: null
-  };
-  state = {
-    loading: true,
-    myPledge: {},
-    slug: null,
-    scrollY: new Animated.Value(0)
-  };
+const PledgeEvents = (props) => {
 
-  componentDidMount() {
-    this.props.fetchPledgesAction(this.props.navigation.getParam('slug'), true);
-    this.getMyPledge();
-    if (this.props.currentUserProfile) {
-      this.setState({
-        loggedIn: true
-      });
-    } else {
-      fetchItem('pledgedEvent')
-        .then(data => {
-          if (typeof data !== 'undefined' && data.length > 0) {
-            let stringPledges = JSON.parse(data);
-            stringPledges = stringPledges.toString();
-            this.props.fetchPublicPledgesAction(stringPledges);
-          }
-        })
-        .catch(error => debug(error));
+  const [scrollY, setScrollY] = React.useState(new Animated.Value(0))
+  const [showRBSheetState, setShowRBSheetState] = React.useState(true)
+  const pledges = props.pledges
+  const navigation = props.navigation
+  const myPledge = props.myPledge
+  const RBSheetRef = React.useRef('');
+
+  React.useEffect(() => {
+    if (props.showRBSheet && showRBSheetState) {
+      RBSheetRef.current.open();
+      setShowRBSheetState(false)
     }
-    this.getMyPledge();
-  }
+    return () => {
+      setShowRBSheetState(true)
+    };
+  }, [props.showRBSheet]);
 
-  componentDidUpdate(prevProps) {
-    if (
-      JSON.stringify(prevProps.pledges) !== JSON.stringify(this.props.pledges)
-    ) {
-      this.setState({
-        slug: this.props.navigation.getParam('slug')
-      });
-      if (this.props.currentUserProfile) {
-        this.setState({
-          loggedIn: true
-        });
-      } else {
-        fetchItem('pledgedEvent')
-          .then(data => {
-            if (typeof data !== 'undefined' && data.length > 0) {
-              let stringPledges = JSON.parse(data);
-              stringPledges = stringPledges.toString();
-              this.props.fetchPublicPledgesAction(stringPledges);
-            }
-          })
-          .catch(error => debug(error));
-      }
-      this.getMyPledge();
-    }
-    if (this.props.navigation.getParam('plantProject').id !== -1) {
-      this.RBSheet.open();
-      this.props.navigation.getParam('plantProject').id = -1;
-    }
-    if (this.props.pledges && this.props.pledges.image && this.state.loading) {
-      this.setState({
-        loading: false
-      });
-    }
-  }
-
-  getMyPledge = () => {
-    let userPledges =
-      this.props.entities && this.props.entities.eventPledge
-        ? this.props.pledges &&
-          this.props.pledges.allEventPledges &&
-          this.props.pledges.allEventPledges.length > 0 // Checking if we have all the pledges
-          ? typeof this.props.entities.eventPledge !== 'undefined'
-            ? ((userPledges = Object.values(this.props.entities.eventPledge)), // convert object to array
-              userPledges.filter(pledge => {
-                return this.props.pledges.allEventPledges.some(f => {
-                  return f.token === pledge.token && f.email === pledge.email;
-                });
-              }))
-            : null
-          : null
-        : null;
-    this.setState({
-      myPledge: userPledges
-    });
-  };
-
-  componentWillUnmount() {
-    this.props.clearTimeoutAction(this.props.pledges.timeoutID);
-  }
-
-  render() {
-    let myPledge = this.state.myPledge;
-    let pledges =
-      this.props.pledges && this.props.pledges.total !== undefined
-        ? this.props.pledges
-        : null;
-    const navigation = this.props.navigation;
-
-    let slug = this.state.slug;
-    return this.state.loading ? (
-      <LoadingIndicator contentLoader screen={'PledgeEvents'} />
-    ) : (
+  return props.loading ? (
+    <LoadingIndicator contentLoader screen={'PledgeEvents'} />
+  ) : (
       <SafeAreaView style={styles.peRootView}>
         <View>
           <HeaderAnimatedImage
             navigation={navigation}
             title={pledges.name}
-            scrollY={this.state.scrollY}
+            scrollY={scrollY}
             titleStyle={styles.eventTitle}
             imageStyle={styles.peHeaderLogo}
             imageSource={{
@@ -154,12 +55,10 @@ class PledgeEvents extends Component {
             }}
           />
 
-          <EventDetails pledges={pledges} scrollY={this.state.scrollY} />
+          <EventDetails pledges={pledges} scrollY={scrollY} />
 
           <RBSheet
-            ref={ref => {
-              this.RBSheet = ref;
-            }}
+            ref={RBSheetRef}
             height={354}
             duration={250}
             customStyles={{
@@ -171,9 +70,7 @@ class PledgeEvents extends Component {
             <View style={styles.baContainer}>
               <Text style={styles.baMessage}>
                 {i18n.t('label.pledgeAddedMessage', {
-                  treeCount: this.props.navigation
-                    .getParam('treeCount')
-                    .toLocaleString()
+                  treeCount: props.treeCount
                 })}
               </Text>
 
@@ -181,8 +78,8 @@ class PledgeEvents extends Component {
                 <TouchableOpacity
                   style={styles.baLaterButton}
                   onPress={() => {
-                    this.props.fetchPledgesAction(slug);
-                    this.RBSheet.close();
+                    props.fetchPledgesAction(props.slug);
+                    RBSheetRef.current.close();
                   }}
                 >
                   <Text style={styles.baLaterText}>
@@ -195,7 +92,24 @@ class PledgeEvents extends Component {
                   onPress={() => {
                     updateStaticRoute(
                       getLocalRoute('app_donateTrees'),
-                      this.props.navigation
+                      props.navigation,
+                      // {
+                      //   context: {
+                      //     contextType: 'pledge',
+                      //     pledge: {
+                      //       firstName: myPledge.firstName,
+                      //       lastName: myPledge.lastName,
+                      //       treeCount: myPledge.treeCount,
+                      //       email: myPledge.email,
+                      //       isAnonymous: myPledge.isAnonymous
+                      //     },
+                      //     plantProject: {
+                      //       currency: plantProject.currency,
+                      //       amountPerTree: plantProject.treeCost,
+                      //       plantProjectID: plantProject.id
+                      //     }
+                      //   }
+                      // }
                     );
                   }}
                 >
@@ -215,16 +129,19 @@ class PledgeEvents extends Component {
                 navigation={navigation}
               />
             ) : (
-              <MakePledgeButton navigation={navigation} pledges={pledges} />
-            )
+                <MakePledgeButton navigation={navigation} pledges={pledges} />
+              )
           ) : (
-            <MakePledgeButton navigation={navigation} pledges={pledges} />
-          )}
+              <MakePledgeButton navigation={navigation} pledges={pledges} />
+            )}
         </View>
       </SafeAreaView>
-    );
-  }
+    )
 }
+
+PledgeEvents.navigationOptions = {
+  header: null
+};
 
 function MakePledgeButton(props) {
   return (
@@ -301,36 +218,32 @@ function EventDetails(props) {
         { nativeEvent: { contentOffset: { y: props.scrollY } } }
       ])}
     >
-      {/* <View style={styles.peHeader}>
-
-      </View> */}
-
       {pledges &&
-      pledges.highestPledgeEvents &&
-      pledges.highestPledgeEvents.length > 0 ? (
-        // If there are Pledges
-        <View>
-          <Text style={styles.eventSubTitle}>
-            {i18n.t('label.treesPledgedAllPledges', {
-              treeCount: delimitNumbers(pledges.total)
-            })}
-          </Text>
-          {/* All the pledges are here */}
-          <PledgeTabView pledges={pledges} />
-        </View>
-      ) : (
-        // If there are no Pledges
-        <View>
-          <Text style={styles.eventSubTitle}>{i18n.t('label.noPledges')}</Text>
-        </View>
-      )}
+        pledges.highestPledgeEvents &&
+        pledges.highestPledgeEvents.length > 0 ? (
+          // If there are Pledges
+          <View>
+            <Text style={styles.eventSubTitle}>
+              {i18n.t('label.treesPledgedAllPledges', {
+                treeCount: delimitNumbers(pledges.total)
+              })}
+            </Text>
+            {/* All the pledges are here */}
+            <PledgeTabView pledges={pledges} />
+          </View>
+        ) : (
+          // If there are no Pledges
+          <View>
+            <Text style={styles.eventSubTitle}>{i18n.t('label.noPledges')}</Text>
+          </View>
+        )}
 
       {/* Show Event Images */}
       {pledges &&
-      pledges.pledgeEventImages &&
-      pledges.pledgeEventImages.length > 0 ? (
-        <EventImages pledgeEventImages={pledges.pledgeEventImages} />
-      ) : null}
+        pledges.pledgeEventImages &&
+        pledges.pledgeEventImages.length > 0 ? (
+          <EventImages pledgeEventImages={pledges.pledgeEventImages} />
+        ) : null}
 
       {/* Show Event description */}
       {pledges.description ? (
@@ -364,24 +277,4 @@ function EventImages(props) {
   );
 }
 
-const mapStateToProps = state => ({
-  pledges: pledgesSelector(state),
-  pledgeEvents: pledgeEventSelector(state),
-  entities: entitiesSelector(state),
-  currentUserProfile: currentUserProfileSelector(state)
-});
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      fetchPledgesAction,
-      postPledge,
-      clearTimeoutAction,
-      fetchPublicPledgesAction,
-      loadUserProfile
-    },
-    dispatch
-  );
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PledgeEvents);
+export default PledgeEvents;

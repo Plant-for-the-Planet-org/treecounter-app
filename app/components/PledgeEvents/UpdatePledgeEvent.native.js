@@ -133,13 +133,11 @@ class MakePledgeForm extends Component {
                 },
                 this.state.loggedIn
               );
-
-              //saveItem('pledgedEvent', JSON.stringify(date));
-
               updateStaticRoute('app_pledge_events', this.props.navigation, {
                 slug: this.props.slug,
                 plantProject: this.props.navigation.getParam('plantProject'),
-                treeCount: data.treeCount
+                treeCount: data.treeCount,
+                showRBSheet: true
               });
             }}
             validationSchema={this.validationSchema}

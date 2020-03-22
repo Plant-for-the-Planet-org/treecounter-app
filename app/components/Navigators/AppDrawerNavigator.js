@@ -47,8 +47,7 @@ import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import EditCompetitionContainer from '../../containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
-import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
-import UnfulfilledPledgeEvents from './../PledgeEvents/UnfulfilledPledgeEvent';
+import PledgeEvents from './../../containers/Pledge';
 import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
 import Reviews from './../Reviews/Reviews';
 import AddReview from './../Reviews/AddReview/AddReview';
@@ -361,9 +360,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       ['app_pledge_update_form']: {
         screen: UpdatePledgeEvent
-      },
-      ['app_unfulfilled_pledge_events']: {
-        screen: UnfulfilledPledgeEvents
       },
       ['contribution_details']: {
         screen: UserContributionsDetailsContainer

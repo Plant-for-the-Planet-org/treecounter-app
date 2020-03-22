@@ -27,8 +27,6 @@ import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
 
-// let _ = require('lodash');
-
 class MakePledgeForm extends Component {
   static navigationOptions = {
     header: null
@@ -132,11 +130,11 @@ class MakePledgeForm extends Component {
                   },
                   this.state.loggedIn
                 );
-                //this.RBSheet.open();
                 updateStaticRoute('app_pledge_events', this.props.navigation, {
                   slug: this.props.navigation.getParam('slug'),
                   plantProject: this.props.navigation.getParam('plantProject'),
-                  treeCount: data.treeCount
+                  treeCount: data.treeCount,
+                  showRBSheet: true
                 });
               }}
               validationSchema={this.validationSchema}

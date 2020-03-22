@@ -140,7 +140,7 @@ class PlantProjectFull extends React.Component {
             '/' +
             this.props.plantProject.id
           }
-          appurl={'weplant://project/' + this.props.plantProject.id}
+        //  appurl={'weplant://project/' + this.props.plantProject.id}
         />
         <ScrollView
           contentContainerStyle={[

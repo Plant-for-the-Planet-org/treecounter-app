@@ -136,7 +136,7 @@ class PlantProjectFull extends React.Component {
             context.scheme +
             '://' +
             context.host +
-            getLocalRoute('app_selectedProject') +
+            getLocalRoute('app_donateTrees') +
             '/' +
             this.props.plantProject.id
           }

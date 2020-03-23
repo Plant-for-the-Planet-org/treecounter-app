@@ -207,6 +207,10 @@ import smalltreewhite from '../assets/images/smalltreewhite.png';
 import markerImage from './images/tree.png';
 import fullscreen_icon from './images/fullscreen_icon.png';
 import multiple_trees from './images/multiple_trees.png'
+import closeHBlack from './images/header/closeBlack.png';
+import closeHWhite from './images/header/closeWhite.png';
+import shareBlack from './images/header/shareBlack.png';
+import shareWhite from './images/header/shareWhite.png';
 
 export {
   treelogo,
@@ -412,5 +416,9 @@ export {
   smalltreewhite,
   markerImage,
   fullscreen_icon,
-  multiple_trees
+  multiple_trees,
+  closeHBlack,
+  closeHWhite,
+  shareBlack,
+  shareWhite,
 };

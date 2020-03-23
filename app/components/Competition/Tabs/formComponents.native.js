@@ -26,12 +26,9 @@ export const FormikForm = props => {
     competitionFormSchema
   );
   const [buttonType, setButtonType] = useState(props.buttonType);
-  useEffect(
-    () => {
-      setButtonType(props.buttonType);
-    },
-    [props.buttonType]
-  );
+  useEffect(() => {
+    setButtonType(props.buttonType);
+  }, [props.buttonType]);
   return (
     <Formik
       initialValues={props.initialValues}

@@ -82,6 +82,7 @@ const headerLabels = {
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.projects',
+  [getLocalRoute('app_selectedProject')]: 'label.project',
   [getLocalRoute('app_competition')]: '',
   [getLocalRoute('app_editCompetition')]: '',
   [getLocalRoute('app_imprint')]: 'label.imprint',
@@ -235,7 +236,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: EmailSentContainer
       },
       [getLocalRoute('app_signup')]: {
-        screen: SignUpContainer
+        screen: SignUpContainer,
+        path: 'signup'
       },
       [getLocalRoute('app_myTrees')]: {
         screen: UserContributionsContainer
@@ -269,15 +271,13 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: PrivacyContainer,
         navigationOptions: { header: null }
       },
-      // [getLocalRoute('app_claim')]: {
-      //   screen: RedemptionContainer
-      // },
       [getLocalRoute('app_editTrees')]: {
         screen: EditUserContributionContainer
       },
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer,
-        navigationOptions: { header: null }
+        navigationOptions: { header: null },
+        path: 'target'
       },
       [getLocalRoute('app_challenge')]: {
         screen: ChallengeContainer,
@@ -302,7 +302,13 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: SelectPlantProjectContainer
       },
       [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProjectContainer
+        screen: SelectPlantProjectContainer,
+        navigationOptions: { header: null },
+      },
+      [getLocalRoute('app_selectedProject')]: {
+        screen: SelectedPlantProjectContainer,
+        navigationOptions: { header: null },
+        path: 'project/:projectSlug'
       },
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer

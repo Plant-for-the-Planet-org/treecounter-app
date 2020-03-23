@@ -209,7 +209,7 @@ class LeaderBoardContainer extends React.Component {
             timePeriodsInfo.timePeriods = {
               '1w': i18n.t('label.lbr_c_this_week'),
               '1y': i18n.t('label.lbr_c_year'),
-              'all': i18n.t('label.lbr_c_all_time')
+              all: i18n.t('label.lbr_c_all_time')
             };
             timePeriodsInfo.timePeriodsKeys = Object.keys(
               timePeriodsInfo.timePeriods

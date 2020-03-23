@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { Text, View, Animated, Platform } from 'react-native';
+import { Text, View, Animated, Platform, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { debug } from '../../debug';
 import i18n from '../../locales/i18n.js';
@@ -14,6 +14,7 @@ import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderStatic from './../Header/HeaderStatic';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
+const height = Dimensions.get('window').height;
 
 class SelectPlantTabView extends PureComponent {
   constructor(props) {
@@ -145,14 +146,14 @@ class SelectPlantTabView extends PureComponent {
         debug('fatured active', index, this.props.plantProjects);
         return this.props.plantProjects.filter(project => project.isFeatured)
           .length ? (
-          <FeaturedProjects
-            onSelectProjects={this.onSelectProjects}
-            {...props}
-            jumpTo={jumpTo}
-            index={this.state.index}
-            scrollY={this.state.scrollY}
-          />
-        ) : null;
+            <FeaturedProjects
+              onSelectProjects={this.onSelectProjects}
+              {...props}
+              jumpTo={jumpTo}
+              index={this.state.index}
+              scrollY={this.state.scrollY}
+            />
+          ) : null;
       case 'list':
         debug('list active', index, this.props.plantProjects);
 
@@ -185,7 +186,7 @@ class SelectPlantTabView extends PureComponent {
             navigation={this.props.navigation}
           />
           <Animated.View
-            style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+            style={{ marginTop: Platform.OS === 'ios' ? height < 670 ? 56 : 26 : 56 }}
           />
 
           <TabView

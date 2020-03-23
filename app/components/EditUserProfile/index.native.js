@@ -177,47 +177,47 @@ export default class EditUserProfile extends Component {
           <CardLayout style={{ flex: 1 }}>
             <ScrollView>
               {treeCounter &&
-              treeCounter.followeeIds &&
-              this.props.followeeList &&
-              this.props.followeeList.length > 0 ? (
-                <View>
-                  {this.props.followeeList.map(follow => (
-                    <View key={follow.id} style={styles.followerRow}>
-                      <UserProfileImage
-                        profileImage={follow.userProfile.image}
-                      />
-                      <TouchableItem
-                        style={styles.followerCol}
-                        onPress={() => {
-                          setTimeout(() => {
-                            this.props.navigation.navigate(
-                              getLocalRoute('app_treecounter'),
-                              {
-                                treeCounterId: follow.id,
-                                titleParam: follow.displayName
-                              }
-                            );
-                          }, 0);
-                        }}
-                      >
-                        <Text>{follow.displayName}</Text>
-                      </TouchableItem>
+                treeCounter.followeeIds &&
+                this.props.followeeList &&
+                this.props.followeeList.length > 0 ? (
+                  <View>
+                    {this.props.followeeList.map(follow => (
+                      <View key={follow.id} style={styles.followerRow}>
+                        <UserProfileImage
+                          profileImage={follow.userProfile.image}
+                        />
+                        <TouchableItem
+                          style={styles.followerCol}
+                          onPress={() => {
+                            setTimeout(() => {
+                              this.props.navigation.navigate(
+                                getLocalRoute('app_treecounter'),
+                                {
+                                  treeCounterId: follow.id,
+                                  titleParam: follow.displayName
+                                }
+                              );
+                            }, 0);
+                          }}
+                        >
+                          <Text>{follow.displayName}</Text>
+                        </TouchableItem>
 
-                      <FollowLabelButton
-                        label={i18n.t('label.unsubscribe')}
-                        isSubscribed
-                        onClick={() => {
-                          this.props.unfollowUser(follow.id);
-                        }}
-                      />
-                    </View>
-                  ))}
-                </View>
-              ) : this.props.followeeList ? (
-                <Text>{i18n.t('label.not_following_anybody')}</Text>
-              ) : (
-                <LoadingIndicator contentLoader screen="profileLoader" />
-              )}
+                        <FollowLabelButton
+                          label={i18n.t('label.unsubscribe')}
+                          isSubscribed
+                          onClick={() => {
+                            this.props.unfollowUser(follow.id);
+                          }}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                ) : this.props.followeeList ? (
+                  <Text>{i18n.t('label.not_following_anybody')}</Text>
+                ) : (
+                    <LoadingIndicator contentLoader screen="profileLoader" />
+                  )}
             </ScrollView>
           </CardLayout>
         );
@@ -243,11 +243,6 @@ export default class EditUserProfile extends Component {
     const textColor = '#4d5153';
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        {/* <HeaderStatic
-          title={i18n.t('label.edit_profile')}
-          navigation={this.props.navigation}
-          showBackButton
-        /> */}
         <HeaderNew title={''} navigation={this.props.navigation} />
 
         <View style={{ marginTop: 60 }} />

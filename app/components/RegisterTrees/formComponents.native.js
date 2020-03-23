@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback, ActivityIndicator
 } from 'react-native';
 import { Switch } from 'react-native-switch';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -37,7 +37,9 @@ export const FormikFormTree = props => {
         props.initialValues.treeScientificName)) ||
     false
   );
+  const backgroundColor = 'white';
   const [geometry, setGeometry] = useState(props.geometry);
+  const [loadButton, setLoadButton] = useState(props.loading);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
   const [initValue, setInitValue] = useState(props.initialValues);
   useEffect(() => {
@@ -49,6 +51,9 @@ export const FormikFormTree = props => {
   useEffect(() => {
     setGeoLocation(props.geoLocation);
   }, [props.geoLocation]);
+  useEffect(() => {
+    setLoadButton(props.loading);
+  }, [props.loading]);
 
   const parentProps = props;
   const isMultipleTree = props.mode === 'multiple-trees';
@@ -65,6 +70,7 @@ export const FormikFormTree = props => {
   function focusTheField(id) {
     inputs[id].focus();
   }
+
   const isContributionImage = props => {
     if (parentProps.isEdit) {
       const contributImage =
@@ -441,11 +447,17 @@ export const FormikFormTree = props => {
                         : buttonStyles.disabledButtonView
                     }
                   >
-                    <Text style={buttonStyles.actionButtonText}>
+                    {loadButton ? (
+                        <ActivityIndicator
+                          size="large"
+                          color={backgroundColor}
+                        />
+                      ):(
+                      <Text style={buttonStyles.actionButtonText}>
                       {parentProps.isEdit
                         ? i18n.t('label.update')
                         : i18n.t('label.register')}
-                    </Text>
+                    </Text>)}
                   </View>
                 </TouchableOpacity>
               </View>

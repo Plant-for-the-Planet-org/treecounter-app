@@ -101,7 +101,7 @@ export default class Menu extends Component {
   resetStackToProperRoute = url => {
     // Do Whatever you need to do within your app to redirect users to the proper route
     let urlBreak = url.split('/');
-    //debug(urlBreak);
+    debug(urlBreak);
     const { navigation } = this.props;
     if (
       urlBreak.indexOf('account-activate') !== -1 ||
@@ -147,6 +147,22 @@ export default class Menu extends Component {
             0,
             {
               treeCounterId: urlBreak[urlBreak.length - 1]
+            }
+          ),
+        0
+      );
+    } else if (urlBreak.indexOf('project') !== -1) {+
+      this.props.selectPlantProjectAction(urlBreak[urlBreak.length - 1]);
+      setTimeout(
+        () =>
+          updateRoute(
+            '/' + urlBreak[urlBreak.length - 2],
+            // '/' +
+            // urlBreak[urlBreak.length - 1],
+            navigation,
+            0,
+            {
+              projectSlug: urlBreak[urlBreak.length - 1]
             }
           ),
         0

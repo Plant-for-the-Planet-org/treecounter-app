@@ -438,7 +438,7 @@ export const FormikFormTree = props => {
                 <TouchableOpacity
                   style={buttonStyles.actionButtonTouchable}
                   onPress={props.handleSubmit}
-                  disabled={!props.isValid}
+                  disabled={!props.isValid || loadButton}
                 >
                   <View
                     style={

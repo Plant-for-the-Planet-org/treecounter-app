@@ -1,3 +1,8 @@
 {
-  "read_more": "Lee más"
+  "support": "Ayuda",
+  "read_more": "Leer más",
+  "contributor": "Contribuyente",
+  "planted_trees": "Árboles plantados",
+  "target": "Objetivo",
+  "supportUser": "Donar árboles para apoyar {{displayName}}"
 }

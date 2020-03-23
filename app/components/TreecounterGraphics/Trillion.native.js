@@ -291,7 +291,7 @@ class Trillion extends PureComponent {
                                   'app_pledge_events',
                                   navigation,
                                   {
-                                    slug: unfulfilledEvent.slug,
+                                    slug: unfulfilledEvent.eventSlug,
                                     plantProject: { id: -1 },
                                     treeCount: -1
                                   }

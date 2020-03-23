@@ -2,7 +2,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
   scrollViewStyle: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: 'white'
   },
   imageStyle: {
     width: 50,
@@ -14,7 +15,7 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     alignItems: 'center',
-    backgroundColor: '$backgroundScreen'
+    backgroundColor: 'white'
   },
   inputContainer: {
     width: '100%',

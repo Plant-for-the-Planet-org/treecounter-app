@@ -120,7 +120,7 @@ export default EStyleSheet.create({
     borderRadius: 100,
     padding: 14,
     alignItems: 'center',
-    width: Dimensions.get('window').width * 42 / 100
+    width: (Dimensions.get('window').width * 42) / 100
   },
   borderGreen: {
     borderWidth: 1,

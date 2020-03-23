@@ -75,6 +75,11 @@ class DonationTreesContainer extends PureComponent {
   async componentDidMount() {
     let selectedProjectId = undefined;
     if (this.props.match) {
+      // patch to map a given projectSlug parameter to the id parameter
+      if (!this.props.match.params.id) {
+        this.props.match.params.id = this.props.match.params.projectSlug
+      }
+      // end patch
       selectedProjectId = parseInt(this.props.match.params.id);
     } else {
       selectedProjectId = this.props.selectedPlantProjectId;

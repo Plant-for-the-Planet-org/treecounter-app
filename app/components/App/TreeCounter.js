@@ -347,8 +347,11 @@ class TreeCounter extends Component {
               component={SelectPlantProjectContainer}
             />
             <Route
+              // path={getLocalRoute('app_selectedProject') + '/:projectSlug?'}
+              // component={SelectedPlantProjectContainer}
+              // temporarily redirect this request to /donate-trees/:id
               path={getLocalRoute('app_selectedProject') + '/:projectSlug?'}
-              component={SelectedPlantProjectContainer}
+              component={DonationTreesContainer}
             />
             <Route
               path={getLocalRoute('app_competition') + '/:id?'}

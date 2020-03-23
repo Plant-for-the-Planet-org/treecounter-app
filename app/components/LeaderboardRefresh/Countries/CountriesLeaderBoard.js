@@ -23,31 +23,24 @@ const CountriesLeaderBoard = ({ navigation }) => {
   const [period, setPeriod] = useState('1w');
   const [orderBy] = useState('planted');
 
-  useEffect(
-    () => {
-      setQueryResult(null);
-      const section = navigation.getParam('category');
-      LeaderBoardDataAction({
-        section,
-        orderBy,
-        period,
-        subSection: undefined
-      }).then(
-        success => {
-          if (
-            success.data &&
-            success.data instanceof Object &&
-            success.data.data
-          )
-            setQueryResult(success.data.data);
-        },
-        error => {
-          debug(error);
-        }
-      );
-    },
-    [period]
-  );
+  useEffect(() => {
+    setQueryResult(null);
+    const section = navigation.getParam('category');
+    LeaderBoardDataAction({
+      section,
+      orderBy,
+      period,
+      subSection: undefined
+    }).then(
+      success => {
+        if (success.data && success.data instanceof Object && success.data.data)
+          setQueryResult(success.data.data);
+      },
+      error => {
+        debug(error);
+      }
+    );
+  }, [period]);
   const renderCountryList = () => {
     if (queryresult) {
       return (

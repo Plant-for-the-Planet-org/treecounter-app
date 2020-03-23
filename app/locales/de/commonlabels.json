@@ -45,5 +45,6 @@
   "view_all": "Zeige alle",
   "show_all": "Zeige alle",
   "show_less": "Zeige weniger",
-  "share": "Teile"
+  "share": "Teile",
+  "noInternet": "Du bist vielleicht offline"
 }

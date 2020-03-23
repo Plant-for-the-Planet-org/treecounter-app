@@ -1,1 +1,23 @@
-{ }
+{
+  "community_reviews": "Opiniones de expertos",
+  "write_review": "Escribe un comentario",
+  "view_pdf": "Ver PDF",
+  "edit_review": "Editar comentario",
+  "delete_review": "Eliminar comentario",
+  "upload_report": "Subir informe (PDF)",
+  "add_project_review": "Agregar revisión del proyecto",
+  "edit_project_review": "Editar revisión del proyecto",
+  "guide_line": "Consulte las pautas y solo los índices de tasas con los que está más familiarizado. Todos los índices son opcionales.",
+  "brief_review": "BREVE COMENTARIO DEL PROYECTO",
+  "no_pdf_found": "¡No se encontró un PDF válido!",
+  "reviews": "Comentarios",
+  "summary_missing": "Falta un texto breve",
+  "file_selected": "1 archivo seleccionado",
+  "add_pictures": "AGREGAR IMÁGENES",
+  "file_already_upload": "1 archivo PDF existente",
+  "view_guidelines": "Ver Directrices",
+  "land_quality": "Calidad de la tierra",
+  "co_benefits": "Beneficios colaterales",
+  "survival_rate": "Tasa de supervivencia",
+  "at_least_one_index": "Se debe proporcionar al menos un índice de revisión."
+}

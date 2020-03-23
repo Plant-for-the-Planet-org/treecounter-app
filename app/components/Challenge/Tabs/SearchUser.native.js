@@ -11,6 +11,7 @@ import i18n from '../../../locales/i18n';
 import searchBarStyles from '../../../styles/header/search_bar.native';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 import UserProfileImage from '../../Common/UserProfileImage';
+import colors from '../../../utils/constants';
 
 class SearchUser extends React.Component {
   static SearchBar = SearchBar;
@@ -19,7 +20,7 @@ class SearchUser extends React.Component {
   static defaultProps = {
     debounce: 500,
     headerBackgroundColor: '#b9d384',
-    headerTintColor: '#fff'
+    headerTintColor: colors.WHITE
   };
   constructor(props) {
     super(props);
@@ -52,7 +53,7 @@ class SearchUser extends React.Component {
       this.props.onSearchResultClick &&
       !this.isMyself(suggestion, this.props.currentUserProfile) &&
       this.props.alreadyInvited &&
-        !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited)
+      !this.alreadyInvitedUser(suggestion, this.props.alreadyInvited)
     ) {
       this.props.onSearchResultClick(suggestion);
       this.setState({

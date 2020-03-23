@@ -3,8 +3,9 @@ export default EStyleSheet.create({
   mainContainer: {
     flex: 1,
     justifyContent: 'space-around',
-    marginBottom: 60,
-    marginTop: 80
+    paddingBottom: 60,
+    paddingTop: 80,
+    backgroundColor: '#fff'
   },
   container: {
     flexDirection: 'row',

@@ -20,6 +20,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import tabStyles from '../../styles/common/tabbar';
 import HeaderNew from './../Header/HeaderNew';
 import { SafeAreaView } from 'react-navigation';
+import colors from '../../utils/constants';
 
 const Form = t.form.Form;
 function UserProfileTemplate(locals) {
@@ -84,7 +85,6 @@ export default class EditUserProfile extends Component {
   _renderTabBar = props => {
     const focusedColor = '#89b53a';
     const normalColor = '#4d5153';
-    const colorWhite = '#fff';
     return (
       <TabBar
         useNativeDriver
@@ -92,7 +92,7 @@ export default class EditUserProfile extends Component {
         {...props}
         style={[tabStyles.tabBar]}
         tabStyle={{ width: 'auto', padding: 0 }}
-        indicatorStyle={{ backgroundColor: colorWhite }}
+        indicatorStyle={{ backgroundColor: colors.WHITE }}
         renderLabel={({ route, focused }) => (
           <View style={{ textAlign: 'left', marginRight: 24 }}>
             <Text

@@ -50,7 +50,8 @@ class AppDrawerNavigatorContainer extends Component {
     if (
       (nextState.loading === this.state.loading &&
         nextState.isLoggedIn === this.state.isLoggedIn &&
-        !nextProps.userProfile && !this.props.userProfile) ||
+        !nextProps.userProfile &&
+        !this.props.userProfile) ||
       (nextProps.userProfile &&
         this.props.userProfile &&
         nextProps.userProfile.id === this.props.userProfile.id)

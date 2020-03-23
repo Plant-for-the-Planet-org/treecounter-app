@@ -15,6 +15,7 @@ import HeaderStatic from './../Header/HeaderStatic';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
 const height = Dimensions.get('window').height;
+import colors from '../../utils/constants';
 
 class SelectPlantTabView extends PureComponent {
   constructor(props) {
@@ -76,7 +77,7 @@ class SelectPlantTabView extends PureComponent {
   renderTabBar = props => {
     const focusedColor = '#89b53a';
     const normalColor = '#4d5153';
-    const colorWhite = '#fff';
+    const colorWhite = colors.WHITE;
     return [
       <TabBar
         key="1"

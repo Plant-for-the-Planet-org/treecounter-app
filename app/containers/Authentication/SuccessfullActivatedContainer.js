@@ -14,7 +14,7 @@ class SuccessfullyActivatedContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (
       this.props.navigation
         ? this.props.navigation.getParam('token')
@@ -51,9 +51,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(
-  SuccessfullyActivatedContainer
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SuccessfullyActivatedContainer);
 
 SuccessfullyActivatedContainer.propTypes = {
   match: PropTypes.shape({

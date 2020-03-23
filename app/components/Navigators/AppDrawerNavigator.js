@@ -61,6 +61,7 @@ import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard
 import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
+import colors from '../../utils/constants';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -80,6 +81,7 @@ const headerLabels = {
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.projects',
+  [getLocalRoute('app_selectedProject')]: 'label.project',
   [getLocalRoute('app_competition')]: '',
   [getLocalRoute('app_editCompetition')]: '',
   [getLocalRoute('app_imprint')]: 'label.imprint',
@@ -101,11 +103,11 @@ const headerLabels = {
   ['app_pledge_update_form']: 'label.updatePledge'
 };
 
-export const getAppNavigator = function(isLoggedIn, userProfile) {
+export const getAppNavigator = function (isLoggedIn, userProfile) {
   const searchNavigator = createStackNavigator(
     {
       Search: {
-        screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
+        screen: () => <SearchLayout searchInputUnderlineColorAndroid={colors.WHITE} />
       }
     },
     {
@@ -156,7 +158,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const getTitle = function(navigation) {
+  const getTitle = function (navigation) {
     let title = navigation.getParam('titleParam');
     try {
       if (!title) {
@@ -225,13 +227,15 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       [getLocalRoute('app_editProfile')]: {
-        screen: isLoggedIn ? EditUserProfileContainer : LoginContainer
+        screen: isLoggedIn ? EditUserProfileContainer : LoginContainer,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_passwordSent')]: {
         screen: EmailSentContainer
       },
       [getLocalRoute('app_signup')]: {
-        screen: SignUpContainer
+        screen: SignUpContainer,
+        path: 'signup'
       },
       [getLocalRoute('app_myTrees')]: {
         screen: UserContributionsContainer
@@ -243,31 +247,35 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: ActivateAccountContainer
       },
       ['pickup_profile_modal']: {
-        screen: ProfilePickerModal
+        screen: ProfilePickerModal,
+        navigationOptions: { header: null }
       },
       ['about_us']: {
-        screen: AboutUsContainer
+        screen: AboutUsContainer,
+        navigationOptions: { header: null }
       },
       ['license_info_list']: {
         screen: LicenseInfoList
       },
       [getLocalRoute('app_imprint')]: {
-        screen: ImprintContainer
+        screen: ImprintContainer,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_privacy')]: {
-        screen: PrivacyContainer
+        screen: PrivacyContainer,
+        navigationOptions: { header: null }
       },
-      // [getLocalRoute('app_claim')]: {
-      //   screen: RedemptionContainer
-      // },
       [getLocalRoute('app_editTrees')]: {
         screen: EditUserContributionContainer
       },
       [getLocalRoute('app_target')]: {
-        screen: isLoggedIn ? TargetContainer : LoginContainer
+        screen: isLoggedIn ? TargetContainer : LoginContainer,
+        navigationOptions: { header: null },
+        path: 'target'
       },
       [getLocalRoute('app_challenge')]: {
-        screen: ChallengeContainer
+        screen: ChallengeContainer,
+        navigationOptions: { header: null }
       },
       ['app_gift_projects']: {
         screen: SelectPlantProjectContainer
@@ -281,13 +289,20 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         path: getLocalRoute('app_resetPassword') + '/:token'
       },
       ['app_create_competition']: {
-        screen: createCompeition
+        screen: createCompeition,
+        navigationOptions: { header: null }
       },
       ['app_supportTrees']: {
         screen: SelectPlantProjectContainer
       },
       [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProjectContainer
+        screen: SelectPlantProjectContainer,
+        navigationOptions: { header: null },
+      },
+      [getLocalRoute('app_selectedProject')]: {
+        screen: SelectedPlantProjectContainer,
+        navigationOptions: { header: null },
+        path: 'project/:projectSlug'
       },
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer
@@ -296,7 +311,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: FAQContainer
       },
       [getLocalRoute('app_editCompetition')]: {
-        screen: isLoggedIn ? EditCompetitionContainer : LoginContainer
+        screen: isLoggedIn ? EditCompetitionContainer : LoginContainer,
+        navigationOptions: { header: null }
       },
       ['app_donate_detail']: {
         screen: DonationTreesContainer
@@ -322,7 +338,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         screen: LoginContainer
       },
       ['app_add_review']: {
-        screen: AddReview
+        screen: AddReview,
+        navigationOptions: { header: null }
       },
       ['app_view_pdf']: {
         screen: PDFViewer
@@ -377,7 +394,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         let navigationConfig = {
           headerStyle: styles.container,
           headerTitleStyle: { paddingRight: 16 },
-          headerTintColor: '#fff',
+          headerTintColor: colors.WHITE,
           headerBackTitle: null,
           title: getTitle(navigation),
           headerRight: (

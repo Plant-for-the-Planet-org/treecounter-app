@@ -28,5 +28,20 @@ export default EStyleSheet.create({
   },
   selectedProjectCol: {
     paddingLeft: 5
+  },
+  selectedCurrencyContainer: {
+    borderBottomColor: '#aaaaaa',
+    borderBottomWidth: 1,
+    padding: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 20,
+    marginHorizontal: 10
+  },
+  selectedCurrency: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16,
+    color: '#6f6f6f'
   }
 });

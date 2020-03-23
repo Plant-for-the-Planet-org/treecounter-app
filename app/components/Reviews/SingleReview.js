@@ -22,7 +22,7 @@ export default class SingleReview extends Component {
       reviewIndexes: props.reviewIndexes
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     nextProps.reviewIndexes
       ? this.setState({ reviewIndexes: nextProps.reviewIndexes })
       : '';

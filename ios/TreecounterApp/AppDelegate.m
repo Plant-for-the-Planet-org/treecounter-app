@@ -18,9 +18,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  NSString *apiUrl = [ReactNativeConfig envFor:@"googleMapApiKey"];
-  NSURL *jsCodeLocation;
-  [GMSServices provideAPIKey:apiUrl];
+  NSString *apiKey = [ReactNativeConfig envFor:@"googleMapApiKey"];
+  if (!apiKey.length) {
+    apiKey = @"NOKEYAVAILABLE";
+  }
+  NSLog(@"apiKey=%@", apiKey);
+  //NSURL *jsCodeLocation;
+  [GMSServices provideAPIKey:apiKey];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"TreecounterApp"
@@ -52,11 +56,17 @@
                      restorationHandler:restorationHandler];
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
+// - (BOOL)application:(UIApplication *)application
+//             openURL:(NSURL *)url
+//             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+// {
+//   return [RCTLinkingManager application:application openURL:url options:options];
+// }
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-  return [RCTLinkingManager application:application openURL:url options:options];
+  return [RCTLinkingManager application:app openURL:url options:options];
 }
 
 @end

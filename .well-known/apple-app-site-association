@@ -10,7 +10,8 @@
                     "/redeem*", "/claim*", "/edit-trees*", "/target*", "/challenge*",
                     "/app_gift_projects*", "/account-activate*", "/home*", "/register-trees*",
                     "/competitions*", "/donate-trees*", "/gift-trees*", "/competition*",
-                    "/edit-competition*", "/app_donate_detail*", "/select-project*", "/t/*", "/reset-password*" ]
+                    "/edit-competition*", "/app_donate_detail*", "/select-project*", "/reset-password*",
+                    "/t/*", "/project/*" ]
             }
         ]
     }

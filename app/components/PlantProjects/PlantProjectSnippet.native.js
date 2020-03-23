@@ -13,16 +13,16 @@ import { getImageUrl } from '../../actions/apiRouting';
 import {
   // tick,
   location_grey,
-  survival_grey,
-  tax_grey,
-  leaf,
-  leafGray
+  // survival_grey,
+  tax_grey
+  // leaf,
+  // leafGray
 } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { formatNumber } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
 // import CardLayout from '../Common/Card';
+import NumberFormat from '../Common/NumberFormat.native';
 import PlantedProgressBar from './PlantedProgressbar.native';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
@@ -66,8 +66,8 @@ class PlantProjectSnippet extends PureComponent {
       allowDonations,
       image,
       reviewScore: plantProjectRating,
-      reviews,
-      survivalRateStatus
+      reviews
+      // survivalRateStatus
       // description,
       // homepageUrl: homepageUrl,
       // homepageCaption: homepageCaption,
@@ -115,12 +115,12 @@ class PlantProjectSnippet extends PureComponent {
         );
       }
     deducibleText1 = deducibleText1.join(', ') + '.';
-    const survivalRateLeaf =
-      survivalRateStatus == 'verified'
-        ? leaf
-        : survivalRateStatus == 'self-reported'
-          ? leafGray
-          : null;
+    // const survivalRateLeaf =
+    // survivalRateStatus == 'verified'
+    //     ? leaf
+    // : survivalRateStatus == 'self-reported'
+    //       ? leafGray
+    //       : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
 
     return (
@@ -217,7 +217,7 @@ class PlantProjectSnippet extends PureComponent {
                   </View>
                 ) : null}
 
-                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                {/* <View style={{ flexDirection: 'row', marginTop: 10 }}>
                   <Image
                     source={survival_grey}
                     style={{
@@ -226,6 +226,8 @@ class PlantProjectSnippet extends PureComponent {
                       marginRight: 10
                     }}
                   />
+
+
                   <View style={styles.survivalText}>
                     <View style={{ flexDirection: 'row' }}>
                       <Text style={styles.survivalText}>
@@ -253,7 +255,7 @@ class PlantProjectSnippet extends PureComponent {
                       ) : null}
                     </View>
                   </View>
-                </View>
+                </View> */}
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -292,7 +294,11 @@ class PlantProjectSnippet extends PureComponent {
                   <View style={styles.costContainer}>
                     <View style={styles.costTextContainer}>
                       <Text style={[styles.costText]}>
-                        {formatNumber(specsProps.treeCost, null, currency)}
+                        {/* {formatNumber(specsProps.treeCost, null, currency)} */}
+                        <NumberFormat
+                          data={specsProps.treeCost}
+                          currency={currency}
+                        />
                       </Text>
                     </View>
 

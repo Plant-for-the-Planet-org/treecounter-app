@@ -25,7 +25,7 @@ export default class FeaturedCompetitions extends Component {
       refreshing: false
     };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let { allCompetitions } = this.props;
     let featuredCompetitions = [];
     let CurrentDate = new Date();
@@ -63,7 +63,7 @@ export default class FeaturedCompetitions extends Component {
     />
   );
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     let featuredCompetitions = [];
     let CurrentDate = new Date();
@@ -105,7 +105,6 @@ export default class FeaturedCompetitions extends Component {
       <ScrollView
         contentContainerStyle={[
           scrollStyle.styleContainer,
-          { paddingBottom: 164 }
         ]}
         refreshControl={
           <RefreshControl

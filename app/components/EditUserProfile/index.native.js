@@ -5,7 +5,6 @@ import { TabView, TabBar } from 'react-native-tab-view';
 import { Text, View, ScrollView } from 'react-native';
 import t from 'tcomb-form-native';
 import { debug } from '../../debug';
-import tabBarStyles from '../../styles/common/tabbar.native';
 import { parsedSchema } from '../../server/parsedSchemas/editProfile';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -18,6 +17,10 @@ import UserProfileImage from '../Common/UserProfileImage';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import TouchableItem from '../Common/TouchableItem.native';
 import { getLocalRoute } from '../../actions/apiRouting';
+import tabStyles from '../../styles/common/tabbar';
+import HeaderNew from './../Header/HeaderNew';
+import { SafeAreaView } from 'react-navigation';
+import colors from '../../utils/constants';
 
 const Form = t.form.Form;
 function UserProfileTemplate(locals) {
@@ -80,19 +83,49 @@ export default class EditUserProfile extends Component {
   };
 
   _renderTabBar = props => {
+    const focusedColor = '#89b53a';
+    const normalColor = '#4d5153';
     return (
       <TabBar
-        {...props}
-        style={[tabBarStyles.tabBar]}
-        labelStyle={tabBarStyles.textStyle}
-        indicatorStyle={tabBarStyles.textActive}
-        scrollEnabled
-        bounces
         useNativeDriver
+        bounces
+        {...props}
+        style={[tabStyles.tabBar]}
+        tabStyle={{ width: 'auto', padding: 0 }}
+        indicatorStyle={{ backgroundColor: colors.WHITE }}
+        renderLabel={({ route, focused }) => (
+          <View style={{ textAlign: 'left', marginRight: 24 }}>
+            <Text
+              style={{
+                color: focused ? focusedColor : normalColor,
+                fontSize: 13,
+                fontFamily: 'OpenSans-SemiBold',
+                textTransform: 'capitalize',
+                textAlign: 'left'
+              }}
+            >
+              {route.title}
+            </Text>
+            {focused ? (
+              <View
+                style={[
+                  {
+                    width: '100%',
+                    marginTop: 11,
+                    backgroundColor: focusedColor,
+                    height: 3,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
+                    color: focusedColor
+                  }
+                ]}
+              />
+            ) : null}
+          </View>
+        )}
       />
     );
   };
-
   _handleIndexChange = index => this.setState({ index });
 
   getFormSchemaOption = (userType, profileType) => {
@@ -144,47 +177,47 @@ export default class EditUserProfile extends Component {
           <CardLayout style={{ flex: 1 }}>
             <ScrollView>
               {treeCounter &&
-              treeCounter.followeeIds &&
-              this.props.followeeList &&
-              this.props.followeeList.length > 0 ? (
-                <View>
-                  {this.props.followeeList.map(follow => (
-                    <View key={follow.id} style={styles.followerRow}>
-                      <UserProfileImage
-                        profileImage={follow.userProfile.image}
-                      />
-                      <TouchableItem
-                        style={styles.followerCol}
-                        onPress={() => {
-                          setTimeout(() => {
-                            this.props.navigation.navigate(
-                              getLocalRoute('app_treecounter'),
-                              {
-                                treeCounterId: follow.id,
-                                titleParam: follow.displayName
-                              }
-                            );
-                          }, 0);
-                        }}
-                      >
-                        <Text>{follow.displayName}</Text>
-                      </TouchableItem>
+                treeCounter.followeeIds &&
+                this.props.followeeList &&
+                this.props.followeeList.length > 0 ? (
+                  <View>
+                    {this.props.followeeList.map(follow => (
+                      <View key={follow.id} style={styles.followerRow}>
+                        <UserProfileImage
+                          profileImage={follow.userProfile.image}
+                        />
+                        <TouchableItem
+                          style={styles.followerCol}
+                          onPress={() => {
+                            setTimeout(() => {
+                              this.props.navigation.navigate(
+                                getLocalRoute('app_treecounter'),
+                                {
+                                  treeCounterId: follow.id,
+                                  titleParam: follow.displayName
+                                }
+                              );
+                            }, 0);
+                          }}
+                        >
+                          <Text>{follow.displayName}</Text>
+                        </TouchableItem>
 
-                      <FollowLabelButton
-                        label={i18n.t('label.unsubscribe')}
-                        isSubscribed
-                        onClick={() => {
-                          this.props.unfollowUser(follow.id);
-                        }}
-                      />
-                    </View>
-                  ))}
-                </View>
-              ) : this.props.followeeList ? (
-                <Text>{i18n.t('label.not_following_anybody')}</Text>
-              ) : (
-                <LoadingIndicator contentLoader screen="profileLoader" />
-              )}
+                        <FollowLabelButton
+                          label={i18n.t('label.unsubscribe')}
+                          isSubscribed
+                          onClick={() => {
+                            this.props.unfollowUser(follow.id);
+                          }}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                ) : this.props.followeeList ? (
+                  <Text>{i18n.t('label.not_following_anybody')}</Text>
+                ) : (
+                    <LoadingIndicator contentLoader screen="profileLoader" />
+                  )}
             </ScrollView>
           </CardLayout>
         );
@@ -207,9 +240,31 @@ export default class EditUserProfile extends Component {
   };
 
   render() {
+    const textColor = '#4d5153';
     return (
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
-        <View />
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
+        {/* <HeaderStatic
+          title={i18n.t('label.edit_profile')}
+          navigation={this.props.navigation}
+          showBackButton
+        /> */}
+        <HeaderNew title={''} navigation={this.props.navigation} />
+
+        <View style={{ marginTop: 60 }} />
+        <Text
+          style={{
+            fontFamily: 'OpenSans-ExtraBold',
+            fontSize: 27,
+            lineHeight: 40,
+            letterSpacing: 0,
+            textAlign: 'left',
+            color: textColor,
+            left: 20
+          }}
+        >
+          {i18n.t('label.edit_profile')}
+        </Text>
+
         <TabView
           ref={'tabView'}
           useNativeDriver
@@ -218,7 +273,7 @@ export default class EditUserProfile extends Component {
           renderTabBar={this._renderTabBar}
           onIndexChange={this._handleIndexChange}
         />
-      </ScrollView>
+      </SafeAreaView>
     );
   }
 }

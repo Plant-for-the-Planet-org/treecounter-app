@@ -2,12 +2,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HTMLView from 'react-native-htmlview';
-import { Text, View, Linking } from 'react-native';
+import { Text, View, Linking, Platform } from 'react-native';
 import ListView from 'deprecated-react-native-listview';
 import { debug } from '../../debug';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { context } from '../../config';
 import styles from '../../styles/faq';
+import i18n from '../../locales/i18n';
+import HeaderNew from './../Header/HeaderNew.native';
+import colors from '../../utils/constants';
 
 export default class Privacy extends Component {
   constructor(props) {
@@ -22,7 +25,7 @@ export default class Privacy extends Component {
       )
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -36,7 +39,7 @@ export default class Privacy extends Component {
   convertPrivacyArrayToMap(privacies) {
     const privacyHeadingMap = {}; // Create the blank map
 
-    privacies.forEach(function(privacyItem) {
+    privacies.forEach(function (privacyItem) {
       if (!privacyHeadingMap[privacyItem.heading]) {
         // Create an entry in the map for the category if it hasn't yet been created
         privacyHeadingMap[privacyItem.heading] = [];
@@ -92,12 +95,19 @@ export default class Privacy extends Component {
     return this.props.loading ? (
       <LoadingIndicator />
     ) : (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderContent}
-        renderSectionHeader={this._renderHeader}
-      />
-    );
+        <View style={{ backgroundColor: colors.WHITE }}>
+          <HeaderNew
+            title={i18n.t('label.data_protection')}
+            navigation={this.props.navigation}
+          />
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this._renderContent}
+            //renderSectionHeader={this._renderHeader}
+            style={{ marginTop: Platform.OS === 'ios' ? 160 : 120 }}
+          />
+        </View>
+      );
   }
 }
 

@@ -6,7 +6,7 @@ const width = Dimensions.get('window').width;
 const squareDimension =
   Math.floor(
     Math.min(Dimensions.get('window').width, Dimensions.get('window').height) /
-      10
+    10
   ) * 10;
 
 export default EStyleSheet.create({
@@ -20,8 +20,8 @@ export default EStyleSheet.create({
     alignItems: 'center'
   },
   userProfileImage: {
-    borderWidth: 4,
-    borderColor: '#F4F2F7',
+    // borderWidth: 4,
+    // borderColor: '#F4F2F7',
     width: 100,
     height: 100,
     borderRadius: 50
@@ -106,6 +106,7 @@ export default EStyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     padding: 20,
+    paddingTop: 0,
     justifyContent: 'space-around'
   },
   secondaryButton: {

@@ -25,7 +25,7 @@ class EditCompetitionContainer extends Component {
     };
     this.editCompetition = this.editCompetition.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.match) {
       // empty
     } else if (nextProps.navigation && this.props.navigation) {
@@ -99,9 +99,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  EditCompetitionContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditCompetitionContainer);
 
 EditCompetitionContainer.propTypes = {
   match: PropTypes.any,

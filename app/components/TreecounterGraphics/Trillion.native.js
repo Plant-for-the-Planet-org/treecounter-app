@@ -4,7 +4,7 @@ import {
   ScrollView,
   Text,
   View,
-  Image,
+  // Image,
   TouchableOpacity,
   // SafeAreaView,
   Animated,
@@ -27,14 +27,14 @@ import i18n from '../../locales/i18n';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 // import Leaderboard from '../../containers/Leaderboard';
 import Leaderboard from '../LeaderboardRefresh/LeaderBoard/leaderboard';
-import { getLocalRoute } from '../../actions/apiRouting';
+// import { getLocalRoute } from '../../actions/apiRouting';
 import {
   fetchpledgeEventsAction,
   fetchPublicPledgesAction
 } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from '../../selectors';
-import { trees } from '../../assets';
+// import { trees } from '../../assets';
 import tabStyles from '../../styles/common/tabbar';
 import { saveItem, fetchItem } from '../../stores/localStorage.native';
 import Constants from '../../utils/const';
@@ -291,7 +291,7 @@ class Trillion extends PureComponent {
                                   'app_pledge_events',
                                   navigation,
                                   {
-                                    slug: unfulfilledEvent.slug,
+                                    slug: unfulfilledEvent.eventSlug,
                                     plantProject: { id: -1 },
                                     treeCount: -1
                                   }
@@ -388,7 +388,7 @@ class Trillion extends PureComponent {
                 </CardLayout>
               ) : null} */}
 
-            <View
+            {/* <View
               style={[
                 styles.cardContainer,
                 {
@@ -422,7 +422,7 @@ class Trillion extends PureComponent {
                   {i18n.t('label.searchProjectButton')}
                 </Text>
               </TouchableOpacity>
-            </View>
+            </View> */}
           </ScrollView>
         );
       }

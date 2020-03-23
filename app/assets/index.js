@@ -194,6 +194,19 @@ import school from './images/icons/LeaderboardIcons/school.png';
 import tpo from './images/icons/LeaderboardIcons/tpo.png';
 import world from './images/icons/LeaderboardIcons/world.png';
 
+import treesProfile from './images/trees/trees.png';
+import spruce from './images/trees/spruce.png';
+import mountains from './images/trees/mountains.png';
+import hills from './images/trees/hills.png';
+import forest from './images/trees/forest.png';
+import fields from './images/trees/fields.png';
+import beach from './images/trees/beach.png';
+
+import closeHBlack from './images/header/closeBlack.png';
+import closeHWhite from './images/header/closeWhite.png';
+import shareBlack from './images/header/shareBlack.png';
+import shareWhite from './images/header/shareWhite.png';
+
 export {
   treelogo,
   germany,
@@ -386,5 +399,16 @@ export {
   organisation,
   world,
   school,
-  tpo
+  tpo,
+  treesProfile,
+  beach,
+  fields,
+  forest,
+  hills,
+  mountains,
+  spruce,
+  closeHBlack,
+  closeHWhite,
+  shareBlack,
+  shareWhite
 };

@@ -1,10 +1,10 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 export default EStyleSheet.create({
   safeAreaViewContainer: { flex: 1, backgroundColor: 'white' },
-  mainContainer: { flex: 1 },
+  mainContainer: { flex: 1, backgroundColor: 'white' },
   loadingContainer: {
     flex: 1,
     alignItems: 'center'
@@ -21,7 +21,7 @@ export default EStyleSheet.create({
   },
   formScrollView: {
     padding: 24,
-    marginTop: 80,
+    marginTop: Platform.OS === 'ios' ? 80 : 40,
     paddingBottom: 240
     // borderWidth: 1
     // minHeight: height * 0.94

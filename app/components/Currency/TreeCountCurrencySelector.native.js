@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import { Dimensions, View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // import { debug } from '../../debug';
-import CurrencySelector from './CurrencySelector';
+// import CurrencySelector from './CurrencySelector.native';
 import TreeCountSelector from './TreeCountSelector';
+import CurrencySelectorList from '../Common/CurrencySelectorList.native';
 import CardLayout from '../Common/Card';
 import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject.native';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import countryCodes from '../../assets/countryCodes.json';
 
 class TreeCountCurrencySelector extends React.PureComponent {
   constructor(props) {
@@ -18,16 +22,17 @@ class TreeCountCurrencySelector extends React.PureComponent {
     this.state = {
       selectedCurrency: props.selectedCurrency,
       selectedTreeCount: props.selectedTreeCount,
-      selectedAmount: 0
+      selectedAmount: 0,
+      showCurrencyModal: false,
+      currencyName: this.getCountryCode(props.selectedCurrency).currency
     };
 
     this.calculateAmount = this.calculateAmount.bind(this);
     this.calculateTreeCount = this.calculateTreeCount.bind(this);
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleTreeCountChange = this.handleTreeCountChange.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTreeCount !== this.state.selectedTreeCount) {
       this.setState({
         selectedTreeCount: nextProps.selectedTreeCount
@@ -35,9 +40,17 @@ class TreeCountCurrencySelector extends React.PureComponent {
     }
   }
 
-  handleCurrencyChange(currency) {
+  hideCurrencyModal = () => {
+    this.setState({ showCurrencyModal: false });
+  };
+
+  handleCurrencyChange = currency => {
     this.updateStateAndParent({ selectedCurrency: currency });
-  }
+    this.setState({ currencyName: this.getCountryCode(currency).currency });
+    this.hideCurrencyModal();
+  };
+
+  getCountryCode = currency => countryCodes.find(c => c.code == currency) || {};
 
   handleTreeCountChange(treeCountData) {
     this.updateStateAndParent({
@@ -75,7 +88,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
   }
 
   render() {
-    const { currencies, treeCountOptions } = this.props;
+    const { treeCountOptions } = this.props;
     // debug('Tree Count currency selector called up');
     return (
       <KeyboardAwareScrollView
@@ -108,7 +121,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
                 {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
               </View>
             ) : this.props.supportTreecounter &&
-            this.props.supportTreecounter.displayName ? (
+              this.props.supportTreecounter.displayName ? (
               <View
                 style={{
                   flexDirection: 'row',
@@ -150,11 +163,30 @@ class TreeCountCurrencySelector extends React.PureComponent {
             </View>
           </View>
 
-          <CurrencySelector
-            currencies={currencies}
-            onChange={this.handleCurrencyChange}
+          <TouchableOpacity
+            onPress={() => {
+              this.setState({ showCurrencyModal: true });
+            }}
+          >
+            <View style={styles.selectedCurrencyContainer}>
+              <Text style={styles.selectedCurrency}>
+                {this.state.currencyName}
+              </Text>
+              <Icon name="arrow-drop-down" color="#6f6f6f" size={32} />
+            </View>
+          </TouchableOpacity>
+
+          <CurrencySelectorList
+            hideCurrencyModal={this.hideCurrencyModal}
+            show={this.state.showCurrencyModal}
+            handleCurrencyChange={this.handleCurrencyChange}
             selectedCurrency={this.state.selectedCurrency}
           />
+
+          {/* <CurrencySelector
+            currencies={currencies}
+            onChange={this.handleCurrencyChange}
+          /> */}
 
           <View style={{ width: Dimensions.get('window').width - 30 }}>
             <TreeCountSelector

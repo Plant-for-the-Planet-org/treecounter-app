@@ -40,7 +40,7 @@ export default class EditUserProfile extends React.Component {
         props.currentUserProfile.plantProjects) || [emptyProjectInfo]
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       plantProjects: (nextProps &&
         nextProps.currentUserProfile &&
@@ -344,55 +344,54 @@ export default class EditUserProfile extends React.Component {
           </PrimaryButton>
         </CardLayout>
 
-        {treeCounter &&
-          treeCounter.followeeIds && (
-            <CardLayout className="user-profile__form-group">
-              <div className="form-group__heading">
-                {i18n.t('label.subscribed')}
-              </div>
-              {this.props.followeeList && this.props.followeeList.length > 0 ? (
-                <div className="follow-container">
-                  {this.props.followeeList.map(follow => (
-                    <div className="follow-container-row" key={follow.id}>
-                      <div className="col col1">
-                        <img
-                          src={
-                            follow.userProfile.image
-                              ? getImageUrl(
-                                  'profile',
-                                  'thumb',
-                                  follow.userProfile.image
-                                )
-                              : ProfilePic
-                          }
-                          className="image-rounded-border"
-                        />
-                      </div>
-                      <div
-                        className="col col2"
-                        onClick={() => {
-                          updateRoute('app_treecounter', null, follow.id, {
-                            treecounter: follow.id
-                          });
-                        }}
-                      >
-                        {follow.displayName}
-                      </div>
-                      <div className="col col3">
-                        <FollowLabelButton
-                          label={i18n.t('label.unsubscribe')}
-                          isSubscribed
-                          onClick={() => this.props.unfollowUser(follow.id)}
-                        />
-                      </div>
+        {treeCounter && treeCounter.followeeIds && (
+          <CardLayout className="user-profile__form-group">
+            <div className="form-group__heading">
+              {i18n.t('label.subscribed')}
+            </div>
+            {this.props.followeeList && this.props.followeeList.length > 0 ? (
+              <div className="follow-container">
+                {this.props.followeeList.map(follow => (
+                  <div className="follow-container-row" key={follow.id}>
+                    <div className="col col1">
+                      <img
+                        src={
+                          follow.userProfile.image
+                            ? getImageUrl(
+                                'profile',
+                                'thumb',
+                                follow.userProfile.image
+                              )
+                            : ProfilePic
+                        }
+                        className="image-rounded-border"
+                      />
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <LoadingIndicator />
-              )}
-            </CardLayout>
-          )}
+                    <div
+                      className="col col2"
+                      onClick={() => {
+                        updateRoute('app_treecounter', null, follow.id, {
+                          treecounter: follow.id
+                        });
+                      }}
+                    >
+                      {follow.displayName}
+                    </div>
+                    <div className="col col3">
+                      <FollowLabelButton
+                        label={i18n.t('label.unsubscribe')}
+                        isSubscribed
+                        onClick={() => this.props.unfollowUser(follow.id)}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <LoadingIndicator />
+            )}
+          </CardLayout>
+        )}
         <div className="delete-profile__button">
           <SecondaryButton
             onClick={() => {

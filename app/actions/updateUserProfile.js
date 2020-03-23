@@ -137,10 +137,6 @@ export function updateUserProfile(data, profileType, forcePromisify) {
     return new Promise(function(resolve, reject) {
       putAuthenticatedRequest(profileTypeToReq[profileType], data)
         .then(res => {
-          debug(res.status);
-          debug(res);
-          debug(userProfileSchema);
-
           if (res.data && res.data instanceof Object) {
             if (res.data.merge) {
               dispatch(

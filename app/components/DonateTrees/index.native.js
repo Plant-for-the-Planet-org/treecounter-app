@@ -14,6 +14,7 @@ import { getLocalRoute } from '../../actions/apiRouting';
 import { context } from '../../config';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
+import colors from '../../utils/constants';
 
 export default class DonateTrees extends React.PureComponent {
   constructor(props) {
@@ -87,7 +88,7 @@ export default class DonateTrees extends React.PureComponent {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // const { navigation } = this.props;
     if (nextProps.selectedProject) {
       debug(
@@ -106,7 +107,7 @@ export default class DonateTrees extends React.PureComponent {
             .fixedDefaultTreeCount;
         const currentTreeCount = this.props.selectedProject
           ? this.props.selectedProject.paymentSetup.treeCountOptions
-              .fixedDefaultTreeCount
+            .fixedDefaultTreeCount
           : null;
 
         if (nextTreeCount !== currentTreeCount) {
@@ -300,24 +301,24 @@ export default class DonateTrees extends React.PureComponent {
         return this.props.selectedTpo &&
           currencies &&
           this.props.selectedProject ? (
-          <TreeCountCurrencySelector
-            treeCost={selectedProject.treeCost}
-            rates={currencies.currency_rates[selectedProject.currency].rates}
-            giftTreeCounterName={this.state.giftTreeCounterName}
-            selectedProject={selectedProject}
-            fees={paymentFee}
-            supportTreecounter={this.props.supportTreecounter}
-            showNextButton
-            currencies={currencies.currency_names} // TODO: connect to data from API
-            selectedCurrency={this.determineDefaultCurrency()}
-            treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
-            onNextClick={this.Tab2validated}
-            selectedTreeCount={this.state.selectedTreeCount}
-            onChange={this.handleTreeCountCurrencyChange}
-          />
-        ) : (
-          <LoadingIndicator contentLoader screen="defaultLoader" />
-        );
+            <TreeCountCurrencySelector
+              treeCost={selectedProject.treeCost}
+              rates={currencies.currency_rates[selectedProject.currency].rates}
+              giftTreeCounterName={this.state.giftTreeCounterName}
+              selectedProject={selectedProject}
+              fees={paymentFee}
+              supportTreecounter={this.props.supportTreecounter}
+              showNextButton
+              currencies={currencies.currency_names} // TODO: connect to data from API
+              selectedCurrency={this.determineDefaultCurrency()}
+              treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
+              onNextClick={this.Tab2validated}
+              selectedTreeCount={this.state.selectedTreeCount}
+              onChange={this.handleTreeCountCurrencyChange}
+            />
+          ) : (
+            <LoadingIndicator contentLoader screen="defaultLoader" />
+          );
       // break;
 
       case 'recipient': {
@@ -403,7 +404,7 @@ export default class DonateTrees extends React.PureComponent {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
         <TabView
           navigationState={this.state}
           renderScene={this._renderScene}

@@ -40,7 +40,7 @@ class SelectedCompetitionContainer extends Component {
       title: ''
     };
   };
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.match) {
       // empty
     } else if (nextProps.navigation && this.props.navigation) {
@@ -111,9 +111,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  SelectedCompetitionContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectedCompetitionContainer);
 
 SelectedCompetitionContainer.propTypes = {
   match: PropTypes.any,

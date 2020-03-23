@@ -17,9 +17,9 @@ import Footer from '../Footer';
 const SelectPlantProjectContainer = lazy(() =>
   import('../../containers/SelectPlantProject')
 );
-const SelectedPlantProjectContainer = lazy(() =>
-  import('./../../containers/SelectedPlantProject')
-);
+//const SelectedPlantProjectContainer = lazy(() =>
+//  import('./../../containers/SelectedPlantProject')
+//);
 const GiftTreesContainer = lazy(() => import('../../containers/GiftTrees'));
 const TargetContainer = lazy(() => import('../../containers/TargetContainer'));
 const RegisterTreesContainer = lazy(() =>

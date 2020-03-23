@@ -116,9 +116,9 @@ class PlantProjectSnippet extends PureComponent {
       }
     deducibleText1 = deducibleText1.join(', ') + '.';
     // const survivalRateLeaf =
-    //   survivalRateStatus == 'verified'
+    // survivalRateStatus == 'verified'
     //     ? leaf
-    //     : survivalRateStatus == 'self-reported'
+    // : survivalRateStatus == 'self-reported'
     //       ? leafGray
     //       : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;

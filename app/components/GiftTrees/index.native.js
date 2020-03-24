@@ -25,7 +25,7 @@ export default class GiftTrees extends Component {
             title={i18n.t('label.gift_trees')}
             navigation={this.props.navigation}
           />
-          <View style={{ marginTop: Platform.OS === 'ios' ? height < 670 ? 56 : 26 : 56 }} />
+          <View style={{ marginTop: Platform.OS === 'ios' ? height < 737 ? 56 : 26 : 56 }} />
           <GiftTabView openProjects={this.openProjects} {...this.props} />
         </SafeAreaView>
       </>

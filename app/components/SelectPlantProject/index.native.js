@@ -187,7 +187,7 @@ class SelectPlantTabView extends PureComponent {
             navigation={this.props.navigation}
           />
           <Animated.View
-            style={{ marginTop: Platform.OS === 'ios' ? height < 670 ? 56 : 26 : 56 }}
+            style={{ marginTop: Platform.OS === 'ios' ? height < 737 ? 56 : 26 : 56 }}
           />
 
           <TabView

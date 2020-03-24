@@ -119,7 +119,7 @@ export default class ChallengeTabView extends Component {
   render() {
     const textColor = '#4d5153';
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
         <HeaderNew title={''} navigation={this.props.navigation} />
         <View style={{ marginTop: 60 }} />
         <Text

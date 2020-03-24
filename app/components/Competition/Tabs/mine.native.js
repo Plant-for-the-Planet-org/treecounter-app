@@ -5,6 +5,7 @@ import {
   View,
   Image,
   FlatList,
+  ActivityIndicator
 } from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
@@ -18,20 +19,25 @@ const MineCompetitions = props => {
   const [showAllCompetitions, setShowAllCompetitions] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const onRefresh = () => {
+    setShowLoader(true);
     setrefreshing(true);
     props
       .fetchMineCompetitions()
       .then(() => {
         setrefreshing(false);
+        setShowLoader(false);
       })
       .catch(() => {
         setrefreshing(false);
+        setShowLoader(false);
       });
   };
 
   const getAllCompetitions = () => {
     props.fetchMineCompetitions();
+    setTimeout(() => { setShowLoader(false) }, 1000)
   };
 
   useEffect(() => {
@@ -84,7 +90,7 @@ const MineCompetitions = props => {
       renderItem={item => _renderItem(item)}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
-      ListEmptyComponent={() => EmptyContainer()}
+      ListEmptyComponent={() => showLoader ? <ActivityIndicator size="large" color={colors.PRIMARY_COLOR} /> : EmptyContainer()}
       style={{ paddingBottom: 60, backgroundColor: colors.WHITE }}
       ListHeaderComponent={() => {
         return (

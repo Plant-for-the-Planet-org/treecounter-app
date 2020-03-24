@@ -4,7 +4,8 @@ import {
   Text,
   View,
   Image,
-  FlatList
+  FlatList,
+  ActivityIndicator
 } from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
@@ -19,22 +20,28 @@ const ClosedCompetitions = props => {
   const [refreshing, setrefreshing] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [showLoader, setShowLoader] = useState(true);
+
   const onRefresh = () => {
+    setShowLoader(true);
     setrefreshing(true);
     setPage(1);
     props
       .fetchCompetitions('archived', page)
       .then(() => {
         setrefreshing(false);
+        setShowLoader(false);
       })
       .catch(() => {
         setrefreshing(false);
+        setShowLoader(false);
       });
   };
   let CurrentDate = new Date();
 
   const getAllCompetitions = () => {
     props.fetchCompetitions('archived', page);
+    setTimeout(() => { setShowLoader(false) }, 1000)
   };
 
   useEffect(() => {
@@ -98,7 +105,7 @@ const ClosedCompetitions = props => {
       onEndReachedThreshold={0.05}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
-      ListEmptyComponent={() => EmptyContainer()}
+      ListEmptyComponent={() => showLoader ? <ActivityIndicator size="large" color={colors.PRIMARY_COLOR} /> : EmptyContainer()}
       style={{ paddingBottom: 60, backgroundColor: colors.WHITE }}
       ListHeaderComponent={() => {
         return (

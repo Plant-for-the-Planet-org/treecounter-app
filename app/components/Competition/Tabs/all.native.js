@@ -5,7 +5,6 @@ import {
   View,
   Image,
   FlatList,
-  Dimensions
 } from 'react-native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';

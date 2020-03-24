@@ -5,7 +5,6 @@ import {
   View,
   Image,
   FlatList,
-  Dimensions
 } from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';

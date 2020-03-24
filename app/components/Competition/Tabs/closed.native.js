@@ -4,8 +4,7 @@ import {
   Text,
   View,
   Image,
-  FlatList,
-  Dimensions
+  FlatList
 } from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';

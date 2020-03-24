@@ -336,4 +336,4 @@ const loadingIndicatorStyle = {
 }
 export default ContentLoading;
 
-export { ProjectSingleLoader };
+export { ProjectSingleLoader, CompetitionLoader };

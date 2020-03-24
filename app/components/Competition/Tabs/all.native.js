@@ -12,12 +12,8 @@ import PropTypes from 'prop-types';
 import { trees, empty } from './../../../assets';
 import styles from '../../../styles/competition/competition-master.native';
 import i18n from '../../../locales/i18n';
-import ContentLoader from 'react-native-content-loader';
-import { Rect } from 'react-native-svg';
 import colors from '../../../utils/constants';
-const HEIGHT = Dimensions.get('window').height;
-const WIDTH = Dimensions.get('window').width;
-
+import { CompetitionLoader } from './../../Common/ContentLoader'
 const AllCompetitions = props => {
   const [showAllCompetitions, setShowAllCompetitions] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
@@ -36,25 +32,6 @@ const AllCompetitions = props => {
       });
   };
   let CurrentDate = new Date();
-
-  const CompetitionLoader = () => (
-    <ContentLoader
-      height={HEIGHT}
-      width={WIDTH}
-      speed={2}
-      primaryColor="#f3f3f3"
-      secondaryColor="#ecebeb"
-    >
-      <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
-      <Rect x="30" y="190" rx="10" ry="10" width="35%" height="20" />
-      <Rect x="30" y="215" rx="10" ry="10" width="85%" height="20" />
-      <Rect x="30" y="240" rx="10" ry="10" width="75%" height="20" />
-      <Rect x="30" y="270" rx="10" ry="10" width="85%" height="180" />
-      <Rect x="30" y="460" rx="10" ry="10" width="35%" height="20" />
-      <Rect x="30" y="490" rx="10" ry="10" width="85%" height="20" />
-      <Rect x="30" y="520" rx="10" ry="10" width="75%" height="20" />
-    </ContentLoader>
-  );
 
   const getAllCompetitions = () => {
     props.fetchCompetitions('all', page);

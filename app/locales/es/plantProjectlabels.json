@@ -5,6 +5,7 @@
   "target": "Objetivo",
   "in": "en",
   "donate": "Donar",
+  "plant_project_full": "PlantProjectFull",
   "different_project": "Seleccione un Proyecto Diferente",
   "project_name": "Nombre del proyecto de plantación",
   "count_target": "Objetivo",
@@ -27,5 +28,6 @@
   "about": "Acerca De",
   "contact_details": "Detalles de contacto",
   "view_profile": "Ver perfil",
-  "read_less": "Leer menos"
+  "read_less": "Leer menos",
+  "shareProject": "Plantar árboles con {{{entityName}} en {{url}}"
 }

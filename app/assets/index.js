@@ -207,6 +207,8 @@ import closeHWhite from './images/header/closeWhite.png';
 import shareBlack from './images/header/shareBlack.png';
 import shareWhite from './images/header/shareWhite.png';
 
+import empty from './images/empty.png';
+
 export {
   treelogo,
   germany,
@@ -410,5 +412,6 @@ export {
   closeHBlack,
   closeHWhite,
   shareBlack,
-  shareWhite
+  shareWhite,
+  empty
 };

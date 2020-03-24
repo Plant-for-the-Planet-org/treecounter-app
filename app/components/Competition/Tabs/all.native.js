@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
-import { trees } from './../../../assets';
+import { trees, empty } from './../../../assets';
 import styles from '../../../styles/competition/competition-master.native';
 import i18n from '../../../locales/i18n';
 import ContentLoader from 'react-native-content-loader';
@@ -103,6 +103,15 @@ const AllCompetitions = props => {
     setPage(page + 1);
     getAllCompetitions();
   };
+
+  const EmptyContainer = () => {
+    return (
+      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 64 }}>
+        <Image source={empty} style={{ height: 186, width: 240, alignSelf: 'center', opacity: 0.7 }} />
+        <Text style={[styles.headerTitle, { marginTop: 12 }]}> {i18n.t('label.no_competitions')}</Text>
+      </View>
+    )
+  }
   return (
     <FlatList
       data={showAllCompetitions}
@@ -112,7 +121,7 @@ const AllCompetitions = props => {
       onEndReachedThreshold={0.05}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
-      ListEmptyComponent={() => CompetitionLoader()}
+      ListEmptyComponent={() => EmptyContainer()}
       style={{ paddingBottom: 60, backgroundColor: colors.WHITE }}
       ListHeaderComponent={() => {
         return (

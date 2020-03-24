@@ -36,7 +36,7 @@ class CompetitionContainer extends React.Component {
       };
       this.props
         .createCompetition(newvalue, this.props.navigation)
-        .then((/* success */) => {})
+        .then((/* success */) => { })
         .catch(err => {
           debug('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
@@ -51,12 +51,7 @@ class CompetitionContainer extends React.Component {
         });
     }
   };
-  componentDidMount() {
-    this.props.fetchCompetitions('featured');
-    // this.props.fetchCompetitions('all');
-    // this.props.fetchCompetitions('archived');
-    // this.props.fetchMineCompetitions();
-  }
+
   leaveCompetition(id) {
     this.props.leaveCompetition(id);
   }
@@ -76,17 +71,8 @@ class CompetitionContainer extends React.Component {
     this.props.fetchCompetitions(category, page);
   };
 
-  updateAllCompetitions = async () => {
-    this.props.fetchCompetitions('all');
-  };
-  updateFeaturedCompetitions = async () => {
-    return this.props.fetchCompetitions('featured');
-  };
-  updateMineCompetitions = async () => {
-    return this.props.fetchMineCompetitions();
-  };
-  updateArchivedCompetitions = async () => {
-    return this.props.fetchCompetitions('archived');
+  fetchMineCompetitions = async () => {
+    this.props.fetchMineCompetitions();
   };
 
   render() {
@@ -103,17 +89,16 @@ class CompetitionContainer extends React.Component {
         supportTreecounterAction={this.props.supportTreecounterAction}
         editCompetition={id => this.editCompetition(id)}
         navigation={this.props.navigation}
-        updateAllCompetitions={this.updateAllCompetitions}
-        updateFeaturedCompetitions={this.updateFeaturedCompetitions}
-        updateMineCompetitions={this.updateMineCompetitions}
-        updateArchivedCompetitions={this.updateArchivedCompetitions}
+        fetchMineCompetitions={() =>
+          this.fetchMineCompetitions()
+        }
         fetchCompetitions={(category, page) =>
           this.fetchCompetitions(category, page)
         }
       />
     ) : (
-      <LoadingIndicator contentLoader screen="Competition" />
-    );
+        <LoadingIndicator contentLoader screen="Competition" />
+      );
   }
 
   onMoreClick(id, name) {

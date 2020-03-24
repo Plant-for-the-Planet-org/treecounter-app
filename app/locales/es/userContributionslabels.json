@@ -36,6 +36,7 @@
   "given_on_by": "Dado el {{date}} por",
   "redeemed_on": "Canjeado el {{date}}",
   "dedicated_on": "Dedicado el {{date}}",
+  "dedicated_on_by": "Dedicado para  {{date}} por",
   "register_new_trees": "Registrar nuevos arboles",
   "measurement": "Mediciones",
   "m_tall": "m de altura",

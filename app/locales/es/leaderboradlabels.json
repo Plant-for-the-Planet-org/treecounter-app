@@ -1,6 +1,7 @@
 {
   "treecount_leaderboard": "Clasificación",
   "trillion_tree_campaign_app_header": "Plant-for-the-Planet App",
+  "tree_planter": "Plantador de árboles",
   "treecount_map": "Mapa",
   "sortBy": "Ordenar por",
   "timePeriod": "Período de tiempo",
@@ -12,5 +13,6 @@
   "existingForest_description": "Actualmente existen 3,04 billones de árboles en todo el mundo. Se llegó a esta cantidad desde los 6 billones de árboles que existían antes de que los humanos comenzaran a talar bosques, hace unos 11.000 años. El mapa muestra la cantidad de árboles por km2.",
   "existingForest_source": "Crowther, T. W. y col. (2015) Mapeo de la densidad de árboles a escala global. Nature 525, 201-205.",
   "restorationOpportunities": "Oportunidades de Restauración",
+  "restorationOpportunities_description": "Para una restauración a gran escala se necesitarían medio billón de hectáreas. Además, más de un billón y medio de hectáreas son adecuadas para la restauración en mosaicos, combinando bosques con otros usos de la tierra como la agrosilvicultura, agricultura a pequeña escala y asentamientos humanos.",
   "restorationOpportunities_source": "Crowther, T. W. y col. (2017) Predicción del potencial de reforestación forestal mundial. BioRxiv 210062."
 }

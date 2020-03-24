@@ -1,5 +1,8 @@
 {
   "redeem_trees": "Canjea árboles",
+  "redeem_heading": "Puedes usar esta herramienta para añadir árboles a tu contador de árboles usando un Tree Voucher o un Merchandise Code",
+  "claim_trees": "Reclamar árboles",
+  "enter_code": "Ingrese un Tree Voucher, Merchandise Code o Token para reclamar tus árboles para canjear",
   "log_in": "Inicia sesión o regístrate para canjear tu código",
   "validate_code": "Validar Código",
   "code": "Código",

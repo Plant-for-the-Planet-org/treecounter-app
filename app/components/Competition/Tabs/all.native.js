@@ -14,6 +14,7 @@ import styles from '../../../styles/competition/competition-master.native';
 import i18n from '../../../locales/i18n';
 import ContentLoader from 'react-native-content-loader';
 import { Rect } from 'react-native-svg';
+import colors from '../../../utils/constants';
 const HEIGHT = Dimensions.get('window').height;
 const WIDTH = Dimensions.get('window').width;
 
@@ -112,7 +113,7 @@ const AllCompetitions = props => {
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
       ListEmptyComponent={() => CompetitionLoader()}
-      style={{ paddingBottom: 60 }}
+      style={{ paddingBottom: 60, backgroundColor: colors.WHITE }}
       ListHeaderComponent={() => {
         return (
           <View style={styles.headerView}>

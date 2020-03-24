@@ -17,6 +17,9 @@ import Footer from '../Footer';
 const SelectPlantProjectContainer = lazy(() =>
   import('../../containers/SelectPlantProject')
 );
+const SelectedPlantProjectContainer = lazy(() =>
+  import('./../../containers/SelectedPlantProject')
+);
 const GiftTreesContainer = lazy(() => import('../../containers/GiftTrees'));
 const TargetContainer = lazy(() => import('../../containers/TargetContainer'));
 const RegisterTreesContainer = lazy(() =>
@@ -342,6 +345,10 @@ class TreeCounter extends Component {
             <Route
               path={getLocalRoute('app_selectProject')}
               component={SelectPlantProjectContainer}
+            />
+            <Route
+              path={getLocalRoute('app_selectedProject') + '/:projectSlug?'}
+              component={SelectedPlantProjectContainer}
             />
             <Route
               path={getLocalRoute('app_competition') + '/:id?'}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, Text, TouchableWithoutFeedback } from 'react-native';
+import { Modal, View, Text, TouchableWithoutFeedback,TouchableOpacity } from 'react-native';
 import styles from '../../../styles/popup/popup.native';
 import PropTypes from 'prop-types';
 
@@ -24,7 +24,7 @@ const PopupNative = props => {
               {props.bodyText}
             </View>
             <View style={styles.buttonContainer}>
-              <TouchableWithoutFeedback
+              <TouchableOpacity
                 onPress={() => {
                   props.onCancel();
                 }}
@@ -34,8 +34,8 @@ const PopupNative = props => {
                     {props.cancelText}
                   </Text>
                 </View>
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={() => {
                   props.onApply();
                 }}
@@ -47,7 +47,7 @@ const PopupNative = props => {
                     {props.applyText}
                   </Text>
                 </View>
-              </TouchableWithoutFeedback>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

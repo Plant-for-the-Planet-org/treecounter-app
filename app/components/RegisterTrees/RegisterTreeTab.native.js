@@ -191,6 +191,7 @@ export default class RegisterTreeTab extends PureComponent {
                 );
               }
             }}
+            {...this.props}
             isTpo={this.props.isTpo}
             isEdit={this.props.isEdit}
             mode={this.props.mode}
@@ -223,6 +224,7 @@ export default class RegisterTreeTab extends PureComponent {
               }}
               isTpo={this.props.isTpo}
               isEdit={this.props.isEdit}
+              {...this.props}
               mode={this.props.mode}
               plantProjects={this.props.plantProjects || ''}
               geometry={geometry}

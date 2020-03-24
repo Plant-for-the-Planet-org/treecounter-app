@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import {
   selectedPlantProjectIdSelector,
@@ -8,26 +8,34 @@ import {
   selectedTpoSelector,
   currentUserProfileSelector
 } from '../../selectors';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import PlantProjectSingle from '../../components/PlantProjects/PlantProjectSingle';
-import { loadProject, loadProjectWeb } from '../../actions/loadTposAction';
+import {updateStaticRoute} from '../../helpers/routerHelper';
+import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
+import {loadProject} from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
 } from '../../actions/selectPlantProjectAction';
 
 const SelectedPlantProjectContainer = props => {
-  React.useEffect(() => {
-    if (props.match) {
-      props.loadProjectWeb(
-        { id: props.match.params.projectSlug },
+  const getProjectDetails = async (projectSlug) => {
+    if (projectSlug) {
+      const project = await props.loadProject(
+        { id: projectSlug || props.selectedPlantProjectId },
         { loading: true }
       );
+      props.selectPlantProjectAction(project.id);
+    } else {
+      props.loadProject(
+        {id: props.selectedPlantProjectId},
+        {loading: true}
+      );
     }
-  }, [props.match.params.projectSlug]);
-
+  };
+  React.useEffect(() => {
+    getProjectDetails(props.navigation.state.params.projectName);
+  }, [props.navigation.state.params.projectName]);
   const selectProject = id => {
-    const { navigation } = props;
+    const {navigation} = props;
     props.selectPlantProjectAction(id);
     if (navigation) {
       updateStaticRoute('app_donate_detail', navigation, {
@@ -38,17 +46,17 @@ const SelectedPlantProjectContainer = props => {
     }
   };
 
-  return props.selectedProject ? (
-    <PlantProjectSingle
+  return (
+    <PlantProjectFull
       {...props}
-      expanded
       plantProject={props.selectedProject}
       tpoName={props.selectedTpo ? props.selectedTpo.name : null}
       selectProject={id => selectProject(id)}
       currentUserProfile={props.currentUserProfile}
     />
-  ) : null;
+  );
 };
+
 SelectedPlantProjectContainer.navigationOptions = () => ({
   headerMode: 'none'
 });
@@ -65,8 +73,7 @@ const mapDispatchToProps = dispatch => {
     {
       clearPlantProject,
       selectPlantProjectAction,
-      loadProject,
-      loadProjectWeb
+      loadProject
     },
     dispatch
   );

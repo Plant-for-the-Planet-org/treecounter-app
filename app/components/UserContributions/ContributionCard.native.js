@@ -244,6 +244,9 @@ class ContributionCard extends React.Component {
           });
   }
 
+  getTreeImage = (treeCount) => {
+    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
+  }
   render() {
     let { contribution } = this.props;
     let {
@@ -321,7 +324,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
+                    {this.getTreeImage(treeCount)}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -360,7 +363,7 @@ class ContributionCard extends React.Component {
                 <View style={styles.row2}>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
+                    {this.getTreeImage(treeCount)}
                   </Text>
                 </View>
                 {dedicateActionLine ? (
@@ -399,7 +402,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
+                    {this.getTreeImage(treeCount)}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -426,7 +429,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
+                    {this.getTreeImage(treeCount)}
                   </Text>
                 </View>
                 <View style={styles.row2}>

@@ -198,7 +198,8 @@ export const myTreesStyle = (color, borderColor) =>
       fontSize: 18,
       color: '#89b53a'
     },
-    redeemObjectSubTitle: { fontFamily: 'OpenSans-Regular', fontSize: 13 }
+    redeemObjectSubTitle: { fontFamily: 'OpenSans-Regular', fontSize: 13 },
+
   });
 
 const style = myTreesStyle('#95c243', '#68aeec');

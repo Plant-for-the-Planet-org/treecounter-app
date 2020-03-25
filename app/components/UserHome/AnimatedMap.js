@@ -22,7 +22,7 @@ import { currentUserProfileIdSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllPlantProjectsSelector } from '../../selectors';
-import { markerImage } from '../../assets/index.js';
+import { multiple_trees, tree_1 } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ContributionCard from '../UserContributions/ContributionCard.native'
 
@@ -169,7 +169,7 @@ class AnimatedViews extends React.Component {
     });
 
     this.state = {
-      mapIndex : 3,
+      mapIndex: 3,
       markersList: [],
       isSatellite: false,
       panX,
@@ -244,11 +244,11 @@ class AnimatedViews extends React.Component {
     }
     // clearTimeout(tempTimeOut)
     // let tempTimeOut = setTimeout(() => {
-      if (index >= this.state.mapIndex) {
-        this.setState({ mapIndex : this.state.mapIndex + 3},()=>{
-          console.log(this.state.mapIndex,'this.state.mapIndex')
-        })
-      }
+    if (index >= this.state.mapIndex) {
+      this.setState({ mapIndex: this.state.mapIndex + 3 }, () => {
+        console.log(this.state.mapIndex, 'this.state.mapIndex')
+      })
+    }
     // },250
     // )
     // alert(index)
@@ -379,6 +379,9 @@ class AnimatedViews extends React.Component {
     }
   };
 
+  getTreeImage = (treeCount) => {
+    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
+  }
   render() {
     const {
       panX,
@@ -419,14 +422,7 @@ class AnimatedViews extends React.Component {
                   longitude: marker.geoLongitude
                 }}
               >
-                <Image
-                  source={markerImage}
-                  style={{
-                    width: 40,
-                    height: 40
-                  }}
-                  resizeMode={'contain'}
-                />
+                {this.getTreeImage(marker.treeCount)}
               </Marker>
             ))
             : null}
@@ -454,31 +450,31 @@ class AnimatedViews extends React.Component {
             <View style={styles.itemContainer}>
               {markers
                 ? markers.map((marker, i) => {
-                  console.log(i, this.state.mapIndex,'------ this.state.mapIndex--------' )
+                  console.log(i, this.state.mapIndex, '------ this.state.mapIndex--------')
                   return (
                     i <= this.state.mapIndex ? <Animated.View
-                    key={marker.id}
-                    style={[
-                      styles.item,
-                      { backgroundColor: 'transparent' },
-                      {
-                        transform: [
-                          { translateY: animations[i].translateY },
-                          { translateX: animations[i].translateX },
-                          { scale: animations[i].scale }
-                        ]
-                      }
-                    ]}
-                  >
-                    <View style={styles.card} key={i}>
-                      <ContributionCard
-                        onPressSingleContribution={this.onPressHeader}
-                        isFromAnimatredCardList
-                        contribution={marker}
-                      />
-                    </View>
-                  </Animated.View> : <Animated.View key={marker.id}/>
-                    )
+                      key={marker.id}
+                      style={[
+                        styles.item,
+                        { backgroundColor: 'transparent' },
+                        {
+                          transform: [
+                            { translateY: animations[i].translateY },
+                            { translateX: animations[i].translateX },
+                            { scale: animations[i].scale }
+                          ]
+                        }
+                      ]}
+                    >
+                      <View style={styles.card} key={i}>
+                        <ContributionCard
+                          onPressSingleContribution={this.onPressHeader}
+                          isFromAnimatredCardList
+                          contribution={marker}
+                        />
+                      </View>
+                    </Animated.View> : <Animated.View key={marker.id} />
+                  )
                 })
                 : null}
             </View>
@@ -541,6 +537,12 @@ AnimatedViews.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  multipleTrees: {
+    marginLeft: 2, height: 20, width: 30,
+  },
+  treeImage: {
+    height: 20,
+  },
   userContributionsDetailsFullViewCont: {
     backgroundColor: 'transparent',
     width: '100%',

@@ -1,1 +1,20 @@
-{ }
+{
+  "redeem_trees": "Canjea árboles",
+  "redeem_heading": "Puedes usar esta herramienta para añadir árboles a tu contador de árboles usando un Tree Voucher o un Merchandise Code",
+  "claim_trees": "Reclamar árboles",
+  "enter_code": "Ingrese un Tree Voucher, Merchandise Code o Token para reclamar tus árboles para canjear",
+  "log_in": "Inicia sesión o regístrate para canjear tu código",
+  "validate_code": "Validar Código",
+  "code": "Código",
+  "redeem_code": "Canjear código",
+  "validate_code_label": "Por favor, escriba el código para canjear",
+  "claiming": "Reclamando:",
+  "trees_in_code": "Árboles en este código",
+  "you_can_redeem": "Puedes canjear",
+  "planted_by": "Plantado por",
+  "add_my_trees": "Añadir a mis árboles",
+  "already_redeemed_trees": "Ya has canjeado este código, intenta con otro.",
+  "RedeemxTrees": "Canjear {{treeCount}} Árboles",
+  "Redeem1Tree": "Canjear {{treeCount}} Árboles",
+  "redeem_trees_button": "Canjear Árboles"
+}

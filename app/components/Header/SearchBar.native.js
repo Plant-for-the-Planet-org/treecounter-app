@@ -45,7 +45,7 @@ class SearchBar extends React.PureComponent {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.inputValue &&
       nextProps.inputValue.toLowerCase().includes(this.state.text.toLowerCase())

@@ -20,11 +20,12 @@ export default EStyleSheet.create({
   subHeaderText: {
     color: textColorDark,
     fontSize: 18,
-    fontFamily: 'OpenSans-SemiBold'
+    fontFamily: 'OpenSans-SemiBold',
+    flex: 1,
+    flexWrap: 'wrap'
   },
   subHeaderTextContainer: {
-    flexDirection: 'row',
-    maxWidth: '90%'
+    // flexDirection: 'row',
   },
   italic: {
     fontStyle: 'italic'
@@ -56,9 +57,9 @@ export default EStyleSheet.create({
     backgroundColor: whiteColor,
     borderRadius: 100,
     justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: textColorLight
+    alignItems: 'center'
+    // borderWidth: 1,
+    // borderColor: textColorLight
   },
   plantedDate: {
     fontFamily: 'OpenSans-Regular',
@@ -119,7 +120,7 @@ export default EStyleSheet.create({
     borderRadius: 100,
     padding: 14,
     alignItems: 'center',
-    width: Dimensions.get('window').width * 42 / 100
+    width: (Dimensions.get('window').width * 42) / 100
   },
   borderGreen: {
     borderWidth: 1,

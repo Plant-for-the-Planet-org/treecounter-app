@@ -11,10 +11,10 @@ import {
 import { getImageUrl } from '../../actions/apiRouting';
 import {
   location_grey,
-  survival_grey,
-  tax_grey,
-  leaf,
-  leafGray
+  // survival_grey,
+  tax_grey
+  // leaf,
+  // leafGray
 } from '../../assets';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-snippetDetails.native';
@@ -75,8 +75,8 @@ class PlantProjectSnippetDetails extends PureComponent {
       imageFile,
       image,
       reviewScore: plantProjectRating,
-      reviews,
-      survivalRateStatus
+      reviews
+      // survivalRateStatus
       // description,
       // homepageUrl: homepageUrl,
       // homepageCaption: homepageCaption,
@@ -117,19 +117,24 @@ class PlantProjectSnippetDetails extends PureComponent {
       treeCost,
       taxDeductibleCountries
     };
-    const survivalRateLeaf =
-      survivalRateStatus == 'verified'
-        ? leaf
-        : survivalRateStatus == 'self-reported'
-          ? leafGray
-          : null;
-    const survivalColor = survivalRateStatus == 'verified' ? '#89b53a' : 'gray';
+    // const survivalRateLeaf =
+    //   survivalRateStatus == 'verified'
+    //     ? leaf
+    //     : survivalRateStatus == 'self-reported'
+    //       ? leafGray
+    //       : null;
+    // const survivalColor = survivalRateStatus == 'verified' ? '#89b53a' : 'gray';
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
+    const noImageStyle = {
+      height: '40%',
+      width: '100%',
+      backgroundColor: '#000'
+    };
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
         <View style={[styles.projectSnippetContainer]}>
           {projectImage ? (
-            <View style={styles.projectImageContainer}>
+            <View style={[styles.projectImageContainer]}>
               <Image
                 style={styles.teaser__projectImage}
                 source={{
@@ -142,7 +147,9 @@ class PlantProjectSnippetDetails extends PureComponent {
                 resizeMode={'cover'}
               />
             </View>
-          ) : null}
+          ) : (
+            <View style={noImageStyle} />
+          )}
           <PlantedProgressBar
             countPlanted={specsProps.countPlanted}
             countTarget={specsProps.countTarget}
@@ -222,7 +229,7 @@ class PlantProjectSnippetDetails extends PureComponent {
                   </View>
                 ) : null}
 
-                <View style={styles.iconTextRow}>
+                {/* <View style={styles.iconTextRow}>
                   <Image source={survival_grey} style={styles.iconImage} />
                   <View
                     style={[
@@ -298,7 +305,7 @@ class PlantProjectSnippetDetails extends PureComponent {
                       </TouchableOpacity>
                     ) : null}
                   </View>
-                </View>
+                </View> */}
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <View style={{ flexDirection: 'row', marginTop: 10 }}>

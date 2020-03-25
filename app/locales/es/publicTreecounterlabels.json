@@ -1,3 +1,11 @@
 {
-  "read_more": "Lee más"
+  "support": "Ayuda",
+  "plant_trees": "Plantar árboles",
+  "read_more": "Leer más",
+  "contributor": "Contribuyente",
+  "planted_trees": "Árboles plantados",
+  "target": "Objetivo",
+  "support_trees_to": "Aportar Árboles para {{user}}",
+  "shareuserprofile": "Conoce a {{displayName}} en la aplicación Plant-for-the-Planet https://www.trilliontreecampaign.org/t/{{{{{slug}}",
+  "supportUser": "Donar árboles para apoyar {{displayName}}"
 }

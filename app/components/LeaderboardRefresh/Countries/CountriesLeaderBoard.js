@@ -23,31 +23,24 @@ const CountriesLeaderBoard = ({ navigation }) => {
   const [period, setPeriod] = useState('1w');
   const [orderBy] = useState('planted');
 
-  useEffect(
-    () => {
-      setQueryResult(null);
-      const section = navigation.getParam('category');
-      LeaderBoardDataAction({
-        section,
-        orderBy,
-        period,
-        subSection: undefined
-      }).then(
-        success => {
-          if (
-            success.data &&
-            success.data instanceof Object &&
-            success.data.data
-          )
-            setQueryResult(success.data.data);
-        },
-        error => {
-          debug(error);
-        }
-      );
-    },
-    [period]
-  );
+  useEffect(() => {
+    setQueryResult(null);
+    const section = navigation.getParam('category');
+    LeaderBoardDataAction({
+      section,
+      orderBy,
+      period,
+      subSection: undefined
+    }).then(
+      success => {
+        if (success.data && success.data instanceof Object && success.data.data)
+          setQueryResult(success.data.data);
+      },
+      error => {
+        debug(error);
+      }
+    );
+  }, [period]);
   const renderCountryList = () => {
     if (queryresult) {
       return (
@@ -77,9 +70,18 @@ const CountriesLeaderBoard = ({ navigation }) => {
                   />
                 </View>
                 <View style={styles.countryBody}>
-                  <Text numberOfLines={2} style={styles.countryNameText}>
-                    {item.caption}
-                  </Text>
+                  <View style={styles.countryNameCont}>
+                    <Text numberOfLines={2} style={[styles.countryNameText]}>
+                      {item.caption}
+                    </Text>
+                    {!isPrivate ? null : (
+                      <View>
+                        <Text style={styles.privateText}>
+                          {i18n.t('label.private')}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
                   <Text style={styles.tressCounter}>
                     {delimitNumbers(item.planted)}{' '}
                     <Text style={styles.tressText}>

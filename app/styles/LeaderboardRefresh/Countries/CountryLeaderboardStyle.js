@@ -3,7 +3,7 @@ export default EStyleSheet.create({
   mainContainer: {
     // marginHorizontal: 15,
     flex: 1,
-    backgroundColor: 'transparent'
+    backgroundColor: 'white'
   },
   headerContainer: {
     marginVertical: 10
@@ -40,7 +40,7 @@ export default EStyleSheet.create({
     borderRadius: 60,
     paddingVertical: 5,
     width: 104,
-    marginHorizontal: 15
+    marginHorizontal: 8
   },
   activeChipText: {
     color: '#fff',
@@ -51,7 +51,7 @@ export default EStyleSheet.create({
     alignItems: 'center',
     borderRadius: 60,
     paddingVertical: 5,
-    marginHorizontal: 15,
+    marginHorizontal: 8,
     borderColor: '#4d5153',
     borderWidth: 1,
     width: 104
@@ -91,22 +91,42 @@ export default EStyleSheet.create({
     borderRadius: 100
   },
   countryBody: {
-    flex: 0.7
+    flex: 1
   },
   countryNameText: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 18,
     color: '#4d5153',
-    lineHeight: 24
+    lineHeight: 24,
+    // flex: 1,
+    borderWidth: 0,
+    borderColor: 'green',
+    paddingHorizontal: 10,
+    maxWidth: '50%'
   },
   tressCounter: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 13,
     color: '#4d5153',
     fontWeight: 'bold',
-    lineHeight: 25
+    lineHeight: 25,
+    paddingHorizontal: 10
   },
   tressText: {
     fontWeight: 'normal'
+  },
+  privateText: {
+    backgroundColor: '#f2f2f7',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 10,
+    fontFamily: 'OpenSans-Bold',
+    color: '#87b738',
+    width: 90,
+    textAlign: 'center',
+    fontSize: 11
+  },
+  countryNameCont: {
+    flexDirection: 'row'
   }
 });

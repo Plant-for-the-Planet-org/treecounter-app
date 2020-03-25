@@ -133,7 +133,7 @@ export default class GiftTrees extends Component {
     this.updateSelectProject = this.updateSelectProject.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject) {
       this.setState({
         showSelectProject: false
@@ -164,7 +164,7 @@ export default class GiftTrees extends Component {
   getSuggestionAndSet(value) {
     debug('calling', value);
     const { updatePageIndex, updateSelectProject, suggestionClicked } = this;
-    postDirectRequest('/suggest', 'q=' + value.trim())
+    postDirectRequest('/suggest.php', 'q=' + value.trim())
       .then(_suggestions => {
         debug('sugessions', _suggestions);
         if (_suggestions.data.length && _suggestions.data[0].slug == value) {
@@ -199,7 +199,7 @@ export default class GiftTrees extends Component {
   componentWillUnmount() {
     this.props.paymentClear();
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.state.context && this.state.context.slug) {
       this.getSuggestionAndSet(this.state.context.slug);
     }

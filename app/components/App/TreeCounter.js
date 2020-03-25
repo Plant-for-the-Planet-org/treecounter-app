@@ -17,6 +17,9 @@ import Footer from '../Footer';
 const SelectPlantProjectContainer = lazy(() =>
   import('../../containers/SelectPlantProject')
 );
+const SelectedPlantProjectContainer = lazy(() =>
+  import('./../../containers/SelectedPlantProject')
+);
 const GiftTreesContainer = lazy(() => import('../../containers/GiftTrees'));
 const TargetContainer = lazy(() => import('../../containers/TargetContainer'));
 const RegisterTreesContainer = lazy(() =>
@@ -110,7 +113,7 @@ const RedirectedPrivateAcceptEmail = lazy(() =>
 );
 
 import { initLocale } from '../../actions/getLocale';
-import { fetchLocation, fetchConfig } from '../../actions/fetchLocation';
+import { fetchConfig } from '../../actions/fetchConfig';
 import { fetchCurrencies } from '../../actions/currencies';
 
 // Class implementation
@@ -134,7 +137,6 @@ class TreeCounter extends Component {
       isCancelled: false
     };
     initLocale();
-    this.props.fetchLocation();
     this.props.fetchCurrencies();
     this.props.fetchConfig();
   }
@@ -345,6 +347,10 @@ class TreeCounter extends Component {
               component={SelectPlantProjectContainer}
             />
             <Route
+              path={getLocalRoute('app_selectedProject') + '/:projectSlug?'}
+              component={SelectedPlantProjectContainer}
+            />
+            <Route
               path={getLocalRoute('app_competition') + '/:id?'}
               component={CompetitionContainer}
             />
@@ -430,7 +436,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchCurrencies,
-      fetchLocation,
       fetchConfig,
       loadUserProfile,
       NotificationAction,

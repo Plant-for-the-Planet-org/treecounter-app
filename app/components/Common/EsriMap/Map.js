@@ -7,7 +7,7 @@ export default class Map extends Component {
     super(props);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const options = { url: 'https://js.arcgis.com/3.23/' };
     const modulesRequired = [
       'esri/map',

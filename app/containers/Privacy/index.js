@@ -13,7 +13,7 @@ class PrivacyContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     PrivacyAction().then(
       success => {
         try {
@@ -32,7 +32,11 @@ class PrivacyContainer extends React.Component {
 
   render() {
     return (
-      <Privacy privacies={this.state.privacy} loading={this.state.loading} />
+      <Privacy
+        privacies={this.state.privacy}
+        loading={this.state.loading}
+        navigation={this.props.navigation}
+      />
     );
   }
 }

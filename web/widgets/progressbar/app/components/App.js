@@ -16,7 +16,7 @@ export default class App extends Component {
       planted: treecounter.countPlanted
     };
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
     if (treecounter) {
       this.setState({

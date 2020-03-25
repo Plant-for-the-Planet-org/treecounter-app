@@ -1,5 +1,18 @@
 {
+  "individual_plant_personal": "plantados por mi",
+  "individual_plant_community": "dedicado a mí",
+  "treecounter_tooltip": "Árboles plantados por personas que dedicaron árboles a este mostrador de árboles \nPor ejemplo, puedes dedicar árboles a tus amigos, a la escuela o a la ciudad y ayudarles a alcanzar su objetivo de árboles! Todos los árboles que les regales aparecerán en su contador de árboles.",
   "tpo_plant_personal": "por nosotros",
+  "tpo_individual_plant_community": "Dedicado a nosotros",
+  "by": "por",
   "faqs": "Preguntas frecuentes",
-  "logged_in": "Conectado"
+  "logged_in": "Conectado",
+  "trillionTreeMessage1": "La aplicación Trillion Tree Campaign tiene como objetivo brindar transparencia a los proyectos de plantación de árboles en todo el mundo y hacer que sea lo más fácil posible para cualquier persona que los apoye.",
+  "trillionTreeMessage2": "Porque la reforestación global capturará, al menos, un cuarto de las emisiones anuales de CO2 producidas por la humanidad y además crea prosperidad en los países en vías de desarrollo.",
+  "trillionlabel": "Eventos de la Campaña Trillion Tree previstos para hoy",
+  "trillionTreesEvents": "Eventos Campaña Trillion Tree",
+  "searchProjectTitle": "El mundo necesita mas arboles",
+  "searchProjectPara": "Un estudio reciente publicado en Science dice que plantar un billón de árboles puede capturar el 25% del CO2 producido por la humanidad.",
+  "searchProjectButton": "Encuentra proyectos para donar",
+  "treesPledged": "Árboles comprometidos"
 }

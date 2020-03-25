@@ -25,7 +25,7 @@ export default class ClosedCompetitions extends Component {
       refreshing: false
     };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let { allCompetitions } = this.props;
     let archivedCompetitions = [];
     let CurrentDate = new Date();
@@ -48,7 +48,7 @@ export default class ClosedCompetitions extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     let archivedCompetitions = [];
     let CurrentDate = new Date();
@@ -105,7 +105,6 @@ export default class ClosedCompetitions extends Component {
       <ScrollView
         contentContainerStyle={[
           scrollStyle.styleContainer,
-          { paddingBottom: 72 }
         ]}
         refreshControl={
           <RefreshControl

@@ -182,7 +182,7 @@ export default class extends Component {
   autoplayTimer = null;
   loopJumpTimer = null;
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!nextProps.autoplay && this.autoplayTimer)
       clearTimeout(this.autoplayTimer);
     this.setState(
@@ -199,7 +199,7 @@ export default class extends Component {
     this.loopJumpTimer && clearTimeout(this.loopJumpTimer);
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
     // If the index has changed, we notify the parent via the onIndexChanged callback
     if (this.state.index !== nextState.index)
       this.props.onIndexChanged(nextState.index);
@@ -379,9 +379,9 @@ export default class extends Component {
   };
 
   /*
-     * Drag end handle
-     * @param {object} e native event
-     */
+   * Drag end handle
+   * @param {object} e native event
+   */
   onScrollEndDrag = e => {
     const { contentOffset } = e.nativeEvent;
     const { horizontal, children } = this.props;

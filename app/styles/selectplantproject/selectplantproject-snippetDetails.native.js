@@ -23,7 +23,7 @@ export default EStyleSheet.create({
     borderWidth: 0
   },
   projectImageContainer: {
-    height: Layout.window.width * 0.4,
+    height: Layout.window.width * 0.7833,
     width: '100%',
     overflow: 'hidden',
     position: 'relative'
@@ -152,7 +152,8 @@ export default EStyleSheet.create({
     fontSize: 12,
     flexWrap: 'wrap',
     fontFamily: 'OpenSans-Regular',
-    color: '$cardTextColor'
+    color: '$cardTextColor',
+    maxWidth: '80%'
   },
   costTextContainer: {
     backgroundColor: '#f2f2f7',

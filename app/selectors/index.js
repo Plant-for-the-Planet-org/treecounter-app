@@ -415,3 +415,5 @@ export const unusedPlantProjectsSelector = createSelector(
     );
   }
 );
+
+export const getProgressModelSelector = (state) => state.modelDialogState.progressModel;

@@ -1,1 +1,14 @@
-{ }
+{
+  "widget_share": "Widget: Comparte tu progreso",
+  "widget_share_description": "Los Widget son una forma sencilla de mostrar el progreso de tu plantación en un sitio web o blog. Sólo se puede incrustar el contador público de árboles de la Trillion Tree Campaign.",
+  "widget_share_choose_widget": "1. Elija el tipo de Widget",
+  "widget_share_copy_paste_html_snippet": "2. Copiar y pegar fragmento de código HTML",
+  "widget_basic": "Recuento de árboles",
+  "widget_global_tree_counter": "Contador Global de árboles",
+  "widget_standard_tree_counter": "Contador de árboles estándar",
+  "widget_progress_tree_counter": "Progreso del Contador de árboles",
+  "widget_donate_trees": "Donar árboles",
+  "widget_preview": "Vista previa del widget",
+  "widget_not_public_acct_warning": "Tu perfil no es visible públicamente, para crear tu widget del contador de árboles por favor establece tu cuenta como pública en Editar perfil.",
+  "widget_loading": " cargando widget  ..."
+}

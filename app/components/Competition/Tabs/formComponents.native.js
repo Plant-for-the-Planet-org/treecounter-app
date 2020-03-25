@@ -26,12 +26,9 @@ export const FormikForm = props => {
     competitionFormSchema
   );
   const [buttonType, setButtonType] = useState(props.buttonType);
-  useEffect(
-    () => {
-      setButtonType(props.buttonType);
-    },
-    [props.buttonType]
-  );
+  useEffect(() => {
+    setButtonType(props.buttonType);
+  }, [props.buttonType]);
   return (
     <Formik
       initialValues={props.initialValues}
@@ -307,7 +304,9 @@ export function CompetitionDatePicker(props) {
         onConfirm={date => {
           (date = date || props.endDate),
             setShowDatePicker(false),
-            props.setFieldValue('endDate', date);
+            props.setFieldValue(
+              formatDate(formatDateToMySQL(new Date(date)), 'yyyy-MM-dd')
+            );
         }}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}

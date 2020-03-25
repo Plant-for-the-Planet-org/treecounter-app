@@ -60,16 +60,16 @@ const ListProjects = ({
         </View>
       </View> */}
 
-      <View style={styles.listViewContainer}>
-        <ListViewProjects
-          projects={filteredProjects}
-          selectProject={selectProject}
-          onMoreClick={onMoreClick}
-          loadProjects={loadProjects}
-          index={index}
-          scrollY={scrollY}
-        />
-      </View>
+      {/* <View style={styles.listViewContainer}> */}
+      <ListViewProjects
+        projects={filteredProjects}
+        selectProject={selectProject}
+        onMoreClick={onMoreClick}
+        loadProjects={loadProjects}
+        index={index}
+        scrollY={scrollY}
+      />
+      {/* </View> */}
     </View>
   );
 };

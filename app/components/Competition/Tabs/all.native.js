@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import { trees } from './../../../assets';
 import styles from '../../../styles/competition/competition-master.native';
 import i18n from '../../../locales/i18n';
+import scrollStyle from '../../../styles/common/scrollStyle.native';
 
 export default class AllCompetitions extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class AllCompetitions extends Component {
       refreshing: false
     };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let { allCompetitions } = this.props;
     let showAllCompetitions = [];
     let CurrentDate = new Date();
@@ -46,7 +47,7 @@ export default class AllCompetitions extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let { allCompetitions } = nextProps;
     let showAllCompetitions = [];
     let CurrentDate = new Date();
@@ -102,7 +103,9 @@ export default class AllCompetitions extends Component {
     let { showAllCompetitions } = this.state;
     return (
       <ScrollView
-        contentContainerStyle={[{ paddingBottom: 72 }]}
+        contentContainerStyle={[
+          scrollStyle.styleContainer
+        ]}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}

@@ -10,7 +10,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
- import { getLocalRoute } from '../../actions/apiRouting';
+import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
 import TouchableItem from '../../components/Common/TouchableItem';
 import i18n from '../../locales/i18n.js';
@@ -19,7 +19,7 @@ import styles, {
 } from '../../styles/myTrees/user_contribution_card';
 import { formatDate, delimitNumbers } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
-import { multiple_trees , tree_1} from '../../assets/index'
+import { multiple_trees, tree_1 } from '../../assets/index'
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -321,7 +321,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'}   source={tree_1} style={styles.treeImage} />}
+                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -353,7 +353,6 @@ class ContributionCard extends React.Component {
                   </Text>
                 </View>
               ) : null}
-
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
@@ -361,7 +360,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} />  : <Image resizeMode={'contain'}  source={tree_1} style={styles.treeImage} />}
+                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -410,7 +409,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1?  <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image  resizeMode={'contain'}  source={tree_1} style={styles.treeImage} />}
+                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>
@@ -442,7 +441,7 @@ class ContributionCard extends React.Component {
                   </Text>
                   <Text style={styles.redeemObjectTrees}>
                     {delimitNumbers(treeCount)}
-                    {treeCount > 1?  <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} />  : <Image resizeMode={'contain'}  source={tree_1} style={styles.treeImage} />}
+                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
                   </Text>
                 </View>
                 <View style={styles.row2}>

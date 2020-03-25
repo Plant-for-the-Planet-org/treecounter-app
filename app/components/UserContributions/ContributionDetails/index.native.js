@@ -264,7 +264,6 @@ class UserContributionsDetails extends React.Component {
     }
     return (
       <ScrollView style={styles.scrollViewContainer} contentContainerStyle={{ marginTop: 20, borderColor: 'red', borderWidth: 0, height: '100%', backgroundColor: colors.WHITE }}>
-        {/* <View style={{ backgroundColor: colors.WHITE, height: height }}> */}
         <UserContributions
           isFromUserProfile={this.props.isFromUserProfile}
           mayUpdate={mayUpdate}
@@ -398,7 +397,6 @@ class UserContributionsDetails extends React.Component {
             <NDVI ndviUid={ndviUid} />
           </View>
         ) : null} */}
-        {/* </View> */}
 
       </ScrollView>
     );

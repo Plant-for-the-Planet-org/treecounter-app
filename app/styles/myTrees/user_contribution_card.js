@@ -20,10 +20,10 @@ export const myTreesStyle = (color, borderColor) =>
       flex: 1,
       paddingVertical: 20
     },
-    multipleTrees : {
-      marginLeft : 2, height: 20, width : 30, 
-    }, 
-    treeImage :{
+    multipleTrees: {
+      marginLeft: 2, height: 20, width: 30,
+    },
+    treeImage: {
       height: 20
     },
     contributionContainer: {
@@ -184,7 +184,7 @@ export const myTreesStyle = (color, borderColor) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginTop: 6
+      // marginTop: 6
     },
     redeemObjectTitle: {
       fontFamily: 'OpenSans-Bold',

@@ -326,11 +326,6 @@ class ContributionCard extends React.Component {
                 </View>
                 <View style={styles.row2}>
                   <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-                  <Text style={styles.redeemObjectSubTitle}>
-                    {treeCount > 1
-                      ? i18n.t('label.trees')
-                      : i18n.t('label.tree')}
-                  </Text>
                 </View>
               </View>
             </View>
@@ -358,19 +353,14 @@ class ContributionCard extends React.Component {
                   <Text style={styles.redeemObjectTitle}>
                     {i18n.t('label.registered_trees')}
                   </Text>
-                  <Text style={styles.redeemObjectTrees}>
-                    {delimitNumbers(treeCount)}
-                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
-                  </Text>
-                </View>
-                <View style={styles.row2}>
                   <Text style={styles.redeemObjectSubTitle}>
                     {plantProjectLine}
                   </Text>
-                  <Text style={styles.redeemObjectSubTitle}>
-                    {treeCount > 1
-                      ? i18n.t('label.trees')
-                      : i18n.t('label.tree')}
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                    {treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />}
                   </Text>
                 </View>
                 {dedicateActionLine ? (
@@ -414,11 +404,6 @@ class ContributionCard extends React.Component {
                 </View>
                 <View style={styles.row2}>
                   <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-                  <Text style={styles.redeemObjectSubTitle}>
-                    {treeCount > 1
-                      ? i18n.t('label.trees')
-                      : i18n.t('label.tree')}
-                  </Text>
                 </View>
               </View>
             </View>
@@ -446,11 +431,6 @@ class ContributionCard extends React.Component {
                 </View>
                 <View style={styles.row2}>
                   <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-                  <Text style={styles.redeemObjectSubTitle}>
-                    {treeCount > 1
-                      ? i18n.t('label.trees')
-                      : i18n.t('label.tree')}
-                  </Text>
                 </View>
               </View>
             </View>

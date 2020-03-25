@@ -174,10 +174,11 @@ export const myTreesStyle = (color, borderColor) =>
       fontSize: 14,
       zIndex: 3
     },
-    redeemObjectTreesContainer: { paddingHorizontal: 20, paddingVertical: 16 },
+    redeemObjectTreesContainer: { flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 16 },
     row1: {
-      flexDirection: 'row',
-      alignItems: 'center',
+      // flexDirection: 'row',
+      flex: 1,
+      alignItems: 'flex-start',
       justifyContent: 'space-between'
     },
     row2: {

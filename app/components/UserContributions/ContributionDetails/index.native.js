@@ -26,7 +26,6 @@ import AccordionContactInfo from './../../PlantProjects/HelperComponents/Accordi
 import { updateStaticRoute } from './../../../helpers/routerHelper';
 import colors from '../../../utils/constants';
 
-const { height } = Dimensions.get('window')
 // eslint-disable-next-line no-underscore-dangle
 const _goToURL = url => {
   Linking.openURL(url).catch(err => debug('Cannot open URI', err));
@@ -263,7 +262,7 @@ class UserContributionsDetails extends React.Component {
       }
     }
     return (
-      <ScrollView style={styles.scrollViewContainer} contentContainerStyle={{ marginTop: 20, borderColor: 'red', borderWidth: 0, height: '100%', backgroundColor: colors.WHITE }}>
+      <ScrollView style={styles.scrollViewContainer} contentContainerStyle={{ marginTop: 20, height: '100%', backgroundColor: colors.WHITE }}>
         <UserContributions
           isFromUserProfile={this.props.isFromUserProfile}
           mayUpdate={mayUpdate}

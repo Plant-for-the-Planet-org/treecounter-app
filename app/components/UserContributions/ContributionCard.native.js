@@ -319,14 +319,14 @@ class ContributionCard extends React.Component {
                   <Text style={styles.redeemObjectTitle}>
                     {i18n.t('label.tree_donation')}
                   </Text>
-                  <Text style={styles.redeemObjectTrees}>
-                    {delimitNumbers(treeCount)}
-                    {this.getTreeImage(treeCount)}
-                  </Text>
+                  <View style={styles.row2}>
+                    <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  </View>
                 </View>
-                <View style={styles.row2}>
-                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-                </View>
+                <Text style={styles.redeemObjectTrees}>
+                  {delimitNumbers(treeCount)}
+                  {this.getTreeImage(treeCount)}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -395,14 +395,14 @@ class ContributionCard extends React.Component {
                   <Text style={styles.redeemObjectTitle}>
                     {i18n.t('label.redeemed_trees')}
                   </Text>
-                  <Text style={styles.redeemObjectTrees}>
-                    {delimitNumbers(treeCount)}
-                    {this.getTreeImage(treeCount)}
-                  </Text>
+                  <View style={styles.row2}>
+                    <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  </View>
                 </View>
-                <View style={styles.row2}>
-                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-                </View>
+                <Text style={styles.redeemObjectTrees}>
+                  {delimitNumbers(treeCount)}
+                  {this.getTreeImage(treeCount)}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -421,14 +421,14 @@ class ContributionCard extends React.Component {
                   <Text style={styles.redeemObjectTitle}>
                     {i18n.t('label.gifted_from_person') + contribution.giverName}
                   </Text>
-                  <Text style={styles.redeemObjectTrees}>
-                    {delimitNumbers(treeCount)}
-                    {this.getTreeImage(treeCount)}
-                  </Text>
+                  <View style={styles.row2}>
+                    <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  </View>
                 </View>
-                <View style={styles.row2}>
-                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-                </View>
+                <Text style={styles.redeemObjectTrees}>
+                  {delimitNumbers(treeCount)}
+                  {this.getTreeImage(treeCount)}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>

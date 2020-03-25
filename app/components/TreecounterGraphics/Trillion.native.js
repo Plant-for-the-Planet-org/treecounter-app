@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   // SafeAreaView,
   Animated,
-  Platform
+  Platform,
+  Dimensions
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { SafeAreaView } from 'react-navigation';
@@ -42,6 +43,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
 import HeaderStatic from './../Header/HeaderStatic';
+const height = Dimensions.get('window').height;
 
 class Trillion extends PureComponent {
   constructor() {
@@ -196,24 +198,24 @@ class Trillion extends PureComponent {
         return this.state.loading ? (
           <LoadingIndicator contentLoader={contentLoader} screen="AppHome" />
         ) : (
-          <ScrollView
-            contentContainerStyle={{
-              paddingBottom: 72,
-              backgroundColor: backgroundColor
-            }}
-            scrollEventThrottle={24}
-            onScroll={Animated.event([
-              {
-                nativeEvent: {
-                  contentOffset: { y: this.state.scrollY }
+            <ScrollView
+              contentContainerStyle={{
+                paddingBottom: 72,
+                backgroundColor: backgroundColor
+              }}
+              scrollEventThrottle={24}
+              onScroll={Animated.event([
+                {
+                  nativeEvent: {
+                    contentOffset: { y: this.state.scrollY }
+                  }
                 }
-              }
-            ])}
-          >
-            {/* <StatusBar backgroundColor="white" barStyle="dark-content" /> */}
-            <View style={styles.parentContainer}>
-              {/* Trillion Tree Events Title */}
-              {/* {this.props.pledgeEvents &&
+              ])}
+            >
+              {/* <StatusBar backgroundColor="white" barStyle="dark-content" /> */}
+              <View style={styles.parentContainer}>
+                {/* Trillion Tree Events Title */}
+                {/* {this.props.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents &&
               this.props.pledgeEvents.pledgeEvents.length > 0 ? (
                 <View style={{ marginTop: 25, marginLeft: 16 }}>
@@ -222,92 +224,92 @@ class Trillion extends PureComponent {
                   </Text>
                 </View>
               ) : null} */}
-              {/* Trillion Tree Events Title Ended */}
+                {/* Trillion Tree Events Title Ended */}
 
-              {/* Featured events horizontal ScrollView */}
-              {this.props.pledgeEvents &&
-              this.props.pledgeEvents.pledgeEvents ? (
-                <View>
-                  <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{
-                      paddingRight: 20,
-                      marginTop:
-                        this.props.pledgeEvents.pledgeEvents.length > 0 ? 24 : 0
-                    }}
-                  >
-                    {this.props.pledgeEvents.pledgeEvents.map(
-                      featuredEvents => (
-                        <TouchableOpacity
-                          key={featuredEvents.slug}
-                          onPress={() => {
-                            updateStaticRoute('app_pledge_events', navigation, {
-                              slug: featuredEvents.slug,
-                              plantProject: { id: -1 },
-                              treeCount: -1
-                            });
-                          }}
-                        >
-                          <FeaturedProject
-                            imageUri={getImageUrl(
-                              'event',
-                              'thumb',
-                              featuredEvents.image
-                            )}
-                            orgname={featuredEvents.name}
-                            treespledged={featuredEvents.total}
-                            date={featuredEvents.eventDate}
-                          />
-                        </TouchableOpacity>
-                      )
-                    )}
-                  </ScrollView>
-                </View>
-              ) : null}
-              {/* Featured events horizontal ScrollView Ended */}
-
-              {/*  Unfulfilled Pledge Events horizontal ScrollView */}
-              {this.props.entities.eventPledge ? (
-                <View>
-                  <View style={{ marginTop: 25, marginLeft: 16 }}>
-                    <Text style={styles.trillionTreeEventTitle}>
-                      {i18n.t('label.unfulfilledPledgesTitle')}
-                    </Text>
-                  </View>
-                  <View style={{ marginTop: 16 }}>
-                    <ScrollView
-                      horizontal
-                      showsHorizontalScrollIndicator={false}
-                      contentContainerStyle={{ paddingRight: 20 }}
-                    >
-                      {Object.values(this.props.entities.eventPledge).map(
-                        unfulfilledEvent =>
-                          unfulfilledEvent.status === 'pending' ? (
+                {/* Featured events horizontal ScrollView */}
+                {this.props.pledgeEvents &&
+                  this.props.pledgeEvents.pledgeEvents ? (
+                    <View>
+                      <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{
+                          paddingRight: 20,
+                          marginTop:
+                            this.props.pledgeEvents.pledgeEvents.length > 0 ? 24 : 0
+                        }}
+                      >
+                        {this.props.pledgeEvents.pledgeEvents.map(
+                          featuredEvents => (
                             <TouchableOpacity
-                              key={unfulfilledEvent.token}
+                              key={featuredEvents.slug}
                               onPress={() => {
-                                updateStaticRoute(
-                                  'app_pledge_events',
-                                  navigation,
-                                  {
-                                    slug: unfulfilledEvent.eventSlug,
-                                    plantProject: { id: -1 },
-                                    treeCount: -1
-                                  }
-                                );
+                                updateStaticRoute('app_pledge_events', navigation, {
+                                  slug: featuredEvents.slug,
+                                  plantProject: { id: -1 },
+                                  treeCount: -1
+                                });
                               }}
                             >
-                              <UnfulfilledEvents event={unfulfilledEvent} />
+                              <FeaturedProject
+                                imageUri={getImageUrl(
+                                  'event',
+                                  'thumb',
+                                  featuredEvents.image
+                                )}
+                                orgname={featuredEvents.name}
+                                treespledged={featuredEvents.total}
+                                date={featuredEvents.eventDate}
+                              />
                             </TouchableOpacity>
-                          ) : null
-                      )}
-                    </ScrollView>
+                          )
+                        )}
+                      </ScrollView>
+                    </View>
+                  ) : null}
+                {/* Featured events horizontal ScrollView Ended */}
+
+                {/*  Unfulfilled Pledge Events horizontal ScrollView */}
+                {this.props.entities.eventPledge ? (
+                  <View>
+                    <View style={{ marginTop: 25, marginLeft: 16 }}>
+                      <Text style={styles.trillionTreeEventTitle}>
+                        {i18n.t('label.unfulfilledPledgesTitle')}
+                      </Text>
+                    </View>
+                    <View style={{ marginTop: 16 }}>
+                      <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{ paddingRight: 20 }}
+                      >
+                        {Object.values(this.props.entities.eventPledge).map(
+                          unfulfilledEvent =>
+                            unfulfilledEvent.status === 'pending' ? (
+                              <TouchableOpacity
+                                key={unfulfilledEvent.token}
+                                onPress={() => {
+                                  updateStaticRoute(
+                                    'app_pledge_events',
+                                    navigation,
+                                    {
+                                      slug: unfulfilledEvent.slug,
+                                      plantProject: { id: -1 },
+                                      treeCount: -1
+                                    }
+                                  );
+                                }}
+                              >
+                                <UnfulfilledEvents event={unfulfilledEvent} />
+                              </TouchableOpacity>
+                            ) : null
+                        )}
+                      </ScrollView>
+                    </View>
                   </View>
-                </View>
-              ) : null}
-              {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
-              {/* <View style={{ marginTop: 16 }}>
+                ) : null}
+                {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
+                {/* <View style={{ marginTop: 16 }}>
                   <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -339,24 +341,24 @@ class Trillion extends PureComponent {
                       : null}
                   </ScrollView>
                 </View> */}
-            </View>
+              </View>
 
-            {/* Tree Counter SVG */}
-            <View style={svgStyles.svgContainer}>
-              <SvgContainer {...this.state.svgData} trillion />
-            </View>
-            {/* Tree Counter SVG Ended */}
+              {/* Tree Counter SVG */}
+              <View style={svgStyles.svgContainer}>
+                <SvgContainer {...this.state.svgData} trillion />
+              </View>
+              {/* Tree Counter SVG Ended */}
 
-            <View style={styles.cardContainer}>
-              <Text style={[styles.titleText, { marginBottom: 16 }]}>
-                {i18n.t('label.trillionTreeMessage1')}
-              </Text>
-              <Text style={styles.titleText}>
-                {i18n.t('label.trillionTreeMessage2')}
-              </Text>
-            </View>
+              <View style={styles.cardContainer}>
+                <Text style={[styles.titleText, { marginBottom: 16 }]}>
+                  {i18n.t('label.trillionTreeMessage1')}
+                </Text>
+                <Text style={styles.titleText}>
+                  {i18n.t('label.trillionTreeMessage2')}
+                </Text>
+              </View>
 
-            {/* {userProfile && userProfile.type === 'tpo' ? (
+              {/* {userProfile && userProfile.type === 'tpo' ? (
                 <CardLayout
                   style={[
                     styles.cardContainer,
@@ -388,7 +390,7 @@ class Trillion extends PureComponent {
                 </CardLayout>
               ) : null} */}
 
-            {/* <View
+              {/* <View
               style={[
                 styles.cardContainer,
                 {
@@ -423,8 +425,8 @@ class Trillion extends PureComponent {
                 </Text>
               </TouchableOpacity>
             </View> */}
-          </ScrollView>
-        );
+            </ScrollView>
+          );
       }
       case 'leaderBoard': {
         return <Leaderboard navigation={this.props.navigation} />;
@@ -465,7 +467,7 @@ class Trillion extends PureComponent {
               showSearch
             />
             <Animated.View
-              style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+              style={{ marginTop: Platform.OS === 'ios' ? height < 737 ? 56 : 26 : 56 }}
             />
 
             <TabView

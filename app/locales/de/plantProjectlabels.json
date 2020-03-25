@@ -28,5 +28,6 @@
   "about": "Über",
   "contact_details": "Kontaktdetails",
   "view_profile": "Profil anzeigen",
-  "read_less": "Zeige weniger"
+  "read_less": "Zeige weniger",
+  "shareProject": "Pflanzen Sie Bäume mit {{entityName}} unter {{url}}"
 }

@@ -6,8 +6,8 @@ const textColorLight = '#d5d5d5';
 const whiteColor = '#ffffff';
 
 export default EStyleSheet.create({
-  scrollViewContainer :{
-    backgroundColor: 'transparent', flex: 1 
+  scrollViewContainer: {
+    backgroundColor: 'transparent', flex: 1
   },
   header: {
     paddingHorizontal: 20,
@@ -46,7 +46,7 @@ export default EStyleSheet.create({
   dateContainer: {
     position: 'absolute',
     left: 20,
-    marginTop: -15,
+    // marginTop: -15,
     zIndex: 10000,
     paddingVertical: 4,
     paddingHorizontal: 10,

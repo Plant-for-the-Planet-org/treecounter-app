@@ -223,7 +223,7 @@ class AnimatedViews extends React.Component {
           try {
             this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)));
           } catch (e) {
-            console.log(JSON.stringify(e))
+            // Do thing
           }
         }, 3000);
       }
@@ -245,9 +245,7 @@ class AnimatedViews extends React.Component {
     // clearTimeout(tempTimeOut)
     // let tempTimeOut = setTimeout(() => {
     if (index >= this.state.mapIndex) {
-      this.setState({ mapIndex: this.state.mapIndex + 3 }, () => {
-        console.log(this.state.mapIndex, 'this.state.mapIndex')
-      })
+      this.setState({ mapIndex: this.state.mapIndex + 3 })
     }
     // },250
     // )
@@ -286,7 +284,7 @@ class AnimatedViews extends React.Component {
             350
           );
         } catch (e) {
-          console.log(JSON.stringify(e))
+          // Do thing
         }
       }
     }, 10);
@@ -304,7 +302,7 @@ class AnimatedViews extends React.Component {
       );
       this.setState({ markersList: this.state.markers.slice(0, 3) })
     } catch (e) {
-      console.log(JSON.stringify(e))
+      // Do thing
     }
   };
   componentWillReceiveProps(nextProps) {
@@ -329,7 +327,7 @@ class AnimatedViews extends React.Component {
                 );
               }
             } catch (e) {
-              console.log(JSON.stringify(e))
+              // Do thing
             }
           }
         );
@@ -340,7 +338,7 @@ class AnimatedViews extends React.Component {
       try {
         this.initiateComponent();
       } catch (e) {
-        console.log(JSON.stringify(e))
+        // Do thing
       }
     }
   }
@@ -355,7 +353,7 @@ class AnimatedViews extends React.Component {
             this.state.markers.map(x => String(x.id))
           );
         } catch (e) {
-          console.log(JSON.stringify(e))
+          // Do thing
         }
       }, 3000);
     }
@@ -372,7 +370,7 @@ class AnimatedViews extends React.Component {
               this.state.markers.map(x => String(x.id))
             );
           } catch (e) {
-            console.log(JSON.stringify(e))
+            // Do thing
           }
         }, 3000);
       }
@@ -396,6 +394,7 @@ class AnimatedViews extends React.Component {
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
         : null;
     let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
+    console.log(markers, 'markers')
     return (
       <View style={styles.container}>
         <MapView
@@ -450,7 +449,6 @@ class AnimatedViews extends React.Component {
             <View style={styles.itemContainer}>
               {markers
                 ? markers.map((marker, i) => {
-                  console.log(i, this.state.mapIndex, '------ this.state.mapIndex--------')
                   return (
                     i <= this.state.mapIndex ? <Animated.View
                       key={marker.id}

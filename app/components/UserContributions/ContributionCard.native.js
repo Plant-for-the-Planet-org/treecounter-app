@@ -270,7 +270,6 @@ class ContributionCard extends React.Component {
 
     // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
-    console.log(plantProjectLine, 'plantProjectLine')
     // let donateActionLine = this.donateActionLine(
     //   isGift,
     //   plantDate,
@@ -280,7 +279,6 @@ class ContributionCard extends React.Component {
     let tpoLine = this.tpoLine(tpoName);
     // let plantActionLine = this.plantActionLine(plantDate, registrationDate);
     let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
-    console.log(dedicateActionLine, 'dedicateActionLine')
     // let redeemActionLine = this.redeemActionLine(
     //   redemptionCode,
     //   redemptionDate,
@@ -300,7 +298,6 @@ class ContributionCard extends React.Component {
     let renderCard = () => {
       const { isFromAnimatredCardList } = this.props
       if (contributionType === 'donation') {
-        console.log(i18n.t('label.tree_donation'), 'CONTRIBUTIONCARD')
         return (
           <TouchableOpacity
             style={singleRedeemObject}
@@ -335,7 +332,6 @@ class ContributionCard extends React.Component {
           </TouchableOpacity>
         );
       } else if (contributionType === 'planting') {
-        console.log(i18n.t('label.registered_trees'), 'CONTRIBUTIONCARD')
         return (
           <TouchableOpacity
             style={singleRedeemObject}
@@ -378,7 +374,6 @@ class ContributionCard extends React.Component {
           </TouchableOpacity>
         );
       } else if (contribution.type === 'tpo-coupon') {
-        console.log(i18n.t('label.redeemed_trees'), 'CONTRIBUTIONCARD')
         return (
           <TouchableOpacity
             style={singleRedeemObject}
@@ -413,7 +408,6 @@ class ContributionCard extends React.Component {
           </TouchableOpacity>
         );
       } else {
-        console.log(i18n.t('label.gifted_from_person') + contribution.giverName, 'CONTRIBUTIONCARD', 'tpoLine= ', tpoLine)
         return (
           <TouchableOpacity
             style={singleRedeemObject}

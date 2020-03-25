@@ -36,7 +36,7 @@ class CompetitionContainer extends React.Component {
       };
       this.props
         .createCompetition(newvalue, this.props.navigation)
-        .then((/* success */) => { })
+        .then((/* success */) => {})
         .catch(err => {
           debug('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
@@ -89,16 +89,14 @@ class CompetitionContainer extends React.Component {
         supportTreecounterAction={this.props.supportTreecounterAction}
         editCompetition={id => this.editCompetition(id)}
         navigation={this.props.navigation}
-        fetchMineCompetitions={() =>
-          this.fetchMineCompetitions()
-        }
+        fetchMineCompetitions={() => this.fetchMineCompetitions()}
         fetchCompetitions={(category, page) =>
           this.fetchCompetitions(category, page)
         }
       />
     ) : (
-        <LoadingIndicator contentLoader screen="Competition" />
-      );
+      <LoadingIndicator contentLoader screen="Competition" />
+    );
   }
 
   onMoreClick(id, name) {

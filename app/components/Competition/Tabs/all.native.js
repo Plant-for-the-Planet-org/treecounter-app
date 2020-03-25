@@ -1,20 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
-import {
-  Text,
-  View,
-  Image,
-  FlatList,
-  ActivityIndicator
-} from 'react-native';
+import { Text, View, Image, FlatList, ActivityIndicator } from 'react-native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
 import { trees, empty } from './../../../assets';
 import styles from '../../../styles/competition/competition-master.native';
 import i18n from '../../../locales/i18n';
 import colors from '../../../utils/constants';
-import { CompetitionLoader } from './../../Common/ContentLoader'
+import { CompetitionLoader } from './../../Common/ContentLoader';
 const AllCompetitions = props => {
+  console.log('\x1b[42m props.allCompetitions', props.allCompetitions);
+  console.log('\x1b[0m');
   const [showAllCompetitions, setShowAllCompetitions] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -24,6 +20,7 @@ const AllCompetitions = props => {
     setShowLoader(true);
     setrefreshing(true);
     setPage(1);
+    console.log('showAllCompetitions', showAllCompetitions);
     props
       .fetchCompetitions('all', page)
       .then(() => {
@@ -39,26 +36,48 @@ const AllCompetitions = props => {
 
   const getAllCompetitions = () => {
     props.fetchCompetitions('all', page);
-    setTimeout(() => { setShowLoader(false) }, 1000)
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 1000);
   };
 
   useEffect(() => {
     if (props.allCompetitions.length < 1) {
+      console.log('\x1b[44m less length \x1b[0m');
       getAllCompetitions();
     }
     let showAllCompetitionsArr = [];
     if (props.allCompetitions.length > 0) {
-      props.allCompetitions.forEach(val => {
-        if (val.category === 'all') {
-          val.competitions.forEach(comp => {
-            let endDate = comp.endDate;
+      console.log('\x1b[46m length ', showAllCompetitionsArr);
+      console.log('\x1b[0m');
+      for (let i = 0; i < props.allCompetitions.length; i++) {
+        if (props.allCompetitions[i].category === 'all') {
+          for (
+            let j = 0;
+            j < props.allCompetitions[i].competitions.length;
+            j++
+          ) {
+            let endDate = props.allCompetitions[i].competitions[j].endDate;
             endDate = new Date(endDate);
             if (endDate > CurrentDate) {
-              showAllCompetitionsArr.push(comp);
+              showAllCompetitionsArr.push(
+                props.allCompetitions[i].competitions[j]
+              );
             }
-          });
+          }
         }
-      });
+      }
+      console.log('\x1b[45m');
+      console.log(
+        '=============================================================='
+      );
+      console.log('showAllCompetitionsArr', showAllCompetitionsArr);
+      console.log('\x1b[44m');
+      console.log('showAllCompetitions', showAllCompetitions);
+      console.log(
+        '=============================================================='
+      );
+      console.log('\x1b[0m');
     }
     setShowAllCompetitions(showAllCompetitions =>
       showAllCompetitions.concat(showAllCompetitionsArr)
@@ -88,12 +107,24 @@ const AllCompetitions = props => {
 
   const EmptyContainer = () => {
     return (
-      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 64 }}>
-        <Image source={empty} style={{ height: 186, width: 240, alignSelf: 'center', opacity: 0.7 }} />
-        <Text style={[styles.headerTitle, { marginTop: 12 }]}> {i18n.t('label.no_competitions')}</Text>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 64
+        }}
+      >
+        <Image
+          source={empty}
+          style={{ height: 186, width: 240, alignSelf: 'center', opacity: 0.7 }}
+        />
+        <Text style={[styles.headerTitle, { marginTop: 12 }]}>
+          {' '}
+          {i18n.t('label.no_competitions')}
+        </Text>
       </View>
-    )
-  }
+    );
+  };
   return (
     <FlatList
       data={showAllCompetitions}
@@ -103,7 +134,13 @@ const AllCompetitions = props => {
       onEndReachedThreshold={0.05}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
-      ListEmptyComponent={() => showLoader ? <ActivityIndicator size="large" color={colors.PRIMARY_COLOR} /> : EmptyContainer()}
+      ListEmptyComponent={() =>
+        showLoader ? (
+          <ActivityIndicator size="large" color={colors.PRIMARY_COLOR} />
+        ) : (
+          EmptyContainer()
+        )
+      }
       style={{ paddingBottom: 60, backgroundColor: colors.WHITE }}
       ListHeaderComponent={() => {
         return (

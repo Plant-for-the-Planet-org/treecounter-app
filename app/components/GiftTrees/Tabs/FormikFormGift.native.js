@@ -79,9 +79,9 @@ export default class FormikFormGift extends Component {
                   scrollEnabled
                 >
                   <View style={{ paddingTop: 20, paddingBottom: 0 }}>
-                    <Text style={styles.add_competition_title}>
+                    {/*<Text style={styles.add_competition_title}>
                       {i18n.t('label.gift_receipient')}
-                    </Text>
+                    </Text>*/}
                     <Text style={stylesGift.description}>
                       {i18n.t('label.gift_trees_description')}
                     </Text>

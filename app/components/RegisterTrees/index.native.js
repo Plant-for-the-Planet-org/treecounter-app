@@ -101,6 +101,7 @@ export default class RegisterTrees extends Component {
         onRegister={(mode, value, plantProject) => {
           return this.props.onSubmit(mode, value, plantProject);
         }}
+        {...this.props}
         isTpo={isTpo(this.props.currentUserProfile)}
         mode={this.state.mode}
         plantProjects={plantProjects}

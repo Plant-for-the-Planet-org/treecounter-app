@@ -243,11 +243,6 @@ export default class EditUserProfile extends Component {
     const textColor = '#4d5153';
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
-        {/* <HeaderStatic
-          title={i18n.t('label.edit_profile')}
-          navigation={this.props.navigation}
-          showBackButton
-        /> */}
         <HeaderNew title={''} navigation={this.props.navigation} />
 
         <View style={{ marginTop: 60 }} />

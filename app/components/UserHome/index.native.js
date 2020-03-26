@@ -242,21 +242,24 @@ class UserHome extends Component {
 
   ) => {
     // console.log('toggleIsFullMapComp');
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setTimeout(() => {
 
-    this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
-      this.scrollRef.scrollTo({ x: 0, y: y, animated: true });
-    });
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
-    this.setState({
-      isFullMapComponentModal: !this.state.isFullMapComponentModal,
-      singleContributionID: singleContributionIDShouldNull
-        ? null
-        : this.state.singleContributionID,
-      isPressFromList: singleContributionIDShouldNull ? false : true
-    }, () => {
-      this.props.navigation.setParams({ isFullMapComponentModal: this.state.isFullMapComponentModal })
-    });
+      this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
+        this.scrollRef.scrollTo({ x: 0, y: y, animated: true });
+      });
+
+      this.setState({
+        isFullMapComponentModal: !this.state.isFullMapComponentModal,
+        singleContributionID: singleContributionIDShouldNull
+          ? null
+          : this.state.singleContributionID,
+        isPressFromList: singleContributionIDShouldNull ? false : true
+      }, () => {
+        this.props.navigation.setParams({ isFullMapComponentModal: this.state.isFullMapComponentModal })
+      });
+    }, 300)
   };
 
   getMapComponent = () => {
@@ -309,8 +312,8 @@ class UserHome extends Component {
       isFullMapComponentModal
     } = this.state;
     return (
-      <SafeAreaView style={{ elevation: 1, flex: 1 }}
-        forceInset={{ bottom: !isFullMapComponentModal ? 'never' : 'never', top: !isFullMapComponentModal ? 'always' : 'never' }}>
+      <SafeAreaView style={{ elevation: 1, flex: 1, backgroundColor: 'white' }}
+        forceInset={{ top: !isFullMapComponentModal ? 'always' : 'never' }}>
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}

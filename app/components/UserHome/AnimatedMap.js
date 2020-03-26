@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Platform,
   SafeAreaView,
+  FlatList
 } from 'react-native';
 import MapView, {
   ProviderPropType,
@@ -25,6 +26,8 @@ import { getAllPlantProjectsSelector } from '../../selectors';
 import { multiple_trees, tree_1 } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ContributionCard from '../UserContributions/ContributionCard.native'
+import Swiper from '../../components/ReactNativeSwiper';
+import SIcon from 'react-native-vector-icons/SimpleLineIcons'
 
 const screen = Dimensions.get('window');
 const { height: HEIGHT, } = screen;
@@ -169,6 +172,7 @@ class AnimatedViews extends React.Component {
     });
 
     this.state = {
+      activeIndex: 0,
       mapIndex: 3,
       markersList: [],
       isSatellite: false,
@@ -195,7 +199,7 @@ class AnimatedViews extends React.Component {
     return {
       top: 0,
       right: 0,
-      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? 180 : 150 : 0,
+      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? 180 : 80 : 0,
       left: 0
     };
   };
@@ -380,6 +384,70 @@ class AnimatedViews extends React.Component {
   getTreeImage = (treeCount) => {
     return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
   }
+
+  onChageIndex = (index) => {
+    console.log('onChageIndex=', index)
+
+    // clearTimeout(this.regionTimeout);
+    // this.regionTimeout = setTimeout(() => {
+
+    this.setState({ activeIndex: index }, () => {
+      this.toAnimateRegion()
+
+    })
+    //   const oneContribution = this.state.markers[index];
+    //   try {
+    //     this.mapView.animateToRegion(
+    //       {
+    //         latitude: oneContribution.geoLatitude,
+    //         longitude: oneContribution.geoLongitude,
+    //         latitudeDelta: 0.00095,
+    //         longitudeDelta: 0.0095
+    //       },
+    //       350
+    //     );
+    //   } catch (e) {
+    //     // Do thing
+    //   }
+
+    // }, 10);
+  }
+  toAnimateRegion = () => {
+    console.log("toAnimateRegion=", this.state.activeIndex, '')
+    const oneContribution = this.state.markers[this.state.activeIndex];
+    try {
+      this.mapView.animateToRegion(
+        {
+          latitude: oneContribution.geoLatitude,
+          longitude: oneContribution.geoLongitude,
+          latitudeDelta: 0.00095,
+          longitudeDelta: 0.0095
+        },
+        350
+      );
+    } catch (e) {
+      // Do thing
+    }
+  }
+  onPressNextPrevBtn = (btn) => {
+
+
+    if (btn == 'back') {
+      if (this.state.activeIndex !== 0) {
+        this.setState({ activeIndex: this.state.activeIndex - 1 }, () => {
+          this.toAnimateRegion()
+        })
+      }
+    }
+    if (btn == 'next') {
+      this.setState({ activeIndex: this.state.activeIndex + 1 }, () => {
+        this.toAnimateRegion()
+      })
+    }
+
+
+
+  }
   render() {
     const {
       panX,
@@ -394,7 +462,7 @@ class AnimatedViews extends React.Component {
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
         : null;
     let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
-    console.log(markers, 'markers')
+    console.log(this.state.activeIndex, 'render state actove Index')
     return (
       <View style={styles.container}>
         <MapView
@@ -426,44 +494,27 @@ class AnimatedViews extends React.Component {
             ))
             : null}
         </MapView>
-        {this.props.isFullMapComponentModal ? (
-          <PanController
-            _getValue={this.getValue}
-            style={{
-              flex: this.state.singleContributionID ? 1.5 : 0.3,
-              position: 'absolute',
-              bottom: 40,
-              backgroundColor: 'transparent'
-            }}
-            vertical
-            horizontal={canMoveHorizontal}
-            xMode={'snap'}
-            snapSpacingX={SNAP_WIDTH}
-            yBounds={[-1 * screen.height, 0]}
-            xBounds={[-screen.width * (markers.length - 1), 0]}
-            panY={panY}
-            panX={panX}
-            onStartShouldSetPanResponder={() => true}
-            onMoveShouldSetPanResponder={() => true}
-          >
-            <View style={styles.itemContainer}>
-              {markers
-                ? markers.map((marker, i) => {
-                  return (
-                    i <= this.state.mapIndex ? <Animated.View
-                      key={marker.id}
-                      style={[
-                        styles.item,
-                        { backgroundColor: 'transparent' },
-                        {
-                          transform: [
-                            { translateY: animations[i].translateY },
-                            { translateX: animations[i].translateX },
-                            { scale: animations[i].scale }
-                          ]
-                        }
-                      ]}
-                    >
+        <View>
+          {this.props.isFullMapComponentModal ? (
+            <View style={{
+              width: '100%',
+              // position: 'absolute',
+              height: 130,
+              // right: 0, left: 0,
+              bottom: 30,
+              backgroundColor: 'transparent',
+              borderColor: 'red', borderWidth: 0
+            }}>
+              <Swiper
+                key={this.state.activeIndex}
+                index={this.state.activeIndex}
+                showsPagination={false}
+                bounces
+                onIndexChanged={this.onChageIndex}
+              >
+                {markers
+                  ? markers.map((marker, i) => {
+                    return (
                       <View style={styles.card} key={i}>
                         <ContributionCard
                           onPressSingleContribution={this.onPressHeader}
@@ -471,14 +522,77 @@ class AnimatedViews extends React.Component {
                           contribution={marker}
                         />
                       </View>
-                    </Animated.View> : <Animated.View key={marker.id} />
-                  )
-                })
-                : null}
-            </View>
-          </PanController>
-        ) : null}
+                    )
+                  }) : null}
+
+              </Swiper>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
+                <View style={{ flex: 1 }} />
+                <View style={{ flexDirection: 'row', }}>
+                  <Icon onPress={() => this.onPressNextPrevBtn('back')} name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginHorizontal: 6 }} />
+                  <Icon onPress={() => this.onPressNextPrevBtn('next')} name={'arrow-forward'} size={30} color={'#4d5153'} style={{ marginHorizontal: 6 }} />
+                </View>
+              </View>
+            </View>) : null}
+
+        </View>
+
         <SafeAreaView />
+
+
+
+        {/* <PanController></PanController>
+          //   _getValue={this.getValue}
+          // style={{
+          //   flex: this.state.singleContributionID ? 1.5 : 0.3,
+          //   position: 'absolute',
+          //   bottom: 40,
+          //   backgroundColor: 'transparent'
+          // }}
+          //   vertical
+          //   horizontal={canMoveHorizontal}
+          //   xMode={'snap'}
+          //   snapSpacingX={SNAP_WIDTH}
+          //   yBounds={[-1 * screen.height, 0]}
+          //   xBounds={[-screen.width * (markers.length - 1), 0]}
+          //   panY={panY}
+          //   panX={panX}
+          //   onStartShouldSetPanResponder={() => true}
+          //   onMoveShouldSetPanResponder={() => true}
+          // >
+          //   <View style={styles.itemContainer}>
+          //     {markers
+          //       ? markers.map((marker, i) => {
+          //         return (
+          //           i <= this.state.mapIndex ? <Animated.View
+          //             key={marker.id}
+          //             style={[
+          //               styles.item,
+          //               { backgroundColor: 'transparent' },
+          //               {
+          //                 transform: [
+          //                   { translateY: animations[i].translateY },
+          //                   { translateX: animations[i].translateX },
+          //                   { scale: animations[i].scale }
+          //                 ]
+          //               }
+          //             ]}
+          //           >
+          //             <View style={styles.card} key={i}>
+          //               <ContributionCard
+          //                 onPressSingleContribution={this.onPressHeader}
+          //                 isFromAnimatredCardList
+          //                 contribution={marker}
+          //               />
+          //             </View>
+          //           </Animated.View> : <Animated.View key={marker.id} />
+          //         )
+          //       })
+          //       : null}
+          //   </View>
+          // </PanController> */}
+
+
         {this.props.isFullMapComponentModal ? (
           <>
             <TouchableOpacity
@@ -620,7 +734,7 @@ const styles = StyleSheet.create({
   },
   myLocationIcon: {
     position: 'absolute',
-    bottom: 220,
+    bottom: 240,
     right: 20,
     padding: 15,
     backgroundColor: '#fff',
@@ -631,7 +745,7 @@ const styles = StyleSheet.create({
   },
   fullScreenExitIcon: {
     position: 'absolute',
-    bottom: 150,
+    bottom: 170,
     right: 20,
     padding: 15,
     backgroundColor: '#fff',
@@ -642,7 +756,7 @@ const styles = StyleSheet.create({
   },
   satellite: {
     position: 'absolute',
-    bottom: 290,
+    bottom: 310,
     right: 20,
     padding: 15,
     backgroundColor: '#fff',
@@ -655,7 +769,7 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     backgroundColor: '#FFF',
-    marginHorizontal: 8,
+    // marginHorizontal: 8,
     shadowColor: '#000',
     shadowRadius: 5,
     shadowOpacity: 0.3,
@@ -664,7 +778,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderWidth: 0,
     borderColor: 'red',
-    borderRadius: 4
+    // borderRadius: 4,
+    width: '100%'
   },
   textContent: {
     flex: 1

@@ -1,19 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
-import {
-  Text,
-  View,
-  Image,
-  FlatList,
-  ActivityIndicator
-} from 'react-native';
+import { Text, View, Image, FlatList, ActivityIndicator } from 'react-native';
 import styles from '../../../styles/competition/competition-master.native';
 import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
 import { trees, empty } from './../../../assets';
 import i18n from '../../../locales/i18n';
 import colors from '../../../utils/constants';
-import { CompetitionLoader } from './../../Common/ContentLoader'
+import { CompetitionLoader } from './../../Common/ContentLoader';
 
 const ClosedCompetitions = props => {
   const [showAllCompetitions, setShowAllCompetitions] = useState([]);
@@ -39,34 +33,47 @@ const ClosedCompetitions = props => {
   };
   let CurrentDate = new Date();
 
-  const getAllCompetitions = () => {
-    props.fetchCompetitions('archived', page);
-    setTimeout(() => { setShowLoader(false) }, 1000)
+  const getAllCompetitions = async () => {
+    await props.fetchCompetitions('archived', page);
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 1000);
+    updateArchivedCompetitionsArr();
   };
 
-  useEffect(() => {
-    if (props.allCompetitions.length < 1) {
-      getAllCompetitions();
-    }
+  const updateArchivedCompetitionsArr = () => {
     let showAllCompetitionsArr = [];
-    if (props.allCompetitions.length > 0) {
-      props.allCompetitions.forEach(val => {
-        if (val.category === 'archived') {
-          val.competitions.forEach(comp => {
-            let endDate = comp.endDate;
+    if (props.archivedCompetitions.length > 0) {
+      for (let i = 0; i < props.archivedCompetitions.length; i++) {
+        if (props.archivedCompetitions[i].category === 'archived') {
+          for (
+            let j = 0;
+            j < props.archivedCompetitions[i].competitions.length;
+            j++
+          ) {
+            let endDate = props.archivedCompetitions[i].competitions[j].endDate;
             endDate = new Date(endDate);
             if (CurrentDate > endDate) {
-              showAllCompetitionsArr.push(comp);
+              showAllCompetitionsArr.push(
+                props.archivedCompetitions[i].competitions[j]
+              );
             }
-          });
+          }
         }
-      });
+      }
     }
     setShowAllCompetitions(showAllCompetitions =>
       showAllCompetitions.concat(showAllCompetitionsArr)
     );
     setLoading(false);
-  }, [props.allCompetitions]);
+  };
+
+  useEffect(() => {
+    // if (props.allCompetitions.length < 1) {
+    //   getAllCompetitions();
+    // }
+    updateArchivedCompetitionsArr();
+  }, [props.archivedCompetitions]);
 
   const _keyExtractor = item => item.id.toString();
   const _renderItem = ({ item }) => (
@@ -90,12 +97,24 @@ const ClosedCompetitions = props => {
 
   const EmptyContainer = () => {
     return (
-      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 64 }}>
-        <Image source={empty} style={{ height: 186, width: 240, alignSelf: 'center', opacity: 0.7 }} />
-        <Text style={[styles.headerTitle, { marginTop: 12 }]}> {i18n.t('label.no_competitions')}</Text>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 64
+        }}
+      >
+        <Image
+          source={empty}
+          style={{ height: 186, width: 240, alignSelf: 'center', opacity: 0.7 }}
+        />
+        <Text style={[styles.headerTitle, { marginTop: 12 }]}>
+          {' '}
+          {i18n.t('label.no_competitions')}
+        </Text>
       </View>
-    )
-  }
+    );
+  };
   return (
     <FlatList
       data={showAllCompetitions}
@@ -105,7 +124,13 @@ const ClosedCompetitions = props => {
       onEndReachedThreshold={0.05}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
-      ListEmptyComponent={() => showLoader ? <ActivityIndicator size="large" color={colors.PRIMARY_COLOR} /> : EmptyContainer()}
+      ListEmptyComponent={() =>
+        showLoader ? (
+          <ActivityIndicator size="large" color={colors.PRIMARY_COLOR} />
+        ) : (
+          EmptyContainer()
+        )
+      }
       style={{ paddingBottom: 60, backgroundColor: colors.WHITE }}
       ListHeaderComponent={() => {
         return (
@@ -131,7 +156,7 @@ const ClosedCompetitions = props => {
 export default ClosedCompetitions;
 
 ClosedCompetitions.propTypes = {
-  allCompetitions: PropTypes.any,
+  archivedCompetitions: PropTypes.any,
   onMoreClick: PropTypes.any,
   leaveCompetition: PropTypes.any,
   enrollCompetition: PropTypes.any,

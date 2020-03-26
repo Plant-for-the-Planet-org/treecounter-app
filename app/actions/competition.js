@@ -25,7 +25,29 @@ import { updateRoute } from '../helpers/routerHelper';
 import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
 import i18n from '../locales/i18n.js';
 
+// importing action type
+import {
+  GET_ALL_COMPETITIONS,
+  GET_FEATURED_COMPETITIONS,
+  GET_ARCHIVED_COMPETITIONS
+} from './types';
+
 export function fetchCompetitions(category, page) {
+  console.log('\x1b[42m');
+  console.log('\n0m');
+  console.log(
+    '\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$fetchCompetitions$$$$$$$$$$$$$$$$$$$$$$$$$$'
+  );
+  console.log('\n0m');
+  console.log('\x1b[0m');
+  let actionType;
+  if (category === 'archived') {
+    actionType = GET_ARCHIVED_COMPETITIONS;
+  } else if (category === 'featured') {
+    actionType = GET_FEATURED_COMPETITIONS;
+  } else {
+    actionType = GET_ALL_COMPETITIONS;
+  }
   return dispatch => {
     // dispatch(setContentLoaderState(true));
     return getAuthenticatedRequest('competitions_get', {
@@ -35,12 +57,19 @@ export function fetchCompetitions(category, page) {
     })
       .then(res => {
         dispatch(
-          mergeEntities(
-            normalize(
+          {
+            type: actionType,
+            payload: normalize(
               res.data.merge.competitionPager[0],
               competitionPagerSchema
             )
-          )
+          }
+          // mergeEntities(
+          //   normalize(
+          //     res.data.merge.competitionPager[0],
+          //     competitionPagerSchema
+          //   )
+          // )
         );
         dispatch(setContentLoaderState(false));
         return res;

@@ -9,7 +9,7 @@ import i18n from '../../../locales/i18n';
 import colors from '../../../utils/constants';
 import { CompetitionLoader } from './../../Common/ContentLoader';
 const AllCompetitions = props => {
-  console.log('\x1b[42m props.allCompetitions', props.allCompetitions);
+  console.log('\x1b[43m \x1b[30m props.allCompetitions', props.allCompetitions);
   console.log('\x1b[0m');
   const [showAllCompetitions, setShowAllCompetitions] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
@@ -22,7 +22,7 @@ const AllCompetitions = props => {
     setPage(1);
     console.log('showAllCompetitions', showAllCompetitions);
     props
-      .fetchCompetitions('all', page)
+      .fetchCompetitions('all', 2)
       .then(() => {
         setrefreshing(false);
         setShowLoader(false);
@@ -42,10 +42,10 @@ const AllCompetitions = props => {
   };
 
   useEffect(() => {
-    if (props.allCompetitions.length < 1) {
-      console.log('\x1b[44m less length \x1b[0m');
-      getAllCompetitions();
-    }
+    // if (props.allCompetitions.length < 1) {
+    //   console.log('\x1b[44m less length \x1b[0m');
+    //   getAllCompetitions();
+    // }
     let showAllCompetitionsArr = [];
     if (props.allCompetitions.length > 0) {
       console.log('\x1b[46m length ', showAllCompetitionsArr);

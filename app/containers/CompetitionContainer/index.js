@@ -28,6 +28,12 @@ class CompetitionContainer extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.fetchCompetitions('all', 1);
+    this.fetchCompetitions('archived', 1);
+    this.fetchCompetitions('featured', 1);
+  }
+
   createCompetition = value => {
     if (value) {
       let newvalue = {
@@ -67,7 +73,7 @@ class CompetitionContainer extends React.Component {
     }
   }
 
-  fetchCompetitions = async (category, page) => {
+  fetchCompetitions = (category, page) => {
     this.props.fetchCompetitions(category, page);
   };
 
@@ -77,10 +83,25 @@ class CompetitionContainer extends React.Component {
 
   render() {
     debug(this.props.contentloader, '**********************');
+    console.log('\x1b[41m');
+    console.log('\nthis.props.allCompetitions', this.props.allCompetitions);
+    console.log('\x1b[42m');
+    console.log(
+      '\nthis.props.featuredCompetitions',
+      this.props.featuredCompetitions
+    );
+    console.log('\x1b[41m');
+    console.log(
+      '\nthis.props.archivedCompetitions',
+      this.props.archivedCompetitions
+    );
+    console.log('\x1b[0m');
     const { contentloader } = this.props;
     return !contentloader ? (
       <Competiton
         allCompetitions={this.props.allCompetitions}
+        featuredCompetitions={this.props.featuredCompetitions}
+        archivedCompetitions={this.props.archivedCompetitions}
         onMoreClick={(id, name) => this.onMoreClick(id, name)}
         leaveCompetition={id => this.leaveCompetition(id)}
         enrollCompetition={id => this.enrollCompetition(id)}
@@ -110,8 +131,11 @@ class CompetitionContainer extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  allCompetitions: getAllCompetitionsSelector(state),
-  contentloader: getContentLoaderState(state)
+  // allCompetitions: getAllCompetitionsSelector(state),
+  contentloader: getContentLoaderState(state),
+  allCompetitions: state.competitionsReducer.allCompetitions,
+  featuredCompetitions: state.competitionsReducer.featuredCompetitions,
+  archivedCompetitions: state.competitionsReducer.archivedCompetitions
 });
 
 const mapDispatchToProps = dispatch => {

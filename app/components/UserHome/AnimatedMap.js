@@ -3,12 +3,10 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  Animated,
   Image,
   TouchableOpacity,
   Platform,
   SafeAreaView,
-  FlatList
 } from 'react-native';
 import MapView, {
   ProviderPropType,
@@ -22,7 +20,7 @@ import { currentUserProfileIdSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllPlantProjectsSelector } from '../../selectors';
-import { multiple_trees, tree_1 } from '../../assets/index.js';
+import { multiple_trees, tree_1, markerImage } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ContributionCard from '../UserContributions/ContributionCard.native'
 import Swiper from '../../components/ReactNativeSwiper';
@@ -33,9 +31,6 @@ const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const CARD_HEIGHT = 100;
-const ITEM_SPACING = -5;
-const ITEM_PREVIEW = 18;
-const ITEM_WIDTH = screen.width - 2 * ITEM_SPACING - 2 * ITEM_PREVIEW;
 
 
 class AnimatedViews extends React.Component {
@@ -46,10 +41,8 @@ class AnimatedViews extends React.Component {
       mapIndex: 3,
       markersList: [],
       isSatellite: false,
-
       index: 0,
       canMoveHorizontal: true,
-
       markers: null,
       region: {
         latitude: 45.5230786,
@@ -97,20 +90,22 @@ class AnimatedViews extends React.Component {
 
   initiateComponent = () => {
     try {
-      this.mapView.animateToRegion(
-        {
-          latitude: this.state.markers[0].geoLatitude,
-          longitude: this.state.markers[0].geoLongitude,
-          latitudeDelta: 0.00095,
-          longitudeDelta: 0.0095
-        },
-        350
-      );
-      this.setState({ markersList: this.state.markers.slice(0, 3) })
+      setTimeout(() => {
+        this.mapView.animateToRegion(
+          {
+            latitude: this.state.markers[0].geoLatitude,
+            longitude: this.state.markers[0].geoLongitude,
+            latitudeDelta: 0.00095,
+            longitudeDelta: 0.0095
+          },
+          350
+        );
+      }, 200)
     } catch (e) {
       // Do thing
     }
   };
+
   componentWillReceiveProps(nextProps) {
     if (this.state.singleContributionID == null) {
       if (nextProps.singleContributionID !== this.state.singleContributionID) {
@@ -184,7 +179,7 @@ class AnimatedViews extends React.Component {
   };
 
   getTreeImage = (treeCount) => {
-    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
+    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.treeImage} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
   }
 
   onChageIndex = (index) => {
@@ -192,6 +187,7 @@ class AnimatedViews extends React.Component {
       this.toAnimateRegion()
     })
   }
+
   toAnimateRegion = () => {
     const oneContribution = this.state.markers[this.state.activeIndex];
     try {
@@ -208,6 +204,7 @@ class AnimatedViews extends React.Component {
       // Do thing
     }
   }
+
   onPressNextPrevBtn = (btn) => {
     if (btn == 'back') {
       if (this.state.activeIndex !== 0) {
@@ -264,14 +261,8 @@ class AnimatedViews extends React.Component {
             : null}
         </MapView>
         <View>
-          {this.props.isFullMapComponentModal ? (
-            <View style={{
-              width: '100%',
-              height: 130,
-              bottom: 30,
-              backgroundColor: 'transparent',
-              borderColor: 'red', borderWidth: 0
-            }}>
+          {this.props.isFullMapComponentModal && !this.state.singleContributionID ? (
+            <View style={styles.swiperCont}>
               <Swiper
                 key={this.state.activeIndex}
                 index={this.state.activeIndex}
@@ -293,7 +284,7 @@ class AnimatedViews extends React.Component {
                   }) : null}
 
               </Swiper>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
+              <View style={styles.bottomArrowsCont}>
                 <View style={{ flex: 1 }} />
                 <View style={{ flexDirection: 'row', }}>
                   <Icon onPress={() => this.onPressNextPrevBtn('back')} name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginHorizontal: 6 }} />
@@ -360,6 +351,15 @@ AnimatedViews.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  bottomArrowsCont: {
+    flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white'
+  },
+  swiperCont: {
+    width: '100%',
+    height: 130,
+    bottom: 30,
+    backgroundColor: 'transparent',
+  },
   multipleTrees: {
     marginLeft: 2, height: 20, width: 30,
   },
@@ -430,16 +430,13 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     backgroundColor: '#FFF',
-    // marginHorizontal: 8,
     shadowColor: '#000',
     shadowRadius: 5,
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
     height: CARD_HEIGHT,
     overflow: 'hidden',
-    borderWidth: 0,
-    borderColor: 'red',
-    // borderRadius: 4,
+
     width: '100%'
   },
   textContent: {

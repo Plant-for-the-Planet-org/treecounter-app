@@ -179,7 +179,7 @@ class AnimatedViews extends React.Component {
   };
 
   getTreeImage = (treeCount) => {
-    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.treeImage} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
+    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
   }
 
   onChageIndex = (index) => {
@@ -248,6 +248,7 @@ class AnimatedViews extends React.Component {
           {markers
             ? markers.map(marker => (
               <Marker
+                onPress={() => this.onPressHeader(marker.id)}
                 identifier={String(marker.id)}
                 key={marker.id}
                 coordinate={{
@@ -362,10 +363,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   multipleTrees: {
-    marginLeft: 2, height: 20, width: 30,
+    height: 40, width: 30,
+    borderColor: 'red', borderWidth: 1,
+
   },
   treeImage: {
-    height: 20,
+    height: 40,
+    borderColor: 'green', borderWidth: 1,
   },
   userContributionsDetailsFullViewCont: {
     backgroundColor: 'transparent',

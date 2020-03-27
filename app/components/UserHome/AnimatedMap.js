@@ -178,6 +178,24 @@ class AnimatedViews extends React.Component {
     }
   };
 
+  onPressMarker = (marker) => {
+    this.onPressHeader(marker.id)
+    const oneContribution = marker;
+    try {
+      this.mapView.animateToRegion(
+        {
+          latitude: oneContribution.geoLatitude,
+          longitude: oneContribution.geoLongitude,
+          latitudeDelta: 0.00095,
+          longitudeDelta: 0.0095
+        },
+        350
+      );
+    } catch (e) {
+      // Do thing
+    }
+  }
+
   getTreeImage = (treeCount) => {
     return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
   }
@@ -248,7 +266,7 @@ class AnimatedViews extends React.Component {
           {markers
             ? markers.map(marker => (
               <Marker
-                onPress={() => this.onPressHeader(marker.id)}
+                onPress={() => this.onPressMarker(marker)}
                 identifier={String(marker.id)}
                 key={marker.id}
                 coordinate={{
@@ -364,12 +382,12 @@ const styles = StyleSheet.create({
   },
   multipleTrees: {
     height: 40, width: 30,
-    borderColor: 'red', borderWidth: 1,
+    // borderColor: 'red', borderWidth: 1,
 
   },
   treeImage: {
     height: 40,
-    borderColor: 'green', borderWidth: 1,
+    // borderColor: 'green', borderWidth: 1,
   },
   userContributionsDetailsFullViewCont: {
     backgroundColor: 'transparent',

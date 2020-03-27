@@ -93,6 +93,8 @@ jobs:
             fi
             scp -r web/server/* $HOST:$WD_SYMFONY/web/.
             scp -r .well-known $HOST:$WD_SYMFONY/web/.
+            # uncomment this to activate the new .htaccess from the client repository instead from the backend after Heroku got active
+            # scp -r .htaccess $HOST:$WD_SYMFONY/web/.
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

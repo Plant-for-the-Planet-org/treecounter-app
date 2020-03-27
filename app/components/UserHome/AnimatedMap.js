@@ -241,19 +241,21 @@ class AnimatedViews extends React.Component {
     const {
       markers,
       region,
+      singleContributionID
     } = this.state;
     let activeMarker =
       this.state.markers !== null
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
         : null;
     let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
+    let isStaticMap = singleContributionID ? false : isContribution
     return (
       <View style={styles.container}>
         <MapView
-          rotateEnabled={isContribution}
-          scrollEnabled={isContribution}
-          pitchEnabled={isContribution}
-          zoomEnabled={isContribution}
+          rotateEnabled={isStaticMap}
+          scrollEnabled={isStaticMap}
+          pitchEnabled={isStaticMap}
+          zoomEnabled={isStaticMap}
           mapType={this.state.isSatellite ? 'satellite' : 'standard'}
           mapPadding={this.setMapPadding()}
           onMapReady={this.onMapReady}
@@ -294,7 +296,7 @@ class AnimatedViews extends React.Component {
                     return (
                       <View style={styles.card} key={i}>
                         <ContributionCard
-                          onPressSingleContribution={this.onPressHeader}
+                          onPressSingleContribution={this.onPressMarker}
                           isFromAnimatredCardList
                           contribution={marker}
                         />

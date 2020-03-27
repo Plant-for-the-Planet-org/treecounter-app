@@ -302,7 +302,7 @@ class ContributionCard extends React.Component {
           <TouchableOpacity
             style={singleRedeemObject}
             onPress={() => {
-              this.props.onPressSingleContribution(contribution.id);
+              this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
@@ -336,7 +336,7 @@ class ContributionCard extends React.Component {
           <TouchableOpacity
             style={singleRedeemObject}
             onPress={() => {
-              this.props.onPressSingleContribution(contribution.id);
+              this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
@@ -378,7 +378,7 @@ class ContributionCard extends React.Component {
           <TouchableOpacity
             style={singleRedeemObject}
             onPress={() => {
-              this.props.onPressSingleContribution(contribution.id);
+              this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
@@ -412,7 +412,7 @@ class ContributionCard extends React.Component {
           <TouchableOpacity
             style={singleRedeemObject}
             onPress={() => {
-              this.props.onPressSingleContribution(contribution.id);
+              this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>

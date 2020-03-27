@@ -287,8 +287,8 @@ class AnimatedViews extends React.Component {
               <View style={styles.bottomArrowsCont}>
                 <View style={{ flex: 1 }} />
                 <View style={{ flexDirection: 'row', }}>
-                  <Icon onPress={() => this.onPressNextPrevBtn('back')} name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginHorizontal: 6 }} />
-                  <Icon onPress={() => this.onPressNextPrevBtn('next')} name={'arrow-forward'} size={30} color={'#4d5153'} style={{ marginHorizontal: 6 }} />
+                  <Icon onPress={() => this.onPressNextPrevBtn('back')} name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} />
+                  <Icon onPress={() => this.onPressNextPrevBtn('next')} name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} />
                 </View>
               </View>
             </View>) : null}
@@ -352,7 +352,8 @@ AnimatedViews.propTypes = {
 
 const styles = StyleSheet.create({
   bottomArrowsCont: {
-    flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white'
+    flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white',
+    marginRight: 20
   },
   swiperCont: {
     width: '100%',
@@ -361,10 +362,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   multipleTrees: {
-    marginLeft: 2, height: 20, width: 30,
+    marginLeft: 2, height: 40, width: 30,
   },
   treeImage: {
-    height: 20,
+    height: 40,
   },
   userContributionsDetailsFullViewCont: {
     backgroundColor: 'transparent',

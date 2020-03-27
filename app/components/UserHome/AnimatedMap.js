@@ -306,8 +306,8 @@ class AnimatedViews extends React.Component {
               <View style={styles.bottomArrowsCont}>
                 <View style={{ flex: 1 }} />
                 <View style={{ flexDirection: 'row', }}>
-                  <Icon onPress={() => this.onPressNextPrevBtn('back')} name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} />
-                  <Icon onPress={() => this.onPressNextPrevBtn('next')} name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} />
+                  <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
                 </View>
               </View>
             </View>) : null}

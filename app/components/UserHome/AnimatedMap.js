@@ -362,10 +362,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   multipleTrees: {
-    marginLeft: 2, height: 40, width: 30,
+    marginLeft: 2, height: 20, width: 30,
   },
   treeImage: {
-    height: 40,
+    height: 20,
   },
   userContributionsDetailsFullViewCont: {
     backgroundColor: 'transparent',

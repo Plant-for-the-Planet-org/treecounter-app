@@ -15,7 +15,6 @@ import MapView, {
   Marker,
   PROVIDER_GOOGLE
 } from 'react-native-maps';
-import PanController from './panController';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 import { deleteContribution } from '../../actions/EditMyTree';
 import { loadProject } from '../../actions/loadTposAction';
@@ -27,7 +26,6 @@ import { multiple_trees, tree_1 } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ContributionCard from '../UserContributions/ContributionCard.native'
 import Swiper from '../../components/ReactNativeSwiper';
-import SIcon from 'react-native-vector-icons/SimpleLineIcons'
 
 const screen = Dimensions.get('window');
 const { height: HEIGHT, } = screen;
@@ -38,152 +36,20 @@ const CARD_HEIGHT = 100;
 const ITEM_SPACING = -5;
 const ITEM_PREVIEW = 18;
 const ITEM_WIDTH = screen.width - 2 * ITEM_SPACING - 2 * ITEM_PREVIEW;
-const SNAP_WIDTH = ITEM_WIDTH + ITEM_SPACING;
-const SCALE_END = screen.width / ITEM_WIDTH;
-const BREAKPOINT1 = 246;
-const BREAKPOINT2 = 350;
-const ONE = new Animated.Value(1);
 
-function getMarkerState(panX, panY, scrollY, i) {
-  const xLeft = -SNAP_WIDTH * i + SNAP_WIDTH / 2;
-  const xRight = -SNAP_WIDTH * i - SNAP_WIDTH / 2;
-  const xPos = -SNAP_WIDTH * i;
-
-  const isIndex = panX.interpolate({
-    inputRange: [xRight - 1, xRight, xLeft, xLeft + 1],
-    outputRange: [0, 1, 1, 0],
-    extrapolate: 'clamp'
-  });
-
-  const isNotIndex = panX.interpolate({
-    inputRange: [xRight - 1, xRight, xLeft, xLeft + 1],
-    outputRange: [1, 0, 0, 1],
-    extrapolate: 'clamp'
-  });
-
-  const center = panX.interpolate({
-    inputRange: [xPos - 10, xPos, xPos + 10],
-    outputRange: [0, 1, 0],
-    extrapolate: 'clamp'
-  });
-
-  const selected = panX.interpolate({
-    inputRange: [xRight, xPos, xLeft],
-    outputRange: [0, 1, 0],
-    extrapolate: 'clamp'
-  });
-
-  const translateY = Animated.multiply(isIndex, panY);
-
-  const translateX = panX;
-
-  const anim = Animated.multiply(
-    isIndex,
-    scrollY.interpolate({
-      inputRange: [0, BREAKPOINT1],
-      outputRange: [0, 1],
-      extrapolate: 'clamp'
-    })
-  );
-
-  const scale = Animated.add(
-    ONE,
-    Animated.multiply(
-      isIndex,
-      scrollY.interpolate({
-        inputRange: [BREAKPOINT1, BREAKPOINT2],
-        outputRange: [0, SCALE_END - 1],
-        extrapolate: 'clamp'
-      })
-    )
-  );
-
-  // [0 => 1]
-  let opacity = scrollY.interpolate({
-    inputRange: [BREAKPOINT1, BREAKPOINT2],
-    outputRange: [0, 1],
-    extrapolate: 'clamp'
-  });
-
-  opacity = Animated.multiply(isNotIndex, opacity);
-
-  opacity = opacity.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0]
-  });
-
-  let markerOpacity = scrollY.interpolate({
-    inputRange: [0, BREAKPOINT1],
-    outputRange: [0, 1],
-    extrapolate: 'clamp'
-  });
-
-  markerOpacity = Animated.multiply(isNotIndex, markerOpacity).interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0]
-  });
-
-  const markerScale = selected.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 1.2]
-  });
-
-  return {
-    translateY,
-    translateX,
-    scale,
-    opacity,
-    anim,
-    center,
-    selected,
-    markerOpacity,
-    markerScale
-  };
-}
 
 class AnimatedViews extends React.Component {
   constructor(props) {
     super(props);
-
-    const panX = new Animated.Value(0);
-    const panY = new Animated.Value(0);
-    this.animation = new Animated.Value(0);
-
-    const scrollY = panY.interpolate({
-      inputRange: [-1, 1],
-      outputRange: [1, -1]
-    });
-
-    const scrollX = panX.interpolate({
-      inputRange: [-1, 1],
-      outputRange: [1, -1]
-    });
-
-    const scale = scrollY.interpolate({
-      inputRange: [0, BREAKPOINT1],
-      outputRange: [1, 1.6],
-      extrapolate: 'clamp'
-    });
-
-    const translateY = scrollY.interpolate({
-      inputRange: [0, BREAKPOINT1],
-      outputRange: [0, -100],
-      extrapolate: 'clamp'
-    });
-
     this.state = {
       activeIndex: 0,
       mapIndex: 3,
       markersList: [],
       isSatellite: false,
-      panX,
-      panY,
+
       index: 0,
       canMoveHorizontal: true,
-      scrollY,
-      scrollX,
-      scale,
-      translateY,
+
       markers: null,
       region: {
         latitude: 45.5230786,
@@ -205,15 +71,10 @@ class AnimatedViews extends React.Component {
   };
 
   onMapReady = () => {
-    const { panX, panY, scrollY } = this.state;
     let markers = this.props.userContributions;
-    const animations = markers.map((m, i) =>
-      getMarkerState(panX, panY, scrollY, i)
-    );
 
     this.setState(
       {
-        animations,
         markers,
         region: {
           latitude: 37.78825,
@@ -234,65 +95,6 @@ class AnimatedViews extends React.Component {
     );
   };
 
-  getValue = (x, spacing) => {
-    const plus = x % spacing < spacing / 2 ? 0 : spacing;
-    let index = Math.round(x / spacing) * spacing + plus;
-    index = Math.abs(index);
-    index = Math.floor(index / ITEM_WIDTH + 0.3);
-
-    if (index >= this.state.markers.length) {
-      index = this.state.markers.length - 1;
-    }
-    if (index <= 0) {
-      index = 0;
-    }
-    // clearTimeout(tempTimeOut)
-    // let tempTimeOut = setTimeout(() => {
-    if (index >= this.state.mapIndex) {
-      this.setState({ mapIndex: this.state.mapIndex + 3 })
-    }
-    // },250
-    // )
-    // alert(index)
-    // const panX = new Animated.Value(0);
-    // const panY = new Animated.Value(0);
-    // this.animation = new Animated.Value(0);
-
-    // const scrollY = panY.interpolate({
-    //   inputRange: [-1, 1],
-    //   outputRange: [1, -1]
-    // });
-    // let markers = this.state.markers.slice(index - 1, 5);
-    // const animations = markers.map((m, i) =>
-    //   getMarkerState(panX, panY, scrollY, i)
-    // );
-    // this.setState({
-    //   panX,
-    //   panY, scrollY, animations, markersList: markers
-    // })
-    // }, 250)
-
-    clearTimeout(this.regionTimeout);
-    this.regionTimeout = setTimeout(() => {
-      if (this.index !== index) {
-        this.index = index;
-        const oneContribution = this.state.markers[index];
-        try {
-          this.mapView.animateToRegion(
-            {
-              latitude: oneContribution.geoLatitude,
-              longitude: oneContribution.geoLongitude,
-              latitudeDelta: 0.00095,
-              longitudeDelta: 0.0095
-            },
-            350
-          );
-        } catch (e) {
-          // Do thing
-        }
-      }
-    }, 10);
-  };
   initiateComponent = () => {
     try {
       this.mapView.animateToRegion(
@@ -386,34 +188,11 @@ class AnimatedViews extends React.Component {
   }
 
   onChageIndex = (index) => {
-    console.log('onChageIndex=', index)
-
-    // clearTimeout(this.regionTimeout);
-    // this.regionTimeout = setTimeout(() => {
-
     this.setState({ activeIndex: index }, () => {
       this.toAnimateRegion()
-
     })
-    //   const oneContribution = this.state.markers[index];
-    //   try {
-    //     this.mapView.animateToRegion(
-    //       {
-    //         latitude: oneContribution.geoLatitude,
-    //         longitude: oneContribution.geoLongitude,
-    //         latitudeDelta: 0.00095,
-    //         longitudeDelta: 0.0095
-    //       },
-    //       350
-    //     );
-    //   } catch (e) {
-    //     // Do thing
-    //   }
-
-    // }, 10);
   }
   toAnimateRegion = () => {
-    console.log("toAnimateRegion=", this.state.activeIndex, '')
     const oneContribution = this.state.markers[this.state.activeIndex];
     try {
       this.mapView.animateToRegion(
@@ -430,8 +209,6 @@ class AnimatedViews extends React.Component {
     }
   }
   onPressNextPrevBtn = (btn) => {
-
-
     if (btn == 'back') {
       if (this.state.activeIndex !== 0) {
         this.setState({ activeIndex: this.state.activeIndex - 1 }, () => {
@@ -444,16 +221,9 @@ class AnimatedViews extends React.Component {
         this.toAnimateRegion()
       })
     }
-
-
-
   }
   render() {
     const {
-      panX,
-      panY,
-      animations,
-      canMoveHorizontal,
       markers,
       region,
     } = this.state;
@@ -462,7 +232,6 @@ class AnimatedViews extends React.Component {
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
         : null;
     let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
-    console.log(this.state.activeIndex, 'render state actove Index')
     return (
       <View style={styles.container}>
         <MapView
@@ -498,9 +267,7 @@ class AnimatedViews extends React.Component {
           {this.props.isFullMapComponentModal ? (
             <View style={{
               width: '100%',
-              // position: 'absolute',
               height: 130,
-              // right: 0, left: 0,
               bottom: 30,
               backgroundColor: 'transparent',
               borderColor: 'red', borderWidth: 0
@@ -536,70 +303,14 @@ class AnimatedViews extends React.Component {
             </View>) : null}
 
         </View>
-
         <SafeAreaView />
-
-
-
-        {/* <PanController></PanController>
-          //   _getValue={this.getValue}
-          // style={{
-          //   flex: this.state.singleContributionID ? 1.5 : 0.3,
-          //   position: 'absolute',
-          //   bottom: 40,
-          //   backgroundColor: 'transparent'
-          // }}
-          //   vertical
-          //   horizontal={canMoveHorizontal}
-          //   xMode={'snap'}
-          //   snapSpacingX={SNAP_WIDTH}
-          //   yBounds={[-1 * screen.height, 0]}
-          //   xBounds={[-screen.width * (markers.length - 1), 0]}
-          //   panY={panY}
-          //   panX={panX}
-          //   onStartShouldSetPanResponder={() => true}
-          //   onMoveShouldSetPanResponder={() => true}
-          // >
-          //   <View style={styles.itemContainer}>
-          //     {markers
-          //       ? markers.map((marker, i) => {
-          //         return (
-          //           i <= this.state.mapIndex ? <Animated.View
-          //             key={marker.id}
-          //             style={[
-          //               styles.item,
-          //               { backgroundColor: 'transparent' },
-          //               {
-          //                 transform: [
-          //                   { translateY: animations[i].translateY },
-          //                   { translateX: animations[i].translateX },
-          //                   { scale: animations[i].scale }
-          //                 ]
-          //               }
-          //             ]}
-          //           >
-          //             <View style={styles.card} key={i}>
-          //               <ContributionCard
-          //                 onPressSingleContribution={this.onPressHeader}
-          //                 isFromAnimatredCardList
-          //                 contribution={marker}
-          //               />
-          //             </View>
-          //           </Animated.View> : <Animated.View key={marker.id} />
-          //         )
-          //       })
-          //       : null}
-          //   </View>
-          // </PanController> */}
-
-
         {this.props.isFullMapComponentModal ? (
           <>
             <TouchableOpacity
               style={styles.downArrowIcon}
               onPress={() => this.onPressHeader()}
             >
-              <Icon name={'keyboard-arrow-down'} size={25} color={'#000'} />
+              <Icon name={this.state.singleContributionID ? 'keyboard-arrow-left' : 'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>
             {!this.state.singleContributionID ? <><TouchableOpacity
               onPress={() => this.onPressHeader()}
@@ -662,67 +373,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
   },
-  treeCountText: {
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 25,
-    lineHeight: 35,
-    marginHorizontal: 2,
-    color: '#89b53a'
-  },
-  treeIcon: {
-    width: 18,
-    height: 20,
-    marginHorizontal: 2
-  },
-  subCont: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   treeCount: {
     justifyContent: 'center',
     alignItems: 'flex-end'
-  },
-  cardHeaderText: {
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 18,
-    lineHeight: 24,
-    color: '#4d5153'
-  },
-  subHeaderText: {
-    fontFamily: 'OpenSans-Regular',
-    fontSize: 14,
-    lineHeight: 24,
-    color: '#4d5153'
-  },
-  cardContainer: {
-    flex: 1,
-    marginVertical: 10,
-    marginHorizontal: 20,
-    flexDirection: 'row'
   },
   container: {
     flex: 1,
     backgroundColor: 'transparent'
   },
-  itemContainer: {
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    paddingHorizontal: ITEM_SPACING / 2 + ITEM_PREVIEW
-  },
   map: {
     backgroundColor: 'transparent',
     flex: 1,
-  },
-  item: {
-    width: ITEM_WIDTH,
-    backgroundColor: 'white',
-    marginHorizontal: ITEM_SPACING / 2,
-    overflow: 'hidden',
-    borderRadius: 5,
-    borderColor: '#000',
-    zIndex: 4000,
-    marginTop: -5
   },
   downArrowIcon: {
     position: 'absolute',

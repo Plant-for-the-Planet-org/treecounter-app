@@ -3,7 +3,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { Dimensions } from 'react-native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import { Text, View, Animated, Platform, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-navigation';

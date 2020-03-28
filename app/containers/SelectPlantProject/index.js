@@ -53,17 +53,22 @@ class SelectPlantProjectContainer extends PureComponent {
   // }
 
   async componentDidMount() {
-  /*  if (
-      this.props.plantProjects &&
-      !this.props.plantProjects.filter(plantProject => plantProject.isFeatured)
-        .length
-    ) {*/
-      let data = await this.props.loadProjects('featured');
-      debug('===got data in await in did mount:', data);
-   // }
+    /*  if (
+        this.props.plantProjects &&
+        !this.props.plantProjects.filter(plantProject => plantProject.isFeatured)
+          .length
+      ) {*/
+    let data = await this.props.loadProjects('featured');
+    debug('===got data in await in did mount:', data);
+    // }
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
+    let context = {}
+    if (this.props.navigation.getParam('context')) {
+      context = this.props.navigation.getParam('context')
+    }
+    console.log('------------------------Context Received --------------- ', context)
     this.props.selectPlantProjectAction(null);
   }
 

@@ -37,7 +37,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProjectContainer from '../../containers/SelectedPlantProject';
 import SelectedCompetitionContainer from '../../containers/SelectedCompetition';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject/index.native';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
 import ImprintContainer from '../../containers/Imprint';

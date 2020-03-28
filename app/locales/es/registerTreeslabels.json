@@ -4,6 +4,7 @@
   "register_tree_tpo_label": "Los árboles que registraste se añadirán a ",
   "register_tree_tpo_no_plant_project_header": "Por favor crea un proyecto para registrar árboles",
   "register_tree_tpo_no_plant_project_description": "Las organizaciones de plantación de árboles sólo pueden registrar árboles en un proyecto. Por favor agregua un proyecto primero.",
+  "edit_trees": "Editar árboles",
   "trees_name": "Nombre del árbol *",
   "planting_location": "Localización de la plantación",
   "many_tree_planting_location_description": "Dibuja un área de plantación en el mapa a continuación. Puedes crear polígonos usando el botón.",

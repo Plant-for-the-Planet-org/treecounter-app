@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   // SafeAreaView,
   Animated,
-  Platform
+  Platform,
+  Dimensions
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { SafeAreaView } from 'react-navigation';
@@ -42,6 +43,7 @@ import { getImageUrl } from '../../actions/apiRouting';
 import FeaturedProject from './FeaturedProjectScroll/Events.native';
 import UnfulfilledEvents from './FeaturedProjectScroll/UnfulfilledEvents.native';
 import HeaderStatic from './../Header/HeaderStatic';
+const height = Dimensions.get('window').height;
 
 class Trillion extends PureComponent {
   constructor() {
@@ -392,7 +394,7 @@ class Trillion extends PureComponent {
                 </Text>
               </TouchableOpacity>
             </View> */}
-            </ScrollView>
+            </ScrollView >
           );
       }
       case 'leaderBoard': {
@@ -434,7 +436,7 @@ class Trillion extends PureComponent {
               showSearch
             />
             <Animated.View
-              style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+              style={{ marginTop: Platform.OS === 'ios' ? height < 737 ? 56 : 26 : 56 }}
             />
 
             <TabView

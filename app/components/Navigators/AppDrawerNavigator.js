@@ -66,6 +66,7 @@ import RegisterTreesContainer from '../../containers/RegisterTrees';
 import SelectContacts from '../NewGiftTrees/components/SelectContacts.native';
 import GiftEmail from '../NewGiftTrees/components/GiftEmail.native';
 import DonateThankYou from '../DonateTrees/DonateThankyou.native';
+import colors from '../../utils/constants';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -85,6 +86,7 @@ const headerLabels = {
   [getLocalRoute('app_claim')]: 'label.claim_trees',
   [getLocalRoute('app_giftTrees')]: 'label.gift_trees',
   [getLocalRoute('app_selectProject')]: 'label.projects',
+  [getLocalRoute('app_selectedProject')]: 'label.project',
   [getLocalRoute('app_competition')]: '',
   [getLocalRoute('app_editCompetition')]: '',
   [getLocalRoute('app_imprint')]: 'label.imprint',
@@ -109,7 +111,7 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
   const searchNavigator = createStackNavigator(
     {
       Search: {
-        screen: () => <SearchLayout searchInputUnderlineColorAndroid="#fff" />
+        screen: () => <SearchLayout searchInputUnderlineColorAndroid={colors.WHITE} />
       }
     },
     {
@@ -237,7 +239,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: EmailSentContainer
       },
       [getLocalRoute('app_signup')]: {
-        screen: SignUpContainer
+        screen: SignUpContainer,
+        path: 'signup'
       },
       [getLocalRoute('app_myTrees')]: {
         screen: UserContributionsContainer
@@ -276,15 +279,13 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: PrivacyContainer,
         navigationOptions: { header: null }
       },
-      // [getLocalRoute('app_claim')]: {
-      //   screen: RedemptionContainer
-      // },
       [getLocalRoute('app_editTrees')]: {
         screen: EditUserContributionContainer
       },
       [getLocalRoute('app_target')]: {
         screen: isLoggedIn ? TargetContainer : LoginContainer,
-        navigationOptions: { header: null }
+        navigationOptions: { header: null },
+        path: 'target'
       },
       [getLocalRoute('app_challenge')]: {
         screen: ChallengeContainer,
@@ -309,7 +310,13 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: SelectPlantProjectContainer
       },
       [getLocalRoute('app_selectProject')]: {
-        screen: SelectedPlantProjectContainer
+        screen: SelectPlantProjectContainer,
+        navigationOptions: { header: null },
+      },
+      [getLocalRoute('app_selectedProject')]: {
+        screen: SelectedPlantProjectContainer,
+        navigationOptions: { header: null },
+        path: 'project/:projectSlug'
       },
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer
@@ -409,7 +416,7 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         let navigationConfig = {
           headerStyle: styles.container,
           headerTitleStyle: { paddingRight: 16 },
-          headerTintColor: '#fff',
+          headerTintColor: colors.WHITE,
           headerBackTitle: null,
           title: getTitle(navigation),
           headerRight: (

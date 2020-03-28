@@ -1,6 +1,7 @@
 {
   "currency": "Moneda",
   "gift_trees": "Árboles de regalo",
+  "treecounter_user_name": "Usuario existente",
   "other_email": "Correo electrónico",
   "heading_give": "Dar a...",
   "heading_donate_details": "Detalles de donación",
@@ -9,6 +10,7 @@
   "heading_payment": "Pago",
   "no_of_trees": "Numero de Árboles",
   "trees": "Árboles",
+  "gift_receipient": "Regala árboles a",
   "gift_trees_description": "Introduce una persona a la que quieras regalar árboles. En los siguientes pasos puedes seleccionar proyectos que plantarán árboles.",
   "gift_message": "Mensaje del regalo (Opcional)",
   "support_user_trees": "Apoyando a {{user}} para plantar {{count}} árboles",

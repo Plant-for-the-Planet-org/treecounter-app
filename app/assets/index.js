@@ -223,6 +223,11 @@ import creditCardBack from './images/icons/creditCardBack.png';
 import giftplant from './images/gifttrees/giftplant.png'
 import donateThankyou from './images/DonateThankyou.png';
 import deciduousTree from './images/deciduous-tree.png';
+import closeHBlack from './images/header/closeBlack.png';
+import closeHWhite from './images/header/closeWhite.png';
+import shareBlack from './images/header/shareBlack.png';
+import shareWhite from './images/header/shareWhite.png';
+
 export {
   treelogo,
   germany,
@@ -442,5 +447,9 @@ export {
   spruce,
   giftplant,
   donateThankyou,
-  deciduousTree
+  deciduousTree,
+  closeHBlack,
+  closeHWhite,
+  shareBlack,
+  shareWhite
 };

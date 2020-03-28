@@ -45,7 +45,10 @@
   "view_all": "Zeige alle",
   "show_all": "Zeige alle",
   "show_less": "Zeige weniger",
+  "select_currency": "Währung auswählen",
+  "featured_currencies": "Ausgewählte Währungen",
+  "all_currencies": "Alle Währungen",
   "share": "Teile",
-  "noInternet": "Keine Internet-Verbindung. Du bist vielleicht offline",
+  "noInternet": "Du bist vielleicht offline",
   "someFunctionality": "Einige Funktionen sind möglicherweise offline nicht verfügbar"
 }

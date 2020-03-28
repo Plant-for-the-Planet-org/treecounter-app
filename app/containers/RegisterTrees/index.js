@@ -5,9 +5,8 @@ import PropTypes from 'prop-types';
 import { debug } from '../../debug';
 import RegisterTrees from '../../components/RegisterTrees';
 import { registerTree } from '../../actions/registerTree';
-import { userTreecounterSelector } from '../../selectors/index';
 import { mergeContributionImages } from '../../helpers/utils';
-import { currentUserProfileSelector } from '../../selectors/index';
+import { currentUserProfileSelector, getProgressModelSelector, userTreecounterSelector } from '../../selectors/index';
 import NavigationEvents from './importNavigationEvents';
 import {
   schemaOptionsSingleTree,
@@ -75,6 +74,7 @@ class RegisterTreesContainer extends PureComponent {
         <RegisterTrees
           key="register-tree"
           ref="registerTrees"
+          {...this.props}
           navigation={this.props.navigation}
           onSubmit={this.onSubmit}
           schemaOptionsSingleTree={this.state.schemaOptionsSingleTree}
@@ -89,7 +89,8 @@ class RegisterTreesContainer extends PureComponent {
 const mapStateToProps = state => {
   return {
     treecounter: userTreecounterSelector(state),
-    currentUserProfile: currentUserProfileSelector(state)
+    currentUserProfile: currentUserProfileSelector(state),
+    loading: getProgressModelSelector(state),
   };
 };
 

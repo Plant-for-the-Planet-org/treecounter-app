@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Text, View, TouchableOpacity, Animated, Platform } from 'react-native';
+import { Text, View, TouchableOpacity, Animated, Platform, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import { TabBar, TabView } from 'react-native-tab-view';
@@ -14,6 +14,8 @@ import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured com
 import AllCompetitions from './Tabs/all.native'; // Shows all competitions
 
 import HeaderStatic from './../Header/HeaderStatic';
+const height = Dimensions.get('window').height;
+import colors from '../../utils/constants';
 
 class Competiton extends React.Component {
   constructor(props) {
@@ -40,7 +42,7 @@ class Competiton extends React.Component {
   _renderTabBar = props => {
     const focusedColor = '#89b53a';
     const normalColor = '#4d5153';
-    const colorWhite = '#fff';
+    const colorWhite = colors.WHITE;
     const colorGreen = '#89b53a';
     return (
       <TabBar
@@ -122,7 +124,7 @@ class Competiton extends React.Component {
             navigation={this.props.navigation}
           />
           <Animated.View
-            style={{ marginTop: Platform.OS === 'ios' ? 24 : 56 }}
+            style={{ marginTop: Platform.OS === 'ios' ? height < 737 ? 56 : 26 : 56 }}
           />
           <TabView
             useNativeDriver

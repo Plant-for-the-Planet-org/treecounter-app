@@ -17,6 +17,7 @@ import styles from '../../../styles/newUserContributions/userContributions';
 // import styles from '../../../styles/newUserContributions/userContributions';
 import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
 import { updateStaticRoute } from './../../../helpers/routerHelper';
+import colors from '../../../utils/constants';
 
 // eslint-disable-next-line no-underscore-dangle
 const _goToURL = url => {
@@ -56,7 +57,7 @@ class UserContributionsDetails extends React.Component {
   onPlantProjectClick = (plantProjectId, plantProjectName) => {
     this.props.selectPlantProjectAction(plantProjectId);
 
-    this.props.navigation.navigate(getLocalRoute('app_selectProject'), {
+    this.props.navigation.navigate(getLocalRoute('app_selectedProject'), {
       treeCounterId: plantProjectId,
       titleParam: plantProjectName
     });
@@ -253,10 +254,8 @@ class UserContributionsDetails extends React.Component {
           i18n.t('label.geolocation_error_by_project');
       }
     }
-    const backgroundColor = '#fff';
-
     return (
-      <ScrollView style={{ backgroundColor: { backgroundColor }, flex: 1 }}>
+      <ScrollView style={{ backgroundColor: colors.WHITE, flex: 1 }}>
         <UserContributions
           mayUpdate={mayUpdate}
           treeCount={treeCount}
@@ -296,29 +295,29 @@ class UserContributionsDetails extends React.Component {
         {(videoUrl ||
           (contributionOrPlantedImages &&
             contributionOrPlantedImages.length > 0)) && (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              marginVertical: 30
-            }}
-          >
-            {/* {debug('\x1b[46m \x1b[30m video', videoUrl)} */}
-            {videoUrl ? <VideoContainer url={videoUrl} /> : null}
-            {/* TODO Add thumbnail for video */}
-            {contributionOrPlantedImages &&
-              contributionOrPlantedImages.length > 0 && (
-                <PlantProjectImageCarousel
-                  resizeMode={'cover'}
-                  images={contributionOrPlantedImages}
-                  aspectRatio={16 / 9}
-                  videoUrl={videoUrl}
-                />
-              )}
-          </ScrollView>
-        )}
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                marginVertical: 30
+              }}
+            >
+              {/* {debug('\x1b[46m \x1b[30m video', videoUrl)} */}
+              {videoUrl ? <VideoContainer url={videoUrl} /> : null}
+              {/* TODO Add thumbnail for video */}
+              {contributionOrPlantedImages &&
+                contributionOrPlantedImages.length > 0 && (
+                  <PlantProjectImageCarousel
+                    resizeMode={'cover'}
+                    images={contributionOrPlantedImages}
+                    aspectRatio={16 / 9}
+                    videoUrl={videoUrl}
+                  />
+                )}
+            </ScrollView>
+          )}
 
         {/* displays error message if geoLatitude and geoLongitude are same */}
         {hasGeoLocationError ? (

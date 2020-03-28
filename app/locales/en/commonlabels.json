@@ -45,7 +45,11 @@
   "view_all": "View all",
   "show_all": "Show all",
   "show_less": "Show less",
+  "select_currency": "Select Currency",
+  "featured_currencies": "Featured Currencies",
+  "all_currencies": "All Currencies",
   "share": "Share",
   "noInternet": "You maybe offline",
-  "thankyou": "Thank you"
+  "thankyou": "Thank you",
+  "someFunctionality": "Some functionalities may be unavailable offline"
 }

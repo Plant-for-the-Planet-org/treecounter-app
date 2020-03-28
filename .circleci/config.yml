@@ -88,13 +88,13 @@ jobs:
             if [[ "${CIRCLE_BRANCH}" == "staging" ]] || [[ "${CIRCLE_BRANCH}" == "develop" ]]
             then
               ssh $HOST "cd $WD_SYMFONY; rm -fr web/*"
+              # copy client .htaccess into web folder
+              scp -r .htaccess $HOST:$WD_SYMFONY/web/.
             else
               ssh $HOST "cd $WD_SYMFONY; git clean -f web"
             fi
             scp -r web/server/* $HOST:$WD_SYMFONY/web/.
             scp -r .well-known $HOST:$WD_SYMFONY/web/.
-            # copy client .htaccess into web folder
-            scp -r .htaccess $HOST:$WD_SYMFONY/web/.
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

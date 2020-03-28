@@ -57,6 +57,7 @@ const PledgeEvents = (props) => {
 
           <EventDetails pledges={pledges} scrollY={scrollY} />
 
+          {/* This opens when the user has just created the Pledge  */}
           <RBSheet
             ref={RBSheetRef}
             height={354}
@@ -92,24 +93,24 @@ const PledgeEvents = (props) => {
                   onPress={() => {
                     updateStaticRoute(
                       getLocalRoute('app_donateTrees'),
-                      props.navigation,
-                      // {
-                      //   context: {
-                      //     contextType: 'pledge',
-                      //     pledge: {
-                      //       firstName: myPledge.firstName,
-                      //       lastName: myPledge.lastName,
-                      //       treeCount: myPledge.treeCount,
-                      //       email: myPledge.email,
-                      //       isAnonymous: myPledge.isAnonymous
-                      //     },
-                      //     plantProject: {
-                      //       currency: plantProject.currency,
-                      //       amountPerTree: plantProject.treeCost,
-                      //       plantProjectID: plantProject.id
-                      //     }
-                      //   }
-                      // }
+                      props.navigation, 0,
+                      {
+                        context: {
+                          contextType: 'pledge',
+                          pledge: {
+                            firstName: myPledge.firstname,
+                            lastName: myPledge.lastname,
+                            treeCount: myPledge.treeCount,
+                            email: myPledge.email,
+                            isAnonymous: myPledge.isAnonymous
+                          },
+                          plantProject: {
+                            currency: pledges.plantProject.currency,
+                            amountPerTree: pledges.plantProject.treeCost,
+                            plantProjectID: pledges.plantProject.id
+                          }
+                        }
+                      }
                     );
                   }}
                 >
@@ -191,7 +192,23 @@ function FulfillPledgeButton(props) {
       </View>
       <TouchableOpacity
         onPress={() => {
-          updateRoute('app_donateTrees', props.navigation);
+          updateRoute('app_donateTrees', props.navigation, 0, {
+            context: {
+              contextType: 'pledge',
+              pledge: {
+                firstName: props.myPledge.firstname,
+                lastName: props.myPledge.lastname,
+                treeCount: props.myPledge.treeCount,
+                email: props.myPledge.email,
+                isAnonymous: props.myPledge.isAnonymous
+              },
+              plantProject: {
+                currency: props.pledges.plantProject.currency,
+                amountPerTree: props.pledges.plantProject.treeCost,
+                plantProjectID: props.pledges.plantProject.id
+              }
+            }
+          });
         }}
       >
         <View style={styles.continueButtonView}>

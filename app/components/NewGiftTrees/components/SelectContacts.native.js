@@ -5,6 +5,7 @@ import styles from './../../../styles/gifttrees/giftrees'
 import GetRandomImage from '../../../utils/getRandomImage';
 import i18n from '../../../locales/i18n';
 import HeaderNew from './../../Header/HeaderNew';
+import { updateRoute } from '../../../helpers/routerHelper';
 
 
 const SelectContacts = (props) => {
@@ -18,16 +19,13 @@ const SelectContacts = (props) => {
             if (err === "denied") {
                 console.warn("Permission to access contacts was denied");
             } else {
-                console.log('Contacts non filtered', contacts)
+                //console.log('Contacts non filtered', contacts)
                 const newContacts = contacts.filter(function (contact) {
                     return contact.emailAddresses.length > 0
                 });
                 setContacts(newContacts)
             }
         });
-        // Contacts.getCount(count => {
-        //     this.setState({ searchPlaceholder: `Search ${count} contacts` });
-        // });
     }
 
     if (!contacts.length > 0) {
@@ -43,12 +41,24 @@ const SelectContacts = (props) => {
         }
     }
 
-    console.log('Contacts filetered', contacts);
-
     const Item = (props) => {
         const item = props.item;
         return (
-            <TouchableOpacity style={{ flexDirection: 'row', marginBottom: 30 }}>
+            <TouchableOpacity
+                onPress={() => {
+                    updateRoute('app_gift_projects', props.navigation, 0, {
+                        context: {
+                            contextType: 'gift-contact',
+                            giftDetails: {
+                                firstName: item.displayName,
+                                lastName: '',
+                                email: item.emailAddresses[0],
+                                giftMessage: ''
+                            }
+                        }
+                    });
+                }}
+                style={{ flexDirection: 'row', marginBottom: 30 }}>
                 {props.item.hasThumbnail ? <Image style={{ height: 50, width: 50, borderRadius: 25 }} source={{ uri: props.item.thumbnailPath }} /> : <GetRandomImage name={item.displayName} />}
 
                 <View style={{ marginLeft: 15, justifyContent: 'center' }}>
@@ -62,7 +72,7 @@ const SelectContacts = (props) => {
     }
     const searchContact = (text) => {
         onChangeSearch(text)
-        console.log(text)
+        //console.log(text)
         const emailAddressRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
         if (text === "" || text === null) {
             loadContacts();
@@ -116,7 +126,7 @@ const SelectContacts = (props) => {
                 <FlatList
                     data={contacts}
                     keyExtractor={item => item.id}
-                    renderItem={({ item }) => <Item item={item} />}
+                    renderItem={({ item }) => <Item item={item} navigation={props.navigation} />}
                 />
 
             </ScrollView>

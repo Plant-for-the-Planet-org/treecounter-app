@@ -8,7 +8,6 @@ import HeaderNew from '../../Header/HeaderNew.native';
 export default class GiftEmail extends Component {
   constructor(props) {
     super(props);
-
     this.state = { buttonType: 'next' };
   }
   render() {

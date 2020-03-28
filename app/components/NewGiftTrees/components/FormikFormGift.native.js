@@ -11,6 +11,7 @@ import i18n from '../../../locales/i18n';
 import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
 import buttonStyles from '../../../styles/common/button.native';
 import giftInvitationFormSchema from '../../../server/formSchemas/giftTrees';
+import { updateRoute } from '../../../helpers/routerHelper';
 
 export default class FormikFormGift extends Component {
   constructor(props) {
@@ -57,7 +58,17 @@ export default class FormikFormGift extends Component {
       <Formik
         initialValues={props.initialValues}
         onSubmit={values => {
-          props.openProjects(values, 'invitation');
+          updateRoute('app_gift_projects', props.navigation, 0, {
+            context: {
+              contextType: 'gift-invitation',
+              giftDetails: {
+                firstName: values.firstname,
+                lastName: values.lastname,
+                email: values.email,
+                giftMessage: values.message
+              }
+            }
+          });
         }}
         validationSchema={this.validationSchema}
       >

@@ -85,7 +85,7 @@ jobs:
               npm run build:server
             fi
             echo "Copying new files to web server"
-            if [[ "${CIRCLE_BRANCH}" == "develop" ]]
+            if [[ "${CIRCLE_BRANCH}" == "staging" ]] || [[ "${CIRCLE_BRANCH}" == "develop" ]]
             then
               ssh $HOST "cd $WD_SYMFONY; rm -r web/*"
             else

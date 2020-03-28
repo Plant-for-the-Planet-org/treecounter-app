@@ -87,7 +87,7 @@ jobs:
             echo "Copying new files to web server"
             if [[ "${CIRCLE_BRANCH}" == "staging" ]] || [[ "${CIRCLE_BRANCH}" == "develop" ]]
             then
-              ssh $HOST "cd $WD_SYMFONY; rm -r web/*"
+              ssh $HOST "cd $WD_SYMFONY; rm -fr web/*"
             else
               ssh $HOST "cd $WD_SYMFONY; git clean -f web"
             fi

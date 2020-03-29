@@ -29,17 +29,11 @@ import i18n from '../locales/i18n.js';
 import {
   GET_ALL_COMPETITIONS,
   GET_FEATURED_COMPETITIONS,
-  GET_ARCHIVED_COMPETITIONS
+  GET_ARCHIVED_COMPETITIONS,
+  GET_MINE_COMPETITIONS
 } from './types';
 
 export function fetchCompetitions(category, page) {
-  console.log('\x1b[42m');
-  console.log('\n0m');
-  console.log(
-    '\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$fetchCompetitions$$$$$$$$$$$$$$$$$$$$$$$$$$'
-  );
-  console.log('\n0m');
-  console.log('\x1b[0m');
   let actionType;
   if (category === 'archived') {
     actionType = GET_ARCHIVED_COMPETITIONS;
@@ -59,10 +53,7 @@ export function fetchCompetitions(category, page) {
         dispatch(
           {
             type: actionType,
-            payload: normalize(
-              res.data.merge.competitionPager[0],
-              competitionPagerSchema
-            )
+            payload: res.data.merge.competitionPager
           }
           // mergeEntities(
           //   normalize(
@@ -336,14 +327,10 @@ export function fetchMineCompetitions() {
     //dispatch(setContentLoaderState(true));
     return getAuthenticatedRequest('competitionsMine_get')
       .then(res => {
-        dispatch(
-          mergeEntities(
-            normalize(
-              res.data.merge.competitionPager[0],
-              competitionPagerSchema
-            )
-          )
-        );
+        dispatch({
+          type: GET_MINE_COMPETITIONS,
+          payload: res.data.merge.competitionPager
+        });
         dispatch(setContentLoaderState(false));
         return res;
       })

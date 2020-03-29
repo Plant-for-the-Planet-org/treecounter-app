@@ -37,13 +37,9 @@ const MineCompetitions = props => {
   };
 
   useEffect(() => {
-    // if (props.allCompetitions.length < 1) {
-    //   getAllCompetitions();
-    // }
     let showAllCompetitionsArr = [];
-
-    if (props.allCompetitions.length > 0) {
-      props.allCompetitions.forEach(val => {
+    if (props.mineCompetitions.length > 0) {
+      props.mineCompetitions.forEach(val => {
         if (val.category === 'mine') {
           val.competitions.forEach(comp => {
             showAllCompetitionsArr.push(comp);
@@ -55,7 +51,7 @@ const MineCompetitions = props => {
       showAllCompetitions.concat(showAllCompetitionsArr)
     );
     setLoading(false);
-  }, [props.allCompetitions]);
+  }, [props.mineCompetitions]);
 
   const _keyExtractor = item => item.id.toString();
   const _renderItem = ({ item }) => (

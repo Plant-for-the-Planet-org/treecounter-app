@@ -19,8 +19,9 @@ const FeaturedCompetitions = props => {
     setShowLoader(true);
     setrefreshing(true);
     setPage(1);
+    setShowAllCompetitions([]);
     props
-      .fetchCompetitions('featured', page)
+      .fetchCompetitions('featured', 1)
       .then(() => {
         setrefreshing(false);
         setShowLoader(false);
@@ -32,19 +33,15 @@ const FeaturedCompetitions = props => {
   };
   let CurrentDate = new Date();
 
-  const getAllCompetitions = async () => {
-    await props.fetchCompetitions('featured', page);
-    setTimeout(() => {
-      setShowLoader(false);
-    }, 1000);
-    updateFeaturedCompetitionsArr();
+  const getAllCompetitions = async pageNo => {
+    await props.fetchCompetitions('featured', pageNo);
   };
 
-  const updateFeaturedCompetitionsArr = () => {
+  useEffect(() => {
     let showAllCompetitionsArr = [];
     if (props.featuredCompetitions.length > 0) {
       for (let i = 0; i < props.featuredCompetitions.length; i++) {
-        if (props.featuredCompetitions[i].category === 'archived') {
+        if (props.featuredCompetitions[i].category === 'featured') {
           for (
             let j = 0;
             j < props.featuredCompetitions[i].competitions.length;
@@ -65,10 +62,7 @@ const FeaturedCompetitions = props => {
       showAllCompetitions.concat(showAllCompetitionsArr)
     );
     setLoading(false);
-  };
-
-  useEffect(() => {
-    updateFeaturedCompetitionsArr();
+    setShowLoader(false);
   }, [props.featuredCompetitions]);
 
   const _keyExtractor = item => item.id.toString();
@@ -88,7 +82,7 @@ const FeaturedCompetitions = props => {
   const handleLoadMore = () => {
     setLoading(true);
     setPage(page + 1);
-    getAllCompetitions();
+    getAllCompetitions(page + 1);
   };
 
   const EmptyContainer = () => {

@@ -8,21 +8,31 @@ import styles from '../../../styles/competition/competition-master.native';
 import i18n from '../../../locales/i18n';
 import colors from '../../../utils/constants';
 import { CompetitionLoader } from './../../Common/ContentLoader';
+const CompetitionFinishedMessage = () => {
+  return (
+    <View style={styles.caughtUpMessageContainer}>
+      <View style={[styles.caughtUpLine, { marginRight: 10 }]} />
+      <Text style={styles.caughtUpMessage}>You're all caught up</Text>
+      <View style={[styles.caughtUpLine, { marginLeft: 10 }]} />
+    </View>
+  );
+};
 const AllCompetitions = props => {
-  console.log('\x1b[43m \x1b[30m props.allCompetitions', props.allCompetitions);
-  console.log('\x1b[0m');
   const [showAllCompetitions, setShowAllCompetitions] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [showLoader, setShowLoader] = useState(true);
+  const [isCompetitionFinished, setCompetitionFinished] = useState(false);
+
   const onRefresh = () => {
     setShowLoader(true);
     setrefreshing(true);
     setPage(1);
-    console.log('showAllCompetitions', showAllCompetitions);
+    setShowAllCompetitions([]);
+    setCompetitionFinished(false);
     props
-      .fetchCompetitions('all', 2)
+      .fetchCompetitions('all', 1)
       .then(() => {
         setrefreshing(false);
         setShowLoader(false);
@@ -34,22 +44,14 @@ const AllCompetitions = props => {
   };
   let CurrentDate = new Date();
 
-  const getAllCompetitions = () => {
-    props.fetchCompetitions('all', page);
-    setTimeout(() => {
-      setShowLoader(false);
-    }, 1000);
+  const getAllCompetitions = async pageNo => {
+    console.log('\x1b[45m ===================\x1b[0m', pageNo);
+    await props.fetchCompetitions('all', pageNo);
   };
 
   useEffect(() => {
-    // if (props.allCompetitions.length < 1) {
-    //   console.log('\x1b[44m less length \x1b[0m');
-    //   getAllCompetitions();
-    // }
     let showAllCompetitionsArr = [];
     if (props.allCompetitions.length > 0) {
-      console.log('\x1b[46m length ', showAllCompetitionsArr);
-      console.log('\x1b[0m');
       for (let i = 0; i < props.allCompetitions.length; i++) {
         if (props.allCompetitions[i].category === 'all') {
           for (
@@ -66,23 +68,16 @@ const AllCompetitions = props => {
             }
           }
         }
+        if (props.allCompetitions[i].nbRemaining === 0) {
+          setCompetitionFinished(true);
+        }
       }
-      console.log('\x1b[45m');
-      console.log(
-        '=============================================================='
-      );
-      console.log('showAllCompetitionsArr', showAllCompetitionsArr);
-      console.log('\x1b[44m');
-      console.log('showAllCompetitions', showAllCompetitions);
-      console.log(
-        '=============================================================='
-      );
-      console.log('\x1b[0m');
     }
     setShowAllCompetitions(showAllCompetitions =>
       showAllCompetitions.concat(showAllCompetitionsArr)
     );
     setLoading(false);
+    setShowLoader(false);
   }, [props.allCompetitions]);
 
   const _keyExtractor = item => item.id.toString();
@@ -101,8 +96,8 @@ const AllCompetitions = props => {
 
   const handleLoadMore = () => {
     setLoading(true);
-    setPage(page + 1);
-    getAllCompetitions();
+    setPage(prevPage => prevPage + 1);
+    getAllCompetitions(page + 1);
   };
 
   const EmptyContainer = () => {
@@ -130,7 +125,7 @@ const AllCompetitions = props => {
       data={showAllCompetitions}
       keyExtractor={item => _keyExtractor(item)}
       renderItem={item => _renderItem(item)}
-      onEndReached={() => handleLoadMore()}
+      onEndReached={isCompetitionFinished ? null : () => handleLoadMore()}
       onEndReachedThreshold={0.05}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
@@ -157,7 +152,11 @@ const AllCompetitions = props => {
         );
       }}
       ListFooterComponent={() => {
-        return isLoading ? CompetitionLoader() : null;
+        return isLoading
+          ? CompetitionLoader()
+          : isCompetitionFinished
+          ? CompetitionFinishedMessage()
+          : null;
       }}
     />
   );

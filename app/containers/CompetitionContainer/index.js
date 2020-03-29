@@ -13,7 +13,7 @@ import {
   fetchMineCompetitions,
   leaveCompetition
 } from '../../actions/competition';
-import { getAllCompetitionsSelector } from '../../selectors';
+// import { getAllCompetitionsSelector } from '../../selectors';
 import { getContentLoaderState } from '../../reducers/contentloaderReducer';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
@@ -32,6 +32,7 @@ class CompetitionContainer extends React.Component {
     this.fetchCompetitions('all', 1);
     this.fetchCompetitions('archived', 1);
     this.fetchCompetitions('featured', 1);
+    this.fetchMineCompetitions();
   }
 
   createCompetition = value => {
@@ -73,8 +74,8 @@ class CompetitionContainer extends React.Component {
     }
   }
 
-  fetchCompetitions = (category, page) => {
-    this.props.fetchCompetitions(category, page);
+  fetchCompetitions = async (category, page) => {
+    await this.props.fetchCompetitions(category, page);
   };
 
   fetchMineCompetitions = async () => {
@@ -83,25 +84,13 @@ class CompetitionContainer extends React.Component {
 
   render() {
     debug(this.props.contentloader, '**********************');
-    console.log('\x1b[41m');
-    console.log('\nthis.props.allCompetitions', this.props.allCompetitions);
-    console.log('\x1b[42m');
-    console.log(
-      '\nthis.props.featuredCompetitions',
-      this.props.featuredCompetitions
-    );
-    console.log('\x1b[41m');
-    console.log(
-      '\nthis.props.archivedCompetitions',
-      this.props.archivedCompetitions
-    );
-    console.log('\x1b[0m');
     const { contentloader } = this.props;
     return !contentloader ? (
       <Competiton
         allCompetitions={this.props.allCompetitions}
         featuredCompetitions={this.props.featuredCompetitions}
         archivedCompetitions={this.props.archivedCompetitions}
+        mineCompetitions={this.props.mineCompetitions}
         onMoreClick={(id, name) => this.onMoreClick(id, name)}
         leaveCompetition={id => this.leaveCompetition(id)}
         enrollCompetition={id => this.enrollCompetition(id)}
@@ -135,7 +124,8 @@ const mapStateToProps = state => ({
   contentloader: getContentLoaderState(state),
   allCompetitions: state.competitionsReducer.allCompetitions,
   featuredCompetitions: state.competitionsReducer.featuredCompetitions,
-  archivedCompetitions: state.competitionsReducer.archivedCompetitions
+  archivedCompetitions: state.competitionsReducer.archivedCompetitions,
+  mineCompetitions: state.competitionsReducer.mineCompetitions
 });
 
 const mapDispatchToProps = dispatch => {

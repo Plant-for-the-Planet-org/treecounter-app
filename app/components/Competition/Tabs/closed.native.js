@@ -8,20 +8,31 @@ import { trees, empty } from './../../../assets';
 import i18n from '../../../locales/i18n';
 import colors from '../../../utils/constants';
 import { CompetitionLoader } from './../../Common/ContentLoader';
-
+const CompetitionFinishedMessage = () => {
+  return (
+    <View style={styles.caughtUpMessageContainer}>
+      <View style={[styles.caughtUpLine, { marginRight: 10 }]} />
+      <Text style={styles.caughtUpMessage}>You're all caught up</Text>
+      <View style={[styles.caughtUpLine, { marginLeft: 10 }]} />
+    </View>
+  );
+};
 const ClosedCompetitions = props => {
   const [showAllCompetitions, setShowAllCompetitions] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [showLoader, setShowLoader] = useState(true);
+  const [isCompetitionFinished, setCompetitionFinished] = useState(false);
 
   const onRefresh = () => {
     setShowLoader(true);
     setrefreshing(true);
     setPage(1);
+    setShowAllCompetitions([]);
+    setCompetitionFinished(false);
     props
-      .fetchCompetitions('archived', page)
+      .fetchCompetitions('archived', 1)
       .then(() => {
         setrefreshing(false);
         setShowLoader(false);
@@ -33,15 +44,11 @@ const ClosedCompetitions = props => {
   };
   let CurrentDate = new Date();
 
-  const getAllCompetitions = async () => {
-    await props.fetchCompetitions('archived', page);
-    setTimeout(() => {
-      setShowLoader(false);
-    }, 1000);
-    updateArchivedCompetitionsArr();
+  const getAllCompetitions = async pageNo => {
+    await props.fetchCompetitions('archived', pageNo);
   };
 
-  const updateArchivedCompetitionsArr = () => {
+  useEffect(() => {
     let showAllCompetitionsArr = [];
     if (props.archivedCompetitions.length > 0) {
       for (let i = 0; i < props.archivedCompetitions.length; i++) {
@@ -60,19 +67,16 @@ const ClosedCompetitions = props => {
             }
           }
         }
+        if (props.allCompetitions[i].nbRemaining === 0) {
+          setCompetitionFinished(true);
+        }
       }
     }
     setShowAllCompetitions(showAllCompetitions =>
       showAllCompetitions.concat(showAllCompetitionsArr)
     );
     setLoading(false);
-  };
-
-  useEffect(() => {
-    // if (props.allCompetitions.length < 1) {
-    //   getAllCompetitions();
-    // }
-    updateArchivedCompetitionsArr();
+    setShowLoader(false);
   }, [props.archivedCompetitions]);
 
   const _keyExtractor = item => item.id.toString();
@@ -92,7 +96,7 @@ const ClosedCompetitions = props => {
   const handleLoadMore = () => {
     setLoading(true);
     setPage(page + 1);
-    getAllCompetitions();
+    getAllCompetitions(page + 1);
   };
 
   const EmptyContainer = () => {
@@ -147,7 +151,11 @@ const ClosedCompetitions = props => {
         );
       }}
       ListFooterComponent={() => {
-        return isLoading ? CompetitionLoader() : null;
+        return isLoading
+          ? CompetitionLoader()
+          : isCompetitionFinished
+          ? CompetitionFinishedMessage()
+          : null;
       }}
     />
   );

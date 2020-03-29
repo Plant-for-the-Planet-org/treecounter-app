@@ -1,13 +1,15 @@
 import {
   GET_ALL_COMPETITIONS,
   GET_FEATURED_COMPETITIONS,
-  GET_ARCHIVED_COMPETITIONS
+  GET_ARCHIVED_COMPETITIONS,
+  GET_MINE_COMPETITIONS
 } from '../actions/types';
 
 const initialState = {
   allCompetitions: [],
   featuredCompetitions: [],
-  archivedCompetitions: []
+  archivedCompetitions: [],
+  mineCompetitions: []
 };
 
 export default function(state = initialState, action) {
@@ -26,6 +28,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         archivedCompetitions: action.payload
+      };
+    case GET_MINE_COMPETITIONS:
+      return {
+        ...state,
+        mineCompetitions: action.payload
       };
     default:
       return state;

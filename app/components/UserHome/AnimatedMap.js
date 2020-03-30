@@ -339,37 +339,27 @@ class AnimatedViews extends React.Component {
             >
               <Icon name={this.state.singleContributionID ? 'keyboard-arrow-left' : 'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>
-            <Animatable.View animation={isMapPressed ? 'slideOutRight' : 'slideInRight'}>
-              {!this.state.singleContributionID ? <>
-                <TouchableOpacity
-                  onPress={() => this.onPressHeader()}
-                  style={styles.fullScreenExitIcon}
-                >
-                  <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={this.onPressCurrentLocation}
-                  style={styles.myLocationIcon}
-                >
-                  <Icon name={'my-location'} size={30} color={'#4C5153'} />
-                </TouchableOpacity>
+            {!this.state.singleContributionID ? <>
+              <TouchableOpacity
+                onPress={() => this.onPressHeader()}
+                style={styles.fullScreenExitIcon}
+              >
+                <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={this.onPressCurrentLocation}
+                style={styles.myLocationIcon}
+              >
+                <Icon name={'my-location'} size={30} color={'#4C5153'} />
+              </TouchableOpacity>
 
-              </> : null}
-            </Animatable.View>
-            {singleContributionID ? <TouchableOpacity
+            </> : null}
+            <TouchableOpacity
               onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
               style={[styles.satellite, { bottom: singleContributionID ? 620 : 310, }]}
             >
               <Icon name={'satellite'} size={30} color={'#4C5153'} />
-            </TouchableOpacity> : <Animatable.View animation={isMapPressed ? 'slideOutRight' : 'slideInRight'}>
-                <TouchableOpacity
-                  onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
-                  style={[styles.satellite, { bottom: singleContributionID ? 620 : 310, }]}
-                >
-                  <Icon name={'satellite'} size={30} color={'#4C5153'} />
-                </TouchableOpacity>
-              </Animatable.View>}
-
+            </TouchableOpacity>
           </>
 
         ) : null}

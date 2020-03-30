@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Platform,
   SafeAreaView,
+  LayoutAnimation
 } from 'react-native';
 import MapView, {
   ProviderPropType,
@@ -24,6 +25,7 @@ import { multiple_trees, tree_1, markerImage } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ContributionCard from '../UserContributions/ContributionCard.native'
 import Swiper from '../../components/ReactNativeSwiper';
+import Geolocation from '@react-native-community/geolocation';
 
 const screen = Dimensions.get('window');
 const { height: HEIGHT, } = screen;
@@ -145,6 +147,7 @@ class AnimatedViews extends React.Component {
   }
 
   onPressHeader = id => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     if (this.props.isPressFromList) {
       this.setState({ singleContributionID: undefined });
       this.props.toggleIsFullMapComp(true);
@@ -177,6 +180,13 @@ class AnimatedViews extends React.Component {
       }
     }
   };
+
+  onPressCurrentLocation = () => {
+    // Geolocation.getCurrentPosition(info => {
+    //   alert(JSON.stringify(info))
+    // });
+    this.setState({ height: true })
+  }
 
   onPressMarker = (marker) => {
     this.onPressHeader(marker.id)
@@ -331,7 +341,7 @@ class AnimatedViews extends React.Component {
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
             </TouchableOpacity>
               <TouchableOpacity
-                onPress={this.initiateComponent}
+                onPress={this.onPressCurrentLocation}
                 style={styles.myLocationIcon}
               >
                 <Icon name={'my-location'} size={30} color={'#4C5153'} />
@@ -346,9 +356,13 @@ class AnimatedViews extends React.Component {
             </> : null}
           </>
         ) : null}
+
+
+
+
         {activeMarker ? (
           <View
-            style={styles.userContributionsDetailsFullViewCont}
+            style={[styles.userContributionsDetailsFullViewCont, { height: activeMarker ? HEIGHT * 0.7 : 0 }]}
           >
             {this.state.markers ? (
               <UserContributionsDetails

@@ -26,6 +26,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ContributionCard from '../UserContributions/ContributionCard.native'
 import Swiper from '../../components/ReactNativeSwiper';
 import Geolocation from '@react-native-community/geolocation';
+import * as Animatable from 'react-native-animatable';
 
 const screen = Dimensions.get('window');
 const { height: HEIGHT, } = screen;
@@ -40,6 +41,7 @@ class AnimatedViews extends React.Component {
     super(props);
     this.state = {
       activeIndex: 0,
+      lastActiveIndex: 0,
       mapIndex: 3,
       markersList: [],
       isSatellite: false,
@@ -100,7 +102,7 @@ class AnimatedViews extends React.Component {
             latitudeDelta: 0.00095,
             longitudeDelta: 0.0095
           },
-          350
+          500
         );
       }, 200)
     } catch (e) {
@@ -126,7 +128,7 @@ class AnimatedViews extends React.Component {
                     latitudeDelta: 0.00095,
                     longitudeDelta: 0.0095
                   },
-                  350
+                  500
                 );
               }
             } catch (e) {
@@ -147,7 +149,7 @@ class AnimatedViews extends React.Component {
   }
 
   onPressHeader = id => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     if (this.props.isPressFromList) {
       this.setState({ singleContributionID: undefined });
       this.props.toggleIsFullMapComp(true);
@@ -199,7 +201,7 @@ class AnimatedViews extends React.Component {
           latitudeDelta: 0.00095,
           longitudeDelta: 0.0095
         },
-        350
+        500
       );
     } catch (e) {
       // Do thing
@@ -236,13 +238,13 @@ class AnimatedViews extends React.Component {
   onPressNextPrevBtn = (btn) => {
     if (btn == 'back') {
       if (this.state.activeIndex !== 0) {
-        this.setState({ activeIndex: this.state.activeIndex - 1 }, () => {
+        this.setState({ activeIndex: this.state.activeIndex - 1, lastActiveIndex: this.state.activeIndex }, () => {
           this.toAnimateRegion()
         })
       }
     }
     if (btn == 'next') {
-      this.setState({ activeIndex: this.state.activeIndex + 1 }, () => {
+      this.setState({ activeIndex: this.state.activeIndex + 1, lastActiveIndex: this.state.activeIndex }, () => {
         this.toAnimateRegion()
       })
     }
@@ -251,7 +253,9 @@ class AnimatedViews extends React.Component {
     const {
       markers,
       region,
-      singleContributionID
+      singleContributionID,
+      activeIndex,
+      lastActiveIndex
     } = this.state;
     let activeMarker =
       this.state.markers !== null
@@ -259,6 +263,7 @@ class AnimatedViews extends React.Component {
         : null;
     let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
     let isStaticMap = singleContributionID ? false : isContribution
+    // alert(lastActiveIndex)
     return (
       <View style={styles.container}>
         <MapView
@@ -294,27 +299,17 @@ class AnimatedViews extends React.Component {
         <View>
           {this.props.isFullMapComponentModal && !this.state.singleContributionID ? (
             <View style={styles.swiperCont}>
-              <Swiper
-                key={this.state.activeIndex}
-                index={this.state.activeIndex}
-                showsPagination={false}
-                bounces
-                onIndexChanged={this.onChageIndex}
+              <View
+                key={activeIndex}
               >
-                {markers
-                  ? markers.map((marker, i) => {
-                    return (
-                      <View style={styles.card} key={i}>
-                        <ContributionCard
-                          onPressSingleContribution={this.onPressMarker}
-                          isFromAnimatredCardList
-                          contribution={marker}
-                        />
-                      </View>
-                    )
-                  }) : null}
-
-              </Swiper>
+                {markers && markers[activeIndex] ? <Animatable.View animation={activeIndex > lastActiveIndex ? 'bounceInRight' : 'bounceInLeft'} style={styles.card}>
+                  <ContributionCard
+                    onPressSingleContribution={this.onPressMarker}
+                    isFromAnimatredCardList
+                    contribution={markers[activeIndex]}
+                  />
+                </Animatable.View> : null}
+              </View>
               <View style={styles.bottomArrowsCont}>
                 <View style={{ flex: 1 }} />
                 <View style={{ flexDirection: 'row', }}>

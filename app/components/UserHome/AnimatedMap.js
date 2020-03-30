@@ -341,14 +341,14 @@ class AnimatedViews extends React.Component {
               >
                 <Icon name={'my-location'} size={30} color={'#4C5153'} />
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
-                style={styles.satellite}
-              >
-                <Icon name={'satellite'} size={30} color={'#4C5153'} />
-              </TouchableOpacity>
 
             </> : null}
+            <TouchableOpacity
+              onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
+              style={[styles.satellite, { bottom: singleContributionID ? 620 : 310, }]}
+            >
+              <Icon name={'satellite'} size={30} color={'#4C5153'} />
+            </TouchableOpacity>
           </>
         ) : null}
 

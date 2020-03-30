@@ -325,7 +325,7 @@ class AnimatedViews extends React.Component {
           {this.props.isFullMapComponentModal && !this.state.singleContributionID ? (
             !isMapPressed ? <Animatable.View
               animation={isMapPressed ? 'slideOutDown' : 'slideInUp'}
-              style={[styles.swiperCont, { borderColor: 'green', borderWidth: 1 }]}>
+              style={styles.swiperCont}>
               <View
                 key={activeIndex}
               >

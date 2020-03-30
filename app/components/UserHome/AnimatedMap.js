@@ -40,7 +40,6 @@ class AnimatedViews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isMapPressed: false,
       activeIndex: 0,
       lastActiveIndex: 0,
       mapIndex: 3,
@@ -60,10 +59,11 @@ class AnimatedViews extends React.Component {
   }
 
   setMapPadding = () => {
+    const { isMapPressed } = this.props;
     return {
       top: 0,
       right: 0,
-      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? 160 : 30 : 0,
+      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? 160 : isMapPressed ? 30 : 170 : 0,
       left: 0
     };
   };
@@ -268,7 +268,7 @@ class AnimatedViews extends React.Component {
   }
 
   onPressMapView = () => {
-    this.setState({ isMapPressed: !this.state.isMapPressed })
+    this.props.onPressMapView()
   }
 
   render() {
@@ -278,8 +278,8 @@ class AnimatedViews extends React.Component {
       singleContributionID,
       activeIndex,
       lastActiveIndex,
-      isMapPressed
     } = this.state;
+    const { isMapPressed } = this.props;
     let activeMarker =
       this.state.markers !== null
         ? this.state.markers.find(x => x.id == this.state.singleContributionID)
@@ -287,6 +287,7 @@ class AnimatedViews extends React.Component {
     let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
     let isStaticMap = singleContributionID ? false : isContribution
     // alert(lastActiveIndex)
+    console.log(isMapPressed, 'isMapPressed')
     return (
       <View style={styles.container}>
         <MapView
@@ -322,7 +323,7 @@ class AnimatedViews extends React.Component {
         </MapView>
         <View>
           {this.props.isFullMapComponentModal && !this.state.singleContributionID ? (
-            <Animatable.View
+            !isMapPressed ? <Animatable.View
               animation={isMapPressed ? 'slideOutDown' : 'slideInUp'}
               style={[styles.swiperCont, { borderColor: 'green', borderWidth: 1 }]}>
               <View
@@ -343,7 +344,7 @@ class AnimatedViews extends React.Component {
                   <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
                 </View>
               </View>
-            </Animatable.View>) : null}
+            </Animatable.View> : null) : null}
 
         </View>
         <SafeAreaView />

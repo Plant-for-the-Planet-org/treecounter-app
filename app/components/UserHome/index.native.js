@@ -49,6 +49,7 @@ class UserHome extends Component {
       svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
+      isMapPressed: false,
       isPressFromList: false,
       singleContributionID: undefined,
       isFullMapComponentModal: false,
@@ -127,7 +128,7 @@ class UserHome extends Component {
       JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
       nextState.index !== this.state.index ||
       nextState.showAllContributions !== this.state.showAllContributions ||
-      nextState.isFullMapComponentModal !== this.state.isFullMapComponentModal;
+      nextState.isFullMapComponentModal !== this.state.isFullMapComponentModal || this.state.isMapPressed !== nextState.isMapPressed;
     return shouldUpdate;
   }
 
@@ -263,6 +264,7 @@ class UserHome extends Component {
   };
 
   getMapComponent = () => {
+    console.log('this.state.isMapPressed=', this.state.isMapPressed)
     let fullScreenIcon = (
       <TouchableOpacity
         onPress={this.toggleIsFullMapComp}
@@ -284,6 +286,8 @@ class UserHome extends Component {
         }}
       >
         <FullMapComponent
+          onPressMapView={this.onPressMapView}
+          isMapPressed={this.state.isMapPressed}
           isPressFromList={this.state.isPressFromList}
           singleContributionID={this.state.singleContributionID}
           isFullMapComponentModal={isFullMapComponentModal}
@@ -302,6 +306,13 @@ class UserHome extends Component {
     });
   };
 
+  onPressMapView = () => {
+    console.log('onPressMapView 798')
+    this.setState({ isMapPressed: !this.state.isMapPressed }, () => {
+      console.log('isMapPressed', this.state.isMapPressed)
+    })
+  }
+
   getWholeComponent() {
     const { userProfile, navigation } = this.props;
     const {
@@ -313,7 +324,7 @@ class UserHome extends Component {
     } = this.state;
     return (
       <SafeAreaView style={{ elevation: 1, flex: 1, backgroundColor: 'white' }}
-        forceInset={{ top: !isFullMapComponentModal ? 'always' : 'never' }}>
+        forceInset={{ top: !isFullMapComponentModal ? 'always' : 'never', bottom: this.state.isMapPressed ? 'never' : 'always' }}>
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}
           ref={ref => (this.scrollRef = ref)}
@@ -521,7 +532,7 @@ class UserHome extends Component {
               <Text style={styles.sectionTitle}>
                 {i18n.t('label.my_trees')}
               </Text>
-              {this.getMapComponent(this.props.userContributions, this.mapView)}
+              {this.getMapComponent()}
               <ContributionCardList
                 onPressSingleContribution={this.onPressSingleContribution}
                 contributions={this.props.userContributions}

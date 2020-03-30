@@ -8,11 +8,15 @@ export default ({
   navigation,
   userContributions,
   singleContributionID,
-  isPressFromList
+  isPressFromList,
+  isMapPressed,
+  onPressMapView
 }) => {
   return (
     <View style={styles.container}>
       <AnimatedViews
+        onPressMapView={onPressMapView}
+        isMapPressed={isMapPressed}
         isPressFromList={isPressFromList}
         singleContributionID={singleContributionID}
         isFullMapComponentModal={isFullMapComponentModal}

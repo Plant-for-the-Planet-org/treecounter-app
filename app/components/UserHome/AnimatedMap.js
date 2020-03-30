@@ -40,6 +40,7 @@ class AnimatedViews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isMapPressed: false,
       activeIndex: 0,
       lastActiveIndex: 0,
       mapIndex: 3,
@@ -249,13 +250,19 @@ class AnimatedViews extends React.Component {
       })
     }
   }
+
+  onPressMapView = () => {
+    this.setState({ isMapPressed: !this.state.isMapPressed })
+  }
+
   render() {
     const {
       markers,
       region,
       singleContributionID,
       activeIndex,
-      lastActiveIndex
+      lastActiveIndex,
+      isMapPressed
     } = this.state;
     let activeMarker =
       this.state.markers !== null
@@ -267,6 +274,7 @@ class AnimatedViews extends React.Component {
     return (
       <View style={styles.container}>
         <MapView
+          onPress={this.onPressMapView}
           rotateEnabled={isStaticMap}
           scrollEnabled={isStaticMap}
           pitchEnabled={isStaticMap}
@@ -298,7 +306,9 @@ class AnimatedViews extends React.Component {
         </MapView>
         <View>
           {this.props.isFullMapComponentModal && !this.state.singleContributionID ? (
-            <View style={styles.swiperCont}>
+            <Animatable.View
+              animation={isMapPressed ? 'slideOutDown' : 'slideInUp'}
+              style={[styles.swiperCont, { borderColor: 'green', borderWidth: 1 }]}>
               <View
                 key={activeIndex}
               >
@@ -317,7 +327,7 @@ class AnimatedViews extends React.Component {
                   <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
                 </View>
               </View>
-            </View>) : null}
+            </Animatable.View>) : null}
 
         </View>
         <SafeAreaView />
@@ -329,34 +339,44 @@ class AnimatedViews extends React.Component {
             >
               <Icon name={this.state.singleContributionID ? 'keyboard-arrow-left' : 'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>
-            {!this.state.singleContributionID ? <><TouchableOpacity
-              onPress={() => this.onPressHeader()}
-              style={styles.fullScreenExitIcon}
-            >
-              <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
-            </TouchableOpacity>
-              <TouchableOpacity
-                onPress={this.onPressCurrentLocation}
-                style={styles.myLocationIcon}
-              >
-                <Icon name={'my-location'} size={30} color={'#4C5153'} />
-              </TouchableOpacity>
+            <Animatable.View animation={isMapPressed ? 'slideOutRight' : 'slideInRight'}>
+              {!this.state.singleContributionID ? <>
+                <TouchableOpacity
+                  onPress={() => this.onPressHeader()}
+                  style={styles.fullScreenExitIcon}
+                >
+                  <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={this.onPressCurrentLocation}
+                  style={styles.myLocationIcon}
+                >
+                  <Icon name={'my-location'} size={30} color={'#4C5153'} />
+                </TouchableOpacity>
 
-            </> : null}
-            <TouchableOpacity
+              </> : null}
+            </Animatable.View>
+            {singleContributionID ? <TouchableOpacity
               onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
               style={[styles.satellite, { bottom: singleContributionID ? 620 : 310, }]}
             >
               <Icon name={'satellite'} size={30} color={'#4C5153'} />
-            </TouchableOpacity>
+            </TouchableOpacity> : <Animatable.View animation={isMapPressed ? 'slideOutRight' : 'slideInRight'}>
+                <TouchableOpacity
+                  onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
+                  style={[styles.satellite, { bottom: singleContributionID ? 620 : 310, }]}
+                >
+                  <Icon name={'satellite'} size={30} color={'#4C5153'} />
+                </TouchableOpacity>
+              </Animatable.View>}
+
           </>
+
         ) : null}
-
-
-
-
         {activeMarker ? (
-          <View
+          <Animatable.View
+            // duration={1500}
+            animation={'slideInUp'}
             style={[styles.userContributionsDetailsFullViewCont, { height: activeMarker ? HEIGHT * 0.7 : 0 }]}
           >
             {this.state.markers ? (
@@ -369,7 +389,7 @@ class AnimatedViews extends React.Component {
                 deleteContribution={this.props.deleteContribution}
               />
             ) : null}
-          </View>
+          </Animatable.View>
         ) : null}
       </View>
     );
@@ -389,7 +409,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 130,
     bottom: 30,
-    backgroundColor: 'transparent',
+    backgroundColor: '#fff',
+    position: 'absolute'
   },
   multipleTrees: {
     height: 40, width: 30,

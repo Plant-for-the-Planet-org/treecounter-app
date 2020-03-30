@@ -6,8 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Platform,
-  SafeAreaView,
-  LayoutAnimation
+  SafeAreaView
 } from 'react-native';
 import MapView, {
   ProviderPropType,
@@ -21,10 +20,9 @@ import { currentUserProfileIdSelector } from '../../selectors/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllPlantProjectsSelector } from '../../selectors';
-import { multiple_trees, tree_1, markerImage } from '../../assets/index.js';
+import { multiple_trees, tree_1 } from '../../assets/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ContributionCard from '../UserContributions/ContributionCard.native'
-import Swiper from '../../components/ReactNativeSwiper';
 import Geolocation from '@react-native-community/geolocation';
 import * as Animatable from 'react-native-animatable';
 

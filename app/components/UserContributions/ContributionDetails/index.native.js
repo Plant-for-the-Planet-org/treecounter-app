@@ -4,8 +4,7 @@ import {
   View,
   Linking,
   Image,
-  Text,
-  Dimensions
+  Text
 } from 'react-native';
 import { BackHandler } from 'react-native';
 import { withNavigation } from 'react-navigation';

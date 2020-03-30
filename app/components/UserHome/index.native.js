@@ -38,7 +38,9 @@ import CompetitionSnippet from './app/CompetitionSnippet';
 import FullMapComponent from './FullMapComponent';
 import SafeAreaView from 'react-native-safe-area-view';
 import { withNavigation } from 'react-navigation';
-import { fullscreen_icon } from '../../assets/index'
+import { fullscreen_icon } from '../../assets/index';
+import colors from '../../utils/constants';
+
 class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -323,7 +325,7 @@ class UserHome extends Component {
       isFullMapComponentModal
     } = this.state;
     return (
-      <SafeAreaView style={{ elevation: 1, flex: 1, backgroundColor: 'white' }}
+      <SafeAreaView style={{ elevation: 1, flex: 1, backgroundColor: colors.WHITE }}
         forceInset={{ top: !isFullMapComponentModal ? 'always' : 'never', bottom: this.state.isMapPressed ? 'never' : 'always' }}>
         <ScrollView
           scrollEnabled={!isFullMapComponentModal}

@@ -58,7 +58,7 @@ class AnimatedViews extends React.Component {
     return {
       top: 0,
       right: 0,
-      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? 180 : 80 : 0,
+      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? 160 : 30 : 0,
       left: 0
     };
   };

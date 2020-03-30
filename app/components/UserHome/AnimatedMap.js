@@ -185,10 +185,26 @@ class AnimatedViews extends React.Component {
   };
 
   onPressCurrentLocation = () => {
-    // Geolocation.getCurrentPosition(info => {
-    //   alert(JSON.stringify(info))
-    // });
-    this.setState({ height: true })
+    Geolocation.getCurrentPosition(info => {
+      try {
+        setTimeout(() => {
+          this.mapView.animateToRegion(
+            {
+              latitude: info.coords.latitude,
+              longitude: info.coords.longitude,
+              latitudeDelta: 0.00095,
+              longitudeDelta: 0.0095
+            },
+            500
+          );
+        }, 200)
+      } catch (e) {
+        // Do thing
+      }
+
+    });
+
+
   }
 
   onPressMarker = (marker) => {
@@ -365,7 +381,6 @@ class AnimatedViews extends React.Component {
         ) : null}
         {activeMarker ? (
           <Animatable.View
-            // duration={1500}
             animation={'slideInUp'}
             style={[styles.userContributionsDetailsFullViewCont, { height: activeMarker ? HEIGHT * 0.7 : 0 }]}
           >

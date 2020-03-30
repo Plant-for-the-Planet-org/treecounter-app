@@ -317,7 +317,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 940;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Plant-for-the-Planet";
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -337,10 +337,9 @@
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "TreecounterApp" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				de,
@@ -630,7 +629,7 @@
 				CODE_SIGN_ENTITLEMENTS = TreecounterApp/TreecounterApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = UYRJ8SA699;
 				HEADER_SEARCH_PATHS = (
@@ -650,7 +649,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 1.49.4;
+				MARKETING_VERSION = 1.49.41;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -673,7 +672,7 @@
 				CODE_SIGN_ENTITLEMENTS = TreecounterApp/TreecounterApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = UYRJ8SA699;
 				HEADER_SEARCH_PATHS = (
@@ -693,7 +692,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 1.49.4;
+				MARKETING_VERSION = 1.49.41;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -712,6 +711,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -765,6 +765,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

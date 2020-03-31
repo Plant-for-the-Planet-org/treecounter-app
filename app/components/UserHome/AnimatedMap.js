@@ -205,20 +205,23 @@ class AnimatedViews extends React.Component {
   }
 
   onPressMarker = (marker) => {
-    this.onPressHeader(marker.id)
-    const oneContribution = marker;
-    try {
-      this.mapView.animateToRegion(
-        {
-          latitude: oneContribution.geoLatitude,
-          longitude: oneContribution.geoLongitude,
-          latitudeDelta: 0.00095,
-          longitudeDelta: 0.0095
-        },
-        500
-      );
-    } catch (e) {
-      // Do thing
+
+    if (this.props.isFullMapComponentModal) {
+      this.onPressHeader(marker.id)
+      const oneContribution = marker;
+      try {
+        this.mapView.animateToRegion(
+          {
+            latitude: oneContribution.geoLatitude,
+            longitude: oneContribution.geoLongitude,
+            latitudeDelta: 0.00095,
+            longitudeDelta: 0.0095
+          },
+          500
+        );
+      } catch (e) {
+        // Do thing
+      }
     }
   }
 

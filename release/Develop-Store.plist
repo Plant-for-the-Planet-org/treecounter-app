@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>compileBitcode</key>
+	<true/>
+	<key>iCloudContainerEnvironment</key>
+	<string>Production</string>
+	<key>method</key>
+	<string>development</string>
+	<key>teamID</key>
+	<string>UYRJ8SA699</string>
+	<key>uploadBitcode</key>
+	<true/>
+	<key>uploadSymbols</key>
+	<true/>
+	<key>signingStyle</key>
+	<string>automatic</string>
+	<key>signingCertificate</key>
+	<string>Apple Development: Norbert Schuler</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>org.plant-for-the-planet.app</key>
+		<string>31f528b5-e436-47ab-b159-9d59e9abb155</string>
+	</dict>
+</dict>
+</plist>

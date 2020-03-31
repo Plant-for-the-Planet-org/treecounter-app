@@ -302,8 +302,8 @@ class UserHome extends Component {
     );
   };
 
-  onPressSingleContribution = id => {
-    this.setState({ singleContributionID: id, isPressFromList: true }, () => {
+  onPressSingleContribution = (singleContObj) => {
+    this.setState({ singleContributionID: singleContObj.id, isPressFromList: true }, () => {
       this.toggleIsFullMapComp();
     });
   };

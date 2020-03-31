@@ -327,7 +327,7 @@ class AnimatedViews extends React.Component {
               <View
                 key={activeIndex}
               >
-                {markers && markers[activeIndex] ? <Animatable.View duration={1500} animation={activeIndex > lastActiveIndex ? 'slideInRight' : 'slideInLeft'} style={styles.card}>
+                {markers && markers[activeIndex] ? <Animatable.View duration={1500} animation={activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft'} style={styles.card}>
                   <ContributionCard
                     onPressSingleContribution={this.onPressMarker}
                     isFromAnimatredCardList
@@ -357,19 +357,19 @@ class AnimatedViews extends React.Component {
 
             <TouchableOpacity
               onPress={() => this.onPressHeader()}
-              style={[styles.fullScreenExitIcon, singleContributionID ? ({ bottom: 620, right: 150 }) : ({})]}
+              style={[styles.fullScreenExitIcon, singleContributionID ? ({ bottom: 620, }) : ({})]}
             >
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
             </TouchableOpacity>
-            <TouchableOpacity
+            {!singleContributionID ? <TouchableOpacity
               onPress={this.onPressCurrentLocation}
               style={[styles.myLocationIcon, singleContributionID ? ({ bottom: 620, right: 85 }) : ({})]}
             >
               <Icon name={'my-location'} size={30} color={'#4C5153'} />
-            </TouchableOpacity>
+            </TouchableOpacity> : null}
             <TouchableOpacity
               onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
-              style={[styles.satellite, { bottom: singleContributionID ? 620 : 310, }]}
+              style={[styles.satellite, singleContributionID ? ({ bottom: 620, right: 85 }) : {}]}
             >
               <Icon name={'satellite'} size={30} color={'#4C5153'} />
             </TouchableOpacity>

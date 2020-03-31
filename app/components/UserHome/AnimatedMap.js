@@ -148,7 +148,6 @@ class AnimatedViews extends React.Component {
   }
 
   onPressHeader = id => {
-    // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     if (this.props.isPressFromList) {
       this.setState({ singleContributionID: undefined });
       this.props.toggleIsFullMapComp(true);
@@ -284,8 +283,6 @@ class AnimatedViews extends React.Component {
         : null;
     let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
     let isStaticMap = singleContributionID ? false : isContribution
-    // alert(lastActiveIndex)
-    console.log(isMapPressed, 'isMapPressed')
     return (
       <View style={styles.container}>
         <MapView
@@ -418,12 +415,10 @@ const styles = StyleSheet.create({
   },
   multipleTrees: {
     height: 40, width: 30,
-    // borderColor: 'red', borderWidth: 1,
 
   },
   treeImage: {
     height: 40,
-    // borderColor: 'green', borderWidth: 1,
   },
   userContributionsDetailsFullViewCont: {
     backgroundColor: 'transparent',

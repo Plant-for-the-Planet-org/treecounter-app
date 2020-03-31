@@ -244,7 +244,6 @@ class UserHome extends Component {
     singleContributionIDShouldNull, /*  if true set id to null*/
 
   ) => {
-    // console.log('toggleIsFullMapComp');
     setTimeout(() => {
 
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -266,7 +265,6 @@ class UserHome extends Component {
   };
 
   getMapComponent = () => {
-    console.log('this.state.isMapPressed=', this.state.isMapPressed)
     let fullScreenIcon = (
       <TouchableOpacity
         onPress={this.toggleIsFullMapComp}
@@ -309,9 +307,7 @@ class UserHome extends Component {
   };
 
   onPressMapView = () => {
-    console.log('onPressMapView 798')
     this.setState({ isMapPressed: !this.state.isMapPressed }, () => {
-      console.log('isMapPressed', this.state.isMapPressed)
     })
   }
 

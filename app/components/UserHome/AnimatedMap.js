@@ -86,7 +86,7 @@ class AnimatedViews extends React.Component {
           } catch (e) {
             // Do thing
           }
-        }, 3000);
+        }, 20);
       }
     );
   };

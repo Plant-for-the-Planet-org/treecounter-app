@@ -10,7 +10,7 @@ import LoginContainer from '../../containers/Authentication/LoginContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import TargetContainer from '../../containers/TargetContainer';
-import DonationTreesContainer from '../../containers/DonateTrees';
+import DonationTreesContainer from '../../containers/DonateTrees/index.native';
 import DonorDetailsContainer from '../../containers/DonateTrees/donorDetails';
 import DonationStep3 from '../DonateTrees/DonationStep3';
 
@@ -37,7 +37,7 @@ import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProjectContainer from '../../containers/SelectedPlantProject';
 import SelectedCompetitionContainer from '../../containers/SelectedCompetition';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject/index.native';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
 import ImprintContainer from '../../containers/Imprint';
@@ -292,7 +292,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       ['app_gift_projects']: {
-        screen: SelectPlantProjectContainer
+        screen: SelectPlantProjectContainer,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_accountActivate')]: {
         screen: SuccessfullActivatedContainer,
@@ -307,7 +308,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       ['app_supportTrees']: {
-        screen: SelectPlantProjectContainer
+        screen: SelectPlantProjectContainer,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_selectProject')]: {
         screen: SelectPlantProjectContainer,

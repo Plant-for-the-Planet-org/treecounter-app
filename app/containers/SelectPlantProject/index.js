@@ -16,6 +16,7 @@ import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
 
 class SelectPlantProjectContainer extends PureComponent {
+
   // componentWillMount() {
   //   let plantProjects = this.props.plantProjects.filter(
   //     project => project.allowDonations
@@ -64,11 +65,7 @@ class SelectPlantProjectContainer extends PureComponent {
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
-    let context = {}
-    if (this.props.navigation.getParam('context')) {
-      context = this.props.navigation.getParam('context')
-    }
-    console.log('------------------------Context Received --------------- ', context)
+
     this.props.selectPlantProjectAction(null);
   }
 
@@ -78,6 +75,10 @@ class SelectPlantProjectContainer extends PureComponent {
       project => project.allowDonations
     );
     debug('==== plantprojects', plantProjects);
+    let context = {}
+    if (this.props.navigation.getParam('context')) {
+      context = this.props.navigation.getParam('context')
+    }
     return !plantProjects.length ? null : (
       <SelectPlantProject
         selectProject={this.selectPlantProjectAction}
@@ -87,6 +88,7 @@ class SelectPlantProjectContainer extends PureComponent {
         navigation={this.props.navigation}
         supportTreecounter={this.props.supportTreecounter}
         loadDetails={this.loadDetails}
+        context={context}
       />
     );
   }

@@ -15,7 +15,8 @@ const ListProjects = ({
   placeholderTextColor,
   loadProjects,
   index,
-  scrollY
+  scrollY,
+  context
 }) => {
   const [search, setSearch] = useState('');
   // memoized: refilters if plantProjects or search string changes
@@ -65,6 +66,8 @@ const ListProjects = ({
         loadProjects={loadProjects}
         index={index}
         scrollY={scrollY}
+        context={context}
+
       />
       {/* </View> */}
     </View>

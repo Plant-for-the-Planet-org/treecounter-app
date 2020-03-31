@@ -58,7 +58,6 @@ export function loadProject(plantProject, options = {}) {
     return new Promise(function (resolve, reject) {
       request
         .then(res => {
-          debug('========================', res.data);
           dispatch(mergeEntities(normalize(res.data, plantProjectSchema)));
           dispatch(mergeEntities(normalize(res.data.tpoData, tpoSchema)));
           options.loading && dispatch(setProgressModelState(false));

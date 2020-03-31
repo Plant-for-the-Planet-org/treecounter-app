@@ -69,7 +69,7 @@ export default class FeaturedProjects extends PureComponent {
     }
   }
   fetchMore = () => {
-    debug('this. should load in fetch more', this.state.shouldLoad);
+    // debug('this. should load in fetch more', this.state.shouldLoad);
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ page: this.state.page + 1 }, async () => {
         try {
@@ -81,7 +81,7 @@ export default class FeaturedProjects extends PureComponent {
             shouldLoad: data.length == this.perPage,
             plantProjects: [...this.state.plantProjects, ...data]
           });
-          debug('Got from fetch more:', data, this.perPage);
+          // debug('Got from fetch more:', data, this.perPage);
         } catch (error) {
           this.setState({ isFetching: false, shouldLoad: false });
         }
@@ -107,8 +107,8 @@ export default class FeaturedProjects extends PureComponent {
       onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
       showMoreButton={false}
       tpoName={item.tpo_name}
-      selectProject={this.props.onSelectProjects}
       navigation={this.props.navigation}
+      context={this.props.context}
     />
   );
 

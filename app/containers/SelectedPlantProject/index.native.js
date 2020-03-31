@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import {
   selectedPlantProjectIdSelector,
@@ -8,9 +8,9 @@ import {
   selectedTpoSelector,
   currentUserProfileSelector
 } from '../../selectors';
-import {updateStaticRoute} from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
-import {loadProject} from '../../actions/loadTposAction';
+import { loadProject } from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
@@ -26,8 +26,8 @@ const SelectedPlantProjectContainer = props => {
       props.selectPlantProjectAction(project.id);
     } else {
       props.loadProject(
-        {id: props.selectedPlantProjectId},
-        {loading: true}
+        { id: props.selectedPlantProjectId },
+        { loading: true }
       );
     }
   };
@@ -35,13 +35,21 @@ const SelectedPlantProjectContainer = props => {
     getProjectDetails(props.navigation.state.params.projectName);
   }, [props.navigation.state.params.projectName]);
   const selectProject = id => {
-    const {navigation} = props;
+    const { navigation } = props;
     props.selectPlantProjectAction(id);
+    let newContext = props.navigation.getParam('context');
+    newContext.plantProject = {
+      currency: props.selectedProject.currency,
+      amountPerTree: props.selectedProject.treeCost,
+      plantProjectID: id
+    }
+
     if (navigation) {
       updateStaticRoute('app_donate_detail', navigation, {
         id: id,
         userForm: navigation.getParam('userForm'),
-        giftMethod: navigation.getParam('giftMethod')
+        giftMethod: navigation.getParam('giftMethod'),
+        context: newContext
       });
     }
   };

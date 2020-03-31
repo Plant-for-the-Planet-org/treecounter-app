@@ -29,7 +29,7 @@ class SelectPlantTabView extends PureComponent {
       index: 0,
       scrollY: new Animated.Value(0)
     };
-    this.onSelectProjects = this.onSelectProjects.bind(this);
+    // this.onSelectProjects = this.onSelectProjects.bind(this);
   }
 
   indexChange(index) {
@@ -37,30 +37,23 @@ class SelectPlantTabView extends PureComponent {
       index: index
     });
   }
-  onSelectProjects(id) {
-    debug('porps---', this.props);
-    this.props.selectProject(id);
-    const { navigation } = this.props;
-    debug(
-      '=======in selectplant project component... calling donate detail with',
-      {
-        userForm: navigation.getParam('userForm'),
-        giftMethod: navigation.getParam('giftMethod')
-      }
-    );
-    updateStaticRoute('app_donate_detail', navigation, {
-      userForm: navigation.getParam('userForm'),
-      giftMethod: navigation.getParam('giftMethod')
-    });
-  }
-  handleExpandedClicked = optionNumber => {
-    this.setState({
-      expandedOption: optionNumber
-    });
-  };
+  // onSelectProjects(id) {
+  //   // debug('porps---', this.props);
+  //   this.props.selectProject(id);
+  //   const { navigation } = this.props;
+  //   updateStaticRoute('app_donate_detail', navigation, {
+  //     userForm: navigation.getParam('userForm'),
+  //     giftMethod: navigation.getParam('giftMethod'),
+  //     context: this.props.context
+  //   });
+  // }
+  // handleExpandedClicked = optionNumber => {
+  //   this.setState({
+  //     expandedOption: optionNumber
+  //   });
+  // };
 
   handleIndexChange = index => {
-    debug('indicator index, ', index);
     this.setState({ index: index });
     if (
       index &&
@@ -68,7 +61,6 @@ class SelectPlantTabView extends PureComponent {
     ) {
       try {
         // this.props.loadProjects();
-        //debug('loaded projects in list', projects);
       } catch (error) {
         debug('error on lloading project on list', error);
       }
@@ -145,27 +137,24 @@ class SelectPlantTabView extends PureComponent {
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        debug('fatured active', index, this.props.plantProjects);
         return this.props.plantProjects.filter(project => project.isFeatured)
           .length ? (
             <FeaturedProjects
-              onSelectProjects={this.onSelectProjects}
               {...props}
               jumpTo={jumpTo}
               index={this.state.index}
               scrollY={this.state.scrollY}
+              context={this.props.context}
             />
           ) : null;
       case 'list':
-        debug('list active', index, this.props.plantProjects);
-
         return (
           <ListProjects
-            onSelectProjects={this.onSelectProjects}
             {...props}
             jumpTo={jumpTo}
             index={this.state.index}
             scrollY={this.state.scrollY}
+            context={this.props.context}
           />
         );
       default:

@@ -43,10 +43,10 @@ class ListViewProjects extends PureComponent {
   }
   async UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.index && !this.state.initiated) {
-      debug(
-        'component got index list =======================================================',
-        nextProps
-      );
+      // debug(
+      //   'component got index list =======================================================',
+      //   nextProps
+      // );
       this.setState({ initiated: true, isFetching: true });
       try {
         const data = await this.props.loadProjects('all', {});
@@ -64,7 +64,7 @@ class ListViewProjects extends PureComponent {
   fetchMore = () => {
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ page: this.state.page + 1 }, async () => {
-        debug('fettch more list calling load');
+        // debug('fettch more list calling load');
         try {
           const data = await this.props.loadProjects('all', {
             page: this.state.page
@@ -74,7 +74,7 @@ class ListViewProjects extends PureComponent {
             shouldLoad: data.length == this.perPage,
             plantProjects: [...this.state.plantProjects, ...data]
           });
-          debug('Got from fetch more:', data);
+          // debug('Got from fetch more:', data);
         } catch (error) {
           this.setState({ isFetching: false });
         }
@@ -99,8 +99,8 @@ class ListViewProjects extends PureComponent {
       onSelectClickedFeaturedProjects={this.props.selectProject}
       showMoreButton={false}
       tpoName={item.tpo_name}
-      selectProject={this.onSelectClickedFeaturedProjects}
       navigation={this.props.navigation}
+      context={this.props.context}
     />
   );
 

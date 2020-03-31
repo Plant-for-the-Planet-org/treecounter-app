@@ -122,7 +122,6 @@ class PlantProjectSnippet extends PureComponent {
     //       ? leafGray
     //       : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
-
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
         <View style={[styles.projectSnippetContainer]} withoutShadow>
@@ -270,8 +269,8 @@ class PlantProjectSnippet extends PureComponent {
                     <Text style={styles.survivalText}>
                       {specsProps.taxDeduction && specsProps.taxDeduction.length
                         ? `${i18n.t('label.tax_deductible')} ${i18n.t(
-                            'label.in'
-                          )} ${deducibleText1}`
+                          'label.in'
+                        )} ${deducibleText1}`
                         : i18n.t('label.no_tax_deduction')}
                     </Text>
                   </View>

@@ -102,7 +102,8 @@ const PledgeEvents = (props) => {
                             lastName: myPledge.lastname,
                             treeCount: myPledge.treeCount,
                             email: myPledge.email,
-                            isAnonymous: myPledge.isAnonymous
+                            isAnonymous: myPledge.isAnonymous,
+                            token: myPledge.token
                           },
                           plantProject: {
                             currency: pledges.plantProject.currency,
@@ -200,7 +201,8 @@ function FulfillPledgeButton(props) {
                 lastName: props.myPledge.lastname,
                 treeCount: props.myPledge.treeCount,
                 email: props.myPledge.email,
-                isAnonymous: props.myPledge.isAnonymous
+                isAnonymous: props.myPledge.isAnonymous,
+                token: props.myPledge.token
               },
               plantProject: {
                 currency: props.pledges.plantProject.currency,

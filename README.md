@@ -40,6 +40,7 @@ To run the app as prod, useful for testing features like (hashed js/css):
   brew install watchman
   npm install -g react-native-cli
   npm install
+  cd ios && pod install
   ```
 
 * Please use node v 12.14.1 LTS; App doesn't build with 13.0 + versions.

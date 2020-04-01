@@ -15,7 +15,6 @@ import {
 } from '../reducers/entitiesReducer';
 import {
   competitionEnrollmentSchema,
-  competitionPagerSchema,
   competitionSchema,
   treecounterSchema
 } from '../schemas';

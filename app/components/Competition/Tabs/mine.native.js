@@ -29,13 +29,6 @@ const MineCompetitions = props => {
       });
   };
 
-  const getAllCompetitions = () => {
-    props.fetchMineCompetitions();
-    setTimeout(() => {
-      setShowLoader(false);
-    }, 1000);
-  };
-
   useEffect(() => {
     let showAllCompetitionsArr = [];
     if (props.mineCompetitions.length > 0) {

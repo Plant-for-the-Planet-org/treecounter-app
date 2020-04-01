@@ -71,8 +71,8 @@ const FeaturedCompetitions = props => {
             }
           }
         }
-        // eslint-disable-next-line no-prototype-builtins
         if (
+          // eslint-disable-next-line no-prototype-builtins
           props.featuredCompetitions[i].hasOwnProperty('nbRemaining') &&
           props.featuredCompetitions[i].nbRemaining === 0
         ) {

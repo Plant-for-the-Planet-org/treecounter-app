@@ -70,8 +70,8 @@ const AllCompetitions = props => {
             }
           }
         }
-        // eslint-disable-next-line no-prototype-builtins
         if (
+          // eslint-disable-next-line no-prototype-builtins
           props.allCompetitions[i].hasOwnProperty('nbRemaining') &&
           props.allCompetitions[i].nbRemaining === 0
         ) {

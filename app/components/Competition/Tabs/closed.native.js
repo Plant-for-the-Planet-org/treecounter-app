@@ -69,8 +69,8 @@ const ClosedCompetitions = props => {
             }
           }
         }
-        // eslint-disable-next-line no-prototype-builtins
         if (
+          // eslint-disable-next-line no-prototype-builtins
           props.archivedCompetitions[i].hasOwnProperty('nbRemaining') &&
           props.archivedCompetitions[i].nbRemaining === 0
         ) {

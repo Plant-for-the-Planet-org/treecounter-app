@@ -183,7 +183,7 @@ class AnimatedViews extends React.Component {
           } catch (e) {
             // Do thing
           }
-        }, 1000);
+        }, 30);
       }
     }
   };
@@ -277,8 +277,14 @@ class AnimatedViews extends React.Component {
   }
 
   onPressMapView = (e) => {
-    if (e.nativeEvent.action !== 'marker-press')
-      this.props.onPressMapView()
+    console.log(e.nativeEvent.action, 'e.nativeEvent.action')
+    if (this.state.singleContributionID) {
+      // Do Nothing
+    } else {
+      if (e.nativeEvent.action !== 'marker-press') {
+        this.props.onPressMapView()
+      }
+    }
   }
 
   render() {
@@ -339,7 +345,7 @@ class AnimatedViews extends React.Component {
               >
                 {markers && markers[activeIndex] ? <Animatable.View duration={1500} animation={activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft'} style={styles.card}>
                   <ContributionCard
-                    onPressSingleContribution={this.onPressMarker}
+                    onPressSingleContribution={() => this.onPressMarker(markers[activeIndex], { nativeEvent: { action: 'marker-press' } })}
                     isFromAnimatredCardList
                     contribution={markers[activeIndex]}
                   />

@@ -141,7 +141,7 @@ class AnimatedViews extends React.Component {
       }
     }
 
-    if (nextProps.isFullMapComponentModal !== this.props.isFullMapComponentModal && !nextProps.isPressFromList) {
+    if (nextProps.isFullMapComponentModal == true && !nextProps.isPressFromList) {
       console.log('144 = at initialCompornrn')
       try {
         this.initiateComponent();
@@ -164,7 +164,7 @@ class AnimatedViews extends React.Component {
         } catch (e) {
           // Do thing
         }
-      }, 3000);
+      }, 30);
     }
     if (id) {
       this.setState({ singleContributionID: id });
@@ -174,6 +174,8 @@ class AnimatedViews extends React.Component {
       } else {
         this.props.toggleIsFullMapComp(true);
         setTimeout(() => {
+          // alert(232323)
+          console.log(' 178 == ')
           try {
             this.mapView.fitToSuppliedMarkers(
               this.state.markers.map(x => String(x.id))
@@ -181,7 +183,7 @@ class AnimatedViews extends React.Component {
           } catch (e) {
             // Do thing
           }
-        }, 3000);
+        }, 1000);
       }
     }
   };

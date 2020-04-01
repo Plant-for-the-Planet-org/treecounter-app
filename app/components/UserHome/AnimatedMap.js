@@ -94,6 +94,7 @@ class AnimatedViews extends React.Component {
   initiateComponent = () => {
     try {
       setTimeout(() => {
+        console.log('initiateComponent')
         this.mapView.animateToRegion(
           {
             latitude: this.state.markers[0].geoLatitude,
@@ -110,6 +111,7 @@ class AnimatedViews extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps.isPressFromList, 'isPressFromListisPressFromList')
     if (this.state.singleContributionID == null) {
       if (nextProps.singleContributionID !== this.state.singleContributionID) {
         this.setState(
@@ -120,6 +122,7 @@ class AnimatedViews extends React.Component {
                 let activeMarker = this.state.markers.find(
                   x => x.id == nextProps.singleContributionID
                 );
+                console.log('componentWillReceiveProps animateTO Region', activeMarker)
                 this.mapView.animateToRegion(
                   {
                     latitude: activeMarker.geoLatitude,
@@ -138,7 +141,8 @@ class AnimatedViews extends React.Component {
       }
     }
 
-    if (nextProps.isFullMapComponentModal) {
+    if (nextProps.isFullMapComponentModal !== this.props.isFullMapComponentModal && !nextProps.isPressFromList) {
+      console.log('144 = at initialCompornrn')
       try {
         this.initiateComponent();
       } catch (e) {
@@ -148,6 +152,7 @@ class AnimatedViews extends React.Component {
   }
 
   onPressHeader = id => {
+
     if (this.props.isPressFromList) {
       this.setState({ singleContributionID: undefined });
       this.props.toggleIsFullMapComp(true);
@@ -204,9 +209,11 @@ class AnimatedViews extends React.Component {
 
   }
 
-  onPressMarker = (marker) => {
-
-    if (this.props.isFullMapComponentModal) {
+  onPressMarker = (marker, e) => {
+    console.log('this.props.isFullMapComponentModal =', this.props.isFullMapComponentModal);
+    console.log(' state singleContribution ID =', this.state.singleContributionID)
+    let action = e.nativeEvent.action;
+    if (this.props.isFullMapComponentModal && this.state.singleContributionID == null && action == 'marker-press') {
       this.onPressHeader(marker.id)
       const oneContribution = marker;
       try {
@@ -267,8 +274,9 @@ class AnimatedViews extends React.Component {
     }
   }
 
-  onPressMapView = () => {
-    this.props.onPressMapView()
+  onPressMapView = (e) => {
+    if (e.nativeEvent.action !== 'marker-press')
+      this.props.onPressMapView()
   }
 
   render() {
@@ -306,7 +314,7 @@ class AnimatedViews extends React.Component {
           {markers
             ? markers.map(marker => (
               <Marker
-                onPress={() => this.onPressMarker(marker)}
+                onPress={(e) => this.onPressMarker(marker, e)}
                 identifier={String(marker.id)}
                 key={marker.id}
                 coordinate={{

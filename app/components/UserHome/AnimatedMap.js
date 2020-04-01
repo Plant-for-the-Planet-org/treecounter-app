@@ -95,6 +95,10 @@ class AnimatedViews extends React.Component {
     try {
       setTimeout(() => {
         console.log('initiateComponent')
+        this.setState({
+          activeIndex: 0,
+          lastActiveIndex: 0,
+        })
         this.mapView.animateToRegion(
           {
             latitude: this.state.markers[0].geoLatitude,
@@ -140,13 +144,20 @@ class AnimatedViews extends React.Component {
         );
       }
     }
-
-    if (nextProps.isFullMapComponentModal == true && !nextProps.isPressFromList) {
-      console.log('144 = at initialCompornrn')
-      try {
-        this.initiateComponent();
-      } catch (e) {
-        // Do thing
+    console.log(nextProps.isFullMapComponentModal, ' 1 ---') // false
+    console.log(this.props.isFullMapComponentModal, '2 ---') // true
+    console.log(nextProps.isPressFromList, '3 ---')
+    console.log(this.state.singleContributionID, 'singleID')
+    if (this.state.singleContributionID) {
+      // DO nothing
+    } else {
+      if (nextProps.isFullMapComponentModal == true && this.props.isFullMapComponentModal == false && !nextProps.isPressFromList) {
+        console.log('144 = at initialCompornrn')
+        try {
+          this.initiateComponent();
+        } catch (e) {
+          // Do thing
+        }
       }
     }
   }
@@ -286,6 +297,12 @@ class AnimatedViews extends React.Component {
       }
     }
   }
+  // onPressMapView = (e) => {
+  //   if (e.nativeEvent.action !== 'marker-press') {
+  //     console.log("e.nativeEvent.action === ", e.nativeEvent.action)
+  //     this.props.onPressMapView()
+  //   }
+  // }
 
   render() {
     const {
@@ -435,7 +452,7 @@ const styles = StyleSheet.create({
 
   },
   treeImage: {
-    height: 40,
+    height: 25, width: 20,
   },
   userContributionsDetailsFullViewCont: {
     backgroundColor: 'transparent',

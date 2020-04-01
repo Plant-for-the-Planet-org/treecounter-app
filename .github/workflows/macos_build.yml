@@ -163,4 +163,4 @@ jobs:
 #      working-directory: ./android
 
 #    - name: iOS Build
-#      run: xcodebuild -workspace PrivateKit.xcworkspace -configuration Release -scheme PrivateKit
+#      run: xcodebuild -workspace TreecounterApp.xcworkspace -configuration Release -scheme TreecounterApp

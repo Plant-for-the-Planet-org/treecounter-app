@@ -53,5 +53,6 @@
   "competetions_404_message": "We do not yet support competitions in your browser, please use our iOS or Android app to get access to the competitions.",
   "goal": "Goal",
   "active": "Active",
-  "no_competitions": "No competitions found"
+  "no_competitions": "No competitions found",
+  "you_are_all_caught_up": "You're all caught up"
 }

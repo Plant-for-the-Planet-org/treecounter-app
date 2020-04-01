@@ -12,7 +12,9 @@ const CompetitionFinishedMessage = () => {
   return (
     <View style={styles.caughtUpMessageContainer}>
       <View style={[styles.caughtUpLine, { marginRight: 10 }]} />
-      <Text style={styles.caughtUpMessage}>You're all caught up</Text>
+      <Text style={styles.caughtUpMessage}>
+        {i18n.t('label.you_are_all_caught_up')}
+      </Text>
       <View style={[styles.caughtUpLine, { marginLeft: 10 }]} />
     </View>
   );
@@ -44,8 +46,8 @@ const ClosedCompetitions = props => {
   };
   let CurrentDate = new Date();
 
-  const getAllCompetitions = async pageNo => {
-    await props.fetchCompetitions('archived', pageNo);
+  const getAllCompetitions = pageNo => {
+    props.fetchCompetitions('archived', pageNo);
   };
 
   useEffect(() => {
@@ -67,7 +69,12 @@ const ClosedCompetitions = props => {
             }
           }
         }
-        if (props.allCompetitions[i].nbRemaining === 0) {
+        // eslint-disable-next-line no-prototype-builtins
+        if (
+          props.archivedCompetitions[i].hasOwnProperty('nbRemaining') &&
+          props.archivedCompetitions[i].nbRemaining === 0
+        ) {
+          setShowLoader(false);
           setCompetitionFinished(true);
         }
       }
@@ -76,7 +83,6 @@ const ClosedCompetitions = props => {
       showAllCompetitions.concat(showAllCompetitionsArr)
     );
     setLoading(false);
-    setShowLoader(false);
   }, [props.archivedCompetitions]);
 
   const _keyExtractor = item => item.id.toString();
@@ -124,7 +130,13 @@ const ClosedCompetitions = props => {
       data={showAllCompetitions}
       keyExtractor={item => _keyExtractor(item)}
       renderItem={item => _renderItem(item)}
-      onEndReached={() => handleLoadMore()}
+      onEndReached={
+        isCompetitionFinished
+          ? null
+          : () => {
+              !isLoading && handleLoadMore();
+            }
+      }
       onEndReachedThreshold={0.05}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}

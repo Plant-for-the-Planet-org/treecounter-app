@@ -29,10 +29,10 @@ class CompetitionContainer extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchMineCompetitions();
     this.fetchCompetitions('all', 1);
     this.fetchCompetitions('archived', 1);
     this.fetchCompetitions('featured', 1);
-    this.fetchMineCompetitions();
   }
 
   createCompetition = value => {
@@ -74,11 +74,11 @@ class CompetitionContainer extends React.Component {
     }
   }
 
-  fetchCompetitions = async (category, page) => {
-    await this.props.fetchCompetitions(category, page);
+  fetchCompetitions = (category, page) => {
+    this.props.fetchCompetitions(category, page);
   };
 
-  fetchMineCompetitions = async () => {
+  fetchMineCompetitions = () => {
     this.props.fetchMineCompetitions();
   };
 

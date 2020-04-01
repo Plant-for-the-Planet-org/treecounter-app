@@ -9,17 +9,32 @@ import i18n from '../../../locales/i18n';
 import colors from '../../../utils/constants';
 import { CompetitionLoader } from './../../Common/ContentLoader';
 
+const CompetitionFinishedMessage = () => {
+  return (
+    <View style={styles.caughtUpMessageContainer}>
+      <View style={[styles.caughtUpLine, { marginRight: 10 }]} />
+      <Text style={styles.caughtUpMessage}>
+        {i18n.t('label.you_are_all_caught_up')}
+      </Text>
+      <View style={[styles.caughtUpLine, { marginLeft: 10 }]} />
+    </View>
+  );
+};
 const FeaturedCompetitions = props => {
   const [showAllCompetitions, setShowAllCompetitions] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [showLoader, setShowLoader] = useState(true);
+  const [isCompetitionFinished, setCompetitionFinished] = useState(false);
+
   const onRefresh = () => {
     setShowLoader(true);
     setrefreshing(true);
     setPage(1);
     setShowAllCompetitions([]);
+    setCompetitionFinished(false);
+
     props
       .fetchCompetitions('featured', 1)
       .then(() => {
@@ -56,13 +71,20 @@ const FeaturedCompetitions = props => {
             }
           }
         }
+        // eslint-disable-next-line no-prototype-builtins
+        if (
+          props.featuredCompetitions[i].hasOwnProperty('nbRemaining') &&
+          props.featuredCompetitions[i].nbRemaining === 0
+        ) {
+          setShowLoader(false);
+          setCompetitionFinished(true);
+        }
       }
     }
     setShowAllCompetitions(showAllCompetitions =>
       showAllCompetitions.concat(showAllCompetitionsArr)
     );
     setLoading(false);
-    setShowLoader(false);
   }, [props.featuredCompetitions]);
 
   const _keyExtractor = item => item.id.toString();
@@ -110,7 +132,13 @@ const FeaturedCompetitions = props => {
       data={showAllCompetitions}
       keyExtractor={item => _keyExtractor(item)}
       renderItem={item => _renderItem(item)}
-      onEndReached={() => handleLoadMore()}
+      onEndReached={
+        isCompetitionFinished
+          ? null
+          : () => {
+              !isLoading && handleLoadMore();
+            }
+      }
       onEndReachedThreshold={0.05}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
@@ -137,7 +165,11 @@ const FeaturedCompetitions = props => {
         );
       }}
       ListFooterComponent={() => {
-        return isLoading ? CompetitionLoader() : null;
+        return isLoading
+          ? CompetitionLoader()
+          : isCompetitionFinished && showLoader
+          ? CompetitionFinishedMessage()
+          : null;
       }}
     />
   );

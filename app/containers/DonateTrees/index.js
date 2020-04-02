@@ -44,9 +44,9 @@ class DonationTreesContainer extends PureComponent {
             _suggestions.data.length &&
             _suggestions.data[0].slug == match.params.slug
           ) {
-            uggestions.data[0].type != 'tpo' && supportTreecounterAction({
+            _suggestions.data[0].type != 'tpo' && supportTreecounterAction({
               id: _suggestions.data[0].treecounterId,
-              type: suggestions.data[0].type,
+              type: _suggestions.data[0].type,
               displayName: _suggestions.data[0].name
             });
           }

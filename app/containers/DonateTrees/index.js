@@ -44,6 +44,7 @@ class DonationTreesContainer extends PureComponent {
             _suggestions.data.length &&
             _suggestions.data[0].slug == match.params.slug
           ) {
+            console.log('support treecounter suggestions', _suggestions.data[0]);
             _suggestions.data[0].type != 'tpo' && supportTreecounterAction({
               id: _suggestions.data[0].treecounterId,
               type: _suggestions.data[0].type,

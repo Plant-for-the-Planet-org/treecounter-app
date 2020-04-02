@@ -421,7 +421,7 @@ export default class DonateTrees extends Component {
           plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
       }
     }
-
+    console.log('support treecounter', this.props.supportTreecounter);
     return this.state.showSelectProject ? (
       <SelectPlantProjectContainer
         supportTreecounter={this.props.supportTreecounter}
@@ -432,10 +432,10 @@ export default class DonateTrees extends Component {
           {this.props.supportTreecounter.treecounterId
             ? (this.props.supportTreecounter.type == 'company' ? i18n.t('label.give_trees_to_company', {
               companyName: this.props.supportTreecounter.displayName
-            }) : (i18n.t('label.support_trees_to', {
+            }) : i18n.t('label.support_trees_to', {
               user: this.props.supportTreecounter.displayName
-            })))
-            : pageHeadings[this.state.pageIndex].heading}
+            }))
+            : (pageHeadings[this.state.pageIndex].heading)}
           <DescriptionHeading>
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>

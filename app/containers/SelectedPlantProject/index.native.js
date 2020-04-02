@@ -38,18 +38,30 @@ const SelectedPlantProjectContainer = props => {
     const { navigation } = props;
     props.selectPlantProjectAction(id);
     let newContext = props.navigation.getParam('context');
-    newContext.plantProject = {
-      currency: props.selectedProject.currency,
-      amountPerTree: props.selectedProject.treeCost,
-      plantProjectID: id
+    let context = {}
+    if (newContext) {
+      newContext.plantProject = {
+        currency: props.selectedProject.currency,
+        amountPerTree: props.selectedProject.treeCost,
+        plantProjectID: id
+      }
+      context = newContext;
+    } else {
+      context.contextType = 'direct';
+      context.plantProject = {
+        currency: props.selectedProject.currency,
+        amountPerTree: props.selectedProject.treeCost,
+        plantProjectID: id
+      }
     }
+
 
     if (navigation) {
       updateStaticRoute('app_donate_detail', navigation, {
         id: id,
         userForm: navigation.getParam('userForm'),
         giftMethod: navigation.getParam('giftMethod'),
-        context: newContext
+        context: context
       });
     }
   };

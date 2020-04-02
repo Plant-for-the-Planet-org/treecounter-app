@@ -44,7 +44,6 @@ function DonationDetails(props) {
   const [frequency, setFrequency] = React.useState(''); // for Selecting Frequency of Donations
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
-
   // Function for Switching the state of commission
   toggleSetCommission = value => {
     setCommissionSwitch(value);
@@ -54,6 +53,11 @@ function DonationDetails(props) {
   toggleTaxReceipt = value => {
     setTaxReceiptSwitch(value);
   };
+
+  // console.log('Context in Donate Page ----------------------------------', props.context)
+  let context = props.context;
+  let contextType = props.context.contextType
+  console.log('Context Type ------------', contextType)
   return (
     <View style={{ backgroundColor: 'white' }}>
       <HeaderAnimated
@@ -91,123 +95,40 @@ function DonationDetails(props) {
             selectedProject={props.selectedProject}
           />
         ) : (
-          <NoPlantProjectDetails
-            treeCost={props.treeCost}
-            selectedCurrency={props.selectedCurrency}
-            selectedProject={props.selectedProject}
-          />
-        )}
+            <NoPlantProjectDetails
+              treeCost={props.treeCost}
+              selectedCurrency={props.selectedCurrency}
+              selectedProject={props.selectedProject}
+            />
+          )}
 
-        <SelectTreeCount
-          treeCount={treeCount}
-          setTreeCount={setTreeCount}
-          selectedProject={props.selectedProject}
-        />
+        {
+          context.contextType === 'direct' ? (
+            <SelectTreeCount
+              treeCount={treeCount}
+              setTreeCount={setTreeCount}
+              selectedProject={props.selectedProject}
+            />) : null
+        }
+
         {/* Donation Context */}
 
         {/* Gift Trees */}
-        <Text style={[styles.sectionTitle, { marginTop: 20 }]}>
-          GIFT RECIPIENT
-        </Text>
-
-        <View style={styles.giftDetails}>
-          <Image
-            style={styles.giftImage}
-            source={{
-              uri: getImageUrl('project', 'thumb', props.selectedProject.image)
-            }}
-          />
-          <View style={styles.giftNameAmount}>
-            <Text style={styles.giftName}>Sagar Aryal</Text>
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text
-              style={{
-                fontFamily: 'OpenSans-Bold',
-                fontSize: 18,
-                lineHeight: 24,
-                letterSpacing: 0,
-                textAlign: 'right',
-                color: '#89b53a',
-                marginRight: 4
-              }}
-            >
-              50
-            </Text>
-            <Text
-              style={{
-                fontFamily: 'OpenSans-Regular',
-                fontSize: 13,
-                lineHeight: 18,
-                letterSpacing: 0,
-                textAlign: 'right',
-                color: 'rgba(0, 0, 0, 0.6)',
-                marginRight: 12
-              }}
-            >
-              Trees
-            </Text>
-            <Icon name={'chevron-down'} size={14} color="#4d5153" />
-          </View>
-        </View>
-
-        <View style={styles.horizontalDivider} />
-
-        <View style={styles.giftDetails}>
-          <Image
-            style={styles.giftImage}
-            source={{
-              uri: getImageUrl('project', 'thumb', props.selectedProject.image)
-            }}
-          />
-          <View style={styles.giftNameAmount}>
-            <Text style={styles.giftName}>Sagar Aryal</Text>
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text
-              style={{
-                fontFamily: 'OpenSans-Regular',
-                fontSize: 13,
-                lineHeight: 18,
-                letterSpacing: 0,
-                textAlign: 'right',
-                color: 'rgba(0, 0, 0, 0.6)',
-                marginRight: 12
-              }}
-            >
-              Select Trees
-            </Text>
-            <Icon name={'chevron-up'} size={14} color="#4d5153" />
-          </View>
-        </View>
-
-        <SelectTreeCount
-          treeCount={treeCount}
-          setTreeCount={setTreeCount}
-          selectedProject={props.selectedProject}
-        />
-
-        <View style={styles.horizontalDivider} />
-
-        <TouchableOpacity>
-          <Text
-            style={{
-              fontFamily: 'OpenSans-SemiBold',
-              fontSize: 14,
-              lineHeight: 21,
-              letterSpacing: 0,
-              textAlign: 'left',
-              color: '#89b53a',
-              marginTop: 10
-            }}
-          >
-            Add another recipient
-          </Text>
-        </TouchableOpacity>
+        {
+          context.contextType === 'gift-contact' || context.contextType === 'gift-invitation' ? (
+            <GiftTreesComponent
+              treeCount={treeCount}
+              setTreeCount={setTreeCount}
+              selectedProject={props.selectedProject}
+            />
+          ) : <GiftTreesComponent
+              treeCount={treeCount}
+              setTreeCount={setTreeCount}
+              selectedProject={props.selectedProject} />
+        }
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
         <View style={[styles.horizontalDivider, { width: '14%' }]} />
-
         {/* Commission Covering */}
         {treeCount ? (
           <CoverFee
@@ -217,47 +138,7 @@ function DonationDetails(props) {
             toggleSetCommission={toggleSetCommission}
             commissionSwitch={commissionSwitch}
           />
-        ) : (
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              marginTop: 24,
-              borderRadius: 6,
-              backgroundColor: '#F5F7F9',
-              alignItems: 'center'
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: '#89b53a',
-                width: 6,
-                height: '100%',
-                borderTopLeftRadius: 6,
-                borderBottomLeftRadius: 6
-              }}
-            />
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                marginLeft: 24,
-                paddingTop: 24,
-                paddingBottom: 24,
-                alignItems: 'center',
-                paddingRight: 24
-              }}
-            >
-              <Image
-                source={infoHint}
-                style={{ marginRight: 12, height: 24, width: 24 }}
-              />
-              <Text style={{ maxWidth: '90%', fontFamily: 'OpenSans-Regular' }}>
-                Please select Tree Count to Donate trees.
-              </Text>
-            </View>
-          </View>
-        )}
+        ) : null}
 
         {/* Tax Receipt */}
         <TaxReceipt
@@ -307,11 +188,7 @@ function DonationDetails(props) {
         <Text style={styles.countryForTaxText}>
           Only donations made in local EUR are tax deductible in Germany.
         </Text> */}
-        {props.giftTreeCounterName ? (
-          <Text>Gift Trees</Text>
-        ) : props.supportTreecounter && props.supportTreecounter.displayName ? (
-          <Text>Support Trees</Text>
-        ) : null}
+
       </KeyboardAwareScrollView>
 
       {treeCount ? (
@@ -326,6 +203,86 @@ function DonationDetails(props) {
     </View>
   );
 }
+
+const GiftTreesComponent = (props) => {
+
+  return (
+    <View>
+      <Text style={[styles.sectionTitle, { marginTop: 20 }]}>
+        GIFT RECIPIENT
+        </Text>
+      {props.treeCount ? (
+        <>
+          <View style={styles.giftDetails}>
+            {props.selectedProject.image ?
+              <Image
+                style={styles.giftImage}
+                source={{
+                  uri: getImageUrl('project', 'thumb', props.selectedProject.image)
+                }}
+              /> : null}
+            <View style={styles.giftNameAmount}>
+              <Text style={styles.giftName}>Sagar Aryal</Text>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={styles.giftTreesTreeCountNumber}>{props.treeCount} </Text>
+              <Text style={[styles.giftTreesSelectTrees, {
+                marginRight: 12
+              }]}>Trees</Text>
+              <TouchableOpacity onPress={() => props.setTreeCount(0)}>
+                <Icon name={'chevron-down'} size={14} color="#4d5153" />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.horizontalDivider} />
+
+        </>
+      ) :
+        (
+          <>
+            <View style={styles.giftDetails}>
+              {props.selectedProject.image ?
+                <Image
+                  style={styles.giftImage}
+                  source={{
+                    uri: getImageUrl('project', 'thumb', props.selectedProject.image)
+                  }}
+                /> : null}
+
+              <View style={styles.giftNameAmount}>
+                <Text style={styles.giftName}>Sagar Aryal</Text>
+              </View>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={styles.giftTreesSelectTrees}>Select Trees</Text>
+                {/* <Icon name={'chevron-up'} size={14} color="#4d5153" /> */}
+              </View>
+            </View>
+
+            <SelectTreeCount
+              treeCount={props.treeCount}
+              setTreeCount={props.setTreeCount}
+              selectedProject={props.selectedProject}
+            />
+
+            <View style={styles.horizontalDivider} />
+
+          </>
+        )
+      }
+
+
+
+      {/* <TouchableOpacity>
+          <Text style={styles.giftTreesAddRecepient}>
+            Add another recipient
+          </Text>
+        </TouchableOpacity> */}
+    </View>
+  )
+}
+
+
 
 DonationDetails.propTypes = {
   currencies: PropTypes.object.isRequired,

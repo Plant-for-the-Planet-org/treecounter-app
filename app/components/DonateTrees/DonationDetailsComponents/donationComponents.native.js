@@ -82,7 +82,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                  (props.treeCount / 100 * 2.9 + 0.3)
+                (props.treeCount / 100 * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency
@@ -214,6 +214,7 @@ export function NoPlantProjectDetails(props) {
 
 export function SelectTreeCount(props) {
   const [customTreeCount, setCustomTreeCount] = React.useState(false);
+  const [tempTreeCount, setTempTreeCount] = React.useState(0);
   let treeCountOptions;
 
   if (props.selectedProject) {
@@ -262,8 +263,9 @@ export function SelectTreeCount(props) {
                 ? styles.treeCountTextInputSelected
                 : styles.treeCountTextInput
             }
-            onChangeText={treeCount => props.setTreeCount(treeCount)}
-            value={props.treeCount}
+            onChangeText={treeCount => setTempTreeCount(treeCount)}
+            onSubmitEditing={() => props.setTreeCount(tempTreeCount)}
+            value={tempTreeCount}
             keyboardType={'number-pad'}
             autoFocus
           />
@@ -278,16 +280,16 @@ export function SelectTreeCount(props) {
           </Text>
         </View>
       ) : (
-        <TouchableOpacity
-          onPress={() => {
-            setCustomTreeCount(true);
-            props.setTreeCount('');
-          }}
-          style={styles.customSelectorView}
-        >
-          <Text style={styles.customTreeCountText}>Custom Trees</Text>
-        </TouchableOpacity>
-      )}
+          <TouchableOpacity
+            onPress={() => {
+              setCustomTreeCount(true);
+              props.setTreeCount('');
+            }}
+            style={styles.customSelectorView}
+          >
+            <Text style={styles.customTreeCountText}>Custom Trees</Text>
+          </TouchableOpacity>
+        )}
     </View>
   );
 }
@@ -325,4 +327,49 @@ export function CountryPicker(props) {
       />
     </View>
   );
+}
+
+
+const hintCard = () => {
+  return (
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 24,
+        borderRadius: 6,
+        backgroundColor: '#F5F7F9',
+        alignItems: 'center'
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: '#89b53a',
+          width: 6,
+          height: '100%',
+          borderTopLeftRadius: 6,
+          borderBottomLeftRadius: 6
+        }}
+      />
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginLeft: 24,
+          paddingTop: 24,
+          paddingBottom: 24,
+          alignItems: 'center',
+          paddingRight: 24
+        }}
+      >
+        <Image
+          source={infoHint}
+          style={{ marginRight: 12, height: 24, width: 24 }}
+        />
+        <Text style={{ maxWidth: '90%', fontFamily: 'OpenSans-Regular' }}>
+          Please select Tree Count to Donate trees.
+              </Text>
+      </View>
+    </View>
+  )
 }

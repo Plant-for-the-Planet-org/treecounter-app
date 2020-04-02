@@ -12,21 +12,15 @@ import DonationDetails from './DonationDetails.native';
 export default function DonateTrees(props) {
   const { selectedProject } = props;
 
-  determineDefaultCurrency = () => {
-    const { currentUserProfile, selectedProject } = props;
-    const userCurrency =
-      null === currentUserProfile ? null : currentUserProfile.currency;
-    return null === userCurrency ? selectedProject.currency : userCurrency;
-  };
-
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       <DonationDetails
         treeCost={selectedProject.treeCost}
         selectedProject={selectedProject}
-        selectedCurrency={determineDefaultCurrency()}
+        selectedCurrency={props.determineDefaultCurrency()}
         treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
         navigation={props.navigation}
+        context={props.context}
       />
     </View>
   );

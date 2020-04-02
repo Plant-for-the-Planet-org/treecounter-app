@@ -124,6 +124,32 @@ export default EStyleSheet.create({
     fontSize: 11,
     color: '#4d5153'
   },
+  giftTreesAddRecepient: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#89b53a',
+    marginTop: 10
+  },
+  giftTreesTreeCountNumber: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 18,
+    lineHeight: 24,
+    letterSpacing: 0,
+    textAlign: 'right',
+    color: '#89b53a',
+    marginRight: 4
+  },
+  giftTreesSelectTrees: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 13,
+    lineHeight: 18,
+    letterSpacing: 0,
+    textAlign: 'right',
+    color: 'rgba(0, 0, 0, 0.6)',
+  },
 
   // Tree Count Selector
 

@@ -21,16 +21,10 @@ import {
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { fetchCurrencies } from '../../actions/currencies';
-import {
-  paymentClear,
-  createPaymentGift,
-  createPaymentDonation
-} from '../../actions/donateAction';
+
 import { loadProject } from '../../actions/loadTposAction';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
-import { updateRoute } from '../../helpers/routerHelper';
 import DonateTrees from '../../components/DonateTrees';
-import { getPaymentStatus } from '../../reducers/paymentStatus';
 import { postDirectRequest } from '../../utils/api';
 
 class DonationTreesContainer extends Component {
@@ -113,13 +107,14 @@ class DonationTreesContainer extends Component {
         });
     }
   }
-  onTabChange = title => this.props.navigation.setParams({ titleParam: title });
 
-  updateRoute = (routeName, id) =>
-    this.props.route(routeName, id, this.props.navigation);
 
-  donate = (donationContribution, plantProjectId, profile) =>
-    this.props.donate(donationContribution, plantProjectId, profile);
+  determineDefaultCurrency = () => {
+    const { currentUserProfile, selectedProject } = this.props;
+    const userCurrency =
+      null === currentUserProfile ? null : currentUserProfile.currency;
+    return null === userCurrency ? selectedProject.currency : userCurrency;
+  };
 
   render() {
     if (this.props.match) {
@@ -129,28 +124,19 @@ class DonationTreesContainer extends Component {
       if (id && !this.props.selectedProject) return null;
     }
 
-    console.log('Context in Donate Page ----------------------------------', this.props.navigation.getParam('context'))
+
     return (
       <DonateTrees
-        ref={'donateTreesContainer'}
         currencies={this.props.currencies}
-        donate={(donationContribution, plantProjectId, profile) =>
-          this.props.donate(donationContribution, plantProjectId, profile)
-        }
-        createPaymentDonation={this.props.createPaymentDonation}
-        createPaymentGift={this.props.createPaymentGift}
-        onTabChange={title => this.onTabChange(title)}
-        paymentClear={this.props.paymentClear}
-        paymentStatus={this.props.paymentStatus}
         plantProjectClear={this.props.clearPlantProject}
         selectedProject={this.props.selectedProject}
         selectedTpo={this.props.selectedTpo}
         setProgressModelState={this.props.setProgressModelState}
         supportTreecounter={this.props.supportTreecounter}
-        updateRoute={this.updateRoute}
         updateUserProfile={this.props.updateUserProfile}
-        {...this.props}
         navigation={this.props.navigation}
+        context={this.props.navigation.getParam('context')}
+        determineDefaultCurrency={() => this.determineDefaultCurrency()}
       />
     );
   }
@@ -164,7 +150,6 @@ const mapStateToProps = state => {
     currentUserProfile: currentUserProfileSelector(state),
     supportTreecounter: supportedTreecounterSelector(state),
     currencies: currenciesSelector(state),
-    paymentStatus: getPaymentStatus(state),
     selectedPlantProjectId: selectedPlantProjectIdSelector(state)
   };
 };
@@ -175,16 +160,11 @@ const mapDispatchToProps = dispatch => {
       supportTreecounterAction,
       selectPlantProjectAction,
       fetchCurrencies,
-      paymentClear,
       loadProject,
       clearPlantProject,
       setProgressModelState,
       loadUserProfile,
-      updateUserProfile,
-      createPaymentDonation,
-      createPaymentGift,
-      route: (routeName, id, navigation) => dispatch =>
-        updateRoute(routeName, navigation || dispatch, id)
+      updateUserProfile
     },
     dispatch
   );
@@ -201,19 +181,12 @@ DonationTreesContainer.propTypes = {
   selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
-  paymentStatus: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
-  paymentClear: PropTypes.func,
-  donate: PropTypes.func,
-  gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
   clearPlantProject: PropTypes.func,
   supportTreecounter: PropTypes.object,
   setProgressModelState: PropTypes.func,
   loadUserProfile: PropTypes.func,
-  route: PropTypes.func,
   updateUserProfile: PropTypes.func,
   match: PropTypes.any,
-  createPaymentDonation: PropTypes.func,
-  createPaymentGift: PropTypes.func
 };

@@ -120,11 +120,6 @@ export default class ChallengeTabView extends Component {
     const textColor = '#4d5153';
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
-        {/* <HeaderStatic
-          title={i18n.t('label.challenge_heading')}
-          navigation={this.props.navigation}
-          showBackButton
-        /> */}
         <HeaderNew title={''} navigation={this.props.navigation} />
         <View style={{ marginTop: 60 }} />
         <Text

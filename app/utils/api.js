@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { v1 as uuidv1 } from 'uuid';
+import { uuidv1 } from './uuid';
 import { debug } from '../debug';
 import { fetchItem, saveItem } from '../stores/localStorage';
 import { getAccessToken } from './user';

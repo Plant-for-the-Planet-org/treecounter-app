@@ -29,7 +29,7 @@ jobs:
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_development"' >>  $ENV_VARS
               echo 'export SERVER_URL="development.trilliontreecampaign.org"' >>  $ENV_VARS
-            elif [[ "${CIRCLE_BRANCH}" == "staging" ]] || [[ "${CIRCLE_BRANCH}" == "test" ]]
+            elif [[ "${CIRCLE_BRANCH}" == "fixtures" ]] || [[ "${CIRCLE_BRANCH}" == "staging" ]] || [[ "${CIRCLE_BRANCH}" == "test" ]]
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_${CIRCLE_BRANCH}"' >>  $ENV_VARS
               echo 'export SERVER_URL="${CIRCLE_BRANCH}.trilliontreecampaign.org"' >>  $ENV_VARS
@@ -85,9 +85,11 @@ jobs:
               npm run build:server
             fi
             echo "Copying new files to web server"
-            if [[ "${CIRCLE_BRANCH}" == "develop" ]]
+            if [[ "${CIRCLE_BRANCH}" == "develop" ]] || [[ "${CIRCLE_BRANCH}" == "fixtures" ]] || [[ "${CIRCLE_BRANCH}" == "staging" ]]
             then
-              ssh $HOST "cd $WD_SYMFONY; rm -r web/*"
+              ssh $HOST "cd $WD_SYMFONY; rm -fr web/*"
+              # copy client .htaccess into web folder
+              scp -r .htaccess $HOST:$WD_SYMFONY/web/.
             else
               ssh $HOST "cd $WD_SYMFONY; git clean -f web"
             fi
@@ -257,6 +259,7 @@ workflows:
               only:
                 - develop
                 - master
+                - fixtures
                 - test
                 - staging
             tags:

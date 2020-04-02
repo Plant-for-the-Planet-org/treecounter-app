@@ -425,8 +425,9 @@ class AnimatedViews extends React.Component {
         {activeMarker ? (
           <View style={styles.userContributionsDetailsFullViewCont}>
             <Animatable.View
+              duration={750}
               key={markers[activeIndex].id}
-              animation={singleContributionID == null ? 'slideInUp' : activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft'}
+              animation={singleContributionID == null ? 'slideInUp' : activeIndex > lastActiveIndex ? 'slideInRight' : 'slideInLeft'}
               style={[{ flex: 1, height: activeMarker ? HEIGHT * 0.7 : 0 }]}
             >
               {this.state.markers ? (

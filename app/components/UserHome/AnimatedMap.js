@@ -223,7 +223,7 @@ class AnimatedViews extends React.Component {
   }
 
   onPressMarker = (marker, e) => {
-    console.log('this.props.isFullMapComponentModal =', this.props.isFullMapComponentModal);
+    console.log('onPressMarker  marker =', marker);
     console.log(' state singleContribution ID =', this.state.singleContributionID)
     let action = e.nativeEvent.action;
     if (this.props.isFullMapComponentModal && this.state.singleContributionID == null && action == 'marker-press') {
@@ -272,16 +272,28 @@ class AnimatedViews extends React.Component {
     }
   }
 
-  onPressNextPrevBtn = (btn) => {
+  onPressNextPrevBtn = (btn, action) => {
+    const { markers, activeIndex } = this.state
+    if (action == 'set-id') {
+      if (btn == 'back') {
+        let nextMarker = markers[activeIndex - 1]
+        if (nextMarker)
+          this.setState({ singleContributionID: nextMarker.id })
+      } else if (btn == 'next') {
+        let prevMarker = markers[activeIndex + 1];
+        if (prevMarker)
+          this.setState({ singleContributionID: prevMarker.id })
+      }
+    }
     if (btn == 'back') {
-      if (this.state.activeIndex !== 0) {
-        this.setState({ activeIndex: this.state.activeIndex - 1, lastActiveIndex: this.state.activeIndex }, () => {
+      if (activeIndex !== 0) {
+        this.setState({ activeIndex: activeIndex - 1, lastActiveIndex: activeIndex, }, () => {
           this.toAnimateRegion()
         })
       }
     }
     if (btn == 'next') {
-      this.setState({ activeIndex: this.state.activeIndex + 1, lastActiveIndex: this.state.activeIndex }, () => {
+      this.setState({ activeIndex: activeIndex + 1, lastActiveIndex: activeIndex }, () => {
         this.toAnimateRegion()
       })
     }
@@ -315,7 +327,7 @@ class AnimatedViews extends React.Component {
     const { isMapPressed } = this.props;
     let activeMarker =
       this.state.markers !== null
-        ? this.state.markers.find(x => x.id == this.state.singleContributionID)
+        ? this.state.markers.find(x => x.id === this.state.singleContributionID)
         : null;
     let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
     let isStaticMap = singleContributionID ? false : isContribution
@@ -354,28 +366,28 @@ class AnimatedViews extends React.Component {
         </MapView>
         <View>
           {this.props.isFullMapComponentModal && !this.state.singleContributionID ? (
-            !isMapPressed ? <Animatable.View
-              animation={isMapPressed ? 'slideOutDown' : 'slideInUp'}
-              style={styles.swiperCont}>
-              <View
-                key={activeIndex}
-              >
-                {markers && markers[activeIndex] ? <Animatable.View duration={1500} animation={activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft'} style={styles.card}>
-                  <ContributionCard
-                    onPressSingleContribution={() => this.onPressMarker(markers[activeIndex], { nativeEvent: { action: 'marker-press' } })}
-                    isFromAnimatredCardList
-                    contribution={markers[activeIndex]}
-                  />
-                </Animatable.View> : null}
-              </View>
-              <View style={styles.bottomArrowsCont}>
-                <View style={{ flex: 1 }} />
-                <View style={{ flexDirection: 'row', }}>
-                  <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
-                  <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
+            !isMapPressed ?
+              <Animatable.View
+                animation={isMapPressed ? 'slideOutDown' : 'slideInUp'}
+                style={styles.swiperCont}>
+                <View
+                  key={activeIndex}>
+                  {markers && markers[activeIndex] ? <Animatable.View duration={1500} animation={activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft'} style={styles.card}>
+                    <ContributionCard
+                      onPressSingleContribution={() => this.onPressMarker(markers[activeIndex], { nativeEvent: { action: 'marker-press' } })}
+                      isFromAnimatredCardList
+                      contribution={markers[activeIndex]}
+                    />
+                  </Animatable.View> : null}
                 </View>
-              </View>
-            </Animatable.View> : null) : null}
+                <View style={styles.bottomArrowsCont}>
+                  <View style={{ flex: 1 }} />
+                  <View style={{ flexDirection: 'row', }}>
+                    <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
+                  </View>
+                </View>
+              </Animatable.View> : null) : null}
 
         </View>
         <SafeAreaView />
@@ -409,23 +421,37 @@ class AnimatedViews extends React.Component {
           </>
 
         ) : null}
+        {/* {console.log('animation=', singleContributionID == null ? 'slideInUp' : activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft')} */}
         {activeMarker ? (
-          <Animatable.View
-            animation={'slideInUp'}
-            style={[styles.userContributionsDetailsFullViewCont, { height: activeMarker ? HEIGHT * 0.7 : 0 }]}
-          >
-            {this.state.markers ? (
-              <UserContributionsDetails
-                isFromUserProfile
-                userProfileId={this.props.userProfileId}
-                navigation={this.props.navigation}
-                contribution={activeMarker}
-                plantProjects={this.props.plantProjects}
-                deleteContribution={this.props.deleteContribution}
-              />
-            ) : null}
-          </Animatable.View>
+          <View style={styles.userContributionsDetailsFullViewCont}>
+            <Animatable.View
+              key={markers[activeIndex].id}
+              animation={singleContributionID == null ? 'slideInUp' : activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft'}
+              style={[{ flex: 1, height: activeMarker ? HEIGHT * 0.7 : 0 }]}
+            >
+              {this.state.markers ? (
+                <UserContributionsDetails
+                  isFromUserProfile
+                  userProfileId={this.props.userProfileId}
+                  navigation={this.props.navigation}
+                  contribution={markers[activeIndex]}
+                  plantProjects={this.props.plantProjects}
+                  deleteContribution={this.props.deleteContribution}
+                />
+              ) : null}
+            </Animatable.View>
+          </View>
         ) : null}
+
+        {singleContributionID ? <View style={{ position: 'absolute', bottom: 30, width: '100%', backgroundColor: '#fff', }}>
+          <View style={styles.bottomArrowsCont}>
+            <View style={{ flex: 1 }} />
+            <View style={{ flexDirection: 'row', }}>
+              <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back', 'set-id')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next', 'set-id')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
+            </View>
+          </View>
+        </View> : null}
       </View>
     );
   }
@@ -455,9 +481,9 @@ const styles = StyleSheet.create({
     height: 25, width: 20,
   },
   userContributionsDetailsFullViewCont: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     width: '100%',
-    height: HEIGHT * 0.7,
+    height: HEIGHT * 0.68,
     position: 'absolute',
     bottom: 0,
   },

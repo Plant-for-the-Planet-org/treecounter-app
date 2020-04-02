@@ -430,11 +430,11 @@ export default class DonateTrees extends Component {
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
           {this.props.supportTreecounter.treecounterId
-            ? (this.props.supportTreecounter.type == 'individual' ? i18n.t('label.support_trees_to', {
+            ? (this.props.supportTreecounter.type == 'company' ? i18n.t('label.give_trees_to_company', {
+              companyName: this.props.supportTreecounter.displayName
+            }) : (i18n.t('label.support_trees_to', {
               user: this.props.supportTreecounter.displayName
-            }) : (this.props.supportTreecounter.type == 'company' ? i18n.t('label.give_trees_to_company', {
-              user: this.props.supportTreecounter.displayName
-            }) : null))
+            })))
             : pageHeadings[this.state.pageIndex].heading}
           <DescriptionHeading>
             {pageHeadings[this.state.pageIndex].description}

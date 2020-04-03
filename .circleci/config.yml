@@ -85,7 +85,7 @@ jobs:
               npm run build:server
             fi
             echo "Copying new files to web server"
-            if [[ "${CIRCLE_BRANCH}" == "develop" ]] || [[ "${CIRCLE_BRANCH}" == "fixtures" ]] || [[ "${CIRCLE_BRANCH}" == "staging" ]]
+            if [[ "${CIRCLE_BRANCH}" == "develop" ]] || [[ "${CIRCLE_BRANCH}" == "fixtures" ]] || [[ "${CIRCLE_BRANCH}" == "staging" ]] || [[ "${CIRCLE_BRANCH}" == "master" ]]
             then
               ssh $HOST "cd $WD_SYMFONY; rm -fr web/*"
               # copy client .htaccess into web folder

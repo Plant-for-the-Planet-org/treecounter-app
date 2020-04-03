@@ -1,5 +1,12 @@
 import React, { useRef } from 'react';
-import { Text, View, TouchableOpacity, Image, BackHandler, TextInput } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  BackHandler,
+  TextInput
+} from 'react-native';
 import { backArrow } from './../../assets';
 import { SafeAreaView } from 'react-navigation';
 import TouchableItem from './../Common/TouchableItem.native';
@@ -12,7 +19,6 @@ export default function HeaderNew(props) {
   };
   const inputEl = useRef('');
 
-
   React.useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', navigateBack);
     // clean up
@@ -22,9 +28,12 @@ export default function HeaderNew(props) {
   });
 
   const clearSearch = () => {
-    inputEl.current.clear(),
-      props.toggleIsSearch(false)
-  }
+    inputEl.current.clear();
+    if (props.onChangeSearch) {
+      props.onChangeSearch('');
+    }
+    props.toggleIsSearch(false);
+  };
 
   const textColor = '#4d5153';
   const whiteColor = 'white';
@@ -103,64 +112,59 @@ export default function HeaderNew(props) {
           </TouchableItem>
         </View>
       ) : null}
-      {
+      {props.isSearch ? (
+        <TextInput
+          style={{
+            borderBottomColor: 'gray',
+            borderBottomWidth: 1,
+            marginLeft: 44,
+            width: 220,
+            height: 40,
+            fontFamily: 'OpenSans-Regular'
+          }}
+          ref={inputEl}
+          onChangeText={text => props.searchContact(text)}
+          value={props.searchText}
+          placeholder={props.searchPlaceholder}
+        />
+      ) : null}
+      {props.searchPlaceholder ? (
         props.isSearch ? (
-          <TextInput
+          <TouchableOpacity
+            onPress={() => clearSearch()}
             style={{
-              borderBottomColor: 'gray',
-              borderBottomWidth: 1,
-              marginLeft: 44,
-              width: 220,
-              height: 40,
-              fontFamily: 'OpenSans-Regular'
+              right: 20,
+              bottom: 24,
+              zIndex: 1002,
+              position: 'absolute'
             }}
-            ref={inputEl}
-            onChangeText={text => props.searchContact(text)}
-            value={props.searchText}
-            placeholder={props.searchPlaceholder}
-
-          />
-        ) : null
-      }
-      {
-        props.searchPlaceholder ? (
-          props.isSearch ?
-            <TouchableOpacity
-              onPress={() => clearSearch()}
-              style={{
-                right: 20,
-                bottom: 24,
-                zIndex: 1002,
-                position: 'absolute'
-              }}>
-              <Icon
-                name="times"
-                size={18}
-                color="#4d5153"
-                style={{ marginLeft: 10 }}
-              />
-            </TouchableOpacity>
-            : (
-
-              <TouchableOpacity
-                onPress={() => props.toggleIsSearch(true)}
-                style={{
-                  right: 20,
-                  bottom: 24,
-                  zIndex: 1002,
-                  position: 'absolute'
-                }}>
-                <Icon
-                  name="search"
-                  size={18}
-                  color="#4d5153"
-                  style={{ marginLeft: 10 }}
-                />
-              </TouchableOpacity>
-            )
-        ) : null
-      }
-
+          >
+            <Icon
+              name="times"
+              size={18}
+              color="#4d5153"
+              style={{ marginLeft: 10 }}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => props.toggleIsSearch(true)}
+            style={{
+              right: 20,
+              bottom: 24,
+              zIndex: 1002,
+              position: 'absolute'
+            }}
+          >
+            <Icon
+              name="search"
+              size={18}
+              color="#4d5153"
+              style={{ marginLeft: 10 }}
+            />
+          </TouchableOpacity>
+        )
+      ) : null}
     </SafeAreaView>
   );
 }

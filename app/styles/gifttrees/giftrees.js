@@ -43,8 +43,7 @@ export default EStyleSheet.create({
     fontFamily: 'OpenSans-Regular'
   },
 
-
-  // New Designs 
+  // New Designs
 
   nMainContainer: {
     backgroundColor: 'white',
@@ -54,11 +53,11 @@ export default EStyleSheet.create({
     height: '100%'
   },
   nGiftDesc: {
-    fontFamily: "OpenSans-SemiBold",
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 18,
     lineHeight: 24,
     letterSpacing: 0,
-    textAlign: "left",
+    textAlign: 'left',
     color: '#4d5153',
     marginTop: 8
   },
@@ -98,30 +97,38 @@ export default EStyleSheet.create({
     fontFamily: 'OpenSans-Bold'
   },
   selectContactTitle: {
-    fontFamily: "OpenSans-SemiBold",
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 17,
     lineHeight: 23,
     letterSpacing: 0,
-    textAlign: "left",
+    textAlign: 'left',
     color: '#4d5153',
     marginTop: 40,
     marginBottom: 25
   },
   contactDisplayName: {
-    fontFamily: "OpenSans-SemiBold",
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 14,
     lineHeight: 14,
     letterSpacing: 0,
-    textAlign: "left",
+    textAlign: 'left',
     color: '#4d5153'
   },
   contactEmail: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     lineHeight: 14,
     letterSpacing: 0,
-    textAlign: "left",
+    textAlign: 'left',
     color: '#4d5153',
     marginTop: 2
+  },
+  headerText: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 27,
+    lineHeight: 40,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
   }
 });

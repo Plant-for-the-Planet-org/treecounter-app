@@ -39,8 +39,8 @@ export default function GetRandomImage(props) {
       <Image
         source={selectedImage}
         style={{
-          width: 50,
-          height: 50,
+          width: props.dimension ? props.dimension : 50,
+          height: props.dimension ? props.dimension : 50,
           borderRadius: 100
         }}
       />

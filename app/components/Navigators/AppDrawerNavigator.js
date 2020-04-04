@@ -67,6 +67,7 @@ import SelectContacts from '../NewGiftTrees/components/SelectContacts.native';
 import GiftEmail from '../NewGiftTrees/components/GiftEmail.native';
 import DonateThankYou from '../DonateTrees/DonateThankyou.native';
 import colors from '../../utils/constants';
+import GiftMessage from '../NewGiftTrees/components/GiftMessage.native';
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -107,11 +108,13 @@ const headerLabels = {
   ['app_pledge_update_form']: 'label.updatePledge'
 };
 
-export const getAppNavigator = function (isLoggedIn, userProfile) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const searchNavigator = createStackNavigator(
     {
       Search: {
-        screen: () => <SearchLayout searchInputUnderlineColorAndroid={colors.WHITE} />
+        screen: () => (
+          <SearchLayout searchInputUnderlineColorAndroid={colors.WHITE} />
+        )
       }
     },
     {
@@ -162,7 +165,7 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       }
     }
   );
-  const getTitle = function (navigation) {
+  const getTitle = function(navigation) {
     let title = navigation.getParam('titleParam');
     try {
       if (!title) {
@@ -313,7 +316,7 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_selectProject')]: {
         screen: SelectPlantProjectContainer,
-        navigationOptions: { header: null },
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_selectedProject')]: {
         screen: SelectedPlantProjectContainer,
@@ -410,6 +413,10 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       ['donate_thankyou']: {
         screen: DonateThankYou,
+        navigationOptions: { header: null }
+      },
+      ['gift_message']: {
+        screen: GiftMessage,
         navigationOptions: { header: null }
       }
     },

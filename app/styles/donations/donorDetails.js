@@ -5,8 +5,7 @@ const width = Dimensions.get('window').width;
 export default EStyleSheet.create({
   scrollView: {
     padding: 24,
-    marginTop: 72,
-    paddingBottom: 240
+    paddingBottom: 200
   },
   pageTitle: {
     fontFamily: 'OpenSans-Bold',
@@ -435,6 +434,5 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 40
   }
 });

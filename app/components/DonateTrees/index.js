@@ -421,7 +421,7 @@ export default class DonateTrees extends Component {
           plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
       }
     }
-    console.log('support treecounter', this.props.supportTreecounter);
+    debug('support treecounter', this.props.supportTreecounter);
     return this.state.showSelectProject ? (
       <SelectPlantProjectContainer
         supportTreecounter={this.props.supportTreecounter}

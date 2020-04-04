@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Accordion from 'react-native-collapsible/Accordion';
 import { debug } from '../../debug';
 import { foldin, foldout } from '../../assets';
-import { Text, View, ScrollView, Image, Linking } from 'react-native';
+import { Text, View, ScrollView, Image, Linking, Platform } from 'react-native';
 import styles from '../../styles/faq';
 import i18n from '../../locales/i18n';
 import TouchableItem from '../../components/Common/TouchableItem';

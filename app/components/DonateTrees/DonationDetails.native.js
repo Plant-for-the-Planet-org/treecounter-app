@@ -37,6 +37,8 @@ import {
   SelectTreeCount,
   CountryPicker
 } from './DonationDetailsComponents/donationComponents.native';
+import BottomSheet from 'reanimated-bottom-sheet'
+import DonorDetails from './DonorDetails'
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
@@ -44,13 +46,22 @@ function DonationDetails(props) {
   const [frequency, setFrequency] = React.useState(''); // for Selecting Frequency of Donations
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
+
+  const [donorDetails, setDonorDetails] = React.useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    country: '',
+    isCompany: false,
+    companyName: ''
+  })
   // Function for Switching the state of commission
-  toggleSetCommission = value => {
+  const toggleSetCommission = value => {
     setCommissionSwitch(value);
   };
 
   // Function for Switching the state of tax receipt
-  toggleTaxReceipt = value => {
+  const toggleTaxReceipt = value => {
     setTaxReceiptSwitch(value);
   };
 
@@ -58,6 +69,30 @@ function DonationDetails(props) {
   let context = props.context;
   let contextType = props.context.contextType
   console.log('Context Type ------------', contextType)
+
+  const renderContent = () => {
+    return (
+      <DonorDetails
+        donorDetails={donorDetails}
+        setDonorDetails={setDonorDetails}
+        snapBottomSheet={() => hideBottomSheet()}
+      />
+    )
+  }
+
+  const hideBottomSheet = () => {
+    BottomSheetRef.current.snapTo(2)
+  }
+  const renderHeader = () => {
+    return (
+      <View style={{ backgroundColor: '#ecf0f1', height: 24, width: '100%', borderTopLeftRadius: 24, borderTopRightRadius: 24, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ backgroundColor: 'white', height: 6, width: 100, borderRadius: 3 }}></View>
+      </View>
+    )
+  }
+
+  const BottomSheetRef = React.useRef('BottomSheet');
+
   return (
     <View style={{ backgroundColor: 'white' }}>
       <HeaderAnimated
@@ -121,10 +156,7 @@ function DonationDetails(props) {
               setTreeCount={setTreeCount}
               selectedProject={props.selectedProject}
             />
-          ) : <GiftTreesComponent
-              treeCount={treeCount}
-              setTreeCount={setTreeCount}
-              selectedProject={props.selectedProject} />
+          ) : null
         }
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
@@ -148,19 +180,24 @@ function DonationDetails(props) {
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>CONTACT DETAILS</Text>
-          {props.selectedProject ? (
-            <TouchableOpacity>
-              <Text style={styles.sectionRightButton}>Edit</Text>
-            </TouchableOpacity>
-          ) : null}
+          <TouchableOpacity
+            onPress={
+              () => BottomSheetRef.current.snapTo(0)
+            }
+          >{donorDetails.firstName ? <Text style={styles.sectionRightButton}>Edit</Text> : <Text style={styles.sectionRightButton}>Add</Text>}
+          </TouchableOpacity>
         </View>
-        <View>
-          <Text style={styles.contactDetailsAddress}>Company Name</Text>
-          <Text style={styles.contactDetailsAddress}>
-            Am Bahnhof 1, Uffing am Staffelsee, DE
-          </Text>
-          <Text style={styles.contactDetailsAddress}>sagar@aryal.me</Text>
-        </View>
+        {donorDetails.firstName ?
+          <View>
+            <Text style={styles.contactDetailsAddress}>{donorDetails.firstName} {donorDetails.lastName}</Text>
+            {donorDetails.companyName ? (
+              <Text style={styles.contactDetailsAddress}>{donorDetails.companyName}</Text>
+            ) : null}
+            <Text style={styles.contactDetailsAddress}>
+              {donorDetails.email}
+            </Text>
+            <Text style={styles.contactDetailsAddress}>{donorDetails.country}</Text>
+          </View> : null}
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>PAYMENT METHOD</Text>
@@ -200,6 +237,16 @@ function DonationDetails(props) {
           navigation={props.navigation}
         />
       ) : null}
+
+      <BottomSheet
+        ref={BottomSheetRef}
+        snapPoints={[500, 100, 0]}
+        initialSnap={2}
+        renderContent={renderContent}
+        renderHeader={renderHeader}
+        enabledContentGestureInteraction={false}
+        enabledContentTapInteraction={false}
+      />
     </View>
   );
 }

@@ -101,15 +101,15 @@ export function PaymentOption(props) {
         </View>
       </View>
       <TouchableOpacity
-        // onPress={() => {
-        //   updateStaticRoute('donor_details_form', props.navigation, {
-        //     treeCount: props.treeCount,
-        //     treeCost: props.treeCost,
-        //     selectedCurrency: props.selectedCurrency,
-        //     commissionSwitch: props.commissionSwitch,
-        //     navigation: props.navigation
-        //   });
-        // }}
+        onPress={() => {
+          updateStaticRoute('payment_details_form', props.navigation, {
+            treeCount: props.treeCount,
+            treeCost: props.treeCost,
+            selectedCurrency: props.selectedCurrency,
+            commissionSwitch: props.commissionSwitch,
+            navigation: props.navigation
+          });
+        }}
         style={styles.continueButtonView}
       >
         <View style={{ alignItems: 'center' }}>

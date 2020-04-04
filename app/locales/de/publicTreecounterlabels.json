@@ -6,6 +6,7 @@
   "planted_trees": "Gepflanzte Bäume",
   "target": "Ziel",
   "support_trees_to": "Unterstütze {{user}} mit Bäumen",
+  "give_trees_to_company": "Unterstütze {{companyName}} mit Bäumen",
   "shareuserprofile": "Treffe {{displayName}} in der Plant-for-the-Planet App https://www.trilliontreecampaign.org/t/{{slug}}",
   "supportUser": "Unterstütze {{displayName}} mit einer Baumspende"
 }

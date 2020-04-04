@@ -10,6 +10,19 @@ import i18n from '../../locales/i18n';
 import TouchableItem from '../../components/Common/TouchableItem';
 
 export default class LicenseInfoList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      indexes: []
+    };
+  }
+
+  _updateSections = sections => {
+    this.setState({
+      indexes: sections
+    });
+  };
+
   _renderHeader(section, index, isActive) {
     return (
       <View style={styles.header}>
@@ -68,10 +81,12 @@ export default class LicenseInfoList extends Component {
           {i18n.t('label.license_credit_info')}
         </Text>
         <Accordion
+          activeSections={this.state.indexes}
           sections={Object.keys(appLicenses)}
           renderHeader={this._renderHeader}
           renderContent={this._renderContent}
           touchableComponent={TouchableItem}
+          onChange={this._updateSections}
         />
       </ScrollView>
     );

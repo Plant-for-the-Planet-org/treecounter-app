@@ -7,7 +7,7 @@ import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
-//const LicenseInfo = require('./LicenseInfo.json');
+const LicenseInfo = require('./LicenseInfo.json');
 import HeaderNew from './../Header/HeaderNew.native';
 import colors from '../../utils/constants';
 
@@ -60,12 +60,12 @@ class AboutUs extends Component {
             onPress={() => {
               // debug('open Third party here');
               //TODO: this a is temporary solution until someone fixes the LicenseInfo component and updates LicenseInfo.json
-              this.openGateWay(
-                'https://github.com/Plant-for-the-Planet-org/treecounter-app/network/dependencies'
-              );
-              //this.props.navigation.navigate('license_info_list', {
-              //  licenseList: LicenseInfo
-              //});
+              // this.openGateWay(
+              //   'https://github.com/Plant-for-the-Planet-org/treecounter-app/network/dependencies'
+              // );
+              this.props.navigation.navigate('license_info_list', {
+                licenseList: LicenseInfo
+              });
             }}
             title={i18n.t('label.open_source_license')}
           />

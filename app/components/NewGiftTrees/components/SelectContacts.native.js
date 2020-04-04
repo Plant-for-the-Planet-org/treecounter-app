@@ -78,10 +78,10 @@ const SelectContacts = props => {
         }}
         style={{ flexDirection: 'row', marginBottom: 30 }}
       >
-        {props.item.hasThumbnail ? (
+        {item.hasThumbnail ? (
           <Image
             style={{ height: 50, width: 50, borderRadius: 25 }}
-            source={{ uri: props.item.thumbnailPath }}
+            source={{ uri: item.thumbnailPath }}
           />
         ) : (
           <GetRandomImage name={item.displayName} />
@@ -160,7 +160,9 @@ const SelectContacts = props => {
         giftContacts.push({
           firstName: searchContacts[i].displayName,
           lastName: '',
-          email: searchContacts[i].emailAddresses[0].email
+          email: searchContacts[i].emailAddresses[0].email,
+          hasThumbnail: searchContacts[i].hasThumbnail,
+          thumbnailPath: searchContacts[i].thumbnailPath
         });
       }
     }
@@ -169,14 +171,8 @@ const SelectContacts = props => {
       setErrMsg('Please select a contact');
     } else {
       setErrMsg('');
-      updateRoute('app_gift_projects', props.navigation, {
-        context: {
-          contextType: 'gift-contact',
-          giftDetails: {
-            giftContacts,
-            giftMessage: ''
-          }
-        }
+      updateRoute('gift_message', props.navigation, 0, {
+        giftContacts
       });
     }
   };
@@ -188,7 +184,7 @@ const SelectContacts = props => {
         navigation={props.navigation}
         onChangeSearch={onChangeSearch}
         searchText={searchText}
-        searchPlaceholder={'Search Contact'}
+        searchPlaceholder={i18n.t('label.search_contact')}
         isSearch={isSearch}
         toggleIsSearch={toggleIsSearch}
         searchContact={searchContact}
@@ -202,18 +198,7 @@ const SelectContacts = props => {
       >
         {!isSearch ? (
           <>
-            <Text
-              style={{
-                fontFamily: 'OpenSans-Bold',
-                fontSize: 27,
-                lineHeight: 40,
-                letterSpacing: 0,
-                textAlign: 'left',
-                color: '#4d5153'
-              }}
-            >
-              {i18n.t('label.gift_trees')}
-            </Text>
+            <Text style={styles.headerText}>{i18n.t('label.gift_trees')}</Text>
 
             <Text style={styles.nGiftDesc}>
               {i18n.t('label.gift_tree_description_new')}
@@ -221,7 +206,9 @@ const SelectContacts = props => {
           </>
         ) : null}
 
-        <Text style={styles.selectContactTitle}>Select Contact</Text>
+        <Text style={styles.selectContactTitle}>
+          {i18n.t('label.select_contact')}
+        </Text>
 
         <FlatList
           data={searchContacts}
@@ -232,7 +219,7 @@ const SelectContacts = props => {
         />
       </ScrollView>
       <PrimaryButton buttonStyle={{ marginVertical: 10 }} onClick={onNextClick}>
-        Next
+        {i18n.t('label.next')}
       </PrimaryButton>
     </View>
   );

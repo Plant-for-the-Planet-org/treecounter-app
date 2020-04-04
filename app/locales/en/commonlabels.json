@@ -51,5 +51,6 @@
   "share": "Share",
   "noInternet": "You maybe offline",
   "thankyou": "Thank you",
-  "someFunctionality": "Some functionalities may be unavailable offline"
+  "someFunctionality": "Some functionalities may be unavailable offline",
+  "next": "Next"
 }

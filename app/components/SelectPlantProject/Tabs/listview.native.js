@@ -81,14 +81,14 @@ class ListViewProjects extends PureComponent {
       });
   };
   _keyExtractor = item => item.id.toString();
-  onSelectClickedFeaturedProjects(id) {
+  onSelectClickedFeaturedProjects = (id) => {
     this.props.selectPlantProjectAction(id);
-    const { navigation } = this.props;
-    updateStaticRoute(
-      'app_donate_detail',
-      navigation,
-      navigation.getParam('userForm')
-    );
+    const { navigation, context } = this.props;
+    updateStaticRoute('app_donate_detail', navigation, {
+      id: id,
+      userForm: navigation.getParam('userForm'),
+      context: context
+    });
   }
   _renderItem = ({ item }) => (
     <PlantProjectSnippet
@@ -96,7 +96,7 @@ class ListViewProjects extends PureComponent {
       key={'projectFull' + item.id}
       onMoreClick={id => this.props.onMoreClick(id, item.name)}
       plantProject={item}
-      onSelectClickedFeaturedProjects={this.props.selectProject}
+      onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
       showMoreButton={false}
       tpoName={item.tpo_name}
       navigation={this.props.navigation}

@@ -19,8 +19,11 @@ import { trees } from './../../../assets';
 import i18n from '../../../locales/i18n.js';
 import LoadingIndicator from '../../Common/LoadingIndicator.native';
 import colors from '../../../utils/constants';
+import {bindActionCreators} from 'redux';
+import {selectPlantProjectAction} from '../../../actions/selectPlantProjectAction';
+import {connect} from 'react-redux';
 
-export default class FeaturedProjects extends PureComponent {
+ class FeaturedProjects extends PureComponent {
   constructor(props) {
     super(props);
     this.onSelectClickedFeaturedProjects = this.onSelectClickedFeaturedProjects.bind(
@@ -88,14 +91,14 @@ export default class FeaturedProjects extends PureComponent {
       });
   };
   _keyExtractor = item => item.id.toString();
-  onSelectClickedFeaturedProjects(id) {
-    this.props.selectProject(id);
-    const { navigation } = this.props;
-    updateStaticRoute(
-      'app_donate_detail',
-      navigation,
-      navigation.getParam('userForm')
-    );
+  onSelectClickedFeaturedProjects = (id) => {
+    this.props.selectPlantProjectAction(id);
+    const { navigation, context } = this.props;
+    updateStaticRoute('app_donate_detail', navigation, {
+      id: id,
+      userForm: navigation.getParam('userForm'),
+      context: context
+    });
   }
 
   _renderItem = ({ item }) => (
@@ -167,6 +170,16 @@ export default class FeaturedProjects extends PureComponent {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      selectPlantProjectAction
+    },
+    dispatch
+  );
+};
+export default connect(null, mapDispatchToProps)(FeaturedProjects);
 
 FeaturedProjects.propTypes = {
   plantProjects: PropTypes.array.isRequired,

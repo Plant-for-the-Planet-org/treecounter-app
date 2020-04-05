@@ -16,7 +16,8 @@ const ListProjects = ({
   loadProjects,
   index,
   scrollY,
-  context
+  context,
+  ...props
 }) => {
   const [search, setSearch] = useState('');
   // memoized: refilters if plantProjects or search string changes
@@ -60,6 +61,7 @@ const ListProjects = ({
 
       {/* <View style={styles.listViewContainer}> */}
       <ListViewProjects
+        {...props}
         projects={filteredProjects}
         selectProject={selectProject}
         onMoreClick={onMoreClick}

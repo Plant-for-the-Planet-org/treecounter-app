@@ -18,7 +18,7 @@ export default function DonateTrees(props) {
         treeCost={selectedProject.treeCost}
         selectedProject={selectedProject}
         selectedCurrency={props.determineDefaultCurrency()}
-        treeCountOptions={selectedProject.paymentSetup.treeCountOptions}
+        treeCountOptions={selectedProject && selectedProject.paymentSetup && selectedProject.paymentSetup.treeCountOptions}
         navigation={props.navigation}
         context={props.context}
       />

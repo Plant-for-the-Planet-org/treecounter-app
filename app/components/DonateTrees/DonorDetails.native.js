@@ -150,6 +150,8 @@ export default function DonorDetails(props) {
 
                 <GooglePlacesInput
                   placeholder={'Address'}
+                  initialValue={formikProps.values.country ? formikProps.values.country : ''}
+                  setFieldValue={formikProps.setFieldValue}
                 />
                 {/* <CountryPicker
                   values={formikProps.values}

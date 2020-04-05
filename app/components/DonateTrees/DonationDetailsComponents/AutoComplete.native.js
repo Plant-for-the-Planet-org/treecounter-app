@@ -6,6 +6,7 @@ import { context } from './../../../config';
 const { googleMapApiKey } = context;
 
 export default GooglePlacesInput = (props) => {
+    const [listViewDisplayed, setListViewDisplayed] = React.useState('auto')
     return (
         <GooglePlacesAutocomplete
             placeholder={props.placeholder}
@@ -13,13 +14,14 @@ export default GooglePlacesInput = (props) => {
             autoFocus={false}
             returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
             keyboardAppearance={'light'} // Can be left out for default keyboardAppearance https://facebook.github.io/react-native/docs/textinput.html#keyboardappearance
-            listViewDisplayed='auto'    // true/false/undefined
-            fetchDetails={true}
+            listViewDisplayed={listViewDisplayed}    // true/false/undefined
             renderDescription={row => row.description} // custom description render
             onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
                 console.log(data, details);
+                setListViewDisplayed('false')
+                props.setFieldValue('country', data)
             }}
-            getDefaultValue={() => ''}
+            getDefaultValue={() => props.initialValue}
             query={{
                 // available options: https://developers.google.com/places/web-service/autocomplete
                 key: googleMapApiKey,
@@ -31,12 +33,16 @@ export default GooglePlacesInput = (props) => {
                     width: '100%',
                     backgroundColor: 'white',
                     paddingLeft: 0,
-                    borderWidth: 0
+                    borderTopWidth: 0,
+                    borderBottomWidth: 1,
+                    marginTop: 20
                 },
                 textInput: {
                     paddingLeft: 0,
                     fontFamily: 'OpenSans-Regular',
-                    borderWidth: 0
+                    borderWidth: 0,
+                    marginLeft: 0,
+                    marginRight: 0,
                 },
                 description: {
                     fontFamily: 'OpenSans-Regular'

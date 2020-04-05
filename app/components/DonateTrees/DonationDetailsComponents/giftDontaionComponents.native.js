@@ -7,7 +7,9 @@ import {
     TouchableOpacity,
     Switch,
     TextInput,
-    Animated
+    Animated,
+    FlatList,
+    Dimensions
 } from 'react-native';
 import styles from '../../../styles/donations/donationDetails';
 import PropTypes from 'prop-types';
@@ -20,11 +22,14 @@ import {
 } from './../../../assets';
 import { getImageUrl } from '../../../actions/apiRouting';
 import i18n from '../../../locales/i18n';
-import { Dropdown } from 'react-native-material-dropdown';
 import { formatNumber, delimitNumbers } from '../../../utils/utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {
+    SelectTreeCount,
+} from './donationComponents.native';
+import GetRandomImage from '../../../utils/getRandomImage';
 
 function SelectMultiTreeCount(props) {
     const [tempTreeCount, setTempTreeCount] = React.useState(0);

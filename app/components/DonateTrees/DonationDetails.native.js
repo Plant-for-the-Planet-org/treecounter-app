@@ -13,14 +13,6 @@ import {
 } from 'react-native';
 import styles from '../../styles/donations/donationDetails';
 import PropTypes from 'prop-types';
-import {
-  currencyIcon,
-  gPayLogo,
-  blackLock,
-  nextArrowWhite,
-  infoHint
-} from './../../assets';
-import { getImageUrl } from '../../actions/apiRouting';
 import i18n from '../../locales/i18n';
 import { Dropdown } from 'react-native-material-dropdown';
 import { formatNumber, delimitNumbers } from '../../utils/utils';
@@ -28,7 +20,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Header from './DonationDetailsComponents/Header';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   TaxReceipt,
   CoverFee,
@@ -37,9 +28,7 @@ import {
   PlantProjectDetails,
   NoPlantProjectDetails,
   SelectTreeCount,
-  CountryPicker,
 } from './DonationDetailsComponents/donationComponents.native';
-import GetRandomImage from '../../utils/getRandomImage';
 import { GiftTreesComponent } from './DonationDetailsComponents/giftDontaionComponents.native'
 
 function DonationDetails(props) {

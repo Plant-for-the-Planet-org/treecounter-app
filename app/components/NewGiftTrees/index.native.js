@@ -52,7 +52,6 @@ const NewGiftTrees = (props) => {
                         </View>
                     </TouchableOpacity>
                 </View>
-
             </View>
         </SafeAreaView>
     )

@@ -153,13 +153,6 @@ export default function DonorDetails(props) {
                   initialValue={formikProps.values.country ? formikProps.values.country : ''}
                   setFieldValue={formikProps.setFieldValue}
                 />
-                {/* <CountryPicker
-                  values={formikProps.values}
-                  touched={formikProps.touched}
-                  errors={formikProps.errors}
-                  handleChange={formikProps.handleChange}
-                  setFieldValue={formikProps.setFieldValue}
-                /> */}
 
                 <View style={styles.coverCommissionView}>
                   <Text style={styles.coverCommissionText}>
@@ -218,39 +211,6 @@ export default function DonorDetails(props) {
 DonorDetails.navigationOptions = {
   header: null
 };
-
-export function CountryPicker(props) {
-  let data = [
-    {
-      label: 'Germany',
-      value: 'germany'
-    },
-    {
-      label: 'India',
-      value: 'india'
-    },
-    {
-      label: 'USA',
-      value: 'usa'
-    }
-  ];
-
-  const refContainer = React.useRef('dropdown');
-
-  return (
-    <View>
-      <Dropdown
-        ref={refContainer}
-        label={'Country'}
-        data={data}
-        onChangeText={(value) => props.handleChange(value, 'country')}
-        lineWidth={1}
-        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-      />
-    </View>
-  );
-}
 
 export function PaymentOption(props) {
   return (

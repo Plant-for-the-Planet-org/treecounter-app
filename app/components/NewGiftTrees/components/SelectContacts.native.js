@@ -24,7 +24,8 @@ const SelectContacts = props => {
   const [searchContacts, setSearchContacts] = React.useState([]);
   const [searchText, onChangeSearch] = React.useState('');
   const [isSearch, toggleIsSearch] = React.useState(false);
-  const [errMsg, setErrMsg] = React.useState('');
+  // const [errMsg, setErrMsg] = React.useState('');
+  const [selectedContactsNum, setSelectedContactsNum] = React.useState(0);
 
   const loadContacts = async () => {
     Contacts.getAll((err, contacts) => {
@@ -67,25 +68,26 @@ const SelectContacts = props => {
     }
   }, [searchText]);
 
-  const Item = props => {
-    const { item, index } = props;
+  const Avatar = ({ item, dimension, style }) => {
     return (
-      <TouchableOpacity
-        onPress={() => {
-          let newContactsArr = [...searchContacts];
-          newContactsArr[index].isSelected = !newContactsArr[index].isSelected;
-          setSearchContacts(newContactsArr);
-        }}
-        style={{ flexDirection: 'row', marginBottom: 30 }}
-      >
+      <View style={style}>
         {item.hasThumbnail ? (
           <Image
-            style={{ height: 50, width: 50, borderRadius: 25 }}
+            style={{ height: dimension, width: dimension, borderRadius: 25 }}
             source={{ uri: item.thumbnailPath }}
           />
         ) : (
-          <GetRandomImage name={item.displayName} />
+          <GetRandomImage name={item.displayName} dimension={dimension} />
         )}
+      </View>
+    );
+  };
+
+  const Item = props => {
+    const { item, disabled } = props;
+    return (
+      <>
+        <Avatar item={item} dimension={50} />
         {item.isSelected ? (
           <View
             style={{
@@ -109,10 +111,53 @@ const SelectContacts = props => {
           </View>
         ) : null}
 
+        {disabled ? (
+          <View
+            style={{
+              position: 'absolute',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: 50,
+              width: 50,
+              borderRadius: 25,
+              backgroundColor: '#c2c2c2',
+              opacity: 0.7
+            }}
+          />
+        ) : null}
         <View style={{ marginLeft: 15, justifyContent: 'center' }}>
-          <Text style={styles.contactDisplayName}>{item.displayName}</Text>
-          <Text>{item.emailAddresses[0].email}</Text>
+          <Text
+            style={[
+              styles.contactDisplayName,
+              disabled ? { color: '#c2c2c2' } : null
+            ]}
+          >
+            {item.displayName}
+          </Text>
+          <Text style={[disabled ? { color: '#c2c2c2' } : null]}>
+            {item.emailAddresses[0].email}
+          </Text>
         </View>
+      </>
+    );
+  };
+
+  const TouchItem = ({ index, item }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          let newContactsArr = [...searchContacts];
+          newContactsArr[index].isSelected = !newContactsArr[index].isSelected;
+          if (newContactsArr[index].isSelected) {
+            setSelectedContactsNum(prevCount => prevCount + 1);
+          } else {
+            setSelectedContactsNum(prevCount => prevCount - 1);
+          }
+          setSearchContacts(newContactsArr);
+        }}
+        style={{ flexDirection: 'row', marginBottom: 30 }}
+      >
+        <Item item={item} />
       </TouchableOpacity>
     );
   };
@@ -167,14 +212,14 @@ const SelectContacts = props => {
       }
     }
 
-    if (giftContacts.length === 0) {
-      setErrMsg('Please select a contact');
-    } else {
-      setErrMsg('');
-      updateRoute('gift_message', props.navigation, 0, {
-        giftContacts
-      });
-    }
+    updateRoute('app_gift_projects', props.navigation, 0, {
+      context: {
+        contextType: 'gift-contact',
+        giftDetails: {
+          giftContacts
+        }
+      }
+    });
   };
 
   return (
@@ -196,7 +241,7 @@ const SelectContacts = props => {
           marginTop: Platform.OS === 'ios' ? 110 : 70
         }}
       >
-        {!isSearch ? (
+        {!isSearch && selectedContactsNum === 0 ? (
           <>
             <Text style={styles.headerText}>{i18n.t('label.gift_trees')}</Text>
 
@@ -206,21 +251,71 @@ const SelectContacts = props => {
           </>
         ) : null}
 
-        <Text style={styles.selectContactTitle}>
+        <Text
+          style={[
+            styles.selectContactTitle,
+            !isSearch && selectedContactsNum === 0 ? { marginTop: 40 } : null
+          ]}
+        >
           {i18n.t('label.select_contact')}
         </Text>
 
         <FlatList
           data={searchContacts}
           keyExtractor={item => item.id}
-          renderItem={({ item, index }) => (
-            <Item item={item} index={index} navigation={props.navigation} />
-          )}
+          renderItem={({ item, index }) =>
+            selectedContactsNum >= 4 ? (
+              item.isSelected ? (
+                <TouchItem item={item} index={index} />
+              ) : (
+                <View style={{ flexDirection: 'row', marginBottom: 30 }}>
+                  <Item item={item} disabled />
+                </View>
+              )
+            ) : (
+              <TouchItem item={item} index={index} />
+            )
+          }
         />
       </ScrollView>
-      <PrimaryButton buttonStyle={{ marginVertical: 10 }} onClick={onNextClick}>
-        {i18n.t('label.next')}
-      </PrimaryButton>
+      {selectedContactsNum > 0 ? (
+        <View style={{ borderTopColor: '#eeeeee', borderTopWidth: 0.5 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: 15,
+              marginBottom: 8,
+              marginTop: 13
+            }}
+          >
+            <FlatList
+              data={searchContacts}
+              keyExtractor={item => item.id}
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              renderItem={({ item }) =>
+                item.isSelected && (
+                  <Avatar
+                    item={item}
+                    dimension={44}
+                    style={{ marginRight: 10 }}
+                  />
+                )
+              }
+            />
+            <Text style={styles.selectedNumText}>
+              {selectedContactsNum} of 4 selected
+            </Text>
+          </View>
+          <PrimaryButton
+            buttonStyle={{ marginVertical: 10 }}
+            onClick={onNextClick}
+          >
+            {i18n.t('label.continue_to_select_project')}
+          </PrimaryButton>
+        </View>
+      ) : null}
     </View>
   );
 };

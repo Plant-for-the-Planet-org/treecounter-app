@@ -103,7 +103,7 @@ export default EStyleSheet.create({
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
-    marginTop: 40,
+    marginTop: 15,
     marginBottom: 25
   },
   contactDisplayName: {
@@ -130,5 +130,9 @@ export default EStyleSheet.create({
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153'
+  },
+  selectedNumText: {
+    fontFamily: 'OpenSans-SemiBold',
+    textAlign: 'right'
   }
 });

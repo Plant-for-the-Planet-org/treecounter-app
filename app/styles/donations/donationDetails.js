@@ -148,7 +148,7 @@ export default EStyleSheet.create({
     lineHeight: 18,
     letterSpacing: 0,
     textAlign: 'right',
-    color: 'rgba(0, 0, 0, 0.6)',
+    color: 'rgba(0, 0, 0, 0.6)'
   },
 
   // Tree Count Selector
@@ -545,5 +545,17 @@ export default EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 30
+  },
+  triangle: {
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderLeftWidth: 20,
+    borderRightWidth: 20,
+    borderBottomWidth: 20,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor: '#eeeeee'
   }
 });

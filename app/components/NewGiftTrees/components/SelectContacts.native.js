@@ -198,7 +198,7 @@ const SelectContacts = props => {
     }
   };
 
-  const onNextClick = () => {
+  const onContinueClick = () => {
     let giftContacts = [];
     for (let i = 0; i < searchContacts.length; i++) {
       if (searchContacts[i].isSelected) {
@@ -215,9 +215,7 @@ const SelectContacts = props => {
     updateRoute('app_gift_projects', props.navigation, 0, {
       context: {
         contextType: 'gift-contact',
-        giftDetails: {
-          giftContacts
-        }
+        giftDetails: giftContacts
       }
     });
   };
@@ -310,7 +308,7 @@ const SelectContacts = props => {
           </View>
           <PrimaryButton
             buttonStyle={{ marginVertical: 10 }}
-            onClick={onNextClick}
+            onClick={onContinueClick}
           >
             {i18n.t('label.continue_to_select_project')}
           </PrimaryButton>

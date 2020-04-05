@@ -9,7 +9,9 @@ export function fetchpledgeEventsAction() {
   return dispatch => {
     getRequest('public_pledgeEvents_get')
       .then(val => dispatch(setPledgeEvents(val.data)))
-      .catch(error => debug(error));
+      .catch(
+        //error => debug(error)
+      );
   };
 }
 

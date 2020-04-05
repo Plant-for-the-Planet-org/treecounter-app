@@ -3,9 +3,10 @@ import { View, Text, Image, ScrollView, Platform, TouchableOpacity } from 'react
 import styles from '../../styles/gifttrees/giftrees'
 import i18n from '../../locales/i18n';
 import { SafeAreaView } from 'react-navigation';
-import { giftplant } from '../../assets';
+import giftplant from '../../assets/svgAssets/giftTrees/giftPlant';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderNew from '../Header/HeaderNew';
+import { SvgXml } from 'react-native-svg';
 
 const NewGiftTrees = (props) => {
     return (
@@ -24,7 +25,8 @@ const NewGiftTrees = (props) => {
                     color: '#4d5153'
                 }}>{i18n.t('label.gift_trees')}</Text>
                 <Text style={styles.nGiftDesc}>{i18n.t('label.gift_tree_description_new')}</Text>
-                <Image source={giftplant} style={styles.giftImage} />
+                {/* <Image source={giftplant} style={styles.giftImage} /> */}
+                <SvgXml style={styles.giftImage} xml={giftplant} />
                 <View style={{ position: 'absolute', bottom: '12%', width: '100%', alignSelf: 'center' }}>
                     <TouchableOpacity
                         onPress={() =>

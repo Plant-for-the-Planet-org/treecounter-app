@@ -17,7 +17,6 @@ import buttonStyles from './../../styles/common/button.native';
 import { forward } from '../../assets';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
 import { Formik } from 'formik';
-import CheckBox from 'react-native-check-box';
 import {
   currencyIcon,
   gPayLogo,
@@ -232,7 +231,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                    ((props.treeCount / 100) * 2.9 + 0.3)
+                ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency

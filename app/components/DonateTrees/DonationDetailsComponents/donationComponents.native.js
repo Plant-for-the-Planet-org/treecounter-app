@@ -294,41 +294,6 @@ export function SelectTreeCount(props) {
   );
 }
 
-export function CountryPicker(props) {
-  let data = [
-    {
-      label: 'Germany',
-      value: 'germany'
-    },
-    {
-      label: 'India',
-      value: 'india'
-    },
-    {
-      label: 'USA',
-      value: 'usa'
-    }
-  ];
-
-  const onChange = value => {
-    props.setCountryForTax(value);
-  };
-
-  return (
-    <View>
-      <Dropdown
-        ref={ref => (this.dropdown = ref)}
-        label={'Country'}
-        data={data}
-        onChangeText={onChange}
-        lineWidth={1}
-        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-      />
-    </View>
-  );
-}
-
 
 const hintCard = () => {
   return (

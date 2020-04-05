@@ -37,8 +37,6 @@ import {
   SelectTreeCount,
   CountryPicker
 } from './DonationDetailsComponents/donationComponents.native';
-import BottomSheet from 'reanimated-bottom-sheet'
-import DonorDetails from './DonorDetails'
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
@@ -69,29 +67,6 @@ function DonationDetails(props) {
   let context = props.context;
   let contextType = props.context.contextType
   console.log('Context Type ------------', contextType)
-
-  const renderContent = () => {
-    return (
-      <DonorDetails
-        donorDetails={donorDetails}
-        setDonorDetails={setDonorDetails}
-        snapBottomSheet={() => hideBottomSheet()}
-      />
-    )
-  }
-
-  const hideBottomSheet = () => {
-    BottomSheetRef.current.snapTo(2)
-  }
-  const renderHeader = () => {
-    return (
-      <View style={{ backgroundColor: '#ecf0f1', height: 24, width: '100%', borderTopLeftRadius: 24, borderTopRightRadius: 24, justifyContent: 'center', alignItems: 'center' }}>
-        <View style={{ backgroundColor: 'white', height: 6, width: 100, borderRadius: 3 }}></View>
-      </View>
-    )
-  }
-
-  const BottomSheetRef = React.useRef('BottomSheet');
 
   return (
     <View style={{ backgroundColor: 'white' }}>
@@ -178,7 +153,7 @@ function DonationDetails(props) {
           toggleTaxReceipt={toggleTaxReceipt}
         />
 
-        <View style={styles.sectionContainer}>
+        {/* <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>CONTACT DETAILS</Text>
           <TouchableOpacity
             onPress={
@@ -197,7 +172,7 @@ function DonationDetails(props) {
               {donorDetails.email}
             </Text>
             <Text style={styles.contactDetailsAddress}>{donorDetails.country}</Text>
-          </View> : null}
+          </View> : null} */}
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>PAYMENT METHOD</Text>
@@ -238,15 +213,6 @@ function DonationDetails(props) {
         />
       ) : null}
 
-      <BottomSheet
-        ref={BottomSheetRef}
-        snapPoints={[500, 100, 0]}
-        initialSnap={2}
-        renderContent={renderContent}
-        renderHeader={renderHeader}
-        enabledContentGestureInteraction={false}
-        enabledContentTapInteraction={false}
-      />
     </View>
   );
 }

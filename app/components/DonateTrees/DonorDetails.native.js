@@ -15,7 +15,18 @@ import styles from '../../styles/donations/donorDetails';
 import i18n from '../../locales/i18n.js';
 import buttonStyles from './../../styles/common/button.native';
 import { forward } from '../../assets';
-
+import HeaderAnimated from './../Header/HeaderAnimated.native';
+import { Formik } from 'formik';
+import CheckBox from 'react-native-check-box';
+import {
+  currencyIcon,
+  gPayLogo,
+  blackLock,
+  nextArrowWhite
+} from '../../assets';
+import { formatNumber, delimitNumbers } from '../../utils/utils';
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import GooglePlacesInput from './DonationDetailsComponents/AutoComplete.native'
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
   const [buttonType, setButtonType] = useState('donate');
@@ -28,34 +39,6 @@ export default function DonorDetails(props) {
   const keyboardDidHide = () => {
     setButtonType('donate');
   };
-
-  // Function for Switching the state of isCompany
-  const toggleIsCompany = value => {
-    setisCompanySwitch(value);
-  };
-
-  const [tempDonorDetails, setTempDonorDetails] = React.useState({
-    firstName: '',
-    lastName: '',
-    country: '',
-    email: '',
-    companyName: ''
-  })
-
-  const handleChange = (value, name) => {
-    setTempDonorDetails({
-      ...tempDonorDetails,
-      [name]: value
-    });
-  };
-
-  const handleSave = () => {
-    props.setDonorDetails({
-      ...tempDonorDetails
-    })
-    props.snapBottomSheet() // Due to a bug in the library this has to be done twice
-    props.snapBottomSheet()
-  }
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -74,12 +57,12 @@ export default function DonorDetails(props) {
   }, []);
 
   return (
-    <View style={{ backgroundColor: 'white' }}>
-      {/* <HeaderAnimated
+    <View style={{ backgroundColor: 'white', flex: 1 }}>
+      <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
         title={'Contact Details'}
-      /> */}
+      />
 
       <KeyboardAwareScrollView
         contentContainerStyle={styles.scrollView}
@@ -94,148 +77,138 @@ export default function DonorDetails(props) {
           { nativeEvent: { contentOffset: { y: scrollY } } }
         ])}
       >
-        <View>
-          <Text style={{
-            fontFamily: 'OpenSans-Bold',
-            fontSize: 27,
-            lineHeight: 40,
-            letterSpacing: 0,
-            textAlign: 'left',
-            color: '#4d5153'
-          }}>Contact Details</Text>
-          <View style={styles.formView}>
-            <View style={styles.formHalfTextField}>
-              <TextField
-                label={i18n.t('label.pledgeFormFName')}
-                value={tempDonorDetails.firstname}
-                tintColor={'#89b53a'}
-                titleFontSize={12}
-                returnKeyType="next"
-                lineWidth={1}
-                labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                blurOnSubmit={false}
-                onChangeText={(value) => handleChange(value, 'firstName')}
-              />
-            </View>
+        <Formik
+          initialValues={{
+            firstname: '',
+            lastname: '',
+            email: '',
+            country: '',
+            isCompany: false,
+            companyName: ''
+          }}
+          onSubmit={values => {
+            console.log(values);
+          }}
+        >
+          {formikProps => (
+            <>
+              <View>
+                <View style={styles.formView}>
+                  <View style={styles.formHalfTextField}>
+                    <TextField
+                      label={i18n.t('label.pledgeFormFName')}
+                      value={formikProps.values.firstname}
+                      tintColor={'#89b53a'}
+                      titleFontSize={12}
+                      returnKeyType="next"
+                      lineWidth={1}
+                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      blurOnSubmit={false}
+                      error={formikProps.touched.firstname && formikProps.errors.firstname}
+                      onChangeText={formikProps.handleChange('firstname')}
+                      onBlur={formikProps.handleBlur('firstname')}
+                    />
+                  </View>
 
-            <View style={styles.formHalfTextField}>
-              <TextField
-                label={i18n.t('label.pledgeFormLName')}
-                value={tempDonorDetails.lastname}
-                tintColor={'#89b53a'}
-                titleFontSize={12}
-                returnKeyType="next"
-                lineWidth={1}
-                labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                onChangeText={(value) => handleChange(value, 'lastName')}
-              />
-            </View>
-          </View>
+                  <View style={styles.formHalfTextField}>
+                    <TextField
+                      label={i18n.t('label.pledgeFormLName')}
+                      value={formikProps.values.lastname}
+                      tintColor={'#89b53a'}
+                      titleFontSize={12}
+                      returnKeyType="next"
+                      lineWidth={1}
+                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      error={formikProps.touched.lastname && formikProps.errors.lastname}
+                      onChangeText={formikProps.handleChange('lastname')}
+                      onBlur={formikProps.handleBlur('lastname')}
+                    />
+                  </View>
+                </View>
 
-          <View>
-            <TextField
-              label={i18n.t('label.pledgeFormEmail')}
-              value={tempDonorDetails.email}
-              tintColor={'#89b53a'}
-              titleFontSize={12}
-              lineWidth={1}
-              keyboardType="email-address"
-              labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-              titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-              affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-              returnKeyType="next"
-              onChangeText={(value) => handleChange(value, 'email')}
-            />
-          </View>
+                <View>
+                  <TextField
+                    label={i18n.t('label.pledgeFormEmail')}
+                    value={formikProps.values.email}
+                    tintColor={'#89b53a'}
+                    titleFontSize={12}
+                    lineWidth={1}
+                    keyboardType="email-address"
+                    error={formikProps.touched.email && formikProps.errors.email}
+                    labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                    affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    returnKeyType="next"
+                    onChangeText={formikProps.handleChange('email')}
+                    onBlur={formikProps.handleBlur('email')}
+                  />
+                </View>
 
-          <CountryPicker
-            values={tempDonorDetails}
-            handleChange={handleChange}
-          // setFieldValue={props.setFieldValue}
-          />
+                <GooglePlacesInput
+                  placeholder={'Address'}
+                />
+                {/* <CountryPicker
+                  values={formikProps.values}
+                  touched={formikProps.touched}
+                  errors={formikProps.errors}
+                  handleChange={formikProps.handleChange}
+                  setFieldValue={formikProps.setFieldValue}
+                /> */}
 
-          <View style={styles.coverCommissionView}>
-            <Text style={styles.coverCommissionText}>
-              This is a Company Donation
+                <View style={styles.coverCommissionView}>
+                  <Text style={styles.coverCommissionText}>
+                    This is a Company Donation
                   </Text>
-            <Switch
-              style={styles.coverCommissionSwitch}
-              onValueChange={(value) => toggleIsCompany(value)}
-              value={isCompanySwitch}
-            />
-          </View>
-
-          {isCompanySwitch ? (
-            <View>
-              <TextField
-                label={'Company Name'}
-                value={tempDonorDetails.companyName}
-                tintColor={'#89b53a'}
-                titleFontSize={12}
-                lineWidth={1}
-                labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                returnKeyType="next"
-                onChangeText={() => handleChange()}
-              />
-            </View>
-          ) : null}
-        </View>
-        {buttonType === 'donate' ? (
-          <>
-            <TouchableOpacity
-              style={[
-                buttonStyles.dualActionButtonTouchable,
-                { marginTop: 24 }
-              ]}
-              onPress={() => handleSave()}
-            >
-              <View
-                style={[
-                  buttonStyles.dualActionButtonView2
-                ]}
-              >
-                <Text style={buttonStyles.dualActionButtonText2}>
-                  {i18n.t('label.save')}
-                </Text>
+                  <Switch
+                    style={styles.coverCommissionSwitch}
+                    onValueChange={(value) => formikProps.setFieldValue('isCompany', value)}
+                    thumbColor={'#89b53a'}
+                    trackColor={{
+                      false: '#f2f2f7',
+                      true: 'rgba(137, 181, 58, 0.8)'
+                    }}
+                    value={formikProps.values.isCompany}
+                  />
+                </View>
+                {formikProps.values.isCompany ? (
+                  <View>
+                    <TextField
+                      label={'Company Name'}
+                      value={formikProps.values.companyName}
+                      tintColor={'#89b53a'}
+                      titleFontSize={12}
+                      lineWidth={1}
+                      error={
+                        formikProps.touched.companyName && formikProps.errors.companyName
+                      }
+                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      returnKeyType="next"
+                      onChangeText={formikProps.handleChange('companyName')}
+                      onBlur={formikProps.handleBlur('companyName')}
+                    />
+                  </View>
+                ) : null}
               </View>
-            </TouchableOpacity>
-          </>
-        ) : null}
+            </>
+          )}
+        </Formik>
 
-        {buttonType === '>' ? (
-          <TouchableOpacity
-            style={[
-              buttonStyles.actionButtonSmallTouchable,
-              { top: undefined, bottom: '16%' },
-              // !props.isValid ? { backgroundColor: backgroundColor } : {}
-            ]}
-          // onPress={props.isValid ? props.handleSubmit : null}
-          >
-            <Image
-              source={forward}
-              resizeMode="cover"
-              style={buttonStyles.actionButtonSmallImage}
-            />
-          </TouchableOpacity>
-        ) : null}
 
       </KeyboardAwareScrollView>
 
-
-
-      {/* <PaymentOption
-        treeCount={treeCount}
-        treeCost={treeCost}
-        selectedCurrency={selectedCurrency}
-        commissionSwitch={commissionSwitch}
+      <PaymentOption
+        treeCount={props.navigation.getParam('treeCount')}
+        treeCost={props.navigation.getParam('treeCost')}
+        selectedCurrency={props.navigation.getParam('selectedCurrency')}
+        commissionSwitch={props.navigation.getParam('commissionSwitch')}
         navigation={props.navigation}
-      /> */}
+      />
     </View>
   );
 }
@@ -273,6 +246,52 @@ export function CountryPicker(props) {
         itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
         labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
       />
+    </View>
+  );
+}
+
+export function PaymentOption(props) {
+  return (
+    <View style={styles.bottomButtonView}>
+      <View style={styles.leftSection}>
+        <View style={styles.paymentTreeDetails}>
+          <Text style={styles.paymentTreeAmount}>
+            {formatNumber(
+              props.commissionSwitch
+                ? props.treeCost * props.treeCount +
+                (props.treeCount / 100 * 2.9 + 0.3)
+                : props.treeCost * props.treeCount,
+              null,
+              props.selectedCurrency
+            )}
+          </Text>
+          <Text style={styles.paymentTreeCount}>
+            for {props.treeCount} trees
+          </Text>
+        </View>
+
+        {/* <TouchableOpacity style={styles.otherPaymentButton}>
+            <Text style={styles.otherPaymentText}>Other payment methods</Text>
+          </TouchableOpacity> */}
+        <View>
+          <Text style={styles.otherPaymentText}>Click Continue to proceed</Text>
+        </View>
+      </View>
+      <TouchableOpacity
+        onPress={() => {
+          updateStaticRoute('payment_details_form', props.navigation);
+        }}
+        style={styles.continueButtonView}
+      >
+        <View style={{ alignItems: 'center' }}>
+          <Image
+            style={{ maxHeight: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+          <Text style={styles.continueButtonText}>Continue</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }

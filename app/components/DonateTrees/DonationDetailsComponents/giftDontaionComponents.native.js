@@ -2,33 +2,16 @@ import React from 'react';
 import {
     View,
     Text,
-    ScrollView,
     Image,
     TouchableOpacity,
-    Switch,
     TextInput,
-    Animated,
     FlatList,
-    Dimensions
+    Dimensions,
+    StyleSheet
 } from 'react-native';
 import styles from '../../../styles/donations/donationDetails';
-import PropTypes from 'prop-types';
-import {
-    currencyIcon,
-    gPayLogo,
-    blackLock,
-    nextArrowWhite,
-    infoHint
-} from './../../../assets';
-import { getImageUrl } from '../../../actions/apiRouting';
 import i18n from '../../../locales/i18n';
 import { formatNumber, delimitNumbers } from '../../../utils/utils';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import {
-    SelectTreeCount,
-} from './donationComponents.native';
 import GetRandomImage from '../../../utils/getRandomImage';
 
 function SelectMultiTreeCount(props) {
@@ -57,7 +40,7 @@ function SelectMultiTreeCount(props) {
                         giftDetails[props.currentIndex].treeCount = option;
                         giftDetails[props.currentIndex].isCustomCount = false;
                         props.setGiftDetails(giftDetails);
-                        setTempTreeCount('');
+                        // setTempTreeCount('');
                     }}
                     style={
                         props.giftDetails[props.currentIndex].treeCount === option
@@ -139,9 +122,7 @@ export const GiftTreesComponent = props => {
     }, []);
     return (
         <View>
-            <Text style={[styles.sectionTitle, { marginTop: 20 }]}>
-                GIFT RECIPIENT
-        </Text>
+            <Text style={[styles.sectionTitle, { marginTop: 20 }]}>GIFT RECIPIENT</Text>
             <FlatList
                 data={props.context.giftDetails}
                 ItemSeparatorComponent={space}
@@ -149,12 +130,7 @@ export const GiftTreesComponent = props => {
                 style={{ marginTop: 20 }}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item, index }) => (
-                    <View
-                        style={{
-                            maxWidth: 60,
-                            alignItems: 'center'
-                        }}
-                    >
+                    <View style={stylesLocal.giftProfileContainer}>
                         <TouchableOpacity
                             onPress={() => {
                                 setCurrentIndex(index);
@@ -165,37 +141,17 @@ export const GiftTreesComponent = props => {
                                     style={{ height: 60, width: 60, borderRadius: 30 }}
                                     source={{ uri: item.thumbnailPath }}
                                 />
-                            ) : (
-                                    <GetRandomImage dimension={60} name={item.firstName} />
-                                )}
-                            <Text
-                                style={{
-                                    fontFamily: 'OpenSans-SemiBold',
-                                    textAlign: 'center',
-                                    marginTop: 6
-                                }}
-                                ellipsizeMode="tail"
-                                numberOfLines={1}
-                            >
-                                {item.firstName}
-                            </Text>
+                            ) : (<GetRandomImage dimension={60} name={item.firstName} />)}
+                            <Text style={stylesLocal.giftReciepientName}>{item.firstName}</Text>
                         </TouchableOpacity>
-                        {currentIndex === index ? (
-                            <View style={[styles.triangle, { marginTop: 10 }]} />
+                        {props.context.giftDetails.length > 1 && currentIndex === index ? (
+                            <View style={styles.triangle} />
                         ) : null}
                     </View>
                 )}
             />
-            <View
-                style={{
-                    width: Dimensions.get('window').width,
-                    borderWidth: 1,
-                    borderColor: '#dddddd',
-                    borderRadius: 8,
-                    padding: 24,
-                    marginLeft: -24
-                }}
-            >
+
+            <View style={styles.multiTreeCountContainer}>
                 {giftDetails.length > 0 ? (
                     <SelectMultiTreeCount
                         currentIndex={currentIndex}
@@ -205,86 +161,12 @@ export const GiftTreesComponent = props => {
                     />
                 ) : null}
             </View>
-            {props.treeCount ? (
-                <>
-                    <View style={styles.giftDetails}>
-                        {props.selectedProject.image ? (
-                            <Image
-                                style={styles.giftImage}
-                                source={{
-                                    uri: getImageUrl(
-                                        'project',
-                                        'thumb',
-                                        props.selectedProject.image
-                                    )
-                                }}
-                            />
-                        ) : null}
-                        <View style={styles.giftNameAmount}>
-                            <Text style={styles.giftName}>Sagar Aryal</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={styles.giftTreesTreeCountNumber}>
-                                {props.treeCount}{' '}
-                            </Text>
-                            <Text
-                                style={[
-                                    styles.giftTreesSelectTrees,
-                                    {
-                                        marginRight: 12
-                                    }
-                                ]}
-                            >
-                                Trees
-                </Text>
-                            <TouchableOpacity onPress={() => props.setTreeCount(0)}>
-                                <Icon name={'chevron-down'} size={14} color="#4d5153" />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                    <View style={styles.horizontalDivider} />
-                </>
-            ) : (
-                    <>
-                        <View style={styles.giftDetails}>
-                            {props.selectedProject.image ? (
-                                <Image
-                                    style={styles.giftImage}
-                                    source={{
-                                        uri: getImageUrl(
-                                            'project',
-                                            'thumb',
-                                            props.selectedProject.image
-                                        )
-                                    }}
-                                />
-                            ) : null}
-
-                            <View style={styles.giftNameAmount}>
-                                <Text style={styles.giftName}>Sagar Aryal</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Text style={styles.giftTreesSelectTrees}>Select Trees</Text>
-                                {/* <Icon name={'chevron-up'} size={14} color="#4d5153" /> */}
-                            </View>
-                        </View>
-
-                        <SelectTreeCount
-                            treeCount={props.treeCount}
-                            setTreeCount={props.setTreeCount}
-                            selectedProject={props.selectedProject}
-                        />
-
-                        <View style={styles.horizontalDivider} />
-                    </>
-                )}
-
-            {/* <TouchableOpacity>
-            <Text style={styles.giftTreesAddRecepient}>
-              Add another recipient
-            </Text>
-          </TouchableOpacity> */}
+            {giftDetails.length < 4 ? (
+                <TouchableOpacity>
+                    <Text style={styles.giftTreesAddRecepient}>Add another recipient</Text>
+                </TouchableOpacity>
+            ) :
+                null}
         </View>
     );
 };
@@ -292,6 +174,30 @@ export const GiftTreesComponent = props => {
 
 const space = () => {
     return (
-        <View style={{ height: 60, width: 15, backgroundColor: 'transparent' }} />
+        <View style={stylesLocal.space} />
     );
 };
+
+
+const stylesLocal = StyleSheet.create({
+    space: { height: 60, width: 15, backgroundColor: 'transparent' },
+    multiTreeCountContainer: {
+        width: Dimensions.get('window').width,
+        borderWidth: 1,
+        borderColor: '#dddddd',
+        borderRadius: 8,
+        padding: 24,
+        marginLeft: -24
+    },
+    giftReciepientName: {
+        fontFamily: 'OpenSans-SemiBold',
+        textAlign: 'center',
+        marginTop: 6,
+        fontSize: 10,
+        marginBottom: 10
+    },
+    giftProfileContainer: {
+        maxWidth: 60,
+        alignItems: 'center'
+    }
+});

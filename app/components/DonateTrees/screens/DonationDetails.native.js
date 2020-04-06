@@ -1,35 +1,11 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  Switch,
-  TextInput,
-  Animated,
-  Dimensions,
-  FlatList
-} from 'react-native';
-import styles from '../../styles/donations/donationDetails';
 import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n';
-import { Dropdown } from 'react-native-material-dropdown';
-import { formatNumber, delimitNumbers } from '../../utils/utils';
+import React from 'react';
+import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Header from './DonationDetailsComponents/Header';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import HeaderAnimated from './../Header/HeaderAnimated.native';
-import {
-  TaxReceipt,
-  CoverFee,
-  PaymentOption,
-  SelectFrequency,
-  PlantProjectDetails,
-  NoPlantProjectDetails,
-  SelectTreeCount,
-} from './DonationDetailsComponents/donationComponents.native';
-import { GiftTreesComponent } from './DonationDetailsComponents/giftDontaionComponents.native'
+import styles from '../../../styles/donations/donationDetails';
+import HeaderAnimated from '../../Header/HeaderAnimated.native';
+import { CoverFee, NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectFrequency, SelectTreeCount, TaxReceipt } from '../components/donationComponents.native';
+import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal

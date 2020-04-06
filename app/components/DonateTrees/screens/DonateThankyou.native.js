@@ -1,16 +1,8 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
-import { closeIcon } from '../../assets';
-import styles from './../../styles/donation/donation.native';
-import {
-  donateThankyou,
-  deciduousTree,
-  planetLogo,
-  sendGreen,
-  downloadGreen
-} from '../../assets';
-import PrimaryButton from '../Common/Button/PrimaryButton.native';
-import i18n from '../../locales/i18n';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { closeIcon, deciduousTree, donateThankyou, downloadGreen, planetLogo, sendGreen } from '../../../assets';
+import i18n from '../../../locales/i18n';
+import styles from '../../../styles/donation/donation.native';
 
 export default function DonateThankYou(props) {
   const { getParam } = props.navigation;
@@ -61,7 +53,7 @@ export default function DonateThankYou(props) {
 
         {/* ========== Floating Share button group STARTS ========= */}
         <View style={styles.shareButtonGroup}>
-          <TouchableOpacity onPress={() => {}} style={{}}>
+          <TouchableOpacity onPress={() => { }} style={{}}>
             <View
               style={[
                 {
@@ -78,7 +70,7 @@ export default function DonateThankYou(props) {
               />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}} style={{}}>
+          <TouchableOpacity onPress={() => { }} style={{}}>
             <View style={[styles.buttonContainer, styles.borderGreen]}>
               <Image style={{ width: 24, height: 24 }} source={sendGreen} />
               <Text style={styles.borderedButtonText}>Share</Text>

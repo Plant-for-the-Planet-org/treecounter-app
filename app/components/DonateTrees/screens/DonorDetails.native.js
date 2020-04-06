@@ -1,31 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {
-  Text,
-  View,
-  Keyboard,
-  Animated,
-  Switch,
-  TouchableOpacity,
-  Image
-} from 'react-native';
-import { TextField } from 'react-native-material-textfield';
-import { Dropdown } from 'react-native-material-dropdown';
-import styles from '../../styles/donations/donorDetails';
-import i18n from '../../locales/i18n.js';
-import buttonStyles from './../../styles/common/button.native';
-import { forward } from '../../assets';
-import HeaderAnimated from './../Header/HeaderAnimated.native';
 import { Formik } from 'formik';
-import {
-  currencyIcon,
-  gPayLogo,
-  blackLock,
-  nextArrowWhite
-} from '../../assets';
-import { formatNumber, delimitNumbers } from '../../utils/utils';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import GooglePlacesInput from './DonationDetailsComponents/AutoComplete.native';
+import React, { useEffect, useState } from 'react';
+import { Animated, Image, Keyboard, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { TextField } from 'react-native-material-textfield';
+import { nextArrowWhite } from '../../../assets';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import i18n from '../../../locales/i18n.js';
+import styles from '../../../styles/donations/donorDetails';
+import { formatNumber } from '../../../utils/utils';
+import HeaderAnimated from '../../Header/HeaderAnimated.native';
+import GooglePlacesInput from '../components/AutoComplete.native';
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
   const [buttonType, setButtonType] = useState('donate');

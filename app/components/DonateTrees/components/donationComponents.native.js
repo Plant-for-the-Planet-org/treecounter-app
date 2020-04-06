@@ -1,30 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  Switch,
-  TextInput,
-  Animated
-} from 'react-native';
-import styles from '../../../styles/donations/donationDetails';
-import PropTypes from 'prop-types';
-import {
-  currencyIcon,
-  gPayLogo,
-  blackLock,
-  nextArrowWhite,
-  infoHint
-} from './../../../assets';
-import { getImageUrl } from '../../../actions/apiRouting';
-import i18n from '../../../locales/i18n';
-import { Dropdown } from 'react-native-material-dropdown';
-import { formatNumber, delimitNumbers } from '../../../utils/utils';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
+import { Image, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { getImageUrl } from '../../../actions/apiRouting';
+import { currencyIcon, infoHint, nextArrowWhite } from '../../../assets';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import styles from '../../../styles/donations/donationDetails';
+import { formatNumber } from '../../../utils/utils';
 
 export function TaxReceipt(props) {
   let { taxReceiptSwitch, toggleTaxReceipt } = props;

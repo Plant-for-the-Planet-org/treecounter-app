@@ -17,7 +17,7 @@ import {
 } from '../../actions/selectPlantProjectAction';
 
 const SelectedPlantProjectContainer = props => {
-  const getProjectDetails = async (projectSlug) => {
+  const getProjectDetails = async projectSlug => {
     if (projectSlug) {
       const project = await props.loadProject(
         { id: projectSlug || props.selectedPlantProjectId },
@@ -34,17 +34,18 @@ const SelectedPlantProjectContainer = props => {
   React.useEffect(() => {
     getProjectDetails(props.navigation.state.params.projectName);
   }, [props.navigation.state.params.projectName]);
+
   const selectProject = id => {
     const { navigation } = props;
     props.selectPlantProjectAction(id);
     let newContext = props.navigation.getParam('context');
-    let context = {}
+    let context = {};
     if (newContext) {
       newContext.plantProject = {
         currency: props.selectedProject.currency,
         amountPerTree: props.selectedProject.treeCost,
         plantProjectID: id
-      }
+      };
       context = newContext;
     } else {
       context.contextType = 'direct';
@@ -52,9 +53,8 @@ const SelectedPlantProjectContainer = props => {
         currency: props.selectedProject.currency,
         amountPerTree: props.selectedProject.treeCost,
         plantProjectID: id
-      }
+      };
     }
-
 
     if (navigation) {
       updateStaticRoute('app_donate_detail', navigation, {

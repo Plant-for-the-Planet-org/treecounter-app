@@ -108,7 +108,6 @@ class DonationTreesContainer extends Component {
     }
   }
 
-
   determineDefaultCurrency = () => {
     const { currentUserProfile, selectedProject } = this.props;
     const userCurrency =
@@ -124,8 +123,7 @@ class DonationTreesContainer extends Component {
       if (id && !this.props.selectedProject) return null;
     }
 
-
-    return (
+    return this.props.selectedProject && this.props.selectedProject.tpoData ? (
       <DonateTrees
         currencies={this.props.currencies}
         plantProjectClear={this.props.clearPlantProject}
@@ -138,7 +136,7 @@ class DonationTreesContainer extends Component {
         context={this.props.navigation.getParam('context')}
         determineDefaultCurrency={() => this.determineDefaultCurrency()}
       />
-    );
+    ) : null;
   }
 }
 
@@ -188,5 +186,5 @@ DonationTreesContainer.propTypes = {
   setProgressModelState: PropTypes.func,
   loadUserProfile: PropTypes.func,
   updateUserProfile: PropTypes.func,
-  match: PropTypes.any,
+  match: PropTypes.any
 };

@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animated, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Text, TouchableOpacity, View, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import { CoverFee, NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectFrequency, SelectTreeCount, TaxReceipt } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
+import {getImageUrl} from '../../../actions/apiRouting';
+import UserProfileImage from '../../Common/UserProfileImage.native';
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
@@ -122,7 +124,20 @@ function DonationDetails(props) {
           taxReceiptSwitch={taxReceiptSwitch}
           toggleTaxReceipt={toggleTaxReceipt}
         />
-
+        {props.context.contextType==='support' ?<View>
+          <View style={[{marginTop:20,marginBottom:0}]}><Text style={styles.sectionTitle}>SUPPORT</Text>
+        <View style={styles.supportUser}>
+          <UserProfileImage
+            profileImage={
+              props.context.support && props.context.support.treecounterAvatar
+            }
+            imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
+          />
+          <View style={styles.supportUserNameContainer}>
+            <Text style={styles.supportUserName}>{props.context.support.displayName}</Text>
+          </View>
+        </View>
+        </View></View>:null}
         {/* <UserContactDetails donorDetails={donorDetails} /> */}
 
         {/* <View style={styles.sectionContainer}>
@@ -154,6 +169,7 @@ function DonationDetails(props) {
           navigation={props.navigation}
         />
       ) : null}
+
     </View>
   );
 }

@@ -44,7 +44,7 @@ import i18n from '../../locales/i18n';
 import styles from '../../styles/header.native';
 import colors from '../../utils/constants';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
-import DonateThankYou from '../DonateTrees/DonateThankyou.native';
+import DonateThankYou from '../DonateTrees/screens/DonateThankyou.native';
 import DonationStep3 from '../DonateTrees/screens/DonationStep3';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import BurgerMenu from '../Header/BurgerMenu';

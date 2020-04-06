@@ -11,12 +11,12 @@ import {
   TextInput
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { sepa } from './../../assets';
+import { sepa } from './../../../assets';
 import CheckBox from 'react-native-check-box';
-import styles from './../../styles/donation/donation.native';
+import styles from './../../../styles/donation/donation.native';
 
 import { TextField } from 'react-native-material-textfield';
-import i18n from '../../locales/i18n';
+import i18n from '../../../locales/i18n';
 
 export default class SepaAccountForm extends Component {
   state = {

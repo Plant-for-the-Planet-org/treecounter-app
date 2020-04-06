@@ -124,11 +124,12 @@ class ContributionCard extends React.Component {
     });
 
   treeCountLine(treeCount, treeSpecies) {
-    return delimitNumbers(treeCount) + ' ' + (treeSpecies ? treeSpecies : '');
+    return delimitNumbers(treeCount) + ' ' + (treeCount > 1 ? 'Trees' : 'Tree') + (treeSpecies ? treeSpecies : '');
   }
 
   plantProjectLine(plantProjectName, country) {
-    return country && getISOToCountryName(country).country;
+    let countryName = country && getISOToCountryName(country).country
+    return (plantProjectName ? plantProjectName + ' ' : '') + countryName;
   }
 
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
@@ -247,6 +248,13 @@ class ContributionCard extends React.Component {
   getTreeImage = (treeCount) => {
     return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
   }
+
+  donateActionLine = (plantDate) => {
+    return `Donated on ${plantDate}`
+  }
+  giftActionLine = (plantDate, givee, giveeSlug) => {
+    return `Gifted on ${plantDate} to ${givee}`
+  }
   render() {
     let { contribution } = this.props;
     let {
@@ -259,7 +267,11 @@ class ContributionCard extends React.Component {
       tpoName,
       cardType,
       contributionType,
-      redemptionDate
+      redemptionDate,
+      treeSpecies,
+      isGift,
+      registrationDate,
+      redemptionCode
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };
@@ -267,9 +279,10 @@ class ContributionCard extends React.Component {
     // let seeLabel = classnames('see-more-label-style', {
     //   'see-more__active': this.state.viewExpanded
     // });
-
-    // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
+    console.log("contribution=", contribution)
+    let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
+    // console.log(plantProjectName, 'plantProjectLine')
     // let donateActionLine = this.donateActionLine(
     //   isGift,
     //   plantDate,
@@ -278,13 +291,37 @@ class ContributionCard extends React.Component {
     // );
     let tpoLine = this.tpoLine(tpoName);
     // let plantActionLine = this.plantActionLine(plantDate, registrationDate);
-    let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
-    // let redeemActionLine = this.redeemActionLine(
-    //   redemptionCode,
-    //   redemptionDate,
-    //   givee,
-    //   giveeSlug
-    // );
+    let dedicateActionLine = this.dedicateActionLine(isGift, givee, giveeSlug);
+    let redeemActionLine = this.redeemActionLine(
+      redemptionCode,
+      redemptionDate,
+      givee,
+      giveeSlug
+    );
+
+    if (contributionType === 'donation') {
+      console.log(' ------ donation start----------')
+      console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
+      console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
+      console.log('donateActionLine =', this.donateActionLine(plantDate))
+      console.log('GiftActionLine =', this.giftActionLine(plantDate, givee, giveeSlug))
+      console.log('tpoLine =', this.tpoLine(tpoName))
+      console.log(' ------ donation End----------')
+    }
+    if (contributionType == 'planting') {
+      console.log(' ------ planting start----------')
+      console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
+      console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
+
+      console.log('plantActionLine =', this.plantActionLine(plantDate, registrationDate))
+
+      console.log('dedicateActionLine =', this.dedicateActionLine(isGift, givee, giveeSlug))
+      console.log('tpoLine =', this.tpoLine(tpoName))
+      console.log(' ------ planting End----------')
+    }
+    console.log(redeemActionLine, 'redeemActionLine')
+
+
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
     let borderColor =
       contributionType == 'donation'
@@ -298,6 +335,7 @@ class ContributionCard extends React.Component {
     let renderCard = () => {
       const { isFromAnimatredCardList } = this.props
       if (contributionType === 'donation') {
+
         return (
           <TouchableOpacity
             style={singleRedeemObject}
@@ -362,6 +400,9 @@ class ContributionCard extends React.Component {
                     {this.getTreeImage(treeCount)}
                   </Text>
                 </View>
+
+              </View>
+              <View style={styles.dedicatedTagLine}>
                 {dedicateActionLine ? (
                   <View style={styles.row2}>
                     <Text style={styles.redeemObjectSubTitle}>

@@ -174,7 +174,8 @@ export const myTreesStyle = (color, borderColor) =>
       fontSize: 14,
       zIndex: 3
     },
-    redeemObjectTreesContainer: { flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 16 },
+    redeemObjectTreesContainer: { flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 16, borderColor: 'green', borderWidth: 0 },
+    dedicatedTagLine: { flexDirection: 'row', paddingHorizontal: 20, paddingBottom: 10, borderColor: 'red', borderWidth: 0 },
     row1: {
       // flexDirection: 'row',
       flex: 1,

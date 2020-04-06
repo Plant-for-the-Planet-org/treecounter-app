@@ -65,8 +65,7 @@ export function CoverFee(props) {
       <Switch
         style={styles.coverCommissionSwitch}
         onValueChange={props.toggleSetCommission}
-        thumbColor={'#89b53a'}
-        trackColor={{ false: '#f2f2f7', true: 'rgba(137, 181, 58, 0.8)' }}
+        trackColor={{ false: '#f2f2f7', true: '#88b439' }}
         value={props.commissionSwitch}
       />
     </View>

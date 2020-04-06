@@ -147,35 +147,16 @@ function DonationDetails(props) {
           toggleTaxReceipt={toggleTaxReceipt}
         />
 
-        {/* <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>CONTACT DETAILS</Text>
-          <TouchableOpacity
-            onPress={
-              () => BottomSheetRef.current.snapTo(0)
-            }
-          >{donorDetails.firstName ? <Text style={styles.sectionRightButton}>Edit</Text> : <Text style={styles.sectionRightButton}>Add</Text>}
-          </TouchableOpacity>
-        </View>
-        {donorDetails.firstName ?
-          <View>
-            <Text style={styles.contactDetailsAddress}>{donorDetails.firstName} {donorDetails.lastName}</Text>
-            {donorDetails.companyName ? (
-              <Text style={styles.contactDetailsAddress}>{donorDetails.companyName}</Text>
-            ) : null}
-            <Text style={styles.contactDetailsAddress}>
-              {donorDetails.email}
-            </Text>
-            <Text style={styles.contactDetailsAddress}>{donorDetails.country}</Text>
-          </View> : null} */}
+        {/* <UserContactDetails donorDetails={donorDetails} /> */}
 
-        <View style={styles.sectionContainer}>
+        {/* <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>PAYMENT METHOD</Text>
           {props.selectedProject ? (
             <TouchableOpacity>
               <Text style={styles.sectionRightButton}>Change</Text>
             </TouchableOpacity>
           ) : null}
-        </View>
+        </View> */}
 
         {/* Payment Processed by */}
         {/* <Text style={styles.paymentProcessText}>
@@ -186,14 +167,6 @@ function DonationDetails(props) {
           if is stripe connected.
         </Text> */}
 
-        {/* <CountryPicker
-          value={countryForTax}
-          setCountryForTax={setCountryForTax}
-        />
-
-        <Text style={styles.countryForTaxText}>
-          Only donations made in local EUR are tax deductible in Germany.
-        </Text> */}
       </KeyboardAwareScrollView>
 
       {treeCount ? (
@@ -209,6 +182,30 @@ function DonationDetails(props) {
   );
 }
 
+const UserContactDetails = (props) => {
+  let { donorDetails } = props
+  return (
+    <>
+      <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>CONTACT DETAILS</Text>
+        <TouchableOpacity>
+          {donorDetails.firstName ? <Text style={styles.sectionRightButton}>Edit</Text> : <Text style={styles.sectionRightButton}>Add</Text>}
+        </TouchableOpacity>
+      </View>
+      {donorDetails.firstName ?
+        <View>
+          <Text style={styles.contactDetailsAddress}>{donorDetails.firstName} {donorDetails.lastName}</Text>
+          {donorDetails.companyName ? (
+            <Text style={styles.contactDetailsAddress}>{donorDetails.companyName}</Text>
+          ) : null}
+          <Text style={styles.contactDetailsAddress}>
+            {donorDetails.email}
+          </Text>
+          <Text style={styles.contactDetailsAddress}>{donorDetails.country}</Text>
+        </View> : null}
+    </>
+  )
+}
 DonationDetails.propTypes = {
   currencies: PropTypes.object.isRequired,
   selectedCurrency: PropTypes.string.isRequired,

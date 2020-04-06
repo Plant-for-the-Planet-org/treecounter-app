@@ -1,13 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
-import { Linking, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n.js';
+import React from 'react';
 // import PaymentSelector from '../Payment/PaymentSelector';
 import { View } from 'react-native';
+import DonationDetails from './screens/DonationDetails.native';
 
-import LoadingIndicator from '../Common/LoadingIndicator';
-import DonationDetails from './DonationDetails.native';
 
 export default function DonateTrees(props) {
   const { selectedProject } = props;

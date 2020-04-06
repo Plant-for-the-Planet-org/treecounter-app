@@ -43,7 +43,7 @@ export function fetchConfig() {
     // if (!getItemSync('preferredCurrency')) {
     getRequest('config_get')
       .then(data => {
-        debug('Got config fetch data:', data.data);
+        // debug('Got config fetch data:', data.data);
         cdnMedia = data.data.cdnMedia;
 
         // fake data manipulation for debug purpose, please remove this when debug finishes

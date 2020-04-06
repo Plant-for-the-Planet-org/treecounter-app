@@ -1,6 +1,5 @@
 const routes = require('../server/routes/fos_js_routes.json');
 import Routing from './router.min.js';
-import { debug } from '../debug';
 import { context } from '../config';
 import { getCdnMediaUrl } from './fetchConfig';
 import { getLocaleAsync } from './getLocale';
@@ -9,7 +8,6 @@ Routing.setRoutingData(routes);
 export const getApiRoute = async (routeName, params) => {
   const { api_url, base: baseUrl } = context;
   let locale = await getLocaleAsync();
-  debug('-------------------- Api calling with ', locale);
   const serverName = `${api_url}`;
   params =
     'api_login_check' === routeName
@@ -42,5 +40,5 @@ export const getPDFUrl = filename => {
 export const getCountryFlagImageUrl = (countryCode, type, size) => {
   return `${
     getCdnMediaUrl().images
-  }/flags/${type}/${size}/${countryCode}.${type}`;
+    }/flags/${type}/${size}/${countryCode}.${type}`;
 };

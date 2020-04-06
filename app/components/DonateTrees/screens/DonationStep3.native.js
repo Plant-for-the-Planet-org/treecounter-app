@@ -1,31 +1,12 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Keyboard,
-  Platform,
-  TextInput
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import {
-  visa,
-  googlePay,
-  applePay,
-  sepa,
-  masterCard,
-  paypal,
-  americanExpress,
-  discover,
-  paypalLogo
-} from './../../assets';
+import { Image, Keyboard, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import styles from './../../styles/donation/donation.native';
-import i18n from '../../locales/i18n';
-import CreditCardForm from './CreditCardForm';
-import SepaAccountForm from './SepaAccountForm';
-import { updateStaticRoute } from './../../helpers/routerHelper';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import { applePay, googlePay, paypal, paypalLogo } from '../../../assets';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import styles from '../../../styles/donation/donation.native';
+import CreditCardForm from '../components/CreditCardForm';
+import SepaAccountForm from '../components/SepaAccountForm';
 
 export default class DonationStep3 extends Component {
   state = {
@@ -104,13 +85,13 @@ export default class DonationStep3 extends Component {
                     style={{ marginLeft: 10 }}
                   />
                 ) : (
-                  <Icon
-                    name="chevron-down"
-                    size={14}
-                    color="rgba(0, 0, 0, 0.38)"
-                    style={{ marginLeft: 10 }}
-                  />
-                )}
+                    <Icon
+                      name="chevron-down"
+                      size={14}
+                      color="rgba(0, 0, 0, 0.38)"
+                      style={{ marginLeft: 10 }}
+                    />
+                  )}
               </TouchableOpacity>
 
               {/* Hidden until expanded by User */}

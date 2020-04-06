@@ -47,8 +47,10 @@ class DonationTreesContainer extends Component {
             _suggestions.data.length &&
             _suggestions.data[0].slug == match.params.slug
           ) {
-            supportTreecounterAction({
+            debug('support treecounter suggestions', _suggestions.data[0]);
+            _suggestions.data[0].type != 'tpo' && supportTreecounterAction({
               id: _suggestions.data[0].treecounterId,
+              type: _suggestions.data[0].type,
               displayName: _suggestions.data[0].name
             });
           }
@@ -65,6 +67,7 @@ class DonationTreesContainer extends Component {
         currentUserProfile.supportedTreecounter &&
           this.props.supportTreecounterAction({
             id: currentUserProfile.supportedTreecounter.id,
+            type: currentUserProfile.supportedTreecounter.type,
             displayName: currentUserProfile.supportedTreecounter.displayName
           });
       }

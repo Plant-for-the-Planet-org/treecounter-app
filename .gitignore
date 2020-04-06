@@ -31,7 +31,7 @@ ios/tmp.xcconfig
 # Enviroment
 #
 .env*
-!.env.sample
+!.env.*sample
 !.env.deploy
 # Android/IntelliJ
 #

@@ -1,73 +1,73 @@
-import { createDrawerNavigator } from 'react-navigation-drawer';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
 import { Animated } from 'react-native';
-import { debug } from '../../debug';
-import Trillion from '../TreecounterGraphics/Trillion';
-import LoginContainer from '../../containers/Authentication/LoginContainer';
-import SignUpContainer from '../../containers/Authentication/SignUpContainer';
-import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
-import TargetContainer from '../../containers/TargetContainer';
-import DonationTreesContainer from '../../containers/DonateTrees/index.native';
-import DonorDetails from './../DonateTrees/DonorDetails';
-import DonationStep3 from '../DonateTrees/DonationStep3';
-
+import { createAppContainer } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { getLocalRoute } from '../../actions/apiRouting';
-import styles from '../../styles/header.native';
-import BurgerMenu from '../Header/BurgerMenu';
-import HeaderRight from '../Header/HeaderFields';
-import i18n from '../../locales/i18n';
-import FAQContainer from '../../containers/FAQ';
-import UserContributionsContainer from '../../containers/UserContributions';
-import UserHomeContainer from '../../containers/UserHome';
-import SearchLayout from '../Header/SearchLayout';
-import AboutUsContainer from '../../containers/AboutUs';
-import UserContributionsDetailsContainer from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
-import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
-import LicenseInfoList from '../AboutUs/LicenseInfoList';
-import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
-import GiftTreesContainer from '../../containers/GiftTrees';
-import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
-import EditUserContributionContainer from '../../containers/EditUserContribution';
-import EditUserProfileContainer from '../../containers/EditUserProfile';
-import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
-import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
-import SelectedPlantProjectContainer from '../../containers/SelectedPlantProject';
-import SelectedCompetitionContainer from '../../containers/SelectedCompetition';
-import SelectPlantProjectContainer from '../../containers/SelectPlantProject/index.native';
-import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
-import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
-import ImprintContainer from '../../containers/Imprint';
-import PrivacyContainer from '../../containers/Privacy';
-import CompetitionContainer from '../../containers/CompetitionContainer';
-import ChallengeContainer from '../../containers/Challenge/createChallenge';
-import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
-import EditCompetitionContainer from '../../containers/EditCompetition';
-import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
-import PledgeEvents from './../../containers/Pledge';
-import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
-import Reviews from './../Reviews/Reviews';
-import AddReview from './../Reviews/AddReview/AddReview';
-import PDFViewer from '../PDFViewer';
-import createCompeition from './../Competition/Tabs/createCompetition.native';
-import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
-import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
-import AddTrees from '../Redemption/app/AddTrees.native';
 import CountriesLeaderBoard from '../../components/LeaderboardRefresh/Countries/CountriesLeaderBoard';
 import CountryDetails from '../../components/LeaderboardRefresh/Countries/CountryDetails';
-import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeaderBoard';
-import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
-import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
-import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
+import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
+import AboutUsContainer from '../../containers/AboutUs';
+import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
+import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
+import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
+import LoginContainer from '../../containers/Authentication/LoginContainer';
+import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
+import SignUpContainer from '../../containers/Authentication/SignUpContainer';
+import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
+import ChallengeContainer from '../../containers/Challenge/createChallenge';
+import CompetitionContainer from '../../containers/CompetitionContainer';
+import DonationTreesContainer from '../../containers/DonateTrees/index.native';
+import EditCompetitionContainer from '../../containers/EditCompetition';
+import EditUserContributionContainer from '../../containers/EditUserContribution';
+import EditUserProfileContainer from '../../containers/EditUserProfile';
+import FAQContainer from '../../containers/FAQ';
+import GiftTreesContainer from '../../containers/GiftTrees';
+import ImprintContainer from '../../containers/Imprint';
+import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
+import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import PrivacyContainer from '../../containers/Privacy';
+import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
+import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
-import SelectContacts from '../NewGiftTrees/components/SelectContacts.native';
-import GiftEmail from '../NewGiftTrees/components/GiftEmail.native';
-import DonateThankYou from '../DonateTrees/DonateThankyou.native';
+import SelectedCompetitionContainer from '../../containers/SelectedCompetition';
+import SelectedPlantProjectContainer from '../../containers/SelectedPlantProject';
+import SelectPlantProjectContainer from '../../containers/SelectPlantProject/index.native';
+import TargetContainer from '../../containers/TargetContainer';
+import UserContributionsContainer from '../../containers/UserContributions';
+import UserContributionsDetailsContainer from '../../containers/UserContributionsDetails';
+import UserHomeContainer from '../../containers/UserHome';
+import { debug } from '../../debug';
+import i18n from '../../locales/i18n';
+import styles from '../../styles/header.native';
 import colors from '../../utils/constants';
+import LicenseInfoList from '../AboutUs/LicenseInfoList';
+import DonateThankYou from '../DonateTrees/DonateThankyou.native';
+import DonationStep3 from '../DonateTrees/screens/DonationStep3';
+import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
+import BurgerMenu from '../Header/BurgerMenu';
+import HeaderRight from '../Header/HeaderFields';
+import SearchLayout from '../Header/SearchLayout';
+import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeaderBoard';
+import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
+import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
+import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
+import GiftEmail from '../NewGiftTrees/components/GiftEmail.native';
 import GiftMessage from '../NewGiftTrees/components/GiftMessage.native';
+import SelectContacts from '../NewGiftTrees/components/SelectContacts.native';
+import PDFViewer from '../PDFViewer';
+import AddTrees from '../Redemption/app/AddTrees.native';
+import Trillion from '../TreecounterGraphics/Trillion';
+import PledgeEvents from './../../containers/Pledge';
+import createCompeition from './../Competition/Tabs/createCompetition.native';
+import DonorDetails from './../DonateTrees/screens/DonorDetails';
+import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
+import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
+import AddReview from './../Reviews/AddReview/AddReview';
+import Reviews from './../Reviews/Reviews';
+
 
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
@@ -108,7 +108,7 @@ const headerLabels = {
   ['app_pledge_update_form']: 'label.updatePledge'
 };
 
-export const getAppNavigator = function(isLoggedIn, userProfile) {
+export const getAppNavigator = function (isLoggedIn, userProfile) {
   const searchNavigator = createStackNavigator(
     {
       Search: {
@@ -165,7 +165,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const getTitle = function(navigation) {
+  const getTitle = function (navigation) {
     let title = navigation.getParam('titleParam');
     try {
       if (!title) {
@@ -263,7 +263,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       ['license_info_list']: {
-        screen: LicenseInfoList
+        screen: LicenseInfoList,
+        navigationOptions: { header: null }
       },
 
       ['select_contacts_gift']: {

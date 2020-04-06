@@ -9,7 +9,6 @@ import {
   Keyboard
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-// import { debug } from '../../../debug';
 import SearchUser from './SearchUser.native';
 import i18n from '../../../locales/i18n';
 import styles from '../../../styles/gifttrees/giftrees';
@@ -51,7 +50,6 @@ export default class GiftUser extends Component {
     });
   };
   onSearchResultClick(suggestion) {
-    // debug('suggestion clicked', suggestion);
     this.setState({ selectedSuggestion: suggestion });
   }
   onNextClick() {

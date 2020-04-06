@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {
-  Text,
-  View,
-  Keyboard,
-  Animated,
-  Switch,
-  TouchableOpacity,
-  Image
-} from 'react-native';
-import { TextField } from 'react-native-material-textfield';
-import { Dropdown } from 'react-native-material-dropdown';
-import styles from '../../styles/donations/donorDetails';
-import i18n from '../../locales/i18n.js';
-import buttonStyles from './../../styles/common/button.native';
-import { forward } from '../../assets';
-import HeaderAnimated from './../Header/HeaderAnimated.native';
 import { Formik } from 'formik';
-import CheckBox from 'react-native-check-box';
-import {
-  currencyIcon,
-  gPayLogo,
-  blackLock,
-  nextArrowWhite
-} from '../../assets';
-import { formatNumber, delimitNumbers } from '../../utils/utils';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import GooglePlacesInput from './DonationDetailsComponents/AutoComplete.native'
+import React, { useEffect, useState } from 'react';
+import { Animated, Image, Keyboard, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { TextField } from 'react-native-material-textfield';
+import { nextArrowWhite } from '../../../assets';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import i18n from '../../../locales/i18n.js';
+import styles from '../../../styles/donations/donorDetails';
+import { formatNumber } from '../../../utils/utils';
+import HeaderAnimated from '../../Header/HeaderAnimated.native';
+import GooglePlacesInput from '../components/AutoComplete.native';
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
   const [buttonType, setButtonType] = useState('donate');
@@ -68,7 +51,7 @@ export default function DonorDetails(props) {
         contentContainerStyle={styles.scrollView}
         keyboardDismissMode="on-drag"
         resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled={true}
+        scrollEnabled
         extraScrollHeight={32}
         extraHeight={32}
         enableOnAndroid
@@ -106,7 +89,10 @@ export default function DonorDetails(props) {
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       blurOnSubmit={false}
-                      error={formikProps.touched.firstname && formikProps.errors.firstname}
+                      error={
+                        formikProps.touched.firstname &&
+                        formikProps.errors.firstname
+                      }
                       onChangeText={formikProps.handleChange('firstname')}
                       onBlur={formikProps.handleBlur('firstname')}
                     />
@@ -123,7 +109,10 @@ export default function DonorDetails(props) {
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      error={formikProps.touched.lastname && formikProps.errors.lastname}
+                      error={
+                        formikProps.touched.lastname &&
+                        formikProps.errors.lastname
+                      }
                       onChangeText={formikProps.handleChange('lastname')}
                       onBlur={formikProps.handleBlur('lastname')}
                     />
@@ -138,7 +127,9 @@ export default function DonorDetails(props) {
                     titleFontSize={12}
                     lineWidth={1}
                     keyboardType="email-address"
-                    error={formikProps.touched.email && formikProps.errors.email}
+                    error={
+                      formikProps.touched.email && formikProps.errors.email
+                    }
                     labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                     affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
@@ -150,7 +141,9 @@ export default function DonorDetails(props) {
 
                 <GooglePlacesInput
                   placeholder={'Address'}
-                  initialValue={formikProps.values.country ? formikProps.values.country : ''}
+                  initialValue={
+                    formikProps.values.country ? formikProps.values.country : ''
+                  }
                   setFieldValue={formikProps.setFieldValue}
                 />
 
@@ -160,7 +153,9 @@ export default function DonorDetails(props) {
                   </Text>
                   <Switch
                     style={styles.coverCommissionSwitch}
-                    onValueChange={(value) => formikProps.setFieldValue('isCompany', value)}
+                    onValueChange={value =>
+                      formikProps.setFieldValue('isCompany', value)
+                    }
                     thumbColor={'#89b53a'}
                     trackColor={{
                       false: '#f2f2f7',
@@ -178,7 +173,8 @@ export default function DonorDetails(props) {
                       titleFontSize={12}
                       lineWidth={1}
                       error={
-                        formikProps.touched.companyName && formikProps.errors.companyName
+                        formikProps.touched.companyName &&
+                        formikProps.errors.companyName
                       }
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
@@ -193,8 +189,6 @@ export default function DonorDetails(props) {
             </>
           )}
         </Formik>
-
-
       </KeyboardAwareScrollView>
 
       <PaymentOption
@@ -221,7 +215,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                (props.treeCount / 100 * 2.9 + 0.3)
+                ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency

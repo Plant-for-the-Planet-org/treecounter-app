@@ -45,7 +45,7 @@ import styles from '../../styles/header.native';
 import colors from '../../utils/constants';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import DonateThankYou from '../DonateTrees/screens/DonateThankyou.native';
-import DonationStep3 from '../DonateTrees/screens/DonationStep3';
+import DonationStep3 from '../DonateTrees/screens/PaymentDetails.native';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import BurgerMenu from '../Header/BurgerMenu';
 import HeaderRight from '../Header/HeaderFields';

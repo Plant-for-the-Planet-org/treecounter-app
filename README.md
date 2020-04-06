@@ -26,21 +26,22 @@ npm start
 
 To run the app as prod, useful for testing features like (hashed js/css):
 
-  ```
-  npm run start-prod-server
-  ```
+```
+npm run start-prod-server
+```
 
 ## iOS Setup
 
 * Install xcode greater then 9.0.
 * Run following commands
-  ```
-  bash
-  brew install node
-  brew install watchman
-  npm install -g react-native-cli
-  npm install
-  ```
+```
+bash
+brew install node
+brew install watchman
+npm install -g react-native-cli
+npm install
+cd ios && pod install
+```
 
 * Please use node v 12.14.1 LTS; App doesn't build with 13.0 + versions.
 
@@ -68,13 +69,24 @@ Steps for setting up Dev Env for android on MAC is as follows:
 * Install JDK 8 if not already there and set JAVA_HOME specific to your JDK Version.
 * Create .bash_profile if not already there and add following variables in it:
 
-```bash
+```
+bash
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home
+```
+
+* Run following commands
+
+```
+bash
+brew install node
+brew install watchman
+npm install -g react-native-cli
+npm install
 ```
 
 ### Running into Android emulator

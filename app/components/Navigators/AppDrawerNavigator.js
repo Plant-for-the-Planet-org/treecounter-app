@@ -263,7 +263,8 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       ['license_info_list']: {
-        screen: LicenseInfoList
+        screen: LicenseInfoList,
+        navigationOptions: { header: null }
       },
 
       ['select_contacts_gift']: {

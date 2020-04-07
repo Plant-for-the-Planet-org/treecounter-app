@@ -1,25 +1,16 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  Text,
-  View,
-  TouchableOpacity
-} from 'react-native';
+import { Dimensions, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
+import { multiple_trees, tree_1 } from '../../assets/index';
 import TouchableItem from '../../components/Common/TouchableItem';
-import i18n from '../../locales/i18n.js';
-import styles, {
-  myTreesStyle
-} from '../../styles/myTrees/user_contribution_card';
-import { formatDate, delimitNumbers } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
-import { multiple_trees, tree_1 } from '../../assets/index'
+import i18n from '../../locales/i18n.js';
+import styles, { myTreesStyle } from '../../styles/myTrees/user_contribution_card';
+import { delimitNumbers, formatDate } from '../../utils/utils';
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -271,8 +262,95 @@ class ContributionCard extends React.Component {
       treeSpecies,
       isGift,
       registrationDate,
-      redemptionCode
+      redemptionCode,
+      giver,
+      giverSlug,
+      plantProjectId,
+      mayUpdate,
+      contributionImages,
+      treeType,
+      treeScientificName,
+      geoLatitude,
+      geoLongitude
     } = contribution;
+
+    // HeaderText -----
+    let headerText = undefined;
+    if (treeType === null) {
+      if (treeCount > 1) {
+        headerText =
+          delimitNumbers(treeCount) +
+          ' ' +
+          i18n.t('label.usr_contribution_tree');
+      } else {
+        headerText =
+          delimitNumbers(treeCount) +
+          ' ' +
+          i18n.t('label.usr_contribution_single_tree');
+      }
+    } else if (treeType !== null) {
+      if (treeCount > 1) {
+        headerText =
+          delimitNumbers(treeCount) +
+          ' ' +
+          treeType.charAt(0).toUpperCase() +
+          treeType.slice(1) +
+          ' ' +
+          i18n.t('label.usr_contribution_tree');
+      } else {
+        headerText =
+          delimitNumbers(treeCount) +
+          ' ' +
+          treeType.charAt(0).toUpperCase() +
+          treeType.slice(1) +
+          ' ' +
+          i18n.t('label.usr_contribution_single_tree');
+      }
+    }
+    if (cardType === 'donation') {
+      headerText = headerText + ' ' + i18n.t('label.donated');
+    }
+
+    if (isGift && givee) {
+      // if contribution type is planting and id Gift = true then contribution
+      // is dedicated
+      if (contributionType === 'planting') {
+        contributionPersonPrefix = i18n.t(
+          'label.usr_contribution_dedicated_to'
+        );
+      }
+      // contribution is gifted if contribution type is not planting
+      // and adds gifted to header text
+      else {
+        headerText = headerText + ' ' + i18n.t('label.gifted');
+        contributionPersonPrefix = i18n.t('label.usr_contribution_to');
+      }
+      // sets the contribution person name
+      contributionPerson = givee;
+
+      // sets slug if available
+      if (giveeSlug) {
+        contributionPersonSlug = giveeSlug;
+      }
+    }
+    if (giver) {
+      contributionPerson = giver;
+      headerText = headerText + ' ' + i18n.t('label.received');
+      contributionPersonPrefix = i18n.t('label.usr_contribution_from');
+      if (giverSlug) {
+        contributionPersonSlug = giverSlug;
+      }
+    }
+
+    // if there's redemptionCode the contribution type is set to redeemed
+    if (redemptionCode && givee) {
+      headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
+    }
+    // HEader Text End 
+
+    console.log('headerText,', headerText)
+
+
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };
     // });
@@ -355,7 +433,7 @@ class ContributionCard extends React.Component {
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    {i18n.t('label.tree_donation')}
+                    {headerText}
                   </Text>
                   <View style={styles.row2}>
                     <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
@@ -388,7 +466,7 @@ class ContributionCard extends React.Component {
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    {i18n.t('label.registered_trees')}
+                    {headerText}
                   </Text>
                   <Text style={styles.redeemObjectSubTitle}>
                     {plantProjectLine}
@@ -434,7 +512,7 @@ class ContributionCard extends React.Component {
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    {i18n.t('label.redeemed_trees')}
+                    {headerText}
                   </Text>
                   <View style={styles.row2}>
                     <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>

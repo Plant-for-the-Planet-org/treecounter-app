@@ -440,19 +440,19 @@ class AnimatedViews extends React.Component {
 
             <TouchableOpacity
               onPress={() => this.onPressHeader()}
-              style={[styles.fullScreenExitIcon, singleContributionID ? ({ bottom: '69%', }) : ({})]}
+              style={[styles.fullScreenExitIcon, singleContributionID ? ({ bottom: '70%', }) : ({})]}
             >
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
             </TouchableOpacity>
             {!singleContributionID ? <TouchableOpacity
               onPress={this.onPressCurrentLocation}
-              style={[styles.myLocationIcon, singleContributionID ? ({ bottom: '69%', right: 85 }) : ({})]}
+              style={[styles.myLocationIcon, singleContributionID ? ({ bottom: '70%', right: 85 }) : ({})]}
             >
               <Icon name={'my-location'} size={30} color={'#4C5153'} />
             </TouchableOpacity> : null}
             <TouchableOpacity
               onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
-              style={[styles.satellite, singleContributionID ? ({ bottom: '69%', right: 85 }) : {}]}
+              style={[styles.satellite, singleContributionID ? ({ bottom: '70%', right: 85 }) : {}]}
             >
               <Icon name={'satellite'} size={30} color={'#4C5153'} />
             </TouchableOpacity>

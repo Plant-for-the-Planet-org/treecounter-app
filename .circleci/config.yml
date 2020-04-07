@@ -81,11 +81,13 @@ jobs:
               npm run build:server
             fi
             echo "Copying new files to web server"
-            ssh $HOST "cd $WD_SYMFONY; rm -fr web/*"
-            # copy client .htaccess into web folder
-            scp -r .htaccess $HOST:$WD_SYMFONY/web/.
-            scp -r web/server/* $HOST:$WD_SYMFONY/web/.
-            scp -r .well-known $HOST:$WD_SYMFONY/web/.
+            ssh $HOST "cd $WD_SYMFONY; rm -fr .tmp"
+            ssh $HOST "cd $WD_SYMFONY; mkdir .tmp"
+            scp .htaccess $HOST:$WD_SYMFONY/.tmp/.
+            scp -r web/server/* $HOST:$WD_SYMFONY/.tmp/.
+            scp -r .well-known $HOST:$WD_SYMFONY/.tmp/.
+            ssh $HOST "cd $WD_SYMFONY; mv web web.bak && mv .tmp web"
+            ssh $HOST "cd $WD_SYMFONY; rm -fr web.bak"
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

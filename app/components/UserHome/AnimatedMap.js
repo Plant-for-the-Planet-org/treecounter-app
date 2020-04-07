@@ -1,6 +1,6 @@
 import Geolocation from '@react-native-community/geolocation';
 import React from 'react';
-import { Dimensions, Image, Platform, SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MapView, { Marker, ProviderPropType, PROVIDER_GOOGLE } from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';
@@ -12,6 +12,7 @@ import { loadProject } from '../../actions/loadTposAction';
 import { multiple_trees, tree_1 } from '../../assets/index.js';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { currentUserProfileIdSelector } from '../../selectors/index';
+import styles from '../../styles/UserHome/animated_map';
 import ContributionCard from '../UserContributions/ContributionCard.native';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 
@@ -523,102 +524,7 @@ AnimatedViews.propTypes = {
   provider: ProviderPropType
 };
 
-const styles = StyleSheet.create({
-  bottomArrowsCont: {
-    flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white',
-    marginRight: 20
-  },
-  swiperCont: {
-    width: '100%',
-    height: 130,
-    bottom: 30,
-    backgroundColor: '#fff',
-    position: 'absolute'
-  },
-  multipleTrees: {
-    height: 40, width: 30,
 
-  },
-  treeImage: {
-    height: 25, width: 20,
-  },
-  userContributionsDetailsFullViewCont: {
-    backgroundColor: 'white',
-    width: '100%',
-    height: HEIGHT * 0.68,
-    position: 'absolute',
-    bottom: 0,
-  },
-  treeCount: {
-    justifyContent: 'center',
-    alignItems: 'flex-end'
-  },
-  container: {
-    flex: 1,
-    backgroundColor: 'transparent'
-  },
-  map: {
-    backgroundColor: 'transparent',
-    flex: 1,
-  },
-  downArrowIcon: {
-    position: 'absolute',
-    top: Platform.OS == 'ios' ? 45 : 20,
-    left: 30,
-    backgroundColor: 'white',
-    borderRadius: 30,
-    padding: 5
-  },
-  myLocationIcon: {
-    position: 'absolute',
-    bottom: 240,
-    right: 20,
-    padding: 15,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-    elevation: 6,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  fullScreenExitIcon: {
-    position: 'absolute',
-    bottom: 170,
-    right: 20,
-    padding: 15,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-    elevation: 6,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  satellite: {
-    position: 'absolute',
-    bottom: 310,
-    right: 20,
-    padding: 15,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-    elevation: 6,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  card: {
-    padding: 10,
-    elevation: 2,
-    backgroundColor: '#FFF',
-    shadowColor: '#000',
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
-    shadowOffset: { x: 2, y: -2 },
-    height: CARD_HEIGHT,
-    overflow: 'hidden',
-
-    width: '100%'
-  },
-  textContent: {
-    flex: 1
-  }
-});
 
 const mapStateToProps = state => {
   return {

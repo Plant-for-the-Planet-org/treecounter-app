@@ -465,6 +465,7 @@ class AnimatedViews extends React.Component {
           true ? (
             <View style={[styles.userContributionsDetailsFullViewCont, { left: this.state.isDetailShow ? 0 : -1000 }]}>
               <Carousel
+
                 scrollEnabled={false}
                 onSnapToItem={(index) => {
 
@@ -477,6 +478,7 @@ class AnimatedViews extends React.Component {
                 data={markers}
                 renderItem={({ item }) => (
                   <UserContributionsDetails
+                    isDetailShow={this.state.isDetailShow}
                     key={item.id}
                     isFromUserProfile
                     userProfileId={this.props.userProfileId}

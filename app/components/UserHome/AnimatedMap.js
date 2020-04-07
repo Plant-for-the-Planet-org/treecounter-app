@@ -417,13 +417,6 @@ class AnimatedViews extends React.Component {
                   sliderWidth={screen.width}
                   itemWidth={screen.width}
                 />
-                {/* {markers && markers[activeIndex] ? <Animatable.View duration={1500} animation={activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft'} style={styles.card}>
-                    <ContributionCard
-                      onPressSingleContribution={() => this.onPressMarker(markers[activeIndex], { nativeEvent: { action: 'marker-press' } })}
-                      isFromAnimatredCardList
-                      contribution={markers[activeIndex]}
-                    />
-                  </Animatable.View> : null} */}
                 <View style={styles.bottomArrowsCont}>
                   <View style={{ flex: 1 }} />
                   <View style={{ flexDirection: 'row', }}>
@@ -446,54 +439,56 @@ class AnimatedViews extends React.Component {
 
             <TouchableOpacity
               onPress={() => this.onPressHeader()}
-              style={[styles.fullScreenExitIcon, singleContributionID ? ({ bottom: 620, }) : ({})]}
+              style={[styles.fullScreenExitIcon, singleContributionID ? ({ bottom: '69%', }) : ({})]}
             >
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
             </TouchableOpacity>
             {!singleContributionID ? <TouchableOpacity
               onPress={this.onPressCurrentLocation}
-              style={[styles.myLocationIcon, singleContributionID ? ({ bottom: 620, right: 85 }) : ({})]}
+              style={[styles.myLocationIcon, singleContributionID ? ({ bottom: '69%', right: 85 }) : ({})]}
             >
               <Icon name={'my-location'} size={30} color={'#4C5153'} />
             </TouchableOpacity> : null}
             <TouchableOpacity
               onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
-              style={[styles.satellite, singleContributionID ? ({ bottom: 620, right: 85 }) : {}]}
+              style={[styles.satellite, singleContributionID ? ({ bottom: '69%', right: 85 }) : {}]}
             >
               <Icon name={'satellite'} size={30} color={'#4C5153'} />
             </TouchableOpacity>
           </>
 
-        ) : null}
+        ) : null
+        }
         {/* {console.log('animation=', singleContributionID == null ? 'slideInUp' : activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft')} */}
-        {true ? (
-          <View style={[styles.userContributionsDetailsFullViewCont, { left: this.state.isDetailShow ? 0 : -1000 }]}>
-            <Carousel
-              scrollEnabled={false}
-              onSnapToItem={(index) => {
+        {
+          true ? (
+            <View style={[styles.userContributionsDetailsFullViewCont, { left: this.state.isDetailShow ? 0 : -1000 }]}>
+              <Carousel
+                scrollEnabled={false}
+                onSnapToItem={(index) => {
 
-                console.log('index=', index)
-                console.log('Total Markers leghtn=', markers.lenght)
-                console.log('activeIndex=', activeIndex)
-              }}
-              ref={(c) => { this._carouselDetail = c; }}
-              // firstItem={singleContributionID ? activeIndex : undefined}
-              data={markers}
-              renderItem={({ item }) => (
-                <UserContributionsDetails
-                  key={item.id}
-                  isFromUserProfile
-                  userProfileId={this.props.userProfileId}
-                  navigation={this.props.navigation}
-                  contribution={item}
-                  plantProjects={this.props.plantProjects}
-                  deleteContribution={this.props.deleteContribution}
-                />
-              )}
-              sliderWidth={screen.width}
-              itemWidth={screen.width}
-            />
-            {/* {this.state.markers ? (
+                  console.log('index=', index)
+                  console.log('Total Markers leghtn=', markers.lenght)
+                  console.log('activeIndex=', activeIndex)
+                }}
+                ref={(c) => { this._carouselDetail = c; }}
+                // firstItem={singleContributionID ? activeIndex : undefined}
+                data={markers}
+                renderItem={({ item }) => (
+                  <UserContributionsDetails
+                    key={item.id}
+                    isFromUserProfile
+                    userProfileId={this.props.userProfileId}
+                    navigation={this.props.navigation}
+                    contribution={item}
+                    plantProjects={this.props.plantProjects}
+                    deleteContribution={this.props.deleteContribution}
+                  />
+                )}
+                sliderWidth={screen.width}
+                itemWidth={screen.width}
+              />
+              {/* {this.state.markers ? (
               <UserContributionsDetails
                 isFromUserProfile
                 userProfileId={this.props.userProfileId}
@@ -503,20 +498,23 @@ class AnimatedViews extends React.Component {
                 deleteContribution={this.props.deleteContribution}
               />
             ) : null} */}
-            {/* </Animatable.View> */}
-          </View>
-        ) : null}
-
-        {this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 30, width: '100%', backgroundColor: '#fff', }}>
-          <View style={styles.bottomArrowsCont}>
-            <View style={{ flex: 1 }} />
-            <View style={{ flexDirection: 'row', }}>
-              <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back', 'set-id')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
-              <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next', 'set-id')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
+              {/* </Animatable.View> */}
             </View>
-          </View>
-        </View> : null}
-      </View>
+          ) : null
+        }
+
+        {
+          this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 30, width: '100%', backgroundColor: '#fff', }}>
+            <View style={styles.bottomArrowsCont}>
+              <View style={{ flex: 1 }} />
+              <View style={{ flexDirection: 'row', }}>
+                <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back', 'set-id')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+                <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next', 'set-id')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
+              </View>
+            </View>
+          </View> : null
+        }
+      </View >
     );
   }
 }

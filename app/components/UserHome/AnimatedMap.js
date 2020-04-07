@@ -438,12 +438,12 @@ class AnimatedViews extends React.Component {
               <Icon name={this.state.singleContributionID ? 'keyboard-arrow-left' : 'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>
 
-            <TouchableOpacity
+            {!singleContributionID ? <TouchableOpacity
               onPress={() => this.onPressHeader()}
               style={[styles.fullScreenExitIcon, singleContributionID ? ({ bottom: '70%', }) : ({})]}
             >
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
-            </TouchableOpacity>
+            </TouchableOpacity> : null}
             {!singleContributionID ? <TouchableOpacity
               onPress={this.onPressCurrentLocation}
               style={[styles.myLocationIcon, singleContributionID ? ({ bottom: '70%', right: 85 }) : ({})]}
@@ -452,7 +452,7 @@ class AnimatedViews extends React.Component {
             </TouchableOpacity> : null}
             <TouchableOpacity
               onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
-              style={[styles.satellite, singleContributionID ? ({ bottom: '70%', right: 85 }) : {}]}
+              style={[styles.satellite, singleContributionID ? ({ top: Platform.OS == 'ios' ? 45 : 20, right: 30, bottom: undefined }) : {}]}
             >
               <Icon name={'satellite'} size={30} color={'#4C5153'} />
             </TouchableOpacity>

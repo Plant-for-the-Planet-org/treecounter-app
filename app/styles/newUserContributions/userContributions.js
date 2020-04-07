@@ -23,7 +23,7 @@ export default EStyleSheet.create({
   subHeaderText: {
     color: textColorDark,
     fontSize: 18,
-    fontFamily: 'OpenSans-SemiBold',
+    fontFamily: 'OpenSans-Bold',
     flex: 1,
     flexWrap: 'wrap'
   },
@@ -48,8 +48,8 @@ export default EStyleSheet.create({
     left: 20,
     // marginTop: -15,
     zIndex: 10000,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
+    // paddingVertical: 4,
+    // paddingHorizontal: 10,
     backgroundColor: whiteColor,
     borderRadius: 100,
     borderColor: textColorLight,
@@ -85,18 +85,20 @@ export default EStyleSheet.create({
   locationErrorContainer: {
     flexDirection: 'row',
     paddingHorizontal: 20,
-    marginBottom: 20
+    marginVertical: 20,
+    // marginTop: 10
   },
   locationErrorText: {
     color: '#ee6453',
     fontFamily: 'OpenSans-Regular',
-    fontSize: 14,
+    fontSize: 16,
     flex: 1,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   icon: {
     width: 24,
-    height: 24
+    height: 24,
+
   },
   iconContainer: {
     minWidth: 38,

@@ -254,7 +254,7 @@ class UserContributionsDetails extends React.Component {
       }
     }
     return (
-      <View style={{ flex: 1, backgroundColor: colors.WHITE, marginTop: 20, }}>
+      <View style={{ flex: 1, backgroundColor: colors.WHITE, marginTop: 10, }}>
         <ScrollView style={styles.scrollViewContainer} contentContainerStyle={{}}>
           <UserContributions
             isFromUserProfile={this.props.isFromUserProfile}
@@ -325,7 +325,7 @@ class UserContributionsDetails extends React.Component {
           {hasGeoLocationError ? (
             <View style={styles.locationErrorContainer}>
               <Image
-                style={[styles.icon, { marginRight: 20 }]}
+                style={[styles.icon, { marginRight: 20, marginTop: 5 }]}
                 source={redMyLocationIcon}
               />
               <Text style={styles.locationErrorText}>{locationErrorText}</Text>

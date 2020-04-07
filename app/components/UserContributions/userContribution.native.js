@@ -1,23 +1,16 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 // import i18n from '../../locales/i18n.js';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  Platform
-} from 'react-native';
-import styles from '../../styles/newUserContributions/userContributions';
-// import ShareIcon from '../../assets/images/share.png';
-import { editIcon, deleteIcon, closeIcon } from '../../assets';
+import { Dimensions, Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { PROVIDER_GOOGLE } from 'react-native-maps';
 import { getLocalRoute } from '../../actions/apiRouting';
+// import ShareIcon from '../../assets/images/share.png';
+import { closeIcon, deleteIcon, editIcon } from '../../assets';
 import i18n from '../../locales/i18n.js';
+import styles from '../../styles/newUserContributions/userContributions';
+import colors from '../../utils/constants';
 import PopupNative from '../Common/ModalDialog/Popup.native';
 import NativeMapView, { mapStyle } from '../Map/NativeMapView.native';
-import { PROVIDER_GOOGLE } from 'react-native-maps';
-import colors from '../../utils/constants';
 
 export default class UserContributions extends React.Component {
   constructor(props) {

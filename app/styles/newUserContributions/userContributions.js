@@ -1,5 +1,5 @@
-import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const textColorDark = '#4D5153';
 const textColorLight = '#d5d5d5';
@@ -53,7 +53,7 @@ export default EStyleSheet.create({
     backgroundColor: whiteColor,
     borderRadius: 100,
     borderColor: textColorLight,
-    borderWidth: 1
+    borderWidth: 0
     // width: 130,
     // textAlign: 'center'
   },

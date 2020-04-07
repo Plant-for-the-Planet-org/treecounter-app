@@ -29,14 +29,10 @@ jobs:
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_development"' >>  $ENV_VARS
               echo 'export SERVER_URL="development.trilliontreecampaign.org"' >>  $ENV_VARS
-            elif [[ "${CIRCLE_BRANCH}" == "fixtures" ]] || [[ "${CIRCLE_BRANCH}" == "staging" ]] || [[ "${CIRCLE_BRANCH}" == "test" ]]
+            elif [[ "${CIRCLE_BRANCH}" == "fixtures" ]] || [[ "${CIRCLE_BRANCH}" == "staging" ]]
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_${CIRCLE_BRANCH}"' >>  $ENV_VARS
               echo 'export SERVER_URL="${CIRCLE_BRANCH}.trilliontreecampaign.org"' >>  $ENV_VARS
-            else
-              # 'devel' tagged version
-              echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_devel"' >>  $ENV_VARS
-              echo 'export SERVER_URL="devel.trilliontreecampaign.org"' >>  $ENV_VARS
             fi
             cat $ENV_VARS
       - run:
@@ -85,107 +81,15 @@ jobs:
               npm run build:server
             fi
             echo "Copying new files to web server"
-            if [[ "${CIRCLE_BRANCH}" == "develop" ]] || [[ "${CIRCLE_BRANCH}" == "fixtures" ]] || [[ "${CIRCLE_BRANCH}" == "staging" ]]
-            then
-              ssh $HOST "cd $WD_SYMFONY; rm -fr web/*"
-              # copy client .htaccess into web folder
-              scp -r .htaccess $HOST:$WD_SYMFONY/web/.
-            else
-              ssh $HOST "cd $WD_SYMFONY; git clean -f web"
-            fi
+            ssh $HOST "cd $WD_SYMFONY; rm -fr web/*"
+            # copy client .htaccess into web folder
+            scp -r .htaccess $HOST:$WD_SYMFONY/web/.
             scp -r web/server/* $HOST:$WD_SYMFONY/web/.
             scp -r .well-known $HOST:$WD_SYMFONY/web/.
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-
-  # only update the repository on the server to support our Dashboard
-  build_server_repository:
-    docker:
-      - image: alpine
-
-    environment:
-      HOST: ssh-840600-pftp2014@jetzt-die-welt-retten.de
-      PROJ_DIR: /kunden/188089_20457/pftp2014/source
-      ENV_VARS: ./env_vars.sh
-
-    working_directory: ~/ttc-app
-
-    steps:
-      - run: echo "$CIRCLE_BRANCH"
-      - run:
-          name: Setting Environment Variables
-          command: |
-            > $ENV_VARS
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]
-            then
-              echo 'export WD_REACT="$PROJ_DIR/ttc-app_prod"' >>  $ENV_VARS
-              echo 'export SERVER_URL="www.trilliontreecampaign.org"' >>  $ENV_VARS
-            elif [[ "${CIRCLE_BRANCH}" == "staging" ]] || [[ "${CIRCLE_BRANCH}" == "test" ]]
-            then
-              echo 'export WD_REACT="$PROJ_DIR/ttc-app_${CIRCLE_BRANCH}"' >>  $ENV_VARS
-              echo 'export SERVER_URL="${CIRCLE_BRANCH}.trilliontreecampaign.org"' >>  $ENV_VARS
-            else
-              # 'devel' tagged version
-              echo 'export WD_REACT="$PROJ_DIR/ttc-app_devel"' >>  $ENV_VARS
-              echo 'export SERVER_URL="devel.trilliontreecampaign.org"' >>  $ENV_VARS
-            fi
-            cat $ENV_VARS
-      # add SSH support
-      - run:
-          name: Install packages
-          command: |
-            apk update && apk add openssh gettext
-      # ID_RSA has been set up in project settings as base64 encoded content of 'id_rsa' file
-      # https://circleci.com/gh/Plant-for-the-Planet-org/treecounter-platform/edit#env-vars
-      - run:
-          name: Setup SSH to Domain Factory
-          command: |
-            mkdir -p ~/.ssh
-            ssh-keyscan jetzt-die-welt-retten.de 2>/dev/null >> ~/.ssh/known_hosts
-            (umask 077; touch ~/.ssh/id_rsa; chmod 0600 ~/.ssh/id_rsa)
-            echo $ID_RSA | base64 -d > ~/.ssh/id_rsa
-      - run:
-          name: Checkout web client
-          command: |
-            source $ENV_VARS
-            echo $WD_REACT
-            ssh $HOST "cd $WD_REACT; git fetch origin --prune && git fetch origin --tags"
-            if [[ "${CIRCLE_BRANCH}" ]]
-            then
-              ssh $HOST "cd $WD_REACT; git checkout ${CIRCLE_BRANCH}"
-              ssh $HOST "cd $WD_REACT; git pull"
-            else
-              # 'devel' tagged version
-              ssh $HOST "cd $WD_REACT; git checkout devel"
-              ssh $HOST "cd $WD_REACT; git merge devel"
-            fi
-      - run:
-          name: Setup local configuration
-          command: |
-            source $ENV_VARS
-            export host=$SERVER_URL
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]
-            then
-              export debug=
-            else
-              export debug=true
-            fi
-            ssh $HOST "cd $WD_REACT; envsubst < .env.deploy > .env.production"
-
-      # - run:
-      #     name: Build web client
-      #     command: |
-      #       source $ENV_VARS
-      #       echo $WD_REACT
-      #       ssh $HOST "cd $WD_REACT; /usr/bin/npm install"
-      #       if [[ "${CIRCLE_BRANCH}" == "master" ]]
-      #       then
-      #         ssh $HOST "cd $WD_REACT; /usr/bin/npm run build:prod_server"
-      #       else
-      #         ssh $HOST "cd $WD_REACT; /usr/bin/npm run build:server"
-      #       fi
 
   # build the app in the cloud to check for eslint or compilation errors
   build_gitflow:
@@ -258,21 +162,9 @@ workflows:
             branches:
               only:
                 - develop
-                - master
                 - fixtures
-                - test
                 - staging
-            tags:
-              only: /^devel/
-      - build_server_repository:
-          filters:
-            branches:
-              only:
                 - master
-                - test
-                - staging
-            tags:
-              only: /^devel/
       - build_gitflow:
           filters:
             branches:

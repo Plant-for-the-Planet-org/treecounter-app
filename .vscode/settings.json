@@ -3,5 +3,8 @@
   "editor.formatOnSave": true,
   "javascript.format.enable": true,
   "java.configuration.updateBuildConfiguration": "automatic",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   "eslint.workingDirectories": ["./"]
 }

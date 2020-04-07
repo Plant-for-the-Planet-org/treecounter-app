@@ -17,6 +17,7 @@ const supportedTreecounterReducer = handleActions(
   {
     [setSupportedTreecounter]: (state, action) => ({
       treecounterId: action.payload.id,
+      type: action.payload.type,
       displayName: action.payload.displayName
     }),
     [clearSupportedTreecounter]: () => initialState

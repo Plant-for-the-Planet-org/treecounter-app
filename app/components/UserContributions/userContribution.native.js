@@ -66,6 +66,7 @@ export default class UserContributions extends React.Component {
 
     const textColor = '#87B738';
     const deleteConfirmColor = '#ee6453';
+    console.log(plantProjectSlug, 'plantProjectIdplantProjectIdplantProjectId')
     return (
       <View style={{ backgroundColor: colors.WHITE }}>
 
@@ -167,16 +168,16 @@ export default class UserContributions extends React.Component {
                   {contributionPersonPrefix}
                   <Text
                     onPress={() => {
-                      updateStaticRoute(
+                      contributionPersonSlug ? updateStaticRoute(
                         getLocalRoute('app_treecounter'),
                         navigation,
                         {
                           treeCounterId: contributionPersonSlug,
                           titleParam: contributionPerson
                         }
-                      );
+                      ) : null;
                     }}
-                    style={[styles.subHeaderText, { color: textColor }]}>
+                    style={[styles.subHeaderText, { color: contributionPersonSlug ? textColor : undefined }]}>
                     {' '}
                     {contributionPerson}
                   </Text>
@@ -212,7 +213,7 @@ export default class UserContributions extends React.Component {
                     )
                     : null;
                 }}
-                style={{ color: textColor }}
+                style={{ color: plantProjectSlug ? textColor : null }}
               >
                 {plantProjectName}
               </Text>

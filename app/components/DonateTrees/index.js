@@ -137,7 +137,7 @@ export default class DonateTrees extends Component {
       const currentTreeCount =
         this.props.selectedProject && this.props.selectedProject.paymentSetup
           ? this.props.selectedProject.paymentSetup.treeCountOptions
-              .fixedDefaultTreeCount
+            .fixedDefaultTreeCount
           : null;
 
       if (nextTreeCount !== currentTreeCount) {
@@ -330,7 +330,7 @@ export default class DonateTrees extends Component {
         }
       }, 1000);
     }
-    const NextArrow = function(props) {
+    const NextArrow = function (props) {
       function validated() {
         if (props.checkValidation[props.currentSlide].call(props.context)) {
           props.onClick();
@@ -421,7 +421,7 @@ export default class DonateTrees extends Component {
           plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
       }
     }
-
+    debug('support treecounter', this.props.supportTreecounter);
     return this.state.showSelectProject ? (
       <SelectPlantProjectContainer
         supportTreecounter={this.props.supportTreecounter}
@@ -430,168 +430,170 @@ export default class DonateTrees extends Component {
       <div className="sidenav-wrapper app-container__content--center">
         <TextHeading>
           {this.props.supportTreecounter.treecounterId
-            ? i18n.t('label.support_trees_to', {
-                user: this.props.supportTreecounter.displayName
-              })
-            : pageHeadings[this.state.pageIndex].heading}
+            ? (this.props.supportTreecounter.type == 'company' ? i18n.t('label.give_trees_to_company', {
+              companyName: this.props.supportTreecounter.displayName
+            }) : i18n.t('label.support_trees_to', {
+              user: this.props.supportTreecounter.displayName
+            }))
+            : (pageHeadings[this.state.pageIndex].heading)}
           <DescriptionHeading>
             {pageHeadings[this.state.pageIndex].description}
           </DescriptionHeading>
         </TextHeading>
         {this.props.paymentStatus &&
-        !this.props.paymentStatus.status &&
-        this.props.paymentStatus.message ? (
-          <CardLayout>
-            <div className="payment-success">
-              <img src={attention} />
-              <div className={'gap'} />
-              <TextBlock strong>
-                {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
-              </TextBlock>
-              <div className={'gap'} />
-              <TextBlock>
-                <PrimaryButton onClick={this.props.paymentClear}>
-                  {i18n.t('label.try_again')}
-                </PrimaryButton>
-              </TextBlock>
-            </div>
-          </CardLayout>
-        ) : this.props.paymentStatus && this.props.paymentStatus.status ? (
-          <CardLayout>
-            <div className="payment-success">
-              <img src={check_green} />
-              <div className={'gap'} />
-              <TextBlock strong>
-                {i18n.t('label.thankyou_planting', {
-                  count: this.state.treeCount
-                })}
-              </TextBlock>
-              <div className={'gap'} />
-              <TextBlock>
-                <InlineLink
-                  uri={'app_userHome'}
-                  caption={i18n.t('label.return_home')}
-                />
-              </TextBlock>
-            </div>
-          </CardLayout>
-        ) : (
-          <form
-            className="donate-tress__container"
-            onSubmit={event => {
-              event.preventDefault();
-            }}
-          >
-            <div>
-              <ContentHeader caption={headings[this.state.pageIndex]} />
+          !this.props.paymentStatus.status &&
+          this.props.paymentStatus.message ? (
+            <CardLayout>
+              <div className="payment-success">
+                <img src={attention} />
+                <div className={'gap'} />
+                <TextBlock strong>
+                  {i18n.t('label.error') + ' ' + this.props.paymentStatus.message}
+                </TextBlock>
+                <div className={'gap'} />
+                <TextBlock>
+                  <PrimaryButton onClick={this.props.paymentClear}>
+                    {i18n.t('label.try_again')}
+                  </PrimaryButton>
+                </TextBlock>
+              </div>
+            </CardLayout>
+          ) : this.props.paymentStatus && this.props.paymentStatus.status ? (
+            <CardLayout>
+              <div className="payment-success">
+                <img src={check_green} />
+                <div className={'gap'} />
+                <TextBlock strong>
+                  {i18n.t('label.thankyou_planting', {
+                    count: this.state.treeCount
+                  })}
+                </TextBlock>
+                <div className={'gap'} />
+                <TextBlock>
+                  <InlineLink
+                    uri={'app_userHome'}
+                    caption={i18n.t('label.return_home')}
+                  />
+                </TextBlock>
+              </div>
+            </CardLayout>
+          ) : (
+              <form
+                className="donate-tress__container"
+                onSubmit={event => {
+                  event.preventDefault();
+                }}
+              >
+                <div>
+                  <ContentHeader caption={headings[this.state.pageIndex]} />
 
-              <Slider {...settings} ref="slider">
-                <div>
-                  {this.props.selectedTpo ? (
-                    <PlantProjectFull
-                      onViewMoreClick={() =>
-                        this.setState({
-                          imageViewMore: !this.state.imageViewMore
-                        })
-                      }
-                      callExpanded={this.callExpanded}
-                      expanded={false}
-                      plantProject={this.props.selectedProject}
-                      tpoName={this.props.selectedTpo.name}
-                      selectAnotherProject
-                      projectClear={this.props.plantProjectClear}
-                    />
-                  ) : null}
-                </div>
-                <div>
-                  {this.props.selectedTpo && currencies ? (
-                    <TreeCountCurrencySelector
-                      treeCost={plantProject.treeCost.toFixed(2)}
-                      rates={
-                        currencies.currency_rates[plantProject.currency].rates
-                      }
-                      fees={paymentFee}
-                      currencies={currencies.currency_names} // TODO: connect to data from API
-                      selectedCurrency={this.determineDefaultCurrency()}
-                      treeCountOptions={
-                        plantProject.paymentSetup.treeCountOptions
-                      }
-                      selectedTreeCount={this.state.selectedTreeCount}
-                      onChange={this.handleTreeCountCurrencyChange}
-                    />
-                  ) : null}
-                </div>
+                  <Slider {...settings} ref="slider">
+                    <div>
+                      {this.props.selectedTpo ? (
+                        <PlantProjectFull
+                          onViewMoreClick={() =>
+                            this.setState({
+                              imageViewMore: !this.state.imageViewMore
+                            })
+                          }
+                          callExpanded={this.callExpanded}
+                          expanded={false}
+                          plantProject={this.props.selectedProject}
+                          tpoName={this.props.selectedTpo.name}
+                          selectAnotherProject
+                          projectClear={this.props.plantProjectClear}
+                        />
+                      ) : null}
+                    </div>
+                    <div>
+                      {this.props.selectedTpo && currencies ? (
+                        <TreeCountCurrencySelector
+                          treeCost={plantProject.treeCost.toFixed(2)}
+                          rates={
+                            currencies.currency_rates[plantProject.currency].rates
+                          }
+                          fees={paymentFee}
+                          currencies={currencies.currency_names} // TODO: connect to data from API
+                          selectedCurrency={this.determineDefaultCurrency()}
+                          treeCountOptions={
+                            plantProject.paymentSetup.treeCountOptions
+                          }
+                          selectedTreeCount={this.state.selectedTreeCount}
+                          onChange={this.handleTreeCountCurrencyChange}
+                        />
+                      ) : null}
+                    </div>
 
-                <div>
-                  <Tabs
-                    data={DonateTrees.data.tabsReceipt}
-                    onTabChange={this.handleModeReceiptChange}
-                    activeTab={
-                      this.state.modeReceipt !== ''
-                        ? this.state.modeReceipt
-                        : null
-                    }
-                  >
-                    {this.state.modeReceipt ===
-                    DonateTrees.data.tabsReceipt[0].id ? (
-                      <TCombForm
-                        ref="donateReceipt"
-                        type={receiptIndividualFormSchema}
-                        options={individualSchemaOptions}
-                        value={this.state.form['receiptIndividual']}
-                      />
-                    ) : (
-                      <TCombForm
-                        ref="donateReceipt"
-                        type={receiptCompanyFormSchema}
-                        options={companySchemaOptions}
-                        value={this.state.form['receiptCompany']}
-                      />
-                    )}
-                  </Tabs>
-                </div>
+                    <div>
+                      <Tabs
+                        data={DonateTrees.data.tabsReceipt}
+                        onTabChange={this.handleModeReceiptChange}
+                        activeTab={
+                          this.state.modeReceipt !== ''
+                            ? this.state.modeReceipt
+                            : null
+                        }
+                      >
+                        {this.state.modeReceipt ===
+                          DonateTrees.data.tabsReceipt[0].id ? (
+                            <TCombForm
+                              ref="donateReceipt"
+                              type={receiptIndividualFormSchema}
+                              options={individualSchemaOptions}
+                              value={this.state.form['receiptIndividual']}
+                            />
+                          ) : (
+                            <TCombForm
+                              ref="donateReceipt"
+                              type={receiptCompanyFormSchema}
+                              options={companySchemaOptions}
+                              value={this.state.form['receiptCompany']}
+                            />
+                          )}
+                      </Tabs>
+                    </div>
 
-                <div>
-                  {this.props.selectedTpo ? (
-                    <PaymentSelector
-                      paymentMethods={paymentMethods}
-                      accounts={plantProject.paymentSetup.accounts}
-                      stripePublishableKey={
-                        plantProject.paymentSetup.stripePublishableKey
-                      }
-                      currentUserProfile={this.props.currentUserProfile}
-                      paymentStatus={this.props.paymentStatus}
-                      currency={this.state.selectedCurrency}
-                      expandedOption={this.state.expandedOption}
-                      handleExpandedClicked={this.handleExpandedClicked}
-                      receipt={{
-                        ...receipt,
-                        modeReceipt: this.state.modeReceipt
-                      }}
-                      paymentDetails={{
-                        amount: this.state.selectedAmount,
-                        currency: this.state.selectedCurrency,
-                        treeCount: this.state.selectedTreeCount
-                      }}
-                      context={{
-                        treeCount: this.state.selectedTreeCount,
-                        tpoName: this.props.selectedTpo.name,
-                        supportTreecounter: this.props.supportTreecounter,
-                        plantProjectName: plantProject.name
-                      }}
-                      onFailure={data =>
-                        debug('/////////////////// payment failure ', data)
-                      }
-                      onError={data =>
-                        debug('/////////////////// payment error ', data)
-                      }
-                    />
-                  ) : null}
+                    <div>
+                      {this.props.selectedTpo ? (
+                        <PaymentSelector
+                          paymentMethods={paymentMethods}
+                          accounts={plantProject.paymentSetup.accounts}
+                          stripePublishableKey={
+                            plantProject.paymentSetup.stripePublishableKey
+                          }
+                          currentUserProfile={this.props.currentUserProfile}
+                          paymentStatus={this.props.paymentStatus}
+                          currency={this.state.selectedCurrency}
+                          expandedOption={this.state.expandedOption}
+                          handleExpandedClicked={this.handleExpandedClicked}
+                          receipt={{
+                            ...receipt,
+                            modeReceipt: this.state.modeReceipt
+                          }}
+                          paymentDetails={{
+                            amount: this.state.selectedAmount,
+                            currency: this.state.selectedCurrency,
+                            treeCount: this.state.selectedTreeCount
+                          }}
+                          context={{
+                            treeCount: this.state.selectedTreeCount,
+                            tpoName: this.props.selectedTpo.name,
+                            supportTreecounter: this.props.supportTreecounter,
+                            plantProjectName: plantProject.name
+                          }}
+                          onFailure={data =>
+                            debug('/////////////////// payment failure ', data)
+                          }
+                          onError={data =>
+                            debug('/////////////////// payment error ', data)
+                          }
+                        />
+                      ) : null}
+                    </div>
+                  </Slider>
                 </div>
-              </Slider>
-            </div>
-          </form>
-        )}
+              </form>
+            )}
       </div>
     );
   }

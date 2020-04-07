@@ -1,45 +1,23 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ScrollView,
-  View,
-  Text,
-  Image,
-  Linking,
-  TouchableOpacity,
-  Share,
-  RefreshControl,
-  FlatList,
-  Dimensions,
-  findNodeHandle,
-  LayoutAnimation,
-  Platform,
-  UIManager
-} from 'react-native';
-import { debug } from '../../debug';
-import {
-  readmoreDown,
-  readmoreUp,
-  share,
-  coupon,
-  registerTree,
-  settings
-} from './../../assets/';
-import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
-import { getLocalRoute } from './../../actions/apiRouting';
-import styles from '../../styles/user-home';
-import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
-import SvgContainer from '../Common/SvgContainer';
-import UserProfileImage from '../Common/UserProfileImage';
-import ContributionCardList from '../UserContributions/ContributionCardList.native';
-import i18n from '../../locales/i18n';
-import CompetitionSnippet from './app/CompetitionSnippet';
-import FullMapComponent from './FullMapComponent';
+import React, { Component } from 'react';
+import { Dimensions, findNodeHandle, FlatList, Image, LayoutAnimation, Linking, Platform, RefreshControl, ScrollView, Share, Text, TouchableOpacity, UIManager, View } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import { withNavigation } from 'react-navigation';
 import { fullscreen_icon } from '../../assets/index';
+import { debug } from '../../debug';
+import i18n from '../../locales/i18n';
+import styles from '../../styles/user-home';
 import colors from '../../utils/constants';
+import SvgContainer from '../Common/SvgContainer';
+import UserProfileImage from '../Common/UserProfileImage';
+import ContributionCardList from '../UserContributions/ContributionCardList.native';
+import { getLocalRoute } from './../../actions/apiRouting';
+import { coupon, readmoreDown, readmoreUp, registerTree, settings, share } from './../../assets/';
+import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
+import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
+import CompetitionSnippet from './app/CompetitionSnippet';
+import FullMapComponent from './FullMapComponent';
 
 class UserHome extends Component {
   constructor(props) {

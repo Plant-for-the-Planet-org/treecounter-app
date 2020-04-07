@@ -399,7 +399,7 @@ class AnimatedViews extends React.Component {
             true ?
               <Animatable.View
                 animation={isMapPressed ? 'slideOutDown' : 'slideInUp'}
-                style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000 }]}>
+                style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, }]}>
                 <Carousel
                   scrollEnabled={false}
                   onSnapToItem={(index) => {

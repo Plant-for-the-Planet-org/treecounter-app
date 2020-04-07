@@ -2,11 +2,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { BackHandler, Image, Linking, ScrollView, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { getLocalRoute } from '../../../actions/apiRouting';
+import { deleteContribution } from '../../../actions/EditMyTree';
+import { loadProject } from '../../../actions/loadTposAction';
+import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
 import { redMyLocationIcon } from '../../../assets';
 import VideoContainer from '../../../components/Common/VideoContainer';
 import { debug } from '../../../debug';
 import i18n from '../../../locales/i18n.js';
+import { currentUserProfileIdSelector, getAllPlantProjectsSelector } from '../../../selectors/index';
 import styles from '../../../styles/newUserContributions/userContributions';
 import colors from '../../../utils/constants';
 import { delimitNumbers, formatDate } from '../../../utils/utils';
@@ -18,6 +24,7 @@ import { updateStaticRoute } from './../../../helpers/routerHelper';
 // import styles from '../../../styles/newUserContributions/userContributions';
 import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
 
+
 // eslint-disable-next-line no-underscore-dangle
 const _goToURL = url => {
   Linking.openURL(url).catch(err => debug('Cannot open URI', err));
@@ -27,6 +34,13 @@ class UserContributionsDetails extends React.Component {
   constructor(props) {
     super(props);
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+    let contribution = this.props.contribution;
+    if (contribution.plantProjectId !== null) {
+      this.props.loadProject({ id: contribution.plantProjectId });
+    }
   }
 
   // adds back button listener on component mount
@@ -98,7 +112,7 @@ class UserContributionsDetails extends React.Component {
       geoLongitude
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
-
+    console.log(this.props.plantProjects, plantProjectId, this.props, ' ===this.props.plantProjectsthis.props.plantProjects')
     // initializing variables
     let plantedDate = undefined;
     let plantProjectSlug = this.props.contribution.plantProjectSlug;
@@ -405,4 +419,28 @@ UserContributionsDetails.propTypes = {
   deleteContribution: PropTypes.func
 };
 
-export default withNavigation(UserContributionsDetails);
+const mapStateToProps = state => {
+  console.log(state, 'statestatestatestatestate')
+  return {
+    userProfileId: currentUserProfileIdSelector(state),
+    plantProjects: getAllPlantProjectsSelector(state)
+    // entities: plantProjectsSelector(state)
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      deleteContribution,
+      loadProject,
+      selectPlantProjectAction
+    },
+    dispatch
+  );
+};
+// const UserCont  = withNavigation(UserContributionsDetails);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNavigation(UserContributionsDetails));

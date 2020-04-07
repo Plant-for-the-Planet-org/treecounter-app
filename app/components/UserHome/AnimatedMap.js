@@ -1,32 +1,19 @@
+import Geolocation from '@react-native-community/geolocation';
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Image,
-  TouchableOpacity,
-  Platform,
-  SafeAreaView,
-  Text
-} from 'react-native';
-import MapView, {
-  ProviderPropType,
-  Marker,
-  PROVIDER_GOOGLE
-} from 'react-native-maps';
-import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
-import { deleteContribution } from '../../actions/EditMyTree';
-import { loadProject } from '../../actions/loadTposAction';
-import { currentUserProfileIdSelector } from '../../selectors/index';
+import { Dimensions, Image, Platform, SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import MapView, { Marker, ProviderPropType, PROVIDER_GOOGLE } from 'react-native-maps';
+import Carousel from 'react-native-snap-carousel';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllPlantProjectsSelector } from '../../selectors';
+import { deleteContribution } from '../../actions/EditMyTree';
+import { loadProject } from '../../actions/loadTposAction';
 import { multiple_trees, tree_1 } from '../../assets/index.js';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import ContributionCard from '../UserContributions/ContributionCard.native'
-import Geolocation from '@react-native-community/geolocation';
-import * as Animatable from 'react-native-animatable';
-import Carousel from 'react-native-snap-carousel';
+import { getAllPlantProjectsSelector } from '../../selectors';
+import { currentUserProfileIdSelector } from '../../selectors/index';
+import ContributionCard from '../UserContributions/ContributionCard.native';
+import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 
 const screen = Dimensions.get('window');
 const { height: HEIGHT, } = screen;
@@ -413,7 +400,7 @@ class AnimatedViews extends React.Component {
                 animation={isMapPressed ? 'slideOutDown' : 'slideInUp'}
                 style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000 }]}>
                 <Carousel
-                  // scrollEnabled={false}
+                  scrollEnabled={false}
                   onSnapToItem={(index) => {
                     console.log('index=', index)
                     console.log('Total Markers leghtn=', markers.lenght)
@@ -481,9 +468,8 @@ class AnimatedViews extends React.Component {
         {/* {console.log('animation=', singleContributionID == null ? 'slideInUp' : activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft')} */}
         {true ? (
           <View style={[styles.userContributionsDetailsFullViewCont, { left: this.state.isDetailShow ? 0 : -1000 }]}>
-            {console.log(this.state.isDetailShow ? 0 : -1000, 'this.state.isDetailShow ? 0 : -1000 ')}
             <Carousel
-              // scrollEnabled={false}
+              scrollEnabled={false}
               onSnapToItem={(index) => {
 
                 console.log('index=', index)

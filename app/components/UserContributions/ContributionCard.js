@@ -275,10 +275,9 @@ export default class ContributionCard extends React.Component {
               : null}
             {!isPending ? (
               <TextSpan>
-                {' '}
                 {cardType && cardType.length > 0
-                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-                  : ''}
+                  ? ' ' + cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                  : ' ' }
               </TextSpan>
             ) : null}
             {mayUpdate ? (
@@ -385,10 +384,9 @@ export default class ContributionCard extends React.Component {
             ) : null}
             {!isPending ? (
               <TextSpan>
-                {' '}
                 {cardType && cardType.length > 0
-                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-                  : ''}
+                  ? ' ' + cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                  : ' ' }
               </TextSpan>
             ) : null}
             {mayUpdate ? (
@@ -467,10 +465,9 @@ export default class ContributionCard extends React.Component {
               : null}
             {!isPending ? (
               <TextSpan>
-                {' '}
                 {cardType && cardType.length > 0
-                  ? cardType.charAt(0).toUpperCase() + cardType.slice(1)
-                  : ''}
+                  ? ' ' + cardType.charAt(0).toUpperCase() + cardType.slice(1)
+                  : ' ' }
               </TextSpan>
             ) : null}
             {mayUpdate ? (

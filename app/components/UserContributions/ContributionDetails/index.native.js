@@ -83,7 +83,9 @@ class UserContributionsDetails extends React.Component {
     }
   }
   shouldComponentUpdate(nextProps) {
-    return this.props.isDetailShow !== nextProps.isDetailShow || JSON.stringify(this.props.plantProjects) !== JSON.stringify(nextProps.plantProjects)
+    let flag = this.props.isDetailShow !== nextProps.isDetailShow || JSON.stringify(this.props.plantProjects) !== JSON.stringify(nextProps.plantProjects);
+    console.log(flag, 'flagflagflagflagflagflagflag')
+    return flag
   }
   render() {
     if (!this.props.contribution) {
@@ -121,7 +123,6 @@ class UserContributionsDetails extends React.Component {
       geoLongitude
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
-    console.log(this.props.plantProjects, plantProjectId, this.props, ' ===this.props.plantProjectsthis.props.plantProjects')
     // initializing variables
     let plantedDate = undefined;
     let plantProjectSlug = this.props.contribution.plantProjectSlug;
@@ -429,7 +430,6 @@ UserContributionsDetails.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log(state, 'statestatestatestatestate')
   return {
     userProfileId: currentUserProfileIdSelector(state),
     plantProjects: getAllPlantProjectsSelector(state)

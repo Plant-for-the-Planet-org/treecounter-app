@@ -348,7 +348,7 @@ class ContributionCard extends React.Component {
     }
     // HEader Text End 
 
-    console.log('headerText,', headerText)
+    // console.log('headerText,', headerText)
 
 
     // let imagesArray = contribution.contributionImages.map(image => {
@@ -357,7 +357,7 @@ class ContributionCard extends React.Component {
     // let seeLabel = classnames('see-more-label-style', {
     //   'see-more__active': this.state.viewExpanded
     // });
-    console.log("contribution=", contribution)
+    // console.log("contribution=", contribution)
     let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
     // console.log(plantProjectName, 'plantProjectLine')
@@ -378,26 +378,26 @@ class ContributionCard extends React.Component {
     );
 
     if (contributionType === 'donation') {
-      console.log(' ------ donation start----------')
-      console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
-      console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
-      console.log('donateActionLine =', this.donateActionLine(plantDate))
-      console.log('GiftActionLine =', this.giftActionLine(plantDate, givee, giveeSlug))
-      console.log('tpoLine =', this.tpoLine(tpoName))
-      console.log(' ------ donation End----------')
+      // console.log(' ------ donation start----------')
+      // console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
+      // console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
+      // console.log('donateActionLine =', this.donateActionLine(plantDate))
+      // console.log('GiftActionLine =', this.giftActionLine(plantDate, givee, giveeSlug))
+      // console.log('tpoLine =', this.tpoLine(tpoName))
+      // console.log(' ------ donation End----------')
     }
     if (contributionType == 'planting') {
-      console.log(' ------ planting start----------')
-      console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
-      console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
+      // console.log(' ------ planting start----------')
+      // console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
+      // console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
 
-      console.log('plantActionLine =', this.plantActionLine(plantDate, registrationDate))
+      // console.log('plantActionLine =', this.plantActionLine(plantDate, registrationDate))
 
-      console.log('dedicateActionLine =', this.dedicateActionLine(isGift, givee, giveeSlug))
-      console.log('tpoLine =', this.tpoLine(tpoName))
-      console.log(' ------ planting End----------')
+      // console.log('dedicateActionLine =', this.dedicateActionLine(isGift, givee, giveeSlug))
+      // console.log('tpoLine =', this.tpoLine(tpoName))
+      // console.log(' ------ planting End----------')
     }
-    console.log(redeemActionLine, 'redeemActionLine')
+    // console.log(redeemActionLine, 'redeemActionLine')
 
 
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';

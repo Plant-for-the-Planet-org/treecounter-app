@@ -85,7 +85,7 @@ class AnimatedViews extends React.Component {
   initiateComponent = () => {
     try {
       setTimeout(() => {
-        console.log('initiateComponent')
+        // console.log('initiateComponent')
         this.setState({
           activeIndex: 0,
           lastActiveIndex: 0,
@@ -107,12 +107,6 @@ class AnimatedViews extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    // console.log(nextProps.isPressFromList, nextProps.singleContributionID, 'isPressFromListisPressFromList')
-    // if (nextProps.isPressFromList) {
-    //   // let activeIndex = this.state.markers.findIndex(x=> x.id == nextProps.singleContributionID);
-    //   this.setState({})
-    // }
-
     if (this.state.singleContributionID == null) {
       if (nextProps.singleContributionID !== this.state.singleContributionID) {
         this.setState(
@@ -124,9 +118,10 @@ class AnimatedViews extends React.Component {
                   x => x.id == nextProps.singleContributionID
                 );
                 let activeMarker = this.state.markers[activeIndex];
-                console.log('componentWillReceiveProps animateTO Region 896', activeMarker)
-                this.setState({ isDetailShow: true, activeIndex: activeIndex })
-                this._carouselDetail.snapToItem(activeIndex)
+                console.log('willRecievevPropsactiveIndex = ', activeIndex, 'activeMarker', activeMarker)
+                this.setState({ isDetailShow: true, activeIndex: activeIndex }, () => {
+                  this._carouselDetail.snapToItem(activeIndex)
+                })
                 this.mapView.animateToRegion(
                   {
                     latitude: activeMarker.geoLatitude,
@@ -138,21 +133,17 @@ class AnimatedViews extends React.Component {
                 );
               }
             } catch (e) {
+              alert(JSON.stringify(e))
               // Do thing
             }
           }
         );
       }
     }
-    console.log(nextProps.isFullMapComponentModal, ' 1 ---') // false
-    console.log(this.props.isFullMapComponentModal, '2 ---') // true
-    console.log(nextProps.isPressFromList, '3 ---')
-    console.log(this.state.singleContributionID, 'singleID')
     if (this.state.singleContributionID) {
       // DO nothing
     } else {
       if (nextProps.isFullMapComponentModal == true && this.props.isFullMapComponentModal == false && !nextProps.isPressFromList) {
-        console.log('144 = at initialCompornrn')
         try {
           this.initiateComponent();
         } catch (e) {
@@ -166,6 +157,11 @@ class AnimatedViews extends React.Component {
     }
   }
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   let flag = this.state.isFullMapComponentModal !== nextProps.isFullMapComponentModal;
+  //   console.log(flag, 'flage -----')
+  //   return flag;
+  // }
   onPressHeader = id => {
 
     if (this.props.isPressFromList) {
@@ -195,7 +191,7 @@ class AnimatedViews extends React.Component {
         this.props.toggleIsFullMapComp(true);
         setTimeout(() => {
           // alert(232323)
-          console.log(' 178 == ')
+          // console.log(' 178 == ')
           try {
             this.mapView.fitToSuppliedMarkers(
               this.state.markers.map(x => String(x.id))
@@ -234,8 +230,8 @@ class AnimatedViews extends React.Component {
 
 
   onPressMarker = (marker, e) => {
-    console.log('onPressMarker  marker =', marker);
-    console.log(' state singleContribution ID =', this.state.singleContributionID)
+    // console.log('onPressMarker  marker =', marker);
+    // console.log(' state singleContribution ID =', this.state.singleContributionID)
     let action = e.nativeEvent.action;
 
     if (this.state.activeIndex == 0) {
@@ -295,7 +291,7 @@ class AnimatedViews extends React.Component {
 
   onPressNextPrevBtn = (btn, action) => {
     const { markers, activeIndex } = this.state;
-    console.log()
+    // console.log()
     if (action == 'set-id') {
       if (btn == 'back') {
         this._carouselDetail.snapToPrev()
@@ -319,9 +315,9 @@ class AnimatedViews extends React.Component {
     }
     if (btn == 'next') {
       this._carousel ? this._carousel.snapToNext() : null;
-      console.log(activeIndex < markers.length, activeIndex, markers.length, "----")
+      // console.log(activeIndex < markers.length, activeIndex, markers.length, "----")
       if (activeIndex + 1 !== markers.length) {
-        console.log('next onPressNextPrevBtn calling', activeIndex)
+        // console.log('next onPressNextPrevBtn calling', activeIndex)
         this.setState({ activeIndex: activeIndex + 1, lastActiveIndex: activeIndex }, () => {
           this.toAnimateRegion()
         })
@@ -330,7 +326,7 @@ class AnimatedViews extends React.Component {
   }
 
   onPressMapView = (e) => {
-    console.log(e.nativeEvent.action, 'e.nativeEvent.action')
+    // console.log(e.nativeEvent.action, 'e.nativeEvent.action')
     if (this.state.singleContributionID) {
       // Do Nothing
     } else {
@@ -353,6 +349,7 @@ class AnimatedViews extends React.Component {
       singleContributionID,
       activeIndex,
       lastActiveIndex,
+      isDetailShow
     } = this.state;
     const { isMapPressed } = this.props;
     let activeMarker =
@@ -403,9 +400,9 @@ class AnimatedViews extends React.Component {
                 <Carousel
                   scrollEnabled={false}
                   onSnapToItem={(index) => {
-                    console.log('index=', index)
-                    console.log('Total Markers leghtn=', markers.lenght)
-                    console.log('activeIndex=', activeIndex)
+                    // console.log('index=', index)
+                    // console.log('Total Markers leghtn=', markers.lenght)
+                    // console.log('activeIndex=', activeIndex)
                   }}
                   // firstItem={activeIndex}
                   ref={(c) => { this._carousel = c; }}
@@ -435,24 +432,24 @@ class AnimatedViews extends React.Component {
               style={styles.downArrowIcon}
               onPress={() => this.onPressHeader()}
             >
-              <Icon name={this.state.singleContributionID ? 'keyboard-arrow-left' : 'keyboard-arrow-down'} size={25} color={'#000'} />
+              <Icon name={this.state.isDetailShow ? 'keyboard-arrow-left' : 'keyboard-arrow-down'} size={25} color={'#000'} />
             </TouchableOpacity>
 
-            {!singleContributionID ? <TouchableOpacity
+            {!isDetailShow ? <TouchableOpacity
               onPress={() => this.onPressHeader()}
-              style={[styles.fullScreenExitIcon, singleContributionID ? ({ bottom: '70%', }) : ({})]}
+              style={[styles.fullScreenExitIcon, isDetailShow ? ({ bottom: '70%', }) : ({})]}
             >
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
             </TouchableOpacity> : null}
-            {!singleContributionID ? <TouchableOpacity
+            {!isDetailShow ? <TouchableOpacity
               onPress={this.onPressCurrentLocation}
-              style={[styles.myLocationIcon, singleContributionID ? ({ bottom: '70%', right: 85 }) : ({})]}
+              style={[styles.myLocationIcon, isDetailShow ? ({ bottom: '70%', right: 85 }) : ({})]}
             >
               <Icon name={'my-location'} size={30} color={'#4C5153'} />
             </TouchableOpacity> : null}
             <TouchableOpacity
               onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
-              style={[styles.satellite, singleContributionID ? ({ top: Platform.OS == 'ios' ? 45 : 20, right: 30, bottom: undefined }) : {}]}
+              style={[styles.satellite, isDetailShow ? ({ top: Platform.OS == 'ios' ? 45 : 20, right: 30, bottom: undefined }) : {}]}
             >
               <Icon name={'satellite'} size={30} color={'#4C5153'} />
             </TouchableOpacity>
@@ -468,9 +465,9 @@ class AnimatedViews extends React.Component {
                 scrollEnabled={false}
                 onSnapToItem={(index) => {
 
-                  console.log('index=', index)
-                  console.log('Total Markers leghtn=', markers.lenght)
-                  console.log('activeIndex=', activeIndex)
+                  // console.log('index=', index)
+                  // console.log('Total Markers leghtn=', markers.lenght)
+                  // console.log('activeIndex=', activeIndex)
                 }}
                 ref={(c) => { this._carouselDetail = c; }}
                 // firstItem={singleContributionID ? activeIndex : undefined}

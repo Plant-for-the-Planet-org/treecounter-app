@@ -66,7 +66,6 @@ export default class UserContributions extends React.Component {
 
     const textColor = '#87B738';
     const deleteConfirmColor = '#ee6453';
-    console.log(plantProjectSlug, 'plantProjectIdplantProjectIdplantProjectId')
     return (
       <View style={{ backgroundColor: colors.WHITE }}>
 

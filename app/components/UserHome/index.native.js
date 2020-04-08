@@ -280,6 +280,7 @@ class UserHome extends Component {
   };
 
   onPressSingleContribution = async (singleContObj) => {
+    console.log(' // onPressSingleContribution')
     if (!this.state.isCardPressed) {
       await this.setState({ singleContributionID: singleContObj.id, isPressFromList: true, isCardPressed: true }, async () => {
         await this.toggleIsFullMapComp();

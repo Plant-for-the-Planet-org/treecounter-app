@@ -235,7 +235,13 @@ export function PaymentOption(props) {
       </View>
       <TouchableOpacity
         onPress={() => {
-          updateStaticRoute('payment_details_form', props.navigation);
+          updateStaticRoute('payment_details_form', props.navigation, {
+            treeCount: props.navigation.getParam('treeCount'),
+            treeCost: props.navigation.getParam('treeCost'),
+            selectedCurrency: props.navigation.getParam('selectedCurrency'),
+            commissionSwitch: props.navigation.getParam('commissionSwitch'),
+            navigation: props.navigation
+          });
         }}
         style={styles.continueButtonView}
       >

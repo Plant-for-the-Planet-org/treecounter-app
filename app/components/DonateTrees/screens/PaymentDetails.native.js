@@ -6,6 +6,7 @@ import { applePay, googlePay, paypal, paypalLogo } from '../../../assets';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donation/donation.native';
 import colors from '../../../utils/constants';
+import { formatNumber } from '../../../utils/utils';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import CreditCardForm from '../components/CreditCardForm';
 import SepaAccountForm from '../components/SepaAccountForm';
@@ -46,7 +47,7 @@ export default function DonationStep3(props) {
   }
 
   return (
-    <View style={{ backgroundColor: colors.WHITE }}>
+    <View style={{ flex: 1, backgroundColor: colors.WHITE }}>
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
@@ -169,36 +170,57 @@ export default function DonationStep3(props) {
       {/* Pay Button Section  */}
 
       {showPay ? (
-        <View style={styles.buttonSectionView}>
-          <View style={styles.donationSummary}>
-            <View style={styles.donationCost}>
-              <Text style={styles.donationAmount}>€ 50</Text>
-              <Text style={styles.donationTree}>for 50 Trees</Text>
-            </View>
-            <Text style={styles.donationFrequency}>One Time Donation</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              updateStaticRoute('donate_thankyou', props.navigation, {
-                treeCount: 4,
-                plantedBy: 'Eden Reforestation Project'
-              });
-            }}
-          >
-            <View
-              style={
-                allValid
-                  ? styles.continueButtonView
-                  : styles.continueButtonViewInvalid
-              }
-            >
-              <Icon name="heart" size={30} color="#fff" />
-              <Text style={styles.payText}>Pay</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+        <PaymentButton
+          treeCount={props.navigation.getParam('treeCount')}
+          treeCost={props.navigation.getParam('treeCost')}
+          selectedCurrency={props.navigation.getParam('selectedCurrency')}
+          commissionSwitch={props.navigation.getParam('commissionSwitch')}
+          navigation={props.navigation}
+          allValid={allValid}
+        />
       ) : null}
       {/* Pay Button Section Ended */}
     </View>
   );
+}
+
+
+const PaymentButton = (props) => {
+  return (
+    <View style={styles.buttonSectionView}>
+      <View style={styles.donationSummary}>
+        <View style={styles.donationCost}>
+          <Text style={styles.donationAmount}>{formatNumber(
+            props.commissionSwitch
+              ? props.treeCost * props.treeCount +
+              ((props.treeCount / 100) * 2.9 + 0.3)
+              : props.treeCost * props.treeCount,
+            null,
+            props.selectedCurrency
+          )}</Text>
+          <Text style={styles.donationTree}>for {props.treeCount} trees</Text>
+        </View>
+        <Text style={styles.donationFrequency}>One Time Donation</Text>
+      </View>
+      <TouchableOpacity
+        onPress={() => {
+          updateStaticRoute('donate_thankyou', props.navigation, {
+            treeCount: props.treeCount,
+            plantedBy: 'Eden Reforestation Project'
+          });
+        }}
+      >
+        <View
+          style={
+            props.allValid
+              ? styles.continueButtonView
+              : styles.continueButtonViewInvalid
+          }
+        >
+          <Icon name="heart" size={30} color="#fff" />
+          <Text style={styles.payText}>Pay</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
 }

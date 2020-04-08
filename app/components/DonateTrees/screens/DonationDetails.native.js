@@ -15,14 +15,6 @@ function DonationDetails(props) {
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
 
-  const [donorDetails, setDonorDetails] = React.useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    country: '',
-    isCompany: false,
-    companyName: ''
-  });
   // Function for Switching the state of commission
   const toggleSetCommission = value => {
     setCommissionSwitch(value);

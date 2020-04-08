@@ -382,6 +382,7 @@ export const SupportUserDetails = (props) => {
             <Text style={styles.supportUserName}>{props.context.support.displayName}</Text>
           </View>
         </View>
-      </View></View>
+      </View>
+    </View>
   )
 }

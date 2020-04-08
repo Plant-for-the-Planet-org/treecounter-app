@@ -124,7 +124,7 @@ class AnimatedViews extends React.Component {
                   x => x.id == nextProps.singleContributionID
                 );
                 let activeMarker = this.state.markers[activeIndex];
-                console.log('componentWillReceiveProps animateTO Region', activeMarker)
+                console.log('componentWillReceiveProps animateTO Region 896', activeMarker)
                 this.setState({ isDetailShow: true, activeIndex: activeIndex })
                 this._carouselDetail.snapToItem(activeIndex)
                 this.mapView.animateToRegion(
@@ -398,7 +398,7 @@ class AnimatedViews extends React.Component {
           {true ? (
             true ?
               <Animatable.View
-                animation={isMapPressed ? 'slideOutDown' : 'slideInUp'}
+                animation={isMapPressed ? 'fadeOutDown' : 'fadeInUp'}
                 style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, }]}>
                 <Carousel
                   scrollEnabled={false}
@@ -465,7 +465,6 @@ class AnimatedViews extends React.Component {
           true ? (
             <View style={[styles.userContributionsDetailsFullViewCont, { left: this.state.isDetailShow ? 0 : -1000 }]}>
               <Carousel
-
                 scrollEnabled={false}
                 onSnapToItem={(index) => {
 

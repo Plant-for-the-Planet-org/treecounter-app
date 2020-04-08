@@ -43,7 +43,8 @@ class UserHome extends Component {
       showAllRecurrentContributions: false,
       recurrentUserContributions: [],
       readMore: false,
-      refreshing: false
+      refreshing: false,
+      isCardPressed: false,
     };
     this.mapView = React.createRef();
 
@@ -222,24 +223,24 @@ class UserHome extends Component {
     singleContributionIDShouldNull, /*  if true set id to null*/
 
   ) => {
-    setTimeout(() => {
+    // setTimeout(() => {
 
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
-      this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
-        this.scrollRef.scrollTo({ x: 0, y: y, animated: true });
-      });
+    this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
+      this.scrollRef.scrollTo({ x: 0, y: y, animated: true });
+    });
 
-      this.setState({
-        isFullMapComponentModal: !this.state.isFullMapComponentModal,
-        singleContributionID: singleContributionIDShouldNull
-          ? null
-          : this.state.singleContributionID,
-        isPressFromList: singleContributionIDShouldNull ? false : true
-      }, () => {
-        this.props.navigation.setParams({ isFullMapComponentModal: this.state.isFullMapComponentModal })
-      });
-    }, 300)
+    this.setState({
+      isFullMapComponentModal: !this.state.isFullMapComponentModal,
+      singleContributionID: singleContributionIDShouldNull
+        ? null
+        : this.state.singleContributionID,
+      isPressFromList: singleContributionIDShouldNull ? false : true
+    }, () => {
+      this.props.navigation.setParams({ isFullMapComponentModal: this.state.isFullMapComponentModal })
+    });
+    // }, 300)
   };
 
   getMapComponent = () => {
@@ -278,10 +279,15 @@ class UserHome extends Component {
     );
   };
 
-  onPressSingleContribution = (singleContObj) => {
-    this.setState({ singleContributionID: singleContObj.id, isPressFromList: true }, () => {
-      this.toggleIsFullMapComp();
-    });
+  onPressSingleContribution = async (singleContObj) => {
+    if (!this.state.isCardPressed) {
+      await this.setState({ singleContributionID: singleContObj.id, isPressFromList: true, isCardPressed: true }, async () => {
+        await this.toggleIsFullMapComp();
+        setTimeout(() => {
+          this.setState({ isCardPressed: false })
+        }, 1000)
+      });
+    }
   };
 
   onPressMapView = () => {

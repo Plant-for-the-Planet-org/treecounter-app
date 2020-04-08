@@ -12,7 +12,6 @@ import { redMyLocationIcon } from '../../../assets';
 import VideoContainer from '../../../components/Common/VideoContainer';
 import { debug } from '../../../debug';
 import i18n from '../../../locales/i18n.js';
-import { currentUserProfileIdSelector, getAllPlantProjectsSelector } from '../../../selectors/index';
 import styles from '../../../styles/newUserContributions/userContributions';
 import colors from '../../../utils/constants';
 import { delimitNumbers, formatDate } from '../../../utils/utils';
@@ -75,9 +74,9 @@ class UserContributionsDetails extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isDetailShow !== this.props.isDetailShow) {
-      console.log('componentDidMount ---')
       let contribution = this.props.contribution;
       if (contribution.plantProjectId !== null) {
+        console.log('componentDidMount ---')
         this.props.loadProject({ id: contribution.plantProjectId });
       }
     }
@@ -431,8 +430,8 @@ UserContributionsDetails.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    userProfileId: currentUserProfileIdSelector(state),
-    plantProjects: getAllPlantProjectsSelector(state)
+    // userProfileId: currentUserProfileIdSelector(state),
+    // plantProjects: getAllPlantProjectsSelector(state)
     // entities: plantProjectsSelector(state)
   };
 };

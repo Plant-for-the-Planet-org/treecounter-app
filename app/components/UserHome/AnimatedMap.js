@@ -118,7 +118,8 @@ class AnimatedViews extends React.Component {
                   x => x.id == nextProps.singleContributionID
                 );
                 let activeMarker = this.state.markers[activeIndex];
-                console.log('willRecievevPropsactiveIndex = ', activeIndex, 'activeMarker', activeMarker)
+                // console.log(this.state.markers, this.state.markers[activeIndex])
+                // console.log('willRecievevPropsactiveIndex = ', activeIndex, 'activeMarker', activeMarker)
                 this.setState({ isDetailShow: true, activeIndex: activeIndex }, () => {
                   this._carouselDetail.snapToItem(activeIndex)
                 })
@@ -178,12 +179,7 @@ class AnimatedViews extends React.Component {
       }, 30);
     }
     if (id) {
-      this.setState({ singleContributionID: id }, () => {
-        // setTimeout(() => {
-        //   alert(90)
-        //   this._carouselDetail.snapToItem(this.state.activeIndex)
-        // }, 500)
-      });
+      this.setState({ singleContributionID: id });
     } else {
       if (this.state.singleContributionID) {
         this.setState({ singleContributionID: undefined, isDetailShow: false });
@@ -458,10 +454,12 @@ class AnimatedViews extends React.Component {
         ) : null
         }
         {/* {console.log('animation=', singleContributionID == null ? 'slideInUp' : activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft')} */}
+        {/* {console.log(markers ? markers.length : undefined, 'markers ? markers.lenght : undefined')} */}
         {
-          true ? (
+          markers && markers.length > 0 ? (
             <View style={[styles.userContributionsDetailsFullViewCont, { left: this.state.isDetailShow ? 0 : -1000 }]}>
               <Carousel
+                initialNumToRender={markers ? markers.length : undefined}
                 scrollEnabled={false}
                 onSnapToItem={(index) => {
 
@@ -472,18 +470,21 @@ class AnimatedViews extends React.Component {
                 ref={(c) => { this._carouselDetail = c; }}
                 // firstItem={singleContributionID ? activeIndex : undefined}
                 data={markers}
-                renderItem={({ item }) => (
-                  <UserContributionsDetails
-                    isDetailShow={this.state.isDetailShow}
-                    key={item.id}
-                    isFromUserProfile
-                    userProfileId={this.props.userProfileId}
-                    navigation={this.props.navigation}
-                    contribution={item}
-                    plantProjects={this.props.plantProjects}
-                    deleteContribution={this.props.deleteContribution}
-                  />
-                )}
+                renderItem={({ item, index }) => {
+                  // console.log('renderItem --- ', index, item)
+                  return (
+                    <UserContributionsDetails
+                      isDetailShow={this.state.isDetailShow}
+                      key={item.id}
+                      isFromUserProfile
+                      userProfileId={this.props.userProfileId}
+                      navigation={this.props.navigation}
+                      contribution={item}
+                      plantProjects={this.props.plantProjects}
+                      deleteContribution={this.props.deleteContribution}
+                    />
+                  )
+                }}
                 sliderWidth={screen.width}
                 itemWidth={screen.width}
               />

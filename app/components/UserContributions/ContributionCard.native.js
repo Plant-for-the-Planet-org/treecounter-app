@@ -399,7 +399,7 @@ class ContributionCard extends React.Component {
     }
     // console.log(redeemActionLine, 'redeemActionLine')
 
-
+    // console.log(headerText, 'HeaderTExt -========')
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
     let borderColor =
       contributionType == 'donation'

@@ -1,16 +1,13 @@
-import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateRoute } from '../../helpers/routerHelper';
-import {
-  getAllPlantProjectsSelector,
-  currenciesSelector
-} from '../../selectors';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { loadProject, loadProjects } from '../../actions/loadTposAction';
-import SelectPlantProject from '../../components/SelectPlantProject';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { fetchCurrencies } from '../../actions/currencies';
+import { loadProject, loadProjects } from '../../actions/loadTposAction';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import SelectPlantProject from '../../components/SelectPlantProject';
+import { updateRoute } from '../../helpers/routerHelper';
+import { currenciesSelector, getAllPlantProjectsSelector } from '../../selectors';
 
 class SelectPlantProjectContainer extends PureComponent {
 
@@ -19,7 +16,7 @@ class SelectPlantProjectContainer extends PureComponent {
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
-    this.props.selectPlantProjectAction(null);
+    !this.props.alreadySelected && this.props.selectPlantProjectAction(null);
   }
 
   render() {

@@ -471,19 +471,21 @@ class AnimatedViews extends React.Component {
                 // firstItem={singleContributionID ? activeIndex : undefined}
                 data={markers}
                 renderItem={({ item, index }) => {
-                  // console.log('renderItem --- ', index, item)
+                  let prevIndex = activeIndex - 1;
+                  let nxtIndex = activeIndex + 1;
                   return (
-                    <UserContributionsDetails
-                      isDetailShow={this.state.isDetailShow}
-                      key={item.id}
-                      isFromUserProfile
-                      userProfileId={this.props.userProfileId}
-                      navigation={this.props.navigation}
-                      contribution={item}
-                      plantProjects={this.props.plantProjects}
-                      deleteContribution={this.props.deleteContribution}
-                    />
-                  )
+                    index >= prevIndex && index <= nxtIndex ?
+                      <UserContributionsDetails
+                        isDetailShow={this.state.isDetailShow}
+                        key={item.id}
+                        isFromUserProfile
+                        userProfileId={this.props.userProfileId}
+                        navigation={this.props.navigation}
+                        contribution={item}
+                        plantProjects={this.props.plantProjects}
+                        deleteContribution={this.props.deleteContribution}
+                      /> : null)
+
                 }}
                 sliderWidth={screen.width}
                 itemWidth={screen.width}

@@ -437,7 +437,7 @@ class AnimatedViews extends React.Component {
             >
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
             </TouchableOpacity> : null}
-            {!isDetailShow ? <TouchableOpacity
+            {false ? <TouchableOpacity
               onPress={this.onPressCurrentLocation}
               style={[styles.myLocationIcon, isDetailShow ? ({ bottom: '70%', right: 85 }) : ({})]}
             >
@@ -445,7 +445,7 @@ class AnimatedViews extends React.Component {
             </TouchableOpacity> : null}
             <TouchableOpacity
               onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
-              style={[styles.satellite, isDetailShow ? ({ top: Platform.OS == 'ios' ? 45 : 20, right: 30, bottom: undefined }) : {}]}
+              style={[styles.myLocationIcon, isDetailShow ? ({ top: Platform.OS == 'ios' ? 45 : 20, right: 30, bottom: undefined }) : {}]}
             >
               <Icon name={'satellite'} size={30} color={'#4C5153'} />
             </TouchableOpacity>

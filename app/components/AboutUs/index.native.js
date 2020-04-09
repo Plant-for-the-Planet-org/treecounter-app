@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { LargeMenuItem } from '../Menu/MenuItem.native';
-import { ScrollView, View, Platform } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
+import i18n from '../../locales/i18n';
+import colors from '../../utils/constants';
+import { LargeMenuItem } from '../Menu/MenuItem.native';
+import HeaderNew from './../Header/HeaderNew.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 const LicenseInfo = require('./LicenseInfo.json');
-import HeaderNew from './../Header/HeaderNew.native';
-import colors from '../../utils/constants';
 
 //Run license-checker --production  --json > license.json to fetch license info from package.json:
 //Copy paste required and specific license info in LicenseInfo.json file under app or web specific

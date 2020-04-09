@@ -27,7 +27,9 @@ class CompetitionParticipant extends React.Component {
       context: {
         contextType: 'support',
         support: {
-          supportedTreecounterID: this.props.competitor.treecounterId
+          supportedTreecounterID: this.props.competitor.treecounterId,
+          displayName: this.props.competitor.treecounterDisplayName,
+          treecounterAvatar: this.props.competitor.treecounterAvatar,
         }
       },
       titleParam: i18n.t('label.support_to', {

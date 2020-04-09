@@ -94,7 +94,11 @@ export default EStyleSheet.create({
     fontSize: 11,
     color: '#4d5153'
   },
-
+supportUser:{
+  display: 'flex',
+  flexDirection: 'row',
+  marginTop: 5
+},
   // Gift Details
   giftDetails: {
     display: 'flex',
@@ -108,7 +112,20 @@ export default EStyleSheet.create({
   },
   giftNameAmount: {
     marginLeft: 10,
-    flexGrow: 1
+    flexGrow: 1,
+  }, supportUserNameContainer: {
+    marginLeft: 10,
+    flexGrow: 1,
+    justifyContent: 'center'
+  },
+  supportUserName:{
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16,
+    letterSpacing: 0.1,
+    textAlign: 'left',
+    color: '#4d5153',
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   giftName: {
     fontFamily: 'OpenSans-Regular',

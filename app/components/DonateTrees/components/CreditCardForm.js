@@ -9,7 +9,7 @@ import {
   TextInput
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import styles from './../../styles/donation/donation.native';
+import styles from '../../../styles/donation/donation.native';
 import {
   visa,
   masterCard,
@@ -17,7 +17,7 @@ import {
   discover,
   creditCard,
   creditCardBack
-} from './../../assets';
+} from './../../../assets';
 import CheckBox from 'react-native-check-box';
 import {
   CreditCardInput,
@@ -25,7 +25,7 @@ import {
 } from 'react-native-credit-card-input';
 
 import { TextField } from 'react-native-material-textfield';
-import i18n from '../../locales/i18n';
+import i18n from '../../../locales/i18n';
 
 export default class CreditCardForm extends Component {
   state = {
@@ -207,7 +207,7 @@ export default class CreditCardForm extends Component {
                       cardImageBack={creditCardBack}
                     />
                     {/* <LiteCreditCardInput onChange={this._onChange}
-                    // inputContainerStyle={{ maxWidth: 100 }} 
+                    // inputContainerStyle={{ maxWidth: 100 }}
                     /> */}
 
                     <CheckBox

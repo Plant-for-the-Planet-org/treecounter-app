@@ -1,5 +1,5 @@
-import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
   // Pledge Tab View Styles
@@ -103,7 +103,8 @@ export default EStyleSheet.create({
 
   pageScrollView: {
     backgroundColor: 'white',
-    paddingBottom: 140
+    paddingBottom: 140,
+    marginTop: 120
   },
   pageView: {
     padding: 8

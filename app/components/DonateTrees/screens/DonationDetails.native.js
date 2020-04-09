@@ -4,7 +4,7 @@ import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
-import { CoverFee, NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectFrequency, SelectTreeCount, TaxReceipt } from '../components/donationComponents.native';
+import { CoverFee, NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 
 function DonationDetails(props) {
@@ -15,14 +15,6 @@ function DonationDetails(props) {
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
 
-  const [donorDetails, setDonorDetails] = React.useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    country: '',
-    isCompany: false,
-    companyName: ''
-  });
   // Function for Switching the state of commission
   const toggleSetCommission = value => {
     setCommissionSwitch(value);
@@ -33,10 +25,7 @@ function DonationDetails(props) {
     setTaxReceiptSwitch(value);
   };
 
-  // console.log('Context in Donate Page ----------------------------------', props.context)
   let context = props.context;
-  let contextType = props.context.contextType;
-  console.log('Context Type ------------', contextType);
 
   return (
     <View style={{ backgroundColor: 'white' }}>
@@ -75,11 +64,7 @@ function DonationDetails(props) {
             selectedProject={props.selectedProject}
           />
         ) : (
-            <NoPlantProjectDetails
-              treeCost={props.treeCost}
-              selectedCurrency={props.selectedCurrency}
-              selectedProject={props.selectedProject}
-            />
+            <NoPlantProjectDetails />
           )}
 
         {context.contextType === 'direct' ? (
@@ -91,6 +76,8 @@ function DonationDetails(props) {
         ) : null}
 
         {/* Donation Context */}
+
+        {context.contextType === 'support' ? <SupportUserDetails context={context} /> : null}
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
@@ -123,25 +110,11 @@ function DonationDetails(props) {
           toggleTaxReceipt={toggleTaxReceipt}
         />
 
+        {/* Needed In Future */}
         {/* <UserContactDetails donorDetails={donorDetails} /> */}
+        {/* <UserPaymentDetails paymentDetails={paymentDetails} /> */}
+        {/* <PaymentsProcessedBy/> */}
 
-        {/* <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>PAYMENT METHOD</Text>
-          {props.selectedProject ? (
-            <TouchableOpacity>
-              <Text style={styles.sectionRightButton}>Change</Text>
-            </TouchableOpacity>
-          ) : null}
-        </View> */}
-
-        {/* Payment Processed by */}
-        {/* <Text style={styles.paymentProcessText}>
-          Your payment will be processed either by Stripe, Plant-for-the-Planet,{' '}
-          {props.selectedProject.tpoSlug === 'plant-for-the-planet'
-            ? null
-            : 'or ' + props.selectedProject.tpoSlug}{' '}
-          if is stripe connected.
-        </Text> */}
 
       </KeyboardAwareScrollView>
 
@@ -154,34 +127,12 @@ function DonationDetails(props) {
           navigation={props.navigation}
         />
       ) : null}
+
     </View>
   );
 }
 
-const UserContactDetails = (props) => {
-  let { donorDetails } = props
-  return (
-    <>
-      <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>CONTACT DETAILS</Text>
-        <TouchableOpacity>
-          {donorDetails.firstName ? <Text style={styles.sectionRightButton}>Edit</Text> : <Text style={styles.sectionRightButton}>Add</Text>}
-        </TouchableOpacity>
-      </View>
-      {donorDetails.firstName ?
-        <View>
-          <Text style={styles.contactDetailsAddress}>{donorDetails.firstName} {donorDetails.lastName}</Text>
-          {donorDetails.companyName ? (
-            <Text style={styles.contactDetailsAddress}>{donorDetails.companyName}</Text>
-          ) : null}
-          <Text style={styles.contactDetailsAddress}>
-            {donorDetails.email}
-          </Text>
-          <Text style={styles.contactDetailsAddress}>{donorDetails.country}</Text>
-        </View> : null}
-    </>
-  )
-}
+
 DonationDetails.propTypes = {
   currencies: PropTypes.object.isRequired,
   selectedCurrency: PropTypes.string.isRequired,
@@ -197,10 +148,3 @@ DonationDetails.propTypes = {
 };
 
 export default DonationDetails;
-
-// ToDO
-/*
-    1. Get Gift Details
-    2. Get Pledge Details
-    3. Add Google/Apple Pay
-*/

@@ -6,6 +6,7 @@ import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import { CoverFee, NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
+import ProjectModal from '../components/ProjectModal.native';
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
@@ -14,6 +15,8 @@ function DonationDetails(props) {
   const [frequency, setFrequency] = React.useState(''); // for Selecting Frequency of Donations
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
+
+  const [showProjectModal, setProjectModal] = React.useState(false);
 
   const [donorDetails, setDonorDetails] = React.useState({
     firstName: '',
@@ -37,6 +40,11 @@ function DonationDetails(props) {
 
   return (
     <View style={{ backgroundColor: 'white' }}>
+      <ProjectModal
+        showHideModal={setProjectModal}
+        show={showProjectModal}
+        navigation={props.navigation}
+        handleProjectChange={(project) => { console.log('project selected', project); setProjectModal(false) }} />
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
@@ -60,7 +68,7 @@ function DonationDetails(props) {
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>DONATION TO</Text>
           {props.selectedProject ? (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => { setProjectModal(true) }}>
               <Text style={styles.sectionRightButton}>Change</Text>
             </TouchableOpacity>
           ) : null}

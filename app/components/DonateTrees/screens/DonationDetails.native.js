@@ -16,16 +16,9 @@ function DonationDetails(props) {
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
 
-  const [showProjectModal, setProjectModal] = React.useState(false);
-
-  const [donorDetails, setDonorDetails] = React.useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    country: '',
-    isCompany: false,
-    companyName: ''
-  });
+  // show hide project modal
+  const [showProjectModal, setProjectModal] = React.useState(false); 
+  
   // Function for Switching the state of commission
   const toggleSetCommission = value => {
     setCommissionSwitch(value);

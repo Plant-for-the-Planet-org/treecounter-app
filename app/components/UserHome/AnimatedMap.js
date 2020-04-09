@@ -362,7 +362,7 @@ class AnimatedViews extends React.Component {
           scrollEnabled={isStaticMap}
           pitchEnabled={isStaticMap}
           zoomEnabled={isStaticMap}
-          mapType={this.state.isSatellite ? 'satellite' : 'standard'}
+          mapType={this.state.isSatellite ? 'satellite' : this.state.isDetailShow ? 'satellite' : 'standard'}
           mapPadding={this.setMapPadding()}
           onMapReady={this.onMapReady}
           ref={map => (this.mapView = map)}

@@ -18,11 +18,9 @@ import ContributionCard from '../UserContributions/ContributionCard.native';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 
 const screen = Dimensions.get('window');
-const { height: HEIGHT, } = screen;
 const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-const CARD_HEIGHT = 100;
 
 
 class AnimatedViews extends React.Component {
@@ -31,12 +29,8 @@ class AnimatedViews extends React.Component {
     this.state = {
       isDetailShow: false,
       activeIndex: 0,
-      lastActiveIndex: 0,
-      mapIndex: 3,
       markersList: [],
       isSatellite: false,
-      index: 0,
-      canMoveHorizontal: true,
       markers: null,
       region: {
         latitude: 45.5230786,
@@ -45,7 +39,6 @@ class AnimatedViews extends React.Component {
         longitudeDelta: LONGITUDE_DELTA
       },
       singleContributionID: props.singleContributionID,
-      isPressNextOrBack: false,
     };
     this.isPressNextOrBack = true;
   }
@@ -136,7 +129,6 @@ class AnimatedViews extends React.Component {
                 );
               }
             } catch (e) {
-              alert(JSON.stringify(e))
               // Do thing
             }
           }
@@ -177,6 +169,7 @@ class AnimatedViews extends React.Component {
       if (this.state.singleContributionID) {
         this.setState({ singleContributionID: undefined, isDetailShow: false });
       } else {
+        this._carouselDetail.snapToItem(0);
         this.props.toggleIsFullMapComp(true);
         setTimeout(() => {
           try {
@@ -237,7 +230,7 @@ class AnimatedViews extends React.Component {
           this.tempDetailsIndex = 1
           setTimeout(() => {
             this._carouselDetail.snapToItem(this.tempDetailsIndex, false)
-          }, 250)
+          }, 500)
         } else {
           this.tempDetailsIndex = activeIndexInTempMarkers
           this._carouselDetail.snapToItem(this.tempDetailsIndex, activeIndex == 0 ? false : true)

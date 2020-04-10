@@ -4,12 +4,13 @@ import { Dimensions, Image, SafeAreaView, TouchableOpacity, View } from 'react-n
 import * as Animatable from 'react-native-animatable';
 import MapView, { Marker, ProviderPropType, PROVIDER_GOOGLE } from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';
+import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteContribution } from '../../actions/EditMyTree';
 import { loadProject } from '../../actions/loadTposAction';
-import { multiple_trees, tree_1 } from '../../assets/index.js';
+import { multiple_trees } from '../../assets/index.js';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { currentUserProfileIdSelector } from '../../selectors/index';
 import styles from '../../styles/UserHome/animated_map';
@@ -43,8 +44,10 @@ class AnimatedViews extends React.Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       },
-      singleContributionID: props.singleContributionID
+      singleContributionID: props.singleContributionID,
+      isPressNextOrBack: false,
     };
+    this.isPressNextOrBack = true;
   }
 
   setMapPadding = () => {
@@ -118,10 +121,13 @@ class AnimatedViews extends React.Component {
                   x => x.id == nextProps.singleContributionID
                 );
                 let activeMarker = this.state.markers[activeIndex];
+                this.tempDetailsIndex = activeIndex + 1;
+                console.log(this.tempMarkers[activeIndex + 1], activeMarker, ' -------')
                 // console.log(this.state.markers, this.state.markers[activeIndex])
-                // console.log('willRecievevPropsactiveIndex = ', activeIndex, 'activeMarker', activeMarker)
+                console.log('willRecievevPropsactiveIndex = ', this.tempMarkers[this.tempDetailsIndex], activeIndex, 'activeMarker', activeMarker)
                 this.setState({ isDetailShow: true, activeIndex: activeIndex }, () => {
-                  this._carouselDetail.snapToItem(activeIndex)
+                  this._carouselDetail.snapToItem(this.tempDetailsIndex)
+                  this._carousel.snapToItem(activeIndex)
                 })
                 this.mapView.animateToRegion(
                   {
@@ -154,8 +160,10 @@ class AnimatedViews extends React.Component {
     }
     if (nextProps.isFullMapComponentModal == false) {
       // alert('Gooes Back')
-      // this.setState({ activeIndex: 0, singleContributionID: undefined })
+      // this.setState({ isDetailShow: true })
     }
+
+
   }
 
   // shouldComponentUpdate(nextProps, nextState) {
@@ -224,21 +232,34 @@ class AnimatedViews extends React.Component {
   }
 
 
+  onPressMarker = async (marker, e) => {
 
-  onPressMarker = (marker, e) => {
-    // console.log('onPressMarker  marker =', marker);
-    // console.log(' state singleContribution ID =', this.state.singleContributionID)
+    let activeIndex = this.state.markers.findIndex(x => x.id == marker.id)
+    let activeIndexInTempMarkers = this.tempMarkers.findIndex(x => x.id == marker.id)
+    console.log(activeIndex, activeIndexInTempMarkers, this.state.activeIndex, ' this.state.activeIndex 1')
+    this.tempDetailsIndex = activeIndexInTempMarkers;
+
+    if (activeIndex !== this.state.activeIndex) {
+      this.setState({ activeIndex: activeIndex })
+      this._carousel.snapToItem(activeIndex)
+      this._carouselDetail.snapToItem(activeIndex)
+    }
+    // await activeIndex !== this.state.activeIndex ? this.setState({ activeIndex: activeIndex }) : null
+
+
     let action = e.nativeEvent.action;
 
-    if (this.state.activeIndex == 0) {
-      this._carouselDetail.snapToNext()
-      setTimeout(() => {
-        this._carouselDetail.snapToPrev()
-      }, 600)
-    }
+
     if (this.props.isFullMapComponentModal && this.state.singleContributionID == null && action == 'marker-press') {
       this.setState({ isDetailShow: true }, () => {
-        this._carouselDetail.snapToItem(this.state.activeIndex)
+        if (activeIndex == 0) {
+          this.tempDetailsIndex = 1
+          this._carouselDetail.snapToItem(this.tempDetailsIndex, false)
+        } else {
+          this.tempDetailsIndex = activeIndexInTempMarkers
+          console.log(activeIndexInTempMarkers, this.state.activeIndex, this.state.markers[activeIndex], this.tempMarkers[activeIndexInTempMarkers], "this.tempDetailsIndexthis.tempDetailsIndexthis.tempDetailsIndex")
+          this._carouselDetail.snapToItem(this.tempDetailsIndex, activeIndex == 0 ? false : true)
+        }
       })
       this.onPressHeader(marker.id)
       const oneContribution = marker;
@@ -259,7 +280,7 @@ class AnimatedViews extends React.Component {
   }
 
   getTreeImage = (treeCount) => {
-    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
+    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <MIcon size={30} color={'#95c243'} name={'tree'} style={{ borderWidth: 2, borderColor: 'white' }} />;
   }
 
   onChageIndex = (index) => {
@@ -285,39 +306,49 @@ class AnimatedViews extends React.Component {
     }
   }
 
-  onPressNextPrevBtn = (btn, action) => {
+  onPressNextPrevBtn = async (btn, action) => {
+    console.log(this.isPressNextOrBack === true, this.isPressNextOrBack, 'isPressNextOrBackisPressNextOrBackisPressNextOrBack')
     const { markers, activeIndex } = this.state;
-    // console.log()
-    if (action == 'set-id') {
+    if (this.isPressNextOrBack) {
+      this.isPressNextOrBack = false;
+      console.log(this.isPressNextOrBack, ' 2 isPressNextOrBackisPressNextOrBackisPressNextOrBack')
+
+      if (action == 'set-id') {
+        if (btn == 'back' && this.tempDetailsIndex > 1) {
+          this._carouselDetail.snapToPrev()
+          this.tempDetailsIndex = this.tempDetailsIndex - 1
+          // let nextMarker = markers[activeIndex - 1]
+          // if (nextMarker)
+          // this.setState({ singleContributionID: nextMarker.id })
+        } else if (btn == 'next' && this.tempDetailsIndex < this.tempMarkers.length) {
+          this._carouselDetail.snapToNext()
+          this.tempDetailsIndex = this.tempDetailsIndex + 1
+          // let prevMarker = markers[activeIndex + 1];
+          // if (prevMarker)
+          // this.setState({ singleContributionID: prevMarker.id })
+        }
+      }
       if (btn == 'back') {
-        this._carouselDetail.snapToPrev()
-        let nextMarker = markers[activeIndex - 1]
-        if (nextMarker)
-          this.setState({ singleContributionID: nextMarker.id })
-      } else if (btn == 'next') {
-        this._carouselDetail.snapToNext()
-        let prevMarker = markers[activeIndex + 1];
-        if (prevMarker)
-          this.setState({ singleContributionID: prevMarker.id })
+        if (activeIndex !== 0) {
+          await this._carousel ? this._carousel.snapToPrev() : null;
+          // this.setState({ activeIndex: activeIndex - 1, lastActiveIndex: activeIndex, }, async () => {
+          // await this._carousel ? this._carousel.snapToPrev() : null;
+          //   await this.toAnimateRegion()
+          // })
+        }
+        // this.isPressNextOrBack = true;
       }
-    }
-    if (btn == 'back') {
-      this._carousel ? this._carousel.snapToPrev() : null;
-      if (activeIndex !== 0) {
-        this.setState({ activeIndex: activeIndex - 1, lastActiveIndex: activeIndex, }, () => {
-          this.toAnimateRegion()
-        })
+      if (btn == 'next') {
+        if (activeIndex + 1 !== markers.length) {
+          this._carousel ? this._carousel.snapToNext() : null;
+          // this.setState({ activeIndex: activeIndex + 1, lastActiveIndex: activeIndex }, async () => {
+          //   await this.toAnimateRegion()
+          //   this.isPressNextOrBack = true;
+          // })
+        }
       }
-    }
-    if (btn == 'next') {
-      this._carousel ? this._carousel.snapToNext() : null;
-      // console.log(activeIndex < markers.length, activeIndex, markers.length, "----")
-      if (activeIndex + 1 !== markers.length) {
-        // console.log('next onPressNextPrevBtn calling', activeIndex)
-        this.setState({ activeIndex: activeIndex + 1, lastActiveIndex: activeIndex }, () => {
-          this.toAnimateRegion()
-        })
-      }
+      this.isPressNextOrBack = true;
+
     }
   }
 
@@ -331,12 +362,10 @@ class AnimatedViews extends React.Component {
       }
     }
   }
-  // onPressMapView = (e) => {
-  //   if (e.nativeEvent.action !== 'marker-press') {
-  //     console.log("e.nativeEvent.action === ", e.nativeEvent.action)
-  //     this.props.onPressMapView()
-  //   }
-  // }
+
+  isFirstTime = true;
+  tempMarkers = [];
+  tempDetailsIndex = 1;
 
   render() {
     const {
@@ -352,8 +381,16 @@ class AnimatedViews extends React.Component {
       this.state.markers !== null
         ? this.state.markers.find(x => x.id === this.state.singleContributionID)
         : null;
-    let isContribution = this.props.userContributions ? this.props.userContributions.lenght !== 0 ? true : false : false
-    let isStaticMap = singleContributionID ? false : isContribution
+    let isContribution = this.props.userContributions ? this.props.userContributions.length !== 0 ? true : false : false
+    let isStaticMap = singleContributionID ? false : isContribution;
+    console.log('markers shift', markers, this.isFirstTime, markers ? markers.length > 0 : '')
+
+    if (this.isFirstTime && markers && markers.length > 0) {
+      this.tempMarkers = markers.slice(0);
+      this.tempMarkers.unshift(markers[0])
+      console.log(this.tempMarkers, 'tempMarkerstempMarkers')
+      this.isFirstTime = false;
+    }
     return (
       <View style={styles.container}>
         <MapView
@@ -374,7 +411,7 @@ class AnimatedViews extends React.Component {
           {markers
             ? markers.map(marker => (
               <Marker
-                onPress={(e) => this.onPressMarker(marker, e)}
+                onPress={({ nativeEvent }) => this.onPressMarker(marker, { nativeEvent })}
                 identifier={String(marker.id)}
                 key={marker.id}
                 coordinate={{
@@ -391,14 +428,18 @@ class AnimatedViews extends React.Component {
           {true ? (
             true ?
               <Animatable.View
+                initialNumToRender={markers ? markers.length : undefined}
                 animation={isMapPressed ? 'fadeOutDown' : 'fadeInUp'}
                 style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, }]}>
                 <Carousel
+                  initialNumToRender={markers ? markers.length : undefined}
                   scrollEnabled={false}
                   onSnapToItem={(index) => {
-                    // console.log('index=', index)
-                    // console.log('Total Markers leghtn=', markers.lenght)
-                    // console.log('activeIndex=', activeIndex)
+                    console.log('index= onSnapToItem', index)
+                    this.tempDetailsIndex = index + 1;
+                    this.setState({ activeIndex: index, }, async () => {
+                      await this.toAnimateRegion()
+                    })
                   }}
                   // firstItem={activeIndex}
                   ref={(c) => { this._carousel = c; }}
@@ -453,56 +494,43 @@ class AnimatedViews extends React.Component {
 
         ) : null
         }
-        {/* {console.log('animation=', singleContributionID == null ? 'slideInUp' : activeIndex > lastActiveIndex ? 'fadeInRight' : 'fadeInLeft')} */}
-        {/* {console.log(markers ? markers.length : undefined, 'markers ? markers.lenght : undefined')} */}
-        {
-          markers && markers.length > 0 ? (
-            <View style={[styles.userContributionsDetailsFullViewCont, { left: this.state.isDetailShow ? 0 : -1000 }]}>
-              <Carousel
-                initialNumToRender={markers ? markers.length : undefined}
-                scrollEnabled={false}
-                onSnapToItem={(index) => {
+        {markers && markers.length > 0 ? (
+          <View style={[styles.userContributionsDetailsFullViewCont, { left: this.state.isDetailShow ? 0 : -1000 }]}>
+            <Carousel
+              initialNumToRender={this.tempMarkers ? this.tempMarkers.length : undefined}
+              scrollEnabled={false}
+              onSnapToItem={(index) => {
+                this.tempDetailsIndex = index;
+              }}
+              ref={(c) => { this._carouselDetail = c; }}
+              // firstItem={activeIndex}
+              data={this.tempMarkers}
+              renderItem={({ item, index }) => {
+                let prevIndex = this.tempDetailsIndex - 1;
+                let nxtIndex = this.tempDetailsIndex + 1;
 
-                  // console.log('index=', index)
-                  // console.log('Total Markers leghtn=', markers.lenght)
-                  // console.log('activeIndex=', activeIndex)
-                }}
-                ref={(c) => { this._carouselDetail = c; }}
-                // firstItem={singleContributionID ? activeIndex : undefined}
-                data={markers}
-                renderItem={({ item, index }) => {
-                  let prevIndex = activeIndex - 1;
-                  let nxtIndex = activeIndex + 1;
-                  return (
-                    index >= prevIndex && index <= nxtIndex ?
-                      <UserContributionsDetails
-                        isDetailShow={this.state.isDetailShow}
-                        key={item.id}
-                        isFromUserProfile
-                        userProfileId={this.props.userProfileId}
-                        navigation={this.props.navigation}
-                        contribution={item}
-                        plantProjects={this.props.plantProjects}
-                        deleteContribution={this.props.deleteContribution}
-                      /> : null)
+                // let prevIndex = activeIndex - 1;
+                // let nxtIndex = activeIndex + 1;
+                // console.log(this.tempMarkers, this.tempDetailsIndex, 'tempDetailsIndex')
+                return (
+                  index >= prevIndex && index <= nxtIndex ?
+                    <UserContributionsDetails
+                      isDetailShow={this.state.isDetailShow}
+                      key={item.id}
+                      isFromUserProfile
+                      userProfileId={this.props.userProfileId}
+                      navigation={this.props.navigation}
+                      contribution={item}
+                      plantProjects={this.props.plantProjects}
+                      deleteContribution={this.props.deleteContribution}
+                    /> : null)
 
-                }}
-                sliderWidth={screen.width}
-                itemWidth={screen.width}
-              />
-              {/* {this.state.markers ? (
-              <UserContributionsDetails
-                isFromUserProfile
-                userProfileId={this.props.userProfileId}
-                navigation={this.props.navigation}
-                contribution={markers[activeIndex]}
-                plantProjects={this.props.plantProjects}
-                deleteContribution={this.props.deleteContribution}
-              />
-            ) : null} */}
-              {/* </Animatable.View> */}
-            </View>
-          ) : null
+              }}
+              sliderWidth={screen.width}
+              itemWidth={screen.width}
+            />
+          </View>
+        ) : null
         }
 
         {

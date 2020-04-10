@@ -1,16 +1,16 @@
+import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { updateRoute } from '../../helpers/routerHelper';
 import {
   getAllPlantProjectsSelector,
   currenciesSelector
 } from '../../selectors';
+import { fetchCurrencies } from '../../actions/currencies';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { loadProject, loadProjects } from '../../actions/loadTposAction';
 import SelectPlantProject from '../../components/SelectPlantProject';
-import { fetchCurrencies } from '../../actions/currencies';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 
 class SelectPlantProjectContainer extends PureComponent {
@@ -49,7 +49,7 @@ class SelectPlantProjectContainer extends PureComponent {
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
-    this.props.selectPlantProjectAction(null);
+    !this.props.alreadySelected && this.props.selectPlantProjectAction(null);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
@@ -76,6 +76,7 @@ class SelectPlantProjectContainer extends PureComponent {
         navigation={this.props.navigation}
         supportTreecounter={this.props.supportTreecounter}
         context={this.state.context}
+        hideTitle={this.props.hideTitle}
       />
     );
   }

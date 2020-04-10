@@ -6,6 +6,7 @@ import { currencyIcon, infoHint, nextArrowWhite } from '../../../assets';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import { formatNumber } from '../../../utils/utils';
+import UserProfileImage from '../../Common/UserProfileImage.native';
 
 export function TaxReceipt(props) {
   let { taxReceiptSwitch, toggleTaxReceipt } = props;

@@ -58,8 +58,7 @@ class ProjectModal extends Component {
                     <View
                         style={{
                             backgroundColor: 'white',
-                            flex: 1,
-                            paddingHorizontal: 24
+                            flex: 1
                         }}
                     >
                         <View
@@ -67,11 +66,10 @@ class ProjectModal extends Component {
                                 opacity: 1,
                                 flexDirection: 'row',
                                 alignItems: 'center',
-                                marginTop: Platform.OS === 'ios' ? 54 : 20,
-                                marginBottom: 20
+                                marginTop: Platform.OS === 'ios' ? 54 : 20
                             }}
                         >
-                            <TouchableItem onPress={this.onClosed}>
+                            <TouchableItem style={{ marginLeft: 24 }} onPress={this.onClosed}>
                                 {this.state.search ? (
                                     <Icon name="arrow-back" size={30} color="black" />
                                 ) : (
@@ -105,6 +103,7 @@ class ProjectModal extends Component {
                             navigation={navigation}
                             alreadySelected={true}
                             supportTreecounter={() => { }}
+                            hideTitle={true}
                         />
                     </View>
                 </View>

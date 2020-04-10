@@ -9,16 +9,50 @@ import { GiftTreesComponent } from '../components/giftDontaionComponents.native'
 import ProjectModal from '../components/ProjectModal.native';
 
 function DonationDetails(props) {
-  const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
-  const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
-  const [treeCount, setTreeCount] = React.useState(''); // for Selecting Tree Count
-  const [frequency, setFrequency] = React.useState(''); // for Selecting Frequency of Donations
-  const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
+  // use centralised context so that we can use this anywhere and can track the changes according
+  let context = {
+    commissionSwitch: false,// if not needed to be a context please use usestate method , commenetd out code below
+    taxReceiptSwitch: false,// if not needed to be a context please use usestate method , commenetd out code below
+    treeCount: '',// only have proper context in this context object , remove other non context properties from here and use usestate
+    frequency: '',
+    countryForTax: '',
+    ...props.context,
+  }
+  // const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
+  // const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
+  // const [treeCount, setTreeCount] = React.useState(''); // for Selecting Tree Count
+  // const [frequency, setFrequency] = React.useState(''); // for Selecting Frequency of Donations
+  // const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
 
+  const setCommissionSwitch = val => {
+    context = { ...context, commissionSwitch: val };
+    props.navigation.setParams({ context: context });
+    return context;
+  }
+  const setTaxReceiptSwitch = val => {
+    context = { ...context, taxReceiptSwitch: val };
+    props.navigation.setParams({ context: context });
+    return context;
+  }
+  const setTreeCount = val => {
+    context = { ...context, treeCount: val };
+    props.navigation.setParams({ context: context });
+    return context;
+  }
+  const setFrequency = val => {
+    context = { ...context, frequency: val };
+    props.navigation.setParams({ context: context });
+    return context;
+  }
+  const setCountryForTax = val => {
+    context = { ...context, countryForTax: val };
+    props.navigation.setParams({ context: context });
+    return context;
+  }
   // show hide project modal
-  const [showProjectModal, setProjectModal] = React.useState(false); 
-  
+  const [showProjectModal, setProjectModal] = React.useState(false);
+
   // Function for Switching the state of commission
   const toggleSetCommission = value => {
     setCommissionSwitch(value);
@@ -29,15 +63,19 @@ function DonationDetails(props) {
     setTaxReceiptSwitch(value);
   };
 
-  let context = props.context;
-
+  // let context = {...props.context, treecount};
+  // console.log()
+  // props.navigation.setParams({ context: context });
+  // console.log('getting updateed context in nav:', props.navigation.getParam('context'))
   return (
     <View style={{ backgroundColor: 'white' }}>
       <ProjectModal
         showHideModal={setProjectModal}
         show={showProjectModal}
         navigation={props.navigation}
-        handleProjectChange={(project) => { console.log('project selected', project); setProjectModal(false) }} />
+        handleProjectChange={(project) => { console.log('project selected', project); setProjectModal(false) }}
+        context={context}
+      />
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
@@ -78,7 +116,7 @@ function DonationDetails(props) {
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
-            treeCount={treeCount}
+            treeCount={context.treeCount}
             setTreeCount={setTreeCount}
             selectedProject={props.selectedProject}
           />
@@ -92,30 +130,30 @@ function DonationDetails(props) {
         {context.contextType === 'gift-contact' ||
           context.contextType === 'gift-invitation' ? (
             <GiftTreesComponent
-              treeCount={treeCount}
+              treeCount={context.treeCount}
               setTreeCount={setTreeCount}
               selectedProject={props.selectedProject}
               context={context}
             />
           ) : null}
 
-        <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
+        <SelectFrequency frequency={context.frequency} setFrequency={setFrequency} />
         <View style={[styles.horizontalDivider, { width: '14%' }]} />
 
         {/* Commission Covering */}
-        {treeCount ? (
+        {context.treeCount ? (
           <CoverFee
             selectedProject={props.selectedProject.tpoSlug}
-            treeCount={treeCount}
+            treeCount={context.treeCount}
             selectedCurrency={props.selectedCurrency}
             toggleSetCommission={toggleSetCommission}
-            commissionSwitch={commissionSwitch}
+            commissionSwitch={context.commissionSwitch}
           />
         ) : null}
 
         {/* Tax Receipt */}
         <TaxReceipt
-          taxReceiptSwitch={taxReceiptSwitch}
+          taxReceiptSwitch={context.taxReceiptSwitch}
           toggleTaxReceipt={toggleTaxReceipt}
         />
 
@@ -127,12 +165,12 @@ function DonationDetails(props) {
 
       </KeyboardAwareScrollView>
 
-      {treeCount ? (
+      {context.treeCount ? (
         <PaymentOption
-          treeCount={treeCount}
+          treeCount={context.treeCount}
           treeCost={props.treeCost}
           selectedCurrency={props.selectedCurrency}
-          commissionSwitch={commissionSwitch}
+          commissionSwitch={context.commissionSwitch}
           navigation={props.navigation}
         />
       ) : null}

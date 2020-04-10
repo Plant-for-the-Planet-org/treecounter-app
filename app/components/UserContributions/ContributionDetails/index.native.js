@@ -36,7 +36,10 @@ class UserContributionsDetails extends React.Component {
   }
 
   componentDidMount() {
-
+    let contribution = this.props.contribution;
+    if (contribution.plantProjectId !== null) {
+      this.props.loadProject({ id: contribution.plantProjectId });
+    }
   }
 
   // adds back button listener on component mount
@@ -72,20 +75,6 @@ class UserContributionsDetails extends React.Component {
     });
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isDetailShow !== this.props.isDetailShow) {
-      let contribution = this.props.contribution;
-      if (contribution.plantProjectId !== null) {
-        console.log('componentDidMount ---')
-        this.props.loadProject({ id: contribution.plantProjectId });
-      }
-    }
-  }
-  shouldComponentUpdate(nextProps) {
-    let flag = this.props.isDetailShow !== nextProps.isDetailShow || JSON.stringify(this.props.plantProjects) !== JSON.stringify(nextProps.plantProjects);
-    console.log(flag, 'flagflagflagflagflagflagflag')
-    return flag
-  }
   render() {
     if (!this.props.contribution) {
       return null;

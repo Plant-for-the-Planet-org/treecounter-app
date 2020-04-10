@@ -55,7 +55,7 @@ class AnimatedViews extends React.Component {
     return {
       top: 0,
       right: 0,
-      bottom: this.props.isFullMapComponentModal ? this.state.singleContributionID ? 160 : isMapPressed ? 30 : 170 : 0,
+      bottom: this.props.isFullMapComponentModal ? this.state.isDetailShow ? 170 : isMapPressed ? 30 : 160 : 0,
       left: 0
     };
   };
@@ -121,7 +121,7 @@ class AnimatedViews extends React.Component {
                 );
                 let activeMarker = this.state.markers[activeIndex];
                 this.tempDetailsIndex = activeIndex + 1;
-                this.setState({ isDetailShow: true, activeIndex: activeIndex }, () => {
+                this.setState({ isDetailShow: true, activeIndex: activeIndex, isSatellite: true }, () => {
                   this._carouselDetail.snapToItem(this.tempDetailsIndex)
                   this._carousel.snapToItem(activeIndex)
                 })
@@ -226,17 +226,18 @@ class AnimatedViews extends React.Component {
       this._carousel.snapToItem(activeIndex)
       this._carouselDetail.snapToItem(activeIndex)
     }
-    // await activeIndex !== this.state.activeIndex ? this.setState({ activeIndex: activeIndex }) : null
 
 
     let action = e.nativeEvent.action;
 
 
     if (this.props.isFullMapComponentModal && this.state.singleContributionID == null && action == 'marker-press') {
-      this.setState({ isDetailShow: true }, () => {
+      this.setState({ isDetailShow: true, isSatellite: true }, () => {
         if (activeIndex == 0) {
           this.tempDetailsIndex = 1
-          this._carouselDetail.snapToItem(this.tempDetailsIndex, false)
+          setTimeout(() => {
+            this._carouselDetail.snapToItem(this.tempDetailsIndex, false)
+          }, 250)
         } else {
           this.tempDetailsIndex = activeIndexInTempMarkers
           this._carouselDetail.snapToItem(this.tempDetailsIndex, activeIndex == 0 ? false : true)
@@ -365,18 +366,19 @@ class AnimatedViews extends React.Component {
           scrollEnabled={isStaticMap}
           pitchEnabled={isStaticMap}
           zoomEnabled={isStaticMap}
-          mapType={this.state.isSatellite ? 'satellite' : this.state.isDetailShow ? 'satellite' : 'standard'}
+          mapType={this.state.isSatellite ? 'satellite' : 'standard'}
           mapPadding={this.setMapPadding()}
           onMapReady={this.onMapReady}
           ref={map => (this.mapView = map)}
           customMapStyle={mapStyle}
           provider={PROVIDER_GOOGLE}
-          style={[styles.map, { flex: this.state.singleContributionID ? 0.5 : 1, }]}
+          style={[styles.map, { flex: isDetailShow ? 0.7 : 1, }]}
           initialRegion={region}
         >
           {markers
             ? markers.map(marker => (
               <Marker
+                tracksViewChanges={false}
                 onPress={({ nativeEvent }) => this.onPressMarker(marker, { nativeEvent })}
                 identifier={String(marker.id)}
                 key={marker.id}
@@ -409,11 +411,11 @@ class AnimatedViews extends React.Component {
                   // firstItem={activeIndex}
                   ref={(c) => { this._carousel = c; }}
                   data={markers}
-                  renderItem={({ item }) => (<ContributionCard
+                  renderItem={({ item }) => (!isDetailShow ? <ContributionCard
                     onPressSingleContribution={() => this.onPressMarker(markers[activeIndex], { nativeEvent: { action: 'marker-press' } })}
                     isFromAnimatredCardList
                     contribution={item}
-                  />)}
+                  /> : null)}
                   sliderWidth={screen.width}
                   itemWidth={screen.width}
                 />
@@ -421,7 +423,7 @@ class AnimatedViews extends React.Component {
                   <View style={{ flex: 1 }} />
                   <View style={{ flexDirection: 'row', }}>
                     <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} /></TouchableOpacity>
                   </View>
                 </View>
               </Animatable.View> : null) : null}
@@ -494,7 +496,7 @@ class AnimatedViews extends React.Component {
         }
 
         {
-          this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 30, width: '100%', backgroundColor: '#fff', }}>
+          this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 0, width: '100%', backgroundColor: '#fff', }}>
             <View style={styles.bottomArrowsCont}>
               <View style={{ flex: 1 }} />
               <View style={{ flexDirection: 'row', }}>

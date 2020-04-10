@@ -1,23 +1,27 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-import {
-  selectedPlantProjectIdSelector,
-  selectedPlantProjectSelector,
-  selectedTpoSelector,
-  currentUserProfileSelector
-} from '../../selectors';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
 import { loadProject } from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
 } from '../../actions/selectPlantProjectAction';
+import {
+  setDonationContext,
+  setSelectedProjectDetails
+} from '../../components/DonateTrees/redux/action';
+import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import {
+  currentUserProfileSelector,
+  selectedPlantProjectIdSelector,
+  selectedPlantProjectSelector,
+  selectedTpoSelector
+} from '../../selectors';
 
 const SelectedPlantProjectContainer = props => {
-  const getProjectDetails = async (projectSlug) => {
+  const getProjectDetails = async projectSlug => {
     if (projectSlug) {
       const project = await props.loadProject(
         { id: projectSlug || props.selectedPlantProjectId },
@@ -38,13 +42,20 @@ const SelectedPlantProjectContainer = props => {
     const { navigation } = props;
     props.selectPlantProjectAction(id);
     let newContext = props.navigation.getParam('context');
-    let context = {}
+    let context = {};
     if (newContext) {
       newContext.plantProject = {
         currency: props.selectedProject.currency,
         amountPerTree: props.selectedProject.treeCost,
         plantProjectID: id
-      }
+      };
+      props.setSelectedProjectDetails({
+        selectedProjectDetails: {
+          currency: props.selectedProject.currency,
+          amountPerTree: props.selectedProject.treeCost,
+          plantProjectID: id
+        }
+      });
       context = newContext;
     } else {
       context.contextType = 'direct';
@@ -52,9 +63,18 @@ const SelectedPlantProjectContainer = props => {
         currency: props.selectedProject.currency,
         amountPerTree: props.selectedProject.treeCost,
         plantProjectID: id
-      }
+      };
+      props.setDonationContext({
+        contextType: 'direct'
+      });
+      props.setSelectedProjectDetails({
+        selectedProjectDetails: {
+          currency: props.selectedProject.currency,
+          amountPerTree: props.selectedProject.treeCost,
+          plantProjectID: id
+        }
+      });
     }
-
 
     if (navigation) {
       updateStaticRoute('app_donate_detail', navigation, {
@@ -93,7 +113,9 @@ const mapDispatchToProps = dispatch => {
     {
       clearPlantProject,
       selectPlantProjectAction,
-      loadProject
+      loadProject,
+      setSelectedProjectDetails,
+      setDonationContext
     },
     dispatch
   );

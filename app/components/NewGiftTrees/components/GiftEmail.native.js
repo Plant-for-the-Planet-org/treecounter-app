@@ -1,9 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
-
 import { View } from 'react-native';
-import FormikFormGift from './FormikFormGift.native';
 import HeaderNew from '../../Header/HeaderNew.native';
+import FormikFormGift from './FormikFormGift.native';
 
 export default class GiftEmail extends Component {
   constructor(props) {
@@ -11,7 +10,6 @@ export default class GiftEmail extends Component {
     this.state = { buttonType: 'next' };
   }
   render() {
-
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <HeaderNew title={''} navigation={this.props.navigation} />
@@ -24,6 +22,9 @@ export default class GiftEmail extends Component {
           }}
           openProjects={this.props.openProjects}
           navigation={this.props.navigation}
+          setGiftContextDetails={this.props.navigation.getParam(
+            'setGiftContextDetails'
+          )}
         />
       </View>
     );

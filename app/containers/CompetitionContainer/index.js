@@ -1,11 +1,7 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
-import Competiton from '../../components/Competition';
-import { updateRoute } from '../../helpers/routerHelper';
-import { formatDateToMySQL } from '../../helpers/utils';
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   createCompetition,
   enrollCompetition,
@@ -13,13 +9,22 @@ import {
   fetchMineCompetitions,
   leaveCompetition
 } from '../../actions/competition';
-import { getAllCompetitionsSelector } from '../../selectors';
-import { getContentLoaderState } from '../../reducers/contentloaderReducer';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import Competiton from '../../components/Competition';
+import {
+  setDonationContext,
+  setSupportDetails
+} from '../../components/DonateTrees/redux/action';
+import { debug } from '../../debug';
+import { updateRoute } from '../../helpers/routerHelper';
+import {
+  formatDateToMySQL,
+  handleServerResponseError
+} from '../../helpers/utils';
+import { getContentLoaderState } from '../../reducers/contentloaderReducer';
+import { getAllCompetitionsSelector } from '../../selectors';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
-import { handleServerResponseError } from '../../helpers/utils';
-
 class CompetitionContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -102,6 +107,8 @@ class CompetitionContainer extends React.Component {
         onCreateCompetition={this.createCompetition}
         competitionFormSchemaOptions={this.state.competitionFormSchemaOptions}
         supportTreecounterAction={this.props.supportTreecounterAction}
+        setSupportDetails={this.props.setSupportDetails}
+        setDonationContext={this.props.setDonationContext}
         editCompetition={id => this.editCompetition(id)}
         navigation={this.props.navigation}
         updateAllCompetitions={this.updateAllCompetitions}
@@ -137,7 +144,9 @@ const mapDispatchToProps = dispatch => {
       leaveCompetition,
       enrollCompetition,
       createCompetition,
-      supportTreecounterAction
+      supportTreecounterAction,
+      setSupportDetails,
+      setDonationContext
     },
     dispatch
   );

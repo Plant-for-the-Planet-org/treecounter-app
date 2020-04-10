@@ -7,18 +7,20 @@ import {
   SET_PAYMENT_DETAILS,
   SET_PAYMENT_RESPONSE,
   SET_PLEDGE_DETAILS,
+  SET_SELECTED_PROJECT,
   SET_SUPPORT_DETAILS
 } from '../../../actions/types';
 
 const initialState = {
-  contextDetails: '', // 'gift', 'support', 'pledge', 'direct'
+  contextType: '', // 'gift', 'support', 'pledge', 'direct'
   giftDetails: [{}], // Array of Gift Details - firstname, lastname, email, message, treecount
   supportTreeCounterDetails: {}, // Supported Treecounter id
   pledgeDetails: {}, // Pledge Details
   donationDetails: {}, // Project details, selected Tree count, frequency
   donorDetails: {}, // Contact details of the Donor
   paymentResponse: {}, // Payment response from the server
-  paymentDetails: {} // Payment mode and the details
+  paymentDetails: {}, // Payment mode and the details
+  projectDetails: {} // Selected project details
 };
 
 export default function(state = initialState, action) {
@@ -29,7 +31,7 @@ export default function(state = initialState, action) {
     case SET_CONTEXT:
       return {
         ...state,
-        contextDetails: action.payload.contextDetails
+        contextType: action.payload.contextType
       };
 
     case SET_DONATION_DETAILS:
@@ -47,7 +49,7 @@ export default function(state = initialState, action) {
     case SET_GIFT_CONTEXT_DETAILS:
       return {
         ...state,
-        contextDetails: action.payload.contextDetails,
+        contextType: action.payload.contextType,
         giftDetails: action.payload.giftDetails
       };
 
@@ -66,16 +68,23 @@ export default function(state = initialState, action) {
     case SET_PLEDGE_DETAILS:
       return {
         ...state,
-        contextDetails: action.payload.contextDetails,
+        contextType: action.payload.contextType,
         pledgeDetails: action.payload.pledgeDetails
+      };
+
+    case SET_SELECTED_PROJECT:
+      return {
+        ...state,
+        projectDetails: action.payload.selectedProjectDetails
       };
 
     case SET_SUPPORT_DETAILS:
       return {
         ...state,
-        contextDetails: action.payload.contextDetails,
+        contextType: action.payload.contextType,
         supportTreeCounterDetails: action.payload.supportTreeCounterDetails
       };
+
     default:
       return state;
   }

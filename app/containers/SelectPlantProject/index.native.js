@@ -1,23 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchCurrencies } from '../../actions/currencies';
+import { loadProject, loadProjects } from '../../actions/loadTposAction';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
+import { setSupportDetails } from '../../components/DonateTrees/redux/action';
+import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateRoute } from '../../helpers/routerHelper';
 import {
-  getAllPlantProjectsSelector,
-  currenciesSelector
+  currenciesSelector,
+  getAllPlantProjectsSelector
 } from '../../selectors';
-import { fetchCurrencies } from '../../actions/currencies';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { loadProject, loadProjects } from '../../actions/loadTposAction';
-import SelectPlantProject from '../../components/SelectPlantProject';
-import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 
 class SelectPlantProjectContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      context: this.props.navigation.getParam('context')||{}
+      context: this.props.navigation.getParam('context') || {}
     };
     this.createContext(props);
   }
@@ -38,6 +39,14 @@ class SelectPlantProjectContainer extends PureComponent {
         displayName: treecounter.displayName,
         treecounterAvatar: treecounter.userProfile.image
       };
+      props.setSupportDetails({
+        contextType: 'support',
+        supportTreeCounterDetails: {
+          supportedTreecounterID: treecounter.id,
+          displayName: treecounter.displayName,
+          treecounterAvatar: treecounter.userProfile.image
+        }
+      });
       this.setState({
         context
       });
@@ -115,7 +124,8 @@ const mapDispatchToProps = dispatch => {
       fetchCurrencies,
       loadProject,
       loadProjects,
-      treecounterLookupAction
+      treecounterLookupAction,
+      setSupportDetails
     },
     dispatch
   );

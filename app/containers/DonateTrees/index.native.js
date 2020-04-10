@@ -125,7 +125,7 @@ class DonationTreesContainer extends Component {
     }
 
 
-    return (
+    return (this.props.selectedProject ?
       <DonateTrees
         currencies={this.props.currencies}
         plantProjectClear={this.props.clearPlantProject}
@@ -135,9 +135,9 @@ class DonationTreesContainer extends Component {
         supportTreecounter={this.props.supportTreecounter}
         updateUserProfile={this.props.updateUserProfile}
         navigation={this.props.navigation}
-        context={this.props.navigation.getParam('context')}
+        context={this.props.navigation.getParam('context') || {}}
         determineDefaultCurrency={() => this.determineDefaultCurrency()}
-      />
+      />:null
     );
   }
 }

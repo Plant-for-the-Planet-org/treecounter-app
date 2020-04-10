@@ -245,7 +245,7 @@ class ContributionCard extends React.Component {
   donateActionLine = (plantDate) => {
     return `Donated on ${plantDate}`
   }
-  giftActionLine = (plantDate, givee, giveeSlug) => {
+  giftActionLine = (plantDate, givee, ) => {
     return `Gifted on ${plantDate} to ${givee}`
   }
   render() {
@@ -261,23 +261,19 @@ class ContributionCard extends React.Component {
       cardType,
       contributionType,
       redemptionDate,
-      treeSpecies,
       isGift,
-      registrationDate,
       redemptionCode,
       giver,
       giverSlug,
-      plantProjectId,
-      mayUpdate,
-      contributionImages,
       treeType,
-      treeScientificName,
-      geoLatitude,
-      geoLongitude
     } = contribution;
 
     // HeaderText -----
     let headerText = undefined;
+    // let contributionPersonPrefix = undefined;
+    // let contributionPerson = undefined;
+    // let contributionPersonSlug = undefined;
+
     if (treeType === null) {
       if (treeCount > 1) {
         headerText =
@@ -317,30 +313,30 @@ class ContributionCard extends React.Component {
       // if contribution type is planting and id Gift = true then contribution
       // is dedicated
       if (contributionType === 'planting') {
-        contributionPersonPrefix = i18n.t(
-          'label.usr_contribution_dedicated_to'
-        );
+        // contributionPersonPrefix = i18n.t(
+        //   'label.usr_contribution_dedicated_to'
+        // );
       }
       // contribution is gifted if contribution type is not planting
       // and adds gifted to header text
       else {
         headerText = headerText + ' ' + i18n.t('label.gifted');
-        contributionPersonPrefix = i18n.t('label.usr_contribution_to');
+        // contributionPersonPrefix = i18n.t('label.usr_contribution_to');
       }
       // sets the contribution person name
-      contributionPerson = givee;
+      // contributionPerson = givee;
 
       // sets slug if available
       if (giveeSlug) {
-        contributionPersonSlug = giveeSlug;
+        // contributionPersonSlug = giveeSlug;
       }
     }
     if (giver) {
-      contributionPerson = giver;
+      // contributionPerson = giver;
       headerText = headerText + ' ' + i18n.t('label.received');
-      contributionPersonPrefix = i18n.t('label.usr_contribution_from');
+      // contributionPersonPrefix = i18n.t('label.usr_contribution_from');
       if (giverSlug) {
-        contributionPersonSlug = giverSlug;
+        // contributionPersonSlug = giverSlug;
       }
     }
 
@@ -358,7 +354,7 @@ class ContributionCard extends React.Component {
     // let seeLabel = classnames('see-more-label-style', {
     //   'see-more__active': this.state.viewExpanded
     // });
-    let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
+    // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
     // let donateActionLine = this.donateActionLine(
     //   isGift,
@@ -369,12 +365,12 @@ class ContributionCard extends React.Component {
     let tpoLine = this.tpoLine(tpoName);
     // let plantActionLine = this.plantActionLine(plantDate, registrationDate);
     let dedicateActionLine = this.dedicateActionLine(isGift, givee, giveeSlug);
-    let redeemActionLine = this.redeemActionLine(
-      redemptionCode,
-      redemptionDate,
-      givee,
-      giveeSlug
-    );
+    // let redeemActionLine = this.redeemActionLine(
+    //   redemptionCode,
+    //   redemptionDate,
+    //   givee,
+    //   giveeSlug
+    // );
 
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
     let borderColor =

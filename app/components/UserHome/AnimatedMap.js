@@ -1,6 +1,6 @@
 import Geolocation from '@react-native-community/geolocation';
 import React from 'react';
-import { Dimensions, Image, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, Platform, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MapView, { Marker, ProviderPropType, PROVIDER_GOOGLE } from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';
@@ -85,7 +85,7 @@ class AnimatedViews extends React.Component {
           activeIndex: 0,
           lastActiveIndex: 0,
         })
-        this._carousel.snapToItem(0)
+        this.carousel.snapToItem(0)
         this.mapView.animateToRegion(
           {
             latitude: this.state.markers[0].geoLatitude,
@@ -115,8 +115,8 @@ class AnimatedViews extends React.Component {
                 let activeMarker = this.state.markers[activeIndex];
                 this.tempDetailsIndex = activeIndex + 1;
                 this.setState({ isDetailShow: true, activeIndex: activeIndex, isSatellite: true }, () => {
-                  this._carouselDetail.snapToItem(this.tempDetailsIndex)
-                  this._carousel.snapToItem(activeIndex)
+                  this.carouselDetail.snapToItem(this.tempDetailsIndex)
+                  this.carousel.snapToItem(activeIndex)
                 })
                 this.mapView.animateToRegion(
                   {
@@ -167,9 +167,9 @@ class AnimatedViews extends React.Component {
       this.setState({ singleContributionID: id });
     } else {
       if (this.state.singleContributionID) {
-        this.setState({ singleContributionID: undefined, isDetailShow: false });
+        this.setState({ singleContributionID: undefined, isDetailShow: false, isSatellite: !this.state.isSatellite });
       } else {
-        this._carouselDetail.snapToItem(0);
+        this.carouselDetail.snapToItem(0);
         this.props.toggleIsFullMapComp(true);
         setTimeout(() => {
           try {
@@ -216,24 +216,20 @@ class AnimatedViews extends React.Component {
 
     if (activeIndex !== this.state.activeIndex) {
       this.setState({ activeIndex: activeIndex })
-      this._carousel.snapToItem(activeIndex)
-      this._carouselDetail.snapToItem(activeIndex)
+      this.carousel.snapToItem(activeIndex)
+      this.carouselDetail.snapToItem(activeIndex)
     }
-
-
     let action = e.nativeEvent.action;
-
-
     if (this.props.isFullMapComponentModal && this.state.singleContributionID == null && action == 'marker-press') {
       this.setState({ isDetailShow: true, isSatellite: true }, () => {
         if (activeIndex == 0) {
           this.tempDetailsIndex = 1
           setTimeout(() => {
-            this._carouselDetail.snapToItem(this.tempDetailsIndex, false)
+            this.carouselDetail.snapToItem(this.tempDetailsIndex, false)
           }, 500)
         } else {
           this.tempDetailsIndex = activeIndexInTempMarkers
-          this._carouselDetail.snapToItem(this.tempDetailsIndex, activeIndex == 0 ? false : true)
+          this.carouselDetail.snapToItem(this.tempDetailsIndex, activeIndex == 0 ? false : true)
         }
       })
       this.onPressHeader(marker.id)
@@ -285,29 +281,23 @@ class AnimatedViews extends React.Component {
     const { markers, activeIndex } = this.state;
     if (this.isPressNextOrBack) {
       this.isPressNextOrBack = false;
-
       if (action == 'set-id') {
         if (btn == 'back' && this.tempDetailsIndex > 1) {
-          this._carouselDetail.snapToPrev()
+          this.carouselDetail.snapToPrev()
           this.tempDetailsIndex = this.tempDetailsIndex - 1
         } else if (btn == 'next' && this.tempDetailsIndex < this.tempMarkers.length) {
-          this._carouselDetail.snapToNext()
+          this.carouselDetail.snapToNext()
           this.tempDetailsIndex = this.tempDetailsIndex + 1
         }
       }
       if (btn == 'back') {
         if (activeIndex !== 0) {
-          await this._carousel ? this._carousel.snapToPrev() : null;
-          // this.setState({ activeIndex: activeIndex - 1, lastActiveIndex: activeIndex, }, async () => {
-          // await this._carousel ? this._carousel.snapToPrev() : null;
-          //   await this.toAnimateRegion()
-          // })
+          await this.carousel ? this.carousel.snapToPrev() : null;
         }
-        // this.isPressNextOrBack = true;
       }
       if (btn == 'next') {
         if (activeIndex + 1 !== markers.length) {
-          this._carousel ? this._carousel.snapToNext() : null;
+          this.carousel ? this.carousel.snapToNext() : null;
         }
       }
       this.isPressNextOrBack = true;
@@ -335,14 +325,9 @@ class AnimatedViews extends React.Component {
       region,
       singleContributionID,
       activeIndex,
-      lastActiveIndex,
       isDetailShow
     } = this.state;
     const { isMapPressed } = this.props;
-    let activeMarker =
-      this.state.markers !== null
-        ? this.state.markers.find(x => x.id === this.state.singleContributionID)
-        : null;
     let isContribution = this.props.userContributions ? this.props.userContributions.length !== 0 ? true : false : false
     let isStaticMap = singleContributionID ? false : isContribution;
 
@@ -386,41 +371,38 @@ class AnimatedViews extends React.Component {
             : null}
         </MapView>
         <View>
-          {true ? (
-            true ?
-              <Animatable.View
-                initialNumToRender={markers ? markers.length : undefined}
-                animation={isMapPressed ? 'fadeOutDown' : 'fadeInUp'}
-                style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, }]}>
-                <Carousel
-                  initialNumToRender={markers ? markers.length : undefined}
-                  scrollEnabled={false}
-                  onSnapToItem={(index) => {
-                    this.tempDetailsIndex = index + 1;
-                    this.setState({ activeIndex: index, }, async () => {
-                      await this.toAnimateRegion()
-                    })
-                  }}
-                  // firstItem={activeIndex}
-                  ref={(c) => { this._carousel = c; }}
-                  data={markers}
-                  renderItem={({ item }) => (!isDetailShow ? <ContributionCard
-                    onPressSingleContribution={() => this.onPressMarker(markers[activeIndex], { nativeEvent: { action: 'marker-press' } })}
-                    isFromAnimatredCardList
-                    contribution={item}
-                  /> : null)}
-                  sliderWidth={screen.width}
-                  itemWidth={screen.width}
-                />
-                <View style={styles.bottomArrowsCont}>
-                  <View style={{ flex: 1 }} />
-                  <View style={{ flexDirection: 'row', }}>
-                    <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} /></TouchableOpacity>
-                  </View>
-                </View>
-              </Animatable.View> : null) : null}
-
+          <Animatable.View
+            initialNumToRender={markers ? markers.length : undefined}
+            animation={isMapPressed ? 'fadeOutDown' : 'fadeInUp'}
+            style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, }]}>
+            <Carousel
+              initialNumToRender={markers ? markers.length : undefined}
+              scrollEnabled={false}
+              onSnapToItem={(index) => {
+                this.tempDetailsIndex = index + 1;
+                this.setState({ activeIndex: index, }, async () => {
+                  await this.toAnimateRegion()
+                })
+              }}
+              // firstItem={activeIndex}
+              ref={(c) => { this.carousel = c; }}
+              data={markers}
+              renderItem={({ item }) => (!isDetailShow ? <ContributionCard
+                onPressSingleContribution={() => this.onPressMarker(markers[activeIndex], { nativeEvent: { action: 'marker-press' } })}
+                isFromAnimatredCardList
+                contribution={item}
+              /> : null)}
+              sliderWidth={screen.width}
+              itemWidth={screen.width}
+            />
+            <View style={styles.bottomArrowsCont}>
+              <View style={{ flex: 1 }} />
+              <View style={{ flexDirection: 'row', }}>
+                <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+                <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} /></TouchableOpacity>
+              </View>
+            </View>
+          </Animatable.View>
         </View>
         <SafeAreaView />
         {this.props.isFullMapComponentModal ? (
@@ -438,12 +420,6 @@ class AnimatedViews extends React.Component {
             >
               <Icon name={'fullscreen-exit'} size={30} color={'#4C5153'} />
             </TouchableOpacity> : null}
-            {false ? <TouchableOpacity
-              onPress={this.onPressCurrentLocation}
-              style={[styles.myLocationIcon, isDetailShow ? ({ bottom: '70%', right: 85 }) : ({})]}
-            >
-              <Icon name={'my-location'} size={30} color={'#4C5153'} />
-            </TouchableOpacity> : null}
             <TouchableOpacity
               onPress={() => { this.setState({ isSatellite: !this.state.isSatellite }) }}
               style={[styles.myLocationIcon, isDetailShow ? ({ top: Platform.OS == 'ios' ? 45 : 20, right: 30, bottom: undefined }) : {}]}
@@ -451,18 +427,17 @@ class AnimatedViews extends React.Component {
               <Icon name={'satellite'} size={30} color={'#4C5153'} />
             </TouchableOpacity>
           </>
-
         ) : null
         }
         {markers && markers.length > 0 ? (
-          <View style={[styles.userContributionsDetailsFullViewCont, { left: this.state.isDetailShow ? 0 : -1000 }]}>
+          <View style={[styles.userContributionsDetailsFullViewCont, { left: isDetailShow ? 0 : -1000 }]}>
             <Carousel
               initialNumToRender={this.tempMarkers ? this.tempMarkers.length : undefined}
               scrollEnabled={false}
               onSnapToItem={(index) => {
                 this.tempDetailsIndex = index;
               }}
-              ref={(c) => { this._carouselDetail = c; }}
+              ref={(c) => { this.carouselDetail = c; }}
               data={this.tempMarkers}
               renderItem={({ item, index }) => {
                 let prevIndex = this.tempDetailsIndex - 1;
@@ -470,7 +445,7 @@ class AnimatedViews extends React.Component {
                 return (
                   index >= prevIndex && index <= nxtIndex ?
                     <UserContributionsDetails
-                      isDetailShow={this.state.isDetailShow}
+                      isDetailShow={isDetailShow}
                       key={item.id}
                       isFromUserProfile
                       userProfileId={this.props.userProfileId}
@@ -479,25 +454,20 @@ class AnimatedViews extends React.Component {
                       plantProjects={this.props.plantProjects}
                       deleteContribution={this.props.deleteContribution}
                     /> : null)
-
               }}
               sliderWidth={screen.width}
               itemWidth={screen.width}
             />
-          </View>
-        ) : null
-        }
-
-        {
-          this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 0, width: '100%', backgroundColor: '#fff', }}>
-            <View style={styles.bottomArrowsCont}>
-              <View style={{ flex: 1 }} />
-              <View style={{ flexDirection: 'row', }}>
-                <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back', 'set-id')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
-                <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next', 'set-id')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
-              </View>
+          </View>) : null}
+        {this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 0, width: '100%', backgroundColor: '#fff', }}>
+          <View style={styles.bottomArrowsCont}>
+            <View style={{ flex: 1 }} />
+            <View style={{ flexDirection: 'row', }}>
+              <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back', 'set-id')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next', 'set-id')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
             </View>
-          </View> : null
+          </View>
+        </View> : null
         }
       </View >
     );

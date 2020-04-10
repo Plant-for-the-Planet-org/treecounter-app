@@ -417,7 +417,7 @@ UserContributionsDetails.propTypes = {
   deleteContribution: PropTypes.func
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = () => {
   return {
     // userProfileId: currentUserProfileIdSelector(state),
     // plantProjects: getAllPlantProjectsSelector(state)

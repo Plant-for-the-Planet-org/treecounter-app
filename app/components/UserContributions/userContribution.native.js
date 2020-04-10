@@ -212,7 +212,7 @@ export default class UserContributions extends React.Component {
                     )
                     : null;
                 }}
-                style={{ color: plantProjectSlug ? textColor : null }}
+                style={{ color: plantProjectSlug ? textColor : undefined }}
               >
                 {plantProjectName}
               </Text>

@@ -37,6 +37,7 @@ class SelectPlantProjectContainer extends PureComponent {
         navigation={this.props.navigation}
         supportTreecounter={this.props.supportTreecounter}
         context={context}
+        hideTitle={this.props.hideTitle}
       />
     );
   }

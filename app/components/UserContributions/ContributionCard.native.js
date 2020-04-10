@@ -2,15 +2,17 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Dimensions, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from 'react-navigation';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
-import { multiple_trees, tree_1 } from '../../assets/index';
+import { multiple_trees } from '../../assets/index';
 import TouchableItem from '../../components/Common/TouchableItem';
 import { getISOToCountryName } from '../../helpers/utils';
 import i18n from '../../locales/i18n.js';
 import styles, { myTreesStyle } from '../../styles/myTrees/user_contribution_card';
 import { delimitNumbers, formatDate } from '../../utils/utils';
+
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -237,7 +239,7 @@ class ContributionCard extends React.Component {
   }
 
   getTreeImage = (treeCount) => {
-    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
+    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <MIcon size={30} color={'#95c243'} name={'tree'} />;
   }
 
   donateActionLine = (plantDate) => {
@@ -348,7 +350,6 @@ class ContributionCard extends React.Component {
     }
     // HEader Text End 
 
-    // console.log('headerText,', headerText)
 
 
     // let imagesArray = contribution.contributionImages.map(image => {
@@ -357,10 +358,8 @@ class ContributionCard extends React.Component {
     // let seeLabel = classnames('see-more-label-style', {
     //   'see-more__active': this.state.viewExpanded
     // });
-    // console.log("contribution=", contribution)
     let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
-    // console.log(plantProjectName, 'plantProjectLine')
     // let donateActionLine = this.donateActionLine(
     //   isGift,
     //   plantDate,
@@ -377,29 +376,6 @@ class ContributionCard extends React.Component {
       giveeSlug
     );
 
-    if (contributionType === 'donation') {
-      // console.log(' ------ donation start----------')
-      // console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
-      // console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
-      // console.log('donateActionLine =', this.donateActionLine(plantDate))
-      // console.log('GiftActionLine =', this.giftActionLine(plantDate, givee, giveeSlug))
-      // console.log('tpoLine =', this.tpoLine(tpoName))
-      // console.log(' ------ donation End----------')
-    }
-    if (contributionType == 'planting') {
-      // console.log(' ------ planting start----------')
-      // console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
-      // console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
-
-      // console.log('plantActionLine =', this.plantActionLine(plantDate, registrationDate))
-
-      // console.log('dedicateActionLine =', this.dedicateActionLine(isGift, givee, giveeSlug))
-      // console.log('tpoLine =', this.tpoLine(tpoName))
-      // console.log(' ------ planting End----------')
-    }
-    // console.log(redeemActionLine, 'redeemActionLine')
-
-    // console.log(headerText, 'HeaderTExt -========')
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
     let borderColor =
       contributionType == 'donation'

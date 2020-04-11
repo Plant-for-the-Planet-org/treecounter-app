@@ -1,15 +1,4 @@
-import {
-  CLEAR_DONATION_REDUCER,
-  SET_CONTEXT,
-  SET_DONATION_DETAILS,
-  SET_DONOR_DETAILS,
-  SET_GIFT_CONTEXT_DETAILS,
-  SET_PAYMENT_DETAILS,
-  SET_PAYMENT_RESPONSE,
-  SET_PLEDGE_DETAILS,
-  SET_SELECTED_PROJECT,
-  SET_SUPPORT_DETAILS
-} from '../../../actions/types';
+import { CLEAR_DONATION_REDUCER, SET_CONTEXT, SET_DONATION_DETAILS, SET_DONOR_DETAILS, SET_GIFT_CONTEXT_DETAILS, SET_PAYMENT_DETAILS, SET_PAYMENT_RESPONSE, SET_PLEDGE_DETAILS, SET_SELECTED_PROJECT, SET_SUPPORT_DETAILS } from '../../../actions/types';
 
 export const clearDonationReducer = () => dispatch => {
   dispatch({
@@ -20,9 +9,7 @@ export const clearDonationReducer = () => dispatch => {
 export const setDonationContext = contextDetails => dispatch => {
   dispatch({
     type: SET_CONTEXT,
-    payload: {
-      contextDetails
-    }
+    payload: contextDetails
   });
 };
 

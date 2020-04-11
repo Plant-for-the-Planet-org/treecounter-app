@@ -1,18 +1,7 @@
-import {
-  CLEAR_DONATION_REDUCER,
-  SET_CONTEXT,
-  SET_DONATION_DETAILS,
-  SET_DONOR_DETAILS,
-  SET_GIFT_CONTEXT_DETAILS,
-  SET_PAYMENT_DETAILS,
-  SET_PAYMENT_RESPONSE,
-  SET_PLEDGE_DETAILS,
-  SET_SELECTED_PROJECT,
-  SET_SUPPORT_DETAILS
-} from '../../../actions/types';
+import { CLEAR_DONATION_REDUCER, SET_CONTEXT, SET_DONATION_DETAILS, SET_DONOR_DETAILS, SET_GIFT_CONTEXT_DETAILS, SET_PAYMENT_DETAILS, SET_PAYMENT_RESPONSE, SET_PLEDGE_DETAILS, SET_SELECTED_PROJECT, SET_SUPPORT_DETAILS } from '../../../actions/types';
 
 const initialState = {
-  contextType: '', // 'gift', 'support', 'pledge', 'direct'
+  contextType: null, // 'gift', 'support', 'pledge', 'direct'
   giftDetails: [{}], // Array of Gift Details - firstname, lastname, email, message, treecount
   supportTreeCounterDetails: {}, // Supported Treecounter id
   pledgeDetails: {}, // Pledge Details
@@ -23,7 +12,7 @@ const initialState = {
   projectDetails: {} // Selected project details
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case CLEAR_DONATION_REDUCER:
       return initialState;
@@ -31,7 +20,7 @@ export default function(state = initialState, action) {
     case SET_CONTEXT:
       return {
         ...state,
-        contextType: action.payload.contextType
+        contextType: action.payload
       };
 
     case SET_DONATION_DETAILS:

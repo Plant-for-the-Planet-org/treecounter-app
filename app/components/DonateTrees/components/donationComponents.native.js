@@ -58,50 +58,69 @@ export function PaymentOption(props) {
   return (
     <View style={styles.bottomButtonView}>
       <View style={styles.leftSection}>
-        <View style={styles.paymentTreeDetails}>
-          <Text style={styles.paymentTreeAmount}>
-            {formatNumber(
-              props.commissionSwitch
-                ? props.treeCost * props.treeCount +
-                (props.treeCount / 100 * 2.9 + 0.3)
-                : props.treeCost * props.treeCount,
-              null,
-              props.selectedCurrency
-            )}
-          </Text>
-          <Text style={styles.paymentTreeCount}>
-            for {props.treeCount} trees
-          </Text>
-        </View>
+        {props.treeCount ?
+          <>
+            <View style={styles.paymentTreeDetails}>
 
-        {/* <TouchableOpacity style={styles.otherPaymentButton}>
+              <Text style={styles.paymentTreeAmount}>
+                {formatNumber(
+                  props.commissionSwitch
+                    ? props.treeCost * props.treeCount +
+                    (props.treeCount / 100 * 2.9 + 0.3)
+                    : props.treeCost * props.treeCount,
+                  null,
+                  props.selectedCurrency
+                )}
+              </Text>
+              <Text style={styles.paymentTreeCount}>
+                for {props.treeCount} trees
+          </Text>
+
+            </View>
+
+            {/* <TouchableOpacity style={styles.otherPaymentButton}>
             <Text style={styles.otherPaymentText}>Other payment methods</Text>
           </TouchableOpacity> */}
-        <View>
-          <Text style={styles.otherPaymentText}>Click Continue to proceed</Text>
-        </View>
+            <View>
+              <Text style={styles.otherPaymentText}>Click Continue to proceed</Text>
+            </View>
+          </>
+          : <Text style={styles.paymentTreeCount}>Please select Tree count</Text>}
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          updateStaticRoute('donor_details_form', props.navigation, {
-            treeCount: props.treeCount,
-            treeCost: props.treeCost,
-            selectedCurrency: props.selectedCurrency,
-            commissionSwitch: props.commissionSwitch,
-            navigation: props.navigation
-          });
-        }}
-        style={styles.continueButtonView}
-      >
-        <View style={{ alignItems: 'center' }}>
-          <Image
-            style={{ maxHeight: 24 }}
-            source={nextArrowWhite}
-            resizeMode="contain"
-          />
-          <Text style={styles.continueButtonText}>Continue</Text>
-        </View>
-      </TouchableOpacity>
+      {props.treeCount ?
+        <TouchableOpacity
+          onPress={() => {
+            updateStaticRoute('donor_details_form', props.navigation, {
+              treeCount: props.treeCount,
+              treeCost: props.treeCost,
+              selectedCurrency: props.selectedCurrency,
+              commissionSwitch: props.commissionSwitch,
+              navigation: props.navigation
+            });
+          }}
+          style={styles.continueButtonView}
+        >
+          <View style={{ alignItems: 'center' }}>
+            <Image
+              style={{ maxHeight: 24 }}
+              source={nextArrowWhite}
+              resizeMode="contain"
+            />
+            <Text style={styles.continueButtonText}>Continue</Text>
+          </View>
+        </TouchableOpacity>
+        : <View
+          style={[styles.continueButtonView, { backgroundColor: 'grey' }]}
+        >
+          <View style={{ alignItems: 'center' }}>
+            <Image
+              style={{ maxHeight: 24 }}
+              source={nextArrowWhite}
+              resizeMode="contain"
+            />
+            <Text style={styles.continueButtonText}>Continue</Text>
+          </View>
+        </View>}
     </View>
   );
 }

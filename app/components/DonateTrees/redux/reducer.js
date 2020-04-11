@@ -2,10 +2,10 @@ import { CLEAR_DONATION_REDUCER, SET_CONTEXT, SET_DONATION_DETAILS, SET_DONOR_DE
 
 const initialState = {
   contextType: null, // 'gift', 'support', 'pledge', 'direct'
-  giftDetails: [{}], // Array of Gift Details - firstname, lastname, email, message, treecount
+  giftDetails: [], // Array of Gift Details - firstname, lastname, email, message, treecount
   supportTreeCounterDetails: {}, // Supported Treecounter id
   pledgeDetails: {}, // Pledge Details
-  donationDetails: {}, // Project details, selected Tree count, frequency
+  donationDetails: {}, // Project details, total Tree count, frequency
   donorDetails: {}, // Contact details of the Donor
   paymentResponse: {}, // Payment response from the server
   paymentDetails: {}, // Payment mode and the details

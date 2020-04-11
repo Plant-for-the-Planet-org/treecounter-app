@@ -9,7 +9,7 @@ import { clearPlantProject, selectPlantProjectAction } from '../../actions/selec
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import DonateTrees from '../../components/DonateTrees';
-import { setDonationDetails, setDonorDetails, setPaymentDetails, setPaymentResponse, setSelectedProjectDetails } from '../../components/DonateTrees/redux/action';
+import { setDonationDetails, setDonorDetails, setPaymentDetails, setPaymentResponse, setPledgeDetails, setSelectedProjectDetails } from '../../components/DonateTrees/redux/action';
 import { debug } from '../../debug';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { currenciesSelector, currentUserProfileSelector, getCurrency, selectedPlantProjectIdSelector, selectedPlantProjectSelector, selectedTpoSelector, supportedTreecounterSelector } from '../../selectors';
@@ -129,6 +129,15 @@ class DonationTreesContainer extends Component {
           giftDetails: this.props.giftDetails,
           projectDetails: this.props.projectDetails,
           supportTreeCounterDetails: this.props.supportTreeCounterDetails,
+          donationDetails: this.props.donationDetails,
+          donorDetails: this.props.donorDetails,
+          paymentDetails: this.props.paymentDetails,
+          pledgeDetails: this.props.pledgeDetails
+        }}
+        contextActions={{
+          setDonationDetails,
+          setDonorDetails,
+          setPaymentDetails
         }}
         determineDefaultCurrency={() => this.determineDefaultCurrency()}
       />
@@ -152,7 +161,8 @@ const mapStateToProps = state => {
     supportTreeCounterDetails: state.donations.supportTreeCounterDetails,
     donationDetails: state.donations.donationDetails,
     donorDetails: state.donations.donorDetails,
-    paymentDetails: state.donations.paymentDetails
+    paymentDetails: state.donations.paymentDetails,
+    pledgeDetails: state.donations.pledgeDetails
   };
 };
 
@@ -171,7 +181,8 @@ const mapDispatchToProps = dispatch => {
       setDonorDetails,
       setPaymentDetails,
       setSelectedProjectDetails,
-      setPaymentResponse
+      setPaymentResponse,
+      setPledgeDetails
     },
     dispatch
   );

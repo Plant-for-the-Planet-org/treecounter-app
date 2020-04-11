@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, SafeAreaView, Text, Linking } from 'react-native';
+import { View, ScrollView, SafeAreaView, Text, Linking, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { debug } from '../../debug';
 import styles from '../../styles/menu.native';
@@ -46,15 +46,12 @@ export default class Menu extends Component {
   }
 
   async componentDidMount() {
-    Linking.getInitialURL()
-      .then(url => {
-        if (url) {
-          this.resetStackToProperRoute(url);
-        }
-      })
-      .catch(e => {
-        debug(e);
-      });
+    if (Platform.OS === 'android') {
+      const NativeLinking = require('react-native/Libraries/Linking/NativeLinking').default;
+      NativeLinking.getInitialURL().then(url => url && this.resetStackToProperRoute(url)).catch(e => debug(e));
+    } else {
+      Linking.getInitialURL().then(url => url && this.resetStackToProperRoute(url)).catch(e => debug(e));
+    }
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);

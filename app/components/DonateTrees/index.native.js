@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Linking, SafeAreaView } from 'react-native';
+import { Linking, SafeAreaView, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { TabView } from 'react-native-tab-view';
 import { debug } from '../../debug';
@@ -65,15 +65,12 @@ export default class DonateTrees extends React.PureComponent {
   componentDidMount() {
     // const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
-    Linking.getInitialURL()
-      .then(url => {
-        if (url) {
-          this.handleOpenURL(url);
-        }
-      })
-      .catch(err => {
-        debug(err);
-      });
+    if (Platform.OS === 'android') {
+      const NativeLinking = require('react-native/Libraries/Linking/NativeLinking').default;
+      NativeLinking.getInitialURL().then(url => url && this.handleOpenURL(url)).catch(e => debug(e));
+    } else {
+      Linking.getInitialURL().then(url => url && this.handleOpenURL(url)).catch(e => debuge);
+    }
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
     debug('got user form', this.props.navigation.getParam('userForm'), params);

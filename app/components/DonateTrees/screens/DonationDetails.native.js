@@ -41,7 +41,6 @@ function DonationDetails(props) {
 
   let context = { ...props.context };
 
-  console.log('Context -------------', context)
 
   const onContinue = () => {
     // Set Donation Details and then switch the page 
@@ -53,14 +52,15 @@ function DonationDetails(props) {
         taxReceiptSwitch: taxReceiptSwitch,
         countryForTax: countryForTax
       })
+      updateStaticRoute('donor_details_form', props.navigation, {
+        context: props.context,
+        treeCount: treeCount,
+        contextActions: props.contextActions,
+        navigation: props.navigation
+      });
     }
 
-    console.log('Context from Container-------------', props.context)
-    updateStaticRoute('donor_details_form', props.navigation, {
-      context: props.context,
-      contextActions: props.contextActions,
-      navigation: props.navigation
-    });
+
   }
   // console.log()
   // props.navigation.setParams({ context: context });

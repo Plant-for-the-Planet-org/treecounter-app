@@ -208,6 +208,9 @@ export function SelectTreeCount(props) {
   const [tempTreeCount, setTempTreeCount] = React.useState(0);
   let treeCountOptions;
 
+  const customTreeCountRef = React.useRef(null);
+
+
   if (props.selectedProject) {
     if (
       props.selectedProject.paymentSetup.treeCountOptions &&
@@ -219,6 +222,10 @@ export function SelectTreeCount(props) {
     } else {
       treeCountOptions = [10, 20, 50, 150];
     }
+  }
+
+  if (!customTreeCountRef.isFocused) {
+    props.setTreeCount(tempTreeCount)
   }
 
   return (
@@ -259,6 +266,7 @@ export function SelectTreeCount(props) {
             value={tempTreeCount}
             keyboardType={'number-pad'}
             autoFocus
+            ref={customTreeCountRef}
           />
           <Text
             style={
@@ -274,7 +282,7 @@ export function SelectTreeCount(props) {
           <TouchableOpacity
             onPress={() => {
               setCustomTreeCount(true);
-              props.setTreeCount('');
+              props.setTreeCount(tempTreeCount);
             }}
             style={styles.customSelectorView}
           >

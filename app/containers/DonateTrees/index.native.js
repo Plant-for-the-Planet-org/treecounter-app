@@ -135,9 +135,9 @@ class DonationTreesContainer extends Component {
           pledgeDetails: this.props.pledgeDetails
         }}
         contextActions={{
-          setDonationDetails,
-          setDonorDetails,
-          setPaymentDetails
+          setDonationDetails: this.props.setDonationDetails,
+          setDonorDetails: this.props.setDonorDetails,
+          setPaymentDetails: this.props.setPaymentDetails
         }}
         determineDefaultCurrency={() => this.determineDefaultCurrency()}
       />

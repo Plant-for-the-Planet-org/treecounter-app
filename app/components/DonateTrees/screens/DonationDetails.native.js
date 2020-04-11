@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import { NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
@@ -41,6 +42,26 @@ function DonationDetails(props) {
   let context = { ...props.context };
 
   console.log('Context -------------', context)
+
+  const onContinue = () => {
+    // Set Donation Details and then switch the page 
+    if (context.contextType === 'direct') {
+      props.contextActions.setDonationDetails({
+        ...props.context.donationDetails,
+        totalTreeCount: treeCount,
+        frequency: frequency,
+        taxReceiptSwitch: taxReceiptSwitch,
+        countryForTax: countryForTax
+      })
+    }
+
+    console.log('Context from Container-------------', props.context)
+    updateStaticRoute('donor_details_form', props.navigation, {
+      context: props.context,
+      contextActions: props.contextActions,
+      navigation: props.navigation
+    });
+  }
   // console.log()
   // props.navigation.setParams({ context: context });
   // console.log('getting updateed context in nav:', props.navigation.getParam('context'))
@@ -149,6 +170,7 @@ function DonationDetails(props) {
         selectedCurrency={props.selectedCurrency}
         commissionSwitch={commissionSwitch}
         navigation={props.navigation}
+        onContinue={onContinue}
       />
 
 

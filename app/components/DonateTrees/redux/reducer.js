@@ -5,7 +5,7 @@ const initialState = {
   giftDetails: [], // Array of Gift Details - firstname, lastname, email, message, treecount
   supportTreeCounterDetails: {}, // Supported Treecounter id
   pledgeDetails: {}, // Pledge Details
-  donationDetails: {}, // Project details, total Tree count, frequency
+  donationDetails: {}, // total Tree count, frequency, tax receipt
   donorDetails: {}, // Contact details of the Donor
   paymentResponse: {}, // Payment response from the server
   paymentDetails: {}, // Payment mode and the details

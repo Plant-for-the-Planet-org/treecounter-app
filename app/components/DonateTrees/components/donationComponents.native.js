@@ -3,7 +3,6 @@ import { Image, Switch, Text, TextInput, TouchableOpacity, View } from 'react-na
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getImageUrl } from '../../../actions/apiRouting';
 import { currencyIcon, infoHint, nextArrowWhite } from '../../../assets';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import { formatNumber } from '../../../utils/utils';
 import UserProfileImage from '../../Common/UserProfileImage.native';
@@ -89,15 +88,7 @@ export function PaymentOption(props) {
       </View>
       {props.treeCount ?
         <TouchableOpacity
-          onPress={() => {
-            updateStaticRoute('donor_details_form', props.navigation, {
-              treeCount: props.treeCount,
-              treeCost: props.treeCost,
-              selectedCurrency: props.selectedCurrency,
-              commissionSwitch: props.commissionSwitch,
-              navigation: props.navigation
-            });
-          }}
+          onPress={() => props.onContinue()}
           style={styles.continueButtonView}
         >
           <View style={{ alignItems: 'center' }}>

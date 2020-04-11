@@ -17,6 +17,7 @@ export default function DonateTrees(props) {
         treeCountOptions={selectedProject && selectedProject.paymentSetup && selectedProject.paymentSetup.treeCountOptions}
         navigation={props.navigation}
         context={props.context}
+        contextActions={props.contextActions}
       />
     </View>
   );

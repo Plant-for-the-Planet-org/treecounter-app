@@ -69,7 +69,7 @@ export default class DonateTrees extends React.PureComponent {
       const NativeLinking = require('react-native/Libraries/Linking/NativeLinking').default;
       NativeLinking.getInitialURL().then(url => url && this.handleOpenURL(url)).catch(e => debug(e));
     } else {
-      Linking.getInitialURL().then(url => url && this.handleOpenURL(url)).catch(e => debuge);
+      Linking.getInitialURL().then(url => url && this.handleOpenURL(url)).catch(e => debug(e));
     }
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;

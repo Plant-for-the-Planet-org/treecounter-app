@@ -4,7 +4,16 @@ import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
-import { CoverFee, NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
+import {
+  CoverFee,
+  NoPlantProjectDetails,
+  PaymentOption,
+  PlantProjectDetails,
+  SelectFrequency,
+  SelectTreeCount,
+  SupportUserDetails,
+  TaxReceipt
+} from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 
 function DonationDetails(props) {
@@ -64,8 +73,8 @@ function DonationDetails(props) {
             selectedProject={props.selectedProject}
           />
         ) : (
-            <NoPlantProjectDetails />
-          )}
+          <NoPlantProjectDetails />
+        )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -77,18 +86,20 @@ function DonationDetails(props) {
 
         {/* Donation Context */}
 
-        {context.contextType === 'support' ? <SupportUserDetails context={context} /> : null}
+        {context.contextType === 'support' ? (
+          <SupportUserDetails context={context} />
+        ) : null}
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-          context.contextType === 'gift-invitation' ? (
-            <GiftTreesComponent
-              treeCount={treeCount}
-              setTreeCount={setTreeCount}
-              selectedProject={props.selectedProject}
-              context={context}
-            />
-          ) : null}
+        context.contextType === 'gift-invitation' ? (
+          <GiftTreesComponent
+            treeCount={treeCount}
+            setTreeCount={setTreeCount}
+            selectedProject={props.selectedProject}
+            context={context}
+          />
+        ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
         <View style={[styles.horizontalDivider, { width: '14%' }]} />
@@ -110,12 +121,14 @@ function DonationDetails(props) {
           toggleTaxReceipt={toggleTaxReceipt}
         />
 
+        {context.contextType === 'pledge' ? (
+          <PledgeOnComponent context={context} />
+        ) : null}
+
         {/* Needed In Future */}
         {/* <UserContactDetails donorDetails={donorDetails} /> */}
         {/* <UserPaymentDetails paymentDetails={paymentDetails} /> */}
         {/* <PaymentsProcessedBy/> */}
-
-
       </KeyboardAwareScrollView>
 
       {treeCount ? (
@@ -127,11 +140,9 @@ function DonationDetails(props) {
           navigation={props.navigation}
         />
       ) : null}
-
     </View>
   );
 }
-
 
 DonationDetails.propTypes = {
   currencies: PropTypes.object.isRequired,

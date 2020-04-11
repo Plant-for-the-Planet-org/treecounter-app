@@ -1,24 +1,17 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Image,
-  Animated
-} from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { Animated, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import { SafeAreaView } from 'react-navigation';
+import { getImageUrl } from '../../actions/apiRouting';
+import { nextArrowWhite } from '../../assets';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import i18n from '../../locales/i18n';
-import PledgeTabView from './PledgeTabView.native';
-import { getImageUrl, getLocalRoute } from '../../actions/apiRouting';
-import { updateStaticRoute, updateRoute } from '../../helpers/routerHelper';
 import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { delimitNumbers } from './../../utils/utils';
 import LoadingIndicator from './../Common/LoadingIndicator';
-import { nextArrowWhite } from '../../assets';
 import HeaderAnimatedImage from './../Header/HeaderAnimatedImage.native';
+import PledgeTabView from './PledgeTabView.native';
 
 const PledgeEvents = props => {
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
@@ -223,7 +216,9 @@ function navigateToDonationDetails(
         treeCount: myPledge.treeCount,
         email: myPledge.email,
         isAnonymous: myPledge.isAnonymous,
-        token: myPledge.token
+        token: myPledge.token,
+        lastIncremented: myPledge.lastIncremented,
+        image: pledges.image
       },
       plantProject: {
         currency: pledges.plantProject.currency,

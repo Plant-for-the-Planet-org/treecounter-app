@@ -42,11 +42,11 @@ export default class SignUp extends Component {
   };
 
   onSignUpClicked = type => {
-    if (this.refs.signupForm.getValue()) {
+    if (this.signupForm.getValue()) {
       Keyboard.dismiss();
     }
     // eslint-disable-next-line no-underscore-dangle
-    this.props.onSignUpClicked(type);
+    this.props.onSignUpClicked(type, this.signupForm);
   };
 
   render() {
@@ -82,7 +82,7 @@ export default class SignUp extends Component {
           )}
           <View style={{ flex: 1 }}>
             <Form
-              ref={'signupForm'}
+              ref={ref => (this.signupForm = ref)}
               type={signupFormSchema[!ProfileTypeParam ? Profiletype : type]}
               options={
                 this.props.schemaOptions[!ProfileTypeParam ? Profiletype : type]

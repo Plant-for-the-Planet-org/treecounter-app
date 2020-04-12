@@ -51,7 +51,7 @@ export const getItemSync = async key => {
   return await AsyncStorage.getItem(key);
 };
 export const clearStorage = async () => {
-  //const welcomeKey = await fetchItem('welcome');
+  //const welcomeKey = await fetchItem('welcome').catch(error => debug(error));
   //debug(welcomeKey);
   await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
   //saveItem('welcome', welcomeKey);

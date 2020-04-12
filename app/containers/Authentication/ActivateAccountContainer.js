@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
+import { debug } from '../../debug';
 import { sendEmail } from '../../actions/authActions';
 import ActivateAccount from '../../components/Authentication/ActivateAccount';
 import { fetchItem } from '../../stores/localStorage';
@@ -16,7 +17,7 @@ class ActivateAccountContainer extends React.Component {
   }
 
   async UNSAFE_componentWillMount() {
-    let email = await fetchItem('email');
+    let email = await fetchItem('email').catch(error => debug(error));
     this.setState({
       email: email
     });

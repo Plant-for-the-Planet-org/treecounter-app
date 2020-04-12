@@ -456,7 +456,7 @@ export const FormikFormTree = props => {
                       <Text style={buttonStyles.actionButtonText}>
                       {parentProps.isEdit
                         ? i18n.t('label.update')
-                        : i18n.t('label.register')}
+                        : (isMultipleTree ? i18n.t('label.register_trees') : i18n.t('label.register'))}
                     </Text>)}
                   </View>
                 </TouchableOpacity>

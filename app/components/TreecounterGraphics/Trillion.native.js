@@ -99,7 +99,8 @@ class Trillion extends PureComponent {
           } catch (err) {
             //debug(error);
           }
-        });
+        })
+        .catch(error => debug(error));
       });
 
     this.props.fetchpledgeEventsAction();

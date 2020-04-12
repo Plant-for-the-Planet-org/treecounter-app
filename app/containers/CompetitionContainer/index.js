@@ -1,11 +1,7 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
-import Competiton from '../../components/Competition';
-import { updateRoute } from '../../helpers/routerHelper';
-import { formatDateToMySQL } from '../../helpers/utils';
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   createCompetition,
   enrollCompetition,
@@ -13,12 +9,18 @@ import {
   fetchMineCompetitions,
   leaveCompetition
 } from '../../actions/competition';
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import Competiton from '../../components/Competition';
+import { debug } from '../../debug';
+import { updateRoute } from '../../helpers/routerHelper';
+import {
+  formatDateToMySQL,
+  handleServerResponseError
+} from '../../helpers/utils';
 // import { getAllCompetitionsSelector } from '../../selectors';
 import { getContentLoaderState } from '../../reducers/contentloaderReducer';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
-import { handleServerResponseError } from '../../helpers/utils';
 
 class CompetitionContainer extends React.Component {
   constructor(props) {
@@ -29,10 +31,10 @@ class CompetitionContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchMineCompetitions();
-    this.fetchCompetitions('all', 1);
-    this.fetchCompetitions('archived', 1);
     this.fetchCompetitions('featured', 1);
+    this.fetchCompetitions('all', 1);
+    this.fetchMineCompetitions();
+    this.fetchCompetitions('archived', 1);
   }
 
   createCompetition = value => {
@@ -74,12 +76,12 @@ class CompetitionContainer extends React.Component {
     }
   }
 
-  fetchCompetitions = (category, page) => {
-    this.props.fetchCompetitions(category, page);
+  fetchCompetitions = async (category, page) => {
+    await this.props.fetchCompetitions(category, page);
   };
 
-  fetchMineCompetitions = () => {
-    this.props.fetchMineCompetitions();
+  fetchMineCompetitions = async () => {
+    await this.props.fetchMineCompetitions();
   };
 
   render() {

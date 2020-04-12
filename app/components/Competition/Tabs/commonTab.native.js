@@ -1,12 +1,12 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from 'react';
-import { Text, View, Image, FlatList, ActivityIndicator } from 'react-native';
-import CompetitionSnippet from '../CompetitionSnippet.native';
 import PropTypes from 'prop-types';
-import { trees, empty } from './../../../assets';
-import styles from '../../../styles/competition/competition-master.native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
 import i18n from '../../../locales/i18n';
+import styles from '../../../styles/competition/competition-master.native';
 import colors from '../../../utils/constants';
+import CompetitionSnippet from '../CompetitionSnippet.native';
+import { empty, trees } from './../../../assets';
 import { CompetitionLoader } from './../../Common/ContentLoader';
 
 const CompetitionFinishedMessage = () => {
@@ -20,71 +20,84 @@ const CompetitionFinishedMessage = () => {
     </View>
   );
 };
-const AllCompetitions = props => {
-  const [showAllCompetitions, setShowAllCompetitions] = useState([]);
-  const [refreshing, setrefreshing] = useState(false);
+const CommonTab = props => {
+  const [showCompetitions, setShowCompetitions] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [showLoader, setShowLoader] = useState(true);
   const [isCompetitionFinished, setCompetitionFinished] = useState(false);
 
-  const onRefresh = () => {
+  const onRefresh = async () => {
     setShowLoader(true);
-    setrefreshing(true);
-    setPage(1);
-    setShowAllCompetitions([]);
-    setCompetitionFinished(false);
-    props
-      .fetchCompetitions('all', 1)
-      .then(() => {
-        setrefreshing(false);
-        setShowLoader(false);
-      })
-      .catch(() => {
-        setrefreshing(false);
-        setShowLoader(false);
-      });
+    setRefreshing(true);
+    if (props.tabType !== 'mine') {
+      setPage(1);
+      setShowCompetitions([]);
+      setCompetitionFinished(false);
+    }
+    await props.fetchCompetitions(props.tabType, 1);
+    setRefreshing(false);
+    setShowLoader(false);
   };
+
   let CurrentDate = new Date();
 
   const getAllCompetitions = pageNo => {
-    props.fetchCompetitions('all', pageNo);
+    props.fetchCompetitions(props.tabType, pageNo);
   };
 
   useEffect(() => {
-    let showAllCompetitionsArr = [];
-    if (props.allCompetitions.length > 0) {
-      for (let i = 0; i < props.allCompetitions.length; i++) {
-        if (props.allCompetitions[i].category === 'all') {
+    let showCompetitionsArr = [];
+    if (props.competitionsArr.length > 0) {
+      for (let i = 0; i < props.competitionsArr.length; i++) {
+        if (props.competitionsArr[i].category === props.tabType) {
           for (
             let j = 0;
-            j < props.allCompetitions[i].competitions.length;
+            j < props.competitionsArr[i].competitions.length;
             j++
           ) {
-            let endDate = props.allCompetitions[i].competitions[j].endDate;
-            endDate = new Date(endDate);
-            if (endDate > CurrentDate) {
-              showAllCompetitionsArr.push(
-                props.allCompetitions[i].competitions[j]
+            if (props.tabType !== 'mine') {
+              let endDate = props.competitionsArr[i].competitions[j].endDate;
+              endDate = new Date(endDate);
+              if (props.tabType === 'archived') {
+                if (CurrentDate > endDate) {
+                  showCompetitionsArr.push(
+                    props.competitionsArr[i].competitions[j]
+                  );
+                }
+              } else {
+                if (endDate > CurrentDate) {
+                  showCompetitionsArr.push(
+                    props.competitionsArr[i].competitions[j]
+                  );
+                }
+              }
+            } else {
+              showCompetitionsArr.push(
+                props.competitionsArr[i].competitions[j]
               );
             }
           }
         }
         if (
+          props.tabType !== 'mine' &&
           // eslint-disable-next-line no-prototype-builtins
-          props.allCompetitions[i].hasOwnProperty('nbRemaining') &&
-          props.allCompetitions[i].nbRemaining === 0
+          props.competitionsArr[i].hasOwnProperty('nbRemaining') &&
+          props.competitionsArr[i].nbRemaining === 0
         ) {
           setShowLoader(false);
           setCompetitionFinished(true);
+        } else {
+          setShowLoader(false);
         }
       }
     }
-    setShowAllCompetitions(showAllCompetitions =>
-      showAllCompetitions.concat(showAllCompetitionsArr)
+    setShowCompetitions(showCompetitions =>
+      showCompetitions.concat(showCompetitionsArr)
     );
     setLoading(false);
-  }, [props.allCompetitions]);
+  }, [props.competitionsArr]);
 
   const _keyExtractor = item => item.id.toString();
   const _renderItem = ({ item }) => (
@@ -96,7 +109,7 @@ const AllCompetitions = props => {
       enrollCompetition={id => props.enrollCompetition(id)}
       editCompetition={props.editCompetition}
       competition={item}
-      type="all"
+      type={props.tabType}
     />
   );
 
@@ -128,15 +141,17 @@ const AllCompetitions = props => {
   };
   return (
     <FlatList
-      data={showAllCompetitions}
+      data={showCompetitions}
       keyExtractor={item => _keyExtractor(item)}
       renderItem={item => _renderItem(item)}
       onEndReached={
-        isCompetitionFinished
-          ? null
-          : () => {
-              !isLoading && handleLoadMore();
-            }
+        props.tabType !== 'mine'
+          ? isCompetitionFinished
+            ? null
+            : () => {
+                !isLoading && handleLoadMore();
+              }
+          : null
       }
       onEndReachedThreshold={0.05}
       onRefresh={() => onRefresh()}
@@ -153,7 +168,9 @@ const AllCompetitions = props => {
         return (
           <View style={styles.headerView}>
             <Text style={styles.headerTitle}>
-              {i18n.t('label.all_compeition_tab_header')}
+              {props.tabType === 'mine' && showCompetitions.length === 0
+                ? props.nullTabHeader
+                : props.tabHeader}
             </Text>
             <Image
               source={trees}
@@ -166,7 +183,7 @@ const AllCompetitions = props => {
       ListFooterComponent={() => {
         return isLoading
           ? CompetitionLoader()
-          : isCompetitionFinished
+          : props.tabType !== 'mine' && isCompetitionFinished
           ? CompetitionFinishedMessage()
           : null;
       }}
@@ -174,10 +191,10 @@ const AllCompetitions = props => {
   );
 };
 
-export default AllCompetitions;
+export default CommonTab;
 
-AllCompetitions.propTypes = {
-  allCompetitions: PropTypes.any,
+CommonTab.propTypes = {
+  competitionsArr: PropTypes.any,
   onMoreClick: PropTypes.any,
   leaveCompetition: PropTypes.any,
   enrollCompetition: PropTypes.any,

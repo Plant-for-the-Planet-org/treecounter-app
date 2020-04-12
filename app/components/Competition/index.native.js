@@ -1,21 +1,24 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Text, View, TouchableOpacity, Animated, Platform, Dimensions } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-
+import {
+  Animated,
+  Dimensions,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
-import styles from '../../styles/common/tabbar.native';
-import buttonStyles from '../../styles/common/button.native';
-import i18n from '../../locales/i18n';
+import { SafeAreaView } from 'react-navigation';
 import { updateStaticRoute } from '../../helpers/routerHelper';
-import ClosedCompetitions from './Tabs/closed.native'; // Shows all Archived competitions
-import MineCompetitions from './Tabs/mine.native'; // Shows my competitions
-import FeaturedCompetitions from './Tabs/featured.native'; // Shows featured competitions
-import AllCompetitions from './Tabs/all.native'; // Shows all competitions
-
-import HeaderStatic from './../Header/HeaderStatic';
-const height = Dimensions.get('window').height;
+import i18n from '../../locales/i18n';
+import buttonStyles from '../../styles/common/button.native';
+import styles from '../../styles/common/tabbar.native';
 import colors from '../../utils/constants';
+import HeaderStatic from './../Header/HeaderStatic';
+import CommonCompetitionTab from './Tabs/commonTab.native'; // Shows my competitions
+
+const height = Dimensions.get('window').height;
 
 class Competiton extends React.Component {
   constructor(props) {
@@ -26,7 +29,7 @@ class Competiton extends React.Component {
         { key: 'featured', title: i18n.t('label.featured_competitions') },
         { key: 'all', title: i18n.t('label.all_competitions') },
         { key: 'mine', title: i18n.t('label.mine_competitions') },
-        { key: 'closed', title: i18n.t('label.archived_competitions') }
+        { key: 'archived', title: i18n.t('label.archived_competitions') }
       ],
       index: 0, // It refers to the selected tab, 0 goes for featured
       scrollY: new Animated.Value(0)
@@ -87,24 +90,52 @@ class Competiton extends React.Component {
 
   // This loads the different components based on the selected index
   _renderSelectPlantScene = ({ route }) => {
-    switch (route.key) {
-      case 'mine':
-        return (
-          <MineCompetitions {...this.props} scrollY={this.state.scrollY} />
-        );
-      case 'featured':
-        return (
-          <FeaturedCompetitions {...this.props} scrollY={this.state.scrollY} />
-        );
-      case 'all':
-        return <AllCompetitions {...this.props} scrollY={this.state.scrollY} />;
-      case 'closed':
-        return (
-          <ClosedCompetitions {...this.props} scrollY={this.state.scrollY} />
-        );
-      default:
-        return null;
-    }
+    let competitionsArr = this.props[`${route.key}Competitions`];
+    let tabType = route.key;
+    let tabHeader = i18n.t(`label.${route.key}_compeition_tab_header`);
+    let nullTabHeader =
+      route.key === 'mine'
+        ? i18n.t('label.mine_compeition_tab_header_null')
+        : '';
+    let fetchCompetitions =
+      route.key === 'mine'
+        ? this.props.fetchMineCompetitions
+        : this.props.fetchCompetitions;
+    // switch (route.key) {
+    //   case 'mine':
+    //     // competitionsArr = this.props.mineCompetitions;
+    //     tabHeader = i18n.t('label.mine_compeition_tab_header');
+    //     // nullTabHeader = i18n.t('label.mine_compeition_tab_header_null');
+    //     break;
+    //   case 'featured':
+    //     // competitionsArr = this.props.featuredCompetitions;
+    //     tabHeader = i18n.t('label.featured_compeition_tab_header');
+    //     break;
+    //   case 'all':
+    //     // competitionsArr = this.props.allCompetitions;
+    //     tabHeader = i18n.t('label.all_compeition_tab_header');
+    //     break;
+    //   case 'archived':
+    //     // competitionsArr = this.props.archivedCompetitions;
+    //     tabHeader = i18n.t('label.archived_compeition_tab_header');
+    //     break;
+    //   default:
+    //     return null;
+    // }
+    return (
+      <CommonCompetitionTab
+        competitionsArr={competitionsArr}
+        onMoreClick={this.props.onMoreClick}
+        leaveCompetition={this.props.leaveCompetition}
+        enrollCompetition={this.props.enrollCompetition}
+        editCompetition={this.props.editCompetition}
+        fetchCompetitions={fetchCompetitions}
+        tabType={tabType}
+        tabHeader={tabHeader}
+        nullTabHeader={nullTabHeader}
+        scrollY={this.state.scrollY}
+      />
+    );
   };
 
   render() {
@@ -124,7 +155,9 @@ class Competiton extends React.Component {
             navigation={this.props.navigation}
           />
           <Animated.View
-            style={{ marginTop: Platform.OS === 'ios' ? height < 737 ? 56 : 26 : 56 }}
+            style={{
+              marginTop: Platform.OS === 'ios' ? (height < 737 ? 56 : 26) : 56
+            }}
           />
           <TabView
             useNativeDriver

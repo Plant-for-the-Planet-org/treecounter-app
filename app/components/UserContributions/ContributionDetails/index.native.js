@@ -115,42 +115,12 @@ class UserContributionsDetails extends React.Component {
     let contributionOrPlantedImages = contributionImages;
 
     // sets the header text
-    // if treeType is null then header text is treecount and type of contribution
-    if (treeType === null) {
-      if (treeCount > 1) {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          i18n.t('label.usr_contribution_tree');
-      } else {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          i18n.t('label.usr_contribution_single_tree');
-      }
-    }
-
-    // if treeType is not null then header text is treecount, treeName and
-    // type of contribution
-    else if (treeType !== null) {
-      if (treeCount > 1) {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          treeType.charAt(0).toUpperCase() +
-          treeType.slice(1) +
-          ' ' +
-          i18n.t('label.usr_contribution_tree');
-      } else {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          treeType.charAt(0).toUpperCase() +
-          treeType.slice(1) +
-          ' ' +
-          i18n.t('label.usr_contribution_single_tree');
-      }
-    }
+    // - if treeType is null then header text is treecount and type of contribution
+    // - if treeType is not null then header text is treecount, treeName and type of contribution
+    headerText = delimitNumbers(treeCount)
+      + (treeType ? ' ' + treeType.charAt(0).toUpperCase() + treeType.slice(1) : '')
+      + ' '
+      + ((treeCount > 1) ? i18n.t('label.usr_contribution_tree') : i18n.t('label.usr_contribution_single_tree'));
 
     // formats the plant date in 'MMMM d,  yyyy' format
     if (plantDate) {

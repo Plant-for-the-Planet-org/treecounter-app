@@ -109,7 +109,7 @@ export default class EditUserContribution extends Component {
                 />
               ) : (
                 <TCombForm
-                  ref="editTreeForm"
+                  ref={ref => (this.editTreeForm = ref)}
                   type={multipleTreesRegisterFormSchema}
                   options={schemaOptionsMultiple}
                   value={this.props.userContribution}

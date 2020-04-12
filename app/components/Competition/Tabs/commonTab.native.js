@@ -29,7 +29,6 @@ const CommonTab = props => {
   const [isCompetitionFinished, setCompetitionFinished] = useState(false);
 
   const onRefresh = async () => {
-    setShowLoader(true);
     setRefreshing(true);
     if (props.tabType !== 'mine') {
       setPage(1);
@@ -38,7 +37,6 @@ const CommonTab = props => {
     }
     await props.fetchCompetitions(props.tabType, 1);
     setRefreshing(false);
-    setShowLoader(false);
   };
 
   let CurrentDate = new Date();
@@ -159,9 +157,9 @@ const CommonTab = props => {
       ListEmptyComponent={() =>
         showLoader ? (
           <ActivityIndicator size="large" color={colors.PRIMARY_COLOR} />
-        ) : (
+        ) : !refreshing ? (
           EmptyContainer()
-        )
+        ) : null
       }
       style={{ paddingBottom: 60, backgroundColor: colors.WHITE }}
       ListHeaderComponent={() => {

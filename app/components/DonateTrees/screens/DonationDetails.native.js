@@ -53,9 +53,6 @@ function DonationDetails(props) {
         countryForTax: countryForTax
       })
       updateStaticRoute('donor_details_form', props.navigation, {
-        context: props.context,
-        treeCount: treeCount,
-        contextActions: props.contextActions,
         navigation: props.navigation
       });
     }

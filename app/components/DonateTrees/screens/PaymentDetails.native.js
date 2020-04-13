@@ -171,10 +171,10 @@ export default function DonationStep3(props) {
 
       {showPay ? (
         <PaymentButton
-          treeCount={props.navigation.getParam('treeCount')}
-          treeCost={props.navigation.getParam('treeCost')}
-          selectedCurrency={props.navigation.getParam('selectedCurrency')}
-          commissionSwitch={props.navigation.getParam('commissionSwitch')}
+          treeCount={props.context.donationDetails.totalTreeCount}
+          treeCost={props.context.projectDetails.selectedProjectDetails.amountPerTree}
+          selectedCurrency={props.context.projectDetails.selectedProjectDetails.currency}
+          // commissionSwitch={props.navigation.getParam('commissionSwitch')}
           navigation={props.navigation}
           allValid={allValid}
         />

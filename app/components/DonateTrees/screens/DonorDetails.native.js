@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { Animated, Image, Keyboard, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Animated, Image, Keyboard, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
 import { nextArrowWhite } from '../../../assets';
@@ -10,6 +10,7 @@ import styles from '../../../styles/donations/donorDetails';
 import { formatNumber } from '../../../utils/utils';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import GooglePlacesInput from '../components/AutoComplete.native';
+
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
   const [buttonType, setButtonType] = useState('donate');
@@ -32,15 +33,17 @@ export default function DonorDetails(props) {
       'keyboardDidHide',
       keyboardDidHide
     );
+
     // clean up
     return () => {
       keyboardDidShowListener.remove();
       keyboardDidHideListener.remove();
     };
-  }, []);
+  });
 
 
-  console.log('Context in Donor Details page', props.navigation.getParam('context'))
+  console.log('Context in Donor Details page', props.context)
+
   return (
     <View style={{ backgroundColor: 'white', flex: 1 }}>
       <HeaderAnimated
@@ -64,15 +67,19 @@ export default function DonorDetails(props) {
       >
         <Formik
           initialValues={{
-            firstname: '',
-            lastname: '',
-            email: '',
-            country: '',
+            firstname: props.currentUserProfile ? props.currentUserProfile.firstname : '',
+            lastname: props.currentUserProfile ? props.currentUserProfile.lastname : '',
+            email: props.currentUserProfile ? props.currentUserProfile.email : '',
+            address: props.currentUserProfile ? props.currentUserProfile.address : '',
             isCompany: false,
             companyName: ''
           }}
           onSubmit={values => {
             console.log(values);
+            props.contextActions.setDonorDetails(values)
+            updateStaticRoute('payment_details_form', props.navigation, {
+              navigation: props.navigation
+            });
           }}
         >
           {formikProps => (
@@ -144,7 +151,7 @@ export default function DonorDetails(props) {
                 <GooglePlacesInput
                   placeholder={'Address'}
                   initialValue={
-                    formikProps.values.country ? formikProps.values.country : ''
+                    formikProps.values.address ? formikProps.values.address : ''
                   }
                   setFieldValue={formikProps.setFieldValue}
                 />
@@ -188,24 +195,26 @@ export default function DonorDetails(props) {
                   </View>
                 ) : null}
               </View>
+              {props.context && props.context.donationDetails &&
+                props.context.donationDetails.totalTreeCount ? (
+                  <PaymentOption
+                    treeCount={props.context.donationDetails.totalTreeCount}
+                    treeCost={props.context.projectDetails.selectedProjectDetails.amountPerTree}
+                    selectedCurrency={props.context.projectDetails.selectedProjectDetails.currency}
+                    navigation={props.navigation}
+                    onSubmit={formikProps.handleSubmit}
+                  />
+                ) : <ActivityIndicator size="large" color="#0000ff" />
+              }
             </>
           )}
         </Formik>
       </KeyboardAwareScrollView>
 
-      <PaymentOption
-        treeCount={props.navigation.getParam('treeCount')}
-        treeCost={props.navigation.getParam('context').projectDetails.amountPerTree}
-        selectedCurrency={props.navigation.getParam('context').projectDetails.currency}
-        navigation={props.navigation}
-      />
     </View>
   );
 }
 
-DonorDetails.navigationOptions = {
-  header: null
-};
 
 export function PaymentOption(props) {
   return (
@@ -236,13 +245,7 @@ export function PaymentOption(props) {
       </View>
       <TouchableOpacity
         onPress={() => {
-          updateStaticRoute('payment_details_form', props.navigation, {
-            treeCount: props.navigation.getParam('treeCount'),
-            treeCost: props.navigation.getParam('treeCost'),
-            selectedCurrency: props.navigation.getParam('selectedCurrency'),
-            commissionSwitch: props.navigation.getParam('commissionSwitch'),
-            navigation: props.navigation
-          });
+          props.onSubmit()
         }}
         style={styles.continueButtonView}
       >
@@ -258,3 +261,8 @@ export function PaymentOption(props) {
     </View>
   );
 }
+
+DonorDetails.navigationOptions = {
+  header: null
+};
+

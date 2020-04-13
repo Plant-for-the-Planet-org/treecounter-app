@@ -224,7 +224,7 @@ export function SelectTreeCount(props) {
     }
   }
 
-  if (!customTreeCountRef.isFocused) {
+  if (!customTreeCountRef.isFocused && customTreeCount) {
     props.setTreeCount(tempTreeCount)
   }
 

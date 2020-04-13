@@ -32,7 +32,6 @@ DonateTrees.propTypes = {
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
   plantProjectClear: PropTypes.func,
-  onTabChange: PropTypes.func,
   setProgressModelState: PropTypes.func,
   loadUserProfile: PropTypes.func,
   updateRoute: PropTypes.func,

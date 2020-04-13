@@ -313,7 +313,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       ['app_supportTrees']: {
         screen: SelectPlantProjectContainer,
-        navigationOptions: { header: null }
+        navigationOptions: { header: null },
+        path: 'support/:treecounterSlug'
       },
       [getLocalRoute('app_selectProject')]: {
         screen: SelectPlantProjectContainer,
@@ -335,7 +336,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       ['app_donate_detail']: {
-        screen: DonationTreesContainer
+        screen: DonationTreesContainer,
+        path: 'donate-trees/:slug'
       },
       ['donor_details_form']: {
         screen: DonorDetails

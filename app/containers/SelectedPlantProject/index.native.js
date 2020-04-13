@@ -1,20 +1,24 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-import {
-  selectedPlantProjectIdSelector,
-  selectedPlantProjectSelector,
-  selectedTpoSelector,
-  currentUserProfileSelector
-} from '../../selectors';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
 import { loadProject } from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
 } from '../../actions/selectPlantProjectAction';
+import {
+  setDonationContext,
+  setSelectedProjectDetails
+} from '../../components/DonateTrees/redux/action';
+import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import {
+  currentUserProfileSelector,
+  selectedPlantProjectIdSelector,
+  selectedPlantProjectSelector,
+  selectedTpoSelector
+} from '../../selectors';
 
 const SelectedPlantProjectContainer = props => {
   const getProjectDetails = async projectSlug => {
@@ -46,6 +50,13 @@ const SelectedPlantProjectContainer = props => {
         amountPerTree: props.selectedProject.treeCost,
         plantProjectID: id
       };
+      props.setSelectedProjectDetails({
+        selectedProjectDetails: {
+          currency: props.selectedProject.currency,
+          amountPerTree: props.selectedProject.treeCost,
+          plantProjectID: id
+        }
+      });
       context = newContext;
     } else {
       context.contextType = 'direct';
@@ -54,6 +65,14 @@ const SelectedPlantProjectContainer = props => {
         amountPerTree: props.selectedProject.treeCost,
         plantProjectID: id
       };
+      props.setDonationContext('direct');
+      props.setSelectedProjectDetails({
+        selectedProjectDetails: {
+          currency: props.selectedProject.currency,
+          amountPerTree: props.selectedProject.treeCost,
+          plantProjectID: id
+        }
+      });
     }
 
     if (navigation) {
@@ -93,7 +112,9 @@ const mapDispatchToProps = dispatch => {
     {
       clearPlantProject,
       selectPlantProjectAction,
-      loadProject
+      loadProject,
+      setSelectedProjectDetails,
+      setDonationContext
     },
     dispatch
   );

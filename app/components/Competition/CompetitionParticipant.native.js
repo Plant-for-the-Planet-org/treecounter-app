@@ -1,13 +1,13 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n';
-import { debug } from '../../debug';
-import styles from '../../styles/competition/competition-full.native';
-import UserProfileImage from '../Common/UserProfileImage.native';
-import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { getLocalRoute } from '../../actions/apiRouting';
+import { debug } from '../../debug';
+import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
+import i18n from '../../locales/i18n';
+import styles from '../../styles/competition/competition-full.native';
 import snippetStyles from '../../styles/competition/competition-fullNew.native';
+import UserProfileImage from '../Common/UserProfileImage.native';
 class CompetitionParticipant extends React.Component {
   constructor(props) {
     super(props);
@@ -23,13 +23,21 @@ class CompetitionParticipant extends React.Component {
     };
     debug('support button pressed');
     this.props.supportTreecounterAction(supportObject);
+    this.props.setSupportDetails({
+      contextType: 'support',
+      supportTreeCounterDetails: {
+        supportedTreecounterID: this.props.competitor.treecounterId,
+        displayName: this.props.competitor.treecounterDisplayName,
+        treecounterAvatar: this.props.competitor.treecounterAvatar
+      }
+    });
     updateRoute('app_supportTrees', this.props.navigation, 55, {
       context: {
         contextType: 'support',
         support: {
           supportedTreecounterID: this.props.competitor.treecounterId,
           displayName: this.props.competitor.treecounterDisplayName,
-          treecounterAvatar: this.props.competitor.treecounterAvatar,
+          treecounterAvatar: this.props.competitor.treecounterAvatar
         }
       },
       titleParam: i18n.t('label.support_to', {
@@ -39,9 +47,10 @@ class CompetitionParticipant extends React.Component {
   }
   // This function is for participants to plant trees
   plantButton() {
+    this.props.setDonationContext('direct');
     updateRoute('app_donateTrees', this.props.navigation, 0, {
       context: {
-        contextType: 'direct',
+        contextType: 'direct'
       }
     });
   }

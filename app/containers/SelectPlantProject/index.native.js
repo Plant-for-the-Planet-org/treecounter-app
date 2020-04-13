@@ -1,25 +1,74 @@
-import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchCurrencies } from '../../actions/currencies';
+import { loadProject, loadProjects } from '../../actions/loadTposAction';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
+import { setSupportDetails } from '../../components/DonateTrees/redux/action';
+import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateRoute } from '../../helpers/routerHelper';
 import {
-  getAllPlantProjectsSelector,
-  currenciesSelector
+  currenciesSelector,
+  getAllPlantProjectsSelector
 } from '../../selectors';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { loadProject, loadProjects } from '../../actions/loadTposAction';
-import SelectPlantProject from '../../components/SelectPlantProject';
-import { fetchCurrencies } from '../../actions/currencies';
 
 class SelectPlantProjectContainer extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      context: this.props.navigation.getParam('context') || {}
+    };
+    this.createContext(props);
+  }
+
+  createContext = async props => {
+    if (
+      props.navigation.state.params &&
+      props.navigation.state.params.treecounterSlug
+    ) {
+      let context = {};
+      const treecounter = await props.treecounterLookupAction(
+        props.navigation.state.params.treecounterSlug,
+        props.navigation
+      );
+      context.contextType = 'support';
+      context.support = {
+        supportedTreecounterID: treecounter.id,
+        displayName: treecounter.displayName,
+        treecounterAvatar: treecounter.userProfile.image
+      };
+      props.setSupportDetails({
+        contextType: 'support',
+        supportTreeCounterDetails: {
+          supportedTreecounterID: treecounter.id,
+          displayName: treecounter.displayName,
+          treecounterAvatar: treecounter.userProfile.image
+        }
+      });
+      this.setState({
+        context
+      });
+    }
+  };
 
   async componentDidMount() {
     let data = await this.props.loadProjects('featured');
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
-    this.props.selectPlantProjectAction(null);
+    !this.props.alreadySelected && this.props.selectPlantProjectAction(null);
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
+    if (
+      this.props.navigation.state.params &&
+      this.props.navigation.state.params.treecounterSlug !==
+        nextProps.navigation.state.params &&
+      nextProps.navigation.state.params.treecounterSlug
+    )
+      this.createContext(nextProps);
   }
 
   render() {
@@ -27,10 +76,6 @@ class SelectPlantProjectContainer extends PureComponent {
     let plantProjects = this.props.plantProjects.filter(
       project => project.allowDonations
     );
-    let context = {}
-    if (this.props.navigation.getParam('context')) {
-      context = this.props.navigation.getParam('context')
-    }
     return !plantProjects.length ? null : (
       <SelectPlantProject
         selectProject={this.selectPlantProjectAction}
@@ -39,7 +84,8 @@ class SelectPlantProjectContainer extends PureComponent {
         plantProjects={plantProjects}
         navigation={this.props.navigation}
         supportTreecounter={this.props.supportTreecounter}
-        context={context}
+        context={this.state.context}
+        hideTitle={this.props.hideTitle}
       />
     );
   }
@@ -73,7 +119,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectPlantProjectAction, fetchCurrencies, loadProject, loadProjects },
+    {
+      selectPlantProjectAction,
+      fetchCurrencies,
+      loadProject,
+      loadProjects,
+      treecounterLookupAction,
+      setSupportDetails
+    },
     dispatch
   );
 };

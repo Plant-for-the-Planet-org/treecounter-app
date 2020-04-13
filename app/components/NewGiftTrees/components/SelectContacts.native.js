@@ -1,23 +1,23 @@
 import React from 'react';
 import {
-  View,
-  Text,
-  PermissionsAndroid,
   FlatList,
-  ScrollView,
-  TouchableOpacity,
+  Image,
+  PermissionsAndroid,
   Platform,
-  Image
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import Contacts from 'react-native-contacts';
-import styles from './../../../styles/gifttrees/giftrees';
-import GetRandomImage from '../../../utils/getRandomImage';
-import i18n from '../../../locales/i18n';
-import HeaderNew from './../../Header/HeaderNew';
-import { updateRoute } from '../../../helpers/routerHelper';
-import PrimaryButton from '../../Common/Button/PrimaryButton.native';
-import colors from '../../../utils/constants';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { updateRoute } from '../../../helpers/routerHelper';
+import i18n from '../../../locales/i18n';
+import colors from '../../../utils/constants';
+import GetRandomImage from '../../../utils/getRandomImage';
+import PrimaryButton from '../../Common/Button/PrimaryButton.native';
+import styles from './../../../styles/gifttrees/giftrees';
+import HeaderNew from './../../Header/HeaderNew';
 
 const SelectContacts = props => {
   const [contacts, setContacts] = React.useState([]);
@@ -211,7 +211,10 @@ const SelectContacts = props => {
         });
       }
     }
-
+    props.navigation.state.params.setGiftContextDetails({
+      contextType: 'gift-contact',
+      giftDetails: giftContacts
+    });
     updateRoute('app_gift_projects', props.navigation, 0, {
       context: {
         contextType: 'gift-contact',

@@ -1,30 +1,36 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchCurrencies } from '../../actions/currencies';
+import { loadProject } from '../../actions/loadTposAction';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import {
+  clearPlantProject,
+  selectPlantProjectAction
+} from '../../actions/selectPlantProjectAction';
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import { updateUserProfile } from '../../actions/updateUserProfile';
+import DonateTrees from '../../components/DonateTrees';
+import {
+  setDonationDetails,
+  setDonorDetails,
+  setPaymentDetails,
+  setPaymentResponse,
+  setPledgeDetails,
+  setSelectedProjectDetails
+} from '../../components/DonateTrees/redux/action';
+import { debug } from '../../debug';
+import { setProgressModelState } from '../../reducers/modelDialogReducer';
+import {
+  currenciesSelector,
+  currentUserProfileSelector,
+  getCurrency,
   selectedPlantProjectIdSelector,
   selectedPlantProjectSelector,
   selectedTpoSelector,
-  currentUserProfileSelector,
-  currenciesSelector,
-  supportedTreecounterSelector,
-  getCurrency
+  supportedTreecounterSelector
 } from '../../selectors';
-import {
-  selectPlantProjectAction,
-  clearPlantProject
-} from '../../actions/selectPlantProjectAction';
-
-import { updateUserProfile } from '../../actions/updateUserProfile';
-import { loadUserProfile } from '../../actions/loadUserProfileAction';
-import { fetchCurrencies } from '../../actions/currencies';
-
-import { loadProject } from '../../actions/loadTposAction';
-import { setProgressModelState } from '../../reducers/modelDialogReducer';
-import DonateTrees from '../../components/DonateTrees';
 import { postDirectRequest } from '../../utils/api';
 
 class DonationTreesContainer extends Component {
@@ -123,7 +129,7 @@ class DonationTreesContainer extends Component {
       if (id && !this.props.selectedProject) return null;
     }
 
-    return this.props.selectedProject && this.props.selectedProject.tpoData ? (
+    return this.props.selectedProject ? (
       <DonateTrees
         currencies={this.props.currencies}
         plantProjectClear={this.props.clearPlantProject}
@@ -133,7 +139,22 @@ class DonationTreesContainer extends Component {
         supportTreecounter={this.props.supportTreecounter}
         updateUserProfile={this.props.updateUserProfile}
         navigation={this.props.navigation}
-        context={this.props.navigation.getParam('context')}
+        // context={this.props.navigation.getParam('context') || {}}
+        context={{
+          contextType: this.props.contextType,
+          giftDetails: this.props.giftDetails,
+          projectDetails: this.props.projectDetails,
+          supportTreeCounterDetails: this.props.supportTreeCounterDetails,
+          donationDetails: this.props.donationDetails,
+          donorDetails: this.props.donorDetails,
+          paymentDetails: this.props.paymentDetails,
+          pledgeDetails: this.props.pledgeDetails
+        }}
+        contextActions={{
+          setDonationDetails: this.props.setDonationDetails,
+          setDonorDetails: this.props.setDonorDetails,
+          setPaymentDetails: this.props.setPaymentDetails
+        }}
         determineDefaultCurrency={() => this.determineDefaultCurrency()}
       />
     ) : null;
@@ -148,7 +169,16 @@ const mapStateToProps = state => {
     currentUserProfile: currentUserProfileSelector(state),
     supportTreecounter: supportedTreecounterSelector(state),
     currencies: currenciesSelector(state),
-    selectedPlantProjectId: selectedPlantProjectIdSelector(state)
+    selectedPlantProjectId: selectedPlantProjectIdSelector(state),
+    // New states
+    contextType: state.donations.contextType,
+    giftDetails: state.donations.giftDetails,
+    projectDetails: state.donations.projectDetails,
+    supportTreeCounterDetails: state.donations.supportTreeCounterDetails,
+    donationDetails: state.donations.donationDetails,
+    donorDetails: state.donations.donorDetails,
+    paymentDetails: state.donations.paymentDetails,
+    pledgeDetails: state.donations.pledgeDetails
   };
 };
 
@@ -162,7 +192,13 @@ const mapDispatchToProps = dispatch => {
       clearPlantProject,
       setProgressModelState,
       loadUserProfile,
-      updateUserProfile
+      updateUserProfile,
+      setDonationDetails,
+      setDonorDetails,
+      setPaymentDetails,
+      setSelectedProjectDetails,
+      setPaymentResponse,
+      setPledgeDetails
     },
     dispatch
   );

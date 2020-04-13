@@ -3,9 +3,9 @@ import { Image, Switch, Text, TextInput, TouchableOpacity, View } from 'react-na
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getImageUrl } from '../../../actions/apiRouting';
 import { currencyIcon, infoHint, nextArrowWhite } from '../../../assets';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import { formatNumber } from '../../../utils/utils';
+import UserProfileImage from '../../Common/UserProfileImage.native';
 
 export function TaxReceipt(props) {
   let { taxReceiptSwitch, toggleTaxReceipt } = props;
@@ -57,50 +57,61 @@ export function PaymentOption(props) {
   return (
     <View style={styles.bottomButtonView}>
       <View style={styles.leftSection}>
-        <View style={styles.paymentTreeDetails}>
-          <Text style={styles.paymentTreeAmount}>
-            {formatNumber(
-              props.commissionSwitch
-                ? props.treeCost * props.treeCount +
-                (props.treeCount / 100 * 2.9 + 0.3)
-                : props.treeCost * props.treeCount,
-              null,
-              props.selectedCurrency
-            )}
-          </Text>
-          <Text style={styles.paymentTreeCount}>
-            for {props.treeCount} trees
-          </Text>
-        </View>
+        {props.treeCount ?
+          <>
+            <View style={styles.paymentTreeDetails}>
 
-        {/* <TouchableOpacity style={styles.otherPaymentButton}>
+              <Text style={styles.paymentTreeAmount}>
+                {formatNumber(
+                  props.commissionSwitch
+                    ? props.treeCost * props.treeCount +
+                    (props.treeCount / 100 * 2.9 + 0.3)
+                    : props.treeCost * props.treeCount,
+                  null,
+                  props.selectedCurrency
+                )}
+              </Text>
+              <Text style={styles.paymentTreeCount}>
+                for {props.treeCount} trees
+          </Text>
+
+            </View>
+
+            {/* <TouchableOpacity style={styles.otherPaymentButton}>
             <Text style={styles.otherPaymentText}>Other payment methods</Text>
           </TouchableOpacity> */}
-        <View>
-          <Text style={styles.otherPaymentText}>Click Continue to proceed</Text>
-        </View>
+            <View>
+              <Text style={styles.otherPaymentText}>Click Continue to proceed</Text>
+            </View>
+          </>
+          : <Text style={styles.paymentTreeCount}>Please select Tree count</Text>}
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          updateStaticRoute('donor_details_form', props.navigation, {
-            treeCount: props.treeCount,
-            treeCost: props.treeCost,
-            selectedCurrency: props.selectedCurrency,
-            commissionSwitch: props.commissionSwitch,
-            navigation: props.navigation
-          });
-        }}
-        style={styles.continueButtonView}
-      >
-        <View style={{ alignItems: 'center' }}>
-          <Image
-            style={{ maxHeight: 24 }}
-            source={nextArrowWhite}
-            resizeMode="contain"
-          />
-          <Text style={styles.continueButtonText}>Continue</Text>
-        </View>
-      </TouchableOpacity>
+      {props.treeCount ?
+        <TouchableOpacity
+          onPress={() => props.onContinue()}
+          style={styles.continueButtonView}
+        >
+          <View style={{ alignItems: 'center' }}>
+            <Image
+              style={{ maxHeight: 24 }}
+              source={nextArrowWhite}
+              resizeMode="contain"
+            />
+            <Text style={styles.continueButtonText}>Continue</Text>
+          </View>
+        </TouchableOpacity>
+        : <View
+          style={[styles.continueButtonView, { backgroundColor: 'grey' }]}
+        >
+          <View style={{ alignItems: 'center' }}>
+            <Image
+              style={{ maxHeight: 24 }}
+              source={nextArrowWhite}
+              resizeMode="contain"
+            />
+            <Text style={styles.continueButtonText}>Continue</Text>
+          </View>
+        </View>}
     </View>
   );
 }
@@ -197,6 +208,9 @@ export function SelectTreeCount(props) {
   const [tempTreeCount, setTempTreeCount] = React.useState(0);
   let treeCountOptions;
 
+  const customTreeCountRef = React.useRef(null);
+
+
   if (props.selectedProject) {
     if (
       props.selectedProject.paymentSetup.treeCountOptions &&
@@ -208,6 +222,10 @@ export function SelectTreeCount(props) {
     } else {
       treeCountOptions = [10, 20, 50, 150];
     }
+  }
+
+  if (!customTreeCountRef.isFocused) {
+    props.setTreeCount(tempTreeCount)
   }
 
   return (
@@ -248,6 +266,7 @@ export function SelectTreeCount(props) {
             value={tempTreeCount}
             keyboardType={'number-pad'}
             autoFocus
+            ref={customTreeCountRef}
           />
           <Text
             style={
@@ -263,7 +282,7 @@ export function SelectTreeCount(props) {
           <TouchableOpacity
             onPress={() => {
               setCustomTreeCount(true);
-              props.setTreeCount('');
+              props.setTreeCount(tempTreeCount);
             }}
             style={styles.customSelectorView}
           >

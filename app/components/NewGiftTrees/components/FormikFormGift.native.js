@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
 import { Formik } from 'formik';
-import { TextField } from 'react-native-material-textfield';
+import React, { Component } from 'react';
+import { Image, Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
-import { debug } from '../../../debug';
+import { TextField } from 'react-native-material-textfield';
 import { forward } from '../../../assets';
+import { debug } from '../../../debug';
+import { updateRoute } from '../../../helpers/routerHelper';
+import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
+import i18n from '../../../locales/i18n';
+import giftInvitationFormSchema from '../../../server/formSchemas/giftTrees';
+import buttonStyles from '../../../styles/common/button.native';
 import styles from '../../../styles/competition/competition-form.native';
 import stylesGift from '../../../styles/gifttrees/giftrees';
-import i18n from '../../../locales/i18n';
-import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
-import buttonStyles from '../../../styles/common/button.native';
-import giftInvitationFormSchema from '../../../server/formSchemas/giftTrees';
-import { updateRoute } from '../../../helpers/routerHelper';
 
 export default class FormikFormGift extends Component {
   constructor(props) {
@@ -58,6 +58,19 @@ export default class FormikFormGift extends Component {
       <Formik
         initialValues={props.initialValues}
         onSubmit={values => {
+          this.props.setGiftContextDetails({
+            contextType: 'gift-invitation',
+            giftDetails: [
+              {
+                firstName: values.firstname,
+                lastName: values.lastname,
+                email: values.email,
+                giftMessage: values.message,
+                hasThumbnail: false
+              }
+            ]
+          });
+
           updateRoute('app_gift_projects', props.navigation, 0, {
             context: {
               contextType: 'gift-invitation',
@@ -109,9 +122,7 @@ export default class FormikFormGift extends Component {
                       titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       blurOnSubmit={false}
-                      error={
-                        props.touched.firstname && props.errors.firstname
-                      }
+                      error={props.touched.firstname && props.errors.firstname}
                       onChangeText={props.handleChange('firstname')}
                       onBlur={props.handleBlur('firstname')}
                     />

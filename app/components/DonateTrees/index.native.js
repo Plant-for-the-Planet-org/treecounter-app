@@ -12,12 +12,12 @@ export default function DonateTrees(props) {
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       <DonationDetails
-        treeCost={selectedProject.treeCost}
         selectedProject={selectedProject}
         selectedCurrency={props.determineDefaultCurrency()}
         treeCountOptions={selectedProject && selectedProject.paymentSetup && selectedProject.paymentSetup.treeCountOptions}
         navigation={props.navigation}
         context={props.context}
+        contextActions={props.contextActions}
       />
     </View>
   );

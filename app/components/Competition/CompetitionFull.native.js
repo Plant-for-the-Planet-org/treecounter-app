@@ -1,30 +1,30 @@
 /* eslint-disable no-prototype-builtins */
-import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image } from 'react-native';
-import { debug } from '../../debug';
-import { getImageUrl } from '../../actions/apiRouting';
-import styles from '../../styles/competition/competition-full.native';
-import CardLayout from '../Common/Card';
+import React from 'react';
+import { Image, Text, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getImageUrl } from '../../actions/apiRouting';
 import { fetchCompetitionDetail } from '../../actions/competition';
+import { compCalendar, email } from '../../assets';
+import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import { debug } from '../../debug';
+import i18n from '../../locales/i18n.js';
+import { getContentLoaderState } from '../../reducers/contentloaderReducer';
 import {
   competitionDetailSelector,
   userCompetitionEnrolledSelector,
   userTreecounterSelector
 } from '../../selectors';
-import CompetitionProgressBar from './CompetitionProgressBar';
-import { compCalendar, email } from '../../assets';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import CompetitionParticipant from './CompetitionParticipant.native';
-import SearchUser from '../Challenge/Tabs/SearchUser.native';
-import i18n from '../../locales/i18n.js';
+import styles from '../../styles/competition/competition-full.native';
 import { formatDate } from '../../utils/utils';
+import SearchUser from '../Challenge/Tabs/SearchUser.native';
+import PrimaryButton from '../Common/Button/PrimaryButton';
+import CardLayout from '../Common/Card';
 import snippetStyles from './../../styles/competition/competition-fullNew.native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { getContentLoaderState } from '../../reducers/contentloaderReducer';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import CompetitionParticipant from './CompetitionParticipant.native';
+import CompetitionProgressBar from './CompetitionProgressBar';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -393,6 +393,10 @@ class CompetitionFull extends React.Component {
                                 supportTreecounterAction={
                                   this.props.supportTreecounterAction
                                 }
+                                setSupportDetails={this.props.setSupportDetails}
+                                setDonationContext={
+                                  this.props.setDonationContext
+                                }
                                 key={index}
                               />
                             ) : null
@@ -439,6 +443,10 @@ class CompetitionFull extends React.Component {
                                 cancelInvite={id => this.props.cancelInvite(id)}
                                 supportTreecounterAction={
                                   this.props.supportTreecounterAction
+                                }
+                                setSupportDetails={this.props.setSupportDetails}
+                                setDonationContext={
+                                  this.props.setDonationContext
                                 }
                                 key={index}
                               />
@@ -489,6 +497,10 @@ class CompetitionFull extends React.Component {
                                 supportTreecounterAction={
                                   this.props.supportTreecounterAction
                                 }
+                                setSupportDetails={this.props.setSupportDetails}
+                                setDonationContext={
+                                  this.props.setDonationContext
+                                }
                                 key={index}
                               />
                             ) : null
@@ -531,6 +543,10 @@ class CompetitionFull extends React.Component {
                                 cancelInvite={id => this.props.cancelInvite(id)}
                                 supportTreecounterAction={
                                   this.props.supportTreecounterAction
+                                }
+                                setSupportDetails={this.props.setSupportDetails}
+                                setDonationContext={
+                                  this.props.setDonationContext
                                 }
                                 key={index}
                               />

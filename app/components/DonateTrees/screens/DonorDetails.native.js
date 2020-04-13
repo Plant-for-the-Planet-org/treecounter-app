@@ -39,6 +39,8 @@ export default function DonorDetails(props) {
     };
   }, []);
 
+
+  console.log('Context in Donor Details page', props.navigation.getParam('context'))
   return (
     <View style={{ backgroundColor: 'white', flex: 1 }}>
       <HeaderAnimated
@@ -193,9 +195,8 @@ export default function DonorDetails(props) {
 
       <PaymentOption
         treeCount={props.navigation.getParam('treeCount')}
-        treeCost={props.navigation.getParam('treeCost')}
-        selectedCurrency={props.navigation.getParam('selectedCurrency')}
-        commissionSwitch={props.navigation.getParam('commissionSwitch')}
+        treeCost={props.navigation.getParam('context').projectDetails.amountPerTree}
+        selectedCurrency={props.navigation.getParam('context').projectDetails.currency}
         navigation={props.navigation}
       />
     </View>

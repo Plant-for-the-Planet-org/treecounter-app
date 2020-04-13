@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import {
-  CoverFee,
   NoPlantProjectDetails,
   PaymentOption,
   PlantProjectDetails,
@@ -15,14 +15,27 @@ import {
   TaxReceipt
 } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
+import ProjectModal from '../components/ProjectModal.native';
 
 function DonationDetails(props) {
+  // use centralised context so that we can use this anywhere and can track the changes according
+  // let context = {
+  //   commissionSwitch: false,// if not needed to be a context please use usestate method , commenetd out code below
+  //   taxReceiptSwitch: false,// if not needed to be a context please use usestate method , commenetd out code below
+  //   treeCount: '',// only have proper context in this context object , remove other non context properties from here and use usestate
+  //   frequency: '',
+  //   countryForTax: '',
+  //   ...props.context,
+  // }
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
   const [treeCount, setTreeCount] = React.useState(''); // for Selecting Tree Count
-  const [frequency, setFrequency] = React.useState(''); // for Selecting Frequency of Donations
+  const [frequency, setFrequency] = React.useState('once'); // for Selecting Frequency of Donations
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
+
+  // show hide project modal
+  const [showProjectModal, setProjectModal] = React.useState(false);
 
   // Function for Switching the state of commission
   const toggleSetCommission = value => {
@@ -34,10 +47,41 @@ function DonationDetails(props) {
     setTaxReceiptSwitch(value);
   };
 
-  let context = props.context;
+  let context = { ...props.context };
 
+  const onContinue = () => {
+    // Set Donation Details and then switch the page
+    if (context.contextType === 'direct') {
+      props.contextActions.setDonationDetails({
+        ...props.context.donationDetails,
+        totalTreeCount: treeCount,
+        frequency: frequency,
+        taxReceiptSwitch: taxReceiptSwitch,
+        countryForTax: countryForTax
+      });
+      updateStaticRoute('donor_details_form', props.navigation, {
+        context: props.context,
+        treeCount: treeCount,
+        contextActions: props.contextActions,
+        navigation: props.navigation
+      });
+    }
+  };
+  // console.log()
+  // props.navigation.setParams({ context: context });
+  // console.log('getting updateed context in nav:', props.navigation.getParam('context'))
   return (
     <View style={{ backgroundColor: 'white' }}>
+      <ProjectModal
+        showHideModal={setProjectModal}
+        show={showProjectModal}
+        navigation={props.navigation}
+        handleProjectChange={project => {
+          console.log('project selected', project);
+          setProjectModal(false);
+        }}
+        context={context}
+      />
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
@@ -61,14 +105,18 @@ function DonationDetails(props) {
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>DONATION TO</Text>
           {props.selectedProject ? (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setProjectModal(true);
+              }}
+            >
               <Text style={styles.sectionRightButton}>Change</Text>
             </TouchableOpacity>
           ) : null}
         </View>
         {props.selectedProject ? (
           <PlantProjectDetails
-            treeCost={props.treeCost}
+            treeCost={props.selectedProject.treeCost}
             selectedCurrency={props.selectedCurrency}
             selectedProject={props.selectedProject}
           />
@@ -105,15 +153,15 @@ function DonationDetails(props) {
         <View style={[styles.horizontalDivider, { width: '14%' }]} />
 
         {/* Commission Covering */}
-        {treeCount ? (
+        {/* {context.treeCount ? (
           <CoverFee
             selectedProject={props.selectedProject.tpoSlug}
-            treeCount={treeCount}
+            treeCount={context.treeCount}
             selectedCurrency={props.selectedCurrency}
             toggleSetCommission={toggleSetCommission}
-            commissionSwitch={commissionSwitch}
+            commissionSwitch={context.commissionSwitch}
           />
-        ) : null}
+        ) : null} */}
 
         {/* Tax Receipt */}
         <TaxReceipt
@@ -131,15 +179,14 @@ function DonationDetails(props) {
         {/* <PaymentsProcessedBy/> */}
       </KeyboardAwareScrollView>
 
-      {treeCount ? (
-        <PaymentOption
-          treeCount={treeCount}
-          treeCost={props.treeCost}
-          selectedCurrency={props.selectedCurrency}
-          commissionSwitch={commissionSwitch}
-          navigation={props.navigation}
-        />
-      ) : null}
+      <PaymentOption
+        treeCount={treeCount}
+        treeCost={props.selectedProject.treeCost}
+        selectedCurrency={props.selectedCurrency}
+        commissionSwitch={commissionSwitch}
+        navigation={props.navigation}
+        onContinue={onContinue}
+      />
     </View>
   );
 }
@@ -149,7 +196,6 @@ DonationDetails.propTypes = {
   selectedCurrency: PropTypes.string.isRequired,
   treeCountOptions: PropTypes.object.isRequired,
   selectedTreeCount: PropTypes.number.isRequired,
-  treeCost: PropTypes.number.isRequired,
   rates: PropTypes.object.isRequired,
   fees: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,

@@ -48,7 +48,7 @@ class AnimatedViews extends React.Component {
     return {
       top: 0,
       right: 0,
-      bottom: this.props.isFullMapComponentModal ? this.state.isDetailShow ? 170 : isMapPressed ? 30 : 160 : 0,
+      bottom: this.props.isFullMapComponentModal ? this.state.isDetailShow ? 0 : isMapPressed ? 30 : 160 : 0,
       left: 0
     };
   };
@@ -350,7 +350,7 @@ class AnimatedViews extends React.Component {
           ref={map => (this.mapView = map)}
           customMapStyle={mapStyle}
           provider={PROVIDER_GOOGLE}
-          style={[styles.map, { flex: isDetailShow ? 0.7 : 1, }]}
+          style={[styles.map, { flex: isDetailShow ? 0.3 : 1, }]}
           initialRegion={region}
         >
           {markers
@@ -374,7 +374,7 @@ class AnimatedViews extends React.Component {
           <Animatable.View
             initialNumToRender={markers ? markers.length : undefined}
             animation={isMapPressed ? 'fadeOutDown' : 'fadeInUp'}
-            style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, }]}>
+            style={[styles.swiperCont, { left: this.props.isFullMapComponentModal && !isDetailShow ? 0 : -1000, }]}>
             <Carousel
               initialNumToRender={markers ? markers.length : undefined}
               scrollEnabled={false}

@@ -29,7 +29,7 @@ export default EStyleSheet.create({
     userContributionsDetailsFullViewCont: {
         backgroundColor: 'white',
         width: '100%',
-        height: HEIGHT * 0.60,
+        height: HEIGHT * 0.7,
         position: 'absolute',
         bottom: 0,
     },

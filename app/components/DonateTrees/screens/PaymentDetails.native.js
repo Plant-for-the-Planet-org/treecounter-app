@@ -1,5 +1,6 @@
 import React from 'react';
 import { Animated, Image, Keyboard, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { GooglePay } from 'react-native-google-pay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { applePay, googlePay, paypal, paypalLogo } from '../../../assets';
@@ -11,7 +12,53 @@ import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import CreditCardForm from '../components/CreditCardForm';
 import SepaAccountForm from '../components/SepaAccountForm';
 
+
 export default function DonationStep3(props) {
+  const GooglePayFunction = () => {
+    const allowedCardNetworks = ['VISA', 'MASTERCARD'];
+    const allowedCardAuthMethods = ['PAN_ONLY', 'CRYPTOGRAM_3DS'];
+
+    const requestData = {
+      cardPaymentMethod: {
+        tokenizationSpecification: {
+          type: 'PAYMENT_GATEWAY',
+          // stripe (see Example):
+          gateway: 'stripe',
+          gatewayMerchantId: '',
+          stripe: {
+            publishableKey: 'pk_test_TYooMQauvdEDq54NiTphI7jx',
+            version: '2018-11-08',
+          },
+          // // other:
+          // gateway: 'example',
+          // gatewayMerchantId: 'exampleGatewayMerchantId',
+        },
+        allowedCardNetworks,
+        allowedCardAuthMethods,
+      },
+      transaction: {
+        totalPrice: '10',
+        totalPriceStatus: 'FINAL',
+        currencyCode: 'USD',
+      },
+      merchantName: 'Example Merchant',
+    };
+
+    GooglePay.setEnvironment(GooglePay.ENVIRONMENT_TEST);
+
+    GooglePay.isReadyToPay(allowedCardNetworks, allowedCardAuthMethods)
+      .then((ready) => {
+        if (ready) {
+          // Request payment token
+          GooglePay.requestPayment(requestData)
+            .then((token) => {
+              console.log(token)
+            })
+            .catch((error) => console.log(error.code, error.message));
+        }
+      })
+  }
+
   const [payPalInfo, setPayPalInfo] = React.useState(false)
   const [showPay, setShowPay] = React.useState(true)
   const [allValid, setAllValid] = React.useState(false)
@@ -144,7 +191,7 @@ export default function DonationStep3(props) {
           {/* Google Pay Information Card */}
 
           {Platform.OS === 'ios' ? null : (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => GooglePayFunction()}>
               <View style={styles.paymentCardView}>
                 <View style={styles.paymentModeView}>
                   <Image

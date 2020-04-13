@@ -53,7 +53,7 @@ export default function DonorDetails(props) {
       />
 
       <KeyboardAwareScrollView
-        contentContainerStyle={styles.scrollView}
+        contentContainerStyle={[styles.scrollView, { flex: 1 }]}
         keyboardDismissMode="on-drag"
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollEnabled
@@ -147,14 +147,16 @@ export default function DonorDetails(props) {
                     onBlur={formikProps.handleBlur('email')}
                   />
                 </View>
+                <View style={styles.coverCommissionView}>
+                  <GooglePlacesInput
+                    placeholder={'Address'}
+                    initialValue={
+                      formikProps.values.address ? formikProps.values.address : ''
+                    }
+                    setFieldValue={formikProps.setFieldValue}
+                  />
+                </View>
 
-                <GooglePlacesInput
-                  placeholder={'Address'}
-                  initialValue={
-                    formikProps.values.address ? formikProps.values.address : ''
-                  }
-                  setFieldValue={formikProps.setFieldValue}
-                />
 
                 <View style={styles.coverCommissionView}>
                   <Text style={styles.coverCommissionText}>

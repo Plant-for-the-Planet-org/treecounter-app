@@ -466,7 +466,7 @@ class AnimatedViews extends React.Component {
               itemWidth={screen.width}
             />
           </View>) : null}
-        {this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 0, width: '100%', backgroundColor: '#fff', }}>
+        {this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 30, width: '100%', backgroundColor: '#fff', }}>
           <View style={styles.bottomArrowsCont}>
             <View style={{ flex: 1 }} />
             <View style={{ flexDirection: 'row', }}>

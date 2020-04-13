@@ -167,7 +167,14 @@ class AnimatedViews extends React.Component {
       this.setState({ singleContributionID: id });
     } else {
       if (this.state.singleContributionID) {
-        this.setState({ singleContributionID: undefined, isDetailShow: false, isSatellite: !this.state.isSatellite });
+        this.setState({ singleContributionID: undefined, isDetailShow: false, isSatellite: !this.state.isSatellite }, () => {
+          if (this.props.isFullMapComponentModal) {
+            this.carousel.snapToNext(false)
+            setTimeout(() => {
+              this.carousel.snapToPrev(false)
+            }, 1000)
+          }
+        });
       } else {
         this.carouselDetail.snapToItem(0);
         this.props.toggleIsFullMapComp(true);
@@ -379,6 +386,7 @@ class AnimatedViews extends React.Component {
               initialNumToRender={markers ? markers.length : undefined}
               scrollEnabled={false}
               onSnapToItem={(index) => {
+                console.log('Call while detakils')
                 this.tempDetailsIndex = index + 1;
                 this.setState({ activeIndex: index, }, async () => {
                   await this.toAnimateRegion()

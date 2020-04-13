@@ -1,8 +1,9 @@
 import Geolocation from '@react-native-community/geolocation';
 import React from 'react';
-import { Dimensions, Image, Platform, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, Platform, TouchableOpacity, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MapView, { Marker, ProviderPropType, PROVIDER_GOOGLE } from 'react-native-maps';
+import SafeAreaView from 'react-native-safe-area-view';
 import Carousel from 'react-native-snap-carousel';
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -16,6 +17,7 @@ import { currentUserProfileIdSelector } from '../../selectors/index';
 import styles from '../../styles/UserHome/animated_map';
 import ContributionCard from '../UserContributions/ContributionCard.native';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
+
 
 const screen = Dimensions.get('window');
 const ASPECT_RATIO = screen.width / screen.height;
@@ -214,7 +216,6 @@ class AnimatedViews extends React.Component {
 
   }
 
-
   onPressMarker = async (marker, e) => {
 
     let activeIndex = this.state.markers.findIndex(x => x.id == marker.id)
@@ -381,7 +382,7 @@ class AnimatedViews extends React.Component {
           <Animatable.View
             initialNumToRender={markers ? markers.length : undefined}
             animation={isMapPressed ? 'fadeOutDown' : 'fadeInUp'}
-            style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, bottom: !isDetailShow ? 30 : -2000 }]}>
+            style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, bottom: !isDetailShow ? 0 : -2000 }]}>
             <Carousel
               initialNumToRender={markers ? markers.length : undefined}
               scrollEnabled={false}
@@ -392,7 +393,6 @@ class AnimatedViews extends React.Component {
                   await this.toAnimateRegion()
                 })
               }}
-              // firstItem={activeIndex}
               ref={(c) => { this.carousel = c; }}
               data={markers}
               renderItem={({ item }) => (!isDetailShow ? <ContributionCard
@@ -412,7 +412,7 @@ class AnimatedViews extends React.Component {
             </View>
           </Animatable.View>
         </View>
-        <SafeAreaView />
+        {(!isMapPressed) && <SafeAreaView forceInset={{ bottom: 'never' }} />}
         {this.props.isFullMapComponentModal ? (
           <>
             <TouchableOpacity
@@ -467,7 +467,7 @@ class AnimatedViews extends React.Component {
               itemWidth={screen.width}
             />
           </View>) : null}
-        {this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 30, width: '100%', backgroundColor: '#fff', }}>
+        {this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 0, width: '100%', backgroundColor: '#fff', zIndex: 1000 }}>
           <View style={styles.bottomArrowsCont}>
             <View style={{ flex: 1 }} />
             <View style={{ flexDirection: 'row', }}>
@@ -477,6 +477,8 @@ class AnimatedViews extends React.Component {
           </View>
         </View> : null
         }
+
+
       </View >
     );
   }

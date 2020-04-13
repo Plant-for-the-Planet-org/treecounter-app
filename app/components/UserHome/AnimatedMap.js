@@ -170,10 +170,17 @@ class AnimatedViews extends React.Component {
       if (this.state.singleContributionID) {
         this.setState({ singleContributionID: undefined, isDetailShow: false, isSatellite: !this.state.isSatellite }, () => {
           if (this.props.isFullMapComponentModal) {
-            this.carousel.snapToNext(false)
-            setTimeout(() => {
+            if (this.state.activeIndex == this.state.markers.length - 1) {
               this.carousel.snapToPrev(false)
-            }, 1000)
+              setTimeout(() => {
+                this.carousel.snapToNext()
+              }, 1000)
+            } else {
+              this.carousel.snapToNext(false)
+              setTimeout(() => {
+                this.carousel.snapToPrev()
+              }, 1000)
+            }
           }
         });
       } else {
@@ -386,7 +393,6 @@ class AnimatedViews extends React.Component {
               initialNumToRender={markers ? markers.length : undefined}
               scrollEnabled={false}
               onSnapToItem={(index) => {
-                console.log('Call while detakils')
                 this.tempDetailsIndex = index + 1;
                 this.setState({ activeIndex: index, }, async () => {
                   await this.toAnimateRegion()
@@ -411,7 +417,7 @@ class AnimatedViews extends React.Component {
             </View>
           </Animatable.View>
         </View>
-        {(!isMapPressed) && <SafeAreaView forceInset={{ bottom: 'always' }} />}
+        {this.props.isFullMapComponentModal ? (!isMapPressed) && <SafeAreaView forceInset={{ bottom: 'always' }} /> : null}
         {this.props.isFullMapComponentModal ? (
           <>
             <TouchableOpacity
@@ -466,15 +472,20 @@ class AnimatedViews extends React.Component {
               itemWidth={screen.width}
             />
           </View>) : null}
-        {this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 30, width: '100%', backgroundColor: '#fff', }}>
-          <View style={styles.bottomArrowsCont}>
+        {this.state.isDetailShow ?
+          <SafeAreaView forceInset={{ flex: 1, bottom: 'always' }} style={{ position: 'absolute', bottom: 0, right: 0, width: '100%', backgroundColor: '#fff', }}>
             <View style={{ flex: 1 }} />
-            <View style={{ flexDirection: 'row', }}>
-              <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back', 'set-id')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
-              <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next', 'set-id')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
+            <View>
+              <View style={styles.bottomArrowsCont}>
+                <View style={{ flex: 1 }} />
+                <View style={{ flexDirection: 'row', }}>
+                  <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back', 'set-id')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next', 'set-id')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
+                </View>
+              </View>
             </View>
-          </View>
-        </View> : null
+          </SafeAreaView>
+          : null
         }
       </View >
     );

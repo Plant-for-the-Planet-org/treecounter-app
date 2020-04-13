@@ -18,7 +18,6 @@ import styles from '../../styles/UserHome/animated_map';
 import ContributionCard from '../UserContributions/ContributionCard.native';
 import UserContributionsDetails from '../UserContributions/ContributionDetails/index.native';
 
-
 const screen = Dimensions.get('window');
 const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
@@ -412,7 +411,7 @@ class AnimatedViews extends React.Component {
             </View>
           </Animatable.View>
         </View>
-        {(!isMapPressed) && <SafeAreaView forceInset={{ bottom: 'never' }} />}
+        {(!isMapPressed) && <SafeAreaView forceInset={{ bottom: 'always' }} />}
         {this.props.isFullMapComponentModal ? (
           <>
             <TouchableOpacity
@@ -467,7 +466,7 @@ class AnimatedViews extends React.Component {
               itemWidth={screen.width}
             />
           </View>) : null}
-        {this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 0, width: '100%', backgroundColor: '#fff', zIndex: 1000 }}>
+        {this.state.isDetailShow ? <View style={{ position: 'absolute', bottom: 0, width: '100%', backgroundColor: '#fff', }}>
           <View style={styles.bottomArrowsCont}>
             <View style={{ flex: 1 }} />
             <View style={{ flexDirection: 'row', }}>
@@ -477,8 +476,6 @@ class AnimatedViews extends React.Component {
           </View>
         </View> : null
         }
-
-
       </View >
     );
   }

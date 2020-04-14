@@ -221,8 +221,8 @@ class AnimatedViews extends React.Component {
 
   }
 
-  onPressMarker = async (marker, e) => {
-
+  onPressMarker = async (marker, e, index) => {
+    console.log(this.state.markers[index])
     let activeIndex = this.state.markers.findIndex(x => x.id == marker.id)
     let activeIndexInTempMarkers = this.tempMarkers.findIndex(x => x.id == marker.id)
     this.tempDetailsIndex = activeIndexInTempMarkers;
@@ -349,6 +349,7 @@ class AnimatedViews extends React.Component {
       this.tempMarkers.unshift(markers[0])
       this.isFirstTime = false;
     }
+    console.log(this.state.markers)
     return (
       <View style={styles.container}>
         <MapView
@@ -367,10 +368,10 @@ class AnimatedViews extends React.Component {
           initialRegion={region}
         >
           {markers
-            ? markers.map(marker => (
+            ? markers.map((marker, index) => (
               <Marker
-                tracksViewChanges={false}
-                onPress={({ nativeEvent }) => this.onPressMarker(marker, { nativeEvent })}
+                // tracksViewChanges={false}
+                onPress={({ nativeEvent }) => this.onPressMarker(marker, { nativeEvent }, index)}
                 identifier={String(marker.id)}
                 key={marker.id}
                 coordinate={{
@@ -410,8 +411,8 @@ class AnimatedViews extends React.Component {
             <View style={styles.bottomArrowsCont}>
               <View style={{ flex: 1 }} />
               <View style={{ flexDirection: 'row', }}>
-                <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
-                <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} /></TouchableOpacity>
+                <TouchableOpacity disabled={this.tempDetailsIndex == 1} onPress={() => this.onPressNextPrevBtn('back')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+                <TouchableOpacity disabled={this.tempDetailsIndex == this.tempMarkers.length - 1} onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} /></TouchableOpacity>
               </View>
             </View>
           </Animatable.View>
@@ -478,8 +479,8 @@ class AnimatedViews extends React.Component {
               <View style={styles.bottomArrowsCont}>
                 <View style={{ flex: 1 }} />
                 <View style={{ flexDirection: 'row', }}>
-                  <TouchableOpacity onPress={() => this.onPressNextPrevBtn('back', 'set-id')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
-                  <TouchableOpacity onPress={() => this.onPressNextPrevBtn('next', 'set-id')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
+                  <TouchableOpacity disabled={this.tempDetailsIndex == 1} onPress={() => this.onPressNextPrevBtn('back', 'set-id')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+                  <TouchableOpacity disabled={this.tempDetailsIndex == this.tempMarkers.length - 1} onPress={() => this.onPressNextPrevBtn('next', 'set-id')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} style={{}} /></TouchableOpacity>
                 </View>
               </View>
             </View>

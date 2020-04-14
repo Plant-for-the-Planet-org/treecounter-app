@@ -280,7 +280,6 @@ class UserHome extends Component {
   };
 
   onPressSingleContribution = async (singleContObj) => {
-    console.log(' // onPressSingleContribution')
     if (!this.state.isCardPressed) {
       await this.setState({ singleContributionID: singleContObj.id, isPressFromList: true, isCardPressed: true }, async () => {
         await this.toggleIsFullMapComp();
@@ -290,6 +289,20 @@ class UserHome extends Component {
       });
     }
   };
+
+  // isCardPressed = false;
+
+  // onPressSingleContribution = async (singleContObj) => {
+  //   console.log(this.isCardPressed, 't1his.isCardPressed')
+  //   if (!this.isCardPressed) {
+  //     this.isCardPressed = true;
+  //     console.log(this.isCardPressed, '2 this.isCardPressed')
+  //     await this.setState({ singleContributionID: singleContObj.id, isPressFromList: true }, async () => {
+  //       await this.toggleIsFullMapComp();
+  //       this.isCardPressed = false;
+  //     });
+  //   }
+  // };
 
   onPressMapView = () => {
     this.setState({ isMapPressed: !this.state.isMapPressed }, () => {

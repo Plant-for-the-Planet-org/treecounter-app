@@ -6,7 +6,7 @@ import MapView, { Marker, ProviderPropType, PROVIDER_GOOGLE } from 'react-native
 import Carousel from 'react-native-snap-carousel';
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteContribution } from '../../actions/EditMyTree';
@@ -221,18 +221,16 @@ class AnimatedViews extends React.Component {
 
   }
 
-  onPressMarker = async (marker, e, index) => {
+  onPressMarker = async (marker, e) => {
 
     let isCoordinatesMatch = this.state.markers[this.state.activeIndex].geoLatitude == marker.geoLatitude && this.state.markers[this.state.activeIndex].geoLongitude == marker.geoLongitude;
-    console.log(isCoordinatesMatch, 'isCoordinatesMatchisCoordinatesMatch')
 
     const pressMarker = (activeIndex) => {
       if (activeIndex > -1) {
-        activeIndex = activeIndex
+        // Do nothing
       } else {
         activeIndex = this.state.markers.findIndex(x => x.id == marker.id)
       }
-      console.log(activeIndex, 'activeIndexactiveIndex')
       let activeIndexInTempMarkers = this.tempMarkers.findIndex(x => x.id == marker.id)
       this.tempDetailsIndex = activeIndexInTempMarkers;
 
@@ -286,7 +284,6 @@ class AnimatedViews extends React.Component {
 
       } else {
         // use param marker
-        console.log('tw param wala marker open karna he')
         pressMarker()
       }
     }
@@ -380,7 +377,6 @@ class AnimatedViews extends React.Component {
       this.tempMarkers.unshift(markers[0])
       this.isFirstTime = false;
     }
-    console.log(this.state.markers)
     return (
       <View style={styles.container}>
         <MapView
@@ -399,10 +395,10 @@ class AnimatedViews extends React.Component {
           initialRegion={region}
         >
           {markers
-            ? markers.map((marker, index) => (
+            ? markers.map((marker) => (
               <Marker
                 // tracksViewChanges={false}
-                onPress={({ nativeEvent }) => this.onPressMarker(marker, { nativeEvent }, index)}
+                onPress={({ nativeEvent }) => this.onPressMarker(marker, { nativeEvent })}
                 identifier={String(marker.id)}
                 key={marker.id}
                 coordinate={{

@@ -2,17 +2,15 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Dimensions, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from 'react-navigation';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
-import { multiple_trees } from '../../assets/index';
+import { multiple_trees, tree_1 } from '../../assets/index';
 import TouchableItem from '../../components/Common/TouchableItem';
 import { getISOToCountryName } from '../../helpers/utils';
 import i18n from '../../locales/i18n.js';
 import styles, { myTreesStyle } from '../../styles/myTrees/user_contribution_card';
 import { delimitNumbers, formatDate } from '../../utils/utils';
-
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -239,13 +237,13 @@ class ContributionCard extends React.Component {
   }
 
   getTreeImage = (treeCount) => {
-    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <MIcon size={30} color={'#95c243'} name={'tree'} />;
+    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
   }
 
   donateActionLine = (plantDate) => {
     return `Donated on ${plantDate}`
   }
-  giftActionLine = (plantDate, givee, ) => {
+  giftActionLine = (plantDate, givee, giveeSlug) => {
     return `Gifted on ${plantDate} to ${givee}`
   }
   render() {
@@ -261,101 +259,21 @@ class ContributionCard extends React.Component {
       cardType,
       contributionType,
       redemptionDate,
+      treeSpecies,
       isGift,
-      redemptionCode,
-      giver,
-      giverSlug,
-      treeType,
+      registrationDate,
+      redemptionCode
     } = contribution;
-
-    // HeaderText -----
-    let headerText = undefined;
-    // let contributionPersonPrefix = undefined;
-    // let contributionPerson = undefined;
-    // let contributionPersonSlug = undefined;
-
-    if (treeType === null) {
-      if (treeCount > 1) {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          i18n.t('label.usr_contribution_tree');
-      } else {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          i18n.t('label.usr_contribution_single_tree');
-      }
-    } else if (treeType !== null) {
-      if (treeCount > 1) {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          treeType.charAt(0).toUpperCase() +
-          treeType.slice(1) +
-          ' ' +
-          i18n.t('label.usr_contribution_tree');
-      } else {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          treeType.charAt(0).toUpperCase() +
-          treeType.slice(1) +
-          ' ' +
-          i18n.t('label.usr_contribution_single_tree');
-      }
-    }
-    if (cardType === 'donation') {
-      headerText = headerText + ' ' + i18n.t('label.donated');
-    }
-
-    if (isGift && givee) {
-      // if contribution type is planting and id Gift = true then contribution
-      // is dedicated
-      if (contributionType === 'planting') {
-        // contributionPersonPrefix = i18n.t(
-        //   'label.usr_contribution_dedicated_to'
-        // );
-      }
-      // contribution is gifted if contribution type is not planting
-      // and adds gifted to header text
-      else {
-        headerText = headerText + ' ' + i18n.t('label.gifted');
-        // contributionPersonPrefix = i18n.t('label.usr_contribution_to');
-      }
-      // sets the contribution person name
-      // contributionPerson = givee;
-
-      // sets slug if available
-      if (giveeSlug) {
-        // contributionPersonSlug = giveeSlug;
-      }
-    }
-    if (giver) {
-      // contributionPerson = giver;
-      headerText = headerText + ' ' + i18n.t('label.received');
-      // contributionPersonPrefix = i18n.t('label.usr_contribution_from');
-      if (giverSlug) {
-        // contributionPersonSlug = giverSlug;
-      }
-    }
-
-    // if there's redemptionCode the contribution type is set to redeemed
-    if (redemptionCode && givee) {
-      headerText = headerText + ' ' + i18n.t('label.usr_contribution_redeemed');
-    }
-    // HEader Text End 
-
-
-
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };
     // });
     // let seeLabel = classnames('see-more-label-style', {
     //   'see-more__active': this.state.viewExpanded
     // });
-    // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
+    console.log("contribution=", contribution)
+    let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
+    // console.log(plantProjectName, 'plantProjectLine')
     // let donateActionLine = this.donateActionLine(
     //   isGift,
     //   plantDate,
@@ -365,12 +283,35 @@ class ContributionCard extends React.Component {
     let tpoLine = this.tpoLine(tpoName);
     // let plantActionLine = this.plantActionLine(plantDate, registrationDate);
     let dedicateActionLine = this.dedicateActionLine(isGift, givee, giveeSlug);
-    // let redeemActionLine = this.redeemActionLine(
-    //   redemptionCode,
-    //   redemptionDate,
-    //   givee,
-    //   giveeSlug
-    // );
+    let redeemActionLine = this.redeemActionLine(
+      redemptionCode,
+      redemptionDate,
+      givee,
+      giveeSlug
+    );
+
+    if (contributionType === 'donation') {
+      console.log(' ------ donation start----------')
+      console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
+      console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
+      console.log('donateActionLine =', this.donateActionLine(plantDate))
+      console.log('GiftActionLine =', this.giftActionLine(plantDate, givee, giveeSlug))
+      console.log('tpoLine =', this.tpoLine(tpoName))
+      console.log(' ------ donation End----------')
+    }
+    if (contributionType == 'planting') {
+      console.log(' ------ planting start----------')
+      console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
+      console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
+
+      console.log('plantActionLine =', this.plantActionLine(plantDate, registrationDate))
+
+      console.log('dedicateActionLine =', this.dedicateActionLine(isGift, givee, giveeSlug))
+      console.log('tpoLine =', this.tpoLine(tpoName))
+      console.log(' ------ planting End----------')
+    }
+    console.log(redeemActionLine, 'redeemActionLine')
+
 
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
     let borderColor =
@@ -405,7 +346,7 @@ class ContributionCard extends React.Component {
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    {headerText}
+                    {i18n.t('label.tree_donation')}
                   </Text>
                   <View style={styles.row2}>
                     <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
@@ -438,7 +379,7 @@ class ContributionCard extends React.Component {
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    {headerText}
+                    {i18n.t('label.registered_trees')}
                   </Text>
                   <Text style={styles.redeemObjectSubTitle}>
                     {plantProjectLine}
@@ -484,7 +425,7 @@ class ContributionCard extends React.Component {
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    {headerText}
+                    {i18n.t('label.redeemed_trees')}
                   </Text>
                   <View style={styles.row2}>
                     <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>

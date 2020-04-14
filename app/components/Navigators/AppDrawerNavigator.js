@@ -206,7 +206,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTreesContainer,
-        navigationOptions: { tabBarVisible: false }
+        navigationOptions: { tabBarVisible: false },
+        path: 'gift-trees/'
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer

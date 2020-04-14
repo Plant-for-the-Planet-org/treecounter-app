@@ -172,13 +172,13 @@ class AnimatedViews extends React.Component {
             if (this.state.activeIndex == this.state.markers.length - 1) {
               this.carousel.snapToPrev(false)
               setTimeout(() => {
-                this.carousel.snapToNext()
-              }, 1000)
+                this.carousel.snapToNext(false)
+              }, 500)
             } else {
               this.carousel.snapToNext(false)
               setTimeout(() => {
-                this.carousel.snapToPrev()
-              }, 1000)
+                this.carousel.snapToPrev(false)
+              }, 500)
             }
           }
         });
@@ -222,45 +222,76 @@ class AnimatedViews extends React.Component {
   }
 
   onPressMarker = async (marker, e, index) => {
-    console.log(this.state.markers[index])
-    let activeIndex = this.state.markers.findIndex(x => x.id == marker.id)
-    let activeIndexInTempMarkers = this.tempMarkers.findIndex(x => x.id == marker.id)
-    this.tempDetailsIndex = activeIndexInTempMarkers;
 
-    if (activeIndex !== this.state.activeIndex) {
-      this.setState({ activeIndex: activeIndex })
-      this.carousel.snapToItem(activeIndex)
-      this.carouselDetail.snapToItem(activeIndex)
-    }
-    let action = e.nativeEvent.action;
-    if (this.props.isFullMapComponentModal && this.state.singleContributionID == null && action == 'marker-press') {
-      this.setState({ isDetailShow: true, isSatellite: true }, () => {
-        if (activeIndex == 0) {
-          this.tempDetailsIndex = 1
-          setTimeout(() => {
-            this.carouselDetail.snapToItem(this.tempDetailsIndex, false)
-          }, 500)
-        } else {
-          this.tempDetailsIndex = activeIndexInTempMarkers
-          this.carouselDetail.snapToItem(this.tempDetailsIndex, activeIndex == 0 ? false : true)
+    let isCoordinatesMatch = this.state.markers[this.state.activeIndex].geoLatitude == marker.geoLatitude && this.state.markers[this.state.activeIndex].geoLongitude == marker.geoLongitude;
+    console.log(isCoordinatesMatch, 'isCoordinatesMatchisCoordinatesMatch')
+
+    const pressMarker = (activeIndex) => {
+      if (activeIndex > -1) {
+        activeIndex = activeIndex
+      } else {
+        activeIndex = this.state.markers.findIndex(x => x.id == marker.id)
+      }
+      console.log(activeIndex, 'activeIndexactiveIndex')
+      let activeIndexInTempMarkers = this.tempMarkers.findIndex(x => x.id == marker.id)
+      this.tempDetailsIndex = activeIndexInTempMarkers;
+
+      if (activeIndex !== this.state.activeIndex) {
+        this.setState({ activeIndex: activeIndex })
+        this.carousel.snapToItem(activeIndex)
+        this.carouselDetail.snapToItem(activeIndex)
+      }
+
+      let action = e.nativeEvent.action;
+
+      if (this.props.isFullMapComponentModal && this.state.singleContributionID == null && action == 'marker-press') {
+        this.setState({ isDetailShow: true, isSatellite: true }, () => {
+          if (activeIndex == 0) {
+            this.tempDetailsIndex = 1
+            setTimeout(() => {
+              this.carouselDetail.snapToItem(this.tempDetailsIndex, false)
+            }, 500)
+          } else {
+            this.tempDetailsIndex = activeIndexInTempMarkers
+            this.carouselDetail.snapToItem(this.tempDetailsIndex, activeIndex == 0 ? false : true)
+          }
+        })
+        this.onPressHeader(marker.id)
+        const oneContribution = marker;
+        try {
+          this.mapView.animateToRegion(
+            {
+              latitude: oneContribution.geoLatitude,
+              longitude: oneContribution.geoLongitude,
+              latitudeDelta: 0.00095,
+              longitudeDelta: 0.0095
+            },
+            500
+          );
+        } catch (e) {
+          // Do thing
         }
-      })
-      this.onPressHeader(marker.id)
-      const oneContribution = marker;
-      try {
-        this.mapView.animateToRegion(
-          {
-            latitude: oneContribution.geoLatitude,
-            longitude: oneContribution.geoLongitude,
-            latitudeDelta: 0.00095,
-            longitudeDelta: 0.0095
-          },
-          500
-        );
-      } catch (e) {
-        // Do thing
       }
     }
+
+    if (this.state.isDetailShow) {
+      if (!isCoordinatesMatch) {
+        // use activeIndex
+        pressMarker()
+      }
+    } else {
+      if (isCoordinatesMatch) {
+        // use activeIndex
+        pressMarker(this.state.activeIndex)
+
+      } else {
+        // use param marker
+        console.log('tw param wala marker open karna he')
+        pressMarker()
+      }
+    }
+
+
   }
 
   getTreeImage = (treeCount) => {

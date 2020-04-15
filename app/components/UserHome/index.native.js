@@ -243,10 +243,18 @@ class UserHome extends Component {
     // }, 300)
   };
 
+  onPressFullScreen = () => {
+    this.setState({ isCardPressed: true }, async () => {
+      await this.toggleIsFullMapComp()
+      setTimeout(() => {
+        this.setState({ isCardPressed: false })
+      }, 1000)
+    })
+  }
   getMapComponent = () => {
     let fullScreenIcon = (
       <TouchableOpacity
-        onPress={this.toggleIsFullMapComp}
+        onPress={this.onPressFullScreen}
         style={styles.fullScreenIcon}
       >
         <Image source={fullscreen_icon} />

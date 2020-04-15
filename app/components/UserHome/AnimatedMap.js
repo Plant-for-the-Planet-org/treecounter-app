@@ -222,7 +222,9 @@ class AnimatedViews extends React.Component {
   }
 
   onPressMarker = async (marker, e) => {
-
+    if (!this.props.isFullMapComponentModal) {
+      return;
+    }
     let isCoordinatesMatch = this.state.markers[this.state.activeIndex].geoLatitude == marker.geoLatitude && this.state.markers[this.state.activeIndex].geoLongitude == marker.geoLongitude;
 
     const pressMarker = (activeIndex) => {
@@ -415,7 +417,7 @@ class AnimatedViews extends React.Component {
           <Animatable.View
             initialNumToRender={markers ? markers.length : undefined}
             animation={isMapPressed ? 'fadeOutDown' : 'fadeInUp'}
-            style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, bottom: !isDetailShow ? 0 : -2000 }]}>
+            style={[styles.swiperCont, { left: this.props.isFullMapComponentModal ? 0 : -1000, bottom: !isDetailShow ? (Platform.OS == 'ios' ? 0 : 25) : -2000 }]}>
             <Carousel
               initialNumToRender={markers ? markers.length : undefined}
               scrollEnabled={false}
@@ -483,7 +485,7 @@ class AnimatedViews extends React.Component {
                 let prevIndex = this.tempDetailsIndex - 1;
                 let nxtIndex = this.tempDetailsIndex + 1;
                 return (
-                  index >= prevIndex && index <= nxtIndex ?
+                  isDetailShow ? index >= prevIndex && index <= nxtIndex ?
                     <UserContributionsDetails
                       isDetailShow={isDetailShow}
                       key={item.id}
@@ -493,14 +495,14 @@ class AnimatedViews extends React.Component {
                       contribution={item}
                       plantProjects={this.props.plantProjects}
                       deleteContribution={this.props.deleteContribution}
-                    /> : null)
+                    /> : null : null)
               }}
               sliderWidth={screen.width}
               itemWidth={screen.width}
             />
           </View>) : null}
         {this.state.isDetailShow ?
-          <SafeAreaView forceInset={{ flex: 1, bottom: 'always' }} style={{ position: 'absolute', bottom: 0, right: 0, width: '100%', backgroundColor: '#fff', }}>
+          <SafeAreaView forceInset={{ flex: 1, bottom: 'always' }} style={{ position: 'absolute', bottom: (Platform.OS == 'ios' ? 0 : 25), right: 0, width: '100%', backgroundColor: '#fff', }}>
             <View style={{ flex: 1 }} />
             <View>
               <View style={styles.bottomArrowsCont}>

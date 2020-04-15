@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Dimensions, findNodeHandle, FlatList, Image, LayoutAnimation, Linking, Platform, RefreshControl, ScrollView, Share, Text, TouchableOpacity, UIManager, View } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
+import { SafeAreaView } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
 import { fullscreen_icon } from '../../assets/index';
 import { debug } from '../../debug';
@@ -305,8 +305,10 @@ class UserHome extends Component {
   // };
 
   onPressMapView = () => {
-    this.setState({ isMapPressed: !this.state.isMapPressed }, () => {
-    })
+    if (this.state.isFullMapComponentModal) {
+      this.setState({ isMapPressed: !this.state.isMapPressed }, () => {
+      })
+    }
   }
 
   getWholeComponent() {
@@ -530,6 +532,7 @@ class UserHome extends Component {
               </Text>
               {this.getMapComponent()}
               <ContributionCardList
+                isCardPressed={this.state.isCardPressed}
                 onPressSingleContribution={this.onPressSingleContribution}
                 contributions={this.props.userContributions}
                 deleteContribution={this.props.deleteContribution}

@@ -240,12 +240,7 @@ class ContributionCard extends React.Component {
     return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
   }
 
-  donateActionLine = (plantDate) => {
-    return `Donated on ${plantDate}`
-  }
-  giftActionLine = (plantDate, givee) => {
-    return `Gifted on ${plantDate} to ${givee}`
-  }
+
   render() {
     let { contribution } = this.props;
     let {
@@ -289,30 +284,6 @@ class ContributionCard extends React.Component {
     //   givee,
     //   giveeSlug
     // );
-
-    if (contributionType === 'donation') {
-      // console.log(' ------ donation start----------')
-      // console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
-      // console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
-      // console.log('donateActionLine =', this.donateActionLine(plantDate))
-      // console.log('GiftActionLine =', this.giftActionLine(plantDate, givee, giveeSlug))
-      // console.log('tpoLine =', this.tpoLine(tpoName))
-      // console.log(' ------ donation End----------')
-    }
-    if (contributionType == 'planting') {
-      // console.log(' ------ planting start----------')
-      // console.log('treeCountLine =', this.treeCountLine(treeCount, treeSpecies))
-      // console.log('plantProjectLine =', this.plantProjectLine(plantProjectName, country))
-
-      // console.log('plantActionLine =', this.plantActionLine(plantDate, registrationDate))
-
-      // console.log('dedicateActionLine =', this.dedicateActionLine(isGift, givee, giveeSlug))
-      // console.log('tpoLine =', this.tpoLine(tpoName))
-      // console.log(' ------ planting End----------')
-    }
-    // console.log(redeemActionLine, 'redeemActionLine')
-
-
     let labelColor = cardType === 'pending' ? '#e6e6e6' : '#95c243';
     let borderColor =
       contributionType == 'donation'
@@ -323,12 +294,14 @@ class ContributionCard extends React.Component {
 
     let styles = myTreesStyle(labelColor, borderColor);
     let singleRedeemObject = [styles.singleRedeemObject, { borderBottomWidth: this.props.isFromAnimatredCardList ? 0 : 1 }]
+    let { isCardPressed } = this.props;
     let renderCard = () => {
       const { isFromAnimatredCardList } = this.props
       if (contributionType === 'donation') {
 
         return (
           <TouchableOpacity
+            disabled={isCardPressed}
             style={singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution);
@@ -363,6 +336,7 @@ class ContributionCard extends React.Component {
       } else if (contributionType === 'planting') {
         return (
           <TouchableOpacity
+            disabled={isCardPressed}
             style={singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution);
@@ -408,6 +382,7 @@ class ContributionCard extends React.Component {
       } else if (contribution.type === 'tpo-coupon') {
         return (
           <TouchableOpacity
+            disabled={isCardPressed}
             style={singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution);
@@ -442,6 +417,7 @@ class ContributionCard extends React.Component {
       } else {
         return (
           <TouchableOpacity
+            disabled={isCardPressed}
             style={singleRedeemObject}
             onPress={() => {
               this.props.onPressSingleContribution(contribution);

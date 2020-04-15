@@ -265,10 +265,8 @@ class ContributionCard extends React.Component {
     // let seeLabel = classnames('see-more-label-style', {
     //   'see-more__active': this.state.viewExpanded
     // });
-    // console.log("contribution=", contribution)
     // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
-    // console.log(plantProjectName, 'plantProjectLine')
     // let donateActionLine = this.donateActionLine(
     //   isGift,
     //   plantDate,

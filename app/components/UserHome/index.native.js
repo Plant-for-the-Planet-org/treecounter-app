@@ -243,14 +243,15 @@ class UserHome extends Component {
     // }, 300)
   };
 
-  onPressFullScreen = () => {
-    this.setState({ isCardPressed: true }, async () => {
-      await this.toggleIsFullMapComp()
+  onPressFullScreen = (e) => {
+    this.setState({ isCardPressed: true }, () => {
+      this.toggleIsFullMapComp(e)
       setTimeout(() => {
         this.setState({ isCardPressed: false })
       }, 1000)
     })
   }
+
   getMapComponent = () => {
     let fullScreenIcon = (
       <TouchableOpacity
@@ -297,20 +298,6 @@ class UserHome extends Component {
       });
     }
   };
-
-  // isCardPressed = false;
-
-  // onPressSingleContribution = async (singleContObj) => {
-  //   console.log(this.isCardPressed, 't1his.isCardPressed')
-  //   if (!this.isCardPressed) {
-  //     this.isCardPressed = true;
-  //     console.log(this.isCardPressed, '2 this.isCardPressed')
-  //     await this.setState({ singleContributionID: singleContObj.id, isPressFromList: true }, async () => {
-  //       await this.toggleIsFullMapComp();
-  //       this.isCardPressed = false;
-  //     });
-  //   }
-  // };
 
   onPressMapView = () => {
     if (this.state.isFullMapComponentModal) {

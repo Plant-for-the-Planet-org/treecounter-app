@@ -15,7 +15,6 @@ export default EStyleSheet.create({
     swiperCont: {
         width: '100%',
         height: 130,
-        bottom: 30,
         backgroundColor: '#fff',
         position: 'absolute'
     },

@@ -4,7 +4,7 @@
   "javascript.format.enable": true,
   "java.configuration.updateBuildConfiguration": "automatic",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": false
   },
   "eslint.workingDirectories": ["./"]
 }

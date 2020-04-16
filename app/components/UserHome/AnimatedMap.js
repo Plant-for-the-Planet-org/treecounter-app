@@ -102,6 +102,12 @@ class AnimatedViews extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
+
+    if (nextProps.userContributions.length !== this.state.markers.length) {
+      this.isFirstTime = true;
+      this.setState({ markers: nextProps.userContributions })
+    }
+
     if (this.state.singleContributionID == null) {
       if (nextProps.singleContributionID !== this.state.singleContributionID) {
         this.setState(
@@ -358,6 +364,25 @@ class AnimatedViews extends React.Component {
     }
   }
 
+  afterDeleteContribution = () => {
+    setTimeout(() => {
+      const oneContribution = this.state.markers[this.state.activeIndex + 1];
+      try {
+        this.mapView.animateToRegion(
+          {
+            latitude: oneContribution.geoLatitude,
+            longitude: oneContribution.geoLongitude,
+            latitudeDelta: 0.00095,
+            longitudeDelta: 0.0095
+          },
+          800
+        );
+      } catch (e) {
+        // Do thing
+      }
+    }, 3500)
+  }
+
   isFirstTime = true;
   tempMarkers = [];
   tempDetailsIndex = 1;
@@ -478,6 +503,7 @@ class AnimatedViews extends React.Component {
               scrollEnabled={false}
               onSnapToItem={(index) => {
                 this.tempDetailsIndex = index;
+
               }}
               ref={(c) => { this.carouselDetail = c; }}
               data={this.tempMarkers}
@@ -487,6 +513,7 @@ class AnimatedViews extends React.Component {
                 return (
                   isDetailShow ? index >= prevIndex && index <= nxtIndex ?
                     <UserContributionsDetails
+                      afterDeleteContribution={this.afterDeleteContribution}
                       isDetailShow={isDetailShow}
                       key={item.id}
                       isFromUserProfile

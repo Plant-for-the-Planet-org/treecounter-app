@@ -260,7 +260,7 @@ class UserContributionsDetails extends React.Component {
                 this.props.contribution.id,
                 this.props.navigation
               );
-              this.props.navigation.goBack();
+              this.props.afterDeleteContribution()
             }}
             onClickEdit={() => {
               this.props.navigation.navigate(getLocalRoute('app_editTrees'), {

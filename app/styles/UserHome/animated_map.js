@@ -16,7 +16,8 @@ export default EStyleSheet.create({
         width: '100%',
         height: 130,
         backgroundColor: '#fff',
-        position: 'absolute'
+        position: 'absolute',
+        bottom: 0
     },
     multipleTrees: {
         height: 40, width: 30,

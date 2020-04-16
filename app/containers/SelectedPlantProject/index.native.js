@@ -80,6 +80,7 @@ const SelectedPlantProjectContainer = props => {
       tpoName={props.selectedTpo ? props.selectedTpo.name : null}
       selectProject={id => selectProject(id)}
       currentUserProfile={props.currentUserProfile}
+      donationContext={props.donationDetails}
     />
   );
 };
@@ -92,7 +93,8 @@ const mapStateToProps = state => ({
   selectedProject: selectedPlantProjectSelector(state),
   selectedTpo: selectedTpoSelector(state),
   currentUserProfile: currentUserProfileSelector(state),
-  selectedPlantProjectId: selectedPlantProjectIdSelector(state)
+  selectedPlantProjectId: selectedPlantProjectIdSelector(state),
+  donationDetails: state.donations.donationDetails
 });
 
 const mapDispatchToProps = dispatch => {

@@ -5,16 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
-import {
-  NoPlantProjectDetails,
-  PaymentOption,
-  PlantProjectDetails,
-  SelectCountryModal,
-  SelectFrequency,
-  SelectTreeCount,
-  SupportUserDetails,
-  TaxReceipt
-} from '../components/donationComponents.native';
+import { NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectCountryModal, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
 
@@ -53,17 +44,22 @@ function DonationDetails(props) {
   };
 
   let context = { ...props.context };
-
-  const onContinue = () => {
-    // Set Donation Details and then switch the page
+  const saveContext = () => {
     if (context.contextType === 'direct') {
       props.contextActions.setDonationDetails({
         ...props.context.donationDetails,
+        selectedProject: props.selectedProject,
         totalTreeCount: treeCount,
         frequency: frequency,
         taxReceiptSwitch: taxReceiptSwitch,
         countryForTax: countryForTax
       });
+    }
+  }
+  const onContinue = () => {
+    // Set Donation Details and then switch the page
+    if (context.contextType === 'direct') {
+      saveContext();
       updateStaticRoute('donor_details_form', props.navigation, {
         navigation: props.navigation
       });
@@ -75,14 +71,12 @@ function DonationDetails(props) {
   return (
     <View style={{ backgroundColor: 'white' }}>
       <ProjectModal
-        showHideModal={setProjectModal}
+        hideModal={setProjectModal}
         show={showProjectModal}
         navigation={props.navigation}
         handleProjectChange={project => {
-          console.log('project selected', project);
           setProjectModal(false);
         }}
-        context={context}
       />
 
       <HeaderAnimated
@@ -110,6 +104,7 @@ function DonationDetails(props) {
           {props.selectedProject ? (
             <TouchableOpacity
               onPress={() => {
+                saveContext();
                 setProjectModal(true);
               }}
             >
@@ -124,8 +119,8 @@ function DonationDetails(props) {
             selectedProject={props.selectedProject}
           />
         ) : (
-          <NoPlantProjectDetails />
-        )}
+            <NoPlantProjectDetails />
+          )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -143,14 +138,14 @@ function DonationDetails(props) {
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-        context.contextType === 'gift-invitation' ? (
-          <GiftTreesComponent
-            treeCount={treeCount}
-            setTreeCount={setTreeCount}
-            selectedProject={props.selectedProject}
-            context={context}
-          />
-        ) : null}
+          context.contextType === 'gift-invitation' ? (
+            <GiftTreesComponent
+              treeCount={treeCount}
+              setTreeCount={setTreeCount}
+              selectedProject={props.selectedProject}
+              context={context}
+            />
+          ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
         <View style={[styles.horizontalDivider, { width: '14%' }]} />

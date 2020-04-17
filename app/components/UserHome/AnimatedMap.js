@@ -175,7 +175,7 @@ class AnimatedViews extends React.Component {
       this.setState({ singleContributionID: id });
     } else {
       if (this.state.singleContributionID) {
-        this.setState({ singleContributionID: undefined, isDetailShow: false, isSatellite: !this.state.isSatellite }, () => {
+        this.setState({ singleContributionID: undefined, isDetailShow: false, isSatellite: false }, () => {
           setTimeout(() => {
             this.carousel.scrollToIndex({ index: this.state.activeIndex, animated: false });
           }, 100)

@@ -25,14 +25,17 @@ jobs:
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_prod"' >>  $ENV_VARS
               echo 'export SERVER_URL="www.trilliontreecampaign.org"' >>  $ENV_VARS
+              echo 'export API_URL="https://app.plant-for-the-planet.org"' >>  $ENV_VARS
             elif [[ "${CIRCLE_BRANCH}" == "develop" ]]
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_development"' >>  $ENV_VARS
               echo 'export SERVER_URL="development.trilliontreecampaign.org"' >>  $ENV_VARS
+              echo 'export API_URL="https://app-development.plant-for-the-planet.org"' >>  $ENV_VARS
             elif [[ "${CIRCLE_BRANCH}" == "fixtures" ]] || [[ "${CIRCLE_BRANCH}" == "staging" ]]
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_${CIRCLE_BRANCH}"' >>  $ENV_VARS
               echo 'export SERVER_URL="${CIRCLE_BRANCH}.trilliontreecampaign.org"' >>  $ENV_VARS
+              echo 'export API_URL="https://app-${CIRCLE_BRANCH}.plant-for-the-planet.org"' >>  $ENV_VARS
             fi
             cat $ENV_VARS
       - run:
@@ -61,7 +64,7 @@ jobs:
           command: |
             source $ENV_VARS
             export host=$SERVER_URL
-            export api_url=$scheme://$host
+            export api_url=$API_URL
             if [[ "${CIRCLE_BRANCH}" == "master" ]]
             then
               export debug=

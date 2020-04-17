@@ -20,10 +20,6 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string></string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -80,6 +76,8 @@
 	<string>We would like to use your camera for the app.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>We would like to access your contacts for the app.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need your location to get the coordinates for the tree registration.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to get the coordinates for the tree registration.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

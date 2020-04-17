@@ -6,6 +6,7 @@
   Copyright © 2019 Facebook. All rights reserved.
 */
 "NSCameraUsageDescription" = "We would like to use your camera for the app.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" =  "We need your location to get the coordinates for the tree registration.";
 "NSLocationAlwaysUsageDescription" = "We need your location to get the coordinates for the tree registration.";
 "NSLocationWhenInUseUsageDescription" = "We need your location to get the coordinates for the tree registration.";
 "NSMicrophoneUsageDescription" = "We would like to use your microphone (for videos).";

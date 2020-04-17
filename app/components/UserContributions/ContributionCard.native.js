@@ -449,6 +449,7 @@ class ContributionCard extends React.Component {
 ContributionCard.propTypes = {
   contribution: PropTypes.object.isRequired,
   deleteContribution: PropTypes.func,
+  onPressSingleContribution: PropTypes.func,
   navigation: PropTypes.any
 };
 

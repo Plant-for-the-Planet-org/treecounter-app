@@ -11,7 +11,6 @@ import {
 } from '../assets';
 
 export default function GetRandomImage(props) {
-  console.log(props, 'propsprops');
   const [selectedImage, selectImage] = React.useState('');
   const firstAlphabet = (props.name ? props.name.charAt(0) : '');
 

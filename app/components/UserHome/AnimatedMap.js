@@ -1,9 +1,7 @@
-import Geolocation from '@react-native-community/geolocation';
 import React from 'react';
-import { Dimensions, Image, Platform, TouchableOpacity, View, FlatList, Text } from 'react-native';
+import { Dimensions, Image, Platform, TouchableOpacity, View, FlatList } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MapView, { Marker, ProviderPropType, PROVIDER_GOOGLE } from 'react-native-maps';
-import Carousel from 'react-native-snap-carousel';
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { SafeAreaView } from 'react-navigation';
@@ -83,7 +81,6 @@ class AnimatedViews extends React.Component {
           activeIndex: 0,
           lastActiveIndex: 0,
         })
-        // this.carousel.snapToItem(0)
         this.mapView.animateToRegion(
           {
             latitude: this.state.markers[0].geoLatitude,
@@ -101,10 +98,8 @@ class AnimatedViews extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.userContributions.length !== this.state.markers.length || JSON.stringify(nextProps.userContributions) !== JSON.stringify(this.state.markers)) {
-      this.isFirstTime = true;
       this.setState({ markers: nextProps.userContributions })
     }
-
     if (this.state.singleContributionID == null) {
       if (nextProps.singleContributionID !== this.state.singleContributionID) {
         this.setState(
@@ -116,15 +111,11 @@ class AnimatedViews extends React.Component {
                   x => x.id == nextProps.singleContributionID
                 );
                 let activeMarker = this.state.markers[activeIndex];
-                // this.tempDetailsIndex = activeIndex + 1;
-
                 this.setState({ isDetailShow: true, activeIndex: activeIndex, isSatellite: true }, () => {
                   setTimeout(() => {
                     this.carouselDetail.scrollToIndex({ index: activeIndex, animated: true })
                     this.carousel.scrollToIndex({ index: activeIndex, animated: true })
                   }, 500)
-                  // this.carouselDetail.snapToItem(this.tempDetailsIndex)
-                  // this.carousel.snapToItem(activeIndex)
                 })
                 this.mapView.animateToRegion(
                   {
@@ -157,7 +148,6 @@ class AnimatedViews extends React.Component {
   }
 
   onPressHeader = id => {
-
     if (this.props.isPressFromList) {
       this.setState({ singleContributionID: undefined });
       this.props.toggleIsFullMapComp(true);
@@ -181,7 +171,6 @@ class AnimatedViews extends React.Component {
           }, 100)
         });
       } else {
-        // this.carouselDetail.scrollToIndex({ index: this.state.activeIndex, animated: true });
         this.props.toggleIsFullMapComp(true);
         setTimeout(() => {
           try {
@@ -196,47 +185,19 @@ class AnimatedViews extends React.Component {
     }
   };
 
-  onPressCurrentLocation = () => {
-    Geolocation.getCurrentPosition(info => {
-      try {
-        setTimeout(() => {
-          this.mapView.animateToRegion(
-            {
-              latitude: info.coords.latitude,
-              longitude: info.coords.longitude,
-              latitudeDelta: 0.00095,
-              longitudeDelta: 0.0095
-            },
-            500
-          );
-        }, 200)
-      } catch (e) {
-        // Do thing
-      }
-
-    });
-
-
-  }
-
   onPressMarker = async (marker, e) => {
     if (!this.props.isFullMapComponentModal) {
       return;
     }
     let isCoordinatesMatch = this.state.markers[this.state.activeIndex].geoLatitude == marker.geoLatitude && this.state.markers[this.state.activeIndex].geoLongitude == marker.geoLongitude;
-
     const pressMarker = (activeIndex) => {
       if (activeIndex > -1) {
         // Do nothing
       } else {
         activeIndex = this.state.markers.findIndex(x => x.id == marker.id)
       }
-      // let activeIndexInTempMarkers = this.tempMarkers.findIndex(x => x.id == marker.id)
-      // this.tempDetailsIndex = activeIndexInTempMarkers;
-
       if (activeIndex !== this.state.activeIndex) {
         this.setState({ activeIndex: activeIndex })
-        // this.carousel.scrollToIndex({ index: activeIndex, animated: true })
         this.carouselDetail.scrollToIndex({ index: activeIndex, animated: true })
       }
 
@@ -250,7 +211,6 @@ class AnimatedViews extends React.Component {
               this.carouselDetail.scrollToIndex({ index: activeIndex, animated: true })
             }, 0)
           } else {
-            // this.tempDetailsIndex = activeIndexInTempMarkers
             setTimeout(() => {
               this.carouselDetail.scrollToIndex({ index: activeIndex, animated: true })
             }, 0)
@@ -297,11 +257,6 @@ class AnimatedViews extends React.Component {
     return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <MIcon size={30} color={'#95c243'} name={'tree'} />;
   }
 
-  onChageIndex = (index) => {
-    this.setState({ activeIndex: index }, () => {
-      this.toAnimateRegion()
-    })
-  }
 
   toAnimateRegion = () => {
     const oneContribution = this.state.markers[this.state.activeIndex];
@@ -320,20 +275,10 @@ class AnimatedViews extends React.Component {
     }
   }
 
-  onPressNextPrevBtn = async (btn, action) => {
+  onPressNextPrevBtn = async (btn) => {
     const { markers, activeIndex } = this.state;
     if (this.isPressNextOrBack) {
       this.isPressNextOrBack = false;
-      if (action == 'set-id') {
-        if (btn == 'back') {
-          // this.carouselDetail.scrollToIndex({ index: this.state.activeIndex - 1, animated: true })
-          // this.tempDetailsIndex = this.tempDetailsIndex - 1
-        } else if (btn == 'next') {
-          // alert('next call')
-          // this.carouselDetail.scrollToIndex({ index: this.state.activeIndex + 1, animated: true })
-          // this.tempDetailsIndex = this.tempDetailsIndex + 1
-        }
-      }
       if (btn == 'back') {
         if (activeIndex !== 0) {
           this.setState({ activeIndex: this.state.activeIndex - 1 }, async () => {
@@ -386,10 +331,6 @@ class AnimatedViews extends React.Component {
     }, 3500)
   }
 
-  isFirstTime = true;
-  tempMarkers = [];
-  tempDetailsIndex = 1;
-
   render() {
     const {
       markers,
@@ -402,11 +343,6 @@ class AnimatedViews extends React.Component {
     let isContribution = this.props.userContributions ? this.props.userContributions.length !== 0 ? true : false : false
     let isStaticMap = singleContributionID ? false : isContribution;
 
-    if (this.isFirstTime && markers && markers.length > 0) {
-      // this.tempMarkers = markers.slice(0);
-      // this.tempMarkers.unshift(markers[0])
-      this.isFirstTime = false;
-    }
     return (
       <View style={styles.container}>
         <MapView
@@ -425,9 +361,9 @@ class AnimatedViews extends React.Component {
           initialRegion={region}
         >
           {markers
-            ? markers.map((marker) => (
+            ? markers.map((marker, i) => (
               <Marker
-                // tracksViewChanges={false}
+                zIndex={i++}
                 onPress={({ nativeEvent }) => this.onPressMarker(marker, { nativeEvent })}
                 identifier={String(marker.id)}
                 key={marker.id}
@@ -436,7 +372,7 @@ class AnimatedViews extends React.Component {
                   longitude: marker.geoLongitude
                 }}
               >
-                {this.getTreeImage(marker.treeCount)}
+                {this.getTreeImage(marker.treeCount, i)}
               </Marker>
             ))
             : null}
@@ -509,27 +445,22 @@ class AnimatedViews extends React.Component {
               style={{}}
               horizontal
               ref={(node) => this.carouselDetail = node}
-              renderItem={({ item, index }) => {
-                let prevIndex = this.state.activeIndex - 1;
-                let nxtIndex = this.state.activeIndex + 1;
-                return (
-
-                  <View style={{ width: screen.width, }}>
-                    {isDetailShow ? index >= prevIndex && index <= nxtIndex ? <UserContributionsDetails
-                      afterDeleteContribution={this.afterDeleteContribution}
-                      isDetailShow={isDetailShow}
-                      key={item.id}
-                      isFromUserProfile
-                      userProfileId={this.props.userProfileId}
-                      navigation={this.props.navigation}
-                      contribution={item}
-                      plantProjects={this.props.plantProjects}
-                      deleteContribution={this.props.deleteContribution}
-                    /> : null : null}
-                  </View>)
-              }}
+              renderItem={({ item, index }) => (
+                <View style={{ width: screen.width, }}>
+                  {isDetailShow ? index >= this.state.activeIndex - 1 && index <= this.state.activeIndex + 1 ? <UserContributionsDetails
+                    afterDeleteContribution={this.afterDeleteContribution}
+                    isDetailShow={isDetailShow}
+                    key={item.id}
+                    isFromUserProfile
+                    userProfileId={this.props.userProfileId}
+                    navigation={this.props.navigation}
+                    contribution={item}
+                    plantProjects={this.props.plantProjects}
+                    deleteContribution={this.props.deleteContribution}
+                  /> : null : null}
+                </View>)
+              }
             />}
-
           </View>) : null}
         {this.state.isDetailShow ?
           <SafeAreaView forceInset={{ flex: 1, bottom: 'always' }} style={{ position: 'absolute', bottom: (Platform.OS == 'ios' ? 0 : 25), right: 0, width: '100%', backgroundColor: '#fff', }}>

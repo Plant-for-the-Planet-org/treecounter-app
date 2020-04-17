@@ -17,7 +17,7 @@ import { coupon, readmoreDown, readmoreUp, registerTree, settings, share } from 
 import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
 import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 import CompetitionSnippet from './app/CompetitionSnippet';
-import FullMapComponent from './FullMapComponent';
+import FullMapComponent from './AnimatedMap';
 
 class UserHome extends Component {
   constructor(props) {

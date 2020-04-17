@@ -427,7 +427,7 @@ class AnimatedViews extends React.Component {
           {markers
             ? markers.map((marker) => (
               <Marker
-                // tracksViewChanges={false}
+                tracksViewChanges={false}
                 onPress={({ nativeEvent }) => this.onPressMarker(marker, { nativeEvent })}
                 identifier={String(marker.id)}
                 key={marker.id}

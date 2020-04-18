@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
+
 import { NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectCountryModal, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
@@ -44,6 +45,7 @@ function DonationDetails(props) {
   };
 
   let context = { ...props.context };
+
   const saveContext = () => {
     if (context.contextType === 'direct') {
       props.contextActions.setDonationDetails({
@@ -54,6 +56,7 @@ function DonationDetails(props) {
         taxReceiptSwitch: taxReceiptSwitch,
         countryForTax: countryForTax
       });
+
     }
   }
   const onContinue = () => {
@@ -75,8 +78,10 @@ function DonationDetails(props) {
         show={showProjectModal}
         navigation={props.navigation}
         handleProjectChange={project => {
+
           setProjectModal(false);
         }}
+        context={context}
       />
 
       <HeaderAnimated
@@ -119,8 +124,8 @@ function DonationDetails(props) {
             selectedProject={props.selectedProject}
           />
         ) : (
-            <NoPlantProjectDetails />
-          )}
+          <NoPlantProjectDetails />
+        )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -138,14 +143,14 @@ function DonationDetails(props) {
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-          context.contextType === 'gift-invitation' ? (
-            <GiftTreesComponent
-              treeCount={treeCount}
-              setTreeCount={setTreeCount}
-              selectedProject={props.selectedProject}
-              context={context}
-            />
-          ) : null}
+        context.contextType === 'gift-invitation' ? (
+          <GiftTreesComponent
+            treeCount={treeCount}
+            setTreeCount={setTreeCount}
+            selectedProject={props.selectedProject}
+            context={context}
+          />
+        ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
         <View style={[styles.horizontalDivider, { width: '14%' }]} />
@@ -181,6 +186,10 @@ function DonationDetails(props) {
           setShowModal={setShowTaxCountryModal}
           taxDeductibleCountries={props.taxDeductibleCountries}
         />
+
+        {context.contextType === 'pledge' ? (
+          <PledgeOnComponent context={context} />
+        ) : null}
 
         {/* Needed In Future */}
         {/* <UserContactDetails donorDetails={donorDetails} /> */}

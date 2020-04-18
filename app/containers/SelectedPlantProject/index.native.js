@@ -3,11 +3,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loadProject } from '../../actions/loadTposAction';
-import { clearPlantProject, selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { setDonationContext, setSelectedProjectDetails } from '../../components/DonateTrees/redux/action';
+import {
+  clearPlantProject,
+  selectPlantProjectAction
+} from '../../actions/selectPlantProjectAction';
+import {
+  setDonationContext,
+  setSelectedProjectDetails
+} from '../../components/DonateTrees/redux/action';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
 import { updateStaticRoute } from '../../helpers/routerHelper';
-import { currentUserProfileSelector, selectedPlantProjectIdSelector, selectedPlantProjectSelector, selectedTpoSelector } from '../../selectors';
+import {
+  currentUserProfileSelector,
+  selectedPlantProjectIdSelector,
+  selectedPlantProjectSelector,
+  selectedTpoSelector
+} from '../../selectors';
 
 const SelectedPlantProjectContainer = props => {
   const getProjectDetails = async projectSlug => {
@@ -27,6 +38,7 @@ const SelectedPlantProjectContainer = props => {
   React.useEffect(() => {
     getProjectDetails(props.navigation.state.params.projectName);
   }, [props.navigation.state.params.projectName]);
+
   const selectProject = id => {
     const { navigation } = props;
     props.selectPlantProjectAction(id);

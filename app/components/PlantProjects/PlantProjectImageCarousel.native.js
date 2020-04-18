@@ -58,7 +58,7 @@ class PlantProjectImageCarousel extends Component {
         source={{
           uri: getImageUrl(
             this.props.pictureType,
-            'large',
+            this.props.pictureSize,
             this.props.images[idx].image
           )
         }}

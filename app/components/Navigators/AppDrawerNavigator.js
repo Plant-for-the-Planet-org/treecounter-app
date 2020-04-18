@@ -20,6 +20,7 @@ import SuccessfullActivatedContainer from '../../containers/Authentication/Succe
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import CompetitionContainer from '../../containers/CompetitionContainer';
 import DonationTreesContainer from '../../containers/DonateTrees/index.native';
+import DonationStep3 from '../../containers/DonateTrees/PaymentDetails.native';
 import EditCompetitionContainer from '../../containers/EditCompetition';
 import EditUserContributionContainer from '../../containers/EditUserContribution';
 import EditUserProfileContainer from '../../containers/EditUserProfile';
@@ -45,7 +46,6 @@ import styles from '../../styles/header.native';
 import colors from '../../utils/constants';
 import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import DonateThankYou from '../DonateTrees/screens/DonateThankyou.native';
-import DonationStep3 from '../DonateTrees/screens/PaymentDetails.native';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import BurgerMenu from '../Header/BurgerMenu';
 import HeaderRight from '../Header/HeaderFields';
@@ -60,9 +60,9 @@ import SelectContacts from '../NewGiftTrees/components/SelectContacts.native';
 import PDFViewer from '../PDFViewer';
 import AddTrees from '../Redemption/app/AddTrees.native';
 import Trillion from '../TreecounterGraphics/Trillion';
+import DonorDetails from './../../containers/DonateTrees/DonorDetails.native';
 import PledgeEvents from './../../containers/Pledge';
 import createCompeition from './../Competition/Tabs/createCompetition.native';
-import DonorDetails from './../DonateTrees/screens/DonorDetails';
 import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
 import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 import AddReview from './../Reviews/AddReview/AddReview';
@@ -206,7 +206,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_giftTrees')]: {
         screen: GiftTreesContainer,
-        navigationOptions: { tabBarVisible: false }
+        navigationOptions: { tabBarVisible: false },
+        path: 'gift-trees/'
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
@@ -340,7 +341,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         path: 'donate-trees/:slug'
       },
       ['donor_details_form']: {
-        screen: DonorDetails
+        screen: DonorDetails,
+        navigationOptions: { header: null }
       },
       ['payment_details_form']: {
         screen: DonationStep3,

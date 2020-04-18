@@ -1,26 +1,62 @@
-import React from 'react';
-import { Image, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import {
+  FlatList,
+  Image,
+  Switch,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import Modal from 'react-native-modalbox';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { getImageUrl } from '../../../actions/apiRouting';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import {
+  getCountryFlagImageUrl,
+  getImageUrl
+} from '../../../actions/apiRouting';
 import { currencyIcon, infoHint, nextArrowWhite } from '../../../assets';
+import countryData from '../../../assets/countryCodes.json';
 import styles from '../../../styles/donations/donationDetails';
 import { formatNumber } from '../../../utils/utils';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 
 export function TaxReceipt(props) {
-  let { taxReceiptSwitch, toggleTaxReceipt } = props;
+  let {
+    taxReceiptSwitch,
+    toggleTaxReceipt,
+    selectedTaxCountry,
+    setShowTaxCountryModal,
+    oneTaxCountry
+  } = props;
+  const SelectedCountryText = () => {
+    return (
+      <Text style={styles.isTaxDeductibleCountry}>
+        {getCountryData(selectedTaxCountry).country}
+      </Text>
+    );
+  };
   return (
     <View style={styles.isTaxDeductibleView}>
       <View>
         <Text style={styles.isTaxDeductibleText}>
           Send me a tax deduction receipt for
         </Text>
-        <TouchableOpacity
-          style={{ flexDirection: 'row', alignItems: 'center' }}
-        >
-          <Text style={styles.isTaxDeductibleCountry}>Germany</Text>
-          <Icon name={'chevron-down'} size={14} color="#89b53a" />
-        </TouchableOpacity>
+        {oneTaxCountry ? (
+          <TouchableOpacity
+            onPress={() =>
+              setShowTaxCountryModal(
+                prevTaxCountryModal => !prevTaxCountryModal
+              )
+            }
+            style={{ flexDirection: 'row', alignItems: 'center' }}
+          >
+            <SelectedCountryText />
+            <Icon name={'chevron-down'} size={14} color="#89b53a" />
+          </TouchableOpacity>
+        ) : (
+          <SelectedCountryText />
+        )}
       </View>
 
       <Switch
@@ -32,13 +68,168 @@ export function TaxReceipt(props) {
   );
 }
 
+export function getCountryData(countryCode) {
+  return countryData.find(c => c.countryCode == countryCode) || {};
+}
+
+export function SelectCountryModal(props) {
+  let {
+    selectedCountry,
+    setSelectedCountry,
+    showModal,
+    setShowModal,
+    taxDeductibleCountries
+  } = props;
+  const activeColor = '#74ba00';
+  const defaultColor = '#4d5153';
+
+  const [searchText, setSearchText] = useState('');
+
+  const keyExtractor = d => d.item;
+
+  const renderItem = ({ item: countryCode }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          setSelectedCountry(countryCode);
+          closeModal();
+        }}
+      >
+        <View
+          key={countryCode}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginVertical: 12
+          }}
+        >
+          <Image
+            source={{
+              uri: getCountryFlagImageUrl(
+                getCountryData(countryCode).currencyCountryFlag,
+                'png',
+                256
+              )
+            }}
+            style={{ width: 24, height: 15 }}
+          />
+          <Text
+            style={{
+              paddingLeft: 16,
+              lineHeight: 22,
+              flex: 1,
+              fontFamily: 'OpenSans-SemiBold',
+              fontSize: 16,
+              color:
+                selectedCountry === countryCode ? activeColor : defaultColor
+            }}
+          >
+            {getCountryData(countryCode).country}
+          </Text>
+          {selectedCountry === countryCode && (
+            <MaterialIcon
+              name="done"
+              size={24}
+              color="#89b53a"
+              style={{
+                marginLeft: 5
+              }}
+            />
+          )}
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const closeModal = () => {
+    setSearchText();
+    setShowModal(false);
+  };
+
+  const setSearchCountries = (text = '') => {
+    setSearchText(text);
+  };
+
+  return (
+    <Modal
+      isOpen={showModal}
+      position={'left'}
+      onClosed={closeModal}
+      backdropPressToClose
+      coverScreen
+      keyboardTopOffset={0}
+      swipeToClose
+    >
+      <View
+        style={{
+          opacity: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginTop: Platform.OS === 'ios' ? 54 : 20,
+          marginBottom: 20,
+          paddingHorizontal: 24
+        }}
+      >
+        <Text
+          style={{
+            fontFamily: 'OpenSans-SemiBold',
+            fontSize: 18,
+            color: defaultColor
+          }}
+        >
+          Select Tax Deduction Country
+        </Text>
+        <TouchableOpacity onPress={closeModal}>
+          {searchText ? (
+            <MaterialIcon name="arrow-back" size={30} color="black" />
+          ) : (
+            <MaterialIcon name="close" size={30} color="#4d5153" />
+          )}
+        </TouchableOpacity>
+        {/* <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            borderColor: '#4d5153',
+            borderRadius: 20,
+            marginLeft: 20
+          }}
+        >
+          <TextInput
+            style={{ height: 40, width: '84%' }}
+            onChangeText={text => {
+              setSearchCountries(text);
+            }}
+            value={searchText}
+            placeholder={i18n.t('label.searchshort')}
+            placeholderTextColor={'#4d5153'}
+            fontFamily="OpenSans-SemiBold"
+          />
+        </View> */}
+      </View>
+      <FlatList
+        data={taxDeductibleCountries}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        contentContainerStyle={{
+          backgroundColor: '#fff',
+          flex: 1,
+          paddingHorizontal: 24
+        }}
+      />
+    </Modal>
+  );
+}
+
 export function CoverFee(props) {
   return (
     <View style={styles.coverCommissionView}>
       <Text style={styles.coverCommissionText}>
         Help {props.selectedProject.tpoSlug} cover the credit card fee of{' '}
         {formatNumber(
-          props.treeCount / 100 * 2.9 + 0.3,
+          (props.treeCount / 100) * 2.9 + 0.3,
           null,
           props.selectedCurrency
         )}{' '}
@@ -57,15 +248,14 @@ export function PaymentOption(props) {
   return (
     <View style={styles.bottomButtonView}>
       <View style={styles.leftSection}>
-        {props.treeCount ?
+        {props.treeCount ? (
           <>
             <View style={styles.paymentTreeDetails}>
-
               <Text style={styles.paymentTreeAmount}>
                 {formatNumber(
                   props.commissionSwitch
                     ? props.treeCost * props.treeCount +
-                    (props.treeCount / 100 * 2.9 + 0.3)
+                        ((props.treeCount / 100) * 2.9 + 0.3)
                     : props.treeCost * props.treeCount,
                   null,
                   props.selectedCurrency
@@ -73,20 +263,23 @@ export function PaymentOption(props) {
               </Text>
               <Text style={styles.paymentTreeCount}>
                 for {props.treeCount} trees
-          </Text>
-
+              </Text>
             </View>
 
             {/* <TouchableOpacity style={styles.otherPaymentButton}>
             <Text style={styles.otherPaymentText}>Other payment methods</Text>
           </TouchableOpacity> */}
             <View>
-              <Text style={styles.otherPaymentText}>Click Continue to proceed</Text>
+              <Text style={styles.otherPaymentText}>
+                Click Continue to proceed
+              </Text>
             </View>
           </>
-          : <Text style={styles.paymentTreeCount}>Please select Tree count</Text>}
+        ) : (
+          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
+        )}
       </View>
-      {props.treeCount ?
+      {props.treeCount ? (
         <TouchableOpacity
           onPress={() => props.onContinue()}
           style={styles.continueButtonView}
@@ -100,9 +293,8 @@ export function PaymentOption(props) {
             <Text style={styles.continueButtonText}>Continue</Text>
           </View>
         </TouchableOpacity>
-        : <View
-          style={[styles.continueButtonView, { backgroundColor: 'grey' }]}
-        >
+      ) : (
+        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
           <View style={{ alignItems: 'center' }}>
             <Image
               style={{ maxHeight: 24 }}
@@ -111,7 +303,8 @@ export function PaymentOption(props) {
             />
             <Text style={styles.continueButtonText}>Continue</Text>
           </View>
-        </View>}
+        </View>
+      )}
     </View>
   );
 }
@@ -210,7 +403,6 @@ export function SelectTreeCount(props) {
 
   const customTreeCountRef = React.useRef(null);
 
-
   if (props.selectedProject) {
     if (
       props.selectedProject.paymentSetup.treeCountOptions &&
@@ -224,8 +416,8 @@ export function SelectTreeCount(props) {
     }
   }
 
-  if (!customTreeCountRef.isFocused) {
-    props.setTreeCount(tempTreeCount)
+  if (!customTreeCountRef.isFocused && customTreeCount) {
+    props.setTreeCount(tempTreeCount);
   }
 
   return (
@@ -279,20 +471,19 @@ export function SelectTreeCount(props) {
           </Text>
         </View>
       ) : (
-          <TouchableOpacity
-            onPress={() => {
-              setCustomTreeCount(true);
-              props.setTreeCount(tempTreeCount);
-            }}
-            style={styles.customSelectorView}
-          >
-            <Text style={styles.customTreeCountText}>Custom Trees</Text>
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity
+          onPress={() => {
+            setCustomTreeCount(true);
+            props.setTreeCount(tempTreeCount);
+          }}
+          style={styles.customSelectorView}
+        >
+          <Text style={styles.customTreeCountText}>Custom Trees</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
-
 
 const hintCard = () => {
   return (
@@ -332,38 +523,47 @@ const hintCard = () => {
         />
         <Text style={{ maxWidth: '90%', fontFamily: 'OpenSans-Regular' }}>
           Please select Tree Count to Donate trees.
-              </Text>
+        </Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export const UserContactDetails = (props) => {
-  let { donorDetails } = props
+export const UserContactDetails = props => {
+  let { donorDetails } = props;
   return (
     <>
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>CONTACT DETAILS</Text>
         <TouchableOpacity>
-          {donorDetails.firstName ? <Text style={styles.sectionRightButton}>Edit</Text> : <Text style={styles.sectionRightButton}>Add</Text>}
+          {donorDetails.firstName ? (
+            <Text style={styles.sectionRightButton}>Edit</Text>
+          ) : (
+            <Text style={styles.sectionRightButton}>Add</Text>
+          )}
         </TouchableOpacity>
       </View>
-      {donorDetails.firstName ?
+      {donorDetails.firstName ? (
         <View>
-          <Text style={styles.contactDetailsAddress}>{donorDetails.firstName} {donorDetails.lastName}</Text>
-          {donorDetails.companyName ? (
-            <Text style={styles.contactDetailsAddress}>{donorDetails.companyName}</Text>
-          ) : null}
           <Text style={styles.contactDetailsAddress}>
-            {donorDetails.email}
+            {donorDetails.firstName} {donorDetails.lastName}
           </Text>
-          <Text style={styles.contactDetailsAddress}>{donorDetails.country}</Text>
-        </View> : null}
+          {donorDetails.companyName ? (
+            <Text style={styles.contactDetailsAddress}>
+              {donorDetails.companyName}
+            </Text>
+          ) : null}
+          <Text style={styles.contactDetailsAddress}>{donorDetails.email}</Text>
+          <Text style={styles.contactDetailsAddress}>
+            {donorDetails.country}
+          </Text>
+        </View>
+      ) : null}
     </>
-  )
-}
+  );
+};
 
-export const UserPaymentDetails = (props) => {
+export const UserPaymentDetails = props => {
   return (
     <View style={styles.sectionContainer}>
       <Text style={styles.sectionTitle}>PAYMENT METHOD</Text>
@@ -371,25 +571,26 @@ export const UserPaymentDetails = (props) => {
         <Text style={styles.sectionRightButton}>Change</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
-export const PaymentsProcessedBy = (props) => {
+export const PaymentsProcessedBy = props => {
   return (
     <Text style={styles.paymentProcessText}>
       Your payment will be processed either by Stripe, Plant-for-the-Planet,{' '}
       {props.selectedProject.tpoSlug === 'plant-for-the-planet'
         ? null
         : 'or ' + props.selectedProject.tpoSlug}{' '}
-          if is stripe connected.
+      if is stripe connected.
     </Text>
-  )
-}
+  );
+};
 
-export const SupportUserDetails = (props) => {
+export const SupportUserDetails = props => {
   return (
     <View>
-      <View style={[{ marginTop: 20, marginBottom: 0 }]}><Text style={styles.sectionTitle}>SUPPORT</Text>
+      <View style={[{ marginTop: 20, marginBottom: 0 }]}>
+        <Text style={styles.sectionTitle}>SUPPORT</Text>
         <View style={styles.supportUser}>
           <UserProfileImage
             profileImage={
@@ -398,10 +599,12 @@ export const SupportUserDetails = (props) => {
             imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
           />
           <View style={styles.supportUserNameContainer}>
-            <Text style={styles.supportUserName}>{props.context.support.displayName}</Text>
+            <Text style={styles.supportUserName}>
+              {props.context.support.displayName}
+            </Text>
           </View>
         </View>
       </View>
     </View>
-  )
-}
+  );
+};

@@ -5,15 +5,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
-import {
-  NoPlantProjectDetails,
-  PaymentOption,
-  PlantProjectDetails,
-  SelectFrequency,
-  SelectTreeCount,
-  SupportUserDetails,
-  TaxReceipt
-} from '../components/donationComponents.native';
+
+import { NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectCountryModal, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
 
@@ -33,6 +26,10 @@ function DonationDetails(props) {
   const [frequency, setFrequency] = React.useState('once'); // for Selecting Frequency of Donations
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
+  const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
+  const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
+    props.hasTaxDeduction && props.taxDeductibleCountries[0]
+  );
 
   // show hide project modal
   const [showProjectModal, setProjectModal] = React.useState(false);
@@ -49,20 +46,24 @@ function DonationDetails(props) {
 
   let context = { ...props.context };
 
-  const onContinue = () => {
-    // Set Donation Details and then switch the page
+  const saveContext = () => {
     if (context.contextType === 'direct') {
       props.contextActions.setDonationDetails({
         ...props.context.donationDetails,
+        selectedProject: props.selectedProject,
         totalTreeCount: treeCount,
         frequency: frequency,
         taxReceiptSwitch: taxReceiptSwitch,
         countryForTax: countryForTax
       });
+
+    }
+  }
+  const onContinue = () => {
+    // Set Donation Details and then switch the page
+    if (context.contextType === 'direct') {
+      saveContext();
       updateStaticRoute('donor_details_form', props.navigation, {
-        context: props.context,
-        treeCount: treeCount,
-        contextActions: props.contextActions,
         navigation: props.navigation
       });
     }
@@ -73,15 +74,16 @@ function DonationDetails(props) {
   return (
     <View style={{ backgroundColor: 'white' }}>
       <ProjectModal
-        showHideModal={setProjectModal}
+        hideModal={setProjectModal}
         show={showProjectModal}
         navigation={props.navigation}
         handleProjectChange={project => {
-          console.log('project selected', project);
+
           setProjectModal(false);
         }}
         context={context}
       />
+
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
@@ -107,6 +109,7 @@ function DonationDetails(props) {
           {props.selectedProject ? (
             <TouchableOpacity
               onPress={() => {
+                saveContext();
                 setProjectModal(true);
               }}
             >
@@ -164,9 +167,24 @@ function DonationDetails(props) {
         ) : null} */}
 
         {/* Tax Receipt */}
-        <TaxReceipt
-          taxReceiptSwitch={taxReceiptSwitch}
-          toggleTaxReceipt={toggleTaxReceipt}
+        {props.hasTaxDeduction && (
+          <TaxReceipt
+            taxReceiptSwitch={taxReceiptSwitch}
+            toggleTaxReceipt={toggleTaxReceipt}
+            setShowTaxCountryModal={setShowTaxCountryModal}
+            selectedTaxCountry={selectedTaxCountry}
+            oneTaxCountry={
+              props.taxDeductibleCountries.length > 1 ? true : false
+            }
+          />
+        )}
+
+        <SelectCountryModal
+          selectedCountry={selectedTaxCountry}
+          setSelectedCountry={setSelectedTaxCountry}
+          showModal={showTaxCountryModal}
+          setShowModal={setShowTaxCountryModal}
+          taxDeductibleCountries={props.taxDeductibleCountries}
         />
 
         {context.contextType === 'pledge' ? (

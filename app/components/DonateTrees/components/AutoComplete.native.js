@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image, Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { context } from './../../../config';
 
@@ -17,9 +16,9 @@ export default GooglePlacesInput = (props) => {
             listViewDisplayed={listViewDisplayed}    // true/false/undefined
             renderDescription={row => row.description} // custom description render
             onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-                console.log(data, details);
+                console.log(data);
                 setListViewDisplayed('false')
-                props.setFieldValue('country', data)
+                props.setFieldValue('country', data.description)
             }}
             getDefaultValue={() => props.initialValue}
             query={{

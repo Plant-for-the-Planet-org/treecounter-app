@@ -5,7 +5,6 @@ import React from 'react';
 import { View } from 'react-native';
 import DonationDetails from './screens/DonationDetails.native';
 
-
 export default function DonateTrees(props) {
   const { selectedProject } = props;
 
@@ -14,7 +13,13 @@ export default function DonateTrees(props) {
       <DonationDetails
         selectedProject={selectedProject}
         selectedCurrency={props.determineDefaultCurrency()}
-        treeCountOptions={selectedProject && selectedProject.paymentSetup && selectedProject.paymentSetup.treeCountOptions}
+        treeCountOptions={
+          selectedProject &&
+          selectedProject.paymentSetup &&
+          selectedProject.paymentSetup.treeCountOptions
+        }
+        taxDeductibleCountries={selectedProject?.taxDeductibleCountries}
+        hasTaxDeduction={selectedProject?.hasTaxDeduction}
         navigation={props.navigation}
         context={props.context}
         contextActions={props.contextActions}
@@ -32,7 +37,6 @@ DonateTrees.propTypes = {
   supportTreecounter: PropTypes.object,
   paymentStatus: PropTypes.object,
   plantProjectClear: PropTypes.func,
-  onTabChange: PropTypes.func,
   setProgressModelState: PropTypes.func,
   loadUserProfile: PropTypes.func,
   updateRoute: PropTypes.func,

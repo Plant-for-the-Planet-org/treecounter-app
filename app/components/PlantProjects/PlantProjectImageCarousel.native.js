@@ -92,7 +92,7 @@ class PlantProjectImageCarousel extends Component {
                   aspectRatio={this.props.aspectRatio}
                   key={url.image}
                   source={{
-                    uri: getImageUrl(this.props.pictureType, 'large', url.image)
+                    uri: getImageUrl(this.props.pictureType, this.props.pictureSize, url.image)
                   }}
                   resizeMode={this.props.resizeMode}
                 />
@@ -106,10 +106,12 @@ class PlantProjectImageCarousel extends Component {
 }
 
 PlantProjectImageCarousel.propTypes = {
-  pictureType: PropTypes.string
+  pictureType: PropTypes.string,
+  pictureSize: PropTypes.string
 };
 PlantProjectImageCarousel.defaultProps = {
-  pictureType: 'project'
+  pictureType: 'project',
+  pictureSize: 'large'
 };
 const textColor = 'white';
 const borderColor = '#29000000';

@@ -295,6 +295,8 @@ class UserContributionsDetails extends React.Component {
                   contributionOrPlantedImages.length > 0 && (
                     <PlantProjectImageCarousel
                       resizeMode={'cover'}
+                      pictureType={this.props.contribution.contributionType == 'planting' ? 'contribution' : 'project'}
+                      pictureSize={this.props.contribution.contributionType == 'planting' ? 'medium' : 'large'}
                       images={contributionOrPlantedImages}
                       aspectRatio={16 / 9}
                       videoUrl={videoUrl}

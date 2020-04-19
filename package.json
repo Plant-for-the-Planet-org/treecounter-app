@@ -49,7 +49,7 @@
     "date-fns": "^2.9.0",
     "deprecated-react-native-listview": "0.0.6",
     "dotenv-webpack": "^1.7.0",
-    "esri-loader": "^2.13.0",
+    "esri-loader": "2.13.0",
     "formik": "^2.1.4",
     "history": "^4.10.1",
     "i18next": "^19.3.2",

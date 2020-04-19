@@ -237,7 +237,10 @@ class UserContributionsDetails extends React.Component {
     }
     return (
       <View style={{ flex: 1, backgroundColor: colors.WHITE, marginTop: 10, }}>
-        <ScrollView style={styles.scrollViewContainer} contentContainerStyle={{}}>
+        <ScrollView style={styles.scrollViewContainer}
+          contentContainerStyle={{
+            paddingBottom: 72
+          }}>
           <UserContributions
             isFromUserProfile={this.props.isFromUserProfile}
             mayUpdate={mayUpdate}

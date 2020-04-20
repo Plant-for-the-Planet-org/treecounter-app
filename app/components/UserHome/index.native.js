@@ -9,6 +9,7 @@ import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/user-home';
 import colors from '../../utils/constants';
+import { convertNumIdToString } from '../../utils/utils';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList.native';
@@ -498,7 +499,7 @@ class UserHome extends Component {
           <ScrollView>
             {userProfile.plantProjects ? (
               <FlatList
-                data={userProfile.plantProjects}
+                data={convertNumIdToString(userProfile.plantProjects)}
                 renderItem={({ item }) => {
                   let project = item;
                   return (
@@ -617,7 +618,7 @@ function MyCompetitions(props) {
         {competitions.length > 0 ? (
           <FlatList
             horizontal
-            data={competitions}
+            data={convertNumIdToString(competitions)}
             renderItem={({ item }) => {
               let competition = item;
               return (

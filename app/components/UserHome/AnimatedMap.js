@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { convertNumIdToString } from '../../utils/utils';
 import { deleteContribution } from '../../actions/EditMyTree';
 import { loadProject } from '../../actions/loadTposAction';
 import { multiple_trees } from '../../assets/index.js';
@@ -389,7 +390,7 @@ class AnimatedViews extends React.Component {
             showsHorizontalScrollIndicator={false}
             initialNumToRender={markers.length}
             scrollEnabled={false}
-            data={this.state.markers}
+            data={convertNumIdToString(this.state.markers)}
             style={{}}
             horizontal
             ref={(node) => this.carousel = node}
@@ -451,7 +452,7 @@ class AnimatedViews extends React.Component {
               showsHorizontalScrollIndicator={false}
               initialNumToRender={markers.length}
               scrollEnabled={false}
-              data={this.state.markers}
+              data={convertNumIdToString(this.state.markers)}
               style={{}}
               horizontal
               ref={(node) => this.carouselDetail = node}

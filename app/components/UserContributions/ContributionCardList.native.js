@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { FlatList } from 'react-native';
 import ContributionCard from './ContributionCard';
+import { convertNumIdToString } from '../../utils/utils';
 
 const ContributionCardList = props => {
   const {
@@ -13,7 +14,7 @@ const ContributionCardList = props => {
   } = props;
   return (
     <FlatList
-      data={contributions.length > 3 && showAllContributions ? contributions : contributions.slice(0, 3)}
+      data={convertNumIdToString(contributions.length > 3 && showAllContributions ? contributions : contributions.slice(0, 3))}
       renderItem={({ item }) => (
         <ContributionCard
           isCardPressed={isCardPressed}

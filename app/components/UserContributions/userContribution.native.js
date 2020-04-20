@@ -230,7 +230,7 @@ export default class UserContributions extends React.Component {
           containerStyle={{
             height:
               Platform.OS === 'android'
-                ? Dimensions.get('window').height * 0.31
+                ? Dimensions.get('window').height * 0.35
                 : Dimensions.get('window').height * 0.24
           }}
           headerText={i18n.t('label.my_trees_delete_confirm')}

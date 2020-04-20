@@ -1,8 +1,8 @@
 import React from 'react';
 import { Animated, Image, Keyboard, Platform, Text, TouchableOpacity, View } from 'react-native';
-import { GooglePay } from 'react-native-google-pay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import stripe from 'tipsi-stripe';
 import { applePay, googlePay, paypal, paypalLogo } from '../../../assets';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donation/donation.native';
@@ -12,59 +12,45 @@ import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import CreditCardForm from '../components/CreditCardForm';
 import SepaAccountForm from '../components/SepaAccountForm';
 
-
 export default function DonationStep3(props) {
-  const GooglePayFunction = () => {
-    const allowedCardNetworks = ['VISA', 'MASTERCARD'];
-    const allowedCardAuthMethods = ['PAN_ONLY', 'CRYPTOGRAM_3DS'];
 
-    const requestData = {
-      cardPaymentMethod: {
-        tokenizationSpecification: {
-          type: 'PAYMENT_GATEWAY',
-          // stripe (see Example):
-          gateway: 'stripe',
-          gatewayMerchantId: '',
-          stripe: {
-            publishableKey: 'pk_test_TYooMQauvdEDq54NiTphI7jx',
-            version: '2018-11-08',
-          },
-          // // other:
-          // gateway: 'example',
-          // gatewayMerchantId: 'exampleGatewayMerchantId',
-        },
-        allowedCardNetworks,
-        allowedCardAuthMethods,
-      },
-      transaction: {
-        totalPrice: '10',
-        totalPriceStatus: 'FINAL',
-        currencyCode: 'USD',
-      },
-      merchantName: 'Example Merchant',
-    };
+  stripe.setOptions({
+    publishableKey: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
+    // merchantId: 'MERCHANT_ID', // Optional
+    androidPayMode: 'test', // Android only
+  })
 
-    GooglePay.setEnvironment(GooglePay.ENVIRONMENT_TEST);
 
-    GooglePay.isReadyToPay(allowedCardNetworks, allowedCardAuthMethods)
-      .then((ready) => {
-        if (ready) {
-          // Request payment token
-          GooglePay.requestPayment(requestData)
-            .then((token) => {
-              console.log(token)
-            })
-            .catch((error) => console.log(error.code, error.message));
-        }
+  const [token, setToken] = React.useState(null)
+
+  const handleAndroidPayPress = async (props) => {
+    try {
+      setToken(null)
+      const token = await stripe.paymentRequestWithNativePay({
+        total_price: props.treeCost * props.totalTreeCount,
+        currency_code: props.currency_code,
+        line_items: [{
+          currency_code: props.currency_code,
+          description: 'Donation to Plant for the Planet',
+          total_price: props.treeCost * props.totalTreeCount,
+          unit_price: props.treeCost,
+          quantity: props.totalTreeCount,
+        }],
       })
+      setToken(token)
+    } catch (error) {
+      console.log('Error', error)
+    }
   }
+
+  console.log('Token -----', token)
 
   const [payPalInfo, setPayPalInfo] = React.useState(false)
   const [showPay, setShowPay] = React.useState(true)
   const [allValid, setAllValid] = React.useState(false)
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
-
-  togglePaypalInfo = () => {
+  const [allowedAndroidPay, setAllowedAndroidPay] = React.useState(false)
+  const togglePaypalInfo = () => {
     setPayPalInfo(!payPalInfo)
   };
 
@@ -78,6 +64,9 @@ export default function DonationStep3(props) {
       keyboardDidHide
     );
 
+    const allowedAndroidPay = stripe.deviceSupportsNativePay()
+
+    setAllowedAndroidPay(allowedAndroidPay)
     // clean up
     return () => {
       keyboardDidShowListener.remove();
@@ -190,8 +179,14 @@ export default function DonationStep3(props) {
 
           {/* Google Pay Information Card */}
 
-          {Platform.OS === 'ios' ? null : (
-            <TouchableOpacity onPress={() => GooglePayFunction()}>
+          {allowedAndroidPay ? (
+            <TouchableOpacity
+              onPress={() => handleAndroidPayPress({
+                totalTreeCount: toString(props.context.donationDetails.totalTreeCount),
+                amountPerTree: toString(props.context.projectDetails.selectedProjectDetails.amountPerTree),
+                currency_code: toString(props.context.projectDetails.selectedProjectDetails.currency)
+              })}
+            >
               <View style={styles.paymentCardView}>
                 <View style={styles.paymentModeView}>
                   <Image
@@ -210,7 +205,7 @@ export default function DonationStep3(props) {
                 </View>
               </View>
             </TouchableOpacity>
-          )}
+          ) : null}
           {/* Google Pay Information Card Ended */}
         </View>
       </KeyboardAwareScrollView>

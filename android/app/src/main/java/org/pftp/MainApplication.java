@@ -8,7 +8,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.rt2zz.reactnativecontacts.ReactNativeContacts; // <--- import
-
+import com.gettipsi.stripe.StripeReactPackage;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -26,6 +26,7 @@ public class MainApplication extends Application implements ReactApplication {
 
             // Packages that cannot be autolinked yet can be added manually here, for example:
            // packages.add(new ReactNativeContacts());
+           packages.add(new StripeReactPackage());
             return packages;
         }
 

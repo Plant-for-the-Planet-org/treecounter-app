@@ -386,12 +386,6 @@ class AnimatedViews extends React.Component {
           style={[isMapPressed ? styles.swiperCont : { bottom: (Platform.OS == 'ios' ? 0 : 25) }]}>
           {markers && <FlatList
             initialScrollIndex={this.state.activeIndex}
-            onScrollToIndexFailed={info => {
-              const wait = new Promise(resolve => setTimeout(resolve, 500));
-              wait.then(() => {
-                this.carousel ? this.carousel.scrollToIndex({ index: info.index, animated: true }) : null
-              });
-            }}
             showsHorizontalScrollIndicator={false}
             initialNumToRender={markers.length}
             scrollEnabled={false}
@@ -400,7 +394,7 @@ class AnimatedViews extends React.Component {
             horizontal
             ref={(node) => this.carousel = node}
             getItemLayout={(item, index) => (
-              {length: screen.width, offset: screen.width * index, index}
+              { length: screen.width, offset: screen.width * index, index }
             )}
             renderItem={({ item, index }) => {
               return (
@@ -454,12 +448,6 @@ class AnimatedViews extends React.Component {
           <View style={[styles.userContributionsDetailsFullViewCont, { left: isDetailShow ? 0 : -1000 }]}>
             {markers && <FlatList
               initialScrollIndex={this.state.activeIndex}
-              onScrollToIndexFailed={info => {
-                const wait = new Promise(resolve => setTimeout(resolve, 500));
-                wait.then(() => {
-                  this.carouselDetail ? this.carouselDetail.scrollToIndex({ index: info.index, animated: true }) : null
-                });
-              }}
               showsHorizontalScrollIndicator={false}
               initialNumToRender={markers.length}
               scrollEnabled={false}
@@ -468,7 +456,7 @@ class AnimatedViews extends React.Component {
               horizontal
               ref={(node) => this.carouselDetail = node}
               getItemLayout={(item, index) => (
-                {length: screen.width, offset: screen.width * index, index}
+                { length: screen.width, offset: screen.width * index, index }
               )}
               renderItem={({ item, index }) => (
                 <View style={{ width: screen.width, }}>

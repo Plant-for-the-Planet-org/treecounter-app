@@ -230,16 +230,17 @@ class UserHome extends Component {
     this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
       this.scrollRef.scrollTo({ x: 0, y: y, animated: true });
     });
-
-    this.setState({
-      isFullMapComponentModal: !this.state.isFullMapComponentModal,
-      singleContributionID: singleContributionIDShouldNull
-        ? null
-        : this.state.singleContributionID,
-      isPressFromList: singleContributionIDShouldNull ? false : true
-    }, () => {
-      this.props.navigation.setParams({ isFullMapComponentModal: this.state.isFullMapComponentModal })
-    });
+    setTimeout(() => {
+      this.setState({
+        isFullMapComponentModal: !this.state.isFullMapComponentModal,
+        singleContributionID: singleContributionIDShouldNull
+          ? null
+          : this.state.singleContributionID,
+        isPressFromList: singleContributionIDShouldNull ? false : true
+      }, () => {
+        this.props.navigation.setParams({ isFullMapComponentModal: this.state.isFullMapComponentModal })
+      });
+    }, 0)
     // }, 300)
   };
 

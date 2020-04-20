@@ -382,6 +382,13 @@ class AnimatedViews extends React.Component {
           animation={isMapPressed ? 'fadeOutDown' : 'fadeInUp'}
           style={[isMapPressed ? styles.swiperCont : { bottom: (Platform.OS == 'ios' ? 0 : 25) }]}>
           {markers && <FlatList
+            initialScrollIndex={this.state.activeIndex}
+            onScrollToIndexFailed={info => {
+              const wait = new Promise(resolve => setTimeout(resolve, 500));
+              wait.then(() => {
+                this.carousel ? this.carousel.scrollToIndex({ index: info.index, animated: true }) : null
+              });
+            }}
             showsHorizontalScrollIndicator={false}
             initialNumToRender={markers.length}
             scrollEnabled={false}
@@ -408,8 +415,10 @@ class AnimatedViews extends React.Component {
           {isFullMapComponentModal && !isDetailShow ? <View style={styles.bottomArrowsCont}>
             <View style={{ flex: 1 }} />
             <View style={{ flexDirection: 'row', }}>
-              <TouchableOpacity disabled={activeIndex == 0} onPress={() => this.onPressNextPrevBtn('back')}><Icon name={'arrow-back'} size={30} color={'#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
-              <TouchableOpacity disabled={activeIndex == markers.length - 1} onPress={() => this.onPressNextPrevBtn('next')}><Icon name={'arrow-forward'} size={30} color={'#4d5153'} /></TouchableOpacity>
+              <TouchableOpacity disabled={activeIndex == 0} onPress={() => this.onPressNextPrevBtn('back')}>
+                <Icon name={'arrow-back'} size={30} color={activeIndex == 0 ? '#929596' : '#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
+              <TouchableOpacity disabled={activeIndex == markers.length - 1} onPress={() => this.onPressNextPrevBtn('next')}>
+                <Icon name={'arrow-forward'} size={30} color={activeIndex == markers.length - 1 ? '#929596' : '#4d5153'} /></TouchableOpacity>
             </View>
           </View> : null}
         </Animatable.View>
@@ -441,6 +450,13 @@ class AnimatedViews extends React.Component {
         {markers && markers.length > 0 ? (
           <View style={[styles.userContributionsDetailsFullViewCont, { left: isDetailShow ? 0 : -1000 }]}>
             {markers && <FlatList
+              initialScrollIndex={this.state.activeIndex}
+              onScrollToIndexFailed={info => {
+                const wait = new Promise(resolve => setTimeout(resolve, 500));
+                wait.then(() => {
+                  this.carouselDetail ? this.carouselDetail.scrollToIndex({ index: info.index, animated: true }) : null
+                });
+              }}
               showsHorizontalScrollIndicator={false}
               initialNumToRender={markers.length}
               scrollEnabled={false}

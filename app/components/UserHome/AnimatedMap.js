@@ -65,7 +65,8 @@ class AnimatedViews extends React.Component {
       () => {
         setTimeout(() => {
           try {
-            this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)));
+            // this.mapView.fitToElements(true)
+            this.mapView.fitToSuppliedMarkers(markers.map(x => String(x.id)), { edgePadding: { top: 300, bottom: 300, right: 300, left: 300 } });
           } catch (e) {
             // Do thing
           }
@@ -154,7 +155,8 @@ class AnimatedViews extends React.Component {
       setTimeout(() => {
         try {
           this.mapView.fitToSuppliedMarkers(
-            this.state.markers.map(x => String(x.id))
+            this.state.markers.map(x => String(x.id)),
+            { edgePadding: { top: 300, bottom: 300, right: 300, left: 300 } }
           );
         } catch (e) {
           // Do thing
@@ -175,7 +177,8 @@ class AnimatedViews extends React.Component {
         setTimeout(() => {
           try {
             this.mapView.fitToSuppliedMarkers(
-              this.state.markers.map(x => String(x.id))
+              this.state.markers.map(x => String(x.id)),
+              { edgePadding: { top: 300, bottom: 300, right: 300, left: 300 } }
             );
           } catch (e) {
             // Do thing

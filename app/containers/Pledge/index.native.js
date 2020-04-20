@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { debug } from '../../debug';
 import { fetchPublicPledgesAction } from '../../actions/pledgeEventsAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
 import { fetchItem } from '../../stores/localStorage';
 import {
   fetchPledgesAction,
@@ -16,22 +17,21 @@ import {
   entitiesSelector,
   currentUserProfileSelector
 } from '../../selectors';
-import PledgeEvents from './../../components/PledgeEvents/PledgeEvents'
-const PledgeEventsContainer = (props) => {
-
-  const [loading, setLoading] = React.useState(true)
-  const [myPledge, setMyPledge] = React.useState('')
-  const [login, setLogin] = React.useState(false)
+import PledgeEvents from './../../components/PledgeEvents/PledgeEvents';
+const PledgeEventsContainer = props => {
+  const [loading, setLoading] = React.useState(true);
+  const [myPledge, setMyPledge] = React.useState('');
+  const [login, setLogin] = React.useState(false);
 
   React.useEffect(() => {
     if (!props.pledges) {
       props.fetchPledgesAction(props.navigation.getParam('slug'), true);
     }
     if (!myPledge) {
-      getMyPledge()
+      getMyPledge();
     }
     if (props.currentUserProfile) {
-      setLogin(true)
+      setLogin(true);
     } else {
       fetchItem('pledgedEvent') // Fetching pledges which are stored in user's device
         .then(data => {
@@ -45,32 +45,34 @@ const PledgeEventsContainer = (props) => {
     }
 
     if (props.pledges && props.pledges.image && loading) {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [props.pledges, props.navigation.getParam('slug'), props.entities.eventPledge]);
+  }, [
+    props.pledges,
+    props.navigation.getParam('slug'),
+    props.entities.eventPledge
+  ]);
 
   const getMyPledge = () => {
-    let userPledges =
-      props.entities.eventPledge
-        ? props.pledges &&
-          props.pledges.allEventPledges &&
-          props.pledges.allEventPledges.length > 0 // Checking if we have all the pledges
-          ? typeof props.entities.eventPledge !== 'undefined'
-            ? ((userPledges = Object.values(props.entities.eventPledge)), // convert object to array
-              userPledges.filter(pledge => {
-                return props.pledges.allEventPledges.some(f => {
-                  return f.token === pledge.token
-                });
-              }))
-            : null
+    let userPledges = props.entities.eventPledge
+      ? props.pledges &&
+        props.pledges.allEventPledges &&
+        props.pledges.allEventPledges.length > 0 // Checking if we have all the pledges
+        ? typeof props.entities.eventPledge !== 'undefined'
+          ? ((userPledges = Object.values(props.entities.eventPledge)), // convert object to array
+            userPledges.filter(pledge => {
+              return props.pledges.allEventPledges.some(f => {
+                return f.token === pledge.token;
+              });
+            }))
           : null
-        : null;
+        : null
+      : null;
     setMyPledge(userPledges);
   };
 
-  let pledges = props.pledges && props.pledges.total !== undefined
-    ? props.pledges
-    : null;
+  let pledges =
+    props.pledges && props.pledges.total !== undefined ? props.pledges : null;
   return (
     <PledgeEvents
       pledges={pledges}
@@ -81,11 +83,12 @@ const PledgeEventsContainer = (props) => {
       treeCount={props.navigation.getParam('treeCount').toLocaleString()}
       fetchPledgesAction={fetchPledgesAction}
       showRBSheet={props.navigation.getParam('showRBSheet')}
+      selectPlantProjectAction={props.selectPlantProjectAction}
       fetchPledgesAction={props.fetchPledgesAction}
       slug={props.navigation.getParam('slug')}
     />
-  )
-}
+  );
+};
 
 PledgeEventsContainer.navigationOptions = {
   header: null
@@ -105,10 +108,14 @@ const mapDispatchToProps = dispatch => {
       postPledge,
       clearTimeoutAction,
       fetchPublicPledgesAction,
-      loadUserProfile
+      loadUserProfile,
+      selectPlantProjectAction
     },
     dispatch
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PledgeEventsContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PledgeEventsContainer);

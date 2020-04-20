@@ -5,17 +5,33 @@ import { bindActionCreators } from 'redux';
 import { fetchCurrencies } from '../../actions/currencies';
 import { loadProject } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
-import { clearPlantProject, selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import {
+  clearPlantProject,
+  selectPlantProjectAction
+} from '../../actions/selectPlantProjectAction';
 import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import DonateTrees from '../../components/DonateTrees';
-import { setDonationDetails, setDonorDetails, setPaymentDetails, setPaymentResponse, setPledgeDetails, setSelectedProjectDetails } from '../../components/DonateTrees/redux/action';
+import {
+  setDonationDetails,
+  setDonorDetails,
+  setPaymentDetails,
+  setPaymentResponse,
+  setPledgeDetails,
+  setSelectedProjectDetails
+} from '../../components/DonateTrees/redux/action';
 import { debug } from '../../debug';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
-import { currenciesSelector, currentUserProfileSelector, getCurrency, selectedPlantProjectIdSelector, selectedPlantProjectSelector, selectedTpoSelector, supportedTreecounterSelector } from '../../selectors';
+import {
+  currenciesSelector,
+  currentUserProfileSelector,
+  getCurrency,
+  selectedPlantProjectIdSelector,
+  selectedPlantProjectSelector,
+  selectedTpoSelector,
+  supportedTreecounterSelector
+} from '../../selectors';
 import { postDirectRequest } from '../../utils/api';
-
-
 
 class DonationTreesContainer extends Component {
   static navigationOptions = {

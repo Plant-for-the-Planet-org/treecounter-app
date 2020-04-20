@@ -5,7 +5,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
-import { NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
+
+import { NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectCountryModal, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
 
@@ -25,6 +26,10 @@ function DonationDetails(props) {
   const [frequency, setFrequency] = React.useState('once'); // for Selecting Frequency of Donations
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
+  const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
+  const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
+    props.hasTaxDeduction && props.taxDeductibleCountries[0]
+  );
 
   // show hide project modal
   const [showProjectModal, setProjectModal] = React.useState(false);
@@ -41,36 +46,44 @@ function DonationDetails(props) {
 
   let context = { ...props.context };
 
-
-  const onContinue = () => {
-    // Set Donation Details and then switch the page 
+  const saveContext = () => {
     if (context.contextType === 'direct') {
       props.contextActions.setDonationDetails({
         ...props.context.donationDetails,
+        selectedProject: props.selectedProject,
         totalTreeCount: treeCount,
         frequency: frequency,
         taxReceiptSwitch: taxReceiptSwitch,
         countryForTax: countryForTax
-      })
+      });
+
+    }
+  }
+  const onContinue = () => {
+    // Set Donation Details and then switch the page
+    if (context.contextType === 'direct') {
+      saveContext();
       updateStaticRoute('donor_details_form', props.navigation, {
         navigation: props.navigation
       });
     }
-
-
-  }
+  };
   // console.log()
   // props.navigation.setParams({ context: context });
   // console.log('getting updateed context in nav:', props.navigation.getParam('context'))
   return (
     <View style={{ backgroundColor: 'white' }}>
       <ProjectModal
-        showHideModal={setProjectModal}
+        hideModal={setProjectModal}
         show={showProjectModal}
         navigation={props.navigation}
-        handleProjectChange={(project) => { console.log('project selected', project); setProjectModal(false) }}
+        handleProjectChange={project => {
+
+          setProjectModal(false);
+        }}
         context={context}
       />
+
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
@@ -94,7 +107,12 @@ function DonationDetails(props) {
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>DONATION TO</Text>
           {props.selectedProject ? (
-            <TouchableOpacity onPress={() => { setProjectModal(true) }}>
+            <TouchableOpacity
+              onPress={() => {
+                saveContext();
+                setProjectModal(true);
+              }}
+            >
               <Text style={styles.sectionRightButton}>Change</Text>
             </TouchableOpacity>
           ) : null}
@@ -106,8 +124,8 @@ function DonationDetails(props) {
             selectedProject={props.selectedProject}
           />
         ) : (
-            <NoPlantProjectDetails />
-          )}
+          <NoPlantProjectDetails />
+        )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -119,18 +137,20 @@ function DonationDetails(props) {
 
         {/* Donation Context */}
 
-        {context.contextType === 'support' ? <SupportUserDetails context={context} /> : null}
+        {context.contextType === 'support' ? (
+          <SupportUserDetails context={context} />
+        ) : null}
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-          context.contextType === 'gift-invitation' ? (
-            <GiftTreesComponent
-              treeCount={treeCount}
-              setTreeCount={setTreeCount}
-              selectedProject={props.selectedProject}
-              context={context}
-            />
-          ) : null}
+        context.contextType === 'gift-invitation' ? (
+          <GiftTreesComponent
+            treeCount={treeCount}
+            setTreeCount={setTreeCount}
+            selectedProject={props.selectedProject}
+            context={context}
+          />
+        ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
         <View style={[styles.horizontalDivider, { width: '14%' }]} />
@@ -147,19 +167,35 @@ function DonationDetails(props) {
         ) : null} */}
 
         {/* Tax Receipt */}
-        <TaxReceipt
-          taxReceiptSwitch={taxReceiptSwitch}
-          toggleTaxReceipt={toggleTaxReceipt}
+        {props.hasTaxDeduction && (
+          <TaxReceipt
+            taxReceiptSwitch={taxReceiptSwitch}
+            toggleTaxReceipt={toggleTaxReceipt}
+            setShowTaxCountryModal={setShowTaxCountryModal}
+            selectedTaxCountry={selectedTaxCountry}
+            oneTaxCountry={
+              props.taxDeductibleCountries.length > 1 ? true : false
+            }
+          />
+        )}
+
+        <SelectCountryModal
+          selectedCountry={selectedTaxCountry}
+          setSelectedCountry={setSelectedTaxCountry}
+          showModal={showTaxCountryModal}
+          setShowModal={setShowTaxCountryModal}
+          taxDeductibleCountries={props.taxDeductibleCountries}
         />
+
+        {context.contextType === 'pledge' ? (
+          <PledgeOnComponent context={context} />
+        ) : null}
 
         {/* Needed In Future */}
         {/* <UserContactDetails donorDetails={donorDetails} /> */}
         {/* <UserPaymentDetails paymentDetails={paymentDetails} /> */}
         {/* <PaymentsProcessedBy/> */}
-
-
       </KeyboardAwareScrollView>
-
 
       <PaymentOption
         treeCount={treeCount}
@@ -169,12 +205,9 @@ function DonationDetails(props) {
         navigation={props.navigation}
         onContinue={onContinue}
       />
-
-
     </View>
   );
 }
-
 
 DonationDetails.propTypes = {
   currencies: PropTypes.object.isRequired,

@@ -26,16 +26,12 @@ class ProjectModal extends Component {
     setSearch = (text = '') => {
         this.state.search !== text && this.setState({ search: text });
     };
-    handleCurrencyChange = selectedOption => {
-        // this.setState({ preferredCurrency: selectedOption });
-        this.props.handleProjectChange(selectedOption);
-    };
     // first close any open search, then close modal dialog
     onClosed = () => {
         this.state.search ? (
             this.setSearch()
         ) : (
-                this.props.showHideModal(
+                this.props.hideModal(
                     false
                 )
             );

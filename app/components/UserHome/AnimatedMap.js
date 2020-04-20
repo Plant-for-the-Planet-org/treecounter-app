@@ -389,6 +389,9 @@ class AnimatedViews extends React.Component {
             style={{}}
             horizontal
             ref={(node) => this.carousel = node}
+            getItemLayout={(item, index) => (
+              {length: screen.width, offset: screen.width * index, index}
+            )}
             renderItem={({ item, index }) => {
               return (
                 (!isDetailShow && isFullMapComponentModal ?
@@ -445,6 +448,9 @@ class AnimatedViews extends React.Component {
               style={{}}
               horizontal
               ref={(node) => this.carouselDetail = node}
+              getItemLayout={(item, index) => (
+                {length: screen.width, offset: screen.width * index, index}
+              )}
               renderItem={({ item, index }) => (
                 <View style={{ width: screen.width, }}>
                   {isDetailShow ? index >= this.state.activeIndex - 1 && index <= this.state.activeIndex + 1 ? <UserContributionsDetails

@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 import { convertNumIdToString } from '../../utils/utils';
 import { deleteContribution } from '../../actions/EditMyTree';
 import { loadProject } from '../../actions/loadTposAction';
-import { multiple_trees } from '../../assets/index.js';
+import { multiple_trees, arrow_down } from '../../assets/index.js';
 import { getAllPlantProjectsSelector } from '../../selectors';
 import { currentUserProfileIdSelector } from '../../selectors/index';
 import styles from '../../styles/UserHome/animated_map';
@@ -99,8 +99,10 @@ class AnimatedViews extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userContributions.length !== this.state.markers.length || JSON.stringify(nextProps.userContributions) !== JSON.stringify(this.state.markers)) {
-      this.setState({ markers: nextProps.userContributions })
+    if (nextProps.userContributions && this.state.markers) {
+      if (nextProps.userContributions.length !== this.state.markers.length || JSON.stringify(nextProps.userContributions) !== JSON.stringify(this.state.markers)) {
+        this.setState({ markers: nextProps.userContributions })
+      }
     }
     if (this.state.singleContributionID == null) {
       if (nextProps.singleContributionID !== this.state.singleContributionID) {
@@ -344,7 +346,7 @@ class AnimatedViews extends React.Component {
       isDetailShow
     } = this.state;
     const { isMapPressed, isFullMapComponentModal } = this.props;
-    let isContribution = this.props.userContributions ? this.props.userContributions.length !== 0 ? true : false : false
+    let isContribution = markers ? markers.length !== 0 ? true : false : false
     let isStaticMap = singleContributionID ? false : isContribution;
 
     return (
@@ -412,22 +414,22 @@ class AnimatedViews extends React.Component {
           />}
           {isFullMapComponentModal && !isDetailShow ? <View style={styles.bottomArrowsCont}>
             <View style={{ flex: 1 }} />
-            <View style={{ flexDirection: 'row', }}>
+            {markers && <View style={{ flexDirection: 'row', }}>
               <TouchableOpacity disabled={activeIndex == 0} onPress={() => this.onPressNextPrevBtn('back')}>
                 <Icon name={'arrow-back'} size={30} color={activeIndex == 0 ? '#929596' : '#4d5153'} style={{ marginRight: 28 }} /></TouchableOpacity>
               <TouchableOpacity disabled={activeIndex == markers.length - 1} onPress={() => this.onPressNextPrevBtn('next')}>
                 <Icon name={'arrow-forward'} size={30} color={activeIndex == markers.length - 1 ? '#929596' : '#4d5153'} /></TouchableOpacity>
-            </View>
+            </View>}
           </View> : null}
         </Animatable.View>
         {this.props.isFullMapComponentModal ? (!isMapPressed) && <SafeAreaView forceInset={{ bottom: 'always' }} /> : null}
         {this.props.isFullMapComponentModal ? (
           <>
             <TouchableOpacity
-              style={styles.downArrowIcon}
+              style={[styles.downArrowIcon, isDetailShow ? ({ transform: [{ rotate: "90deg" }] }) : ({})]}
               onPress={() => this.onPressHeader()}
             >
-              <Icon name={this.state.isDetailShow ? 'keyboard-arrow-left' : 'keyboard-arrow-down'} size={25} color={'#000'} />
+              <Image style={{ height: 20, width: 20, }} source={arrow_down} />
             </TouchableOpacity>
 
             {!isDetailShow ? <TouchableOpacity
@@ -482,14 +484,14 @@ class AnimatedViews extends React.Component {
             <View>
               <View style={styles.bottomArrowsCont}>
                 <View style={{ flex: 1 }} />
-                <View style={{ flexDirection: 'row', }}>
+                {markers && <View style={{ flexDirection: 'row', }}>
                   <TouchableOpacity disabled={activeIndex == 0} onPress={() => this.onPressNextPrevBtn('back', 'set-id')}>
                     <Icon name={'arrow-back'} size={30} color={activeIndex == 0 ? '#929596' : '#4d5153'} style={{ marginRight: 28 }} />
                   </TouchableOpacity>
                   <TouchableOpacity disabled={activeIndex == markers.length - 1} onPress={() => this.onPressNextPrevBtn('next', 'set-id')}>
                     <Icon name={'arrow-forward'} size={30} color={activeIndex == markers.length - 1 ? '#929596' : '#4d5153'} />
                   </TouchableOpacity>
-                </View>
+                </View>}
               </View>
             </View>
           </SafeAreaView>

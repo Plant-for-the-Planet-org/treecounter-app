@@ -212,7 +212,10 @@ import closeHWhite from './images/header/closeWhite.png';
 import shareBlack from './images/header/shareBlack.png';
 import shareWhite from './images/header/shareWhite.png';
 
+import arrow_down from './images/arrow_down.png'
+
 export {
+  arrow_down,
   treelogo,
   germany,
   worldImg,

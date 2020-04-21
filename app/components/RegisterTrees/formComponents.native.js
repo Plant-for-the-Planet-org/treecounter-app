@@ -180,7 +180,10 @@ export const FormikFormTree = props => {
                             display: 'none'
                           }}
                           label={i18n.t('label.plant_project')}
-                          dropdownOffset={{ top: 0 }}
+                          dropdownOffset={{
+                            top: 0,
+                            left: 0
+                          }}
                           data={parentProps.plantProjects.map(item => {
                             return { value: item.value, label: item.text };
                           })}

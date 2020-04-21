@@ -18,7 +18,8 @@
     "shake": "adb shell input keyevent 82",
     "clean": "./clean.sh",
     "ios": "ENVFILE=.env.develop react-native run-ios --scheme 'TreecounterApp(.env.develop)'",
-    "android": "ENVFILE=.env.develop react-native run-android --variant 'developDebug'"
+    "android": "ENVFILE=.env.develop react-native run-android --variant 'developDebug'",
+    "android-windows": "SET ENVFILE=.env&& react-native run-android --variant DevDebug"
   },
   "lint-staged": {
     "*.js": [

@@ -80,7 +80,6 @@
     "react-native-fs": "2.16.6",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-get-random-values": "^1.2.0",
-    "react-native-google-pay": "^2.1.0",
     "react-native-google-places-autocomplete": "^1.4.1",
     "react-native-htmlview": "^0.15.0",
     "react-native-i18n": "^2.0.15",
@@ -144,6 +143,7 @@
     "tcomb-form": "^0.9.21",
     "tcomb-form-native": "^0.6.20",
     "tcomb-json-schema": "^0.3.2",
+    "tipsi-stripe": "^7.5.3",
     "uuid": "^7.0.1",
     "yup": "^0.28.1"
   },

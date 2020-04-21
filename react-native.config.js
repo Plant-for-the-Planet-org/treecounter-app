@@ -7,6 +7,14 @@ module.exports = {
     ios: {},
     android: {}
   },
-  assets: ['Resources/fonts', './app/assets/fonts'] // stays the same
+  assets: ['Resources/fonts', './app/assets/fonts'], // stays the same
   // commands: require('./path-to-commands.js'),
+  dependencies: {
+    'tipsi-stripe': {
+      platforms: {
+        android: null,
+        ios: null,
+      }
+    }
+  }
 };

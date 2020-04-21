@@ -431,7 +431,7 @@ class AnimatedViews extends React.Component {
         {this.props.isFullMapComponentModal ? (
           <>
             <TouchableOpacity
-              style={[styles.downArrowIcon, isDetailShow ? ({ transform: [{ rotate: "90deg" }] }) : ({})]}
+              style={[styles.downArrowIcon, isDetailShow ? ({ transform: [{ rotate: '90deg' }] }) : ({})]}
               onPress={() => this.onPressHeader()}
             >
               <Image style={{ height: 20, width: 20, }} source={arrow_down} />

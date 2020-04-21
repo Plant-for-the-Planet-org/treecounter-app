@@ -319,6 +319,11 @@ class AnimatedViews extends React.Component {
   }
 
   afterDeleteContribution = () => {
+    if (this.state.markers.length == this.state.activeIndex + 1) {
+      this.setState({
+        activeIndex: this.state.activeIndex - 1,
+      })
+    }
     setTimeout(() => {
       const oneContribution = this.state.markers[this.state.activeIndex + 1];
       try {

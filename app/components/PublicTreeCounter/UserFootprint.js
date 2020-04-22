@@ -5,11 +5,6 @@ import UserSynopsis from '../Common/UserSynopsis';
 import UserHomepageLink from '../Common/UserHomepageLink';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
 
-/**
- * MapIds:
- *   - d601683709dc415b99ddc1bc66a6d8eb
- *   - 534da741b327459eb117f4cc93acd98e
- */
 const UserFootprint = ({ userProfile }) => {
   return (
     <div className="full_width">
@@ -21,10 +16,7 @@ const UserFootprint = ({ userProfile }) => {
         homepageUrl={userProfile.url}
         caption={userProfile.linkText}
       />
-      <ArcGISContributionsMap
-        webMapId={getWebMapId('inventory')}
-        userId={userProfile.id}
-      />
+      <ArcGISContributionsMap userId={userProfile.id} />
       {/*<UserBarChart contributions={userProfile.contributions} />*/}
     </div>
   );

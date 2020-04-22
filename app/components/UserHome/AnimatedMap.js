@@ -319,14 +319,12 @@ class AnimatedViews extends React.Component {
   }
 
   afterDeleteContribution = () => {
-
     if (this.state.markers.length === 1) {
       this.setState({ singleContributionID: undefined, isDetailShow: false, isSatellite: false });
       this.props.toggleIsFullMapComp(true);
     } else {
       let activeIndexTemp = this.state.markers.length == this.state.activeIndex + 1 ? this.state.activeIndex - 1 : this.state.activeIndex;
       this.setState({ activeIndex: activeIndexTemp })
-
       setTimeout(() => {
         const oneContribution = this.state.markers[activeIndexTemp];
         try {

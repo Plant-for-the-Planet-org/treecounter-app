@@ -1,4 +1,4 @@
-/* 
+/*
   InfoPlist.strings
   TreecounterApp
 
@@ -6,6 +6,7 @@
   Copyright © 2019 Facebook. All rights reserved.
 */
 "NSCameraUsageDescription" = "Wir benötigen Zugriff auf die Kamera für die App.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" =  "Wir benötigen Ihren Standort, um die Koordinaten für die Baumregistrierung zu erhalten.";
 "NSLocationAlwaysUsageDescription" = "Wir benötigen Ihren Standort, um die Koordinaten für die Baumregistrierung zu erhalten.";
 "NSLocationWhenInUseUsageDescription" = "Wir benötigen Ihren Standort, um die Koordinaten für die Baumregistrierung zu erhalten.";
 "NSMicrophoneUsageDescription" = "Wir benötigen Zugriff auf das Mikrofon (für Videos).";

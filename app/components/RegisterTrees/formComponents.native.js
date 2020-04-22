@@ -180,7 +180,10 @@ export const FormikFormTree = props => {
                             display: 'none'
                           }}
                           label={i18n.t('label.plant_project')}
-                          dropdownOffset={{ top: 0 }}
+                          dropdownOffset={{
+                            top: 0,
+                            left: 0
+                          }}
                           data={parentProps.plantProjects.map(item => {
                             return { value: item.value, label: item.text };
                           })}
@@ -485,7 +488,7 @@ export class AddMeasurements extends React.Component {
       measurementView: [
         {
           isVisible: false,
-          id: 1
+          id: 0
         }
       ],
       showMeasurement: false,
@@ -601,7 +604,7 @@ export class AddMeasurements extends React.Component {
                           <TextField
                             label={i18n.t('label.tree_diameter')}
                             value={
-                              parseInt(elementMasument[index]['diameter']) ||
+                              '' + parseInt(elementMasument[index]['diameter']) ||
                               props.values.treeDiameter
                             }
                             onSubmitEditing={() => {
@@ -648,7 +651,7 @@ export class AddMeasurements extends React.Component {
                           <TextField
                             label={i18n.t('label.tree_height')}
                             value={
-                              parseInt(elementMasument[index]['height']) ||
+                              '' + parseInt(elementMasument[index]['height']) ||
                               props.values.treeHeight
                             }
                             ref={input =>

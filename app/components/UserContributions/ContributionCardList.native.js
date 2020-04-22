@@ -1,36 +1,32 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-
+import React from 'react';
+import { FlatList } from 'react-native';
 import ContributionCard from './ContributionCard';
+import { convertNumIdToString } from '../../utils/utils';
 
 const ContributionCardList = props => {
-  const { contributions, deleteContribution, showAllContributions } = props;
-
-  return contributions.length > 3 && showAllContributions
-    ? contributions.map(
-        contribution =>
-          contribution && (
-            <ContributionCard
-              contribution={contribution}
-              deleteContribution={deleteContribution}
-              key={contribution.id}
-              navigation={props.navigation}
-            />
-          )
-      )
-    : contributions
-        .slice(0, 3)
-        .map(
-          contribution =>
-            contribution && (
-              <ContributionCard
-                contribution={contribution}
-                deleteContribution={deleteContribution}
-                key={contribution.id}
-                navigation={props.navigation}
-              />
-            )
-        );
+  const {
+    contributions,
+    deleteContribution,
+    showAllContributions,
+    onPressSingleContribution,
+    isCardPressed
+  } = props;
+  return (
+    <FlatList
+      data={convertNumIdToString(contributions.length > 3 && showAllContributions ? contributions : contributions.slice(0, 3))}
+      renderItem={({ item }) => (
+        <ContributionCard
+          isCardPressed={isCardPressed}
+          onPressSingleContribution={onPressSingleContribution}
+          contribution={item}
+          deleteContribution={deleteContribution}
+          key={item.id}
+          navigation={props.navigation}
+        />
+      )}
+    />
+  )
 };
 
 ContributionCardList.propTypes = {

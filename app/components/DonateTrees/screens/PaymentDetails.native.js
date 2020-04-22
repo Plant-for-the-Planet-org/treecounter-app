@@ -49,7 +49,16 @@ export default function DonationStep3(props) {
   const [showPay, setShowPay] = React.useState(true)
   const [allValid, setAllValid] = React.useState(false)
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
-  const [allowedAndroidPay, setAllowedAndroidPay] = React.useState(false)
+  const [allowedNativePay, setallowedNativePay] = React.useState(false)
+
+  const [amexAvailable, setAmexAvailable] = React.useState(false)
+  const [discoverAvailable, setDiscoverAvailable] = React.useState(false)
+  const [masterCardAvailable, setMasterCardAvailable] = React.useState(false)
+  const [visaAvailable, setVisaAvailable] = React.useState(false)
+
+  const [applePayComplete, setApplePayComplete] = React.useState(false)
+  const [applePayStatus, setApplePayStatus] = React.useState('')
+
   const togglePaypalInfo = () => {
     setPayPalInfo(!payPalInfo)
   };
@@ -64,9 +73,25 @@ export default function DonationStep3(props) {
       keyboardDidHide
     );
 
-    const allowedAndroidPay = stripe.deviceSupportsNativePay()
+    const allowedNativePay = stripe.deviceSupportsNativePay()
+    const amexAvailable = stripe.canMakeNativePayPayments({
+      networks: ['american_express'],
+    })
+    const discoverAvailable = stripe.canMakeNativePayPayments({
+      networks: ['discover'],
+    })
+    const masterCardAvailable = stripe.canMakeNativePayPayments({
+      networks: ['master_card'],
+    })
+    const visaAvailable = stripe.canMakeNativePayPayments({
+      networks: ['visa'],
+    })
+    setallowedNativePay(allowedNativePay)
+    setAmexAvailable(amexAvailable)
+    setDiscoverAvailable(discoverAvailable)
+    setMasterCardAvailable(masterCardAvailable)
+    setVisaAvailable(visaAvailable)
 
-    setAllowedAndroidPay(allowedAndroidPay)
     // clean up
     return () => {
       keyboardDidShowListener.remove();
@@ -81,6 +106,49 @@ export default function DonationStep3(props) {
   const keyboardDidHide = () => {
     setShowPay(true)
   }
+
+  handleCompleteChange = complete => (
+    setApplePayComplete(complete)
+  )
+
+  const handleApplePayPress = async (props) => {
+    try {
+      setApplePayStatus('')
+      setToken(null)
+      const token = await stripe.paymentRequestWithNativePay({
+        currencyCode: props.currency_code
+      },
+        [{
+          label: 'Donation to Plant for the Planet',
+          amount: props.treeCost * props.totalTreeCount,
+        },])
+
+      setToken(token)
+
+      if (applePayComplete) {
+        await stripe.completeNativePayRequest()
+        setApplePayStatus('Apple Pay payment completed')
+      } else {
+        await stripe.cancelNativePayRequest()
+        setApplePayStatus('Apple Pay payment cenceled')
+      }
+    } catch (error) {
+      setApplePayStatus(`Error: ${error.message}`)
+    }
+  }
+
+  handleSetupApplePayPress = () => (
+    stripe.openNativePaySetup()
+  )
+
+
+  const cards = {
+    americanExpressAvailabilityStatus: { name: 'American Express', isAvailable: amexAvailable },
+    discoverAvailabilityStatus: { name: 'Discover', isAvailable: discoverAvailable },
+    masterCardAvailabilityStatus: { name: 'Master Card', isAvailable: masterCardAvailable },
+    visaAvailabilityStatus: { name: 'Visa', isAvailable: visaAvailable },
+  }
+
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.WHITE }}>
@@ -157,8 +225,12 @@ export default function DonationStep3(props) {
           <SepaAccountForm />
 
           {/* Apple Pay Information Card */}
-          {Platform.OS === 'ios' ? (
-            <TouchableOpacity>
+          {Platform.OS === 'ios' && allowedNativePay ? (
+            <TouchableOpacity onPress={() => handleApplePayPress({
+              totalTreeCount: toString(props.context.donationDetails.totalTreeCount),
+              amountPerTree: toString(props.context.projectDetails.selectedProjectDetails.amountPerTree),
+              currency_code: toString(props.context.projectDetails.selectedProjectDetails.currency)
+            })}>
               <View style={styles.paymentCardView}>
                 <View style={styles.paymentModeView}>
                   <Image source={applePay} style={styles.creditCardsDesign} />
@@ -179,7 +251,7 @@ export default function DonationStep3(props) {
 
           {/* Google Pay Information Card */}
 
-          {allowedAndroidPay ? (
+          {allowedNativePay ? (
             <TouchableOpacity
               onPress={() => handleAndroidPayPress({
                 totalTreeCount: toString(props.context.donationDetails.totalTreeCount),

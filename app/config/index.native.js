@@ -12,7 +12,6 @@ export const context = {
   base: config.base, // API base url. Debug mode off: "" on: "/app_dev.php" (requires login)
   debug: config.debug, // local console debugging switch
   currency: config.currency,
-  mapIds: { inventory: config.mapIdsInventory },
   bugsnagApiKey: config.bugsnagApiKey,
   android: {
     appId: config.androidAppId

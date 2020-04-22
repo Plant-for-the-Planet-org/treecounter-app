@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { getWebMapId } from '../../actions/apiRouting';
 import UserSynopsis from '../Common/UserSynopsis';
 import UserHomepageLink from '../Common/UserHomepageLink';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';
@@ -22,7 +22,7 @@ const UserFootprint = ({ userProfile }) => {
         caption={userProfile.linkText}
       />
       <ArcGISContributionsMap
-        webMapId={'d601683709dc415b99ddc1bc66a6d8eb'}
+        webMapId={getWebMapId('inventory')}
         userId={userProfile.id}
       />
       {/*<UserBarChart contributions={userProfile.contributions} />*/}

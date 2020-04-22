@@ -320,25 +320,30 @@ class AnimatedViews extends React.Component {
 
   afterDeleteContribution = () => {
 
-    let activeIndexTemp = this.state.markers.length == this.state.activeIndex + 1 ? this.state.activeIndex - 1 : this.state.activeIndex;
-    this.setState({ activeIndex: activeIndexTemp })
+    if (this.state.markers.length === 1) {
+      this.setState({ singleContributionID: undefined, isDetailShow: false, isSatellite: false });
+      this.props.toggleIsFullMapComp(true);
+    } else {
+      let activeIndexTemp = this.state.markers.length == this.state.activeIndex + 1 ? this.state.activeIndex - 1 : this.state.activeIndex;
+      this.setState({ activeIndex: activeIndexTemp })
 
-    setTimeout(() => {
-      const oneContribution = this.state.markers[activeIndexTemp];
-      try {
-        this.mapView.animateToRegion(
-          {
-            latitude: oneContribution.geoLatitude,
-            longitude: oneContribution.geoLongitude,
-            latitudeDelta: 0.00095,
-            longitudeDelta: 0.0095
-          },
-          800
-        );
-      } catch (e) {
-        // Do thing
-      }
-    }, 3500)
+      setTimeout(() => {
+        const oneContribution = this.state.markers[activeIndexTemp];
+        try {
+          this.mapView.animateToRegion(
+            {
+              latitude: oneContribution.geoLatitude,
+              longitude: oneContribution.geoLongitude,
+              latitudeDelta: 0.00095,
+              longitudeDelta: 0.0095
+            },
+            800
+          );
+        } catch (e) {
+          // Do thing
+        }
+      }, 3500)
+    }
   }
 
   render() {

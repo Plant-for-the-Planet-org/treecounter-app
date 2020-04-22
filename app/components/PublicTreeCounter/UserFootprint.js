@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getWebMapId } from '../../actions/apiRouting';
 import UserSynopsis from '../Common/UserSynopsis';
 import UserHomepageLink from '../Common/UserHomepageLink';
 import ArcGISContributionsMap from '../Map/ArcGISContributionsMap';

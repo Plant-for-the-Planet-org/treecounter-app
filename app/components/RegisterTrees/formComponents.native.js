@@ -97,7 +97,7 @@ export const FormikFormTree = props => {
         : '';
     }
   };
-
+console.log('validationSchema',validationSchema)
   return (
     <Formik
       initialValues={initValue}
@@ -159,6 +159,7 @@ export const FormikFormTree = props => {
                               </Text>
                             </TouchableWithoutFeedback>
                           </Text>
+                          {console.log('formik props',props)}
                         </View>
                         <Dropdown
                           value={
@@ -173,8 +174,10 @@ export const FormikFormTree = props => {
                             top: 0,
                             width: '100%'
                           }}
-                          onChangeText={props.handleChange('plantProject')}
-                          onBlur={props.handleBlur('plantProject')}
+                          onChangeText={(e)=>{
+                            props.setFieldValue('plantProject',e);
+                            }}
+                         // onBlur={props.handleBlur('plantProject')}
                           inputContainerStyle={{
                             borderBottomWidth: 0,
                             display: 'none'

@@ -1052,7 +1052,6 @@ class NativeMapView extends Component {
             </View>
           </TouchableOpacity>
         )}
-        {debug('this.ref', this.ref)}
       </View>
     );
   }

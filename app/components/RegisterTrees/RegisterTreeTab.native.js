@@ -29,15 +29,24 @@ export default class RegisterTreeTab extends PureComponent {
       contributionMeasurements:
         (props.value && props.value.contributionMeasurements) || [],
       contributionImages: (props.value && props.value.contributionImages) || [],
-      geoLocation: ''
-      // geometry: ''
+      geoLocation: '',
+      plantProject: props.isTpo
+        ? props.plantProjects.length > 0
+          ? props.plantProjects[0].value
+          : ''
+        : '',
     };
     const defaultMultipleInitValue = {
       plantDate: (props.value && props.value.plantDate) || new Date(),
       treeSpecies: (props.value && props.value.treeSpecies) || '',
       treeCount: (props.value && props.value.treeCount) || 5,
       contributionImages: (props.value && props.value.contributionImages) || [],
-      geoLocation: (props.value && props.value.geoLocation) || ''
+      geoLocation: (props.value && props.value.geoLocation) || '',
+      plantProject: props.isTpo
+        ? props.plantProjects.length > 0
+          ? props.plantProjects[0].value
+          : ''
+        : '',
     };
     this.state = {
       plantProject: props.isTpo

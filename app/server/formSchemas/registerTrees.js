@@ -88,10 +88,6 @@ export default {
         maxLength: 255,
         propertyOrder: 7
       },
-
-      /*
-      * Todo: Make universal schema function to handle array type form schemas
-      *  */
       contributionMeasurements: {
         type: 'array',
         title: 'label.add_measurements',
@@ -148,8 +144,6 @@ export default {
         propertyOrder: 1
       },
       plantProject: {
-        enum: ['4', '6'],
-        enum_titles: ['project_4', 'Campeche Rainforest Restoration 2'],
         type: 'string',
         title: 'label.plant_project',
         icon: null,

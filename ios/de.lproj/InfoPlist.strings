@@ -1,18 +1,16 @@
-/*
-  InfoPlist.strings
+/* InfoPlist.strings
   TreecounterApp
 
   Created by Norbert Schuler on 29.08.19.
-  Copyright © 2019 Facebook. All rights reserved.
-*/
+  Copyright © 2019 Facebook. All rights reserved. */
 "NSCameraUsageDescription" = "Wir benötigen Zugriff auf die Kamera für die App.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" =  "Wir benötigen Ihren Standort, um die Koordinaten für die Baumregistrierung zu erhalten.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Wir benötigen Ihren Standort, um die Koordinaten für die Baumregistrierung zu erhalten.";
 "NSLocationAlwaysUsageDescription" = "Wir benötigen Ihren Standort, um die Koordinaten für die Baumregistrierung zu erhalten.";
 "NSLocationWhenInUseUsageDescription" = "Wir benötigen Ihren Standort, um die Koordinaten für die Baumregistrierung zu erhalten.";
 "NSMicrophoneUsageDescription" = "Wir benötigen Zugriff auf das Mikrofon (für Videos).";
 "NSPhotoLibraryAddUsageDescription" = "Wir möchten Fotos in Ihre Alben speichern.";
 "NSPhotoLibraryUsageDescription" = "Wir benötigen Zugriff auf die Fotoalben für die App.";
-"NSCalendarsUsageDescription" =  "Wir benötigen Zugriff auf den Kalender für die App.";
+"NSCalendarsUsageDescription" = "Wir benötigen Zugriff auf den Kalender für die App.";
 "NSAppleMusicUsageDescription" = "Wir benötigen Zugriff auf die Musikbibliothek für die App.";
 "NSBluetoothPeripheralUsageDescription" = "Wir würden gerne Bluetooh für die App verwenden.";
 "NSBluetoothAlwaysUsageDescription" = "Wir würden gerne Bluetooh für die App verwenden.";

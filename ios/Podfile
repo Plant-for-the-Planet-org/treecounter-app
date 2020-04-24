@@ -60,7 +60,8 @@ target 'TreecounterApp' do
   pod 'Permission-Siri', :path => "#{permissions_path}/Siri.podspec"
   pod 'Permission-SpeechRecognition', :path => "#{permissions_path}/SpeechRecognition.podspec"
   pod 'Permission-StoreKit', :path => "#{permissions_path}/StoreKit.podspec"
-
+  pod 'Stripe', '~> 14.0.0'
+  pod 'tipsi-stripe', :path => '../node_modules/tipsi-stripe'
   # React Native Maps dependencies
   rn_maps_path = '../node_modules/react-native-maps'
   pod 'react-native-google-maps', :path => rn_maps_path

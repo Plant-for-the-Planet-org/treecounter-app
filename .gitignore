@@ -57,3 +57,7 @@ coverage
 #app build
 web/prod
 web/server
+
+
+# loc file
+*.lock

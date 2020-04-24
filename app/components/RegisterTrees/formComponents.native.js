@@ -97,7 +97,6 @@ export const FormikFormTree = props => {
         : '';
     }
   };
-console.log('validationSchema',validationSchema)
   return (
     <Formik
       initialValues={initValue}
@@ -159,7 +158,6 @@ console.log('validationSchema',validationSchema)
                               </Text>
                             </TouchableWithoutFeedback>
                           </Text>
-                          {console.log('formik props',props)}
                         </View>
                         <Dropdown
                           value={
@@ -497,17 +495,11 @@ export class AddMeasurements extends React.Component {
       showMeasurement: false,
       elementMasument: contributionMeasurements || []
     };
-    debug(
-      'props.props.value.contributionMeasurements',
-      props.props &&
-      props.props.values &&
-      props.props.values.contributionMeasurements
-    );
+
     if (contributionMeasurements) {
       contributionMeasurements.length &&
         contributionMeasurements.map((item, index) => {
           this._addMeasurementView(true, index, item, contributionMeasurements);
-          debug('measurementView', this.state.elementMasument);
         });
 
       this._addMeasurementView();

@@ -184,19 +184,13 @@ export default class RegisterTreeTab extends PureComponent {
         {this.state.mode === 'single-tree' ? (
           <FormikFormTree
             onCreateCompetition={value => {
-              if (this.props.mode === 'single-tree') {
-                //  value.geometry = undefined;
-                // delete value.geometry;
-              } else {
-                // value.geometry = JSON.stringify(value.geometry);
-              }
               if (this.props.onRegister) {
                 this.props.onRegister(
                   this.props.mode,
                   value,
                   this.state.plantProject === ''
                     ? null
-                    : this.state.plantProject
+                    : value.plantProject
                 );
               }
             }}

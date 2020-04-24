@@ -42,7 +42,7 @@ class SelectPlantProject extends Component {
       expanded: false,
       pageIndex: 0,
       filteredProjects: props.plantProjects,
-      featuredProjects: props.plantProjects,
+      featuredProjects: props.featuredProjects,
       priceSortedProjects: props.plantProjects,
       searchFieldValue: '',
       imageViewMore: false,
@@ -87,13 +87,14 @@ class SelectPlantProject extends Component {
 
   initialStateFromProps(props) {
     const {
+      featuredProjects,
       plantProjects,
       currencies: { currencies }
     } = props;
     debug('Pojects featured:', plantProjects);
-    let featuredProjects = plantProjects.filter(project => project.isFeatured);
-    featuredProjects = _.orderBy(featuredProjects, 'id');
-    featuredProjects.length && featuredProjects.push(featuredProjects[0]);
+    // let featuredProjects = plantProjects.filter(project => project.isFeatured);
+    // featuredProjects = _.orderBy(featuredProjects, 'id');
+    // featuredProjects.length && featuredProjects.push(featuredProjects[0]);
 
     let priceSortedProjects = sortProjectsByPrice(
       plantProjects,
@@ -252,7 +253,7 @@ class SelectPlantProject extends Component {
           <Slider {...settings}>
             {featuredProjects.length !== 0
               ? featuredProjects
-                .sort((a, b) => a.id - b.id)
+                // .sort((a, b) => a.id - b.id)?
                 .map(project => {
                   {
                     /* debug(project); */

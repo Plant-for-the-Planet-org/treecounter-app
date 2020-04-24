@@ -1,0 +1,20 @@
+/* InfoPlist.strings
+  TreecounterApp
+
+  Created by Norbert Schuler on 29.08.19.
+  Copyright © 2019 Facebook. All rights reserved. */
+"NSCameraUsageDescription" = "Nos gustaría usar tu cámara";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Necesitamos tu ubicación para obtener las coordenadas para registrar el árbol.";
+"NSLocationAlwaysUsageDescription" = "Necesitamos tu ubicación para obtener las coordenadas para registrar el árbol.";
+"NSLocationWhenInUseUsageDescription" = "Necesitamos tu ubicación para obtener las coordenadas para registrar el árbol.";
+"NSMicrophoneUsageDescription" = "Nos gustaría usar tu micrófono (para los videos).";
+"NSPhotoLibraryAddUsageDescription" = "Nos gustaría guardar las fotos en tu galería de fotos.";
+"NSPhotoLibraryUsageDescription" = "Nos gustaría guardar las fotos en tu galería de fotos para la aplicación.";
+"NSCalendarsUsageDescription" = "Nos gustaría tener acceso a tu calendario para la aplicación.";
+"NSAppleMusicUsageDescription" = "Nos gustaría tener acceso a tu biblioteca de música para la aplicación.";
+"NSBluetoothPeripheralUsageDescription" = "Nos gustaría usar el bluetooth para la aplicación.";
+"NSBluetoothAlwaysUsageDescription" = "Nos gustaría usar el bluetooth para la aplicación.";
+"NSMotionUsageDescription" = "Nos gustaría usar el sensor de movimiento para la aplicación.";
+"NSSpeechRecognitionUsageDescription" = "Nos gustaría usar el reconocimiento de voz para la aplicación.";
+"NSContactsUsageDescription" = "Nos gustaría acceder a tus contactos para la aplicación.";
+"NSSiriUsageDescription" = "Nos gustaría usar Siri para la aplicación.";

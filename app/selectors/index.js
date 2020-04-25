@@ -130,15 +130,6 @@ export const getAllCompetitionsSelector = createSelector(
         competitions.push(
           denormalize(competitionPager[id], competitionPagerSchema, entities)
         );
-        console.log('\n\n\n\n\n\n');
-        console.log(
-          '============================================================'
-        );
-        console.log('competitions', competitions);
-        console.log(
-          '============================================================'
-        );
-        console.log('\n\n\n\n\n\n');
         return competitions;
       },
       []

@@ -88,7 +88,7 @@ class Competiton extends React.Component {
     );
   };
 
-  // This loads the different components based on the selected index
+  // This loads different components based on the selected index
   _renderSelectPlantScene = ({ route }) => {
     let competitionsArr = this.props[`${route.key}Competitions`];
     let tabType = route.key;
@@ -101,27 +101,6 @@ class Competiton extends React.Component {
       route.key === 'mine'
         ? this.props.fetchMineCompetitions
         : this.props.fetchCompetitions;
-    // switch (route.key) {
-    //   case 'mine':
-    //     // competitionsArr = this.props.mineCompetitions;
-    //     tabHeader = i18n.t('label.mine_compeition_tab_header');
-    //     // nullTabHeader = i18n.t('label.mine_compeition_tab_header_null');
-    //     break;
-    //   case 'featured':
-    //     // competitionsArr = this.props.featuredCompetitions;
-    //     tabHeader = i18n.t('label.featured_compeition_tab_header');
-    //     break;
-    //   case 'all':
-    //     // competitionsArr = this.props.allCompetitions;
-    //     tabHeader = i18n.t('label.all_compeition_tab_header');
-    //     break;
-    //   case 'archived':
-    //     // competitionsArr = this.props.archivedCompetitions;
-    //     tabHeader = i18n.t('label.archived_compeition_tab_header');
-    //     break;
-    //   default:
-    //     return null;
-    // }
     return (
       <CommonCompetitionTab
         competitionsArr={competitionsArr}

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
+import { FlatList, Image, Text, View } from 'react-native';
 import i18n from '../../../locales/i18n';
 import styles from '../../../styles/competition/competition-master.native';
 import colors from '../../../utils/constants';
@@ -23,11 +23,18 @@ const CompetitionFinishedMessage = () => {
 const CommonTab = props => {
   const [showCompetitions, setShowCompetitions] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [showLoader, setShowLoader] = useState(true);
   const [isCompetitionFinished, setCompetitionFinished] = useState(false);
 
+  /**
+   * * On user refresh
+   * 1. Sets refreshing to {true}
+   * 2. Empties the competition loaded
+   * 3. Sets competition finished to {false}
+   * 4. Fetches competition starting from page 1
+   * 5. Sets refreshing to {false} after api call is completed
+   */
   const onRefresh = async () => {
     setRefreshing(true);
     if (props.tabType !== 'mine') {
@@ -41,10 +48,30 @@ const CommonTab = props => {
 
   let CurrentDate = new Date();
 
+  /**
+   * * Fetches the competition from api using current page number
+   * @requires @param {Number} pageNo =>
+   */
   const getAllCompetitions = pageNo => {
     props.fetchCompetitions(props.tabType, pageNo);
   };
 
+  /**
+   * * This lifecycle method is called everytime there is change in competitionsArr
+   * * which is being fetched from API.
+   *
+   * * Pushes the newly loaded competitions from API to showCompetitons array state
+   * 1. If the competiton type is {all} and {featured} then checks
+   *    if end date of competition is greater than current date only then
+   *    pushes to showCompetitions array state
+   * 2. If the competiton type is {archived} then checks
+   *    if end date of competition is smaller than current date only then
+   *    pushes to showCompetitions array state
+   * 3. If the competiton type is {mine}
+   *    then directly pushes to showCompetitons array state
+   * 4. Sets loading to {false}
+   * 5. Sets competition finished to {true} in there is no remaining competition
+   */
   useEffect(() => {
     let showCompetitionsArr = [];
     if (props.competitionsArr.length > 0) {
@@ -84,17 +111,14 @@ const CommonTab = props => {
           props.competitionsArr[i].hasOwnProperty('nbRemaining') &&
           props.competitionsArr[i].nbRemaining === 0
         ) {
-          setShowLoader(false);
           setCompetitionFinished(true);
-        } else {
-          setShowLoader(false);
         }
+        setLoading(false);
       }
     }
     setShowCompetitions(showCompetitions =>
       showCompetitions.concat(showCompetitionsArr)
     );
-    setLoading(false);
   }, [props.competitionsArr]);
 
   const _keyExtractor = item => item.id.toString();
@@ -111,12 +135,21 @@ const CommonTab = props => {
     />
   );
 
+  /**
+   * * Function called when user scrolls to the bottom of the list
+   * 1. Sets loading to {true}
+   * 2. Increments the current page no. and sets page no.
+   * 3. calls @function getAllCompetitions(pageNo) with @param {Number} pageNo
+   */
   const handleLoadMore = () => {
     setLoading(true);
     setPage(prevPage => prevPage + 1);
     getAllCompetitions(page + 1);
   };
 
+  /**
+   * * Returns Empty container View with and Image and Text
+   */
   const EmptyContainer = () => {
     return (
       <View
@@ -137,12 +170,17 @@ const CommonTab = props => {
       </View>
     );
   };
+
   return (
     <FlatList
       data={showCompetitions}
       keyExtractor={item => _keyExtractor(item)}
       renderItem={item => _renderItem(item)}
       onEndReached={
+        /**
+         * * Only if competition is not finished and no new competition is loading
+         *   calls @function handleLoadMore()
+         */
         props.tabType !== 'mine'
           ? isCompetitionFinished
             ? null
@@ -154,15 +192,16 @@ const CommonTab = props => {
       onEndReachedThreshold={0.05}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
+      /**
+       * 1. If competiton is loading then shows {CompetitionLoader} component
+       * 2. Else if competiton is  not loading and not refreshing then shows {EmptyContainer} component
+       */
       ListEmptyComponent={() =>
-        showLoader ? (
-          <ActivityIndicator size="large" color={colors.PRIMARY_COLOR} />
-        ) : !refreshing ? (
-          EmptyContainer()
-        ) : null
+        !isLoading && !refreshing ? EmptyContainer() : null
       }
       style={{ paddingBottom: 60, backgroundColor: colors.WHITE }}
       ListHeaderComponent={() => {
+        // * Returns the header for the competiitons
         return (
           <View style={styles.headerView}>
             <Text style={styles.headerTitle}>
@@ -179,11 +218,17 @@ const CommonTab = props => {
         );
       }}
       ListFooterComponent={() => {
-        return isLoading
-          ? CompetitionLoader()
-          : props.tabType !== 'mine' && isCompetitionFinished
-          ? CompetitionFinishedMessage()
-          : null;
+        /**
+         * * Returns the footer for the competiitons
+         * 1. If competition is loading then shows the Competition Content Loader.
+         * 2. Else if competition is not loading and competitions are finished
+         *    then shows Competion Finished Message
+         */
+        return isLoading ? (
+          <View style={{ marginTop: 16 }}>{CompetitionLoader()}</View>
+        ) : props.tabType !== 'mine' && isCompetitionFinished ? (
+          CompetitionFinishedMessage()
+        ) : null;
       }}
     />
   );

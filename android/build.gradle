@@ -37,7 +37,17 @@ allprojects {
             url "https://maven.google.com"
         }
         maven { url 'https://jitpack.io' }
-        
+        configurations.all {
+            resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.google.android.gms') {
+                details.useVersion '17.0.0'
+            }
+            if (requested.group == 'com.google.firebase') {
+                details.useVersion '17.0.0'
+                }
+            }
+         }
     }
 }
 

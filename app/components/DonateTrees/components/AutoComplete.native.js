@@ -1,6 +1,6 @@
 import React from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-
+import { context } from './../../../config';
 const { googleMapApiKey } = context;
 
 export default GooglePlacesInput = props => {

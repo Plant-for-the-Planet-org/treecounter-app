@@ -5,10 +5,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
-
 import { NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectCountryModal, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
+
 
 function DonationDetails(props) {
   // use centralised context so that we can use this anywhere and can track the changes according
@@ -50,11 +50,11 @@ function DonationDetails(props) {
     if (context.contextType === 'direct') {
       props.contextActions.setDonationDetails({
         ...props.context.donationDetails,
-        selectedProject: props.selectedProject,
         totalTreeCount: treeCount,
         frequency: frequency,
         taxReceiptSwitch: taxReceiptSwitch,
-        countryForTax: countryForTax
+        countryForTax: countryForTax,
+        selectedProject: props.selectedProject
       });
 
     }
@@ -124,8 +124,8 @@ function DonationDetails(props) {
             selectedProject={props.selectedProject}
           />
         ) : (
-          <NoPlantProjectDetails />
-        )}
+            <NoPlantProjectDetails />
+          )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -143,14 +143,14 @@ function DonationDetails(props) {
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-        context.contextType === 'gift-invitation' ? (
-          <GiftTreesComponent
-            treeCount={treeCount}
-            setTreeCount={setTreeCount}
-            selectedProject={props.selectedProject}
-            context={context}
-          />
-        ) : null}
+          context.contextType === 'gift-invitation' ? (
+            <GiftTreesComponent
+              treeCount={treeCount}
+              setTreeCount={setTreeCount}
+              selectedProject={props.selectedProject}
+              context={context}
+            />
+          ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
         <View style={[styles.horizontalDivider, { width: '14%' }]} />

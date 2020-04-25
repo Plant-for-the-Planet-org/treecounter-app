@@ -3,14 +3,12 @@ import { Animated, Image, Keyboard, Platform, Text, TouchableOpacity, View } fro
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import stripe from 'tipsi-stripe';
-import { applePay, googlePay, paypal, paypalLogo } from '../../../assets';
+import { applePay, googlePay } from '../../../assets';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donation/donation.native';
 import colors from '../../../utils/constants';
 import { formatNumber } from '../../../utils/utils';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
-import CreditCardForm from '../components/CreditCardForm';
-import SepaAccountForm from '../components/SepaAccountForm';
 
 export default function DonationStep3(props) {
 
@@ -20,20 +18,25 @@ export default function DonationStep3(props) {
     androidPayMode: 'test', // Android only
   })
 
+  console.log('Context', props.context.donationDetails.totalTreeCount)
 
   const [token, setToken] = React.useState(null)
 
   const handleAndroidPayPress = async (props) => {
     try {
       setToken(null)
+      console.log('totalPrice', props.totalPrice)
+      console.log('Currency code', props.currency_code)
+      console.log('Amount per tree', props.amountPerTree)
+      console.log('Total tree count', props.totalTreeCount)
       const token = await stripe.paymentRequestWithNativePay({
-        total_price: props.treeCost * props.totalTreeCount,
+        total_price: props.totalPrice,
         currency_code: props.currency_code,
         line_items: [{
           currency_code: props.currency_code,
           description: 'Donation to Plant for the Planet',
-          total_price: props.treeCost * props.totalTreeCount,
-          unit_price: props.treeCost,
+          total_price: props.totalPrice,
+          unit_price: props.amountPerTree,
           quantity: props.totalTreeCount,
         }],
       })
@@ -172,12 +175,12 @@ export default function DonationStep3(props) {
           {/* <Text style={styles.pageTitle}>Payment</Text> */}
           <Text style={styles.pageSubTitle}>
             Please review your payment and donation details.
-            </Text>
+          </Text>
 
-          <CreditCardForm />
+          {/* <CreditCardForm /> */}
 
           {/* PayPal Information Card */}
-          <View style={styles.paymentCardView}>
+          {/* <View style={styles.paymentCardView}>
             <TouchableOpacity
               style={styles.paymentModeView}
               onPress={() => { togglePaypalInfo() }}
@@ -200,10 +203,10 @@ export default function DonationStep3(props) {
                     style={{ marginLeft: 10 }}
                   />
                 )}
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-            {/* Hidden until expanded by User */}
-            {payPalInfo ? (
+          {/* Hidden until expanded by User */}
+          {/* {payPalInfo ? (
               <View style={styles.expandedPaymentModePaypal}>
                 <Text style={styles.paypalMessage}>
                   Click the PayPal icon below to sign into your PayPal account
@@ -217,19 +220,19 @@ export default function DonationStep3(props) {
                   />
                 </TouchableOpacity>
               </View>
-            ) : null}
-            {/* Hidden until expanded by User */}
-          </View>
+            ) : null} */}
+          {/* Hidden until expanded by User */}
+          {/* </View> */}
           {/* PayPal Information Card Ended */}
 
-          <SepaAccountForm />
+          {/* <SepaAccountForm /> */}
 
           {/* Apple Pay Information Card */}
           {Platform.OS === 'ios' && allowedNativePay ? (
             <TouchableOpacity onPress={() => handleApplePayPress({
-              totalTreeCount: toString(props.context.donationDetails.totalTreeCount),
-              amountPerTree: toString(props.context.projectDetails.selectedProjectDetails.amountPerTree),
-              currency_code: toString(props.context.projectDetails.selectedProjectDetails.currency)
+              totalTreeCount: String(props.context.donationDetails.totalTreeCount),
+              amountPerTree: String(props.context.projectDetails.selectedProjectDetails.amountPerTree),
+              currency_code: String(props.context.projectDetails.selectedProjectDetails.currency)
             })}>
               <View style={styles.paymentCardView}>
                 <View style={styles.paymentModeView}>
@@ -251,12 +254,13 @@ export default function DonationStep3(props) {
 
           {/* Google Pay Information Card */}
 
-          {allowedNativePay ? (
+          {Platform.OS === 'android' && allowedNativePay ? (
             <TouchableOpacity
               onPress={() => handleAndroidPayPress({
-                totalTreeCount: toString(props.context.donationDetails.totalTreeCount),
-                amountPerTree: toString(props.context.projectDetails.selectedProjectDetails.amountPerTree),
-                currency_code: toString(props.context.projectDetails.selectedProjectDetails.currency)
+                totalTreeCount: String(props.context.donationDetails.talTreeCount),
+                totalPrice: String(props.context.donationDetails.totalTreeCount * props.context.projectDetails.selectedProjectDetails.amountPerTree),
+                amountPerTree: String(props.context.projectDetails.selectedProjectDetails.amountPerTree),
+                currency_code: String(props.context.projectDetails.selectedProjectDetails.currency)
               })}
             >
               <View style={styles.paymentCardView}>
@@ -283,18 +287,20 @@ export default function DonationStep3(props) {
       </KeyboardAwareScrollView>
       {/* Pay Button Section  */}
 
-      {showPay ? (
-        <PaymentButton
-          treeCount={props.context.donationDetails.totalTreeCount}
-          treeCost={props.context.projectDetails.selectedProjectDetails.amountPerTree}
-          selectedCurrency={props.context.projectDetails.selectedProjectDetails.currency}
-          // commissionSwitch={props.navigation.getParam('commissionSwitch')}
-          navigation={props.navigation}
-          allValid={allValid}
-        />
-      ) : null}
+      {
+        showPay ? (
+          <PaymentButton
+            treeCount={props.context.donationDetails.totalTreeCount}
+            treeCost={props.context.projectDetails.selectedProjectDetails.amountPerTree}
+            selectedCurrency={props.context.projectDetails.selectedProjectDetails.currency}
+            // commissionSwitch={props.navigation.getParam('commissionSwitch')}
+            navigation={props.navigation}
+            allValid={allValid}
+          />
+        ) : null
+      }
       {/* Pay Button Section Ended */}
-    </View>
+    </View >
   );
 }
 

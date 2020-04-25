@@ -226,6 +226,7 @@ dependencies {
         exclude group: 'com.google.android.gms'
         exclude group: 'com.google.firebase'
     }    
+    implementation 'com.google.android.gms:play-services-wallet:11.+'
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'com.facebook.fresco:animated-gif:2.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'

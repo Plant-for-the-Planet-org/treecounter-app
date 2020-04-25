@@ -23,7 +23,15 @@ export const saveState = async state => {
 };
 
 export const saveItem = async (key, value) => {
-  await AsyncStorage.setItem(key, value);
+  try {
+    if (value) {
+      await AsyncStorage.setItem(key, value);
+    } else {
+      await AsyncStorage.removeItem(key);
+    }
+  } catch (err) {
+    debug(err);
+  }
 };
 
 export const fetchItem = async key => {

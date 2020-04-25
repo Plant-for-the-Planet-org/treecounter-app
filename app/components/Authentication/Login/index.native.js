@@ -107,7 +107,10 @@ export default class Login extends Component {
             // eslint-disable-next-line no-underscore-dangle
             _password: ''
           }}
-          ref={'loginForm'}
+          /* ExceptionsManager.js:126 Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+             Check the render method of `Login`.
+             in Formik (at Login/index.native.js:103) */
+          // ref={'loginForm'}
           onSubmit={values => {
             this.setState({
               loadButton: true

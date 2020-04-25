@@ -1,47 +1,26 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ScrollView,
-  View,
-  Text,
-  Image,
-  Linking,
-  TouchableOpacity,
-  Share,
-  SafeAreaView,
-  RefreshControl
-  //FlatList
-} from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import React, { Component } from 'react';
+import { Dimensions, findNodeHandle, FlatList, Image, LayoutAnimation, Linking, Platform, RefreshControl, ScrollView, Share, Text, TouchableOpacity, UIManager, View } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
+import { fullscreen_icon } from '../../assets/index';
 import { debug } from '../../debug';
-import {
-  readmoreDown,
-  readmoreUp,
-  share,
-  coupon,
-  registerTree,
-  settings
-} from './../../assets/';
-import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
-// import CountryLoader from './../Common/ContentLoader/LeaderboardRefresh/CountryLoader';
-import { getLocalRoute } from './../../actions/apiRouting';
-// import { delimitNumbers } from './../../utils/utils';
-// import { getImageUrl } from './../../actions/apiRouting';
+import i18n from '../../locales/i18n';
 import styles from '../../styles/user-home';
-// import tabStyles from '../../styles/common/tabbar';
-import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
-// import CardLayout from '../Common/Card';
+import colors from '../../utils/constants';
+import { convertNumIdToString } from '../../utils/utils';
 import SvgContainer from '../Common/SvgContainer';
 import UserProfileImage from '../Common/UserProfileImage';
 import ContributionCardList from '../UserContributions/ContributionCardList.native';
-import i18n from '../../locales/i18n';
+import { getLocalRoute } from './../../actions/apiRouting';
+import { coupon, readmoreDown, readmoreUp, registerTree, settings, share } from './../../assets/';
+import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
+import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 import CompetitionSnippet from './app/CompetitionSnippet';
-// import NativeMapView from './../Map/NativeMapView'
-// import Icon from 'react-native-vector-icons/FontAwesome5';
-import Smalltreewhite from '../../assets/images/smalltreewhite.png';
+import FullMapComponent from './AnimatedMap';
 
-export default class UserHome extends Component {
+class UserHome extends Component {
   constructor(props) {
     super(props);
 
@@ -51,6 +30,10 @@ export default class UserHome extends Component {
       svgData = { ...treecounterData, type: userProfile.type };
     }
     this.state = {
+      isMapPressed: false,
+      isPressFromList: false,
+      singleContributionID: undefined,
+      isFullMapComponentModal: false,
       svgData: svgData,
       routes: [
         { key: 'home', title: i18n.t('label.home') },
@@ -61,8 +44,14 @@ export default class UserHome extends Component {
       showAllRecurrentContributions: false,
       recurrentUserContributions: [],
       readMore: false,
-      refreshing: false
+      refreshing: false,
+      isCardPressed: false,
     };
+    this.mapView = React.createRef();
+
+    if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
   }
   componentDidMount() {
     let { userContributions } = this.props;
@@ -78,7 +67,6 @@ export default class UserHome extends Component {
       recurrentUserContributions: recurrentUserContributions
     });
   }
-
   onRefresh = () => {
     this.setState({
       refreshing: true
@@ -121,7 +109,8 @@ export default class UserHome extends Component {
     const shouldUpdate =
       JSON.stringify(nextProps) !== JSON.stringify(this.props) ||
       nextState.index !== this.state.index ||
-      nextState.showAllContributions !== this.state.showAllContributions;
+      nextState.showAllContributions !== this.state.showAllContributions ||
+      nextState.isFullMapComponentModal !== this.state.isFullMapComponentModal || this.state.isMapPressed !== nextState.isMapPressed;
     return shouldUpdate;
   }
 
@@ -230,64 +219,110 @@ export default class UserHome extends Component {
       alert(error.message);
     }
   };
-  getMapComponent = userContributions => {
-    let mapViewLatLong = {
-      latitude: userContributions[userContributions.length - 1].geoLatitude,
-      longitude: userContributions[userContributions.length - 1].geoLongitude,
-      latitudeDelta: 0.00000922,
-      longitudeDelta: 0.0421
-    };
-    let markerStyle = {
-      width: 30,
-      height: 30,
-      backgroundColor: '#89b53a',
-      borderRadius: 50,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
-    };
-    let markerList = userContributions.map(oneContribution => {
-      return (
-        <Marker
-          coordinate={{
-            latitude: oneContribution.geoLatitude,
-            longitude: oneContribution.geoLongitude
-          }}
-          key={oneContribution.id}
-        >
-          <View style={markerStyle}>
-            <Image source={Smalltreewhite} resizeMode={'contain'} />
-          </View>
-        </Marker>
-      );
+
+  toggleIsFullMapComp = (
+    singleContributionIDShouldNull, /*  if true set id to null*/
+
+  ) => {
+    // setTimeout(() => {
+
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
+    this.mapParent.measureLayout(findNodeHandle(this.scrollRef), (x, y) => {
+      this.scrollRef.scrollTo({ x: 0, y: y, animated: true });
     });
-    return (
-      <MapView
-        mapType={'satellite'}
-        provider={PROVIDER_GOOGLE}
-        style={{ height: 250, flex: 1 }}
-        initialRegion={mapViewLatLong}
+    setTimeout(() => {
+      this.setState({
+        isFullMapComponentModal: !this.state.isFullMapComponentModal,
+        singleContributionID: singleContributionIDShouldNull
+          ? null
+          : this.state.singleContributionID,
+        isPressFromList: singleContributionIDShouldNull ? false : true
+      }, () => {
+        this.props.navigation.setParams({ isFullMapComponentModal: this.state.isFullMapComponentModal })
+      });
+    }, 0)
+    // }, 300)
+  };
+
+  onPressFullScreen = (e) => {
+    this.setState({ isCardPressed: true }, () => {
+      this.toggleIsFullMapComp(e)
+      setTimeout(() => {
+        this.setState({ isCardPressed: false })
+      }, 1000)
+    })
+  }
+
+  getMapComponent = () => {
+    let fullScreenIcon = (
+      <TouchableOpacity
+        onPress={this.onPressFullScreen}
+        style={styles.fullScreenIcon}
       >
-        {markerList}
-      </MapView>
+        <Image source={fullscreen_icon} />
+      </TouchableOpacity>
+    );
+
+    const { isFullMapComponentModal } = this.state;
+    return (
+      <View
+        ref={ref => (this.mapParent = ref)}
+        style={{
+          flex: 1,
+          height: isFullMapComponentModal
+            ? Dimensions.get('window').height
+            : 250
+        }}
+      >
+        <FullMapComponent
+          onPressMapView={this.onPressMapView}
+          isMapPressed={this.state.isMapPressed}
+          isPressFromList={this.state.isPressFromList}
+          singleContributionID={this.state.singleContributionID}
+          isFullMapComponentModal={isFullMapComponentModal}
+          toggleIsFullMapComp={this.toggleIsFullMapComp}
+          navigation={this.props.navigation}
+          userContributions={this.props.userContributions}
+        />
+        {!isFullMapComponentModal ? fullScreenIcon : null}
+      </View>
     );
   };
-  render() {
+
+  onPressSingleContribution = async (singleContObj) => {
+    if (!this.state.isCardPressed) {
+      await this.setState({ singleContributionID: singleContObj.id, isPressFromList: true, isCardPressed: true }, async () => {
+        await this.toggleIsFullMapComp();
+        setTimeout(() => {
+          this.setState({ isCardPressed: false })
+        }, 1000)
+      });
+    }
+  };
+
+  onPressMapView = () => {
+    if (this.state.isFullMapComponentModal) {
+      this.setState({ isMapPressed: !this.state.isMapPressed }, () => {
+      })
+    }
+  }
+
+  getWholeComponent() {
     const { userProfile, navigation } = this.props;
-    // const profileType = userProfile.type;
-    let {
+    const {
       svgData,
       showAllContributions,
       showAllRecurrentContributions,
-      recurrentUserContributions
+      recurrentUserContributions,
+      isFullMapComponentModal
     } = this.state;
-    debug(userProfile);
-    const white = 'white';
     return (
-      <View style={{ elevation: 1, backgroundColor: white }}>
-        <SafeAreaView />
-
+      <SafeAreaView style={{ elevation: 1, flex: 1, backgroundColor: colors.WHITE }}
+        forceInset={{ top: !isFullMapComponentModal ? 'always' : 'never', bottom: this.state.isMapPressed ? 'never' : 'always' }}>
         <ScrollView
+          scrollEnabled={!isFullMapComponentModal}
+          ref={ref => (this.scrollRef = ref)}
           contentContainerStyle={{ paddingBottom: 72 }}
           refreshControl={
             <RefreshControl
@@ -305,7 +340,6 @@ export default class UserHome extends Component {
                     profileImage={userProfile.image}
                   />
                 </View>
-
                 <View style={styles.userInfo}>
                   <View style={styles.userInfoName}>
                     <Text style={styles.nameStyle}>
@@ -314,17 +348,8 @@ export default class UserHome extends Component {
                   </View>
                 </View>
               </View>
-
               <TouchableOpacity
-                style={{
-                  zIndex: 10000,
-                  elevation: 10,
-                  height: 20,
-                  width: 20,
-                  alignSelf: 'flex-end',
-                  right: 20,
-                  top: -182
-                }}
+                style={styles.settingIconContainer}
                 onPress={() => {
                   navigation.openDrawer();
                 }}
@@ -472,23 +497,29 @@ export default class UserHome extends Component {
             <Text style={styles.sectionTitle}>{i18n.t('label.projects')}</Text>
           ) : null}
           <ScrollView>
-            {userProfile.plantProjects
-              ? userProfile.plantProjects.map(project => (
-                <PlantProjectSnippet
-                  key={'projectFull' + project.id}
-                  onMoreClick={id =>
-                    this.onPlantProjectClick(id, project.name)
-                  }
-                  plantProject={project}
-                  onSelectClickedFeaturedProjects={id =>
-                    this.onPlantProjectClick(id, project.name)
-                  }
-                  showMoreButton={false}
-                  tpoName={project.tpo_name}
-                  navigation={this.props.navigation}
-                />
-              ))
-              : null}
+            {userProfile.plantProjects ? (
+              <FlatList
+                data={convertNumIdToString(userProfile.plantProjects)}
+                renderItem={({ item }) => {
+                  let project = item;
+                  return (
+                    <PlantProjectSnippet
+                      key={'projectFull' + project.id}
+                      onMoreClick={id =>
+                        this.onPlantProjectClick(id, project.name)
+                      }
+                      plantProject={project}
+                      onSelectClickedFeaturedProjects={id =>
+                        this.onPlantProjectClick(id, project.name)
+                      }
+                      showMoreButton={false}
+                      tpoName={project.tpo_name}
+                      navigation={this.props.navigation}
+                    />
+                  );
+                }}
+              />
+            ) : null}
           </ScrollView>
 
           {this.props.userContributions.length ? (
@@ -496,9 +527,10 @@ export default class UserHome extends Component {
               <Text style={styles.sectionTitle}>
                 {i18n.t('label.my_trees')}
               </Text>
-              {this.getMapComponent(this.props.userContributions)}
-
+              {this.getMapComponent()}
               <ContributionCardList
+                isCardPressed={this.state.isCardPressed}
+                onPressSingleContribution={this.onPressSingleContribution}
                 contributions={this.props.userContributions}
                 deleteContribution={this.props.deleteContribution}
                 showAllContributions={showAllContributions}
@@ -519,8 +551,12 @@ export default class UserHome extends Component {
             gifts={userProfile.treecounter.gifts}
           /> */}
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
+  }
+
+  render() {
+    return this.getWholeComponent();
   }
 }
 
@@ -579,18 +615,25 @@ function MyCompetitions(props) {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingLeft: 20 }}
       >
-        {competitions.length > 0
-          ? competitions.map(competition => (
-            <CompetitionSnippet
-              key={'competition' + competition.id}
-              onMoreClick={id =>
-                props.onCompetitionClick(id, competition.name)
-              }
-              competition={competition}
-              type="all"
-            />
-          ))
-          : null}
+        {competitions.length > 0 ? (
+          <FlatList
+            horizontal
+            data={convertNumIdToString(competitions)}
+            renderItem={({ item }) => {
+              let competition = item;
+              return (
+                <CompetitionSnippet
+                  key={'competition' + competition.id}
+                  onMoreClick={id =>
+                    props.onCompetitionClick(id, competition.name)
+                  }
+                  competition={competition}
+                  type="all"
+                />
+              );
+            }}
+          />
+        ) : null}
       </ScrollView>
     </View>
   );
@@ -637,68 +680,5 @@ function DedicatedTrees(props) {
   );
 }
 
-// function RenderIndividualsList(props) {
-//   const { gifts, navigation } = props;
-//   const onPressListItem = (treeCounterId, title) => {
-//     if (treeCounterId) {
-//       navigation.navigate(getLocalRoute('app_treecounter'), {
-//         treeCounterId: treeCounterId,
-//         titleParam: title
-//       });
-//     }
-//   };
-//   if (gifts) {
-//     return (
-//       <View style={{ marginTop: 20 }}>
-//         <Text style={styles.sectionTitle}>My Supporters</Text>
-//         <FlatList
-//           showsVerticalScrollIndicator={false}
-//           data={gifts}
-//           renderItem={({ item, index }) => {
-//             return (
-//               <TouchableOpacity
-//                 onPress={() => {
-//                   onPressListItem(item.id, item.giverName);
-//                 }}
-//                 style={styles.oneContryContainer}
-//               >
-//                 <View style={styles.indexContainer}>
-//                   <Text style={styles.indexText}>{index + 1}</Text>
-//                 </View>
-//                 <View style={styles.countryFlagContainer}>
-//                   <Image
-//                     style={styles.countryFlagImage}
-//                     source={{
-//                       uri: getImageUrl('profile', 'avatar', item.giverAvatar)
-//                     }}
-//                   />
-//                 </View>
-//                 <View style={styles.countryBody}>
-//                   <Text numberOfLines={2} style={styles.countryNameText}>
-//                     {item.giverName
-//                       ? item.giverName
-//                       : i18n.t('label.anonymous')}
-//                   </Text>
-//                   <Text style={styles.treesText}>
-//                     <Text style={styles.treesCounter}>
-//                       {delimitNumbers(item.treeCount)}{' '}
-//                     </Text>
-//                     {i18n.t('label.trees')}
-//                   </Text>
-//                 </View>
-//               </TouchableOpacity>
-//             );
-//           }}
-//         />
-//       </View>
-//     );
-//   } else {
-//     return (
-//       <>
-//         <CountryLoader />
-//         <CountryLoader />
-//         <CountryLoader />
-//       </>
-//     );
-//   }
-// }
+
+export default withNavigation(UserHome);

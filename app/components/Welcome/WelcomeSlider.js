@@ -11,6 +11,7 @@ import PrimaryButton from '../Common/Button/PrimaryButton';
 import i18n from '../../locales/i18n.js';
 import styless from '../../styles/WelcomeScreens/WelcomeScreen5';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
+import SafeAreaView from 'react-native-safe-area-view';
 
 const WelcomSlider = ({ navigation }) => {
   const appHomePage = () => updateRoute('app_homepage', navigation);
@@ -46,7 +47,7 @@ const WelcomSlider = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <Swiper
         showsButtons={false}
         activeDotColor={'#89b53a'}
@@ -69,7 +70,7 @@ const WelcomSlider = ({ navigation }) => {
         </View>
       </Swiper>
       <Footer />
-    </View>
+    </SafeAreaView>
   );
 };
 

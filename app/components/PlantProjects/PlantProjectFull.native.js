@@ -125,6 +125,7 @@ class PlantProjectFull extends React.Component {
           entityType={'projects'}
           entityName={tpoName}
           donationContext={this.props.donationContext}
+          selectPlantProjectAction={this.props.selectPlantProjectAction}
           url={
             context.scheme +
             '://' +
@@ -196,7 +197,7 @@ class PlantProjectFull extends React.Component {
               onClick={() => this.props.selectProject(plantProject.id)}
               image={right_arrow_button}
             >
-              {i18n.t('label.donate')}
+              {!this.props.donationContext.selectedProject ? i18n.t('label.donate') : i18n.t('label.select_project')}
             </FullHeightButton>
           </View>
         ) : null}

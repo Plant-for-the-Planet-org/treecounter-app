@@ -15,7 +15,7 @@ class SelectPlantProjectContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      context: this.props.navigation.getParam('context') || {}
+      context: this.props.context || {}
     };
     this.createContext(props);
   }
@@ -55,7 +55,7 @@ class SelectPlantProjectContainer extends PureComponent {
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
-    !this.props.alreadySelected && this.props.selectPlantProjectAction(null);
+    // !this.props.alreadySelected && this.props.selectPlantProjectAction(null);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
@@ -110,6 +110,7 @@ class SelectPlantProjectContainer extends PureComponent {
 }
 
 const mapStateToProps = state => ({
+  context: state.donations,
   plantProjects: getAllPlantProjectsSelector(state),
   currencies: currenciesSelector(state),
   donationDetails: state.donations.donationDetails

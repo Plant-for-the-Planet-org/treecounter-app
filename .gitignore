@@ -61,3 +61,6 @@ web/server
 
 # loc file
 *.lock
+
+# log file
+*.log

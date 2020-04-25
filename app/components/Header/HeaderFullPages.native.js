@@ -35,6 +35,8 @@ export default function HeaderAnimated(props) {
     let { navigation, donationContext } = props;
     console.log(donationContext)
     if (navigation && donationContext.selectedProject) {
+      console.log('donationconetxt', donationContext);
+      props.selectPlantProjectAction(donationContext.selectedProject.id)
       updateStaticRoute('app_donate_detail', navigation, {
         userForm: navigation.getParam('userForm'),
         giftMethod: navigation.getParam('giftMethod'),

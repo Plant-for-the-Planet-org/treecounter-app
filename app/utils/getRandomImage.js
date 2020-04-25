@@ -12,7 +12,7 @@ import {
 
 export default function GetRandomImage(props) {
   const [selectedImage, selectImage] = React.useState('');
-  const firstAlphabet = props.name.charAt(0);
+  const firstAlphabet = props.name ? props.name.charAt(0) : '';
 
   React.useEffect(() => {
     if (firstAlphabet >= 'A' && firstAlphabet <= 'D') {

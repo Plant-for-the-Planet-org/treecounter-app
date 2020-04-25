@@ -1,8 +1,7 @@
 import React from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-// const { googleMapApiKey } = context;
-const googleMapApiKey = 'AIzaSyACp9ZTlGv6eWES4uxn50XvFO7x8ii_mbU';
+const { googleMapApiKey } = context;
 
 export default GooglePlacesInput = props => {
   const [listViewDisplayed, setListViewDisplayed] = React.useState('auto');

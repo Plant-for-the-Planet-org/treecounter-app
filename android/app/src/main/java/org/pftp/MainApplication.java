@@ -6,8 +6,7 @@ import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.soloader.SoLoader;
-import com.rt2zz.reactnativecontacts.ReactNativeContacts; // <--- import
+import com.facebook.soloader.SoLoader; // <--- import
 import com.gettipsi.stripe.StripeReactPackage;
 import java.util.List;
 

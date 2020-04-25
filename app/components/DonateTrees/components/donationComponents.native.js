@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
-import {
-  FlatList,
-  Image,
-  Switch,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { FlatList, Image, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modalbox';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import {
-  getCountryFlagImageUrl,
-  getImageUrl
-} from '../../../actions/apiRouting';
-import { currencyIcon, infoHint, nextArrowWhite } from '../../../assets';
+import { getCountryFlagImageUrl, getImageUrl } from '../../../actions/apiRouting';
+import { infoHint, nextArrowWhite } from '../../../assets';
 import countryData from '../../../assets/countryCodes.json';
 import styles from '../../../styles/donations/donationDetails';
 import { formatNumber } from '../../../utils/utils';
@@ -55,8 +44,8 @@ export function TaxReceipt(props) {
             <Icon name={'chevron-down'} size={14} color="#89b53a" />
           </TouchableOpacity>
         ) : (
-          <SelectedCountryText />
-        )}
+            <SelectedCountryText />
+          )}
       </View>
 
       <Switch
@@ -184,8 +173,8 @@ export function SelectCountryModal(props) {
           {searchText ? (
             <MaterialIcon name="arrow-back" size={30} color="black" />
           ) : (
-            <MaterialIcon name="close" size={30} color="#4d5153" />
-          )}
+              <MaterialIcon name="close" size={30} color="#4d5153" />
+            )}
         </TouchableOpacity>
         {/* <View
           style={{
@@ -245,6 +234,19 @@ export function CoverFee(props) {
 }
 
 export function PaymentOption(props) {
+
+  let frequencyOptions = [
+    { label: 'One time Donation', value: 'once' },
+    { label: 'Monthly Donation', value: 'monthly' },
+    { label: 'Yearly Donation', value: 'yearly' }
+  ];
+
+  let ffrequency = {
+    once: 'One time Donation',
+    monthly: 'Monthly Donation',
+    yearly: 'Yearly Donation'
+  }
+
   return (
     <View style={styles.bottomButtonView}>
       <View style={styles.leftSection}>
@@ -255,7 +257,7 @@ export function PaymentOption(props) {
                 {formatNumber(
                   props.commissionSwitch
                     ? props.treeCost * props.treeCount +
-                        ((props.treeCount / 100) * 2.9 + 0.3)
+                    ((props.treeCount / 100) * 2.9 + 0.3)
                     : props.treeCost * props.treeCount,
                   null,
                   props.selectedCurrency
@@ -271,47 +273,43 @@ export function PaymentOption(props) {
           </TouchableOpacity> */}
             <View>
               <Text style={styles.otherPaymentText}>
-                Click Continue to proceed
+                {props.frequency ? ffrequency[props.frequency] : null}
               </Text>
             </View>
           </>
         ) : (
-          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
-        )}
+            <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
+          )}
       </View>
       {props.treeCount ? (
         <TouchableOpacity
           onPress={() => props.onContinue()}
           style={styles.continueButtonView}
         >
-          <View style={{ alignItems: 'center' }}>
-            <Image
-              style={{ maxHeight: 24 }}
-              source={nextArrowWhite}
-              resizeMode="contain"
-            />
-            <Text style={styles.continueButtonText}>Continue</Text>
-          </View>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
         </TouchableOpacity>
       ) : (
-        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-          <View style={{ alignItems: 'center' }}>
+          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+            <Text style={styles.continueButtonText}>Next</Text>
             <Image
-              style={{ maxHeight: 24 }}
+              style={{ maxHeight: 24, maxWidth: 24 }}
               source={nextArrowWhite}
               resizeMode="contain"
             />
-            <Text style={styles.continueButtonText}>Continue</Text>
           </View>
-        </View>
-      )}
+        )}
     </View>
   );
 }
 
 export function SelectFrequency(props) {
   let frequencyOptions = [
-    { label: 'One Time', value: 'once' },
+    { label: 'Once', value: 'once' },
     { label: 'Monthly', value: 'monthly' },
     { label: 'Yearly', value: 'yearly' }
   ];
@@ -368,7 +366,19 @@ export function PlantProjectDetails(props) {
       <View style={styles.projectNameAmount}>
         <Text style={styles.projectName}>{props.selectedProject.name}</Text>
         <View style={styles.projectAmountView}>
-          <Image style={styles.projectAmountImage} source={currencyIcon} />
+
+
+          <TouchableOpacity
+            // @ankit add function here
+            style={{ flexDirection: 'row', alignItems: 'center' }}
+          >
+            <Text style={styles.isTaxDeductibleCountry}>
+              {props.selectedCurrency}
+            </Text>
+            <Icon name={'chevron-down'} size={14} color="#89b53a" />
+          </TouchableOpacity>
+
+          {/* <Image style={styles.projectAmountImage} source={currencyIcon} /> */}
           <Text style={styles.projectAmountText}>
             {formatNumber(props.treeCost, null, props.selectedCurrency)} per
             tree
@@ -471,16 +481,16 @@ export function SelectTreeCount(props) {
           </Text>
         </View>
       ) : (
-        <TouchableOpacity
-          onPress={() => {
-            setCustomTreeCount(true);
-            props.setTreeCount(tempTreeCount);
-          }}
-          style={styles.customSelectorView}
-        >
-          <Text style={styles.customTreeCountText}>Custom Trees</Text>
-        </TouchableOpacity>
-      )}
+          <TouchableOpacity
+            onPress={() => {
+              setCustomTreeCount(true);
+              props.setTreeCount(tempTreeCount);
+            }}
+            style={styles.customSelectorView}
+          >
+            <Text style={styles.customTreeCountText}>Custom Trees</Text>
+          </TouchableOpacity>
+        )}
     </View>
   );
 }
@@ -539,8 +549,8 @@ export const UserContactDetails = props => {
           {donorDetails.firstName ? (
             <Text style={styles.sectionRightButton}>Edit</Text>
           ) : (
-            <Text style={styles.sectionRightButton}>Add</Text>
-          )}
+              <Text style={styles.sectionRightButton}>Add</Text>
+            )}
         </TouchableOpacity>
       </View>
       {donorDetails.firstName ? (

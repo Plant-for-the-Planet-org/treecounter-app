@@ -138,15 +138,17 @@ export default EStyleSheet.create({
   },
   buttonSectionView: {
     width: '100%',
-    backgroundColor: '#f7f7f7',
-    height: 88,
+    backgroundColor: '#f2f2f7',
+    height: 96,
     flexDirection: 'row',
-    justifyContent: 'space-between',
     position: 'absolute',
-    bottom: '0%'
+    bottom: 0
   },
   donationSummary: {
-    padding: 20
+    padding: 20,
+    //width: width * 0.75
+    flexGrow: 1,
+    justifyContent: 'center'
   },
   donationCost: {
     flexDirection: 'row'
@@ -182,27 +184,34 @@ export default EStyleSheet.create({
   },
   continueButtonView: {
     backgroundColor: '#89b53a',
-    padding: 18,
+    paddingVertical: 12,
+    height: 52,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 100
+    alignSelf: 'center',
+    flexDirection: 'row',
+    borderRadius: 26,
+    right: 20,
+    minWidth: 120
   },
   continueButtonViewInvalid: {
     backgroundColor: '#d5d5d5',
-    padding: 18,
+    paddingVertical: 12,
+    height: 52,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 100
+    alignSelf: 'center',
+    flexDirection: 'row',
+    borderRadius: 26,
+    right: 20,
+    minWidth: 120
   },
   payText: {
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    lineHeight: 22,
     letterSpacing: 0.21,
-    textAlign: 'center',
     color: '#ffffff',
-    marginTop: 4
+    marginRight: 12
   },
   paymentCardView: {
     borderRadius: 9,

@@ -3,7 +3,7 @@ import { Animated, Image, Keyboard, Platform, Text, TouchableOpacity, View } fro
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import stripe from 'tipsi-stripe';
-import { applePay, googlePay } from '../../../assets';
+import { applePay, googlePay, nextArrowWhite } from '../../../assets';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donation/donation.native';
 import colors from '../../../utils/constants';
@@ -329,17 +329,18 @@ const PaymentButton = (props) => {
             plantedBy: 'Eden Reforestation Project'
           });
         }}
+        style={
+          props.allValid
+            ? styles.continueButtonView
+            : styles.continueButtonViewInvalid
+        }
       >
-        <View
-          style={
-            props.allValid
-              ? styles.continueButtonView
-              : styles.continueButtonViewInvalid
-          }
-        >
-          <Icon name="heart" size={30} color="#fff" />
-          <Text style={styles.payText}>Pay</Text>
-        </View>
+        <Text style={styles.payText}>Pay</Text>
+        <Image
+          style={{ maxHeight: 24, maxWidth: 24 }}
+          source={nextArrowWhite}
+          resizeMode="contain"
+        />
       </TouchableOpacity>
     </View>
   )

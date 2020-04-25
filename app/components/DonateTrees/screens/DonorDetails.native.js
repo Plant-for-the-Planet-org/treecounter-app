@@ -1,15 +1,6 @@
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  Animated,
-  Image,
-  Keyboard,
-  Switch,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { ActivityIndicator, Animated, Image, Keyboard, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
 import * as Yup from 'yup';
@@ -164,7 +155,7 @@ export default function DonorDetails(props) {
                   </View>
                 </View>
 
-                <View>
+                <View style={{ marginTop: 12 }}>
                   <TextField
                     label={i18n.t('label.pledgeFormEmail')}
                     value={formikProps.values.email}
@@ -183,7 +174,19 @@ export default function DonorDetails(props) {
                     onBlur={formikProps.handleBlur('email')}
                   />
                 </View>
-                <View style={styles.coverCommissionView}>
+                <View style={styles.autoCompleteAddressView}>
+                  <Text
+                    style={{
+                      fontFamily: "OpenSans-SemiBold",
+                      fontSize: 12,
+                      lineHeight: 17,
+                      letterSpacing: 0,
+                      color: "rgba(0, 0, 0, 0.6)",
+                      marginBottom: -24
+                    }}
+                  >
+                    Address
+                  </Text>
                   <GooglePlacesInput
                     placeholder={'Address'}
                     initialValue={
@@ -250,23 +253,24 @@ export default function DonorDetails(props) {
                 ) : null}
               </View>
               {props.context &&
-              props.context.donationDetails &&
-              props.context.donationDetails.totalTreeCount ? (
-                <PaymentOption
-                  treeCount={props.context.donationDetails.totalTreeCount}
-                  treeCost={
-                    props.context.projectDetails.selectedProjectDetails
-                      .amountPerTree
-                  }
-                  selectedCurrency={
-                    props.context.projectDetails.selectedProjectDetails.currency
-                  }
-                  navigation={props.navigation}
-                  onSubmit={formikProps.handleSubmit}
-                />
-              ) : (
-                <ActivityIndicator size="large" color="#0000ff" />
-              )}
+                props.context.donationDetails &&
+                props.context.donationDetails.totalTreeCount ? (
+                  <PaymentOption
+                    treeCount={props.context.donationDetails.totalTreeCount}
+                    treeCost={
+                      props.context.projectDetails.selectedProjectDetails
+                        .amountPerTree
+                    }
+                    selectedCurrency={
+                      props.context.projectDetails.selectedProjectDetails.currency
+                    }
+                    navigation={props.navigation}
+                    onSubmit={formikProps.handleSubmit}
+                    isValid={formikProps.isValid}
+                  />
+                ) : (
+                  <ActivityIndicator size="large" color="#0000ff" />
+                )}
             </>
           )}
         </Formik>
@@ -284,7 +288,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                    ((props.treeCount / 100) * 2.9 + 0.3)
+                ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency
@@ -302,21 +306,31 @@ export function PaymentOption(props) {
           <Text style={styles.otherPaymentText}>Click Continue to proceed</Text>
         </View>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          props.onSubmit();
-        }}
-        style={styles.continueButtonView}
-      >
-        <View style={{ alignItems: 'center' }}>
+      {props.isValid ? (
+        <TouchableOpacity
+          onPress={() => {
+            props.onSubmit();
+          }}
+          style={styles.continueButtonView}
+        >
+          <Text style={styles.continueButtonText}>Next</Text>
           <Image
-            style={{ maxHeight: 24 }}
+            style={{ maxHeight: 24, maxWidth: 24 }}
             source={nextArrowWhite}
             resizeMode="contain"
           />
-          <Text style={styles.continueButtonText}>Continue</Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      ) : (
+          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+            <Text style={styles.continueButtonText}>Next</Text>
+            <Image
+              style={{ maxHeight: 24, maxWidth: 24 }}
+              source={nextArrowWhite}
+              resizeMode="contain"
+            />
+          </View>
+        )}
+
     </View>
   );
 }

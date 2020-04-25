@@ -248,8 +248,13 @@ export default EStyleSheet.create({
   coverCommissionView: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: 25,
+    marginTop: 60,
     justifyContent: 'space-between'
+  },
+
+  // Autocomplete Address
+  autoCompleteAddressView: {
+    marginTop: 24,
   },
 
   // Tax Deductible
@@ -302,16 +307,19 @@ export default EStyleSheet.create({
 
   // Payment Button
   bottomButtonView: {
-    width: '100%',
     backgroundColor: '#f2f2f7',
     height: 96,
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 0
+    bottom: 0,
+    right: 0,
+    left: 0
   },
   leftSection: {
     padding: 20,
-    width: width * 0.75
+    //width: width * 0.75
+    flexGrow: 1,
+    justifyContent: 'center'
   },
   paymentTreeAmount: {
     fontSize: 18,
@@ -364,20 +372,21 @@ export default EStyleSheet.create({
   },
   continueButtonView: {
     backgroundColor: '#89b53a',
-    padding: 12,
+    paddingVertical: 12,
+    height: 52,
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
-    width: width * 0.25
+    alignSelf: 'center',
+    flexDirection: 'row',
+    borderRadius: 26,
+    right: 20
   },
   continueButtonText: {
     fontFamily: 'OpenSans-SemiBold',
-    fontSize: 12,
-    lineHeight: 22,
+    fontSize: 16,
     letterSpacing: 0.21,
-    textAlign: 'center',
     color: '#ffffff',
-    marginTop: 6
+    marginRight: 12
   },
 
   // Input Selection
@@ -423,12 +432,11 @@ export default EStyleSheet.create({
 
   formScrollView: {
     backgroundColor: 'white',
-    flexGrow: 1,
+    flex: 1,
     padding: 24,
-    paddingBottom: 100,
-    minHeight: '100%'
+    // paddingBottom: 100,
   },
-  formHalfTextField: { width: '45%' },
+  formHalfTextField: { width: '45%', marginTop: 24 },
 
   formView: {
     display: 'flex',

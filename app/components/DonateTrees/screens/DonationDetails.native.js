@@ -204,6 +204,7 @@ function DonationDetails(props) {
         commissionSwitch={commissionSwitch}
         navigation={props.navigation}
         onContinue={onContinue}
+        frequency={frequency}
       />
     </View>
   );

@@ -32,7 +32,7 @@ export default EStyleSheet.create({
     marginLeft: 10
   },
   projectName: {
-    fontFamily: 'OpenSans-SemiBold',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 18,
     lineHeight: 24,
     color: '#4d5153',
@@ -52,7 +52,8 @@ export default EStyleSheet.create({
   projectAmountText: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 11,
-    color: '#4d5153'
+    color: '#4d5153',
+    marginLeft: 8
   },
 
   // Project Details
@@ -94,11 +95,11 @@ export default EStyleSheet.create({
     fontSize: 11,
     color: '#4d5153'
   },
-supportUser:{
-  display: 'flex',
-  flexDirection: 'row',
-  marginTop: 5
-},
+  supportUser: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 5
+  },
   // Gift Details
   giftDetails: {
     display: 'flex',
@@ -118,7 +119,7 @@ supportUser:{
     flexGrow: 1,
     justifyContent: 'center'
   },
-  supportUserName:{
+  supportUserName: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     letterSpacing: 0.1,
@@ -182,8 +183,8 @@ supportUser:{
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#d5d5d5',
-    height: 54,
-    paddingVertical: 24,
+    minHeight: 54,
+    paddingVertical: 8,
     paddingHorizontal: 12,
     justifyContent: 'center',
     alignItems: 'center',
@@ -203,8 +204,8 @@ supportUser:{
   selectedView: {
     borderRadius: 7,
     backgroundColor: '#89b53a',
-    height: 54,
-    paddingVertical: 24,
+    minHeight: 54,
+    paddingVertical: 8,
     paddingHorizontal: 12,
     justifyContent: 'center',
     alignItems: 'center',
@@ -281,12 +282,12 @@ supportUser:{
     color: '#4d5153'
   },
   repititionSelectorView: {
-    borderRadius: 15,
+    borderRadius: 32,
     backgroundColor: '#ffffff',
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#d5d5d5',
-    height: 30,
+    minHeight: 32,
     paddingVertical: 8,
     paddingHorizontal: 12,
     justifyContent: 'center',
@@ -302,9 +303,9 @@ supportUser:{
     color: '#ffffff'
   },
   repititionSelectedView: {
-    borderRadius: 15,
+    borderRadius: 32,
     backgroundColor: '#89b53a',
-    height: 30,
+    minHeight: 32,
     paddingVertical: 8,
     paddingHorizontal: 12,
     justifyContent: 'center',
@@ -446,8 +447,8 @@ supportUser:{
     fontFamily: 'OpenSans-SemiBold'
   },
   otherPaymentText: {
-    fontSize: 12,
-    lineHeight: 12,
+    fontSize: 14,
+    lineHeight: 14,
     letterSpacing: 0,
     textAlign: 'left',
     color: '#4d5153',
@@ -456,18 +457,21 @@ supportUser:{
   },
   continueButtonView: {
     backgroundColor: '#89b53a',
-    padding: 12,
+    paddingVertical: 12,
+    height: 52,
     justifyContent: 'center',
     alignItems: 'center',
-    width: width * 0.25
+    alignSelf: 'center',
+    flexDirection: 'row',
+    borderRadius: 26,
+    right: 20
   },
   continueButtonText: {
     fontFamily: 'OpenSans-SemiBold',
-    fontSize: 12,
+    fontSize: 16,
     letterSpacing: 0.21,
-    textAlign: 'center',
     color: '#ffffff',
-    marginTop: 6
+    marginRight: 12
   },
 
   // Input Selection

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animated, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donations/donationDetails';
@@ -73,6 +73,8 @@ function DonationDetails(props) {
   // console.log('getting updateed context in nav:', props.navigation.getParam('context'))
   return (
     <View style={{ backgroundColor: 'white' }}>
+      <StatusBar hidden />
+
       <ProjectModal
         hideModal={setProjectModal}
         show={showProjectModal}

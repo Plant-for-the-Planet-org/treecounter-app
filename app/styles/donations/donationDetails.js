@@ -232,7 +232,7 @@ export default EStyleSheet.create({
     borderWidth: 1,
     borderColor: '#d5d5d5',
     height: 54,
-    paddingVertical: 24,
+    paddingVertical: 12,
     paddingHorizontal: 24,
     justifyContent: 'center',
     alignItems: 'center',

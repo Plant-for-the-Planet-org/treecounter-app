@@ -14,11 +14,10 @@ export default function DonationStep3(props) {
 
   stripe.setOptions({
     publishableKey: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
-    // merchantId: 'MERCHANT_ID', // Optional
+    merchantId: '', // Optional
     androidPayMode: 'test', // Android only
   })
 
-  console.log('Context', props.context.donationDetails.totalTreeCount)
 
   const [token, setToken] = React.useState(null)
 
@@ -115,6 +114,8 @@ export default function DonationStep3(props) {
   )
 
   const handleApplePayPress = async (props) => {
+    console.log('currecny code', props.currency_code)
+    console.log('Amount', props.totalPrice)
     try {
       setApplePayStatus('')
       setToken(null)
@@ -123,7 +124,7 @@ export default function DonationStep3(props) {
       },
         [{
           label: 'Donation to Plant for the Planet',
-          amount: props.treeCost * props.totalTreeCount,
+          amount: props.totalPrice,
         },])
 
       setToken(token)
@@ -131,12 +132,15 @@ export default function DonationStep3(props) {
       if (applePayComplete) {
         await stripe.completeNativePayRequest()
         setApplePayStatus('Apple Pay payment completed')
+        console.log('Entered if')
       } else {
         await stripe.cancelNativePayRequest()
         setApplePayStatus('Apple Pay payment cenceled')
+        console.log('Entered else')
       }
     } catch (error) {
       setApplePayStatus(`Error: ${error.message}`)
+      console.log('Error', error.message)
     }
   }
 
@@ -232,7 +236,8 @@ export default function DonationStep3(props) {
             <TouchableOpacity onPress={() => handleApplePayPress({
               totalTreeCount: String(props.context.donationDetails.totalTreeCount),
               amountPerTree: String(props.context.projectDetails.selectedProjectDetails.amountPerTree),
-              currency_code: String(props.context.projectDetails.selectedProjectDetails.currency)
+              currency_code: String(props.context.projectDetails.selectedProjectDetails.currency),
+              totalPrice: String(props.context.donationDetails.totalTreeCount * props.context.projectDetails.selectedProjectDetails.amountPerTree),
             })}>
               <View style={styles.paymentCardView}>
                 <View style={styles.paymentModeView}>

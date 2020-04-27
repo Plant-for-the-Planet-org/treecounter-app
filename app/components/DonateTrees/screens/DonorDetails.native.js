@@ -24,9 +24,9 @@ const DonationContactDetailsSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
     .required('Email is equired'),
-  address: Yup.string()
-    .nullable()
-    .required('Address is required'),
+  // address: Yup.string()
+  //   .nullable()
+  //   .required('Address is required'),
   isCompany: Yup.boolean().required('Required')
 });
 
@@ -175,7 +175,7 @@ export default function DonorDetails(props) {
                   />
                 </View>
                 <View style={styles.autoCompleteAddressView}>
-                  <Text
+                  {/* <Text
                     style={{
                       fontFamily: "OpenSans-SemiBold",
                       fontSize: 12,
@@ -186,7 +186,7 @@ export default function DonorDetails(props) {
                     }}
                   >
                     Address
-                  </Text>
+                  </Text> */}
                   <GooglePlacesInput
                     placeholder={'Address'}
                     initialValue={
@@ -202,7 +202,7 @@ export default function DonorDetails(props) {
                   <Text
                     style={{
                       color: '#e74c3c',
-                      marginTop: 4,
+                      marginTop: 64,
                       fontFamily: 'OpenSans-SemiBold',
                       fontSize: 12
                     }}

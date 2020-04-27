@@ -32,7 +32,7 @@ export default class RegisterTreeTab extends PureComponent {
       geoLocation: '',
       plantProject: props.isTpo
         ? props.plantProjects.length > 0
-          ? props.plantProjects[0].value
+          ?  (props.value && props.value.plantProjectId) || props.plantProjects[0].value
           : ''
         : '',
     };
@@ -44,14 +44,14 @@ export default class RegisterTreeTab extends PureComponent {
       geoLocation: (props.value && props.value.geoLocation) || '',
       plantProject: props.isTpo
         ? props.plantProjects.length > 0
-          ? props.plantProjects[0].value
+          ? (props.value && props.value.plantProjectId) || props.plantProjects[0].value
           : ''
         : '',
     };
     this.state = {
       plantProject: props.isTpo
         ? props.plantProjects.length > 0
-          ? props.plantProjects[0].value
+          ? (props.value && props.value.plantProjectId) ||props.plantProjects[0].value
           : ''
         : '',
       defaultSingleInitValue: defaultSingleInitValue,

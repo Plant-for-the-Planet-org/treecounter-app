@@ -9,7 +9,7 @@ import styles from '../../../styles/donation/donation.native';
 import colors from '../../../utils/constants';
 import { formatNumber } from '../../../utils/utils';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
-
+import CreditCardForm from './../components/CreditCardForm';
 export default function DonationStep3(props) {
 
   stripe.setOptions({
@@ -24,13 +24,12 @@ export default function DonationStep3(props) {
   const handleAndroidPayPress = async (props) => {
     try {
       setToken(null)
-      console.log('totalPrice', props.totalPrice)
-      console.log('Currency code', props.currency_code)
-      console.log('Amount per tree', props.amountPerTree)
-      console.log('Total tree count', props.totalTreeCount)
+
       const token = await stripe.paymentRequestWithNativePay({
         total_price: props.totalPrice,
         currency_code: props.currency_code,
+        billing_address_required: true,
+        phone_number_required: true,
         line_items: [{
           currency_code: props.currency_code,
           description: 'Donation to Plant for the Planet',
@@ -120,6 +119,7 @@ export default function DonationStep3(props) {
       setApplePayStatus('')
       setToken(null)
       const token = await stripe.paymentRequestWithNativePay({
+        requiredBillingAddressFields: ['all'],
         currencyCode: props.currency_code
       },
         [{
@@ -181,7 +181,7 @@ export default function DonationStep3(props) {
             Please review your payment and donation details.
           </Text>
 
-          {/* <CreditCardForm /> */}
+          <CreditCardForm />
 
           {/* PayPal Information Card */}
           {/* <View style={styles.paymentCardView}>

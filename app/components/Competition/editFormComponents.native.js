@@ -107,7 +107,9 @@ export const FormikForm = props => {
 
                 <CompetitionDatePicker
                   endDate={props.values.endDate}
-                  setFieldValue={props.setFieldValue}
+                  setFieldValue={date =>
+                    props.setFieldValue('endDate', date)
+                  }
                   touched={props.touched.endDate}
                   errors={props.errors.endDate}
                 />
@@ -384,6 +386,7 @@ export function CompetitionDatePicker(props) {
               formatDate(formatDateToMySQL(new Date(date)), 'yyyy-MM-dd')
             );
         }}
+        date={new Date(props.endDate)}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}
       />

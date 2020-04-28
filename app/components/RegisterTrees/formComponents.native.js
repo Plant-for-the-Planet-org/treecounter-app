@@ -31,6 +31,11 @@ import { getImageUrl } from '../../actions/apiRouting';
 import colors from '../../utils/constants';
 
 export const FormikFormTree = props => {
+  /**
+  * 1. {showClassification} state are used for set default value of classification when we edit tree
+  * 2. {geometry} {geoLocation} are used for get the value from fullScreenMap and set it to registerTree
+  * 3. {initValue} initial value of the formik form this will used when we edit the tree
+  * */
   const [showClassification, setShowClassificationSwitch] = useState(
     (props.initialValues &&
       (props.initialValues.treeClassification ||
@@ -42,6 +47,10 @@ export const FormikFormTree = props => {
   const [loadButton, setLoadButton] = useState(props.loading);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
   const [initValue, setInitValue] = useState(props.initialValues);
+
+  /**
+  * Get value of specific Props
+  * */
   useEffect(() => {
     setGeometry(props.geometry);
   }, [props.geometry]);
@@ -57,20 +66,31 @@ export const FormikFormTree = props => {
 
   const parentProps = props;
   const isMultipleTree = props.mode === 'multiple-trees';
-
+  /**
+  *  {generateFormikSchemaFromFormSchema} are used for get validation schema for single tree and multiple tree
+  *  @param schemasObj single tree form schema or multiple tree form schema
+  * */
   const validationSchema = generateFormikSchemaFromFormSchema(
     isMultipleTree
       ? schemaOptionsMultiple.multiple_trees
       : schemaOptionsMultiple.single_tree
   );
   let inputs = [];
+  /**
+   * Ref of dropdown element for focus the field
+   * */
   const inputEl = useRef(null);
 
   // function to focus the field
   function focusTheField(id) {
     inputs[id].focus();
   }
-
+  /**
+   *  Contribution image to display on screen when we edit the tree or not
+   * @param props object of formik props
+   * if {isEdit} it will get default or initial value from props
+   * if {!isEdit} it will get value from updated value from formik
+   * */
   const isContributionImage = props => {
     if (parentProps.isEdit) {
       const contributImage =
@@ -97,6 +117,18 @@ export const FormikFormTree = props => {
         : '';
     }
   };
+  /**
+   * Render formik form
+   * @property {initialValues} initialize the form with initial value
+   * @property {onSubmit} called when for are submit
+   * @property {validationSchema} validation schema are generated from {generateFormikSchemaFromFormSchema()}
+   * @property {isInitialValid} when from are initialized is valid or not when we edit tree all all value are passed so it will initialValid true when we edit that value it will reevaluate that field
+   * for more information please refer https://jaredpalmer.com/formik/docs/api/formik
+   * {props.setFieldValue} Set the value of a field. field should match the key of values you wish to update
+   * {props.handleChange} General input change event handler. This will update the values[key] where key is the event-emitting input's name attribute. If the name attribute is not present, handleChange will look for an input's id attribute.
+   * {props.touched} return true when specific field are touched
+   * {props.errors} return true when specific field validation throw any error, validationSchema (which you should be), keys and shape will match your schema exactly.
+   * */
   return (
     <Formik
       initialValues={initValue}
@@ -104,13 +136,17 @@ export const FormikFormTree = props => {
       onSubmit={parentProps.onCreateCompetition}
       validationSchema={validationSchema}
       isInitialValid={!!parentProps.isEdit}
-      mapPropsToStatus={initValue}
     >
       {props => (
         <>
           <View>
             <View style={styles.formScrollView}>
               <CardLayout style={{ marginTop: 9 }}>
+                {/**
+                 * {parentProps} is this components Props
+                 * {Props} is this formik form Props
+                 * if(!isEdit && isTpo) we will show TPO plant Project dropdown
+                */}
                 {!parentProps.isEdit && parentProps.isTpo ? (
                   parentProps.plantProjects &&
                     parentProps.plantProjects.length > 0 ? (
@@ -144,6 +180,9 @@ export const FormikFormTree = props => {
                                   textAlign: 'center'
                                 }}
                               >
+                                {/**
+                                 * select first plant project default
+                                 * */}
                                 {!props.values.plantProject &&
                                   parentProps.plantProjects.length >= 1
                                   ? parentProps.plantProjects[0].text
@@ -173,6 +212,10 @@ export const FormikFormTree = props => {
                             width: '100%'
                           }}
                           onChangeText={(e)=>{
+                            /**
+                             * Set value in formik form
+                             * {props.setFieldValue} Set the value of a field. field should match the key of values you wish to update
+                             * */
                             props.setFieldValue('plantProject',e);
                             }}
                          // onBlur={props.handleBlur('plantProject')}
@@ -244,6 +287,9 @@ export const FormikFormTree = props => {
                           <View
                             style={isMultipleTree ? styles.formNameFields : ''}
                           >
+                            {/**
+                             * <TextField> for more details refer https://github.com/n4kz/react-native-material-textfield
+                             */}
                             <TextField
                               label={i18n.t('label.number_of_trees')}
                               ref={input => {
@@ -318,6 +364,14 @@ export const FormikFormTree = props => {
                       : ''
                   }
                 >
+                  {/**
+                   * <NativeMapView> Render map on screen
+                   * @property {mode} single tree or multiple tree
+                   * @property {mapStyle} specify map style
+                   * @property {geometry}{geoLocation} used to render marker on map
+                   * @property {address} set address in googleAutocompleteTextFiled
+                   * {parentProps.openModel} open fullscrenn model for set location
+                   */}
                   <NativeMapView
                     mode={'single-tree'}
                     mapStyle={{ height: 200 }}
@@ -360,6 +414,9 @@ export const FormikFormTree = props => {
                         {i18n.t('label.add_classification')}
                       </Text>
                       <View>
+                        {/**
+                         * {setShowClassificationSwitch} set the state value of showClassification state whether you want to show classification filed on screen
+                        */}
                         <CustomSwitch
                           value={showClassification}
                           onChange={setShowClassificationSwitch}
@@ -367,6 +424,9 @@ export const FormikFormTree = props => {
                       </View>
                     </View>
                     <View>
+                      {/**
+                       * {showClassification} show classification filed on screen when true
+                       */}
                       {showClassification && (
                         <View>
                           <View style={styles.formClassificationFields}>
@@ -495,6 +555,10 @@ export class AddMeasurements extends React.Component {
       showMeasurement: false,
       elementMasument: contributionMeasurements || []
     };
+    /**
+     * Render multiple masurmentView on screen
+     * if edit props.props.values.contributionMeasurements get value
+     * */
 
     if (contributionMeasurements) {
       contributionMeasurements.length &&
@@ -507,7 +571,11 @@ export class AddMeasurements extends React.Component {
       this._addMeasurementView();
     }
   }
-
+  /**
+   * @param {value} bool if contributionMeasurements has value should be true otherwise false
+   * @param {index} int Index of the measurementView
+   * @param {defaultValue} object set default value of measurement this mostly use in edit tree
+   * */
   _addMeasurementView = (val, index, defaultValue = null) => {
     const { measurementView } = this.state;
     if (val) {
@@ -517,8 +585,7 @@ export class AddMeasurements extends React.Component {
       }
       // NOTE:
       // check is last switch is enabled, if yes add new item
-      // temporary commented logic for add dynamic fields
-      // eslint-disable-next-line no-constant-condition
+      // {this.elementMasument} {elementMasument} create object of measurement object with if default value not passed otherwise use default value object
       if (index + 1 === this.counter) {
         this.counter++;
         if (!defaultValue)
@@ -549,15 +616,17 @@ export class AddMeasurements extends React.Component {
       }
     }
   };
+  /**
+   * @param {field} name of field
+   * @param {value} value of field
+   * @param {index} index of field for multiple measurement view
+   * */
   onChangeHandler = (field, value, index) => {
-    debug('this.elementMasument', field, value, index);
 
     this.elementMasument[index][field] = value;
     this.setState({
       elementMasument: this.elementMasument
     });
-    //this.props.handleChange(field, value);
-    debug('this.elementMasument', this.elementMasument);
     this.props.handleChange(this.elementMasument);
   };
 

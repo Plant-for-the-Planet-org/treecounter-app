@@ -37,7 +37,7 @@ class UserContributionsDetails extends React.Component {
 
   componentDidMount() {
     let contribution = this.props.contribution;
-    if (contribution.plantProjectId !== null) {
+    if (contribution.plantProjectId) {
       this.props.loadProject({ id: contribution.plantProjectId });
     }
   }

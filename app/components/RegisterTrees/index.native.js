@@ -111,7 +111,6 @@ export default class RegisterTrees extends Component {
   };
 
   render() {
-    debug('this.props===----===--=-=-=->', this.props);
     return (
       <>
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>

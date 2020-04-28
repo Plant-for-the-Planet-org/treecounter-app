@@ -482,7 +482,6 @@ class NativeMapView extends Component {
         }, 1000);
       }
     );
-    debug(' nextProps.address', nextProps.address);
     nextProps.address && this.ref && this.ref.setAddressText(nextProps.address);
 
     // }
@@ -633,13 +632,6 @@ class NativeMapView extends Component {
         Platform.OS === 'android' ? androidEdgePadding : iosEdgePadding;
       return edgePadding;
     };
-    debug(
-      'this.props.mapStyle',
-      this.props.mapStyle,
-      { width: this.state.width, marginBottom: this.state.mapMargin },
-      setMapPadding(),
-      mapStyle
-    );
     return (
       <MapView
         //mapType={'satellite'}
@@ -770,7 +762,6 @@ class NativeMapView extends Component {
         ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
       })
     ).then((/*response*/) => {
-      debug('Location=====>', Geolocation);
       setTimeout(() => {
         Geolocation.getCurrentPosition(
           location => {
@@ -1052,7 +1043,6 @@ class NativeMapView extends Component {
             </View>
           </TouchableOpacity>
         )}
-        {debug('this.ref', this.ref)}
       </View>
     );
   }

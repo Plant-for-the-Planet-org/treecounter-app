@@ -97,7 +97,6 @@ export const FormikFormTree = props => {
         : '';
     }
   };
-
   return (
     <Formik
       initialValues={initValue}
@@ -173,8 +172,10 @@ export const FormikFormTree = props => {
                             top: 0,
                             width: '100%'
                           }}
-                          onChangeText={props.handleChange('plantProject')}
-                          onBlur={props.handleBlur('plantProject')}
+                          onChangeText={(e)=>{
+                            props.setFieldValue('plantProject',e);
+                            }}
+                         // onBlur={props.handleBlur('plantProject')}
                           inputContainerStyle={{
                             borderBottomWidth: 0,
                             display: 'none'
@@ -494,17 +495,11 @@ export class AddMeasurements extends React.Component {
       showMeasurement: false,
       elementMasument: contributionMeasurements || []
     };
-    debug(
-      'props.props.value.contributionMeasurements',
-      props.props &&
-      props.props.values &&
-      props.props.values.contributionMeasurements
-    );
+
     if (contributionMeasurements) {
       contributionMeasurements.length &&
         contributionMeasurements.map((item, index) => {
           this._addMeasurementView(true, index, item, contributionMeasurements);
-          debug('measurementView', this.state.elementMasument);
         });
 
       this._addMeasurementView();

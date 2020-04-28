@@ -1,14 +1,13 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { Component } from 'react';
 // import t from 'tcomb-form-native';
-import { Platform, TextInput, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import Modal from 'react-native-modalbox';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TouchableItem from '../../../components/Common/TouchableItem';
 import SelectPlantProjectContainer from '../../../containers/SelectPlantProject';
-import i18n from '../../../locales/i18n';
 import { getProgressModelState } from '../../../reducers/modelDialogReducer';
 const backgroundColor = '#e4e4e4';
 const activeColor = '#74ba00';
@@ -83,7 +82,7 @@ class ProjectModal extends Component {
                                     marginLeft: 20
                                 }}
                             >
-                                <TextInput
+                                {/* <TextInput
                                     style={{ height: 40, width: '84%' }}
                                     onChangeText={text => {
                                         this.setSearch(text);
@@ -92,7 +91,7 @@ class ProjectModal extends Component {
                                     placeholder={i18n.t('label.searchshort')}
                                     placeholderTextColor={'#4d5153'}
                                     fontFamily="OpenSans-SemiBold"
-                                />
+                                /> */}
                             </View>
                         </View>
                         <SelectPlantProjectContainer
@@ -100,6 +99,7 @@ class ProjectModal extends Component {
                             alreadySelected={true}
                             supportTreecounter={() => { }}
                             hideTitle={true}
+                            search={this.state.search}
                         />
                     </View>
                 </View>

@@ -91,7 +91,6 @@ class SelectPlantProject extends Component {
       plantProjects,
       currencies: { currencies }
     } = props;
-    debug('Pojects featured:', plantProjects);
     // let featuredProjects = plantProjects.filter(project => project.isFeatured);
     // featuredProjects = _.orderBy(featuredProjects, 'id');
     // featuredProjects.length && featuredProjects.push(featuredProjects[0]);
@@ -186,6 +185,7 @@ class SelectPlantProject extends Component {
       featuredProjects,
       priceSortedProjects
     } = this.state;
+
     const settings = {
       dots: false,
       infinite: true,
@@ -204,6 +204,40 @@ class SelectPlantProject extends Component {
         />
       )
     };
+
+    const slides = featuredProjects.length !== 0
+      ? featuredProjects
+        // .sort((a, b) => a.id - b.id)?
+        .map(project => {
+          return (
+            <CardLayout
+              className="plant_project_content"
+              key={project.id}
+            >
+              <PlantProjectFull
+                onViewMoreClick={() =>
+                  this.setState({
+                    imageViewMore: !this.state.imageViewMore
+                  })
+                }
+                callExpanded={() => this.callExpanded()}
+                expanded={false}
+                plantProject={project}
+                tpoName={project.tpoName}
+              />
+              <div className="select-project_button__container">
+                <PrimaryButton
+                  onClick={() =>
+                    this.onSelectClickedFeaturedProjects(project.id)
+                  }
+                >
+                  {i18n.t('label.donate_trees_cap')}
+                </PrimaryButton>
+              </div>
+            </CardLayout>
+          );
+        })
+        : null;
 
     return (
       <div className="app-container__content--center sidenav-wrapper">
@@ -250,44 +284,11 @@ class SelectPlantProject extends Component {
           <div className="select-project__header">
             {i18n.t('label.featuredProjects')}{' '}
           </div>
-          <Slider {...settings}>
-            {featuredProjects.length !== 0
-              ? featuredProjects
-                // .sort((a, b) => a.id - b.id)?
-                .map(project => {
-                  {
-                    /* debug(project); */
-                  }
-                  return (
-                    <CardLayout
-                      className="plant_project_content"
-                      key={project.id}
-                    >
-                      <PlantProjectFull
-                        onViewMoreClick={() =>
-                          this.setState({
-                            imageViewMore: !this.state.imageViewMore
-                          })
-                        }
-                        callExpanded={() => this.callExpanded()}
-                        expanded={false}
-                        plantProject={project}
-                        tpoName={project.tpoName}
-                      />
-                      <div className="select-project_button__container">
-                        <PrimaryButton
-                          onClick={() =>
-                            this.onSelectClickedFeaturedProjects(project.id)
-                          }
-                        >
-                          {i18n.t('label.donate_trees_cap')}
-                        </PrimaryButton>
-                      </div>
-                    </CardLayout>
-                  );
-                })
-              : null}
-          </Slider>
+          {featuredProjects != null && featuredProjects.length > 0 &&
+            <Slider {...settings}>
+              {slides}
+            </Slider>
+          }
         </div>
         <div className="select-project__container">
           <Tabs

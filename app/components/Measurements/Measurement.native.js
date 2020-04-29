@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from '../../styles/mesurements/index';
 import { grayCalendar, upArrow, nextArrow } from '../../assets';
+import { formatDate } from '../../utils/utils';
 import i18n from '../../locales/i18n.js';
 
 const Measurement = props => (
@@ -14,7 +15,7 @@ const Measurement = props => (
       <View style={styles.iconContainer}>
         <Image source={grayCalendar} style={styles.icon} />
       </View>
-      <Text style={{ ...styles.text }}>{props.measurementDate}</Text>
+      <Text style={{ ...styles.text }}>{formatDate(props.measurementDate)}</Text>
     </View>
     <View style={{ flexDirection: 'row', paddingTop: 5 }}>
       <View

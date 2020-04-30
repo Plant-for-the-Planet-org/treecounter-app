@@ -597,7 +597,7 @@ export class AddMeasurements extends React.Component {
                           ]}
                         >
                           <TextField
-                            label={i18n.t('label.tree_diameter')}
+                            label={i18n.t('label.tree_diameter_short')}
                             value={
                               '' + parseInt(elementMasument[index]['diameter']) ||
                               props.values.treeDiameter
@@ -644,7 +644,7 @@ export class AddMeasurements extends React.Component {
                           ]}
                         >
                           <TextField
-                            label={i18n.t('label.tree_height')}
+                            label={i18n.t('label.tree_height_short')}
                             value={
                               '' + parseInt(elementMasument[index]['height']) ||
                               props.values.treeHeight

@@ -1,11 +1,14 @@
-import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const textColorDark = '#4D5153';
 const textColorLight = '#d5d5d5';
 const whiteColor = '#ffffff';
 
 export default EStyleSheet.create({
+  scrollViewContainer: {
+    backgroundColor: 'transparent', flex: 1
+  },
   header: {
     paddingHorizontal: 20,
     paddingTop: 23,
@@ -20,7 +23,7 @@ export default EStyleSheet.create({
   subHeaderText: {
     color: textColorDark,
     fontSize: 18,
-    fontFamily: 'OpenSans-SemiBold',
+    fontFamily: 'OpenSans-Bold',
     flex: 1,
     flexWrap: 'wrap'
   },
@@ -41,6 +44,20 @@ export default EStyleSheet.create({
     left: 14
   },
   dateContainer: {
+    position: 'absolute',
+    left: 20,
+    // marginTop: -15,
+    zIndex: 10000,
+    // paddingVertical: 4,
+    // paddingHorizontal: 10,
+    backgroundColor: whiteColor,
+    borderRadius: 100,
+    borderColor: textColorLight,
+    borderWidth: 0
+    // width: 130,
+    // textAlign: 'center'
+  },
+  dateContainerWithoutMap: {
     position: 'absolute',
     left: 20,
     bottom: -14,
@@ -68,18 +85,20 @@ export default EStyleSheet.create({
   locationErrorContainer: {
     flexDirection: 'row',
     paddingHorizontal: 20,
-    marginBottom: 20
+    marginVertical: 20,
+    // marginTop: 10
   },
   locationErrorText: {
     color: '#ee6453',
     fontFamily: 'OpenSans-Regular',
-    fontSize: 14,
+    fontSize: 16,
     flex: 1,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   icon: {
     width: 24,
-    height: 24
+    height: 24,
+
   },
   iconContainer: {
     minWidth: 38,
@@ -92,6 +111,7 @@ export default EStyleSheet.create({
     height: 40
   },
   treeCount: {
+    marginVertical: 15,
     fontSize: 27,
     color: textColorDark,
     fontFamily: 'OpenSans-ExtraBold',

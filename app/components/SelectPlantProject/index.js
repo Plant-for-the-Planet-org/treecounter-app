@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import _ from 'lodash';
+// import _ from 'lodash';
 import { debug } from '../../debug';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
@@ -42,7 +42,7 @@ class SelectPlantProject extends Component {
       expanded: false,
       pageIndex: 0,
       filteredProjects: props.plantProjects,
-      featuredProjects: props.plantProjects,
+      featuredProjects: props.featuredProjects,
       priceSortedProjects: props.plantProjects,
       searchFieldValue: '',
       imageViewMore: false,
@@ -87,13 +87,13 @@ class SelectPlantProject extends Component {
 
   initialStateFromProps(props) {
     const {
+      featuredProjects,
       plantProjects,
       currencies: { currencies }
     } = props;
-    debug('Pojects featured:', plantProjects);
-    let featuredProjects = plantProjects.filter(project => project.isFeatured);
-    featuredProjects = _.orderBy(featuredProjects, 'id');
-    featuredProjects.length && featuredProjects.push(featuredProjects[0]);
+    // let featuredProjects = plantProjects.filter(project => project.isFeatured);
+    // featuredProjects = _.orderBy(featuredProjects, 'id');
+    // featuredProjects.length && featuredProjects.push(featuredProjects[0]);
 
     let priceSortedProjects = sortProjectsByPrice(
       plantProjects,
@@ -185,6 +185,7 @@ class SelectPlantProject extends Component {
       featuredProjects,
       priceSortedProjects
     } = this.state;
+
     const settings = {
       dots: false,
       infinite: true,
@@ -204,15 +205,53 @@ class SelectPlantProject extends Component {
       )
     };
 
+    const slides = featuredProjects.length !== 0
+      ? featuredProjects
+        // .sort((a, b) => a.id - b.id)?
+        .map(project => {
+          return (
+            <CardLayout
+              className="plant_project_content"
+              key={project.id}
+            >
+              <PlantProjectFull
+                onViewMoreClick={() =>
+                  this.setState({
+                    imageViewMore: !this.state.imageViewMore
+                  })
+                }
+                callExpanded={() => this.callExpanded()}
+                expanded={false}
+                plantProject={project}
+                tpoName={project.tpoName}
+              />
+              <div className="select-project_button__container">
+                <PrimaryButton
+                  onClick={() =>
+                    this.onSelectClickedFeaturedProjects(project.id)
+                  }
+                >
+                  {i18n.t('label.donate_trees_cap')}
+                </PrimaryButton>
+              </div>
+            </CardLayout>
+          );
+        })
+        : null;
+
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>
           {this.props.supportTreecounter &&
             this.props.supportTreecounter.treecounterId &&
-            i18n.t('label.support_trees_to', {
+            (this.props.supportTreecounter.type == 'company' ? i18n.t('label.give_trees_to_company', {
+              companyName: this.props.supportTreecounter.displayName
+            }) + '\n' : i18n.t('label.support_trees_to', {
               user: this.props.supportTreecounter.displayName
-            }) + '\n'}
-          {i18n.t('label.select_project')}
+            })) + '\n'}
+          {''}
+
+          <div> {i18n.t('label.select_project')}</div>
           <DescriptionHeading>
             {i18n.t('label.donate_trees_description')}
           </DescriptionHeading>
@@ -245,44 +284,11 @@ class SelectPlantProject extends Component {
           <div className="select-project__header">
             {i18n.t('label.featuredProjects')}{' '}
           </div>
-          <Slider {...settings}>
-            {featuredProjects.length !== 0
-              ? featuredProjects
-                  .sort((a, b) => a.id - b.id)
-                  .map(project => {
-                    {
-                      /* debug(project); */
-                    }
-                    return (
-                      <CardLayout
-                        className="plant_project_content"
-                        key={project.id}
-                      >
-                        <PlantProjectFull
-                          onViewMoreClick={() =>
-                            this.setState({
-                              imageViewMore: !this.state.imageViewMore
-                            })
-                          }
-                          callExpanded={() => this.callExpanded()}
-                          expanded={false}
-                          plantProject={project}
-                          tpoName={project.tpoName}
-                        />
-                        <div className="select-project_button__container">
-                          <PrimaryButton
-                            onClick={() =>
-                              this.onSelectClickedFeaturedProjects(project.id)
-                            }
-                          >
-                            {i18n.t('label.donate_trees_cap')}
-                          </PrimaryButton>
-                        </div>
-                      </CardLayout>
-                    );
-                  })
-              : null}
-          </Slider>
+          {featuredProjects != null && featuredProjects.length > 0 &&
+            <Slider {...settings}>
+              {slides}
+            </Slider>
+          }
         </div>
         <div className="select-project__container">
           <Tabs
@@ -330,33 +336,33 @@ class SelectPlantProject extends Component {
                     <tbody>
                       {filteredProjects.length !== 0
                         ? filteredProjects
-                            .sort((a, b) => a.id - b.id)
-                            .map(project => (
-                              <tr key={'tr' + project.id}>
-                                <td className="align-left">{project.name}</td>
-                                <td className="align-left">
-                                  {project.tpoName}
-                                </td>
-                                <td className="align-right">
-                                  {delimitNumbers(
-                                    parseInt(project.countPlanted)
-                                  )}
-                                </td>
-                                <td className="align-right">
-                                  <NumberFormat
-                                    currency={project.currency}
-                                    data={project.treeCost.toFixed(2)}
-                                  />
-                                </td>
-                                <td>
-                                  <PrimaryButton
-                                    onClick={() => this.openModal(project.id)}
-                                  >
-                                    {i18n.t('label.see_more')}
-                                  </PrimaryButton>
-                                </td>
-                              </tr>
-                            ))
+                          .sort((a, b) => a.id - b.id)
+                          .map(project => (
+                            <tr key={'tr' + project.id}>
+                              <td className="align-left">{project.name}</td>
+                              <td className="align-left">
+                                {project.tpoName}
+                              </td>
+                              <td className="align-right">
+                                {delimitNumbers(
+                                  parseInt(project.countPlanted)
+                                )}
+                              </td>
+                              <td className="align-right">
+                                <NumberFormat
+                                  currency={project.currency}
+                                  data={project.treeCost.toFixed(2)}
+                                />
+                              </td>
+                              <td>
+                                <PrimaryButton
+                                  onClick={() => this.openModal(project.id)}
+                                >
+                                  {i18n.t('label.see_more')}
+                                </PrimaryButton>
+                              </td>
+                            </tr>
+                          ))
                         : null}
                     </tbody>
                   </table>
@@ -387,27 +393,27 @@ class SelectPlantProject extends Component {
                     <tbody>
                       {priceSortedProjects.length !== 0
                         ? priceSortedProjects.map(project => (
-                            <tr key={'tr' + project.id}>
-                              <td className="align-left">{project.name}</td>
-                              <td className="align-left">{project.tpoName}</td>
-                              <td className="align-right">
-                                {delimitNumbers(parseInt(project.countPlanted))}
-                              </td>
-                              <td className="align-right">
-                                <NumberFormat
-                                  currency={project.currency}
-                                  data={project.treeCost.toFixed(2)}
-                                />
-                              </td>
-                              <td>
-                                <PrimaryButton
-                                  onClick={() => this.openModal(project.id)}
-                                >
-                                  {i18n.t('label.see_more')}
-                                </PrimaryButton>
-                              </td>
-                            </tr>
-                          ))
+                          <tr key={'tr' + project.id}>
+                            <td className="align-left">{project.name}</td>
+                            <td className="align-left">{project.tpoName}</td>
+                            <td className="align-right">
+                              {delimitNumbers(parseInt(project.countPlanted))}
+                            </td>
+                            <td className="align-right">
+                              <NumberFormat
+                                currency={project.currency}
+                                data={project.treeCost.toFixed(2)}
+                              />
+                            </td>
+                            <td>
+                              <PrimaryButton
+                                onClick={() => this.openModal(project.id)}
+                              >
+                                {i18n.t('label.see_more')}
+                              </PrimaryButton>
+                            </td>
+                          </tr>
+                        ))
                         : null}
                     </tbody>
                   </table>

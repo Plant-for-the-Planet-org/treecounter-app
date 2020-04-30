@@ -1,37 +1,22 @@
-import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
-import {
-  selectedPlantProjectIdSelector,
-  selectedPlantProjectSelector,
-  selectedTpoSelector,
-  currentUserProfileSelector,
-  currenciesSelector,
-  supportedTreecounterSelector,
-  getCurrency
-} from '../../selectors';
-import {
-  selectPlantProjectAction,
-  clearPlantProject
-} from '../../actions/selectPlantProjectAction';
-
-import { updateUserProfile } from '../../actions/updateUserProfile';
-import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { fetchCurrencies } from '../../actions/currencies';
-import {
-  paymentClear,
-  createPaymentGift,
-  createPaymentDonation
-} from '../../actions/donateAction';
+import { createPaymentDonation, createPaymentGift, paymentClear } from '../../actions/donateAction';
 import { loadProject } from '../../actions/loadTposAction';
-import { setProgressModelState } from '../../reducers/modelDialogReducer';
-import { updateRoute } from '../../helpers/routerHelper';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import { clearPlantProject, selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import { updateUserProfile } from '../../actions/updateUserProfile';
 import DonateTrees from '../../components/DonateTrees';
+import { debug } from '../../debug';
+import { updateRoute } from '../../helpers/routerHelper';
+import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
+import { currenciesSelector, currentUserProfileSelector, getCurrency, selectedPlantProjectIdSelector, selectedPlantProjectSelector, selectedTpoSelector, supportedTreecounterSelector } from '../../selectors';
 import { postDirectRequest } from '../../utils/api';
+
 
 class DonationTreesContainer extends PureComponent {
   UNSAFE_componentWillMount() {
@@ -44,8 +29,10 @@ class DonationTreesContainer extends PureComponent {
             _suggestions.data.length &&
             _suggestions.data[0].slug == match.params.slug
           ) {
-            supportTreecounterAction({
+            debug('support treecounter suggestions', _suggestions.data[0]);
+            _suggestions.data[0].type != 'tpo' && supportTreecounterAction({
               id: _suggestions.data[0].treecounterId,
+              type: _suggestions.data[0].type,
               displayName: _suggestions.data[0].name
             });
           }
@@ -62,6 +49,7 @@ class DonationTreesContainer extends PureComponent {
         currentUserProfile.supportedTreecounter &&
           this.props.supportTreecounterAction({
             id: currentUserProfile.supportedTreecounter.id,
+            type: currentUserProfile.supportedTreecounter.type,
             displayName: currentUserProfile.supportedTreecounter.displayName
           });
       }

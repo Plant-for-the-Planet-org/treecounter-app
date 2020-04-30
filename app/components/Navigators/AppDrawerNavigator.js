@@ -63,6 +63,7 @@ import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
 import colors from '../../utils/constants';
 
+import FullMapComponent from './../UserHome/FullMapComponent';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -103,11 +104,13 @@ const headerLabels = {
   ['app_pledge_update_form']: 'label.updatePledge'
 };
 
-export const getAppNavigator = function (isLoggedIn, userProfile) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const searchNavigator = createStackNavigator(
     {
       Search: {
-        screen: () => <SearchLayout searchInputUnderlineColorAndroid={colors.WHITE} />
+        screen: () => (
+          <SearchLayout searchInputUnderlineColorAndroid={colors.WHITE} />
+        )
       }
     },
     {
@@ -158,7 +161,7 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       }
     }
   );
-  const getTitle = function (navigation) {
+  const getTitle = function(navigation) {
     let title = navigation.getParam('titleParam');
     try {
       if (!title) {
@@ -207,7 +210,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+        screen: isLoggedIn ? () => <UserHomeContainer isLoggedIn={isLoggedIn} /> : LoginContainer,
+        navigationOptions: ({ navigation }) => ({ tabBarVisible: isLoggedIn ? navigation.state.params ? navigation.state.params.isFullMapComponentModal ? false : true : true : true })
       }
     },
     {
@@ -240,6 +244,10 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       [getLocalRoute('app_myTrees')]: {
         screen: UserContributionsContainer
       },
+      ['my_trees_fullMap']: {
+        screen: FullMapComponent,
+        navigationOptions: { header: null }
+      },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer
       },
@@ -255,7 +263,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       ['license_info_list']: {
-        screen: LicenseInfoList
+        screen: LicenseInfoList,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_imprint')]: {
         screen: ImprintContainer,
@@ -297,7 +306,7 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_selectProject')]: {
         screen: SelectPlantProjectContainer,
-        navigationOptions: { header: null },
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_selectedProject')]: {
         screen: SelectedPlantProjectContainer,

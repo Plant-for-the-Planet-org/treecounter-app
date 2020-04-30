@@ -31,7 +31,7 @@ ios/tmp.xcconfig
 # Enviroment
 #
 .env*
-!.env.sample
+!.env.*sample
 !.env.deploy
 # Android/IntelliJ
 #
@@ -57,3 +57,7 @@ coverage
 #app build
 web/prod
 web/server
+
+
+# lock 
+*.lock

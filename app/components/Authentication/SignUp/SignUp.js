@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import { ReCaptcha, loadReCaptcha } from 'recaptcha-v3-react';
-import { v4 as uuidv4 } from 'uuid';
+import { uuidv4 } from '../../../utils/uuid';
 import { debug } from '../../../debug';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import TextHeading from '../../Common/Heading/TextHeading';
@@ -142,9 +142,9 @@ export default class SignUp extends Component {
         )}
         <div className={'card-width'}>
           <CardLayout>
-            <form onSubmit={this.props.onSignUpClicked.bind(this, type)}>
+            <form onSubmit={this.props.onSignUpClicked.bind(this, type, this.signupForm)}>
               <TCombForm
-                ref={'signupForm'}
+                ref={ref => (this.signupForm = ref)}
                 type={signupFormSchema[type]}
                 options={this.props.schemaOptions[type]}
                 value={this.props.formValue}
@@ -153,6 +153,7 @@ export default class SignUp extends Component {
                 onClick={event => {
                   this.props.onSignUpClicked(
                     type,
+                    this.signupForm,
                     this.state.recaptchaToken,
                     this.refreshToken
                   );

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { v1 as uuidv1 } from 'uuid';
+import { uuidv1 } from './uuid';
 import { debug } from '../debug';
 import { fetchItem, saveItem } from '../stores/localStorage';
 import { getAccessToken } from './user';
@@ -60,7 +60,7 @@ async function getActivateLinkHeaders() {
   return {
     headers: {
       ...headers,
-      Authorization: `Bearer ${await fetchItem('activate_token')}`
+      Authorization: `Bearer ${await fetchItem('activate_token').catch(error => debug(error))}`
     }
   };
 }

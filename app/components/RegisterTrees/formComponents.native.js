@@ -819,7 +819,6 @@ export function AddImage(props) {
   };
 
   const renderAsset = (image, index) => {
-    debug('Images====>', image);
     return (
       <View key={index} style={[{ position: 'relative', marginRight: 8 }]}>
         <Image

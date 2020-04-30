@@ -46,19 +46,12 @@ let id = 0;
 
 const styles = EStyleSheet.create({
   container: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
     marginBottom: 30,
     position: 'relative'
   },
   fullScreenContainer: {
     flex: 1,
     marginTop: 20,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
     position: 'relative'
   },
   map: {
@@ -141,7 +134,6 @@ const styles = EStyleSheet.create({
   marker: {
     height: 48,
     width: 48
-    // top: -20
   },
   actionButtonTouchableFullScreen: {
     bottom: '4%'
@@ -357,11 +349,6 @@ export function encodeFormData(mode, mapPoint) {
         return data;
       });
       debug('polygon', polygon);
-
-      /* const data = mapPoint.coordinates.map(cord => {
-         return [cord.latitude, cord.longitude];
-       });
-       data.push(data[0]);*/
       return {
         type: 'Polygon',
         coordinates: polygon
@@ -393,30 +380,6 @@ export function decodeFormData(mode, mapPoint) {
           }
         }
       ];
-      // return point;
-    } else if (
-      mode === 'multiple-trees' &&
-      mapPoint &&
-      mapPoint.length &&
-      mapPoint.type === 'Polygon'
-    ) {
-      /*const polygon = mapPoint.coordinates.map((items, index) => {
-        const data = items.map(item => {
-          return {
-            latitude: item[0],
-            longitude: item[1]
-          };
-        })
-
-        return data;
-      })*/
-      /*item.coordinates = mapPoint.coordinates[0].map(items => {
-        return {
-          latitude: items[0],
-          longitude: items[1]
-        };
-      });*/
-      return null;
     }
   }
   return mode === 'single-tree' ? [] : null;
@@ -467,7 +430,6 @@ class NativeMapView extends Component {
   }
 
   onPropsUpdate = nextProps => {
-    // if (!nextProps.fullScreen) {
     const { geoLocation, mode, geometry } = nextProps;
     const marker =
       this.isSingleTree && geoLocation
@@ -499,8 +461,6 @@ class NativeMapView extends Component {
       }
     );
     nextProps.address && this.ref && this.ref.setAddressText(nextProps.address);
-
-    // }
   };
 
   onDoublePress = e => {
@@ -509,11 +469,10 @@ class NativeMapView extends Component {
     }
     return null;
   };
-/**
- * if(!this.props.fullScreen) open map in full screen
- * */
+  /**
+   * if(!this.props.fullScreen) open map in full screen
+   * */
   onPress(e) {
-    // const isSingleTree = this.props.mode === 'single-tree';
     if (!this.props.fullScreen && this.props.onPress) {
       this.props.onPress(e);
     } else if (!this.isSingleTree) {
@@ -593,10 +552,10 @@ class NativeMapView extends Component {
     });
   };
 
-/**
- * Callback that is called continuously when the region changes, such as when a user is dragging the map.
- * if map is full screen and it's single tree
- * */
+  /**
+   * Callback that is called continuously when the region changes, such as when a user is dragging the map.
+   * if map is full screen and it's single tree
+   * */
   onRegionChange = region => {
     if (this.props.fullScreen && this.isSingleTree) {
       /**
@@ -615,7 +574,6 @@ class NativeMapView extends Component {
        * */
       this.setState({
         markers: [
-          // ...this.state.markers,
           {
             coordinate: {
               latitude: region.latitude,
@@ -634,22 +592,15 @@ class NativeMapView extends Component {
      * {showsUserLocation} If true the app will ask for the user's location.
      * */
     const mapOptions = {
-      // scrollEnabled: this.props.fullScreen,
-      // cacheEnabled: !this.props.fullScreen,
-      // liteMode: !this.props.fullScreen,
-      // rotateEnabled: this.props.fullScreen,
-      // zoomEnabled: this.props.fullScreen,
-      // loadingEnabled: false,
       showsUserLocation: false,
-      // mapType: this.props.mapType
     };
     const {
       editing,
       region: { latitude, longitude }
     } = this.state;
-/**
- * drow polygon for multiple tree
- * */
+    /**
+     * drow polygon for multiple tree
+     * */
     if (editing) {
       mapOptions.scrollEnabled = false;
       mapOptions.onPanDrag = e => this.onPress(e);
@@ -665,9 +616,9 @@ class NativeMapView extends Component {
     }
     const screen = Dimensions.get('window');
     const mapPaddingTop = screen.height * 0.1;
-/**
- * set mapPadding for set position of google logo on screen
- * */
+    /**
+     * set mapPadding for set position of google logo on screen
+     * */
     const setMapPadding = () => {
       const iosEdgePadding = {
         top: mapPaddingTop * 0.5,
@@ -699,16 +650,13 @@ class NativeMapView extends Component {
      * */
     return (
       <MapView
-        //mapType={'satellite'}
         ref={ref => (this.map = ref)}
         provider={PROVIDER_GOOGLE}
-        // provider={this.props.provider}
         style={[
           this.props.mapStyle,
           { width: this.state.width, marginBottom: this.state.mapMargin }
         ]}
-        mapPadding={setMapPadding()} //!this.props.fullScreen ? {top:0,right:0,left:0,bottom:Platform.OS === 'ios' ? Dimensions.get('window').height * (0.03): -30} : {top:0,right:0,left:0,bottom:Dimensions.get('window').height * (0.1),}}
-        // initialRegion={this.state.region}
+        mapPadding={setMapPadding()}
         onPress={e => this.onPress(e)}
         onMapReady={() => this.setState({ width: screen.width })}
         onDoublePress={e => this.onDoublePress(e)}
@@ -747,7 +695,6 @@ class NativeMapView extends Component {
           this.props.mode === 'single-tree' &&
           this.state.markers.map(marker => (
             <Marker
-              // image={markerImage}
               key={marker.key || 0}
               coordinate={marker.coordinate}
             >
@@ -766,7 +713,6 @@ class NativeMapView extends Component {
           this.state.editing &&
           this.state.editing.coordinates.map((marker, index) => (
             <Marker
-              // image={markerImage}
               key={index}
               coordinate={marker}
             >
@@ -932,8 +878,6 @@ class NativeMapView extends Component {
         onFocus: onPress,
         pointerEvents: 'none'
       };
-    // inputProps.style = styles.inputStyle
-    // const isSingleTree = this.props.mode === 'single-tree';
     return this.renderComp(
       <View style={fullScreen ? styles.fullScreenContainer : styles.container}>
         {this.renderPolygon()}
@@ -1036,9 +980,6 @@ class NativeMapView extends Component {
                     />
                   )}
                   onPress={(data, details = null) => {
-                    // 'details' is provided when fetchDetails = true
-                    debug('Details===>', details);
-                    debug('Data===>', data);
                     this.gotoCurrentLocation(
                       {
                         latitude: details.geometry.location.lat,

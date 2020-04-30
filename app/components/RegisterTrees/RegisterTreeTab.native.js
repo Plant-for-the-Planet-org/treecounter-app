@@ -1,6 +1,5 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { PureComponent } from 'react';
-// import t from 'tcomb-form-native';
 import { Text, View, Linking, Alert, Platform } from 'react-native';
 import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
@@ -81,8 +80,6 @@ export default class RegisterTreeTab extends PureComponent {
         props.plantProjects &&
         props.plantProjects.length <= 0
     };
-    // this.isVisiable = false;
-    // isAndroid() && this.alertBox(this.state.showAddProjectModel)
   }
 
   componentDidMount() {
@@ -133,16 +130,10 @@ export default class RegisterTreeTab extends PureComponent {
    * */
 
   openModel = formProps => {
-    // if (!isEqual(this.formProps, formProps)) {
     this.formProps = formProps;
     this.renderFullscreenMap = (
       <MapboxMap
         mode={'single-tree'}
-        /*geometry={
-          this.formProps && this.formProps.values
-            ? this.formProps.values.geometry
-            : null
-        }*/
         geoLocation={
           this.formProps && this.formProps.values
             ? this.formProps.values.geoLocation
@@ -181,7 +172,6 @@ export default class RegisterTreeTab extends PureComponent {
            * set value of geoLocation in formik form
            * */
           this.formProps.setFieldValue('geoLocation', geoLocation);
-          //this.formProps.setFieldValue('geometry', geometry);
         }
       }
     );
@@ -201,9 +191,6 @@ export default class RegisterTreeTab extends PureComponent {
       address,
       showAddProjectModel
     } = this.state;
-    /*if (geometry) {
-      defaultValue.geometry = geometry;
-    }*/
     if (geoLocation) {
       defaultValue.geoLocation = geoLocation;
     }
@@ -251,12 +238,6 @@ export default class RegisterTreeTab extends PureComponent {
           this.state.mode === 'multiple-trees' && (
             <FormikFormTree
               onCreateCompetition={value => {
-                if (this.props.mode === 'single-tree') {
-                  //  value.geometry = undefined;
-                  // delete value.geometry;
-                } else {
-                  // value.geometry = JSON.stringify(value.geometry);
-                }
                 if (this.props.onRegister) {
                   this.props.onRegister(
                     this.props.mode,
@@ -314,7 +295,6 @@ export default class RegisterTreeTab extends PureComponent {
          * full screen map model
          */}
         <Modal
-          // position={'bottom'}
           isOpen={isOpen}
           position={'top'}
           onClosed={this.onClosed}
@@ -330,7 +310,6 @@ export default class RegisterTreeTab extends PureComponent {
             }}
           >
             <TouchableItem
-              // key={button.type}
               style={{
                 height: 70
               }}

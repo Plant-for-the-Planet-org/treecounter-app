@@ -44,20 +44,15 @@ export default class RegisterTrees extends Component {
     debug('this.props.navigation', this.props);
     // Bind Local method
     this._handleIndexChange = this._handleIndexChange.bind(this);
-    this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
-/**
- * Tab index change change for change mode of tree registration single tree or multiple tree
- * */
+  /**
+   * Tab index change change for change mode of tree registration single tree or multiple tree
+   * */
   _handleIndexChange = index =>
     this.setState({
       index,
       mode: index === 0 ? 'single-tree' : 'multiple-trees'
     });
-
-  handleGeoLocationChange(/* geoLocation */) {
-    //debug(geoLocation);
-  }
 
   _renderTabBar = props => {
     const normalColor = '#4d5153';

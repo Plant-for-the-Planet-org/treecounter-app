@@ -138,3 +138,11 @@ jobs:
         name: TreecounterApp-develop-release.ipa
         path: ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa
 
+    - name: Upload iOS IPA to Browserstack
+      env:
+        BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      run: |
+        upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.ipa
+        echo "::set-env name=upload_file::$upload_file"
+        mv 'ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa' release/$upload_file
+        curl -u "planetit1:$BROWSERSTACK_ACCESS_KEY" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@release/$upload_file"

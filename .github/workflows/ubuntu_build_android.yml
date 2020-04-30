@@ -1,0 +1,140 @@
+name: Android build on Ubuntu
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v2
+
+    - name: Check versions
+      run: |
+        echo "Node version:"
+        npm --version
+        echo "Java version:"
+        java -version
+        echo "PATH:"
+        echo $PATH
+        echo "ANDROID_HOME:"
+        echo $ANDROID_HOME
+
+#    - name: Adding build tools to path
+#      run: |
+#        export PATH=$ANDROID_HOME/tools/bin:$PATH
+#        export PATH=$ANDROID_HOME/build-tools/$(ls -tr $ANDROID_HOME/build-tools/ | tail -1):$PATH
+#        echo $PATH
+
+#    - name: List current Android SDK installations
+#      run: sudo $ANDROID_HOME/tools/bin/sdkmanager --list
+
+    - name: Installing Gettext for envsubst command
+      run: sudo apt-get update && sudo apt-get install -y gettext-base
+
+    - name: Caching node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install npm
+      run : |
+        npm install
+
+    - name: Setting Environment Variables
+      env:
+        googleMapApiKey: ${{ secrets.GOOGLE_MAP_API_KEY }}
+        mediaPath: /media/cache
+        scheme: https
+        host: development.trilliontreecampaign.org
+        api_url: https://app-development.plant-for-the-planet.org
+        base:
+        debug: true
+        currency: EUR
+        mapIdsInventory: dee6acf9de774fe6878813f707b4ab88
+        bugsnagApiKey: ${{ secrets.BUGSNAG_API_KEY }}
+        androidAppId: org.pftp
+        iosAppId: 1444740626
+        locationApikKey: ${{ secrets.LOCATION_API_KEY }}
+        env: develop
+      run: |
+        envsubst < .env.deploy > .env.develop
+        cp .env.develop .env
+
+# Currently not yet supported different flavors
+    # - name: Overide Environment if Master Branch
+    #   if: endsWith(github.ref, '/master')
+    #   run: |
+    #     echo "::set-env name=host::https://www.trilliontreecampaign.org";
+    #     echo "::set-env name=api_url::https://app.plant-for-the-planet.org";
+    #     echo "::set-env name=mapIdsInventory::534da741b327459eb117f4cc93acd98e";
+    #     echo "::set-env name=debug::false";
+    #     echo "::set-env name=env::production";
+    #     envsubst < .env.deploy > .env.production
+    #     cp .env.production .env
+    #
+    # - name: Overide Environment if Staging Branch
+    #   if: endsWith(github.ref, '/staging')
+    #   run: |
+    #     echo "::set-env name=host::https://staging.trilliontreecampaign.org";
+    #     echo "::set-env name=api_url::https://app-staging.plant-for-the-planet.org";
+    #     echo "::set-env name=mapIdsInventory::dee6acf9de774fe6878813f707b4ab88";
+    #     echo "::set-env name=debug::true";
+    #     echo "::set-env name=env::staging";
+    #     envsubst < .env.deploy > .env.staging
+    #     cp .env.staging .env
+
+    - name: Listing Environment Variables
+      run: cat .env
+
+    - name: Preparing Android build
+      env:
+        android_release_password: ${{ secrets.ANDROID_RELEASE_PASSWORD }}
+      run: |
+        # react-native-i18n has an incompatible manifest
+        search='<uses-sdk android:minSdkVersion="16" />'
+        sed -i "s|${search}||g" node_modules/react-native-i18n/android/src/main/AndroidManifest.xml
+        # prepare local.properties
+        echo "MYAPP_RELEASE_STORE_PASSWORD=$android_release_password" > android/local.properties
+        echo "MYAPP_RELEASE_KEY_PASSWORD=$android_release_password" >> android/local.properties
+
+    - name: Fixes for Android Build
+      run: |
+        # fix problems with 'Error: ENOSPC: System limit for number of file watchers reached'
+        echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+        # fix for task ':app:stripDevelopReleaseDebugSymbols'
+        (echo y; echo y; echo y;) | sudo $ANDROID_HOME/tools/bin/sdkmanager  'ndk;20.0.5594570'
+
+    - name: Caching Gradle dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-androidgradle-${{ hashFiles('android/*.gradle') }}
+        restore-keys: |
+          ${{ runner.os }}-androidgradle-
+
+# Currently not working due to https://github.com/react-native-community/react-native-maps/issues/3266
+#    - name: Checking Gradle dependencies
+#      run: ./gradlew check
+#      working-directory: ./android
+
+    - name: Android Build
+      run: ./gradlew assembleDevelopRelease --stacktrace --no-daemon
+      working-directory: ./android
+
+    - name: Upload Android APK file
+      uses: actions/upload-artifact@v1
+      with:
+        name: TreecounterApp-develop-release.apk
+        path: android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk
+

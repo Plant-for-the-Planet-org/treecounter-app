@@ -11,15 +11,7 @@ import ProjectModal from '../components/ProjectModal.native';
 
 
 function DonationDetails(props) {
-  // use centralised context so that we can use this anywhere and can track the changes according
-  // let context = {
-  //   commissionSwitch: false,// if not needed to be a context please use usestate method , commenetd out code below
-  //   taxReceiptSwitch: false,// if not needed to be a context please use usestate method , commenetd out code below
-  //   treeCount: '',// only have proper context in this context object , remove other non context properties from here and use usestate
-  //   frequency: '',
-  //   countryForTax: '',
-  //   ...props.context,
-  // }
+
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
   const [treeCount, setTreeCount] = React.useState(''); // for Selecting Tree Count
@@ -46,6 +38,20 @@ function DonationDetails(props) {
 
   let context = { ...props.context };
 
+  // this is to redraw the form after you change project or cancel project selected on details page on project
+  if (context.donationDetails.totalTreeCount && context.donationDetails.totalTreeCount != treeCount) {
+    setTreeCount(context.donationDetails.totalTreeCount);
+  }
+  if (context.donationDetails.frequency && context.donationDetails.frequency != frequency) {
+    setFrequency(context.donationDetails.frequency);
+  }
+  if (context.donationDetails.taxReceiptSwitch && context.donationDetails.taxReceiptSwitch != taxReceiptSwitch) {
+    setTaxReceiptSwitch(context.donationDetails.taxReceiptSwitch);
+  }
+  if (context.donationDetails.countryForTax && context.donationDetails.countryForTax != countryForTax) {
+    setSelectedTaxCountry(context.donationDetails.countryForTax);
+  }
+
   const saveContext = () => {
     if (context.contextType === 'direct') {
       props.contextActions.setDonationDetails({
@@ -68,9 +74,6 @@ function DonationDetails(props) {
       });
     }
   };
-  // console.log()
-  // props.navigation.setParams({ context: context });
-  // console.log('getting updateed context in nav:', props.navigation.getParam('context'))
   return (
     <View style={{ backgroundColor: 'white' }}>
       <StatusBar hidden />

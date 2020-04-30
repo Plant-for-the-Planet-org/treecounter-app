@@ -2,28 +2,21 @@
 import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import {
-  FlatList,
-  View,
-  Image,
-  Text,
-  RefreshControl,
-  Animated
-} from 'react-native';
+import { Animated, FlatList, Image, RefreshControl, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
 import { debug } from '../../../debug';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
-import styles from '../../../styles/selectplantproject/featured.native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
-import { trees } from './../../../assets';
 import i18n from '../../../locales/i18n.js';
-import LoadingIndicator from '../../Common/LoadingIndicator.native';
+import styles from '../../../styles/selectplantproject/featured.native';
+import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 import colors from '../../../utils/constants';
-import {bindActionCreators} from 'redux';
-import {selectPlantProjectAction} from '../../../actions/selectPlantProjectAction';
-import {connect} from 'react-redux';
+import LoadingIndicator from '../../Common/LoadingIndicator.native';
+import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
+import { trees } from './../../../assets';
 
- class FeaturedProjects extends PureComponent {
+class FeaturedProjects extends PureComponent {
   constructor(props) {
     super(props);
     this.onSelectClickedFeaturedProjects = this.onSelectClickedFeaturedProjects.bind(
@@ -36,7 +29,8 @@ import {connect} from 'react-redux';
       page: parseInt(props.plantProjects.length / this.perPage),
       initiated: false,
       shouldLoad: props.plantProjects.length != this.perPage,
-      loader: true
+      loader: true,
+      search: props.search || ''
     };
   }
   componentDidMount() {
@@ -69,6 +63,10 @@ import {connect} from 'react-redux';
         initiated: true,
         shouldLoad: this.props.plantProjects.length == this.perPage
       });
+    }
+    if (nextProps.search && this.state.search !== nextProps.search) {
+      this.setState({ search: nextProps.search })
+      debug('search', nextProps.search)
     }
   }
   fetchMore = () => {
@@ -118,7 +116,8 @@ import {connect} from 'react-redux';
   render() {
     const { loader } = this.state;
     let featuredProjects = orderBy(
-      this.props.plantProjects.filter(project => project.isFeatured),
+      this.props.plantProjects.filter(project => project.isFeatured)
+      ,
       'created'
     );
 

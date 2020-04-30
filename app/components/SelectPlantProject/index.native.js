@@ -144,6 +144,7 @@ class SelectPlantTabView extends PureComponent {
               index={this.state.index}
               scrollY={this.state.scrollY}
               context={this.props.context}
+              search={this.props.search}
             />
           ) : null;
       case 'list':

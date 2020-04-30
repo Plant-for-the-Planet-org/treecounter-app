@@ -118,6 +118,12 @@ jobs:
       run: ./gradlew assembleDevelopRelease --stacktrace --no-daemon
       working-directory: ./android
 
+    - name: Upload Android APK file
+      uses: actions/upload-artifact@v1
+      with:
+        name: TreecounterApp-develop-release.apk
+        path: android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk
+
     - name: Upload Android APK to Browserstack
       env:
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
@@ -126,9 +132,3 @@ jobs:
         echo "::set-env name=upload_file::$upload_file"
         mv android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk release/$upload_file
         curl -u "planetit1:$BROWSERSTACK_ACCESS_KEY" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@release/$upload_file"
-
-    - name: Upload Android APK file
-      uses: actions/upload-artifact@v1
-      with:
-        name: $upload_file
-        path: release/$upload_file

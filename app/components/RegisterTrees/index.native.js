@@ -8,7 +8,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { debug } from '../../debug';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
-// import { renderFilledTabBar } from '../Common/Tabs';
 import RegisterTreeTab from './RegisterTreeTab.native';
 import { getPlantProjectEnum, isTpo } from '../../helpers/utils';
 import styles from '../../styles/register_trees.native';
@@ -16,6 +15,9 @@ import HeaderNew from './../Header/HeaderNew';
 import colors from '../../utils/constants';
 
 export default class RegisterTrees extends Component {
+  /**
+   * Tab route single tree and multiple tree
+   * */
   routes = [
     {
       key: 'single-tree',
@@ -42,18 +44,15 @@ export default class RegisterTrees extends Component {
     debug('this.props.navigation', this.props);
     // Bind Local method
     this._handleIndexChange = this._handleIndexChange.bind(this);
-    this.handleGeoLocationChange = this.handleGeoLocationChange.bind(this);
   }
-
+  /**
+   * Tab index change change for change mode of tree registration single tree or multiple tree
+   * */
   _handleIndexChange = index =>
     this.setState({
       index,
       mode: index === 0 ? 'single-tree' : 'multiple-trees'
     });
-
-  handleGeoLocationChange(/* geoLocation */) {
-    //debug(geoLocation);
-  }
 
   _renderTabBar = props => {
     const normalColor = '#4d5153';
@@ -96,6 +95,12 @@ export default class RegisterTrees extends Component {
       this.props.currentUserProfile,
       this.props.plantProjects
     );
+    /**
+     * @property onRegister call back function when user click on add tree
+     * @property isTpo whether user is Tpo user or not
+     * @property mode single tree or multiple tree
+     * @property plantProjects list of plant project
+     * */
     return (
       <RegisterTreeTab
         onRegister={(mode, value, plantProject) => {

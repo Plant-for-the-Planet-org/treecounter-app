@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { Animated, Image, Keyboard, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -10,6 +11,8 @@ import colors from '../../../utils/constants';
 import { formatNumber } from '../../../utils/utils';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import CreditCardForm from './../components/CreditCardForm';
+
+
 export default function DonationStep3(props) {
 
   stripe.setOptions({
@@ -41,6 +44,92 @@ export default function DonationStep3(props) {
       setToken(token)
     } catch (error) {
       console.log('Error', error)
+    }
+  }
+
+  const handleApplePayPress = async (props) => {
+    console.log('currecny code', props.currency_code)
+    console.log('Amount', props.totalPrice)
+    try {
+      setApplePayStatus('')
+      setToken(null)
+      const token = await stripe.paymentRequestWithNativePay({
+        requiredBillingAddressFields: ['all'],
+        currencyCode: props.currency_code
+      },
+        [{
+          label: 'Donation to Plant for the Planet',
+          amount: props.totalPrice,
+        },])
+
+      setToken(token)
+
+      const data = {
+        type: 'card',
+        card: { token: token.tokenId },
+        key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
+      }
+
+      function JSON_to_URLEncoded(element, key, list) {
+        var list = list || [];
+        if (typeof (element) == 'object') {
+          for (var idx in element)
+            JSON_to_URLEncoded(element[idx], key ? key + '[' + idx + ']' : idx, list);
+        } else {
+          list.push(key + '=' + encodeURIComponent(element));
+        }
+        return list.join('&');
+      }
+
+      console.log('Data', data)
+      const paymentMethod = axios.post('https://api.stripe.com/v1/payment_methods', JSON_to_URLEncoded(data), {
+        headers: {
+          Authorization: 'Bearer sk_test_pvrGEhOIEu3HwYdLTMhqznnl00kFjZUvMD',
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+      }).then(response => {
+        try {
+          const response = axios.post('https://stripe-ex-backend.herokuapp.com/create_intent', JSON_to_URLEncoded({
+            amount: 2000,
+            currency: 'usd',
+            confirmationMethod: 'manual',
+            confirm: false,
+            payment_method: paymentMethod
+          }), {
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            }
+          })
+            .then(response => {
+              console.log(response)
+            })
+            .catch(error => {
+              console.log(error.response)
+            });
+          console.log('Payment Intent', response)
+        } catch (e) {
+          console.log('Payment Intent Error', e)
+        }
+      })
+        .catch(error => {
+          console.log(error.response)
+        });
+
+
+
+      if (applePayComplete) {
+        await stripe.completeNativePayRequest()
+        setApplePayStatus('Apple Pay payment completed')
+        console.log('Entered if')
+      } else {
+        await stripe.cancelNativePayRequest()
+        setApplePayStatus('Apple Pay payment cenceled')
+        console.log('Entered else')
+      }
+    } catch (error) {
+      setApplePayStatus(`Error: ${error.message}`)
+      console.log('Error', error.message)
     }
   }
 
@@ -108,53 +197,14 @@ export default function DonationStep3(props) {
     setShowPay(true)
   }
 
-  handleCompleteChange = complete => (
-    setApplePayComplete(complete)
-  )
+  // const handleCompleteChange = complete => (
+  //   setApplePayComplete(complete)
+  // )
 
-  const handleApplePayPress = async (props) => {
-    console.log('currecny code', props.currency_code)
-    console.log('Amount', props.totalPrice)
-    try {
-      setApplePayStatus('')
-      setToken(null)
-      const token = await stripe.paymentRequestWithNativePay({
-        requiredBillingAddressFields: ['all'],
-        currencyCode: props.currency_code
-      },
-        [{
-          label: 'Donation to Plant for the Planet',
-          amount: props.totalPrice,
-        },])
+  // const handleSetupApplePayPress = () => (
+  //   stripe.openNativePaySetup()
+  // )
 
-      setToken(token)
-
-      if (applePayComplete) {
-        await stripe.completeNativePayRequest()
-        setApplePayStatus('Apple Pay payment completed')
-        console.log('Entered if')
-      } else {
-        await stripe.cancelNativePayRequest()
-        setApplePayStatus('Apple Pay payment cenceled')
-        console.log('Entered else')
-      }
-    } catch (error) {
-      setApplePayStatus(`Error: ${error.message}`)
-      console.log('Error', error.message)
-    }
-  }
-
-  handleSetupApplePayPress = () => (
-    stripe.openNativePaySetup()
-  )
-
-
-  const cards = {
-    americanExpressAvailabilityStatus: { name: 'American Express', isAvailable: amexAvailable },
-    discoverAvailabilityStatus: { name: 'Discover', isAvailable: discoverAvailable },
-    masterCardAvailabilityStatus: { name: 'Master Card', isAvailable: masterCardAvailable },
-    visaAvailabilityStatus: { name: 'Visa', isAvailable: visaAvailable },
-  }
 
 
   return (

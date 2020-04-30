@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '10.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'TreecounterApp' do
@@ -59,7 +59,7 @@ target 'TreecounterApp' do
   pod 'Permission-Siri', :path => "#{permissions_path}/Siri.podspec"
   pod 'Permission-SpeechRecognition', :path => "#{permissions_path}/SpeechRecognition.podspec"
   pod 'Permission-StoreKit', :path => "#{permissions_path}/StoreKit.podspec"
-  pod 'Stripe', '~> 14.0.0'
+  pod 'Stripe', '~> 19.1'
   pod 'tipsi-stripe', :path => '../node_modules/tipsi-stripe'
   # React Native Maps dependencies
   rn_maps_path = '../node_modules/react-native-maps'

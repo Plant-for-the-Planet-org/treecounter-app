@@ -1,4 +1,5 @@
 # Plant-for-the-Planet App
+![iOS build on MacOS](https://github.com/Plant-for-the-Planet-org/treecounter-app/workflows/iOS%20build%20on%20MacOS/badge.svg) ![Android build on Ubuntu](https://github.com/Plant-for-the-Planet-org/treecounter-app/workflows/Android%20build%20on%20Ubuntu/badge.svg)
 
 Welcome to this repository which contains the code of the web clients and the native iOS and Android apps of the Trillion Tree Campaign at https://www.trilliontreecampaign.org/ written with React-Native. For contributions please read our [contribution guide](https://github.com/Plant-for-the-Planet-org/treecounter-app/blob/develop/CONTRIBUTING.md) as well as our [code of conduct](https://github.com/Plant-for-the-Planet-org/treecounter-app/blob/develop/CODE_OF_CONDUCT.md) and the following information:
 

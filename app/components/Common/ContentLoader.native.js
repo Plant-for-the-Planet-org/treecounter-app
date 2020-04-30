@@ -300,7 +300,7 @@ const ProjectsLoading = () => (
 
 const ContentLoading = props => {
   const { screen } = props;
-  debug(screen, 'screenscreenscreenscreenscreenscreen');
+  debug(screen, 'screen');
   return (
     <View style={loadingIndicatorStyle}>
       {screen === 'AppHome' && <WorldLoader />}

@@ -16,6 +16,9 @@ import { updateStaticRoute } from '../../helpers/routerHelper/routerHelper';
 import { fetchCurrencies } from '../../actions/currencies';
 
 class SelectPlantProjectContainer extends PureComponent {
+  state = {
+    featuredProjects: [],
+  };
   // componentWillMount() {
   //   let plantProjects = this.props.plantProjects.filter(
   //     project => project.allowDonations
@@ -53,14 +56,15 @@ class SelectPlantProjectContainer extends PureComponent {
   // }
 
   async componentDidMount() {
-  /*  if (
-      this.props.plantProjects &&
-      !this.props.plantProjects.filter(plantProject => plantProject.isFeatured)
-        .length
-    ) {*/
-      let data = await this.props.loadProjects('featured');
-      debug('===got data in await in did mount:', data);
-   // }
+    /*  if (
+        this.props.plantProjects &&
+        !this.props.plantProjects.filter(plantProject => plantProject.isFeatured)
+          .length
+      ) {*/
+    let data = await this.props.loadProjects('featured');
+    debug('===got data in await in did mount:', data);
+    this.setState({ featuredProjects: data });
+    // }
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
@@ -82,6 +86,7 @@ class SelectPlantProjectContainer extends PureComponent {
         navigation={this.props.navigation}
         supportTreecounter={this.props.supportTreecounter}
         loadDetails={this.loadDetails}
+        featuredProjects={this.state.featuredProjects}
       />
     );
   }

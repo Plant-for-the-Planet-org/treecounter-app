@@ -1,6 +1,5 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { PureComponent } from 'react';
-// import t from 'tcomb-form-native';
 import { Text, View, Linking, Alert, Platform } from 'react-native';
 import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
@@ -20,6 +19,10 @@ let isVisible = false;
 export default class RegisterTreeTab extends PureComponent {
   constructor(props) {
     super(props);
+    /**
+     * {defaultSingleInitValue} {defaultMultipleInitValue} default value object for formik form this will be passed on formik components
+     * {props.value} if edit tree this will be value of all field otherwise we set it null
+     * */
     const defaultSingleInitValue = {
       plantDate: (props.value && props.value.plantDate) || new Date(),
       treeClassification: (props.value && props.value.treeClassification) || '',
@@ -29,20 +32,29 @@ export default class RegisterTreeTab extends PureComponent {
       contributionMeasurements:
         (props.value && props.value.contributionMeasurements) || [],
       contributionImages: (props.value && props.value.contributionImages) || [],
-      geoLocation: ''
-      // geometry: ''
+      geoLocation: '',
+      plantProject: props.isTpo
+        ? props.plantProjects.length > 0
+          ?  (props.value && props.value.plantProjectId) || props.plantProjects[0].value
+          : ''
+        : '',
     };
     const defaultMultipleInitValue = {
       plantDate: (props.value && props.value.plantDate) || new Date(),
       treeSpecies: (props.value && props.value.treeSpecies) || '',
       treeCount: (props.value && props.value.treeCount) || 5,
       contributionImages: (props.value && props.value.contributionImages) || [],
-      geoLocation: (props.value && props.value.geoLocation) || ''
+      geoLocation: (props.value && props.value.geoLocation) || '',
+      plantProject: props.isTpo
+        ? props.plantProjects.length > 0
+          ? (props.value && props.value.plantProjectId) || props.plantProjects[0].value
+          : ''
+        : '',
     };
     this.state = {
       plantProject: props.isTpo
         ? props.plantProjects.length > 0
-          ? props.plantProjects[0].value
+          ? (props.value && props.value.plantProjectId) ||props.plantProjects[0].value
           : ''
         : '',
       defaultSingleInitValue: defaultSingleInitValue,
@@ -55,16 +67,19 @@ export default class RegisterTreeTab extends PureComponent {
 
       isOpen: false,
       mode: props.mode,
-      //  geometry: (props.value && props.value.geometry) || null,
+      /**
+       * {geoLocation} we are setting this value from parent components
+       * */
       geoLocation: (props.value && props.value.geoLocation) || null,
+      /**
+       * {showAddProjectModel} show dialog to create plantProject if there is not plant project
+       * */
       showAddProjectModel:
         !props.isEdit &&
         props.isTpo &&
         props.plantProjects &&
         props.plantProjects.length <= 0
     };
-    // this.isVisiable = false;
-    // isAndroid() && this.alertBox(this.state.showAddProjectModel)
   }
 
   componentDidMount() {
@@ -72,6 +87,10 @@ export default class RegisterTreeTab extends PureComponent {
       !isVisible &&
       this.alertBox(this.state.showAddProjectModel);
   }
+  /**
+   * Show android style dialog box in android for if no plantProject
+   * @param {showAddProjectModel} bool
+   * */
 
   alertBox = showAddProjectModel => {
     isVisible = true;
@@ -102,18 +121,19 @@ export default class RegisterTreeTab extends PureComponent {
       mode: nextProps.mode
     });
   }
+  /**
+   * @param formProps we get value form formik form
+   * @property {mode} single tree or multiple tree
+   * @property {geoLocation} set geoLocation that we get from formikForm
+   * @property {fullScreen} bool show map in fullscreen
+   * @property {onContinue} called funtion when user press onContinue button to get updated value of geoLocation,geometry,address,mode
+   * */
 
   openModel = formProps => {
-    // if (!isEqual(this.formProps, formProps)) {
     this.formProps = formProps;
     this.renderFullscreenMap = (
       <MapboxMap
         mode={'single-tree'}
-        /*geometry={
-          this.formProps && this.formProps.values
-            ? this.formProps.values.geometry
-            : null
-        }*/
         geoLocation={
           this.formProps && this.formProps.values
             ? this.formProps.values.geoLocation
@@ -131,6 +151,12 @@ export default class RegisterTreeTab extends PureComponent {
       isOpen: true
     });
   };
+  /**
+   * @param {geoLocation} geoLocation of map tree
+   * @param {geometry} geometry of map tree
+   * @param {mode} string single tree or multiple tree
+   * @param {address} string from googleAutocompleteTextField
+   * */
 
   onModelClosed = (geoLocation, geometry, mode, address = null) => {
     this.setState(
@@ -142,8 +168,10 @@ export default class RegisterTreeTab extends PureComponent {
       },
       () => {
         if (this.formProps) {
+          /**
+           * set value of geoLocation in formik form
+           * */
           this.formProps.setFieldValue('geoLocation', geoLocation);
-          //this.formProps.setFieldValue('geometry', geometry);
         }
       }
     );
@@ -163,31 +191,35 @@ export default class RegisterTreeTab extends PureComponent {
       address,
       showAddProjectModel
     } = this.state;
-    /*if (geometry) {
-      defaultValue.geometry = geometry;
-    }*/
     if (geoLocation) {
       defaultValue.geoLocation = geoLocation;
     }
+    /**
+     *  <FormikFormTree> render formik form on screen
+     *  @property {onCreateCompetition} get the value of form from formikForm and pass it to parent components
+     *  @property {isTpo} bool is user is TPO
+     *  @property {isEdit} bool is edit register tree or new registration of tree
+     *  @property {mode} string single tree or multiple tree
+     *  @property {plantProjects} List of all PlantProject
+     *  @property {geometry} value of geometry to show in map
+     *  @property {geoLocation} value of geoLocation to show in map
+     *  @property {address} set value in address of googleAutoCompeleteTextField
+     *  @property {initialValues} default value of formik form
+     *  @property {openModel} call back function to show map in full-screen
+     * */
 
     return (
       <View style={{ backgroundColor: backgroundColor, flex: 1 }}>
         {this.state.mode === 'single-tree' ? (
           <FormikFormTree
             onCreateCompetition={value => {
-              if (this.props.mode === 'single-tree') {
-                //  value.geometry = undefined;
-                // delete value.geometry;
-              } else {
-                // value.geometry = JSON.stringify(value.geometry);
-              }
               if (this.props.onRegister) {
                 this.props.onRegister(
                   this.props.mode,
                   value,
                   this.state.plantProject === ''
                     ? null
-                    : this.state.plantProject
+                    : value.plantProject
                 );
               }
             }}
@@ -206,12 +238,6 @@ export default class RegisterTreeTab extends PureComponent {
           this.state.mode === 'multiple-trees' && (
             <FormikFormTree
               onCreateCompetition={value => {
-                if (this.props.mode === 'single-tree') {
-                  //  value.geometry = undefined;
-                  // delete value.geometry;
-                } else {
-                  // value.geometry = JSON.stringify(value.geometry);
-                }
                 if (this.props.onRegister) {
                   this.props.onRegister(
                     this.props.mode,
@@ -235,6 +261,9 @@ export default class RegisterTreeTab extends PureComponent {
             />
           )
         )}
+        {/**
+         * popupNative to show if no plant project present in user profile
+         */}
         {Platform.OS === 'ios' && (
           <PopupNative
             isOpen={showAddProjectModel}
@@ -262,8 +291,10 @@ export default class RegisterTreeTab extends PureComponent {
             }}
           />
         )}
+        {/**
+         * full screen map model
+         */}
         <Modal
-          // position={'bottom'}
           isOpen={isOpen}
           position={'top'}
           onClosed={this.onClosed}
@@ -279,7 +310,6 @@ export default class RegisterTreeTab extends PureComponent {
             }}
           >
             <TouchableItem
-              // key={button.type}
               style={{
                 height: 70
               }}

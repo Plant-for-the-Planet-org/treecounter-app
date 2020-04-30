@@ -46,19 +46,12 @@ let id = 0;
 
 const styles = EStyleSheet.create({
   container: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
     marginBottom: 30,
     position: 'relative'
   },
   fullScreenContainer: {
     flex: 1,
     marginTop: 20,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
     position: 'relative'
   },
   map: {
@@ -141,13 +134,15 @@ const styles = EStyleSheet.create({
   marker: {
     height: 48,
     width: 48
-    // top: -20
   },
   actionButtonTouchableFullScreen: {
     bottom: '4%'
   }
 });
-
+/**
+ * {mapStyle} apply your custom map style to the map
+ * for more information refer this https://mapstyle.withgoogle.com/
+ * */
 const mapStyle = [
   {
     elementType: 'geometry',
@@ -309,6 +304,11 @@ const mapStyle = [
   }
 ];
 
+/**
+ * extract geoLongitude or geoLatitude from query param mapPoint string geoLatitude=19.07340857684426&geoLongitude=72.87765506654978
+ * @param query mapPoint
+ * @param variable geoLongitude or geoLatitude
+* */
 function getQueryVariable(query, variable) {
   if (!query) {
     return null;
@@ -321,7 +321,11 @@ function getQueryVariable(query, variable) {
     }
   }
 }
-
+/**
+ * convert geoLongitude geoLatitude in string format to accept api DTO
+ * @param mode string single_tree or multiple_trees
+ * @param mapPoint array of coordinate of longitude and latitude
+ * */
 export function encodeFormData(mode, mapPoint) {
   debug('Data in polygon', mapPoint);
 
@@ -345,11 +349,6 @@ export function encodeFormData(mode, mapPoint) {
         return data;
       });
       debug('polygon', polygon);
-
-      /* const data = mapPoint.coordinates.map(cord => {
-         return [cord.latitude, cord.longitude];
-       });
-       data.push(data[0]);*/
       return {
         type: 'Polygon',
         coordinates: polygon
@@ -360,7 +359,11 @@ export function encodeFormData(mode, mapPoint) {
     return null;
   }
 }
-
+/**
+ * convert string to data object that map accept
+ * @param mode string single_tree or multiple_trees
+ * @param mapPoint string of data that we get from api or in string format
+ * */
 export function decodeFormData(mode, mapPoint) {
   if (!mapPoint) {
     return null;
@@ -377,30 +380,6 @@ export function decodeFormData(mode, mapPoint) {
           }
         }
       ];
-      // return point;
-    } else if (
-      mode === 'multiple-trees' &&
-      mapPoint &&
-      mapPoint.length &&
-      mapPoint.type === 'Polygon'
-    ) {
-      /*const polygon = mapPoint.coordinates.map((items, index) => {
-        const data = items.map(item => {
-          return {
-            latitude: item[0],
-            longitude: item[1]
-          };
-        })
-
-        return data;
-      })*/
-      /*item.coordinates = mapPoint.coordinates[0].map(items => {
-        return {
-          latitude: items[0],
-          longitude: items[1]
-        };
-      });*/
-      return null;
     }
   }
   return mode === 'single-tree' ? [] : null;
@@ -451,7 +430,6 @@ class NativeMapView extends Component {
   }
 
   onPropsUpdate = nextProps => {
-    // if (!nextProps.fullScreen) {
     const { geoLocation, mode, geometry } = nextProps;
     const marker =
       this.isSingleTree && geoLocation
@@ -482,10 +460,7 @@ class NativeMapView extends Component {
         }, 1000);
       }
     );
-    debug(' nextProps.address', nextProps.address);
     nextProps.address && this.ref && this.ref.setAddressText(nextProps.address);
-
-    // }
   };
 
   onDoublePress = e => {
@@ -494,12 +469,16 @@ class NativeMapView extends Component {
     }
     return null;
   };
-
+  /**
+   * if(!this.props.fullScreen) open map in full screen
+   * */
   onPress(e) {
-    // const isSingleTree = this.props.mode === 'single-tree';
     if (!this.props.fullScreen && this.props.onPress) {
       this.props.onPress(e);
     } else if (!this.isSingleTree) {
+      /**
+       * this for multiple tree we are currently using single tree flow in feature we are planning to add multiple marker for multiple tree
+       * */
       const { editing, creatingHole } = this.state;
       if (!editing) {
         debug('clicked map');
@@ -534,19 +513,36 @@ class NativeMapView extends Component {
       }
     }
   }
-
+  /**
+   * change position to specific region or location
+   * @param location object of region = {
+        latitude: ....,
+        longitude: ...,
+        latitudeDelta: .....,
+        longitudeDelta: ....
+      }
+    * @param address string set textfield value of GooglePlacesAutocomplete address
+   * @param isFromTextInput bool if(isFromTextInput) set change state value of address that we will pass in parent components
+   * */
   gotoCurrentLocation = (location, address = null, isFromTextInput = false) => {
     if (address && isFromTextInput) {
       this.setState({
         address
       });
     }
+    /**
+     * change position of map to givin region or location
+     * */
     if (this.map && location) {
       setTimeout(() => {
         this.map && this.map.animateToRegion(location);
       }, 1000);
     }
   };
+
+  /**
+   * for multiple tree to add multiple polygon on map
+   * */
   addPolygon = () => {
     const { polygons, editing } = this.state;
     this.setState({
@@ -555,8 +551,16 @@ class NativeMapView extends Component {
       creatingHole: false
     });
   };
+
+  /**
+   * Callback that is called continuously when the region changes, such as when a user is dragging the map.
+   * if map is full screen and it's single tree
+   * */
   onRegionChange = region => {
     if (this.props.fullScreen && this.isSingleTree) {
+      /**
+       * set region object that data we will send to parent props
+       * */
       this.setState({
         region: {
           latitude: region.latitude,
@@ -565,9 +569,11 @@ class NativeMapView extends Component {
           longitudeDelta: LONGITUDE_DELTA
         }
       });
+      /**
+       * set Marker array on map
+       * */
       this.setState({
         markers: [
-          // ...this.state.markers,
           {
             coordinate: {
               latitude: region.latitude,
@@ -581,33 +587,38 @@ class NativeMapView extends Component {
   };
 
   renderPolygon() {
+    /**
+     * @property mapOptions used to configure map option
+     * {showsUserLocation} If true the app will ask for the user's location.
+     * */
     const mapOptions = {
-      // scrollEnabled: this.props.fullScreen,
-      // cacheEnabled: !this.props.fullScreen,
-      // liteMode: !this.props.fullScreen,
-      // rotateEnabled: this.props.fullScreen,
-      // zoomEnabled: this.props.fullScreen,
-      // loadingEnabled: false,
       showsUserLocation: false,
-      mapType: this.props.mapType
     };
     const {
       editing,
       region: { latitude, longitude }
     } = this.state;
-
+    /**
+     * drow polygon for multiple tree
+     * */
     if (editing) {
       mapOptions.scrollEnabled = false;
       mapOptions.onPanDrag = e => this.onPress(e);
     }
+    /**
+     * set initial region on map
+     * */
     if (latitude && longitude) {
       mapOptions.initialRegion = {
         ...this.state.region
       };
+
     }
     const screen = Dimensions.get('window');
     const mapPaddingTop = screen.height * 0.1;
-
+    /**
+     * set mapPadding for set position of google logo on screen
+     * */
     const setMapPadding = () => {
       const iosEdgePadding = {
         top: mapPaddingTop * 0.5,
@@ -633,25 +644,19 @@ class NativeMapView extends Component {
         Platform.OS === 'android' ? androidEdgePadding : iosEdgePadding;
       return edgePadding;
     };
-    debug(
-      'this.props.mapStyle',
-      this.props.mapStyle,
-      { width: this.state.width, marginBottom: this.state.mapMargin },
-      setMapPadding(),
-      mapStyle
-    );
+    /**
+     * for more information refer https://github.com/react-native-community/react-native-maps
+     *
+     * */
     return (
       <MapView
-        //mapType={'satellite'}
         ref={ref => (this.map = ref)}
         provider={PROVIDER_GOOGLE}
-        // provider={this.props.provider}
         style={[
           this.props.mapStyle,
           { width: this.state.width, marginBottom: this.state.mapMargin }
         ]}
-        mapPadding={setMapPadding()} //!this.props.fullScreen ? {top:0,right:0,left:0,bottom:Platform.OS === 'ios' ? Dimensions.get('window').height * (0.03): -30} : {top:0,right:0,left:0,bottom:Dimensions.get('window').height * (0.1),}}
-        // initialRegion={this.state.region}
+        mapPadding={setMapPadding()}
         onPress={e => this.onPress(e)}
         onMapReady={() => this.setState({ width: screen.width })}
         onDoublePress={e => this.onDoublePress(e)}
@@ -683,12 +688,13 @@ class NativeMapView extends Component {
             tappable
           />
         )}
-
+        {/**
+         * render marker on map
+         */}
         {!this.props.fullScreen &&
           this.props.mode === 'single-tree' &&
           this.state.markers.map(marker => (
             <Marker
-              // image={markerImage}
               key={marker.key || 0}
               coordinate={marker.coordinate}
             >
@@ -707,7 +713,6 @@ class NativeMapView extends Component {
           this.state.editing &&
           this.state.editing.coordinates.map((marker, index) => (
             <Marker
-              // image={markerImage}
               key={index}
               coordinate={marker}
             >
@@ -731,6 +736,10 @@ class NativeMapView extends Component {
       editing: null
     });
   };
+
+  /**
+   * move map to user current location
+   * */
   goto = () => {
     if (!this.props.fullScreen) {
       if (this.props.onPress) {
@@ -740,6 +749,9 @@ class NativeMapView extends Component {
       this.getMyLocation();
     }
   };
+  /**
+   * set map view to current location
+   * */
   gotoLocation = () => {
     if (
       !this.props.fullScreen &&
@@ -762,7 +774,9 @@ class NativeMapView extends Component {
       this.getMyLocation();
     }
   };
-
+  /**
+   * get current position of user
+   * */
   getMyLocation = () => {
     request(
       Platform.select({
@@ -770,7 +784,6 @@ class NativeMapView extends Component {
         ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
       })
     ).then((/*response*/) => {
-      debug('Location=====>', Geolocation);
       setTimeout(() => {
         Geolocation.getCurrentPosition(
           location => {
@@ -824,7 +837,9 @@ class NativeMapView extends Component {
       }, 1000);
     });
   };
-
+/**
+ * render full screen map small map
+ * */
   renderComp = render => {
     const { fullScreen, onPress } = this.props;
     if (!fullScreen) {
@@ -863,8 +878,6 @@ class NativeMapView extends Component {
         onFocus: onPress,
         pointerEvents: 'none'
       };
-    // inputProps.style = styles.inputStyle
-    // const isSingleTree = this.props.mode === 'single-tree';
     return this.renderComp(
       <View style={fullScreen ? styles.fullScreenContainer : styles.container}>
         {this.renderPolygon()}
@@ -890,6 +903,11 @@ class NativeMapView extends Component {
                     : styles.inputContainer
                 }
               >
+                {/**
+                 * for more info https://github.com/FaridSafi/react-native-google-places-autocomplete
+                 * @property listViewDisplayed display result in list view
+                 * @property fetchDetails fetch details from googlePlaceApi
+                 */}
                 <GooglePlacesAutocomplete
                   listViewDisplayed={this.state.shouldDisplayListView}
                   keyboardShouldPersistTaps={'always'}
@@ -941,15 +959,15 @@ class NativeMapView extends Component {
                       display: 'none'
                     }
                   }}
-                  debounce={200}
-                  nearbyPlacesAPI="GooglePlacesSearch"
+                  debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
+                  nearbyPlacesAPI="GooglePlacesSearch" //Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
                   query={{
                     // available options: https://developers.google.com/places/web-service/autocomplete
                     key: googleMapApiKey,
                     language: i18n.language // language of the results
                   }}
-                  currentLocation={false}
-                  renderLeftButton={() => (
+                  currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
+                  renderLeftButton={() => ( //searchIcon
                     <Image
                       source={iosSearchGrey}
                       style={{
@@ -962,9 +980,6 @@ class NativeMapView extends Component {
                     />
                   )}
                   onPress={(data, details = null) => {
-                    // 'details' is provided when fetchDetails = true
-                    debug('Details===>', details);
-                    debug('Data===>', data);
                     this.gotoCurrentLocation(
                       {
                         latitude: details.geometry.location.lat,
@@ -983,8 +998,10 @@ class NativeMapView extends Component {
             </TouchableWithoutFeedback>
           )
           : null}
-
-        {!!(this.state.markers.length || this.state.editing) &&
+          {/**
+           * for multiple trees add multiple polygon
+           */}
+          {!!(this.state.markers.length || this.state.editing) &&
           !this.isSingleTree && (
             <RoundedButton
               buttonStyle={
@@ -996,6 +1013,9 @@ class NativeMapView extends Component {
               <Icon name="plus" size={fullScreen ? 24 : 18} color="#000000" />
             </RoundedButton>
           )}
+          {/**
+           * remove button to remove polygon on map
+           */}
         {!!(this.state.markers.length || this.state.editing) &&
           !this.isSingleTree && (
             <RoundedButton
@@ -1008,6 +1028,10 @@ class NativeMapView extends Component {
               <Icon name="delete" size={fullScreen ? 24 : 18} color="#000000" />
             </RoundedButton>
           )}
+
+          {/**
+           * current location button
+          */}
         {fullScreen && (
           <RoundedButton
             buttonStyle={
@@ -1023,7 +1047,11 @@ class NativeMapView extends Component {
             />
           </RoundedButton>
         )}
-
+        {/**
+         * continue button for fullscreen map
+         * @function onContinue send data to parent components
+         * {encodeFormData} convert object into string that api accept
+         */}
         {fullScreen && (
           <TouchableOpacity
             style={[
@@ -1052,7 +1080,6 @@ class NativeMapView extends Component {
             </View>
           </TouchableOpacity>
         )}
-        {debug('this.ref', this.ref)}
       </View>
     );
   }

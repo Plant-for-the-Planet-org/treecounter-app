@@ -1,0 +1,140 @@
+name: iOS build on MacOS
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    timeout-minutes: 30
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v2
+
+    - name: Select Xcode
+      run: |
+        echo "Default version:" `xcode-select -p`
+        sudo xcode-select -s /Applications/Xcode_11.4.1.app
+        echo "Selected version:" `xcode-select -p`
+
+    - name: Check versions
+      run: |
+        echo "Xcode version:"
+        xcodebuild -version
+        echo "Pod version:"
+        pod --version
+        echo "Brew version:"
+        brew --version
+        echo "Node version:"
+        npm --version
+        echo "PATH:"
+        echo $PATH
+
+    - name: Installing Gettext for envsubst command
+      run: |
+        echo $PATH
+        brew reinstall gettext
+
+    - name: Caching node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install npm
+      run : |
+        npm install
+
+    - name: Setting Environment Variables
+      env:
+        googleMapApiKey: ${{ secrets.GOOGLE_MAP_API_KEY }}
+        mediaPath: /media/cache
+        scheme: https
+        host: development.trilliontreecampaign.org
+        api_url: https://app-development.plant-for-the-planet.org
+        base:
+        debug: true
+        currency: EUR
+        mapIdsInventory: dee6acf9de774fe6878813f707b4ab88
+        bugsnagApiKey: ${{ secrets.BUGSNAG_API_KEY }}
+        androidAppId: org.pftp
+        iosAppId: 1444740626
+        locationApikKey: ${{ secrets.LOCATION_API_KEY }}
+        env: develop
+      run: |
+        /usr/local/opt/gettext/bin/envsubst < .env.deploy > .env.develop
+        cp .env.develop .env
+
+# Currently not yet supported different flavors
+    # - name: Overide Environment if Master Branch
+    #   if: endsWith(github.ref, '/master')
+    #   run: |
+    #     echo "::set-env name=host::https://www.trilliontreecampaign.org";
+    #     echo "::set-env name=api_url::https://app.plant-for-the-planet.org";
+    #     echo "::set-env name=mapIdsInventory::534da741b327459eb117f4cc93acd98e";
+    #     echo "::set-env name=debug::false";
+    #     echo "::set-env name=env::production";
+    #     envsubst < .env.deploy > .env.production
+    #     cp .env.production .env
+    #
+    # - name: Overide Environment if Staging Branch
+    #   if: endsWith(github.ref, '/staging')
+    #   run: |
+    #     echo "::set-env name=host::https://staging.trilliontreecampaign.org";
+    #     echo "::set-env name=api_url::https://app-staging.plant-for-the-planet.org";
+    #     echo "::set-env name=mapIdsInventory::dee6acf9de774fe6878813f707b4ab88";
+    #     echo "::set-env name=debug::true";
+    #     echo "::set-env name=env::staging";
+    #     envsubst < .env.deploy > .env.staging
+    #     cp .env.staging .env
+
+    - name: Listing Environment Variables
+      run: cat .env
+
+    - name: Caching Pods
+      uses: actions/cache@v1
+      with:
+        path: ios/Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile*') }}
+        restore-keys: |
+          ${{ runner.os }}-pods-
+
+    - name: Install Pods
+      run: pod install
+      working-directory: ./ios
+
+    - name: Preparing build
+      env:
+        PROVISIONING_PASSWORD: ${{ secrets.IOS_PROVISIONING_PASSWORD }}
+      run: |
+        ./release/prepare_macos_ios_signing.sh
+
+    - name: Build archive
+      run: |
+        xcodebuild -sdk iphoneos -workspace TreecounterApp.xcworkspace \
+        -configuration Release -scheme 'TreecounterApp(.env.develop)' \
+        -derivedDataPath DerivedData \
+        -archivePath DerivedData/Archive/TreecounterAppDevelop archive
+      working-directory: ./ios
+
+    - name: Export Archive
+      run: |
+        xcodebuild -exportArchive \
+        -archivePath DerivedData/Archive/TreecounterAppDevelop.xcarchive \
+        -exportOptionsPlist ../release/Develop-Store.plist \
+        -exportPath DerivedData/ipa
+      working-directory: ./ios
+
+    - name: Upload iOS IPA file
+      uses: actions/upload-artifact@v1
+      with:
+        name: TreecounterApp-develop-release.ipa
+        path: ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa
+

@@ -61,7 +61,7 @@ const schemaOptionsSingle = {
   template: formLayoutSingleTree,
   ...schemaOptionsSingleTree
 };
-
+console.log('schemaOptionsSingle',schemaOptionsSingle)
 const schemaOptionsMultiple = {
   template: formLayoutMultipleTrees,
   ...schemaOptionsMultipleTrees

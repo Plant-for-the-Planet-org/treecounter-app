@@ -53,6 +53,7 @@ export default {
               type: 'string',
               title: 'label.upload_profile_picture',
               widget: 'file',
+              category:'contribution',
               icon: null,
               help: null,
               propertyOrder: 1
@@ -186,6 +187,7 @@ export default {
               title: 'label.upload_profile_picture',
               widget: 'file',
               icon: null,
+              category:'contribution',
               help: null,
               propertyOrder: 1
             }

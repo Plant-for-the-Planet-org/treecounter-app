@@ -222,7 +222,7 @@ export function mergeContributionImages(updatedTreeContribution) {
         'base64'
       )
     ) {
-      let { imageFile } = newContributionImage;
+      let imageFile  = newContributionImage.image || newContributionImage.imageFile;
       return newContributionImage.id
         ? { imageFile, id: newContributionImage.id }
         : { imageFile };

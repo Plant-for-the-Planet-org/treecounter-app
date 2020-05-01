@@ -14,7 +14,6 @@ const config = {
   //   }
   // }
 };
-
 const {
   transformedSchema: singleTreeRegisterFormSchema,
   schemaOptions: schemaOptionsSingleTree

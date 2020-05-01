@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
-import { FlatList, Image, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  Switch,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import Modal from 'react-native-modalbox';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { getCountryFlagImageUrl, getImageUrl } from '../../../actions/apiRouting';
+import {
+  getCountryFlagImageUrl,
+  getImageUrl
+} from '../../../actions/apiRouting';
 import { infoHint, nextArrowWhite } from '../../../assets';
 import countryData from '../../../assets/countryCodes.json';
 import styles from '../../../styles/donations/donationDetails';
 import { formatNumber } from '../../../utils/utils';
+import CurrencySelectorList from '../../Common/CurrencySelectorList.native';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 
 export function TaxReceipt(props) {
@@ -44,8 +56,8 @@ export function TaxReceipt(props) {
             <Icon name={'chevron-down'} size={14} color="#89b53a" />
           </TouchableOpacity>
         ) : (
-            <SelectedCountryText />
-          )}
+          <SelectedCountryText />
+        )}
       </View>
 
       <Switch
@@ -173,8 +185,8 @@ export function SelectCountryModal(props) {
           {searchText ? (
             <MaterialIcon name="arrow-back" size={30} color="black" />
           ) : (
-              <MaterialIcon name="close" size={30} color="#4d5153" />
-            )}
+            <MaterialIcon name="close" size={30} color="#4d5153" />
+          )}
         </TouchableOpacity>
         {/* <View
           style={{
@@ -234,7 +246,6 @@ export function CoverFee(props) {
 }
 
 export function PaymentOption(props) {
-
   let frequencyOptions = [
     { label: 'One time Donation', value: 'once' },
     { label: 'Monthly Donation', value: 'monthly' },
@@ -245,7 +256,7 @@ export function PaymentOption(props) {
     once: 'One time Donation',
     monthly: 'Monthly Donation',
     yearly: 'Yearly Donation'
-  }
+  };
 
   return (
     <View style={styles.bottomButtonView}>
@@ -257,7 +268,7 @@ export function PaymentOption(props) {
                 {formatNumber(
                   props.commissionSwitch
                     ? props.treeCost * props.treeCount +
-                    ((props.treeCount / 100) * 2.9 + 0.3)
+                        ((props.treeCount / 100) * 2.9 + 0.3)
                     : props.treeCost * props.treeCount,
                   null,
                   props.selectedCurrency
@@ -278,8 +289,8 @@ export function PaymentOption(props) {
             </View>
           </>
         ) : (
-            <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
-          )}
+          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
+        )}
       </View>
       {props.treeCount ? (
         <TouchableOpacity
@@ -294,15 +305,15 @@ export function PaymentOption(props) {
           />
         </TouchableOpacity>
       ) : (
-          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-            <Text style={styles.continueButtonText}>Next</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
-              source={nextArrowWhite}
-              resizeMode="contain"
-            />
-          </View>
-        )}
+        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+        </View>
+      )}
     </View>
   );
 }
@@ -355,6 +366,26 @@ export function SelectFrequency(props) {
 }
 
 export function PlantProjectDetails(props) {
+  const [showCurrencyModal, setShowCurrencyModal] = useState(false);
+  const [selectedCurrency, setSelectedCurrency] = useState(
+    props.selectedCurrency
+  );
+  const [treeCost, setTreeCost] = useState(props.treeCost);
+
+  const handleCurrencyChange = currency => {
+    setSelectedCurrency(currency);
+    setShowCurrencyModal(false);
+    setTreeCost(calculateAmount(currency));
+  };
+
+  // This function takes the tree Count and calculates the total amount
+  const calculateAmount = currency => {
+    return (
+      Math.round(props.treeCost * parseFloat(props.rates[currency]) * 100) /
+        100 +
+      props.fee
+    );
+  };
   return (
     <View style={styles.projectDetails}>
       <Image
@@ -366,25 +397,28 @@ export function PlantProjectDetails(props) {
       <View style={styles.projectNameAmount}>
         <Text style={styles.projectName}>{props.selectedProject.name}</Text>
         <View style={styles.projectAmountView}>
-
-
           <TouchableOpacity
-            // @ankit add function here
+            onPress={() => setShowCurrencyModal(true)}
             style={{ flexDirection: 'row', alignItems: 'center' }}
           >
             <Text style={styles.isTaxDeductibleCountry}>
-              {props.selectedCurrency}
+              {selectedCurrency}
             </Text>
             <Icon name={'chevron-down'} size={14} color="#89b53a" />
           </TouchableOpacity>
 
           {/* <Image style={styles.projectAmountImage} source={currencyIcon} /> */}
           <Text style={styles.projectAmountText}>
-            {formatNumber(props.treeCost, null, props.selectedCurrency)} per
-            tree
+            {formatNumber(treeCost, null, selectedCurrency)} per tree
           </Text>
         </View>
       </View>
+      <CurrencySelectorList
+        hideCurrencyModal={() => setShowCurrencyModal(false)}
+        show={showCurrencyModal}
+        handleCurrencyChange={handleCurrencyChange}
+        selectedCurrency={selectedCurrency}
+      />
     </View>
   );
 }
@@ -481,16 +515,16 @@ export function SelectTreeCount(props) {
           </Text>
         </View>
       ) : (
-          <TouchableOpacity
-            onPress={() => {
-              setCustomTreeCount(true);
-              props.setTreeCount(tempTreeCount);
-            }}
-            style={styles.customSelectorView}
-          >
-            <Text style={styles.customTreeCountText}>Custom Trees</Text>
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity
+          onPress={() => {
+            setCustomTreeCount(true);
+            props.setTreeCount(tempTreeCount);
+          }}
+          style={styles.customSelectorView}
+        >
+          <Text style={styles.customTreeCountText}>Custom Trees</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -549,8 +583,8 @@ export const UserContactDetails = props => {
           {donorDetails.firstName ? (
             <Text style={styles.sectionRightButton}>Edit</Text>
           ) : (
-              <Text style={styles.sectionRightButton}>Add</Text>
-            )}
+            <Text style={styles.sectionRightButton}>Add</Text>
+          )}
         </TouchableOpacity>
       </View>
       {donorDetails.firstName ? (

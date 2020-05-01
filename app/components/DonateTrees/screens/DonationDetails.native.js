@@ -1,17 +1,31 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animated, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Animated,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
+import { paymentFee } from '../../../helpers/utils';
 import styles from '../../../styles/donations/donationDetails';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
-import { NoPlantProjectDetails, PaymentOption, PlantProjectDetails, SelectCountryModal, SelectFrequency, SelectTreeCount, SupportUserDetails, TaxReceipt } from '../components/donationComponents.native';
+import {
+  NoPlantProjectDetails,
+  PaymentOption,
+  PlantProjectDetails,
+  SelectCountryModal,
+  SelectFrequency,
+  SelectTreeCount,
+  SupportUserDetails,
+  TaxReceipt
+} from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
 
-
 function DonationDetails(props) {
-
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
   const [treeCount, setTreeCount] = React.useState(''); // for Selecting Tree Count
@@ -39,16 +53,28 @@ function DonationDetails(props) {
   let context = { ...props.context };
 
   // this is to redraw the form after you change project or cancel project selected on details page on project
-  if (context.donationDetails.totalTreeCount && context.donationDetails.totalTreeCount != treeCount) {
+  if (
+    context.donationDetails.totalTreeCount &&
+    context.donationDetails.totalTreeCount != treeCount
+  ) {
     setTreeCount(context.donationDetails.totalTreeCount);
   }
-  if (context.donationDetails.frequency && context.donationDetails.frequency != frequency) {
+  if (
+    context.donationDetails.frequency &&
+    context.donationDetails.frequency != frequency
+  ) {
     setFrequency(context.donationDetails.frequency);
   }
-  if (context.donationDetails.taxReceiptSwitch && context.donationDetails.taxReceiptSwitch != taxReceiptSwitch) {
+  if (
+    context.donationDetails.taxReceiptSwitch &&
+    context.donationDetails.taxReceiptSwitch != taxReceiptSwitch
+  ) {
     setTaxReceiptSwitch(context.donationDetails.taxReceiptSwitch);
   }
-  if (context.donationDetails.countryForTax && context.donationDetails.countryForTax != countryForTax) {
+  if (
+    context.donationDetails.countryForTax &&
+    context.donationDetails.countryForTax != countryForTax
+  ) {
     setSelectedTaxCountry(context.donationDetails.countryForTax);
   }
 
@@ -62,9 +88,8 @@ function DonationDetails(props) {
         countryForTax: countryForTax,
         selectedProject: props.selectedProject
       });
-
     }
-  }
+  };
   const onContinue = () => {
     // Set Donation Details and then switch the page
     if (context.contextType === 'direct') {
@@ -83,7 +108,6 @@ function DonationDetails(props) {
         show={showProjectModal}
         navigation={props.navigation}
         handleProjectChange={project => {
-
           setProjectModal(false);
         }}
         context={context}
@@ -127,10 +151,16 @@ function DonationDetails(props) {
             treeCost={props.selectedProject.treeCost}
             selectedCurrency={props.selectedCurrency}
             selectedProject={props.selectedProject}
+            rates={
+              props.currencies.currencies.currency_rates[
+                props.selectedProject.currency
+              ].rates
+            }
+            fee={paymentFee}
           />
         ) : (
-            <NoPlantProjectDetails />
-          )}
+          <NoPlantProjectDetails />
+        )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -148,14 +178,14 @@ function DonationDetails(props) {
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-          context.contextType === 'gift-invitation' ? (
-            <GiftTreesComponent
-              treeCount={treeCount}
-              setTreeCount={setTreeCount}
-              selectedProject={props.selectedProject}
-              context={context}
-            />
-          ) : null}
+        context.contextType === 'gift-invitation' ? (
+          <GiftTreesComponent
+            treeCount={treeCount}
+            setTreeCount={setTreeCount}
+            selectedProject={props.selectedProject}
+            context={context}
+          />
+        ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
         <View style={[styles.horizontalDivider, { width: '14%' }]} />

@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animated, Platform, ScrollView, StatusBar, Text, View } from 'react-native';
+import {
+  Animated,
+  Platform,
+  ScrollView,
+  StatusBar,
+  Text,
+  View
+} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loadProject } from '../../actions/loadTposAction';
@@ -76,7 +83,6 @@ class PlantProjectFull extends React.Component {
   }
   render() {
     let { plantProject } = this.props;
-
     if (!plantProject || !plantProject.tpoData) return <LoadingIndicator />;
     debug('rendering with project:', plantProject);
     const {
@@ -134,7 +140,7 @@ class PlantProjectFull extends React.Component {
             '/' +
             this.props.plantProject.id
           }
-        //  appurl={'weplant://project/' + this.props.plantProject.id}
+          //  appurl={'weplant://project/' + this.props.plantProject.id}
         />
         <ScrollView
           contentContainerStyle={[
@@ -197,16 +203,18 @@ class PlantProjectFull extends React.Component {
               onClick={() => this.props.selectProject(plantProject.id)}
               image={right_arrow_button}
             >
-              {!this.props.donationContext.selectedProject ? i18n.t('label.donate') : i18n.t('label.select_project')}
+              {!this.props.donationContext.selectedProject
+                ? i18n.t('label.donate')
+                : i18n.t('label.select_project')}
             </FullHeightButton>
           </View>
         ) : null}
       </View>
     ) : (
-        <View style={{ flex: 1, marginTop: -20 }}>
-          <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
-        </View>
-      );
+      <View style={{ flex: 1, marginTop: -20 }}>
+        <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
+      </View>
+    );
   }
 }
 

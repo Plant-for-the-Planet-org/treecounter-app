@@ -11,6 +11,7 @@ export default function DonateTrees(props) {
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       <DonationDetails
+        currencies={props.currencies}
         selectedProject={selectedProject}
         selectedCurrency={props.determineDefaultCurrency()}
         treeCountOptions={

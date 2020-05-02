@@ -56,7 +56,7 @@ const refreshTokenIfExpired = async () => {
       if (response.data) {
         const newToken = response.data.token;
         // refresh_token does not seem to be part of the result of api/token/refresh any more
-        const refreshToken = response.data.refresh_token || prev_refresh_token;
+        const refreshToken = response.data.refresh_token || prev_refresh_token;
         updateJWT(newToken, refreshToken);
         return newToken;
       }

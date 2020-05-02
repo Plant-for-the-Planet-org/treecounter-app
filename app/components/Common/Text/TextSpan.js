@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import TransparentButton from '../Button/TransparentButton';
 
 const TextSpan = ({ onPress, children, strong }) => (
-  <div className={'pftp-text-span ' + (strong ? 'bold' : '')}
-    onClick={() => onPress()}
-  >
+  <div className={'pftp-text-span ' + (strong ? 'bold' : '')}>
     {onPress ?
       <TransparentButton onClick={onPress}>
         {children}

@@ -372,7 +372,7 @@ class CompetitionFull extends React.Component {
                                 {i18n.t('label.donate_now')}
                               </Text>
                             </TouchableOpacity>) :
-                            competitionDetail.filterType === 'registered' ?
+                            competitionDetail.filterType === 'plantings' ?
                               (<TouchableOpacity
                                 style={{ width: '100%' }}
                                 onPress={() =>

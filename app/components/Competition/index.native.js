@@ -16,7 +16,7 @@ import buttonStyles from '../../styles/common/button.native';
 import styles from '../../styles/common/tabbar.native';
 import colors from '../../utils/constants';
 import HeaderStatic from './../Header/HeaderStatic';
-import CommonCompetitionTab from './Tabs/commonTab.native'; // Shows my competitions
+import CommonCompetitionTab from './screens/CompetitionsList.native'; // Shows my competitions
 
 const height = Dimensions.get('window').height;
 
@@ -40,7 +40,6 @@ class Competiton extends React.Component {
   _handleIndexChange = index => {
     this.setState({ index });
   };
-
 
   // Tabbar represents the top header with the different tab items
   _renderTabBar = props => {

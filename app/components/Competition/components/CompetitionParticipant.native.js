@@ -40,7 +40,8 @@ class CompetitionParticipant extends React.Component {
 
     if (
       this.props.type === 'participants' &&
-      this.props.competitor.treecounterSlug === this.props.treeCounter.slug
+      this.props.competitor.treecounterSlug === this.props.treeCounter.slug &&
+      !this.props.isCompetitionOwner
     ) {
       support_button = (
         <View style={snippetStyles.topCompetitorScore}>

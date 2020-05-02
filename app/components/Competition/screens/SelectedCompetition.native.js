@@ -89,7 +89,7 @@ class CompetitionFull extends React.Component {
         }
       }
     }
-
+    let isCompetitionOwner = false;
     if (
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
@@ -104,6 +104,7 @@ class CompetitionFull extends React.Component {
           <Text> {i18n.t('label.edit')}</Text>
         </PrimaryButton>
       );
+      isCompetitionOwner = true;
       if (status === '') {
         button2 = (
           <PrimaryButton
@@ -427,6 +428,7 @@ class CompetitionFull extends React.Component {
                                   key={index}
                                   status={status}
                                   competitionEnded={competitionEnded}
+                                  isCompetitionOwner={isCompetitionOwner}
                                 />
                               ) : null
                             )}

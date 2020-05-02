@@ -154,17 +154,21 @@ export function getDateFromMySQL(dateTime) {
 export function formatDateToMySQL(date) {
   debug('formatDateToMySQL', date);
 
-  let dd = date.getDate();
-  let mm = date.getMonth() + 1; //January is 0!
-  let yyyy = date.getFullYear();
-  if (dd < 10) {
-    dd = '0' + dd;
-  }
-  if (mm < 10) {
-    mm = '0' + mm;
-  }
+  try {
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1; //January is 0!
+    let yyyy = date.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
 
-  date = yyyy + '-' + mm + '-' + dd;
+    date = yyyy + '-' + mm + '-' + dd;
+  } catch (err) {
+    // debug(err);
+  }
   return date;
 }
 

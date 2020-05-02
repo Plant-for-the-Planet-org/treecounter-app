@@ -270,7 +270,7 @@ class TreeCounter extends Component {
             />
             <PrivateRoute
               path={
-                getLocalRoute('app_challengeResponse') + '/active' + '/:token'
+                getLocalRoute('app_challengeResponse') + '/accept' + '/:token'
               }
               component={RedirectedPrivateAcceptEmail}
             />

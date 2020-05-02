@@ -242,8 +242,7 @@ export default EStyleSheet.create({
   },
   googleCardTitle: {
     fontSize: 17,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-SemiBold',
     lineHeight: 23,
     letterSpacing: 0,
     textAlign: 'left',
@@ -251,8 +250,7 @@ export default EStyleSheet.create({
   },
   googleCardPara: {
     fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Regular',
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',
@@ -262,8 +260,7 @@ export default EStyleSheet.create({
   },
   googleCardButton: {
     fontSize: 14,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-SemiBold',
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',

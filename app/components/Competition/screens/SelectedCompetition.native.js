@@ -1,7 +1,7 @@
 /* eslint-disable no-prototype-builtins */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { debug } from '../../../debug';
 import { getImageUrl } from '../../../actions/apiRouting';
 import styles from '../../../styles/competition/competition-full.native';
@@ -15,7 +15,7 @@ import {
   userTreecounterSelector
 } from '../../../selectors';
 import CompetitionProgressBar from './../components/CompetitionProgressBar';
-import { compCalendar, email } from '../../../assets';
+import { compCalendar, email, trees } from '../../../assets';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import CompetitionParticipant from '../components/CompetitionParticipant.native';
 import SearchUser from '../../Challenge/Tabs/SearchUser.native';
@@ -327,36 +327,67 @@ class CompetitionFull extends React.Component {
                   </View>
 
                   {/* Donate Card */}
-                  {/* <CardLayout style={[snippetStyles.cardContainer]}>
-                <Text
-                  style={[snippetStyles.googleCardTitle, { textAlign: 'left' }]}
-                >
-                  {i18n.t('label.plant_trees')}
-                </Text>
-                <View style={snippetStyles.googleCardParaContainer}>
-                  <Text style={snippetStyles.googleCardPara}>
-                    {i18n.t(
-                      'This competition supports Yucatation Reforestation by Plant -for-the-Planet'
-                    )}
-                  </Text>
-                  <Image
-                    source={trees}
-                    style={{ height: 60, flex: 1 }}
-                    resizeMode="contain"
-                  />
-                </View>
-                <View style={snippetStyles.horizontalLine} />
-                <TouchableOpacity
-                  style={{ width: '100%' }}
-                  onPress={() =>
-                    navigation.navigate(getLocalRoute('app_donateTrees'))
-                  }
-                >
-                  <Text style={snippetStyles.googleCardButton}>
-                    {i18n.t('Donate Now')}
-                  </Text>
-                </TouchableOpacity>
-              </CardLayout> */}
+                  {competitionDetail ? (
+                    <CardLayout style={[snippetStyles.cardContainer]}>
+                      <Text style={[snippetStyles.googleCardTitle, { textAlign: 'left' }]}>
+                        {i18n.t('label.support_comp_trees')}
+                      </Text>
+                      <View style={snippetStyles.googleCardParaContainer}>
+                        <Text style={snippetStyles.googleCardPara}>
+                          {
+                            competitionDetail.filterType === 'all' ? i18n.t('label.if_all_project_msg') :
+                              competitionDetail.filterType === 'donations' ? i18n.t('label.donation_only_msg') :
+                                competitionDetail.filterType === 'registered' ? i18n.t('label.register_only_msg') : null
+                          }
+                          {}
+                        </Text>
+                        <Image
+                          source={trees}
+                          style={{ height: 60, flex: 1 }}
+                          resizeMode="contain"
+                        />
+                      </View>
+                      <View style={snippetStyles.horizontalLine} />
+
+                      {
+                        competitionDetail.filterType === 'all' ?
+                          (<TouchableOpacity
+                            style={{ width: '100%' }}
+                            onPress={() =>
+                              navigation.navigate(getLocalRoute('app_donateTrees'))
+                            }
+                          >
+                            <Text style={snippetStyles.googleCardButton}>
+                              {i18n.t('label.donate_now')}
+                            </Text>
+                          </TouchableOpacity>) :
+                          competitionDetail.filterType === 'donations' ?
+                            (<TouchableOpacity
+                              style={{ width: '100%' }}
+                              onPress={() =>
+                                navigation.navigate(getLocalRoute('app_donateTrees'))
+                              }
+                            >
+                              <Text style={snippetStyles.googleCardButton}>
+                                {i18n.t('label.donate_now')}
+                              </Text>
+                            </TouchableOpacity>) :
+                            competitionDetail.filterType === 'registered' ?
+                              (<TouchableOpacity
+                                style={{ width: '100%' }}
+                                onPress={() =>
+                                  navigation.navigate(getLocalRoute('app_registerTrees'))
+                                }
+                              >
+                                <Text style={snippetStyles.googleCardButton}>
+                                  {i18n.t('label.register_only')}
+                                </Text>
+                              </TouchableOpacity>) : null
+                      }
+
+                    </CardLayout>
+                  ) : null}
+
                   {/* Donate Card Ends */}
                 </View>
                 {/* Competition Information Ended  */}

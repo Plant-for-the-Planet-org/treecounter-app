@@ -13,8 +13,9 @@ class ArrowButton extends Component {
   }
 
   handleArrowButtonClick() {
-    this.setState({ toggle: !this.state.toggle });
-    this.props.onToggle(!this.state.toggle);
+    const toogle = !this.state.toggle;
+    this.setState({ toggle: toogle });
+    this.props.onToggle(toogle);
   }
 
   render() {

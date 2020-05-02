@@ -56,8 +56,8 @@ export default class ContributionCard extends React.Component {
           <TextSpan
             key={`donateActionLine_1`}
             onPress={() =>
-              updateRoute(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+              updateRoute('app_treecounter', null, null, {
+                treecounter: giveeSlug
               })
             }
           >
@@ -94,8 +94,8 @@ export default class ContributionCard extends React.Component {
           <TextSpan
             key={`dedicateActionLine_1`}
             onPress={() =>
-              updateRoute(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+              updateRoute('app_treecounter', null, null, {
+                treecounter: giveeSlug
               })
             }
           >
@@ -116,8 +116,8 @@ export default class ContributionCard extends React.Component {
           <TextSpan
             key={`redeemActionLine_1`}
             onPress={() =>
-              updateRoute(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug
+              updateRoute('app_treecounter', null, null, {
+                treecounter: giveeSlug
               })
             }
           >
@@ -138,8 +138,8 @@ export default class ContributionCard extends React.Component {
               <TextSpan
                 key={`redeemActionLine_3`}
                 onPress={() =>
-                  updateRoute(getLocalRoute('app_treecounter'), {
-                    treeCounterId: giveeSlug
+                  updateRoute('app_treecounter', null, null, {
+                    treecounter: giveeSlug
                   })
                 }
               >

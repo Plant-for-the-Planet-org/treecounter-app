@@ -45,7 +45,7 @@ class CompetitionContainer extends React.Component {
       };
       this.props
         .createCompetition(newvalue, this.props.navigation)
-        .then((/* success */) => {})
+        .then((/* success */) => { })
         .catch(err => {
           debug('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
@@ -85,7 +85,7 @@ class CompetitionContainer extends React.Component {
   };
 
   render() {
-    debug(this.props.contentloader, '**********************');
+    // debug(this.props.contentloader, '**********************');
     const { contentloader } = this.props;
     return !contentloader ? (
       <Competiton
@@ -107,8 +107,8 @@ class CompetitionContainer extends React.Component {
         }
       />
     ) : (
-      <LoadingIndicator contentLoader screen="Competition" />
-    );
+        <LoadingIndicator contentLoader screen="Competition" />
+      );
   }
 
   onMoreClick(id, name) {

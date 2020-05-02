@@ -121,6 +121,7 @@ const CommonTab = props => {
     );
   }, [props.competitionsArr]);
 
+
   const _keyExtractor = item => item.id.toString();
   const _renderItem = ({ item }) => (
     <CompetitionSnippet
@@ -171,6 +172,11 @@ const CommonTab = props => {
     );
   };
 
+  if (props.tabType === 'featured') {
+    console.log('Featured in tabs', showCompetitions.length)
+  }
+
+
   return (
     <FlatList
       data={showCompetitions}
@@ -185,8 +191,8 @@ const CommonTab = props => {
           ? isCompetitionFinished
             ? null
             : () => {
-                !isLoading && handleLoadMore();
-              }
+              !isLoading && handleLoadMore();
+            }
           : null
       }
       onEndReachedThreshold={0.05}

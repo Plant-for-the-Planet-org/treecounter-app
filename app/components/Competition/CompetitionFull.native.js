@@ -55,7 +55,6 @@ class CompetitionFull extends React.Component {
       ? competitionDetail.hasOwnProperty('allEnrollments')
       : false;
 
-    debug(' CompetitionFull ', competitionDetail);
     let participantCount = 0,
       requestCount = 0,
       // eslint-disable-next-line no-unused-vars
@@ -204,130 +203,130 @@ class CompetitionFull extends React.Component {
         {contentloader ? (
           <LoadingIndicator contentLoader screen={'SingleCompetition'} />
         ) : (
-          <KeyboardAwareScrollView
-            keyboardDismissMode="on-drag"
-            keyboardShouldPersistTaps="always"
-            style={styles.keyboardScrollView}
-            resetScrollToCoords={{ x: 0, y: 0 }}
-            scrollEnabled
-          >
-            <View>
-              {/* Competition Information  */}
-              <View style={[snippetStyles.projectSnippetContainerN]}>
-                <View style={snippetStyles.projectSpecsContainer}>
-                  {/* Competition Cover Image */}
-                  {competitionDetail && competitionDetail.image ? (
-                    <View style={snippetStyles.projectImageContainer}>
-                      <Image
-                        style={snippetStyles.teaser__projectImage}
-                        source={{
-                          uri: getImageUrl(
-                            'competition',
-                            'medium',
-                            competitionDetail.image
-                          )
-                        }}
-                        resizeMode={'cover'}
-                      />
-                    </View>
-                  ) : null}
-                  {/* Competition Cover Image Ends */}
+            <KeyboardAwareScrollView
+              keyboardDismissMode="on-drag"
+              keyboardShouldPersistTaps="always"
+              style={styles.keyboardScrollView}
+              resetScrollToCoords={{ x: 0, y: 0 }}
+              scrollEnabled
+            >
+              <View>
+                {/* Competition Information  */}
+                <View style={[snippetStyles.projectSnippetContainerN]}>
+                  <View style={snippetStyles.projectSpecsContainer}>
+                    {/* Competition Cover Image */}
+                    {competitionDetail && competitionDetail.image ? (
+                      <View style={snippetStyles.projectImageContainer}>
+                        <Image
+                          style={snippetStyles.teaser__projectImage}
+                          source={{
+                            uri: getImageUrl(
+                              'competition',
+                              'medium',
+                              competitionDetail.image
+                            )
+                          }}
+                          resizeMode={'cover'}
+                        />
+                      </View>
+                    ) : null}
+                    {/* Competition Cover Image Ends */}
 
-                  {/* Competition Progress Bar */}
-                  <CompetitionProgressBar
-                    countPlanted={competitionDetail && competitionDetail.score}
-                    countTarget={competitionDetail && competitionDetail.goal}
-                  />
-                  {/* Competition Progress Bar Ends */}
+                    {/* Competition Progress Bar */}
+                    <CompetitionProgressBar
+                      countPlanted={competitionDetail && competitionDetail.score}
+                      countTarget={competitionDetail && competitionDetail.goal}
+                    />
+                    {/* Competition Progress Bar Ends */}
 
-                  <View style={snippetStyles.competitionContent}>
-                    {/* Competition Name */}
-                    <View style={snippetStyles.projectNameContainer}>
-                      <Text
-                        ellipsizeMode="tail"
-                        numberOfLines={3}
-                        style={snippetStyles.project_teaser__contentText}
-                      >
-                        {competitionDetail
-                          ? i18n.t('label.comp_by_name', {
+                    <View style={snippetStyles.competitionContent}>
+                      {/* Competition Name */}
+                      <View style={snippetStyles.projectNameContainer}>
+                        <Text
+                          ellipsizeMode="tail"
+                          numberOfLines={3}
+                          style={snippetStyles.project_teaser__contentText}
+                        >
+                          {competitionDetail
+                            ? i18n.t('label.comp_by_name', {
                               compname:
                                 competitionDetail && competitionDetail.name,
                               ownername:
                                 competitionDetail && competitionDetail.ownerName
                             })
-                          : null}
-                      </Text>
-                    </View>
-                    {/* Competition Name Ends */}
+                            : null}
+                        </Text>
+                      </View>
+                      {/* Competition Name Ends */}
 
-                    {/* Competition Description */}
-                    <View style={snippetStyles.projectDescriptionContainer}>
-                      <Text
-                        style={
-                          snippetStyles.project_teaser__contentDescriptionText
-                        }
-                      >
-                        {competitionDetail && competitionDetail.description}
-                      </Text>
-                    </View>
-                    {/* Competition Description Ends */}
+                      {/* Competition Description */}
+                      <View style={snippetStyles.projectDescriptionContainer}>
+                        <Text
+                          style={
+                            snippetStyles.project_teaser__contentDescriptionText
+                          }
+                        >
+                          {competitionDetail && competitionDetail.description}
+                        </Text>
+                      </View>
+                      {/* Competition Description Ends */}
 
-                    {/* Competition Owner Email */}
-                    {competitionDetail && competitionDetail.email ? (
-                      <View style={snippetStyles.actionContainer}>
-                        <View style={snippetStyles.emailContainer}>
-                          <Image
-                            source={email}
-                            style={{ width: 15, height: 15 }}
-                          />
-                          <Text style={snippetStyles.bottomText}>
-                            {competitionDetail &&
-                              competitionDetail.contact +
+                      {/* Competition Owner Email */}
+                      {competitionDetail && competitionDetail.email ? (
+                        <View style={snippetStyles.actionContainer}>
+                          <View style={snippetStyles.emailContainer}>
+                            <Image
+                              source={email}
+                              style={{ width: 15, height: 15 }}
+                            />
+                            <Text style={snippetStyles.bottomText}>
+                              {competitionDetail &&
+                                competitionDetail.contact +
                                 ', ' +
                                 competitionDetail &&
-                              competitionDetail.email}
-                          </Text>
+                                competitionDetail.email}
+                            </Text>
+                          </View>
                         </View>
-                      </View>
-                    ) : null}
-                    {/* Competition Owner Email Ends */}
+                      ) : null}
+                      {/* Competition Owner Email Ends */}
 
-                    {/* Competition Date */}
-                    {competitionDetail && competitionDetail.endDate ? (
-                      <View style={styles.actionContainer}>
-                        <View style={snippetStyles.byOrgContainer}>
-                          <Image
-                            source={compCalendar}
-                            style={{ width: 15, height: 15 }}
-                          />
-                          <Text style={snippetStyles.bottomText}>
-                            {i18n.t('label.ends')}{' '}
-                            {formatDate(competitionDetail.endDate)}
-                          </Text>
+                      {/* Competition Date */}
+                      {competitionDetail && competitionDetail.endDate ? (
+                        <View style={styles.actionContainer}>
+                          <View style={snippetStyles.byOrgContainer}>
+                            <Image
+                              source={compCalendar}
+                              style={{ width: 15, height: 15 }}
+                            />
+                            <Text style={snippetStyles.bottomText}>
+                              {i18n.t('label.ends')}{' '}
+                              {formatDate(competitionDetail.endDate)}
+                            </Text>
+                          </View>
                         </View>
+                      ) : null}
+
+                      {/* Competition Date Ends */}
+
+                      {/* Competition Buttons */}
+                      <View
+                        style={{
+                          marginTop: 20,
+                          width: '100%',
+                          flexDirection: 'row',
+                          left: 0
+                        }}
+                      >
+                        {button}
+                        {button2}
                       </View>
-                    ) : null}
-
-                    {/* Competition Date Ends */}
-
-                    {/* Competition Buttons */}
-                    <View
-                      style={{
-                        marginTop: 20,
-                        width: '100%',
-                        flexDirection: 'row',
-                        left: 0
-                      }}
-                    >
-                      {button}
-                      {button2}
+                      {/* Competition Buttons Ends */}
                     </View>
-                    {/* Competition Buttons Ends */}
                   </View>
-                </View>
 
-                {/* Donate Card */}
-                {/* <CardLayout style={[snippetStyles.cardContainer]}>
+                  {/* Donate Card */}
+                  {/* <CardLayout style={[snippetStyles.cardContainer]}>
                 <Text
                   style={[snippetStyles.googleCardTitle, { textAlign: 'left' }]}
                 >
@@ -357,198 +356,198 @@ class CompetitionFull extends React.Component {
                   </Text>
                 </TouchableOpacity>
               </CardLayout> */}
-                {/* Donate Card Ends */}
-              </View>
-              {/* Competition Information Ended  */}
-
-              {/* Competition Participant Details */}
-              {participantCount > 0 ? (
-                <View style={[snippetStyles.projectSnippetContainerN]}>
-                  <View style={snippetStyles.projectSpecsContainer}>
-                    <View style={styles.headingParticipantContainer}>
-                      {/* Participant Total Count */}
-                      <Text style={snippetStyles.textHeadingParticipants}>
-                        {i18n.t('label.participants')} (
-                        {competitionDetail && competitionDetail.competitorCount}
-                        )
-                      </Text>
-                      {/* Participant Total Count Ends */}
-                    </View>
-                    <View style={snippetStyles.topCompetitorContainer}>
-                      <View>
-                        {/* Participant Details */}
-                        {hasEnrollments &&
-                          competitionDetail.allEnrollments.map((top, index) =>
-                            top.status === 'enrolled' ? (
-                              <CompetitionParticipant
-                                competitor={top}
-                                index={index}
-                                type="participants"
-                                navigation={this.props.navigation}
-                                treeCounter={this.props.treeCounter}
-                                competitionDetail={competitionDetail}
-                                confirmPart={id => this.props.confirmPart(id)}
-                                declinePart={id => this.props.declinePart(id)}
-                                cancelInvite={id => this.props.cancelInvite(id)}
-                                supportTreecounterAction={
-                                  this.props.supportTreecounterAction
-                                }
-                                key={index}
-                              />
-                            ) : null
-                          )}
-                        {/* Participant Details Ends */}
-                      </View>
-                    </View>
-                  </View>
+                  {/* Donate Card Ends */}
                 </View>
-              ) : null}
-              {/* Competition Participant Details Ends */}
+                {/* Competition Information Ended  */}
 
-              {/* Participant Requests */}
-              {requestCount > 0 &&
-              competitionDetail &&
-              competitionDetail.ownerTreecounterId ===
-                this.props.treeCounter.id ? (
-                <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
-                  <View style={snippetStyles.projectSpecsContainer}>
-                    <View style={styles.headingParticipantContainer}>
-                      {/* Total Requests  */}
-                      <Text style={snippetStyles.textHeadingParticipants}>
-                        {i18n.t('label.requests_to_join')} (
+                {/* Competition Participant Details */}
+                {participantCount > 0 ? (
+                  <View style={[snippetStyles.projectSnippetContainerN]}>
+                    <View style={snippetStyles.projectSpecsContainer}>
+                      <View style={styles.headingParticipantContainer}>
+                        {/* Participant Total Count */}
+                        <Text style={snippetStyles.textHeadingParticipants}>
+                          {i18n.t('label.participants')} (
                         {competitionDetail && competitionDetail.competitorCount}
                         )
                       </Text>
-                      {/* Total Requests Ends */}
-                    </View>
-                    <View style={styles.topCompetitorContainer}>
-                      <View>
-                        {/* Requseters Details */}
-                        {hasEnrollments &&
-                          competitionDetail.allEnrollments.map((top, index) =>
-                            top.status === 'pending' ? (
-                              <CompetitionParticipant
-                                competitor={top}
-                                index={index}
-                                type="request_join"
-                                navigation={this.props.navigation}
-                                treeCounter={this.props.treeCounter}
-                                competitionDetail={competitionDetail}
-                                confirmPart={id => this.props.confirmPart(id)}
-                                declinePart={id => this.props.declinePart(id)}
-                                cancelInvite={id => this.props.cancelInvite(id)}
-                                supportTreecounterAction={
-                                  this.props.supportTreecounterAction
-                                }
-                                key={index}
-                              />
-                            ) : null
-                          )}
-                        {/* Requseters Details Ends */}
+                        {/* Participant Total Count Ends */}
+                      </View>
+                      <View style={snippetStyles.topCompetitorContainer}>
+                        <View>
+                          {/* Participant Details */}
+                          {hasEnrollments &&
+                            competitionDetail.allEnrollments.map((top, index) =>
+                              top.status === 'enrolled' ? (
+                                <CompetitionParticipant
+                                  competitor={top}
+                                  index={index}
+                                  type="participants"
+                                  navigation={this.props.navigation}
+                                  treeCounter={this.props.treeCounter}
+                                  competitionDetail={competitionDetail}
+                                  confirmPart={id => this.props.confirmPart(id)}
+                                  declinePart={id => this.props.declinePart(id)}
+                                  cancelInvite={id => this.props.cancelInvite(id)}
+                                  supportTreecounterAction={
+                                    this.props.supportTreecounterAction
+                                  }
+                                  key={index}
+                                />
+                              ) : null
+                            )}
+                          {/* Participant Details Ends */}
+                        </View>
                       </View>
                     </View>
                   </View>
-                </CardLayout>
-              ) : null}
-              {/* Participant Requests Ends */}
+                ) : null}
+                {/* Competition Participant Details Ends */}
 
-              {/* Invitation Details */}
-              {competitionDetail &&
-              competitionDetail.ownerTreecounterId ===
-                this.props.treeCounter.id ? (
-                <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
-                  <View style={snippetStyles.projectSpecsContainer}>
-                    <View style={styles.headingParticipantContainer}>
-                      <Text style={snippetStyles.textHeadingParticipants}>
-                        {i18n.t('label.invite')}
+                {/* Participant Requests */}
+                {requestCount > 0 &&
+                  competitionDetail &&
+                  competitionDetail.ownerTreecounterId ===
+                  this.props.treeCounter.id ? (
+                    <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
+                      <View style={snippetStyles.projectSpecsContainer}>
+                        <View style={styles.headingParticipantContainer}>
+                          {/* Total Requests  */}
+                          <Text style={snippetStyles.textHeadingParticipants}>
+                            {i18n.t('label.requests_to_join')} (
+                        {competitionDetail && competitionDetail.competitorCount}
+                        )
                       </Text>
-                    </View>
-                    <View style={styles.topCompetitorContainer}>
-                      <View>
-                        <SearchUser
-                          onSearchResultClick={this.onSearchResultClick}
-                          currentUserProfile={this.props.currentUserProfile}
-                          clearTextOnClick
-                          alreadyInvited={competitionDetail.allEnrollments}
-                          hideCompetitions
-                          addstyles={{ width: '90%' }}
-                        />
-                        {hasEnrollments &&
-                          competitionDetail.allEnrollments.map((top, index) =>
-                            top.status === 'invited' ? (
-                              <CompetitionParticipant
-                                competitor={top}
-                                index={index}
-                                type="invite"
-                                navigation={this.props.navigation}
-                                treeCounter={this.props.treeCounter}
-                                competitionDetail={competitionDetail}
-                                confirmPart={id => this.props.confirmPart(id)}
-                                declinePart={id => this.props.declinePart(id)}
-                                cancelInvite={id => this.props.cancelInvite(id)}
-                                supportTreecounterAction={
-                                  this.props.supportTreecounterAction
-                                }
-                                key={index}
-                              />
-                            ) : null
-                          )}
+                          {/* Total Requests Ends */}
+                        </View>
+                        <View style={styles.topCompetitorContainer}>
+                          <View>
+                            {/* Requseters Details */}
+                            {hasEnrollments &&
+                              competitionDetail.allEnrollments.map((top, index) =>
+                                top.status === 'pending' ? (
+                                  <CompetitionParticipant
+                                    competitor={top}
+                                    index={index}
+                                    type="request_join"
+                                    navigation={this.props.navigation}
+                                    treeCounter={this.props.treeCounter}
+                                    competitionDetail={competitionDetail}
+                                    confirmPart={id => this.props.confirmPart(id)}
+                                    declinePart={id => this.props.declinePart(id)}
+                                    cancelInvite={id => this.props.cancelInvite(id)}
+                                    supportTreecounterAction={
+                                      this.props.supportTreecounterAction
+                                    }
+                                    key={index}
+                                  />
+                                ) : null
+                              )}
+                            {/* Requseters Details Ends */}
+                          </View>
+                        </View>
                       </View>
-                    </View>
-                  </View>
-                </CardLayout>
-              ) : null}
-              {/* Invitation Details Ends */}
+                    </CardLayout>
+                  ) : null}
+                {/* Participant Requests Ends */}
 
-              {/* Invited Users */}
-              {competitionDetail &&
-              invitedCount > 0 &&
-              competitionDetail.ownerTreecounterId !==
-                this.props.treeCounter.id ? (
-                <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
-                  <View style={snippetStyles.projectSpecsContainer}>
-                    <View style={styles.headingParticipantContainer}>
-                      <Text style={snippetStyles.textHeadingParticipants}>
-                        {i18n.t('label.invited')}
-                      </Text>
-                    </View>
-                    <View style={styles.topCompetitorContainer}>
-                      <View>
-                        {hasEnrollments &&
-                          competitionDetail.allEnrollments.map((top, index) =>
-                            top.status === 'invited' &&
-                            top.treecounterSlug ===
-                              this.props.treeCounter.slug ? (
-                              <CompetitionParticipant
-                                competitor={top}
-                                index={index}
-                                type="request_join"
-                                navigation={this.props.navigation}
-                                treeCounter={this.props.treeCounter}
-                                competitionDetail={competitionDetail}
-                                confirmPart={id => this.props.confirmPart(id)}
-                                declinePart={id => this.props.declinePart(id)}
-                                cancelInvite={id => this.props.cancelInvite(id)}
-                                supportTreecounterAction={
-                                  this.props.supportTreecounterAction
-                                }
-                                key={index}
-                              />
-                            ) : null
-                          )}
+                {/* Invitation Details */}
+                {competitionDetail &&
+                  competitionDetail.ownerTreecounterId ===
+                  this.props.treeCounter.id ? (
+                    <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
+                      <View style={snippetStyles.projectSpecsContainer}>
+                        <View style={styles.headingParticipantContainer}>
+                          <Text style={snippetStyles.textHeadingParticipants}>
+                            {i18n.t('label.invite')}
+                          </Text>
+                        </View>
+                        <View style={styles.topCompetitorContainer}>
+                          <View>
+                            <SearchUser
+                              onSearchResultClick={this.onSearchResultClick}
+                              currentUserProfile={this.props.currentUserProfile}
+                              clearTextOnClick
+                              alreadyInvited={competitionDetail.allEnrollments}
+                              hideCompetitions
+                              addstyles={{ width: '90%' }}
+                            />
+                            {hasEnrollments &&
+                              competitionDetail.allEnrollments.map((top, index) =>
+                                top.status === 'invited' ? (
+                                  <CompetitionParticipant
+                                    competitor={top}
+                                    index={index}
+                                    type="invite"
+                                    navigation={this.props.navigation}
+                                    treeCounter={this.props.treeCounter}
+                                    competitionDetail={competitionDetail}
+                                    confirmPart={id => this.props.confirmPart(id)}
+                                    declinePart={id => this.props.declinePart(id)}
+                                    cancelInvite={id => this.props.cancelInvite(id)}
+                                    supportTreecounterAction={
+                                      this.props.supportTreecounterAction
+                                    }
+                                    key={index}
+                                  />
+                                ) : null
+                              )}
+                          </View>
+                        </View>
                       </View>
-                    </View>
-                  </View>
-                </CardLayout>
-              ) : null}
-              {/* Invited Users Ends */}
-            </View>
-          </KeyboardAwareScrollView>
-        )}
+                    </CardLayout>
+                  ) : null}
+                {/* Invitation Details Ends */}
+
+                {/* Invited Users */}
+                {competitionDetail &&
+                  invitedCount > 0 &&
+                  competitionDetail.ownerTreecounterId !==
+                  this.props.treeCounter.id ? (
+                    <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
+                      <View style={snippetStyles.projectSpecsContainer}>
+                        <View style={styles.headingParticipantContainer}>
+                          <Text style={snippetStyles.textHeadingParticipants}>
+                            {i18n.t('label.invited')}
+                          </Text>
+                        </View>
+                        <View style={styles.topCompetitorContainer}>
+                          <View>
+                            {hasEnrollments &&
+                              competitionDetail.allEnrollments.map((top, index) =>
+                                top.status === 'invited' &&
+                                  top.treecounterSlug ===
+                                  this.props.treeCounter.slug ? (
+                                    <CompetitionParticipant
+                                      competitor={top}
+                                      index={index}
+                                      type="request_join"
+                                      navigation={this.props.navigation}
+                                      treeCounter={this.props.treeCounter}
+                                      competitionDetail={competitionDetail}
+                                      confirmPart={id => this.props.confirmPart(id)}
+                                      declinePart={id => this.props.declinePart(id)}
+                                      cancelInvite={id => this.props.cancelInvite(id)}
+                                      supportTreecounterAction={
+                                        this.props.supportTreecounterAction
+                                      }
+                                      key={index}
+                                    />
+                                  ) : null
+                              )}
+                          </View>
+                        </View>
+                      </View>
+                    </CardLayout>
+                  ) : null}
+                {/* Invited Users Ends */}
+              </View>
+            </KeyboardAwareScrollView>
+          )}
       </View>
     );
   }
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 }
 
 const mapStateToProps = state => ({

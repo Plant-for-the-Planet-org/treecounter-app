@@ -169,7 +169,7 @@ export function leaveCompetition(id) {
 export function createCompetition(value, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       postAuthenticatedRequest('competition_post', value)
         .then(res => {
           dispatch(
@@ -186,7 +186,7 @@ export function createCompetition(value, navigation) {
           //   competition: res.data.merge.competition[0].id,
           //   titleParam: res.data.merge.competition[0].name
           // });
-          debug(updateRoute('app_competitions', navigation || dispatch));
+          // debug(updateRoute('app_competitions', navigation || dispatch));
           updateRoute('app_competitions', navigation || dispatch);
           resolve(res.data);
           dispatch(setProgressModelState(false));
@@ -216,7 +216,7 @@ export function createCompetition(value, navigation) {
 export function editCompetition(value, param, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       putAuthenticatedRequest('competition_put', value, { competition: param })
         .then(res => {
           dispatch(
@@ -254,7 +254,7 @@ export function editCompetition(value, param, navigation) {
 export function deleteCompetition(param) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       deleteAuthenticatedRequest('competition_delete', { competition: param })
         .then(res => {
           dispatch(unlinkEntity(res.data.unlink));

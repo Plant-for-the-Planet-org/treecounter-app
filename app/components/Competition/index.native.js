@@ -41,6 +41,7 @@ class Competiton extends React.Component {
     this.setState({ index });
   };
 
+
   // Tabbar represents the top header with the different tab items
   _renderTabBar = props => {
     const focusedColor = '#89b53a';
@@ -101,6 +102,7 @@ class Competiton extends React.Component {
       route.key === 'mine'
         ? this.props.fetchMineCompetitions
         : this.props.fetchCompetitions;
+
     return (
       <CommonCompetitionTab
         competitionsArr={competitionsArr}

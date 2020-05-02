@@ -186,7 +186,7 @@ class CompetitionFull extends React.Component {
     }
 
     let CurrentDate = new Date();
-
+    let competitionEnded = false;
     if (competitionDetail) {
       let endDate = competitionDetail.endDate;
       endDate = new Date(endDate);
@@ -195,7 +195,8 @@ class CompetitionFull extends React.Component {
           <Text style={snippetStyles.competitionOver}>
             {i18n.t('label.competition_over')}
           </Text>
-        );
+        )
+        competitionEnded = true;
       }
     }
     return (
@@ -394,6 +395,7 @@ class CompetitionFull extends React.Component {
                                   }
                                   key={index}
                                   status={status}
+                                  competitionEnded={competitionEnded}
                                 />
                               ) : null
                             )}

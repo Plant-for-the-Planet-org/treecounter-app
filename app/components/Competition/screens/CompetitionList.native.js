@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { SafeAreaView } from 'react-navigation';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import i18n from '../../locales/i18n';
-import buttonStyles from '../../styles/common/button.native';
-import styles from '../../styles/common/tabbar.native';
-import colors from '../../utils/constants';
-import HeaderStatic from './../Header/HeaderStatic';
-import CommonCompetitionTab from './screens/CompetitionsList.native'; // Shows my competitions
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import i18n from '../../../locales/i18n';
+import buttonStyles from '../../../styles/common/button.native';
+import styles from '../../../styles/common/tabbar.native';
+import colors from '../../../utils/constants';
+import HeaderStatic from '../../Header/HeaderStatic';
+import CommonCompetitionTab from '../components/CompetitionsListTabs.native'; // Shows my competitions
 
 const height = Dimensions.get('window').height;
 

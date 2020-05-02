@@ -3,7 +3,7 @@ import {
   GET_FEATURED_COMPETITIONS,
   GET_ARCHIVED_COMPETITIONS,
   GET_MINE_COMPETITIONS
-} from '../actions/types';
+} from '../../../actions/types';
 
 const initialState = {
   allCompetitions: [],
@@ -12,7 +12,7 @@ const initialState = {
   mineCompetitions: []
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_ALL_COMPETITIONS:
       return {

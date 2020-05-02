@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n';
-import { debug } from '../../debug';
-import styles from '../../styles/competition/competition-full.native';
-import UserProfileImage from '../Common/UserProfileImage.native';
-import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
-import { getLocalRoute } from '../../actions/apiRouting';
-import snippetStyles from '../../styles/competition/competition-fullNew.native';
+import i18n from '../../../locales/i18n';
+import { debug } from '../../../debug';
+import styles from '../../../styles/competition/competition-full.native';
+import UserProfileImage from '../../Common/UserProfileImage.native';
+import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
+import { getLocalRoute } from '../../../actions/apiRouting';
+import snippetStyles from '../../../styles/competition/competition-fullNew.native';
 class CompetitionParticipant extends React.Component {
   constructor(props) {
     super(props);

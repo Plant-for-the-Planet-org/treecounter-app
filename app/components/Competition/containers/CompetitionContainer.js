@@ -8,19 +8,19 @@ import {
   fetchCompetitions,
   fetchMineCompetitions,
   leaveCompetition
-} from '../../actions/competition';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import Competiton from '../../components/Competition';
-import { debug } from '../../debug';
-import { updateRoute } from '../../helpers/routerHelper';
+} from './../redux/competitionActions';
+import { supportTreecounterAction } from '../../../actions/supportTreecounterAction';
+import LoadingIndicator from '../../../components/Common/LoadingIndicator';
+import Competiton from './../screens/CompetitionList.native';
+import { debug } from '../../../debug';
+import { updateRoute } from '../../../helpers/routerHelper';
 import {
   formatDateToMySQL,
   handleServerResponseError
-} from '../../helpers/utils';
+} from '../../../helpers/utils';
 // import { getAllCompetitionsSelector } from '../../selectors';
-import { getContentLoaderState } from '../../reducers/contentloaderReducer';
-import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
+import { getContentLoaderState } from '../../../reducers/contentloaderReducer';
+import { competitionFormSchemaOptions } from '../../../server/parsedSchemas/competition';
 
 class CompetitionContainer extends React.Component {
   constructor(props) {

@@ -1,39 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import {
-  cameraSolid,
-  imageGallery,
-  forward,
-  circleDelete
-} from '../../../assets';
 import { Formik } from 'formik';
-import { TextField } from 'react-native-material-textfield';
-import ImagePicker from 'react-native-image-picker';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Dropdown } from 'react-native-material-dropdown';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import { TextField } from 'react-native-material-textfield';
+import { Dropdown } from 'react-native-material-dropdown';
+import ImagePicker from 'react-native-image-picker';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { debug } from '../../../debug';
+import { cameraSolid, imageGallery, forward, circleDelete } from '../../../assets';
 import styles from '../../../styles/competition/competition-form.native';
-import { formatDateToMySQL } from './../../../helpers/utils';
-import { formatDate } from './../../../utils/utils';
+import { formatDateToMySQL } from '../../../helpers/utils';
+import { formatDate } from '../../../utils/utils';
 import i18n from '../../../locales/i18n';
-import competitionFormSchema from './../../../server/formSchemas/competition';
+import competitionFormSchema from '../../../server/formSchemas/competition';
 import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
 import buttonStyles from '../../../styles/common/button.native';
+import { getImageUrl } from '../../../actions/apiRouting';
+import { updateRoute } from '../../../helpers/routerHelper';
 
 export const FormikForm = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     competitionFormSchema
   );
-  const [buttonType, setButtonType] = useState(props.buttonType);
-  useEffect(() => {
-    setButtonType(props.buttonType);
-  }, [props.buttonType]);
+  debug('validation schema', validationSchema);
+  const buttonType = props.buttonType;
+
+  const handleDelete = () => {
+    RBSheetRef.close();
+    props
+      .onDeleteCompetition(props.competition_id)
+      .then((/* success */) => { })
+      .catch(err => {
+        debug('Error', err);
+      });
+    updateRoute('app_competitions', props.navigation);
+  };
+  let RBSheetRef = null;
   return (
     <Formik
       initialValues={props.initialValues}
       onSubmit={values => {
-        props.onCreateCompetition(values);
+        props.onEditCompetition(values, props.competition_id);
       }}
       validationSchema={validationSchema}
     >
@@ -49,7 +57,7 @@ export const FormikForm = props => {
               scrollEnabled
             >
               <Text style={styles.add_competition_title}>
-                {i18n.t('label.add_competition')}
+                {i18n.t('label.edit_competition')}
               </Text>
               <View>
                 <TextField
@@ -86,10 +94,10 @@ export const FormikForm = props => {
                     titleFontSize={12}
                     returnKeyType="next"
                     lineWidth={1}
-                    blurOnSubmit={false}
                     labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    blurOnSubmit={false}
                     keyboardType="numeric"
                     error={props.touched.goal && props.errors.goal}
                     onChangeText={props.handleChange('goal')}
@@ -113,10 +121,10 @@ export const FormikForm = props => {
                   returnKeyType="next"
                   lineWidth={1}
                   blurOnSubmit={false}
+                  multiline
                   labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                   titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                   affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                  multiline
                   error={props.touched.description && props.errors.description}
                   onChangeText={props.handleChange('description')}
                   onBlur={props.handleBlur('description')}
@@ -128,28 +136,37 @@ export const FormikForm = props => {
                 setFieldValue={props.setFieldValue}
               />
             </KeyboardAwareScrollView>
+
             {buttonType === 'competition' ? (
-              <TouchableOpacity
-                style={[
-                  buttonStyles.actionButtonTouchable,
-                  { top: undefined, bottom: '1%', padding: 20 }
-                ]}
-                onPress={props.handleSubmit}
-              >
-                <View style={buttonStyles.actionButtonView}>
-                  <Text style={buttonStyles.actionButtonText}>
-                    {i18n.t('label.create_competition')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
+              <>
+                <TouchableOpacity
+                  style={buttonStyles.dualActionButtonTouchable1}
+                  onPress={() => {
+                    RBSheetRef.open();
+                  }}
+                >
+                  <View style={buttonStyles.dualActionButtonView1}>
+                    <Text style={buttonStyles.dualActionButtonText1}>
+                      {i18n.t('label.delete_competition')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={buttonStyles.dualActionButtonTouchable2}
+                  onPress={props.handleSubmit}
+                >
+                  <View style={buttonStyles.dualActionButtonView2}>
+                    <Text style={buttonStyles.dualActionButtonText2}>
+                      {i18n.t('label.save_competition')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </>
             ) : null}
 
             {buttonType === '>' ? (
               <TouchableOpacity
-                style={[
-                  buttonStyles.actionButtonSmallTouchable,
-                  { top: undefined, bottom: '2%' }
-                ]}
+                style={buttonStyles.actionButtonSmallTouchable}
                 onPress={props.handleSubmit}
               >
                 <Image
@@ -159,6 +176,47 @@ export const FormikForm = props => {
                 />
               </TouchableOpacity>
             ) : null}
+
+            <RBSheet
+              ref={ref => {
+                RBSheetRef = ref;
+              }}
+              height={300}
+              duration={250}
+              customStyles={{
+                container: {
+                  justifyContent: 'center'
+                }
+              }}
+            >
+              <View style={buttonStyles.baContainer}>
+                <Text style={buttonStyles.baMessage}>
+                  {i18n.t('label.confirm_delete_message')}
+                </Text>
+
+                <View style={buttonStyles.baButtonContainer}>
+                  <TouchableOpacity
+                    style={buttonStyles.baLaterButton}
+                    onPress={() => {
+                      RBSheetRef.close();
+                    }}
+                  >
+                    <Text style={buttonStyles.baLaterText}>
+                      {i18n.t('label.cancel')}
+                    </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={buttonStyles.baContinueButton}
+                    onPress={handleDelete}
+                  >
+                    <Text style={buttonStyles.baContinueText}>
+                      {i18n.t('label.delete')}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </RBSheet>
           </View>
         </>
       )}
@@ -181,28 +239,30 @@ export function AccessPicker(props) {
       value: 'invitation'
     }
   ];
-
   const onChange = value => {
     props.setFieldValue('access', value);
   };
-
+  // eslint-disable-next-line
+  let dropdown = '';
   return (
     <View>
       <Dropdown
+        ref={ref => (dropdown = ref)}
         label={i18n.t('label.competition_access')}
         data={data}
         onChangeText={onChange}
         lineWidth={1}
-        error={props.touched.access && props.errors.access}
         itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
         labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+        error={props.touched.access && props.errors.access}
+        value={props.values.access}
       />
     </View>
   );
 }
 
 export function AddImage(props) {
-  const image = props.image;
+  let image = props.image;
 
   const options = {
     title: 'Add Image',
@@ -212,28 +272,49 @@ export function AddImage(props) {
     }
   };
 
-  const renderAsset = image => {
-    return (
-      <View style={styles.projectImageContainer}>
-        <TouchableOpacity
-          style={styles.competitionDeleteButton}
-          onPress={() => props.setFieldValue('imageFile', '')}
-        >
-          <Image style={styles.competitionDeleteImage} source={circleDelete} />
-        </TouchableOpacity>
-        <Image
-          style={styles.teaser__projectImage}
-          source={{ uri: image }}
-          resizeMode={'cover'}
-        />
-      </View>
-    );
-  };
   return (
     <View>
       <Text style={styles.addImageTitle}>{i18n.t('label.add_image')}</Text>
       <View style={styles.showImage}>
-        {image && image != 'null' ? renderAsset(image) : null}
+        {image && image != 'null' ? (
+          image.includes('base64') ? (
+            <View style={styles.projectImageContainer}>
+              <TouchableOpacity
+                style={styles.competitionDeleteButton}
+                onPress={() => props.setFieldValue('imageFile', 'null')}
+              >
+                <Image
+                  style={styles.competitionDeleteImage}
+                  source={circleDelete}
+                />
+              </TouchableOpacity>
+              <Image
+                style={styles.teaser__projectImage}
+                source={{ uri: image }}
+                resizeMode={'cover'}
+              />
+            </View>
+          ) : (
+              <View style={styles.projectImageContainer}>
+                <TouchableOpacity
+                  style={styles.competitionDeleteButton}
+                  onPress={() => props.setFieldValue('imageFile', 'null')}
+                >
+                  <Image
+                    style={styles.competitionDeleteImage}
+                    source={circleDelete}
+                  />
+                </TouchableOpacity>
+                <Image
+                  style={styles.teaser__projectImage}
+                  source={{
+                    uri: getImageUrl('competition', 'medium', image)
+                  }}
+                  resizeMode={'cover'}
+                />
+              </View>
+            )
+        ) : null}
       </View>
       <View style={styles.addImageButtonContainer}>
         <TouchableOpacity
@@ -289,12 +370,7 @@ export function CompetitionDatePicker(props) {
           <Text style={styles.labelEndDate}>
             {i18n.t('label.competition_end_date')}
           </Text>
-          <Text style={styles.EndDate}>
-            {formatDate(formatDateToMySQL(props.endDate))}
-          </Text>
-          {props.errors && props.errors.endDate ? (
-            <Text>{props.errors.endDate}</Text>
-          ) : null}
+          <Text>{formatDate(formatDateToMySQL(props.endDate))}</Text>
         </View>
         <View style={styles.datePickerUnderline} />
       </TouchableOpacity>
@@ -310,9 +386,6 @@ export function CompetitionDatePicker(props) {
         }}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}
-        titleIOS={i18n.t('label.datePickerTitle')}
-        cancelTextIOS={i18n.t('label.datePickerCancel')}
-        confirmTextIOS={i18n.t('label.datePickerConfirm')}
       />
     </View>
   );

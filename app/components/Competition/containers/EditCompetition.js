@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
-import { editCompetition, deleteCompetition } from '../../actions/competition';
-import EditCompetition from '../../components/Competition/EditCompetition.native';
-import { handleServerResponseError } from '../../helpers/utils';
-import { competitionFormSchemaOptions } from '../../server/parsedSchemas/competition';
-import { formatDateToMySQL } from '../../helpers/utils';
+import { debug } from '../../../debug';
+import { editCompetition, deleteCompetition } from './../redux/competitionActions';
+import EditCompetition from './../screens/EditCompetition.native';
+import { handleServerResponseError } from '../../../helpers/utils';
+import { competitionFormSchemaOptions } from '../../../server/parsedSchemas/competition';
+import { formatDateToMySQL } from '../../../helpers/utils';
 
 class EditCompetitionContainer extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class EditCompetitionContainer extends Component {
     }
     this.props
       .editCompetition(json, params, this.props.navigation)
-      .then((/* success */) => {})
+      .then((/* success */) => { })
       .catch(err => {
         debug('err signup data', err);
         let newSchemaOptions = handleServerResponseError(
@@ -67,7 +67,7 @@ class EditCompetitionContainer extends Component {
         });
       });
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     if (this.state.competition_id) {

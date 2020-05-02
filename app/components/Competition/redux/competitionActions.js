@@ -3,26 +3,26 @@ import {
   getAuthenticatedRequest,
   postAuthenticatedRequest,
   putAuthenticatedRequest
-} from '../utils/api';
-import { setCompetitionDetail } from '../reducers/competitionDetailReducer';
-import { setProgressModelState } from '../reducers/modelDialogReducer';
-import { setContentLoaderState } from '../reducers/contentloaderReducer';
+} from '../../../utils/api';
+import { setCompetitionDetail } from './competitionDetailReducer';
+import { setProgressModelState } from '../../../reducers/modelDialogReducer';
+import { setContentLoaderState } from '../../../reducers/contentloaderReducer';
 
 import {
   deleteEntity,
   mergeEntities,
   unlinkEntity
-} from '../reducers/entitiesReducer';
+} from '../../../reducers/entitiesReducer';
 import {
   competitionEnrollmentSchema,
   competitionSchema,
   treecounterSchema
-} from '../schemas';
+} from '../../../schemas';
 import { normalize } from 'normalizr';
-import { debug } from '../debug';
-import { updateRoute } from '../helpers/routerHelper';
-import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-import i18n from '../locales/i18n.js';
+import { debug } from '../../../debug';
+import { updateRoute } from '../../../helpers/routerHelper';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
+import i18n from '../../../locales/i18n.js';
 
 // importing action type
 import {
@@ -30,7 +30,7 @@ import {
   GET_FEATURED_COMPETITIONS,
   GET_ARCHIVED_COMPETITIONS,
   GET_MINE_COMPETITIONS
-} from './types';
+} from '../../../actions/types';
 
 export function fetchCompetitions(category, page) {
   let actionType;

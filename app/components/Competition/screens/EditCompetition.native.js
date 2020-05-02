@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { competitionDetailSelector } from '../../selectors';
-import { fetchCompetitionDetail } from '../../actions/competition';
+import { competitionDetailSelector } from '../../../selectors';
+import { fetchCompetitionDetail } from './../redux/competitionActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getDateFromMySQL } from './../../helpers/utils';
-import HeaderNew from './../Header/HeaderNew.native';
+import { getDateFromMySQL } from '../../../helpers/utils';
+import HeaderNew from '../../Header/HeaderNew.native';
 
 import { View, Keyboard, Platform } from 'react-native';
-import { FormikForm } from './editFormComponents.native';
+import { FormikForm } from '../components/editFormComponents.native';
 
 function EditCompetition(props) {
   const [buttonType, setButtonType] = useState('competition');

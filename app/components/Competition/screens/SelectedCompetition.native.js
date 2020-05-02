@@ -2,29 +2,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
-import { debug } from '../../debug';
-import { getImageUrl } from '../../actions/apiRouting';
-import styles from '../../styles/competition/competition-full.native';
-import CardLayout from '../Common/Card';
+import { debug } from '../../../debug';
+import { getImageUrl } from '../../../actions/apiRouting';
+import styles from '../../../styles/competition/competition-full.native';
+import CardLayout from '../../Common/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCompetitionDetail } from '../../actions/competition';
+import { fetchCompetitionDetail } from '../redux/competitionActions';
 import {
   competitionDetailSelector,
   userCompetitionEnrolledSelector,
   userTreecounterSelector
-} from '../../selectors';
-import CompetitionProgressBar from './CompetitionProgressBar';
-import { compCalendar, email } from '../../assets';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import CompetitionParticipant from './CompetitionParticipant.native';
-import SearchUser from '../Challenge/Tabs/SearchUser.native';
-import i18n from '../../locales/i18n.js';
-import { formatDate } from '../../utils/utils';
-import snippetStyles from './../../styles/competition/competition-fullNew.native';
+} from '../../../selectors';
+import CompetitionProgressBar from './../components/CompetitionProgressBar';
+import { compCalendar, email } from '../../../assets';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
+import CompetitionParticipant from '../components/CompetitionParticipant.native';
+import SearchUser from '../../Challenge/Tabs/SearchUser.native';
+import i18n from '../../../locales/i18n.js';
+import { formatDate } from '../../../utils/utils';
+import snippetStyles from '../../../styles/competition/competition-fullNew.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { getContentLoaderState } from '../../reducers/contentloaderReducer';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import { getContentLoaderState } from '../../../reducers/contentloaderReducer';
+import LoadingIndicator from '../../Common/LoadingIndicator';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull

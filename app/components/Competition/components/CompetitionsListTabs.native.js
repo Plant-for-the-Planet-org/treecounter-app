@@ -5,8 +5,8 @@ import { FlatList, Image, Text, View } from 'react-native';
 import i18n from '../../../locales/i18n';
 import styles from '../../../styles/competition/competition-master.native';
 import colors from '../../../utils/constants';
-import CompetitionSnippet from '../components/CompetitionSnippet.native';
-import { empty, trees } from './../../../assets';
+import CompetitionSnippet from './CompetitionSnippet.native';
+import { empty, trees } from '../../../assets';
 import { CompetitionLoader } from './../../Common/ContentLoader';
 
 const CompetitionFinishedMessage = () => {
@@ -191,8 +191,8 @@ const CompetitionsList = props => {
           ? isCompetitionFinished
             ? null
             : () => {
-                !isLoading && handleLoadMore();
-              }
+              !isLoading && handleLoadMore();
+            }
           : null
       }
       onEndReachedThreshold={0.05}

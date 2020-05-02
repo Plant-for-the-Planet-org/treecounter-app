@@ -33,16 +33,16 @@ import EditUserProfileContainer from '../../containers/EditUserProfile';
 import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProjectContainer from '../../containers/SelectedPlantProject';
-import SelectedCompetitionContainer from '../../containers/SelectedCompetition';
+import SelectedCompetitionContainer from './../Competition/containers/SelectedCompetition';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
 import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
-import CompetitionContainer from '../../containers/CompetitionContainer';
+import CompetitionContainer from './../Competition/containers/CompetitionContainer';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
-import EditCompetitionContainer from '../../containers/EditCompetition';
+import EditCompetitionContainer from './../Competition/containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
 import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
 import UnfulfilledPledgeEvents from './../PledgeEvents/UnfulfilledPledgeEvent';
@@ -50,7 +50,7 @@ import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
 import Reviews from './../Reviews/Reviews';
 import AddReview from './../Reviews/AddReview/AddReview';
 import PDFViewer from '../PDFViewer';
-import createCompeition from './../Competition/Tabs/createCompetition.native';
+import createCompeition from '../Competition/screens/createCompetition.native';
 import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
 import AddTrees from '../Redemption/app/AddTrees.native';
@@ -104,7 +104,7 @@ const headerLabels = {
   ['app_pledge_update_form']: 'label.updatePledge'
 };
 
-export const getAppNavigator = function(isLoggedIn, userProfile) {
+export const getAppNavigator = function (isLoggedIn, userProfile) {
   const searchNavigator = createStackNavigator(
     {
       Search: {
@@ -161,7 +161,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
       }
     }
   );
-  const getTitle = function(navigation) {
+  const getTitle = function (navigation) {
     let title = navigation.getParam('titleParam');
     try {
       if (!title) {

@@ -393,6 +393,7 @@ class CompetitionFull extends React.Component {
                                     this.props.supportTreecounterAction
                                   }
                                   key={index}
+                                  status={status}
                                 />
                               ) : null
                             )}

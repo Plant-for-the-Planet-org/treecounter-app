@@ -15,6 +15,8 @@ class CompetitionParticipant extends React.Component {
     this.plantButton = this.plantButton.bind(this);
   }
 
+
+
   // This function is for people to support someone who is a participant in the competition
   supportButton() {
     let supportObject = {
@@ -33,7 +35,9 @@ class CompetitionParticipant extends React.Component {
     updateRoute('app_donateTrees', this.props.navigation);
   }
   render() {
+
     let support_button = null;
+
     if (
       this.props.type === 'participants' &&
       this.props.competitor.treecounterSlug === this.props.treeCounter.slug
@@ -50,29 +54,27 @@ class CompetitionParticipant extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
+      )
+
+    }
+    else if (
+      this.props.type === 'participants' &&
+      this.props.competitor.treecounterSlug !== this.props.treeCounter.slug
+      && this.props.status !== 'enrolled'
+    ) {
+      support_button = (
+        <View style={snippetStyles.topCompetitorScore}>
+          <TouchableOpacity
+            style={snippetStyles.secondaryButton}
+            onPress={() => this.supportButton()}
+          >
+            <Text style={snippetStyles.secondaryButtonText}>
+              {i18n.t('label.support')}
+            </Text>
+          </TouchableOpacity>
+        </View>
       );
     }
-    /*
-      The code block below has been commented out as per 
-      https://github.com/Plant-for-the-Planet-org/treecounter-app/issues/2264
-    */
-    // else if (
-    //   this.props.type === 'participants' &&
-    //   this.props.competitor.treecounterSlug !== this.props.treeCounter.slug
-    // ) {
-    //   support_button = (
-    //     <View style={snippetStyles.topCompetitorScore}>
-    //       <TouchableOpacity
-    //         style={snippetStyles.secondaryButton}
-    //         onPress={() => this.supportButton()}
-    //       >
-    //         <Text style={snippetStyles.secondaryButtonText}>
-    //           {i18n.t('label.support')}
-    //         </Text>
-    //       </TouchableOpacity>
-    //     </View>
-    //   );
-    // } 
 
     else if (this.props.type === 'invite') {
       support_button = (

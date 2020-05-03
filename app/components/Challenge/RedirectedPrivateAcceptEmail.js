@@ -17,6 +17,7 @@ export default class RedirectedPrivateAcceptEmail extends Component {
   UNSAFE_componentWillMount() {
     this.props.acceptChallenge();
   }
+
   render() {
     return (
       <div className="app-container__content--center sidenav-wrapper">

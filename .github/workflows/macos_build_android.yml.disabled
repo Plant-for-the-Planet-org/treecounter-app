@@ -118,11 +118,12 @@ jobs:
       run: ./gradlew assembleDevelopRelease --stacktrace --no-daemon
       working-directory: ./android
 
-    - name: Upload Android APK file
-      uses: actions/upload-artifact@v1
-      with:
-        name: TreecounterApp-develop-release.apk
-        path: android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk
+# We only have 0.5GB space to store artifacts for GitHub actions
+#    - name: Upload Android APK file
+#      uses: actions/upload-artifact@v1
+#      with:
+#        name: TreecounterApp-develop-release.apk
+#        path: android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk
 
     - name: Upload Android APK to Browserstack
       env:

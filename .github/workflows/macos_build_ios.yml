@@ -132,11 +132,12 @@ jobs:
         -exportPath DerivedData/ipa
       working-directory: ./ios
 
-    - name: Upload iOS IPA file
-      uses: actions/upload-artifact@v1
-      with:
-        name: TreecounterApp-develop-release.ipa
-        path: ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa
+# We only have 0.5GB space to store artifacts for GitHub actions
+#    - name: Upload iOS IPA file
+#      uses: actions/upload-artifact@v1
+#      with:
+#        name: TreecounterApp-develop-release.ipa
+#        path: ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa
 
     - name: Upload iOS IPA to Browserstack
       env:

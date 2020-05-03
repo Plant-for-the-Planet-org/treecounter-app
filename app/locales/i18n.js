@@ -1,6 +1,7 @@
 import i18next from 'i18next';
 import enlabels from './en';
 import deLabels from './de';
+import esLabels from './es';
 import { getLocale } from '../actions/getLocale';
 
 let userLang = getLocale();
@@ -22,6 +23,11 @@ i18next.init({
     de: {
       translation: {
         label: deLabels
+      }
+    },
+    es: {
+      translation: {
+        label: esLabels
       }
     }
   }

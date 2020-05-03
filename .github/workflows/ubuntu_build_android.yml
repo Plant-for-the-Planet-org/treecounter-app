@@ -148,4 +148,6 @@ jobs:
         curl -u "planetit1:$BROWSERSTACK_ACCESS_KEY" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@release/$upload_file"
 
     - name: Slack notification
-      run: curl -X POST --data-urlencode "payload={\"channel\": \"#notifications-git\", \"username\": \"webhookbot\", \"text\": \"Finished GitHub action $GITHUB_WORKFLOW for $GITHUB_REF\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/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
+      run: |
+        payload="{\"channel\": \"#notifications-git\", \"username\": \"webhookbot\", \"text\": \"Finished GitHub action $GITHUB_WORKFLOW for $GITHUB_REF\"}"
+        curl -X POST --data-urlencode "payload=$payload" https://hooks.slack.com/services/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

@@ -44,11 +44,6 @@ function EditCompetition(props) {
       keyboardDidHideListener.remove();
     };
   }, []);
-  let formValue = {};
-  if (props.competitionDetail) {
-    formValue = props.competitionDetail;
-  }
-  console.log('Competition Details', props.competitionDetail)
   const style = { backgroundColor: 'white', flex: 1 };
   return (
     props.competitionDetail ? (

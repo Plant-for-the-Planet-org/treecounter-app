@@ -6,6 +6,7 @@ import { mergeEntities } from '../reducers/entitiesReducer';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { setLastRoute } from '../reducers/updateLastRouteReducer';
+import { setCurrency } from './fetchConfig';
 
 export function loadUserProfile(returnData) {
   const request = getAuthenticatedRequest('data_userProfile_get');
@@ -16,6 +17,9 @@ export function loadUserProfile(returnData) {
       .then(res => {
         dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
         dispatch(setCurrentUserProfileId(res.data.id));
+        // overwrite currency loaded with config API
+        res.data.currency && setCurrency(res.data.currency, dispatch);
+
         dispatch(setProgressModelState(false));
         if (returnData) {
           dispatch(setLastRoute(returnData));

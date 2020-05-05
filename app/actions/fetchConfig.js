@@ -13,6 +13,12 @@ let cdnMedia = {};
 let currency = '';
 let webMapIds = {};
 
+export function setCurrency(cur, dispatch) {
+  currency = cur;
+  supportedCurrency.includes(currency) &&
+    dispatch(setCurrencyAction(currency));
+}
+
 export function fetchLocation() {
   return dispatch => {
     if (!getItemSync('preferredCurrency')) {
@@ -22,8 +28,7 @@ export function fetchLocation() {
           const foundLocation = find(countryCodes, {
             countryCode: res.data.country_code
           });
-          supportedCurrency.includes(foundLocation.code) &&
-            dispatch(setCurrencyAction(foundLocation.code));
+          setCurrency(foundLocation.code, dispatch);
         })
 
         .catch(error => {
@@ -59,9 +64,7 @@ export function fetchConfig() {
         // debug code ends
 
         if (res.data && res.data.currency) {
-          currency = res.data.currency;
-          supportedCurrency.includes(res.data.currency) &&
-            dispatch(setCurrencyAction(res.data.currency));
+          setCurrency(res.data.currency, dispatch);
         } else {
           dispatch(fetchLocation());
         }

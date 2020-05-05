@@ -18,6 +18,7 @@ import {
 } from '../reducers/entitiesReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
+import { setCurrency } from './fetchConfig';
 
 const profileTypeToReq = {
   profile: 'profile_put',
@@ -144,6 +145,11 @@ export function updateUserProfile(data, profileType, forcePromisify) {
                   normalize(res.data.merge.userProfile, [userProfileSchema])
                 )
               );
+              // overwrite currency loaded with config API
+              if (profileTypeToReq[profileType] === 'currency') {
+                res.data.merge.userProfile[0] && res.data.merge.userProfile[0].currency
+                  && setCurrency(res.data.merge.userProfile[0].currency, dispatch);
+              }
             } else {
               dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
             }

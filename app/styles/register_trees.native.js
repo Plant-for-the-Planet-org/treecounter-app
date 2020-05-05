@@ -223,7 +223,7 @@ export default EStyleSheet.create({
     zIndex: 5,
     position: 'absolute',
     backgroundColor: 'rgba(0,0,0,0.5)',
-    right: 18,
+    right: 0,
     borderTopRightRadius: 7,
     borderBottomRightRadius: 7,
     flex: 1,

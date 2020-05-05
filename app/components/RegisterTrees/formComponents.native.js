@@ -94,8 +94,9 @@ export const FormikFormTree = props => {
    * if {isEdit} it will get default or initial value from props
    * if {!isEdit} it will get value from updated value from formik
    * */
+  // eslint-disable-next-line
   const isContributionImage = props => {
-    console.log('Image props',  props.values.contributionImages)
+    debug('Image props',  props.values.contributionImages)
     if (parentProps.isEdit) {
       const contributImage =
         props.values.contributionImages &&
@@ -135,7 +136,7 @@ export const FormikFormTree = props => {
     props.setFieldValue('contributionImages',contributionImages)
   }
   const deleteImage=(index,props)=> {
-    console.log('contributionImages==delete',contributionImages)
+    debug('contributionImages==delete',contributionImages)
     let images = [...contributionImages.reverse()];
     images = images.filter((data, i) => i !== index);
     setContributionImages(images);

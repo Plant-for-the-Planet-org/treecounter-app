@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { debug } from '../../debug';
 import MapContributions from './MapContributions';
-import { context } from '../../config';
+import { getWebMapId } from '../../actions/apiRouting';
 
 const ArcGISContributionsMap = ({ userId }) => {
-  const webMapId = context.mapIds.inventory;
+  const webMapId = getWebMapId('inventory');
   debug('ArcGISContributionsMap: webMapId', webMapId);
   debug('ArcGISContributionsMap: userId', userId);
   return (

@@ -6,6 +6,7 @@
   "planted_trees": "Árboles plantados",
   "target": "Objetivo",
   "support_trees_to": "Aportar Árboles para {{user}}",
+  "give_trees_to_company": "Da árboles con {{nombre de la empresa}}",
   "shareuserprofile": "Conoce a {{displayName}} en la aplicación Plant-for-the-Planet https://www.trilliontreecampaign.org/t/{{{{{slug}}",
   "supportUser": "Donar árboles para apoyar {{displayName}}"
 }

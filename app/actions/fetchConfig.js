@@ -11,14 +11,16 @@ import { setCurrencyAction } from './globalCurrency';
 // import { setCdnMedia } from '../reducers/configReducer';
 let cdnMedia = {};
 let currency = '';
+let webMapIds = {};
+
 export function fetchLocation() {
   return dispatch => {
     if (!getItemSync('preferredCurrency')) {
       getRequest('public_ipstack')
-        .then(data => {
-          // debug('Got location fetch ip', data);
+        .then(res => {
+          // debug('Got location fetch ip', res.data);
           const foundLocation = find(countryCodes, {
-            countryCode: data.data.country_code
+            countryCode: res.data.country_code
           });
           supportedCurrency.includes(foundLocation.code) &&
             dispatch(setCurrencyAction(foundLocation.code));
@@ -38,22 +40,28 @@ export function getCurrency() {
 export function getCdnMediaUrl() {
   return cdnMedia;
 }
+
+export function getWebMapIds() {
+  return webMapIds;
+}
+
 export function fetchConfig() {
   return dispatch => {
     // if (!getItemSync('preferredCurrency')) {
     getRequest('config_get')
-      .then(data => {
-        debug('Got config fetch data:', data.data);
-        cdnMedia = data.data.cdnMedia;
+      .then(res => {
+        debug('Got config fetch data:', res.data);
+        cdnMedia = res.data.cdnMedia;
+        webMapIds = res.data.webMapIds;
 
         // fake data manipulation for debug purpose, please remove this when debug finishes
         // data.data.currency = 'USD';
         // debug code ends
 
-        if (data.data && data.data.currency) {
-          currency = data.data.currency;
-          supportedCurrency.includes(data.data.currency) &&
-            dispatch(setCurrencyAction(data.data.currency));
+        if (res.data && res.data.currency) {
+          currency = res.data.currency;
+          supportedCurrency.includes(res.data.currency) &&
+            dispatch(setCurrencyAction(res.data.currency));
         } else {
           dispatch(fetchLocation());
         }

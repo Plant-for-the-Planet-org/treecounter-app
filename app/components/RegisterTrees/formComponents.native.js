@@ -140,7 +140,7 @@ export const FormikFormTree = props => {
     let images = [...contributionImages.reverse()];
     images = images.filter((data, i) => i !== index);
     setContributionImages(images);
-    console.log('images delete',contributionImages,index)
+    debug('images delete',contributionImages,index)
     props.setFieldValue('contributionImages',images)
   }
   /**
@@ -853,7 +853,7 @@ export function AddImage(props) {
   };
 
   const renderAsset = (image, index) => {
-    console.log('Image in add images=====>',image)
+    debug('Image in add images=====>',image)
     return (
       <View key={index} style={[{ position: 'relative', marginRight: 8 }]}>
         <Image

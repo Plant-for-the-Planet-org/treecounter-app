@@ -132,11 +132,12 @@ jobs:
         -exportPath DerivedData/ipa
       working-directory: ./ios
 
-    - name: Upload iOS IPA file
-      uses: actions/upload-artifact@v1
-      with:
-        name: TreecounterApp-develop-release.ipa
-        path: ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa
+# We only have 0.5GB space to store artifacts for GitHub actions
+#    - name: Upload iOS IPA file
+#      uses: actions/upload-artifact@v1
+#      with:
+#        name: TreecounterApp-develop-release.ipa
+#        path: ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa
 
     - name: Upload iOS IPA to Browserstack
       env:
@@ -146,3 +147,10 @@ jobs:
         echo "::set-env name=upload_file::$upload_file"
         mv 'ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa' release/$upload_file
         curl -u "planetit1:$BROWSERSTACK_ACCESS_KEY" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@release/$upload_file"
+
+    - name: Slack notification
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+        payload="{\"channel\": \"#notifications-git\", \"username\": \"webhookbot\", \"text\": \"Finished GitHub action $GITHUB_WORKFLOW for $GITHUB_REF\"}"
+        curl -X POST --data-urlencode "payload=$payload" https://hooks.slack.com/services/$SLACK_WEBHOOK_URL

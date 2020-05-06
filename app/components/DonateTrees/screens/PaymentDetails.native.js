@@ -30,11 +30,11 @@ export default function DonationStep3(props) {
 
       const token = await stripe.paymentRequestWithNativePay({
         total_price: props.totalPrice,
-        currency_code: 'INR',
+        currency_code: props.currency_code,
         billing_address_required: true,
         phone_number_required: true,
         line_items: [{
-          currency_code: 'INR',
+          currency_code: props.currency_code,
           description: 'Donation to Plant for the Planet',
           total_price: props.totalPrice,
           unit_price: props.amountPerTree,

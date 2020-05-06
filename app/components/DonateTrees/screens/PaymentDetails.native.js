@@ -30,16 +30,22 @@ export default function DonationStep3(props) {
 
       const token = await stripe.paymentRequestWithNativePay({
         total_price: props.totalPrice,
-        currency_code: props.currency_code,
+        currency_code: 'INR',
         billing_address_required: true,
         phone_number_required: true,
         line_items: [{
-          currency_code: props.currency_code,
+          currency_code: 'INR',
           description: 'Donation to Plant for the Planet',
           total_price: props.totalPrice,
           unit_price: props.amountPerTree,
           quantity: props.totalTreeCount,
         }],
+      }).then(
+        token => {
+          console.log('Token from GPAY --- ', token)
+        }
+      ).catch(err => {
+        console.log('error gpay', err)
       })
       setToken(token)
     } catch (error) {
@@ -285,9 +291,9 @@ export default function DonationStep3(props) {
           {Platform.OS === 'ios' && allowedNativePay ? (
             <TouchableOpacity onPress={() => handleApplePayPress({
               totalTreeCount: String(props.context.donationDetails.totalTreeCount),
-              amountPerTree: String(props.context.projectDetails.selectedProjectDetails.amountPerTree),
-              currency_code: String(props.context.projectDetails.selectedProjectDetails.currency),
-              totalPrice: String(props.context.donationDetails.totalTreeCount * props.context.projectDetails.selectedProjectDetails.amountPerTree),
+              amountPerTree: String(props.context.projectDetails.amountPerTree),
+              currency_code: String(props.context.projectDetails.currency),
+              totalPrice: String(props.context.donationDetails.totalTreeCount * props.context.projectDetails.amountPerTree),
             })}>
               <View style={styles.paymentCardView}>
                 <View style={styles.paymentModeView}>
@@ -313,9 +319,9 @@ export default function DonationStep3(props) {
             <TouchableOpacity
               onPress={() => handleAndroidPayPress({
                 totalTreeCount: String(props.context.donationDetails.talTreeCount),
-                totalPrice: String(props.context.donationDetails.totalTreeCount * props.context.projectDetails.selectedProjectDetails.amountPerTree),
-                amountPerTree: String(props.context.projectDetails.selectedProjectDetails.amountPerTree),
-                currency_code: String(props.context.projectDetails.selectedProjectDetails.currency)
+                totalPrice: String(props.context.donationDetails.totalTreeCount * props.context.projectDetails.amountPerTree),
+                amountPerTree: String(props.context.projectDetails.amountPerTree),
+                currency_code: String(props.context.projectDetails.currency)
               })}
             >
               <View style={styles.paymentCardView}>
@@ -346,8 +352,8 @@ export default function DonationStep3(props) {
         showPay ? (
           <PaymentButton
             treeCount={props.context.donationDetails.totalTreeCount}
-            treeCost={props.context.projectDetails.selectedProjectDetails.amountPerTree}
-            selectedCurrency={props.context.projectDetails.selectedProjectDetails.currency}
+            treeCost={props.context.projectDetails.amountPerTree}
+            selectedCurrency={props.context.projectDetails.currency}
             // commissionSwitch={props.navigation.getParam('commissionSwitch')}
             navigation={props.navigation}
             allValid={allValid}

@@ -253,16 +253,15 @@ export default function DonorDetails(props) {
                 ) : null}
               </View>
               {props.context &&
-                props.context.donationDetails &&
+                props.context.donationDetails && props.context.projectDetails &&
                 props.context.donationDetails.totalTreeCount ? (
                   <PaymentOption
                     treeCount={props.context.donationDetails.totalTreeCount}
                     treeCost={
-                      props.context.projectDetails.selectedProjectDetails
-                        .amountPerTree
+                      props.context.projectDetails.amountPerTree
                     }
                     selectedCurrency={
-                      props.context.projectDetails.selectedProjectDetails.currency
+                      props.context.projectDetails.currency
                     }
                     navigation={props.navigation}
                     onSubmit={formikProps.handleSubmit}

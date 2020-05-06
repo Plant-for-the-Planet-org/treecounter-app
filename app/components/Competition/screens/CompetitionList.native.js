@@ -54,6 +54,7 @@ class Competiton extends React.Component {
         style={[styles.tabBar]}
         tabStyle={{ width: 'auto', padding: 0 }}
         indicatorStyle={{ backgroundColor: colorWhite }}
+        lazy
         renderLabel={({ route, focused }) => (
           <View style={{ textAlign: 'left', marginRight: 24 }}>
             <Text
@@ -91,6 +92,9 @@ class Competiton extends React.Component {
   // This loads different components based on the selected index
   _renderSelectPlantScene = ({ route }) => {
     let competitionsArr = this.props[`${route.key}Competitions`];
+    let currentCompetitionsKey = `current${route.key.charAt(0).toUpperCase() +
+      route.key.slice(1)}Competitions`;
+    let currentCompetitionsArr = this.props[currentCompetitionsKey];
     let tabType = route.key;
     let tabHeader = i18n.t(`label.${route.key}_compeition_tab_header`);
     let nullTabHeader =
@@ -105,6 +109,9 @@ class Competiton extends React.Component {
     return (
       <CommonCompetitionTab
         competitionsArr={competitionsArr}
+        currentCompetitionsArr={currentCompetitionsArr}
+        setCurrentCompetitions={this.props.setCurrentCompetitions}
+        clearCurrentCompetitions={this.props.clearCurrentCompetitions}
         onMoreClick={this.props.onMoreClick}
         leaveCompetition={this.props.leaveCompetition}
         enrollCompetition={this.props.enrollCompetition}

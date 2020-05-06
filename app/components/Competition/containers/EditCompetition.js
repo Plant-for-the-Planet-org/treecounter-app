@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { debug } from '../../../debug';
-import { editCompetition, deleteCompetition } from './../redux/competitionActions';
+import {
+  editCompetition,
+  deleteCompetition
+} from './../redux/competitionActions';
 import EditCompetition from './../screens/EditCompetition.native';
 import { handleServerResponseError } from '../../../helpers/utils';
 import { competitionFormSchemaOptions } from '../../../server/parsedSchemas/competition';
@@ -37,7 +40,6 @@ class EditCompetitionContainer extends Component {
     }
   }
   editCompetition(value, params) {
-    debug(value);
     let json = {
       name: value.name,
       goal: value.goal,
@@ -53,7 +55,7 @@ class EditCompetitionContainer extends Component {
     }
     this.props
       .editCompetition(json, params, this.props.navigation)
-      .then((/* success */) => { })
+      .then((/* success */) => {})
       .catch(err => {
         debug('err signup data', err);
         let newSchemaOptions = handleServerResponseError(
@@ -67,7 +69,7 @@ class EditCompetitionContainer extends Component {
         });
       });
   }
-  componentDidMount() { }
+  componentDidMount() {}
 
   render() {
     if (this.state.competition_id) {

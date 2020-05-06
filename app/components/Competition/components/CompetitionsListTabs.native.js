@@ -9,16 +9,19 @@ import CompetitionSnippet from './CompetitionSnippet.native';
 import { empty, trees } from '../../../assets';
 import { CompetitionLoader } from './../../Common/ContentLoader';
 
-const CompetitionFinishedMessage = () => {
-  return (
-    <View style={styles.caughtUpMessageContainer}>
-      <View style={[styles.caughtUpLine, { marginRight: 10 }]} />
-      <Text style={styles.caughtUpMessage}>
-        {i18n.t('label.you_are_all_caught_up')}
-      </Text>
-      <View style={[styles.caughtUpLine, { marginLeft: 10 }]} />
-    </View>
-  );
+const CompetitionFinishedMessage = showFinishedMessage => {
+  if (showFinishedMessage) {
+    return (
+      <View style={styles.caughtUpMessageContainer}>
+        <View style={[styles.caughtUpLine, { marginRight: 10 }]} />
+        <Text style={styles.caughtUpMessage}>
+          {i18n.t('label.you_are_all_caught_up')}
+        </Text>
+        <View style={[styles.caughtUpLine, { marginLeft: 10 }]} />
+      </View>
+    );
+  }
+  return null;
 };
 
 const CompetitionsList = props => {
@@ -27,6 +30,8 @@ const CompetitionsList = props => {
   const [isLoading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [isCompetitionFinished, setCompetitionFinished] = useState(false);
+  const [showFinishedMessage, setShowFinishedMessage] = useState(false);
+  let onEndReachedCalledDuringMomentum = true;
 
   /**
    * * On user refresh
@@ -41,6 +46,7 @@ const CompetitionsList = props => {
     if (props.tabType !== 'mine') {
       setPage(1);
       setShowCompetitions([]);
+      props.clearCurrentCompetitions(props.tabType);
       setCompetitionFinished(false);
     }
     await props.fetchCompetitions(props.tabType, 1);
@@ -76,50 +82,82 @@ const CompetitionsList = props => {
   useEffect(() => {
     let showCompetitionsArr = [];
     if (props.competitionsArr.length > 0) {
-      for (let i = 0; i < props.competitionsArr.length; i++) {
-        if (props.competitionsArr[i].category === props.tabType) {
-          for (
-            let j = 0;
-            j < props.competitionsArr[i].competitions.length;
-            j++
-          ) {
-            if (props.tabType !== 'mine') {
-              let endDate = props.competitionsArr[i].competitions[j].endDate;
-              endDate = new Date(endDate);
-              if (props.tabType === 'archived') {
-                if (CurrentDate > endDate) {
-                  showCompetitionsArr.push(
-                    props.competitionsArr[i].competitions[j]
-                  );
-                }
-              } else {
-                if (endDate > CurrentDate) {
-                  showCompetitionsArr.push(
-                    props.competitionsArr[i].competitions[j]
-                  );
-                }
-              }
-            } else {
-              showCompetitionsArr.push(
-                props.competitionsArr[i].competitions[j]
-              );
-            }
-          }
-        }
+      // * Checks if current page from api is not equal to current page value of state
+      // 1. If not then set the current page to same as API's loaded competiton current page
+      // 2. Also concats the competition array to be shown with redux currentCompetition state
+      // 3. Set's loading to false
+      if (
+        props.competitionsArr[0].currentPage !== page &&
+        props.currentCompetitionsArr?.length > 0
+      ) {
+        setPage(props.competitionsArr[0].currentPage);
+        showCompetitionsArr = showCompetitionsArr.concat(
+          props.currentCompetitionsArr
+        );
+        setLoading(false);
+
+        // * If no more pages are left to be shown for competition then
+        //    sets competionFinished to be true
         if (
           props.tabType !== 'mine' &&
           // eslint-disable-next-line no-prototype-builtins
-          props.competitionsArr[i].hasOwnProperty('nbRemaining') &&
-          props.competitionsArr[i].nbRemaining === 0
+          props.competitionsArr[0].hasOwnProperty('nbRemaining') &&
+          props.competitionsArr[0].nbRemaining === 0
         ) {
           setCompetitionFinished(true);
         }
-        setLoading(false);
+      } else {
+        for (let i = 0; i < props.competitionsArr.length; i++) {
+          if (props.competitionsArr[i].category === props.tabType) {
+            for (
+              let j = 0;
+              j < props.competitionsArr[i].competitions.length;
+              j++
+            ) {
+              if (props.tabType !== 'mine') {
+                let endDate = props.competitionsArr[i].competitions[j].endDate;
+                endDate = new Date(endDate);
+                if (props.tabType === 'archived') {
+                  if (CurrentDate > endDate) {
+                    showCompetitionsArr.push(
+                      props.competitionsArr[i].competitions[j]
+                    );
+                  }
+                } else {
+                  if (endDate > CurrentDate) {
+                    showCompetitionsArr.push(
+                      props.competitionsArr[i].competitions[j]
+                    );
+                  }
+                }
+              } else {
+                showCompetitionsArr.push(
+                  props.competitionsArr[i].competitions[j]
+                );
+              }
+            }
+          }
+          if (
+            props.tabType !== 'mine' &&
+            // eslint-disable-next-line no-prototype-builtins
+            props.competitionsArr[i].hasOwnProperty('nbRemaining') &&
+            props.competitionsArr[i].nbRemaining === 0
+          ) {
+            setCompetitionFinished(true);
+          }
+          setLoading(false);
+        }
       }
     }
     setShowCompetitions(showCompetitions =>
       showCompetitions.concat(showCompetitionsArr)
     );
+    if (props.tabType !== 'mine') {
+      props.setCurrentCompetitions(
+        props.tabType,
+        showCompetitions.concat(showCompetitionsArr)
+      );
+    }
   }, [props.competitionsArr]);
 
   const _keyExtractor = item => item.id.toString();
@@ -173,29 +211,40 @@ const CompetitionsList = props => {
     );
   };
 
-  if (props.tabType === 'featured') {
-    console.log('Featured in tabs', showCompetitions.length);
-  }
-
   return (
     <FlatList
-      data={showCompetitions}
+      data={
+        props.tabType !== 'mine'
+          ? props.currentCompetitionsArr
+          : showCompetitions
+      }
       keyExtractor={item => _keyExtractor(item)}
       renderItem={item => _renderItem(item)}
-      onEndReached={
-        /**
-         * * Only if competition is not finished and no new competition is loading
-         *   calls @function handleLoadMore()
-         */
-        props.tabType !== 'mine'
-          ? isCompetitionFinished
-            ? null
-            : () => {
-              !isLoading && handleLoadMore();
-            }
-          : null
-      }
+      /**
+       * * Only if competition is not finished and no new competition is loading
+       *   calls @function handleLoadMore()
+       */
+      onEndReached={({ distanceFromEnd }) => {
+        console.log('\n\x1b[42m distanceFromEnd \x1b[0m \n', distanceFromEnd);
+        if (distanceFromEnd <= 0) {
+          setShowFinishedMessage(true);
+        } else {
+          setShowFinishedMessage(false);
+        }
+        if (
+          !onEndReachedCalledDuringMomentum &&
+          props.tabType !== 'mine' &&
+          !isCompetitionFinished &&
+          !isLoading
+        ) {
+          handleLoadMore();
+          onEndReachedCalledDuringMomentum = true;
+        }
+      }}
       onEndReachedThreshold={0.05}
+      onMomentumScrollBegin={() => {
+        onEndReachedCalledDuringMomentum = false;
+      }}
       onRefresh={() => onRefresh()}
       refreshing={refreshing}
       /**
@@ -233,7 +282,7 @@ const CompetitionsList = props => {
         return isLoading ? (
           <View style={{ marginTop: 16 }}>{CompetitionLoader()}</View>
         ) : props.tabType !== 'mine' && isCompetitionFinished ? (
-          CompetitionFinishedMessage()
+          CompetitionFinishedMessage(showFinishedMessage)
         ) : null;
       }}
     />

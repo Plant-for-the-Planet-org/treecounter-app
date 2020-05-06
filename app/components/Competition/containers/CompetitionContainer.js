@@ -7,7 +7,9 @@ import {
   enrollCompetition,
   fetchCompetitions,
   fetchMineCompetitions,
-  leaveCompetition
+  leaveCompetition,
+  setCurrentCompetitions,
+  clearCurrentCompetitions
 } from './../redux/competitionActions';
 import { supportTreecounterAction } from '../../../actions/supportTreecounterAction';
 import LoadingIndicator from '../../../components/Common/LoadingIndicator';
@@ -45,7 +47,7 @@ class CompetitionContainer extends React.Component {
       };
       this.props
         .createCompetition(newvalue, this.props.navigation)
-        .then((/* success */) => { })
+        .then((/* success */) => {})
         .catch(err => {
           debug('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
@@ -91,8 +93,13 @@ class CompetitionContainer extends React.Component {
       <Competiton
         allCompetitions={this.props.allCompetitions}
         featuredCompetitions={this.props.featuredCompetitions}
-        archivedCompetitions={this.props.archivedCompetitions}
         mineCompetitions={this.props.mineCompetitions}
+        archivedCompetitions={this.props.archivedCompetitions}
+        currentAllCompetitions={this.props.currentAllCompetitions}
+        currentFeaturedCompetitions={this.props.currentFeaturedCompetitions}
+        currentArchivedCompetitions={this.props.currentArchivedCompetitions}
+        setCurrentCompetitions={this.props.setCurrentCompetitions}
+        clearCurrentCompetitions={this.props.clearCurrentCompetitions}
         onMoreClick={(id, name) => this.onMoreClick(id, name)}
         leaveCompetition={id => this.leaveCompetition(id)}
         enrollCompetition={id => this.enrollCompetition(id)}
@@ -107,8 +114,8 @@ class CompetitionContainer extends React.Component {
         }
       />
     ) : (
-        <LoadingIndicator contentLoader screen="Competition" />
-      );
+      <LoadingIndicator contentLoader screen="Competition" />
+    );
   }
 
   onMoreClick(id, name) {
@@ -127,6 +134,11 @@ const mapStateToProps = state => ({
   allCompetitions: state.competitionsReducer.allCompetitions,
   featuredCompetitions: state.competitionsReducer.featuredCompetitions,
   archivedCompetitions: state.competitionsReducer.archivedCompetitions,
+  currentAllCompetitions: state.competitionsReducer.currentAllCompetitions,
+  currentFeaturedCompetitions:
+    state.competitionsReducer.currentFeaturedCompetitions,
+  currentArchivedCompetitions:
+    state.competitionsReducer.currentArchivedCompetitions,
   mineCompetitions: state.competitionsReducer.mineCompetitions
 });
 
@@ -138,7 +150,9 @@ const mapDispatchToProps = dispatch => {
       leaveCompetition,
       enrollCompetition,
       createCompetition,
-      supportTreecounterAction
+      supportTreecounterAction,
+      setCurrentCompetitions,
+      clearCurrentCompetitions
     },
     dispatch
   );

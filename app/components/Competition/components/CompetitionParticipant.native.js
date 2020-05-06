@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import i18n from '../../../locales/i18n';
-import { debug } from '../../../debug';
 import styles from '../../../styles/competition/competition-full.native';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
@@ -14,8 +13,6 @@ class CompetitionParticipant extends React.Component {
     this.supportButton = this.supportButton.bind(this);
     this.plantButton = this.plantButton.bind(this);
   }
-
-
 
   // This function is for people to support someone who is a participant in the competition
   supportButton() {
@@ -35,7 +32,6 @@ class CompetitionParticipant extends React.Component {
     updateRoute('app_donateTrees', this.props.navigation);
   }
   render() {
-
     let support_button = null;
 
     if (
@@ -55,13 +51,12 @@ class CompetitionParticipant extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
-      )
-
-    }
-    else if (
+      );
+    } else if (
       this.props.type === 'participants' &&
-      this.props.competitor.treecounterSlug !== this.props.treeCounter.slug
-      && this.props.status !== 'enrolled' && !this.props.competitionEnded
+      this.props.competitor.treecounterSlug !== this.props.treeCounter.slug &&
+      this.props.status !== 'enrolled' &&
+      !this.props.competitionEnded
     ) {
       support_button = (
         <View style={snippetStyles.topCompetitorScore}>
@@ -75,9 +70,7 @@ class CompetitionParticipant extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    }
-
-    else if (this.props.type === 'invite') {
+    } else if (this.props.type === 'invite') {
       support_button = (
         <View style={snippetStyles.topCompetitorScore}>
           <TouchableOpacity
@@ -127,41 +120,41 @@ class CompetitionParticipant extends React.Component {
               }
             >
               {this.props.competitor.treecounterSlug ===
-                this.props.treeCounter.slug
+              this.props.treeCounter.slug
                 ? i18n.t('label.me')
                 : this.props.competitor.treecounterDisplayName}
             </Text>
             {/* Competitor Name Ends */}
 
             {this.props.type === 'participants' ||
-              this.props.type === 'invite' ? (
-                <Text style={styles.topCompetitorScoreText}>
-                  {this.props.competitor.score} {i18n.t('label.planted')}
-                </Text>
-              ) : this.props.type === 'request_join' ? (
-                <View style={styles.confirm_delete_button}>
-                  <TouchableOpacity
-                    style={snippetStyles.secondaryButton}
-                    onPress={() =>
-                      this.props.confirmPart(this.props.competitor.token)
-                    }
-                  >
-                    <Text style={snippetStyles.secondaryButtonText}>
-                      {i18n.t('label.confirm')}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={snippetStyles.cancelButton}
-                    onPress={() =>
-                      this.props.declinePart(this.props.competitor.token)
-                    }
-                  >
-                    <Text style={snippetStyles.cancelButtonText}>
-                      {i18n.t('label.delete')}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              ) : null}
+            this.props.type === 'invite' ? (
+              <Text style={styles.topCompetitorScoreText}>
+                {this.props.competitor.score} {i18n.t('label.planted')}
+              </Text>
+            ) : this.props.type === 'request_join' ? (
+              <View style={styles.confirm_delete_button}>
+                <TouchableOpacity
+                  style={snippetStyles.secondaryButton}
+                  onPress={() =>
+                    this.props.confirmPart(this.props.competitor.token)
+                  }
+                >
+                  <Text style={snippetStyles.secondaryButtonText}>
+                    {i18n.t('label.confirm')}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={snippetStyles.cancelButton}
+                  onPress={() =>
+                    this.props.declinePart(this.props.competitor.token)
+                  }
+                >
+                  <Text style={snippetStyles.cancelButtonText}>
+                    {i18n.t('label.delete')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
           </View>
         </View>
         {support_button}

@@ -8,7 +8,12 @@ import ImagePicker from 'react-native-image-picker';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { debug } from '../../../debug';
-import { cameraSolid, imageGallery, forward, circleDelete } from '../../../assets';
+import {
+  cameraSolid,
+  imageGallery,
+  forward,
+  circleDelete
+} from '../../../assets';
 import styles from '../../../styles/competition/competition-form.native';
 import { formatDateToMySQL } from '../../../helpers/utils';
 import { formatDate } from '../../../utils/utils';
@@ -23,14 +28,13 @@ export const FormikForm = props => {
   const validationSchema = generateFormikSchemaFromFormSchema(
     competitionFormSchema
   );
-  debug('validation schema', validationSchema);
   const buttonType = props.buttonType;
 
   const handleDelete = () => {
     RBSheetRef.close();
     props
       .onDeleteCompetition(props.competition_id)
-      .then((/* success */) => { })
+      .then((/* success */) => {})
       .catch(err => {
         debug('Error', err);
       });
@@ -107,9 +111,7 @@ export const FormikForm = props => {
 
                 <CompetitionDatePicker
                   endDate={props.values.endDate}
-                  setFieldValue={date =>
-                    props.setFieldValue('endDate', date)
-                  }
+                  setFieldValue={date => props.setFieldValue('endDate', date)}
                   touched={props.touched.endDate}
                   errors={props.errors.endDate}
                 />
@@ -297,25 +299,25 @@ export function AddImage(props) {
               />
             </View>
           ) : (
-              <View style={styles.projectImageContainer}>
-                <TouchableOpacity
-                  style={styles.competitionDeleteButton}
-                  onPress={() => props.setFieldValue('imageFile', 'null')}
-                >
-                  <Image
-                    style={styles.competitionDeleteImage}
-                    source={circleDelete}
-                  />
-                </TouchableOpacity>
+            <View style={styles.projectImageContainer}>
+              <TouchableOpacity
+                style={styles.competitionDeleteButton}
+                onPress={() => props.setFieldValue('imageFile', 'null')}
+              >
                 <Image
-                  style={styles.teaser__projectImage}
-                  source={{
-                    uri: getImageUrl('competition', 'medium', image)
-                  }}
-                  resizeMode={'cover'}
+                  style={styles.competitionDeleteImage}
+                  source={circleDelete}
                 />
-              </View>
-            )
+              </TouchableOpacity>
+              <Image
+                style={styles.teaser__projectImage}
+                source={{
+                  uri: getImageUrl('competition', 'medium', image)
+                }}
+                resizeMode={'cover'}
+              />
+            </View>
+          )
         ) : null}
       </View>
       <View style={styles.addImageButtonContainer}>

@@ -29,7 +29,13 @@ import {
   GET_ALL_COMPETITIONS,
   GET_FEATURED_COMPETITIONS,
   GET_ARCHIVED_COMPETITIONS,
-  GET_MINE_COMPETITIONS
+  GET_MINE_COMPETITIONS,
+  SET_CURRENT_ALL_COMPETITIONS,
+  SET_CURRENT_FEATURED_COMPETITIONS,
+  SET_CURRENT_ARCHIVED_COMPETITIONS,
+  CLEAR_CURRENT_ALL_COMPETITIONS,
+  CLEAR_CURRENT_FEATURED_COMPETITIONS,
+  CLEAR_CURRENT_ARCHIVED_COMPETITIONS
 } from '../../../actions/types';
 
 export function fetchCompetitions(category, page) {
@@ -119,6 +125,7 @@ export function declinePart(id) {
       });
   };
 }
+
 export function cancelInvite(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
@@ -169,7 +176,7 @@ export function leaveCompetition(id) {
 export function createCompetition(value, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       postAuthenticatedRequest('competition_post', value)
         .then(res => {
           dispatch(
@@ -213,10 +220,11 @@ export function createCompetition(value, navigation) {
     });
   };
 }
+
 export function editCompetition(value, param, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       putAuthenticatedRequest('competition_put', value, { competition: param })
         .then(res => {
           dispatch(
@@ -254,7 +262,7 @@ export function editCompetition(value, param, navigation) {
 export function deleteCompetition(param) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       deleteAuthenticatedRequest('competition_delete', { competition: param })
         .then(res => {
           dispatch(unlinkEntity(res.data.unlink));
@@ -317,6 +325,7 @@ export function enrollCompetition(id) {
       });
   };
 }
+
 export function fetchAllCompetitions() {
   return getAuthenticatedRequest('competitions_get', { category: 'all' });
 }
@@ -370,6 +379,7 @@ export function invitePart(competition, competitor) {
       });
   };
 }
+
 export function fetchCompetitionDetail(id) {
   return dispatch => {
     // dispatch(setProgressModelState(true));
@@ -387,5 +397,38 @@ export function fetchCompetitionDetail(id) {
         // dispatch(setProgressModelState(false));
         dispatch(setContentLoaderState(false));
       });
+  };
+}
+
+export function setCurrentCompetitions(category, competitionsArr) {
+  let actionType;
+  if (category === 'archived') {
+    actionType = SET_CURRENT_ARCHIVED_COMPETITIONS;
+  } else if (category === 'featured') {
+    actionType = SET_CURRENT_FEATURED_COMPETITIONS;
+  } else {
+    actionType = SET_CURRENT_ALL_COMPETITIONS;
+  }
+  return dispatch => {
+    dispatch({
+      type: actionType,
+      payload: competitionsArr
+    });
+  };
+}
+
+export function clearCurrentCompetitions(category) {
+  let actionType;
+  if (category === 'archived') {
+    actionType = CLEAR_CURRENT_ARCHIVED_COMPETITIONS;
+  } else if (category === 'featured') {
+    actionType = CLEAR_CURRENT_FEATURED_COMPETITIONS;
+  } else {
+    actionType = CLEAR_CURRENT_ALL_COMPETITIONS;
+  }
+  return dispatch => {
+    dispatch({
+      type: actionType
+    });
   };
 }

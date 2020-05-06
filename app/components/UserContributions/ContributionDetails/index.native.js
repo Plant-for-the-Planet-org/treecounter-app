@@ -1,23 +1,28 @@
-import React from 'react';
-import { ScrollView, View, Linking, Image, Text } from 'react-native';
-import { BackHandler } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { BackHandler, Image, Linking, ScrollView, Text, View } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getLocalRoute } from '../../../actions/apiRouting';
+import { deleteContribution } from '../../../actions/EditMyTree';
+import { loadProject } from '../../../actions/loadTposAction';
+import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
+import { redMyLocationIcon } from '../../../assets';
+import VideoContainer from '../../../components/Common/VideoContainer';
 import { debug } from '../../../debug';
+import i18n from '../../../locales/i18n.js';
+import styles from '../../../styles/newUserContributions/userContributions';
+import colors from '../../../utils/constants';
+import { delimitNumbers, formatDate } from '../../../utils/utils';
+import Measurements from '../../Measurements/Measurements.native';
+import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
 // import NDVI from '../../../containers/NDVI/NDVI';
 import UserContributions from '../../UserContributions/userContribution.native';
-import Measurements from '../../Measurements/Measurements.native';
-import { formatDate, delimitNumbers } from '../../../utils/utils';
-import i18n from '../../../locales/i18n.js';
-import VideoContainer from '../../../components/Common/VideoContainer';
-import PlantProjectImageCarousel from '../../PlantProjects/PlantProjectImageCarousel';
-import { getLocalRoute } from '../../../actions/apiRouting';
-import { redMyLocationIcon } from '../../../assets';
-import styles from '../../../styles/newUserContributions/userContributions';
+import { updateStaticRoute } from './../../../helpers/routerHelper';
 // import styles from '../../../styles/newUserContributions/userContributions';
 import AccordionContactInfo from './../../PlantProjects/HelperComponents/AccordionContactInfo';
-import { updateStaticRoute } from './../../../helpers/routerHelper';
-import colors from '../../../utils/constants';
+
 
 // eslint-disable-next-line no-underscore-dangle
 const _goToURL = url => {
@@ -28,6 +33,13 @@ class UserContributionsDetails extends React.Component {
   constructor(props) {
     super(props);
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+    let contribution = this.props.contribution;
+    if (contribution.plantProjectId) {
+      this.props.loadProject({ id: contribution.plantProjectId });
+    }
   }
 
   // adds back button listener on component mount
@@ -99,7 +111,6 @@ class UserContributionsDetails extends React.Component {
       geoLongitude
     } = this.props.contribution;
     const plantProjects = this.props.plantProjects || [];
-
     // initializing variables
     let plantedDate = undefined;
     let plantProjectSlug = this.props.contribution.plantProjectSlug;
@@ -115,42 +126,12 @@ class UserContributionsDetails extends React.Component {
     let contributionOrPlantedImages = contributionImages;
 
     // sets the header text
-    // if treeType is null then header text is treecount and type of contribution
-    if (treeType === null) {
-      if (treeCount > 1) {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          i18n.t('label.usr_contribution_tree');
-      } else {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          i18n.t('label.usr_contribution_single_tree');
-      }
-    }
-
-    // if treeType is not null then header text is treecount, treeName and
-    // type of contribution
-    else if (treeType !== null) {
-      if (treeCount > 1) {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          treeType.charAt(0).toUpperCase() +
-          treeType.slice(1) +
-          ' ' +
-          i18n.t('label.usr_contribution_tree');
-      } else {
-        headerText =
-          delimitNumbers(treeCount) +
-          ' ' +
-          treeType.charAt(0).toUpperCase() +
-          treeType.slice(1) +
-          ' ' +
-          i18n.t('label.usr_contribution_single_tree');
-      }
-    }
+    // - if treeType is null then header text is treecount and type of contribution
+    // - if treeType is not null then header text is treecount, treeName and type of contribution
+    headerText = delimitNumbers(treeCount)
+      + (treeType ? ' ' + treeType.charAt(0).toUpperCase() + treeType.slice(1) : '')
+      + ' '
+      + ((treeCount > 1) ? i18n.t('label.usr_contribution_tree') : i18n.t('label.usr_contribution_single_tree'));
 
     // formats the plant date in 'MMMM d,  yyyy' format
     if (plantDate) {
@@ -255,113 +236,121 @@ class UserContributionsDetails extends React.Component {
       }
     }
     return (
-      <ScrollView style={{ backgroundColor: colors.WHITE, flex: 1 }}>
-        <UserContributions
-          mayUpdate={mayUpdate}
-          treeCount={treeCount}
-          plantProjectName={plantProjectName}
-          plantProjectSlug={plantProjectSlug}
-          contributionPersonPrefix={contributionPersonPrefix}
-          contributionPerson={contributionPerson}
-          contributionPersonSlug={contributionPersonSlug}
-          navigation={this.props.navigation}
-          updateStaticRoute={updateStaticRoute}
-          treeClassification={treeClassification}
-          plantedDate={plantedDate}
-          showDelete={contributionType == 'planting'}
-          headerText={headerText}
-          plantProjectId={plantProjectId}
-          onPlantProjectClick={this.onPlantProjectClick}
-          onClickDelete={() => {
-            this.props.deleteContribution(
-              this.props.contribution.id,
-              this.props.navigation
-            );
-            this.props.navigation.goBack();
-          }}
-          onClickEdit={() => {
-            this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
-              selectedTreeId: this.props.contribution.id,
-              contribution: this.props.contribution
-            });
-          }}
-          onClickClose={() => {
-            this.props.navigation.goBack();
-          }}
-          contribution={this.props.contribution}
-        />
+      <View style={{ flex: 1, backgroundColor: colors.WHITE, marginTop: 10, }}>
+        <ScrollView style={styles.scrollViewContainer}
+          contentContainerStyle={{
+            paddingBottom: 72
+          }}>
+          <UserContributions
+            isFromUserProfile={this.props.isFromUserProfile}
+            mayUpdate={mayUpdate}
+            treeCount={treeCount}
+            plantProjectName={plantProjectName}
+            plantProjectSlug={plantProjectSlug}
+            contributionPersonPrefix={contributionPersonPrefix}
+            contributionPerson={contributionPerson}
+            contributionPersonSlug={contributionPersonSlug}
+            navigation={this.props.navigation}
+            updateStaticRoute={updateStaticRoute}
+            treeClassification={treeClassification}
+            plantedDate={plantedDate}
+            showDelete={contributionType == 'planting'}
+            headerText={headerText}
+            plantProjectId={plantProjectId}
+            onPlantProjectClick={this.onPlantProjectClick}
+            onClickDelete={() => {
+              this.props.deleteContribution(
+                this.props.contribution.id,
+                this.props.navigation
+              );
+              this.props.afterDeleteContribution()
+            }}
+            onClickEdit={() => {
+              this.props.navigation.navigate(getLocalRoute('app_editTrees'), {
+                selectedTreeId: this.props.contribution.id,
+                contribution: this.props.contribution
+              });
+            }}
+            onClickClose={() => {
+              this.props.navigation.goBack();
+            }}
+            contribution={this.props.contribution}
+          />
 
-        {/* displays image carousel if any image or video is available */}
-        {(videoUrl ||
-          (contributionOrPlantedImages &&
-            contributionOrPlantedImages.length > 0)) && (
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                marginVertical: 30
-              }}
-            >
-              {/* {debug('\x1b[46m \x1b[30m video', videoUrl)} */}
-              {videoUrl ? <VideoContainer url={videoUrl} /> : null}
-              {/* TODO Add thumbnail for video */}
-              {contributionOrPlantedImages &&
-                contributionOrPlantedImages.length > 0 && (
-                  <PlantProjectImageCarousel
-                    resizeMode={'cover'}
-                    images={contributionOrPlantedImages}
-                    aspectRatio={16 / 9}
-                    videoUrl={videoUrl}
-                  />
-                )}
-            </ScrollView>
-          )}
+          {/* displays image carousel if any image or video is available */}
+          {(videoUrl ||
 
-        {/* displays error message if geoLatitude and geoLongitude are same */}
-        {hasGeoLocationError ? (
-          <View style={styles.locationErrorContainer}>
-            <Image
-              style={[styles.icon, { marginRight: 20 }]}
-              source={redMyLocationIcon}
-            />
-            <Text style={styles.locationErrorText}>{locationErrorText}</Text>
-          </View>
-        ) : null}
+            (contributionOrPlantedImages &&
+              contributionOrPlantedImages.length > 0)) && (
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  marginVertical: 30
+                }}
+              >
+                {/* {debug('\x1b[46m \x1b[30m video', videoUrl)} */}
+                {videoUrl ? <VideoContainer url={videoUrl} /> : null}
+                {/* TODO Add thumbnail for video */}
+                {contributionOrPlantedImages &&
+                  contributionOrPlantedImages.length > 0 && (
+                    <PlantProjectImageCarousel
+                      resizeMode={'cover'}
+                      pictureType={this.props.contribution.contributionType == 'planting' ? 'contribution' : 'project'}
+                      pictureSize={this.props.contribution.contributionType == 'planting' ? 'medium' : 'large'}
+                      images={contributionOrPlantedImages}
+                      aspectRatio={16 / 9}
+                      videoUrl={videoUrl}
+                    />
+                  )}
+              </ScrollView>
+            )}
 
-        {/* displays measurements if available */}
-        {/* if contribution type is planting gives Add Measurement button */}
-        {hasMeasurements ? (
-          <View style={{ marginHorizontal: 20, marginTop: 30 }}>
-            <Measurements
-              measurements={this.props.contribution.contributionMeasurements}
-              // isPlanting={contributionType === 'planting' ? true : false}
-              isPlanting={false}
-            />
-          </View>
-        ) : null}
+          {/* displays error message if geoLatitude and geoLongitude are same */}
+          {hasGeoLocationError ? (
+            <View style={styles.locationErrorContainer}>
+              <Image
+                style={[styles.icon, { marginRight: 20, marginTop: 5 }]}
+                source={redMyLocationIcon}
+              />
+              <Text style={styles.locationErrorText}>{locationErrorText}</Text>
+            </View>
+          ) : null}
 
-        {/* displays project contact card if project is available
+          {/* displays measurements if available */}
+          {/* if contribution type is planting gives Add Measurement button */}
+          {hasMeasurements ? (
+            <View style={{ marginHorizontal: 20, marginTop: 30 }}>
+              <Measurements
+                measurements={this.props.contribution.contributionMeasurements}
+                // isPlanting={contributionType === 'planting' ? true : false}
+                isPlanting={false}
+              />
+            </View>
+          ) : null}
+
+          {/* displays project contact card if project is available
           in the contribution */}
-        {selectedPlantProjectDetails && selectedPlantProjectDetails.tpoData ? (
-          <View style={{ marginBottom: 30 }}>
-            <AccordionContactInfo
-              navigation={this.props.navigation}
-              slug={selectedPlantProjectDetails.tpoData.treecounterSlug}
-              updateStaticRoute={updateStaticRoute}
-              url={selectedPlantProjectDetails.url}
-              _goToURL={_goToURL}
-              email={selectedPlantProjectDetails.tpoData.email}
-              address={selectedPlantProjectDetails.tpoData.address}
-              name={selectedPlantProjectDetails.tpoData.name}
-              title={selectedPlantProjectDetails.tpoData.name}
-            />
-          </View>
-        ) : null}
+          {selectedPlantProjectDetails && selectedPlantProjectDetails.tpoData ? (
+            <View style={{ marginBottom: 30 }}>
+              <AccordionContactInfo
+                navigation={this.props.navigation}
+                slug={selectedPlantProjectDetails.tpoData.treecounterSlug}
+                updateStaticRoute={updateStaticRoute}
+                url={selectedPlantProjectDetails.url}
+                _goToURL={_goToURL}
+                email={selectedPlantProjectDetails.tpoData.email}
+                address={selectedPlantProjectDetails.tpoData.address}
+                name={selectedPlantProjectDetails.tpoData.name}
+                title={selectedPlantProjectDetails.tpoData.name}
+              />
+            </View>
+          ) : null}
 
-        {/* certificate and share button not required as of now */}
-        {/* <View style={styles.buttonGroup}>
+          {/* certificate and share button not required as of now */}
+          {/* <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={() => {}} style={{}}>
             <View style={[styles.buttonContainer, styles.borderGreen]}>
               <Image style={{ width: 16, height: 16 }} source={downloadGreen} />
@@ -382,12 +371,15 @@ class UserContributionsDetails extends React.Component {
           </TouchableOpacity>
         </View> */}
 
-        {/* {ndviUid ? (
+          {/* {ndviUid ? (
           <View style={{ marginLeft: 8, marginRight: 8, marginTop: 20 }}>
             <NDVI ndviUid={ndviUid} />
           </View>
         ) : null} */}
-      </ScrollView>
+
+        </ScrollView>
+      </View>
+
     );
   }
 }
@@ -400,4 +392,27 @@ UserContributionsDetails.propTypes = {
   deleteContribution: PropTypes.func
 };
 
-export default withNavigation(UserContributionsDetails);
+const mapStateToProps = () => {
+  return {
+    // userProfileId: currentUserProfileIdSelector(state),
+    // plantProjects: getAllPlantProjectsSelector(state)
+    // entities: plantProjectsSelector(state)
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      deleteContribution,
+      loadProject,
+      selectPlantProjectAction
+    },
+    dispatch
+  );
+};
+// const UserCont  = withNavigation(UserContributionsDetails);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNavigation(UserContributionsDetails));

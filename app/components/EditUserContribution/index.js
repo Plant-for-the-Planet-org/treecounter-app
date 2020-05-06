@@ -12,6 +12,7 @@ import {
   schemaOptionsMultipleTrees
 } from '../../server/parsedSchemas/registerTrees';
 import i18n from '../../locales/i18n.js';
+import {isTpo} from '../../helpers/utils';
 
 let TCombForm = t.form.Form;
 
@@ -89,7 +90,11 @@ export default class EditUserContribution extends Component {
   }
 
   onSubmitClick(event, mode) {
-    this.props.onSubmit(mode, this.editTreeForm.getValue());
+    let plantProject = null;
+    if (isTpo(this.props.currentUserProfile)) {
+      plantProject =this.props.userContribution.plantProjectId
+    }
+    this.props.onSubmit(mode, this.editTreeForm.getValue(),plantProject);
     event && event.preventDefault();
   }
 
@@ -109,7 +114,7 @@ export default class EditUserContribution extends Component {
                 />
               ) : (
                 <TCombForm
-                  ref="editTreeForm"
+                  ref={ref => (this.editTreeForm = ref)}
                   type={multipleTreesRegisterFormSchema}
                   options={schemaOptionsMultiple}
                   value={this.props.userContribution}

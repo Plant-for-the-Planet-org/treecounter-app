@@ -211,7 +211,7 @@ export default class RegisterTrees extends Component {
                 />
               ) : (
                 <TCombForm
-                  ref="registerTreeForm"
+                  ref={ref => (this.registerTreeForm = ref)}
                   type={multipleTreesRegisterFormSchema}
                   options={formSchemaOptions}
                   value={this.state.formValueMultiple}
@@ -242,7 +242,7 @@ export default class RegisterTrees extends Component {
               ) : null}
             </Tabs>
             <PrimaryButton onClick={this.onSubmitClick}>
-              {i18n.t('label.register')}
+              {isSingleTree ? i18n.t('label.register') : i18n.t('label.register_trees')}
             </PrimaryButton>
           </form>
         </CardLayout>

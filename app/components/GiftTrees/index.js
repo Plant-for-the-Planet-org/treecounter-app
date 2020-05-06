@@ -223,7 +223,7 @@ export default class GiftTrees extends Component {
     () => {
       if (this.state.modeUser === 'direct') {
         let returnValue;
-        returnValue = this.state.form.directGift.treecounter ? true : false;
+        returnValue = (this.state.form.directGift && this.state.form.directGift.treecounter) ? true : false;
         this.setState({
           form: {
             ...this.state.form

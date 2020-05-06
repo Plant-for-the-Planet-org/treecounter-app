@@ -1,19 +1,14 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 // import i18n from '../../locales/i18n.js';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  Platform
-} from 'react-native';
-import styles from '../../styles/newUserContributions/userContributions';
-// import ShareIcon from '../../assets/images/share.png';
-import { editIcon, deleteIcon, closeIcon } from '../../assets';
+import { Dimensions, Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { PROVIDER_GOOGLE } from 'react-native-maps';
 import { getLocalRoute } from '../../actions/apiRouting';
+// import ShareIcon from '../../assets/images/share.png';
+import { closeIcon, deleteIcon, editIcon } from '../../assets';
 import i18n from '../../locales/i18n.js';
+import styles from '../../styles/newUserContributions/userContributions';
+import colors from '../../utils/constants';
 import PopupNative from '../Common/ModalDialog/Popup.native';
 import NativeMapView, { mapStyle } from '../Map/NativeMapView.native';
 
@@ -26,9 +21,14 @@ export default class UserContributions extends React.Component {
   _handleIndexChange = index => this.setState({ index });
 
   getMapComponent = userContribution => {
-    let geoLatLong = `geoLongitude=${userContribution.geoLongitude}&geoLatitude=${userContribution.geoLatitude}&country=${userContribution.country}`;
+    let geoLatLong = `geoLongitude=${
+      userContribution.geoLongitude
+      }&geoLatitude=${userContribution.geoLatitude}&country=${
+      userContribution.country
+      }`;
     return (
       <NativeMapView
+        provider={PROVIDER_GOOGLE}
         mapType={'satellite'}
         mode={'single-tree'}
         geoLocation={geoLatLong}
@@ -60,38 +60,60 @@ export default class UserContributions extends React.Component {
       updateStaticRoute,
       showDelete,
       mayUpdate,
-      plantProjectId
+      plantProjectId,
+      isFromUserProfile
     } = props;
 
     const textColor = '#87B738';
     const deleteConfirmColor = '#ee6453';
     return (
-      <View>
+      <View style={{ backgroundColor: colors.WHITE }}>
+
         {/* ===== Map View starts ===== */}
-        <View style={styles.mapView}>
-          {/* get the map component */}
-          {this.getMapComponent(this.props.contribution)}
+        {!isFromUserProfile ? (
+          <View style={styles.mapView}>
+            {/* get the map component */}
+            {this.getMapComponent(this.props.contribution)}
 
-          {/* close icon - goes back to previous screen */}
-          <TouchableOpacity
-            onPress={props.onClickClose}
-            style={[styles.button, styles.closeIcon]}
-          >
-            <View style={styles.closeContainer}>
-              <Image style={{ width: 16, height: 16 }} source={closeIcon} />
-            </View>
-          </TouchableOpacity>
-
-          {/* maps the date */}
-          {plantedDate ? (
-            <View style={styles.dateContainer}>
-              <Text style={styles.plantedDate}>{plantedDate}</Text>
-            </View>
-          ) : null}
-        </View>
+            {/* close icon - goes back to previous screen */}
+            <TouchableOpacity
+              onPress={props.onClickClose}
+              style={[styles.button, styles.closeIcon]}
+            >
+              <View style={styles.closeContainer}>
+                <Image style={{ width: 16, height: 16 }} source={closeIcon} />
+              </View>
+            </TouchableOpacity>
+            {/* maps the date */}
+            {plantedDate ? (
+              <View
+                style={[
+                  isFromUserProfile
+                    ? styles.dateContainer
+                    : styles.dateContainerWithoutMap
+                ]}
+              >
+                <Text style={styles.plantedDate}>{plantedDate}</Text>
+              </View>
+            ) : null}
+          </View>
+        ) : null}
         {/* ===== Map View Ends ===== */}
+        {/* maps the date */}
+        {isFromUserProfile && plantedDate ? (
+          <View
+            style={[
+              isFromUserProfile
+                ? styles.dateContainer
+                : styles.dateContainerWithoutMap
+            ]}
+          >
+            <Text style={styles.plantedDate}>{plantedDate}</Text>
+          </View>
+        ) : null}
 
         {/* ===== Header and Sub header starts ===== */}
+
         <View style={styles.header}>
           {/* maps the tree count with contribution type : Gifted, Donated, Received */}
           {treeCount && treeCount > 0 ? (
@@ -138,45 +160,59 @@ export default class UserContributions extends React.Component {
           )}
 
           {/* maps the contributionPerson type and name of contributionPerson if any */}
-          {contributionPersonPrefix && contributionPerson && (
-            // <View style={styles.subHeaderTextContainer}>
-            <Text style={styles.subHeaderText}>
-              <Text>{contributionPersonPrefix}</Text>
-              <Text
-                onPress={() => {
-                  updateStaticRoute(
-                    getLocalRoute('app_treecounter'),
-                    navigation,
-                    {
-                      treeCounterId: contributionPersonSlug,
-                      titleParam: contributionPerson
-                    }
-                  );
-                }}
-                style={{ color: textColor }}
-              >
-                {' '}
-                {contributionPerson}
-              </Text>
-            </Text>
-            // </View>
-          )}
+          {contributionPersonPrefix &&
+            contributionPerson && (
+              <View style={[styles.subHeaderTextContainer, { flexWrap: 'wrap' }]}>
+                <Text style={styles.subHeaderText}>
+                  {contributionPersonPrefix}
+                  <Text
+                    onPress={() => {
+                      contributionPersonSlug ? updateStaticRoute(
+                        getLocalRoute('app_treecounter'),
+                        navigation,
+                        {
+                          treeCounterId: contributionPersonSlug,
+                          titleParam: contributionPerson
+                        }
+                      ) : null;
+                    }}
+                    style={[styles.subHeaderText, { color: contributionPersonSlug ? textColor : undefined }]}>
+                    {' '}
+                    {contributionPerson}
+                  </Text>
+                  {/* <TouchableOpacity
+                  onPress={() => {
+                    updateStaticRoute(
+                      getLocalRoute('app_treecounter'),
+                      navigation,
+                      {
+                        treeCounterId: contributionPersonSlug,
+                        titleParam: contributionPerson
+                      }
+                    );
+                  }}
+                >
+                </TouchableOpacity> */}
+                </Text>
+
+              </View>
+            )}
 
           {/* maps the project name by whom it was planted if any */}
           {plantProjectName && (
             // <View style={styles.subHeaderTextContainer}>
-            <Text style={styles.subHeaderText}>
+            <Text style={[styles.subHeaderText, { flexWrap: 'wrap' }]}>
               <Text>{i18n.t('label.planted_at')}</Text>
               <Text
                 onPress={() => {
                   plantProjectSlug
                     ? this.props.onPlantProjectClick(
-                        plantProjectId,
-                        plantProjectName
-                      )
+                      plantProjectId,
+                      plantProjectName
+                    )
                     : null;
                 }}
-                style={{ color: textColor }}
+                style={{ color: plantProjectSlug ? textColor : undefined }}
               >
                 {plantProjectName}
               </Text>
@@ -194,7 +230,7 @@ export default class UserContributions extends React.Component {
           containerStyle={{
             height:
               Platform.OS === 'android'
-                ? Dimensions.get('window').height * 0.31
+                ? Dimensions.get('window').height * 0.35
                 : Dimensions.get('window').height * 0.24
           }}
           headerText={i18n.t('label.my_trees_delete_confirm')}

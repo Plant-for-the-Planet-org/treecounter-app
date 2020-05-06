@@ -1,36 +1,20 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { debug } from '../../debug';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
-import {
-  selectedPlantProjectIdSelector,
-  selectedPlantProjectSelector,
-  selectedTpoSelector,
-  currentUserProfileSelector,
-  currenciesSelector,
-  supportedTreecounterSelector,
-  getCurrency
-} from '../../selectors';
-import {
-  selectPlantProjectAction,
-  clearPlantProject
-} from '../../actions/selectPlantProjectAction';
-
-import { updateUserProfile } from '../../actions/updateUserProfile';
-import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import { bindActionCreators } from 'redux';
 import { fetchCurrencies } from '../../actions/currencies';
-import {
-  paymentClear,
-  createPaymentGift,
-  createPaymentDonation
-} from '../../actions/donateAction';
+import { createPaymentDonation, createPaymentGift, paymentClear } from '../../actions/donateAction';
 import { loadProject } from '../../actions/loadTposAction';
-import { setProgressModelState } from '../../reducers/modelDialogReducer';
-import { updateRoute } from '../../helpers/routerHelper';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import { clearPlantProject, selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import { updateUserProfile } from '../../actions/updateUserProfile';
 import DonateTrees from '../../components/DonateTrees';
+import { debug } from '../../debug';
+import { updateRoute } from '../../helpers/routerHelper';
+import { setProgressModelState } from '../../reducers/modelDialogReducer';
 import { getPaymentStatus } from '../../reducers/paymentStatus';
+import { currenciesSelector, currentUserProfileSelector, getCurrency, selectedPlantProjectIdSelector, selectedPlantProjectSelector, selectedTpoSelector, supportedTreecounterSelector } from '../../selectors';
 import { postDirectRequest } from '../../utils/api';
 
 class DonationTreesContainer extends Component {

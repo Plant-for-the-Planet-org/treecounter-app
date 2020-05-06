@@ -68,7 +68,7 @@ class CheckoutForm extends React.Component {
       this.props.setProgressModelState(false);
       this.props.paymentFailed({
         status: false,
-        message: paymentMethodResponse.error.message || 'error'
+        message: (paymentMethodResponse && paymentMethodResponse.error ? paymentMethodResponse.error.message : i18n.t('label.error'))
       });
       this.props.onError(e.message);
     }

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { acceptChallenge } from '../../actions/challengeActions';
-import RedirectedPrivateAcceptEmail from '../../components/Challenge/RedirectedPublicDenyEmail';
+import RedirectedPrivateAcceptEmail from '../../components/Challenge/RedirectedPrivateAcceptEmail';
 
 class RedirectedPrivateAcceptEmailContainer extends React.Component {
   render() {

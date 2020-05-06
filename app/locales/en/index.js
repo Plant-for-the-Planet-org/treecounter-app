@@ -75,6 +75,7 @@ export default {
   ...treecounterGraphicslabels,
   ...trillionlabels,
   ...userContributionslabels,
+//  ...widgetShareLabels,
   ...NDVI,
   ...reviews,
   ...formValidationErrors,

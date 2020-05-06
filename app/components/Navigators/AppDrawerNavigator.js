@@ -69,6 +69,7 @@ import AddReview from './../Reviews/AddReview/AddReview';
 import Reviews from './../Reviews/Reviews';
 
 
+import FullMapComponent from './../UserHome/FullMapComponent';
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -216,7 +217,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? UserHomeContainer : LoginContainer
+        screen: isLoggedIn ? () => <UserHomeContainer isLoggedIn={isLoggedIn} /> : LoginContainer,
+        navigationOptions: ({ navigation }) => ({ tabBarVisible: isLoggedIn ? navigation.state.params ? navigation.state.params.isFullMapComponentModal ? false : true : true : true })
       }
     },
     {
@@ -248,6 +250,10 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_myTrees')]: {
         screen: UserContributionsContainer
+      },
+      ['my_trees_fullMap']: {
+        screen: FullMapComponent,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_forgotPassword')]: {
         screen: ForgotPasswordContainer

@@ -37,7 +37,8 @@ class BottomTabContainer extends Component {
           debug(err);
         }
       }
-    });
+    })
+    .catch(error => debug(error));
     isLoggedin
       ? AuthenticatedSideMenuSchema('mobile.bottom').subscribe(
           success => {

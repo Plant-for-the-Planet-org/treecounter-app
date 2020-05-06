@@ -1,15 +1,16 @@
 import { getItemSync } from '../stores/localStorage';
 import en from 'date-fns/locale/en-US';
 import de from 'date-fns/locale/de';
+import es from 'date-fns/locale/es';
 // import and register all locales used for 'react-datepicker'
 import { registerLocale } from 'react-datepicker';
 // import { debug } from '../debug';
 
 let cache = { locale: undefined };
 
-export const supportedLocales = ['en', 'de'];
+export const supportedLocales = ['en', 'de', 'es'];
 export const defaultLocale = 'en';
-export const localeObjects = { en: en, de: de };
+export const localeObjects = { en: en, de: de , es: es };
 
 /**
  * Call this when the app starts up

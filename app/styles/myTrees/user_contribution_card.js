@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const getHeaderText = function(padding, margin) {
+const getHeaderText = function (padding, margin) {
   return {
     fontSize: 16,
     fontWeight: '500',
@@ -19,6 +19,12 @@ export const myTreesStyle = (color, borderColor) =>
     contentContainer: {
       flex: 1,
       paddingVertical: 20
+    },
+    multipleTrees: {
+      marginLeft: 2, height: 20, width: 30,
+    },
+    treeImage: {
+      height: 25, width: 20,
     },
     contributionContainer: {
       borderWidth: 1,
@@ -155,7 +161,7 @@ export const myTreesStyle = (color, borderColor) =>
 
     // New Design
 
-    singleRedeemObject: { borderBottomWidth: 1, borderBottomColor: '#d5d5d5' },
+    singleRedeemObject: { backgroundColor: 'white', borderBottomWidth: 1, borderBottomColor: '#d5d5d5' },
     redeemObjectDate: {
       backgroundColor: '#f7f7f7',
       height: 40,
@@ -168,17 +174,19 @@ export const myTreesStyle = (color, borderColor) =>
       fontSize: 14,
       zIndex: 3
     },
-    redeemObjectTreesContainer: { paddingHorizontal: 20, paddingVertical: 16 },
+    redeemObjectTreesContainer: { flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 16, borderColor: 'green', borderWidth: 0 },
+    dedicatedTagLine: { flexDirection: 'row', paddingHorizontal: 20, paddingBottom: 10, borderColor: 'red', borderWidth: 0 },
     row1: {
-      flexDirection: 'row',
-      alignItems: 'center',
+      // flexDirection: 'row',
+      flex: 1,
+      alignItems: 'flex-start',
       justifyContent: 'space-between'
     },
     row2: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginTop: 6
+      // marginTop: 6
     },
     redeemObjectTitle: {
       fontFamily: 'OpenSans-Bold',
@@ -191,7 +199,8 @@ export const myTreesStyle = (color, borderColor) =>
       fontSize: 18,
       color: '#89b53a'
     },
-    redeemObjectSubTitle: { fontFamily: 'OpenSans-Regular', fontSize: 13 }
+    redeemObjectSubTitle: { fontFamily: 'OpenSans-Regular', fontSize: 13 },
+
   });
 
 const style = myTreesStyle('#95c243', '#68aeec');

@@ -154,17 +154,21 @@ export function getDateFromMySQL(dateTime) {
 export function formatDateToMySQL(date) {
   debug('formatDateToMySQL', date);
 
-  let dd = date.getDate();
-  let mm = date.getMonth() + 1; //January is 0!
-  let yyyy = date.getFullYear();
-  if (dd < 10) {
-    dd = '0' + dd;
-  }
-  if (mm < 10) {
-    mm = '0' + mm;
-  }
+  try {
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1; //January is 0!
+    let yyyy = date.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
 
-  date = yyyy + '-' + mm + '-' + dd;
+    date = yyyy + '-' + mm + '-' + dd;
+  } catch (err) {
+    // debug(err);
+  }
   return date;
 }
 
@@ -597,7 +601,6 @@ export function generateFormikSchemaFromFormSchema(
   schemaObj = { properties: {}, required: [] },
   fields = []
 ) {
-  debug('schemaObj====>', schemaObj);
   let validationSchemaGenerated = {};
   Object.keys(schemaObj.properties).map(key => {
     if (fields.length === 0 || fields.indexOf(key) !== -1) {
@@ -612,7 +615,6 @@ export function generateFormikSchemaFromFormSchema(
           prepareSchema = prepareSchema.array(
             generateFormikSchemaFromFormSchema(property.items, fields)
           );
-          debug('prepareSchema====>', prepareSchema);
         } else if (property.type === 'object') {
           prepareSchema = generateFormikSchemaFromFormSchema(property, fields);
         } else {

@@ -7,7 +7,6 @@ import { editTree } from '../../actions/EditMyTree';
 import EditUserContribution from '../../components/EditUserContribution';
 import {
   mergeContributionImages,
-  getPlantProjectEnum,
   isTpo
 } from '../../helpers/utils';
 // Actions
@@ -19,7 +18,7 @@ import {
 class EditUserContributionsContainer extends React.Component {
   _userContribution = null;
 
-  onSubmit = (mode, value) => {
+  onSubmit = (mode, value, plantProject) => {
     //debug('OnSubmit====>', registerTreeForm);
     /*registerTreeForm =
       registerTreeForm || this.refs.editTrees.refs.editTreeForm;
@@ -29,10 +28,6 @@ class EditUserContributionsContainer extends React.Component {
       value = mergeContributionImages(value);
 
       if (isTpo(this.props.currentUserProfile)) {
-        let plantProject =
-          getPlantProjectEnum(this.props.currentUserProfile).length > 0
-            ? getPlantProjectEnum(this.props.currentUserProfile)[0].value
-            : null;
         if (plantProject) {
           // needs to change an immutable struct
           value = {

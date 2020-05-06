@@ -25,14 +25,17 @@ jobs:
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_prod"' >>  $ENV_VARS
               echo 'export SERVER_URL="www.trilliontreecampaign.org"' >>  $ENV_VARS
+              echo 'export API_URL="https://app.plant-for-the-planet.org"' >>  $ENV_VARS
             elif [[ "${CIRCLE_BRANCH}" == "develop" ]]
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_development"' >>  $ENV_VARS
               echo 'export SERVER_URL="development.trilliontreecampaign.org"' >>  $ENV_VARS
+              echo 'export API_URL="https://app-development.plant-for-the-planet.org"' >>  $ENV_VARS
             elif [[ "${CIRCLE_BRANCH}" == "fixtures" ]] || [[ "${CIRCLE_BRANCH}" == "staging" ]]
             then
               echo 'export WD_SYMFONY="$PROJ_DIR/ttc2018_${CIRCLE_BRANCH}"' >>  $ENV_VARS
               echo 'export SERVER_URL="${CIRCLE_BRANCH}.trilliontreecampaign.org"' >>  $ENV_VARS
+              echo 'export API_URL="https://app-${CIRCLE_BRANCH}.plant-for-the-planet.org"' >>  $ENV_VARS
             fi
             cat $ENV_VARS
       - run:
@@ -61,7 +64,7 @@ jobs:
           command: |
             source $ENV_VARS
             export host=$SERVER_URL
-            export api_url=$scheme://$host
+            export api_url=$API_URL
             if [[ "${CIRCLE_BRANCH}" == "master" ]]
             then
               export debug=
@@ -81,11 +84,13 @@ jobs:
               npm run build:server
             fi
             echo "Copying new files to web server"
-            ssh $HOST "cd $WD_SYMFONY; rm -fr web/*"
-            # copy client .htaccess into web folder
-            scp -r .htaccess $HOST:$WD_SYMFONY/web/.
-            scp -r web/server/* $HOST:$WD_SYMFONY/web/.
-            scp -r .well-known $HOST:$WD_SYMFONY/web/.
+            ssh $HOST "cd $WD_SYMFONY; rm -fr .tmp"
+            ssh $HOST "cd $WD_SYMFONY; mkdir .tmp"
+            scp .htaccess $HOST:$WD_SYMFONY/.tmp/.
+            scp -r web/server/* $HOST:$WD_SYMFONY/.tmp/.
+            scp -r .well-known $HOST:$WD_SYMFONY/.tmp/.
+            ssh $HOST "cd $WD_SYMFONY; mv web web.bak && mv .tmp web"
+            ssh $HOST "cd $WD_SYMFONY; rm -fr web.bak"
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

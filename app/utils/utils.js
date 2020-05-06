@@ -144,3 +144,15 @@ export function convertNumber(number, useDigits) {
     ][digitsInGroup / 3]
   );
 }
+
+/* FlatList requires a data object with items containing a string value for every id attribute
+   This function converts an existing id attribute from number to string
+*/
+export function convertNumIdToString(object) {
+  return object.map(item => {
+    return {
+      ...item,
+      id: item.id + ''
+    };
+  });
+}

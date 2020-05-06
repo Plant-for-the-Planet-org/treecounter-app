@@ -24,6 +24,7 @@ import snippetStyles from '../../../styles/competition/competition-fullNew.nativ
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { getContentLoaderState } from '../../../reducers/contentloaderReducer';
 import LoadingIndicator from '../../Common/LoadingIndicator';
+import { getLocalRoute } from '../../../actions/apiRouting';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -199,6 +200,8 @@ class CompetitionFull extends React.Component {
         competitionEnded = true;
       }
     }
+
+    const { navigation } = this.props;
     return (
       <View style={snippetStyles.flexView}>
         {contentloader ? (

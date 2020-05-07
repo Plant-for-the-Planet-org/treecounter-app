@@ -1,1 +1,9 @@
-{ }
+{
+  "has_dedicated": "Todas as árvores que você planta, exceto as doações de presentes, serão dedicadas ao {{user}}. Mesmo as árvores aparecendo nos dois contadores, elas contarão apenas uma vez no contador global de árvores.",
+  "has_not_dedicated": "Ao oferecer árvores a amigos, colegas ou organizações, você os ajuda a alcançar sua meta de árvores.",
+  "dedicate_tootltip": "Todas as árvores que você plantar, registrar ou doar a partir de agora serão doadas ao usuário selecionado. Você pode mudar a pessoa para quem você gostaria de doar as árvores a qualquer momento. Caso você doe árvores de presente, elas só serão doadas ao destinatário do presente.",
+  "pick_profile": "Escolha o Perfil",
+  "dedicate_trees": "Dedicar minhas árvores para",
+  "dedicate_my_trees": "Dedicar Minhas árvores",
+  "currently_dedicated_to": "Atualmente dedicado a"
+}

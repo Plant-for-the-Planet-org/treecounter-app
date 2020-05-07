@@ -16,8 +16,24 @@ const width = Dimensions.get('window').width;
 class PlantProjectImageCarousel extends Component {
   imageCarousel;
 
+  constructor(props) {
+    super(props);
+    this.state={
+      images: props.images || []
+    }
+  }
+
+
   UNSAFE_componentWillMount() {
     // StatusBar.setBarStyle('dark-content');
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (this.props.images !== nextProps.images) {
+      this.setState({
+        images: nextProps.images,
+      })
+    }
   }
 
   captureImageCarousel = imageCarousel => {
@@ -39,27 +55,27 @@ class PlantProjectImageCarousel extends Component {
     </TouchableWithoutFeedback>
   );
 
-  renderFooter = idx => (
+  renderFooter = (idx, images) => (
     <View style={[{ height: 150 }]}>
       <Text style={[styles.footerText, {}]}>
-        {idx + 1}/{this.props.images.length}{' '}
-        {this.props.images[idx].description ? '-' : ''}{' '}
-        {this.props.images[idx].description}
+        {idx + 1}/{images.length}{' '}
+        {images[idx].description ? '-' : ''}{' '}
+        {images[idx].description}
       </Text>
     </View>
   );
 
-  renderImage = idx => {
+  renderImage = (idx, images) => {
     return (
       <Image
-        key={this.props.images[idx].image}
+        key={images && images[idx].image}
         style={[StyleSheet.absoluteFill]}
         resizeMode="contain"
         source={{
           uri: getImageUrl(
             this.props.pictureType,
-            'large',
-            this.props.images[idx].image
+            this.props.pictureSize,
+            images && images[idx].image
           )
         }}
       />
@@ -67,16 +83,18 @@ class PlantProjectImageCarousel extends Component {
   };
 
   render() {
+    const {images}=this.state;
     return (
+      images && images.length > 0 &&
       <View style={styles.container}>
         <View>
           <ImageCarousel
             ref={this.captureImageCarousel}
-            renderContent={this.renderImage}
-            renderHeader={this.renderHeader}
-            renderFooter={this.renderFooter}
+            renderContent={(idx)=>this.renderImage(idx,images)}
+            renderHeader={(idx)=>this.renderHeader(idx,images)}
+            renderFooter={(idx)=>this.renderFooter(idx,images)}
           >
-            {this.props.images.map(url => (
+            {images && images.map(url => (
               <View
                 key={`viewof-${url}`}
                 style={[
@@ -90,9 +108,9 @@ class PlantProjectImageCarousel extends Component {
                     this.props.style ? this.props.style : ''
                   ]}
                   aspectRatio={this.props.aspectRatio}
-                  key={url.image}
+                  key={url && url.image}
                   source={{
-                    uri: getImageUrl(this.props.pictureType, 'large', url.image)
+                    uri: url && getImageUrl(this.props.pictureType, this.props.pictureSize, url && url.image)
                   }}
                   resizeMode={this.props.resizeMode}
                 />
@@ -106,10 +124,12 @@ class PlantProjectImageCarousel extends Component {
 }
 
 PlantProjectImageCarousel.propTypes = {
-  pictureType: PropTypes.string
+  pictureType: PropTypes.string,
+  pictureSize: PropTypes.string
 };
 PlantProjectImageCarousel.defaultProps = {
-  pictureType: 'project'
+  pictureType: 'project',
+  pictureSize: 'large'
 };
 const textColor = 'white';
 const borderColor = '#29000000';

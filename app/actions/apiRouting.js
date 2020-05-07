@@ -2,7 +2,7 @@ const routes = require('../server/routes/fos_js_routes.json');
 import Routing from './router.min.js';
 import { debug } from '../debug';
 import { context } from '../config';
-import { getCdnMediaUrl } from './fetchConfig';
+import { getCdnMediaUrl, getWebMapIds } from './fetchConfig';
 import { getLocaleAsync } from './getLocale';
 Routing.setRoutingData(routes);
 
@@ -43,4 +43,8 @@ export const getCountryFlagImageUrl = (countryCode, type, size) => {
   return `${
     getCdnMediaUrl().images
   }/flags/${type}/${size}/${countryCode}.${type}`;
+};
+
+export const getWebMapId = type => {
+  return getWebMapIds()[type];
 };

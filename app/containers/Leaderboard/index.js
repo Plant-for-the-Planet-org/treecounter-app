@@ -6,6 +6,7 @@ import {
   ExploreDataAction,
   LeaderBoardDataAction
 } from '../../actions/exploreAction';
+import { getWebMapIds } from '../../actions/fetchConfig';
 import { updateRoute, replaceRoute } from '../../helpers/routerHelper';
 import i18n from '../../locales/i18n';
 import { objectToQueryParams, queryParamsToObject } from '../../helpers/utils';
@@ -220,7 +221,9 @@ class LeaderBoardContainer extends React.Component {
             mapInfo.mapLayersKeys = Object.keys(mapInfo.mapLayers);
           }
           if (exploreData.webMapIds) {
-            mapInfo.webMapIds = exploreData.webMapIds;
+            // webMapIds now retrieved from config instead explore API call
+            mapInfo.webMapIds = getWebMapIds();
+            // mapInfo.webMapIds = exploreData.webMapIds;
           }
         }
 

@@ -1,26 +1,16 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  Text,
-  View,
-  TouchableOpacity
-} from 'react-native';
+import { Dimensions, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { debug } from '../../debug';
 import { getLocalRoute } from '../../actions/apiRouting';
 import { foldin, foldout } from '../../assets';
+import { multiple_trees, tree_1 } from '../../assets/index';
 import TouchableItem from '../../components/Common/TouchableItem';
-import i18n from '../../locales/i18n.js';
-import styles, {
-  myTreesStyle
-} from '../../styles/myTrees/user_contribution_card';
-import { formatDate, delimitNumbers } from '../../utils/utils';
 import { getISOToCountryName } from '../../helpers/utils';
-
+import i18n from '../../locales/i18n.js';
+import styles, { myTreesStyle } from '../../styles/myTrees/user_contribution_card';
+import { delimitNumbers, formatDate } from '../../utils/utils';
 const WINDOW_WIDTH = Dimensions.get('window').width;
 export const ENABLED_NDVI = false;
 
@@ -74,21 +64,21 @@ class ContributionCard extends React.Component {
         ) : null}
         {measurementsAvailable
           ? section.contributionMeasurements.map((measurement, index) => {
-              return (
-                <View style={styles.actionBar} key={`measurement-${index}`}>
-                  <Text>{formatDate(measurement.measurementDate)}</Text>
-                  <Text>
-                    {_.padStart(
-                      (measurement.height * 10).toFixed(1) + ' ' + 'mm',
-                      10
-                    )}
-                  </Text>
-                  <Text>
-                    {_.padStart(measurement.diameter + ' ' + 'cm', 10)}
-                  </Text>
-                </View>
-              );
-            })
+            return (
+              <View style={styles.actionBar} key={`measurement-${index}`}>
+                <Text>{formatDate(measurement.measurementDate)}</Text>
+                <Text>
+                  {_.padStart(
+                    (measurement.height * 10).toFixed(1) + ' ' + 'mm',
+                    10
+                  )}
+                </Text>
+                <Text>
+                  {_.padStart(measurement.diameter + ' ' + 'cm', 10)}
+                </Text>
+              </View>
+            );
+          })
           : null}
       </View>
     );
@@ -125,36 +115,37 @@ class ContributionCard extends React.Component {
     });
 
   treeCountLine(treeCount, treeSpecies) {
-    return delimitNumbers(treeCount) + ' ' + (treeSpecies ? treeSpecies : '');
+    return delimitNumbers(treeCount) + ' ' + (treeCount > 1 ? 'Trees' : 'Tree') + (treeSpecies ? treeSpecies : '');
   }
 
   plantProjectLine(plantProjectName, country) {
-    return country && getISOToCountryName(country).country;
+    let countryName = country && getISOToCountryName(country).country
+    return (plantProjectName ? plantProjectName + ' ' : '') + countryName;
   }
 
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
     return isGift
       ? [
-          <Text key={`donateActionLine_10`}>
-            {i18n.t('label.gifted_on_to', {
-              date: formatDate(plantDate)
-            })}
-          </Text>,
-          <Text
-            key={`donateActionLine_11`}
-            onPress={() =>
-              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug,
-                titleParam: givee
-              })
-            }
-          >
-            {givee}
-          </Text>
-        ]
+        <Text key={`donateActionLine_10`}>
+          {i18n.t('label.gifted_on_to', {
+            date: formatDate(plantDate)
+          })}
+        </Text>,
+        <Text
+          key={`donateActionLine_11`}
+          onPress={() =>
+            this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+              treeCounterId: giveeSlug,
+              titleParam: givee
+            })
+          }
+        >
+          {givee}
+        </Text>
+      ]
       : i18n.t('label.donated_on', {
-          date: formatDate(plantDate)
-        });
+        date: formatDate(plantDate)
+      });
   }
 
   tpoLine(tpoName) {
@@ -176,81 +167,84 @@ class ContributionCard extends React.Component {
   dedicateActionLine(isGift, givee, giveeSlug) {
     return isGift
       ? [
-          <Text key={`dedicateActionLine_11`}>
-            {i18n.t('label.dedicated_to')}
-          </Text>,
-          <Text
-            key={`dedicateActionLine_12`}
-            onPress={() =>
-              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug,
-                titleParam: givee
-              })
-            }
-          >
-            {' ' + givee}
-          </Text>
-        ]
+        <Text key={`dedicateActionLine_11`}>
+          {i18n.t('label.dedicated_to')}
+        </Text>,
+        <Text
+          key={`dedicateActionLine_12`}
+          onPress={() =>
+            this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+              treeCounterId: giveeSlug,
+              titleParam: givee
+            })
+          }
+        >
+          {' ' + givee}
+        </Text>
+      ]
       : '';
   }
 
   redeemActionLine(redemptionCode, redemptionDate, givee, giveeSlug) {
     return redemptionCode && givee
       ? [
-          <Text key={`redeemActionLine_11`}>
-            {i18n.t('label.given_on_by', {
-              date: formatDate(redemptionDate)
-            })}
-          </Text>,
-          <Text
-            key={`redeemActionLine_12`}
-            onPress={() =>
-              this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
-                treeCounterId: giveeSlug,
-                titleParam: givee
-              })
-            }
-          >
-            {' ' + givee}
-          </Text>
-        ]
+        <Text key={`redeemActionLine_11`}>
+          {i18n.t('label.given_on_by', {
+            date: formatDate(redemptionDate)
+          })}
+        </Text>,
+        <Text
+          key={`redeemActionLine_12`}
+          onPress={() =>
+            this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
+              treeCounterId: giveeSlug,
+              titleParam: givee
+            })
+          }
+        >
+          {' ' + givee}
+        </Text>
+      ]
       : redemptionCode
         ? i18n.t('label.redeemed_on', {
-            date: formatDate(redemptionDate)
-          })
+          date: formatDate(redemptionDate)
+        })
         : givee
           ? [
-              <Text key={`dedicated_on_by_11`}>
-                {i18n.t('label.dedicated_on_by', {
-                  date: formatDate(redemptionDate)
-                })}
-              </Text>,
-              <Text
-                key={`dedicated_on_by_12`}
-                onPress={() =>
-                  this.props.navigation.navigate(
-                    getLocalRoute('app_treecounter'),
-                    {
-                      treeCounterId: giveeSlug,
-                      titleParam: givee
-                    }
-                  )
-                }
-              >
-                {' ' + givee}
-              </Text>
-            ]
+            <Text key={`dedicated_on_by_11`}>
+              {i18n.t('label.dedicated_on_by', {
+                date: formatDate(redemptionDate)
+              })}
+            </Text>,
+            <Text
+              key={`dedicated_on_by_12`}
+              onPress={() =>
+                this.props.navigation.navigate(
+                  getLocalRoute('app_treecounter'),
+                  {
+                    treeCounterId: giveeSlug,
+                    titleParam: givee
+                  }
+                )
+              }
+            >
+              {' ' + givee}
+            </Text>
+          ]
           : i18n.t('label.dedicated_on', {
-              date: formatDate(redemptionDate)
-            });
+            date: formatDate(redemptionDate)
+          });
   }
+
+  getTreeImage = (treeCount) => {
+    return treeCount > 1 ? <Image resizeMode={'contain'} source={multiple_trees} style={styles.multipleTrees} /> : <Image resizeMode={'contain'} source={tree_1} style={styles.treeImage} />;
+  }
+
 
   render() {
     let { contribution } = this.props;
-    debug('Contribution', contribution);
     let {
       treeCount,
-      treeSpecies,
       plantProjectName,
       country,
       plantDate,
@@ -259,7 +253,11 @@ class ContributionCard extends React.Component {
       tpoName,
       cardType,
       contributionType,
-      redemptionDate
+      redemptionDate,
+      // treeSpecies,
+      isGift,
+      // registrationDate,
+      // redemptionCode
     } = contribution;
     // let imagesArray = contribution.contributionImages.map(image => {
     //   return { src: getImageUrl('contribution', 'medium', image.image) };
@@ -267,7 +265,6 @@ class ContributionCard extends React.Component {
     // let seeLabel = classnames('see-more-label-style', {
     //   'see-more__active': this.state.viewExpanded
     // });
-
     // let treeCountLine = this.treeCountLine(treeCount, treeSpecies);
     let plantProjectLine = this.plantProjectLine(plantProjectName, country);
     // let donateActionLine = this.donateActionLine(
@@ -278,7 +275,7 @@ class ContributionCard extends React.Component {
     // );
     let tpoLine = this.tpoLine(tpoName);
     // let plantActionLine = this.plantActionLine(plantDate, registrationDate);
-    let dedicateActionLine = this.dedicateActionLine(givee, giveeSlug);
+    let dedicateActionLine = this.dedicateActionLine(isGift, givee, giveeSlug);
     // let redeemActionLine = this.redeemActionLine(
     //   redemptionCode,
     //   redemptionDate,
@@ -294,21 +291,22 @@ class ContributionCard extends React.Component {
           : '#ec6453';
 
     let styles = myTreesStyle(labelColor, borderColor);
-
+    let singleRedeemObject = [styles.singleRedeemObject, { borderBottomWidth: this.props.isFromAnimatredCardList ? 0 : 1 }]
+    let { isCardPressed } = this.props;
     let renderCard = () => {
+      const { isFromAnimatredCardList } = this.props
       if (contributionType === 'donation') {
+
         return (
           <TouchableOpacity
-            style={styles.singleRedeemObject}
+            disabled={isCardPressed}
+            style={singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate('contribution_details', {
-                contribution,
-                titleParam: plantProjectName || tpoName || treeSpecies
-              });
+              this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
-              {plantDate ? (
+              {plantDate && !isFromAnimatredCardList ? (
                 <View style={styles.redeemObjectDate}>
                   <Text style={styles.redeemObjectDateText}>
                     {formatDate(plantDate)}
@@ -321,18 +319,14 @@ class ContributionCard extends React.Component {
                   <Text style={styles.redeemObjectTitle}>
                     {i18n.t('label.tree_donation')}
                   </Text>
-                  <Text style={styles.redeemObjectTrees}>
-                    {delimitNumbers(treeCount)}
-                  </Text>
+                  <View style={styles.row2}>
+                    <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  </View>
                 </View>
-                <View style={styles.row2}>
-                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-                  <Text style={styles.redeemObjectSubTitle}>
-                    {treeCount > 1
-                      ? i18n.t('label.trees')
-                      : i18n.t('label.tree')}
-                  </Text>
-                </View>
+                <Text style={styles.redeemObjectTrees}>
+                  {delimitNumbers(treeCount)}
+                  {this.getTreeImage(treeCount)}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -340,42 +334,38 @@ class ContributionCard extends React.Component {
       } else if (contributionType === 'planting') {
         return (
           <TouchableOpacity
-            style={styles.singleRedeemObject}
+            disabled={isCardPressed}
+            style={singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate('contribution_details', {
-                contribution,
-                titleParam: plantProjectName || tpoName || treeSpecies
-              });
+              this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
-              {plantDate ? (
+              {plantDate && !isFromAnimatredCardList ? (
                 <View style={styles.redeemObjectDate}>
                   <Text style={styles.redeemObjectDateText}>
                     {formatDate(plantDate)}
                   </Text>
                 </View>
               ) : null}
-
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
                     {i18n.t('label.registered_trees')}
                   </Text>
-                  <Text style={styles.redeemObjectTrees}>
-                    {delimitNumbers(treeCount)}
-                  </Text>
-                </View>
-                <View style={styles.row2}>
                   <Text style={styles.redeemObjectSubTitle}>
                     {plantProjectLine}
                   </Text>
-                  <Text style={styles.redeemObjectSubTitle}>
-                    {treeCount > 1
-                      ? i18n.t('label.trees')
-                      : i18n.t('label.tree')}
+                </View>
+                <View style={styles.row2}>
+                  <Text style={styles.redeemObjectTrees}>
+                    {delimitNumbers(treeCount)}
+                    {this.getTreeImage(treeCount)}
                   </Text>
                 </View>
+
+              </View>
+              <View style={styles.dedicatedTagLine}>
                 {dedicateActionLine ? (
                   <View style={styles.row2}>
                     <Text style={styles.redeemObjectSubTitle}>
@@ -390,16 +380,14 @@ class ContributionCard extends React.Component {
       } else if (contribution.type === 'tpo-coupon') {
         return (
           <TouchableOpacity
-            style={styles.singleRedeemObject}
+            disabled={isCardPressed}
+            style={singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate('contribution_details', {
-                contribution,
-                titleParam: plantProjectName || tpoName || treeSpecies
-              });
+              this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
-              {redemptionDate ? (
+              {redemptionDate && !isFromAnimatredCardList ? (
                 <View style={styles.redeemObjectDate}>
                   <Text style={styles.redeemObjectDateText}>
                     {formatDate(redemptionDate)}
@@ -412,18 +400,14 @@ class ContributionCard extends React.Component {
                   <Text style={styles.redeemObjectTitle}>
                     {i18n.t('label.redeemed_trees')}
                   </Text>
-                  <Text style={styles.redeemObjectTrees}>
-                    {delimitNumbers(treeCount)}
-                  </Text>
+                  <View style={styles.row2}>
+                    <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  </View>
                 </View>
-                <View style={styles.row2}>
-                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-                  <Text style={styles.redeemObjectSubTitle}>
-                    {treeCount > 1
-                      ? i18n.t('label.trees')
-                      : i18n.t('label.tree')}
-                  </Text>
-                </View>
+                <Text style={styles.redeemObjectTrees}>
+                  {delimitNumbers(treeCount)}
+                  {this.getTreeImage(treeCount)}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -431,32 +415,26 @@ class ContributionCard extends React.Component {
       } else {
         return (
           <TouchableOpacity
-            style={styles.singleRedeemObject}
+            disabled={isCardPressed}
+            style={singleRedeemObject}
             onPress={() => {
-              this.props.navigation.navigate('contribution_details', {
-                contribution,
-                titleParam: plantProjectName || tpoName || treeSpecies
-              });
+              this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    {i18n.t('label.gifted_from_person', contribution.giverName)}
+                    {i18n.t('label.gifted_from_person') + contribution.giverName}
                   </Text>
-                  <Text style={styles.redeemObjectTrees}>
-                    {delimitNumbers(treeCount)}
-                  </Text>
+                  <View style={styles.row2}>
+                    <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
+                  </View>
                 </View>
-                <View style={styles.row2}>
-                  <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>
-                  <Text style={styles.redeemObjectSubTitle}>
-                    {treeCount > 1
-                      ? i18n.t('label.trees')
-                      : i18n.t('label.tree')}
-                  </Text>
-                </View>
+                <Text style={styles.redeemObjectTrees}>
+                  {delimitNumbers(treeCount)}
+                  {this.getTreeImage(treeCount)}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -471,6 +449,7 @@ class ContributionCard extends React.Component {
 ContributionCard.propTypes = {
   contribution: PropTypes.object.isRequired,
   deleteContribution: PropTypes.func,
+  onPressSingleContribution: PropTypes.func,
   navigation: PropTypes.any
 };
 

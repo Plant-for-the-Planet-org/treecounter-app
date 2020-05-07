@@ -1,1 +1,11 @@
-{ }
+{
+  "reset": "Reiniciar.",
+  "dont_have_account": "Você não tem uma conta?",
+  "login": "Login",
+  "log-in": "Log In",
+  "show": "Mostrar",
+  "hide": "Ocultar",
+  "password": "Senha",
+  "current_password": "Senha atual",
+  "login_description": "Faça o login com a sua Conta do aplicativo Plant-for-the-Planet para acessar seu contador de árvores. Você pode se cadastrar se você ainda não tiver uma conta."
+}

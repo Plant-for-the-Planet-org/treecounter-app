@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { debug } from '../../debug';
 import MapContributionCapture from './MapContributionCapture';
-import { context } from '../../config';
+import { getWebMapId } from '../../actions/apiRouting';
 
 const ArcGISContributionCaptureMap = ({ geoLocation, onLocationSelected }) => {
-  const webMapId = context.mapIds.inventory;
+  const webMapId = getWebMapId('inventory');
   debug('ArcGISContributionCaptureMap: webMapId', webMapId);
   debug('ArcGISContributionCaptureMap: geoLocation', geoLocation);
   return (

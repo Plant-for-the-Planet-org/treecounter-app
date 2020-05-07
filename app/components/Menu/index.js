@@ -89,7 +89,8 @@ const customStyles = {
 
 const statusOptions = [
   { value: 'en', label: 'English', icon: images.worldImg },
-  { value: 'de', label: 'Deutsch', icon: images.germany }
+  { value: 'de', label: 'Deutsch', icon: images.germany },
+  { value: 'es', label: 'Español', icon: images.spain }
 ];
 
 let userLang = getLocale(); // en|de

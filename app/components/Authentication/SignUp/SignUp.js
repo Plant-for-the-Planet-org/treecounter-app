@@ -142,9 +142,9 @@ export default class SignUp extends Component {
         )}
         <div className={'card-width'}>
           <CardLayout>
-            <form onSubmit={this.props.onSignUpClicked.bind(this, type)}>
+            <form onSubmit={this.props.onSignUpClicked.bind(this, type, this.signupForm)}>
               <TCombForm
-                ref={'signupForm'}
+                ref={ref => (this.signupForm = ref)}
                 type={signupFormSchema[type]}
                 options={this.props.schemaOptions[type]}
                 value={this.props.formValue}
@@ -153,6 +153,7 @@ export default class SignUp extends Component {
                 onClick={event => {
                   this.props.onSignUpClicked(
                     type,
+                    this.signupForm,
                     this.state.recaptchaToken,
                     this.refreshToken
                   );

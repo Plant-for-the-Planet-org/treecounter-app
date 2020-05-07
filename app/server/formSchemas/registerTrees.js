@@ -49,13 +49,22 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
+            id: {
+              type: 'integer',
+              widget: 'hidden'
+            },
             image: {
               type: 'string',
               title: 'label.upload_profile_picture',
               widget: 'file',
+              category:'contribution',
               icon: null,
               help: null,
               propertyOrder: 1
+            },
+            description: {
+              type: 'string',
+              widget: 'hidden'
             }
           },
           required: ['imageFile'],
@@ -88,10 +97,6 @@ export default {
         maxLength: 255,
         propertyOrder: 7
       },
-
-      /*
-      * Todo: Make universal schema function to handle array type form schemas
-      *  */
       contributionMeasurements: {
         type: 'array',
         title: 'label.add_measurements',
@@ -148,8 +153,6 @@ export default {
         propertyOrder: 1
       },
       plantProject: {
-        enum: ['4', '6'],
-        enum_titles: ['project_4', 'Campeche Rainforest Restoration 2'],
         type: 'string',
         title: 'label.plant_project',
         icon: null,
@@ -187,13 +190,22 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
+            id: {
+              type: 'integer',
+              widget: 'hidden'
+            },
             image: {
               type: 'string',
               title: 'label.upload_profile_picture',
               widget: 'file',
               icon: null,
+              category:'contribution',
               help: null,
               propertyOrder: 1
+            },
+            description: {
+              type: 'string',
+              widget: 'hidden'
             }
           },
           required: ['imageFile'],

@@ -24,9 +24,9 @@ class SignUpContainer extends React.Component {
     }
   }
 
-  onSignUpClicked = (profileType, token, refreshToken) => {
-    debug(this.refs.signupContainer.refs.signupForm.validate());
-    let formValue = this.refs.signupContainer.refs.signupForm.getValue();
+  onSignUpClicked = (profileType, signupForm, token, refreshToken) => {
+    debug(signupForm.validate());
+    let formValue = signupForm.getValue();
     if (formValue) {
       this.props
         .signUp(profileType, formValue, token, this.props.navigation)
@@ -46,7 +46,7 @@ class SignUpContainer extends React.Component {
               }
             },
             () => {
-              this.refs.signupContainer.refs.signupForm.validate();
+              signupForm.validate();
             }
           );
         });

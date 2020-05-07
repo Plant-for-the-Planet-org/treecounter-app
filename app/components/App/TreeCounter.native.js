@@ -8,7 +8,8 @@ import React, { Component } from 'react';
 import AppDrawerNavigatorContainer from '../../containers/Navigators/AppDrawerNavigatorContainer';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { SafeAreaView } from 'react-navigation';
+import SafeAreaView from 'react-native-safe-area-view';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { initLocale } from '../../actions/getLocale.native.js';
 import { fetchCurrencies } from '../../actions/currencies';
 import { fetchConfig } from '../../actions/fetchConfig';
@@ -23,12 +24,14 @@ class App extends Component {
   render() {
     const backgroundColor = 'transparent';
     return (
-      <SafeAreaView
-        forceInset={{ top: 'never', bottom: 'always' }}
-        style={{ flex: 1, backgroundColor: backgroundColor }}
-      >
-        <AppDrawerNavigatorContainer uriPrefix={'weplant://'} />
-      </SafeAreaView>
+      <SafeAreaProvider style={{ flex: 1 }}>
+        <SafeAreaView
+          forceInset={{ top: 'never', bottom: 'never' }}
+          style={{ flex: 1, backgroundColor: backgroundColor }}
+        >
+          <AppDrawerNavigatorContainer uriPrefix={'weplant://'} />
+        </SafeAreaView>
+      </SafeAreaProvider>
     );
   }
 }

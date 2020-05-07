@@ -5,6 +5,7 @@ export default EStyleSheet.create({
     flex: 1,
     paddingVertical: 20
   },
+ 
   container: {
     justifyContent: 'center',
     alignItems: 'center',

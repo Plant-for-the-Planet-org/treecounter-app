@@ -143,10 +143,13 @@ import survival_grey from './images/icons/survival_grey.png';
 import tax_grey from './images/icons/tax_grey.png';
 import worldImg from './images/icons/world.png';
 import germany from './images/germany.png';
+import spain from './images/spain.png';
 import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
+import googlePlayBadge_es from './images/es/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
+import appleStoreBadge_es from './images/es/apple-store-badge.png';
 import attach from './images/attach.png';
 import cameraSolid from './images/icons/camera-solid.png';
 import imageGallery from './images/icons/images-gallery.png';
@@ -202,15 +205,24 @@ import forest from './images/trees/forest.png';
 import fields from './images/trees/fields.png';
 import beach from './images/trees/beach.png';
 
+import tree_1 from './images/icons/tree_1.png';
+import smalltreewhite from '../assets/images/smalltreewhite.png';
+import markerImage from './images/tree.png';
+import fullscreen_icon from './images/fullscreen_icon.png';
+import multiple_trees from './images/icons/multiple_trees.png'
 import closeHBlack from './images/header/closeBlack.png';
 import closeHWhite from './images/header/closeWhite.png';
 import shareBlack from './images/header/shareBlack.png';
 import shareWhite from './images/header/shareWhite.png';
 
+import arrow_down from './images/arrow_down.png'
+
 export {
+  arrow_down,
   treelogo,
-  germany,
   worldImg,
+  germany,
+  spain,
   mapCollapse,
   mapExpand,
   tpoIcon,
@@ -352,8 +364,10 @@ export {
   tax_grey,
   googlePlayBadge_en,
   googlePlayBadge_de,
+  googlePlayBadge_es,
   appleStoreBadge_en,
   appleStoreBadge_de,
+  appleStoreBadge_es,
   attach,
   cameraSolid,
   imageGallery,
@@ -407,8 +421,13 @@ export {
   hills,
   mountains,
   spruce,
+  tree_1,
+  smalltreewhite,
+  markerImage,
+  fullscreen_icon,
+  multiple_trees,
   closeHBlack,
   closeHWhite,
   shareBlack,
-  shareWhite
+  shareWhite,
 };

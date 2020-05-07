@@ -1,1 +1,18 @@
-{ }
+{
+  "individual_plant_personal": "plantada por mim",
+  "individual_plant_community": "dedicado a mim",
+  "treecounter_tooltip": "Árvores plantadas por pessoas que doaram árvores para este contador.\nPor exemplo, você pode doar árvores para seus amigos, escola ou cidade e ajudá-los a atingir sua meta de plantio! Todas as árvores que você der de presente aparecerá no seu contador de árvores.",
+  "tpo_plant_personal": "por nós",
+  "tpo_individual_plant_community": "Dedicado a nós",
+  "by": "por",
+  "faqs": "FAQs",
+  "logged_in": "Logado",
+  "trillionTreeMessage1": "Plante conosco! O aplicativo da Web Plant-for-the-Planet apresenta organizações de plantio de árvores de todo o mundo. Desta forma, você pode facilmente ajudar a plantar árvores! Não importa quando ou onde você esteja, nunca foi tão fácil salvar o clima e fazer algo de bom. ",
+  "trillionTreeMessage2": "Porque o reflorestamento global captura pelo menos um quarto das emissões anuais de CO2 produzidas pelo homem e, ao mesmo tempo, cria prosperidade nos países do Global Sul.",
+  "trillionlabel": "Eventos Trilhão de árvores hoje",
+  "trillionTreesEvents": "Eventos da campanha Trilhões de árvores",
+  "searchProjectTitle": "O mundo precisa de mais árvores",
+  "searchProjectPara": "Um estudo recente publicado na revista \"Science\" diz que plantar um trilhão de árvores pode capturar 25% do CO2 produzido pelo homem.",
+  "searchProjectButton": "Encontre projetos para doar",
+  "treesPledged": "Árvores compromissadas"
+}

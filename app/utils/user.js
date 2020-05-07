@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import { debug } from '../debug';
-import { fetchItem, getItem, saveItem } from '../stores/localStorage';
+import { getItem, saveItem } from '../stores/localStorage';
 import { postRequest } from './api';
 
 /**
@@ -47,18 +47,21 @@ const getExpirationTimeStamp = token => {
  */
 const refreshTokenIfExpired = async () => {
   if (await tokenIsExpired()) {
-    const prev_refresh_token = await fetchItem('refresh_token');
-    let response = await postRequest('gesdinet_jwt_refresh_token', {
-      refresh_token: prev_refresh_token
-    });
-
-    const newToken = response.data.token;
-    const refreshToken = response.data.refresh_token;
-    updateJWT(newToken, refreshToken);
-    return newToken;
-  } else {
-    return;
+    const prev_refresh_token = await getItem('refresh_token');
+    if (prev_refresh_token) {
+      let response = await postRequest('gesdinet_jwt_refresh_token', {
+        refresh_token: prev_refresh_token
+      });
+      if (response.data) {
+        const newToken = response.data.token;
+        // refresh_token does not seem to be part of the result of api/token/refresh any more
+        const refreshToken = response.data.refresh_token || prev_refresh_token;
+        updateJWT(newToken, refreshToken);
+        return newToken;
+      }
+    }
   }
+  return;
 };
 
 const tokenIsExpired = async () => {
@@ -68,8 +71,12 @@ const tokenIsExpired = async () => {
 };
 
 const getTokenExpires = async () => {
-  let tokenExpiryTime = await fetchItem('token_expires');
-  return parseInt(tokenExpiryTime);
+  let tokenExpiryTime = await getItem('token_expires');
+  if (tokenExpiryTime) {
+    return parseInt(tokenExpiryTime);
+  } else {
+    return 0;
+  }
 };
 
 const getCurrentUnixTimestamp = () => Math.floor(Date.now() / 1000);

@@ -12,7 +12,6 @@ export const context = {
   base: process.env.base, // API base url. Debug mode off: "" on: "/app_dev.php" (requires login)
   debug: process.env.debug, // local console debugging switch
   currency: process.env.currency,
-  mapIds: { inventory: process.env.mapIdsInventory },
   bugsnagApiKey: process.env.bugsnagApiKey,
   android: {
     appId: process.env.androidAppId

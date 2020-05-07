@@ -85,6 +85,8 @@
 		6AFE9E9D21347CD4009D99E7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6B0830F8231806E700E64C6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		6B0830FC2318070700E64C6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6B3D2A7C24530E60002B35AB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6B7C9C2224402A3F000447B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6BBEA35E22A8FE8E00C6ADE1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		79829B7B4E914185BF3BE7C5 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		7E6219CAB4CD4570A7C98EB4 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				en,
 				Base,
 				de,
+				es,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -561,6 +564,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B0830FC2318070700E64C6C /* de */,
+				6B7C9C2224402A3F000447B7 /* en */,
+				6B3D2A7C24530E60002B35AB /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -629,7 +634,7 @@
 				CODE_SIGN_ENTITLEMENTS = TreecounterApp/TreecounterApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = UYRJ8SA699;
 				HEADER_SEARCH_PATHS = (
@@ -649,7 +654,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 1.49.41;
+				MARKETING_VERSION = 1.49.42;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -672,7 +677,7 @@
 				CODE_SIGN_ENTITLEMENTS = TreecounterApp/TreecounterApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = UYRJ8SA699;
 				HEADER_SEARCH_PATHS = (
@@ -692,7 +697,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)",
 				);
-				MARKETING_VERSION = 1.49.41;
+				MARKETING_VERSION = 1.49.42;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

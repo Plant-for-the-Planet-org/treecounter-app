@@ -26,13 +26,8 @@ export default class EditUserContribution extends Component {
       this.props.currentUserProfile,
       this.props.plantProjects
     );
-    // Bind Local method
-    this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
-  onSubmitClick() {
-    this.props.onSubmit();
-  }
 
   render() {
     return (
@@ -51,6 +46,7 @@ export default class EditUserContribution extends Component {
           isTpo={isTpo(this.props.currentUserProfile)}
           value={this.props.userContribution}
           isEdit
+          {...this.props}
         />
       </KeyboardAwareScrollView>
     );

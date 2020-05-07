@@ -154,17 +154,21 @@ export function getDateFromMySQL(dateTime) {
 export function formatDateToMySQL(date) {
   debug('formatDateToMySQL', date);
 
-  let dd = date.getDate();
-  let mm = date.getMonth() + 1; //January is 0!
-  let yyyy = date.getFullYear();
-  if (dd < 10) {
-    dd = '0' + dd;
-  }
-  if (mm < 10) {
-    mm = '0' + mm;
-  }
+  try {
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1; //January is 0!
+    let yyyy = date.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
 
-  date = yyyy + '-' + mm + '-' + dd;
+    date = yyyy + '-' + mm + '-' + dd;
+  } catch (err) {
+    // debug(err);
+  }
   return date;
 }
 
@@ -212,7 +216,10 @@ export function mergeContributionImages(updatedTreeContribution) {
     !updatedTreeContribution.contributionImages ||
     updatedTreeContribution.contributionImages.length == 0
   ) {
-    return updatedTreeContribution;
+    return {
+      ...updatedTreeContribution,
+      contributionImages: []
+    };
   }
   const newContributionImages = updatedTreeContribution.contributionImages;
   let contributionImages = [];
@@ -222,7 +229,7 @@ export function mergeContributionImages(updatedTreeContribution) {
         'base64'
       )
     ) {
-      let { imageFile } = newContributionImage;
+      let imageFile  = newContributionImage.image || newContributionImage.imageFile;
       return newContributionImage.id
         ? { imageFile, id: newContributionImage.id }
         : { imageFile };
@@ -597,22 +604,19 @@ export function generateFormikSchemaFromFormSchema(
   schemaObj = { properties: {}, required: [] },
   fields = []
 ) {
-  debug('schemaObj====>', schemaObj);
   let validationSchemaGenerated = {};
   Object.keys(schemaObj.properties).map(key => {
     if (fields.length === 0 || fields.indexOf(key) !== -1) {
       const property = schemaObj.properties[key];
 
-      if (['hidden', 'file'].indexOf(property.type) < 0) {
+      if (['hidden', 'file'].indexOf(property.type) < 0 && property.widget !== 'hidden') {
         // Not accepted in native
-
         let prepareSchema = Yup;
         const title = i18n.t(property.title);
         if (property.type === 'array') {
           prepareSchema = prepareSchema.array(
             generateFormikSchemaFromFormSchema(property.items, fields)
           );
-          debug('prepareSchema====>', prepareSchema);
         } else if (property.type === 'object') {
           prepareSchema = generateFormikSchemaFromFormSchema(property, fields);
         } else {

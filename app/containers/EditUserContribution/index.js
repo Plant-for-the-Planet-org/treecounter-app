@@ -7,32 +7,23 @@ import { editTree } from '../../actions/EditMyTree';
 import EditUserContribution from '../../components/EditUserContribution';
 import {
   mergeContributionImages,
-  getPlantProjectEnum,
   isTpo
 } from '../../helpers/utils';
 // Actions
 import {
-  currentUserProfileSelector,
+  currentUserProfileSelector, getProgressModelSelector,
   sortedUserContributionsSelector
 } from '../../selectors/index';
 
 class EditUserContributionsContainer extends React.Component {
   _userContribution = null;
 
-  onSubmit = (mode, value) => {
-    //debug('OnSubmit====>', registerTreeForm);
-    /*registerTreeForm =
-      registerTreeForm || this.refs.editTrees.refs.editTreeForm;
-    let value = registerTreeForm.getValue();*/
+  onSubmit = (mode, value, plantProject) => {
     const { props } = this;
     if (value) {
       value = mergeContributionImages(value);
 
       if (isTpo(this.props.currentUserProfile)) {
-        let plantProject =
-          getPlantProjectEnum(this.props.currentUserProfile).length > 0
-            ? getPlantProjectEnum(this.props.currentUserProfile)[0].value
-            : null;
         if (plantProject) {
           // needs to change an immutable struct
           value = {
@@ -72,6 +63,7 @@ class EditUserContributionsContainer extends React.Component {
         userContribution={this._userContribution}
         currentUserProfile={this.props.currentUserProfile}
         isEdit
+        {...this.props}
         onSubmit={this.onSubmit}
       />
     );
@@ -80,21 +72,24 @@ class EditUserContributionsContainer extends React.Component {
 
 const mapStateToProps = state => ({
   userContributions: sortedUserContributionsSelector(state),
-  currentUserProfile: currentUserProfileSelector(state)
+  currentUserProfile: currentUserProfileSelector(state),
+  loading: getProgressModelSelector(state),
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ editTree }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  EditUserContributionsContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditUserContributionsContainer);
 
 EditUserContributionsContainer.propTypes = {
   userContributions: PropTypes.array.isRequired,
   currentUserProfile: PropTypes.object,
   editTree: PropTypes.func,
+  loading: PropTypes.bool,
   navigation: PropTypes.any,
   match: PropTypes.shape({
     params: PropTypes.shape({

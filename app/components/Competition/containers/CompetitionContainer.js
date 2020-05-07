@@ -13,7 +13,7 @@ import {
 } from './../redux/competitionActions';
 import { supportTreecounterAction } from '../../../actions/supportTreecounterAction';
 import LoadingIndicator from '../../../components/Common/LoadingIndicator';
-import Competiton from './../screens/CompetitionList.native';
+import Competiton from './../screens/CompetitionList';
 import { debug } from '../../../debug';
 import { updateRoute } from '../../../helpers/routerHelper';
 import {

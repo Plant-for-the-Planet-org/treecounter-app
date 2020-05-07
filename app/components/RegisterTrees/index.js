@@ -139,7 +139,6 @@ export default class RegisterTrees extends Component {
             ? getPlantProjectEnum(this.props.currentUserProfile)[0].value
             : null;
     }
-
     this.props.onSubmit(
       this.state.mode,
       this.registerTreeForm.getValue(),
@@ -186,7 +185,6 @@ export default class RegisterTrees extends Component {
       : this.props.schemaOptionsMultipleTrees;
 
     formSchemaOptions = this.updateTemplate(template, null, formSchemaOptions);
-
     return (
       <div className="app-container__content--center sidenav-wrapper">
         <TextHeading>

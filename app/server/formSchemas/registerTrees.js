@@ -49,13 +49,22 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
+            id: {
+              type: 'integer',
+              widget: 'hidden'
+            },
             image: {
               type: 'string',
               title: 'label.upload_profile_picture',
               widget: 'file',
+              category:'contribution',
               icon: null,
               help: null,
               propertyOrder: 1
+            },
+            description: {
+              type: 'string',
+              widget: 'hidden'
             }
           },
           required: ['imageFile'],
@@ -181,13 +190,22 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
+            id: {
+              type: 'integer',
+              widget: 'hidden'
+            },
             image: {
               type: 'string',
               title: 'label.upload_profile_picture',
               widget: 'file',
               icon: null,
+              category:'contribution',
               help: null,
               propertyOrder: 1
+            },
+            description: {
+              type: 'string',
+              widget: 'hidden'
             }
           },
           required: ['imageFile'],

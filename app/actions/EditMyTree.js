@@ -33,8 +33,8 @@ export function editTree(plantContribution, plantId, navigation) {
         const { statusText } = res;
         const { merge, unlink } = res.data;
         const toBeDeleted = res.data['delete'];
-        dispatch(unlinkEntity(unlink));
-        dispatch(deleteEntity(toBeDeleted));
+        if (unlink) dispatch(unlinkEntity(unlink));
+        if (toBeDeleted) dispatch(deleteEntity(toBeDeleted));
         if (merge) {
           merge.contribution &&
             dispatch(
@@ -82,8 +82,8 @@ export function deleteContribution(plantContributionId, navigation) {
           const { statusText } = res;
           const { merge, unlink } = res.data;
           const toBeDeleted = res.data['delete'];
-          dispatch(unlinkEntity(unlink));
-          dispatch(deleteEntity(toBeDeleted));
+          if (unlink) dispatch(unlinkEntity(unlink));
+          if (toBeDeleted) dispatch(deleteEntity(toBeDeleted));
           if (merge) {
             merge.treecounter &&
               dispatch(

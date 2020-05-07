@@ -189,12 +189,7 @@ export default function DonorDetails(props) {
                   </Text> */}
                   <GooglePlacesInput
                     placeholder={'Address'}
-                    initialValue={
-                      formikProps.values.address
-                        ? formikProps.values.address
-                        : ''
-                    }
-                    onChangeText={formikProps.handleChange('address')}
+                    initialValue={formikProps.values.country ? formikProps.values.country : ''}
                     setFieldValue={formikProps.setFieldValue}
                   />
                 </View>

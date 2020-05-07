@@ -57,6 +57,24 @@ export default {
               icon: null,
               help: null,
               propertyOrder: 1
+            },
+            description:{
+              type: 'string',
+              title: 'description',
+              category:'contribution',
+              widget: 'hidden',
+              icon: null,
+              help: null,
+              propertyOrder: 2
+            },
+            id:{
+              type: 'integer',
+              title: 'id',
+              category:'contribution',
+              widget: 'hidden',
+              icon: null,
+              help: null,
+              propertyOrder: 3
             }
           },
           required: ['imageFile'],
@@ -190,6 +208,24 @@ export default {
               category:'contribution',
               help: null,
               propertyOrder: 1
+            },
+            description:{
+              type: 'string',
+              title: 'description',
+              category:'contribution',
+              widget: 'hidden',
+              icon: null,
+              help: null,
+              propertyOrder: 2
+            },
+            id:{
+              type: 'integer',
+              title: 'id',
+              category:'contribution',
+              widget: 'hidden',
+              icon: null,
+              help: null,
+              propertyOrder: 3
             }
           },
           required: ['imageFile'],

@@ -13,10 +13,8 @@ import {
 } from '../reducers/entitiesReducer';
 import {
   contributionSchema,
-  // competitionEnrollmentSchema,
-  // competitionSchema,
   treecounterSchema,
-  plantProjectSchema
+  plantProjectSchema,
 } from '../schemas';
 import { debug } from '../debug';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
@@ -31,7 +29,7 @@ export function editTree(plantContribution, plantId, navigation) {
     })
       .then(res => {
         const { statusText } = res;
-        const { merge } = res.data;
+        const { merge, unlink } = res.data;
         if (merge) {
           merge.contribution &&
             dispatch(
@@ -49,6 +47,16 @@ export function editTree(plantContribution, plantId, navigation) {
                 normalize(merge.plantProject[0], plantProjectSchema)
               )
             );
+        }
+        if(res.data.delete){
+          dispatch(
+            deleteEntity(res.data.delete)
+          );
+        }
+        if(unlink){
+          dispatch(
+            unlinkEntity(unlink)
+          );
         }
         updateRoute('app_userHome', navigation || dispatch);
         NotificationManager.success(statusText, i18n.t('label.success'), 5000);

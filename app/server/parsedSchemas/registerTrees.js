@@ -18,7 +18,6 @@ const {
   transformedSchema: singleTreeRegisterFormSchema,
   schemaOptions: schemaOptionsSingleTree
 } = callParser(treeForm['single_tree'], config);
-
 const {
   transformedSchema: multipleTreesRegisterFormSchema,
   schemaOptions: schemaOptionsMultipleTrees

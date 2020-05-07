@@ -49,6 +49,10 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
+            id: {
+              type: 'integer',
+              widget: 'hidden'
+            },
             image: {
               type: 'string',
               title: 'label.upload_profile_picture',
@@ -58,23 +62,9 @@ export default {
               help: null,
               propertyOrder: 1
             },
-            description:{
+            description: {
               type: 'string',
-              title: 'description',
-              category:'contribution',
-              widget: 'hidden',
-              icon: null,
-              help: null,
-              propertyOrder: 2
-            },
-            id:{
-              type: 'integer',
-              title: 'id',
-              category:'contribution',
-              widget: 'hidden',
-              icon: null,
-              help: null,
-              propertyOrder: 3
+              widget: 'hidden'
             }
           },
           required: ['imageFile'],
@@ -200,6 +190,10 @@ export default {
           title: 'prototype',
           type: 'object',
           properties: {
+            id: {
+              type: 'integer',
+              widget: 'hidden'
+            },
             image: {
               type: 'string',
               title: 'label.upload_profile_picture',
@@ -209,23 +203,9 @@ export default {
               help: null,
               propertyOrder: 1
             },
-            description:{
+            description: {
               type: 'string',
-              title: 'description',
-              category:'contribution',
-              widget: 'hidden',
-              icon: null,
-              help: null,
-              propertyOrder: 2
-            },
-            id:{
-              type: 'integer',
-              title: 'id',
-              category:'contribution',
-              widget: 'hidden',
-              icon: null,
-              help: null,
-              propertyOrder: 3
+              widget: 'hidden'
             }
           },
           required: ['imageFile'],

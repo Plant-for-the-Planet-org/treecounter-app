@@ -30,6 +30,9 @@ export function editTree(plantContribution, plantId, navigation) {
       .then(res => {
         const { statusText } = res;
         const { merge, unlink } = res.data;
+        const toBeDeleted = res.data['delete'];
+        if (unlink) dispatch(unlinkEntity(unlink));
+        if (toBeDeleted) dispatch(deleteEntity(toBeDeleted));
         if (merge) {
           merge.contribution &&
             dispatch(
@@ -47,16 +50,6 @@ export function editTree(plantContribution, plantId, navigation) {
                 normalize(merge.plantProject[0], plantProjectSchema)
               )
             );
-        }
-        if(res.data.delete){
-          dispatch(
-            deleteEntity(res.data.delete)
-          );
-        }
-        if(unlink){
-          dispatch(
-            unlinkEntity(unlink)
-          );
         }
         updateRoute('app_userHome', navigation || dispatch);
         NotificationManager.success(statusText, i18n.t('label.success'), 5000);
@@ -87,8 +80,8 @@ export function deleteContribution(plantContributionId, navigation) {
           const { statusText } = res;
           const { merge, unlink } = res.data;
           const toBeDeleted = res.data['delete'];
-          dispatch(unlinkEntity(unlink));
-          dispatch(deleteEntity(toBeDeleted));
+          if (unlink) dispatch(unlinkEntity(unlink));
+          if (toBeDeleted) dispatch(deleteEntity(toBeDeleted));
           if (merge) {
             merge.treecounter &&
               dispatch(

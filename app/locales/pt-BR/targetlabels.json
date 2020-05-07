@@ -1,1 +1,7 @@
-{ }
+{
+  "set_target": "Minha Meta de Árvores",
+  "update_target": "Minha meta de árvores",
+  "save": "Salvar",
+  "target_count": "Meta de Árvores Total",
+  "target_year": "Ano Alvo"
+}

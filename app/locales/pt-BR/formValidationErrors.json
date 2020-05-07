@@ -1,1 +1,8 @@
-{ }
+{
+  "positive_number": "O número deve ser positivo",
+  "invalid_number": "Não é um número válido",
+  "required_field": "{{field}}é obrigatório",
+  "selection_invalid": "Não é uma opção válida",
+  "email_invalid": "E-mail inválido",
+  "char_limit": "Número de caracteres não devem exceder {{limit}}"
+}

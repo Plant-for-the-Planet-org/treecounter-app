@@ -31,7 +31,10 @@ export function editTree(plantContribution, plantId, navigation) {
     })
       .then(res => {
         const { statusText } = res;
-        const { merge } = res.data;
+        const { merge, unlink } = res.data;
+        const toBeDeleted = res.data['delete'];
+        dispatch(unlinkEntity(unlink));
+        dispatch(deleteEntity(toBeDeleted));
         if (merge) {
           merge.contribution &&
             dispatch(

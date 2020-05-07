@@ -43,6 +43,36 @@ export default function DonationStep3(props) {
       }).then(
         token => {
           console.log('Token from GPAY --- ', token)
+
+          const data = {
+            type: 'card',
+            card: { token: token.tokenId },
+            key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
+          }
+
+          function JSON_to_URLEncoded(element, key, list) {
+            var list = list || [];
+            if (typeof (element) == 'object') {
+              for (var idx in element)
+                JSON_to_URLEncoded(element[idx], key ? key + '[' + idx + ']' : idx, list);
+            } else {
+              list.push(key + '=' + encodeURIComponent(element));
+            }
+            return list.join('&');
+          }
+
+          console.log('Data', data)
+          const paymentMethod = axios.post('https://api.stripe.com/v1/payment_methods', JSON_to_URLEncoded(data), {
+            headers: {
+              Authorization: 'Bearer sk_test_pvrGEhOIEu3HwYdLTMhqznnl00kFjZUvMD',
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+          }).then(response => {
+            console.log('Payment Method', response)
+          })
+            .catch(error => {
+              console.log(error.response)
+            });
         }
       ).catch(err => {
         console.log('error gpay', err)
@@ -94,29 +124,7 @@ export default function DonationStep3(props) {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         }
       }).then(response => {
-        try {
-          const response = axios.post('https://stripe-ex-backend.herokuapp.com/create_intent', JSON_to_URLEncoded({
-            amount: 2000,
-            currency: 'usd',
-            confirmationMethod: 'manual',
-            confirm: false,
-            payment_method: paymentMethod
-          }), {
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            }
-          })
-            .then(response => {
-              console.log(response)
-            })
-            .catch(error => {
-              console.log(error.response)
-            });
-          console.log('Payment Intent', response)
-        } catch (e) {
-          console.log('Payment Intent Error', e)
-        }
+        console.log(response)
       })
         .catch(error => {
           console.log(error.response)

@@ -1,1 +1,25 @@
-{ }
+{
+  "challenge_heading": "Desafie Amigos",
+  "challenge_to_plant": "Desafio para plantar:",
+  "challenge_edit_description": "Quem planta a maior floresta? Desafie seus amigos e colegas de trabalho ou participe de competições em andamento! ",
+  "from": "de",
+  "indefinite": "Indefinido",
+  "to": "para",
+  "accept": "Aceitar",
+  "reject": "Rejeitar",
+  "sent": "Enviado",
+  "accepted": "Aceito",
+  "declined": "Recusado",
+  "challenge_accept": "Você aceitou o desafio",
+  "challenge_deny": "Você recusou o desafio.",
+  "challenge_error": "A meta atual de {{user}} é {{target}}. Por favor, preencha com um número maior.",
+  "search_user": "Pesquisar Usuário",
+  "email": "Email",
+  "year": "Ano",
+  "challenge_create_successfully": "Desafio criado com sucesso",
+  "please_select_user": "Por favor selecione um usuário",
+  "please_select_year": "Por favor selecione o ano",
+  "could_not_add_user": "Não foi possível adicionar usuário",
+  "name_is_required": "Nome é obrigatório",
+  "goal_is_required": "Meta é obrigatória"
+}

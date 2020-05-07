@@ -6,13 +6,13 @@
   "sortBy": "Ordenar por",
   "timePeriod": "Período de tempo",
   "map_description": "Há espaço suficiente no mundo para muitas árvores novas. No total, uma área do tamanho dos EUA poderia ser reflorestada! Descubra no mapa onde árvores já foram plantadas e onde mais árvores podem ser plantadas. No Ranking você pode ver quais países, organizações ou empresas plantaram mais árvores.",
-  "explore": "Explorar",
+  "explore": "Mapa de Árvores no Mundo",
   "plantedTrees": "Árvores plantadas",
   "plantedTrees_description": "Todas as árvores registradas neste site desde 2006.",
   "existingForest": "Floresta Existente",
-  "existingForest_description": "3.04 triliões de árvores existem atualmente no mundo. É um número menor do que os seis trilhões de árvores antes dos humanos começarem a derrubar florestas, cerca de 11.000 anos atrás. O mapa mostra o número de árvores por km².",
-  "existingForest_source": "Crowther, T. W. et al. (2015) Mapping tree density at a global scale. Nature 525, 201-205.",
+  "existingForest_description": "Atualmente, existem 3,04 trilhões de árvores em todo o mundo. É um número menor que os seis trilhões de árvores que existiam antes que os humanos comecem a derrubar florestas, cerca de 11.000 anos atrás. O mapa mostra o número de árvores por km².",
+  "existingForest_source": "Crowther, T. W. et al. (2015) Mapping tree density at a global scale. Nature 525, 201–205.",
   "restorationOpportunities": "Oportunidades de Restauração",
-  "restorationOpportunities_description": "Meio bilhão de hectares são suficientes para a restauração em larga escala de florestas fechadas. Adicionalmente, um bilhão e meio de hectares estão melhor localizados para a restauração de mosaicos, que combina florestas com outros usos da terra como agroflorestas, pequenas propriedades de agricultores e assentamentos.",
+  "restorationOpportunities_description": "Meio bilhão de hectares são adequados para a restauração em larga escala de florestas fechadas. Outros um bilhão e meio de hectares possuem melhor localização para a restauração de mosaicos, que combina florestas com outros usos da terra como agroflorestas, pequenas propriedades de agricultura e assentamentos.",
   "restorationOpportunities_source": "Crowther, T. W. et al. (2017) Predicting Global Forest Reforestation Potential. bioRxiv 210062."
 }

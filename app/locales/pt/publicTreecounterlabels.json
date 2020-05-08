@@ -5,5 +5,7 @@
   "contributor": "Contribuidor",
   "planted_trees": "Árvores plantadas",
   "target": "Alvo",
-  "support_trees_to": "Apoie árvores para {{user}}"
+  "support_trees_to": "Apoie árvores para {{user}}",
+  "give_trees_to_company": "Dê árvores com {{companyName}}",
+  "shareuserprofile": "Conheça {{displayName}} no aplicativo Plant-for-the-Planet https://www.trilliontreecampaign.org/t/{{slug}}"
 }

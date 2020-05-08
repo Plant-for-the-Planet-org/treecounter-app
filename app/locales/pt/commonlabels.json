@@ -1,5 +1,6 @@
 {
   "loading": "Carregando..",
+  "update": "Atualizar",
   "isRequired": "{{context}} é obrigatório",
   "enterValidEmail": "Digite um email válido",
   "invalidLength": "Comprimento inválido: deve ser menor que {{length}}",

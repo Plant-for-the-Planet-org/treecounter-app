@@ -17,5 +17,6 @@
   "select_file": "Selecione um arquivo do computador",
   "browse": "Procurar",
   "upload_profile_picture": "Adicionar nova foto",
+  "planted_at": "Plantado em {{location}}",
   "dedicated_to": "Dedicado à"
 }

@@ -1,9 +1,13 @@
 {
   "register_trees": "Registrar Árvores",
   "edit_trees": "Editar árvores",
+  "planting_location_desc": "Por favor, selecione uma área de plantio no mapa.",
+  "tree_count": "Contagem de Árvores",
   "tree_species": "Espécies de árvores",
   "geo_location": "Localização Geográfica",
   "add_images": "Adicionar imagens",
+  "tree_classification": "Classificação de Árvores",
+  "tree_scientific_name": "Nome Científico da Árvore",
   "heading_register_trees": "Registrar árvores plantadas",
   "many_trees": "Várias árvores",
   "plant_project": "Projeto Plantar",

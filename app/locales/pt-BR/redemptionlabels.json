@@ -1,1 +1,20 @@
-{ }
+{
+  "redeem_trees": "Resgate sua Árvore de presente",
+  "redeem_heading": "Você pode usar esta ferramenta para adicionar árvores ao seu contador de árvores usando um Voucher de Árvore que ganhou de presente ou um código do produto.",
+  "claim_trees": "Resgatar Árvores",
+  "enter_code": "Por favor insira o Voucher da Árvore, o código de produto ou Token para solicitar o resgate das suas árvores.",
+  "log_in": "Por favor, faça login ou inscreva-se para resgatar o seu código.",
+  "validate_code": "Validar Código",
+  "code": "Código",
+  "redeem_code": "Resgatar Código",
+  "validate_code_label": "Por favor, digite o código a ser resgatado",
+  "claiming": "Reivindicação:",
+  "trees_in_code": "Árvores neste código",
+  "you_can_redeem": "Você pode resgatar",
+  "planted_by": "Plantado por",
+  "add_my_trees": "Adicionar às minhas Árvores",
+  "already_redeemed_trees": "Você já resgatou este código, por favor tente outro.",
+  "RedeemxTrees": "Resgatar {{treeCount}} Árvores",
+  "Redeem1Tree": "Resgatar {{treeCount}} Árvore",
+  "redeem_trees_button": "Resgatar Árvores"
+}

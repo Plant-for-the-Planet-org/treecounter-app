@@ -1,1 +1,9 @@
-{ }
+{
+  "trees_planted": "Árvores Plantadas",
+  "discard_changes": "Cancelar alterações",
+  "my_dashboard": "Meu painel",
+  "project_heading": "Você pode gerenciar seus projetos de plantio de árvores, e (no futuro) ver as doações que você recebeu.",
+  "total_donation": "Total de Doações",
+  "connect_to_stripe": "Se conectar à Stripe",
+  "recent_donations": "Doações recentes"
+}

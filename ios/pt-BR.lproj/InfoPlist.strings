@@ -1,0 +1,13 @@
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Precisamos da sua localização para obter as coordenadas geográficas durante o registro de árvores.";
+"NSLocationAlwaysUsageDescription" = "Precisamos da sua localização para obter as coordenadas geográficas durante o registro de árvores.";
+"NSLocationWhenInUseUsageDescription" = "Precisamos da sua localização para obter as coordenadas geográficas durante o registro de árvores.";
+"NSMicrophoneUsageDescription" = "Gostaríamos de ter acesso ao seu microfone (para vídeos).";
+"NSPhotoLibraryAddUsageDescription" = "Nós gostaríamos de salvar fotos na sua galeria de fotos.";
+"NSCalendarsUsageDescription" = "Para bom funcionamento do app, gostaríamos de acessar seu calendário.";
+"NSAppleMusicUsageDescription" = "Para bom funcionamento do app, gostaríamos de acessar sua biblioteca de músicas.";
+"NSBluetoothPeripheralUsageDescription" = "Para bom funcionamento do app, gostaríamos de usar o bluetooth.";
+"NSBluetoothAlwaysUsageDescription" = "Para bom funcionamento do app, gostaríamos de usar o bluetooth.";
+"NSMotionUsageDescription" = "Para bom funcionamento do app, gostaríamos de usar o sensor de movimento.";
+"NSSpeechRecognitionUsageDescription" = "Para bom funcionamento do app, gostaríamos de usar o reconhecimento de voz.";
+"NSContactsUsageDescription" = "Gostaríamos de acessar seus contatos.";
+"NSSiriUsageDescription" = "Gostaríamos de usar a Siri para o app.";

@@ -132,6 +132,7 @@ export default class EditUserProfile extends Component {
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
     if (profileType == 'password') {
       try {
+        console.log('schemaOptionm', schemaOptions);
         schemaOptions.fields.password.fields.first.hasError = schemaOptions.fields.password.fields.second.hasError = this.state.passwordNotSameError;
         schemaOptions.fields.password.fields.first.error = schemaOptions.fields.password.fields.second.error = (
           <Text>{i18n.t('label.same_password_error')}</Text>
@@ -152,7 +153,7 @@ export default class EditUserProfile extends Component {
     this.setState({ passwordNotSameError: value });
 
   _renderScene = ({ route }) => {
-    const { onSave, currentUserProfile } = this.props;
+    const { onSave, currentUserProfile, loading } = this.props;
     const { treecounter: treeCounter } = currentUserProfile;
     switch (route.key) {
       case 'basic':
@@ -161,6 +162,7 @@ export default class EditUserProfile extends Component {
             onSave={onSave}
             currentUserProfile={currentUserProfile}
             getFormSchemaOption={this.getFormSchemaOption}
+            loading={loading}
           />
         );
       // break;
@@ -170,6 +172,7 @@ export default class EditUserProfile extends Component {
             onSave={onSave}
             currentUserProfile={currentUserProfile}
             getFormSchemaOption={this.getFormSchemaOption}
+            loading={loading}
           />
         );
       case 'following':
@@ -232,6 +235,7 @@ export default class EditUserProfile extends Component {
             navigation={this.props.navigation}
             deleteProfile={this.props.deleteProfile}
             changeEmail={this.changeEmail}
+            loading={loading}
             onSamePasswordErrorState={this.changePasswordErrorState}
           />
         );
@@ -290,9 +294,9 @@ class BasicTabView extends React.PureComponent {
   constructor(props) {
     super(props);
   }
-
   render() {
     const { type } = this.props.currentUserProfile;
+
     return (
       <KeyboardAwareScrollView enableOnAndroid>
         <CardLayout style={{ flex: 1 }}>
@@ -311,6 +315,7 @@ class BasicTabView extends React.PureComponent {
             />
           </View>
           <PrimaryButton
+            loading={this.props.loading}
             onClick={() => {
               this.props.onSave(type, 'profile', this.refs);
             }}
@@ -326,6 +331,7 @@ class BasicTabView extends React.PureComponent {
 BasicTabView.propTypes = {
   onSave: PropTypes.func.isRequired,
   currentUserProfile: PropTypes.object,
+  loading: PropTypes.bool,
   getFormSchemaOption: PropTypes.func
 };
 
@@ -348,6 +354,7 @@ class DescriptionTabView extends React.PureComponent {
             />
           </View>
           <PrimaryButton
+            loading={this.props.loading}
             onClick={() => {
               this.props.onSave(type, 'about_me', this.refs);
             }}
@@ -362,17 +369,25 @@ class DescriptionTabView extends React.PureComponent {
 
 DescriptionTabView.propTypes = {
   onSave: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
   currentUserProfile: PropTypes.object,
   getFormSchemaOption: PropTypes.func
 };
 
 class SecurityTabView extends React.PureComponent {
+
   constructor(props) {
     super(props);
+    this.state={
+      emailButtonPress: false,
+      changPassworsdButtonPress: false,
+    }
   }
 
   render() {
     const { type } = this.props.currentUserProfile;
+    const {loading} = this.props;
+    const {emailButtonPress, changPassworsdButtonPress} = this.state;
     return (
       <KeyboardAwareScrollView enableOnAndroid>
         <CardLayout style={{ flex: 1 }}>
@@ -387,7 +402,12 @@ class SecurityTabView extends React.PureComponent {
             </Text>
           </View>
           <PrimaryButton
+            loading={emailButtonPress && loading}
             onClick={() => {
+              this.setState({
+                emailButtonPress: true,
+                changPassworsdButtonPress:false,
+              });
               this.props.changeEmail(this.refs.change_email);
             }}
           >
@@ -406,6 +426,7 @@ class SecurityTabView extends React.PureComponent {
             />
           </View>
           <PrimaryButton
+            loading={changPassworsdButtonPress && loading}
             onClick={() => {
               let value = this.refs.password.getValue();
               if (
@@ -416,11 +437,13 @@ class SecurityTabView extends React.PureComponent {
                 //same password
                 this.props.onSamePasswordErrorState(true);
                 this.setState({
-                  passwordNotSameError: true
+                  emailButtonPress:false,
+                  passwordNotSameError: true,
+                  changPassworsdButtonPress:true,
                 });
                 return;
               }
-              this.props.onSamePasswordErrorState(true);
+              this.props.onSamePasswordErrorState(false);
               this.props.onSave(type, 'password', this.refs);
             }}
           >
@@ -444,6 +467,7 @@ class SecurityTabView extends React.PureComponent {
 
 SecurityTabView.propTypes = {
   onSave: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
   currentUserProfile: PropTypes.object,
   getFormSchemaOption: PropTypes.func,
   navigation: PropTypes.object,

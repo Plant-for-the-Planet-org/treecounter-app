@@ -61,3 +61,6 @@ web/server
 
 # lock 
 *.lock
+
+# debug.log etc
+*.log

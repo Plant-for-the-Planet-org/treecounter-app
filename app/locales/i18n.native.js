@@ -4,6 +4,8 @@ import { getLanguages } from 'react-native-i18n';
 import enlabels from './en';
 import deLabels from './de';
 import esLabels from './es';
+import ptLabels from './pt';
+import ptBRLabels from './pt-BR';
 
 // TO-DO: consider changing this the same way as i18n.js using getLocale()
 let userLang = undefined;
@@ -23,19 +25,29 @@ i18next.init({
 
   // Using simple hardcoded resources for simple example
   resources: {
-    en: {
+    'en': {
       translation: {
         label: enlabels
       }
     },
-    de: {
+    'de': {
       translation: {
         label: deLabels
       }
     },
-    es: {
+    'es': {
       translation: {
         label: esLabels
+      }
+    },
+    'pt': {
+      translation: {
+        label: ptLabels
+      }
+    },
+    'pt-BR': {
+      translation: {
+        label: ptBRLabels
       }
     }
   }

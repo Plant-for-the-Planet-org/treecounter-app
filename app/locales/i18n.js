@@ -2,6 +2,8 @@ import i18next from 'i18next';
 import enlabels from './en';
 import deLabels from './de';
 import esLabels from './es';
+import ptLabels from './pt';
+import ptBRLabels from './pt-BR';
 import { getLocale } from '../actions/getLocale';
 
 let userLang = getLocale();
@@ -15,19 +17,29 @@ i18next.init({
 
   // Using simple hardcoded resources for simple example
   resources: {
-    en: {
+    'en': {
       translation: {
         label: enlabels
       }
     },
-    de: {
+    'de': {
       translation: {
         label: deLabels
       }
     },
-    es: {
+    'es': {
       translation: {
         label: esLabels
+      }
+    },
+    'pt': {
+      translation: {
+        label: ptLabels
+      }
+    },
+    'pt-BR': {
+      translation: {
+        label: ptBRLabels
       }
     }
   }

@@ -91,6 +91,8 @@ const statusOptions = [
   { value: 'en', label: 'English', icon: images.worldImg },
   { value: 'de', label: 'Deutsch', icon: images.germany },
   { value: 'es', label: 'Español', icon: images.spain }
+  { value: 'pt', label: 'Português', icon: images.worldImg }
+  { value: 'pt-BR', label: 'Português brasileiro', icon: images.worldImg }
 ];
 
 let userLang = getLocale(); // en|de

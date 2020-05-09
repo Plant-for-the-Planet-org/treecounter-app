@@ -56,7 +56,7 @@ function guessLocale() {
   } else if (languageCached !== null) {
     return languageCached;
   } else {
-    let locale = navigator.language || navigator.userLanguage;;
+    let locale = navigator.language || navigator.userLanguage;
     // if not supported long locale format, e.g. en-US try short version, e.g. en
     if (!supportedLocales.includes(locale)) {
       locale = locale.split('-')[0];

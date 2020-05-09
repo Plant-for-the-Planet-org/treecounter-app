@@ -84,3 +84,149 @@ export const setSupportDetails = supportContextDetails => dispatch => {
     }
   });
 };
+
+// data has to be in the following format - 
+// {
+//   "amount": 50,
+//   "currency": "EUR",
+//   "recipientType": "individual",
+//   "treeCount": 50,
+//   "receiptIndividual": {
+//       "firstname": "jvjmv",
+//       "lastname": "hghg",
+//       "email": "hgj@hh.com",
+//       "address": "ihh",
+//       "zipCode": "134003",
+//       "city": "gfjyfgh",
+//       "country": "IN"
+//   }
+// }
+export function createDonation(data, plantProject, loggedIn, donationType) {
+  return dispatch => {
+    loggedIn
+      ?
+      donationType === 'gift' ?
+        postAuthenticatedRequest('giftDonationCreate_post', data, {
+          version: 'v1.3',
+          plantProject: plantProject
+        })
+          .then(res => {
+            //const { donationID } = res.data;
+            dispatch(
+              // Code for adding data
+            );
+            debug(res.data);
+          })
+          .catch(error => {
+            NotificationManager.error(
+              error.response.data.message,
+              i18n.t('label.error'),
+              5000
+            );
+          })
+        :
+        postAuthenticatedRequest('donationCreate_post', data, {
+          version: 'v1.3',
+          plantProject: plantProject
+        })
+          .then(res => {
+            //const { donationID } = res.data;
+            dispatch(
+              // Code for adding data
+            );
+            debug(res.data);
+          })
+          .catch(error => {
+            NotificationManager.error(
+              error.response.data.message,
+              i18n.t('label.error'),
+              5000
+            );
+          })
+      :
+      donationType === 'gift' ?
+        postRequest('giftDonationCreatePublic_post', data, {
+          version: 'v1.3',
+          plantProject: plantProject
+        })
+          .then(res => {
+            dispatch(
+              // Code for adding data
+            );
+            // getLocalStorageItem();
+          })
+          .catch(error => {
+            NotificationManager.error(
+              error.response.data.message,
+              i18n.t('label.error'),
+              5000
+            );
+          })
+        :
+        postRequest('donationCreatePublic_post', data, {
+          version: 'v1.3',
+          plantProject: plantProject
+        })
+          .then(res => {
+            dispatch(
+              // Code for adding data
+            );
+            // getLocalStorageItem();
+          })
+          .catch(error => {
+            NotificationManager.error(
+              error.response.data.message,
+              i18n.t('label.error'),
+              5000
+            );
+          });
+  };
+}
+
+// data has to be in the following format - 
+// {
+//   "paymentProviderRequest": {
+//       "account": "acct_1Ajup2JruhzYVufP",
+//       "gateway": "stripe",
+//       "source": {
+//           "id": "pm_1FId4pGhHD5xN1UqvYpFtj5c",
+//           "object": "payment_method"
+//       }
+//   }
+// }
+export function donationPay(data, donationID, loggedIn) {
+  return dispatch => {
+    loggedIn
+      ? postAuthenticatedRequest('donationPay_post', data, {
+        version: 'v1.3',
+        donationID: donationID
+      })
+        .then(res => {
+          //const {  } = res.data.merge;
+
+          debug(res.data);
+        })
+        .catch(error => {
+          NotificationManager.error(
+            error.response.data.message,
+            i18n.t('label.error'),
+            5000
+          );
+        })
+      : postRequest('donationPayPublic_post', data, {
+        version: 'v1.3',
+        donationID: donationID
+      })
+        .then(res => {
+          debug(res.data);
+        })
+        .catch(error => {
+          NotificationManager.error(
+            error.response.data.message,
+            i18n.t('label.error'),
+            5000
+          );
+        });
+  };
+}
+

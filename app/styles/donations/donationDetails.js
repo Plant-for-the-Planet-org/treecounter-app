@@ -420,8 +420,7 @@ export default EStyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: 'left',
-    color: '#4d5153',
-    marginLeft: 8
+    color: '#4d5153'
   },
   paymentTreeDetails: {
     display: 'flex',
@@ -473,7 +472,39 @@ export default EStyleSheet.create({
     color: '#ffffff',
     marginRight: 12
   },
-
+  continueOtherButton: {
+    backgroundColor: 'white',
+    paddingVertical: 12,
+    height: 52,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    borderRadius: 26,
+    right: 20,
+    borderWidth: 1,
+    borderColor: '#d5d5d5'
+  },
+  continueOtherButtonText: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 16,
+    letterSpacing: 0.21,
+    color: '#4d5153',
+    marginRight: 5.4
+  },
+  nativePayButton: {
+    backgroundColor: 'white',
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    height: 52,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: 26,
+    borderWidth: 1,
+    borderColor: '#d5d5d5',
+    marginRight: 30
+  },
   // Input Selection
 
   treeCountTextInput: {

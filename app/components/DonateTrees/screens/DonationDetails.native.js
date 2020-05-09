@@ -5,7 +5,8 @@ import {
   StatusBar,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Platform
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
@@ -24,6 +25,7 @@ import {
 } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
+import stripe from 'tipsi-stripe';
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
@@ -36,6 +38,21 @@ function DonationDetails(props) {
   const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
     props.hasTaxDeduction && props.taxDeductibleCountries[0]
   );
+  const [token, setToken] = React.useState(null)
+  const [applePayStatus, setApplePayStatus] = React.useState('')
+
+  // this is to test whether Apple/Google pay is allowed or not
+  stripe.setOptions({
+    publishableKey: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
+    merchantId: '', // Optional
+    androidPayMode: 'test', // Android only
+  })
+  const [allowedNativePay, setallowedNativePay] = React.useState(false)
+
+  React.useEffect(() => {
+    const allowedNativePay = stripe.deviceSupportsNativePay()
+    setallowedNativePay(allowedNativePay)
+  }, [])
 
   // show hide project modal
   const [showProjectModal, setProjectModal] = React.useState(false);
@@ -159,8 +176,8 @@ function DonationDetails(props) {
             fee={paymentFee}
           />
         ) : (
-          <NoPlantProjectDetails />
-        )}
+            <NoPlantProjectDetails />
+          )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -178,17 +195,17 @@ function DonationDetails(props) {
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-        context.contextType === 'gift-invitation' ? (
-          <GiftTreesComponent
-            treeCount={treeCount}
-            setTreeCount={setTreeCount}
-            selectedProject={props.selectedProject}
-            context={context}
-          />
-        ) : null}
+          context.contextType === 'gift-invitation' ? (
+            <GiftTreesComponent
+              treeCount={treeCount}
+              setTreeCount={setTreeCount}
+              selectedProject={props.selectedProject}
+              context={context}
+            />
+          ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
-        <View style={[styles.horizontalDivider, { width: '14%' }]} />
+        <View style={[styles.horizontalDivider, { width: '14%', marginTop: 30 }]} />
 
         {/* Commission Covering */}
         {/* {context.treeCount ? (
@@ -240,6 +257,11 @@ function DonationDetails(props) {
         navigation={props.navigation}
         onContinue={onContinue}
         frequency={frequency}
+        showNativePay={allowedNativePay ? Platform.OS === 'ios' ? 'apple' : 'google' : null}
+        token={token}
+        setToken={setToken}
+        stripe={stripe}
+        setApplePayStatus={setApplePayStatus}
       />
     </View>
   );

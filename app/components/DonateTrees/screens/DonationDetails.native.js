@@ -134,7 +134,10 @@ function DonationDetails(props) {
         scrollY={scrollY}
         navigation={props.navigation}
         title={'Tree Donation'}
+        showClose
       />
+
+
 
       <KeyboardAwareScrollView
         contentContainerStyle={styles.scrollView}

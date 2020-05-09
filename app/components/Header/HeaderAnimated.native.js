@@ -6,7 +6,7 @@ import {
   BackHandler,
   View
 } from 'react-native';
-import { backArrow } from '../../assets';
+import { backArrow, closeIcon } from '../../assets';
 
 let HEADER_MAX_HEIGHT = 80;
 let HEADER_MIN_HEIGHT = 80;
@@ -102,13 +102,13 @@ export default function HeaderAnimated(props) {
         }}
       >
         <TouchableOpacity
-          style={{ height: 18, zIndex: 1001 }}
+          style={{ height: 18, zIndex: 1001, left: 24 }}
           onPress={() => props.navigation.goBack()}
         >
           <Image
-            source={backArrow}
+            source={props.showClose ? closeIcon : backArrow}
             resizeMode="contain"
-            style={{ height: 18 }}
+            style={{ height: 18, width: 24 }}
           />
         </TouchableOpacity>
       </Animated.View>

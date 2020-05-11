@@ -6,11 +6,15 @@ import deLabels from './de';
 import esLabels from './es';
 import ptLabels from './pt';
 import ptBRLabels from './pt-BR';
+import { supportedLocales } from '../actions/getLocale';
 
 // TO-DO: consider changing this the same way as i18n.js using getLocale()
 let userLang = undefined;
 getLanguages().then(languages => {
-  userLang = languages[0].split('-')[0];
+  userLang = languages[0];
+  if (!supportedLocales.includes(userLang)) {
+    userLang = userLang.split('-')[0];
+  }
   i18next.changeLanguage(userLang); // ['en-US', 'en']
 });
 

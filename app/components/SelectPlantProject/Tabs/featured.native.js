@@ -133,7 +133,7 @@ class FeaturedProjects extends PureComponent {
         />
       </View>
     );
-    debug('featuredProjects', featuredProjects);
+    // debug('featuredProjects', featuredProjects);
     return (
       <View style={styles.flexContainer}>
         {!loader ? (

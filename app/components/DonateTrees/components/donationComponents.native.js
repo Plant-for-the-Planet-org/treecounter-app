@@ -295,24 +295,31 @@ export function PaymentOption(props) {
       {props.treeCount ? (
         <>
           <TouchableOpacity
-            onPress={() => props.showNativePay === 'google' ? handleAndroidPayPress({
-              totalTreeCount: String(props.treeCount),
-              totalPrice: String(props.treeCount * props.treeCost),
-              amountPerTree: String(props.treeCost),
-              currency_code: String(props.selectedCurrency),
-              token: props.token,
-              setToken: props.setToken,
-              stripe: props.stripe
-            }) : handleApplePayPress({
-              totalTreeCount: String(props.treeCount),
-              totalPrice: String(props.treeCount * props.treeCost),
-              amountPerTree: String(props.treeCost),
-              currency_code: String(props.selectedCurrency),
-              token: props.token,
-              setToken: props.setToken,
-              stripe: props.stripe,
-              setApplePayStatus: props.setApplePayStatus,
-            })}
+            onPress={() => props.showNativePay === 'google' ?
+              handleAndroidPayPress({
+                totalTreeCount: String(props.treeCount),
+                totalPrice: String(props.treeCount * props.treeCost),
+                amountPerTree: String(props.treeCost),
+                currency_code: String(props.selectedCurrency),
+                token: props.token,
+                setToken: props.setToken,
+                stripe: props.stripe,
+                currentUserProfile: props.currentUserProfile,
+                context: props.context,
+                createDonation: props.createDonation,
+                setDonorDetails: props.setDonorDetails,
+                donationPay: props.donationPay
+              }) : handleApplePayPress({
+                totalTreeCount: String(props.treeCount),
+                totalPrice: String(props.treeCount * props.treeCost),
+                amountPerTree: String(props.treeCost),
+                currency_code: String(props.selectedCurrency),
+                token: props.token,
+                setToken: props.setToken,
+                stripe: props.stripe,
+                setApplePayStatus: props.setApplePayStatus,
+                currentUserProfile: props.currentUserProfile
+              })}
             style={styles.nativePayButton}
           >
             <SvgXml style={{ maxHeight: 24, maxWidth: 60 }} xml={props.showNativePay === 'google' ? google_pay : apple_pay} />

@@ -265,6 +265,11 @@ function DonationDetails(props) {
         setToken={setToken}
         stripe={stripe}
         setApplePayStatus={setApplePayStatus}
+        currentUserProfile={props.currentUserProfile}
+        context={context}
+        createDonation={props.createDonation}
+        setDonorDetails={props.setDonorDetails}
+        donationPay={props.donationPay}
       />
     </View>
   );

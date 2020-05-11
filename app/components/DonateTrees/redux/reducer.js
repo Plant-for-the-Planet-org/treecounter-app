@@ -1,4 +1,4 @@
-import { CLEAR_DONATION_REDUCER, SET_CONTEXT, SET_DONATION_DETAILS, SET_DONOR_DETAILS, SET_GIFT_CONTEXT_DETAILS, SET_PAYMENT_DETAILS, SET_PAYMENT_RESPONSE, SET_PLEDGE_DETAILS, SET_SELECTED_PROJECT, SET_SUPPORT_DETAILS } from '../../../actions/types';
+import { CLEAR_DONATION_REDUCER, SET_CONTEXT, SET_DONATION_DETAILS, SET_DONOR_DETAILS, SET_GIFT_CONTEXT_DETAILS, SET_PAYMENT_DETAILS, SET_PAYMENT_RESPONSE, SET_PLEDGE_DETAILS, SET_SELECTED_PROJECT, SET_SUPPORT_DETAILS, SET_DONATION_ID } from '../../../actions/types';
 
 const initialState = {
   contextType: null, // 'gift', 'support', 'pledge', 'direct'
@@ -9,7 +9,8 @@ const initialState = {
   donorDetails: {}, // Contact details of the Donor
   paymentResponse: {}, // Payment response from the server
   paymentDetails: {}, // Payment mode and the details
-  projectDetails: {} // Selected project details
+  projectDetails: {}, // Selected project details
+  donationID: null
 };
 
 export default function (state = initialState, action) {
@@ -72,6 +73,12 @@ export default function (state = initialState, action) {
         ...state,
         contextType: action.payload.contextType,
         supportTreeCounterDetails: action.payload.supportTreeCounterDetails
+      };
+
+    case SET_DONATION_ID:
+      return {
+        ...state,
+        donationID: action.payload
       };
 
     default:

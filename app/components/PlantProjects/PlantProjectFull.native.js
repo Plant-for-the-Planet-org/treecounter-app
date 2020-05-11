@@ -84,7 +84,7 @@ class PlantProjectFull extends React.Component {
   render() {
     let { plantProject } = this.props;
     if (!plantProject || !plantProject.tpoData) return <LoadingIndicator />;
-    debug('rendering with project:', plantProject);
+    // debug('rendering with project:', plantProject);
     const {
       images,
       description,
@@ -140,7 +140,7 @@ class PlantProjectFull extends React.Component {
             '/' +
             this.props.plantProject.id
           }
-          //  appurl={'weplant://project/' + this.props.plantProject.id}
+        //  appurl={'weplant://project/' + this.props.plantProject.id}
         />
         <ScrollView
           contentContainerStyle={[
@@ -211,10 +211,10 @@ class PlantProjectFull extends React.Component {
         ) : null}
       </View>
     ) : (
-      <View style={{ flex: 1, marginTop: -20 }}>
-        <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
-      </View>
-    );
+        <View style={{ flex: 1, marginTop: -20 }}>
+          <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
+        </View>
+      );
   }
 }
 

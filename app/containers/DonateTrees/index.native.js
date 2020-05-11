@@ -18,7 +18,9 @@ import {
   setPaymentDetails,
   setPaymentResponse,
   setPledgeDetails,
-  setSelectedProjectDetails
+  setSelectedProjectDetails,
+  createDonation,
+  donationPay
 } from '../../components/DonateTrees/redux/action';
 import { debug } from '../../debug';
 import { setProgressModelState } from '../../reducers/modelDialogReducer';
@@ -148,7 +150,8 @@ class DonationTreesContainer extends Component {
           donationDetails: this.props.donationDetails,
           donorDetails: this.props.donorDetails,
           paymentDetails: this.props.paymentDetails,
-          pledgeDetails: this.props.pledgeDetails
+          pledgeDetails: this.props.pledgeDetails,
+          donationID: this.props.donationID
         }}
         contextActions={{
           setDonationDetails: this.props.setDonationDetails,
@@ -156,6 +159,9 @@ class DonationTreesContainer extends Component {
           setPaymentDetails: this.props.setPaymentDetails
         }}
         determineDefaultCurrency={() => this.determineDefaultCurrency()}
+        currentUserProfile={this.props.currentUserProfile}
+        createDonation={this.props.createDonation}
+        donationPay={this.props.donationPay}
       />
     ) : null;
   }
@@ -178,7 +184,8 @@ const mapStateToProps = state => {
     donationDetails: state.donations.donationDetails,
     donorDetails: state.donations.donorDetails,
     paymentDetails: state.donations.paymentDetails,
-    pledgeDetails: state.donations.pledgeDetails
+    pledgeDetails: state.donations.pledgeDetails,
+    donationID: state.donations.donationID
   };
 };
 
@@ -198,7 +205,9 @@ const mapDispatchToProps = dispatch => {
       setPaymentDetails,
       setSelectedProjectDetails,
       setPaymentResponse,
-      setPledgeDetails
+      setPledgeDetails,
+      createDonation,
+      donationPay
     },
     dispatch
   );

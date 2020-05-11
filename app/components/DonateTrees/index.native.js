@@ -24,6 +24,10 @@ export default function DonateTrees(props) {
         navigation={props.navigation}
         context={props.context}
         contextActions={props.contextActions}
+        currentUserProfile={props.currentUserProfile}
+        createDonation={props.createDonation}
+        setDonorDetails={props.contextActions.setDonorDetails}
+        donationPay={props.donationPay}
       />
     </View>
   );

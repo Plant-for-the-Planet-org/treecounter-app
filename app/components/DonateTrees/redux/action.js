@@ -1,4 +1,8 @@
-import { CLEAR_DONATION_REDUCER, SET_CONTEXT, SET_DONATION_DETAILS, SET_DONOR_DETAILS, SET_GIFT_CONTEXT_DETAILS, SET_PAYMENT_DETAILS, SET_PAYMENT_RESPONSE, SET_PLEDGE_DETAILS, SET_SELECTED_PROJECT, SET_SUPPORT_DETAILS } from '../../../actions/types';
+import { CLEAR_DONATION_REDUCER, SET_CONTEXT, SET_DONATION_DETAILS, SET_DONOR_DETAILS, SET_GIFT_CONTEXT_DETAILS, SET_PAYMENT_DETAILS, SET_PAYMENT_RESPONSE, SET_PLEDGE_DETAILS, SET_SELECTED_PROJECT, SET_SUPPORT_DETAILS, SET_DONATION_ID } from '../../../actions/types';
+import { postAuthenticatedRequest, postRequest } from './../../../utils/api'
+import i18n from './../../../locales/i18n';
+
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
 
 export const clearDonationReducer = () => dispatch => {
   dispatch({
@@ -107,53 +111,43 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
       ?
       donationType === 'gift' ?
         postAuthenticatedRequest('giftDonationCreate_post', data, {
-          version: 'v1.3',
+          version: 'v1.4',
           plantProject: plantProject
+        }).then(res => {
+          console.log(res.data);
+        }).catch(error => {
+          NotificationManager.error(
+            error.response.data.message,
+            i18n.t('label.error'),
+            5000
+          );
         })
-          .then(res => {
-            //const { donationID } = res.data;
-            dispatch(
-              // Code for adding data
-            );
-            debug(res.data);
-          })
-          .catch(error => {
-            NotificationManager.error(
-              error.response.data.message,
-              i18n.t('label.error'),
-              5000
-            );
-          })
         :
         postAuthenticatedRequest('donationCreate_post', data, {
-          version: 'v1.3',
+          version: 'v1.4',
           plantProject: plantProject
+        }).then(res => {
+          console.log('Entered in Create donation')
+          // dispatch({
+          //   type: SET_DONATION_ID,
+          //   payload: res.data.donationId
+          // });
+        }).catch(error => {
+          console.log('Error', error)
+          NotificationManager.error(
+            error.response.data.message,
+            i18n.t('label.error'),
+            5000
+          );
         })
-          .then(res => {
-            //const { donationID } = res.data;
-            dispatch(
-              // Code for adding data
-            );
-            debug(res.data);
-          })
-          .catch(error => {
-            NotificationManager.error(
-              error.response.data.message,
-              i18n.t('label.error'),
-              5000
-            );
-          })
       :
       donationType === 'gift' ?
         postRequest('giftDonationCreatePublic_post', data, {
-          version: 'v1.3',
+          version: 'v1.4',
           plantProject: plantProject
         })
           .then(res => {
-            dispatch(
-              // Code for adding data
-            );
-            // getLocalStorageItem();
+            console.log('Donation ID', res.data.donationId);
           })
           .catch(error => {
             NotificationManager.error(
@@ -164,14 +158,11 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
           })
         :
         postRequest('donationCreatePublic_post', data, {
-          version: 'v1.3',
+          version: 'v1.4',
           plantProject: plantProject
         })
           .then(res => {
-            dispatch(
-              // Code for adding data
-            );
-            // getLocalStorageItem();
+            console.log('Donation ID', res.data.donationId);
           })
           .catch(error => {
             NotificationManager.error(
@@ -179,7 +170,7 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
               i18n.t('label.error'),
               5000
             );
-          });
+          })
   };
 }
 
@@ -198,15 +189,14 @@ export function donationPay(data, donationID, loggedIn) {
   return dispatch => {
     loggedIn
       ? postAuthenticatedRequest('donationPay_post', data, {
-        version: 'v1.3',
+        version: 'v1.4',
         donationID: donationID
       })
         .then(res => {
-          //const {  } = res.data.merge;
-
-          debug(res.data);
+          console.log('Then Donation Pay', res.data)
         })
         .catch(error => {
+          console.log('Catch Donation Pay', error)
           NotificationManager.error(
             error.response.data.message,
             i18n.t('label.error'),
@@ -214,13 +204,14 @@ export function donationPay(data, donationID, loggedIn) {
           );
         })
       : postRequest('donationPayPublic_post', data, {
-        version: 'v1.3',
+        version: 'v1.4',
         donationID: donationID
       })
         .then(res => {
-          debug(res.data);
+          console.log('Then Donation Pay', res.data)
         })
         .catch(error => {
+          console.log('Catch Donation Pay', error)
           NotificationManager.error(
             error.response.data.message,
             i18n.t('label.error'),

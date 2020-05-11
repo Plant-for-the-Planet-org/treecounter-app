@@ -14,16 +14,19 @@ export function FilePickerTemplate(locals) {
     });
     if ($event.target.files && $event.target.files[0]) {
       fileReader.readAsDataURL($event.target.files[0]);
-    } else locals.onChange($event.target.value);
+    } else {
+      locals.onChange($event.target.value);
+    }
   }
   let error = locals.hasError;
   let label;
+  const category=locals.config.category || 'project';
   if (locals.value) {
     label = (
       <img
         src={
           !locals.value.includes('base64')
-            ? getImageUrl('project', 'small', locals.value)
+            ? getImageUrl(category, 'small', locals.value)
             : locals.value
         }
       />

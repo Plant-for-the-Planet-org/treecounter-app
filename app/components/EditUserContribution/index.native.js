@@ -46,6 +46,7 @@ export default class EditUserContribution extends Component {
           isTpo={isTpo(this.props.currentUserProfile)}
           value={this.props.userContribution}
           isEdit
+          {...this.props}
         />
       </KeyboardAwareScrollView>
     );

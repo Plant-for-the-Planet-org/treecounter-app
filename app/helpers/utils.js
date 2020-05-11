@@ -216,7 +216,10 @@ export function mergeContributionImages(updatedTreeContribution) {
     !updatedTreeContribution.contributionImages ||
     updatedTreeContribution.contributionImages.length == 0
   ) {
-    return updatedTreeContribution;
+    return {
+      ...updatedTreeContribution,
+      contributionImages: []
+    };
   }
   const newContributionImages = updatedTreeContribution.contributionImages;
   let contributionImages = [];
@@ -226,7 +229,7 @@ export function mergeContributionImages(updatedTreeContribution) {
         'base64'
       )
     ) {
-      let { imageFile } = newContributionImage;
+      let imageFile  = newContributionImage.image || newContributionImage.imageFile;
       return newContributionImage.id
         ? { imageFile, id: newContributionImage.id }
         : { imageFile };
@@ -606,9 +609,8 @@ export function generateFormikSchemaFromFormSchema(
     if (fields.length === 0 || fields.indexOf(key) !== -1) {
       const property = schemaObj.properties[key];
 
-      if (['hidden', 'file'].indexOf(property.type) < 0) {
+      if (['hidden', 'file'].indexOf(property.type) < 0 && property.widget !== 'hidden') {
         // Not accepted in native
-
         let prepareSchema = Yup;
         const title = i18n.t(property.title);
         if (property.type === 'array') {

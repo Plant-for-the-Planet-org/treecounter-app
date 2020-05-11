@@ -1,6 +1,5 @@
 #/bin/bash
 
-cd ~
 source .env.production
 BUGSNAG_API_KEY=$bugsnagApiKey
 PACKAGE_VERSION=$(cat package.json \

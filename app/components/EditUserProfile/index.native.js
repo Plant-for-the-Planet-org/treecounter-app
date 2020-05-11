@@ -132,7 +132,6 @@ export default class EditUserProfile extends Component {
     let schemaOptions = parsedSchema[userType][profileType].schemaOptions;
     if (profileType == 'password') {
       try {
-        console.log('schemaOptionm', schemaOptions);
         schemaOptions.fields.password.fields.first.hasError = schemaOptions.fields.password.fields.second.hasError = this.state.passwordNotSameError;
         schemaOptions.fields.password.fields.first.error = schemaOptions.fields.password.fields.second.error = (
           <Text>{i18n.t('label.same_password_error')}</Text>

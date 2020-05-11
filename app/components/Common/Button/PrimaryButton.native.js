@@ -21,7 +21,7 @@ const PrimaryButton = ({
       {loading ? (
         <ActivityIndicator
           size="large"
-          color='white'
+          color="white"
         />
       ):(
         <>

@@ -17,7 +17,7 @@ export const handleAndroidPayPress = async (props) => {
                 quantity: props.totalTreeCount,
             }],
         }).then(
-            token => {
+            async token => {
                 console.log('Token from GPAY --- ', token)
                 // let donorValues = {
                 //     firstname: token.card.name,
@@ -54,7 +54,7 @@ export const handleAndroidPayPress = async (props) => {
                 let donationType = props.context.contextType;
                 console.log('Donation Type', donationType)
                 console.log('newData', newData)
-                props.createDonation(newData, plantProject, loggedIn, donationType);
+                await props.createDonation(newData, plantProject, loggedIn, donationType);
                 console.log('Donation ID', props.context.donationID)
                 const data = {
                     type: 'card',

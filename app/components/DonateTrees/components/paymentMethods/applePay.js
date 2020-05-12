@@ -11,27 +11,56 @@ export const handleApplePayPress = async (props) => {
             [{
                 label: 'Donation to Plant for the Planet',
                 amount: props.totalPrice,
-            },])
+            },
+            ]).then(token => {
+                let loggedIn = props.currentUserProfile;
+                let plantProject = '1';
+                console.log("Token apple pay", token)
+                // let newData = {
+                //     "amount": Number(props.totalPrice),
+                //     "currency": props.currency_code,
+                //     "recipientType": 'individual',
+                //     "treeCount": Number(props.totalTreeCount),
+                //     "receiptIndividual": {
+                //         "firstname": token.card.name,
+                //         "lastname": token.card.name,
+                //         "email": "a@b.com",
+                //         "address": token.card.addressLine1,
+                //         "zipCode": token.card.addressZip,
+                //         "city": token.card.addressCity,
+                //         "country": token.card.addressCountry
+                //     }
+                // };
+
+                // let donationType = props.context.contextType;
+                // console.log('Donation Type', donationType)
+                // console.log('newData', newData)
+                // await props.createDonation(newData, plantProject, loggedIn, donationType);
+                // console.log('Donation ID', props.context.donationID)
+                // const data = {
+                //     type: 'card',
+                //     card: { token: token.tokenId },
+                //     key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
+                // }
+
+                // const paymentMethod = axios.post('https://api.stripe.com/v1/payment_methods', JSON_to_URLEncoded(data), {
+                //     headers: {
+                //         Authorization: 'Bearer sk_test_pvrGEhOIEu3HwYdLTMhqznnl00kFjZUvMD',
+                //         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                //     }
+                // }).then(response => {
+                //     console.log(response)
+                // })
+                //     .catch(error => {
+                //         console.log(error.response)
+                //     });
+            }).catch(error => {
+                console.log(error)
+            })
 
         props.setToken(token)
 
-        const data = {
-            type: 'card',
-            card: { token: token.tokenId },
-            key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
-        }
 
-        const paymentMethod = axios.post('https://api.stripe.com/v1/payment_methods', JSON_to_URLEncoded(data), {
-            headers: {
-                Authorization: 'Bearer sk_test_pvrGEhOIEu3HwYdLTMhqznnl00kFjZUvMD',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
-        }).then(response => {
-            console.log(response)
-        })
-            .catch(error => {
-                console.log(error.response)
-            });
 
         // if (applePayComplete) {
         //     await props.stripe.completeNativePayRequest()

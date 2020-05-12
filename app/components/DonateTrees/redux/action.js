@@ -128,10 +128,10 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
           plantProject: plantProject
         }).then(res => {
           console.log('Entered in Create donation')
-          // dispatch({
-          //   type: SET_DONATION_ID,
-          //   payload: res.data.donationId
-          // });
+          dispatch({
+            type: SET_DONATION_ID,
+            payload: res.data.donationId
+          });
         }).catch(error => {
           console.log('Error', error)
           NotificationManager.error(

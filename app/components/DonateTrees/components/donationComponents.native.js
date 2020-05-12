@@ -318,7 +318,11 @@ export function PaymentOption(props) {
                 setToken: props.setToken,
                 stripe: props.stripe,
                 setApplePayStatus: props.setApplePayStatus,
-                currentUserProfile: props.currentUserProfile
+                currentUserProfile: props.currentUserProfile,
+                context: props.context,
+                createDonation: props.createDonation,
+                setDonorDetails: props.setDonorDetails,
+                donationPay: props.donationPay
               })}
             style={styles.nativePayButton}
           >

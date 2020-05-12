@@ -480,25 +480,31 @@ export function SelectTreeCount(props) {
   const [customTreeCount, setCustomTreeCount] = React.useState(false);
   const [tempTreeCount, setTempTreeCount] = React.useState(0);
   let treeCountOptions;
+  let defaultTreeCountOption;
 
   const customTreeCountRef = React.useRef(null);
 
   if (props.selectedProject) {
-    if (
-      props.selectedProject.paymentSetup.treeCountOptions &&
-      props.selectedProject.paymentSetup.treeCountOptions.fixedTreeCountOptions
-    ) {
-      treeCountOptions =
-        props.selectedProject.paymentSetup.treeCountOptions
-          .fixedTreeCountOptions;
+    if (props.selectedProject.treeCountOptions) {
+      treeCountOptions = Object.values(props.selectedProject.treeCountOptions);
+      treeCountOptions.sort();
+      if (!props.treeCount) {
+        props.setTreeCount(props.selectedProject.treeCountOptions.default)
+      }
     } else {
+      defaultTreeCountOption = 10;
       treeCountOptions = [10, 20, 50, 150];
+      if (!props.treeCount) {
+        props.setTreeCount(defaultTreeCountOption)
+      }
     }
   }
 
   if (!customTreeCountRef.isFocused && customTreeCount) {
     props.setTreeCount(tempTreeCount);
   }
+
+  console.log('Tree Count', props.treeCount)
 
   return (
     <View style={styles.treeCountSelector}>

@@ -30,7 +30,7 @@ import stripe from 'tipsi-stripe';
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
-  const [treeCount, setTreeCount] = React.useState(''); // for Selecting Tree Count
+  const [treeCount, setTreeCount] = React.useState(0); // for Selecting Tree Count
   const [frequency, setFrequency] = React.useState('once'); // for Selecting Frequency of Donations
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
@@ -116,6 +116,8 @@ function DonationDetails(props) {
       });
     }
   };
+
+  console.log('Selected project', props.selectedProject)
   return (
     <View style={{ backgroundColor: 'white' }}>
       <StatusBar hidden />

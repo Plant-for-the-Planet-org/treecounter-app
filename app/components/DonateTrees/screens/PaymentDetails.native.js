@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React from 'react';
 import { Animated, Image, Keyboard, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import stripe from 'tipsi-stripe';
-import { applePay, googlePay, nextArrowWhite } from '../../../assets';
+import { nextArrowWhite } from '../../../assets';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donation/donation.native';
 import colors from '../../../utils/constants';
@@ -96,8 +95,6 @@ export default function DonationStep3(props) {
         title={'Payment Mode'}
       />
 
-
-
       <KeyboardAwareScrollView
         contentContainerStyle={styles.pageScrollView}
         keyboardDismissMode="on-drag"
@@ -164,70 +161,6 @@ export default function DonationStep3(props) {
 
           {/* <SepaAccountForm /> */}
 
-          {/* Apple Pay Information Card */}
-          {Platform.OS === 'ios' && allowedNativePay ? (
-            <TouchableOpacity onPress={() => handleApplePayPress({
-              totalTreeCount: String(props.context.donationDetails.totalTreeCount),
-              amountPerTree: String(props.context.projectDetails.amountPerTree),
-              currency_code: String(props.context.projectDetails.currency),
-              totalPrice: String(props.context.donationDetails.totalTreeCount * props.context.projectDetails.amountPerTree),
-              token: token,
-              setToken: setToken,
-              setApplePayStatus: setApplePayStatus,
-              stripe: stripe
-            })}>
-              <View style={styles.paymentCardView}>
-                <View style={styles.paymentModeView}>
-                  <Image source={applePay} style={styles.creditCardsDesign} />
-                  <Text style={styles.paymentModeTitle}>Apple Pay</Text>
-                  <TouchableOpacity>
-                    <Icon
-                      name="chevron-right"
-                      size={14}
-                      color="rgba(0, 0, 0, 0.38)"
-                      style={{ marginLeft: 10 }}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </TouchableOpacity>
-          ) : null}
-          {/* Apple Pay Information Card Ended */}
-
-          {/* Google Pay Information Card */}
-
-          {Platform.OS === 'android' && allowedNativePay ? (
-            <TouchableOpacity
-              onPress={() => handleAndroidPayPress({
-                totalTreeCount: String(props.context.donationDetails.totalTreeCount),
-                totalPrice: String(props.context.donationDetails.totalTreeCount * props.context.projectDetails.amountPerTree),
-                amountPerTree: String(props.context.projectDetails.amountPerTree),
-                currency_code: String(props.context.projectDetails.currency),
-                token: token,
-                setToken: setToken,
-                stripe: stripe
-              })}
-            >
-              <View style={styles.paymentCardView}>
-                <View style={styles.paymentModeView}>
-                  <Image
-                    source={googlePay}
-                    style={styles.creditCardsDesign}
-                  />
-                  <Text style={styles.paymentModeTitle}>Google Pay</Text>
-                  <TouchableOpacity>
-                    <Icon
-                      name="chevron-right"
-                      size={14}
-                      color="rgba(0, 0, 0, 0.38)"
-                      style={{ marginLeft: 10 }}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </TouchableOpacity>
-          ) : null}
-          {/* Google Pay Information Card Ended */}
         </View>
       </KeyboardAwareScrollView>
       {/* Pay Button Section  */}

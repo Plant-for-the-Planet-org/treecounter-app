@@ -50,10 +50,11 @@ export function TaxReceipt(props) {
         </Text>
         {oneTaxCountry ? (
           <TouchableOpacity
-            onPress={() =>
+            onPress={() => {
               setShowTaxCountryModal(
                 prevTaxCountryModal => !prevTaxCountryModal
-              )
+              ), toggleTaxReceipt(true)
+            }
             }
             style={{ flexDirection: 'row', alignItems: 'center' }}
           >

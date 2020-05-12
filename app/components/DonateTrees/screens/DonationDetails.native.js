@@ -116,8 +116,6 @@ function DonationDetails(props) {
       });
     }
   };
-
-  console.log('Selected project', props.selectedProject)
   return (
     <View style={{ backgroundColor: 'white' }}>
       <StatusBar hidden />

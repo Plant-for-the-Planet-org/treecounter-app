@@ -225,7 +225,6 @@ const CompetitionsList = props => {
        *   calls @function handleLoadMore()
        */
       onEndReached={({ distanceFromEnd }) => {
-        console.log('\n\x1b[42m distanceFromEnd \x1b[0m \n', distanceFromEnd);
         if (distanceFromEnd <= 0) {
           setShowFinishedMessage(true);
         } else {

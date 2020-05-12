@@ -1,6 +1,15 @@
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Animated, Image, Keyboard, Switch, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Animated,
+  Image,
+  Keyboard,
+  Switch,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
 import * as Yup from 'yup';
@@ -189,7 +198,11 @@ export default function DonorDetails(props) {
                   </Text> */}
                   <GooglePlacesInput
                     placeholder={'Address'}
-                    initialValue={formikProps.values.country ? formikProps.values.country : ''}
+                    initialValue={
+                      formikProps.values.country
+                        ? formikProps.values.country
+                        : ''
+                    }
                     setFieldValue={formikProps.setFieldValue}
                   />
                 </View>
@@ -217,10 +230,12 @@ export default function DonorDetails(props) {
                     onValueChange={value =>
                       formikProps.setFieldValue('isCompany', value)
                     }
-                    thumbColor={'#89b53a'}
+                    thumbColor={
+                      formikProps.values.isCompany ? '#89b53a' : '#bdc3c7'
+                    }
                     trackColor={{
                       false: '#f2f2f7',
-                      true: 'rgba(137, 181, 58, 0.8)'
+                      true: 'rgba(137, 181, 58, 0.6)'
                     }}
                     value={formikProps.values.isCompany}
                   />
@@ -248,23 +263,20 @@ export default function DonorDetails(props) {
                 ) : null}
               </View>
               {props.context &&
-                props.context.donationDetails && props.context.projectDetails &&
-                props.context.donationDetails.totalTreeCount ? (
-                  <PaymentOption
-                    treeCount={props.context.donationDetails.totalTreeCount}
-                    treeCost={
-                      props.context.projectDetails.amountPerTree
-                    }
-                    selectedCurrency={
-                      props.context.projectDetails.currency
-                    }
-                    navigation={props.navigation}
-                    onSubmit={formikProps.handleSubmit}
-                    isValid={formikProps.isValid}
-                  />
-                ) : (
-                  <ActivityIndicator size="large" color="#0000ff" />
-                )}
+              props.context.donationDetails &&
+              props.context.projectDetails &&
+              props.context.donationDetails.totalTreeCount ? (
+                <PaymentOption
+                  treeCount={props.context.donationDetails.totalTreeCount}
+                  treeCost={props.context.projectDetails.amountPerTree}
+                  selectedCurrency={props.context.projectDetails.currency}
+                  navigation={props.navigation}
+                  onSubmit={formikProps.handleSubmit}
+                  isValid={formikProps.isValid}
+                />
+              ) : (
+                <ActivityIndicator size="large" color="#0000ff" />
+              )}
             </>
           )}
         </Formik>
@@ -282,7 +294,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                ((props.treeCount / 100) * 2.9 + 0.3)
+                    ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency
@@ -315,16 +327,15 @@ export function PaymentOption(props) {
           />
         </TouchableOpacity>
       ) : (
-          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-            <Text style={styles.continueButtonText}>Next</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
-              source={nextArrowWhite}
-              resizeMode="contain"
-            />
-          </View>
-        )}
-
+        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+        </View>
+      )}
     </View>
   );
 }

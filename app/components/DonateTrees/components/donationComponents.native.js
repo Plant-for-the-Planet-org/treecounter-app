@@ -21,8 +21,8 @@ import styles from '../../../styles/donations/donationDetails';
 import { formatNumber } from '../../../utils/utils';
 import CurrencySelectorList from '../../Common/CurrencySelectorList.native';
 import UserProfileImage from '../../Common/UserProfileImage.native';
-import { handleApplePayPress } from './paymentMethods/applePay'
-import { handleAndroidPayPress } from './paymentMethods/googlePay'
+import { handleApplePayPress } from './paymentMethods/applePay';
+import { handleAndroidPayPress } from './paymentMethods/googlePay';
 import { SvgXml } from 'react-native-svg';
 import google_pay from '../../../assets/svgAssets/donations/google_pay';
 import apple_pay from '../../../assets/svgAssets/donations/apple_pay';
@@ -53,23 +53,28 @@ export function TaxReceipt(props) {
             onPress={() => {
               setShowTaxCountryModal(
                 prevTaxCountryModal => !prevTaxCountryModal
-              ), toggleTaxReceipt(true)
-            }
-            }
+              ),
+                toggleTaxReceipt(true);
+            }}
             style={{ flexDirection: 'row', alignItems: 'center' }}
           >
             <SelectedCountryText />
             <Icon name={'chevron-down'} size={14} color="#89b53a" />
           </TouchableOpacity>
         ) : (
-            <SelectedCountryText />
-          )}
+          <SelectedCountryText />
+        )}
       </View>
 
       <Switch
         style={styles.isTaxDeductibleSwitch}
         onValueChange={toggleTaxReceipt}
         value={taxReceiptSwitch}
+        thumbColor={taxReceiptSwitch ? '#89b53a' : '#bdc3c7'}
+        trackColor={{
+          false: '#f2f2f7',
+          true: 'rgba(137, 181, 58, 0.6)'
+        }}
       />
     </View>
   );
@@ -191,8 +196,8 @@ export function SelectCountryModal(props) {
           {searchText ? (
             <MaterialIcon name="arrow-back" size={30} color="black" />
           ) : (
-              <MaterialIcon name="close" size={30} color="#4d5153" />
-            )}
+            <MaterialIcon name="close" size={30} color="#4d5153" />
+          )}
         </TouchableOpacity>
         {/* <View
           style={{
@@ -252,7 +257,6 @@ export function CoverFee(props) {
 }
 
 export function PaymentOption(props) {
-
   let ffrequency = {
     once: 'One time Donation',
     monthly: 'Monthly Donation',
@@ -269,7 +273,7 @@ export function PaymentOption(props) {
                 {formatNumber(
                   props.commissionSwitch
                     ? props.treeCost * props.treeCount +
-                    ((props.treeCount / 100) * 2.9 + 0.3)
+                        ((props.treeCount / 100) * 2.9 + 0.3)
                     : props.treeCost * props.treeCount,
                   null,
                   props.selectedCurrency
@@ -286,48 +290,56 @@ export function PaymentOption(props) {
                 {props.frequency ? ffrequency[props.frequency] : null}
               </Text> */}
 
-              <Text style={styles.paymentTreeCount}>for {props.treeCount} trees</Text>
+              <Text style={styles.paymentTreeCount}>
+                for {props.treeCount} trees
+              </Text>
             </View>
           </>
         ) : (
-            <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
-          )}
+          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
+        )}
       </View>
       {props.treeCount ? (
         <>
           <TouchableOpacity
-            onPress={() => props.showNativePay === 'google' ?
-              handleAndroidPayPress({
-                totalTreeCount: String(props.treeCount),
-                totalPrice: String(props.treeCount * props.treeCost),
-                amountPerTree: String(props.treeCost),
-                currency_code: String(props.selectedCurrency),
-                token: props.token,
-                setToken: props.setToken,
-                stripe: props.stripe,
-                currentUserProfile: props.currentUserProfile,
-                context: props.context,
-                createDonation: props.createDonation,
-                setDonorDetails: props.setDonorDetails,
-                donationPay: props.donationPay
-              }) : handleApplePayPress({
-                totalTreeCount: String(props.treeCount),
-                totalPrice: String(props.treeCount * props.treeCost),
-                amountPerTree: String(props.treeCost),
-                currency_code: String(props.selectedCurrency),
-                token: props.token,
-                setToken: props.setToken,
-                stripe: props.stripe,
-                setApplePayStatus: props.setApplePayStatus,
-                currentUserProfile: props.currentUserProfile,
-                context: props.context,
-                createDonation: props.createDonation,
-                setDonorDetails: props.setDonorDetails,
-                donationPay: props.donationPay
-              })}
+            onPress={() =>
+              props.showNativePay === 'google'
+                ? handleAndroidPayPress({
+                    totalTreeCount: String(props.treeCount),
+                    totalPrice: String(props.treeCount * props.treeCost),
+                    amountPerTree: String(props.treeCost),
+                    currency_code: String(props.selectedCurrency),
+                    token: props.token,
+                    setToken: props.setToken,
+                    stripe: props.stripe,
+                    currentUserProfile: props.currentUserProfile,
+                    context: props.context,
+                    createDonation: props.createDonation,
+                    setDonorDetails: props.setDonorDetails,
+                    donationPay: props.donationPay
+                  })
+                : handleApplePayPress({
+                    totalTreeCount: String(props.treeCount),
+                    totalPrice: String(props.treeCount * props.treeCost),
+                    amountPerTree: String(props.treeCost),
+                    currency_code: String(props.selectedCurrency),
+                    token: props.token,
+                    setToken: props.setToken,
+                    stripe: props.stripe,
+                    setApplePayStatus: props.setApplePayStatus,
+                    currentUserProfile: props.currentUserProfile,
+                    context: props.context,
+                    createDonation: props.createDonation,
+                    setDonorDetails: props.setDonorDetails,
+                    donationPay: props.donationPay
+                  })
+            }
             style={styles.nativePayButton}
           >
-            <SvgXml style={{ maxHeight: 24, maxWidth: 60 }} xml={props.showNativePay === 'google' ? google_pay : apple_pay} />
+            <SvgXml
+              style={{ maxHeight: 24, maxWidth: 60 }}
+              xml={props.showNativePay === 'google' ? google_pay : apple_pay}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => props.onContinue()}
@@ -342,15 +354,15 @@ export function PaymentOption(props) {
           </TouchableOpacity>
         </>
       ) : (
-          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-            <Text style={styles.continueButtonText}>Next</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
-              source={nextArrowWhite}
-              resizeMode="contain"
-            />
-          </View>
-        )}
+        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+        </View>
+      )}
     </View>
   );
 }
@@ -419,7 +431,7 @@ export function PlantProjectDetails(props) {
   const calculateAmount = currency => {
     return (
       Math.round(props.treeCost * parseFloat(props.rates[currency]) * 100) /
-      100 +
+        100 +
       props.fee
     );
   };
@@ -490,13 +502,13 @@ export function SelectTreeCount(props) {
       treeCountOptions = Object.values(props.selectedProject.treeCountOptions);
       treeCountOptions.sort();
       if (!props.treeCount) {
-        props.setTreeCount(props.selectedProject.treeCountOptions.default)
+        props.setTreeCount(props.selectedProject.treeCountOptions.default);
       }
     } else {
       defaultTreeCountOption = 10;
       treeCountOptions = [10, 20, 50, 150];
       if (!props.treeCount) {
-        props.setTreeCount(defaultTreeCountOption)
+        props.setTreeCount(defaultTreeCountOption);
       }
     }
   }
@@ -505,7 +517,7 @@ export function SelectTreeCount(props) {
     props.setTreeCount(tempTreeCount);
   }
 
-  console.log('Tree Count', props.treeCount)
+  console.log('Tree Count', props.treeCount);
 
   return (
     <View style={styles.treeCountSelector}>
@@ -558,16 +570,16 @@ export function SelectTreeCount(props) {
           </Text>
         </View>
       ) : (
-          <TouchableOpacity
-            onPress={() => {
-              setCustomTreeCount(true);
-              props.setTreeCount(tempTreeCount);
-            }}
-            style={styles.customSelectorView}
-          >
-            <Text style={styles.customTreeCountText}>Custom Trees</Text>
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity
+          onPress={() => {
+            setCustomTreeCount(true);
+            props.setTreeCount(tempTreeCount);
+          }}
+          style={styles.customSelectorView}
+        >
+          <Text style={styles.customTreeCountText}>Custom Trees</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -626,8 +638,8 @@ export const UserContactDetails = props => {
           {donorDetails.firstName ? (
             <Text style={styles.sectionRightButton}>Edit</Text>
           ) : (
-              <Text style={styles.sectionRightButton}>Add</Text>
-            )}
+            <Text style={styles.sectionRightButton}>Add</Text>
+          )}
         </TouchableOpacity>
       </View>
       {donorDetails.firstName ? (

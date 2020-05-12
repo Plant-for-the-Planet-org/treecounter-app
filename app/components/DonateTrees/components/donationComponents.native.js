@@ -35,6 +35,7 @@ export function TaxReceipt(props) {
     setShowTaxCountryModal,
     oneTaxCountry
   } = props;
+  console.log('taxReceiptSwitch', taxReceiptSwitch);
   const SelectedCountryText = () => {
     return (
       <Text style={styles.isTaxDeductibleCountry}>

@@ -36,6 +36,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
   return YES;
 }
 

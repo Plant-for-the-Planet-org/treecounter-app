@@ -17,20 +17,8 @@ export const handleAndroidPayPress = async (props) => {
                 quantity: props.totalTreeCount,
             }],
         }).then(
-            async token => {
+            token => {
                 console.log('Token from GPAY --- ', token)
-                // let donorValues = {
-                //     firstname: token.card.name,
-                //     lastname: token.card.name,
-                //     email: 'a@b.com',
-                //     address: token.card.addressLine1,
-                //     zipCode: token.card.addressZip,
-                //     city: token.card.addressCity,
-                //     country: token.card.addressCountry,
-                //     isCompany: false
-                // }
-                // console.log('Donor Details', donorValues)
-                // props.setDonorDetails(donorValues)
 
                 // Create Donation API
                 let loggedIn = props.currentUserProfile;
@@ -54,7 +42,7 @@ export const handleAndroidPayPress = async (props) => {
                 let donationType = props.context.contextType;
                 console.log('Donation Type', donationType)
                 console.log('newData', newData)
-                await props.createDonation(newData, plantProject, loggedIn, donationType);
+                props.createDonation(newData, plantProject, loggedIn, donationType);
                 console.log('Donation ID', props.context.donationID)
                 const data = {
                     type: 'card',

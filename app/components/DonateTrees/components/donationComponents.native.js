@@ -505,8 +505,6 @@ export function SelectTreeCount(props) {
     props.setTreeCount(tempTreeCount);
   }
 
-  console.log('Tree Count', props.treeCount)
-
   return (
     <View style={styles.treeCountSelector}>
       {treeCountOptions.map(option => (

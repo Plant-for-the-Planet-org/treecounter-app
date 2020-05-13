@@ -436,8 +436,11 @@ export default EStyleSheet.create({
     padding: 24
     // paddingBottom: 100,
   },
-  formHalfTextField: { width: '45%', marginTop: 24 },
-
+  formHalfTextField: {
+    width: '45%',
+    marginTop: 24,
+    zIndex: 1
+  },
   formView: {
     display: 'flex',
     flexDirection: 'row',

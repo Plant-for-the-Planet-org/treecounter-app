@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   ActivityIndicator,
   Animated,
@@ -43,6 +43,11 @@ export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
   const [buttonType, setButtonType] = useState('donate');
   const [isCompanySwitch, setisCompanySwitch] = React.useState(false); // for Switching whether the user wants receipt or not
+
+
+  let lastnameRef = useRef(null);
+  let emailRef = useRef(null);
+  let addressRef = useRef(null);
 
   const keyboardDidShow = () => {
     setButtonType('>');
@@ -133,7 +138,7 @@ export default function DonorDetails(props) {
             >
               <View>
                 <View style={styles.formView}>
-                  <View style={styles.formHalfTextField}>
+                  <View style={[styles.formHalfTextField, { zIndex: 2 }]}>
                     <TextField
                       label={i18n.t('label.pledgeFormFName')}
                       value={formikProps.values.firstname}
@@ -151,6 +156,9 @@ export default function DonorDetails(props) {
                       }
                       onChangeText={formikProps.handleChange('firstname')}
                       onBlur={formikProps.handleBlur('firstname')}
+                      onSubmitEditing={() => {
+                        lastnameRef.focus();
+                      }}
                     />
                   </View>
 
@@ -169,8 +177,14 @@ export default function DonorDetails(props) {
                         formikProps.touched.lastname &&
                         formikProps.errors.lastname
                       }
+                      ref={input => {
+                        lastnameRef = input;
+                      }}
                       onChangeText={formikProps.handleChange('lastname')}
                       onBlur={formikProps.handleBlur('lastname')}
+                      onSubmitEditing={() => {
+                        emailRef.focus();
+                      }}
                     />
                   </View>
                 </View>
@@ -190,8 +204,14 @@ export default function DonorDetails(props) {
                     titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                     affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     returnKeyType="next"
+                    ref={input => {
+                      emailRef = input;
+                    }}
                     onChangeText={formikProps.handleChange('email')}
                     onBlur={formikProps.handleBlur('email')}
+                  // onSubmitEditing={() => {
+                  //   addressRef.focus();
+                  // }}
                   />
                 </View>
                 <View style={styles.autoCompleteAddressView}>
@@ -277,20 +297,20 @@ export default function DonorDetails(props) {
               </View>
             </KeyboardAwareScrollView>
             {props.context &&
-            props.context.donationDetails &&
-            props.context.projectDetails &&
-            props.context.donationDetails.totalTreeCount ? (
-              <PaymentOption
-                treeCount={props.context.donationDetails.totalTreeCount}
-                treeCost={props.context.projectDetails.amountPerTree}
-                selectedCurrency={props.context.projectDetails.currency}
-                navigation={props.navigation}
-                onSubmit={formikProps.handleSubmit}
-                isValid={formikProps.isValid}
-              />
-            ) : (
-              <ActivityIndicator size="large" color="#0000ff" />
-            )}
+              props.context.donationDetails &&
+              props.context.projectDetails &&
+              props.context.donationDetails.totalTreeCount ? (
+                <PaymentOption
+                  treeCount={props.context.donationDetails.totalTreeCount}
+                  treeCost={props.context.projectDetails.amountPerTree}
+                  selectedCurrency={props.context.projectDetails.currency}
+                  navigation={props.navigation}
+                  onSubmit={formikProps.handleSubmit}
+                  isValid={formikProps.isValid}
+                />
+              ) : (
+                <ActivityIndicator size="large" color="#0000ff" />
+              )}
           </>
         )}
       </Formik>
@@ -308,7 +328,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                    ((props.treeCount / 100) * 2.9 + 0.3)
+                ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency
@@ -341,15 +361,15 @@ export function PaymentOption(props) {
           />
         </TouchableOpacity>
       ) : (
-        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-          <Text style={styles.continueButtonText}>Next</Text>
-          <Image
-            style={{ maxHeight: 24, maxWidth: 24 }}
-            source={nextArrowWhite}
-            resizeMode="contain"
-          />
-        </View>
-      )}
+          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+            <Text style={styles.continueButtonText}>Next</Text>
+            <Image
+              style={{ maxHeight: 24, maxWidth: 24 }}
+              source={nextArrowWhite}
+              resizeMode="contain"
+            />
+          </View>
+        )}
     </View>
   );
 }

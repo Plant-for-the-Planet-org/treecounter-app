@@ -21,8 +21,8 @@ import styles from '../../../styles/donations/donationDetails';
 import { formatNumber } from '../../../utils/utils';
 import CurrencySelectorList from '../../Common/CurrencySelectorList.native';
 import UserProfileImage from '../../Common/UserProfileImage.native';
-import { handleApplePayPress } from './paymentMethods/applePay'
-import { handleAndroidPayPress } from './paymentMethods/googlePay'
+import { handleApplePayPress } from './paymentMethods/applePay';
+import { handleAndroidPayPress } from './paymentMethods/googlePay';
 import { SvgXml } from 'react-native-svg';
 import google_pay from '../../../assets/svgAssets/donations/google_pay';
 import apple_pay from '../../../assets/svgAssets/donations/apple_pay';
@@ -35,6 +35,7 @@ export function TaxReceipt(props) {
     setShowTaxCountryModal,
     oneTaxCountry
   } = props;
+  console.log('taxReceiptSwitch', taxReceiptSwitch);
   const SelectedCountryText = () => {
     return (
       <Text style={styles.isTaxDeductibleCountry}>
@@ -53,9 +54,9 @@ export function TaxReceipt(props) {
             onPress={() => {
               setShowTaxCountryModal(
                 prevTaxCountryModal => !prevTaxCountryModal
-              ), toggleTaxReceipt(true)
-            }
-            }
+              ),
+                toggleTaxReceipt(true);
+            }}
             style={{ flexDirection: 'row', alignItems: 'center' }}
           >
             <SelectedCountryText />
@@ -70,6 +71,11 @@ export function TaxReceipt(props) {
         style={styles.isTaxDeductibleSwitch}
         onValueChange={toggleTaxReceipt}
         value={taxReceiptSwitch}
+        thumbColor={taxReceiptSwitch ? '#89b53a' : '#bdc3c7'}
+        trackColor={{
+          false: '#f2f2f7',
+          true: 'rgba(137, 181, 58, 0.6)'
+        }}
       />
     </View>
   );
@@ -252,7 +258,6 @@ export function CoverFee(props) {
 }
 
 export function PaymentOption(props) {
-
   let ffrequency = {
     once: 'One time Donation',
     monthly: 'Monthly Donation',
@@ -286,7 +291,9 @@ export function PaymentOption(props) {
                 {props.frequency ? ffrequency[props.frequency] : null}
               </Text> */}
 
-              <Text style={styles.paymentTreeCount}>for {props.treeCount} trees</Text>
+              <Text style={styles.paymentTreeCount}>
+                for {props.treeCount} trees
+              </Text>
             </View>
           </>
         ) : (
@@ -296,38 +303,44 @@ export function PaymentOption(props) {
       {props.treeCount ? (
         <>
           <TouchableOpacity
-            onPress={() => props.showNativePay === 'google' ?
-              handleAndroidPayPress({
-                totalTreeCount: String(props.treeCount),
-                totalPrice: String(props.treeCount * props.treeCost),
-                amountPerTree: String(props.treeCost),
-                currency_code: String(props.selectedCurrency),
-                token: props.token,
-                setToken: props.setToken,
-                stripe: props.stripe,
-                currentUserProfile: props.currentUserProfile,
-                context: props.context,
-                createDonation: props.createDonation,
-                setDonorDetails: props.setDonorDetails,
-                donationPay: props.donationPay
-              }) : handleApplePayPress({
-                totalTreeCount: String(props.treeCount),
-                totalPrice: String(props.treeCount * props.treeCost),
-                amountPerTree: String(props.treeCost),
-                currency_code: String(props.selectedCurrency),
-                token: props.token,
-                setToken: props.setToken,
-                stripe: props.stripe,
-                setApplePayStatus: props.setApplePayStatus,
-                currentUserProfile: props.currentUserProfile,
-                context: props.context,
-                createDonation: props.createDonation,
-                setDonorDetails: props.setDonorDetails,
-                donationPay: props.donationPay
-              })}
+            onPress={() =>
+              props.showNativePay === 'google'
+                ? handleAndroidPayPress({
+                  totalTreeCount: String(props.treeCount),
+                  totalPrice: String(props.treeCount * props.treeCost),
+                  amountPerTree: String(props.treeCost),
+                  currency_code: String(props.selectedCurrency),
+                  token: props.token,
+                  setToken: props.setToken,
+                  stripe: props.stripe,
+                  currentUserProfile: props.currentUserProfile,
+                  context: props.context,
+                  createDonation: props.createDonation,
+                  setDonorDetails: props.setDonorDetails,
+                  donationPay: props.donationPay
+                })
+                : handleApplePayPress({
+                  totalTreeCount: String(props.treeCount),
+                  totalPrice: String(props.treeCount * props.treeCost),
+                  amountPerTree: String(props.treeCost),
+                  currency_code: String(props.selectedCurrency),
+                  token: props.token,
+                  setToken: props.setToken,
+                  stripe: props.stripe,
+                  setApplePayStatus: props.setApplePayStatus,
+                  currentUserProfile: props.currentUserProfile,
+                  context: props.context,
+                  createDonation: props.createDonation,
+                  setDonorDetails: props.setDonorDetails,
+                  donationPay: props.donationPay
+                })
+            }
             style={styles.nativePayButton}
           >
-            <SvgXml style={{ maxHeight: 24, maxWidth: 60 }} xml={props.showNativePay === 'google' ? google_pay : apple_pay} />
+            <SvgXml
+              style={{ maxHeight: 24, maxWidth: 60 }}
+              xml={props.showNativePay === 'google' ? google_pay : apple_pay}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => props.onContinue()}
@@ -490,13 +503,13 @@ export function SelectTreeCount(props) {
       treeCountOptions = Object.values(props.selectedProject.treeCountOptions);
       treeCountOptions.sort();
       if (!props.treeCount) {
-        props.setTreeCount(props.selectedProject.treeCountOptions.default)
+        props.setTreeCount(props.selectedProject.treeCountOptions.default);
       }
     } else {
       defaultTreeCountOption = 10;
       treeCountOptions = [10, 20, 50, 150];
       if (!props.treeCount) {
-        props.setTreeCount(defaultTreeCountOption)
+        props.setTreeCount(defaultTreeCountOption);
       }
     }
   }

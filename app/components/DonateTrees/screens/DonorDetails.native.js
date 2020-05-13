@@ -1,6 +1,15 @@
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Animated, Image, Keyboard, Switch, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Animated,
+  Image,
+  Keyboard,
+  Switch,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
 import * as Yup from 'yup';
@@ -70,8 +79,8 @@ export default function DonorDetails(props) {
         title={'Contact Details'}
       />
 
-      <KeyboardAwareScrollView
-        contentContainerStyle={[styles.scrollView, { flex: 1 }]}
+      {/* <KeyboardAwareScrollView
+        contentContainerStyle={[styles.scrollView]}
         keyboardDismissMode="on-drag"
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollEnabled
@@ -82,35 +91,46 @@ export default function DonorDetails(props) {
         onScroll={Animated.event([
           { nativeEvent: { contentOffset: { y: scrollY } } }
         ])}
+      > */}
+      <Formik
+        initialValues={{
+          firstname: props.currentUserProfile
+            ? props.currentUserProfile.firstname
+            : '',
+          lastname: props.currentUserProfile
+            ? props.currentUserProfile.lastname
+            : '',
+          email: props.currentUserProfile ? props.currentUserProfile.email : '',
+          address: props.currentUserProfile
+            ? props.currentUserProfile.address
+            : '',
+          isCompany: false,
+          companyName: ''
+        }}
+        validationSchema={DonationContactDetailsSchema}
+        onSubmit={values => {
+          console.log(values);
+          props.contextActions.setDonorDetails(values);
+          updateStaticRoute('payment_details_form', props.navigation, {
+            navigation: props.navigation
+          });
+        }}
       >
-        <Formik
-          initialValues={{
-            firstname: props.currentUserProfile
-              ? props.currentUserProfile.firstname
-              : '',
-            lastname: props.currentUserProfile
-              ? props.currentUserProfile.lastname
-              : '',
-            email: props.currentUserProfile
-              ? props.currentUserProfile.email
-              : '',
-            address: props.currentUserProfile
-              ? props.currentUserProfile.address
-              : '',
-            isCompany: false,
-            companyName: ''
-          }}
-          validationSchema={DonationContactDetailsSchema}
-          onSubmit={values => {
-            console.log(values);
-            props.contextActions.setDonorDetails(values);
-            updateStaticRoute('payment_details_form', props.navigation, {
-              navigation: props.navigation
-            });
-          }}
-        >
-          {formikProps => (
-            <>
+        {formikProps => (
+          <>
+            <KeyboardAwareScrollView
+              contentContainerStyle={styles.scrollView}
+              keyboardDismissMode="on-drag"
+              resetScrollToCoords={{ x: 0, y: 0 }}
+              scrollEnabled
+              extraScrollHeight={32}
+              extraHeight={32}
+              enableOnAndroid
+              scrollEventThrottle={16}
+              onScroll={Animated.event([
+                { nativeEvent: { contentOffset: { y: scrollY } } }
+              ])}
+            >
               <View>
                 <View style={styles.formView}>
                   <View style={styles.formHalfTextField}>
@@ -189,24 +209,30 @@ export default function DonorDetails(props) {
                   </Text> */}
                   <GooglePlacesInput
                     placeholder={'Address'}
-                    initialValue={formikProps.values.country ? formikProps.values.country : ''}
+                    initialValue={
+                      formikProps.values.address
+                        ? formikProps.values.address
+                        : ''
+                    }
                     setFieldValue={formikProps.setFieldValue}
                   />
                 </View>
-                <View>
-                  <Text
-                    style={{
-                      color: '#e74c3c',
-                      marginTop: 64,
-                      fontFamily: 'OpenSans-SemiBold',
-                      fontSize: 12
-                    }}
-                  >
-                    {formikProps.values.address
-                      ? null
-                      : formikProps.errors.address}
-                  </Text>
-                </View>
+                {!formikProps.errors.address ? null : (
+                  <View>
+                    <Text
+                      style={{
+                        color: '#e74c3c',
+                        marginTop: 64,
+                        fontFamily: 'OpenSans-SemiBold',
+                        fontSize: 12
+                      }}
+                    >
+                      {formikProps.values.address
+                        ? null
+                        : formikProps.errors.address}
+                    </Text>
+                  </View>
+                )}
 
                 <View style={styles.coverCommissionView}>
                   <Text style={styles.coverCommissionText}>
@@ -217,10 +243,12 @@ export default function DonorDetails(props) {
                     onValueChange={value =>
                       formikProps.setFieldValue('isCompany', value)
                     }
-                    thumbColor={'#89b53a'}
+                    thumbColor={
+                      formikProps.values.isCompany ? '#89b53a' : '#bdc3c7'
+                    }
                     trackColor={{
                       false: '#f2f2f7',
-                      true: 'rgba(137, 181, 58, 0.8)'
+                      true: 'rgba(137, 181, 58, 0.6)'
                     }}
                     value={formikProps.values.isCompany}
                   />
@@ -247,28 +275,26 @@ export default function DonorDetails(props) {
                   </View>
                 ) : null}
               </View>
-              {props.context &&
-                props.context.donationDetails && props.context.projectDetails &&
-                props.context.donationDetails.totalTreeCount ? (
-                  <PaymentOption
-                    treeCount={props.context.donationDetails.totalTreeCount}
-                    treeCost={
-                      props.context.projectDetails.amountPerTree
-                    }
-                    selectedCurrency={
-                      props.context.projectDetails.currency
-                    }
-                    navigation={props.navigation}
-                    onSubmit={formikProps.handleSubmit}
-                    isValid={formikProps.isValid}
-                  />
-                ) : (
-                  <ActivityIndicator size="large" color="#0000ff" />
-                )}
-            </>
-          )}
-        </Formik>
-      </KeyboardAwareScrollView>
+            </KeyboardAwareScrollView>
+            {props.context &&
+            props.context.donationDetails &&
+            props.context.projectDetails &&
+            props.context.donationDetails.totalTreeCount ? (
+              <PaymentOption
+                treeCount={props.context.donationDetails.totalTreeCount}
+                treeCost={props.context.projectDetails.amountPerTree}
+                selectedCurrency={props.context.projectDetails.currency}
+                navigation={props.navigation}
+                onSubmit={formikProps.handleSubmit}
+                isValid={formikProps.isValid}
+              />
+            ) : (
+              <ActivityIndicator size="large" color="#0000ff" />
+            )}
+          </>
+        )}
+      </Formik>
+      {/* </KeyboardAwareScrollView> */}
     </View>
   );
 }
@@ -282,7 +308,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                ((props.treeCount / 100) * 2.9 + 0.3)
+                    ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency
@@ -315,16 +341,15 @@ export function PaymentOption(props) {
           />
         </TouchableOpacity>
       ) : (
-          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-            <Text style={styles.continueButtonText}>Next</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
-              source={nextArrowWhite}
-              resizeMode="contain"
-            />
-          </View>
-        )}
-
+        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+        </View>
+      )}
     </View>
   );
 }

@@ -254,7 +254,7 @@ export default EStyleSheet.create({
 
   // Autocomplete Address
   autoCompleteAddressView: {
-    marginTop: 24,
+    marginTop: 24
   },
 
   // Tax Deductible
@@ -433,7 +433,7 @@ export default EStyleSheet.create({
   formScrollView: {
     backgroundColor: 'white',
     flex: 1,
-    padding: 24,
+    padding: 24
     // paddingBottom: 100,
   },
   formHalfTextField: { width: '45%', marginTop: 24 },
@@ -442,6 +442,6 @@ export default EStyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   }
 });

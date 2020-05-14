@@ -137,6 +137,7 @@ export function updateUserProfile(data, profileType, forcePromisify) {
     return new Promise(function(resolve, reject) {
       putAuthenticatedRequest(profileTypeToReq[profileType], data)
         .then(res => {
+          const {statusText} = res;
           if (res.data && res.data instanceof Object) {
             if (res.data.merge) {
               dispatch(
@@ -151,11 +152,18 @@ export function updateUserProfile(data, profileType, forcePromisify) {
           if (res.data.merge) resolve(res.data);
           forcePromisify && resolve(res.data);
           dispatch(setProgressModelState(false));
+          NotificationManager.success(statusText, i18n.t('label.success'), 5000);
+
         })
         .catch(err => {
           debug(err);
           reject(err);
           dispatch(setProgressModelState(false));
+          NotificationManager.error(
+            err.response.data.message,
+            i18n.t('label.error'),
+            5000
+          );
         });
     });
   };

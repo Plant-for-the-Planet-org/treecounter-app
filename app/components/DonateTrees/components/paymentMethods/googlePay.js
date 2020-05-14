@@ -42,43 +42,45 @@ export const handleAndroidPayPress = async (props) => {
                 let donationType = props.context.contextType;
                 console.log('Donation Type', donationType)
                 console.log('newData', newData)
-                props.createDonation(newData, plantProject, loggedIn, donationType);
-                console.log('Donation ID', props.context.donationID)
-                const data = {
-                    type: 'card',
-                    card: { token: token.tokenId },
-                    key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
-                }
-                // console.log('Data', data)
-                const paymentMethod = axios.post('https://api.stripe.com/v1/payment_methods', JSON_to_URLEncoded(data), {
-                    headers: {
-                        Authorization: 'Bearer sk_test_pvrGEhOIEu3HwYdLTMhqznnl00kFjZUvMD',
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                    }
-                }).then(response => {
-                    console.log('Payment Method', response)
-
-                    let payData = {
-                        "paymentProviderRequest": {
-                            "account": token.card.cardId,
-                            "gateway": "stripe",
-                            "source": {
-                                "id": response.data.id,
-                                "object": response.data.object
-                            }
+                props.createDonation(newData, plantProject, loggedIn, donationType).then(
+                    response => {
+                        console.log('RESPONSE EEEEE', response.data.donationId)
+                        const donationID = response.data.donationId;
+                        const data = {
+                            type: 'card',
+                            card: { token: token.tokenId },
+                            key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
                         }
+
+                        const paymentMethod = axios.post('https://api.stripe.com/v1/payment_methods', JSON_to_URLEncoded(data), {
+                            headers: {
+                                Authorization: 'Bearer sk_test_pvrGEhOIEu3HwYdLTMhqznnl00kFjZUvMD',
+                                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                            }
+                        }).then(response => {
+                            console.log('Payment Method', response)
+
+                            let payData = {
+                                "paymentProviderRequest": {
+                                    "account": token.card.cardId,
+                                    "gateway": "stripe",
+                                    "source": {
+                                        "id": response.data.id,
+                                        "object": response.data.object
+                                    }
+                                }
+                            }
+                            console.log('Pay Data', payData)
+                            props.donationPay(payData, donationID, loggedIn);
+                            // Send this payment method to the backend to make the payment
+
+                            // Donation Pay API
+                        })
+                            .catch(error => {
+                                console.log(error.response)
+                            });
                     }
-                    console.log('Pay Data', payData)
-
-
-                    // props.donationPay(payData, donationID, loggedIn);
-                    // Send this payment method to the backend to make the payment
-
-                    // Donation Pay API
-                })
-                    .catch(error => {
-                        console.log(error.response)
-                    });
+                );
             }
         ).catch(err => {
             console.log('error gpay', err)

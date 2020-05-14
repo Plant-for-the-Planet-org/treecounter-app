@@ -64,7 +64,7 @@ function DonationDetails(props) {
 
   // Function for Switching the state of tax receipt
   const toggleTaxReceipt = value => {
-    console.log(value);
+    // console.log(value);
     setTaxReceiptSwitch(value);
   };
 
@@ -172,8 +172,8 @@ function DonationDetails(props) {
             fee={paymentFee}
           />
         ) : (
-          <NoPlantProjectDetails />
-        )}
+            <NoPlantProjectDetails />
+          )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -191,14 +191,14 @@ function DonationDetails(props) {
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-        context.contextType === 'gift-invitation' ? (
-          <GiftTreesComponent
-            treeCount={treeCount}
-            setTreeCount={setTreeCount}
-            selectedProject={props.selectedProject}
-            context={context}
-          />
-        ) : null}
+          context.contextType === 'gift-invitation' ? (
+            <GiftTreesComponent
+              treeCount={treeCount}
+              setTreeCount={setTreeCount}
+              selectedProject={props.selectedProject}
+              context={context}
+            />
+          ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
         <View

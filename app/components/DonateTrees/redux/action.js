@@ -106,50 +106,37 @@ export const setSupportDetails = supportContextDetails => dispatch => {
 //   }
 // }
 export function createDonation(data, plantProject, loggedIn, donationType) {
-  return dispatch => {
-    loggedIn
-      ?
-      donationType === 'gift' ?
-        postAuthenticatedRequest('giftDonationCreate_post', data, {
-          version: 'v1.4',
-          plantProject: plantProject
-        }).then(res => {
-          console.log(res.data);
-        }).catch(error => {
-          NotificationManager.error(
-            error.response.data.message,
-            i18n.t('label.error'),
-            5000
-          );
-        })
-        :
-        postAuthenticatedRequest('donationCreate_post', data, {
-          version: 'v1.4',
-          plantProject: plantProject
-        }).then(res => {
-          console.log('Entered in Create donation')
-          dispatch({
-            type: SET_DONATION_ID,
-            payload: res.data.donationId
-          });
-        }).catch(error => {
-          console.log('Error', error)
-          NotificationManager.error(
-            error.response.data.message,
-            i18n.t('label.error'),
-            5000
-          );
-        })
-      :
-      donationType === 'gift' ?
-        postRequest('giftDonationCreatePublic_post', data, {
-          version: 'v1.4',
-          plantProject: plantProject
-        })
-          .then(res => {
-            console.log('Donation ID', res.data.donationId);
+  return dispatch => new Promise(function (resolve, reject) {
+    {
+      loggedIn
+        ?
+        donationType === 'gift' ?
+          postAuthenticatedRequest('giftDonationCreate_post', data, {
+            version: 'v1.4',
+            plantProject: plantProject
+          }).then(res => {
+            console.log(res.data);
+          }).catch(error => {
+            NotificationManager.error(
+              error.response.data.message,
+              i18n.t('label.error'),
+              5000
+            );
           })
-          .catch(error => {
+          :
+          postAuthenticatedRequest('donationCreate_post', data, {
+            version: 'v1.4',
+            plantProject: plantProject
+          }).then(res => {
+            console.log('Entered in Create donation')
+            dispatch({
+              type: SET_DONATION_ID,
+              payload: res.data.donationId
+            });
+            resolve(res);
+          }).catch(error => {
+            reject(error);
+            console.log('Error', error)
             NotificationManager.error(
               error.response.data.message,
               i18n.t('label.error'),
@@ -157,22 +144,45 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
             );
           })
         :
-        postRequest('donationCreatePublic_post', data, {
-          version: 'v1.4',
-          plantProject: plantProject
-        })
-          .then(res => {
-            console.log('Donation ID', res.data.donationId);
+        donationType === 'gift' ?
+          postRequest('giftDonationCreatePublic_post', data, {
+            version: 'v1.4',
+            plantProject: plantProject
           })
-          .catch(error => {
-            NotificationManager.error(
-              error.response.data.message,
-              i18n.t('label.error'),
-              5000
-            );
+            .then(res => {
+              console.log('Donation ID', res.data.donationId);
+            })
+            .catch(error => {
+              NotificationManager.error(
+                error.response.data.message,
+                i18n.t('label.error'),
+                5000
+              );
+            })
+          :
+          postRequest('donationCreatePublic_post', data, {
+            version: 'v1.4',
+            plantProject: plantProject
           })
-  };
+            .then(res => {
+              console.log('Entered in Create donation')
+              dispatch({
+                type: SET_DONATION_ID,
+                payload: res.data.donationId
+              });
+              resolve(res);
+            })
+            .catch(error => {
+              NotificationManager.error(
+                error.response.data.message,
+                i18n.t('label.error'),
+                5000
+              );
+            })
+    };
+  });
 }
+
 
 // data has to be in the following format - 
 // {
@@ -186,38 +196,40 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
 //   }
 // }
 export function donationPay(data, donationID, loggedIn) {
-  return dispatch => {
-    loggedIn
-      ? postAuthenticatedRequest('donationPay_post', data, {
-        version: 'v1.4',
-        donationID: donationID
-      })
-        .then(res => {
-          console.log('Then Donation Pay', res.data)
+  return dispatch => new Promise(function (resolve, reject) {
+    {
+      loggedIn
+        ? postAuthenticatedRequest('donationPay_post', data, {
+          version: 'v1.4',
+          donation: donationID
         })
-        .catch(error => {
-          console.log('Catch Donation Pay', error)
-          NotificationManager.error(
-            error.response.data.message,
-            i18n.t('label.error'),
-            5000
-          );
+          .then(res => {
+            console.log('Then Donation Pay', res.data)
+          })
+          .catch(error => {
+            console.log('Catch Donation Pay', error)
+            NotificationManager.error(
+              error.response.data.message,
+              i18n.t('label.error'),
+              5000
+            );
+          })
+        : postRequest('donationPayPublic_post', data, {
+          version: 'v1.4',
+          donation: donationID
         })
-      : postRequest('donationPayPublic_post', data, {
-        version: 'v1.4',
-        donationID: donationID
-      })
-        .then(res => {
-          console.log('Then Donation Pay', res.data)
-        })
-        .catch(error => {
-          console.log('Catch Donation Pay', error)
-          NotificationManager.error(
-            error.response.data.message,
-            i18n.t('label.error'),
-            5000
-          );
-        });
-  };
+          .then(res => {
+            console.log('Then Donation Pay', res.data)
+          })
+          .catch(error => {
+            console.log('Catch Donation Pay', error)
+            NotificationManager.error(
+              error.response.data.message,
+              i18n.t('label.error'),
+              5000
+            );
+          });
+    };
+  });
 }
 

@@ -125,6 +125,9 @@ export default class FormikFormGift extends Component {
                       error={props.touched.firstname && props.errors.firstname}
                       onChangeText={props.handleChange('firstname')}
                       onBlur={props.handleBlur('firstname')}
+                      onSubmitEditing={() => {
+                        this.lastnameTextInput.focus();
+                      }}
                     />
                   </View>
 
@@ -140,6 +143,12 @@ export default class FormikFormGift extends Component {
                       titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       blurOnSubmit={false}
+                      ref={input => {
+                        this.lastnameTextInput = input;
+                      }}
+                      onSubmitEditing={() => {
+                        this.emailTextInput.focus();
+                      }}
                       error={props.touched.lastname && props.errors.lastname}
                       onChangeText={props.handleChange('lastname')}
                       onBlur={props.handleBlur('lastname')}
@@ -154,6 +163,13 @@ export default class FormikFormGift extends Component {
                     titleFontSize={12}
                     returnKeyType="next"
                     lineWidth={1}
+                    keyboardType="email-address"
+                    ref={input => {
+                      this.emailTextInput = input;
+                    }}
+                    onSubmitEditing={() => {
+                      this.giftMessageInput.focus();
+                    }}
                     labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
@@ -172,6 +188,9 @@ export default class FormikFormGift extends Component {
                     returnKeyType="next"
                     lineWidth={1}
                     multiline
+                    ref={input => {
+                      this.giftMessageInput = input;
+                    }}
                     labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}

@@ -201,6 +201,10 @@ function DonationDetails(props) {
             />
           ) : null}
 
+        {context.contextType === 'pledge' ? (
+          <PledgeOnComponent context={context} />
+        ) : null}
+
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
         <View
           style={[styles.horizontalDivider, { width: '14%', marginTop: 30 }]}
@@ -238,9 +242,7 @@ function DonationDetails(props) {
           taxDeductibleCountries={props.taxDeductibleCountries}
         />
 
-        {context.contextType === 'pledge' ? (
-          <PledgeOnComponent context={context} />
-        ) : null}
+
 
         {/* Needed In Future */}
         {/* <UserContactDetails donorDetails={donorDetails} /> */}

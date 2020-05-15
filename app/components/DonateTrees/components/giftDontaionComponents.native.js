@@ -13,21 +13,32 @@ import styles from '../../../styles/donations/donationDetails';
 import GetRandomImage from '../../../utils/getRandomImage';
 
 function SelectMultiTreeCount(props) {
+  const [customTreeCount, setCustomTreeCount] = React.useState(false);
   const [tempTreeCount, setTempTreeCount] = React.useState(0);
   let treeCountOptions;
+  let defaultTreeCountOption;
+
+  const customTreeCountRef = React.useRef(null);
 
   //  sets the tree count options to be shown by project or sets default
   if (props.selectedProject) {
-    if (
-      props.selectedProject.paymentSetup.treeCountOptions &&
-      props.selectedProject.paymentSetup.treeCountOptions.fixedTreeCountOptions
-    ) {
-      treeCountOptions =
-        props.selectedProject.paymentSetup.treeCountOptions
-          .fixedTreeCountOptions;
+    if (props.selectedProject.treeCountOptions) {
+      treeCountOptions = Object.values(props.selectedProject.treeCountOptions);
+      treeCountOptions.sort();
+      if (!props.treeCount) {
+        props.setTreeCount(props.selectedProject.treeCountOptions.default);
+      }
     } else {
+      defaultTreeCountOption = 10;
       treeCountOptions = [10, 20, 50, 150];
+      if (!props.treeCount) {
+        props.setTreeCount(defaultTreeCountOption);
+      }
     }
+  }
+
+  if (!customTreeCountRef.isFocused && customTreeCount) {
+    props.setTreeCount(tempTreeCount);
   }
 
   return (
@@ -80,6 +91,7 @@ function SelectMultiTreeCount(props) {
             value={tempTreeCount}
             keyboardType={'number-pad'}
             autoFocus
+            ref={customTreeCountRef}
           />
           <Text
             //  change the style of text selected by tree count
@@ -94,19 +106,19 @@ function SelectMultiTreeCount(props) {
           </Text>
         </View>
       ) : (
-        <TouchableOpacity
-          //  sets tree count to 0 and custom count to true
-          onPress={() => {
-            let { giftDetails } = props;
-            giftDetails[props.currentIndex].treeCount = 0;
-            giftDetails[props.currentIndex].isCustomCount = true;
-            props.setGiftDetails(giftDetails);
-          }}
-          style={styles.customSelectorView}
-        >
-          <Text style={styles.customTreeCountText}>Custom Trees</Text>
-        </TouchableOpacity>
-      )}
+          <TouchableOpacity
+            //  sets tree count to 0 and custom count to true
+            onPress={() => {
+              let { giftDetails } = props;
+              giftDetails[props.currentIndex].treeCount = 0;
+              giftDetails[props.currentIndex].isCustomCount = true;
+              props.setGiftDetails(giftDetails);
+            }}
+            style={styles.customSelectorView}
+          >
+            <Text style={styles.customTreeCountText}>Custom Trees</Text>
+          </TouchableOpacity>
+        )}
     </View>
   );
 }
@@ -154,8 +166,8 @@ export const GiftTreesComponent = props => {
                   source={{ uri: item.thumbnailPath }}
                 />
               ) : (
-                <GetRandomImage dimension={60} name={item.firstName} />
-              )}
+                  <GetRandomImage dimension={60} name={item.firstName} />
+                )}
               <Text style={stylesLocal.giftReciepientName}>
                 {item.firstName}
               </Text>
@@ -175,6 +187,7 @@ export const GiftTreesComponent = props => {
             giftDetails={giftDetails}
             setGiftDetails={setGiftDetails}
             selectedProject={props.selectedProject}
+            setTreeCount={props.setTreeCount}
           />
         ) : null}
       </View>

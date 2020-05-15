@@ -317,7 +317,8 @@ export function PaymentOption(props) {
                   context: props.context,
                   createDonation: props.createDonation,
                   setDonorDetails: props.setDonorDetails,
-                  donationPay: props.donationPay
+                  donationPay: props.donationPay,
+                  selectedProject: props.selectedProject
                 })
                 : handleApplePayPress({
                   totalTreeCount: String(props.treeCount),

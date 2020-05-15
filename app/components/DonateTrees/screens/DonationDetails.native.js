@@ -267,6 +267,7 @@ function DonationDetails(props) {
         createDonation={props.createDonation}
         setDonorDetails={props.setDonorDetails}
         donationPay={props.donationPay}
+        selectedProject={props.selectedProject}
       />
     </View>
   );

@@ -59,7 +59,7 @@ export const handleAndroidPayPress = async (props) => {
                             }
                         }).then(response => {
                             console.log('Payment Method', response)
-
+                            console.log('Project account', props.selectedProject.paymentSetup)
                             let payData = {
                                 "paymentProviderRequest": {
                                     "account": token.card.cardId,
@@ -70,11 +70,10 @@ export const handleAndroidPayPress = async (props) => {
                                     }
                                 }
                             }
-                            console.log('Pay Data', payData)
-                            props.donationPay(payData, donationID, loggedIn);
-                            // Send this payment method to the backend to make the payment
+                            console.log('Pay Data', payData);
 
-                            // Donation Pay API
+                            // This is the final Pay API
+                            props.donationPay(payData, donationID, loggedIn);
                         })
                             .catch(error => {
                                 console.log(error.response)

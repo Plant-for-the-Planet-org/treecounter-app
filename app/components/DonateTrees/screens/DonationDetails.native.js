@@ -171,7 +171,7 @@ function DonationDetails(props) {
         {props.selectedProject ? (
           <PlantProjectDetails
             treeCost={props.selectedProject.treeCost}
-            selectedCurrency={props.selectedCurrency}
+            selectedCurrency={props.globalCurrency ? props.globalCurrency.currency : props.selectedCurrency}
             selectedProject={props.selectedProject}
             rates={
               props.currencies.currencies.currency_rates[
@@ -179,6 +179,7 @@ function DonationDetails(props) {
               ].rates
             }
             fee={paymentFee}
+            globalCurrency={props.globalCurrency}
           />
         ) : (
             <NoPlantProjectDetails />

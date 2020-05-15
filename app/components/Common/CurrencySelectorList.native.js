@@ -47,31 +47,35 @@ class CurrencySelectorList extends Component {
     this.state.preferredCurrency &&
       this.props.setCurrencyAction(this.state.preferredCurrency);
   }
-
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedCurrency && this.state.preferredCurrency && this.state.preferredCurrency != nextProps.selectedCurrency) {
+      this.setState({ preferredCurrency: nextProps.selectedCurrency });
+    }
+  }
   getCurrencyNames() {
     return this.props.currencies.currencies
       ? currencySort(
-          Object.keys(this.props.currencies.currencies.currency_names)
+        Object.keys(this.props.currencies.currencies.currency_names)
+      )
+        .map(currency => {
+          return {
+            value: currency,
+            label: this.props.currencies.currencies.currency_names[currency]
+          };
+        })
+        .filter(
+          currency =>
+            currency.value.includes(this.state.search.toUpperCase()) ||
+            currency.label
+              .toLowerCase()
+              .includes(this.state.search.toLowerCase())
         )
-          .map(currency => {
-            return {
-              value: currency,
-              label: this.props.currencies.currencies.currency_names[currency]
-            };
-          })
-          .filter(
-            currency =>
-              currency.value.includes(this.state.search.toUpperCase()) ||
-              currency.label
-                .toLowerCase()
-                .includes(this.state.search.toLowerCase())
-          )
       : [
-          {
-            value: this.state.preferredCurrency,
-            label: this.state.preferredCurrency
-          }
-        ];
+        {
+          value: this.state.preferredCurrency,
+          label: this.state.preferredCurrency
+        }
+      ];
   }
   setSearch = (text = '') => {
     this.state.search !== text && this.setState({ search: text });
@@ -85,10 +89,10 @@ class CurrencySelectorList extends Component {
     this.state.search ? (
       this.setSearch()
     ) : (
-      this.props.hideCurrencyModal({
-        show: false
-      })
-    );
+        this.props.hideCurrencyModal({
+          show: false
+        })
+      );
   };
   getCountryCode = currency =>
     countryCodes.find(c => c.code == currency.value) || {};
@@ -170,7 +174,7 @@ class CurrencySelectorList extends Component {
         keyboardTopOffset={0}
         swipeToClose
       >
-        <View style={{ backgroundColor: backgroundColor, flex: 1, marginBottom: 20}}>
+        <View style={{ backgroundColor: backgroundColor, flex: 1, marginBottom: 20 }}>
           <View
             style={{
               backgroundColor: 'white',
@@ -188,11 +192,11 @@ class CurrencySelectorList extends Component {
               }}
             >
               <TouchableItem onPress={this.onClosed}>
-                { this.state.search ? (
+                {this.state.search ? (
                   <Icon name="arrow-back" size={30} color="black" />
                 ) : (
-                  <Icon name="close" size={30} color="#4d5153" />
-                ) }
+                    <Icon name="close" size={30} color="#4d5153" />
+                  )}
 
               </TouchableItem>
               <View

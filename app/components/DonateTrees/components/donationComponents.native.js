@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FlatList,
   Image,
@@ -26,6 +26,7 @@ import { handleAndroidPayPress } from './paymentMethods/googlePay'
 import { SvgXml } from 'react-native-svg';
 import google_pay from '../../../assets/svgAssets/donations/google_pay';
 import apple_pay from '../../../assets/svgAssets/donations/apple_pay';
+import NumberFormat from '../../Common/NumberFormat.native.js';
 
 export function TaxReceipt(props) {
   let {
@@ -406,14 +407,23 @@ export function PlantProjectDetails(props) {
   const [selectedCurrency, setSelectedCurrency] = useState(
     props.selectedCurrency
   );
+  const [force, setForce] = useState(false);
   const [treeCost, setTreeCost] = useState(props.treeCost);
 
   const handleCurrencyChange = currency => {
+    showCurrencyModal && currency != selectedCurrency ? setForce(true) : setForce(false);
+
+    console.log('changing currency:', force, 'Already selected:', selectedCurrency, ' to be seelcted:', currency);
     setSelectedCurrency(currency);
+
     setShowCurrencyModal(false);
     setTreeCost(calculateAmount(currency));
-  };
 
+  };
+  useEffect(() => {
+    console.log('global currency changed!', props.globalCurrency);
+    setSelectedCurrency(props.globalCurrency.currency);
+  }, [props.globalCurrency]);
   // This function takes the tree Count and calculates the total amount
   const calculateAmount = currency => {
     return (
@@ -445,7 +455,13 @@ export function PlantProjectDetails(props) {
 
           {/* <Image style={styles.projectAmountImage} source={currencyIcon} /> */}
           <Text style={styles.projectAmountText}>
-            {formatNumber(treeCost, null, selectedCurrency)} per tree
+            <NumberFormat
+              currency={selectedCurrency}
+              data={treeCost.toFixed(2)}
+              handleCurrencyChange={handleCurrencyChange}
+              force={force}
+            />
+           per tree
           </Text>
         </View>
       </View>

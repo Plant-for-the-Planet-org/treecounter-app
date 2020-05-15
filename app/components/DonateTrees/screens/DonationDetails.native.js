@@ -38,21 +38,21 @@ function DonationDetails(props) {
   const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
     props.hasTaxDeduction && props.taxDeductibleCountries[0]
   );
-  const [token, setToken] = React.useState(null)
-  const [applePayStatus, setApplePayStatus] = React.useState('')
+  const [token, setToken] = React.useState(null);
+  const [applePayStatus, setApplePayStatus] = React.useState('');
 
   // this is to test whether Apple/Google pay is allowed or not
   stripe.setOptions({
     publishableKey: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
     merchantId: '', // Optional
-    androidPayMode: 'test', // Android only
-  })
-  const [allowedNativePay, setallowedNativePay] = React.useState(false)
+    androidPayMode: 'test' // Android only
+  });
+  const [allowedNativePay, setallowedNativePay] = React.useState(false);
 
   React.useEffect(() => {
-    const allowedNativePay = stripe.deviceSupportsNativePay()
-    setallowedNativePay(allowedNativePay)
-  }, [])
+    const allowedNativePay = stripe.deviceSupportsNativePay();
+    setallowedNativePay(allowedNativePay);
+  }, []);
 
   // show hide project modal
   const [showProjectModal, setProjectModal] = React.useState(false);
@@ -64,6 +64,7 @@ function DonationDetails(props) {
 
   // Function for Switching the state of tax receipt
   const toggleTaxReceipt = value => {
+    // console.log(value);
     setTaxReceiptSwitch(value);
   };
 
@@ -81,12 +82,6 @@ function DonationDetails(props) {
     context.donationDetails.frequency != frequency
   ) {
     setFrequency(context.donationDetails.frequency);
-  }
-  if (
-    context.donationDetails.taxReceiptSwitch &&
-    context.donationDetails.taxReceiptSwitch != taxReceiptSwitch
-  ) {
-    setTaxReceiptSwitch(context.donationDetails.taxReceiptSwitch);
   }
   if (
     context.donationDetails.countryForTax &&
@@ -116,8 +111,6 @@ function DonationDetails(props) {
       });
     }
   };
-
-  console.log('Selected project', props.selectedProject)
   return (
     <View style={{ backgroundColor: 'white' }}>
       <StatusBar hidden />
@@ -138,8 +131,6 @@ function DonationDetails(props) {
         title={'Tree Donation'}
         showClose
       />
-
-
 
       <KeyboardAwareScrollView
         contentContainerStyle={styles.scrollView}
@@ -211,7 +202,9 @@ function DonationDetails(props) {
           ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
-        <View style={[styles.horizontalDivider, { width: '14%', marginTop: 30 }]} />
+        <View
+          style={[styles.horizontalDivider, { width: '14%', marginTop: 30 }]}
+        />
 
         {/* Commission Covering */}
         {/* {context.treeCount ? (
@@ -263,7 +256,9 @@ function DonationDetails(props) {
         navigation={props.navigation}
         onContinue={onContinue}
         frequency={frequency}
-        showNativePay={allowedNativePay ? Platform.OS === 'ios' ? 'apple' : 'google' : null}
+        showNativePay={
+          allowedNativePay ? (Platform.OS === 'ios' ? 'apple' : 'google') : null
+        }
         token={token}
         setToken={setToken}
         stripe={stripe}

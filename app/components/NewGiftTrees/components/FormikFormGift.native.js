@@ -110,7 +110,7 @@ export default class FormikFormGift extends Component {
                   </Text>
                 </View>
                 <View style={styles.formView}>
-                  <View style={styles.formHalfTextField}>
+                  <View style={[styles.formHalfTextField, { zIndex: 2 }]}>
                     <TextField
                       label={i18n.t('label.First_Name')}
                       value={props.values.firstname}
@@ -128,7 +128,7 @@ export default class FormikFormGift extends Component {
                     />
                   </View>
 
-                  <View style={styles.formHalfTextField}>
+                  <View style={[styles.formHalfTextField, { zIndex: 1 }]}>
                     <TextField
                       label={i18n.t('label.Last_Name')}
                       value={props.values.lastname}

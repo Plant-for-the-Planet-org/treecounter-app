@@ -36,6 +36,9 @@ import {
 import { postDirectRequest } from '../../utils/api';
 
 class DonationTreesContainer extends Component {
+  state = {
+    currency: ''
+  }
   static navigationOptions = {
     header: null
   };
@@ -73,9 +76,13 @@ class DonationTreesContainer extends Component {
     }
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
+    console.log('nextProps to detect change in redux currency', nextProps.globalCurrency)
     if (nextProps.selectedProject && !nextProps.selectedProject.tpoData) {
       this.props.loadProject({ id: nextProps.selectedProject.id });
     }
+    // if (nextProps.globalCurrency.currency !== this.state.currency) {
+    //   this.setState({ currency: nextProps.globalCurrency.currency })
+    // }
   }
   async componentDidMount() {
     let selectedProjectId = undefined;
@@ -120,7 +127,7 @@ class DonationTreesContainer extends Component {
     const { currentUserProfile, selectedProject } = this.props;
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
-    return null === userCurrency ? selectedProject.currency : userCurrency;
+    return null === userCurrency ? (this.state.currency ? this.state.currency : selectedProject.currency) : (this.state.currency ? this.state.currency : userCurrency);
   };
 
   render() {
@@ -162,6 +169,7 @@ class DonationTreesContainer extends Component {
         currentUserProfile={this.props.currentUserProfile}
         createDonation={this.props.createDonation}
         donationPay={this.props.donationPay}
+        globalCurrency={this.props.globalCurrency}
       />
     ) : null;
   }

@@ -246,7 +246,7 @@ export default EStyleSheet.create({
     height: 54,
     paddingVertical: 12,
     paddingHorizontal: 24,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: 16,
     flexGrow: 1,
@@ -512,36 +512,33 @@ export default EStyleSheet.create({
     borderWidth: 0,
     borderBottomWidth: 1,
     padding: 0,
-    width: 50,
-    color: '#fff'
+    width: 100,
+    color: '#fff',
+    fontFamily: 'OpenSans-SemiBold'
   },
   treeCountTextInputSelected: {
     borderColor: 'white',
     borderWidth: 0,
-    borderBottomWidth: 1,
     padding: 0,
-    width: 50,
-    color: '#fff'
+    width: 100,
+    color: '#fff',
+    fontFamily: 'OpenSans-SemiBold'
   },
   treeCountNumber: {
     fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: 'center',
     color: '#4d5153',
-    fontFamily: 'OpenSans-Regular'
+    fontFamily: 'OpenSans-SemiBold'
   },
   treeCountNumberSelected: {
     fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: 'center',
     color: '#ffffff',
-    fontFamily: 'OpenSans-Regular'
+    fontFamily: 'OpenSans-SemiBold'
   },
 
   // Donor Form

@@ -24,14 +24,11 @@ export default class FeaturedProject extends Component {
             style={{
               paddingLeft: 16,
               paddingRight: 16,
-              flexWrap: 'wrap',
               display: 'flex',
               flexDirection: 'column'
             }}
           >
-            <Text
-              style={{ flex: 1, flexWrap: 'wrap', fontFamily: 'OpenSans-Bold' }}
-            >
+            <Text style={{ flex: 1, fontFamily: 'OpenSans-Bold' }}>
               {this.props.orgname}
             </Text>
             <View style={styles.featuredProjectCardIconContainer}>

@@ -35,7 +35,7 @@ const PledgeEvents = props => {
     <LoadingIndicator contentLoader screen={'PledgeEvents'} />
   ) : (
       <SafeAreaView style={styles.peRootView}>
-        <View>
+        <View style={{ paddingBottom: 100 }}>
           <HeaderAnimatedImage
             navigation={navigation}
             title={pledges.name}

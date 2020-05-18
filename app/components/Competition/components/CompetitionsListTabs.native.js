@@ -29,6 +29,7 @@ const CompetitionsList = props => {
   const [refreshing, setRefreshing] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [prevPage, setPrevPage] = useState(1);
   const [isCompetitionFinished, setCompetitionFinished] = useState(false);
   const [showFinishedMessage, setShowFinishedMessage] = useState(false);
   let onEndReachedCalledDuringMomentum = true;
@@ -43,13 +44,11 @@ const CompetitionsList = props => {
    */
   const onRefresh = async () => {
     setRefreshing(true);
-    if (props.tabType !== 'mine') {
-      setPage(1);
-      setShowCompetitions([]);
-      props.clearCurrentCompetitions(props.tabType);
-      setCompetitionFinished(false);
-    }
-    await props.fetchCompetitions(props.tabType, 1);
+    setPage(1);
+    setShowCompetitions([]);
+    props.clearCurrentCompetitions(props.tabType);
+    setCompetitionFinished(false);
+    await props.fetchCompetitions(props.tabType, page);
     setRefreshing(false);
   };
 
@@ -78,6 +77,7 @@ const CompetitionsList = props => {
    *    then directly pushes to showCompetitons array state
    * 4. Sets loading to {false}
    * 5. Sets competition finished to {true} in there is no remaining competition
+   * 6. if currentPage and prevPage both are same then we will set showCompetitons empty array because it's adding duplicate data in showCompetitons array
    */
   useEffect(() => {
     let showCompetitionsArr = [];
@@ -86,6 +86,9 @@ const CompetitionsList = props => {
       // 1. If not then set the current page to same as API's loaded competiton current page
       // 2. Also concats the competition array to be shown with redux currentCompetition state
       // 3. Set's loading to false
+      if( props.competitionsArr[0].currentPage === prevPage){
+        setShowCompetitions([])
+      }
       if (
         props.competitionsArr[0].currentPage !== page &&
         props.currentCompetitionsArr?.length > 0
@@ -183,6 +186,7 @@ const CompetitionsList = props => {
    */
   const handleLoadMore = () => {
     setLoading(true);
+    setPrevPage(page)
     setPage(prevPage => prevPage + 1);
     getAllCompetitions(page + 1);
   };

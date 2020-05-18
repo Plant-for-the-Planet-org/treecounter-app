@@ -18,6 +18,13 @@ import {
   currentUserProfileSelector
 } from '../../selectors';
 import PledgeEvents from './../../components/PledgeEvents/PledgeEvents';
+import {
+  setDonorDetails,
+  setPledgeDetails,
+  setSelectedProjectDetails,
+  setDonationContext
+} from './../../components/DonateTrees/redux/action';
+
 const PledgeEventsContainer = props => {
   const [loading, setLoading] = React.useState(true);
   const [myPledge, setMyPledge] = React.useState('');
@@ -86,6 +93,12 @@ const PledgeEventsContainer = props => {
       selectPlantProjectAction={props.selectPlantProjectAction}
       fetchPledgesAction={props.fetchPledgesAction}
       slug={props.navigation.getParam('slug')}
+      contextActions={{
+        setPledgeDetails: props.setPledgeDetails,
+        setDonorDetails: props.setDonorDetails,
+        setSelectedProjectDetails: props.setSelectedProjectDetails,
+        setDonationContext: props.setDonationContext
+      }}
     />
   );
 };
@@ -109,7 +122,11 @@ const mapDispatchToProps = dispatch => {
       clearTimeoutAction,
       fetchPublicPledgesAction,
       loadUserProfile,
-      selectPlantProjectAction
+      selectPlantProjectAction,
+      setDonorDetails,
+      setPledgeDetails,
+      setSelectedProjectDetails,
+      setDonationContext
     },
     dispatch
   );

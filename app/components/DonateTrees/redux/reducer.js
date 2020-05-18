@@ -58,8 +58,7 @@ export default function (state = initialState, action) {
     case SET_PLEDGE_DETAILS:
       return {
         ...state,
-        contextType: action.payload.contextType,
-        pledgeDetails: action.payload.pledgeDetails
+        pledgeDetails: action.payload.pledgeContextDetails
       };
 
     case SET_SELECTED_PROJECT:

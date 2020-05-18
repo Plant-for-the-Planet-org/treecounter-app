@@ -34,89 +34,91 @@ const PledgeEvents = props => {
   return props.loading ? (
     <LoadingIndicator contentLoader screen={'PledgeEvents'} />
   ) : (
-    <SafeAreaView style={styles.peRootView}>
-      <View>
-        <HeaderAnimatedImage
-          navigation={navigation}
-          title={pledges.name}
-          scrollY={scrollY}
-          titleStyle={styles.eventTitle}
-          imageStyle={styles.peHeaderLogo}
-          imageSource={{
-            uri: getImageUrl('event', 'thumb', pledges.image)
-          }}
-        />
+      <SafeAreaView style={styles.peRootView}>
+        <View>
+          <HeaderAnimatedImage
+            navigation={navigation}
+            title={pledges.name}
+            scrollY={scrollY}
+            titleStyle={styles.eventTitle}
+            imageStyle={styles.peHeaderLogo}
+            imageSource={{
+              uri: getImageUrl('event', 'thumb', pledges.image)
+            }}
+          />
 
-        <EventDetails pledges={pledges} scrollY={scrollY} />
+          <EventDetails pledges={pledges} scrollY={scrollY} />
 
-        {/* This opens when the user has just created the Pledge  */}
-        <RBSheet
-          ref={RBSheetRef}
-          height={354}
-          duration={250}
-          customStyles={{
-            container: {
-              justifyContent: 'center'
-            }
-          }}
-        >
-          <View style={styles.baContainer}>
-            <Text style={styles.baMessage}>
-              {i18n.t('label.pledgeAddedMessage', {
-                treeCount: props.treeCount
-              })}
-            </Text>
+          {/* This opens when the user has just created the Pledge  */}
+          <RBSheet
+            ref={RBSheetRef}
+            height={354}
+            duration={250}
+            customStyles={{
+              container: {
+                justifyContent: 'center'
+              }
+            }}
+          >
+            <View style={styles.baContainer}>
+              <Text style={styles.baMessage}>
+                {i18n.t('label.pledgeAddedMessage', {
+                  treeCount: props.treeCount
+                })}
+              </Text>
 
-            <View style={styles.baButtonContainer}>
-              <TouchableOpacity
-                style={styles.baLaterButton}
-                onPress={() => {
-                  props.fetchPledgesAction(props.slug);
-                  RBSheetRef.current.close();
-                }}
-              >
-                <Text style={styles.baLaterText}>
-                  {i18n.t('label.pledgeAddedLaterButton')}
-                </Text>
-              </TouchableOpacity>
+              <View style={styles.baButtonContainer}>
+                <TouchableOpacity
+                  style={styles.baLaterButton}
+                  onPress={() => {
+                    props.fetchPledgesAction(props.slug);
+                    RBSheetRef.current.close();
+                  }}
+                >
+                  <Text style={styles.baLaterText}>
+                    {i18n.t('label.pledgeAddedLaterButton')}
+                  </Text>
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.baContinueButton}
-                onPress={() => {
-                  const { navigation, selectPlantProjectAction } = props;
-                  navigateToDonationDetails(
-                    navigation,
-                    pledges,
-                    myPledge,
-                    selectPlantProjectAction
-                  );
-                }}
-              >
-                <Text style={styles.baContinueText}>
-                  {i18n.t('label.pledgeAddedContinueButton')}
-                </Text>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.baContinueButton}
+                  onPress={() => {
+                    const { navigation, selectPlantProjectAction } = props;
+                    navigateToDonationDetails(
+                      navigation,
+                      pledges,
+                      myPledge,
+                      selectPlantProjectAction,
+                      contextActions = props.contextActions
+                    );
+                  }}
+                >
+                  <Text style={styles.baContinueText}>
+                    {i18n.t('label.pledgeAddedContinueButton')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </RBSheet>
+          </RBSheet>
 
-        {typeof myPledge !== 'undefined' && myPledge !== null ? (
-          myPledge.length > 0 ? (
-            <FulfillPledgeButton
-              myPledge={myPledge[0]}
-              pledges={pledges}
-              selectPlantProjectAction={props.selectPlantProjectAction}
-              navigation={navigation}
-            />
+          {typeof myPledge !== 'undefined' && myPledge !== null ? (
+            myPledge.length > 0 ? (
+              <FulfillPledgeButton
+                myPledge={myPledge[0]}
+                pledges={pledges}
+                selectPlantProjectAction={props.selectPlantProjectAction}
+                navigation={navigation}
+                contextActions={props.contextActions}
+              />
+            ) : (
+                <MakePledgeButton navigation={navigation} pledges={pledges} />
+              )
           ) : (
-            <MakePledgeButton navigation={navigation} pledges={pledges} />
-          )
-        ) : (
-          <MakePledgeButton navigation={navigation} pledges={pledges} />
-        )}
-      </View>
-    </SafeAreaView>
-  );
+              <MakePledgeButton navigation={navigation} pledges={pledges} />
+            )}
+        </View>
+      </SafeAreaView>
+    );
 };
 
 PledgeEvents.navigationOptions = {
@@ -175,13 +177,15 @@ function FulfillPledgeButton(props) {
             navigation,
             pledges,
             myPledge,
-            selectPlantProjectAction
+            selectPlantProjectAction,
+            contextActions
           } = props;
           navigateToDonationDetails(
             navigation,
             pledges,
             myPledge,
-            selectPlantProjectAction
+            selectPlantProjectAction,
+            contextActions
           );
         }}
       >
@@ -202,30 +206,39 @@ function navigateToDonationDetails(
   navigation,
   pledges,
   myPledge,
-  selectPlantProjectAction
+  selectPlantProjectAction,
+  contextActions
 ) {
   selectPlantProjectAction(pledges.plantProject.id);
+
+  contextActions.setDonorDetails({
+    firstName: myPledge.firstname,
+    lastName: myPledge.lastname,
+    email: myPledge.email,
+  });
+
+  contextActions.setPledgeDetails({
+    firstName: myPledge.firstname,
+    lastName: myPledge.lastname,
+    treeCount: myPledge.treeCount,
+    email: myPledge.email,
+    isAnonymous: myPledge.isAnonymous,
+    token: myPledge.token,
+    lastIncremented: myPledge.lastIncremented,
+    image: pledges.image
+  });
+
+  contextActions.setSelectedProjectDetails({
+    currency: pledges.plantProject.currency,
+    amountPerTree: pledges.plantProject.treeCost,
+    plantProjectID: pledges.plantProject.id
+  });
+
+  contextActions.setDonationContext('pledge');
+
   updateStaticRoute('app_donate_detail', navigation, {
     id: pledges.plantProject.id,
     userForm: navigation.getParam('userForm'),
-    context: {
-      contextType: 'pledge',
-      pledge: {
-        firstName: myPledge.firstname,
-        lastName: myPledge.lastname,
-        treeCount: myPledge.treeCount,
-        email: myPledge.email,
-        isAnonymous: myPledge.isAnonymous,
-        token: myPledge.token,
-        lastIncremented: myPledge.lastIncremented,
-        image: pledges.image
-      },
-      plantProject: {
-        currency: pledges.plantProject.currency,
-        amountPerTree: pledges.plantProject.treeCost,
-        plantProjectID: pledges.plantProject.id
-      }
-    }
   });
 }
 
@@ -241,31 +254,31 @@ function EventDetails(props) {
       ])}
     >
       {pledges &&
-      pledges.highestPledgeEvents &&
-      pledges.highestPledgeEvents.length > 0 ? (
-        // If there are Pledges
-        <View>
-          <Text style={styles.eventSubTitle}>
-            {i18n.t('label.treesPledgedAllPledges', {
-              treeCount: delimitNumbers(pledges.total)
-            })}
-          </Text>
-          {/* All the pledges are here */}
-          <PledgeTabView pledges={pledges} />
-        </View>
-      ) : (
-        // If there are no Pledges
-        <View>
-          <Text style={styles.eventSubTitle}>{i18n.t('label.noPledges')}</Text>
-        </View>
-      )}
+        pledges.highestPledgeEvents &&
+        pledges.highestPledgeEvents.length > 0 ? (
+          // If there are Pledges
+          <View>
+            <Text style={styles.eventSubTitle}>
+              {i18n.t('label.treesPledgedAllPledges', {
+                treeCount: delimitNumbers(pledges.total)
+              })}
+            </Text>
+            {/* All the pledges are here */}
+            <PledgeTabView pledges={pledges} />
+          </View>
+        ) : (
+          // If there are no Pledges
+          <View>
+            <Text style={styles.eventSubTitle}>{i18n.t('label.noPledges')}</Text>
+          </View>
+        )}
 
       {/* Show Event Images */}
       {pledges &&
-      pledges.pledgeEventImages &&
-      pledges.pledgeEventImages.length > 0 ? (
-        <EventImages pledgeEventImages={pledges.pledgeEventImages} />
-      ) : null}
+        pledges.pledgeEventImages &&
+        pledges.pledgeEventImages.length > 0 ? (
+          <EventImages pledgeEventImages={pledges.pledgeEventImages} />
+        ) : null}
 
       {/* Show Event description */}
       {pledges.description ? (

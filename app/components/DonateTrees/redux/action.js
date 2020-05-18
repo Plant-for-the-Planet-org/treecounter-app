@@ -66,7 +66,7 @@ export const setPledgeDetails = pledgeContextDetails => dispatch => {
   dispatch({
     type: SET_PLEDGE_DETAILS,
     payload: {
-      ...pledgeContextDetails
+      pledgeContextDetails
     }
   });
 };

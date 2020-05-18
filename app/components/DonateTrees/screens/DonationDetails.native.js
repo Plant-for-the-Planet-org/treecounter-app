@@ -21,7 +21,8 @@ import {
   SelectFrequency,
   SelectTreeCount,
   SupportUserDetails,
-  TaxReceipt
+  TaxReceipt,
+  PledgeOnComponent
 } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
@@ -111,6 +112,7 @@ function DonationDetails(props) {
       });
     }
   };
+
   return (
     <View style={{ backgroundColor: 'white' }}>
       <StatusBar hidden />
@@ -202,7 +204,7 @@ function DonationDetails(props) {
           ) : null}
 
         {context.contextType === 'pledge' ? (
-          <PledgeOnComponent context={context} />
+          <PledgeOnComponent pledgeDetails={context.pledgeDetails} />
         ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />

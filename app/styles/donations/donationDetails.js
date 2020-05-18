@@ -606,5 +606,51 @@ export default EStyleSheet.create({
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
     borderBottomColor: '#eeeeee'
-  }
+  },
+
+
+
+  // Pledge Event Details
+  titlePledge: {
+    marginTop: 20,
+    fontSize: 14,
+    fontFamily: 'OpenSans-SemiBold',
+    textTransform: 'uppercase'
+  },
+  pledgeDetails: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 20
+  },
+  pledgeImage: {
+    height: 32,
+    width: 32,
+    borderRadius: 16
+  },
+  pledgeNameAmount: {
+    marginLeft: 10
+  },
+  pledgeName: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    lineHeight: 24,
+    color: '#4d5153',
+    display: 'flex',
+    flexWrap: 'wrap'
+    //maxWidth: '95%'
+  },
+  pledgeAmountView: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 4
+  },
+  pledgeAmountImage: {
+    height: 14,
+    width: 14
+  },
+  pledgeAmountText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 11,
+    color: '#4d5153',
+  },
 });

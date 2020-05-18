@@ -18,7 +18,7 @@ import {
 import { infoHint, nextArrowWhite, nextArrow } from '../../../assets';
 import countryData from '../../../assets/countryCodes.json';
 import styles from '../../../styles/donations/donationDetails';
-import { formatNumber } from '../../../utils/utils';
+import { formatNumber, formatDate } from '../../../utils/utils';
 import CurrencySelectorList from '../../Common/CurrencySelectorList.native';
 import UserProfileImage from '../../Common/UserProfileImage.native';
 import { handleApplePayPress } from './paymentMethods/applePay';
@@ -36,7 +36,6 @@ export function TaxReceipt(props) {
     setShowTaxCountryModal,
     oneTaxCountry
   } = props;
-  console.log('taxReceiptSwitch', taxReceiptSwitch);
   const SelectedCountryText = () => {
     return (
       <Text style={styles.isTaxDeductibleCountry}>
@@ -428,7 +427,6 @@ export function PlantProjectDetails(props) {
   const handleCurrencyChange = currency => {
     showCurrencyModal && currency != selectedCurrency ? setForce(true) : setForce(false);
 
-    console.log('changing currency:', force, 'Already selected:', selectedCurrency, ' to be seelcted:', currency);
     setSelectedCurrency(currency);
 
     setShowCurrencyModal(false);
@@ -436,7 +434,6 @@ export function PlantProjectDetails(props) {
 
   };
   useEffect(() => {
-    console.log('global currency changed!', props.globalCurrency);
     setSelectedCurrency(props.globalCurrency.currency);
   }, [props.globalCurrency]);
   // This function takes the tree Count and calculates the total amount
@@ -723,3 +720,29 @@ export const SupportUserDetails = props => {
     </View>
   );
 };
+
+
+
+export function PledgeOnComponent(props) {
+  return (
+    <>
+      <Text style={styles.titlePledge}>Pledged To</Text>
+      <View style={styles.pledgeDetails}>
+        <Image
+          style={styles.pledgeImage}
+          source={{
+            uri: getImageUrl('event', 'thumb', props.pledgeDetails.image)
+          }}
+        />
+        <View style={styles.pledgeNameAmount}>
+          <Text style={styles.pledgeName}>{props.pledgeDetails.eventName}</Text>
+          <View style={styles.pledgeAmountView}>
+            <Text style={styles.pledgeAmountText}>
+              On {formatDate(props.pledgeDetails.eventDate)}
+            </Text>
+          </View>
+        </View>
+      </View>
+    </>
+  );
+}

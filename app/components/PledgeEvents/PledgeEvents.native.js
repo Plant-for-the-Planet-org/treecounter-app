@@ -225,7 +225,9 @@ function navigateToDonationDetails(
     isAnonymous: myPledge.isAnonymous,
     token: myPledge.token,
     lastIncremented: myPledge.lastIncremented,
-    image: pledges.image
+    image: pledges.image,
+    eventName: pledges.name,
+    eventDate: pledges.eventDate
   });
 
   contextActions.setSelectedProjectDetails({

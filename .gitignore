@@ -59,8 +59,8 @@ web/prod
 web/server
 
 
-# loc file
+# lock 
 *.lock
 
-# log file
+# debug.log etc
 *.log

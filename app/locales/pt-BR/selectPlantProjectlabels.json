@@ -1,1 +1,14 @@
-{ }
+{
+  "name": "Nome",
+  "price": "Preço",
+  "select_project": "Selecione o projeto",
+  "search_project": "Procurar projectos...",
+  "donate_trees_cap": "Doe Árvores",
+  "featured": "Em destaque",
+  "list": "Todos",
+  "country": "País",
+  "select_by_country": "Classificar por país",
+  "cost_per_tree": "por árvore",
+  "no_tax_deduction": "Não há dedução de impostos disponível",
+  "select_project_title": "Selecione um projeto para realizar uma doação para plantar árvores"
+}

@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
   TouchableWithoutFeedback, ActivityIndicator
 } from 'react-native';
 import { Switch } from 'react-native-switch';
@@ -47,6 +48,7 @@ export const FormikFormTree = props => {
   const [loadButton, setLoadButton] = useState(props.loading);
   const [geoLocation, setGeoLocation] = useState(props.geoLocation);
   const [initValue, setInitValue] = useState(props.initialValues);
+  const [contributionImages, setContributionImages] = useState(props.initialValues && props.initialValues.contributionImages||[]);
 
   /**
   * Get value of specific Props
@@ -63,6 +65,7 @@ export const FormikFormTree = props => {
   useEffect(() => {
     setLoadButton(props.loading);
   }, [props.loading]);
+
 
   const parentProps = props;
   const isMultipleTree = props.mode === 'multiple-trees';
@@ -91,14 +94,16 @@ export const FormikFormTree = props => {
    * if {isEdit} it will get default or initial value from props
    * if {!isEdit} it will get value from updated value from formik
    * */
+  // eslint-disable-next-line
   const isContributionImage = props => {
+    debug('Image props',  props.values.contributionImages)
     if (parentProps.isEdit) {
       const contributImage =
         props.values.contributionImages &&
           props.values.contributionImages.length &&
           props.values.contributionImages[0] &&
           props.values.contributionImages[0].image
-          ? props.values.contributionImages[0].image
+          ? props.values.contributionImages
           : '';
       return (
         (contributImage &&
@@ -117,6 +122,27 @@ export const FormikFormTree = props => {
         : '';
     }
   };
+  const updateImage= (images,props) =>{
+      if (typeof images == 'string') {
+        images = [images];
+      }
+      images.map(image => {
+        return contributionImages.push({
+          imageFile: image
+        });
+      });
+      debug('updating review images:', contributionImages);
+      setContributionImages(contributionImages)
+    props.setFieldValue('contributionImages',contributionImages)
+  }
+  const deleteImage=(index,props)=> {
+    debug('contributionImages==delete',contributionImages)
+    let images = [...contributionImages.reverse()];
+    images = images.filter((data, i) => i !== index);
+    setContributionImages(images);
+    debug('images delete',contributionImages,index)
+    props.setFieldValue('contributionImages',images)
+  }
   /**
    * Render formik form
    * @property {initialValues} initialize the form with initial value
@@ -403,8 +429,13 @@ export const FormikFormTree = props => {
               <CardLayout>
                 <View style={styles.formAddImageBlock}>
                   <AddImage
-                    image={isContributionImage(props)}
-                    setFieldValue={props.setFieldValue}
+                    images={props.values.contributionImages.map(data =>
+                      data.imageFile
+                        ? data.imageFile
+                        : getImageUrl('contribution', 'medium', data.image)
+                    )}
+                    updateImages={(images)=>updateImage(images,props)}
+                    deleteImage={(index)=>deleteImage(index,props)}
                   />
                 </View>
                 {!isMultipleTree && (
@@ -808,10 +839,13 @@ export class CustomSwitch extends React.Component {
 }
 
 export function AddImage(props) {
-  const image = props.image;
+  const images = props.images;
 
   const options = {
-    title: 'Add Image',
+    title: props.title || 'Add Image',
+    allowsEditing: true,
+    mediaType: 'photo',
+    multiple: true,
     storageOptions: {
       skipBackup: true,
       path: 'images'
@@ -819,16 +853,17 @@ export function AddImage(props) {
   };
 
   const renderAsset = (image, index) => {
+    debug('Image in add images=====>',image)
     return (
       <View key={index} style={[{ position: 'relative', marginRight: 8 }]}>
         <Image
-          style={[styles.teaser__projectImage, { width: '95%', height: 150 }]}
+          style={[styles.teaser__projectImage, { width: 330, height: 150 }]}
           source={{ uri: image }}
         // resizeMode={'cover'}
         />
         <View style={[styles.competitionDeleteButton]}>
           <TouchableOpacity
-            onPress={() => props.setFieldValue('contributionImages', [])}
+            onPress={() => props.deleteImage(index)}
             style={styles.addDeleteButtonIcon}
           >
             <Image
@@ -854,7 +889,9 @@ export function AddImage(props) {
   return (
     <View>
       <Text style={styles.addImageTitle}>{i18n.t('label.add_images')}</Text>
-      {image && image != 'null' ? renderAsset(image) : null}
+      <ScrollView horizontal>
+        {images && images != 'null' ? images.reverse().map(renderAsset) : null}
+      </ScrollView>
       <View style={styles.addImageButtonContainer}>
         <TouchableOpacity
           style={styles.addImageButton1}
@@ -865,11 +902,7 @@ export function AddImage(props) {
               } else if (response.error) {
                 debug('ImagePicker Error: ', response.error);
               } else {
-                props.setFieldValue('contributionImages', [
-                  {
-                    imageFile: 'data:image/jpeg;base64,' + response.data
-                  }
-                ]);
+                props.updateImages('data:image/jpeg;base64,' + response.data);
               }
             });
           }}
@@ -885,11 +918,7 @@ export function AddImage(props) {
               } else if (response.error) {
                 debug('ImagePicker Error: ', response.error);
               } else {
-                props.setFieldValue('contributionImages', [
-                  {
-                    imageFile: 'data:image/jpeg;base64,' + response.data
-                  }
-                ]);
+                props.updateImages('data:image/jpeg;base64,' + response.data);
               }
             });
           }}

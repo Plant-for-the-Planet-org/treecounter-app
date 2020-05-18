@@ -3,13 +3,13 @@
 
   Created by Norbert Schuler on 29.08.19.
   Copyright © 2019 Facebook. All rights reserved. */
-"NSCameraUsageDescription" = "We would like to use your camera for the app.";
+"NSCameraUsageDescription" = "We would like to use your camera to take a photo for your user profile and registered trees.";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "We need your location to get the coordinates for the tree registration.";
 "NSLocationAlwaysUsageDescription" = "We need your location to get the coordinates for the tree registration.";
 "NSLocationWhenInUseUsageDescription" = "We need your location to get the coordinates for the tree registration.";
 "NSMicrophoneUsageDescription" = "We would like to use your microphone (for videos).";
 "NSPhotoLibraryAddUsageDescription" = "We would like to save photos to your photo gallery.";
-"NSPhotoLibraryUsageDescription" = "We would like access to your photo gallery for the app.";
+"NSPhotoLibraryUsageDescription" = "We would like access to your photo gallery to choose a photo for your user profile and registered trees.";
 "NSCalendarsUsageDescription" = "We would like access to your calendar for the app.";
 "NSAppleMusicUsageDescription" = "We would like access to your music library for the app.";
 "NSBluetoothPeripheralUsageDescription" = "We would like to use bluetooth for the app.";

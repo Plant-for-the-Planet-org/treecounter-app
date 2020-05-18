@@ -1,1 +1,7 @@
-{ }
+{
+  "welcome_scrn_3_heading": "Um contador de árvores\npara as suas árvores",
+  "welcome_scrn_3_sub_heading": "Você já pensou\nem começar a sua própria floresta\npara salvar algumas árvores?",
+  "welcome_scrn_3_continue": "Continuar",
+  "welcome_scrn_3_already_have_an_account": "Já tem uma conta?",
+  "welcome_scrn_3_sign_in": "Se inscrever"
+}

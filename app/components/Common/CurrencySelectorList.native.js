@@ -24,28 +24,45 @@ const activeColor = '#74ba00';
 const defaultColor = '#4d5153';
 
 class CurrencySelectorList extends Component {
+
   state = {
     focus: 0,
     search: '',
-    preferredCurrency: this.props.selectedCurrency
+    preferredCurrency: this.props.userProfile ? this.props.userProfile.curreny : (this.props.selectedCurrency
       ? this.props.selectedCurrency
-      : this.props.globalCurrency.currency,
+      : this.props.globalCurrency.currency),
     show: this.props.show
   };
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
       await this.props.fetchCurrencies();
     }
-    if (!this.state.preferredCurrency && this.props.selectedCurrency) {
+    if (!this.state.preferredCurrency && this.props.selectedCurrency && this.props.selectedCurrency != this.state.preferredCurrency) {
       this.setState({ preferredCurrency: this.props.selectedCurrency });
+      this.props.setCurrencyAction(this.props.selectedCurrency);
     } else if (
       !this.state.preferredCurrency &&
-      this.props.globalCurrency.currency
+      this.props.globalCurrency.currency && this.props.globalCurrency.currency != this.state.preferredCurrency
     ) {
       this.setState({ preferredCurrency: this.props.globalCurrency.currency });
+      this.props.setCurrencyAction(this.props.globalCurrency.currency);
     }
-    this.state.preferredCurrency &&
-      this.props.setCurrencyAction(this.state.preferredCurrency);
+    if (
+      this.props.userProfile &&
+      this.props.userProfile.currency && this.props.userProfile.currency != this.state.preferredCurrency
+    ) {
+      this.setState({ preferredCurrency: this.props.userProfile.currency });
+      this.props.setCurrencyAction(this.props.userProfile.currency);
+    }
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.userProfile &&
+      nextProps.userProfile.currency && nextProps.userProfile.currency != this.state.preferredCurrency
+    ) {
+      this.setState({ preferredCurrency: nextProps.userProfile.currency });
+      this.props.setCurrencyAction(nextProps.userProfile.currency);
+    }
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedCurrency && this.state.preferredCurrency && this.state.preferredCurrency != nextProps.selectedCurrency) {

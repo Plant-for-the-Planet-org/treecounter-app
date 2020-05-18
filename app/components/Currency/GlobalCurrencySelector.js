@@ -89,16 +89,19 @@ class GlobalCurrencySelector extends Component {
     }
   }
   async UNSAFE_componentWillMount() {
-    this.setState({ preferredCurrency: getPreferredCurrency() });
+
   }
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
       let curreniesData = await this.props.fetchCurrencies();
       debug('got fron fetch', curreniesData);
     }
-    debug('setting', this.state);
-    this.state.preferredCurrency &&
-      this.props.setCurrencyAction(this.state.preferredCurrency);
+    debug('settings', this.state);
+    !this.props.userProfile && this.setState({ preferredCurrency: getPreferredCurrency() }) && this.props.setCurrencyAction(this.state.preferredCurrency)
+    this.props.userProfile &&
+      this.props.userProfile.currency &&
+      this.setState({ preferredCurrency: this.props.userProfile.currency }) &&
+      this.props.setCurrencyAction(this.props.userProfile.currency);
   }
   updateState(data) {
     this.setState(data);
@@ -106,16 +109,16 @@ class GlobalCurrencySelector extends Component {
   getCurrencyNames() {
     return this.props.currencies.currencies
       ? currencySort(
-          Object.keys(this.props.currencies.currencies.currency_names)
-        ).map(currency => {
-          return { value: currency, label: currency };
-        })
+        Object.keys(this.props.currencies.currencies.currency_names)
+      ).map(currency => {
+        return { value: currency, label: currency };
+      })
       : [
-          {
-            value: this.state.preferredCurrency,
-            label: this.state.preferredCurrency
-          }
-        ];
+        {
+          value: this.state.preferredCurrency,
+          label: this.state.preferredCurrency
+        }
+      ];
   }
   handleCurrencyChange(selectedOption) {
     debug(selectedOption);

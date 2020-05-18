@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { debug } from '../../debug';
 import EditUserProfile from '../../components/EditUserProfile';
-import { currentUserProfileSelector } from '../../selectors/index';
+import {currentUserProfileSelector, getProgressModelSelector} from '../../selectors/index';
 import {
   updateUserProfile,
   updatePlantProject,
@@ -250,6 +250,7 @@ class EditUserProfileContainer extends React.Component {
         navigation={this.props.navigation}
         followeeList={this.state.followeeInfo}
         unfollowUser={this.props.unfollowUser}
+        {...this.props}
       />
     );
   }
@@ -260,7 +261,8 @@ EditUserProfileContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currentUserProfile: currentUserProfileSelector(state)
+  currentUserProfile: currentUserProfileSelector(state),
+  loading: getProgressModelSelector(state),
 });
 
 const mapDispatchToProps = dispatch => {

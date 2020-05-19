@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Keyboard, Platform } from 'react-native';
-import { FormikForm } from './formComponents.native';
-import HeaderNew from './../../Header/HeaderNew.native';
+import { FormikForm } from './../components/CreateFormComponents.native';
+import HeaderNew from '../../Header/HeaderNew.native';
 
 export default function createCompetition(props) {
   const [buttonType, setButtonType] = useState('competition');

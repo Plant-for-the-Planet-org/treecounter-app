@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import merge from 'lodash/merge';
 import get from 'lodash/get';
 import set from 'lodash/set';
-import { debug } from '../debug';
 
 export const initialState = {
   userProfile: null,
@@ -37,14 +36,14 @@ export const unlinkEntity = createAction('ENTITY_UNLINK');
 export default handleActions(
   {
     ENTITIES_MERGE: (state, action) => {
-      debug('Merging entities');
+      // debug('Merging entities');
       if (action.payload && action.payload.entities) {
         return merge({}, state, action.payload.entities);
       }
       return state;
     },
     ENTITY_DELETE: (state, action) => {
-      debug('Deleting entity', action, state);
+      // debug('Deleting entity', action, state);
       state = { ...state };
 
       Object.keys(action.payload).forEach(entity => {

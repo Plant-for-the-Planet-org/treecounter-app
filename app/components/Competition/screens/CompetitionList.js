@@ -1,5 +1,5 @@
 import React from 'react';
-import i18n from '../../locales/i18n';
+import i18n from '../../../locales/i18n';
 class Competiton extends React.Component {
   constructor(props) {
     super(props);

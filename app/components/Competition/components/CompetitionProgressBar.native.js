@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import i18n from '../../locales/i18n';
+import i18n from '../../../locales/i18n';
 import { View, Text, Image } from 'react-native';
-import styles from '../../styles/competition/competition-snippet.native';
-import { flagTarget } from '../../assets';
-import { delimitNumbers } from '../../utils/utils';
+import styles from '../../../styles/competition/competition-snippet.native';
+import { flagTarget } from '../../../assets';
+import { delimitNumbers } from '../../../utils/utils';
 
 class CompetitionProgressBar extends React.Component {
   constructor(props) {

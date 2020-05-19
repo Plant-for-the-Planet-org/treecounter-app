@@ -1,30 +1,30 @@
 /* eslint-disable no-prototype-builtins */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image } from 'react-native';
-import { debug } from '../../debug';
-import { getImageUrl } from '../../actions/apiRouting';
-import styles from '../../styles/competition/competition-full.native';
-import CardLayout from '../Common/Card';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { getImageUrl } from '../../../actions/apiRouting';
+import styles from '../../../styles/competition/competition-full.native';
+import CardLayout from '../../Common/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCompetitionDetail } from '../../actions/competition';
+import { fetchCompetitionDetail } from '../redux/competitionActions';
 import {
   competitionDetailSelector,
   userCompetitionEnrolledSelector,
   userTreecounterSelector
-} from '../../selectors';
-import CompetitionProgressBar from './CompetitionProgressBar';
-import { compCalendar, email } from '../../assets';
-import PrimaryButton from '../Common/Button/PrimaryButton';
-import CompetitionParticipant from './CompetitionParticipant.native';
-import SearchUser from '../Challenge/Tabs/SearchUser.native';
-import i18n from '../../locales/i18n.js';
-import { formatDate } from '../../utils/utils';
-import snippetStyles from './../../styles/competition/competition-fullNew.native';
+} from '../../../selectors';
+import CompetitionProgressBar from './../components/CompetitionProgressBar';
+import { compCalendar, email, trees } from '../../../assets';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
+import CompetitionParticipant from '../components/CompetitionParticipant.native';
+import SearchUser from '../../Challenge/Tabs/SearchUser.native';
+import i18n from '../../../locales/i18n.js';
+import { formatDate } from '../../../utils/utils';
+import snippetStyles from '../../../styles/competition/competition-fullNew.native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { getContentLoaderState } from '../../reducers/contentloaderReducer';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
+import { getContentLoaderState } from '../../../reducers/contentloaderReducer';
+import LoadingIndicator from '../../Common/LoadingIndicator';
+import { getLocalRoute } from '../../../actions/apiRouting';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -55,7 +55,6 @@ class CompetitionFull extends React.Component {
       ? competitionDetail.hasOwnProperty('allEnrollments')
       : false;
 
-    debug(' CompetitionFull ', competitionDetail);
     let participantCount = 0,
       requestCount = 0,
       // eslint-disable-next-line no-unused-vars
@@ -90,7 +89,7 @@ class CompetitionFull extends React.Component {
         }
       }
     }
-
+    let isCompetitionOwner = false;
     if (
       competitionDetail &&
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
@@ -105,6 +104,7 @@ class CompetitionFull extends React.Component {
           <Text> {i18n.t('label.edit')}</Text>
         </PrimaryButton>
       );
+      isCompetitionOwner = true;
       if (status === '') {
         button2 = (
           <PrimaryButton
@@ -187,7 +187,7 @@ class CompetitionFull extends React.Component {
     }
 
     let CurrentDate = new Date();
-
+    let competitionEnded = false;
     if (competitionDetail) {
       let endDate = competitionDetail.endDate;
       endDate = new Date(endDate);
@@ -197,8 +197,11 @@ class CompetitionFull extends React.Component {
             {i18n.t('label.competition_over')}
           </Text>
         );
+        competitionEnded = true;
       }
     }
+
+    const { navigation } = this.props;
     return (
       <View style={snippetStyles.flexView}>
         {contentloader ? (
@@ -327,36 +330,74 @@ class CompetitionFull extends React.Component {
                 </View>
 
                 {/* Donate Card */}
-                {/* <CardLayout style={[snippetStyles.cardContainer]}>
-                <Text
-                  style={[snippetStyles.googleCardTitle, { textAlign: 'left' }]}
-                >
-                  {i18n.t('label.plant_trees')}
-                </Text>
-                <View style={snippetStyles.googleCardParaContainer}>
-                  <Text style={snippetStyles.googleCardPara}>
-                    {i18n.t(
-                      'This competition supports Yucatation Reforestation by Plant -for-the-Planet'
-                    )}
-                  </Text>
-                  <Image
-                    source={trees}
-                    style={{ height: 60, flex: 1 }}
-                    resizeMode="contain"
-                  />
-                </View>
-                <View style={snippetStyles.horizontalLine} />
-                <TouchableOpacity
-                  style={{ width: '100%' }}
-                  onPress={() =>
-                    navigation.navigate(getLocalRoute('app_donateTrees'))
-                  }
-                >
-                  <Text style={snippetStyles.googleCardButton}>
-                    {i18n.t('Donate Now')}
-                  </Text>
-                </TouchableOpacity>
-              </CardLayout> */}
+                {competitionDetail ? (
+                  <CardLayout style={[snippetStyles.cardContainer]}>
+                    <Text
+                      style={[
+                        snippetStyles.googleCardTitle,
+                        { textAlign: 'left' }
+                      ]}
+                    >
+                      {i18n.t('label.support_comp_trees')}
+                    </Text>
+                    <View style={snippetStyles.googleCardParaContainer}>
+                      <Text style={snippetStyles.googleCardPara}>
+                        {competitionDetail.filterType === 'all'
+                          ? i18n.t('label.if_all_project_msg')
+                          : competitionDetail.filterType === 'donations'
+                          ? i18n.t('label.donation_only_msg')
+                          : competitionDetail.filterType === 'registered'
+                          ? i18n.t('label.register_only_msg')
+                          : null}
+                        {}
+                      </Text>
+                      <Image
+                        source={trees}
+                        style={{ height: 60, flex: 1 }}
+                        resizeMode="contain"
+                      />
+                    </View>
+                    <View style={snippetStyles.horizontalLine} />
+
+                    {competitionDetail.filterType === 'all' ? (
+                      <TouchableOpacity
+                        style={{ width: '100%' }}
+                        onPress={() =>
+                          navigation.navigate(getLocalRoute('app_donateTrees'))
+                        }
+                      >
+                        <Text style={snippetStyles.googleCardButton}>
+                          {i18n.t('label.donate_now')}
+                        </Text>
+                      </TouchableOpacity>
+                    ) : competitionDetail.filterType === 'donations' ? (
+                      <TouchableOpacity
+                        style={{ width: '100%' }}
+                        onPress={() =>
+                          navigation.navigate(getLocalRoute('app_donateTrees'))
+                        }
+                      >
+                        <Text style={snippetStyles.googleCardButton}>
+                          {i18n.t('label.donate_now')}
+                        </Text>
+                      </TouchableOpacity>
+                    ) : competitionDetail.filterType === 'plantings' ? (
+                      <TouchableOpacity
+                        style={{ width: '100%' }}
+                        onPress={() =>
+                          navigation.navigate(
+                            getLocalRoute('app_registerTrees')
+                          )
+                        }
+                      >
+                        <Text style={snippetStyles.googleCardButton}>
+                          {i18n.t('label.register_only')}
+                        </Text>
+                      </TouchableOpacity>
+                    ) : null}
+                  </CardLayout>
+                ) : null}
+
                 {/* Donate Card Ends */}
               </View>
               {/* Competition Information Ended  */}
@@ -394,6 +435,9 @@ class CompetitionFull extends React.Component {
                                   this.props.supportTreecounterAction
                                 }
                                 key={index}
+                                status={status}
+                                competitionEnded={competitionEnded}
+                                isCompetitionOwner={isCompetitionOwner}
                               />
                             ) : null
                           )}

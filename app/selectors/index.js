@@ -26,7 +26,7 @@ import { getPaymentStatus } from '../reducers/paymentStatus';
 import { getCurrencies } from '../reducers/currenciesReducer';
 import { getGlobalCurrency } from '../reducers/currencyReducer';
 import { getCdnMedia, getWebMapIdList } from '../reducers/configReducer';
-import { getCompetitionDetail } from '../reducers/competitionDetailReducer';
+import { getCompetitionDetail } from '../components/Competition/redux/competitionDetailReducer';
 
 export const supportedTreecounterSelector = state =>
   getSupportedTreecounter(state);
@@ -95,7 +95,7 @@ export const getAllPlantProjectsSelector = createSelector(
       project.tpo_name = tpos[project.tpoId] ? tpos[project.tpoId].name : '-';
       return project;
     });
-    tpoNameExpandedProjects.sort(function(a, b) {
+    tpoNameExpandedProjects.sort(function (a, b) {
       let nameA = a.name.toLowerCase(),
         nameB = b.name.toLowerCase();
       if (nameA < nameB)
@@ -116,10 +116,10 @@ export const competitionDetailSelector = createSelector(
     return null === selectedCompetitionId
       ? null
       : denormalize(
-          entities.competition[selectedCompetitionId.competitionDetail],
-          competitionSchema,
-          entities
-        );
+        entities.competition[selectedCompetitionId.competitionDetail],
+        competitionSchema,
+        entities
+      );
   }
 );
 export const getAllCompetitionsSelector = createSelector(
@@ -147,10 +147,10 @@ export const currentUserProfileSelector = createSelector(
     return null === currentUserProfileId
       ? null
       : denormalize(
-          entities.userProfile[currentUserProfileId],
-          userProfileSchema,
-          entities
-        );
+        entities.userProfile[currentUserProfileId],
+        userProfileSchema,
+        entities
+      );
   }
 );
 
@@ -249,10 +249,10 @@ export const selectedPlantProjectSelector = createSelector(
     return null === selectedPlantProjectId
       ? null
       : denormalize(
-          entities.plantProject[selectedPlantProjectId],
-          plantProjectSchema,
-          entities
-        );
+        entities.plantProject[selectedPlantProjectId],
+        plantProjectSchema,
+        entities
+      );
   }
 );
 
@@ -267,9 +267,9 @@ export const selectedReviewsSelector = createSelector(
     return null === selectedPlantProjectId
       ? null
       : //denormalize(
-        Object.values(entities.reviews).filter(
-          review => review.plantProjectId === selectedPlantProjectId
-        );
+      Object.values(entities.reviews).filter(
+        review => review.plantProjectId === selectedPlantProjectId
+      );
     //reviewsSchema,
     // entities
     // )
@@ -306,9 +306,9 @@ export const availablePaymentGatewaysSelector = createSelector(
     logSelectorUpdate('availablePaymentGatewaysSelector');
     return null === selectedPlantProject
       ? null
-      : paymentGateways.filter(function(paymentGateway) {
-          return paymentGateway.tpoId === selectedPlantProject.tpoId;
-        });
+      : paymentGateways.filter(function (paymentGateway) {
+        return paymentGateway.tpoId === selectedPlantProject.tpoId;
+      });
   }
 );
 
@@ -322,15 +322,15 @@ export const userTreecounterDataSelector = createSelector(
     return null === treecounter
       ? null
       : {
-          id: treecounter.id,
-          target: treecounter.countTarget,
-          implicitTarget: treecounter.implicitTarget,
-          planted: treecounter.countPlanted,
-          personal: treecounter.countPersonal,
-          community: treecounter.countReceived,
-          targetComment: treecounter.targetComment,
-          targetYear: treecounter.targetYear
-        };
+        id: treecounter.id,
+        target: treecounter.countTarget,
+        implicitTarget: treecounter.implicitTarget,
+        planted: treecounter.countPlanted,
+        personal: treecounter.countPersonal,
+        community: treecounter.countReceived,
+        targetComment: treecounter.targetComment,
+        targetYear: treecounter.targetYear
+      };
   }
 );
 
@@ -371,8 +371,8 @@ export const sortedUserPlantProjectsSelector = createSelector(
     return null === plantProjects
       ? null
       : Object.values(plantProjects).sort(
-          (p1, p2) => Date.parse(p2.created) - Date.parse(p1.created)
-        );
+        (p1, p2) => Date.parse(p2.created) - Date.parse(p1.created)
+      );
   }
 );
 
@@ -417,4 +417,5 @@ export const unusedPlantProjectsSelector = createSelector(
   }
 );
 
-export const getProgressModelSelector = (state) => state.modelDialogState.progressModel;
+export const getProgressModelSelector = state =>
+  state.modelDialogState.progressModel;

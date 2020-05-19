@@ -209,13 +209,14 @@ import tree_1 from './images/icons/tree_1.png';
 import smalltreewhite from '../assets/images/smalltreewhite.png';
 import markerImage from './images/tree.png';
 import fullscreen_icon from './images/fullscreen_icon.png';
-import multiple_trees from './images/icons/multiple_trees.png'
+import multiple_trees from './images/icons/multiple_trees.png';
 import closeHBlack from './images/header/closeBlack.png';
 import closeHWhite from './images/header/closeWhite.png';
 import shareBlack from './images/header/shareBlack.png';
 import shareWhite from './images/header/shareWhite.png';
 
-import arrow_down from './images/arrow_down.png'
+import empty from './images/empty.png';
+import arrow_down from './images/arrow_down.png';
 
 export {
   arrow_down,
@@ -430,4 +431,5 @@ export {
   closeHWhite,
   shareBlack,
   shareWhite,
+  empty
 };

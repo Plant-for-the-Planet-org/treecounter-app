@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import i18n from '../../locales/i18n';
-import { debug } from '../../debug';
-import styles from '../../styles/competition/competition-full.native';
-import UserProfileImage from '../Common/UserProfileImage.native';
-import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
-import { getLocalRoute } from '../../actions/apiRouting';
-import snippetStyles from '../../styles/competition/competition-fullNew.native';
+import i18n from '../../../locales/i18n';
+import styles from '../../../styles/competition/competition-full.native';
+import UserProfileImage from '../../Common/UserProfileImage.native';
+import { updateRoute } from '../../../helpers/routerHelper/routerHelper.native';
+import { getLocalRoute } from '../../../actions/apiRouting';
+import snippetStyles from '../../../styles/competition/competition-fullNew.native';
 class CompetitionParticipant extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +20,6 @@ class CompetitionParticipant extends React.Component {
       id: this.props.competitor.treecounterId,
       displayName: this.props.competitor.treecounterDisplayName
     };
-    debug('support button pressed');
     this.props.supportTreecounterAction(supportObject);
     updateRoute('app_supportTrees', this.props.navigation, 55, {
       titleParam: i18n.t('label.support_to', {
@@ -35,9 +33,11 @@ class CompetitionParticipant extends React.Component {
   }
   render() {
     let support_button = null;
+
     if (
       this.props.type === 'participants' &&
-      this.props.competitor.treecounterSlug === this.props.treeCounter.slug
+      this.props.competitor.treecounterSlug === this.props.treeCounter.slug &&
+      !this.props.isCompetitionOwner
     ) {
       support_button = (
         <View style={snippetStyles.topCompetitorScore}>
@@ -54,7 +54,9 @@ class CompetitionParticipant extends React.Component {
       );
     } else if (
       this.props.type === 'participants' &&
-      this.props.competitor.treecounterSlug !== this.props.treeCounter.slug
+      this.props.competitor.treecounterSlug !== this.props.treeCounter.slug &&
+      this.props.status !== 'enrolled' &&
+      !this.props.competitionEnded
     ) {
       support_button = (
         <View style={snippetStyles.topCompetitorScore}>

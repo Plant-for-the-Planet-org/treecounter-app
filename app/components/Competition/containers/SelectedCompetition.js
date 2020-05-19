@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { currentUserProfileSelector } from '../../selectors';
-import { updateRoute } from '../../helpers/routerHelper';
-import CompetitionFull from '../../components/Competition/CompetitionFull.native';
+import { currentUserProfileSelector } from '../../../selectors';
+import { updateRoute } from '../../../helpers/routerHelper';
+import CompetitionFull from './../screens/SelectedCompetition.native';
 
 import {
   confirmPart,
@@ -14,8 +14,8 @@ import {
   enrollCompetition,
   invitePart,
   leaveCompetition
-} from '../../actions/competition';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+} from './../redux/competitionActions';
+import { supportTreecounterAction } from '../../../actions/supportTreecounterAction';
 
 class SelectedCompetitionContainer extends Component {
   constructor(props) {

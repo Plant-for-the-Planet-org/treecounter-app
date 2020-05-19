@@ -653,4 +653,10 @@ export default EStyleSheet.create({
     fontSize: 11,
     color: '#4d5153',
   },
+  pledgeTreeCountError: {
+    fontFamily: 'OpenSans-Regular',
+    color: '#e74c3c',
+    marginTop: 8,
+    fontSize: 12
+  }
 });

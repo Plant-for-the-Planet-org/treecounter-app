@@ -22,7 +22,8 @@ import {
   SelectTreeCount,
   SupportUserDetails,
   TaxReceipt,
-  PledgeOnComponent
+  PledgeOnComponent,
+  PledgeTreeCount
 } from '../components/donationComponents.native';
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
@@ -204,7 +205,14 @@ function DonationDetails(props) {
           ) : null}
 
         {context.contextType === 'pledge' ? (
-          <PledgeOnComponent pledgeDetails={context.pledgeDetails} />
+          <>
+            <PledgeOnComponent pledgeDetails={context.pledgeDetails} />
+            <PledgeTreeCount
+              treeCount={treeCount}
+              treeCountPledged={context.pledgeDetails.treeCount}
+              setTreeCount={setTreeCount}
+            />
+          </>
         ) : null}
 
         <SelectFrequency frequency={frequency} setFrequency={setFrequency} />

@@ -17,7 +17,6 @@ import i18n from '../../../locales/i18n';
 export const GiftTreesComponent = props => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [giftDetails, setGiftDetails] = React.useState([]);
-  const [tempTreeCount, setTempTreeCount] = React.useState(0);
 
   React.useEffect(() => {
     let details = props.context.giftDetails;
@@ -28,8 +27,7 @@ export const GiftTreesComponent = props => {
           ? props.selectedProject.treeCountOptions.default
           : 10,
         isCustomCount: false,
-        giftMsg: '',
-        notifyRecipient: false
+        giftMsg: details[i].giftMsg ? details[i].giftMsg : ''
       };
     }
     setGiftDetails(details);
@@ -105,9 +103,9 @@ export const GiftTreesComponent = props => {
                 {item.firstName}
               </Text>
             </TouchableOpacity>
-            {giftDetails.length > 1 && currentIndex === index ? (
+            {/* {giftDetails.length > 1 && currentIndex === index ? (
               <View style={styles.triangle} />
-            ) : null}
+            ) : null} */}
           </View>
         )}
       />
@@ -119,7 +117,6 @@ export const GiftTreesComponent = props => {
             <SelectTreeCount
               treeCount={item.treeCount}
               customTreeCount={item.isCustomCount}
-              tempTreeCount={item.isCustomCount ? item.treeCount : 0}
               setCustomTreeCount={setCustomTreeCount}
               setTreeCount={treeCount => setTotalTreeCount(index, treeCount)}
               selectedProject={props.selectedProject}
@@ -149,13 +146,13 @@ export const GiftTreesComponent = props => {
         }
       />
 
-      {giftDetails.length < 4 ? (
+      {/* {giftDetails.length < 4 ? (
         <TouchableOpacity>
           <Text style={styles.giftTreesAddRecepient}>
             Add another recipient
           </Text>
         </TouchableOpacity>
-      ) : null}
+      ) : null} */}
     </View>
   );
 };

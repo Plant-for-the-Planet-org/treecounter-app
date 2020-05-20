@@ -66,7 +66,6 @@ function DonationDetails(props) {
 
   // Function for Switching the state of tax receipt
   const toggleTaxReceipt = value => {
-    // console.log(value);
     setTaxReceiptSwitch(value);
   };
 

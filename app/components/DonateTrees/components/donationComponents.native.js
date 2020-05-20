@@ -509,9 +509,7 @@ export function SelectTreeCount(props) {
   const [customTreeCount, setCustomTreeCountLocal] = React.useState(
     props.customTreeCount ? props.customTreeCount : false
   );
-  const [tempTreeCount, setTempTreeCount] = React.useState(
-    props.tempTreeCount ? props.tempTreeCount : 0
-  );
+  const [tempTreeCount, setTempTreeCount] = React.useState(0);
   let treeCountOptions;
   let defaultTreeCountOption;
 
@@ -599,6 +597,7 @@ export function SelectTreeCount(props) {
         <TouchableOpacity
           onPress={() => {
             setCustomTreeCount(true);
+            setTempTreeCount(0);
             props.setTreeCount(Number(tempTreeCount));
           }}
           style={styles.customSelectorView}

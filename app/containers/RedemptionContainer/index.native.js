@@ -26,7 +26,7 @@ class RedemptionContainer extends Component {
       <Redemption
         navigation={this.props.navigation}
         validateCodeAction={validateCodeAction}
-        setRedemptionCode={setRedemptionCodeAction}
+        setRedemptionCode={this.props.setRedemptionCodeAction}
         code={code}
         type={type}
       />
@@ -43,6 +43,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      setRedemptionCodeAction,
       route: (routeName, id, params, navigation) => dispatch =>
         updateRoute(routeName, navigation || dispatch, id, params)
     },

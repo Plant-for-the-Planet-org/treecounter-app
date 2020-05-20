@@ -44,7 +44,7 @@ export const handleAndroidPayPress = async (props) => {
                 console.log('newData', newData)
                 props.createDonation(newData, plantProject, loggedIn, donationType).then(
                     response => {
-                        console.log('RESPONSE EEEEE', response.data.donationId)
+                        console.log('RESPONSE', response.data.donationId)
                         const donationID = response.data.donationId;
                         const data = {
                             type: 'card',

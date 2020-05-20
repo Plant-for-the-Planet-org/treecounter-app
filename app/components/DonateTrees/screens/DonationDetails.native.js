@@ -18,7 +18,7 @@ import {
   PaymentOption,
   PlantProjectDetails,
   SelectCountryModal,
-  SelectFrequency,
+  // SelectFrequency,
   SelectTreeCount,
   SupportUserDetails,
   TaxReceipt,
@@ -33,7 +33,7 @@ function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
   const [treeCount, setTreeCount] = React.useState(0); // for Selecting Tree Count
-  const [frequency, setFrequency] = React.useState('once'); // for Selecting Frequency of Donations
+  // const [frequency, setFrequency] = React.useState('once'); // for Selecting Frequency of Donations
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
@@ -78,12 +78,12 @@ function DonationDetails(props) {
   ) {
     setTreeCount(context.donationDetails.totalTreeCount);
   }
-  if (
-    context.donationDetails.frequency &&
-    context.donationDetails.frequency != frequency
-  ) {
-    setFrequency(context.donationDetails.frequency);
-  }
+  // if (
+  //   context.donationDetails.frequency &&
+  //   context.donationDetails.frequency != frequency
+  // ) {
+  //   setFrequency(context.donationDetails.frequency);
+  // }
   if (
     context.donationDetails.countryForTax &&
     context.donationDetails.countryForTax != countryForTax
@@ -96,7 +96,7 @@ function DonationDetails(props) {
       props.contextActions.setDonationDetails({
         ...props.context.donationDetails,
         totalTreeCount: treeCount,
-        frequency: frequency,
+        // frequency: frequency,
         taxReceiptSwitch: taxReceiptSwitch,
         countryForTax: countryForTax,
         selectedProject: props.selectedProject
@@ -179,8 +179,8 @@ function DonationDetails(props) {
             globalCurrency={props.globalCurrency}
           />
         ) : (
-          <NoPlantProjectDetails />
-        )}
+            <NoPlantProjectDetails />
+          )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -198,14 +198,14 @@ function DonationDetails(props) {
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-        context.contextType === 'gift-invitation' ? (
-          <GiftTreesComponent
-            treeCount={treeCount}
-            setTreeCount={setTreeCount}
-            selectedProject={props.selectedProject}
-            context={context}
-          />
-        ) : null}
+          context.contextType === 'gift-invitation' ? (
+            <GiftTreesComponent
+              treeCount={treeCount}
+              setTreeCount={setTreeCount}
+              selectedProject={props.selectedProject}
+              context={context}
+            />
+          ) : null}
 
         {context.contextType === 'pledge' ? (
           <>
@@ -218,7 +218,7 @@ function DonationDetails(props) {
           </>
         ) : null}
 
-        <SelectFrequency frequency={frequency} setFrequency={setFrequency} />
+        {/* <SelectFrequency frequency={frequency} setFrequency={setFrequency} /> */}
         <View
           style={[styles.horizontalDivider, { width: '14%', marginTop: 30 }]}
         />
@@ -268,7 +268,7 @@ function DonationDetails(props) {
         commissionSwitch={commissionSwitch}
         navigation={props.navigation}
         onContinue={onContinue}
-        frequency={frequency}
+        // frequency={frequency}
         showNativePay={
           allowedNativePay ? (Platform.OS === 'ios' ? 'apple' : 'google') : null
         }

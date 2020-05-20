@@ -509,7 +509,9 @@ export function SelectTreeCount(props) {
   const [customTreeCount, setCustomTreeCountLocal] = React.useState(
     props.customTreeCount ? props.customTreeCount : false
   );
-  const [tempTreeCount, setTempTreeCount] = React.useState(0);
+  const [tempTreeCount, setTempTreeCount] = React.useState(
+    props.tempTreeCount ? props.tempTreeCount : 0
+  );
   let treeCountOptions;
   let defaultTreeCountOption;
 

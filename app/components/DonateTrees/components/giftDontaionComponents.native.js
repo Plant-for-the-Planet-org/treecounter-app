@@ -17,6 +17,7 @@ import i18n from '../../../locales/i18n';
 export const GiftTreesComponent = props => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [giftDetails, setGiftDetails] = React.useState([]);
+  const [tempTreeCount, setTempTreeCount] = React.useState(0);
 
   React.useEffect(() => {
     let details = props.context.giftDetails;
@@ -32,6 +33,11 @@ export const GiftTreesComponent = props => {
       };
     }
     setGiftDetails(details);
+    if (props.selectedProject.treeCountOptions.default) {
+      props.setTreeCount(
+        props.selectedProject.treeCountOptions.default * details.length
+      );
+    }
   }, []);
 
   const setTotalTreeCount = (index, treeCount) => {
@@ -58,7 +64,6 @@ export const GiftTreesComponent = props => {
   };
 
   const setCustomTreeCount = value => {
-    console.log('setCustomTreeCount component', value);
     let details = giftDetails;
     details[currentIndex] = {
       ...details[currentIndex],
@@ -114,6 +119,7 @@ export const GiftTreesComponent = props => {
             <SelectTreeCount
               treeCount={item.treeCount}
               customTreeCount={item.isCustomCount}
+              tempTreeCount={item.isCustomCount ? item.treeCount : 0}
               setCustomTreeCount={setCustomTreeCount}
               setTreeCount={treeCount => setTotalTreeCount(index, treeCount)}
               selectedProject={props.selectedProject}

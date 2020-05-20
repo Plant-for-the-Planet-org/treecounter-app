@@ -5,133 +5,27 @@ import {
   Image,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
 import styles from '../../../styles/donations/donationDetails';
 import GetRandomImage from '../../../utils/getRandomImage';
-
-function SelectMultiTreeCount(props) {
-  const [customTreeCount, setCustomTreeCount] = React.useState(false);
-  const [tempTreeCount, setTempTreeCount] = React.useState(0);
-  let treeCountOptions;
-  let defaultTreeCountOption;
-
-  const customTreeCountRef = React.useRef(null);
-
-  //  sets the tree count options to be shown by project or sets default
-  if (props.selectedProject) {
-    if (props.selectedProject.treeCountOptions) {
-      treeCountOptions = Object.values(props.selectedProject.treeCountOptions);
-      treeCountOptions.sort();
-      if (!props.treeCount) {
-        props.setTreeCount(props.selectedProject.treeCountOptions.default);
-      }
-    } else {
-      defaultTreeCountOption = 10;
-      treeCountOptions = [10, 20, 50, 150];
-      if (!props.treeCount) {
-        props.setTreeCount(defaultTreeCountOption);
-      }
-    }
-  }
-
-  if (!customTreeCountRef.isFocused && customTreeCount) {
-    props.setTreeCount(tempTreeCount);
-  }
-
-  return (
-    <View style={styles.treeCountSelector}>
-      {treeCountOptions.map(option => (
-        // sets the tree count of current index and custom count as false
-        <TouchableOpacity
-          onPress={() => {
-            let { giftDetails } = props;
-            giftDetails[props.currentIndex].treeCount = option;
-            giftDetails[props.currentIndex].isCustomCount = false;
-            props.setGiftDetails(giftDetails);
-          }}
-          //  change the style of box selected by tree count
-          style={
-            props.giftDetails[props.currentIndex].treeCount === option
-              ? styles.selectedView
-              : styles.selectorView
-          }
-        >
-          <Text
-            //  change the style of text selected by tree count
-            style={
-              props.giftDetails[props.currentIndex].treeCount === option
-                ? styles.selectedTreeCountText
-                : styles.treeCountText
-            }
-          >
-            {option} Trees
-          </Text>
-        </TouchableOpacity>
-      ))}
-      {/* checks if custom count is true then changes style to active and enable input to enter tree count */}
-      {props.giftDetails[props.currentIndex].isCustomCount ? (
-        <View style={styles.customSelectedView}>
-          <TextInput
-            //  change the style of text input selected by tree count
-            style={
-              props.giftDetails[props.currentIndex].isCustomCount
-                ? styles.treeCountTextInputSelected
-                : styles.treeCountTextInput
-            }
-            onChangeText={treeCount => setTempTreeCount(treeCount)}
-            // after submitting sets the tree count
-            onSubmitEditing={() => {
-              let { giftDetails } = props;
-              giftDetails[props.currentIndex].treeCount = Number(tempTreeCount);
-              props.setGiftDetails(giftDetails);
-            }}
-            value={tempTreeCount}
-            keyboardType={'number-pad'}
-            autoFocus
-            ref={customTreeCountRef}
-          />
-          <Text
-            //  change the style of text selected by tree count
-
-            style={
-              props.giftDetails[props.currentIndex].isCustomCount
-                ? styles.treeCountNumberSelected
-                : styles.treeCountNumber
-            }
-          >
-            Trees
-          </Text>
-        </View>
-      ) : (
-          <TouchableOpacity
-            //  sets tree count to 0 and custom count to true
-            onPress={() => {
-              let { giftDetails } = props;
-              giftDetails[props.currentIndex].treeCount = 0;
-              giftDetails[props.currentIndex].isCustomCount = true;
-              props.setGiftDetails(giftDetails);
-            }}
-            style={styles.customSelectorView}
-          >
-            <Text style={styles.customTreeCountText}>Custom Trees</Text>
-          </TouchableOpacity>
-        )}
-    </View>
-  );
-}
+import { SelectTreeCount } from './donationComponents.native';
+import { TextField } from 'react-native-material-textfield';
+import i18n from '../../../locales/i18n';
 
 export const GiftTreesComponent = props => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [giftDetails, setGiftDetails] = React.useState([]);
+
   React.useEffect(() => {
     let details = props.context.giftDetails;
     for (let i = 0; i < details.length; i++) {
       details[i] = {
         ...details[i],
-        treeCount: 0,
+        treeCount: props.selectedProject.treeCountOptions.default
+          ? props.selectedProject.treeCountOptions.default
+          : 10,
         isCustomCount: false,
         giftMsg: '',
         notifyRecipient: false
@@ -139,6 +33,40 @@ export const GiftTreesComponent = props => {
     }
     setGiftDetails(details);
   }, []);
+
+  const setTotalTreeCount = (index, treeCount) => {
+    let details = giftDetails;
+    details[index] = {
+      ...details[index],
+      treeCount: treeCount
+    };
+    setGiftDetails(details);
+    let totalTreeCount = 0;
+    for (let i = 0; i < details.length; i++) {
+      totalTreeCount = totalTreeCount + details[i].treeCount;
+    }
+    props.setTreeCount(totalTreeCount);
+  };
+
+  const handleGiftMessageChange = text => {
+    let details = giftDetails;
+    details[currentIndex] = {
+      ...details[currentIndex],
+      giftMsg: text
+    };
+    setGiftDetails(details);
+  };
+
+  const setCustomTreeCount = value => {
+    console.log('setCustomTreeCount component', value);
+    let details = giftDetails;
+    details[currentIndex] = {
+      ...details[currentIndex],
+      isCustomCount: value
+    };
+    setGiftDetails(details);
+  };
+
   return (
     <View>
       <Text style={[styles.sectionTitle, { marginTop: 20 }]}>
@@ -147,7 +75,7 @@ export const GiftTreesComponent = props => {
       {/* Maps the Avatar of selected contacts from giftDetails, 
             which on click shows no. of trees to contribute to each one of them */}
       <FlatList
-        data={props.context.giftDetails}
+        data={giftDetails}
         ItemSeparatorComponent={space}
         horizontal
         style={{ marginTop: 20 }}
@@ -166,31 +94,55 @@ export const GiftTreesComponent = props => {
                   source={{ uri: item.thumbnailPath }}
                 />
               ) : (
-                  <GetRandomImage dimension={60} name={item.firstName} />
-                )}
+                <GetRandomImage dimension={60} name={item.firstName} />
+              )}
               <Text style={stylesLocal.giftReciepientName}>
                 {item.firstName}
               </Text>
             </TouchableOpacity>
-            {props.context.giftDetails.length > 1 && currentIndex === index ? (
+            {giftDetails.length > 1 && currentIndex === index ? (
               <View style={styles.triangle} />
             ) : null}
           </View>
         )}
       />
+      <FlatList
+        data={giftDetails}
+        style={{ marginTop: 20 }}
+        renderItem={({ item, index }) =>
+          currentIndex === index && (
+            <SelectTreeCount
+              treeCount={item.treeCount}
+              customTreeCount={item.isCustomCount}
+              setCustomTreeCount={setCustomTreeCount}
+              setTreeCount={treeCount => setTotalTreeCount(index, treeCount)}
+              selectedProject={props.selectedProject}
+            />
+          )
+        }
+      />
 
-      <View style={styles.multiTreeCountContainer}>
-        {giftDetails.length > 0 ? (
-          // maps the tree count for each user
-          <SelectMultiTreeCount
-            currentIndex={currentIndex}
-            giftDetails={giftDetails}
-            setGiftDetails={setGiftDetails}
-            selectedProject={props.selectedProject}
-            setTreeCount={props.setTreeCount}
-          />
-        ) : null}
-      </View>
+      <FlatList
+        data={giftDetails}
+        renderItem={({ item, index }) =>
+          currentIndex === index && (
+            <TextField
+              label={i18n.t('label.Gift_Message')}
+              value={giftDetails[currentIndex]?.giftMsg}
+              tintColor={'#89b53a'}
+              titleFontSize={12}
+              returnKeyType="next"
+              lineWidth={1}
+              labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+              titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+              affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+              blurOnSubmit={false}
+              onChangeText={text => handleGiftMessageChange(text)}
+            />
+          )
+        }
+      />
+
       {giftDetails.length < 4 ? (
         <TouchableOpacity>
           <Text style={styles.giftTreesAddRecepient}>

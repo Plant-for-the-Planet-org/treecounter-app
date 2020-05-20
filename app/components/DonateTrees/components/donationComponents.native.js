@@ -63,8 +63,8 @@ export function TaxReceipt(props) {
             <Icon name={'chevron-down'} size={14} color="#89b53a" />
           </TouchableOpacity>
         ) : (
-            <SelectedCountryText />
-          )}
+          <SelectedCountryText />
+        )}
       </View>
 
       <Switch
@@ -197,8 +197,8 @@ export function SelectCountryModal(props) {
           {searchText ? (
             <MaterialIcon name="arrow-back" size={30} color="black" />
           ) : (
-              <MaterialIcon name="close" size={30} color="#4d5153" />
-            )}
+            <MaterialIcon name="close" size={30} color="#4d5153" />
+          )}
         </TouchableOpacity>
         {/* <View
           style={{
@@ -274,7 +274,7 @@ export function PaymentOption(props) {
                 {formatNumber(
                   props.commissionSwitch
                     ? props.treeCost * props.treeCount +
-                    ((props.treeCount / 100) * 2.9 + 0.3)
+                        ((props.treeCount / 100) * 2.9 + 0.3)
                     : props.treeCost * props.treeCount,
                   null,
                   props.selectedCurrency
@@ -297,8 +297,8 @@ export function PaymentOption(props) {
             </View>
           </>
         ) : (
-            <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
-          )}
+          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
+        )}
       </View>
       {props.treeCount ? (
         <>
@@ -306,35 +306,35 @@ export function PaymentOption(props) {
             onPress={() =>
               props.showNativePay === 'google'
                 ? handleAndroidPayPress({
-                  totalTreeCount: String(props.treeCount),
-                  totalPrice: String(props.treeCount * props.treeCost),
-                  amountPerTree: String(props.treeCost),
-                  currency_code: String(props.selectedCurrency),
-                  token: props.token,
-                  setToken: props.setToken,
-                  stripe: props.stripe,
-                  currentUserProfile: props.currentUserProfile,
-                  context: props.context,
-                  createDonation: props.createDonation,
-                  setDonorDetails: props.setDonorDetails,
-                  donationPay: props.donationPay,
-                  selectedProject: props.selectedProject
-                })
+                    totalTreeCount: String(props.treeCount),
+                    totalPrice: String(props.treeCount * props.treeCost),
+                    amountPerTree: String(props.treeCost),
+                    currency_code: String(props.selectedCurrency),
+                    token: props.token,
+                    setToken: props.setToken,
+                    stripe: props.stripe,
+                    currentUserProfile: props.currentUserProfile,
+                    context: props.context,
+                    createDonation: props.createDonation,
+                    setDonorDetails: props.setDonorDetails,
+                    donationPay: props.donationPay,
+                    selectedProject: props.selectedProject
+                  })
                 : handleApplePayPress({
-                  totalTreeCount: String(props.treeCount),
-                  totalPrice: String(props.treeCount * props.treeCost),
-                  amountPerTree: String(props.treeCost),
-                  currency_code: String(props.selectedCurrency),
-                  token: props.token,
-                  setToken: props.setToken,
-                  stripe: props.stripe,
-                  setApplePayStatus: props.setApplePayStatus,
-                  currentUserProfile: props.currentUserProfile,
-                  context: props.context,
-                  createDonation: props.createDonation,
-                  setDonorDetails: props.setDonorDetails,
-                  donationPay: props.donationPay
-                })
+                    totalTreeCount: String(props.treeCount),
+                    totalPrice: String(props.treeCount * props.treeCost),
+                    amountPerTree: String(props.treeCost),
+                    currency_code: String(props.selectedCurrency),
+                    token: props.token,
+                    setToken: props.setToken,
+                    stripe: props.stripe,
+                    setApplePayStatus: props.setApplePayStatus,
+                    currentUserProfile: props.currentUserProfile,
+                    context: props.context,
+                    createDonation: props.createDonation,
+                    setDonorDetails: props.setDonorDetails,
+                    donationPay: props.donationPay
+                  })
             }
             style={styles.nativePayButton}
           >
@@ -356,15 +356,15 @@ export function PaymentOption(props) {
           </TouchableOpacity>
         </>
       ) : (
-          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-            <Text style={styles.continueButtonText}>Next</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
-              source={nextArrowWhite}
-              resizeMode="contain"
-            />
-          </View>
-        )}
+        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+        </View>
+      )}
     </View>
   );
 }
@@ -425,13 +425,14 @@ export function PlantProjectDetails(props) {
   const [treeCost, setTreeCost] = useState(props.treeCost);
 
   const handleCurrencyChange = currency => {
-    showCurrencyModal && currency != selectedCurrency ? setForce(true) : setForce(false);
+    showCurrencyModal && currency != selectedCurrency
+      ? setForce(true)
+      : setForce(false);
 
     setSelectedCurrency(currency);
 
     setShowCurrencyModal(false);
     setTreeCost(calculateAmount(currency));
-
   };
   useEffect(() => {
     setSelectedCurrency(props.globalCurrency.currency);
@@ -440,7 +441,7 @@ export function PlantProjectDetails(props) {
   const calculateAmount = currency => {
     return (
       Math.round(props.treeCost * parseFloat(props.rates[currency]) * 100) /
-      100 +
+        100 +
       props.fee
     );
   };
@@ -473,7 +474,7 @@ export function PlantProjectDetails(props) {
               handleCurrencyChange={handleCurrencyChange}
               force={force}
             />
-           per tree
+            per tree
           </Text>
         </View>
       </View>
@@ -505,7 +506,9 @@ export function NoPlantProjectDetails(props) {
 }
 
 export function SelectTreeCount(props) {
-  const [customTreeCount, setCustomTreeCount] = React.useState(false);
+  const [customTreeCount, setCustomTreeCountLocal] = React.useState(
+    props.customTreeCount ? props.customTreeCount : false
+  );
   const [tempTreeCount, setTempTreeCount] = React.useState(0);
   let treeCountOptions;
   let defaultTreeCountOption;
@@ -531,6 +534,14 @@ export function SelectTreeCount(props) {
   if (!customTreeCountRef.isFocused && customTreeCount) {
     props.setTreeCount(tempTreeCount);
   }
+  const setCustomTreeCount = value => {
+    if (props.hasOwnProperty('customTreeCount')) {
+      props.setCustomTreeCount(value);
+      setCustomTreeCountLocal(value);
+    } else {
+      setCustomTreeCountLocal(value);
+    }
+  };
 
   return (
     <View style={styles.treeCountSelector}>
@@ -565,7 +576,7 @@ export function SelectTreeCount(props) {
                 ? styles.treeCountTextInputSelected
                 : styles.treeCountTextInput
             }
-            onChangeText={treeCount => setTempTreeCount(treeCount)}
+            onChangeText={treeCount => setTempTreeCount(Number(treeCount))}
             onSubmitEditing={() => props.setTreeCount(tempTreeCount)}
             value={tempTreeCount}
             keyboardType={'number-pad'}
@@ -583,20 +594,19 @@ export function SelectTreeCount(props) {
           </Text>
         </View>
       ) : (
-          <TouchableOpacity
-            onPress={() => {
-              setCustomTreeCount(true);
-              props.setTreeCount(tempTreeCount);
-            }}
-            style={styles.customSelectorView}
-          >
-            <Text style={styles.customTreeCountText}>Custom Trees</Text>
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity
+          onPress={() => {
+            setCustomTreeCount(true);
+            props.setTreeCount(Number(tempTreeCount));
+          }}
+          style={styles.customSelectorView}
+        >
+          <Text style={styles.customTreeCountText}>Custom Trees</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
-
 
 export function PledgeTreeCount(props) {
   const [customTreeCount, setCustomTreeCount] = React.useState(false);
@@ -604,7 +614,7 @@ export function PledgeTreeCount(props) {
   let treeCountOptions;
   let defaultTreeCountOption = props.treeCountPledged;
 
-  const [erorrMessage, setErrorMessage] = React.useState(false)
+  const [erorrMessage, setErrorMessage] = React.useState(false);
   const customTreeCountRef = React.useRef(null);
 
   if (!props.treeCount) {
@@ -615,11 +625,7 @@ export function PledgeTreeCount(props) {
   }
 
   if (erorrMessage) {
-    setTimeout(
-      () =>
-        setErrorMessage(false),
-      3000
-    );
+    setTimeout(() => setErrorMessage(false), 3000);
   }
 
   return (
@@ -643,7 +649,7 @@ export function PledgeTreeCount(props) {
           }
         >
           {defaultTreeCountOption} Trees
-          </Text>
+        </Text>
       </TouchableOpacity>
 
       {customTreeCount ? (
@@ -655,7 +661,13 @@ export function PledgeTreeCount(props) {
                 : styles.treeCountTextInput
             }
             onChangeText={treeCount => setTempTreeCount(treeCount)}
-            onSubmitEditing={() => tempTreeCount < defaultTreeCountOption ? (setErrorMessage(true), props.setTreeCount(defaultTreeCountOption), setCustomTreeCount(false)) : props.setTreeCount(tempTreeCount)}
+            onSubmitEditing={() =>
+              tempTreeCount < defaultTreeCountOption
+                ? (setErrorMessage(true),
+                  props.setTreeCount(defaultTreeCountOption),
+                  setCustomTreeCount(false))
+                : props.setTreeCount(tempTreeCount)
+            }
             value={tempTreeCount}
             keyboardType={'number-pad'}
             autoFocus
@@ -672,18 +684,21 @@ export function PledgeTreeCount(props) {
           </Text>
         </View>
       ) : (
-          <TouchableOpacity
-            onPress={() => {
-              setCustomTreeCount(true);
-              props.setTreeCount(tempTreeCount);
-            }}
-            style={styles.customSelectorView}
-          >
-            <Text style={styles.customTreeCountText}>Custom Trees</Text>
-          </TouchableOpacity>
-        )}
-      {erorrMessage ? <Text style={styles.pledgeTreeCountError}>Tree count should be higher than the pledged tree count</Text> : null}
-
+        <TouchableOpacity
+          onPress={() => {
+            setCustomTreeCount(true);
+            props.setTreeCount(tempTreeCount);
+          }}
+          style={styles.customSelectorView}
+        >
+          <Text style={styles.customTreeCountText}>Custom Trees</Text>
+        </TouchableOpacity>
+      )}
+      {erorrMessage ? (
+        <Text style={styles.pledgeTreeCountError}>
+          Tree count should be higher than the pledged tree count
+        </Text>
+      ) : null}
     </View>
   );
 }
@@ -742,8 +757,8 @@ export const UserContactDetails = props => {
           {donorDetails.firstName ? (
             <Text style={styles.sectionRightButton}>Edit</Text>
           ) : (
-              <Text style={styles.sectionRightButton}>Add</Text>
-            )}
+            <Text style={styles.sectionRightButton}>Add</Text>
+          )}
         </TouchableOpacity>
       </View>
       {donorDetails.firstName ? (
@@ -811,8 +826,6 @@ export const SupportUserDetails = props => {
     </View>
   );
 };
-
-
 
 export function PledgeOnComponent(props) {
   return (

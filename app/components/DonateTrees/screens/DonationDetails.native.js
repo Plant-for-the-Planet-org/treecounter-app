@@ -165,7 +165,11 @@ function DonationDetails(props) {
         {props.selectedProject ? (
           <PlantProjectDetails
             treeCost={props.selectedProject.treeCost}
-            selectedCurrency={props.globalCurrency ? props.globalCurrency.currency : props.selectedCurrency}
+            selectedCurrency={
+              props.globalCurrency
+                ? props.globalCurrency.currency
+                : props.selectedCurrency
+            }
             selectedProject={props.selectedProject}
             rates={
               props.currencies.currencies.currency_rates[
@@ -176,8 +180,8 @@ function DonationDetails(props) {
             globalCurrency={props.globalCurrency}
           />
         ) : (
-            <NoPlantProjectDetails />
-          )}
+          <NoPlantProjectDetails />
+        )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -195,14 +199,14 @@ function DonationDetails(props) {
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-          context.contextType === 'gift-invitation' ? (
-            <GiftTreesComponent
-              treeCount={treeCount}
-              setTreeCount={setTreeCount}
-              selectedProject={props.selectedProject}
-              context={context}
-            />
-          ) : null}
+        context.contextType === 'gift-invitation' ? (
+          <GiftTreesComponent
+            treeCount={treeCount}
+            setTreeCount={setTreeCount}
+            selectedProject={props.selectedProject}
+            context={context}
+          />
+        ) : null}
 
         {context.contextType === 'pledge' ? (
           <>
@@ -251,8 +255,6 @@ function DonationDetails(props) {
           setShowModal={setShowTaxCountryModal}
           taxDeductibleCountries={props.taxDeductibleCountries}
         />
-
-
 
         {/* Needed In Future */}
         {/* <UserContactDetails donorDetails={donorDetails} /> */}

@@ -5,7 +5,7 @@ import deLabels from './de';
 import esLabels from './es';
 import ptLabels from './pt';
 import ptBRLabels from './pt-BR';
-import { getLocale, supportedLocales, defaultLocale } from '../actions/getLocale';
+import { supportedLocales, defaultLocale } from '../actions/getLocale';
 
 // TO-DO: consider changing this the same way as i18n.js using getLocale()
 //        but i18next.changeLanguage need to be called async

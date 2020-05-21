@@ -1,5 +1,26 @@
-import { CLEAR_DONATION_REDUCER, SET_CONTEXT, SET_DONATION_DETAILS, SET_DONOR_DETAILS, SET_GIFT_CONTEXT_DETAILS, SET_PAYMENT_DETAILS, SET_PAYMENT_RESPONSE, SET_PLEDGE_DETAILS, SET_SELECTED_PROJECT, SET_SUPPORT_DETAILS, SET_DONATION_ID } from '../../../actions/types';
-import { postAuthenticatedRequest, postRequest } from './../../../utils/api'
+import {
+  CLEAR_DONATION_REDUCER,
+  SET_CONTEXT,
+  CLEAR_CONTEXT,
+  SET_DONATION_DETAILS,
+  CLEAR_DONATION_DETAILS,
+  SET_DONOR_DETAILS,
+  CLEAR_DONOR_DETAILS,
+  SET_GIFT_CONTEXT_DETAILS,
+  CLEAR_GIFT_CONTEXT_DETAILS,
+  SET_PAYMENT_DETAILS,
+  CLEAR_PAYMENT_DETAILS,
+  SET_PAYMENT_RESPONSE,
+  CLEAR_PAYMENT_RESPONSE,
+  SET_PLEDGE_DETAILS,
+  CLEAR_PLEDGE_DETAILS,
+  SET_SELECTED_PROJECT,
+  CLEAR_SELECTED_PROJECT,
+  SET_SUPPORT_DETAILS,
+  CLEAR_SUPPORT_DETAILS,
+  SET_DONATION_ID
+} from '../../../actions/types';
+import { postAuthenticatedRequest, postRequest } from './../../../utils/api';
 import i18n from './../../../locales/i18n';
 
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
@@ -17,12 +38,24 @@ export const setDonationContext = contextDetails => dispatch => {
   });
 };
 
+export const clearDonationContext = () => dispatch => {
+  dispatch({
+    type: CLEAR_CONTEXT
+  });
+};
+
 export const setDonationDetails = donationDetails => dispatch => {
   dispatch({
     type: SET_DONATION_DETAILS,
     payload: {
       donationDetails
     }
+  });
+};
+
+export const clearDonationDetails = () => dispatch => {
+  dispatch({
+    type: CLEAR_DONATION_DETAILS
   });
 };
 
@@ -35,12 +68,24 @@ export const setDonorDetails = donorDetails => dispatch => {
   });
 };
 
+export const clearDonorDetails = () => dispatch => {
+  dispatch({
+    type: CLEAR_DONOR_DETAILS
+  });
+};
+
 export const setGiftContextDetails = giftContextDetails => dispatch => {
   dispatch({
     type: SET_GIFT_CONTEXT_DETAILS,
     payload: {
       ...giftContextDetails
     }
+  });
+};
+
+export const clearGiftContextDetails = () => dispatch => {
+  dispatch({
+    type: CLEAR_GIFT_CONTEXT_DETAILS
   });
 };
 
@@ -53,12 +98,24 @@ export const setPaymentDetails = paymentDetails => dispatch => {
   });
 };
 
+export const clearPaymentDetails = () => dispatch => {
+  dispatch({
+    type: CLEAR_PAYMENT_DETAILS
+  });
+};
+
 export const setPaymentResponse = paymentResponse => dispatch => {
   dispatch({
     type: SET_PAYMENT_RESPONSE,
     payload: {
       paymentResponse
     }
+  });
+};
+
+export const clearPaymentResponse = () => dispatch => {
+  dispatch({
+    type: CLEAR_PAYMENT_RESPONSE
   });
 };
 
@@ -71,12 +128,25 @@ export const setPledgeDetails = pledgeContextDetails => dispatch => {
   });
 };
 
+export const clearPledgeDetails = () => dispatch => {
+  dispatch({
+    type: CLEAR_PLEDGE_DETAILS
+  });
+};
+
 export const setSelectedProjectDetails = selectedProjectDetails => dispatch => {
   dispatch({
     type: SET_SELECTED_PROJECT,
     payload: {
       selectedProjectDetails
     }
+  });
+};
+
+export const clearSelectedProjectDetails = () => dispatch => {
+  console.log('\n\n\x1b[45mclearSelectedProjectDetails\x1b[0m\n\n');
+  dispatch({
+    type: CLEAR_SELECTED_PROJECT
   });
 };
 
@@ -89,7 +159,13 @@ export const setSupportDetails = supportContextDetails => dispatch => {
   });
 };
 
-// data has to be in the following format - 
+export const clearSupportDetails = () => dispatch => {
+  dispatch({
+    type: CLEAR_SUPPORT_DETAILS
+  });
+};
+
+// data has to be in the following format -
 // {
 //   "amount": 50,
 //   "currency": "EUR",
@@ -106,85 +182,85 @@ export const setSupportDetails = supportContextDetails => dispatch => {
 //   }
 // }
 export function createDonation(data, plantProject, loggedIn, donationType) {
-  return dispatch => new Promise(function (resolve, reject) {
-    {
-      loggedIn
-        ?
-        donationType === 'gift' ?
-          postAuthenticatedRequest('giftDonationCreate_post', data, {
-            version: 'v1.4',
-            plantProject: plantProject
-          }).then(res => {
-            console.log(res.data);
-          }).catch(error => {
-            NotificationManager.error(
-              error.response.data.message,
-              i18n.t('label.error'),
-              5000
-            );
-          })
-          :
-          postAuthenticatedRequest('donationCreate_post', data, {
-            version: 'v1.4',
-            plantProject: plantProject
-          }).then(res => {
-            console.log('Entered in Create donation')
-            dispatch({
-              type: SET_DONATION_ID,
-              payload: res.data.donationId
-            });
-            resolve(res);
-          }).catch(error => {
-            reject(error);
-            console.log('Error', error)
-            NotificationManager.error(
-              error.response.data.message,
-              i18n.t('label.error'),
-              5000
-            );
-          })
-        :
-        donationType === 'gift' ?
-          postRequest('giftDonationCreatePublic_post', data, {
-            version: 'v1.4',
-            plantProject: plantProject
-          })
-            .then(res => {
-              console.log('Donation ID', res.data.donationId);
+  return dispatch =>
+    new Promise(function(resolve, reject) {
+      {
+        loggedIn
+          ? donationType === 'gift'
+            ? postAuthenticatedRequest('giftDonationCreate_post', data, {
+                version: 'v1.4',
+                plantProject: plantProject
+              })
+                .then(res => {
+                  console.log(res.data);
+                })
+                .catch(error => {
+                  NotificationManager.error(
+                    error.response.data.message,
+                    i18n.t('label.error'),
+                    5000
+                  );
+                })
+            : postAuthenticatedRequest('donationCreate_post', data, {
+                version: 'v1.4',
+                plantProject: plantProject
+              })
+                .then(res => {
+                  console.log('Entered in Create donation');
+                  dispatch({
+                    type: SET_DONATION_ID,
+                    payload: res.data.donationId
+                  });
+                  resolve(res);
+                })
+                .catch(error => {
+                  reject(error);
+                  console.log('Error', error);
+                  NotificationManager.error(
+                    error.response.data.message,
+                    i18n.t('label.error'),
+                    5000
+                  );
+                })
+          : donationType === 'gift'
+          ? postRequest('giftDonationCreatePublic_post', data, {
+              version: 'v1.4',
+              plantProject: plantProject
             })
-            .catch(error => {
-              NotificationManager.error(
-                error.response.data.message,
-                i18n.t('label.error'),
-                5000
-              );
+              .then(res => {
+                console.log('Donation ID', res.data.donationId);
+              })
+              .catch(error => {
+                NotificationManager.error(
+                  error.response.data.message,
+                  i18n.t('label.error'),
+                  5000
+                );
+              })
+          : postRequest('donationCreatePublic_post', data, {
+              version: 'v1.4',
+              plantProject: plantProject
             })
-          :
-          postRequest('donationCreatePublic_post', data, {
-            version: 'v1.4',
-            plantProject: plantProject
-          })
-            .then(res => {
-              console.log('Entered in Create donation')
-              dispatch({
-                type: SET_DONATION_ID,
-                payload: res.data.donationId
+              .then(res => {
+                console.log('Entered in Create donation');
+                dispatch({
+                  type: SET_DONATION_ID,
+                  payload: res.data.donationId
+                });
+                resolve(res);
+              })
+              .catch(error => {
+                NotificationManager.error(
+                  error.response.data.message,
+                  i18n.t('label.error'),
+                  5000
+                );
               });
-              resolve(res);
-            })
-            .catch(error => {
-              NotificationManager.error(
-                error.response.data.message,
-                i18n.t('label.error'),
-                5000
-              );
-            })
-    };
-  });
+      }
+    });
 }
 
-
-// data has to be in the following format - 
+// data has to be in the following format -
 // {
 //   "paymentProviderRequest": {
 //       "account": "acct_1Ajup2JruhzYVufP",
@@ -196,40 +272,40 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
 //   }
 // }
 export function donationPay(data, donationID, loggedIn) {
-  return dispatch => new Promise(function (resolve, reject) {
-    {
-      loggedIn
-        ? postAuthenticatedRequest('donationPay_post', data, {
-          version: 'v1.4',
-          donation: donationID
-        })
-          .then(res => {
-            console.log('Then Donation Pay', res.data)
-          })
-          .catch(error => {
-            console.log('Catch Donation Pay', error)
-            NotificationManager.error(
-              error.response.data.message,
-              i18n.t('label.error'),
-              5000
-            );
-          })
-        : postRequest('donationPayPublic_post', data, {
-          version: 'v1.4',
-          donation: donationID
-        })
-          .then(res => {
-            console.log('Then Donation Pay', res.data)
-          })
-          .catch(error => {
-            console.log('Catch Donation Pay', error)
-            NotificationManager.error(
-              error.response.data.message,
-              i18n.t('label.error'),
-              5000
-            );
-          });
-    };
-  });
+  return dispatch =>
+    new Promise(function(resolve, reject) {
+      {
+        loggedIn
+          ? postAuthenticatedRequest('donationPay_post', data, {
+              version: 'v1.4',
+              donation: donationID
+            })
+              .then(res => {
+                console.log('Then Donation Pay', res.data);
+              })
+              .catch(error => {
+                console.log('Catch Donation Pay', error);
+                NotificationManager.error(
+                  error.response.data.message,
+                  i18n.t('label.error'),
+                  5000
+                );
+              })
+          : postRequest('donationPayPublic_post', data, {
+              version: 'v1.4',
+              donation: donationID
+            })
+              .then(res => {
+                console.log('Then Donation Pay', res.data);
+              })
+              .catch(error => {
+                console.log('Catch Donation Pay', error);
+                NotificationManager.error(
+                  error.response.data.message,
+                  i18n.t('label.error'),
+                  5000
+                );
+              });
+      }
+    });
 }
-

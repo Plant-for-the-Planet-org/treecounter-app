@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { fetchCurrencies } from '../../actions/currencies';
 import { createPaymentDonation, createPaymentGift, paymentClear } from '../../actions/donateAction';
 import { loadProject } from '../../actions/loadTposAction';

@@ -4,9 +4,10 @@ import deLabels from './de';
 import esLabels from './es';
 import ptLabels from './pt';
 import ptBRLabels from './pt-BR';
-import { getLocale } from '../actions/getLocale';
+import { getLocale, defaultLocale } from '../actions/getLocale';
 
 let userLang = getLocale();
+
 i18next.init({
   interpolation: {
     // React already does escaping
@@ -14,6 +15,7 @@ i18next.init({
   },
   // Add language detector later
   lng: userLang, // 'en' | 'es'
+  fallbackLng: defaultLocale,
 
   // Using simple hardcoded resources for simple example
   resources: {
@@ -44,5 +46,7 @@ i18next.init({
     }
   }
 });
+
+i18next.changeLanguage(userLang); // ['en-US', 'en']
 
 export default i18next;

@@ -8,7 +8,9 @@ import ptBR from 'date-fns/locale/pt-BR';
 
 let cache = { locale: undefined };
 
-export const supportedLocales = ['en', 'de', 'es', 'pt', 'pt-BR'];
+// TODO: activate 'pt' here
+//export const supportedLocales = ['en', 'de', 'es', 'pt', 'pt-BR'];
+export const supportedLocales = ['en', 'de', 'es', 'pt-BR'];
 export const defaultLocale = 'en';
 export const localeObjects = { 'en': en, 'de': de , 'es': es , 'pt': pt , 'pt-BR': ptBR };
 
@@ -40,7 +42,7 @@ export function getLocale() {
 async function guessLocale() {
   let languages = await getLanguages();
 
-  let locale = languages[0] // ['en-US', 'en']
+  let locale = languages[0]; // ['en-US', 'en']
   if (!supportedLocales.includes(locale)) {
     locale = locale.split('-')[0];
   }

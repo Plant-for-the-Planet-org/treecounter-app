@@ -10,7 +10,9 @@ import { registerLocale } from 'react-datepicker';
 
 let cache = { locale: undefined };
 
-export const supportedLocales = ['en', 'de', 'es', 'pt', 'pt-BR'];
+// TODO: activate 'pt' here
+//export const supportedLocales = ['en', 'de', 'es', 'pt', 'pt-BR'];
+export const supportedLocales = ['en', 'de', 'es', 'pt-BR'];
 export const defaultLocale = 'en';
 export const localeObjects = { 'en': en, 'de': de , 'es': es , 'pt': pt , 'pt-BR': ptBR };
 

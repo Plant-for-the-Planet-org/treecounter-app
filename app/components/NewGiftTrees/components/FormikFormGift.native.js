@@ -65,7 +65,7 @@ export default class FormikFormGift extends Component {
                 firstName: values.firstname,
                 lastName: values.lastname,
                 email: values.email,
-                giftMessage: values.message,
+                giftMsg: values.message,
                 hasThumbnail: false
               }
             ]

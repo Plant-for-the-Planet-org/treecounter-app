@@ -27,11 +27,15 @@ export const GiftTreesComponent = props => {
           ? props.selectedProject.treeCountOptions.default
           : 10,
         isCustomCount: false,
-        giftMsg: '',
-        notifyRecipient: false
+        giftMsg: details[i].giftMsg ? details[i].giftMsg : ''
       };
     }
     setGiftDetails(details);
+    if (props.selectedProject.treeCountOptions.default) {
+      props.setTreeCount(
+        props.selectedProject.treeCountOptions.default * details.length
+      );
+    }
   }, []);
 
   const setTotalTreeCount = (index, treeCount) => {
@@ -58,7 +62,6 @@ export const GiftTreesComponent = props => {
   };
 
   const setCustomTreeCount = value => {
-    console.log('setCustomTreeCount component', value);
     let details = giftDetails;
     details[currentIndex] = {
       ...details[currentIndex],
@@ -100,9 +103,9 @@ export const GiftTreesComponent = props => {
                 {item.firstName}
               </Text>
             </TouchableOpacity>
-            {giftDetails.length > 1 && currentIndex === index ? (
+            {/* {giftDetails.length > 1 && currentIndex === index ? (
               <View style={styles.triangle} />
-            ) : null}
+            ) : null} */}
           </View>
         )}
       />
@@ -143,13 +146,13 @@ export const GiftTreesComponent = props => {
         }
       />
 
-      {giftDetails.length < 4 ? (
+      {/* {giftDetails.length < 4 ? (
         <TouchableOpacity>
           <Text style={styles.giftTreesAddRecepient}>
             Add another recipient
           </Text>
         </TouchableOpacity>
-      ) : null}
+      ) : null} */}
     </View>
   );
 };

@@ -22,7 +22,7 @@ export const handleAndroidPayPress = async (props) => {
 
                 // Create Donation API
                 let loggedIn = props.currentUserProfile;
-                let plantProject = '1';
+                let plantProject = props.selectedProject.id;
                 let newData = {
                     "amount": Number(props.totalPrice),
                     "currency": props.currency_code,

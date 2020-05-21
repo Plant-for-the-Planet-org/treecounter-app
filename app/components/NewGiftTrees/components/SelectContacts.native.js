@@ -88,7 +88,7 @@ const SelectContacts = props => {
     return (
       <>
         <Avatar item={item} dimension={50} />
-        {item.isSelected ? (
+        {/* {item.isSelected ? (
           <View
             style={{
               position: 'absolute',
@@ -109,7 +109,7 @@ const SelectContacts = props => {
               <Icon size={30} name="check" color="#ffffff" />
             </View>
           </View>
-        ) : null}
+        ) : null} */}
 
         {disabled ? (
           <View
@@ -154,6 +154,7 @@ const SelectContacts = props => {
             setSelectedContactsNum(prevCount => prevCount - 1);
           }
           setSearchContacts(newContactsArr);
+          onContinueClick();
         }}
         style={{ flexDirection: 'row', marginBottom: 30 }}
       >
@@ -190,7 +191,6 @@ const SelectContacts = props => {
       setSearchContacts(
         contacts.filter(contact => {
           if (contact.displayName.toLowerCase().includes(text.toLowerCase())) {
-            console.log(contact.displayName);
             return contact;
           }
         })
@@ -242,7 +242,9 @@ const SelectContacts = props => {
           marginTop: Platform.OS === 'ios' ? 110 : 70
         }}
       >
-        {!isSearch && selectedContactsNum === 0 ? (
+        {/* ================================ */}
+        {/* TODO: Future use -> code to select multiple contacts  */}
+        {/* {!isSearch && selectedContactsNum === 0 ? (
           <>
             <Text style={styles.headerText}>{i18n.t('label.gift_trees')}</Text>
 
@@ -250,7 +252,14 @@ const SelectContacts = props => {
               {i18n.t('label.gift_tree_description_new')}
             </Text>
           </>
-        ) : null}
+        ) : null} */}
+        {/* ================================ */}
+
+        <Text style={styles.headerText}>{i18n.t('label.gift_trees')}</Text>
+
+        <Text style={styles.nGiftDesc}>
+          {i18n.t('label.gift_tree_description_new')}
+        </Text>
 
         <Text
           style={[
@@ -262,6 +271,16 @@ const SelectContacts = props => {
         </Text>
 
         <FlatList
+          data={searchContacts}
+          keyExtractor={item => item.id}
+          renderItem={({ item, index }) => (
+            <TouchItem item={item} index={index} />
+          )}
+        />
+
+        {/* ================================ */}
+        {/* TODO: Future use -> code to select multiple contacts  */}
+        {/* <FlatList
           data={searchContacts}
           keyExtractor={item => item.id}
           renderItem={({ item, index }) =>
@@ -277,9 +296,14 @@ const SelectContacts = props => {
               <TouchItem item={item} index={index} />
             )
           }
-        />
+        /> */}
+        {/* ================================ */}
       </ScrollView>
-      {selectedContactsNum > 0 ? (
+
+      {/* ================================ */}
+      {/* TODO: Future use -> code to select multiple contacts  */}
+
+      {/* {selectedContactsNum > 0 ? (
         <View style={{ borderTopColor: '#eeeeee', borderTopWidth: 0.5 }}>
           <View
             style={{
@@ -316,7 +340,8 @@ const SelectContacts = props => {
             {i18n.t('label.continue_to_select_project')}
           </PrimaryButton>
         </View>
-      ) : null}
+      ) : null} */}
+      {/* ================================ */}
     </View>
   );
 };

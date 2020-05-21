@@ -14,7 +14,7 @@ export const handleApplePayPress = async (props) => {
             },
             ]).then(token => {
                 let loggedIn = props.currentUserProfile;
-                let plantProject = '1';
+                let plantProject = props.selectedProject.id;
                 console.log("Token apple pay", token)
 
                 let newData = {

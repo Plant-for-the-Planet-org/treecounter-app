@@ -52,5 +52,14 @@
   "confirm_delete_message": "Are you sure you want to delete this Competition ? There's no undo button.",
   "competetions_404_message": "We do not yet support competitions in your browser, please use our iOS or Android app to get access to the competitions.",
   "goal": "Goal",
-  "active": "Active"
+  "active": "Active",
+  "no_competitions": "No competitions found",
+  "you_are_all_caught_up": "You're all caught up",
+  "register_only": "Register Only",
+  "register_only_msg": "Please plant a tree yourself and register them to support this competition",
+  "donation_only_msg": "Please choose from 100+ projects and make a donation to support this competition.",
+  "specific_project_msg": "Donate to {{project}} Project to support this competition.",
+  "if_all_project_msg": "Plant a tree or choose from 100+ projects and make a donation to support this competition.",
+  "support_comp_trees": "Support Competition with trees",
+  "donate_now": "Donate Now"
 }

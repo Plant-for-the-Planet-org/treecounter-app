@@ -3,43 +3,69 @@ import {
   getAuthenticatedRequest,
   postAuthenticatedRequest,
   putAuthenticatedRequest
-} from '../utils/api';
-import { setCompetitionDetail } from '../reducers/competitionDetailReducer';
-import { setProgressModelState } from '../reducers/modelDialogReducer';
-import { setContentLoaderState } from '../reducers/contentloaderReducer';
+} from '../../../utils/api';
+import { setCompetitionDetail } from './competitionDetailReducer';
+import { setProgressModelState } from '../../../reducers/modelDialogReducer';
+import { setContentLoaderState } from '../../../reducers/contentloaderReducer';
 
 import {
   deleteEntity,
   mergeEntities,
   unlinkEntity
-} from '../reducers/entitiesReducer';
+} from '../../../reducers/entitiesReducer';
 import {
   competitionEnrollmentSchema,
-  competitionPagerSchema,
   competitionSchema,
   treecounterSchema
-} from '../schemas';
+} from '../../../schemas';
 import { normalize } from 'normalizr';
-import { debug } from '../debug';
-import { updateRoute } from '../helpers/routerHelper';
-import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
-import i18n from '../locales/i18n.js';
+import { debug } from '../../../debug';
+import { updateRoute } from '../../../helpers/routerHelper';
+import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
+import i18n from '../../../locales/i18n.js';
 
-export function fetchCompetitions(category) {
+// importing action type
+import {
+  GET_ALL_COMPETITIONS,
+  GET_FEATURED_COMPETITIONS,
+  GET_ARCHIVED_COMPETITIONS,
+  GET_MINE_COMPETITIONS,
+  SET_CURRENT_ALL_COMPETITIONS,
+  SET_CURRENT_FEATURED_COMPETITIONS,
+  SET_CURRENT_ARCHIVED_COMPETITIONS,
+  CLEAR_CURRENT_ALL_COMPETITIONS,
+  CLEAR_CURRENT_FEATURED_COMPETITIONS,
+  CLEAR_CURRENT_ARCHIVED_COMPETITIONS
+} from '../../../actions/types';
+
+export function fetchCompetitions(category, page) {
+  let actionType;
+  if (category === 'archived') {
+    actionType = GET_ARCHIVED_COMPETITIONS;
+  } else if (category === 'featured') {
+    actionType = GET_FEATURED_COMPETITIONS;
+  } else {
+    actionType = GET_ALL_COMPETITIONS;
+  }
   return dispatch => {
-    dispatch(setContentLoaderState(true));
+    // dispatch(setContentLoaderState(true));
     return getAuthenticatedRequest('competitions_get', {
       category: category,
-      limit: 100
+      page: page,
+      limit: 10
     })
       .then(res => {
         dispatch(
-          mergeEntities(
-            normalize(
-              res.data.merge.competitionPager[0],
-              competitionPagerSchema
-            )
-          )
+          {
+            type: actionType,
+            payload: res.data.merge.competitionPager
+          }
+          // mergeEntities(
+          //   normalize(
+          //     res.data.merge.competitionPager[0],
+          //     competitionPagerSchema
+          //   )
+          // )
         );
         dispatch(setContentLoaderState(false));
         return res;
@@ -99,6 +125,7 @@ export function declinePart(id) {
       });
   };
 }
+
 export function cancelInvite(id) {
   return dispatch => {
     dispatch(setProgressModelState(true));
@@ -166,7 +193,7 @@ export function createCompetition(value, navigation) {
           //   competition: res.data.merge.competition[0].id,
           //   titleParam: res.data.merge.competition[0].name
           // });
-          debug(updateRoute('app_competitions', navigation || dispatch));
+          // debug(updateRoute('app_competitions', navigation || dispatch));
           updateRoute('app_competitions', navigation || dispatch);
           resolve(res.data);
           dispatch(setProgressModelState(false));
@@ -193,6 +220,7 @@ export function createCompetition(value, navigation) {
     });
   };
 }
+
 export function editCompetition(value, param, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
@@ -297,23 +325,20 @@ export function enrollCompetition(id) {
       });
   };
 }
+
 export function fetchAllCompetitions() {
   return getAuthenticatedRequest('competitions_get', { category: 'all' });
 }
 
 export function fetchMineCompetitions() {
   return dispatch => {
-    dispatch(setContentLoaderState(true));
+    //dispatch(setContentLoaderState(true));
     return getAuthenticatedRequest('competitionsMine_get')
       .then(res => {
-        dispatch(
-          mergeEntities(
-            normalize(
-              res.data.merge.competitionPager[0],
-              competitionPagerSchema
-            )
-          )
-        );
+        dispatch({
+          type: GET_MINE_COMPETITIONS,
+          payload: res.data.merge.competitionPager
+        });
         dispatch(setContentLoaderState(false));
         return res;
       })
@@ -354,6 +379,7 @@ export function invitePart(competition, competitor) {
       });
   };
 }
+
 export function fetchCompetitionDetail(id) {
   return dispatch => {
     // dispatch(setProgressModelState(true));
@@ -371,5 +397,38 @@ export function fetchCompetitionDetail(id) {
         // dispatch(setProgressModelState(false));
         dispatch(setContentLoaderState(false));
       });
+  };
+}
+
+export function setCurrentCompetitions(category, competitionsArr) {
+  let actionType;
+  if (category === 'archived') {
+    actionType = SET_CURRENT_ARCHIVED_COMPETITIONS;
+  } else if (category === 'featured') {
+    actionType = SET_CURRENT_FEATURED_COMPETITIONS;
+  } else {
+    actionType = SET_CURRENT_ALL_COMPETITIONS;
+  }
+  return dispatch => {
+    dispatch({
+      type: actionType,
+      payload: competitionsArr
+    });
+  };
+}
+
+export function clearCurrentCompetitions(category) {
+  let actionType;
+  if (category === 'archived') {
+    actionType = CLEAR_CURRENT_ARCHIVED_COMPETITIONS;
+  } else if (category === 'featured') {
+    actionType = CLEAR_CURRENT_FEATURED_COMPETITIONS;
+  } else {
+    actionType = CLEAR_CURRENT_ALL_COMPETITIONS;
+  }
+  return dispatch => {
+    dispatch({
+      type: actionType
+    });
   };
 }

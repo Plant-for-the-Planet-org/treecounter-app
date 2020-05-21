@@ -76,7 +76,7 @@ const SuccessfullyActivatedAccount = lazy(() =>
   import('../../containers/Authentication/SuccessfullActivatedContainer')
 );
 const CompetitionContainer = lazy(() =>
-  import('../../containers/CompetitionContainer/index')
+  import('../../components/Competition/containers/CompetitionContainer')
 );
 const DonationTreesContainer = lazy(() =>
   import('../../containers/DonateTrees/index')

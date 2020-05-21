@@ -1,21 +1,21 @@
 import React from 'react';
-import { CardLayoutCompetition } from '../Common/Card';
-import styles from '../../styles/competition/competition-snippet.native';
+import { CardLayoutCompetition } from '../../Common/Card';
+import styles from '../../../styles/competition/competition-snippet.native';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
-import { getImageUrl } from '../../actions/apiRouting';
+import { getImageUrl } from '../../../actions/apiRouting';
 import CompetitionProgressBar from './CompetitionProgressBar';
-import TouchableItem from '../../components/Common/TouchableItem';
+import TouchableItem from '../../Common/TouchableItem.native';
 import PropTypes from 'prop-types';
-import { compCalendar } from '../../assets';
+import { compCalendar } from '../../../assets';
 import { bindActionCreators } from 'redux';
 import CompetitionTopCompetitor from './CompetitionTopCompetitor.native';
 import {
   userCompetitionEnrolledSelector,
   userTreecounterSelector
-} from '../../selectors';
+} from '../../../selectors';
 import { connect } from 'react-redux';
-import i18n from '../../locales/i18n.js';
-import { formatDate } from '../../utils/utils';
+import i18n from '../../../locales/i18n.js';
+import { formatDate } from '../../../utils/utils';
 
 class CompetitionSnippet extends React.Component {
   constructor(props) {

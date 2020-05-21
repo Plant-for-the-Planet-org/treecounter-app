@@ -39,7 +39,7 @@ export default class StaticTabbar extends React.PureComponent<StaticTabbarProps>
     render() {
         const { onPress } = this;
         const { tabs } = this.props;
-        debug('Navigation', this.props.navigation);
+        // debug('Navigation', this.props.navigation);
         return (
             <View>
                 <View style={styles.container}>

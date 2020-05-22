@@ -138,5 +138,5 @@ jobs:
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       run: |
-        payload="{\"channel\": \"#notifications-git\", \"username\": \"webhookbot\", \"text\": \"Finished GitHub action $GITHUB_WORKFLOW for $GITHUB_REF\"}"
+        payload="{\"channel\": \"#notifications-git\", \"username\": \"webhookbot\", \"text\": \"Finished GitHub action $GITHUB_WORKFLOW for $GITHUB_REF (TreecounterApp)\"}"
         curl -X POST --data-urlencode "payload=$payload" https://hooks.slack.com/services/$SLACK_WEBHOOK_URL

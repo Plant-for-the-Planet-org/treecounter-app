@@ -2,15 +2,19 @@ import { getItemSync } from '../stores/localStorage';
 import en from 'date-fns/locale/en-US';
 import de from 'date-fns/locale/de';
 import es from 'date-fns/locale/es';
+import pt from 'date-fns/locale/pt';
+import ptBR from 'date-fns/locale/pt-BR';
 // import and register all locales used for 'react-datepicker'
 import { registerLocale } from 'react-datepicker';
 // import { debug } from '../debug';
 
 let cache = { locale: undefined };
 
-export const supportedLocales = ['en', 'de', 'es'];
+// TODO: activate 'pt' here
+//export const supportedLocales = ['en', 'de', 'es', 'pt', 'pt-BR'];
+export const supportedLocales = ['en', 'de', 'es', 'pt-BR'];
 export const defaultLocale = 'en';
-export const localeObjects = { en: en, de: de , es: es };
+export const localeObjects = { 'en': en, 'de': de , 'es': es , 'pt': pt , 'pt-BR': ptBR };
 
 /**
  * Call this when the app starts up
@@ -54,8 +58,11 @@ function guessLocale() {
   } else if (languageCached !== null) {
     return languageCached;
   } else {
-    let userLang = navigator.language || navigator.userLanguage;
-    let locale = userLang.split('-')[0];
+    let locale = navigator.language || navigator.userLanguage;
+    // if not supported long locale format, e.g. en-US try short version, e.g. en
+    if (!supportedLocales.includes(locale)) {
+      locale = locale.split('-')[0];
+    }
     if (supportedLocales.includes(locale)) {
       return locale;
     } else {

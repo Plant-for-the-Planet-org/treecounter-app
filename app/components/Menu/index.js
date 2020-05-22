@@ -90,7 +90,10 @@ const customStyles = {
 const statusOptions = [
   { value: 'en', label: 'English', icon: images.worldImg },
   { value: 'de', label: 'Deutsch', icon: images.germany },
-  { value: 'es', label: 'Español', icon: images.spain }
+  { value: 'es', label: 'Español', icon: images.spain },
+// TODO: activate 'pt' here
+//  { value: 'pt', label: 'Português', icon: images.portugal },
+  { value: 'pt-BR', label: 'Português brasileiro', icon: images.brazil }
 ];
 
 let userLang = getLocale(); // en|de
@@ -279,7 +282,7 @@ class Menu extends Component {
             rel="noopener noreferrer"
             href={`https://apps.apple.com/app/plant-for-the-planet/id${context['ios'].appId}`}
           >
-            <img src={images['appleStoreBadge_' + userLang]} />
+            <img src={images['appleStoreBadge_' + userLang.replace(/-/g,'')]} />
           </a>
         </div>
         <div className="global-selector">
@@ -288,7 +291,7 @@ class Menu extends Component {
             rel="noopener noreferrer"
             href={`https://play.google.com/store/apps/details?id=${context['android'].appId}`}
           >
-            <img src={images['googlePlayBadge_' + userLang]} />
+            <img src={images['googlePlayBadge_' + userLang.replace(/-/g,'')]} />
           </a>
         </div>
       </div>

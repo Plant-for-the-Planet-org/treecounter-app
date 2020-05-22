@@ -142,14 +142,20 @@ import location_grey from './images/icons/location_grey.png';
 import survival_grey from './images/icons/survival_grey.png';
 import tax_grey from './images/icons/tax_grey.png';
 import worldImg from './images/icons/world.png';
-import germany from './images/germany.png';
-import spain from './images/spain.png';
+import germany from './images/flags/germany.png';
+import spain from './images/flags/spain.png';
+import portugal from './images/flags/portugal.png';
+import brazil from './images/flags/brazil.png';
 import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
 import googlePlayBadge_es from './images/es/google-play-badge.png';
+import googlePlayBadge_pt from './images/pt/google-play-badge.png';
+import googlePlayBadge_ptBR from './images/pt-BR/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
 import appleStoreBadge_es from './images/es/apple-store-badge.png';
+import appleStoreBadge_pt from './images/pt/apple-store-badge.png';
+import appleStoreBadge_ptBR from './images/pt-BR/apple-store-badge.png';
 import attach from './images/attach.png';
 import cameraSolid from './images/icons/camera-solid.png';
 import imageGallery from './images/icons/images-gallery.png';
@@ -224,6 +230,8 @@ export {
   worldImg,
   germany,
   spain,
+  portugal,
+  brazil,
   mapCollapse,
   mapExpand,
   tpoIcon,
@@ -366,9 +374,13 @@ export {
   googlePlayBadge_en,
   googlePlayBadge_de,
   googlePlayBadge_es,
+  googlePlayBadge_pt,
+  googlePlayBadge_ptBR,
   appleStoreBadge_en,
   appleStoreBadge_de,
   appleStoreBadge_es,
+  appleStoreBadge_pt,
+  appleStoreBadge_ptBR,
   attach,
   cameraSolid,
   imageGallery,

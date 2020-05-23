@@ -14,6 +14,9 @@ import selectedPlantProjectIdReducer from './selectedPlantProjectIdReducer';
 import supportedTreecounterReducer from './supportedTreecounterReducer';
 import updateLastRouteReducer from './updateLastRouteReducer';
 import userFeedReducer from './userFeedReducer';
+import competitionDetailReducer from '../components/Competition/redux/competitionDetailReducer';
+
+import competitionsReducer from '../components/Competition/redux/competitionsReducer';
 
 const commonReducers = {
   entities: entitiesReducer,
@@ -31,7 +34,8 @@ const commonReducers = {
   pledgeEvents: pledgeEventReducer,
   lastRouteState: updateLastRouteReducer,
   competitionDetail: competitionDetailReducer,
-  donations: donationsReducer
+  donations: donationsReducer,
+  competitionsReducer
 };
 
 export default commonReducers;

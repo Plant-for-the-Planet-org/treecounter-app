@@ -2,13 +2,17 @@ import { getLanguages } from 'react-native-i18n';
 import en from 'date-fns/locale/en-US';
 import de from 'date-fns/locale/de';
 import es from 'date-fns/locale/es';
+import pt from 'date-fns/locale/pt';
+import ptBR from 'date-fns/locale/pt-BR';
 // import { debug } from '../debug';
 
 let cache = { locale: undefined };
 
-export const supportedLocales = ['en', 'de', 'es'];
+// TODO: activate 'pt' here
+//export const supportedLocales = ['en', 'de', 'es', 'pt', 'pt-BR'];
+export const supportedLocales = ['en', 'de', 'es', 'pt-BR'];
 export const defaultLocale = 'en';
-export const localeObjects = { en: en, de: de , es: es };
+export const localeObjects = { 'en': en, 'de': de , 'es': es , 'pt': pt , 'pt-BR': ptBR };
 
 /**
  * Call this when the app starts up
@@ -38,7 +42,10 @@ export function getLocale() {
 async function guessLocale() {
   let languages = await getLanguages();
 
-  let locale = languages[0].split('-')[0]; // ['en-US', 'en']
+  let locale = languages[0]; // ['en-US', 'en']
+  if (!supportedLocales.includes(locale)) {
+    locale = locale.split('-')[0];
+  }
   if (supportedLocales.includes(locale)) {
     return locale;
   } else {

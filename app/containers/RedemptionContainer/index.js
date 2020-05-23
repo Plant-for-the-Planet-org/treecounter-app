@@ -49,7 +49,7 @@ class RedemptionContainer extends Component {
     };
   }
   callSetState(isCode, isLoggedIn, code, type) {
-    if (isCode && isLoggedIn) {
+    if (isCode && (code == this.state.code && this.state.codeStatus != 'success' || code != this.state.code) && isLoggedIn) {
       this.setState({ loading: true });
       validateCodeAction({
         type: type,
@@ -72,7 +72,7 @@ class RedemptionContainer extends Component {
           debug(error);
         }
       );
-    } else if (isCode && !isLoggedIn) {
+    } else if (isCode && (code == this.state.code && this.state.codeStatus != 'success' || code != this.state.code) && !isLoggedIn) {
       this.setState({
         loading: false,
         pageStatus: 'not-logged-in',
@@ -154,7 +154,7 @@ class RedemptionContainer extends Component {
     let value = data;
     this.setState({ loading: true });
     if (value) {
-      setRedemptionCodeAction({
+      this.props.setRedemptionCodeAction({
         type: this.state.type,
         code: this.state.code.replace(/\s/g, '')
       }).then(
@@ -239,6 +239,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      setRedemptionCodeAction,
       setAccessDenied,
       route: (routeName, id, params, navigation) => dispatch =>
         updateRoute(routeName, navigation || dispatch, id, params)

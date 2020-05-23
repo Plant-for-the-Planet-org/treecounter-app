@@ -273,12 +273,13 @@ export function PaymentOption(props) {
               <Text style={styles.paymentTreeAmount}>
                 {formatNumber(
                   props.commissionSwitch
-                    ? props.treeCost * props.treeCount +
+                    ? props.treeCost * props.treeCount * props.rates[props.selectedCurrency] +
                     ((props.treeCount / 100) * 2.9 + 0.3)
-                    : props.treeCost * props.treeCount,
+                    : props.treeCost * props.treeCount * props.rates[props.selectedCurrency],
                   null,
                   props.selectedCurrency
                 )}
+
               </Text>
             </View>
 
@@ -434,9 +435,11 @@ export function PlantProjectDetails(props) {
 
     setShowCurrencyModal(false);
     setTreeCost(calculateAmount(currency));
+    props.setCurrency(currency);
   };
   useEffect(() => {
     setSelectedCurrency(props.globalCurrency.currency);
+    props.setCurrency(props.globalCurrency.currency);
   }, [props.globalCurrency]);
   // This function takes the tree Count and calculates the total amount
   const calculateAmount = currency => {

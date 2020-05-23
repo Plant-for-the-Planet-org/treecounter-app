@@ -40,6 +40,7 @@ function DonationDetails(props) {
   const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
     props.hasTaxDeduction && props.taxDeductibleCountries[0]
   );
+  const [currency, setCurrency] = React.useState(props.selectedCurrency);
   const [token, setToken] = React.useState(null);
   const [applePayStatus, setApplePayStatus] = React.useState('');
 
@@ -167,7 +168,7 @@ function DonationDetails(props) {
             selectedCurrency={
               props.globalCurrency
                 ? props.globalCurrency.currency
-                : props.selectedCurrency
+                : currency
             }
             selectedProject={props.selectedProject}
             rates={
@@ -177,6 +178,7 @@ function DonationDetails(props) {
             }
             fee={paymentFee}
             globalCurrency={props.globalCurrency}
+            setCurrency={setCurrency}
           />
         ) : (
             <NoPlantProjectDetails />
@@ -263,8 +265,6 @@ function DonationDetails(props) {
 
       <PaymentOption
         treeCount={treeCount}
-        treeCost={props.selectedProject.treeCost}
-        selectedCurrency={props.selectedCurrency}
         commissionSwitch={commissionSwitch}
         navigation={props.navigation}
         onContinue={onContinue}
@@ -282,6 +282,17 @@ function DonationDetails(props) {
         setDonorDetails={props.setDonorDetails}
         donationPay={props.donationPay}
         selectedProject={props.selectedProject}
+        treeCost={props.selectedProject.treeCost}
+        selectedCurrency={
+          currency
+        }
+        rates={
+          props.currencies.currencies.currency_rates[
+            props.selectedProject.currency
+          ].rates
+        }
+        fee={paymentFee}
+        globalCurrency={props.globalCurrency}
       />
     </View>
   );

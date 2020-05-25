@@ -1,5 +1,4 @@
 import donationsReducer from './../components/DonateTrees/redux/reducer';
-import competitionDetailReducer from './competitionDetailReducer';
 import configReducer from './configReducer';
 import contentloaderReducer from './contentloaderReducer';
 import currenciesReducer from './currenciesReducer';
@@ -15,7 +14,6 @@ import supportedTreecounterReducer from './supportedTreecounterReducer';
 import updateLastRouteReducer from './updateLastRouteReducer';
 import userFeedReducer from './userFeedReducer';
 import competitionDetailReducer from '../components/Competition/redux/competitionDetailReducer';
-
 import competitionsReducer from '../components/Competition/redux/competitionsReducer';
 
 const commonReducers = {

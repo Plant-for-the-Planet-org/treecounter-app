@@ -6,7 +6,10 @@ import PropTypes from 'prop-types';
 import { currentUserProfileSelector } from '../../../selectors';
 import { updateRoute } from '../../../helpers/routerHelper';
 import CompetitionFull from './../screens/SelectedCompetition.native';
-
+import {
+  setDonationContext,
+  setSupportDetails
+} from './../../DonateTrees/redux/action';
 import {
   confirmPart,
   cancelInvite,
@@ -84,6 +87,8 @@ class SelectedCompetitionContainer extends Component {
           invitePart={(competition, competitor) =>
             this.props.invitePart(competition, competitor)
           }
+          setSupportDetails={this.props.setSupportDetails}
+          setDonationContext={this.props.setDonationContext}
         />
       );
     } else {
@@ -105,7 +110,9 @@ const mapDispatchToProps = dispatch => {
       declinePart,
       cancelInvite,
       invitePart,
-      supportTreecounterAction
+      supportTreecounterAction,
+      setSupportDetails,
+      setDonationContext
     },
     dispatch
   );

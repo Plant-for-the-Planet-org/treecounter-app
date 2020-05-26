@@ -217,7 +217,7 @@ function DonationDetails(props) {
                   <NoPlantProjectDetails />
                 )}
 
-              {context.contextType === 'direct' ? (
+              {context.contextType === 'direct' || context.contextType === 'support' ? (
                 <SelectTreeCount
                   treeCount={treeCount}
                   setTreeCount={setTreeCount}

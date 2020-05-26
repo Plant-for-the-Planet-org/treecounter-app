@@ -818,13 +818,13 @@ export const SupportUserDetails = props => {
         <View style={styles.supportUser}>
           <UserProfileImage
             profileImage={
-              props.context.support && props.context.support.treecounterAvatar
+              props.context.supportTreeCounterDetails && props.context.supportTreeCounterDetails.treecounterAvatar
             }
             imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
           />
           <View style={styles.supportUserNameContainer}>
             <Text style={styles.supportUserName}>
-              {props.context.support.displayName}
+              {props.context.supportTreeCounterDetails.displayName}
             </Text>
           </View>
         </View>

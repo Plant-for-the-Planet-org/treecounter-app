@@ -1,5 +1,14 @@
 import React from 'react';
-import { Animated, BackHandler, Dimensions, Image, Platform, Share, TouchableOpacity, View } from 'react-native';
+import {
+  Animated,
+  BackHandler,
+  Dimensions,
+  Image,
+  Platform,
+  Share,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { closeHBlack, closeHWhite, shareBlack, shareWhite } from '../../assets';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import i18n from '../../locales/i18n';
@@ -33,18 +42,16 @@ export default function HeaderAnimated(props) {
   };
   const backHandler = () => {
     let { navigation, donationContext } = props;
-    console.log(donationContext)
     if (navigation && donationContext.selectedProject) {
-      console.log('donationconetxt', donationContext);
-      props.selectPlantProjectAction(donationContext.selectedProject.id)
+      props.selectPlantProjectAction(donationContext.selectedProject.id);
       updateStaticRoute('app_donate_detail', navigation, {
         userForm: navigation.getParam('userForm'),
-        giftMethod: navigation.getParam('giftMethod'),
+        giftMethod: navigation.getParam('giftMethod')
       });
     } else {
       navigateBack();
     }
-  }
+  };
   React.useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', navigateBack);
     // clean up

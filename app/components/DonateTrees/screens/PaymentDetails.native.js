@@ -1,5 +1,13 @@
 import React from 'react';
-import { Animated, Image, Keyboard, Platform, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Animated,
+  Image,
+  Keyboard,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import stripe from 'tipsi-stripe';
@@ -10,37 +18,34 @@ import colors from '../../../utils/constants';
 import { formatNumber } from '../../../utils/utils';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import CreditCardForm from './../components/CreditCardForm';
-import { handleApplePayPress } from './../components/paymentMethods/applePay'
-import { handleAndroidPayPress } from './../components/paymentMethods/googlePay'
+import { handleApplePayPress } from './../components/paymentMethods/applePay';
+import { handleAndroidPayPress } from './../components/paymentMethods/googlePay';
 
 export default function DonationStep3(props) {
-
   stripe.setOptions({
     publishableKey: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
     merchantId: '', // Optional
-    androidPayMode: 'test', // Android only
-  })
+    androidPayMode: 'test' // Android only
+  });
 
-  const [token, setToken] = React.useState(null)
+  const [token, setToken] = React.useState(null);
 
-  console.log('Token -----', token)
-
-  const [payPalInfo, setPayPalInfo] = React.useState(false)
-  const [showPay, setShowPay] = React.useState(true)
-  const [allValid, setAllValid] = React.useState(false)
+  const [payPalInfo, setPayPalInfo] = React.useState(false);
+  const [showPay, setShowPay] = React.useState(true);
+  const [allValid, setAllValid] = React.useState(false);
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
-  const [allowedNativePay, setallowedNativePay] = React.useState(false)
+  const [allowedNativePay, setallowedNativePay] = React.useState(false);
 
-  const [amexAvailable, setAmexAvailable] = React.useState(false)
-  const [discoverAvailable, setDiscoverAvailable] = React.useState(false)
-  const [masterCardAvailable, setMasterCardAvailable] = React.useState(false)
-  const [visaAvailable, setVisaAvailable] = React.useState(false)
+  const [amexAvailable, setAmexAvailable] = React.useState(false);
+  const [discoverAvailable, setDiscoverAvailable] = React.useState(false);
+  const [masterCardAvailable, setMasterCardAvailable] = React.useState(false);
+  const [visaAvailable, setVisaAvailable] = React.useState(false);
 
-  const [applePayComplete, setApplePayComplete] = React.useState(false)
-  const [applePayStatus, setApplePayStatus] = React.useState('')
+  const [applePayComplete, setApplePayComplete] = React.useState(false);
+  const [applePayStatus, setApplePayStatus] = React.useState('');
 
   const togglePaypalInfo = () => {
-    setPayPalInfo(!payPalInfo)
+    setPayPalInfo(!payPalInfo);
   };
 
   React.useEffect(() => {
@@ -53,39 +58,39 @@ export default function DonationStep3(props) {
       keyboardDidHide
     );
 
-    const allowedNativePay = stripe.deviceSupportsNativePay()
+    const allowedNativePay = stripe.deviceSupportsNativePay();
     const amexAvailable = stripe.canMakeNativePayPayments({
-      networks: ['american_express'],
-    })
+      networks: ['american_express']
+    });
     const discoverAvailable = stripe.canMakeNativePayPayments({
-      networks: ['discover'],
-    })
+      networks: ['discover']
+    });
     const masterCardAvailable = stripe.canMakeNativePayPayments({
-      networks: ['master_card'],
-    })
+      networks: ['master_card']
+    });
     const visaAvailable = stripe.canMakeNativePayPayments({
-      networks: ['visa'],
-    })
-    setallowedNativePay(allowedNativePay)
-    setAmexAvailable(amexAvailable)
-    setDiscoverAvailable(discoverAvailable)
-    setMasterCardAvailable(masterCardAvailable)
-    setVisaAvailable(visaAvailable)
+      networks: ['visa']
+    });
+    setallowedNativePay(allowedNativePay);
+    setAmexAvailable(amexAvailable);
+    setDiscoverAvailable(discoverAvailable);
+    setMasterCardAvailable(masterCardAvailable);
+    setVisaAvailable(visaAvailable);
 
     // clean up
     return () => {
       keyboardDidShowListener.remove();
       keyboardDidHideListener.remove();
     };
-  }, [])
+  }, []);
 
   const keyboardDidShow = () => {
-    setShowPay(false)
-  }
+    setShowPay(false);
+  };
 
   const keyboardDidHide = () => {
-    setShowPay(true)
-  }
+    setShowPay(true);
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.WHITE }}>
@@ -160,42 +165,40 @@ export default function DonationStep3(props) {
           {/* PayPal Information Card Ended */}
 
           {/* <SepaAccountForm /> */}
-
         </View>
       </KeyboardAwareScrollView>
       {/* Pay Button Section  */}
 
-      {
-        showPay ? (
-          <PaymentButton
-            treeCount={props.context.donationDetails.totalTreeCount}
-            treeCost={props.context.projectDetails.amountPerTree}
-            selectedCurrency={props.context.projectDetails.currency}
-            // commissionSwitch={props.navigation.getParam('commissionSwitch')}
-            navigation={props.navigation}
-            allValid={allValid}
-          />
-        ) : null
-      }
+      {showPay ? (
+        <PaymentButton
+          treeCount={props.context.donationDetails.totalTreeCount}
+          treeCost={props.context.projectDetails.amountPerTree}
+          selectedCurrency={props.context.projectDetails.currency}
+          // commissionSwitch={props.navigation.getParam('commissionSwitch')}
+          navigation={props.navigation}
+          allValid={allValid}
+        />
+      ) : null}
       {/* Pay Button Section Ended */}
-    </View >
+    </View>
   );
 }
 
-
-const PaymentButton = (props) => {
+const PaymentButton = props => {
   return (
     <View style={styles.buttonSectionView}>
       <View style={styles.donationSummary}>
         <View style={styles.donationCost}>
-          <Text style={styles.donationAmount}>{formatNumber(
-            props.commissionSwitch
-              ? props.treeCost * props.treeCount +
-              ((props.treeCount / 100) * 2.9 + 0.3)
-              : props.treeCost * props.treeCount,
-            null,
-            props.selectedCurrency
-          )}</Text>
+          <Text style={styles.donationAmount}>
+            {formatNumber(
+              props.commissionSwitch
+                ? props.treeCost * props.treeCount +
+                    ((props.treeCount / 100) * 2.9 + 0.3)
+                : props.treeCost * props.treeCount,
+              null,
+              props.selectedCurrency
+            )}
+          </Text>
           <Text style={styles.donationTree}>for {props.treeCount} trees</Text>
         </View>
         <Text style={styles.donationFrequency}>One Time Donation</Text>
@@ -221,5 +224,5 @@ const PaymentButton = (props) => {
         />
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};

@@ -20,6 +20,7 @@ import {
   setPledgeDetails,
   setSelectedProjectDetails,
   createDonation,
+  clearDonationReducer,
   donationPay
 } from '../../components/DonateTrees/redux/action';
 import { debug } from '../../debug';
@@ -38,7 +39,7 @@ import { postDirectRequest } from '../../utils/api';
 class DonationTreesContainer extends Component {
   state = {
     currency: ''
-  }
+  };
   static navigationOptions = {
     header: null
   };
@@ -76,7 +77,6 @@ class DonationTreesContainer extends Component {
     }
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log('nextProps to detect change in redux currency', nextProps.globalCurrency)
     if (nextProps.selectedProject && !nextProps.selectedProject.tpoData) {
       this.props.loadProject({ id: nextProps.selectedProject.id });
     }
@@ -127,7 +127,13 @@ class DonationTreesContainer extends Component {
     const { currentUserProfile, selectedProject } = this.props;
     const userCurrency =
       null === currentUserProfile ? null : currentUserProfile.currency;
-    return null === userCurrency ? (this.state.currency ? this.state.currency : selectedProject.currency) : (this.state.currency ? this.state.currency : userCurrency);
+    return null === userCurrency
+      ? this.state.currency
+        ? this.state.currency
+        : selectedProject.currency
+      : this.state.currency
+      ? this.state.currency
+      : userCurrency;
   };
 
   render() {
@@ -163,7 +169,8 @@ class DonationTreesContainer extends Component {
         contextActions={{
           setDonationDetails: this.props.setDonationDetails,
           setDonorDetails: this.props.setDonorDetails,
-          setPaymentDetails: this.props.setPaymentDetails
+          setPaymentDetails: this.props.setPaymentDetails,
+          clearDonationReducer: this.props.clearDonationReducer
         }}
         determineDefaultCurrency={() => this.determineDefaultCurrency()}
         currentUserProfile={this.props.currentUserProfile}
@@ -215,7 +222,8 @@ const mapDispatchToProps = dispatch => {
       setPaymentResponse,
       setPledgeDetails,
       createDonation,
-      donationPay
+      donationPay,
+      clearDonationReducer
     },
     dispatch
   );

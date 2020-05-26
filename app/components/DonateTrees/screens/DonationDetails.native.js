@@ -131,6 +131,7 @@ function DonationDetails(props) {
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
+        onBack={props.contextActions.clearDonationReducer}
         title={'Tree Donation'}
         showClose
       />
@@ -166,9 +167,7 @@ function DonationDetails(props) {
           <PlantProjectDetails
             treeCost={props.selectedProject.treeCost}
             selectedCurrency={
-              props.globalCurrency
-                ? props.globalCurrency.currency
-                : currency
+              props.globalCurrency ? props.globalCurrency.currency : currency
             }
             selectedProject={props.selectedProject}
             rates={
@@ -181,8 +180,8 @@ function DonationDetails(props) {
             setCurrency={setCurrency}
           />
         ) : (
-            <NoPlantProjectDetails />
-          )}
+          <NoPlantProjectDetails />
+        )}
 
         {context.contextType === 'direct' ? (
           <SelectTreeCount
@@ -200,14 +199,14 @@ function DonationDetails(props) {
 
         {/* Gift Trees */}
         {context.contextType === 'gift-contact' ||
-          context.contextType === 'gift-invitation' ? (
-            <GiftTreesComponent
-              treeCount={treeCount}
-              setTreeCount={setTreeCount}
-              selectedProject={props.selectedProject}
-              context={context}
-            />
-          ) : null}
+        context.contextType === 'gift-invitation' ? (
+          <GiftTreesComponent
+            treeCount={treeCount}
+            setTreeCount={setTreeCount}
+            selectedProject={props.selectedProject}
+            context={context}
+          />
+        ) : null}
 
         {context.contextType === 'pledge' ? (
           <>
@@ -283,9 +282,7 @@ function DonationDetails(props) {
         donationPay={props.donationPay}
         selectedProject={props.selectedProject}
         treeCost={props.selectedProject.treeCost}
-        selectedCurrency={
-          currency
-        }
+        selectedCurrency={currency}
         rates={
           props.currencies.currencies.currency_rates[
             props.selectedProject.currency

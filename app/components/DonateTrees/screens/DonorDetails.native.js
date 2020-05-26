@@ -44,7 +44,6 @@ export default function DonorDetails(props) {
   const [buttonType, setButtonType] = useState('donate');
   const [isCompanySwitch, setisCompanySwitch] = React.useState(false); // for Switching whether the user wants receipt or not
 
-
   let lastnameRef = useRef(null);
   let emailRef = useRef(null);
   let addressRef = useRef(null);
@@ -73,8 +72,6 @@ export default function DonorDetails(props) {
       keyboardDidHideListener.remove();
     };
   });
-
-  console.log('Context in Donor Details page', props.context);
 
   return (
     <View style={{ backgroundColor: 'white', flex: 1 }}>
@@ -114,7 +111,6 @@ export default function DonorDetails(props) {
         }}
         validationSchema={DonationContactDetailsSchema}
         onSubmit={values => {
-          console.log(values);
           props.contextActions.setDonorDetails(values);
           updateStaticRoute('payment_details_form', props.navigation, {
             navigation: props.navigation
@@ -209,9 +205,9 @@ export default function DonorDetails(props) {
                     }}
                     onChangeText={formikProps.handleChange('email')}
                     onBlur={formikProps.handleBlur('email')}
-                  // onSubmitEditing={() => {
-                  //   addressRef.focus();
-                  // }}
+                    // onSubmitEditing={() => {
+                    //   addressRef.focus();
+                    // }}
                   />
                 </View>
                 <View style={styles.autoCompleteAddressView}>
@@ -297,20 +293,20 @@ export default function DonorDetails(props) {
               </View>
             </KeyboardAwareScrollView>
             {props.context &&
-              props.context.donationDetails &&
-              props.context.projectDetails &&
-              props.context.donationDetails.totalTreeCount ? (
-                <PaymentOption
-                  treeCount={props.context.donationDetails.totalTreeCount}
-                  treeCost={props.context.projectDetails.amountPerTree}
-                  selectedCurrency={props.context.projectDetails.currency}
-                  navigation={props.navigation}
-                  onSubmit={formikProps.handleSubmit}
-                  isValid={formikProps.isValid}
-                />
-              ) : (
-                <ActivityIndicator size="large" color="#0000ff" />
-              )}
+            props.context.donationDetails &&
+            props.context.projectDetails &&
+            props.context.donationDetails.totalTreeCount ? (
+              <PaymentOption
+                treeCount={props.context.donationDetails.totalTreeCount}
+                treeCost={props.context.projectDetails.amountPerTree}
+                selectedCurrency={props.context.projectDetails.currency}
+                navigation={props.navigation}
+                onSubmit={formikProps.handleSubmit}
+                isValid={formikProps.isValid}
+              />
+            ) : (
+              <ActivityIndicator size="large" color="#0000ff" />
+            )}
           </>
         )}
       </Formik>
@@ -328,7 +324,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                ((props.treeCount / 100) * 2.9 + 0.3)
+                    ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency
@@ -361,15 +357,15 @@ export function PaymentOption(props) {
           />
         </TouchableOpacity>
       ) : (
-          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-            <Text style={styles.continueButtonText}>Next</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
-              source={nextArrowWhite}
-              resizeMode="contain"
-            />
-          </View>
-        )}
+        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+        </View>
+      )}
     </View>
   );
 }

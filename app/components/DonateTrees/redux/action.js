@@ -144,7 +144,6 @@ export const setSelectedProjectDetails = selectedProjectDetails => dispatch => {
 };
 
 export const clearSelectedProjectDetails = () => dispatch => {
-  console.log('\n\n\x1b[45mclearSelectedProjectDetails\x1b[0m\n\n');
   dispatch({
     type: CLEAR_SELECTED_PROJECT
   });
@@ -191,9 +190,7 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
                 version: 'v1.4',
                 plantProject: plantProject
               })
-                .then(res => {
-                  console.log(res.data);
-                })
+                .then(res => {})
                 .catch(error => {
                   NotificationManager.error(
                     error.response.data.message,
@@ -206,7 +203,6 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
                 plantProject: plantProject
               })
                 .then(res => {
-                  console.log('Entered in Create donation');
                   dispatch({
                     type: SET_DONATION_ID,
                     payload: res.data.donationId
@@ -227,9 +223,7 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
               version: 'v1.4',
               plantProject: plantProject
             })
-              .then(res => {
-                console.log('Donation ID', res.data.donationId);
-              })
+              .then(res => {})
               .catch(error => {
                 NotificationManager.error(
                   error.response.data.message,
@@ -242,7 +236,6 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
               plantProject: plantProject
             })
               .then(res => {
-                console.log('Entered in Create donation');
                 dispatch({
                   type: SET_DONATION_ID,
                   payload: res.data.donationId
@@ -280,11 +273,8 @@ export function donationPay(data, donationID, loggedIn) {
               version: 'v1.4',
               donation: donationID
             })
-              .then(res => {
-                console.log('Then Donation Pay', res.data);
-              })
+              .then(res => {})
               .catch(error => {
-                console.log('Catch Donation Pay', error);
                 NotificationManager.error(
                   error.response.data.message,
                   i18n.t('label.error'),
@@ -295,11 +285,8 @@ export function donationPay(data, donationID, loggedIn) {
               version: 'v1.4',
               donation: donationID
             })
-              .then(res => {
-                console.log('Then Donation Pay', res.data);
-              })
+              .then(res => {})
               .catch(error => {
-                console.log('Catch Donation Pay', error);
                 NotificationManager.error(
                   error.response.data.message,
                   i18n.t('label.error'),

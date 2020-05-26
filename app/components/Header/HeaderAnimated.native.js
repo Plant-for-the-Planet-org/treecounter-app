@@ -70,6 +70,9 @@ export default function HeaderAnimated(props) {
   });
 
   let navigateBack = () => {
+    if (props.onBack) {
+      props.onBack();
+    }
     props.navigation.goBack();
     return true;
   };
@@ -103,7 +106,7 @@ export default function HeaderAnimated(props) {
       >
         <TouchableOpacity
           style={{ height: 18, zIndex: 1001, left: 24 }}
-          onPress={() => props.navigation.goBack()}
+          onPress={navigateBack}
         >
           <Image
             source={props.showClose ? closeIcon : backArrow}

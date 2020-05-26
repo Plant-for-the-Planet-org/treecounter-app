@@ -165,6 +165,7 @@ function DonationDetails(props) {
               navigation={props.navigation}
               title={'Tree Donation'}
               showClose
+              onBack={props.contextActions.clearDonationReducer}
             />
 
             <KeyboardAwareScrollView

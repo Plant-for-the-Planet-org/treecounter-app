@@ -28,6 +28,26 @@ import {
 import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
 import ProjectModal from '../components/ProjectModal.native';
 import stripe from 'tipsi-stripe';
+import { TextField } from 'react-native-material-textfield';
+import i18n from '../../../locales/i18n.js';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+const DonationDetailsValidation = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Email is required')
+});
+
+const validateEmail = (value) => {
+  let error;
+  if (!value) {
+    error = 'Email is Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    error = 'Invalid email address';
+  }
+  return error;
+}
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
@@ -44,6 +64,8 @@ function DonationDetails(props) {
   const [token, setToken] = React.useState(null);
   const [applePayStatus, setApplePayStatus] = React.useState('');
 
+
+  const [email, setEmail] = React.useState(props.currentUserProfile ? props.currentUserProfile.email : '');
   // this is to test whether Apple/Google pay is allowed or not
   stripe.setOptions({
     publishableKey: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
@@ -116,117 +138,127 @@ function DonationDetails(props) {
 
   return (
     <View style={{ backgroundColor: 'white' }}>
-      <StatusBar hidden />
-
-      <ProjectModal
-        hideModal={setProjectModal}
-        show={showProjectModal}
-        navigation={props.navigation}
-        handleProjectChange={project => {
-          setProjectModal(false);
+      <Formik
+        initialValues={{ email: props.currentUserProfile ? props.currentUserProfile.email : '' }}
+        validationSchema={DonationDetailsValidation}
+        onSubmit={values => {
+          console.log(values);
         }}
-        context={context}
-      />
-
-      <HeaderAnimated
-        scrollY={scrollY}
-        navigation={props.navigation}
-        title={'Tree Donation'}
-        showClose
-      />
-
-      <KeyboardAwareScrollView
-        contentContainerStyle={styles.scrollView}
-        keyboardDismissMode="on-drag"
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled
-        extraScrollHeight={100}
-        extraHeight={100}
-        enableOnAndroid
-        scrollEventThrottle={16}
-        onScroll={Animated.event([
-          { nativeEvent: { contentOffset: { y: scrollY } } }
-        ])}
+        validateOnChange
       >
-        {/* Plant Project Details */}
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>DONATION TO</Text>
-          {props.selectedProject ? (
-            <TouchableOpacity
-              onPress={() => {
-                saveContext();
-                setProjectModal(true);
+        {formikProps => (
+          <>
+            <StatusBar hidden />
+
+            <ProjectModal
+              hideModal={setProjectModal}
+              show={showProjectModal}
+              navigation={props.navigation}
+              handleProjectChange={project => {
+                setProjectModal(false);
               }}
-            >
-              <Text style={styles.sectionRightButton}>Change</Text>
-            </TouchableOpacity>
-          ) : null}
-        </View>
-        {props.selectedProject ? (
-          <PlantProjectDetails
-            treeCost={props.selectedProject.treeCost}
-            selectedCurrency={
-              props.globalCurrency
-                ? props.globalCurrency.currency
-                : currency
-            }
-            selectedProject={props.selectedProject}
-            rates={
-              props.currencies.currencies.currency_rates[
-                props.selectedProject.currency
-              ].rates
-            }
-            fee={paymentFee}
-            globalCurrency={props.globalCurrency}
-            setCurrency={setCurrency}
-          />
-        ) : (
-            <NoPlantProjectDetails />
-          )}
-
-        {context.contextType === 'direct' ? (
-          <SelectTreeCount
-            treeCount={treeCount}
-            setTreeCount={setTreeCount}
-            selectedProject={props.selectedProject}
-          />
-        ) : null}
-
-        {/* Donation Context */}
-
-        {context.contextType === 'support' ? (
-          <SupportUserDetails context={context} />
-        ) : null}
-
-        {/* Gift Trees */}
-        {context.contextType === 'gift-contact' ||
-          context.contextType === 'gift-invitation' ? (
-            <GiftTreesComponent
-              treeCount={treeCount}
-              setTreeCount={setTreeCount}
-              selectedProject={props.selectedProject}
               context={context}
             />
-          ) : null}
 
-        {context.contextType === 'pledge' ? (
-          <>
-            <PledgeOnComponent pledgeDetails={context.pledgeDetails} />
-            <PledgeTreeCount
-              treeCount={treeCount}
-              treeCountPledged={context.pledgeDetails.treeCount}
-              setTreeCount={setTreeCount}
+            <HeaderAnimated
+              scrollY={scrollY}
+              navigation={props.navigation}
+              title={'Tree Donation'}
+              showClose
             />
-          </>
-        ) : null}
 
-        {/* <SelectFrequency frequency={frequency} setFrequency={setFrequency} /> */}
-        <View
-          style={[styles.horizontalDivider, { width: '14%', marginTop: 30 }]}
-        />
+            <KeyboardAwareScrollView
+              contentContainerStyle={styles.scrollView}
+              keyboardDismissMode="on-drag"
+              resetScrollToCoords={{ x: 0, y: 0 }}
+              scrollEnabled
+              extraScrollHeight={100}
+              extraHeight={100}
+              enableOnAndroid
+              scrollEventThrottle={16}
+              onScroll={Animated.event([
+                { nativeEvent: { contentOffset: { y: scrollY } } }
+              ])}
+            >
+              {/* Plant Project Details */}
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>DONATION TO</Text>
+                {props.selectedProject ? (
+                  <TouchableOpacity
+                    onPress={() => {
+                      saveContext();
+                      setProjectModal(true);
+                    }}
+                  >
+                    <Text style={styles.sectionRightButton}>Change</Text>
+                  </TouchableOpacity>
+                ) : null}
+              </View>
+              {props.selectedProject ? (
+                <PlantProjectDetails
+                  treeCost={props.selectedProject.treeCost}
+                  selectedCurrency={
+                    props.globalCurrency
+                      ? props.globalCurrency.currency
+                      : currency
+                  }
+                  selectedProject={props.selectedProject}
+                  rates={
+                    props.currencies.currencies.currency_rates[
+                      props.selectedProject.currency
+                    ].rates
+                  }
+                  fee={paymentFee}
+                  globalCurrency={props.globalCurrency}
+                  setCurrency={setCurrency}
+                />
+              ) : (
+                  <NoPlantProjectDetails />
+                )}
 
-        {/* Commission Covering */}
-        {/* {context.treeCount ? (
+              {context.contextType === 'direct' ? (
+                <SelectTreeCount
+                  treeCount={treeCount}
+                  setTreeCount={setTreeCount}
+                  selectedProject={props.selectedProject}
+                />
+              ) : null}
+
+              {/* Donation Context */}
+
+              {context.contextType === 'support' ? (
+                <SupportUserDetails context={context} />
+              ) : null}
+
+              {/* Gift Trees */}
+              {context.contextType === 'gift-contact' ||
+                context.contextType === 'gift-invitation' ? (
+                  <GiftTreesComponent
+                    treeCount={treeCount}
+                    setTreeCount={setTreeCount}
+                    selectedProject={props.selectedProject}
+                    context={context}
+                  />
+                ) : null}
+
+              {context.contextType === 'pledge' ? (
+                <>
+                  <PledgeOnComponent pledgeDetails={context.pledgeDetails} />
+                  <PledgeTreeCount
+                    treeCount={treeCount}
+                    treeCountPledged={context.pledgeDetails.treeCount}
+                    setTreeCount={setTreeCount}
+                  />
+                </>
+              ) : null}
+
+              {/* <SelectFrequency frequency={frequency} setFrequency={setFrequency} /> */}
+              <View
+                style={[styles.horizontalDivider, { width: '14%', marginTop: 30 }]}
+              />
+
+              {/* Commission Covering */}
+              {/* {context.treeCount ? (
           <CoverFee
             selectedProject={props.selectedProject.tpoSlug}
             treeCount={context.treeCount}
@@ -236,64 +268,93 @@ function DonationDetails(props) {
           />
         ) : null} */}
 
-        {/* Tax Receipt */}
-        {props.hasTaxDeduction && (
-          <TaxReceipt
-            taxReceiptSwitch={taxReceiptSwitch}
-            toggleTaxReceipt={toggleTaxReceipt}
-            setShowTaxCountryModal={setShowTaxCountryModal}
-            selectedTaxCountry={selectedTaxCountry}
-            oneTaxCountry={
-              props.taxDeductibleCountries.length > 1 ? true : false
-            }
-          />
+              {/* Tax Receipt */}
+              {props.hasTaxDeduction && (
+                <TaxReceipt
+                  taxReceiptSwitch={taxReceiptSwitch}
+                  toggleTaxReceipt={toggleTaxReceipt}
+                  setShowTaxCountryModal={setShowTaxCountryModal}
+                  selectedTaxCountry={selectedTaxCountry}
+                  oneTaxCountry={
+                    props.taxDeductibleCountries.length > 1 ? true : false
+                  }
+                />
+              )}
+
+
+
+
+              <View style={{ marginTop: 12 }}>
+                <TextField
+                  label={i18n.t('label.pledgeFormEmail')}
+                  value={formikProps.values.email}
+                  tintColor={'#89b53a'}
+                  titleFontSize={12}
+                  lineWidth={1}
+                  keyboardType="email-address"
+                  labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                  affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                  returnKeyType="next"
+                  onEndEditing={(email) => { setEmail(email) }}
+                  onChangeText={formikProps.handleChange('email')}
+                  onBlur={formikProps.handleBlur('email')}
+                  error={
+                    formikProps.touched.email && formikProps.errors.email
+                  }
+                // validate={validateEmail}
+                />
+              </View>
+
+              <SelectCountryModal
+                selectedCountry={selectedTaxCountry}
+                setSelectedCountry={setSelectedTaxCountry}
+                showModal={showTaxCountryModal}
+                setShowModal={setShowTaxCountryModal}
+                taxDeductibleCountries={props.taxDeductibleCountries}
+              />
+
+              {/* Needed In Future */}
+              {/* <UserContactDetails donorDetails={donorDetails} /> */}
+              {/* <UserPaymentDetails paymentDetails={paymentDetails} /> */}
+              {/* <PaymentsProcessedBy/> */}
+            </KeyboardAwareScrollView>
+
+            <PaymentOption
+              treeCount={treeCount}
+              commissionSwitch={commissionSwitch}
+              navigation={props.navigation}
+              onContinue={onContinue}
+              // frequency={frequency}
+              showNativePay={
+                allowedNativePay ? (Platform.OS === 'ios' ? 'apple' : 'google') : null
+              }
+              token={token}
+              setToken={setToken}
+              stripe={stripe}
+              setApplePayStatus={setApplePayStatus}
+              currentUserProfile={props.currentUserProfile}
+              context={context}
+              createDonation={props.createDonation}
+              setDonorDetails={props.setDonorDetails}
+              donationPay={props.donationPay}
+              selectedProject={props.selectedProject}
+              treeCost={props.selectedProject.treeCost}
+              selectedCurrency={
+                currency
+              }
+              rates={
+                props.currencies.currencies.currency_rates[
+                  props.selectedProject.currency
+                ].rates
+              }
+              fee={paymentFee}
+              globalCurrency={props.globalCurrency}
+              isValid={formikProps.isValid}
+            />
+          </>
         )}
-
-        <SelectCountryModal
-          selectedCountry={selectedTaxCountry}
-          setSelectedCountry={setSelectedTaxCountry}
-          showModal={showTaxCountryModal}
-          setShowModal={setShowTaxCountryModal}
-          taxDeductibleCountries={props.taxDeductibleCountries}
-        />
-
-        {/* Needed In Future */}
-        {/* <UserContactDetails donorDetails={donorDetails} /> */}
-        {/* <UserPaymentDetails paymentDetails={paymentDetails} /> */}
-        {/* <PaymentsProcessedBy/> */}
-      </KeyboardAwareScrollView>
-
-      <PaymentOption
-        treeCount={treeCount}
-        commissionSwitch={commissionSwitch}
-        navigation={props.navigation}
-        onContinue={onContinue}
-        // frequency={frequency}
-        showNativePay={
-          allowedNativePay ? (Platform.OS === 'ios' ? 'apple' : 'google') : null
-        }
-        token={token}
-        setToken={setToken}
-        stripe={stripe}
-        setApplePayStatus={setApplePayStatus}
-        currentUserProfile={props.currentUserProfile}
-        context={context}
-        createDonation={props.createDonation}
-        setDonorDetails={props.setDonorDetails}
-        donationPay={props.donationPay}
-        selectedProject={props.selectedProject}
-        treeCost={props.selectedProject.treeCost}
-        selectedCurrency={
-          currency
-        }
-        rates={
-          props.currencies.currencies.currency_rates[
-            props.selectedProject.currency
-          ].rates
-        }
-        fee={paymentFee}
-        globalCurrency={props.globalCurrency}
-      />
+      </Formik>
     </View>
   );
 }

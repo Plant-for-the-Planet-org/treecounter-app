@@ -267,7 +267,7 @@ export function PaymentOption(props) {
   return (
     <View style={styles.bottomButtonView}>
       <View style={styles.leftSection}>
-        {props.treeCount ? (
+        {props.treeCount && props.isValid ? (
           <>
             <View style={styles.paymentTreeDetails}>
               <Text style={styles.paymentTreeAmount}>
@@ -297,11 +297,13 @@ export function PaymentOption(props) {
               </Text>
             </View>
           </>
-        ) : (
-            <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
-          )}
+        ) : !props.treeCount ? (
+          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
+        ) : !props.isValid ? (
+          <Text style={styles.paymentTreeCount}>Please enter Email</Text>
+        ) : null}
       </View>
-      {props.treeCount ? (
+      {props.treeCount && props.isValid ? (
         <>
           <TouchableOpacity
             onPress={() =>
@@ -477,8 +479,7 @@ export function PlantProjectDetails(props) {
               data={treeCost.toFixed(2)}
               handleCurrencyChange={handleCurrencyChange}
               force={force}
-            />
-            per tree
+            /> per tree
           </Text>
         </View>
       </View>

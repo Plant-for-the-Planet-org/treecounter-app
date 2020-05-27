@@ -103,7 +103,7 @@ export default EStyleSheet.create({
 
   pageScrollView: {
     backgroundColor: 'white',
-    paddingBottom: 140,
+    paddingBottom: 180,
     marginTop: 120
   },
   pageView: {
@@ -127,8 +127,7 @@ export default EStyleSheet.create({
   },
   pageSubTitle: {
     fontSize: 18,
-    fontWeight: '400',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Regular',
     lineHeight: 24,
     letterSpacing: 0,
     textAlign: 'left',
@@ -224,8 +223,7 @@ export default EStyleSheet.create({
   },
   paymentModeTitle: {
     fontSize: 14,
-    fontWeight: 'bold',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Bold',
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: 'left',
@@ -491,5 +489,10 @@ export default EStyleSheet.create({
     color: '#89B53A',
     fontSize: 16,
     marginLeft: 10
+  },
+
+  // Credit card form 
+  checkBoxText: {
+    fontFamily: 'OpenSans-Regular'
   }
 });

@@ -93,7 +93,7 @@ export default function DonationStep3(props) {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.WHITE }}>
+    <View style={{ flex: 1, backgroundColor: colors.WHITE, paddingBottom: 120 }}>
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
@@ -193,7 +193,7 @@ const PaymentButton = props => {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                    ((props.treeCount / 100) * 2.9 + 0.3)
+                ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency

@@ -31,22 +31,22 @@ export default class CreditCardForm extends Component {
   state = {
     creditCardInfo: false,
     creditCardsList: [
-      {
-        id: 0,
-        selected: false,
-        image: discover,
-        cardNumber: '*** 5997',
-        expiryDate: 'Expired',
-        cvv: '453'
-      },
-      {
-        id: 1,
-        selected: true,
-        image: americanExpress,
-        cardNumber: '*** 5997',
-        expiryDate: '10/20',
-        cvv: '234'
-      }
+      // {
+      //   id: 0,
+      //   selected: false,
+      //   image: discover,
+      //   cardNumber: '*** 5997',
+      //   expiryDate: 'Expired',
+      //   cvv: '453'
+      // },
+      // {
+      //   id: 1,
+      //   selected: true,
+      //   image: americanExpress,
+      //   cardNumber: '*** 5997',
+      //   expiryDate: '10/20',
+      //   cvv: '234'
+      // }
     ],
     showNewCreditCard: false,
     showPay: true
@@ -108,13 +108,13 @@ export default class CreditCardForm extends Component {
                 style={{ marginLeft: 10 }}
               />
             ) : (
-              <Icon
-                name="chevron-down"
-                size={14}
-                color="rgba(0, 0, 0, 0.38)"
-                style={{ marginLeft: 10 }}
-              />
-            )}
+                <Icon
+                  name="chevron-down"
+                  size={14}
+                  color="rgba(0, 0, 0, 0.38)"
+                  style={{ marginLeft: 10 }}
+                />
+              )}
           </TouchableOpacity>
           {/* Hidden until expanded by User */}
           {this.state.creditCardInfo ? (
@@ -187,8 +187,7 @@ export default class CreditCardForm extends Component {
                   <Text
                     style={{
                       fontSize: 14,
-                      fontWeight: 'bold',
-                      fontStyle: 'normal',
+                      fontFamily: 'OpenSans-Bold',
                       lineHeight: 19,
                       letterSpacing: 0,
                       textAlign: 'left',
@@ -202,9 +201,13 @@ export default class CreditCardForm extends Component {
                   <View style={{ marginTop: 18 }}>
                     <CreditCardInput
                       onChange={this._onChange}
-                      inputContainerStyle={{ maxWidth: 120 }}
+                      inputContainerStyle={{ maxWidth: 120, fontFamily: 'OpenSans-Regular' }}
                       cardImageFront={creditCard}
                       cardImageBack={creditCardBack}
+                      cardFontFamily={'OpenSans-Regular'}
+                      labelStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      allowScroll
+                      placeholderColor={'#d5d5d5'}
                     />
                     {/* <LiteCreditCardInput onChange={this._onChange}
                     // inputContainerStyle={{ maxWidth: 100 }}

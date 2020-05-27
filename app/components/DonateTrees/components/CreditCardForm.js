@@ -49,7 +49,9 @@ export default class CreditCardForm extends Component {
       // }
     ],
     showNewCreditCard: false,
-    showPay: true
+    showPay: true,
+    cardValues: null,
+    changeInCardValue: false
   };
 
   togglecreditCardInfo = () => {
@@ -82,9 +84,34 @@ export default class CreditCardForm extends Component {
     this.setState({ showNewCreditCard: !this.state.showNewCreditCard });
   };
 
-  _onChange = form => console.log(form);
+  _onChange = form => {
+    this.setState({
+      cardValues: form,
+      changeInCardValue: true
+    });
+  }
+
+
+
+
 
   render() {
+
+    if (this.state.cardValues && this.state.cardValues.valid && this.state.changeInCardValue) {
+      this.setState({
+        changeInCardValue: false
+      });
+      this.props.setcardValid(true);
+      let expArr = this.state.cardValues.values.expiry.split("/");
+      let cardDetails = {
+        number: this.state.cardValues.values.number,
+        cvc: this.state.cardValues.values.cvc,
+        expMonth: expArr[0],
+        expYear: expArr[1]
+      }
+      console.log('Card Values', cardDetails);
+      this.props.setcardValues(cardDetails)
+    }
     return (
       <View>
         {/* Payment Information Card */}

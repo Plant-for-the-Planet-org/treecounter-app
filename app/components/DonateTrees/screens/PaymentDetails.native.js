@@ -32,17 +32,11 @@ export default function DonationStep3(props) {
 
   const [payPalInfo, setPayPalInfo] = React.useState(false);
   const [showPay, setShowPay] = React.useState(true);
-  const [allValid, setAllValid] = React.useState(false);
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
-  const [allowedNativePay, setallowedNativePay] = React.useState(false);
 
-  const [amexAvailable, setAmexAvailable] = React.useState(false);
-  const [discoverAvailable, setDiscoverAvailable] = React.useState(false);
-  const [masterCardAvailable, setMasterCardAvailable] = React.useState(false);
-  const [visaAvailable, setVisaAvailable] = React.useState(false);
 
-  const [applePayComplete, setApplePayComplete] = React.useState(false);
-  const [applePayStatus, setApplePayStatus] = React.useState('');
+  const [cardValues, setcardValues] = React.useState('');
+  const [cardValid, setcardValid] = React.useState(false);
 
   const togglePaypalInfo = () => {
     setPayPalInfo(!payPalInfo);
@@ -57,25 +51,6 @@ export default function DonationStep3(props) {
       'keyboardDidHide',
       keyboardDidHide
     );
-
-    const allowedNativePay = stripe.deviceSupportsNativePay();
-    const amexAvailable = stripe.canMakeNativePayPayments({
-      networks: ['american_express']
-    });
-    const discoverAvailable = stripe.canMakeNativePayPayments({
-      networks: ['discover']
-    });
-    const masterCardAvailable = stripe.canMakeNativePayPayments({
-      networks: ['master_card']
-    });
-    const visaAvailable = stripe.canMakeNativePayPayments({
-      networks: ['visa']
-    });
-    setallowedNativePay(allowedNativePay);
-    setAmexAvailable(amexAvailable);
-    setDiscoverAvailable(discoverAvailable);
-    setMasterCardAvailable(masterCardAvailable);
-    setVisaAvailable(visaAvailable);
 
     // clean up
     return () => {
@@ -116,7 +91,10 @@ export default function DonationStep3(props) {
             Please review your payment and donation details.
           </Text>
 
-          <CreditCardForm />
+          <CreditCardForm
+            setcardValid={setcardValid}
+            setcardValues={setcardValues}
+          />
 
           {/* PayPal Information Card */}
           {/* <View style={styles.paymentCardView}>
@@ -176,7 +154,7 @@ export default function DonationStep3(props) {
           selectedCurrency={props.context.projectDetails.currency}
           // commissionSwitch={props.navigation.getParam('commissionSwitch')}
           navigation={props.navigation}
-          allValid={allValid}
+          cardValid={cardValid}
         />
       ) : null}
       {/* Pay Button Section Ended */}
@@ -211,7 +189,7 @@ const PaymentButton = props => {
           });
         }}
         style={
-          props.allValid
+          props.cardValid
             ? styles.continueButtonView
             : styles.continueButtonViewInvalid
         }

@@ -18,8 +18,7 @@ import colors from '../../../utils/constants';
 import { formatNumber } from '../../../utils/utils';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import CreditCardForm from './../components/CreditCardForm';
-import { handleApplePayPress } from './../components/paymentMethods/applePay';
-import { handleAndroidPayPress } from './../components/paymentMethods/googlePay';
+import { handleCreditCardPayPress } from './../components/paymentMethods/creditCard';
 
 export default function DonationStep3(props) {
   stripe.setOptions({
@@ -66,6 +65,8 @@ export default function DonationStep3(props) {
   const keyboardDidHide = () => {
     setShowPay(true);
   };
+
+  console.log('Card Values', cardValues);
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.WHITE, paddingBottom: 120 }}>
@@ -155,6 +156,8 @@ export default function DonationStep3(props) {
           // commissionSwitch={props.navigation.getParam('commissionSwitch')}
           navigation={props.navigation}
           cardValid={cardValid}
+          stripe={stripe}
+          cardValues={cardValues}
         />
       ) : null}
       {/* Pay Button Section Ended */}
@@ -183,10 +186,25 @@ const PaymentButton = props => {
       </View>
       <TouchableOpacity
         onPress={() => {
-          updateStaticRoute('donate_thankyou', props.navigation, {
-            treeCount: props.treeCount,
-            plantedBy: 'Eden Reforestation Project'
-          });
+          handleCreditCardPayPress({
+            // totalTreeCount: String(props.treeCount),
+            // totalPrice: String(props.treeCount * props.treeCost),
+            // amountPerTree: String(props.treeCost),
+            currency_code: String(props.selectedCurrency),
+            stripe: props.stripe,
+            // currentUserProfile: props.currentUserProfile,
+            // context: props.context,
+            // createDonation: props.createDonation,
+            // setDonorDetails: props.setDonorDetails,
+            // donationPay: props.donationPay,
+            // selectedProject: props.selectedProject
+            cardValues: props.cardValues
+          })
+
+          // updateStaticRoute('donate_thankyou', props.navigation, {
+          //   treeCount: props.treeCount,
+          //   plantedBy: 'Eden Reforestation Project'
+          // });
         }}
         style={
           props.cardValid

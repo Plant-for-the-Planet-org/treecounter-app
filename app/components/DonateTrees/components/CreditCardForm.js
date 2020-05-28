@@ -109,7 +109,6 @@ export default class CreditCardForm extends Component {
         expMonth: expArr[0],
         expYear: expArr[1]
       }
-      console.log('Card Values', cardDetails);
       this.props.setcardValues(cardDetails)
     }
     return (

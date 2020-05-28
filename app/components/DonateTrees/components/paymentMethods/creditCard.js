@@ -14,74 +14,74 @@ export const handleCreditCardPayPress = async props => {
     const token = await props.stripe
       .createTokenWithCard(params)
       .then(token => {
+        // Create Donation API
+        let loggedIn = props.currentUserProfile;
+        let plantProject = props.context.projectDetails.plantProjectID;
 
-        console.log('Token', token)
+        let newData = {
+          amount: Number(props.totalPrice),
+          currency: props.currency_code,
+          recipientType: props.context.donorDetails.isCompany ? 'company' : 'individual',
+          treeCount: Number(props.totalTreeCount),
+          receiptIndividual: {
+            firstname: props.context.donorDetails.firstname,
+            lastname: props.context.donorDetails.lastname,
+            email: props.context.donorDetails.email,
+            address: props.context.donorDetails.address,
+            zipCode: '323222',
+            city: 'Mumbai',
+            country: 'India'
+          }
+        };
 
-        // // Create Donation API
-        // let loggedIn = props.currentUserProfile;
-        // let plantProject = props.selectedProject.id;
-        // let newData = {
-        //   amount: Number(props.totalPrice),
-        //   currency: props.currency_code,
-        //   recipientType: 'individual',
-        //   treeCount: Number(props.totalTreeCount),
-        //   receiptIndividual: {
-        //     firstname: token.card.name,
-        //     lastname: token.card.name,
-        //     email: 'a@b.com',
-        //     address: token.card.addressLine1,
-        //     zipCode: token.card.addressZip,
-        //     city: token.card.addressCity,
-        //     country: token.card.addressCountry
-        //   }
-        // };
+        let donationType = props.context.contextType;
+        props
+          .createDonation(newData, plantProject, loggedIn, donationType)
+          .then(response => {
+            console.log('Resposne', response)
+            const donationID = response.data.donationId;
+            const data = {
+              type: 'card',
+              card: { token: token.tokenId },
+              key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw'
+            };
 
-        //   let donationType = props.context.contextType;
-        //   props
-        //     .createDonation(newData, plantProject, loggedIn, donationType)
-        //     .then(response => {
-        //       const donationID = response.data.donationId;
-        //       const data = {
-        //         type: 'card',
-        //         card: { token: token.tokenId },
-        //         key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw'
-        //       };
+            const paymentMethod = axios
+              .post(
+                'https://api.stripe.com/v1/payment_methods',
+                JSON_to_URLEncoded(data),
+                {
+                  headers: {
+                    Authorization:
+                      'Bearer sk_test_pvrGEhOIEu3HwYdLTMhqznnl00kFjZUvMD',
+                    'Content-Type':
+                      'application/x-www-form-urlencoded; charset=UTF-8'
+                  }
+                }
+              )
+              .then(response => {
+                console.log('Payment Method', response)
+                // let payData = {
+                //   paymentProviderRequest: {
+                //     account: token.card.cardId,
+                //     gateway: 'stripe',
+                //     source: {
+                //       id: response.data.id,
+                //       object: response.data.object
+                //     }
+                //   }
+                // };
 
-        //       const paymentMethod = axios
-        //         .post(
-        //           'https://api.stripe.com/v1/payment_methods',
-        //           JSON_to_URLEncoded(data),
-        //           {
-        //             headers: {
-        //               Authorization:
-        //                 'Bearer sk_test_pvrGEhOIEu3HwYdLTMhqznnl00kFjZUvMD',
-        //               'Content-Type':
-        //                 'application/x-www-form-urlencoded; charset=UTF-8'
-        //             }
-        //           }
-        //         )
-        //         .then(response => {
-        //           let payData = {
-        //             paymentProviderRequest: {
-        //               account: token.card.cardId,
-        //               gateway: 'stripe',
-        //               source: {
-        //                 id: response.data.id,
-        //                 object: response.data.object
-        //               }
-        //             }
-        //           };
-
-        //           // This is the final Pay API
-        //           props.donationPay(payData, donationID, loggedIn);
-        //         })
-        //         .catch(error => {
-        //           console.log(error.response);
-        //         });
-        //     });
+                // // This is the final Pay API
+                // props.donationPay(payData, donationID, loggedIn);
+              })
+              .catch(error => {
+                console.log(error.response);
+              });
+          });
       })
       .catch(err => {
-        console.log('error gpay', err);
+        console.log('Error', err);
       });
     // props.setToken(token);
   } catch (error) {

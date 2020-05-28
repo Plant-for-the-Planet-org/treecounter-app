@@ -158,6 +158,8 @@ export default function DonationStep3(props) {
           cardValid={cardValid}
           stripe={stripe}
           cardValues={cardValues}
+          context={props.context}
+          createDonation={props.createDonation}
         />
       ) : null}
       {/* Pay Button Section Ended */}
@@ -188,13 +190,13 @@ const PaymentButton = props => {
         onPress={() => {
           handleCreditCardPayPress({
             // totalTreeCount: String(props.treeCount),
-            // totalPrice: String(props.treeCount * props.treeCost),
+            totalPrice: String(props.treeCount * props.treeCost),
             // amountPerTree: String(props.treeCost),
             currency_code: String(props.selectedCurrency),
             stripe: props.stripe,
-            // currentUserProfile: props.currentUserProfile,
-            // context: props.context,
-            // createDonation: props.createDonation,
+            currentUserProfile: props.currentUserProfile,
+            context: props.context,
+            createDonation: props.createDonation,
             // setDonorDetails: props.setDonorDetails,
             // donationPay: props.donationPay,
             // selectedProject: props.selectedProject

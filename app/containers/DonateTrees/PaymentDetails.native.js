@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setDonationDetails, setDonorDetails, setPaymentDetails, setPaymentResponse, setPledgeDetails, setSelectedProjectDetails } from '../../components/DonateTrees/redux/action';
+import { setDonationDetails, setDonorDetails, setPaymentDetails, setPaymentResponse, setPledgeDetails, setSelectedProjectDetails, createDonation } from '../../components/DonateTrees/redux/action';
 import PaymentDetailsNative from '../../components/DonateTrees/screens/PaymentDetails.native';
 import { currentUserProfileSelector } from '../../selectors/index';
 const PaymentDetails = (props) => {
@@ -24,6 +24,7 @@ const PaymentDetails = (props) => {
                 setPaymentDetails: props.setPaymentDetails
             }}
             currentUserProfile={props.currentUserProfile}
+            createDonation={props.createDonation}
         />
     )
 }
@@ -51,7 +52,8 @@ const mapDispatchToProps = dispatch => {
             setPaymentDetails,
             setSelectedProjectDetails,
             setPaymentResponse,
-            setPledgeDetails
+            setPledgeDetails,
+            createDonation
         },
         dispatch
     );

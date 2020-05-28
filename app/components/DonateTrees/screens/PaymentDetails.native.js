@@ -160,6 +160,7 @@ export default function DonationStep3(props) {
           cardValues={cardValues}
           context={props.context}
           createDonation={props.createDonation}
+          currentUserProfile={props.currentUserProfile}
         />
       ) : null}
       {/* Pay Button Section Ended */}
@@ -189,7 +190,7 @@ const PaymentButton = props => {
       <TouchableOpacity
         onPress={() => {
           handleCreditCardPayPress({
-            // totalTreeCount: String(props.treeCount),
+            totalTreeCount: String(props.treeCount),
             totalPrice: String(props.treeCount * props.treeCost),
             // amountPerTree: String(props.treeCost),
             currency_code: String(props.selectedCurrency),

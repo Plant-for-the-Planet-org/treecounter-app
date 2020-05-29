@@ -28,9 +28,9 @@ export const handleCreditCardPayPress = async props => {
             lastname: props.context.donorDetails.lastname,
             email: props.context.donorDetails.email,
             address: props.context.donorDetails.address,
-            zipCode: '323222',
-            city: 'Mumbai',
-            country: 'IN'
+            zipCode: props.context.donorDetails.zipCode,
+            city: props.context.donorDetails.city,
+            country: props.context.donorDetails.country
           }
         };
 

@@ -26,8 +26,7 @@ import {
 import countryData from '../../../assets/countryCodes.json';
 
 import {
-  getCountryFlagImageUrl,
-  getImageUrl
+  getCountryFlagImageUrl
 } from '../../../actions/apiRouting';
 
 
@@ -142,7 +141,6 @@ export default function DonorDetails(props) {
         }}
         validationSchema={DonationContactDetailsSchema}
         onSubmit={values => {
-          console.log('values', values)
           props.contextActions.setDonorDetails(values);
           updateStaticRoute('payment_details_form', props.navigation, {
             navigation: props.navigation

@@ -104,7 +104,8 @@ export function SelectCountryModal(props) {
     return (
       <TouchableOpacity
         onPress={() => {
-          setSelectedCountry(countryCode);
+          props.setFormikValue ? props.setFormikValue('country', countryCode) :
+            setSelectedCountry(countryCode);
           closeModal();
         }}
       >
@@ -228,7 +229,7 @@ export function SelectCountryModal(props) {
         renderItem={renderItem}
         contentContainerStyle={{
           backgroundColor: '#fff',
-          flex: 1,
+          // flex: 1,
           paddingHorizontal: 24
         }}
       />

@@ -30,7 +30,7 @@ export const handleCreditCardPayPress = async props => {
             address: props.context.donorDetails.address,
             zipCode: '323222',
             city: 'Mumbai',
-            country: 'India'
+            country: 'IN'
           }
         };
 

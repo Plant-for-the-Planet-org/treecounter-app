@@ -253,9 +253,7 @@ export default EStyleSheet.create({
   },
 
   // Autocomplete Address
-  autoCompleteAddressView: {
-    marginTop: 24
-  },
+
 
   // Tax Deductible
   notTaxDeductible: {

@@ -18,6 +18,8 @@ export default GooglePlacesInput = props => {
       renderDescription={row => row.description} // custom description render
       onPress={(data, details = null) => {
         // 'details' is provided when fetchDetails = true
+
+        console.log('Data', data)
         setListViewDisplayed(false);
         props.setFieldValue('address', data);
       }}

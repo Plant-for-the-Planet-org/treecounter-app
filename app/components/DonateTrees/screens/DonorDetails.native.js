@@ -20,6 +20,11 @@ import styles from '../../../styles/donations/donorDetails';
 import { formatNumber } from '../../../utils/utils';
 import HeaderAnimated from '../../Header/HeaderAnimated.native';
 import GooglePlacesInput from '../components/AutoComplete.native';
+import {
+  SelectCountryModal,
+} from '../components/donationComponents.native';
+import countryData from '../../../assets/countryCodes.json';
+
 
 const DonationContactDetailsSchema = Yup.object().shape({
   firstname: Yup.string()
@@ -32,17 +37,28 @@ const DonationContactDetailsSchema = Yup.object().shape({
     .required('Last name is equired'),
   email: Yup.string()
     .email('Invalid email')
-    .required('Email is equired'),
-  // address: Yup.string()
-  //   .nullable()
-  //   .required('Address is required'),
-  isCompany: Yup.boolean().required('Required')
+    .required('Email is required'),
+  address: Yup.string()
+    .required('Address is required'),
+  city: Yup.string()
+    .required('City is required'),
+  zipCode: Yup.string()
+    .required('Zip Code is required'),
+  country: Yup.string()
+    .required('Country is required'),
 });
 
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
   const [buttonType, setButtonType] = useState('donate');
   const [isCompanySwitch, setisCompanySwitch] = React.useState(false); // for Switching whether the user wants receipt or not
+  const [showCountryModal, setShowCountryModal] = React.useState(false);
+
+  let countryCodes = countryData;
+  countryCodes = countryCodes.map(a => a.countryCode);
+  countryCodes = countryCodes.sort();
+  console.log('Countries', countryCodes)
+
 
   let lastnameRef = useRef(null);
   let emailRef = useRef(null);
@@ -106,6 +122,15 @@ export default function DonorDetails(props) {
           address: props.currentUserProfile
             ? props.currentUserProfile.address
             : '',
+          city: props.currentUserProfile
+            ? props.currentUserProfile.city
+            : '',
+          zipCode: props.currentUserProfile
+            ? props.currentUserProfile.zipCode
+            : '',
+          country: props.currentUserProfile
+            ? props.currentUserProfile.country
+            : '',
           isCompany: false,
           companyName: ''
         }}
@@ -145,6 +170,7 @@ export default function DonorDetails(props) {
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      style={{ fontFamily: 'OpenSans-Regular' }}
                       blurOnSubmit={false}
                       error={
                         formikProps.touched.firstname &&
@@ -169,6 +195,7 @@ export default function DonorDetails(props) {
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      style={{ fontFamily: 'OpenSans-Regular' }}
                       error={
                         formikProps.touched.lastname &&
                         formikProps.errors.lastname
@@ -199,41 +226,56 @@ export default function DonorDetails(props) {
                     labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                     titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                     affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    style={{ fontFamily: 'OpenSans-Regular' }}
                     returnKeyType="next"
                     ref={input => {
                       emailRef = input;
                     }}
                     onChangeText={formikProps.handleChange('email')}
                     onBlur={formikProps.handleBlur('email')}
-                    // onSubmitEditing={() => {
-                    //   addressRef.focus();
-                    // }}
+                  // onSubmitEditing={() => {
+                  //   addressRef.focus();
+                  // }}
                   />
                 </View>
-                <View style={styles.autoCompleteAddressView}>
-                  {/* <Text
-                    style={{
-                      fontFamily: "OpenSans-SemiBold",
-                      fontSize: 12,
-                      lineHeight: 17,
-                      letterSpacing: 0,
-                      color: "rgba(0, 0, 0, 0.6)",
-                      marginBottom: -24
+
+                <View style={{ marginTop: 12 }}>
+                  <TextField
+                    label={i18n.t('Address')}
+                    value={formikProps.values.address}
+                    tintColor={'#89b53a'}
+                    titleFontSize={12}
+                    lineWidth={1}
+                    error={
+                      formikProps.touched.address && formikProps.errors.address
+                    }
+                    labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                    affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                    style={{ fontFamily: 'OpenSans-Regular' }}
+                    returnKeyType="next"
+                    ref={input => {
+                      addressRef = input;
                     }}
-                  >
-                    Address
-                  </Text> */}
+                    onChangeText={formikProps.handleChange('address')}
+                    onBlur={formikProps.handleBlur('address')}
+                  />
+                </View>
+
+
+                <View style={styles.autoCompleteAddressView}>
                   <GooglePlacesInput
-                    placeholder={'Address'}
+                    placeholder={'City'}
                     initialValue={
-                      formikProps.values.address
-                        ? formikProps.values.address
+                      formikProps.values.city
+                        ? formikProps.values.city
                         : ''
                     }
                     setFieldValue={formikProps.setFieldValue}
                   />
                 </View>
-                {!formikProps.errors.address ? null : (
+
+                {!formikProps.errors.city ? null : (
                   <View>
                     <Text
                       style={{
@@ -243,12 +285,85 @@ export default function DonorDetails(props) {
                         fontSize: 12
                       }}
                     >
-                      {formikProps.values.address
+                      {formikProps.values.city
                         ? null
-                        : formikProps.errors.address}
+                        : formikProps.errors.city}
                     </Text>
                   </View>
                 )}
+
+                <View style={styles.formView}>
+                  <View style={[styles.formHalfTextField, { zIndex: 2 }]}>
+                    <TextField
+                      label={'Zip code'}
+                      value={formikProps.values.zipCode}
+                      tintColor={'#89b53a'}
+                      titleFontSize={12}
+                      returnKeyType="next"
+                      lineWidth={1}
+                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      style={{ fontFamily: 'OpenSans-Regular' }}
+                      blurOnSubmit={false}
+                      error={
+                        formikProps.touched.zipCode &&
+                        formikProps.errors.zipCode
+                      }
+                      onChangeText={formikProps.handleChange('zipCode')}
+                      onBlur={formikProps.handleBlur('zipCode')}
+                    // onSubmitEditing={() => {
+                    //   lastnameRef.focus();
+                    // }}
+                    />
+                  </View>
+
+                  <TouchableOpacity
+                    onPress={() => setShowCountryModal(
+                      prevTaxCountryModal => !prevTaxCountryModal
+                    )}
+                  >
+                    <Text>Country</Text>
+                  </TouchableOpacity>
+
+                  <SelectCountryModal
+                    selectedCountry={formikProps.values.city}
+                    // setSelectedCountry={setSelectedTaxCountry}
+                    showModal={showCountryModal}
+                    setShowModal={setShowCountryModal}
+                    setFormikValue={formikProps.setFieldValue}
+                    taxDeductibleCountries={countryCodes}
+                  />
+
+                  {/* <View style={styles.formHalfTextField}>
+                    <TextField
+                      label={'Country'}
+                      value={formikProps.values.country}
+                      tintColor={'#89b53a'}
+                      titleFontSize={12}
+                      returnKeyType="next"
+                      lineWidth={1}
+                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
+                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+                      style={{ fontFamily: 'OpenSans-Regular' }}
+                      error={
+                        formikProps.touched.country &&
+                        formikProps.errors.country
+                      }
+                      // ref={input => {
+                      //   countryRef = input;
+                      // }}
+                      onChangeText={formikProps.handleChange('country')}
+                      onBlur={formikProps.handleBlur('country')}
+                    // onSubmitEditing={() => {
+                    //   emailRef.focus();
+                    // }}
+                    />
+                  </View> */}
+                </View>
+
+
 
                 <View style={styles.coverCommissionView}>
                   <Text style={styles.coverCommissionText}>
@@ -293,24 +408,25 @@ export default function DonorDetails(props) {
               </View>
             </KeyboardAwareScrollView>
             {props.context &&
-            props.context.donationDetails &&
-            props.context.projectDetails &&
-            props.context.donationDetails.totalTreeCount ? (
-              <PaymentOption
-                treeCount={props.context.donationDetails.totalTreeCount}
-                treeCost={props.context.projectDetails.amountPerTree}
-                selectedCurrency={props.context.projectDetails.currency}
-                navigation={props.navigation}
-                onSubmit={formikProps.handleSubmit}
-                isValid={formikProps.isValid}
-              />
-            ) : (
-              <ActivityIndicator size="large" color="#0000ff" />
-            )}
+              props.context.donationDetails &&
+              props.context.projectDetails &&
+              props.context.donationDetails.totalTreeCount ? (
+                <PaymentOption
+                  treeCount={props.context.donationDetails.totalTreeCount}
+                  treeCost={props.context.projectDetails.amountPerTree}
+                  selectedCurrency={props.context.projectDetails.currency}
+                  navigation={props.navigation}
+                  onSubmit={formikProps.handleSubmit}
+                  isValid={formikProps.isValid}
+                />
+              ) : (
+                <ActivityIndicator size="large" color="#0000ff" />
+              )}
           </>
         )}
       </Formik>
       {/* </KeyboardAwareScrollView> */}
+
     </View>
   );
 }
@@ -324,7 +440,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                    ((props.treeCount / 100) * 2.9 + 0.3)
+                ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency
@@ -357,15 +473,15 @@ export function PaymentOption(props) {
           />
         </TouchableOpacity>
       ) : (
-        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-          <Text style={styles.continueButtonText}>Next</Text>
-          <Image
-            style={{ maxHeight: 24, maxWidth: 24 }}
-            source={nextArrowWhite}
-            resizeMode="contain"
-          />
-        </View>
-      )}
+          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+            <Text style={styles.continueButtonText}>Next</Text>
+            <Image
+              style={{ maxHeight: 24, maxWidth: 24 }}
+              source={nextArrowWhite}
+              resizeMode="contain"
+            />
+          </View>
+        )}
     </View>
   );
 }

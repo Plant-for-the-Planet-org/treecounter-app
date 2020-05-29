@@ -25,7 +25,15 @@ import {
 } from '../components/donationComponents.native';
 import countryData from '../../../assets/countryCodes.json';
 
+import {
+  getCountryFlagImageUrl,
+  getImageUrl
+} from '../../../actions/apiRouting';
 
+
+export function getCountryData(countryCode) {
+  return countryData.find(c => c.countryCode == countryCode) || {};
+}
 const DonationContactDetailsSchema = Yup.object().shape({
   firstname: Yup.string()
     .min(2, 'First name is too short!')
@@ -57,8 +65,6 @@ export default function DonorDetails(props) {
   let countryCodes = countryData;
   countryCodes = countryCodes.map(a => a.countryCode);
   countryCodes = countryCodes.sort();
-  console.log('Countries', countryCodes)
-
 
   let lastnameRef = useRef(null);
   let emailRef = useRef(null);
@@ -136,6 +142,7 @@ export default function DonorDetails(props) {
         }}
         validationSchema={DonationContactDetailsSchema}
         onSubmit={values => {
+          console.log('values', values)
           props.contextActions.setDonorDetails(values);
           updateStaticRoute('payment_details_form', props.navigation, {
             navigation: props.navigation
@@ -164,6 +171,7 @@ export default function DonorDetails(props) {
                       label={i18n.t('label.pledgeFormFName')}
                       value={formikProps.values.firstname}
                       tintColor={'#89b53a'}
+                      baseColor={'#D5D5D5'}
                       titleFontSize={12}
                       returnKeyType="next"
                       lineWidth={1}
@@ -189,6 +197,7 @@ export default function DonorDetails(props) {
                       label={i18n.t('label.pledgeFormLName')}
                       value={formikProps.values.lastname}
                       tintColor={'#89b53a'}
+                      baseColor={'#D5D5D5'}
                       titleFontSize={12}
                       returnKeyType="next"
                       lineWidth={1}
@@ -217,6 +226,7 @@ export default function DonorDetails(props) {
                     label={i18n.t('label.pledgeFormEmail')}
                     value={formikProps.values.email}
                     tintColor={'#89b53a'}
+                    baseColor={'#D5D5D5'}
                     titleFontSize={12}
                     lineWidth={1}
                     keyboardType="email-address"
@@ -244,6 +254,7 @@ export default function DonorDetails(props) {
                     label={i18n.t('Address')}
                     value={formikProps.values.address}
                     tintColor={'#89b53a'}
+                    baseColor={'#D5D5D5'}
                     titleFontSize={12}
                     lineWidth={1}
                     error={
@@ -298,6 +309,7 @@ export default function DonorDetails(props) {
                       label={'Zip code'}
                       value={formikProps.values.zipCode}
                       tintColor={'#89b53a'}
+                      baseColor={'#D5D5D5'}
                       titleFontSize={12}
                       returnKeyType="next"
                       lineWidth={1}
@@ -319,16 +331,52 @@ export default function DonorDetails(props) {
                   </View>
 
                   <TouchableOpacity
+                    style={[styles.formHalfTextField, {
+                      borderBottomWidth: 1,
+                      borderBottomColor: '#D5D5D5',
+                      flex: 1,
+                      marginLeft: 24,
+                      alignSelf: 'flex-end',
+                      marginBottom: 8,
+                      paddingBottom: 6
+                    }]}
                     onPress={() => setShowCountryModal(
                       prevTaxCountryModal => !prevTaxCountryModal
                     )}
                   >
-                    <Text>Country</Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center'
+                      }}
+                    >
+                      <Image
+                        source={{
+                          uri: getCountryFlagImageUrl(
+                            getCountryData(formikProps.values.country).currencyCountryFlag,
+                            'png',
+                            256
+                          )
+                        }}
+                        style={{ width: 24, height: 15 }}
+                      />
+                      <Text
+                        style={{
+                          paddingLeft: 12,
+                          lineHeight: 22,
+                          flex: 1,
+                          fontFamily: 'OpenSans-Regular',
+                          fontSize: 16,
+                          color: '#111'
+                        }}
+                      >
+                        {getCountryData(formikProps.values.country).country}
+                      </Text>
+                    </View>
                   </TouchableOpacity>
 
                   <SelectCountryModal
-                    selectedCountry={formikProps.values.city}
-                    // setSelectedCountry={setSelectedTaxCountry}
+                    selectedCountry={formikProps.values.country}
                     showModal={showCountryModal}
                     setShowModal={setShowCountryModal}
                     setFormikValue={formikProps.setFieldValue}

@@ -66,8 +66,6 @@ export default function DonationStep3(props) {
     setShowPay(true);
   };
 
-  console.log('Card Values', cardValues);
-
   return (
     <View style={{ flex: 1, backgroundColor: colors.WHITE, paddingBottom: 120 }}>
       <HeaderAnimated
@@ -160,7 +158,9 @@ export default function DonationStep3(props) {
           cardValues={cardValues}
           context={props.context}
           createDonation={props.createDonation}
+          donationPay={props.donationPay}
           currentUserProfile={props.currentUserProfile}
+          paymentSetup={props.paymentSetup}
         />
       ) : null}
       {/* Pay Button Section Ended */}
@@ -199,9 +199,10 @@ const PaymentButton = props => {
             context: props.context,
             createDonation: props.createDonation,
             // setDonorDetails: props.setDonorDetails,
-            // donationPay: props.donationPay,
+            donationPay: props.donationPay,
             // selectedProject: props.selectedProject
-            cardValues: props.cardValues
+            cardValues: props.cardValues,
+            paymentSetup: props.paymentSetup
           })
 
           // updateStaticRoute('donate_thankyou', props.navigation, {

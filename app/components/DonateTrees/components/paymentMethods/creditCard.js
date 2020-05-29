@@ -43,7 +43,7 @@ export const handleCreditCardPayPress = async props => {
             const data = {
               type: 'card',
               card: { token: token.tokenId },
-              key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw'
+              key: props.paymentSetup.accounts.de.gateways.stripe.authorization.stripePublishableKey
             };
 
             const paymentMethod = axios
@@ -61,19 +61,19 @@ export const handleCreditCardPayPress = async props => {
               )
               .then(response => {
                 console.log('Payment Method', response)
-                // let payData = {
-                //   paymentProviderRequest: {
-                //     account: token.card.cardId,
-                //     gateway: 'stripe',
-                //     source: {
-                //       id: response.data.id,
-                //       object: response.data.object
-                //     }
-                //   }
-                // };
+                let payData = {
+                  paymentProviderRequest: {
+                    account: props.paymentSetup.accounts.de.gateways.stripe.authorization.accountId,
+                    gateway: 'stripe',
+                    source: {
+                      id: response.data.id,
+                      object: response.data.object
+                    }
+                  }
+                };
 
-                // // This is the final Pay API
-                // props.donationPay(payData, donationID, loggedIn);
+                // This is the final Pay API
+                props.donationPay(payData, donationID, loggedIn);
               })
               .catch(error => {
                 console.log(error.response);

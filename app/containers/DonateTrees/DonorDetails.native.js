@@ -5,6 +5,7 @@ import { setDonationDetails, setDonorDetails, setPaymentDetails, setPaymentRespo
 import DonorDetailsNative from '../../components/DonateTrees/screens/DonorDetails.native';
 import { currentUserProfileSelector } from '../../selectors/index';
 const DonorDetails = (props) => {
+
     return (
         <DonorDetailsNative
             navigation={props.navigation}
@@ -24,6 +25,7 @@ const DonorDetails = (props) => {
                 setPaymentDetails: props.setPaymentDetails
             }}
             currentUserProfile={props.currentUserProfile}
+            paymentSetup={props.navigation.getParam('paymentSetup')}
         />
     )
 }

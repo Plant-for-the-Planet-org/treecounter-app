@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setDonationDetails, setDonorDetails, setPaymentDetails, setPaymentResponse, setPledgeDetails, setSelectedProjectDetails, createDonation } from '../../components/DonateTrees/redux/action';
+import { setDonationDetails, setDonorDetails, setPaymentDetails, setPaymentResponse, setPledgeDetails, setSelectedProjectDetails, createDonation, donationPay } from '../../components/DonateTrees/redux/action';
 import PaymentDetailsNative from '../../components/DonateTrees/screens/PaymentDetails.native';
 import { currentUserProfileSelector } from '../../selectors/index';
 const PaymentDetails = (props) => {
+
     return (
         <PaymentDetailsNative
             navigation={props.navigation}
@@ -25,6 +26,8 @@ const PaymentDetails = (props) => {
             }}
             currentUserProfile={props.currentUserProfile}
             createDonation={props.createDonation}
+            donationPay={props.donationPay}
+            paymentSetup={props.navigation.getParam('paymentSetup')}
         />
     )
 }
@@ -53,7 +56,8 @@ const mapDispatchToProps = dispatch => {
             setSelectedProjectDetails,
             setPaymentResponse,
             setPledgeDetails,
-            createDonation
+            createDonation,
+            donationPay
         },
         dispatch
     );

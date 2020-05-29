@@ -143,7 +143,8 @@ export default function DonorDetails(props) {
         onSubmit={values => {
           props.contextActions.setDonorDetails(values);
           updateStaticRoute('payment_details_form', props.navigation, {
-            navigation: props.navigation
+            navigation: props.navigation,
+            paymentSetup: props.paymentSetup
           });
         }}
       >
@@ -501,7 +502,7 @@ export function PaymentOption(props) {
             <Text style={styles.otherPaymentText}>Other payment methods</Text>
           </TouchableOpacity> */}
         <View>
-          <Text style={styles.otherPaymentText}>Click Continue to proceed</Text>
+          <Text style={styles.otherPaymentText}>Click Next to proceed</Text>
         </View>
       </View>
       {props.isValid ? (

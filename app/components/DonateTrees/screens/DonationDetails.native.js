@@ -133,12 +133,11 @@ function DonationDetails(props) {
     if (context.contextType === 'direct') {
       saveContext();
       updateStaticRoute('donor_details_form', props.navigation, {
-        navigation: props.navigation
+        navigation: props.navigation,
+        paymentSetup: props.paymentSetup
       });
     }
   };
-
-  console.log('Payment Setup', props.paymentSetup)
 
   return (
     <View style={{ backgroundColor: 'white' }}>
@@ -358,6 +357,7 @@ function DonationDetails(props) {
               fee={paymentFee}
               globalCurrency={props.globalCurrency}
               isValid={formikProps.isValid}
+              paymentSetup={props.paymentSetup}
             />
           </>
         )}

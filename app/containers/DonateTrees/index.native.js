@@ -171,13 +171,14 @@ class DonationTreesContainer extends Component {
           gateways: {
             stripe: {
               authorization: {
-                accountId: 'acct_1CceM9AJditpofHH',
-                stripePublishableKey: 'pk_live_kgrdlpO8m5OZmfysUTSwbd'
+                accountId: 'acct_1DYCMDD2OpW2f42N',
+                stripePublishableKey: 'pk_test_zOadi2MBKX0gATOBvc3fzdRY00SLVj1YvJ'
               },
               mode: 'production',
               methods: [
                 'sepa',
-                'apple_pay'
+                'apple_pay',
+                'google_pay'
               ]
             },
             paypal: {

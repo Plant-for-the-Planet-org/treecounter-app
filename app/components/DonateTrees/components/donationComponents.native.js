@@ -259,12 +259,6 @@ export function CoverFee(props) {
 }
 
 export function PaymentOption(props) {
-  // let ffrequency = {
-  //   once: 'One time Donation',
-  //   monthly: 'Monthly Donation',
-  //   yearly: 'Yearly Donation'
-  // };
-
   return (
     <View style={styles.bottomButtonView}>
       <View style={styles.leftSection}>
@@ -284,14 +278,7 @@ export function PaymentOption(props) {
               </Text>
             </View>
 
-            {/* <TouchableOpacity style={styles.otherPaymentButton}>
-            <Text style={styles.otherPaymentText}>Other payment methods</Text>
-          </TouchableOpacity> */}
             <View>
-              {/* <Text style={styles.otherPaymentText}>
-                
-                {props.frequency ? ffrequency[props.frequency] : null}
-              </Text> */}
 
               <Text style={styles.paymentTreeCount}>
                 for {props.treeCount} trees
@@ -322,7 +309,8 @@ export function PaymentOption(props) {
                   createDonation: props.createDonation,
                   setDonorDetails: props.setDonorDetails,
                   donationPay: props.donationPay,
-                  selectedProject: props.selectedProject
+                  selectedProject: props.selectedProject,
+                  paymentSetup: props.paymentSetup
                 })
                 : handleApplePayPress({
                   totalTreeCount: String(props.treeCount),
@@ -338,7 +326,8 @@ export function PaymentOption(props) {
                   createDonation: props.createDonation,
                   setDonorDetails: props.setDonorDetails,
                   donationPay: props.donationPay,
-                  selectedProject: props.selectedProject
+                  selectedProject: props.selectedProject,
+                  paymentSetup: props.paymentSetup
                 })
             }
             style={styles.nativePayButton}

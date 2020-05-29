@@ -132,8 +132,8 @@ class DonationTreesContainer extends Component {
         ? this.state.currency
         : selectedProject.currency
       : this.state.currency
-      ? this.state.currency
-      : userCurrency;
+        ? this.state.currency
+        : userCurrency;
   };
 
   render() {
@@ -144,6 +144,52 @@ class DonationTreesContainer extends Component {
       if (id && !this.props.selectedProject) return null;
     }
 
+    const paymentSetup =
+    {
+      taxDeductionCountries: [
+        'DE',
+        'US',
+        'ES',
+        'MX',
+        'UK'
+      ],
+      defaultCountry: 'DE',
+      treeCountOptions: {
+        fixedTreeCountOptions: [
+          10,
+          20,
+          50,
+          100,
+          150,
+          200
+        ],
+        fixedDefaultTreeCount: 50,
+        variableDefaultTreeCount: 150
+      },
+      accounts: {
+        de: {
+          gateways: {
+            stripe: {
+              authorization: {
+                accountId: 'acct_1CceM9AJditpofHH',
+                stripePublishableKey: 'pk_live_kgrdlpO8m5OZmfysUTSwbd'
+              },
+              mode: 'production',
+              methods: [
+                'sepa',
+                'apple_pay'
+              ]
+            },
+            paypal: {
+              authorization: {
+                client_id: 'Ac6akWq63eXCG6hd4T28bORJr9io1RMHk32Vw9Y1ixFMZdVKbom_S-fTMOzj-EZbSxZ7om-Ux1ZvbKmu'
+              },
+              mode: 'production'
+            }
+          }
+        }
+      }
+    }
     return this.props.selectedProject ? (
       <DonateTrees
         currencies={this.props.currencies}
@@ -177,6 +223,7 @@ class DonationTreesContainer extends Component {
         createDonation={this.props.createDonation}
         donationPay={this.props.donationPay}
         globalCurrency={this.props.globalCurrency}
+        paymentSetup={paymentSetup}
       />
     ) : null;
   }

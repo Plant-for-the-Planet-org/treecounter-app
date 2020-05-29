@@ -57,8 +57,10 @@ function DonationDetails(props) {
   const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
+
+
   const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
-    props.hasTaxDeduction && props.taxDeductibleCountries[0]
+    props.paymentSetup && props.paymentSetup.defaultCountry
   );
   const [currency, setCurrency] = React.useState(props.selectedCurrency);
   const [token, setToken] = React.useState(null);
@@ -135,6 +137,8 @@ function DonationDetails(props) {
       });
     }
   };
+
+  console.log('Payment Setup', props.paymentSetup)
 
   return (
     <View style={{ backgroundColor: 'white' }}>
@@ -222,6 +226,7 @@ function DonationDetails(props) {
                   treeCount={treeCount}
                   setTreeCount={setTreeCount}
                   selectedProject={props.selectedProject}
+                  treeCountOptions={props.paymentSetup.treeCountOptions}
                 />
               ) : null}
 
@@ -239,6 +244,7 @@ function DonationDetails(props) {
                     setTreeCount={setTreeCount}
                     selectedProject={props.selectedProject}
                     context={context}
+                    treeCountOptions={props.paymentSetup.treeCountOptions}
                   />
                 ) : null}
 
@@ -312,7 +318,7 @@ function DonationDetails(props) {
                 setSelectedCountry={setSelectedTaxCountry}
                 showModal={showTaxCountryModal}
                 setShowModal={setShowTaxCountryModal}
-                taxDeductibleCountries={props.taxDeductibleCountries}
+                taxDeductibleCountries={props.paymentSetup.taxDeductionCountries}
               />
 
               {/* Needed In Future */}

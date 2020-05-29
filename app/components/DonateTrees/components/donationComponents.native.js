@@ -521,21 +521,19 @@ export function SelectTreeCount(props) {
 
   const customTreeCountRef = React.useRef(null);
 
-  if (props.selectedProject) {
-    if (props.selectedProject.treeCountOptions) {
-      treeCountOptions = Object.values(props.selectedProject.treeCountOptions);
-      treeCountOptions.sort();
-      if (!props.treeCount) {
-        props.setTreeCount(props.selectedProject.treeCountOptions.default);
-      }
-    } else {
-      defaultTreeCountOption = 10;
-      treeCountOptions = [10, 20, 50, 150];
-      if (!props.treeCount) {
-        props.setTreeCount(defaultTreeCountOption);
-      }
+  if (props.treeCountOptions) {
+    treeCountOptions = props.treeCountOptions.fixedTreeCountOptions;
+    if (!props.treeCount) {
+      props.setTreeCount(props.treeCountOptions.fixedDefaultTreeCount);
+    }
+  } else {
+    defaultTreeCountOption = 10;
+    treeCountOptions = [10, 20, 50, 150];
+    if (!props.treeCount) {
+      props.setTreeCount(defaultTreeCountOption);
     }
   }
+
 
   if (!customTreeCountRef.isFocused && customTreeCount) {
     props.setTreeCount(tempTreeCount);

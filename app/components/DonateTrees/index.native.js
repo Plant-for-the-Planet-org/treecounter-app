@@ -29,6 +29,7 @@ export default function DonateTrees(props) {
         setDonorDetails={props.contextActions.setDonorDetails}
         donationPay={props.donationPay}
         globalCurrency={props.globalCurrency}
+        paymentSetup={props.paymentSetup}
       />
     </View>
   );

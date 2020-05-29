@@ -97,8 +97,8 @@ export const GiftTreesComponent = props => {
                   source={{ uri: item.thumbnailPath }}
                 />
               ) : (
-                <GetRandomImage dimension={60} name={item.firstName} />
-              )}
+                  <GetRandomImage dimension={60} name={item.firstName} />
+                )}
               <Text style={stylesLocal.giftReciepientName}>
                 {item.firstName}
               </Text>
@@ -120,6 +120,7 @@ export const GiftTreesComponent = props => {
               setCustomTreeCount={setCustomTreeCount}
               setTreeCount={treeCount => setTotalTreeCount(index, treeCount)}
               selectedProject={props.selectedProject}
+              treeCountOptions={props.paymentSetup.treeCountOptions}
             />
           )
         }

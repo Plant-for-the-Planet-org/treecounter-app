@@ -46,7 +46,7 @@ export const handleApplePayPress = async props => {
             const data = {
               type: 'card',
               card: { token: token.tokenId },
-              key: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw'
+              key: props.paymentSetup.accounts.de.gateways.stripe.authorization.stripePublishableKey
             };
 
             const paymentMethod = axios
@@ -63,9 +63,10 @@ export const handleApplePayPress = async props => {
                 }
               )
               .then(response => {
+                console.log('Response', response)
                 let payData = {
                   paymentProviderRequest: {
-                    account: token.card.cardId,
+                    account: props.paymentSetup.accounts.de.gateways.stripe.authorization.accountId,
                     gateway: 'stripe',
                     source: {
                       id: response.data.id,

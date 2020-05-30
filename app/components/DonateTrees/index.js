@@ -351,7 +351,6 @@ export default class DonateTrees extends Component {
     };
     const settings = {
       dots: true,
-      dotClass: 'disbale-click',
       nextArrow: (
         <NextArrow checkValidation={this.checkValidation} context={this} />
       ),

@@ -427,7 +427,7 @@ export default class DonateTrees extends Component {
         supportTreecounter={this.props.supportTreecounter}
       />
     ) : !plantProject ? null : (
-      <div className="sidenav-wrapper app-container__content--center">
+      <div className="sidenav-wrapper app-container__content--center donate">
         <TextHeading>
           {this.props.supportTreecounter.treecounterId
             ? (this.props.supportTreecounter.type == 'company' ? i18n.t('label.give_trees_to_company', {

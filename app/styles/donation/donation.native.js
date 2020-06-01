@@ -239,8 +239,7 @@ export default EStyleSheet.create({
   },
   paypalMessage: {
     fontSize: 12,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Regular',
     lineHeight: 17,
     letterSpacing: 0,
     textAlign: 'center',
@@ -266,8 +265,7 @@ export default EStyleSheet.create({
   },
   paypalButtonText: {
     fontSize: 16,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
+    fontFamily: 'OpenSans-Regular',
     lineHeight: 22,
     letterSpacing: 0,
     textAlign: 'center',

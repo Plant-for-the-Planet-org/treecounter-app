@@ -11,7 +11,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import stripe from 'tipsi-stripe';
-import { nextArrowWhite } from '../../../assets';
+import { nextArrowWhite, paypal, paypalLogo } from '../../../assets';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import styles from '../../../styles/donation/donation.native';
 import colors from '../../../utils/constants';
@@ -96,7 +96,7 @@ export default function DonationStep3(props) {
           />
 
           {/* PayPal Information Card */}
-          {/* <View style={styles.paymentCardView}>
+          <View style={styles.paymentCardView}>
             <TouchableOpacity
               style={styles.paymentModeView}
               onPress={() => { togglePaypalInfo() }}
@@ -119,10 +119,10 @@ export default function DonationStep3(props) {
                     style={{ marginLeft: 10 }}
                   />
                 )}
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
-          {/* Hidden until expanded by User */}
-          {/* {payPalInfo ? (
+            {/* Hidden until expanded by User */}
+            {payPalInfo ? (
               <View style={styles.expandedPaymentModePaypal}>
                 <Text style={styles.paypalMessage}>
                   Click the PayPal icon below to sign into your PayPal account
@@ -136,9 +136,9 @@ export default function DonationStep3(props) {
                   />
                 </TouchableOpacity>
               </View>
-            ) : null} */}
-          {/* Hidden until expanded by User */}
-          {/* </View> */}
+            ) : null}
+            {/* Hidden until expanded by User */}
+          </View>
           {/* PayPal Information Card Ended */}
 
           {/* <SepaAccountForm /> */}

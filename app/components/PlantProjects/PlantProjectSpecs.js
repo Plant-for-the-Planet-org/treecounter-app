@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import PlantProjectSpecsItem from './PlantProjectSpecsItem';
 import i18n from '../../locales/i18n.js';
 import { getISOToCountryName } from '../../helpers/utils';
-import { locationIcon, tree_survival } from '../../assets';
+//import { locationIcon, tree_survival } from '../../assets'; // disabled survial rates as in the native apps
+import { locationIcon } from '../../assets';
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectSpecs
  */
-const PlantProjectSpecs = ({ location, survivalRate, taxDeduction }) => {
+//const PlantProjectSpecs = ({ location, survivalRate, taxDeduction }) => { // disabled survial rates as in the native apps
+const PlantProjectSpecs = ({ location, taxDeduction }) => {
   const getTaxCountries = () => {
     return (
       taxDeduction &&
@@ -22,11 +24,13 @@ const PlantProjectSpecs = ({ location, survivalRate, taxDeduction }) => {
     <div className="project-specs-left__container">
       <PlantProjectSpecsItem icon={locationIcon} label={location} />
 
+      { /* disable survial rates as in the native apps
       <PlantProjectSpecsItem
         icon={tree_survival}
         value={i18n.t('label.survival_rate')}
         label={survivalRate + '%'}
       />
+      */ }
 
       <div className="project-specs__taxdeductible">
         {taxDeduction && taxDeduction.length ? (

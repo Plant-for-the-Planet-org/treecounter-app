@@ -8,6 +8,7 @@ export const handleApplePayPress = async props => {
       .paymentRequestWithNativePay(
         {
           requiredBillingAddressFields: ['all'],
+          requiredShippingAddressFields: ['email'],
           currencyCode: props.currency_code
         },
         [

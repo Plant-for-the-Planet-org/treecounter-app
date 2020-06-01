@@ -21,7 +21,7 @@ export const handleApplePayPress = async props => {
       .then(token => {
         let loggedIn = props.currentUserProfile;
         let plantProject = props.selectedProject.id;
-
+        console.log('Token', token)
         let newData = {
           amount: Number(props.totalPrice),
           currency: props.currency_code,
@@ -30,7 +30,7 @@ export const handleApplePayPress = async props => {
           receiptIndividual: {
             firstname: token.card.name,
             lastname: token.card.name,
-            email: 'a@b.com',
+            email: token.extra.shippingContact.emailAddress,
             address: token.card.addressLine1,
             zipCode: token.card.addressZip,
             city: token.card.addressCity,

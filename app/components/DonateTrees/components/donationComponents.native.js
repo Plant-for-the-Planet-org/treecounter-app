@@ -262,7 +262,7 @@ export function PaymentOption(props) {
   return (
     <View style={styles.bottomButtonView}>
       <View style={styles.leftSection}>
-        {props.treeCount && props.isValid ? (
+        {props.treeCount ? (
           <>
             <View style={styles.paymentTreeDetails}>
               <Text style={styles.paymentTreeAmount}>
@@ -287,11 +287,9 @@ export function PaymentOption(props) {
           </>
         ) : !props.treeCount ? (
           <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
-        ) : !props.isValid ? (
-          <Text style={styles.paymentTreeCount}>Please enter Email</Text>
         ) : null}
       </View>
-      {props.treeCount && props.isValid ? (
+      {props.treeCount ? (
         <>
           <TouchableOpacity
             onPress={() =>

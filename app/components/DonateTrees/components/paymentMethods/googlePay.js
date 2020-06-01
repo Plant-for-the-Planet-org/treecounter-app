@@ -9,6 +9,7 @@ export const handleAndroidPayPress = async props => {
         total_price: props.totalPrice,
         currency_code: props.currency_code,
         billing_address_required: true,
+        email_required: true,
         // phone_number_required: true,
         line_items: [
           {
@@ -22,6 +23,7 @@ export const handleAndroidPayPress = async props => {
       })
       .then(token => {
         // Create Donation API
+        console.log('Token', token)
         let loggedIn = props.currentUserProfile;
         let plantProject = props.selectedProject.id;
         let newData = {
@@ -32,7 +34,7 @@ export const handleAndroidPayPress = async props => {
           receiptIndividual: {
             firstname: token.card.name,
             lastname: token.card.name,
-            email: 'a@b.com',
+            email: token.extra.billingContact.emailAddress,
             address: token.card.addressLine1,
             zipCode: token.card.addressZip,
             city: token.card.addressCity,

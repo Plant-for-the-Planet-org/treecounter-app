@@ -44,9 +44,10 @@ function DonationDetails(props) {
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
 
-
+  let defaultCountry = props.paymentSetup && props.paymentSetup.defaultCountryKey.split("/");
+  defaultCountry = defaultCountry[0];
   const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
-    props.paymentSetup && props.paymentSetup.defaultCountry
+    defaultCountry
   );
   const [currency, setCurrency] = React.useState(props.selectedCurrency);
   const [token, setToken] = React.useState(null);
@@ -55,7 +56,7 @@ function DonationDetails(props) {
 
   // this is to test whether Apple/Google pay is allowed or not
   stripe.setOptions({
-    publishableKey: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
+    publishableKey: props.paymentSetup.stripePublishableKey,
     merchantId: '', // Optional
     androidPayMode: 'test' // Android only
   });

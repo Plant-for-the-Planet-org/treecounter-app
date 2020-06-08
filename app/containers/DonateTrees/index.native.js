@@ -144,53 +144,8 @@ class DonationTreesContainer extends Component {
       if (id && !this.props.selectedProject) return null;
     }
 
-    const paymentSetup =
-    {
-      taxDeductionCountries: [
-        'DE',
-        'US',
-        'ES',
-        'MX',
-        'UK'
-      ],
-      defaultCountry: 'DE',
-      treeCountOptions: {
-        fixedTreeCountOptions: [
-          10,
-          20,
-          50,
-          100,
-          150,
-          200
-        ],
-        fixedDefaultTreeCount: 50,
-        variableDefaultTreeCount: 150
-      },
-      accounts: {
-        de: {
-          gateways: {
-            stripe: {
-              authorization: {
-                accountId: 'acct_1DYCMDD2OpW2f42N',
-                stripePublishableKey: 'pk_test_zOadi2MBKX0gATOBvc3fzdRY00SLVj1YvJ'
-              },
-              mode: 'production',
-              methods: [
-                'sepa',
-                'apple_pay',
-                'google_pay'
-              ]
-            },
-            paypal: {
-              authorization: {
-                client_id: 'Ac6akWq63eXCG6hd4T28bORJr9io1RMHk32Vw9Y1ixFMZdVKbom_S-fTMOzj-EZbSxZ7om-Ux1ZvbKmu'
-              },
-              mode: 'production'
-            }
-          }
-        }
-      }
-    }
+    console.log('Payment Setup =----- ', this.props.selectedProject.paymentSetup)
+
     return this.props.selectedProject ? (
       <DonateTrees
         currencies={this.props.currencies}
@@ -224,7 +179,7 @@ class DonationTreesContainer extends Component {
         createDonation={this.props.createDonation}
         donationPay={this.props.donationPay}
         globalCurrency={this.props.globalCurrency}
-        paymentSetup={paymentSetup}
+        paymentSetup={this.props.selectedProject.paymentSetup}
       />
     ) : null;
   }

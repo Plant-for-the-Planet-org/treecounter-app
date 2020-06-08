@@ -57,7 +57,7 @@ export const handleApplePayPress = async props => {
                 {
                   headers: {
                     Authorization:
-                      'Bearer sk_test_pvrGEhOIEu3HwYdLTMhqznnl00kFjZUvMD',
+                      'Bearer ' + props.paymentSetup.stripePublishableKey,
                     'Content-Type':
                       'application/x-www-form-urlencoded; charset=UTF-8'
                   }

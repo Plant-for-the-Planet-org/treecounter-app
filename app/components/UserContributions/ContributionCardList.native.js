@@ -6,12 +6,18 @@ import { convertNumIdToString } from '../../utils/utils';
 
 const ContributionCardList = props => {
   const {
-    contributions,
     deleteContribution,
     showAllContributions,
     onPressSingleContribution,
     isCardPressed
   } = props;
+  let { contributions } = props;
+  console.table({ contributions })
+  contributions = contributions.sort(function (a, b) {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(b.plantDate ? b.plantDate : b.redemptionDate) - new Date(a.plantDate ? a.plantDate : a.redemptionDate);
+  });
   return (
     <FlatList
       data={convertNumIdToString(contributions.length > 3 && showAllContributions ? contributions : contributions.slice(0, 3))}

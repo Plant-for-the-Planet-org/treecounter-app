@@ -13,7 +13,9 @@ import contentloaderReducer from './contentloaderReducer';
 
 import pledgeEventReducer from './pledgeEventReducer';
 import updateLastRouteReducer from './updateLastRouteReducer';
-import competitionDetailReducer from './competitionDetailReducer';
+import competitionDetailReducer from '../components/Competition/redux/competitionDetailReducer';
+
+import competitionsReducer from '../components/Competition/redux/competitionsReducer';
 
 const commonReducers = {
   entities: entitiesReducer,
@@ -30,7 +32,8 @@ const commonReducers = {
   contentloaderState: contentloaderReducer,
   pledgeEvents: pledgeEventReducer,
   lastRouteState: updateLastRouteReducer,
-  competitionDetail: competitionDetailReducer
+  competitionDetail: competitionDetailReducer,
+  competitionsReducer
 };
 
 export default commonReducers;

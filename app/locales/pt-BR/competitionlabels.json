@@ -52,5 +52,14 @@
   "confirm_delete_message": "Tem a certeza que quer apagar essa competição? Não é possível desfazer essa ação.",
   "competetions_404_message": "Nós ainda não suportamos competições no seu navegador, por favor use nosso aplicativo iOS ou Android para ter acesso às competições.",
   "goal": "Objetivo",
-  "active": "Ativo"
+  "active": "Ativo",
+  "no_competitions": "Não foram encontradas competições",
+  "you_are_all_caught_up": "Você está perto do seu prazo",
+  "register_only": "Registrar Somente",
+  "register_only_msg": "Por favor, plante árvores você mesmo e registre-as para apoiar este competição",
+  "donation_only_msg": "Por favor escolha entre mais de 100 projetos e faça uma doação para apoiar esta competição",
+  "specific_project_msg": "Doar para Projeto {{project}} para apoiar esta competição.",
+  "if_all_project_msg": "Plante uma árvore ou escolha entre mais de 100 projetos e faça uma doação para apoiar esta competição",
+  "support_comp_trees": "Apoie competição com árvores",
+  "donate_now": "Doe Agora"
 }

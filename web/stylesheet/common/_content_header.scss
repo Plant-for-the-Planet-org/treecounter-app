@@ -9,3 +9,7 @@
   align-items: center;
   font-size: 24px;
 }
+
+.donate .slick-initialized .slick-dots button {
+  pointer-events: none;
+}

@@ -28,5 +28,22 @@ export default EStyleSheet.create({
     color: '#4d5153',
     maxWidth: '70%'
   },
-  headerImage: { height: 60, flex: 1 }
+  headerImage: { height: 60, flex: 1 },
+  caughtUpMessageContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+    marginHorizontal: 20,
+    marginBottom: 30
+  },
+  caughtUpLine: {
+    height: 1,
+    flexGrow: 1,
+    backgroundColor: '#c4c4c4'
+  },
+  caughtUpMessage: {
+    fontFamily: 'OpenSans-Regular',
+    color: '#6f6f6f'
+  }
 });

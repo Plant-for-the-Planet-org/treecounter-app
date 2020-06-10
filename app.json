@@ -10,7 +10,8 @@
   "stack": "heroku-18",
   "env": {
     "googleMapApiKey": {
-      "description": "Google Maps Api Key"
+      "description": "Google Maps Api Key",
+      "required": "false"
     },
     "mediaPath": {
       "description": "Media Path",
@@ -30,7 +31,7 @@
     },
     "base": {
       "description": "API base url. Debug mode off: on: \"/app_dev.php\" (requires login)",
-      "value": "pass"
+      "required": "false"
     },
     "debug": {
       "description": "local console debugging switch",
@@ -41,7 +42,8 @@
       "value": "EUR"
     },
     "bugsnagApiKey": {
-      "description": "Bug snag API Key"
+      "description": "Bug snag API Key",
+      "required": "false"
     },
     "androidAppId": {
       "description": "Android App ID",
@@ -52,7 +54,8 @@
       "value": "1444740626"
     },
     "locationApikKey": {
-      "description": "Location API Key"
+      "description": "Location API Key",
+      "required": "false"
     },
     "env": {
       "description": "env should be develop, staging, production",

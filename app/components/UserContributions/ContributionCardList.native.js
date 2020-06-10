@@ -12,7 +12,7 @@ const ContributionCardList = props => {
     isCardPressed
   } = props;
   let { contributions } = props;
-  console.table({ contributions })
+  // console.table({ contributions })
   contributions = contributions.sort(function (a, b) {
     // Turn your strings into dates, and then subtract them
     // to get a value that is either negative, positive, or zero.

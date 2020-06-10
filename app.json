@@ -23,7 +23,7 @@
     },
     "host": {
       "description": "Website server domain - add app url",
-      "value": ""
+      "required": "false"
     },
     "api_url": {
       "description": "API endpoint",

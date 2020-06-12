@@ -1,15 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 // import PaymentSelector from '../Payment/PaymentSelector';
-import { View } from 'react-native';
-import DonationDetails from './screens/DonationDetails.native';
+import { View } from "react-native";
+import DonationDetails from "./screens/DonationDetails.native";
 
 export default function DonateTrees(props) {
   const { selectedProject } = props;
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       <DonationDetails
         currencies={props.currencies}
         selectedProject={selectedProject}
@@ -30,6 +30,7 @@ export default function DonateTrees(props) {
         donationPay={props.donationPay}
         globalCurrency={props.globalCurrency}
         paymentSetup={props.paymentSetup}
+        userCountry={props.userCountry}
       />
     </View>
   );

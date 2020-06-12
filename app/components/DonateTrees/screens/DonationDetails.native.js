@@ -44,10 +44,12 @@ function DonationDetails(props) {
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
 
-  // let defaultCountry = props.paymentSetup && props.paymentSetup.defaultCountryKey.split("/");
-  // defaultCountry = defaultCountry[0];
-
-  let defaultCountry = props.paymentSetup && props.paymentSetup.defaultCountry;
+  const useUserCountry =
+    props.paymentSetup &&
+    props.paymentSetup.taxDeductionCountries.includes(props.userCountry);
+  let defaultCountry = useUserCountry
+    ? props.userCountry
+    : props.paymentSetup && props.paymentSetup.defaultCountry;
   const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
     defaultCountry
   );

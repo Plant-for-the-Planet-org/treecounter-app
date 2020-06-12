@@ -1,17 +1,17 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchCurrencies } from '../../actions/currencies';
-import { loadProject } from '../../actions/loadTposAction';
-import { loadUserProfile } from '../../actions/loadUserProfileAction';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { fetchCurrencies } from "../../actions/currencies";
+import { loadProject } from "../../actions/loadTposAction";
+import { loadUserProfile } from "../../actions/loadUserProfileAction";
 import {
   clearPlantProject,
   selectPlantProjectAction
-} from '../../actions/selectPlantProjectAction';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
-import { updateUserProfile } from '../../actions/updateUserProfile';
-import DonateTrees from '../../components/DonateTrees';
+} from "../../actions/selectPlantProjectAction";
+import { supportTreecounterAction } from "../../actions/supportTreecounterAction";
+import { updateUserProfile } from "../../actions/updateUserProfile";
+import DonateTrees from "../../components/DonateTrees";
 import {
   setDonationDetails,
   setDonorDetails,
@@ -22,9 +22,9 @@ import {
   createDonation,
   clearDonationReducer,
   donationPay
-} from '../../components/DonateTrees/redux/action';
-import { debug } from '../../debug';
-import { setProgressModelState } from '../../reducers/modelDialogReducer';
+} from "../../components/DonateTrees/redux/action";
+import { debug } from "../../debug";
+import { setProgressModelState } from "../../reducers/modelDialogReducer";
 import {
   currenciesSelector,
   currentUserProfileSelector,
@@ -33,12 +33,13 @@ import {
   selectedPlantProjectSelector,
   selectedTpoSelector,
   supportedTreecounterSelector
-} from '../../selectors';
-import { postDirectRequest } from '../../utils/api';
+} from "../../selectors";
+import { postDirectRequest } from "../../utils/api";
+import * as RNLocalize from "react-native-localize";
 
 class DonationTreesContainer extends Component {
   state = {
-    currency: ''
+    currency: ""
   };
   static navigationOptions = {
     header: null
@@ -46,9 +47,9 @@ class DonationTreesContainer extends Component {
   UNSAFE_componentWillMount() {
     const { supportTreecounterAction, match } = this.props;
     if (match && match.params && match.params.slug) {
-      postDirectRequest('/suggest.php', 'q=' + match.params.slug)
+      postDirectRequest("/suggest.php", "q=" + match.params.slug)
         .then(_suggestions => {
-          debug('sugessions', _suggestions);
+          debug("sugessions", _suggestions);
           if (
             _suggestions.data.length &&
             _suggestions.data[0].slug == match.params.slug
@@ -63,7 +64,7 @@ class DonationTreesContainer extends Component {
     } else {
       const { currentUserProfile } = this.props;
       debug(
-        'current user profile and suported tree counter',
+        "current user profile and suported tree counter",
         currentUserProfile,
         this.props.supportTreecounter.treecounterId
       );
@@ -94,14 +95,14 @@ class DonationTreesContainer extends Component {
     selectedProjectId &&
       (await this.props.loadProject({ id: selectedProjectId }));
 
-    if (this.props.navigation && this.props.navigation.getParam('id'))
-      selectedProjectId = parseInt(this.props.navigation.getParam('id'));
+    if (this.props.navigation && this.props.navigation.getParam("id"))
+      selectedProjectId = parseInt(this.props.navigation.getParam("id"));
     if (this.props.selectedProject && !this.props.selectedProject.tpoData) {
       await this.props.loadProject({ id: this.props.selectedProject.id });
     }
 
     // this causes a redraw
-    typeof selectedProjectId == 'number' &&
+    typeof selectedProjectId == "number" &&
       this.props.selectPlantProjectAction(selectedProjectId);
 
     if (!this.props.currencies.currencies) {
@@ -111,7 +112,7 @@ class DonationTreesContainer extends Component {
   componentWillUnmount() {
     const { currentUserProfile } = this.props;
     debug(
-      'current user profile unmounting donate trees container',
+      "current user profile unmounting donate trees container",
       currentUserProfile
     );
     if (currentUserProfile) {
@@ -132,8 +133,8 @@ class DonationTreesContainer extends Component {
         ? this.state.currency
         : selectedProject.currency
       : this.state.currency
-        ? this.state.currency
-        : userCurrency;
+      ? this.state.currency
+      : userCurrency;
   };
 
   render() {
@@ -143,8 +144,6 @@ class DonationTreesContainer extends Component {
       } = this.props.match;
       if (id && !this.props.selectedProject) return null;
     }
-
-    console.log('Payment Setup =----- ', this.props.selectedProject.paymentSetup)
 
     return this.props.selectedProject ? (
       <DonateTrees
@@ -180,6 +179,7 @@ class DonationTreesContainer extends Component {
         donationPay={this.props.donationPay}
         globalCurrency={this.props.globalCurrency}
         paymentSetup={this.props.selectedProject.paymentSetup}
+        userCountry={RNLocalize.getCountry()}
       />
     ) : null;
   }

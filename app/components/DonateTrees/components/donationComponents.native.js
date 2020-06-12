@@ -105,7 +105,7 @@ export function SelectCountryModal(props) {
   const activeColor = "#74ba00";
   const defaultColor = "#4d5153";
 
-  const [searchText, setSearchText] = useState("");
+  const [search, setSearch] = useState("");
 
   const keyExtractor = d => d.item;
 
@@ -166,13 +166,18 @@ export function SelectCountryModal(props) {
   };
 
   const closeModal = () => {
-    setSearchText();
+    setSearch();
     setShowModal(false);
   };
 
-  const setSearchCountries = (text = "") => {
-    setSearchText(text);
-  };
+  const getCountryCode = currency =>
+    countryCodes.find(c => c.code == currency.value) || {};
+  //console.log("Countries", taxDeductibleCountries);
+
+  // taxDeductibleCountries only has country codes, users will search using country names too
+  // Fetch all the coutnry names too
+  // Use country names to filter against the search string
+  // Return array with only country codes after filter is applied to show in the Flatlist
 
   return (
     <Modal
@@ -195,21 +200,20 @@ export function SelectCountryModal(props) {
           paddingHorizontal: 24
         }}
       >
-        <Text
+        <TextInput
           style={{
             fontFamily: "OpenSans-SemiBold",
             fontSize: 18,
-            color: defaultColor
+            color: defaultColor,
+            flexGrow: 1
           }}
-        >
-          Select Tax Deduction Country
-        </Text>
+          onChangeText={text => setSearch(text)}
+          value={search}
+          autoFocus
+          placeholder={"Search Country"}
+        />
         <TouchableOpacity onPress={closeModal}>
-          {searchText ? (
-            <MaterialIcon name="arrow-back" size={30} color="black" />
-          ) : (
-            <MaterialIcon name="close" size={30} color="#4d5153" />
-          )}
+          <MaterialIcon name="close" size={30} color="#4d5153" />
         </TouchableOpacity>
         {/* <View
           style={{

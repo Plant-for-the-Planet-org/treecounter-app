@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const handleAndroidPayPress = async props => {
   try {
@@ -13,7 +13,7 @@ export const handleAndroidPayPress = async props => {
         line_items: [
           {
             currency_code: props.currency_code,
-            description: 'Donation to Plant for the Planet',
+            description: "Donation to Plant for the Planet",
             total_price: props.totalPrice,
             unit_price: props.amountPerTree,
             quantity: props.totalTreeCount
@@ -22,13 +22,12 @@ export const handleAndroidPayPress = async props => {
       })
       .then(token => {
         // Create Donation API
-        console.log('Token', token)
         let loggedIn = props.currentUserProfile;
         let plantProject = props.selectedProject.id;
         let newData = {
           amount: Number(props.totalPrice),
           currency: props.currency_code,
-          recipientType: 'individual',
+          recipientType: "individual",
           treeCount: Number(props.totalTreeCount),
           receiptIndividual: {
             firstname: token.card.name,
@@ -47,31 +46,33 @@ export const handleAndroidPayPress = async props => {
           .then(response => {
             const donationID = response.data.donationId;
             const data = {
-              type: 'card',
+              type: "card",
               card: { token: token.tokenId },
               key: props.paymentSetup.gateways.DE.stripe.stripePublishableKey
             };
 
             const paymentMethod = axios
               .post(
-                'https://api.stripe.com/v1/payment_methods',
+                "https://api.stripe.com/v1/payment_methods",
                 JSON_to_URLEncoded(data),
                 {
                   headers: {
                     Authorization:
-                      'Bearer ' + props.paymentSetup.gateways.DE.stripe.stripePublishableKey,
-                    'Content-Type':
-                      'application/x-www-form-urlencoded; charset=UTF-8'
+                      "Bearer " +
+                      props.paymentSetup.gateways.DE.stripe
+                        .stripePublishableKey,
+                    "Content-Type":
+                      "application/x-www-form-urlencoded; charset=UTF-8"
                   }
                 }
               )
               .then(response => {
-
-                console.log('Response', response)
                 let payData = {
                   paymentProviderRequest: {
-                    account: props.paymentSetup.gateways.DE.stripe.authorization.accountId,
-                    gateway: 'stripe',
+                    account:
+                      props.paymentSetup.gateways.DE.stripe.authorization
+                        .accountId,
+                    gateway: "stripe",
                     source: {
                       id: response.data.id,
                       object: response.data.object
@@ -88,21 +89,21 @@ export const handleAndroidPayPress = async props => {
           });
       })
       .catch(err => {
-        console.log('error gpay', err);
+        console.log("error gpay", err);
       });
     props.setToken(token);
   } catch (error) {
-    console.log('Error', error);
+    console.log("Error", error);
   }
 };
 
 function JSON_to_URLEncoded(element, key, list) {
   var list = list || [];
-  if (typeof element == 'object') {
+  if (typeof element == "object") {
     for (let idx in element)
-      JSON_to_URLEncoded(element[idx], key ? key + '[' + idx + ']' : idx, list);
+      JSON_to_URLEncoded(element[idx], key ? key + "[" + idx + "]" : idx, list);
   } else {
-    list.push(key + '=' + encodeURIComponent(element));
+    list.push(key + "=" + encodeURIComponent(element));
   }
-  return list.join('&');
+  return list.join("&");
 }

@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import {
   Animated,
   TouchableOpacity,
   Image,
   BackHandler,
   View
-} from 'react-native';
-import { backArrow, closeIcon } from '../../assets';
+} from "react-native";
+import { backArrow, closeIcon } from "../../assets";
 
 let HEADER_MAX_HEIGHT = 80;
 let HEADER_MIN_HEIGHT = 80;
@@ -18,12 +18,12 @@ export default function HeaderAnimated(props) {
   const headerHeight = props.scrollY.interpolate({
     inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
     outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-    extrapolate: 'clamp'
+    extrapolate: "clamp"
   });
   const headerZindex = props.scrollY.interpolate({
     inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT, 120],
     outputRange: [100, 100, 1000],
-    extrapolate: 'clamp'
+    extrapolate: "clamp"
   });
 
   const headerTitleZIndex = props.scrollY.interpolate({
@@ -34,7 +34,7 @@ export default function HeaderAnimated(props) {
       100
     ],
     outputRange: [100, 100, 100, 1001],
-    extrapolate: 'clamp'
+    extrapolate: "clamp"
   });
 
   const headerTitleBottom = props.scrollY.interpolate({
@@ -44,7 +44,7 @@ export default function HeaderAnimated(props) {
       HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + HEADER_TEXT_MIN_HEIGHT + 26
     ],
     outputRange: [-116, -110, -64],
-    extrapolate: 'clamp'
+    extrapolate: "clamp"
   });
 
   const headerTitleLeft = props.scrollY.interpolate({
@@ -55,7 +55,7 @@ export default function HeaderAnimated(props) {
       HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + HEADER_TEXT_MIN_HEIGHT + 26
     ],
     outputRange: [24, 24, 24, 72],
-    extrapolate: 'clamp'
+    extrapolate: "clamp"
   });
 
   const headerFontSize = props.scrollY.interpolate({
@@ -66,7 +66,7 @@ export default function HeaderAnimated(props) {
       HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + HEADER_TEXT_MIN_HEIGHT + 26
     ],
     outputRange: [27, 27, 27, 18],
-    extrapolate: 'clamp'
+    extrapolate: "clamp"
   });
 
   let navigateBack = () => {
@@ -78,30 +78,30 @@ export default function HeaderAnimated(props) {
   };
 
   React.useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', navigateBack);
+    BackHandler.addEventListener("hardwareBackPress", navigateBack);
     // clean up
     return () => {
-      BackHandler.removeEventListener('hardwareBackPress', navigateBack);
+      BackHandler.removeEventListener("hardwareBackPress", navigateBack);
     };
   });
 
-  const textColor = '#4d5153';
-  const whiteColor = 'white';
+  const textColor = "#4d5153";
+  const whiteColor = "white";
   return (
     <View>
       <Animated.View
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: 0,
           left: 0,
           right: 0,
           backgroundColor: whiteColor,
           height: headerHeight,
           zIndex: headerZindex,
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'row',
-          width: '100%'
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "row",
+          width: "100%"
         }}
       >
         <TouchableOpacity
@@ -117,7 +117,7 @@ export default function HeaderAnimated(props) {
       </Animated.View>
       <Animated.View
         style={{
-          position: 'absolute',
+          position: "absolute",
           bottom: headerTitleBottom,
           left: headerTitleLeft,
           zIndex: headerTitleZIndex
@@ -125,11 +125,11 @@ export default function HeaderAnimated(props) {
       >
         <Animated.Text
           style={{
-            fontFamily: 'OpenSans-Bold',
+            fontFamily: "OpenSans-ExtraBold",
             fontSize: headerFontSize,
             lineHeight: 40,
             letterSpacing: 0,
-            textAlign: 'left',
+            textAlign: "left",
             color: textColor
           }}
         >

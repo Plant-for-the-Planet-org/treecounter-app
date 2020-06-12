@@ -1,5 +1,5 @@
-import { Formik } from 'formik';
-import React, { useEffect, useState, useRef } from 'react';
+import { Formik } from "formik";
+import React, { useEffect, useState, useRef } from "react";
 import {
   ActivityIndicator,
   Animated,
@@ -9,55 +9,46 @@ import {
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { TextField } from 'react-native-material-textfield';
-import * as Yup from 'yup';
-import { nextArrowWhite } from '../../../assets';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
-import i18n from '../../../locales/i18n.js';
-import styles from '../../../styles/donations/donorDetails';
-import { formatNumber } from '../../../utils/utils';
-import HeaderAnimated from '../../Header/HeaderAnimated.native';
-import GooglePlacesInput from '../components/AutoComplete.native';
-import {
-  SelectCountryModal,
-} from '../components/donationComponents.native';
-import countryData from '../../../assets/countryCodes.json';
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { TextField } from "react-native-material-textfield";
+import * as Yup from "yup";
+import { nextArrowWhite } from "../../../assets";
+import { updateStaticRoute } from "../../../helpers/routerHelper";
+import i18n from "../../../locales/i18n.js";
+import styles from "../../../styles/donations/donorDetails";
+import { formatNumber } from "../../../utils/utils";
+import HeaderAnimated from "../../Header/HeaderAnimated.native";
+import GooglePlacesInput from "../components/AutoComplete.native";
+import { SelectCountryModal } from "../components/donationComponents.native";
+import countryData from "../../../assets/countryCodes.json";
 
-import {
-  getCountryFlagImageUrl
-} from '../../../actions/apiRouting';
-
+import { getCountryFlagImageUrl } from "../../../actions/apiRouting";
 
 export function getCountryData(countryCode) {
   return countryData.find(c => c.countryCode == countryCode) || {};
 }
 const DonationContactDetailsSchema = Yup.object().shape({
   firstname: Yup.string()
-    .min(2, 'First name is too short!')
-    .max(50, 'First name is too long!')
-    .required('First name is required'),
+    .min(2, "First name is too short!")
+    .max(50, "First name is too long!")
+    .required("First name is required"),
   lastname: Yup.string()
-    .min(2, 'Last name is too short!')
-    .max(50, 'Last name is too long!')
-    .required('Last name is equired'),
+    .min(2, "Last name is too short!")
+    .max(50, "Last name is too long!")
+    .required("Last name is equired"),
   email: Yup.string()
-    .email('Invalid email')
-    .required('Email is required'),
-  address: Yup.string()
-    .required('Address is required'),
-  city: Yup.string()
-    .required('City is required'),
-  zipCode: Yup.string()
-    .required('Zip Code is required'),
-  country: Yup.string()
-    .required('Country is required'),
+    .email("Invalid email")
+    .required("Email is required"),
+  address: Yup.string().required("Address is required"),
+  city: Yup.string().required("City is required"),
+  zipCode: Yup.string().required("Zip Code is required"),
+  country: Yup.string().required("Country is required")
 });
 
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
-  const [buttonType, setButtonType] = useState('donate');
+  const [buttonType, setButtonType] = useState("donate");
   const [isCompanySwitch, setisCompanySwitch] = React.useState(false); // for Switching whether the user wants receipt or not
   const [showCountryModal, setShowCountryModal] = React.useState(false);
 
@@ -70,20 +61,20 @@ export default function DonorDetails(props) {
   let addressRef = useRef(null);
 
   const keyboardDidShow = () => {
-    setButtonType('>');
+    setButtonType(">");
   };
 
   const keyboardDidHide = () => {
-    setButtonType('donate');
+    setButtonType("donate");
   };
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
+      "keyboardDidShow",
       keyboardDidShow
     );
     const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
+      "keyboardDidHide",
       keyboardDidHide
     );
 
@@ -94,12 +85,27 @@ export default function DonorDetails(props) {
     };
   });
 
+  let textfieldDesigns = {
+    tintColor: "#89b53a",
+    baseColor: "#4d5153",
+    textColor: "#4d5153",
+    titleFontSize: 12,
+    lineWidth: 1.5,
+    labelTextStyle: {
+      fontFamily: "OpenSans-SemiBold"
+      // textTransform: "uppercase"
+    },
+
+    titleTextStyle: { fontFamily: "OpenSans-SemiBold" },
+    affixTextStyle: { fontFamily: "OpenSans-Regular" },
+    style: { fontFamily: "OpenSans-Regular" }
+  };
   return (
-    <View style={{ backgroundColor: 'white', flex: 1 }}>
+    <View style={{ backgroundColor: "white", flex: 1 }}>
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
-        title={'Contact Details'}
+        title={"Contact Details"}
       />
 
       {/* <KeyboardAwareScrollView
@@ -119,30 +125,28 @@ export default function DonorDetails(props) {
         initialValues={{
           firstname: props.currentUserProfile
             ? props.currentUserProfile.firstname
-            : '',
+            : "",
           lastname: props.currentUserProfile
             ? props.currentUserProfile.lastname
-            : '',
-          email: props.currentUserProfile ? props.currentUserProfile.email : '',
+            : "",
+          email: props.currentUserProfile ? props.currentUserProfile.email : "",
           address: props.currentUserProfile
             ? props.currentUserProfile.address
-            : '',
-          city: props.currentUserProfile
-            ? props.currentUserProfile.city
-            : '',
+            : "",
+          city: props.currentUserProfile ? props.currentUserProfile.city : "",
           zipCode: props.currentUserProfile
             ? props.currentUserProfile.zipCode
-            : '',
+            : "",
           country: props.currentUserProfile
             ? props.currentUserProfile.country
-            : '',
+            : "",
           isCompany: false,
-          companyName: ''
+          companyName: ""
         }}
         validationSchema={DonationContactDetailsSchema}
         onSubmit={values => {
           props.contextActions.setDonorDetails(values);
-          updateStaticRoute('payment_details_form', props.navigation, {
+          updateStaticRoute("payment_details_form", props.navigation, {
             navigation: props.navigation,
             paymentSetup: props.paymentSetup
           });
@@ -167,24 +171,16 @@ export default function DonorDetails(props) {
                 <View style={styles.formView}>
                   <View style={[styles.formHalfTextField, { zIndex: 2 }]}>
                     <TextField
-                      label={i18n.t('label.pledgeFormFName')}
-                      value={formikProps.values.firstname}
-                      tintColor={'#89b53a'}
-                      baseColor={'#D5D5D5'}
-                      titleFontSize={12}
+                      {...textfieldDesigns}
                       returnKeyType="next"
-                      lineWidth={1}
-                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      style={{ fontFamily: 'OpenSans-Regular' }}
-                      blurOnSubmit={false}
+                      label={i18n.t("label.pledgeFormFName")}
+                      value={formikProps.values.firstname}
                       error={
                         formikProps.touched.firstname &&
                         formikProps.errors.firstname
                       }
-                      onChangeText={formikProps.handleChange('firstname')}
-                      onBlur={formikProps.handleBlur('firstname')}
+                      onChangeText={formikProps.handleChange("firstname")}
+                      onBlur={formikProps.handleBlur("firstname")}
                       onSubmitEditing={() => {
                         lastnameRef.focus();
                       }}
@@ -193,26 +189,19 @@ export default function DonorDetails(props) {
 
                   <View style={styles.formHalfTextField}>
                     <TextField
-                      label={i18n.t('label.pledgeFormLName')}
-                      value={formikProps.values.lastname}
-                      tintColor={'#89b53a'}
-                      baseColor={'#D5D5D5'}
-                      titleFontSize={12}
-                      returnKeyType="next"
-                      lineWidth={1}
-                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      style={{ fontFamily: 'OpenSans-Regular' }}
+                      {...textfieldDesigns}
                       error={
                         formikProps.touched.lastname &&
                         formikProps.errors.lastname
                       }
+                      label={i18n.t("label.pledgeFormLName")}
+                      value={formikProps.values.lastname}
+                      returnKeyType="next"
                       ref={input => {
                         lastnameRef = input;
                       }}
-                      onChangeText={formikProps.handleChange('lastname')}
-                      onBlur={formikProps.handleBlur('lastname')}
+                      onChangeText={formikProps.handleChange("lastname")}
+                      onBlur={formikProps.handleBlur("lastname")}
                       onSubmitEditing={() => {
                         emailRef.focus();
                       }}
@@ -222,138 +211,98 @@ export default function DonorDetails(props) {
 
                 <View style={{ marginTop: 12 }}>
                   <TextField
-                    label={i18n.t('label.pledgeFormEmail')}
+                    {...textfieldDesigns}
+                    label={i18n.t("label.pledgeFormEmail")}
                     value={formikProps.values.email}
-                    tintColor={'#89b53a'}
-                    baseColor={'#D5D5D5'}
-                    titleFontSize={12}
-                    lineWidth={1}
                     keyboardType="email-address"
                     error={
                       formikProps.touched.email && formikProps.errors.email
                     }
-                    labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                    titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                    affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                    style={{ fontFamily: 'OpenSans-Regular' }}
                     returnKeyType="next"
                     ref={input => {
                       emailRef = input;
                     }}
-                    onChangeText={formikProps.handleChange('email')}
-                    onBlur={formikProps.handleBlur('email')}
-                  // onSubmitEditing={() => {
-                  //   addressRef.focus();
-                  // }}
+                    onChangeText={formikProps.handleChange("email")}
+                    onBlur={formikProps.handleBlur("email")}
                   />
                 </View>
 
                 <View style={{ marginTop: 12 }}>
                   <TextField
-                    label={i18n.t('Address')}
+                    {...textfieldDesigns}
+                    label={i18n.t("Street Address")}
                     value={formikProps.values.address}
-                    tintColor={'#89b53a'}
-                    baseColor={'#D5D5D5'}
-                    titleFontSize={12}
-                    lineWidth={1}
                     error={
                       formikProps.touched.address && formikProps.errors.address
                     }
-                    labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                    titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                    affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                    style={{ fontFamily: 'OpenSans-Regular' }}
                     returnKeyType="next"
                     ref={input => {
                       addressRef = input;
                     }}
-                    onChangeText={formikProps.handleChange('address')}
-                    onBlur={formikProps.handleBlur('address')}
+                    onChangeText={formikProps.handleChange("address")}
+                    onBlur={formikProps.handleBlur("address")}
                   />
                 </View>
-
-
-                <View style={styles.autoCompleteAddressView}>
-                  <GooglePlacesInput
-                    placeholder={'City'}
-                    initialValue={
-                      formikProps.values.city
-                        ? formikProps.values.city
-                        : ''
-                    }
-                    setFieldValue={formikProps.setFieldValue}
-                  />
-                </View>
-
-                {!formikProps.errors.city ? null : (
-                  <View>
-                    <Text
-                      style={{
-                        color: '#e74c3c',
-                        marginTop: 64,
-                        fontFamily: 'OpenSans-SemiBold',
-                        fontSize: 12
-                      }}
-                    >
-                      {formikProps.values.city
-                        ? null
-                        : formikProps.errors.city}
-                    </Text>
-                  </View>
-                )}
 
                 <View style={styles.formView}>
                   <View style={[styles.formHalfTextField, { zIndex: 2 }]}>
                     <TextField
-                      label={'Zip code'}
-                      value={formikProps.values.zipCode}
-                      tintColor={'#89b53a'}
-                      baseColor={'#D5D5D5'}
-                      titleFontSize={12}
+                      {...textfieldDesigns}
+                      label={i18n.t("City")}
+                      value={formikProps.values.city}
+                      error={
+                        formikProps.touched.city && formikProps.errors.city
+                      }
                       returnKeyType="next"
-                      lineWidth={1}
-                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      style={{ fontFamily: 'OpenSans-Regular' }}
-                      blurOnSubmit={false}
+                      // ref={input => {
+                      //   cityRef = input;
+                      // }}
+                      onChangeText={formikProps.handleChange("city")}
+                      onBlur={formikProps.handleBlur("city")}
+                    />
+                  </View>
+                  <View style={[styles.formHalfTextField, { zIndex: 1 }]}>
+                    <TextField
+                      {...textfieldDesigns}
+                      label={"Zip code"}
+                      value={formikProps.values.zipCode}
+                      returnKeyType="next"
                       error={
                         formikProps.touched.zipCode &&
                         formikProps.errors.zipCode
                       }
-                      onChangeText={formikProps.handleChange('zipCode')}
-                      onBlur={formikProps.handleBlur('zipCode')}
-                    // onSubmitEditing={() => {
-                    //   lastnameRef.focus();
-                    // }}
+                      onChangeText={formikProps.handleChange("zipCode")}
+                      onBlur={formikProps.handleBlur("zipCode")}
                     />
                   </View>
-
-                  <TouchableOpacity
-                    style={[styles.formHalfTextField, {
-                      borderBottomWidth: 1,
-                      borderBottomColor: '#D5D5D5',
-                      flex: 1,
-                      marginLeft: 24,
-                      alignSelf: 'flex-end',
-                      marginBottom: 8,
-                      paddingBottom: 6
-                    }]}
-                    onPress={() => setShowCountryModal(
+                </View>
+                <TouchableOpacity
+                  style={{
+                    borderBottomWidth: 1.5,
+                    borderBottomColor: "#4d5153",
+                    marginBottom: 8,
+                    paddingBottom: 6,
+                    marginTop: 44
+                  }}
+                  onPress={() =>
+                    setShowCountryModal(
                       prevTaxCountryModal => !prevTaxCountryModal
-                    )}
-                  >
+                    )
+                  }
+                >
+                  {formikProps.values.country ? (
                     <View
                       style={{
-                        flexDirection: 'row',
-                        alignItems: 'center'
+                        flexDirection: "row",
+                        alignItems: "center"
                       }}
                     >
                       <Image
                         source={{
                           uri: getCountryFlagImageUrl(
-                            getCountryData(formikProps.values.country).currencyCountryFlag,
-                            'png',
+                            getCountryData(formikProps.values.country)
+                              .currencyCountryFlag,
+                            "png",
                             256
                           )
                         }}
@@ -364,54 +313,34 @@ export default function DonorDetails(props) {
                           paddingLeft: 12,
                           lineHeight: 22,
                           flex: 1,
-                          fontFamily: 'OpenSans-Regular',
+                          fontFamily: "OpenSans-Regular",
                           fontSize: 16,
-                          color: '#111'
+                          color: "#111"
                         }}
                       >
                         {getCountryData(formikProps.values.country).country}
                       </Text>
                     </View>
-                  </TouchableOpacity>
+                  ) : (
+                    <Text
+                      style={{
+                        fontFamily: "OpenSans-SemiBold",
+                        color: "#4d5153",
+                        fontSize: 16
+                      }}
+                    >
+                      Select Country
+                    </Text>
+                  )}
+                </TouchableOpacity>
 
-                  <SelectCountryModal
-                    selectedCountry={formikProps.values.country}
-                    showModal={showCountryModal}
-                    setShowModal={setShowCountryModal}
-                    setFormikValue={formikProps.setFieldValue}
-                    taxDeductibleCountries={countryCodes}
-                  />
-
-                  {/* <View style={styles.formHalfTextField}>
-                    <TextField
-                      label={'Country'}
-                      value={formikProps.values.country}
-                      tintColor={'#89b53a'}
-                      titleFontSize={12}
-                      returnKeyType="next"
-                      lineWidth={1}
-                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      style={{ fontFamily: 'OpenSans-Regular' }}
-                      error={
-                        formikProps.touched.country &&
-                        formikProps.errors.country
-                      }
-                      // ref={input => {
-                      //   countryRef = input;
-                      // }}
-                      onChangeText={formikProps.handleChange('country')}
-                      onBlur={formikProps.handleBlur('country')}
-                    // onSubmitEditing={() => {
-                    //   emailRef.focus();
-                    // }}
-                    />
-                  </View> */}
-                </View>
-
-
-
+                <SelectCountryModal
+                  selectedCountry={formikProps.values.country}
+                  showModal={showCountryModal}
+                  setShowModal={setShowCountryModal}
+                  setFormikValue={formikProps.setFieldValue}
+                  taxDeductibleCountries={countryCodes}
+                />
                 <View style={styles.coverCommissionView}>
                   <Text style={styles.coverCommissionText}>
                     This is a Company Donation
@@ -419,14 +348,14 @@ export default function DonorDetails(props) {
                   <Switch
                     style={styles.coverCommissionSwitch}
                     onValueChange={value =>
-                      formikProps.setFieldValue('isCompany', value)
+                      formikProps.setFieldValue("isCompany", value)
                     }
                     thumbColor={
-                      formikProps.values.isCompany ? '#89b53a' : '#bdc3c7'
+                      formikProps.values.isCompany ? "#89b53a" : "#bdc3c7"
                     }
                     trackColor={{
-                      false: '#f2f2f7',
-                      true: 'rgba(137, 181, 58, 0.6)'
+                      false: "#f2f2f7",
+                      true: "rgba(137, 181, 58, 0.6)"
                     }}
                     value={formikProps.values.isCompany}
                   />
@@ -434,46 +363,40 @@ export default function DonorDetails(props) {
                 {formikProps.values.isCompany ? (
                   <View>
                     <TextField
-                      label={'Company Name'}
+                      {...textfieldDesigns}
+                      label={"Company Name"}
                       value={formikProps.values.companyName}
-                      tintColor={'#89b53a'}
-                      titleFontSize={12}
-                      lineWidth={1}
                       error={
                         formikProps.touched.companyName &&
                         formikProps.errors.companyName
                       }
-                      labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                      titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                      affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       returnKeyType="next"
-                      onChangeText={formikProps.handleChange('companyName')}
-                      onBlur={formikProps.handleBlur('companyName')}
+                      onChangeText={formikProps.handleChange("companyName")}
+                      onBlur={formikProps.handleBlur("companyName")}
                     />
                   </View>
                 ) : null}
               </View>
             </KeyboardAwareScrollView>
             {props.context &&
-              props.context.donationDetails &&
-              props.context.projectDetails &&
-              props.context.donationDetails.totalTreeCount ? (
-                <PaymentOption
-                  treeCount={props.context.donationDetails.totalTreeCount}
-                  treeCost={props.context.projectDetails.amountPerTree}
-                  selectedCurrency={props.context.projectDetails.currency}
-                  navigation={props.navigation}
-                  onSubmit={formikProps.handleSubmit}
-                  isValid={formikProps.isValid}
-                />
-              ) : (
-                <ActivityIndicator size="large" color="#0000ff" />
-              )}
+            props.context.donationDetails &&
+            props.context.projectDetails &&
+            props.context.donationDetails.totalTreeCount ? (
+              <PaymentOption
+                treeCount={props.context.donationDetails.totalTreeCount}
+                treeCost={props.context.projectDetails.amountPerTree}
+                selectedCurrency={props.context.projectDetails.currency}
+                navigation={props.navigation}
+                onSubmit={formikProps.handleSubmit}
+                isValid={formikProps.isValid}
+              />
+            ) : (
+              <ActivityIndicator size="large" color="#0000ff" />
+            )}
           </>
         )}
       </Formik>
       {/* </KeyboardAwareScrollView> */}
-
     </View>
   );
 }
@@ -487,7 +410,7 @@ export function PaymentOption(props) {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                ((props.treeCount / 100) * 2.9 + 0.3)
+                    ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency
@@ -520,15 +443,15 @@ export function PaymentOption(props) {
           />
         </TouchableOpacity>
       ) : (
-          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-            <Text style={styles.continueButtonText}>Next</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
-              source={nextArrowWhite}
-              resizeMode="contain"
-            />
-          </View>
-        )}
+        <View style={[styles.continueButtonView, { backgroundColor: "grey" }]}>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+        </View>
+      )}
     </View>
   );
 }

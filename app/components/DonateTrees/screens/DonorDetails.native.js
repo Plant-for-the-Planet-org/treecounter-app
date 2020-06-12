@@ -19,9 +19,12 @@ import i18n from "../../../locales/i18n.js";
 import styles from "../../../styles/donations/donorDetails";
 import { formatNumber } from "../../../utils/utils";
 import HeaderAnimated from "../../Header/HeaderAnimated.native";
-import GooglePlacesInput from "../components/AutoComplete.native";
-import { SelectCountryModal } from "../components/donationComponents.native";
+import {
+  SelectCountryModal,
+  Header
+} from "../components/donationComponents.native";
 import countryData from "../../../assets/countryCodes.json";
+import SafeAreaView from "react-native-safe-area-view";
 
 import { getCountryFlagImageUrl } from "../../../actions/apiRouting";
 
@@ -101,26 +104,7 @@ export default function DonorDetails(props) {
     style: { fontFamily: "OpenSans-Regular" }
   };
   return (
-    <View style={{ backgroundColor: "white", flex: 1 }}>
-      <HeaderAnimated
-        scrollY={scrollY}
-        navigation={props.navigation}
-        title={"Contact Details"}
-      />
-
-      {/* <KeyboardAwareScrollView
-        contentContainerStyle={[styles.scrollView]}
-        keyboardDismissMode="on-drag"
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled
-        extraScrollHeight={32}
-        extraHeight={32}
-        enableOnAndroid
-        scrollEventThrottle={16}
-        onScroll={Animated.event([
-          { nativeEvent: { contentOffset: { y: scrollY } } }
-        ])}
-      > */}
+    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <Formik
         initialValues={{
           firstname: props.currentUserProfile
@@ -155,7 +139,10 @@ export default function DonorDetails(props) {
         {formikProps => (
           <>
             <KeyboardAwareScrollView
-              contentContainerStyle={styles.scrollView}
+              contentContainerStyle={[
+                styles.scrollView,
+                Platform.OS === "ios" ? null : { marginTop: 24 }
+              ]}
               keyboardDismissMode="on-drag"
               resetScrollToCoords={{ x: 0, y: 0 }}
               scrollEnabled
@@ -167,6 +154,8 @@ export default function DonorDetails(props) {
                 { nativeEvent: { contentOffset: { y: scrollY } } }
               ])}
             >
+              <Header navigation={props.navigation} title={"Contact Details"} />
+
               <View>
                 <View style={styles.formView}>
                   <View style={[styles.formHalfTextField, { zIndex: 2 }]}>
@@ -396,8 +385,7 @@ export default function DonorDetails(props) {
           </>
         )}
       </Formik>
-      {/* </KeyboardAwareScrollView> */}
-    </View>
+    </SafeAreaView>
   );
 }
 

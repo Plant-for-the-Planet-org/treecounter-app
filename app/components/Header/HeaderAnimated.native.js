@@ -22,7 +22,7 @@ export default function HeaderAnimated(props) {
   });
   const headerZindex = props.scrollY.interpolate({
     inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT, 120],
-    outputRange: [100, 100, 1000],
+    outputRange: [1000, 1000, 10000],
     extrapolate: "clamp"
   });
 
@@ -70,6 +70,7 @@ export default function HeaderAnimated(props) {
   });
 
   let navigateBack = () => {
+    console.log("Back Button Hit");
     if (props.onBack) {
       props.onBack();
     }

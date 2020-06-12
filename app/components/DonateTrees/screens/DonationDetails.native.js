@@ -6,7 +6,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Platform
+  Platform,
+  Image
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { updateStaticRoute } from "../../../helpers/routerHelper";
@@ -23,13 +24,16 @@ import {
   SupportUserDetails,
   TaxReceipt,
   PledgeOnComponent,
-  PledgeTreeCount
+  PledgeTreeCount,
+  Header
 } from "../components/donationComponents.native";
 import { GiftTreesComponent } from "../components/giftDontaionComponents.native";
 import ProjectModal from "../components/ProjectModal.native";
 import stripe from "tipsi-stripe";
 import { TextField } from "react-native-material-textfield";
 import i18n from "../../../locales/i18n.js";
+import SafeAreaView from "react-native-safe-area-view";
+import { backArrow, closeIcon } from "../../../assets";
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
@@ -123,9 +127,7 @@ function DonationDetails(props) {
   };
 
   return (
-    <View style={{ backgroundColor: "white" }}>
-      <StatusBar hidden />
-
+    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <ProjectModal
         hideModal={setProjectModal}
         show={showProjectModal}
@@ -136,16 +138,19 @@ function DonationDetails(props) {
         context={context}
       />
 
-      <HeaderAnimated
+      {/* <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
         title={"Tree Donation"}
         showClose
         onBack={props.contextActions.clearDonationReducer}
-      />
+      /> */}
 
       <KeyboardAwareScrollView
-        contentContainerStyle={styles.scrollView}
+        contentContainerStyle={[
+          styles.scrollView,
+          Platform.OS === "ios" ? null : { marginTop: 24 }
+        ]}
         keyboardDismissMode="on-drag"
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollEnabled
@@ -157,6 +162,7 @@ function DonationDetails(props) {
           { nativeEvent: { contentOffset: { y: scrollY } } }
         ])}
       >
+        <Header navigation={props.navigation} title={"Tree Donation"} />
         {/* Plant Project Details */}
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>DONATION TO</Text>
@@ -303,7 +309,7 @@ function DonationDetails(props) {
         globalCurrency={props.globalCurrency}
         paymentSetup={props.paymentSetup}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

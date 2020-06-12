@@ -15,7 +15,12 @@ import {
   getCountryFlagImageUrl,
   getImageUrl
 } from "../../../actions/apiRouting";
-import { infoHint, nextArrowWhite, nextArrow } from "../../../assets";
+import {
+  infoHint,
+  nextArrowWhite,
+  nextArrow,
+  closeIcon
+} from "../../../assets";
 import countryData from "../../../assets/countryCodes.json";
 import styles from "../../../styles/donations/donationDetails";
 import { formatNumber, formatDate } from "../../../utils/utils";
@@ -860,6 +865,57 @@ export function PledgeOnComponent(props) {
           </View>
         </View>
       </View>
+    </>
+  );
+}
+
+export function Header(props) {
+  let navigateBack = () => {
+    if (props.onBack) {
+      props.onBack();
+    }
+    props.navigation.goBack();
+    return true;
+  };
+  return (
+    <>
+      <View
+        style={{
+          top: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: "#fff",
+          height: 60,
+          zIndex: 100,
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "row",
+          width: "100%"
+        }}
+      >
+        <TouchableOpacity
+          style={{ height: 18, zIndex: 1001 }}
+          onPress={navigateBack}
+        >
+          <Image
+            source={closeIcon}
+            resizeMode="contain"
+            style={{ height: 18, width: 24 }}
+          />
+        </TouchableOpacity>
+      </View>
+      <Text
+        style={{
+          fontFamily: "OpenSans-ExtraBold",
+          fontSize: 27,
+          lineHeight: 40,
+          letterSpacing: 0,
+          textAlign: "left",
+          color: "#4d5153"
+        }}
+      >
+        {props.title}
+      </Text>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Animated,
   Image,
@@ -7,24 +7,26 @@ import {
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import stripe from 'tipsi-stripe';
-import { nextArrowWhite, paypal, paypalLogo } from '../../../assets';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
-import styles from '../../../styles/donation/donation.native';
-import colors from '../../../utils/constants';
-import { formatNumber } from '../../../utils/utils';
-import HeaderAnimated from '../../Header/HeaderAnimated.native';
-import CreditCardForm from './../components/CreditCardForm';
-import { handleCreditCardPayPress } from './../components/paymentMethods/creditCard';
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import stripe from "tipsi-stripe";
+import { nextArrowWhite, paypal, paypalLogo } from "../../../assets";
+import { updateStaticRoute } from "../../../helpers/routerHelper";
+import styles from "../../../styles/donation/donation.native";
+import colors from "../../../utils/constants";
+import { formatNumber } from "../../../utils/utils";
+import HeaderAnimated from "../../Header/HeaderAnimated.native";
+import CreditCardForm from "./../components/CreditCardForm";
+import { handleCreditCardPayPress } from "./../components/paymentMethods/creditCard";
+import SafeAreaView from "react-native-safe-area-view";
+import { Header } from "../components/donationComponents.native";
 
 export default function DonationStep3(props) {
   stripe.setOptions({
-    publishableKey: 'pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw',
-    merchantId: '', // Optional
-    androidPayMode: 'test' // Android only
+    publishableKey: "pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw",
+    merchantId: "", // Optional
+    androidPayMode: "test" // Android only
   });
 
   const [token, setToken] = React.useState(null);
@@ -33,8 +35,7 @@ export default function DonationStep3(props) {
   const [showPay, setShowPay] = React.useState(true);
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
 
-
-  const [cardValues, setcardValues] = React.useState('');
+  const [cardValues, setcardValues] = React.useState("");
   const [cardValid, setcardValid] = React.useState(false);
 
   const togglePaypalInfo = () => {
@@ -43,11 +44,11 @@ export default function DonationStep3(props) {
 
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
+      "keyboardDidShow",
       keyboardDidShow
     );
     const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
+      "keyboardDidHide",
       keyboardDidHide
     );
 
@@ -67,15 +68,19 @@ export default function DonationStep3(props) {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.WHITE, paddingBottom: 120 }}>
-      <HeaderAnimated
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "#fff", paddingBottom: 120 }}
+    >
+      {/* <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
-        title={'Payment Mode'}
-      />
+        title={"Payment Mode"}
+      /> */}
 
       <KeyboardAwareScrollView
-        contentContainerStyle={styles.pageScrollView}
+        contentContainerStyle={[
+          Platform.OS === "ios" ? null : { marginTop: 24 }
+        ]}
         keyboardDismissMode="on-drag"
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollEnabled
@@ -84,6 +89,10 @@ export default function DonationStep3(props) {
           { nativeEvent: { contentOffset: { y: scrollY } } }
         ])}
       >
+        <View style={{ paddingHorizontal: 20 }}>
+          <Header navigation={props.navigation} title={"Payment Mode"} />
+        </View>
+
         <View style={styles.pageView}>
           {/* <Text style={styles.pageTitle}>Payment</Text> */}
           <Text style={styles.pageSubTitle}>
@@ -99,7 +108,9 @@ export default function DonationStep3(props) {
           <View style={styles.paymentCardView}>
             <TouchableOpacity
               style={styles.paymentModeView}
-              onPress={() => { togglePaypalInfo() }}
+              onPress={() => {
+                togglePaypalInfo();
+              }}
             >
               <Image source={paypal} style={styles.creditCardsDesign} />
               <Text style={styles.paymentModeTitle}>PayPal</Text>
@@ -112,13 +123,13 @@ export default function DonationStep3(props) {
                   style={{ marginLeft: 10 }}
                 />
               ) : (
-                  <Icon
-                    name="chevron-down"
-                    size={14}
-                    color="rgba(0, 0, 0, 0.38)"
-                    style={{ marginLeft: 10 }}
-                  />
-                )}
+                <Icon
+                  name="chevron-down"
+                  size={14}
+                  color="rgba(0, 0, 0, 0.38)"
+                  style={{ marginLeft: 10 }}
+                />
+              )}
             </TouchableOpacity>
 
             {/* Hidden until expanded by User */}
@@ -127,7 +138,7 @@ export default function DonationStep3(props) {
                 <Text style={styles.paypalMessage}>
                   Click the PayPal icon below to sign into your PayPal account
                   and pay securely.
-                  </Text>
+                </Text>
                 <TouchableOpacity style={styles.paypalButton}>
                   <Text style={styles.paypalButtonText}>Pay with</Text>
                   <Image
@@ -164,7 +175,7 @@ export default function DonationStep3(props) {
         />
       ) : null}
       {/* Pay Button Section Ended */}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -177,7 +188,7 @@ const PaymentButton = props => {
             {formatNumber(
               props.commissionSwitch
                 ? props.treeCost * props.treeCount +
-                ((props.treeCount / 100) * 2.9 + 0.3)
+                    ((props.treeCount / 100) * 2.9 + 0.3)
                 : props.treeCost * props.treeCount,
               null,
               props.selectedCurrency
@@ -203,7 +214,7 @@ const PaymentButton = props => {
             // selectedProject: props.selectedProject
             cardValues: props.cardValues,
             paymentSetup: props.paymentSetup
-          })
+          });
 
           // updateStaticRoute('donate_thankyou', props.navigation, {
           //   treeCount: props.treeCount,

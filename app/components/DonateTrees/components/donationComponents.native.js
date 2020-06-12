@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   FlatList,
   Image,
@@ -7,26 +7,26 @@ import {
   TextInput,
   TouchableOpacity,
   View
-} from 'react-native';
-import Modal from 'react-native-modalbox';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+} from "react-native";
+import Modal from "react-native-modalbox";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import {
   getCountryFlagImageUrl,
   getImageUrl
-} from '../../../actions/apiRouting';
-import { infoHint, nextArrowWhite, nextArrow } from '../../../assets';
-import countryData from '../../../assets/countryCodes.json';
-import styles from '../../../styles/donations/donationDetails';
-import { formatNumber, formatDate } from '../../../utils/utils';
-import CurrencySelectorList from '../../Common/CurrencySelectorList.native';
-import UserProfileImage from '../../Common/UserProfileImage.native';
-import { handleApplePayPress } from './paymentMethods/applePay';
-import { handleAndroidPayPress } from './paymentMethods/googlePay';
-import { SvgXml } from 'react-native-svg';
-import google_pay from '../../../assets/svgAssets/donations/google_pay';
-import apple_pay from '../../../assets/svgAssets/donations/apple_pay';
-import NumberFormat from '../../Common/NumberFormat.native.js';
+} from "../../../actions/apiRouting";
+import { infoHint, nextArrowWhite, nextArrow } from "../../../assets";
+import countryData from "../../../assets/countryCodes.json";
+import styles from "../../../styles/donations/donationDetails";
+import { formatNumber, formatDate } from "../../../utils/utils";
+import CurrencySelectorList from "../../Common/CurrencySelectorList.native";
+import UserProfileImage from "../../Common/UserProfileImage.native";
+import { handleApplePayPress } from "./paymentMethods/applePay";
+import { handleAndroidPayPress } from "./paymentMethods/googlePay";
+import { SvgXml } from "react-native-svg";
+import google_pay from "../../../assets/svgAssets/donations/google_pay";
+import apple_pay from "../../../assets/svgAssets/donations/apple_pay";
+import NumberFormat from "../../Common/NumberFormat.native.js";
 
 export function TaxReceipt(props) {
   let {
@@ -38,7 +38,12 @@ export function TaxReceipt(props) {
   } = props;
   const SelectedCountryText = () => {
     return (
-      <Text style={styles.isTaxDeductibleCountry}>
+      <Text
+        style={[
+          styles.isTaxDeductibleCountry,
+          taxReceiptSwitch ? null : { color: "rgba(0, 0, 0, 0.3)" }
+        ]}
+      >
         {getCountryData(selectedTaxCountry).country}
       </Text>
     );
@@ -57,24 +62,28 @@ export function TaxReceipt(props) {
               ),
                 toggleTaxReceipt(true);
             }}
-            style={{ flexDirection: 'row', alignItems: 'center' }}
+            style={{ flexDirection: "row", alignItems: "center" }}
           >
             <SelectedCountryText />
-            <Icon name={'chevron-down'} size={14} color="#89b53a" />
+            <Icon
+              name={"chevron-down"}
+              size={14}
+              color={taxReceiptSwitch ? "#89b53a" : "rgba(0, 0, 0, 0.2)"}
+            />
           </TouchableOpacity>
         ) : (
-            <SelectedCountryText />
-          )}
+          <SelectedCountryText />
+        )}
       </View>
 
       <Switch
         style={styles.isTaxDeductibleSwitch}
         onValueChange={toggleTaxReceipt}
         value={taxReceiptSwitch}
-        thumbColor={taxReceiptSwitch ? '#89b53a' : '#bdc3c7'}
+        thumbColor={taxReceiptSwitch ? "#89b53a" : "#bdc3c7"}
         trackColor={{
-          false: '#f2f2f7',
-          true: 'rgba(137, 181, 58, 0.6)'
+          false: "#f2f2f7",
+          true: "rgba(137, 181, 58, 0.6)"
         }}
       />
     </View>
@@ -93,10 +102,10 @@ export function SelectCountryModal(props) {
     setShowModal,
     taxDeductibleCountries
   } = props;
-  const activeColor = '#74ba00';
-  const defaultColor = '#4d5153';
+  const activeColor = "#74ba00";
+  const defaultColor = "#4d5153";
 
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
 
   const keyExtractor = d => d.item;
 
@@ -104,16 +113,17 @@ export function SelectCountryModal(props) {
     return (
       <TouchableOpacity
         onPress={() => {
-          props.setFormikValue ? props.setFormikValue('country', countryCode) :
-            setSelectedCountry(countryCode);
+          props.setFormikValue
+            ? props.setFormikValue("country", countryCode)
+            : setSelectedCountry(countryCode);
           closeModal();
         }}
       >
         <View
           key={countryCode}
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
+            flexDirection: "row",
+            alignItems: "center",
             marginVertical: 12
           }}
         >
@@ -121,7 +131,7 @@ export function SelectCountryModal(props) {
             source={{
               uri: getCountryFlagImageUrl(
                 getCountryData(countryCode).currencyCountryFlag,
-                'png',
+                "png",
                 256
               )
             }}
@@ -132,7 +142,7 @@ export function SelectCountryModal(props) {
               paddingLeft: 16,
               lineHeight: 22,
               flex: 1,
-              fontFamily: 'OpenSans-SemiBold',
+              fontFamily: "OpenSans-SemiBold",
               fontSize: 16,
               color:
                 selectedCountry === countryCode ? activeColor : defaultColor
@@ -160,14 +170,14 @@ export function SelectCountryModal(props) {
     setShowModal(false);
   };
 
-  const setSearchCountries = (text = '') => {
+  const setSearchCountries = (text = "") => {
     setSearchText(text);
   };
 
   return (
     <Modal
       isOpen={showModal}
-      position={'left'}
+      position={"left"}
       onClosed={closeModal}
       backdropPressToClose
       coverScreen
@@ -177,17 +187,17 @@ export function SelectCountryModal(props) {
       <View
         style={{
           opacity: 1,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginTop: Platform.OS === 'ios' ? 54 : 20,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginTop: Platform.OS === "ios" ? 54 : 20,
           marginBottom: 20,
           paddingHorizontal: 24
         }}
       >
         <Text
           style={{
-            fontFamily: 'OpenSans-SemiBold',
+            fontFamily: "OpenSans-SemiBold",
             fontSize: 18,
             color: defaultColor
           }}
@@ -198,8 +208,8 @@ export function SelectCountryModal(props) {
           {searchText ? (
             <MaterialIcon name="arrow-back" size={30} color="black" />
           ) : (
-              <MaterialIcon name="close" size={30} color="#4d5153" />
-            )}
+            <MaterialIcon name="close" size={30} color="#4d5153" />
+          )}
         </TouchableOpacity>
         {/* <View
           style={{
@@ -228,7 +238,7 @@ export function SelectCountryModal(props) {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         contentContainerStyle={{
-          backgroundColor: '#fff',
+          backgroundColor: "#fff",
           // flex: 1,
           paddingHorizontal: 24
         }}
@@ -241,17 +251,17 @@ export function CoverFee(props) {
   return (
     <View style={styles.coverCommissionView}>
       <Text style={styles.coverCommissionText}>
-        Help {props.selectedProject.tpoSlug} cover the credit card fee of{' '}
+        Help {props.selectedProject.tpoSlug} cover the credit card fee of{" "}
         {formatNumber(
           (props.treeCount / 100) * 2.9 + 0.3,
           null,
           props.selectedCurrency
-        )}{' '}
+        )}{" "}
       </Text>
       <Switch
         style={styles.coverCommissionSwitch}
         onValueChange={props.toggleSetCommission}
-        trackColor={{ false: '#f2f2f7', true: '#88b439' }}
+        trackColor={{ false: "#f2f2f7", true: "#88b439" }}
         value={props.commissionSwitch}
       />
     </View>
@@ -268,18 +278,20 @@ export function PaymentOption(props) {
               <Text style={styles.paymentTreeAmount}>
                 {formatNumber(
                   props.commissionSwitch
-                    ? props.treeCost * props.treeCount * props.rates[props.selectedCurrency] +
-                    ((props.treeCount / 100) * 2.9 + 0.3)
-                    : props.treeCost * props.treeCount * props.rates[props.selectedCurrency],
+                    ? props.treeCost *
+                        props.treeCount *
+                        props.rates[props.selectedCurrency] +
+                        ((props.treeCount / 100) * 2.9 + 0.3)
+                    : props.treeCost *
+                        props.treeCount *
+                        props.rates[props.selectedCurrency],
                   null,
                   props.selectedCurrency
                 )}
-
               </Text>
             </View>
 
             <View>
-
               <Text style={styles.paymentTreeCount}>
                 for {props.treeCount} trees
               </Text>
@@ -293,46 +305,46 @@ export function PaymentOption(props) {
         <>
           <TouchableOpacity
             onPress={() =>
-              props.showNativePay === 'google'
+              props.showNativePay === "google"
                 ? handleAndroidPayPress({
-                  totalTreeCount: String(props.treeCount),
-                  totalPrice: String(props.treeCount * props.treeCost),
-                  amountPerTree: String(props.treeCost),
-                  currency_code: String(props.selectedCurrency),
-                  token: props.token,
-                  setToken: props.setToken,
-                  stripe: props.stripe,
-                  currentUserProfile: props.currentUserProfile,
-                  context: props.context,
-                  createDonation: props.createDonation,
-                  setDonorDetails: props.setDonorDetails,
-                  donationPay: props.donationPay,
-                  selectedProject: props.selectedProject,
-                  paymentSetup: props.paymentSetup
-                })
+                    totalTreeCount: String(props.treeCount),
+                    totalPrice: String(props.treeCount * props.treeCost),
+                    amountPerTree: String(props.treeCost),
+                    currency_code: String(props.selectedCurrency),
+                    token: props.token,
+                    setToken: props.setToken,
+                    stripe: props.stripe,
+                    currentUserProfile: props.currentUserProfile,
+                    context: props.context,
+                    createDonation: props.createDonation,
+                    setDonorDetails: props.setDonorDetails,
+                    donationPay: props.donationPay,
+                    selectedProject: props.selectedProject,
+                    paymentSetup: props.paymentSetup
+                  })
                 : handleApplePayPress({
-                  totalTreeCount: String(props.treeCount),
-                  totalPrice: String(props.treeCount * props.treeCost),
-                  amountPerTree: String(props.treeCost),
-                  currency_code: String(props.selectedCurrency),
-                  token: props.token,
-                  setToken: props.setToken,
-                  stripe: props.stripe,
-                  setApplePayStatus: props.setApplePayStatus,
-                  currentUserProfile: props.currentUserProfile,
-                  context: props.context,
-                  createDonation: props.createDonation,
-                  setDonorDetails: props.setDonorDetails,
-                  donationPay: props.donationPay,
-                  selectedProject: props.selectedProject,
-                  paymentSetup: props.paymentSetup
-                })
+                    totalTreeCount: String(props.treeCount),
+                    totalPrice: String(props.treeCount * props.treeCost),
+                    amountPerTree: String(props.treeCost),
+                    currency_code: String(props.selectedCurrency),
+                    token: props.token,
+                    setToken: props.setToken,
+                    stripe: props.stripe,
+                    setApplePayStatus: props.setApplePayStatus,
+                    currentUserProfile: props.currentUserProfile,
+                    context: props.context,
+                    createDonation: props.createDonation,
+                    setDonorDetails: props.setDonorDetails,
+                    donationPay: props.donationPay,
+                    selectedProject: props.selectedProject,
+                    paymentSetup: props.paymentSetup
+                  })
             }
             style={styles.nativePayButton}
           >
             <SvgXml
               style={{ maxHeight: 24, maxWidth: 60 }}
-              xml={props.showNativePay === 'google' ? google_pay : apple_pay}
+              xml={props.showNativePay === "google" ? google_pay : apple_pay}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -348,35 +360,35 @@ export function PaymentOption(props) {
           </TouchableOpacity>
         </>
       ) : (
-          <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
-            <Text style={styles.continueButtonText}>Next</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
-              source={nextArrowWhite}
-              resizeMode="contain"
-            />
-          </View>
-        )}
+        <View style={[styles.continueButtonView, { backgroundColor: "grey" }]}>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+        </View>
+      )}
     </View>
   );
 }
 
 export function SelectFrequency(props) {
   let frequencyOptions = [
-    { label: 'Once', value: 'once' },
-    { label: 'Monthly', value: 'monthly' },
-    { label: 'Yearly', value: 'yearly' }
+    { label: "Once", value: "once" },
+    { label: "Monthly", value: "monthly" },
+    { label: "Yearly", value: "yearly" }
   ];
   return (
     <>
       <Text
         style={{
-          fontFamily: 'OpenSans-SemiBold',
+          fontFamily: "OpenSans-SemiBold",
           fontSize: 12,
           lineHeight: 17,
           letterSpacing: 0,
-          textAlign: 'left',
-          color: '#4d5153',
+          textAlign: "left",
+          color: "#4d5153",
           marginTop: 30
         }}
       >
@@ -435,7 +447,7 @@ export function PlantProjectDetails(props) {
   const calculateAmount = currency => {
     return (
       Math.round(props.treeCost * parseFloat(props.rates[currency]) * 100) /
-      100 +
+        100 +
       props.fee
     );
   };
@@ -444,7 +456,7 @@ export function PlantProjectDetails(props) {
       <Image
         style={styles.projectImage}
         source={{
-          uri: getImageUrl('project', 'thumb', props.selectedProject.image)
+          uri: getImageUrl("project", "thumb", props.selectedProject.image)
         }}
       />
       <View style={styles.projectNameAmount}>
@@ -452,12 +464,12 @@ export function PlantProjectDetails(props) {
         <View style={styles.projectAmountView}>
           <TouchableOpacity
             onPress={() => setShowCurrencyModal(true)}
-            style={{ flexDirection: 'row', alignItems: 'center' }}
+            style={{ flexDirection: "row", alignItems: "center" }}
           >
             <Text style={styles.isTaxDeductibleCountry}>
               {selectedCurrency}
             </Text>
-            <Icon name={'chevron-down'} size={14} color="#89b53a" />
+            <Icon name={"chevron-down"} size={14} color="#89b53a" />
           </TouchableOpacity>
 
           {/* <Image style={styles.projectAmountImage} source={currencyIcon} /> */}
@@ -467,7 +479,8 @@ export function PlantProjectDetails(props) {
               data={treeCost.toFixed(2)}
               handleCurrencyChange={handleCurrencyChange}
               force={force}
-            /> per tree
+            />{" "}
+            per tree
           </Text>
         </View>
       </View>
@@ -491,8 +504,8 @@ export function NoPlantProjectDetails(props) {
           Tap here to view all projects
         </Text>
       </View>
-      <View style={[{ alignSelf: 'auto', marginRight: 16 }]}>
-        <Icon name={'chevron-right'} size={14} color="#4d5153" />
+      <View style={[{ alignSelf: "auto", marginRight: 16 }]}>
+        <Icon name={"chevron-right"} size={14} color="#4d5153" />
       </View>
     </TouchableOpacity>
   );
@@ -521,12 +534,11 @@ export function SelectTreeCount(props) {
     }
   }
 
-
   if (!customTreeCountRef.isFocused && customTreeCount) {
     props.setTreeCount(tempTreeCount);
   }
   const setCustomTreeCount = value => {
-    if (props.hasOwnProperty('customTreeCount')) {
+    if (props.hasOwnProperty("customTreeCount")) {
       props.setCustomTreeCount(value);
       setCustomTreeCountLocal(value);
     } else {
@@ -535,56 +547,59 @@ export function SelectTreeCount(props) {
   };
 
   return (
-    <View style={styles.treeCountSelector}>
-      {treeCountOptions.map(option => (
-        <TouchableOpacity
-          onPress={() => {
-            props.setTreeCount(option);
-            setCustomTreeCount(false);
-          }}
-          style={
-            props.treeCount === option
-              ? styles.selectedView
-              : styles.selectorView
-          }
-        >
-          <Text
+    <>
+      <View style={styles.treeCountSelector}>
+        {treeCountOptions.map(option => (
+          <TouchableOpacity
+            onPress={() => {
+              props.setTreeCount(option);
+              setCustomTreeCount(false);
+            }}
             style={
               props.treeCount === option
-                ? styles.selectedTreeCountText
-                : styles.treeCountText
+                ? styles.selectedView
+                : styles.selectorView
             }
           >
-            {option} Trees
-          </Text>
-        </TouchableOpacity>
-      ))}
-      {customTreeCount ? (
-        <View style={styles.customSelectedView}>
-          <TextInput
-            style={
-              customTreeCount
-                ? styles.treeCountTextInputSelected
-                : styles.treeCountTextInput
-            }
-            onChangeText={treeCount => setTempTreeCount(Number(treeCount))}
-            onSubmitEditing={() => props.setTreeCount(tempTreeCount)}
-            value={tempTreeCount}
-            keyboardType={'number-pad'}
-            autoFocus
-            ref={customTreeCountRef}
-          />
-          <Text
-            style={
-              customTreeCount
-                ? styles.treeCountNumberSelected
-                : styles.treeCountNumber
-            }
-          >
-            Trees
-          </Text>
-        </View>
-      ) : (
+            <Text
+              style={
+                props.treeCount === option
+                  ? styles.selectedTreeCountText
+                  : styles.treeCountText
+              }
+            >
+              {option} Trees
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <View>
+        {customTreeCount ? (
+          <View style={styles.customSelectedView}>
+            <TextInput
+              style={
+                customTreeCount
+                  ? styles.treeCountTextInputSelected
+                  : styles.treeCountTextInput
+              }
+              onChangeText={treeCount => setTempTreeCount(Number(treeCount))}
+              onSubmitEditing={() => props.setTreeCount(tempTreeCount)}
+              value={tempTreeCount}
+              keyboardType={"number-pad"}
+              autoFocus
+              ref={customTreeCountRef}
+            />
+            <Text
+              style={
+                customTreeCount
+                  ? styles.treeCountNumberSelected
+                  : styles.treeCountNumber
+              }
+            >
+              Trees
+            </Text>
+          </View>
+        ) : (
           <TouchableOpacity
             onPress={() => {
               setCustomTreeCount(true);
@@ -596,7 +611,8 @@ export function SelectTreeCount(props) {
             <Text style={styles.customTreeCountText}>Custom Trees</Text>
           </TouchableOpacity>
         )}
-    </View>
+      </View>
+    </>
   );
 }
 
@@ -661,7 +677,7 @@ export function PledgeTreeCount(props) {
                 : props.setTreeCount(tempTreeCount)
             }
             value={tempTreeCount}
-            keyboardType={'number-pad'}
+            keyboardType={"number-pad"}
             autoFocus
             ref={customTreeCountRef}
           />
@@ -676,16 +692,16 @@ export function PledgeTreeCount(props) {
           </Text>
         </View>
       ) : (
-          <TouchableOpacity
-            onPress={() => {
-              setCustomTreeCount(true);
-              props.setTreeCount(tempTreeCount);
-            }}
-            style={styles.customSelectorView}
-          >
-            <Text style={styles.customTreeCountText}>Custom Trees</Text>
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity
+          onPress={() => {
+            setCustomTreeCount(true);
+            props.setTreeCount(tempTreeCount);
+          }}
+          style={styles.customSelectorView}
+        >
+          <Text style={styles.customTreeCountText}>Custom Trees</Text>
+        </TouchableOpacity>
+      )}
       {erorrMessage ? (
         <Text style={styles.pledgeTreeCountError}>
           Tree count should be higher than the pledged tree count
@@ -699,31 +715,31 @@ const hintCard = () => {
   return (
     <View
       style={{
-        display: 'flex',
-        flexDirection: 'row',
+        display: "flex",
+        flexDirection: "row",
         marginTop: 24,
         borderRadius: 6,
-        backgroundColor: '#F5F7F9',
-        alignItems: 'center'
+        backgroundColor: "#F5F7F9",
+        alignItems: "center"
       }}
     >
       <View
         style={{
-          backgroundColor: '#89b53a',
+          backgroundColor: "#89b53a",
           width: 6,
-          height: '100%',
+          height: "100%",
           borderTopLeftRadius: 6,
           borderBottomLeftRadius: 6
         }}
       />
       <View
         style={{
-          display: 'flex',
-          flexDirection: 'row',
+          display: "flex",
+          flexDirection: "row",
           marginLeft: 24,
           paddingTop: 24,
           paddingBottom: 24,
-          alignItems: 'center',
+          alignItems: "center",
           paddingRight: 24
         }}
       >
@@ -731,7 +747,7 @@ const hintCard = () => {
           source={infoHint}
           style={{ marginRight: 12, height: 24, width: 24 }}
         />
-        <Text style={{ maxWidth: '90%', fontFamily: 'OpenSans-Regular' }}>
+        <Text style={{ maxWidth: "90%", fontFamily: "OpenSans-Regular" }}>
           Please select Tree Count to Donate trees.
         </Text>
       </View>
@@ -749,8 +765,8 @@ export const UserContactDetails = props => {
           {donorDetails.firstName ? (
             <Text style={styles.sectionRightButton}>Edit</Text>
           ) : (
-              <Text style={styles.sectionRightButton}>Add</Text>
-            )}
+            <Text style={styles.sectionRightButton}>Add</Text>
+          )}
         </TouchableOpacity>
       </View>
       {donorDetails.firstName ? (
@@ -787,10 +803,10 @@ export const UserPaymentDetails = props => {
 export const PaymentsProcessedBy = props => {
   return (
     <Text style={styles.paymentProcessText}>
-      Your payment will be processed either by Stripe, Plant-for-the-Planet,{' '}
-      {props.selectedProject.tpoSlug === 'plant-for-the-planet'
+      Your payment will be processed either by Stripe, Plant-for-the-Planet,{" "}
+      {props.selectedProject.tpoSlug === "plant-for-the-planet"
         ? null
-        : 'or ' + props.selectedProject.tpoSlug}{' '}
+        : "or " + props.selectedProject.tpoSlug}{" "}
       if is stripe connected.
     </Text>
   );
@@ -804,7 +820,8 @@ export const SupportUserDetails = props => {
         <View style={styles.supportUser}>
           <UserProfileImage
             profileImage={
-              props.context.supportTreeCounterDetails && props.context.supportTreeCounterDetails.treecounterAvatar
+              props.context.supportTreeCounterDetails &&
+              props.context.supportTreeCounterDetails.treecounterAvatar
             }
             imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
           />
@@ -827,7 +844,7 @@ export function PledgeOnComponent(props) {
         <Image
           style={styles.pledgeImage}
           source={{
-            uri: getImageUrl('event', 'thumb', props.pledgeDetails.image)
+            uri: getImageUrl("event", "thumb", props.pledgeDetails.image)
           }}
         />
         <View style={styles.pledgeNameAmount}>

@@ -52,7 +52,7 @@ export function loadProjects(category = 'all', options = {}) {
 }
 
 export function loadProject(plantProject, options = {}) {
-  const request = getRequest('plantProject_get', { uid: plantProject.id });
+  const request = getRequest('plantProject_get', { version: 'v1.5', uid: plantProject.id });
   return dispatch => {
     options.loading && dispatch(setProgressModelState(true));
     return new Promise(function (resolve, reject) {

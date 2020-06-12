@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 import {
   Animated,
   StatusBar,
@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
   View,
   Platform
-} from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { updateStaticRoute } from '../../../helpers/routerHelper';
-import { paymentFee } from '../../../helpers/utils';
-import styles from '../../../styles/donations/donationDetails';
-import HeaderAnimated from '../../Header/HeaderAnimated.native';
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { updateStaticRoute } from "../../../helpers/routerHelper";
+import { paymentFee } from "../../../helpers/utils";
+import styles from "../../../styles/donations/donationDetails";
+import HeaderAnimated from "../../Header/HeaderAnimated.native";
 import {
   NoPlantProjectDetails,
   PaymentOption,
@@ -24,41 +24,38 @@ import {
   TaxReceipt,
   PledgeOnComponent,
   PledgeTreeCount
-} from '../components/donationComponents.native';
-import { GiftTreesComponent } from '../components/giftDontaionComponents.native';
-import ProjectModal from '../components/ProjectModal.native';
-import stripe from 'tipsi-stripe';
-import { TextField } from 'react-native-material-textfield';
-import i18n from '../../../locales/i18n.js';
-
-
-
-
+} from "../components/donationComponents.native";
+import { GiftTreesComponent } from "../components/giftDontaionComponents.native";
+import ProjectModal from "../components/ProjectModal.native";
+import stripe from "tipsi-stripe";
+import { TextField } from "react-native-material-textfield";
+import i18n from "../../../locales/i18n.js";
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
   const [treeCount, setTreeCount] = React.useState(0); // for Selecting Tree Count
   // const [frequency, setFrequency] = React.useState('once'); // for Selecting Frequency of Donations
-  const [countryForTax, setCountryForTax] = React.useState(''); // for Selecting the Country
+  const [countryForTax, setCountryForTax] = React.useState(""); // for Selecting the Country
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
 
-  let defaultCountry = props.paymentSetup && props.paymentSetup.defaultCountryKey.split("/");
-  defaultCountry = defaultCountry[0];
+  // let defaultCountry = props.paymentSetup && props.paymentSetup.defaultCountryKey.split("/");
+  // defaultCountry = defaultCountry[0];
+
+  let defaultCountry = props.paymentSetup && props.paymentSetup.defaultCountry;
   const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
     defaultCountry
   );
   const [currency, setCurrency] = React.useState(props.selectedCurrency);
   const [token, setToken] = React.useState(null);
-  const [applePayStatus, setApplePayStatus] = React.useState('');
-
+  const [applePayStatus, setApplePayStatus] = React.useState("");
 
   // this is to test whether Apple/Google pay is allowed or not
   stripe.setOptions({
-    publishableKey: props.paymentSetup.stripePublishableKey,
-    merchantId: '', // Optional
-    androidPayMode: 'test' // Android only
+    publishableKey: props.paymentSetup.gateways.DE.stripe.stripePublishableKey,
+    merchantId: "", // Optional
+    androidPayMode: "test" // Android only
   });
   const [allowedNativePay, setallowedNativePay] = React.useState(false);
 
@@ -103,7 +100,7 @@ function DonationDetails(props) {
   }
 
   const saveContext = () => {
-    if (context.contextType === 'direct') {
+    if (context.contextType === "direct") {
       props.contextActions.setDonationDetails({
         ...props.context.donationDetails,
         totalTreeCount: treeCount,
@@ -116,9 +113,9 @@ function DonationDetails(props) {
   };
   const onContinue = () => {
     // Set Donation Details and then switch the page
-    if (context.contextType === 'direct') {
+    if (context.contextType === "direct") {
       saveContext();
-      updateStaticRoute('donor_details_form', props.navigation, {
+      updateStaticRoute("donor_details_form", props.navigation, {
         navigation: props.navigation,
         paymentSetup: props.paymentSetup
       });
@@ -126,8 +123,7 @@ function DonationDetails(props) {
   };
 
   return (
-    <View style={{ backgroundColor: 'white' }}>
-
+    <View style={{ backgroundColor: "white" }}>
       <StatusBar hidden />
 
       <ProjectModal
@@ -143,7 +139,7 @@ function DonationDetails(props) {
       <HeaderAnimated
         scrollY={scrollY}
         navigation={props.navigation}
-        title={'Tree Donation'}
+        title={"Tree Donation"}
         showClose
         onBack={props.contextActions.clearDonationReducer}
       />
@@ -179,9 +175,7 @@ function DonationDetails(props) {
           <PlantProjectDetails
             treeCost={props.selectedProject.treeCost}
             selectedCurrency={
-              props.globalCurrency
-                ? props.globalCurrency.currency
-                : currency
+              props.globalCurrency ? props.globalCurrency.currency : currency
             }
             selectedProject={props.selectedProject}
             rates={
@@ -194,10 +188,11 @@ function DonationDetails(props) {
             setCurrency={setCurrency}
           />
         ) : (
-            <NoPlantProjectDetails />
-          )}
+          <NoPlantProjectDetails />
+        )}
 
-        {context.contextType === 'direct' || context.contextType === 'support' ? (
+        {context.contextType === "direct" ||
+        context.contextType === "support" ? (
           <SelectTreeCount
             treeCount={treeCount}
             setTreeCount={setTreeCount}
@@ -208,23 +203,23 @@ function DonationDetails(props) {
 
         {/* Donation Context */}
 
-        {context.contextType === 'support' ? (
+        {context.contextType === "support" ? (
           <SupportUserDetails context={context} />
         ) : null}
 
         {/* Gift Trees */}
-        {context.contextType === 'gift-contact' ||
-          context.contextType === 'gift-invitation' ? (
-            <GiftTreesComponent
-              treeCount={treeCount}
-              setTreeCount={setTreeCount}
-              selectedProject={props.selectedProject}
-              context={context}
-              treeCountOptions={props.paymentSetup.treeCountOptions}
-            />
-          ) : null}
+        {context.contextType === "gift-contact" ||
+        context.contextType === "gift-invitation" ? (
+          <GiftTreesComponent
+            treeCount={treeCount}
+            setTreeCount={setTreeCount}
+            selectedProject={props.selectedProject}
+            context={context}
+            treeCountOptions={props.paymentSetup.treeCountOptions}
+          />
+        ) : null}
 
-        {context.contextType === 'pledge' ? (
+        {context.contextType === "pledge" ? (
           <>
             <PledgeOnComponent pledgeDetails={context.pledgeDetails} />
             <PledgeTreeCount
@@ -237,7 +232,7 @@ function DonationDetails(props) {
 
         {/* <SelectFrequency frequency={frequency} setFrequency={setFrequency} /> */}
         <View
-          style={[styles.horizontalDivider, { width: '14%', marginTop: 30 }]}
+          style={[styles.horizontalDivider, { width: "14%", marginTop: 30 }]}
         />
 
         {/* Commission Covering */}
@@ -264,7 +259,6 @@ function DonationDetails(props) {
           />
         )}
 
-
         <SelectCountryModal
           selectedCountry={selectedTaxCountry}
           setSelectedCountry={setSelectedTaxCountry}
@@ -286,7 +280,7 @@ function DonationDetails(props) {
         onContinue={onContinue}
         // frequency={frequency}
         showNativePay={
-          allowedNativePay ? (Platform.OS === 'ios' ? 'apple' : 'google') : null
+          allowedNativePay ? (Platform.OS === "ios" ? "apple" : "google") : null
         }
         token={token}
         setToken={setToken}
@@ -299,9 +293,7 @@ function DonationDetails(props) {
         donationPay={props.donationPay}
         selectedProject={props.selectedProject}
         treeCost={props.selectedProject.treeCost}
-        selectedCurrency={
-          currency
-        }
+        selectedCurrency={currency}
         rates={
           props.currencies.currencies.currency_rates[
             props.selectedProject.currency

@@ -3,7 +3,6 @@ import axios from 'axios';
 export const handleAndroidPayPress = async props => {
   try {
     props.setToken(null);
-
     const token = await props.stripe
       .paymentRequestWithNativePay({
         total_price: props.totalPrice,
@@ -50,7 +49,7 @@ export const handleAndroidPayPress = async props => {
             const data = {
               type: 'card',
               card: { token: token.tokenId },
-              key: props.paymentSetup.accounts.de.gateways.stripe.authorization.stripePublishableKey
+              key: props.paymentSetup.gateways.DE.stripe.stripePublishableKey
             };
 
             const paymentMethod = axios
@@ -60,7 +59,7 @@ export const handleAndroidPayPress = async props => {
                 {
                   headers: {
                     Authorization:
-                      'Bearer ' + props.paymentSetup.stripePublishableKey,
+                      'Bearer ' + props.paymentSetup.gateways.DE.stripe.stripePublishableKey,
                     'Content-Type':
                       'application/x-www-form-urlencoded; charset=UTF-8'
                   }
@@ -71,7 +70,7 @@ export const handleAndroidPayPress = async props => {
                 console.log('Response', response)
                 let payData = {
                   paymentProviderRequest: {
-                    account: props.paymentSetup.accounts.de.gateways.stripe.authorization.accountId,
+                    account: props.paymentSetup.gateways.DE.stripe.authorization.accountId,
                     gateway: 'stripe',
                     source: {
                       id: response.data.id,

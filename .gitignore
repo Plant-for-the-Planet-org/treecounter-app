@@ -24,7 +24,6 @@ project.xcworkspace
 ios/._TreecounterApp.xcodeproj
 ios/._TreecounterApp.xcworkspace
 ios/Pods/._Pods.xcodeproj
-ios/Podfile.lock
 ios/Pods/*
 ios/tmp.xcconfig
 
@@ -46,7 +45,6 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
-package-lock.json
 
 # Bundle artifact
 *.jsbundle
@@ -57,10 +55,6 @@ coverage
 #app build
 web/prod
 web/server
-
-
-# lock 
-*.lock
 
 # debug.log etc
 *.log

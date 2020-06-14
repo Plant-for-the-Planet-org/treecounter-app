@@ -19,6 +19,8 @@ jobs:
     - name: Check versions
       run: |
         echo "Node version:"
+        node --version
+        echo "NPM version:"
         npm --version
         echo "Java version:"
         java -version

@@ -31,6 +31,8 @@ jobs:
         echo "Brew version:"
         brew --version
         echo "Node version:"
+        node --version
+        echo "NPM version:"
         npm --version
         echo "PATH:"
         echo $PATH

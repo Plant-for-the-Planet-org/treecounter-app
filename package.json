@@ -23,7 +23,7 @@
     "ios": "ENVFILE=.env.develop react-native run-ios --scheme 'TreecounterApp(.env.develop)'",
     "android": "ENVFILE=.env.develop react-native run-android --variant 'developDebug'",
     "metro": "react-native start --reset-cache",
-    "heroku-postbuild": "echo \"api_url=$api_url\nenv=$env\nscheme=$scheme\nmediaPath=$mediaPath\nhost=$host\nbase=$base\ncurrency=$currency\n\" >> .env.production && webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail"
+    "heroku-postbuild": "echo \"api_url=$api_url\nenv=$env\nscheme=$scheme\nmediaPath=$mediaPath\nhost=$host\nbase=$base\ncurrency=$currency\ngoogleMapApiKey=$googleMapApiKey\ndebug=$debug\nbugsnagApiKey=$bugsnagApiKey\nandroidAppId=$androidAppId\niosAppId=$iosAppId\nlocationApikKey=$locationApikKey\" >> .env.production && webpack --config ./web/config/webpack.prod.config.js --progress --profile --bail"
   },
   "lint-staged": {
     "*.js": [

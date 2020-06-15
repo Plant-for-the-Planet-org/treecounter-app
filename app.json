@@ -60,10 +60,6 @@
     "env": {
       "description": "env should be develop, staging, production",
       "value": "production"
-    },
-    "NODE_ENV": {
-      "description": "env should be develop, production",
-      "value": "production"
     }
   },
   "formation": {
@@ -78,3 +74,4 @@
     }
   ]
 }
+

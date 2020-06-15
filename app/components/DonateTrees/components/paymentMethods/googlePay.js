@@ -48,7 +48,9 @@ export const handleAndroidPayPress = async props => {
             const data = {
               type: "card",
               card: { token: token.tokenId },
-              key: props.paymentSetup.gateways.DE.stripe.stripePublishableKey
+              key:
+                props.paymentSetup.gateways[props.selectedTaxCountry].stripe
+                  .stripePublishableKey
             };
 
             const paymentMethod = axios
@@ -57,7 +59,10 @@ export const handleAndroidPayPress = async props => {
                 JSON_to_URLEncoded(data),
                 {
                   headers: {
-                    Authorization: `Bearer ${props.paymentSetup.gateways.DE.stripe.stripePublishableKey}`,
+                    Authorization: `Bearer ${
+                      props.paymentSetup.gateways[props.selectedTaxCountry]
+                        .stripe.stripePublishableKey
+                    }`,
                     "Content-Type":
                       "application/x-www-form-urlencoded; charset=UTF-8"
                   }
@@ -69,8 +74,8 @@ export const handleAndroidPayPress = async props => {
                 let payData = {
                   paymentProviderRequest: {
                     account:
-                      props.paymentSetup.gateways.DE.stripe.authorization
-                        .accountId,
+                      props.paymentSetup.gateways[props.selectedTaxCountry]
+                        .stripe.authorization.accountId,
                     gateway: "stripe",
                     source: {
                       id: response.data.id,

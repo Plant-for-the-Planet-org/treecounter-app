@@ -310,6 +310,7 @@ function DonationDetails(props) {
         fee={paymentFee}
         globalCurrency={props.globalCurrency}
         paymentSetup={props.paymentSetup}
+        selectedTaxCountry={selectedTaxCountry}
       />
     </SafeAreaView>
   );

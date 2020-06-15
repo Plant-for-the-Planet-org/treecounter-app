@@ -24,6 +24,13 @@ import { postAuthenticatedRequest, postRequest } from "./../../../utils/api";
 import i18n from "./../../../locales/i18n";
 
 import { NotificationManager } from "../../../notification/PopupNotificaiton/notificationManager";
+import {
+  contributionSchema,
+  treecounterSchema,
+  plantProjectSchema
+} from "./../../../schemas/index";
+import { mergeEntities } from "./../../../reducers/entitiesReducer";
+import { normalize } from "normalizr";
 
 export const clearDonationReducer = () => dispatch => {
   dispatch({
@@ -273,7 +280,22 @@ export function donationPay(data, donationID, loggedIn) {
               version: "v1.5",
               donation: donationID
             })
-              .then(res => {})
+              .then(res => {
+                const {
+                  contribution,
+                  treecounter,
+                  plantProject
+                } = res.data.merge;
+                dispatch(
+                  mergeEntities(normalize(contribution, [contributionSchema]))
+                );
+                dispatch(
+                  mergeEntities(normalize(plantProject, [plantProjectSchema]))
+                );
+                dispatch(
+                  mergeEntities(normalize(treecounter, [treecounterSchema]))
+                );
+              })
               .catch(error => {
                 NotificationManager.error(
                   error.response.data.message,
@@ -285,10 +307,18 @@ export function donationPay(data, donationID, loggedIn) {
               version: "v1.5",
               donation: donationID
             })
-              .then(res => {})
+              .then(res => {
+                const { contribution, plantProject } = res.data.merge;
+                dispatch(
+                  mergeEntities(normalize(contribution, [contributionSchema]))
+                );
+                dispatch(
+                  mergeEntities(normalize(plantProject, [plantProjectSchema]))
+                );
+              })
               .catch(error => {
                 NotificationManager.error(
-                  error.response.data.message,
+                  error.res.data.message,
                   i18n.t("label.error"),
                   5000
                 );

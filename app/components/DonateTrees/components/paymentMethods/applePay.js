@@ -1,19 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const handleApplePayPress = async props => {
   try {
-    props.setApplePayStatus('');
+    props.setApplePayStatus("");
     props.setToken(null);
     const token = await props.stripe
       .paymentRequestWithNativePay(
         {
-          requiredBillingAddressFields: ['all'],
-          requiredShippingAddressFields: ['email'],
+          requiredBillingAddressFields: ["all"],
+          requiredShippingAddressFields: ["email"],
           currencyCode: props.currency_code
         },
         [
           {
-            label: 'Donation to Plant for the Planet',
+            label: "Donation to Plant for the Planet",
             amount: props.totalPrice
           }
         ]
@@ -21,11 +21,11 @@ export const handleApplePayPress = async props => {
       .then(token => {
         let loggedIn = props.currentUserProfile;
         let plantProject = props.selectedProject.id;
-        console.log('Token', token)
+        console.log("Token", token);
         let newData = {
           amount: Number(props.totalPrice),
           currency: props.currency_code,
-          recipientType: 'individual',
+          recipientType: "individual",
           treeCount: Number(props.totalTreeCount),
           receiptIndividual: {
             firstname: token.card.name,
@@ -45,30 +45,36 @@ export const handleApplePayPress = async props => {
             const donationID = response.data.donationId;
 
             const data = {
-              type: 'card',
+              type: "card",
               card: { token: token.tokenId },
-              key: props.paymentSetup.accounts.de.gateways.stripe.authorization.stripePublishableKey
+              key:
+                props.paymentSetup.gateways[props.selectedTaxCountry].stripe
+                  .stripePublishableKey
             };
 
             const paymentMethod = axios
               .post(
-                'https://api.stripe.com/v1/payment_methods',
+                "https://api.stripe.com/v1/payment_methods",
                 JSON_to_URLEncoded(data),
                 {
                   headers: {
-                    Authorization:
-                      'Bearer ' + props.paymentSetup.stripePublishableKey,
-                    'Content-Type':
-                      'application/x-www-form-urlencoded; charset=UTF-8'
+                    Authorization: `Bearer ${
+                      props.paymentSetup.gateways[props.selectedTaxCountry]
+                        .stripe.stripePublishableKey
+                    }`,
+                    "Content-Type":
+                      "application/x-www-form-urlencoded; charset=UTF-8"
                   }
                 }
               )
               .then(response => {
-                console.log('Response', response)
+                console.log("Response", response);
                 let payData = {
                   paymentProviderRequest: {
-                    account: props.paymentSetup.accounts.de.gateways.stripe.authorization.accountId,
-                    gateway: 'stripe',
+                    account:
+                      props.paymentSetup.gateways[props.selectedTaxCountry]
+                        .stripe.authorization.accountId,
+                    gateway: "stripe",
                     source: {
                       id: response.data.id,
                       object: response.data.object
@@ -98,17 +104,17 @@ export const handleApplePayPress = async props => {
     // }
   } catch (error) {
     props.setApplePayStatus(`Error: ${error.message}`);
-    console.log('Error', error.message);
+    console.log("Error", error.message);
   }
 };
 
 function JSON_to_URLEncoded(element, key, list) {
   var list = list || [];
-  if (typeof element == 'object') {
+  if (typeof element == "object") {
     for (let idx in element)
-      JSON_to_URLEncoded(element[idx], key ? key + '[' + idx + ']' : idx, list);
+      JSON_to_URLEncoded(element[idx], key ? key + "[" + idx + "]" : idx, list);
   } else {
-    list.push(key + '=' + encodeURIComponent(element));
+    list.push(key + "=" + encodeURIComponent(element));
   }
-  return list.join('&');
+  return list.join("&");
 }

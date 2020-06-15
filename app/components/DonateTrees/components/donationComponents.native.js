@@ -213,6 +213,16 @@ export function SelectCountryModal(props) {
           paddingHorizontal: 24
         }}
       >
+        <TouchableOpacity>
+          {search ? null : (
+            <MaterialIcon
+              name="search"
+              size={24}
+              color="#4d5153"
+              style={{ marginRight: 6 }}
+            />
+          )}
+        </TouchableOpacity>
         <TextInput
           style={{
             fontFamily: "OpenSans-SemiBold",
@@ -225,8 +235,10 @@ export function SelectCountryModal(props) {
           autoFocus
           placeholder={"Search Country"}
         />
-        <TouchableOpacity onPress={closeModal}>
-          <MaterialIcon name="close" size={30} color="#4d5153" />
+        <TouchableOpacity onPress={() => searchCountry("")}>
+          {search ? (
+            <MaterialIcon name="close" size={30} color="#4d5153" />
+          ) : null}
         </TouchableOpacity>
       </View>
       <FlatList
@@ -235,10 +247,27 @@ export function SelectCountryModal(props) {
         renderItem={renderItem}
         contentContainerStyle={{
           backgroundColor: "#fff",
-          // flex: 1,
-          paddingHorizontal: 24
+          paddingHorizontal: 24,
+          paddingBottom: 60
         }}
       />
+      <TouchableOpacity
+        style={{
+          position: "absolute",
+          bottom: 24,
+          alignSelf: "center",
+          backgroundColor: "white",
+          borderWidth: 0.5,
+          borderRadius: 20,
+          justifyContent: "center",
+          alignItems: "center",
+          height: 36,
+          width: 36
+        }}
+        onPress={() => closeModal()}
+      >
+        <MaterialIcon name="close" size={24} color="#4d5153" />
+      </TouchableOpacity>
     </Modal>
   );
 }
@@ -316,7 +345,8 @@ export function PaymentOption(props) {
                     setDonorDetails: props.setDonorDetails,
                     donationPay: props.donationPay,
                     selectedProject: props.selectedProject,
-                    paymentSetup: props.paymentSetup
+                    paymentSetup: props.paymentSetup,
+                    selectedTaxCountry: props.selectedTaxCountry
                   })
                 : handleApplePayPress({
                     totalTreeCount: String(props.treeCount),
@@ -333,7 +363,8 @@ export function PaymentOption(props) {
                     setDonorDetails: props.setDonorDetails,
                     donationPay: props.donationPay,
                     selectedProject: props.selectedProject,
-                    paymentSetup: props.paymentSetup
+                    paymentSetup: props.paymentSetup,
+                    selectedTaxCountry: props.selectedTaxCountry
                   })
             }
             style={styles.nativePayButton}

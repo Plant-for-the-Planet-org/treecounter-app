@@ -132,7 +132,8 @@ export default function DonorDetails(props) {
           props.contextActions.setDonorDetails(values);
           updateStaticRoute("payment_details_form", props.navigation, {
             navigation: props.navigation,
-            paymentSetup: props.paymentSetup
+            paymentSetup: props.paymentSetup,
+            selectedTaxCountry: props.selectedTaxCountry
           });
         }}
       >

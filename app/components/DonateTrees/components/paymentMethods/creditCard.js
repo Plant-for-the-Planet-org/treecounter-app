@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const handleCreditCardPayPress = async props => {
   try {
@@ -9,7 +9,7 @@ export const handleCreditCardPayPress = async props => {
       expYear: Number(props.cardValues.expYear),
       cvc: props.cardValues.cvc,
       currency: props.currency_code
-    }
+    };
 
     const token = await props.stripe
       .createTokenWithCard(params)
@@ -21,7 +21,9 @@ export const handleCreditCardPayPress = async props => {
         let newData = {
           amount: Number(props.totalPrice),
           currency: props.currency_code,
-          recipientType: props.context.donorDetails.isCompany ? 'company' : 'individual',
+          recipientType: props.context.donorDetails.isCompany
+            ? "company"
+            : "individual",
           treeCount: Number(props.totalTreeCount),
           receiptIndividual: {
             firstname: props.context.donorDetails.firstname,
@@ -38,33 +40,37 @@ export const handleCreditCardPayPress = async props => {
         props
           .createDonation(newData, plantProject, loggedIn, donationType)
           .then(response => {
-            console.log('Resposne', response)
             const donationID = response.data.donationId;
             const data = {
-              type: 'card',
+              type: "card",
               card: { token: token.tokenId },
-              key: props.paymentSetup.accounts.de.gateways.stripe.authorization.stripePublishableKey
+              key:
+                props.paymentSetup.gateways[props.selectedTaxCountry].stripe
+                  .stripePublishableKey
             };
 
             const paymentMethod = axios
               .post(
-                'https://api.stripe.com/v1/payment_methods',
+                "https://api.stripe.com/v1/payment_methods",
                 JSON_to_URLEncoded(data),
                 {
                   headers: {
-                    Authorization:
-                      'Bearer ' + props.paymentSetup.stripePublishableKey,
-                    'Content-Type':
-                      'application/x-www-form-urlencoded; charset=UTF-8'
+                    Authorization: `Bearer ${
+                      props.paymentSetup.gateways[props.selectedTaxCountry]
+                        .stripe.stripePublishableKey
+                    }`,
+                    "Content-Type":
+                      "application/x-www-form-urlencoded; charset=UTF-8"
                   }
                 }
               )
               .then(response => {
-                console.log('Payment Method', response)
                 let payData = {
                   paymentProviderRequest: {
-                    account: props.paymentSetup.accounts.de.gateways.stripe.authorization.accountId,
-                    gateway: 'stripe',
+                    account:
+                      props.paymentSetup.gateways[props.selectedTaxCountry]
+                        .stripe.account,
+                    gateway: "stripe",
                     source: {
                       id: response.data.id,
                       object: response.data.object
@@ -81,51 +87,21 @@ export const handleCreditCardPayPress = async props => {
           });
       })
       .catch(err => {
-        console.log('Error', err);
+        console.log("Error", err);
       });
     // props.setToken(token);
   } catch (error) {
-    console.log('Error', error);
+    console.log("Error", error);
   }
 };
 
 function JSON_to_URLEncoded(element, key, list) {
   var list = list || [];
-  if (typeof element == 'object') {
+  if (typeof element == "object") {
     for (let idx in element)
-      JSON_to_URLEncoded(element[idx], key ? key + '[' + idx + ']' : idx, list);
+      JSON_to_URLEncoded(element[idx], key ? key + "[" + idx + "]" : idx, list);
   } else {
-    list.push(key + '=' + encodeURIComponent(element));
+    list.push(key + "=" + encodeURIComponent(element));
   }
-  return list.join('&');
+  return list.join("&");
 }
-
-
-// Sample Token 
-
-// {
-//   card:{
-//   "currency": "usd",
-//   "country": "US",
-//   "fingerprint": null,
-//   "last4": "4242",
-//   "addressCountry": null,
-//   "addressZip": null,
-//   "addressState": null,
-//   "addressLine1": null,
-//   "expMonth": 11,
-//   "cvc": null,
-//   "number": null,
-//   "cardId": "card_1GnqX4C2focfHw90x7v9o3G1",
-//   "funding": "credit",
-//   "brand": "Visa",
-//   "addressCity": null,
-//   "addressLine2": null,
-//   "name": null,
-//   "expYear": 2024
-// }
-// created: 1590690766000
-// livemode: false
-// tokenId: "tok_1GnqX4C2focfHw9097HzTSIB"
-// used: false
-// }

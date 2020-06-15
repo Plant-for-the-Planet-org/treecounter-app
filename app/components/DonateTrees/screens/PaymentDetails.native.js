@@ -213,7 +213,8 @@ const PaymentButton = props => {
             donationPay: props.donationPay,
             // selectedProject: props.selectedProject
             cardValues: props.cardValues,
-            paymentSetup: props.paymentSetup
+            paymentSetup: props.paymentSetup,
+            selectedTaxCountry: props.selectedTaxCountry
           });
 
           // updateStaticRoute('donate_thankyou', props.navigation, {

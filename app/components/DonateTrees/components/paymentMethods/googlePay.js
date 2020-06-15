@@ -69,13 +69,13 @@ export const handleAndroidPayPress = async props => {
                 }
               )
               .then(response => {
-                console.log("Payment Method ---", response);
-                console.log("Payment Setup ---", props.paymentSetup);
+                // console.log("Payment Method ---", response);
+                // console.log("Payment Setup ---", props.paymentSetup);
                 let payData = {
                   paymentProviderRequest: {
                     account:
                       props.paymentSetup.gateways[props.selectedTaxCountry]
-                        .stripe.authorization.accountId,
+                        .stripe.account,
                     gateway: "stripe",
                     source: {
                       id: response.data.id,

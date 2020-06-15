@@ -59,7 +59,9 @@ function DonationDetails(props) {
 
   // this is to test whether Apple/Google pay is allowed or not
   stripe.setOptions({
-    publishableKey: props.paymentSetup.gateways.DE.stripe.stripePublishableKey,
+    publishableKey:
+      props.paymentSetup.gateways[selectedTaxCountry].stripe
+        .stripePublishableKey,
     merchantId: "", // Optional
     androidPayMode: "test" // Android only
   });
@@ -123,7 +125,8 @@ function DonationDetails(props) {
       saveContext();
       updateStaticRoute("donor_details_form", props.navigation, {
         navigation: props.navigation,
-        paymentSetup: props.paymentSetup
+        paymentSetup: props.paymentSetup,
+        selectedTaxCountry: selectedTaxCountry
       });
     }
   };

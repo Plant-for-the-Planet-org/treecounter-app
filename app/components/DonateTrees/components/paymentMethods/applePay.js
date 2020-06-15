@@ -21,7 +21,7 @@ export const handleApplePayPress = async props => {
       .then(token => {
         let loggedIn = props.currentUserProfile;
         let plantProject = props.selectedProject.id;
-        console.log("Token", token);
+        // console.log("Token", token);
         let newData = {
           amount: Number(props.totalPrice),
           currency: props.currency_code,
@@ -68,12 +68,12 @@ export const handleApplePayPress = async props => {
                 }
               )
               .then(response => {
-                console.log("Response", response);
+                // console.log("Response", response);
                 let payData = {
                   paymentProviderRequest: {
                     account:
                       props.paymentSetup.gateways[props.selectedTaxCountry]
-                        .stripe.authorization.accountId,
+                        .stripe.account,
                     gateway: "stripe",
                     source: {
                       id: response.data.id,

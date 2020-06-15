@@ -111,6 +111,7 @@ export function SelectCountryModal(props) {
   const defaultColor = "#4d5153";
 
   const [search, setSearch] = useState("");
+  const [countriesList, setCountriesList] = useState(taxDeductibleCountries);
 
   const keyExtractor = d => d.item;
 
@@ -172,17 +173,24 @@ export function SelectCountryModal(props) {
 
   const closeModal = () => {
     setSearch();
+    setCountriesList(taxDeductibleCountries);
     setShowModal(false);
   };
 
-  const getCountryCode = currency =>
-    countryCodes.find(c => c.code == currency.value) || {};
-  //console.log("Countries", taxDeductibleCountries);
+  const searchCountry = searchString => {
+    setSearch(searchString);
+    let arrayToSearchCountry = [];
+    for (let i = 0; i < taxDeductibleCountries.length; i++) {
+      if (
+        taxDeductibleCountries[i].includes(searchString) ||
+        getCountryData(taxDeductibleCountries[i]).country.includes(searchString) // Fetch all the country names and filter against the search string
+      ) {
+        arrayToSearchCountry.push(taxDeductibleCountries[i]);
+      }
+    }
 
-  // taxDeductibleCountries only has country codes, users will search using country names too
-  // Fetch all the coutnry names too
-  // Use country names to filter against the search string
-  // Return array with only country codes after filter is applied to show in the Flatlist
+    setCountriesList(arrayToSearchCountry); // Return array with only country codes after filter is applied to show in the Flatlist
+  };
 
   return (
     <Modal
@@ -212,7 +220,7 @@ export function SelectCountryModal(props) {
             color: defaultColor,
             flexGrow: 1
           }}
-          onChangeText={text => setSearch(text)}
+          onChangeText={text => searchCountry(text)}
           value={search}
           autoFocus
           placeholder={"Search Country"}
@@ -220,30 +228,9 @@ export function SelectCountryModal(props) {
         <TouchableOpacity onPress={closeModal}>
           <MaterialIcon name="close" size={30} color="#4d5153" />
         </TouchableOpacity>
-        {/* <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'row',
-            borderColor: '#4d5153',
-            borderRadius: 20,
-            marginLeft: 20
-          }}
-        >
-          <TextInput
-            style={{ height: 40, width: '84%' }}
-            onChangeText={text => {
-              setSearchCountries(text);
-            }}
-            value={searchText}
-            placeholder={i18n.t('label.searchshort')}
-            placeholderTextColor={'#4d5153'}
-            fontFamily="OpenSans-SemiBold"
-          />
-        </View> */}
       </View>
       <FlatList
-        data={taxDeductibleCountries}
+        data={countriesList}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         contentContainerStyle={{

@@ -57,16 +57,15 @@ export const handleAndroidPayPress = async props => {
                 JSON_to_URLEncoded(data),
                 {
                   headers: {
-                    Authorization:
-                      "Bearer " +
-                      props.paymentSetup.gateways.DE.stripe
-                        .stripePublishableKey,
+                    Authorization: `Bearer ${props.paymentSetup.gateways.DE.stripe.stripePublishableKey}`,
                     "Content-Type":
                       "application/x-www-form-urlencoded; charset=UTF-8"
                   }
                 }
               )
               .then(response => {
+                console.log("Payment Method ---", response);
+                console.log("Payment Setup ---", props.paymentSetup);
                 let payData = {
                   paymentProviderRequest: {
                     account:

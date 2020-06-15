@@ -77,7 +77,7 @@ const ListProjects = ({
 
 ListProjects.propTypes = {
   plantProjects: PropTypes.array.isRequired,
-  // selectProject: PropTypes.func.isRequired,
+  selectProject: PropTypes.func,
   onMoreClick: PropTypes.func.isRequired,
   placeholderTextColor: PropTypes.string,
   loadProjects: PropTypes.func.isRequired,

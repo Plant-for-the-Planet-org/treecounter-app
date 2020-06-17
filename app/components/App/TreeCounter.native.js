@@ -12,7 +12,6 @@ import SafeAreaView from 'react-native-safe-area-view';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { initLocale } from '../../actions/getLocale.native.js';
 import { fetchCurrencies } from '../../actions/currencies';
-import { fetchConfig } from '../../actions/fetchConfig';
 
 class App extends Component {
   componentDidMount() {

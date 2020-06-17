@@ -5,13 +5,8 @@ import { bindActionCreators } from "redux";
 import { fetchCurrencies } from "../../actions/currencies";
 import { loadProject } from "../../actions/loadTposAction";
 import { loadUserProfile } from "../../actions/loadUserProfileAction";
-import {
-  clearPlantProject,
-  selectPlantProjectAction
-} from "../../actions/selectPlantProjectAction";
-import { supportTreecounterAction } from "../../actions/supportTreecounterAction";
-import { updateUserProfile } from "../../actions/updateUserProfile";
-import DonateTrees from "../../components/DonateTrees";
+import { selectPlantProjectAction } from "../../actions/selectPlantProjectAction";
+import DonateTrees from "../../components/DonateTrees/screens/DonationDetails.native";
 import {
   setDonationDetails,
   setDonorDetails,
@@ -23,18 +18,13 @@ import {
   clearDonationReducer,
   donationPay
 } from "../../components/DonateTrees/redux/action";
-import { debug } from "../../debug";
-import { setProgressModelState } from "../../reducers/modelDialogReducer";
 import {
   currenciesSelector,
   currentUserProfileSelector,
   getCurrency,
   selectedPlantProjectIdSelector,
-  selectedPlantProjectSelector,
-  selectedTpoSelector,
-  supportedTreecounterSelector
+  selectedPlantProjectSelector
 } from "../../selectors";
-import { postDirectRequest } from "../../utils/api";
 import * as RNLocalize from "react-native-localize";
 
 class DonationTreesContainer extends Component {
@@ -44,39 +34,7 @@ class DonationTreesContainer extends Component {
   static navigationOptions = {
     header: null
   };
-  UNSAFE_componentWillMount() {
-    const { supportTreecounterAction, match } = this.props;
-    if (match && match.params && match.params.slug) {
-      postDirectRequest("/suggest.php", "q=" + match.params.slug)
-        .then(_suggestions => {
-          debug("sugessions", _suggestions);
-          if (
-            _suggestions.data.length &&
-            _suggestions.data[0].slug == match.params.slug
-          ) {
-            supportTreecounterAction({
-              id: _suggestions.data[0].treecounterId,
-              displayName: _suggestions.data[0].name
-            });
-          }
-        })
-        .catch(error => debug(error));
-    } else {
-      const { currentUserProfile } = this.props;
-      debug(
-        "current user profile and suported tree counter",
-        currentUserProfile,
-        this.props.supportTreecounter.treecounterId
-      );
-      if (currentUserProfile && !this.props.supportTreecounter.treecounterId) {
-        currentUserProfile.supportedTreecounter &&
-          this.props.supportTreecounterAction({
-            id: currentUserProfile.supportedTreecounter.id,
-            displayName: currentUserProfile.supportedTreecounter.displayName
-          });
-      }
-    }
-  }
+
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedProject && !nextProps.selectedProject.tpoData) {
       this.props.loadProject({ id: nextProps.selectedProject.id });
@@ -86,19 +44,21 @@ class DonationTreesContainer extends Component {
     // }
   }
   async componentDidMount() {
-    let selectedProjectId = undefined;
-    if (this.props.match) {
-      selectedProjectId = parseInt(this.props.match.params.id);
-    } else {
-      selectedProjectId = this.props.selectedPlantProjectId;
-    }
-    selectedProjectId &&
-      (await this.props.loadProject({ id: selectedProjectId }));
+    // let selectedProjectId = undefined;
+    // selectedProjectId = this.props.selectedPlantProjectId;
 
+    // selectedProjectId &&
+    //   (await this.props.loadProject({ id: selectedProjectId }));
+    let selectedProjectId;
     if (this.props.navigation && this.props.navigation.getParam("id"))
       selectedProjectId = parseInt(this.props.navigation.getParam("id"));
-    if (this.props.selectedProject && !this.props.selectedProject.tpoData) {
-      await this.props.loadProject({ id: this.props.selectedProject.id });
+
+    if (
+      this.props.selectedProject &&
+      !this.props.selectedProject.tpoData &&
+      !this.props.selectedProject.paymentSetup
+    ) {
+      await this.props.loadProject({ id: selectedProjectId });
     }
 
     // this causes a redraw
@@ -107,20 +67,6 @@ class DonationTreesContainer extends Component {
 
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
-    }
-  }
-  componentWillUnmount() {
-    const { currentUserProfile } = this.props;
-    debug(
-      "current user profile unmounting donate trees container",
-      currentUserProfile
-    );
-    if (currentUserProfile) {
-      currentUserProfile.supportedTreecounter &&
-        this.props.supportTreecounterAction({
-          id: null,
-          displayName: null
-        });
     }
   }
 
@@ -138,24 +84,15 @@ class DonationTreesContainer extends Component {
   };
 
   render() {
-    if (this.props.match) {
-      const {
-        params: { id }
-      } = this.props.match;
-      if (id && !this.props.selectedProject) return null;
-    }
-
-    return this.props.selectedProject ? (
+    console.log("SELECTED PROJECT-------", this.props.selectedProject);
+    return this.props.selectedProject &&
+      this.props.selectedProject.paymentSetup ? (
       <DonateTrees
         currencies={this.props.currencies}
-        plantProjectClear={this.props.clearPlantProject}
+        selectedCurrency={() => this.determineDefaultCurrency()}
+        globalCurrency={this.props.globalCurrency}
         selectedProject={this.props.selectedProject}
-        selectedTpo={this.props.selectedTpo}
-        setProgressModelState={this.props.setProgressModelState}
-        supportTreecounter={this.props.supportTreecounter}
-        updateUserProfile={this.props.updateUserProfile}
         navigation={this.props.navigation}
-        // context={this.props.navigation.getParam('context') || {}}
         context={{
           contextType: this.props.contextType,
           giftDetails: this.props.giftDetails,
@@ -173,12 +110,9 @@ class DonationTreesContainer extends Component {
           setPaymentDetails: this.props.setPaymentDetails,
           clearDonationReducer: this.props.clearDonationReducer
         }}
-        determineDefaultCurrency={() => this.determineDefaultCurrency()}
         currentUserProfile={this.props.currentUserProfile}
         createDonation={this.props.createDonation}
         donationPay={this.props.donationPay}
-        globalCurrency={this.props.globalCurrency}
-        paymentSetup={this.props.selectedProject.paymentSetup}
         userCountry={RNLocalize.getCountry()}
       />
     ) : null;
@@ -189,12 +123,9 @@ const mapStateToProps = state => {
   return {
     globalCurrency: getCurrency(state),
     selectedProject: selectedPlantProjectSelector(state),
-    selectedTpo: selectedTpoSelector(state),
     currentUserProfile: currentUserProfileSelector(state),
-    supportTreecounter: supportedTreecounterSelector(state),
     currencies: currenciesSelector(state),
     selectedPlantProjectId: selectedPlantProjectIdSelector(state),
-    // New states
     contextType: state.donations.contextType,
     giftDetails: state.donations.giftDetails,
     projectDetails: state.donations.projectDetails,
@@ -210,14 +141,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      supportTreecounterAction,
       selectPlantProjectAction,
       fetchCurrencies,
       loadProject,
-      clearPlantProject,
-      setProgressModelState,
       loadUserProfile,
-      updateUserProfile,
       setDonationDetails,
       setDonorDetails,
       setPaymentDetails,
@@ -240,15 +167,9 @@ export default connect(
 DonationTreesContainer.propTypes = {
   selectedProject: PropTypes.object,
   navigation: PropTypes.any,
-  selectedTpo: PropTypes.object,
   currentUserProfile: PropTypes.object,
   currencies: PropTypes.object,
   selectPlantProjectAction: PropTypes.func,
   fetchCurrencies: PropTypes.func,
-  clearPlantProject: PropTypes.func,
-  supportTreecounter: PropTypes.object,
-  setProgressModelState: PropTypes.func,
-  loadUserProfile: PropTypes.func,
-  updateUserProfile: PropTypes.func,
-  match: PropTypes.any
+  loadUserProfile: PropTypes.func
 };

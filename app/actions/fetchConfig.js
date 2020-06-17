@@ -1,22 +1,22 @@
-import { getItemSync } from '../stores/localStorage';
-import { getRequest } from '../utils/api';
-import { debug } from '../debug';
+import { getItemSync } from "../stores/localStorage";
+import { getRequest } from "../utils/api";
+import { debug } from "../debug";
 // Source: This is absolutely static data
-import countryCodes from '../assets/countryCodes.json';
+import countryCodes from "../assets/countryCodes.json";
 // Source: https://trilliontreecampaign.org/public/v1.1/en/currencies > rates
 // This should be changed upon we change the rates api.
-import supportedCurrency from '../assets/supportedCurrency.json';
-import { find } from 'lodash';
-import { setCurrencyAction } from './globalCurrency';
+import supportedCurrency from "../assets/supportedCurrency.json";
+import { find } from "lodash";
+import { setCurrencyAction } from "./globalCurrency";
 // import { setCdnMedia } from '../reducers/configReducer';
 let cdnMedia = {};
-let currency = '';
+let currency = "";
 let webMapIds = {};
 
 export function fetchLocation() {
   return dispatch => {
-    if (!getItemSync('preferredCurrency')) {
-      getRequest('public_ipstack')
+    if (!getItemSync("preferredCurrency")) {
+      getRequest("public_ipstack")
         .then(res => {
           // debug('Got location fetch ip', res.data);
           const foundLocation = find(countryCodes, {
@@ -48,9 +48,8 @@ export function getWebMapIds() {
 export function fetchConfig() {
   return dispatch => {
     // if (!getItemSync('preferredCurrency')) {
-    getRequest('config_get')
+    getRequest("config_get")
       .then(res => {
-        debug('Got config fetch data:', res.data);
         cdnMedia = res.data.cdnMedia;
         webMapIds = res.data.webMapIds;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Animated,
   BackHandler,
@@ -8,15 +8,15 @@ import {
   Share,
   TouchableOpacity,
   View
-} from 'react-native';
-import { closeHBlack, closeHWhite, shareBlack, shareWhite } from '../../assets';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import i18n from '../../locales/i18n';
+} from "react-native";
+import { closeHBlack, closeHWhite, shareBlack, shareWhite } from "../../assets";
+import { updateStaticRoute } from "../../helpers/routerHelper";
+import i18n from "../../locales/i18n";
 
 const Layout = {
   window: {
-    height: Dimensions.get('window').height - (56 + 70 + 20),
-    width: Dimensions.get('window').width
+    height: Dimensions.get("window").height - (56 + 70 + 20),
+    width: Dimensions.get("window").width
   }
 };
 export default function HeaderAnimated(props) {
@@ -27,7 +27,7 @@ export default function HeaderAnimated(props) {
       Layout.window.width * 0.7833 * 0.96
     ],
     outputRange: [0, 0, 1],
-    extrapolate: 'clamp'
+    extrapolate: "clamp"
   });
 
   // const iconColor = props.scrollY.interpolate({
@@ -44,27 +44,28 @@ export default function HeaderAnimated(props) {
     let { navigation, donationContext } = props;
     if (navigation && donationContext.selectedProject) {
       props.selectPlantProjectAction(donationContext.selectedProject.id);
-      updateStaticRoute('app_donate_detail', navigation, {
-        userForm: navigation.getParam('userForm'),
-        giftMethod: navigation.getParam('giftMethod')
+      updateStaticRoute("app_donate_detail", navigation, {
+        id: donationContext.selectedProject.id,
+        userForm: navigation.getParam("userForm"),
+        giftMethod: navigation.getParam("giftMethod")
       });
     } else {
       navigateBack();
     }
   };
   React.useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', navigateBack);
+    BackHandler.addEventListener("hardwareBackPress", navigateBack);
     // clean up
     return () => {
-      BackHandler.removeEventListener('hardwareBackPress', navigateBack);
+      BackHandler.removeEventListener("hardwareBackPress", navigateBack);
     };
   });
 
   let onShare = async (entityType, entityName, url, appurl) => {
     try {
-      if (entityType === 'projects') {
+      if (entityType === "projects") {
         const result = await Share.share({
-          message: i18n.t('label.shareProject', {
+          message: i18n.t("label.shareProject", {
             entityName: entityName,
             url: url,
             appurl: appurl
@@ -85,25 +86,25 @@ export default function HeaderAnimated(props) {
     }
   };
 
-  const whiteColor = 'white';
-  const transparent = 'rgba(52, 52, 52, 0.0)';
+  const whiteColor = "white";
+  const transparent = "rgba(52, 52, 52, 0.0)";
   return (
     <>
       <Animated.View
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: 0,
           left: 0,
           right: 0,
           backgroundColor: whiteColor,
-          height: Platform.OS === 'ios' ? 96 : 76,
+          height: Platform.OS === "ios" ? 96 : 76,
           zIndex: 1000,
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          width: '100%',
-          paddingTop: Platform.OS === 'ios' ? 44 : 24,
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: "100%",
+          paddingTop: Platform.OS === "ios" ? 44 : 24,
           opacity: headerOpacityReverse
         }}
       >
@@ -111,7 +112,7 @@ export default function HeaderAnimated(props) {
           style={{
             height: 48,
             width: 48,
-            justifyContent: 'center',
+            justifyContent: "center",
             marginLeft: 12
           }}
         >
@@ -120,8 +121,8 @@ export default function HeaderAnimated(props) {
               height: 38,
               width: 38,
               zIndex: 1001,
-              justifyContent: 'center',
-              alignSelf: 'center'
+              justifyContent: "center",
+              alignSelf: "center"
             }}
             onPress={backHandler}
           >
@@ -130,7 +131,7 @@ export default function HeaderAnimated(props) {
               style={{
                 height: 24,
                 width: 24,
-                alignSelf: 'center'
+                alignSelf: "center"
               }}
             />
           </TouchableOpacity>
@@ -139,7 +140,7 @@ export default function HeaderAnimated(props) {
           style={{
             height: 48,
             width: 48,
-            justifyContent: 'center',
+            justifyContent: "center",
             marginRight: 12
           }}
         >
@@ -148,8 +149,8 @@ export default function HeaderAnimated(props) {
               height: 38,
               width: 38,
               zIndex: 1001,
-              justifyContent: 'center',
-              alignSelf: 'center'
+              justifyContent: "center",
+              alignSelf: "center"
             }}
             onPress={() =>
               onShare(
@@ -165,7 +166,7 @@ export default function HeaderAnimated(props) {
               style={{
                 height: 24,
                 width: 24,
-                alignSelf: 'center'
+                alignSelf: "center"
               }}
             />
           </TouchableOpacity>
@@ -173,26 +174,26 @@ export default function HeaderAnimated(props) {
       </Animated.View>
       <Animated.View
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: 0,
           left: 0,
           right: 0,
           backgroundColor: transparent,
-          height: Platform.OS === 'ios' ? 96 : 76,
+          height: Platform.OS === "ios" ? 96 : 76,
           zIndex: 999,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          display: 'flex',
-          flexDirection: 'row',
-          width: '100%',
-          paddingTop: Platform.OS === 'ios' ? 44 : 24
+          alignItems: "center",
+          justifyContent: "space-between",
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          paddingTop: Platform.OS === "ios" ? 44 : 24
         }}
       >
         <View
           style={{
             height: 48,
             width: 48,
-            justifyContent: 'center',
+            justifyContent: "center",
             marginLeft: 12
           }}
         >
@@ -201,8 +202,8 @@ export default function HeaderAnimated(props) {
               height: 38,
               width: 38,
               zIndex: 1001,
-              justifyContent: 'center',
-              alignSelf: 'center'
+              justifyContent: "center",
+              alignSelf: "center"
             }}
             onPress={() => props.navigation.goBack()}
           >
@@ -211,7 +212,7 @@ export default function HeaderAnimated(props) {
               style={{
                 height: 24,
                 width: 24,
-                alignSelf: 'center'
+                alignSelf: "center"
               }}
             />
           </TouchableOpacity>
@@ -220,7 +221,7 @@ export default function HeaderAnimated(props) {
           style={{
             height: 48,
             width: 48,
-            justifyContent: 'center',
+            justifyContent: "center",
             marginRight: 12
           }}
         >
@@ -229,8 +230,8 @@ export default function HeaderAnimated(props) {
               height: 38,
               width: 38,
               zIndex: 1001,
-              justifyContent: 'center',
-              alignSelf: 'center'
+              justifyContent: "center",
+              alignSelf: "center"
             }}
             onPress={() =>
               onShare(props.entityType, props.entityName, props.url)
@@ -241,7 +242,7 @@ export default function HeaderAnimated(props) {
               style={{
                 height: 24,
                 width: 24,
-                alignSelf: 'center'
+                alignSelf: "center"
               }}
             />
           </TouchableOpacity>

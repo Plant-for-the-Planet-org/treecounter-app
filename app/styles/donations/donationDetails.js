@@ -5,7 +5,6 @@ const width = Dimensions.get("window").width;
 export default EStyleSheet.create({
   scrollView: {
     padding: 24,
-    // marginTop: 90,
     paddingBottom: 320,
     paddingTop: 0
   },
@@ -368,7 +367,8 @@ export default EStyleSheet.create({
     display: "flex",
     flexDirection: "row",
     marginTop: 25,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    marginBottom: 200
   },
 
   // Payment Process

@@ -96,11 +96,12 @@ class FeaturedProjects extends PureComponent {
       });
   };
   _keyExtractor = item => item.id.toString();
-  onSelectClickedFeaturedProjects = id => {
-    this.props.selectPlantProjectAction(id);
+  onSelectClickedFeaturedProjects = item => {
+    console.log("Project Item ------ ", item);
+    this.props.selectPlantProjectAction(item.id);
     const { navigation, context } = this.props;
     updateStaticRoute("app_donate_detail", navigation, {
-      id: id,
+      id: item.id,
       userForm: navigation.getParam("userForm"),
       context: context
     });

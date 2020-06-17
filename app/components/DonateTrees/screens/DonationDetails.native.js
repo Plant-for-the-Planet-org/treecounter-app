@@ -1,14 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import {
-  Animated,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-  Platform,
-  Image
-} from "react-native";
+import { Animated, Text, TouchableOpacity, View, Platform } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { updateStaticRoute } from "../../../helpers/routerHelper";
 import { paymentFee } from "../../../helpers/utils";
@@ -27,13 +19,11 @@ import {
   PledgeTreeCount,
   Header
 } from "../components/donationComponents.native";
-import { GiftTreesComponent } from "../components/giftDontaionComponents.native";
+import { GiftTreesComponent } from "../components/giftDonationComponents.native";
 import ProjectModal from "../components/ProjectModal.native";
 import stripe from "tipsi-stripe";
-import { TextField } from "react-native-material-textfield";
 import i18n from "../../../locales/i18n.js";
 import SafeAreaView from "react-native-safe-area-view";
-import { backArrow, closeIcon } from "../../../assets";
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
@@ -45,11 +35,14 @@ function DonationDetails(props) {
   const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
 
   const useUserCountry =
-    props.paymentSetup &&
-    props.paymentSetup.taxDeductionCountries.includes(props.userCountry);
+    props.selectedProject.paymentSetup &&
+    props.selectedProject.paymentSetup.taxDeductionCountries.includes(
+      props.userCountry
+    );
   let defaultCountry = useUserCountry
     ? props.userCountry
-    : props.paymentSetup && props.paymentSetup.defaultCountry;
+    : props.selectedProject.paymentSetup &&
+      props.selectedProject.paymentSetup.defaultCountry;
   const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
     defaultCountry
   );
@@ -60,7 +53,7 @@ function DonationDetails(props) {
   // this is to test whether Apple/Google pay is allowed or not
   stripe.setOptions({
     publishableKey:
-      props.paymentSetup.gateways[selectedTaxCountry].stripe
+      props.selectedProject.paymentSetup.gateways[selectedTaxCountry].stripe
         .stripePublishableKey,
     merchantId: "", // Optional
     androidPayMode: "test" // Android only
@@ -125,7 +118,7 @@ function DonationDetails(props) {
       saveContext();
       updateStaticRoute("donor_details_form", props.navigation, {
         navigation: props.navigation,
-        paymentSetup: props.paymentSetup,
+        paymentSetup: props.selectedProject.paymentSetup,
         selectedTaxCountry: selectedTaxCountry
       });
     }
@@ -203,12 +196,15 @@ function DonationDetails(props) {
         )}
 
         {context.contextType === "direct" ||
-        context.contextType === "support" ? (
+        context.contextType === "support" ||
+        context.contextType === null ? (
           <SelectTreeCount
             treeCount={treeCount}
             setTreeCount={setTreeCount}
             selectedProject={props.selectedProject}
-            treeCountOptions={props.paymentSetup.treeCountOptions}
+            treeCountOptions={
+              props.selectedProject.paymentSetup.treeCountOptions
+            }
           />
         ) : null}
 
@@ -226,7 +222,9 @@ function DonationDetails(props) {
             setTreeCount={setTreeCount}
             selectedProject={props.selectedProject}
             context={context}
-            treeCountOptions={props.paymentSetup.treeCountOptions}
+            treeCountOptions={
+              props.selectedProject.paymentSetup.treeCountOptions
+            }
           />
         ) : null}
 
@@ -258,14 +256,17 @@ function DonationDetails(props) {
         ) : null} */}
 
         {/* Tax Receipt */}
-        {props.hasTaxDeduction && (
+        {props.selectedProject.hasTaxDeduction && (
           <TaxReceipt
             taxReceiptSwitch={taxReceiptSwitch}
             toggleTaxReceipt={toggleTaxReceipt}
             setShowTaxCountryModal={setShowTaxCountryModal}
             selectedTaxCountry={selectedTaxCountry}
             oneTaxCountry={
-              props.taxDeductibleCountries.length > 1 ? true : false
+              props.selectedProject.paymentSetup.taxDeductionCountries.length >
+              1
+                ? true
+                : false
             }
           />
         )}
@@ -275,7 +276,9 @@ function DonationDetails(props) {
           setSelectedCountry={setSelectedTaxCountry}
           showModal={showTaxCountryModal}
           setShowModal={setShowTaxCountryModal}
-          taxDeductibleCountries={props.paymentSetup.taxDeductionCountries}
+          taxDeductibleCountries={
+            props.selectedProject.paymentSetup.taxDeductionCountries
+          }
         />
 
         {/* Needed In Future */}
@@ -300,7 +303,7 @@ function DonationDetails(props) {
         currentUserProfile={props.currentUserProfile}
         context={context}
         createDonation={props.createDonation}
-        setDonorDetails={props.setDonorDetails}
+        setDonorDetails={props.contextActions.setDonorDetails}
         donationPay={props.donationPay}
         selectedProject={props.selectedProject}
         treeCost={props.selectedProject.treeCost}
@@ -312,7 +315,7 @@ function DonationDetails(props) {
         }
         fee={paymentFee}
         globalCurrency={props.globalCurrency}
-        paymentSetup={props.paymentSetup}
+        paymentSetup={props.selectedProject.paymentSetup}
         selectedTaxCountry={selectedTaxCountry}
       />
     </SafeAreaView>
@@ -321,14 +324,6 @@ function DonationDetails(props) {
 
 DonationDetails.propTypes = {
   currencies: PropTypes.object.isRequired,
-  selectedCurrency: PropTypes.string.isRequired,
-  treeCountOptions: PropTypes.object.isRequired,
-  selectedTreeCount: PropTypes.number.isRequired,
-  rates: PropTypes.object.isRequired,
-  fees: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
-  showNextButton: PropTypes.bool,
-  onNextClick: PropTypes.func,
   selectedProject: PropTypes.object.isRequired
 };
 

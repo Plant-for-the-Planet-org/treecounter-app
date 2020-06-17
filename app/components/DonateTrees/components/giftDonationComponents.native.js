@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Dimensions,
   FlatList,
@@ -7,12 +7,12 @@ import {
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import styles from '../../../styles/donations/donationDetails';
-import GetRandomImage from '../../../utils/getRandomImage';
-import { SelectTreeCount } from './donationComponents.native';
-import { TextField } from 'react-native-material-textfield';
-import i18n from '../../../locales/i18n';
+} from "react-native";
+import styles from "../../../styles/donations/donationDetails";
+import GetRandomImage from "../../../utils/getRandomImage";
+import { SelectTreeCount } from "./donationComponents.native";
+import { TextField } from "react-native-material-textfield";
+import i18n from "../../../locales/i18n";
 
 export const GiftTreesComponent = props => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -23,17 +23,17 @@ export const GiftTreesComponent = props => {
     for (let i = 0; i < details.length; i++) {
       details[i] = {
         ...details[i],
-        treeCount: props.selectedProject.treeCountOptions.default
-          ? props.selectedProject.treeCountOptions.default
+        treeCount: props.treeCountOptions.fixedDefaultTreeCount
+          ? props.treeCountOptions.fixedDefaultTreeCount
           : 10,
         isCustomCount: false,
-        giftMsg: details[i].giftMsg ? details[i].giftMsg : ''
+        giftMsg: details[i].giftMsg ? details[i].giftMsg : ""
       };
     }
     setGiftDetails(details);
-    if (props.selectedProject.treeCountOptions.default) {
+    if (props.treeCountOptions.fixedDefaultTreeCount) {
       props.setTreeCount(
-        props.selectedProject.treeCountOptions.default * details.length
+        props.treeCountOptions.fixedDefaultTreeCount * details.length
       );
     }
   }, []);
@@ -97,8 +97,8 @@ export const GiftTreesComponent = props => {
                   source={{ uri: item.thumbnailPath }}
                 />
               ) : (
-                  <GetRandomImage dimension={60} name={item.firstName} />
-                )}
+                <GetRandomImage dimension={60} name={item.firstName} />
+              )}
               <Text style={stylesLocal.giftReciepientName}>
                 {item.firstName}
               </Text>
@@ -120,7 +120,7 @@ export const GiftTreesComponent = props => {
               setCustomTreeCount={setCustomTreeCount}
               setTreeCount={treeCount => setTotalTreeCount(index, treeCount)}
               selectedProject={props.selectedProject}
-              treeCountOptions={props.paymentSetup.treeCountOptions}
+              treeCountOptions={props.treeCountOptions}
             />
           )
         }
@@ -131,15 +131,15 @@ export const GiftTreesComponent = props => {
         renderItem={({ item, index }) =>
           currentIndex === index && (
             <TextField
-              label={i18n.t('label.Gift_Message')}
+              label={i18n.t("label.Gift_Message")}
               value={giftDetails[currentIndex]?.giftMsg}
-              tintColor={'#89b53a'}
+              tintColor={"#89b53a"}
               titleFontSize={12}
               returnKeyType="next"
               lineWidth={1}
-              labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-              titleTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-              affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
+              labelTextStyle={{ fontFamily: "OpenSans-Regular" }}
+              titleTextStyle={{ fontFamily: "OpenSans-Regular" }}
+              affixTextStyle={{ fontFamily: "OpenSans-Regular" }}
               blurOnSubmit={false}
               onChangeText={text => handleGiftMessageChange(text)}
             />
@@ -163,24 +163,24 @@ const space = () => {
 };
 
 const stylesLocal = StyleSheet.create({
-  space: { height: 60, width: 15, backgroundColor: 'transparent' },
+  space: { height: 60, width: 15, backgroundColor: "transparent" },
   multiTreeCountContainer: {
-    width: Dimensions.get('window').width,
+    width: Dimensions.get("window").width,
     borderWidth: 1,
-    borderColor: '#dddddd',
+    borderColor: "#dddddd",
     borderRadius: 8,
     padding: 24,
     marginLeft: -24
   },
   giftReciepientName: {
-    fontFamily: 'OpenSans-SemiBold',
-    textAlign: 'center',
+    fontFamily: "OpenSans-SemiBold",
+    textAlign: "center",
     marginTop: 6,
     fontSize: 10,
     marginBottom: 10
   },
   giftProfileContainer: {
     maxWidth: 60,
-    alignItems: 'center'
+    alignItems: "center"
   }
 });

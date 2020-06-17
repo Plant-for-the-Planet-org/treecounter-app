@@ -1,11 +1,11 @@
-import React from 'react';
-import { View, Dimensions, Image, ScrollView, Platform } from 'react-native';
-import ContentLoader from 'react-native-content-loader';
-import { Circle, Rect } from 'react-native-svg';
-import { debug } from '../../debug';
-import { treelogo } from '../../assets/index';
-const HEIGHT = Dimensions.get('window').height;
-const WIDTH = Dimensions.get('window').width;
+import React from "react";
+import { View, Dimensions, Image, ScrollView, Platform } from "react-native";
+import ContentLoader from "react-native-content-loader";
+import { Circle, Rect } from "react-native-svg";
+import { debug } from "../../debug";
+import { treelogo } from "../../assets/index";
+const HEIGHT = Dimensions.get("window").height;
+const WIDTH = Dimensions.get("window").width;
 const CompetitionLoader = () => (
   <ContentLoader
     height={HEIGHT}
@@ -77,9 +77,9 @@ const InitialContentLoader = () => (
   <View>
     <View
       style={{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
         marginVertical: 40
       }}
     >
@@ -300,32 +300,31 @@ const ProjectsLoading = () => (
 
 const ContentLoading = props => {
   const { screen } = props;
-  debug(screen, 'screen');
   return (
     <View style={loadingIndicatorStyle}>
-      {screen === 'AppHome' && <WorldLoader />}
-      {screen === 'LeaderBoard' && <LeaderBoardLoader />}
-      {screen === 'Competition' && <CompetitionLoader />}
-      {screen === 'SingleCompetition' && <SingleCompetitionLoader />}
-      {screen === 'PublicTreeCounterContentLoader' && (
+      {screen === "AppHome" && <WorldLoader />}
+      {screen === "LeaderBoard" && <LeaderBoardLoader />}
+      {screen === "Competition" && <CompetitionLoader />}
+      {screen === "SingleCompetition" && <SingleCompetitionLoader />}
+      {screen === "PublicTreeCounterContentLoader" && (
         <PublicTreeCounterContentLoader />
       )}
-      {screen === 'profileLoader' && <ProfileLoader />}
-      {screen === 'publicProfileLoader' && <PublicProfileLoader />}
-      {screen === 'competitionListLoader' && <CompetitionListLoader />}
-      {screen === 'competitionSingleLoader' && <CompetitionSingleLoader />}
-      {screen === 'projectListLoader' && <ProjectListLoader />}
-      {screen === 'worldLoader' && <InitialContentLoader />}
-      {screen === 'ProjectSingleLoader' && <ProjectSingleLoader />}
-      {screen === 'PledgeEvents' && <PledgeEventsContentLoader />}
-      {screen === 'ProjectsLoading' && <ProjectsLoading />}
+      {screen === "profileLoader" && <ProfileLoader />}
+      {screen === "publicProfileLoader" && <PublicProfileLoader />}
+      {screen === "competitionListLoader" && <CompetitionListLoader />}
+      {screen === "competitionSingleLoader" && <CompetitionSingleLoader />}
+      {screen === "projectListLoader" && <ProjectListLoader />}
+      {screen === "worldLoader" && <InitialContentLoader />}
+      {screen === "ProjectSingleLoader" && <ProjectSingleLoader />}
+      {screen === "PledgeEvents" && <PledgeEventsContentLoader />}
+      {screen === "ProjectsLoading" && <ProjectsLoading />}
     </View>
   );
 };
 const loadingIndicatorStyle = {
   flex: 1,
-  alignItems: 'center',
-  marginTop: Platform.OS === 'ios' ? HEIGHT * 0.1 : HEIGHT * 0.05
+  alignItems: "center",
+  marginTop: Platform.OS === "ios" ? HEIGHT * 0.1 : HEIGHT * 0.05
 };
 {
   /*const containerStyle = {

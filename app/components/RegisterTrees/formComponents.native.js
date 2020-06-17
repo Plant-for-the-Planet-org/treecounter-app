@@ -646,19 +646,31 @@ export class AddMeasurements extends React.Component {
         });
       }
     }
+    this.sendDatatoParent();
   };
   /**
    * @param {field} name of field
    * @param {value} value of field
    * @param {index} index of field for multiple measurement view
    * */
+
+  sendDatatoParent=()=>{
+    const finalData=[];
+    this.state.measurementView.length>0 && filter(this.state.measurementView,((item,index)=>{
+        if(item.isVisible){
+          finalData.push( this.elementMasument[index])
+        }
+      }
+    ))
+    this.props.handleChange(finalData);
+  }
   onChangeHandler = (field, value, index) => {
 
     this.elementMasument[index][field] = value;
     this.setState({
       elementMasument: this.elementMasument
     });
-    this.props.handleChange(this.elementMasument);
+    this.sendDatatoParent();
   };
 
   render() {
@@ -673,7 +685,7 @@ export class AddMeasurements extends React.Component {
                 <View style={styles.formSwitchView}>
                   <Text style={styles.formClassificationLabel}>
                     {`${i18n.t('label.add_measurements')} ${
-                      item.id <= 1 ? '' : item.id
+                      index < 1 ? '' : index
                       }`}
                   </Text>
                   <View>

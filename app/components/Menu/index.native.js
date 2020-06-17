@@ -15,6 +15,8 @@ import UserProfileImage from '../Common/UserProfileImage.native';
 import { LargeMenuItem } from './MenuItem.native';
 import countryCodes from '../../assets/countryCodes.json';
 import CurrencySelector from '../Common/CurrencySelectorList.native';
+import { fetchConfig, getAppVersions } from '../../actions/fetchConfig';
+import { version } from './../../../package.json';
 
 //   icons.target_outline;
 
@@ -55,15 +57,26 @@ export default class Menu extends Component {
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);
-    // const welcome = await fetchItem('welcome').catch(error => debug(error));
-    if (!this.props.userProfile) {
-      // if (welcome == null) {
-      //   updateRoute('welcome_screen', this.props.navigation, 0);
-      // } else {
-      //   updateRoute('app_homepage', this.props.navigation, 0);
-      // }
-      updateRoute('welcome_screen', this.props.navigation, 0);
+
+    // check for updates
+    await fetchConfig();
+    console.log('package version:', version, ' appVersions:', getAppVersions());
+    if (getAppVersions()[Platform.OS] && getAppVersions()[Platform.OS][0] && version < getAppVersions()[Platform.OS][0]) {
+    // if (getAppVersions()[Platform.OS] && getAppVersions()[Platform.OS][0] && version < getAppVersions()[Platform.OS][0]) {
+       // show the user an information that the app is outdate and a link to the app stores
+      updateStaticRoute('app_splash_screen', this.props.navigation);
+    } else {
+      // const welcome = await fetchItem('welcome').catch(error => debug(error));
+      if (!this.props.userProfile) {
+        // if (welcome == null) {
+        //   updateRoute('welcome_screen', this.props.navigation, 0);
+        // } else {
+        //   updateRoute('app_homepage', this.props.navigation, 0);
+        // }
+        updateRoute('welcome_screen', this.props.navigation, 0);
+      }
     }
+
     // saveItem('welcome', JSON.stringify({ value: 'true' }));
   }
   componentWillUnmount() {

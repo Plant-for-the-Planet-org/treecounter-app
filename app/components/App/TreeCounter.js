@@ -137,8 +137,8 @@ class TreeCounter extends Component {
       isCancelled: false
     };
     initLocale();
+    fetchConfig();
     this.props.fetchCurrencies();
-    this.props.fetchConfig();
   }
 
   _appRoutes = undefined;
@@ -436,7 +436,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchCurrencies,
-      fetchConfig,
       loadUserProfile,
       NotificationAction,
       fetchpledgeEventsAction

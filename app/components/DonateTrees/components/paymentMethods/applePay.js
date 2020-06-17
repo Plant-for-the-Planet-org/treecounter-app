@@ -1,6 +1,9 @@
 import axios from "axios";
+import React from "react";
+import { updateStaticRoute } from "../../../../helpers/routerHelper";
 
 export const handleApplePayPress = async props => {
+  let applePayComplete;
   try {
     props.setApplePayStatus("");
     const token = await props.stripe
@@ -81,7 +84,23 @@ export const handleApplePayPress = async props => {
                   }
                 };
 
-                props.donationPay(payData, donationID, loggedIn);
+                props.donationPay(payData, donationID, loggedIn).then(res => {
+                  applePayComplete = true;
+                  props.setLoading(false);
+
+                  if (applePayComplete) {
+                    props.stripe.completeNativePayRequest();
+                    props.setApplePayStatus("Apple Pay payment completed");
+                    updateStaticRoute("donate_thankyou", props.navigation, {
+                      treeCount: props.totalTreeCount,
+                      plantedBy: props.selectedProject.name,
+                      navigation: props.navigation
+                    });
+                  } else {
+                    props.stripe.cancelNativePayRequest();
+                    props.setApplePayStatus("Apple Pay payment cancelled");
+                  }
+                });
               })
               .catch(error => {
                 console.log(error.response);
@@ -91,14 +110,6 @@ export const handleApplePayPress = async props => {
       .catch(error => {
         console.log(error);
       });
-
-    // if (applePayComplete) {
-    //     await props.stripe.completeNativePayRequest()
-    //     props.setApplePayStatus('Apple Pay payment completed')
-    // } else {
-    //     await props.stripe.cancelNativePayRequest()
-    //     props.setApplePayStatus('Apple Pay payment cancelled')
-    // }
   } catch (error) {
     props.setApplePayStatus(`Error: ${error.message}`);
     console.log("Error", error.message);

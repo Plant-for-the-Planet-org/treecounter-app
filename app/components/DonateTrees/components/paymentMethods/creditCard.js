@@ -89,7 +89,6 @@ export const handleCreditCardPayPress = async props => {
       .catch(err => {
         console.log("Error", err);
       });
-    // props.setToken(token);
   } catch (error) {
     console.log("Error", error);
   }

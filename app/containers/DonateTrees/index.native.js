@@ -26,6 +26,7 @@ import {
   selectedPlantProjectSelector
 } from "../../selectors";
 import * as RNLocalize from "react-native-localize";
+import { ActivityIndicator, View } from "react-native";
 
 class DonationTreesContainer extends Component {
   state = {
@@ -84,7 +85,6 @@ class DonationTreesContainer extends Component {
   };
 
   render() {
-    console.log("SELECTED PROJECT-------", this.props.selectedProject);
     return this.props.selectedProject &&
       this.props.selectedProject.paymentSetup ? (
       <DonateTrees
@@ -115,7 +115,22 @@ class DonationTreesContainer extends Component {
         donationPay={this.props.donationPay}
         userCountry={RNLocalize.getCountry()}
       />
-    ) : null;
+    ) : (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#fff"
+        }}
+      >
+        <ActivityIndicator
+          style={{ alignSelf: "center" }}
+          size="large"
+          color="#89b53a"
+        />
+      </View>
+    );
   }
 }
 

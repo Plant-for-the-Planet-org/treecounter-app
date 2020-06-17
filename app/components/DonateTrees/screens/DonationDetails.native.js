@@ -1,6 +1,13 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Animated, Text, TouchableOpacity, View, Platform } from "react-native";
+import {
+  Animated,
+  Text,
+  TouchableOpacity,
+  View,
+  Platform,
+  ActivityIndicator
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { updateStaticRoute } from "../../../helpers/routerHelper";
 import { paymentFee } from "../../../helpers/utils";
@@ -34,6 +41,7 @@ function DonationDetails(props) {
   const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
 
+  const [loading, setLoading] = React.useState(false);
   const useUserCountry =
     props.selectedProject.paymentSetup &&
     props.selectedProject.paymentSetup.taxDeductionCountries.includes(
@@ -124,7 +132,41 @@ function DonationDetails(props) {
     }
   };
 
-  return (
+  const setDonationStatus = status => {
+    if (status === "success") {
+      updateStaticRoute("donate_thankyou", props.navigation, {
+        treeCount: props.totalTreeCount,
+        plantedBy: "Eden Reforestation Project"
+      });
+    }
+  };
+
+  return loading ? (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fff"
+      }}
+    >
+      <ActivityIndicator
+        style={{ alignSelf: "center" }}
+        size={"large"}
+        color="#89b53a"
+      />
+      <Text
+        style={{ fontFamily: "OpenSans-SemiBold", marginTop: 24, fontSize: 16 }}
+      >
+        Processing Payment
+      </Text>
+      <Text
+        style={{ fontFamily: "OpenSans-SemiBold", marginTop: 8, fontSize: 16 }}
+      >
+        Please wait
+      </Text>
+    </View>
+  ) : (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <ProjectModal
         hideModal={setProjectModal}
@@ -160,7 +202,11 @@ function DonationDetails(props) {
           { nativeEvent: { contentOffset: { y: scrollY } } }
         ])}
       >
-        <Header navigation={props.navigation} title={"Tree Donation"} />
+        <Header
+          onBack={props.contextActions.clearDonationReducer}
+          navigation={props.navigation}
+          title={"Tree Donation"}
+        />
         {/* Plant Project Details */}
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>DONATION TO</Text>
@@ -296,8 +342,8 @@ function DonationDetails(props) {
         showNativePay={
           allowedNativePay ? (Platform.OS === "ios" ? "apple" : "google") : null
         }
-        token={token}
-        setToken={setToken}
+        setLoading={setLoading}
+        setDonationStatus={setDonationStatus}
         stripe={stripe}
         setApplePayStatus={setApplePayStatus}
         currentUserProfile={props.currentUserProfile}

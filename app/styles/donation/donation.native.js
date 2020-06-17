@@ -371,9 +371,6 @@ export default EStyleSheet.create({
   height40: {
     height: Dimensions.get("window").height * 0.36
   },
-  height20: {
-    height: Dimensions.get("window").height * 0.2
-  },
   closeContainer: {
     width: 30,
     height: 30,

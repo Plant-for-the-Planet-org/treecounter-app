@@ -171,22 +171,6 @@ export const clearSupportDetails = () => dispatch => {
   });
 };
 
-// data has to be in the following format -
-// {
-//   "amount": 50,
-//   "currency": "EUR",
-//   "recipientType": "individual",
-//   "treeCount": 50,
-//   "receiptIndividual": {
-//       "firstname": "jvjmv",
-//       "lastname": "hghg",
-//       "email": "hgj@hh.com",
-//       "address": "ihh",
-//       "zipCode": "134003",
-//       "city": "gfjyfgh",
-//       "country": "IN"
-//   }
-// }
 export function createDonation(data, plantProject, loggedIn, donationType) {
   return dispatch =>
     new Promise(function(resolve, reject) {
@@ -197,7 +181,13 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
                 version: "v1.4",
                 plantProject: plantProject
               })
-                .then(res => {})
+                .then(res => {
+                  dispatch({
+                    type: SET_DONATION_ID,
+                    payload: res.data.donationId
+                  });
+                  resolve(res);
+                })
                 .catch(error => {
                   NotificationManager.error(
                     error.response.data.message,
@@ -230,7 +220,13 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
               version: "v1.4",
               plantProject: plantProject
             })
-              .then(res => {})
+              .then(res => {
+                dispatch({
+                  type: SET_DONATION_ID,
+                  payload: res.data.donationId
+                });
+                resolve(res);
+              })
               .catch(error => {
                 NotificationManager.error(
                   error.response.data.message,
@@ -260,17 +256,6 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
     });
 }
 
-// data has to be in the following format -
-// {
-//   "paymentProviderRequest": {
-//       "account": "acct_1Ajup2JruhzYVufP",
-//       "gateway": "stripe",
-//       "source": {
-//           "id": "pm_1FId4pGhHD5xN1UqvYpFtj5c",
-//           "object": "payment_method"
-//       }
-//   }
-// }
 export function donationPay(data, donationID, loggedIn) {
   return dispatch =>
     new Promise(function(resolve, reject) {
@@ -295,6 +280,7 @@ export function donationPay(data, donationID, loggedIn) {
                 dispatch(
                   mergeEntities(normalize(treecounter, [treecounterSchema]))
                 );
+                resolve(res);
               })
               .catch(error => {
                 NotificationManager.error(
@@ -315,6 +301,7 @@ export function donationPay(data, donationID, loggedIn) {
                 dispatch(
                   mergeEntities(normalize(plantProject, [plantProjectSchema]))
                 );
+                resolve(res);
               })
               .catch(error => {
                 NotificationManager.error(

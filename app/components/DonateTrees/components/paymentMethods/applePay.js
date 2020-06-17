@@ -3,7 +3,6 @@ import axios from "axios";
 export const handleApplePayPress = async props => {
   try {
     props.setApplePayStatus("");
-    props.setToken(null);
     const token = await props.stripe
       .paymentRequestWithNativePay(
         {
@@ -92,8 +91,6 @@ export const handleApplePayPress = async props => {
       .catch(error => {
         console.log(error);
       });
-
-    props.setToken(token);
 
     // if (applePayComplete) {
     //     await props.stripe.completeNativePayRequest()

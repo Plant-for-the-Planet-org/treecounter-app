@@ -1,8 +1,8 @@
 import axios from "axios";
+import { updateStaticRoute } from "../../../../helpers/routerHelper";
 
 export const handleAndroidPayPress = async props => {
   try {
-    props.setToken(null);
     const token = await props.stripe
       .paymentRequestWithNativePay({
         total_price: props.totalPrice,
@@ -22,6 +22,8 @@ export const handleAndroidPayPress = async props => {
       })
       .then(token => {
         // Create Donation API
+        console.log("Selected Proket", props.selectedProject);
+        props.setLoading(true);
         let loggedIn = props.currentUserProfile;
         let plantProject = props.selectedProject.id;
         let newData = {
@@ -69,8 +71,6 @@ export const handleAndroidPayPress = async props => {
                 }
               )
               .then(response => {
-                // console.log("Payment Method ---", response);
-                // console.log("Payment Setup ---", props.paymentSetup);
                 let payData = {
                   paymentProviderRequest: {
                     account:
@@ -85,7 +85,14 @@ export const handleAndroidPayPress = async props => {
                 };
 
                 // This is the final Pay API
-                props.donationPay(payData, donationID, loggedIn);
+                props.donationPay(payData, donationID, loggedIn).then(res => {
+                  props.setLoading(false);
+                  updateStaticRoute("donate_thankyou", props.navigation, {
+                    treeCount: props.totalTreeCount,
+                    plantedBy: props.selectedProject.name,
+                    navigation: props.navigation
+                  });
+                });
               })
               .catch(error => {
                 console.log(error.response);
@@ -95,7 +102,6 @@ export const handleAndroidPayPress = async props => {
       .catch(err => {
         console.log("error gpay", err);
       });
-    props.setToken(token);
   } catch (error) {
     console.log("Error", error);
   }

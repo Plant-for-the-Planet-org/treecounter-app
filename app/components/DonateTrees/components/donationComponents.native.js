@@ -336,8 +336,6 @@ export function PaymentOption(props) {
                     totalPrice: String(props.treeCount * props.treeCost),
                     amountPerTree: String(props.treeCost),
                     currency_code: String(props.selectedCurrency),
-                    token: props.token,
-                    setToken: props.setToken,
                     stripe: props.stripe,
                     currentUserProfile: props.currentUserProfile,
                     context: props.context,
@@ -346,15 +344,15 @@ export function PaymentOption(props) {
                     donationPay: props.donationPay,
                     selectedProject: props.selectedProject,
                     paymentSetup: props.paymentSetup,
-                    selectedTaxCountry: props.selectedTaxCountry
+                    selectedTaxCountry: props.selectedTaxCountry,
+                    setLoading: props.setLoading,
+                    navigation: props.navigation
                   })
                 : handleApplePayPress({
                     totalTreeCount: String(props.treeCount),
                     totalPrice: String(props.treeCount * props.treeCost),
                     amountPerTree: String(props.treeCost),
                     currency_code: String(props.selectedCurrency),
-                    token: props.token,
-                    setToken: props.setToken,
                     stripe: props.stripe,
                     setApplePayStatus: props.setApplePayStatus,
                     currentUserProfile: props.currentUserProfile,
@@ -364,7 +362,9 @@ export function PaymentOption(props) {
                     donationPay: props.donationPay,
                     selectedProject: props.selectedProject,
                     paymentSetup: props.paymentSetup,
-                    selectedTaxCountry: props.selectedTaxCountry
+                    selectedTaxCountry: props.selectedTaxCountry,
+                    setLoading: props.setLoading,
+                    navigation: props.navigation
                   })
             }
             style={styles.nativePayButton}

@@ -77,7 +77,8 @@ export function fetchConfig() {
             supportedCurrency.includes(res.data.currency) &&
               dispatch(setCurrencyAction(res.data.currency));
           } else {
-            dispatch(fetchLocation());
+            //disabled fallback with ipstack
+            // dispatch(fetchLocation());
           }
           // for now we are not storing those in redux, please uncomment this when you need these urls in your components
           // dispatch(setCdnMedia(data.data.cdnMedia));

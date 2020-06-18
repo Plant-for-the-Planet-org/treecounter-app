@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, ScrollView, SafeAreaView, Text, Linking, Platform } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { debug } from '../../debug';
 import styles from '../../styles/menu.native';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
@@ -20,18 +22,14 @@ import { version } from './../../../package.json';
 
 //   icons.target_outline;
 
-export default class Menu extends Component {
-  state = {
-    showCurrencyModal: false
-  };
-  static propTypes = {
-    menuData: PropTypes.array.isRequired,
-    onPress: PropTypes.func,
-    selectPlantProjectAction: PropTypes.func,
-    userProfile: PropTypes.any,
-    navigation: PropTypes.any,
-    lastRoute: PropTypes.any
-  };
+class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showCurrencyModal: false
+    };
+  }
+
   hideCurrencyModal = () => {
     this.setState({ showCurrencyModal: false });
   };
@@ -59,7 +57,7 @@ export default class Menu extends Component {
     Linking.addEventListener('url', this.appWokeUp);
 
     // check for updates
-    await fetchConfig();
+    await this.props.fetchConfig();
     console.log('package version:', version, ' appVersions:', getAppVersions());
     if (getAppVersions()[Platform.OS] && getAppVersions()[Platform.OS][0] && version < getAppVersions()[Platform.OS][0]) {
     // if (getAppVersions()[Platform.OS] && getAppVersions()[Platform.OS][0] && version < getAppVersions()[Platform.OS][0]) {
@@ -364,3 +362,20 @@ export default class Menu extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      fetchConfig
+    },
+    dispatch);
+};
+export default connect(null, mapDispatchToProps)(Menu);
+Menu.propTypes = {
+  menuData: PropTypes.array.isRequired,
+  onPress: PropTypes.func,
+  selectPlantProjectAction: PropTypes.func,
+  userProfile: PropTypes.any,
+  navigation: PropTypes.any,
+  lastRoute: PropTypes.any
+};

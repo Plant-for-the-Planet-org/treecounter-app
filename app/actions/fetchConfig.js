@@ -15,22 +15,24 @@ let currency = '';
 let webMapIds = {};
 let appVersions = {};
 
-export async function fetchLocation() {
-  if (!getItemSync('preferredCurrency')) {
-    getRequest('public_ipstack')
-      .then(res => {
-        debug('Got location fetch ip', res.data);
-        const foundLocation = find(countryCodes, {
-          countryCode: res.data.country_code
-        });
-        supportedCurrency.includes(foundLocation.code) &&
-          setCurrencyAction(foundLocation.code);
-      })
+export function fetchLocation() {
+  return dispatch => {
+    if (!getItemSync('preferredCurrency')) {
+      getRequest('public_ipstack')
+        .then(res => {
+          debug('Got location fetch ip', res.data);
+          const foundLocation = find(countryCodes, {
+            countryCode: res.data.country_code
+          });
+          supportedCurrency.includes(foundLocation.code) &&
+            dispatch(setCurrencyAction(foundLocation.code));
+        })
 
-      .catch(error => {
-        console.error(error);
-      });
-  }
+        .catch(error => {
+          debug(error);
+        });
+    }
+  };
 }
 
 export function getCurrency() {
@@ -49,35 +51,44 @@ export function getAppVersions() {
   return appVersions;
 }
 
-export async function fetchConfig() {
-  // if (!getItemSync('preferredCurrency')) {
-  await getRequest('config_get')
-    .then(res => {
-      debug('Got config fetch data:', res.data);
-      cdnMedia = res.data.cdnMedia;
-      webMapIds = res.data.webMapIds;
-      appVersions = res.data.appVersions;
-      // Test outdates app addding these values:
-      // appVersions.ios[0]='1.3.5';
-      // appVersions.android[0]='1.3.5';
+export function fetchConfig() {
+  const request = getRequest('config_get', {
+    version: 'v1.2'
+  });
+  return dispatch => {
+    // if (!getItemSync('preferredCurrency')) {
+    return new Promise(function (resolve, reject) {
+      request
+        .then(res => {
+          debug('Got config fetch data:', res.data);
+          cdnMedia = res.data.cdnMedia;
+          webMapIds = res.data.webMapIds;
+          appVersions = res.data.appVersions;
+          // Test outdates app addding these values:
+          //appVersions.ios[0]='1.3.5';
+          //appVersions.android[0]='1.3.5';
 
-      // fake data manipulation for debug purpose, please remove this when debug finishes
-      // data.data.currency = 'USD';
-      // debug code ends
+          // fake data manipulation for debug purpose, please remove this when debug finishes
+          // data.data.currency = 'USD';
+          // debug code ends
 
-      if (res.data && res.data.currency) {
-        currency = res.data.currency;
-        supportedCurrency.includes(res.data.currency) &&
-          setCurrencyAction(res.data.currency);
-      } else {
-        fetchLocation();
-      }
-      // for now we are not storing those in redux, please uncomment this when you need these urls in your components
-      // setCdnMedia(data.data.cdnMedia);
-    })
+          if (res.data && res.data.currency) {
+            currency = res.data.currency;
+            supportedCurrency.includes(res.data.currency) &&
+              dispatch(setCurrencyAction(res.data.currency));
+          } else {
+            dispatch(fetchLocation());
+          }
+          // for now we are not storing those in redux, please uncomment this when you need these urls in your components
+          // dispatch(setCdnMedia(data.data.cdnMedia));
+          resolve(res.data.appVersions);
+        })
 
-    .catch(error => {
-      console.error(error);
-    });
-  // }
+        .catch(error => {
+          reject(error);
+          debug(error);
+        });
+      });
+    // }
+  };
 }

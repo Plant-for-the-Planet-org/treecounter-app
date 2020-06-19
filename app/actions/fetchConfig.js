@@ -65,8 +65,8 @@ export function fetchConfig() {
           webMapIds = res.data.webMapIds;
           appVersions = res.data.appVersions;
           // Test outdates app addding these values:
-          //appVersions.ios[0]='1.3.5';
-          //appVersions.android[0]='1.3.5';
+          //appVersions.ios='1.3.5';
+          //appVersions.android='1.3.5';
 
           // fake data manipulation for debug purpose, please remove this when debug finishes
           // data.data.currency = 'USD';

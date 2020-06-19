@@ -59,8 +59,7 @@ class Menu extends Component {
     // check for updates
     await this.props.fetchConfig();
     console.log('package version:', version, ' appVersions:', getAppVersions());
-    if (getAppVersions()[Platform.OS] && getAppVersions()[Platform.OS][0] && version < getAppVersions()[Platform.OS][0]) {
-    // if (getAppVersions()[Platform.OS] && getAppVersions()[Platform.OS][0] && version < getAppVersions()[Platform.OS][0]) {
+    if (getAppVersions()[Platform.OS] && version < getAppVersions()[Platform.OS]) {
        // show the user an information that the app is outdate and a link to the app stores
       updateStaticRoute('app_splash_screen', this.props.navigation);
     } else {

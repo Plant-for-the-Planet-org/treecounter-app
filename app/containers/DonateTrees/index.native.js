@@ -13,7 +13,6 @@ import {
   setPaymentDetails,
   setPaymentResponse,
   setPledgeDetails,
-  setSelectedProjectDetails,
   createDonation,
   clearDonationReducer,
   donationPay
@@ -163,7 +162,6 @@ const mapDispatchToProps = dispatch => {
       setDonationDetails,
       setDonorDetails,
       setPaymentDetails,
-      setSelectedProjectDetails,
       setPaymentResponse,
       setPledgeDetails,
       createDonation,

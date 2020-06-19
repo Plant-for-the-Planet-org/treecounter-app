@@ -6,7 +6,8 @@ import {
   Platform,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ActivityIndicator
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -21,22 +22,16 @@ import CreditCardForm from "./../components/CreditCardForm";
 import { handleCreditCardPayPress } from "./../components/paymentMethods/creditCard";
 import SafeAreaView from "react-native-safe-area-view";
 import { Header } from "../components/donationComponents.native";
+import PaymentLoader from "../components/PaymentLoader";
+import { handleNativePayPress } from "./../components/paymentMethods/nativePay";
 
 export default function DonationStep3(props) {
-  stripe.setOptions({
-    publishableKey: "pk_test_9L6XVwL1f0D903gMcdbjRabp00Zf7jYJuw",
-    merchantId: "", // Optional
-    androidPayMode: "test" // Android only
-  });
-
-  const [token, setToken] = React.useState(null);
-
   const [payPalInfo, setPayPalInfo] = React.useState(false);
   const [showPay, setShowPay] = React.useState(true);
-  const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
 
   const [cardValues, setcardValues] = React.useState("");
   const [cardValid, setcardValid] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const togglePaypalInfo = () => {
     setPayPalInfo(!payPalInfo);
@@ -51,6 +46,16 @@ export default function DonationStep3(props) {
       "keyboardDidHide",
       keyboardDidHide
     );
+    if (props.paymentSetup) {
+      stripe.setOptions({
+        publishableKey:
+          props.paymentSetup.gateways[
+            props.context.donationDetails.selectedTaxCountry
+          ].stripe.stripePublishableKey,
+        merchantId: "", // Optional
+        androidPayMode: "test" // Android only
+      });
+    }
 
     // clean up
     return () => {
@@ -67,16 +72,12 @@ export default function DonationStep3(props) {
     setShowPay(true);
   };
 
-  return (
+  return loading ? (
+    <PaymentLoader />
+  ) : (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#fff", paddingBottom: 120 }}
     >
-      {/* <HeaderAnimated
-        scrollY={scrollY}
-        navigation={props.navigation}
-        title={"Payment Mode"}
-      /> */}
-
       <KeyboardAwareScrollView
         contentContainerStyle={[
           Platform.OS === "ios" ? null : { marginTop: 24 }
@@ -85,9 +86,6 @@ export default function DonationStep3(props) {
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollEnabled
         scrollEventThrottle={16}
-        onScroll={Animated.event([
-          { nativeEvent: { contentOffset: { y: scrollY } } }
-        ])}
       >
         <View style={{ paddingHorizontal: 20 }}>
           <Header navigation={props.navigation} title={"Payment Mode"} />
@@ -157,29 +155,56 @@ export default function DonationStep3(props) {
       </KeyboardAwareScrollView>
       {/* Pay Button Section  */}
 
-      {showPay ? (
+      {props.context &&
+      props.context.donationDetails &&
+      props.context.donationDetails.totalTreeCount ? (
         <PaymentButton
           treeCount={props.context.donationDetails.totalTreeCount}
-          treeCost={props.context.projectDetails.amountPerTree}
-          selectedCurrency={props.context.projectDetails.currency}
-          // commissionSwitch={props.navigation.getParam('commissionSwitch')}
-          navigation={props.navigation}
-          cardValid={cardValid}
+          treeCost={props.context.donationDetails.selectedProject.treeCost}
+          selectedCurrency={props.context.donationDetails.selectedCurrency}
           stripe={stripe}
-          cardValues={cardValues}
+          currentUserProfile={props.currentUserProfile}
           context={props.context}
           createDonation={props.createDonation}
           donationPay={props.donationPay}
-          currentUserProfile={props.currentUserProfile}
+          selectedProject={props.context.donationDetails.selectedProject}
           paymentSetup={props.paymentSetup}
+          selectedTaxCountry={props.context.donationDetails.selectedTaxCountry}
+          setLoading={setLoading}
+          navigation={props.navigation}
+          cardValid={cardValid}
+          cardValues={cardValues}
+          rates={props.context.donationDetails.rates}
         />
-      ) : null}
+      ) : (
+        <ActivityIndicator size="large" color="#0000ff" />
+      )}
       {/* Pay Button Section Ended */}
     </SafeAreaView>
   );
 }
 
 const PaymentButton = props => {
+  let paymentProps = {
+    totalTreeCount: String(props.treeCount),
+    totalPrice: String(props.treeCount * props.treeCost),
+    amountPerTree: String(props.treeCost),
+    currency_code: String(props.selectedCurrency),
+    stripe: props.stripe,
+    currentUserProfile: props.currentUserProfile,
+    context: props.context,
+    createDonation: props.createDonation,
+    donationPay: props.donationPay,
+    selectedProject: props.selectedProject,
+    paymentSetup: props.paymentSetup,
+    selectedTaxCountry: props.selectedTaxCountry,
+    setLoading: props.setLoading,
+    navigation: props.navigation,
+    setApplePayStatus: null,
+    isApplePay: false,
+    isCredit: true,
+    cardValues: props.cardValues
+  };
   return (
     <View style={styles.buttonSectionView}>
       <View style={styles.donationSummary}>
@@ -187,40 +212,23 @@ const PaymentButton = props => {
           <Text style={styles.donationAmount}>
             {formatNumber(
               props.commissionSwitch
-                ? props.treeCost * props.treeCount +
+                ? props.treeCost *
+                    props.treeCount *
+                    props.rates[props.selectedCurrency] +
                     ((props.treeCount / 100) * 2.9 + 0.3)
-                : props.treeCost * props.treeCount,
+                : props.treeCost *
+                    props.treeCount *
+                    props.rates[props.selectedCurrency],
               null,
               props.selectedCurrency
             )}
           </Text>
           <Text style={styles.donationTree}>for {props.treeCount} trees</Text>
         </View>
-        <Text style={styles.donationFrequency}>One Time Donation</Text>
       </View>
       <TouchableOpacity
         onPress={() => {
-          handleCreditCardPayPress({
-            totalTreeCount: String(props.treeCount),
-            totalPrice: String(props.treeCount * props.treeCost),
-            // amountPerTree: String(props.treeCost),
-            currency_code: String(props.selectedCurrency),
-            stripe: props.stripe,
-            currentUserProfile: props.currentUserProfile,
-            context: props.context,
-            createDonation: props.createDonation,
-            // setDonorDetails: props.setDonorDetails,
-            donationPay: props.donationPay,
-            // selectedProject: props.selectedProject
-            cardValues: props.cardValues,
-            paymentSetup: props.paymentSetup,
-            selectedTaxCountry: props.selectedTaxCountry
-          });
-
-          // updateStaticRoute('donate_thankyou', props.navigation, {
-          //   treeCount: props.treeCount,
-          //   plantedBy: 'Eden Reforestation Project'
-          // });
+          handleNativePayPress(paymentProps);
         }}
         style={
           props.cardValid

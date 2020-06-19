@@ -52,7 +52,7 @@ const DonationContactDetailsSchema = Yup.object().shape({
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
   const [buttonType, setButtonType] = useState("donate");
-  const [isCompanySwitch, setisCompanySwitch] = React.useState(false); // for Switching whether the user wants receipt or not
+
   const [showCountryModal, setShowCountryModal] = React.useState(false);
 
   let countryCodes = countryData;
@@ -132,8 +132,7 @@ export default function DonorDetails(props) {
           props.contextActions.setDonorDetails(values);
           updateStaticRoute("payment_details_form", props.navigation, {
             navigation: props.navigation,
-            paymentSetup: props.paymentSetup,
-            selectedTaxCountry: props.selectedTaxCountry
+            paymentSetup: props.paymentSetup
           });
         }}
       >
@@ -370,15 +369,19 @@ export default function DonorDetails(props) {
             </KeyboardAwareScrollView>
             {props.context &&
             props.context.donationDetails &&
-            props.context.projectDetails &&
             props.context.donationDetails.totalTreeCount ? (
               <PaymentOption
                 treeCount={props.context.donationDetails.totalTreeCount}
-                treeCost={props.context.projectDetails.amountPerTree}
-                selectedCurrency={props.context.projectDetails.currency}
+                treeCost={
+                  props.context.donationDetails.selectedProject.treeCost
+                }
+                selectedCurrency={
+                  props.context.donationDetails.selectedCurrency
+                }
                 navigation={props.navigation}
                 onSubmit={formikProps.handleSubmit}
                 isValid={formikProps.isValid}
+                rates={props.context.donationDetails.rates}
               />
             ) : (
               <ActivityIndicator size="large" color="#0000ff" />
@@ -398,9 +401,13 @@ export function PaymentOption(props) {
           <Text style={styles.paymentTreeAmount}>
             {formatNumber(
               props.commissionSwitch
-                ? props.treeCost * props.treeCount +
+                ? props.treeCost *
+                    props.treeCount *
+                    props.rates[props.selectedCurrency] +
                     ((props.treeCount / 100) * 2.9 + 0.3)
-                : props.treeCost * props.treeCount,
+                : props.treeCost *
+                    props.treeCount *
+                    props.rates[props.selectedCurrency],
               null,
               props.selectedCurrency
             )}
@@ -409,10 +416,6 @@ export function PaymentOption(props) {
             for {props.treeCount} trees
           </Text>
         </View>
-
-        {/* <TouchableOpacity style={styles.otherPaymentButton}>
-            <Text style={styles.otherPaymentText}>Other payment methods</Text>
-          </TouchableOpacity> */}
         <View>
           <Text style={styles.otherPaymentText}>Click Next to proceed</Text>
         </View>

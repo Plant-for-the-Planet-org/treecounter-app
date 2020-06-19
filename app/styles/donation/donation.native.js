@@ -153,17 +153,15 @@ export default EStyleSheet.create({
   },
   donationAmount: {
     fontSize: 18,
-    fontWeight: "bold",
-    fontStyle: "normal",
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: "left",
-    color: "#89b53a"
+    color: "#89b53a",
+    fontFamily: "OpenSans-Bold"
   },
   donationTree: {
     fontSize: 14,
-    fontWeight: "600",
-    fontStyle: "normal",
+    fontFamily: "OpenSans-SemiBold",
     lineHeight: 21,
     letterSpacing: 0,
     textAlign: "left",

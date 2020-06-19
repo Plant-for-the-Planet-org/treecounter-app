@@ -15,22 +15,13 @@ import {
   getCountryFlagImageUrl,
   getImageUrl
 } from "../../../actions/apiRouting";
-import {
-  infoHint,
-  nextArrowWhite,
-  nextArrow,
-  closeIcon
-} from "../../../assets";
+import { infoHint, closeIcon } from "../../../assets";
 import countryData from "../../../assets/countryCodes.json";
 import styles from "../../../styles/donations/donationDetails";
 import { formatNumber, formatDate } from "../../../utils/utils";
 import CurrencySelectorList from "../../Common/CurrencySelectorList.native";
 import UserProfileImage from "../../Common/UserProfileImage.native";
-import { handleApplePayPress } from "./paymentMethods/applePay";
-import { handleAndroidPayPress } from "./paymentMethods/googlePay";
-import { SvgXml } from "react-native-svg";
-import google_pay from "../../../assets/svgAssets/donations/google_pay";
-import apple_pay from "../../../assets/svgAssets/donations/apple_pay";
+
 import NumberFormat from "../../Common/NumberFormat.native.js";
 
 export function TaxReceipt(props) {
@@ -289,113 +280,6 @@ export function CoverFee(props) {
         trackColor={{ false: "#f2f2f7", true: "#88b439" }}
         value={props.commissionSwitch}
       />
-    </View>
-  );
-}
-
-export function PaymentOption(props) {
-  return (
-    <View style={styles.bottomButtonView}>
-      <View style={styles.leftSection}>
-        {props.treeCount ? (
-          <>
-            <View style={styles.paymentTreeDetails}>
-              <Text style={styles.paymentTreeAmount}>
-                {formatNumber(
-                  props.commissionSwitch
-                    ? props.treeCost *
-                        props.treeCount *
-                        props.rates[props.selectedCurrency] +
-                        ((props.treeCount / 100) * 2.9 + 0.3)
-                    : props.treeCost *
-                        props.treeCount *
-                        props.rates[props.selectedCurrency],
-                  null,
-                  props.selectedCurrency
-                )}
-              </Text>
-            </View>
-
-            <View>
-              <Text style={styles.paymentTreeCount}>
-                for {props.treeCount} trees
-              </Text>
-            </View>
-          </>
-        ) : !props.treeCount ? (
-          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
-        ) : null}
-      </View>
-      {props.treeCount ? (
-        <>
-          <TouchableOpacity
-            onPress={() =>
-              props.showNativePay === "google"
-                ? handleAndroidPayPress({
-                    totalTreeCount: String(props.treeCount),
-                    totalPrice: String(props.treeCount * props.treeCost),
-                    amountPerTree: String(props.treeCost),
-                    currency_code: String(props.selectedCurrency),
-                    stripe: props.stripe,
-                    currentUserProfile: props.currentUserProfile,
-                    context: props.context,
-                    createDonation: props.createDonation,
-                    setDonorDetails: props.setDonorDetails,
-                    donationPay: props.donationPay,
-                    selectedProject: props.selectedProject,
-                    paymentSetup: props.paymentSetup,
-                    selectedTaxCountry: props.selectedTaxCountry,
-                    setLoading: props.setLoading,
-                    navigation: props.navigation
-                  })
-                : handleApplePayPress({
-                    totalTreeCount: String(props.treeCount),
-                    totalPrice: String(props.treeCount * props.treeCost),
-                    amountPerTree: String(props.treeCost),
-                    currency_code: String(props.selectedCurrency),
-                    stripe: props.stripe,
-                    setApplePayStatus: props.setApplePayStatus,
-                    currentUserProfile: props.currentUserProfile,
-                    context: props.context,
-                    createDonation: props.createDonation,
-                    setDonorDetails: props.setDonorDetails,
-                    donationPay: props.donationPay,
-                    selectedProject: props.selectedProject,
-                    paymentSetup: props.paymentSetup,
-                    selectedTaxCountry: props.selectedTaxCountry,
-                    setLoading: props.setLoading,
-                    navigation: props.navigation
-                  })
-            }
-            style={styles.nativePayButton}
-          >
-            <SvgXml
-              style={{ maxHeight: 24, maxWidth: 60 }}
-              xml={props.showNativePay === "google" ? google_pay : apple_pay}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => props.onContinue()}
-            style={styles.continueOtherButton}
-          >
-            <Text style={styles.continueOtherButtonText}>Other</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
-              source={nextArrow}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-        </>
-      ) : (
-        <View style={[styles.continueButtonView, { backgroundColor: "grey" }]}>
-          <Text style={styles.continueButtonText}>Next</Text>
-          <Image
-            style={{ maxHeight: 24, maxWidth: 24 }}
-            source={nextArrowWhite}
-            resizeMode="contain"
-          />
-        </View>
-      )}
     </View>
   );
 }

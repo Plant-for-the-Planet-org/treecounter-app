@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 import { updateStaticRoute } from "../../../../helpers/routerHelper";
 
 export const handleApplePayPress = async props => {
@@ -21,13 +20,15 @@ export const handleApplePayPress = async props => {
         ]
       )
       .then(token => {
+        props.setLoading(true);
         let loggedIn = props.currentUserProfile;
         let plantProject = props.selectedProject.id;
-        // console.log("Token", token);
         let newData = {
           amount: Number(props.totalPrice),
           currency: props.currency_code,
-          recipientType: "individual",
+          recipientType: props.context.donorDetails.isCompany
+            ? "company"
+            : "individual",
           treeCount: Number(props.totalTreeCount),
           receiptIndividual: {
             firstname: token.card.name,
@@ -86,8 +87,6 @@ export const handleApplePayPress = async props => {
 
                 props.donationPay(payData, donationID, loggedIn).then(res => {
                   applePayComplete = true;
-                  props.setLoading(false);
-
                   if (applePayComplete) {
                     props.stripe.completeNativePayRequest();
                     props.setApplePayStatus("Apple Pay payment completed");

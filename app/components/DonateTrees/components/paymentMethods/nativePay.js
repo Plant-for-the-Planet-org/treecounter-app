@@ -1,10 +1,34 @@
 import axios from "axios";
 import { updateStaticRoute } from "../../../../helpers/routerHelper";
 
-export const handleAndroidPayPress = async props => {
-  try {
-    const token = await props.stripe
-      .paymentRequestWithNativePay({
+export const handleNativePayPress = async props => {
+  let isCredit = props.isCredit;
+  let isApplePay = props.isApplePay;
+  let applePayComplete;
+
+  let request = isCredit
+    ? props.stripe.createTokenWithCard({
+        number: props.cardValues.number,
+        expMonth: Number(props.cardValues.expMonth),
+        expYear: Number(props.cardValues.expYear),
+        cvc: props.cardValues.cvc,
+        currency: props.currency_code
+      })
+    : isApplePay
+    ? props.stripe.paymentRequestWithNativePay(
+        {
+          requiredBillingAddressFields: ["all"],
+          requiredShippingAddressFields: ["email"],
+          currencyCode: props.currency_code
+        },
+        [
+          {
+            label: "Donation to Plant for the Planet",
+            amount: props.totalPrice
+          }
+        ]
+      )
+    : props.stripe.paymentRequestWithNativePay({
         total_price: props.totalPrice,
         currency_code: props.currency_code,
         billing_address_required: true,
@@ -19,34 +43,60 @@ export const handleAndroidPayPress = async props => {
             quantity: props.totalTreeCount
           }
         ]
-      })
+      });
+
+  console.log("Request", request);
+  try {
+    const token = await request
       .then(token => {
         props.setLoading(true);
         let loggedIn = props.currentUserProfile;
         let plantProject = props.selectedProject.id;
-        let newData = {
+
+        let createDonationData = {
           amount: Number(props.totalPrice),
           currency: props.currency_code,
-          recipientType: props.context.donorDetails.isCompany
-            ? "company"
-            : "individual",
+          recipientType:
+            isCredit && props.context.donorDetails.isCompany
+              ? "company"
+              : "individual",
           treeCount: Number(props.totalTreeCount),
           receiptIndividual: {
-            firstname: token.card.name,
-            lastname: token.card.name,
-            email: token.extra.billingContact.emailAddress,
-            address: token.card.addressLine1,
-            zipCode: token.card.addressZip,
-            city: token.card.addressCity,
-            country: token.card.addressCountry
+            firstname: isCredit
+              ? props.context.donorDetails.firstname
+              : token.card.name,
+            lastname: isCredit
+              ? props.context.donorDetails.lastname
+              : token.card.name,
+            email: isCredit
+              ? props.context.donorDetails.email
+              : token.extra.shippingContact.emailAddress,
+            address: isCredit
+              ? props.context.donorDetails.address
+              : token.card.addressLine1,
+            zipCode: isCredit
+              ? props.context.donorDetails.zipCode
+              : token.card.addressZip,
+            city: isCredit
+              ? props.context.donorDetails.city
+              : token.card.addressCity,
+            country: isCredit
+              ? props.context.donorDetails.country
+              : token.card.addressCountry
           }
         };
 
         let donationType = props.context.contextType;
         props
-          .createDonation(newData, plantProject, loggedIn, donationType)
+          .createDonation(
+            createDonationData,
+            plantProject,
+            loggedIn,
+            donationType
+          )
           .then(response => {
             const donationID = response.data.donationId;
+
             const data = {
               type: "card",
               card: { token: token.tokenId },
@@ -84,9 +134,20 @@ export const handleAndroidPayPress = async props => {
                   }
                 };
 
-                // This is the final Pay API
                 props.donationPay(payData, donationID, loggedIn).then(res => {
-                  props.setLoading(false);
+                  if (isApplePay) {
+                    applePayComplete = true;
+                    if (applePayComplete) {
+                      props.stripe.completeNativePayRequest();
+                      props.setApplePayStatus("Apple Pay payment completed");
+                    } else {
+                      props.stripe.cancelNativePayRequest();
+                      props.setApplePayStatus("Apple Pay payment cancelled");
+                    }
+                  } else {
+                    props.setLoading(false);
+                  }
+
                   updateStaticRoute("donate_thankyou", props.navigation, {
                     treeCount: props.totalTreeCount,
                     plantedBy: props.selectedProject.name,
@@ -99,11 +160,18 @@ export const handleAndroidPayPress = async props => {
               });
           });
       })
-      .catch(err => {
-        console.log("error gpay", err);
+      .catch(error => {
+        // Error handling for token creation fail case
+        console.log(error);
       });
   } catch (error) {
-    console.log("Error", error);
+    if (isApplePay) {
+      props.setApplePayStatus
+        ? props.setApplePayStatus(`Error: ${error.message}`)
+        : null;
+    }
+    // Error handling for token creation fail case
+    console.log("Error", error.message);
   }
 };
 

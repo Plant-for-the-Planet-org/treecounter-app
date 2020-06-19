@@ -1,8 +1,8 @@
 import axios from "axios";
+import { updateStaticRoute } from "../../../../helpers/routerHelper";
 
 export const handleCreditCardPayPress = async props => {
   try {
-    // props.setToken(null);
     const params = {
       number: props.cardValues.number,
       expMonth: Number(props.cardValues.expMonth),
@@ -14,7 +14,7 @@ export const handleCreditCardPayPress = async props => {
     const token = await props.stripe
       .createTokenWithCard(params)
       .then(token => {
-        // Create Donation API
+        props.setLoading(true);
         let loggedIn = props.currentUserProfile;
         let plantProject = props.context.projectDetails.plantProjectID;
 
@@ -79,7 +79,14 @@ export const handleCreditCardPayPress = async props => {
                 };
 
                 // This is the final Pay API
-                props.donationPay(payData, donationID, loggedIn);
+                props.donationPay(payData, donationID, loggedIn).then(res => {
+                  props.setLoading(false);
+                  updateStaticRoute("donate_thankyou", props.navigation, {
+                    treeCount: props.totalTreeCount,
+                    plantedBy: props.selectedProject.name,
+                    navigation: props.navigation
+                  });
+                });
               })
               .catch(error => {
                 console.log(error.response);

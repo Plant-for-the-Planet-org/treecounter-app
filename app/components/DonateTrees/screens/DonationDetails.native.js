@@ -6,16 +6,14 @@ import {
   TouchableOpacity,
   View,
   Platform,
-  ActivityIndicator
+  Image,
+  ScrollView
 } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { updateStaticRoute } from "../../../helpers/routerHelper";
 import { paymentFee } from "../../../helpers/utils";
 import styles from "../../../styles/donations/donationDetails";
-import HeaderAnimated from "../../Header/HeaderAnimated.native";
 import {
   NoPlantProjectDetails,
-  PaymentOption,
   PlantProjectDetails,
   SelectCountryModal,
   // SelectFrequency,
@@ -31,17 +29,26 @@ import ProjectModal from "../components/ProjectModal.native";
 import stripe from "tipsi-stripe";
 import i18n from "../../../locales/i18n.js";
 import SafeAreaView from "react-native-safe-area-view";
+import PaymentLoader from "../components/PaymentLoader";
+import { nextArrowWhite, nextArrow } from "../../../assets";
+import { formatNumber } from "../../../utils/utils";
+import { handleApplePayPress } from "./../components/paymentMethods/applePay";
+import { handleAndroidPayPress } from "./../components/paymentMethods/googlePay";
+import { handleNativePayPress } from "./../components/paymentMethods/nativePay";
+
+import { SvgXml } from "react-native-svg";
+import google_pay from "../../../assets/svgAssets/donations/google_pay";
+import apple_pay from "../../../assets/svgAssets/donations/apple_pay";
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
   const [treeCount, setTreeCount] = React.useState(0); // for Selecting Tree Count
   // const [frequency, setFrequency] = React.useState('once'); // for Selecting Frequency of Donations
-  const [countryForTax, setCountryForTax] = React.useState(""); // for Selecting the Country
-  const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
   const [showTaxCountryModal, setShowTaxCountryModal] = React.useState(false);
 
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false); // This starts the loader while payment is happening
+
   const useUserCountry =
     props.selectedProject.paymentSetup &&
     props.selectedProject.paymentSetup.taxDeductionCountries.includes(
@@ -54,19 +61,17 @@ function DonationDetails(props) {
   const [selectedTaxCountry, setSelectedTaxCountry] = React.useState(
     defaultCountry
   );
-  const [currency, setCurrency] = React.useState(props.selectedCurrency);
-  const [token, setToken] = React.useState(null);
-  const [applePayStatus, setApplePayStatus] = React.useState("");
 
-  // this is to test whether Apple/Google pay is allowed or not
+  const [currency, setCurrency] = React.useState(props.selectedCurrency);
   stripe.setOptions({
     publishableKey:
       props.selectedProject.paymentSetup.gateways[selectedTaxCountry].stripe
         .stripePublishableKey,
-    merchantId: "", // Optional
+    merchantId: "", // The value can be blank but the key is needed
     androidPayMode: "test" // Android only
   });
-  const [allowedNativePay, setallowedNativePay] = React.useState(false);
+  const [allowedNativePay, setallowedNativePay] = React.useState(false); // this is to test whether Apple/Google pay is allowed or not
+  const [applePayStatus, setApplePayStatus] = React.useState("");
 
   React.useEffect(() => {
     const allowedNativePay = stripe.deviceSupportsNativePay();
@@ -76,7 +81,7 @@ function DonationDetails(props) {
   // show hide project modal
   const [showProjectModal, setProjectModal] = React.useState(false);
 
-  // Function for Switching the state of commission
+  // Function for Switching the state of commission - Right now this functionality is disabled
   const toggleSetCommission = value => {
     setCommissionSwitch(value);
   };
@@ -101,71 +106,37 @@ function DonationDetails(props) {
   // ) {
   //   setFrequency(context.donationDetails.frequency);
   // }
-  if (
-    context.donationDetails.countryForTax &&
-    context.donationDetails.countryForTax != countryForTax
-  ) {
-    setSelectedTaxCountry(context.donationDetails.countryForTax);
-  }
 
   const saveContext = () => {
-    if (context.contextType === "direct") {
-      props.contextActions.setDonationDetails({
-        ...props.context.donationDetails,
-        totalTreeCount: treeCount,
-        // frequency: frequency,
-        taxReceiptSwitch: taxReceiptSwitch,
-        countryForTax: countryForTax,
-        selectedProject: props.selectedProject
-      });
-    }
+    props.contextActions.setDonationDetails({
+      // frequency: frequency,
+      ...props.context.donationDetails,
+      totalTreeCount: treeCount,
+      taxReceiptSwitch: taxReceiptSwitch,
+      selectedProject: props.selectedProject,
+      selectedTaxCountry: selectedTaxCountry,
+      selectedCurrency: currency,
+      rates:
+        props.currencies.currencies.currency_rates[
+          props.selectedProject.currency
+        ].rates
+    });
   };
   const onContinue = () => {
     // Set Donation Details and then switch the page
-    if (context.contextType === "direct") {
-      saveContext();
-      updateStaticRoute("donor_details_form", props.navigation, {
-        navigation: props.navigation,
-        paymentSetup: props.selectedProject.paymentSetup,
-        selectedTaxCountry: selectedTaxCountry
-      });
-    }
+    saveContext();
+    updateStaticRoute("donor_details_form", props.navigation, {
+      navigation: props.navigation,
+      paymentSetup: props.selectedProject.paymentSetup
+    });
   };
 
   const setDonationStatus = status => {
-    if (status === "success") {
-      updateStaticRoute("donate_thankyou", props.navigation, {
-        treeCount: props.totalTreeCount,
-        plantedBy: "Eden Reforestation Project"
-      });
-    }
+    // To be used to show errors
   };
 
   return loading ? (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#fff"
-      }}
-    >
-      <ActivityIndicator
-        style={{ alignSelf: "center" }}
-        size={"large"}
-        color="#89b53a"
-      />
-      <Text
-        style={{ fontFamily: "OpenSans-SemiBold", marginTop: 24, fontSize: 16 }}
-      >
-        Processing Payment
-      </Text>
-      <Text
-        style={{ fontFamily: "OpenSans-SemiBold", marginTop: 8, fontSize: 16 }}
-      >
-        Please wait
-      </Text>
-    </View>
+    <PaymentLoader />
   ) : (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <ProjectModal
@@ -178,35 +149,18 @@ function DonationDetails(props) {
         context={context}
       />
 
-      {/* <HeaderAnimated
-        scrollY={scrollY}
-        navigation={props.navigation}
-        title={"Tree Donation"}
-        showClose
-        onBack={props.contextActions.clearDonationReducer}
-      /> */}
-
-      <KeyboardAwareScrollView
+      <ScrollView
         contentContainerStyle={[
           styles.scrollView,
           Platform.OS === "ios" ? null : { marginTop: 24 }
         ]}
-        keyboardDismissMode="on-drag"
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled
-        extraScrollHeight={100}
-        extraHeight={100}
-        enableOnAndroid
-        scrollEventThrottle={16}
-        onScroll={Animated.event([
-          { nativeEvent: { contentOffset: { y: scrollY } } }
-        ])}
       >
         <Header
           onBack={props.contextActions.clearDonationReducer}
           navigation={props.navigation}
           title={"Tree Donation"}
         />
+
         {/* Plant Project Details */}
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>DONATION TO</Text>
@@ -331,7 +285,7 @@ function DonationDetails(props) {
         {/* <UserContactDetails donorDetails={donorDetails} /> */}
         {/* <UserPaymentDetails paymentDetails={paymentDetails} /> */}
         {/* <PaymentsProcessedBy/> */}
-      </KeyboardAwareScrollView>
+      </ScrollView>
 
       <PaymentOption
         treeCount={treeCount}
@@ -339,8 +293,8 @@ function DonationDetails(props) {
         navigation={props.navigation}
         onContinue={onContinue}
         // frequency={frequency}
-        showNativePay={
-          allowedNativePay ? (Platform.OS === "ios" ? "apple" : "google") : null
+        isApplePay={
+          allowedNativePay ? (Platform.OS === "ios" ? true : false) : null
         }
         setLoading={setLoading}
         setDonationStatus={setDonationStatus}
@@ -365,6 +319,96 @@ function DonationDetails(props) {
         selectedTaxCountry={selectedTaxCountry}
       />
     </SafeAreaView>
+  );
+}
+
+export function PaymentOption(props) {
+  let paymentProps = {
+    totalTreeCount: String(props.treeCount),
+    totalPrice: String(props.treeCount * props.treeCost),
+    amountPerTree: String(props.treeCost),
+    currency_code: String(props.selectedCurrency),
+    stripe: props.stripe,
+    currentUserProfile: props.currentUserProfile,
+    context: props.context,
+    createDonation: props.createDonation,
+    setDonorDetails: props.setDonorDetails,
+    donationPay: props.donationPay,
+    selectedProject: props.selectedProject,
+    paymentSetup: props.paymentSetup,
+    selectedTaxCountry: props.selectedTaxCountry,
+    setLoading: props.setLoading,
+    navigation: props.navigation,
+    setApplePayStatus: props.setApplePayStatus,
+    isApplePay: props.isApplePay,
+    isCredit: false
+  };
+  return (
+    <View style={styles.bottomButtonView}>
+      <View style={styles.leftSection}>
+        {props.treeCount ? (
+          <>
+            <View style={styles.paymentTreeDetails}>
+              <Text style={styles.paymentTreeAmount}>
+                {formatNumber(
+                  props.commissionSwitch
+                    ? props.treeCost *
+                        props.treeCount *
+                        props.rates[props.selectedCurrency] +
+                        ((props.treeCount / 100) * 2.9 + 0.3)
+                    : props.treeCost *
+                        props.treeCount *
+                        props.rates[props.selectedCurrency],
+                  null,
+                  props.selectedCurrency
+                )}
+              </Text>
+            </View>
+
+            <View>
+              <Text style={styles.paymentTreeCount}>
+                for {props.treeCount} trees
+              </Text>
+            </View>
+          </>
+        ) : !props.treeCount ? (
+          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
+        ) : null}
+      </View>
+      {props.treeCount ? (
+        <>
+          <TouchableOpacity
+            onPress={() => handleNativePayPress(paymentProps)}
+            style={styles.nativePayButton}
+          >
+            <SvgXml
+              style={{ maxHeight: 24, maxWidth: 60 }}
+              xml={props.isApplePay ? apple_pay : google_pay}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => props.onContinue()}
+            style={styles.continueOtherButton}
+          >
+            <Text style={styles.continueOtherButtonText}>Other</Text>
+            <Image
+              style={{ maxHeight: 24, maxWidth: 24 }}
+              source={nextArrow}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        </>
+      ) : (
+        <View style={[styles.continueButtonView, { backgroundColor: "grey" }]}>
+          <Text style={styles.continueButtonText}>Next</Text>
+          <Image
+            style={{ maxHeight: 24, maxWidth: 24 }}
+            source={nextArrowWhite}
+            resizeMode="contain"
+          />
+        </View>
+      )}
+    </View>
   );
 }
 

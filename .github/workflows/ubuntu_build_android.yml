@@ -19,6 +19,8 @@ jobs:
     - name: Check versions
       run: |
         echo "Node version:"
+        node --version
+        echo "NPM version:"
         npm --version
         echo "Java version:"
         java -version
@@ -43,7 +45,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
 

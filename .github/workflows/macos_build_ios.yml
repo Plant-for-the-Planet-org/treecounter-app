@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: macOS-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
     - name: Checkout branch
       uses: actions/checkout@v2
@@ -31,6 +31,8 @@ jobs:
         echo "Brew version:"
         brew --version
         echo "Node version:"
+        node --version
+        echo "NPM version:"
         npm --version
         echo "PATH:"
         echo $PATH
@@ -44,7 +46,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
 

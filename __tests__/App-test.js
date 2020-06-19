@@ -63,6 +63,11 @@ jest.mock('@react-native-community/viewpager', () => {});
 jest.mock('@react-native-community/masked-view', () => {});
 jest.mock('@react-native-community/datetimepicker', () => {});
 jest.mock('@react-native-community/netinfo', () => {});
+jest.mock('react-native-splash-screen', () => {
+  return {
+    hide: jest.fn()
+  };
+});
 
 // eslint-disable-next-line no-undef
 it('renders correctly', () => {

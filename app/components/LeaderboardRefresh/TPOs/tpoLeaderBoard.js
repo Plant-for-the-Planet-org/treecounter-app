@@ -21,7 +21,7 @@ import GetRandomImage from '../../../utils/getRandomImage';
 
 const tpoLeaderBoard = ({ navigation }) => {
   const [queryresult, setQueryResult] = useState(null);
-  const [period, setPeriod] = useState('1w');
+  const [period, setPeriod] = useState('1y');
   const [orderBy] = useState('planted');
 
   useEffect(() => {
@@ -168,8 +168,8 @@ const CompanyListItem = ({ onPressListItem, item, index }) => {
             }}
           />
         ) : (
-          <GetRandomImage name={item.caption} />
-        )}
+            <GetRandomImage name={item.caption} />
+          )}
       </View>
       <View style={styles.countryBody}>
         <View style={styles.countryNameCont}>

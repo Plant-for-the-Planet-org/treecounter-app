@@ -147,6 +147,15 @@ export default class DonateTrees extends Component {
     this.setState(state);
   }
 
+  // This will set tree count when users directly jump to the project page via a link
+  componentDidMount() {
+    if (this.props.selectedProject && this.props.selectedProject.paymentSetup) {
+      this.setState({
+        selectedTreeCount: this.props.selectedProject.paymentSetup.treeCountOptions.fixedDefaultTreeCount
+      })
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.donationCreated !== this.state.donationCreated) {
       let requestData = {
@@ -212,6 +221,7 @@ export default class DonateTrees extends Component {
     });
   };
 
+  // This function validates the Next button
   checkValidation = [
     () => {
       if (this.props.selectedProject) {
@@ -427,7 +437,7 @@ export default class DonateTrees extends Component {
         supportTreecounter={this.props.supportTreecounter}
       />
     ) : !plantProject ? null : (
-      <div className="sidenav-wrapper app-container__content--center">
+      <div className="sidenav-wrapper app-container__content--center donate">
         <TextHeading>
           {this.props.supportTreecounter.treecounterId
             ? (this.props.supportTreecounter.type == 'company' ? i18n.t('label.give_trees_to_company', {

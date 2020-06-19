@@ -52,5 +52,14 @@
   "confirm_delete_message": "Möchten Sie diesen Wettbewerb wirklich löschen? Es gibt keine Schaltfläche zum Rückgängigmachen.",
   "competetions_404_message": "Wir unterstützen noch keine Wettbewerbe im Browser. Verwende unsere iOS- oder Android-App, um auf die Wettbewerbe zuzugreifen.",
   "goal": "Ziel",
-  "active": "Aktiv"
+  "active": "Aktiv",
+  "no_competitions": "Keine Wettbewerbe gefunden",
+  "you_are_all_caught_up": "Das war alles!",
+  "register_only": "Nur mit Registrierung",
+  "register_only_msg": "Bitte pflanze selbst Bäume und registriere sie, um diesen Wettbewerb zu unterstützen.",
+  "donation_only_msg": "Bitte wähle 100 Projekten aus und unterstütze diesen Wettbewerb mit einer Spende.",
+  "specific_project_msg": "Spende an das Projekt {{project}} zur Unterstützung dieses Wettbewerbs.",
+  "if_all_project_msg": "Pflanze einen Baum oder wähle aus 100 Projekten aus und unterstütze diesen Wettbewerb mit einer Spende.",
+  "support_comp_trees": "Wettbewerb mit Bäumen unterstützen",
+  "donate_now": "Jetzt spenden"
 }

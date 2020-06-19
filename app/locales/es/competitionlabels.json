@@ -1,5 +1,5 @@
 {
-  "competitions": "Competiciones",
+  "competitions": "Competencias",
   "my_competitions": "Mis Competiciones",
   "mine_competitions": "Mina",
   "featured_competitions": "Destacado",
@@ -37,7 +37,7 @@
   "comp_by_name": "{{compname}} por {{ownername}}",
   "competition_create_successfully": "Competición creado con éxito",
   "competition_creation_error": "La creación de la competición falló",
-  "competition_edited_successfully": "Concurso editado con éxito.",
+  "competition_edited_successfully": "Competencia editada con éxito.",
   "competition_editing_error": "La edición de la competición falló",
   "mine_compeition_tab_header": "Lista de todas las competiciones a las que te has unido o creado.",
   "mine_compeition_tab_header_null": "Parece que todavía no tienes competiciones. Únete o cree una, y aparecerán aquí.",
@@ -52,5 +52,14 @@
   "confirm_delete_message": "¿Seguro que quieres eliminar esta competición? Esta acción no se puede deshacer.",
   "competetions_404_message": "Todavía no admitimos competiciones en tu navegador, utiliza nuestra aplicación iOS o Android para acceder a las competiciones.",
   "goal": "Objetivo",
-  "active": "Activo"
+  "active": "Activo",
+  "no_competitions": "No se encontraron competencias",
+  "you_are_all_caught_up": "Ya estas al día.",
+  "register_only": "Sólo registro",
+  "register_only_msg": "Plante árboles usted mismo y regístrelos para apoyar esta competencia.",
+  "donation_only_msg": "Por favor, elija entre 100 proyectos y haga una donación para apoyar este competencia.",
+  "specific_project_msg": "Donar al proyecto {{project}} para apoyar esta competencia.",
+  "if_all_project_msg": "Planta un árbol o elige entre 100 proyectos y haz una donación para apoyar esta competencia.",
+  "support_comp_trees": "Apoyar la competencia con árboles",
+  "donate_now": "Dona ahora"
 }

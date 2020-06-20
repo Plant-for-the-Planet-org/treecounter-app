@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchCurrencies } from "../../actions/currencies";
-import { loadProject } from "../../actions/loadTposAction";
-import { loadUserProfile } from "../../actions/loadUserProfileAction";
-import { selectPlantProjectAction } from "../../actions/selectPlantProjectAction";
-import DonateTrees from "../../components/DonateTrees/screens/DonationDetails.native";
+import { fetchCurrencies } from "../../../actions/currencies";
+import { loadProject } from "../../../actions/loadTposAction";
+import { loadUserProfile } from "../../../actions/loadUserProfileAction";
+import { selectPlantProjectAction } from "../../../actions/selectPlantProjectAction";
+import DonateTrees from "../screens/DonationDetails.native";
 import {
   setDonationDetails,
   setDonorDetails,
@@ -16,14 +16,14 @@ import {
   createDonation,
   clearDonationReducer,
   donationPay
-} from "../../components/DonateTrees/redux/action";
+} from "../redux/action";
 import {
   currenciesSelector,
   currentUserProfileSelector,
   getCurrency,
   selectedPlantProjectIdSelector,
   selectedPlantProjectSelector
-} from "../../selectors";
+} from "../../../selectors";
 import * as RNLocalize from "react-native-localize";
 import { ActivityIndicator, View } from "react-native";
 

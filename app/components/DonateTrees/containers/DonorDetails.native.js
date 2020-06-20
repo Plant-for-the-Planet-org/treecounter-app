@@ -6,15 +6,13 @@ import {
   setDonorDetails,
   setPaymentDetails,
   setPaymentResponse,
-  setPledgeDetails,
-  createDonation,
-  donationPay
-} from "../../components/DonateTrees/redux/action";
-import PaymentDetailsNative from "../../components/DonateTrees/screens/PaymentDetails.native";
-import { currentUserProfileSelector } from "../../selectors/index";
-const PaymentDetails = props => {
+  setPledgeDetails
+} from "../redux/action";
+import DonorDetailsNative from "../screens/DonorDetails.native";
+import { currentUserProfileSelector } from "../../../selectors/index";
+const DonorDetails = props => {
   return (
-    <PaymentDetailsNative
+    <DonorDetailsNative
       navigation={props.navigation}
       context={{
         contextType: props.contextType,
@@ -32,8 +30,6 @@ const PaymentDetails = props => {
         setPaymentDetails: props.setPaymentDetails
       }}
       currentUserProfile={props.currentUserProfile}
-      createDonation={props.createDonation}
-      donationPay={props.donationPay}
       paymentSetup={props.navigation.getParam("paymentSetup")}
     />
   );
@@ -60,12 +56,10 @@ const mapDispatchToProps = dispatch => {
       setDonorDetails,
       setPaymentDetails,
       setPaymentResponse,
-      setPledgeDetails,
-      createDonation,
-      donationPay
+      setPledgeDetails
     },
     dispatch
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(DonorDetails);

@@ -57,21 +57,22 @@ class Menu extends Component {
     Linking.addEventListener('url', this.appWokeUp);
 
     // check for updates
-    await this.props.fetchConfig();
-    console.log('package version:', version, ' appVersions:', getAppVersions());
-    if (getAppVersions()[Platform.OS] && version < getAppVersions()[Platform.OS]) {
-       // show the user an information that the app is outdate and a link to the app stores
-      updateStaticRoute('app_splash_screen', this.props.navigation);
-    } else {
-      // const welcome = await fetchItem('welcome').catch(error => debug(error));
-      if (!this.props.userProfile) {
-        // if (welcome == null) {
-        //   updateRoute('welcome_screen', this.props.navigation, 0);
-        // } else {
-        //   updateRoute('app_homepage', this.props.navigation, 0);
-        // }
-        updateRoute('welcome_screen', this.props.navigation, 0);
-      }
+    this.props.fetchConfig().then(() => {
+      console.log('package version:', version, ' appVersions:', getAppVersions());
+      if (getAppVersions()[Platform.OS] && version < getAppVersions()[Platform.OS]) {
+         // show the user an information that the app is outdate and a link to the app stores
+        updateStaticRoute('app_splash_screen', this.props.navigation);
+      }}
+    );
+
+    // const welcome = await fetchItem('welcome').catch(error => debug(error));
+    if (!this.props.userProfile) {
+      // if (welcome == null) {
+      //   updateRoute('welcome_screen', this.props.navigation, 0);
+      // } else {
+      //   updateRoute('app_homepage', this.props.navigation, 0);
+      // }
+      updateRoute('welcome_screen', this.props.navigation, 0);
     }
 
     // saveItem('welcome', JSON.stringify({ value: 'true' }));

@@ -45,7 +45,7 @@ class Menu extends Component {
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (Platform.OS === 'android') {
       const NativeLinking = require('react-native/Libraries/Linking/NativeLinking').default;
       NativeLinking.getInitialURL().then(url => url && this.resetStackToProperRoute(url)).catch(e => debug(e));

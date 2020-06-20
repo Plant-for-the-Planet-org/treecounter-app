@@ -9,8 +9,7 @@ export default EStyleSheet.create({
   },
   updateTitle: {
     fontSize: 27,
-    fontWeight: '800',
-    fontStyle: 'normal',
+    fontFamily:'OpenSans-Bold',
     lineHeight: 40,
     letterSpacing: 0,
     textAlign: 'left',
@@ -23,8 +22,7 @@ export default EStyleSheet.create({
   },
   updateExplanation: {
     fontSize: 18,
-    fontWeight: '400',
-    fontStyle: 'normal',
+    fontFamily:'OpenSans-Regular',
     lineHeight: 27,
     letterSpacing: 0,
     textAlign: 'center',
@@ -43,8 +41,7 @@ export default EStyleSheet.create({
   },
   updateButtonText: {
     fontSize: 16,
-    fontWeight: '600',
-    fontStyle: 'normal',
+    fontFamily:'OpenSans-SemiBold',
     lineHeight: 22,
     letterSpacing: 0.21,
     textAlign: 'center',

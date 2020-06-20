@@ -151,7 +151,8 @@ export const handleNativePayPress = async props => {
                   updateStaticRoute("donate_thankyou", props.navigation, {
                     treeCount: props.totalTreeCount,
                     plantedBy: props.selectedProject.name,
-                    navigation: props.navigation
+                    navigation: props.navigation,
+                    loggedIn: loggedIn
                   });
                 });
               })

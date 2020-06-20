@@ -1,5 +1,12 @@
 import React from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  BackHandler
+} from "react-native";
 import {
   closeIcon,
   deciduousTree,
@@ -17,7 +24,22 @@ export default function DonateThankYou(props) {
   const { getParam } = props.navigation;
   let treeCount = getParam("treeCount");
   let plantedBy = getParam("plantedBy");
+  let loggedIn = getParam("loggedIn");
   let treePossessive = treeCount > 1 ? "trees" : "tree";
+
+  let navigateBack = () => {
+    updateRoute("app_donateTrees", props.navigation);
+    return true;
+  };
+
+  React.useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", navigateBack);
+    // clean up
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", navigateBack);
+    };
+  });
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={styles.donateThankYouContainer}>
@@ -29,7 +51,7 @@ export default function DonateThankYou(props) {
             style={[styles.treeImage, styles.height40]}
           />
           <TouchableOpacity
-            onPress={() => props.navigation.goBack()}
+            onPress={() => navigateBack()}
             style={styles.closeIcon}
           >
             <View style={styles.closeContainer}>
@@ -93,7 +115,9 @@ export default function DonateThankYou(props) {
       </ScrollView>
       <PrimaryButton
         onClick={() => {
-          updateRoute("app_homepage", props.navigation);
+          loggedIn
+            ? updateRoute("app_userHome", props.navigation)
+            : updateRoute("app_donateTrees", props.navigation);
         }}
         buttonStyle={styles.thankyouButton}
       >

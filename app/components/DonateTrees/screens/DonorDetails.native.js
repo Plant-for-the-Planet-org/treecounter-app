@@ -350,7 +350,7 @@ export default function DonorDetails(props) {
                   />
                 </View>
                 {formikProps.values.isCompany ? (
-                  <View>
+                  <View style={{ paddingBottom: 200 }}>
                     <TextField
                       {...textfieldDesigns}
                       label={"Company Name"}

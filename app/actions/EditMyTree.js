@@ -57,7 +57,7 @@ export function editTree(plantContribution, plantId, navigation) {
       .catch(error => {
         debug(error);
         NotificationManager.error(
-          error.response.data ? error.response.data.message : i18n.t('label.error'),
+          error.response && error.response.data ? error.response.data.message : i18n.t('label.error'),
           i18n.t('label.error'),
           5000
         );

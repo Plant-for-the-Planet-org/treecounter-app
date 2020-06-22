@@ -55,7 +55,7 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
       .catch(err => {
         dispatch(setProgressModelState(false));
         NotificationManager.error(
-          err.response.data.message,
+          err.response.data ? err.response.data.message : i18n.t('label.error'),
           i18n.t('label.error'),
           5000
         );
@@ -84,7 +84,7 @@ export function forgot_password(data, navigation = undefined) {
         debug(err);
         dispatch(setProgressModelState(false));
         NotificationManager.error(
-          err.response.data.message,
+          err.response.data ? err.response.data.message : i18n.t('label.error'),
           i18n.t('label.error'),
           5000
         );
@@ -125,7 +125,7 @@ export function setAccessDenied(data, params, path, navigation = undefined) {
       })
       .catch(error => {
         debug(error);
-        // NotificationManager.error(error.response.data.message, i18n.t('label.error'), 5000);
+        // NotificationManager.error(error.response.data ? error.response.data.message : i18n.t('label.error'), i18n.t('label.error'), 5000);
       });
   };
 }

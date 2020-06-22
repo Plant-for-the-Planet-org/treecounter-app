@@ -171,7 +171,7 @@ class Menu extends Component {
     this.setState({
       selectedLanguage: selectedOption
     });
-    debug('change');
+    debug('change language to', selectedOption.value);
     saveItem('language', selectedOption.value);
     this.props.userProfile
       ? this.props

@@ -160,7 +160,7 @@ export function updateUserProfile(data, profileType, forcePromisify) {
           reject(err);
           dispatch(setProgressModelState(false));
           NotificationManager.error(
-            err.response.data.message,
+            err.response.data ? err.response.data.message : i18n.t('label.error'),
             i18n.t('label.error'),
             5000
           );

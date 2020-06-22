@@ -193,7 +193,6 @@ export default function DonationStep3(props) {
           onNavigationStateChange={_onNavigationStateChange}
           javaScriptEnabled={true}
           domStorageEnabled={true}
-          startInLoadingState={false}
           style={{ marginTop: 20 }}
         />
       ) : (

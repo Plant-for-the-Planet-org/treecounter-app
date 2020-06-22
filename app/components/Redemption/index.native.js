@@ -85,7 +85,7 @@ export default function Redemption(props) {
                   code: values.code,
                   type: type,
                   treeCount: res.data.treeCount,
-                  tpoName: res.data.tpos[0].tpoName,
+                  tpoName: res.data.tpos[0] ? res.data.tpos[0].tpoName : '',
                   setRedemptionCode: props.setRedemptionCode
                 });
                 setloadButton(false);

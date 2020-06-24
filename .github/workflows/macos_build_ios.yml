@@ -42,6 +42,38 @@ jobs:
         echo $PATH
         brew reinstall gettext
 
+    - name: Installing and changing to newer bash version
+      run: |
+        echo $PATH
+        bash -version
+        brew reinstall bash
+        sudo chsh -s /usr/local/bin/bash
+
+    - name: Installing and changing to gnu sed version
+      run: |
+        echo $PATH
+        brew reinstall gnu-sed
+        echo 'export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"' >> ~/.bashrc
+
+    - name: Installing google-drive-upload script
+      env:
+        CLIENT_ID: ${{ secrets.GOOGLE_DRIVE_CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+        REFRESH_TOKEN: ${{ secrets.GOOGLE_DRIVE_REFRESH_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.GOOGLE_DRIVE_ACCESS_TOKEN }}
+      run: |
+        source ~/.bashrc
+        echo $PATH
+        bash <(curl --compressed -s https://raw.githubusercontent.com/labbots/google-drive-upload/master/install.sh)
+        #bash <(curl --compressed -# https://raw.githubusercontent.com/Akianonymus/google-drive-upload/fix/install.sh) -r Akianonymus/google-drive-upload -B fix
+        echo "CLIENT_ID=\"$CLIENT_ID\"" >> ~/.googledrive.conf
+        echo "CLIENT_SECRET=\"$CLIENT_SECRET\"" >> ~/.googledrive.conf
+        echo "REFRESH_TOKEN=\"$REFRESH_TOKEN\"" >> ~/.googledrive.conf
+        echo "ACCESS_TOKEN=\"$ACCESS_TOKEN\"" >> ~/.googledrive.conf
+        echo "ACCESS_TOKEN_EXPIRY=" >> ~/.googledrive.conf
+        echo "ROOT_FOLDER=\"1sO16rDuJA8McRA8-Q-I6R2OjMGcG4nEp\"" >> ~/.googledrive.conf
+        echo "ROOT_FOLDER_NAME=" >> ~/.googledrive.conf
+
     - name: Caching node modules
       uses: actions/cache@v1
       with:
@@ -155,15 +187,11 @@ jobs:
       run: |
         curl -u "planetit1:$BROWSERSTACK_ACCESS_KEY" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@uploads/$upload_file"
 
-    # depends on existence of upload file in folder uploads
+    # depends on existence of upload file at uploads/$upload_file
     - name: Upload iOS IPA to Google Drive
-      uses: satackey/action-google-drive@v1.2.0
-      with:
-        upload-from: ./uploads
-        upload-to: /GitHubActions/TreecounterApp/.
-        skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
-        google-client-id: ${{ secrets.GOOGLE_DRIVE_CLIENT_ID }}
-        google-client-secret: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+      run: |
+        source ~/.bashrc
+        gupload -C TreecounterApp uploads/$upload_file
 
     - name: Slack notification
       env:

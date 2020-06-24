@@ -23,7 +23,7 @@ export function fetchCurrencies() {
             dispatch(setCurrenciesConversions(response.data));
             resolve(response.data)
           })
-          .catch(error => { debug(error); reject(err) });
+          .catch(error => { debug(error); reject(error) });
       } else {
         debug('fetchCurrencies already called, throttling.');
         resolve();

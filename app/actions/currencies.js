@@ -12,16 +12,22 @@ export function fetchCurrencies() {
   // If there was a network or server error then it will try
   // again in 10 seconds.
   return dispatch => {
-    const now = Date.now();
-    if (now - last > 10000) {
-      last = now;
+    return new Promise((resolve, reject) => {
+      const now = Date.now();
+      if (now - last > 10000) {
+        last = now;
 
-      debug('fetchCurrencies...');
-      getRequest('public_currencies_get')
-        .then(response => dispatch(setCurrenciesConversions(response.data)))
-        .catch(error => debug(error));
-    } else {
-      debug('fetchCurrencies already called, throttling.');
-    }
-  };
+        debug('fetchCurrencies...');
+        getRequest('public_currencies_get')
+          .then(response => {
+            dispatch(setCurrenciesConversions(response.data));
+            resolve(response.data)
+          })
+          .catch(error => { debug(error); reject(err) });
+      } else {
+        debug('fetchCurrencies already called, throttling.');
+        resolve();
+      }
+    })
+  }
 }

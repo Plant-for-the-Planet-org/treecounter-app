@@ -141,14 +141,29 @@ jobs:
 #        name: TreecounterApp-develop-release.apk
 #        path: android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk
 
+    - name: Prepare Android APK for upload
+      run: |
+        upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.apk
+        echo "::set-env name=upload_file::$upload_file"
+        mkdir -p uploads
+        mv android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk uploads/$upload_file
+
+    # depends on existence of upload file at uploads/$upload_file
     - name: Upload Android APK to Browserstack
       env:
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       run: |
-        upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.apk
-        echo "::set-env name=upload_file::$upload_file"
-        mv android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk release/$upload_file
-        curl -u "planetit1:$BROWSERSTACK_ACCESS_KEY" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@release/$upload_file"
+        curl -u "planetit1:$BROWSERSTACK_ACCESS_KEY" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@uploads/$upload_file"
+
+    # depends on existence of upload file in folder uploads
+    - name: Upload Android APK to Google Drive
+      uses: satackey/action-google-drive@v1.2.0
+      with:
+        upload-from: ./uploads
+        upload-to: /GitHubActions/TreecounterApp/.
+        skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
+        google-client-id: ${{ secrets.GOOGLE_DRIVE_CLIENT_ID }}
+        google-client-secret: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
 
     - name: Slack notification
       env:

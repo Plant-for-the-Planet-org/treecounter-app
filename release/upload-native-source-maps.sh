@@ -17,7 +17,7 @@ react-native bundle \
 
 curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
    -F apiKey="$BUGSNAG_API_KEY" \
-   -F appVersion="$PACKAGE_VERSION" \
+   -F appVersionCode="$PACKAGE_VERSION" \
    -F dev=false \
    -F platform=android \
    -F sourceMap=@android-release.bundle.map \
@@ -35,7 +35,7 @@ react-native bundle \
 
 curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
    -F apiKey="$BUGSNAG_API_KEY" \
-   -F appVersion="$PACKAGE_VERSION" \
+   -F appBundleVersion="$PACKAGE_VERSION" \
    -F dev=false \
    -F platform=ios \
    -F sourceMap=@ios-release.bundle.map \

@@ -337,8 +337,11 @@ export function PlantProjectDetails(props) {
     props.selectedCurrency
   );
   const [force, setForce] = useState(false);
-  const [treeCost, setTreeCost] = useState(props.treeCost);
-
+  const caclculateTreeCost = () => {
+    return props.rates[selectedCurrency] * props.treeCost
+  }
+  const [treeCost, setTreeCost] = useState(caclculateTreeCost());
+  
   const handleCurrencyChange = currency => {
     showCurrencyModal && currency != selectedCurrency
       ? setForce(true)

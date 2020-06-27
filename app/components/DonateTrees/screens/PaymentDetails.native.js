@@ -9,6 +9,7 @@ import {
   View,
   ActivityIndicator
 } from "react-native";
+import WebView from "react-native-webview";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import stripe from "tipsi-stripe";
@@ -24,10 +25,17 @@ import SafeAreaView from "react-native-safe-area-view";
 import { Header } from "../components/donationComponents.native";
 import PaymentLoader from "../components/PaymentLoader";
 import { handleNativePayPress } from "./../components/paymentMethods/nativePay";
+import Axios from "axios";
 
 export default function DonationStep3(props) {
   const [payPalInfo, setPayPalInfo] = React.useState(false);
+  const [paypalOption, setPaypalOption] = React.useState(false);
   const [showPay, setShowPay] = React.useState(true);
+
+  const [paymentId, setPaymentId] = React.useState(null);
+  const [accessToken, setAccessToken] = React.useState(null);
+  const [approvalUrl, setApprovalUrl] = React.useState(null);
+  const [dataDetail, setDataDetail] = React.useState(null);
 
   const [cardValues, setcardValues] = React.useState("");
   const [cardValid, setcardValid] = React.useState(false);
@@ -55,6 +63,47 @@ export default function DonationStep3(props) {
         merchantId: "", // Optional
         androidPayMode: "test" // Android only
       });
+
+      if (
+        "paypal" in
+        props.paymentSetup.gateways[
+          props.context.donationDetails.selectedTaxCountry
+        ]
+      ) {
+        setPaypalOption(true);
+        setDataDetail({
+          intent: "sale",
+          payer: {
+            payment_method: "paypal"
+          },
+          transactions: [
+            {
+              amount: {
+                total: (
+                  props.context.donationDetails.totalTreeCount *
+                  props.context.donationDetails.selectedProject.treeCost
+                ).toString(),
+                currency: props.context.donationDetails.selectedCurrency,
+                details: {
+                  subtotal: (
+                    props.context.donationDetails.totalTreeCount *
+                    props.context.donationDetails.selectedProject.treeCost
+                  ).toString(),
+                  tax: "0",
+                  shipping: "0",
+                  handling_fee: "0",
+                  shipping_discount: "0",
+                  insurance: "0"
+                }
+              }
+            }
+          ],
+          redirect_urls: {
+            return_url: "https://example.com",
+            cancel_url: "https://example.com"
+          }
+        });
+      }
     }
 
     // clean up
@@ -63,6 +112,65 @@ export default function DonationStep3(props) {
       keyboardDidHideListener.remove();
     };
   }, []);
+
+  const getPaypalDetails = () => {
+    Axios.get(
+      `https://app-development.plant-for-the-planet.org/public/v1.4/en/plantProject/${
+        props.context.donationDetails.selectedProject.id
+      }/paypalAccessToken/${
+        props.paymentSetup.gateways[
+          props.context.donationDetails.selectedTaxCountry
+        ].paypal.account
+      }`
+    ).then(response => {
+      setAccessToken(response.data.accessToken);
+      Axios.post(
+        "https://api.sandbox.paypal.com/v1/payments/payment",
+        dataDetail,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${response.data.accessToken}`
+          }
+        }
+      )
+        .then(response => {
+          const { id, links } = response.data;
+          const approvalUrl = links.find(data => data.rel == "approval_url");
+
+          setPaymentId(id);
+          setApprovalUrl(approvalUrl.href);
+        })
+        .catch(err => {
+          console.log({ ...err });
+        });
+    });
+  };
+
+  const _onNavigationStateChange = webViewState => {
+    if (webViewState.url.includes("https://example.com/")) {
+      setApprovalUrl(null);
+
+      const { PayerID, paymentId } = webViewState.url;
+
+      Axios.post(
+        `https://api.sandbox.paypal.com/v1/payments/payment/${paymentId}/execute`,
+        { payer_id: PayerID },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          console.log({ ...err });
+        });
+    }
+  };
 
   const keyboardDidShow = () => {
     setShowPay(false);
@@ -78,81 +186,97 @@ export default function DonationStep3(props) {
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#fff", paddingBottom: 120 }}
     >
-      <KeyboardAwareScrollView
-        contentContainerStyle={[
-          Platform.OS === "ios" ? null : { marginTop: 24 }
-        ]}
-        keyboardDismissMode="on-drag"
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled
-        scrollEventThrottle={16}
-      >
-        <View style={{ paddingHorizontal: 20 }}>
-          <Header navigation={props.navigation} title={"Payment Mode"} />
-        </View>
+      {approvalUrl ? (
+        <WebView
+          style={{ height: "100%", width: "100%" }}
+          source={{ uri: approvalUrl }}
+          onNavigationStateChange={_onNavigationStateChange}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          style={{ marginTop: 20 }}
+        />
+      ) : (
+        <KeyboardAwareScrollView
+          contentContainerStyle={[
+            Platform.OS === "ios" ? null : { marginTop: 24 }
+          ]}
+          keyboardDismissMode="on-drag"
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled
+          scrollEventThrottle={16}
+        >
+          <View style={{ paddingHorizontal: 20 }}>
+            <Header navigation={props.navigation} title={"Payment Mode"} />
+          </View>
 
-        <View style={styles.pageView}>
-          {/* <Text style={styles.pageTitle}>Payment</Text> */}
-          <Text style={styles.pageSubTitle}>
-            Please review your payment and donation details.
-          </Text>
+          <View style={styles.pageView}>
+            {/* <Text style={styles.pageTitle}>Payment</Text> */}
+            <Text style={styles.pageSubTitle}>
+              Please review your payment and donation details.
+            </Text>
 
-          <CreditCardForm
-            setcardValid={setcardValid}
-            setcardValues={setcardValues}
-          />
+            <CreditCardForm
+              setcardValid={setcardValid}
+              setcardValues={setcardValues}
+            />
 
-          {/* PayPal Information Card */}
-          <View style={styles.paymentCardView}>
-            <TouchableOpacity
-              style={styles.paymentModeView}
-              onPress={() => {
-                togglePaypalInfo();
-              }}
-            >
-              <Image source={paypal} style={styles.creditCardsDesign} />
-              <Text style={styles.paymentModeTitle}>PayPal</Text>
+            {/* PayPal Information Card */}
+            {paypalOption ? (
+              <View style={styles.paymentCardView}>
+                <TouchableOpacity
+                  style={styles.paymentModeView}
+                  onPress={() => {
+                    togglePaypalInfo();
+                  }}
+                >
+                  <Image source={paypal} style={styles.creditCardsDesign} />
+                  <Text style={styles.paymentModeTitle}>PayPal</Text>
 
-              {payPalInfo ? (
-                <Icon
-                  name="chevron-up"
-                  size={14}
-                  color="rgba(0, 0, 0, 0.38)"
-                  style={{ marginLeft: 10 }}
-                />
-              ) : (
-                <Icon
-                  name="chevron-down"
-                  size={14}
-                  color="rgba(0, 0, 0, 0.38)"
-                  style={{ marginLeft: 10 }}
-                />
-              )}
-            </TouchableOpacity>
-
-            {/* Hidden until expanded by User */}
-            {payPalInfo ? (
-              <View style={styles.expandedPaymentModePaypal}>
-                <Text style={styles.paypalMessage}>
-                  Click the PayPal icon below to sign into your PayPal account
-                  and pay securely.
-                </Text>
-                <TouchableOpacity style={styles.paypalButton}>
-                  <Text style={styles.paypalButtonText}>Pay with</Text>
-                  <Image
-                    source={paypalLogo}
-                    style={{ height: 26, marginLeft: 14, maxWidth: 100 }}
-                  />
+                  {payPalInfo ? (
+                    <Icon
+                      name="chevron-up"
+                      size={14}
+                      color="rgba(0, 0, 0, 0.38)"
+                      style={{ marginLeft: 10 }}
+                    />
+                  ) : (
+                    <Icon
+                      name="chevron-down"
+                      size={14}
+                      color="rgba(0, 0, 0, 0.38)"
+                      style={{ marginLeft: 10 }}
+                    />
+                  )}
                 </TouchableOpacity>
+
+                {/* Hidden until expanded by User */}
+                {payPalInfo ? (
+                  <View style={styles.expandedPaymentModePaypal}>
+                    <Text style={styles.paypalMessage}>
+                      Click the PayPal icon below to sign into your PayPal
+                      account and pay securely.
+                    </Text>
+                    <TouchableOpacity
+                      onPress={getPaypalDetails}
+                      style={styles.paypalButton}
+                    >
+                      <Text style={styles.paypalButtonText}>Pay with</Text>
+                      <Image
+                        source={paypalLogo}
+                        style={{ height: 26, marginLeft: 14, maxWidth: 100 }}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                ) : null}
+                {/* Hidden until expanded by User */}
               </View>
             ) : null}
-            {/* Hidden until expanded by User */}
-          </View>
-          {/* PayPal Information Card Ended */}
+            {/* PayPal Information Card Ended */}
 
-          {/* <SepaAccountForm /> */}
-        </View>
-      </KeyboardAwareScrollView>
+            {/* <SepaAccountForm /> */}
+          </View>
+        </KeyboardAwareScrollView>
+      )}
       {/* Pay Button Section  */}
 
       {props.context &&

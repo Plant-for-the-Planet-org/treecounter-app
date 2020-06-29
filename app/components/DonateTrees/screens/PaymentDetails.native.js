@@ -14,14 +14,12 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Icon from "react-native-vector-icons/FontAwesome5";
 import stripe from "tipsi-stripe";
 import { nextArrowWhite, paypal, paypalLogo } from "../../../assets";
-import { updateStaticRoute } from "../../../helpers/routerHelper";
 import styles from "../../../styles/donation/donation.native";
 import colors from "../../../utils/constants";
 import { formatNumber } from "../../../utils/utils";
 import CreditCardForm from "./../components/CreditCardForm";
-import { handleCreditCardPayPress } from "./../components/paymentMethods/creditCard";
 import SafeAreaView from "react-native-safe-area-view";
-import { Header } from "../components/donationComponents.native";
+import { Header } from "./../components/Header";
 import PaymentLoader from "../components/PaymentLoader";
 import { handleNativePayPress } from "./../components/paymentMethods/nativePay";
 import Axios from "axios";

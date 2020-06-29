@@ -15,7 +15,6 @@ import {
   getCountryFlagImageUrl,
   getImageUrl
 } from "../../../actions/apiRouting";
-import { infoHint, closeIcon } from "../../../assets";
 import countryData from "../../../assets/countryCodes.json";
 import styles from "../../../styles/donations/donationDetails";
 import { formatNumber, formatDate } from "../../../utils/utils";
@@ -260,74 +259,6 @@ export function SelectCountryModal(props) {
         <MaterialIcon name="close" size={24} color="#4d5153" />
       </TouchableOpacity>
     </Modal>
-  );
-}
-
-export function CoverFee(props) {
-  return (
-    <View style={styles.coverCommissionView}>
-      <Text style={styles.coverCommissionText}>
-        Help {props.selectedProject.tpoSlug} cover the credit card fee of{" "}
-        {formatNumber(
-          (props.treeCount / 100) * 2.9 + 0.3,
-          null,
-          props.selectedCurrency
-        )}{" "}
-      </Text>
-      <Switch
-        style={styles.coverCommissionSwitch}
-        onValueChange={props.toggleSetCommission}
-        trackColor={{ false: "#f2f2f7", true: "#88b439" }}
-        value={props.commissionSwitch}
-      />
-    </View>
-  );
-}
-
-export function SelectFrequency(props) {
-  let frequencyOptions = [
-    { label: "Once", value: "once" },
-    { label: "Monthly", value: "monthly" },
-    { label: "Yearly", value: "yearly" }
-  ];
-  return (
-    <>
-      <Text
-        style={{
-          fontFamily: "OpenSans-SemiBold",
-          fontSize: 12,
-          lineHeight: 17,
-          letterSpacing: 0,
-          textAlign: "left",
-          color: "#4d5153",
-          marginTop: 30
-        }}
-      >
-        FREQUENCY
-      </Text>
-      <View style={styles.repititionSelector}>
-        {frequencyOptions.map(option => (
-          <TouchableOpacity
-            onPress={() => props.setFrequency(option.value)}
-            style={
-              props.frequency === option.value
-                ? styles.repititionSelectedView
-                : styles.repititionSelectorView
-            }
-          >
-            <Text
-              style={
-                props.frequency === option.value
-                  ? styles.selectedRepititionText
-                  : styles.repititionText
-              }
-            >
-              {option.label}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </>
   );
 }
 
@@ -623,50 +554,6 @@ export function PledgeTreeCount(props) {
   );
 }
 
-const hintCard = () => {
-  return (
-    <View
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        marginTop: 24,
-        borderRadius: 6,
-        backgroundColor: "#F5F7F9",
-        alignItems: "center"
-      }}
-    >
-      <View
-        style={{
-          backgroundColor: "#89b53a",
-          width: 6,
-          height: "100%",
-          borderTopLeftRadius: 6,
-          borderBottomLeftRadius: 6
-        }}
-      />
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginLeft: 24,
-          paddingTop: 24,
-          paddingBottom: 24,
-          alignItems: "center",
-          paddingRight: 24
-        }}
-      >
-        <Image
-          source={infoHint}
-          style={{ marginRight: 12, height: 24, width: 24 }}
-        />
-        <Text style={{ maxWidth: "90%", fontFamily: "OpenSans-Regular" }}>
-          Please select Tree Count to Donate trees.
-        </Text>
-      </View>
-    </View>
-  );
-};
-
 export const UserContactDetails = props => {
   let { donorDetails } = props;
   return (
@@ -698,29 +585,6 @@ export const UserContactDetails = props => {
         </View>
       ) : null}
     </>
-  );
-};
-
-export const UserPaymentDetails = props => {
-  return (
-    <View style={styles.sectionContainer}>
-      <Text style={styles.sectionTitle}>PAYMENT METHOD</Text>
-      <TouchableOpacity>
-        <Text style={styles.sectionRightButton}>Change</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-export const PaymentsProcessedBy = props => {
-  return (
-    <Text style={styles.paymentProcessText}>
-      Your payment will be processed either by Stripe, Plant-for-the-Planet,{" "}
-      {props.selectedProject.tpoSlug === "plant-for-the-planet"
-        ? null
-        : "or " + props.selectedProject.tpoSlug}{" "}
-      if is stripe connected.
-    </Text>
   );
 };
 
@@ -768,57 +632,6 @@ export function PledgeOnComponent(props) {
           </View>
         </View>
       </View>
-    </>
-  );
-}
-
-export function Header(props) {
-  let navigateBack = () => {
-    if (props.onBack) {
-      props.onBack();
-    }
-    props.navigation.goBack();
-    return true;
-  };
-  return (
-    <>
-      <View
-        style={{
-          top: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: "#fff",
-          height: 60,
-          zIndex: 100,
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "row",
-          width: "100%"
-        }}
-      >
-        <TouchableOpacity
-          style={{ height: 18, zIndex: 1001 }}
-          onPress={navigateBack}
-        >
-          <Image
-            source={closeIcon}
-            resizeMode="contain"
-            style={{ height: 18, width: 24 }}
-          />
-        </TouchableOpacity>
-      </View>
-      <Text
-        style={{
-          fontFamily: "OpenSans-ExtraBold",
-          fontSize: 27,
-          lineHeight: 40,
-          letterSpacing: 0,
-          textAlign: "left",
-          color: "#4d5153"
-        }}
-      >
-        {props.title}
-      </Text>
     </>
   );
 }

@@ -17,14 +17,13 @@ import {
   NoPlantProjectDetails,
   PlantProjectDetails,
   SelectCountryModal,
-  // SelectFrequency,
   SelectTreeCount,
   SupportUserDetails,
   TaxReceipt,
   PledgeOnComponent,
-  PledgeTreeCount,
-  Header
+  PledgeTreeCount
 } from "../components/donationComponents.native";
+import { Header } from "./../components/Header";
 import { GiftTreesComponent } from "../components/giftDonationComponents.native";
 import ProjectModal from "../components/ProjectModal.native";
 import stripe from "tipsi-stripe";
@@ -262,21 +261,9 @@ function DonationDetails(props) {
           </>
         ) : null}
 
-        {/* <SelectFrequency frequency={frequency} setFrequency={setFrequency} /> */}
         <View
           style={[styles.horizontalDivider, { width: "14%", marginTop: 30 }]}
         />
-
-        {/* Commission Covering */}
-        {/* {context.treeCount ? (
-          <CoverFee
-            selectedProject={props.selectedProject.tpoSlug}
-            treeCount={context.treeCount}
-            selectedCurrency={props.selectedCurrency}
-            toggleSetCommission={toggleSetCommission}
-            commissionSwitch={context.commissionSwitch}
-          />
-        ) : null} */}
 
         {/* Tax Receipt */}
         {props.selectedProject.hasTaxDeduction && (
@@ -306,8 +293,6 @@ function DonationDetails(props) {
 
         {/* Needed In Future */}
         {/* <UserContactDetails donorDetails={donorDetails} /> */}
-        {/* <UserPaymentDetails paymentDetails={paymentDetails} /> */}
-        {/* <PaymentsProcessedBy/> */}
       </ScrollView>
 
       {buttonType === "showPayment" ? (

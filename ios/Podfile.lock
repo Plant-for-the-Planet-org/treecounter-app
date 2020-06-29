@@ -244,6 +244,8 @@ PODS:
   - React-jsinspector (0.61.5)
   - react-native-config (0.12.0):
     - React
+  - react-native-contacts (5.2.1):
+    - React
   - react-native-document-picker (3.2.4):
     - React
   - react-native-geolocation (2.0.2):
@@ -330,6 +332,8 @@ PODS:
     - React-Core
     - React-RCTImage
     - RSKImageCropper
+  - RNLocalize (1.4.0):
+    - React
   - RNPermissions (2.0.9):
     - React
   - RNReanimated (1.7.0):
@@ -341,6 +345,10 @@ PODS:
   - RNVectorIcons (6.6.0):
     - React
   - RSKImageCropper (2.2.3)
+  - Stripe (19.2.0)
+  - tipsi-stripe (8.0.0-beta.10):
+    - React
+    - Stripe (>= 19.0.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -381,6 +389,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - react-native-contacts (from `../node_modules/react-native-contacts`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
@@ -413,11 +422,14 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNI18n (from `../node_modules/react-native-i18n`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
+  - RNLocalize (from `../node_modules/react-native-localize`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - Stripe (~> 19.1)
+  - tipsi-stripe (from `../node_modules/tipsi-stripe`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -426,6 +438,7 @@ SPEC REPOS:
     - Google-Maps-iOS-Utils
     - GoogleMaps
     - RSKImageCropper
+    - Stripe
 
 EXTERNAL SOURCES:
   BugsnagReactNative:
@@ -494,6 +507,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-config:
     :path: "../node_modules/react-native-config"
+  react-native-contacts:
+    :path: "../node_modules/react-native-contacts"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
   react-native-geolocation:
@@ -556,6 +571,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-i18n"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
+  RNLocalize:
+    :path: "../node_modules/react-native-localize"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNReanimated:
@@ -566,6 +583,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  tipsi-stripe:
+    :path: "../node_modules/tipsi-stripe"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -606,6 +625,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
+  react-native-contacts: 5724ae28c660a021bf1028874993fac794f9c07a
   react-native-document-picker: c36bf5f067a581657ecaf7124dcd921a8be19061
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-get-random-values: 6f638190cfaa202576b43ea9534d5cf88181f139
@@ -637,14 +657,17 @@ SPEC CHECKSUMS:
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
   RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
   RNImageCropPicker: cf129d17e042ce3e96fb9ada967c28f21f977c82
+  RNLocalize: fc27ee5878ce5a3af73873fb2d8e866e0d1e6d84
   RNPermissions: 2f74237e97b08beda01e914301e12524ddddf5b8
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
   RNScreens: 03bf608b92ac0acf323f47d8f5b63a8f829340c8
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
+  Stripe: d481c2dab9a892fd923f097f854661217f70dc7f
+  tipsi-stripe: 624337e28b13c127fef45c09de0e1e37cba25151
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: ea0fdd044658ebb0f2a28446d61b2692711df3b3
+PODFILE CHECKSUM: 8e60a3f5e73b4e1ab2232d79d457719e47c026ed
 
 COCOAPODS: 1.8.4

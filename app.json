@@ -1,4 +1,77 @@
 {
   "name": "TreecounterApp",
-  "displayName": "TreecounterApp"
+  "displayName": "TreecounterApp",
+  "description": "this repository contains the code of the web clients and the native iOS and Android apps of the Trillion Tree Campaign at https://www.trilliontreecampaign.org/ written with React-Native",
+  "keywords": ["treecounter", "react-native"],
+  "website": "https://www.trilliontreecampaign.org/",
+  "repository": "https://github.com/Plant-for-the-Planet-org/treecounter-app",
+  "logo": "https://www.trilliontreecampaign.org/assets/apple-touch-icon-57x57.png",
+  "success_url": "/",
+  "stack": "heroku-18",
+  "env": {
+    "googleMapApiKey": {
+      "description": "Google Maps Api Key",
+      "required": "false"
+    },
+    "mediaPath": {
+      "description": "Media Path",
+      "value": "/media/cache"
+    },
+    "scheme": {
+      "description": "Website server protocol",
+      "value": "https"
+    },
+    "host": {
+      "description": "Website server domain - add app url",
+      "required": "false"
+    },
+    "api_url": {
+      "description": "API endpoint",
+      "value": "https://app-development.plant-for-the-planet.org"
+    },
+    "base": {
+      "description": "API base url. Debug mode off: on: \"/app_dev.php\" (requires login)",
+      "required": "false"
+    },
+    "debug": {
+      "description": "local console debugging switch",
+      "value": "true"
+    },
+    "currency": {
+      "description": "Currency",
+      "value": "EUR"
+    },
+    "bugsnagApiKey": {
+      "description": "Bug snag API Key",
+      "required": "false"
+    },
+    "androidAppId": {
+      "description": "Android App ID",
+      "value": "org.pftp"
+    },
+    "iosAppId": {
+      "description": "iOS app ID",
+      "value": "1444740626"
+    },
+    "locationApikKey": {
+      "description": "Location API Key",
+      "required": "false"
+    },
+    "env": {
+      "description": "env should be develop, staging, production",
+      "value": "production"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    {
+      "plan": "papertrail:choklad"
+    }
+  ]
 }
+

@@ -21,7 +21,7 @@ export function SubmitTarget(treecounterData, navigation = undefined) {
           debug(error);
           reject(error);
           dispatch(setProgressModelState(false));
-          // NotificationManager.error(error.response.data.message, i18n.t('label.error'), 5000);
+          // NotificationManager.error(error.response.data.message ? error.response.data.message : i18n.t('label.error'), i18n.t('label.error'), 5000);
         });
     });
   };

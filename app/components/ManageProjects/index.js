@@ -159,7 +159,7 @@ export default class ManageProjects extends Component {
     }
     let uploadPlantProjectImages = [];
     uploadPlantProjectImages = newPlantProjectImages.map(newProjectImage => {
-      if (newProjectImage.image.includes('base64')) {
+      if (newProjectImage.image && newProjectImage.image.includes('base64')) {
         let { image: imageFile, description } = newProjectImage;
 
         return newProjectImage.id

@@ -9,7 +9,7 @@ export default class SignUpType extends Component {
   }
 
   OnProfileClick() {
-    this.props.onProfileClick(this.props.type);
+    this.props.onProfileClick && this.props.onProfileClick(this.props.type);
   }
 
   render() {

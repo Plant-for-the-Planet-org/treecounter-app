@@ -1,5 +1,7 @@
 import { debug } from '../debug';
 
+const FIREFOX_STORAGE_ERROR = 'Sorry, it looks like your browser storage has been corrupted. Please clear your storage by going to Tools -> Clear Recent History -> Cookies and set time range to "Everything". This will remove the corrupted browser storage across all sites.'
+
 export const loadState = () => {
   return new Promise(function(resolve, reject) {
     try {
@@ -18,13 +20,25 @@ export const saveState = state => {
   try {
     const serializedState = JSON.stringify(state);
     window.localStorage.setItem('state', serializedState);
-  } catch (err) {
-    debug(err);
+  } catch(err) {
+    if(err.name == 'NS_ERROR_FILE_CORRUPTED') {
+      console.error(FIREFOX_STORAGE_ERROR);
+    } else {
+      debug(err);
+    }
   }
 };
 
 export const saveItem = (key, value) => {
-  window.localStorage.setItem(key, value);
+  try {
+    window.localStorage.setItem(key, value);
+  } catch(err) {
+    if(err.name == 'NS_ERROR_FILE_CORRUPTED') {
+      console.error(FIREFOX_STORAGE_ERROR);
+    } else {
+      debug(err);
+    }
+  }
 };
 
 export const fetchItem = key => {
@@ -52,6 +66,14 @@ export const getItemSync = key => {
 };
 export const clearStorage = () => {
   const sessionId = window.localStorage.getItem('session_id');
-  window.localStorage.clear();
-  window.localStorage.setItem('session_id', sessionId);
+  try {
+    window.localStorage.clear();
+    window.localStorage.setItem('session_id', sessionId);
+  } catch(err) {
+    if(err.name == 'NS_ERROR_FILE_CORRUPTED') {
+      console.error(FIREFOX_STORAGE_ERROR);
+    } else {
+      debug(err);
+    }
+  }
 };

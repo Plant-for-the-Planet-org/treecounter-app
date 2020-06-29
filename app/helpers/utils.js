@@ -225,6 +225,7 @@ export function mergeContributionImages(updatedTreeContribution) {
   let contributionImages = [];
   contributionImages = newContributionImages.map(newContributionImage => {
     if (
+      (newContributionImage.image || newContributionImage.imageFile) &&
       (newContributionImage.image || newContributionImage.imageFile).includes(
         'base64'
       )

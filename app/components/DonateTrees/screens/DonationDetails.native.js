@@ -63,20 +63,14 @@ function DonationDetails(props) {
   );
 
   const [currency, setCurrency] = React.useState(props.selectedCurrency);
-  stripe.setOptions({
-    publishableKey:
-      props.selectedProject.paymentSetup.gateways[selectedTaxCountry].stripe
-        .stripePublishableKey,
-    merchantId: "", // The value can be blank but the key is needed
-    androidPayMode: "test" // Android only
-  });
+
   const [allowedNativePay, setallowedNativePay] = React.useState(false); // this is to test whether Apple/Google pay is allowed or not
   const [applePayStatus, setApplePayStatus] = React.useState("");
 
   React.useEffect(() => {
     const allowedNativePay = stripe.deviceSupportsNativePay();
     setallowedNativePay(allowedNativePay);
-  }, []);
+  }, [selectedTaxCountry]);
 
   // show hide project modal
   const [showProjectModal, setProjectModal] = React.useState(false);
@@ -343,6 +337,22 @@ export function PaymentOption(props) {
     isApplePay: props.isApplePay,
     isCredit: false
   };
+
+  stripe.setOptions({
+    publishableKey:
+      props.selectedProject.paymentSetup.gateways[props.selectedTaxCountry] &&
+      props.selectedProject.paymentSetup.gateways[props.selectedTaxCountry]
+        .stripe &&
+      props.selectedProject.paymentSetup.gateways[props.selectedTaxCountry]
+        .stripe.stripePublishableKey
+        ? props.selectedProject.paymentSetup.gateways[props.selectedTaxCountry]
+            .stripe.stripePublishableKey
+        : props.selectedProject.paymentSetup.gateways[
+            props.selectedProject.paymentSetup.defaultCountry
+          ].stripe.stripePublishableKey,
+    merchantId: "", // The value can be blank but the key is needed
+    androidPayMode: "test" // Android only
+  });
   return (
     <View style={styles.bottomButtonView}>
       <View style={styles.leftSection}>

@@ -233,29 +233,29 @@ export default EStyleSheet.create({
     borderStyle: "solid",
     borderWidth: 1,
     borderColor: "#d5d5d5",
-    height: 54,
+    minHeight: 54,
     paddingVertical: 12,
     paddingHorizontal: 24,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 16,
     flexGrow: 1,
-    width: width * 0.6
+    marginLeft: 20
   },
   customSelectedView: {
     borderRadius: 7,
     borderColor: "#89b53a",
     borderWidth: 1,
-    height: 54,
+    minHeight: 54,
     paddingVertical: 12,
     paddingHorizontal: 24,
     justifyContent: "space-around",
     alignItems: "center",
     marginTop: 16,
     flexGrow: 1,
-    width: width * 0.6,
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    marginLeft: 20
   },
   customTreeCountText: {
     fontFamily: "OpenSans-Regular",

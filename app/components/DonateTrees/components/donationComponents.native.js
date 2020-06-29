@@ -486,8 +486,6 @@ export function SelectTreeCount(props) {
             </Text>
           </TouchableOpacity>
         ))}
-      </View>
-      <View>
         {customTreeCount ? (
           <View style={styles.customSelectedView}>
             <TextInput

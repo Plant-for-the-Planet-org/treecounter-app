@@ -18,7 +18,6 @@ import { updateStaticRoute } from "../../../helpers/routerHelper";
 import styles from "../../../styles/donation/donation.native";
 import colors from "../../../utils/constants";
 import { formatNumber } from "../../../utils/utils";
-import HeaderAnimated from "../../Header/HeaderAnimated.native";
 import CreditCardForm from "./../components/CreditCardForm";
 import { handleCreditCardPayPress } from "./../components/paymentMethods/creditCard";
 import SafeAreaView from "react-native-safe-area-view";

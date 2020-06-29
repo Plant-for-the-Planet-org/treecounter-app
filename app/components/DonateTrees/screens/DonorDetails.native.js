@@ -18,7 +18,6 @@ import { updateStaticRoute } from "../../../helpers/routerHelper";
 import i18n from "../../../locales/i18n.js";
 import styles from "../../../styles/donations/donorDetails";
 import { formatNumber } from "../../../utils/utils";
-import HeaderAnimated from "../../Header/HeaderAnimated.native";
 import {
   SelectCountryModal,
   Header

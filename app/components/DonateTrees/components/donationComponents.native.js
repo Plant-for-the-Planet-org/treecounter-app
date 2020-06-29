@@ -205,14 +205,12 @@ export function SelectCountryModal(props) {
         }}
       >
         <TouchableOpacity>
-          {search ? null : (
-            <MaterialIcon
-              name="search"
-              size={24}
-              color="#4d5153"
-              style={{ marginRight: 6 }}
-            />
-          )}
+          <MaterialIcon
+            name="search"
+            size={24}
+            color="#4d5153"
+            style={{ marginRight: 6 }}
+          />
         </TouchableOpacity>
         <TextInput
           style={{
@@ -239,7 +237,8 @@ export function SelectCountryModal(props) {
         contentContainerStyle={{
           backgroundColor: "#fff",
           paddingHorizontal: 24,
-          paddingBottom: 60
+          paddingBottom: 60,
+          zIndex: 2
         }}
       />
       <TouchableOpacity
@@ -253,7 +252,8 @@ export function SelectCountryModal(props) {
           justifyContent: "center",
           alignItems: "center",
           height: 36,
-          width: 36
+          width: 36,
+          zIndex: 4000
         }}
         onPress={() => closeModal()}
       >
@@ -338,10 +338,10 @@ export function PlantProjectDetails(props) {
   );
   const [force, setForce] = useState(false);
   const caclculateTreeCost = () => {
-    return props.rates[selectedCurrency] * props.treeCost
-  }
+    return props.rates[selectedCurrency] * props.treeCost;
+  };
   const [treeCost, setTreeCost] = useState(caclculateTreeCost());
-  
+
   const handleCurrencyChange = currency => {
     showCurrencyModal && currency != selectedCurrency
       ? setForce(true)

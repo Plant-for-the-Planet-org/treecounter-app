@@ -183,9 +183,7 @@ export default function DonationStep3(props) {
   return loading ? (
     <PaymentLoader />
   ) : (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#fff", paddingBottom: 120 }}
-    >
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       {approvalUrl ? (
         <WebView
           style={{ height: "100%", width: "100%" }}
@@ -198,7 +196,9 @@ export default function DonationStep3(props) {
       ) : (
         <KeyboardAwareScrollView
           contentContainerStyle={[
-            Platform.OS === "ios" ? null : { marginTop: 24 }
+            Platform.OS === "ios"
+              ? { paddingBottom: 200 }
+              : { marginTop: 24, paddingBottom: 200 }
           ]}
           keyboardDismissMode="on-drag"
           resetScrollToCoords={{ x: 0, y: 0 }}
@@ -279,30 +279,34 @@ export default function DonationStep3(props) {
       )}
       {/* Pay Button Section  */}
 
-      {props.context &&
-      props.context.donationDetails &&
-      props.context.donationDetails.totalTreeCount ? (
-        <PaymentButton
-          treeCount={props.context.donationDetails.totalTreeCount}
-          treeCost={props.context.donationDetails.selectedProject.treeCost}
-          selectedCurrency={props.context.donationDetails.selectedCurrency}
-          stripe={stripe}
-          currentUserProfile={props.currentUserProfile}
-          context={props.context}
-          createDonation={props.createDonation}
-          donationPay={props.donationPay}
-          selectedProject={props.context.donationDetails.selectedProject}
-          paymentSetup={props.paymentSetup}
-          selectedTaxCountry={props.context.donationDetails.selectedTaxCountry}
-          setLoading={setLoading}
-          navigation={props.navigation}
-          cardValid={cardValid}
-          cardValues={cardValues}
-          rates={props.context.donationDetails.rates}
-        />
-      ) : (
-        <ActivityIndicator size="large" color="#0000ff" />
-      )}
+      {showPay ? (
+        props.context &&
+        props.context.donationDetails &&
+        props.context.donationDetails.totalTreeCount ? (
+          <PaymentButton
+            treeCount={props.context.donationDetails.totalTreeCount}
+            treeCost={props.context.donationDetails.selectedProject.treeCost}
+            selectedCurrency={props.context.donationDetails.selectedCurrency}
+            stripe={stripe}
+            currentUserProfile={props.currentUserProfile}
+            context={props.context}
+            createDonation={props.createDonation}
+            donationPay={props.donationPay}
+            selectedProject={props.context.donationDetails.selectedProject}
+            paymentSetup={props.paymentSetup}
+            selectedTaxCountry={
+              props.context.donationDetails.selectedTaxCountry
+            }
+            setLoading={setLoading}
+            navigation={props.navigation}
+            cardValid={cardValid}
+            cardValues={cardValues}
+            rates={props.context.donationDetails.rates}
+          />
+        ) : (
+          <ActivityIndicator size="large" color="#0000ff" />
+        )
+      ) : null}
       {/* Pay Button Section Ended */}
     </SafeAreaView>
   );

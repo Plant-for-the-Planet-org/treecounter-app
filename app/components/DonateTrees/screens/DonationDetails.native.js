@@ -7,7 +7,8 @@ import {
   View,
   Platform,
   Image,
-  ScrollView
+  ScrollView,
+  Keyboard
 } from "react-native";
 import { updateStaticRoute } from "../../../helpers/routerHelper";
 import { paymentFee } from "../../../helpers/utils";
@@ -100,6 +101,34 @@ function DonationDetails(props) {
   // ) {
   //   setFrequency(context.donationDetails.frequency);
   // }
+
+  const [buttonType, setButtonType] = React.useState("showPayment");
+
+  const keyboardDidShow = () => {
+    setButtonType("");
+  };
+
+  const keyboardDidHide = () => {
+    setButtonType("showPayment");
+  };
+
+  let keyboardDidShowListener;
+  let keyboardDidHideListener;
+  React.useEffect(() => {
+    keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      keyboardDidShow
+    );
+    keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      keyboardDidHide
+    );
+    // clean up
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   const saveContext = () => {
     props.contextActions.setDonationDetails({
@@ -281,37 +310,39 @@ function DonationDetails(props) {
         {/* <PaymentsProcessedBy/> */}
       </ScrollView>
 
-      <PaymentOption
-        treeCount={treeCount}
-        commissionSwitch={commissionSwitch}
-        navigation={props.navigation}
-        onContinue={onContinue}
-        // frequency={frequency}
-        isApplePay={
-          allowedNativePay ? (Platform.OS === "ios" ? true : false) : null
-        }
-        setLoading={setLoading}
-        setDonationStatus={setDonationStatus}
-        stripe={stripe}
-        setApplePayStatus={setApplePayStatus}
-        currentUserProfile={props.currentUserProfile}
-        context={context}
-        createDonation={props.createDonation}
-        setDonorDetails={props.contextActions.setDonorDetails}
-        donationPay={props.donationPay}
-        selectedProject={props.selectedProject}
-        treeCost={props.selectedProject.treeCost}
-        selectedCurrency={currency}
-        rates={
-          props.currencies.currencies.currency_rates[
-            props.selectedProject.currency
-          ].rates
-        }
-        fee={paymentFee}
-        globalCurrency={props.globalCurrency}
-        paymentSetup={props.selectedProject.paymentSetup}
-        selectedTaxCountry={selectedTaxCountry}
-      />
+      {buttonType === "showPayment" ? (
+        <PaymentOption
+          treeCount={treeCount}
+          commissionSwitch={commissionSwitch}
+          navigation={props.navigation}
+          onContinue={onContinue}
+          // frequency={frequency}
+          isApplePay={
+            allowedNativePay ? (Platform.OS === "ios" ? true : false) : null
+          }
+          setLoading={setLoading}
+          setDonationStatus={setDonationStatus}
+          stripe={stripe}
+          setApplePayStatus={setApplePayStatus}
+          currentUserProfile={props.currentUserProfile}
+          context={context}
+          createDonation={props.createDonation}
+          setDonorDetails={props.contextActions.setDonorDetails}
+          donationPay={props.donationPay}
+          selectedProject={props.selectedProject}
+          treeCost={props.selectedProject.treeCost}
+          selectedCurrency={currency}
+          rates={
+            props.currencies.currencies.currency_rates[
+              props.selectedProject.currency
+            ].rates
+          }
+          fee={paymentFee}
+          globalCurrency={props.globalCurrency}
+          paymentSetup={props.selectedProject.paymentSetup}
+          selectedTaxCountry={selectedTaxCountry}
+        />
+      ) : null}
     </SafeAreaView>
   );
 }

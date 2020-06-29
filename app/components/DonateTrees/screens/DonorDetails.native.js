@@ -51,7 +51,7 @@ const DonationContactDetailsSchema = Yup.object().shape({
 
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
-  const [buttonType, setButtonType] = useState("donate");
+  const [buttonType, setButtonType] = useState("showPayment");
 
   const [showCountryModal, setShowCountryModal] = React.useState(false);
 
@@ -64,11 +64,11 @@ export default function DonorDetails(props) {
   let addressRef = useRef(null);
 
   const keyboardDidShow = () => {
-    setButtonType(">");
+    setButtonType("");
   };
 
   const keyboardDidHide = () => {
-    setButtonType("donate");
+    setButtonType("showPayment");
   };
 
   useEffect(() => {
@@ -367,25 +367,27 @@ export default function DonorDetails(props) {
                 ) : null}
               </View>
             </KeyboardAwareScrollView>
-            {props.context &&
-            props.context.donationDetails &&
-            props.context.donationDetails.totalTreeCount ? (
-              <PaymentOption
-                treeCount={props.context.donationDetails.totalTreeCount}
-                treeCost={
-                  props.context.donationDetails.selectedProject.treeCost
-                }
-                selectedCurrency={
-                  props.context.donationDetails.selectedCurrency
-                }
-                navigation={props.navigation}
-                onSubmit={formikProps.handleSubmit}
-                isValid={formikProps.isValid}
-                rates={props.context.donationDetails.rates}
-              />
-            ) : (
-              <ActivityIndicator size="large" color="#0000ff" />
-            )}
+            {buttonType === "showPayment" ? (
+              props.context &&
+              props.context.donationDetails &&
+              props.context.donationDetails.totalTreeCount ? (
+                <PaymentOption
+                  treeCount={props.context.donationDetails.totalTreeCount}
+                  treeCost={
+                    props.context.donationDetails.selectedProject.treeCost
+                  }
+                  selectedCurrency={
+                    props.context.donationDetails.selectedCurrency
+                  }
+                  navigation={props.navigation}
+                  onSubmit={formikProps.handleSubmit}
+                  isValid={formikProps.isValid}
+                  rates={props.context.donationDetails.rates}
+                />
+              ) : (
+                <ActivityIndicator size="large" color="#0000ff" />
+              )
+            ) : null}
           </>
         )}
       </Formik>

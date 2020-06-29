@@ -5,7 +5,8 @@ import {
   Dimensions,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Keyboard
 } from "react-native";
 import { debug } from "../../debug";
 import StaticTabbar from "./StaticTabbar";
@@ -18,7 +19,8 @@ let unsubscribe = null;
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Tabbar extends React.PureComponent {
   state = {
-    isConnected: true
+    isConnected: true,
+    buttonType: "showBottomNav"
   };
 
   checkInternet() {
@@ -42,9 +44,32 @@ export default class Tabbar extends React.PureComponent {
   }
   componentDidMount() {
     this.subscribeCheckInternet();
+
+    this.keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      this._keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      this._keyboardDidHide
+    );
   }
+
+  _keyboardDidShow = () => {
+    this.setState({
+      buttonType: ""
+    });
+  };
+
+  _keyboardDidHide = () => {
+    this.setState({
+      buttonType: "showBottomNav"
+    });
+  };
   componentWillUnmount() {
     this.unsubscribeCheckInternet();
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
   }
 
   render() {
@@ -82,7 +107,7 @@ export default class Tabbar extends React.PureComponent {
         route: "app_userHome"
       }
     ];
-    return (
+    return this.state.buttonType === "showBottomNav" ? (
       <>
         <View {...{ height, width }}>
           <View
@@ -138,7 +163,7 @@ export default class Tabbar extends React.PureComponent {
           </TouchableOpacity>
         )}
       </>
-    );
+    ) : null;
   }
 }
 

@@ -477,37 +477,32 @@ export default EStyleSheet.create({
     marginRight: 12
   },
   continueOtherButton: {
-    backgroundColor: "white",
-    paddingVertical: 12,
-    height: 52,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
     flexDirection: "row",
-    borderRadius: 26,
-    right: 20,
-    borderWidth: 1,
-    borderColor: "#d5d5d5"
+    borderRadius: 26
   },
   continueOtherButtonText: {
-    fontFamily: "OpenSans-SemiBold",
-    fontSize: 16,
+    fontFamily: "OpenSans-Bold",
+    fontSize: 13,
     letterSpacing: 0.21,
-    color: "#4d5153",
-    marginRight: 5.4
+    color: "#89b53a",
+    marginRight: 5.4,
+    marginTop: 18
   },
   nativePayButton: {
     backgroundColor: "white",
-    paddingVertical: 12,
-    paddingHorizontal: 12,
+    paddingVertical: 24,
+    paddingHorizontal: 36,
     height: 52,
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center",
+    alignSelf: "flex-end",
     borderRadius: 26,
     borderWidth: 1,
     borderColor: "#d5d5d5",
-    marginRight: 30
+    marginTop: -48
   },
   // Input Selection
 

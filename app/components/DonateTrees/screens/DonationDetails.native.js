@@ -417,7 +417,13 @@ export function PaymentOption(props) {
         ) : null}
       </View>
       {props.treeCount ? (
-        <>
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: 20
+          }}
+        >
           <TouchableOpacity
             onPress={() => handleNativePayPress(paymentProps)}
             style={styles.nativePayButton}
@@ -431,14 +437,16 @@ export function PaymentOption(props) {
             onPress={() => props.onContinue()}
             style={styles.continueOtherButton}
           >
-            <Text style={styles.continueOtherButtonText}>Other</Text>
-            <Image
-              style={{ maxHeight: 24, maxWidth: 24 }}
+            <Text style={styles.continueOtherButtonText}>
+              Other Payment Methods
+            </Text>
+            {/* <Image
+              style={{ maxHeight: 18, maxWidth: 18 }}
               source={nextArrow}
               resizeMode="contain"
-            />
+            /> */}
           </TouchableOpacity>
-        </>
+        </View>
       ) : (
         <View style={[styles.continueButtonView, { backgroundColor: "grey" }]}>
           <Text style={styles.continueButtonText}>Next</Text>

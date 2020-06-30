@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Dimensions, Image, ScrollView, Platform } from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
-import { debug } from '../../debug';
 import { treelogo } from '../../assets/index';
 const HEIGHT = Dimensions.get('window').height;
 const WIDTH = Dimensions.get('window').width;

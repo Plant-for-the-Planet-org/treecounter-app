@@ -131,22 +131,21 @@ class SelectPlantTabView extends PureComponent {
       loadProjects,
       loadProject
     };
-    const { index } = this.state;
 
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
         return this.props.plantProjects.filter(project => project.isFeatured)
           .length ? (
-            <FeaturedProjects
-              {...props}
-              jumpTo={jumpTo}
-              index={this.state.index}
-              scrollY={this.state.scrollY}
-              context={this.props.context}
-              search={this.props.search}
-            />
-          ) : null;
+          <FeaturedProjects
+            {...props}
+            jumpTo={jumpTo}
+            index={this.state.index}
+            scrollY={this.state.scrollY}
+            context={this.props.context}
+            search={this.props.search}
+          />
+        ) : null;
       case 'list':
         return (
           <ListProjects
@@ -179,7 +178,10 @@ class SelectPlantTabView extends PureComponent {
                 navigation={this.props.navigation}
               />
               <Animated.View
-                style={{ marginTop: Platform.OS === 'ios' ? height < 737 ? 56 : 26 : 56 }}
+                style={{
+                  marginTop:
+                    Platform.OS === 'ios' ? (height < 737 ? 56 : 26) : 56
+                }}
               />
             </>
           )}

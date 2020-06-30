@@ -13,7 +13,6 @@ import { bindActionCreators } from 'redux';
 import { loadProject } from '../../actions/loadTposAction';
 import { right_arrow_button } from '../../assets';
 import { context } from '../../config';
-import { debug } from '../../debug';
 import { queryParamsToObject } from '../../helpers/utils';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
@@ -140,7 +139,7 @@ class PlantProjectFull extends React.Component {
             '/' +
             this.props.plantProject.id
           }
-        //  appurl={'weplant://project/' + this.props.plantProject.id}
+          //  appurl={'weplant://project/' + this.props.plantProject.id}
         />
         <ScrollView
           contentContainerStyle={[
@@ -211,10 +210,10 @@ class PlantProjectFull extends React.Component {
         ) : null}
       </View>
     ) : (
-        <View style={{ flex: 1, marginTop: -20 }}>
-          <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
-        </View>
-      );
+      <View style={{ flex: 1, marginTop: -20 }}>
+        <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
+      </View>
+    );
   }
 }
 

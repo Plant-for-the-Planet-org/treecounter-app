@@ -10,12 +10,9 @@ import {
   View
 } from 'react-native';
 import Contacts from 'react-native-contacts';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { updateRoute } from '../../../helpers/routerHelper';
 import i18n from '../../../locales/i18n';
-import colors from '../../../utils/constants';
 import GetRandomImage from '../../../utils/getRandomImage';
-import PrimaryButton from '../../Common/Button/PrimaryButton.native';
 import styles from './../../../styles/gifttrees/giftrees';
 import HeaderNew from './../../Header/HeaderNew';
 
@@ -111,30 +108,17 @@ const SelectContacts = props => {
           </View>
         ) : null} */}
 
-        {disabled ? (
-          <View
-            style={{
-              position: 'absolute',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: 50,
-              width: 50,
-              borderRadius: 25,
-              backgroundColor: '#c2c2c2',
-              opacity: 0.7
-            }}
-          />
-        ) : null}
+        {disabled ? <View style={styles.disabledView} /> : null}
         <View style={{ marginLeft: 15, justifyContent: 'center' }}>
           <Text
             style={[
               styles.contactDisplayName,
-              disabled ? { color: '#c2c2c2' } : null
+              disabled ? styles.disabledText : null
             ]}
           >
             {item.displayName}
           </Text>
-          <Text style={[disabled ? { color: '#c2c2c2' } : null]}>
+          <Text style={[disabled ? styles.disabledText : null]}>
             {item.emailAddresses[0].email}
           </Text>
         </View>
@@ -224,7 +208,7 @@ const SelectContacts = props => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <View style={styles.view_container}>
       <HeaderNew
         title={''}
         navigation={props.navigation}
@@ -238,7 +222,6 @@ const SelectContacts = props => {
       <ScrollView
         style={{
           paddingHorizontal: 20,
-
           marginTop: Platform.OS === 'ios' ? 110 : 70
         }}
       >

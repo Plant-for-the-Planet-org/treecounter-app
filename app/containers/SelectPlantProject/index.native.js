@@ -9,7 +9,10 @@ import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 import { setSupportDetails } from '../../components/DonateTrees/redux/action';
 import SelectPlantProject from '../../components/SelectPlantProject';
 import { updateRoute } from '../../helpers/routerHelper';
-import { currenciesSelector, getAllPlantProjectsSelector } from '../../selectors';
+import {
+  currenciesSelector,
+  getAllPlantProjectsSelector
+} from '../../selectors';
 
 class SelectPlantProjectContainer extends PureComponent {
   constructor(props) {
@@ -51,18 +54,18 @@ class SelectPlantProjectContainer extends PureComponent {
   };
 
   async componentDidMount() {
-    let data = await this.props.loadProjects('featured');
+    await this.props.loadProjects('featured');
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
     // !this.props.alreadySelected && this.props.selectPlantProjectAction(null);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.props.navigation.state.params &&
       this.props.navigation.state.params.treecounterSlug !==
-      nextProps.navigation.state.params &&
+        nextProps.navigation.state.params &&
       nextProps.navigation.state.params.treecounterSlug
     )
       this.createContext(nextProps);

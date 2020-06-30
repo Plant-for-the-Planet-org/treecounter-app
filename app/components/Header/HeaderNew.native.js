@@ -38,6 +38,7 @@ export default function HeaderNew(props) {
   const textColor = '#4d5153';
   const whiteColor = 'white';
   const linkColor = '#89B53A';
+  const borderBottomColor = 'gray';
   return (
     <SafeAreaView
       style={{
@@ -115,7 +116,7 @@ export default function HeaderNew(props) {
       {props.isSearch ? (
         <TextInput
           style={{
-            borderBottomColor: 'gray',
+            borderBottomColor: borderBottomColor,
             borderBottomWidth: 1,
             marginLeft: 44,
             width: 220,

@@ -3,6 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const width = Dimensions.get('window').width;
 export default EStyleSheet.create({
+  mainContainer: { backgroundColor: 'white', flex: 1 },
   scrollView: {
     padding: 24,
     paddingBottom: 200,
@@ -443,5 +444,25 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  countryTouchable: {
+    borderBottomWidth: 1.5,
+    borderBottomColor: '#4d5153',
+    marginBottom: 8,
+    paddingBottom: 6,
+    marginTop: 44
+  },
+  countryName: {
+    paddingLeft: 12,
+    lineHeight: 22,
+    flex: 1,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16,
+    color: '#111'
+  },
+  selectCountryName: {
+    fontFamily: 'OpenSans-SemiBold',
+    color: '#4d5153',
+    fontSize: 16
   }
 });

@@ -8,6 +8,7 @@ export default EStyleSheet.create({
     paddingBottom: 320,
     paddingTop: 0
   },
+  mainContainer: { backgroundColor: 'white', flex: 1 },
   pageTitle: {
     fontFamily: 'OpenSans-Bold',
     fontSize: 27,

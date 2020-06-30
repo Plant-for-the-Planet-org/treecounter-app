@@ -7,18 +7,11 @@ import {
   View,
   BackHandler
 } from 'react-native';
-import {
-  closeIcon,
-  deciduousTree,
-  donateThankyou,
-  downloadGreen,
-  planetLogo,
-  sendGreen
-} from '../../../assets';
+import { closeIcon, donateThankyou } from '../../../assets';
 import i18n from '../../../locales/i18n';
 import styles from '../../../styles/donation/donation.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import { updateStaticRoute, updateRoute } from '../../../helpers/routerHelper';
+import { updateRoute } from '../../../helpers/routerHelper';
 
 export default function DonateThankYou(props) {
   const { getParam } = props.navigation;
@@ -121,7 +114,7 @@ export default function DonateThankYou(props) {
         }}
         buttonStyle={styles.thankyouButton}
       >
-        Go Home
+        <Text>Go Home</Text>
       </PrimaryButton>
     </View>
   );

@@ -29,16 +29,17 @@ import stripe from 'tipsi-stripe';
 import i18n from '../../../locales/i18n.js';
 import SafeAreaView from 'react-native-safe-area-view';
 import PaymentLoader from '../components/PaymentLoader';
-import { nextArrowWhite, nextArrow } from '../../../assets';
+import { nextArrowWhite } from '../../../assets';
 import { formatNumber } from '../../../utils/utils';
 import { handleNativePayPress } from './../components/PaymentMethods/NativePay';
 
 import { SvgXml } from 'react-native-svg';
 import google_pay from '../../../assets/svgAssets/donations/google_pay';
 import apple_pay from '../../../assets/svgAssets/donations/apple_pay';
+import colors from '../../../utils/constants';
 
 function DonationDetails(props) {
-  const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
+  const [commissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
   const [taxReceiptSwitch, setTaxReceiptSwitch] = React.useState(false); // for Switching whether the user wants receipt or not
   const [treeCount, setTreeCount] = React.useState(0); // for Selecting Tree Count
   // const [frequency, setFrequency] = React.useState('once'); // for Selecting Frequency of Donations
@@ -62,6 +63,7 @@ function DonationDetails(props) {
   const [currency, setCurrency] = React.useState(props.selectedCurrency);
 
   const [allowedNativePay, setallowedNativePay] = React.useState(false); // this is to test whether Apple/Google pay is allowed or not
+
   const [applePayStatus, setApplePayStatus] = React.useState('');
 
   React.useEffect(() => {
@@ -73,9 +75,9 @@ function DonationDetails(props) {
   const [showProjectModal, setProjectModal] = React.useState(false);
 
   // Function for Switching the state of commission - Right now this functionality is disabled
-  const toggleSetCommission = value => {
-    setCommissionSwitch(value);
-  };
+  // const toggleSetCommission = value => {
+  //   setCommissionSwitch(value);
+  // };
 
   // Function for Switching the state of tax receipt
   const toggleTaxReceipt = value => {
@@ -150,19 +152,19 @@ function DonationDetails(props) {
     });
   };
 
-  const setDonationStatus = status => {
-    // To be used to show errors
-  };
+  // const setDonationStatus = status => {
+  //   // To be used to show errors
+  // };
 
   return loading ? (
     <PaymentLoader />
   ) : (
-    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
+    <SafeAreaView style={styles.mainContainer}>
       <ProjectModal
         hideModal={setProjectModal}
         show={showProjectModal}
         navigation={props.navigation}
-        handleProjectChange={project => {
+        handleProjectChange={() => {
           setProjectModal(false);
         }}
         context={context}
@@ -300,9 +302,9 @@ function DonationDetails(props) {
             allowedNativePay ? (Platform.OS === 'ios' ? true : false) : null
           }
           setLoading={setLoading}
-          setDonationStatus={setDonationStatus}
           stripe={stripe}
           setApplePayStatus={setApplePayStatus}
+          applePayStatus={applePayStatus}
           currentUserProfile={props.currentUserProfile}
           context={context}
           createDonation={props.createDonation}
@@ -427,7 +429,9 @@ export function PaymentOption(props) {
           </TouchableOpacity>
         </View>
       ) : (
-        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+        <View
+          style={[styles.continueButtonView, { backgroundColor: colors.GREY }]}
+        >
           <Text style={styles.continueButtonText}>Next</Text>
           <Image
             style={{ maxHeight: 24, maxWidth: 24 }}

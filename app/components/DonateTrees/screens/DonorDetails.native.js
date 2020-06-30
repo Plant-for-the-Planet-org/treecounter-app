@@ -8,7 +8,8 @@ import {
   Switch,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Platform
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
@@ -25,6 +26,7 @@ import countryData from '../../../assets/countryCodes.json';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import { getCountryFlagImageUrl } from '../../../actions/apiRouting';
+import { colors } from './../../../utils/constants';
 
 export function getCountryData(countryCode) {
   return countryData.find(c => c.countryCode == countryCode) || {};
@@ -48,7 +50,7 @@ const DonationContactDetailsSchema = Yup.object().shape({
 });
 
 export default function DonorDetails(props) {
-  const [scrollY, setScrollY] = useState(new Animated.Value(0));
+  const [scrollY] = useState(new Animated.Value(0));
   const [buttonType, setButtonType] = useState('showPayment');
 
   const [showCountryModal, setShowCountryModal] = React.useState(false);
@@ -60,7 +62,8 @@ export default function DonorDetails(props) {
   let lastnameRef = useRef(null);
   let emailRef = useRef(null);
   let addressRef = useRef(null);
-
+  let cityRef = useRef(null);
+  let zipCodeRef = useRef(null);
   const keyboardDidShow = () => {
     setButtonType('');
   };
@@ -102,7 +105,7 @@ export default function DonorDetails(props) {
     style: { fontFamily: 'OpenSans-Regular' }
   };
   return (
-    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
+    <SafeAreaView style={styles.mainContainer}>
       <Formik
         initialValues={{
           firstname: props.currentUserProfile
@@ -184,11 +187,11 @@ export default function DonorDetails(props) {
                       label={i18n.t('label.pledgeFormLName')}
                       value={formikProps.values.lastname}
                       returnKeyType="next"
+                      onChangeText={formikProps.handleChange('lastname')}
+                      onBlur={formikProps.handleBlur('lastname')}
                       ref={input => {
                         lastnameRef = input;
                       }}
-                      onChangeText={formikProps.handleChange('lastname')}
-                      onBlur={formikProps.handleBlur('lastname')}
                       onSubmitEditing={() => {
                         emailRef.focus();
                       }}
@@ -209,6 +212,9 @@ export default function DonorDetails(props) {
                     ref={input => {
                       emailRef = input;
                     }}
+                    onSubmitEditing={() => {
+                      addressRef.focus();
+                    }}
                     onChangeText={formikProps.handleChange('email')}
                     onBlur={formikProps.handleBlur('email')}
                   />
@@ -226,6 +232,9 @@ export default function DonorDetails(props) {
                     ref={input => {
                       addressRef = input;
                     }}
+                    onSubmitEditing={() => {
+                      cityRef.focus();
+                    }}
                     onChangeText={formikProps.handleChange('address')}
                     onBlur={formikProps.handleBlur('address')}
                   />
@@ -241,9 +250,12 @@ export default function DonorDetails(props) {
                         formikProps.touched.city && formikProps.errors.city
                       }
                       returnKeyType="next"
-                      // ref={input => {
-                      //   cityRef = input;
-                      // }}
+                      ref={input => {
+                        cityRef = input;
+                      }}
+                      onSubmitEditing={() => {
+                        zipCodeRef.focus();
+                      }}
                       onChangeText={formikProps.handleChange('city')}
                       onBlur={formikProps.handleBlur('city')}
                     />
@@ -258,19 +270,16 @@ export default function DonorDetails(props) {
                         formikProps.touched.zipCode &&
                         formikProps.errors.zipCode
                       }
+                      ref={input => {
+                        zipCodeRef = input;
+                      }}
                       onChangeText={formikProps.handleChange('zipCode')}
                       onBlur={formikProps.handleBlur('zipCode')}
                     />
                   </View>
                 </View>
                 <TouchableOpacity
-                  style={{
-                    borderBottomWidth: 1.5,
-                    borderBottomColor: '#4d5153',
-                    marginBottom: 8,
-                    paddingBottom: 6,
-                    marginTop: 44
-                  }}
+                  style={styles.countryTouchable}
                   onPress={() =>
                     setShowCountryModal(
                       prevTaxCountryModal => !prevTaxCountryModal
@@ -295,29 +304,12 @@ export default function DonorDetails(props) {
                         }}
                         style={{ width: 24, height: 15 }}
                       />
-                      <Text
-                        style={{
-                          paddingLeft: 12,
-                          lineHeight: 22,
-                          flex: 1,
-                          fontFamily: 'OpenSans-Regular',
-                          fontSize: 16,
-                          color: '#111'
-                        }}
-                      >
+                      <Text style={styles.countryName}>
                         {getCountryData(formikProps.values.country).country}
                       </Text>
                     </View>
                   ) : (
-                    <Text
-                      style={{
-                        fontFamily: 'OpenSans-SemiBold',
-                        color: '#4d5153',
-                        fontSize: 16
-                      }}
-                    >
-                      Select Country
-                    </Text>
+                    <Text style={styles.selectCountryName}>Select Country</Text>
                   )}
                 </TouchableOpacity>
 
@@ -338,7 +330,9 @@ export default function DonorDetails(props) {
                       formikProps.setFieldValue('isCompany', value)
                     }
                     thumbColor={
-                      formikProps.values.isCompany ? '#89b53a' : '#bdc3c7'
+                      formikProps.values.isCompany
+                        ? colors.PRIMARY_COLOR
+                        : colors.PRIMARY_COLOR2
                     }
                     trackColor={{
                       false: '#f2f2f7',
@@ -435,7 +429,9 @@ export function PaymentOption(props) {
           />
         </TouchableOpacity>
       ) : (
-        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
+        <View
+          style={[styles.continueButtonView, { backgroundColor: colors.GREY }]}
+        >
           <Text style={styles.continueButtonText}>Next</Text>
           <Image
             style={{ maxHeight: 24, maxWidth: 24 }}

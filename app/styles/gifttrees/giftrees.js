@@ -16,7 +16,6 @@ export default EStyleSheet.create({
     minHeight: '100%'
   },
   view_container: { backgroundColor: 'white', flex: 1 },
-
   gtDescription: {
     padding: 12,
     color: '#c4bfbf',
@@ -134,5 +133,42 @@ export default EStyleSheet.create({
   selectedNumText: {
     fontFamily: 'OpenSans-SemiBold',
     textAlign: 'right'
-  }
+  },
+  disabledView: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    backgroundColor: '#c2c2c2',
+    opacity: 0.7
+  },
+  disabledText: { color: '#c2c2c2' },
+  giftTreesTitle: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 27,
+    lineHeight: 40,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  selectContactButton: {
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+    width: '100%',
+    marginTop: 16
+  },
+  receiverButton: {
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+    width: '100%'
+  },
+  receiverButtonContainer: {
+    position: 'absolute',
+    bottom: '12%',
+    width: '100%',
+    alignSelf: 'center'
+  },
+  spaceView: { height: 60, width: 15, backgroundColor: 'transparent' }
 });

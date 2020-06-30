@@ -1,6 +1,13 @@
 import { Formik } from 'formik';
 import React, { Component } from 'react';
-import { Image, Keyboard, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  Keyboard,
+  Text,
+  TouchableOpacity,
+  View,
+  Platform
+} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextField } from 'react-native-material-textfield';
 import { forward } from '../../../assets';
@@ -86,7 +93,7 @@ export default class FormikFormGift extends Component {
         validationSchema={this.validationSchema}
       >
         {props => {
-          let isValid = props;
+          // let isValid = props;
           const style = { marginTop: Platform.OS === 'ios' ? 80 : 40 };
           return (
             <View style={[styles.view_container, style]}>

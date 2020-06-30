@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Animated,
   Image,
   Keyboard,
   Platform,
@@ -15,7 +14,6 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import stripe from 'tipsi-stripe';
 import { nextArrowWhite, paypal, paypalLogo } from '../../../assets';
 import styles from '../../../styles/donation/donation.native';
-import colors from '../../../utils/constants';
 import { formatNumber } from '../../../utils/utils';
 import CreditCardForm from '../components/PaymentMethods/CreditCardForm';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -28,7 +26,7 @@ export default function DonationStep3(props) {
   const [payPalInfo, setPayPalInfo] = React.useState(false);
   const [paypalOption, setPaypalOption] = React.useState(false);
   const [showPay, setShowPay] = React.useState(true);
-
+  // eslint-disable-next-line no-unused-vars
   const [paymentId, setPaymentId] = React.useState(null);
   const [accessToken, setAccessToken] = React.useState(null);
   const [approvalUrl, setApprovalUrl] = React.useState(null);
@@ -144,6 +142,7 @@ export default function DonationStep3(props) {
     });
   };
 
+  // eslint-disable-next-line no-underscore-dangle
   const _onNavigationStateChange = webViewState => {
     if (webViewState.url.includes('https://example.com/')) {
       setApprovalUrl(null);
@@ -180,15 +179,15 @@ export default function DonationStep3(props) {
   return loading ? (
     <PaymentLoader />
   ) : (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={styles.webViewContainer}>
       {approvalUrl ? (
         <WebView
-          style={{ height: '100%', width: '100%' }}
+          style={{ height: '100%', width: '100%', marginTop: 20 }}
           source={{ uri: approvalUrl }}
+          // eslint-disable-next-line no-underscore-dangle
           onNavigationStateChange={_onNavigationStateChange}
           javaScriptEnabled
           domStorageEnabled
-          style={{ marginTop: 20 }}
         />
       ) : (
         <KeyboardAwareScrollView

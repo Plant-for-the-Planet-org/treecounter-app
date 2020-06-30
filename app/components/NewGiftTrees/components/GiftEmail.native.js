@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import HeaderNew from '../../Header/HeaderNew.native';
 import FormikFormGift from './FormikFormGift.native';
+import styles from './../../../styles/gifttrees/giftrees';
 
 export default class GiftEmail extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class GiftEmail extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={styles.view_container}>
         <HeaderNew title={''} navigation={this.props.navigation} />
         <FormikFormGift
           initialValues={{

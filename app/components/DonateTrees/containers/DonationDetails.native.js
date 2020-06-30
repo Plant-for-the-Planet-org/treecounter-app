@@ -26,6 +26,7 @@ import {
 } from '../../../selectors';
 import * as RNLocalize from 'react-native-localize';
 import { ActivityIndicator, View } from 'react-native';
+import colors from '../../../utils/constants';
 
 class DonationTreesContainer extends Component {
   state = {
@@ -124,7 +125,7 @@ class DonationTreesContainer extends Component {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#fff'
+          backgroundColor: colors.WHITE
         }}
       >
         <ActivityIndicator

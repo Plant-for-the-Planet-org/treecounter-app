@@ -21,7 +21,7 @@ import HeaderAnimatedImage from './../Header/HeaderAnimatedImage.native';
 import PledgeTabView from './PledgeTabView.native';
 
 const PledgeEvents = props => {
-  const [scrollY, setScrollY] = React.useState(new Animated.Value(0));
+  const [scrollY] = React.useState(new Animated.Value(0));
   const [showRBSheetState, setShowRBSheetState] = React.useState(true);
   const pledges = props.pledges;
   const navigation = props.navigation;
@@ -90,13 +90,17 @@ const PledgeEvents = props => {
               <TouchableOpacity
                 style={styles.baContinueButton}
                 onPress={() => {
-                  const { navigation, selectPlantProjectAction } = props;
+                  const {
+                    navigation,
+                    selectPlantProjectAction,
+                    contextActions
+                  } = props;
                   navigateToDonationDetails(
                     navigation,
                     pledges,
                     myPledge,
                     selectPlantProjectAction,
-                    (contextActions = props.contextActions)
+                    contextActions
                   );
                 }}
               >

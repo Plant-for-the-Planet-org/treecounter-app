@@ -9,8 +9,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import { link, readmoreDown, readmoreUp } from '../../assets';
-import TouchableItem from '../../components/Common/TouchableItem';
+import { readmoreDown, readmoreUp } from '../../assets';
 import { debug } from '../../debug';
 import VideoContainer from '../../components/Common/VideoContainer';
 // import NDVI from '../../containers/NDVI/NDVI';
@@ -102,9 +101,9 @@ const PlantProjectDetails = ({
           {readMore
             ? description
             : description
-              ? description.substring(0, 250) +
+            ? description.substring(0, 250) +
               (description.length > 250 ? '...' : '')
-              : ''}
+            : ''}
         </Text>
         {description && description.length > 250 ? (
           <TouchableOpacity onPress={() => setReadMore(!readMore)}>
@@ -122,19 +121,19 @@ const PlantProjectDetails = ({
                 </Text>
               </View>
             ) : (
-                <View style={styles.readmoreButtonView}>
-                  <View style={{ height: 8 }}>
-                    <Image
-                      source={readmoreDown}
-                      style={{ height: 8, width: 15 }}
-                      resizeMode={'contain'}
-                    />
-                  </View>
-                  <Text style={styles.readMoreText}>
-                    {i18n.t('label.read_more')}
-                  </Text>
+              <View style={styles.readmoreButtonView}>
+                <View style={{ height: 8 }}>
+                  <Image
+                    source={readmoreDown}
+                    style={{ height: 8, width: 15 }}
+                    resizeMode={'contain'}
+                  />
                 </View>
-              )}
+                <Text style={styles.readMoreText}>
+                  {i18n.t('label.read_more')}
+                </Text>
+              </View>
+            )}
           </TouchableOpacity>
         ) : null}
         {/* <Text style={styles.descriptionText}>

@@ -248,7 +248,7 @@ export function createDonation(data, plantProject, loggedIn, donationType) {
 
 export function donationPay(data, donationID, loggedIn) {
   return dispatch =>
-    new Promise(function(resolve, reject) {
+    new Promise(function(resolve) {
       {
         loggedIn
           ? postAuthenticatedRequest('donationPay_post', data, {

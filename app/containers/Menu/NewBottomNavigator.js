@@ -46,10 +46,12 @@ export default class Tabbar extends React.PureComponent {
 
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
+      // eslint-disable-next-line no-underscore-dangle
       this._keyboardDidShow
     );
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
+      // eslint-disable-next-line no-underscore-dangle
       this._keyboardDidHide
     );
   }

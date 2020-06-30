@@ -1,6 +1,5 @@
 import { getItemSync } from '../stores/localStorage';
 import { getRequest } from '../utils/api';
-import { debug } from '../debug';
 // Source: This is absolutely static data
 import countryCodes from '../assets/countryCodes.json';
 // Source: https://trilliontreecampaign.org/public/v1.1/en/currencies > rates

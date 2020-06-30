@@ -20,9 +20,7 @@ const GiftMessage = props => {
   const [errMsg, setErrMsg] = useState('');
 
   const space = () => {
-    return (
-      <View style={{ height: 60, width: 15, backgroundColor: 'transparent' }} />
-    );
+    return <View style={styles.spaceView} />;
   };
 
   const onNextClick = () => {
@@ -48,7 +46,7 @@ const GiftMessage = props => {
     }
   };
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <View style={styles.view_container}>
       <HeaderNew title={''} navigation={props.navigation} isSearch={false} />
       <ScrollView
         style={{

@@ -60,7 +60,6 @@ export default class FormikFormGift extends Component {
         validationSchema={this.validationSchema}
       >
         {props => {
-          let isValid = props;
           return (
             <>
               <View style={styles.view_container}>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { currenciesSelector, getCurrency } from '../../selectors';
 import { getPreferredCurrency } from '../../actions/globalCurrency.native.js';
 import { formatNumber } from '../../utils/utils';
-import { context } from '../../config';
+// import { context } from '../../config';
 
 const NumberFormat = ({
   data,
@@ -26,8 +26,12 @@ const NumberFormat = ({
   if (force && currency) {
     // force use provided currency
     userProfile.currency = currency;
-  }
-  else if (handleCurrencyChange && currency && userProfile.currency && currency != userProfile.currency) {
+  } else if (
+    handleCurrencyChange &&
+    currency &&
+    userProfile.currency &&
+    currency != userProfile.currency
+  ) {
     handleCurrencyChange(userProfile.currency);
   }
   return formatNumber(data, locale, currency, userProfile, currencies);

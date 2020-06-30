@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Keyboard
 } from 'react-native';
-import { debug } from '../../debug';
 import StaticTabbar from './StaticTabbar';
 import i18n from '../../locales/i18n';
 import NetInfo from '@react-native-community/netinfo';
@@ -54,13 +53,14 @@ export default class Tabbar extends React.PureComponent {
       this._keyboardDidHide
     );
   }
-
+  // eslint-disable-next-line no-underscore-dangle
   _keyboardDidShow = () => {
     this.setState({
       buttonType: ''
     });
   };
 
+  // eslint-disable-next-line no-underscore-dangle
   _keyboardDidHide = () => {
     this.setState({
       buttonType: 'showBottomNav'

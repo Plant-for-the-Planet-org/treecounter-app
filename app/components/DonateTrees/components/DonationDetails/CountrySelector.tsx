@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   FlatList,
   Image,
@@ -8,11 +8,11 @@ import {
   View,
   Platform,
   StyleSheet
-} from "react-native";
-import Modal from "react-native-modalbox";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
-import { getCountryFlagImageUrl } from "../../../../actions/apiRouting";
-import countryData from "../../../../assets/countryCodes.json";
+} from 'react-native';
+import Modal from 'react-native-modalbox';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { getCountryFlagImageUrl } from '../../../../actions/apiRouting';
+import countryData from '../../../../assets/countryCodes.json';
 
 export function getCountryData(countryCode) {
   return countryData.find(c => c.countryCode == countryCode) || {};
@@ -26,10 +26,10 @@ export function SelectCountryModal(props) {
     setShowModal,
     taxDeductibleCountries
   } = props;
-  const activeColor = "#74ba00";
-  const defaultColor = "#4d5153";
+  const activeColor = '#74ba00';
+  const defaultColor = '#4d5153';
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [countriesList, setCountriesList] = useState(taxDeductibleCountries);
 
   const keyExtractor = d => d.item;
@@ -39,7 +39,7 @@ export function SelectCountryModal(props) {
       <TouchableOpacity
         onPress={() => {
           props.setFormikValue
-            ? props.setFormikValue("country", countryCode)
+            ? props.setFormikValue('country', countryCode)
             : setSelectedCountry(countryCode);
           closeModal();
         }}
@@ -49,7 +49,7 @@ export function SelectCountryModal(props) {
             source={{
               uri: getCountryFlagImageUrl(
                 getCountryData(countryCode).currencyCountryFlag,
-                "png",
+                'png',
                 256
               )
             }}
@@ -105,7 +105,7 @@ export function SelectCountryModal(props) {
   return (
     <Modal
       isOpen={showModal}
-      position={"left"}
+      position={'left'}
       onClosed={closeModal}
       backdropPressToClose
       coverScreen
@@ -126,9 +126,9 @@ export function SelectCountryModal(props) {
           onChangeText={text => searchCountry(text)}
           value={search}
           autoFocus
-          placeholder={"Search Country"}
+          placeholder={'Search Country'}
         />
-        <TouchableOpacity onPress={() => searchCountry("")}>
+        <TouchableOpacity onPress={() => searchCountry('')}>
           {search ? (
             <MaterialIcon name="close" size={30} color="#4d5153" />
           ) : null}
@@ -149,8 +149,8 @@ export function SelectCountryModal(props) {
 
 const styles = StyleSheet.create({
   singleCountryView: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 12
   },
   singleCountryFlag: { width: 24, height: 15 },
@@ -158,39 +158,39 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     lineHeight: 22,
     flex: 1,
-    fontFamily: "OpenSans-SemiBold",
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 16
   },
   modalView: {
     opacity: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 20,
     paddingHorizontal: 24,
-    marginTop: Platform.OS === "ios" ? 54 : 20
+    marginTop: Platform.OS === 'ios' ? 54 : 20
   },
   searchBarInput: {
-    fontFamily: "OpenSans-SemiBold",
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 18,
-    color: "#4d5153",
+    color: '#4d5153',
     flexGrow: 1
   },
   closeButton: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 24,
-    alignSelf: "center",
-    backgroundColor: "white",
+    alignSelf: 'center',
+    backgroundColor: 'white',
     borderWidth: 0.5,
     borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     height: 36,
     width: 36,
     zIndex: 4000
   },
   flatList: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     paddingHorizontal: 24,
     paddingBottom: 60,
     zIndex: 2

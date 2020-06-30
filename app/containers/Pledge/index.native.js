@@ -88,7 +88,6 @@ const PledgeEventsContainer = props => {
       login={login}
       loading={loading}
       treeCount={props.navigation.getParam('treeCount').toLocaleString()}
-      fetchPledgesAction={fetchPledgesAction}
       showRBSheet={props.navigation.getParam('showRBSheet')}
       selectPlantProjectAction={props.selectPlantProjectAction}
       fetchPledgesAction={props.fetchPledgesAction}

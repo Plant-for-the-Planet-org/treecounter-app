@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import reactotron from '../../ReactotronConfig';
-import { context } from '../config';
+// import { context } from '../config';
 import middlewares from './middlewares';
 import initialState from './storeInitialState';
 

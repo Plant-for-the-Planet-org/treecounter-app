@@ -11,16 +11,9 @@ import {
 import Modal from "react-native-modalbox";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
-import {
-  getCountryFlagImageUrl,
-  getImageUrl
-} from "../../../actions/apiRouting";
+import { getCountryFlagImageUrl } from "../../../actions/apiRouting";
 import countryData from "../../../assets/countryCodes.json";
 import styles from "../../../styles/donations/donationDetails";
-import CurrencySelectorList from "../../Common/CurrencySelectorList.native";
-import UserProfileImage from "../../Common/UserProfileImage.native";
-
-import NumberFormat from "../../Common/NumberFormat.native.js";
 
 export function TaxReceipt(props) {
   let {
@@ -261,100 +254,6 @@ export function SelectCountryModal(props) {
   );
 }
 
-export function PlantProjectDetails(props) {
-  const [showCurrencyModal, setShowCurrencyModal] = useState(false);
-  const [selectedCurrency, setSelectedCurrency] = useState(
-    props.selectedCurrency
-  );
-  const [force, setForce] = useState(false);
-  const caclculateTreeCost = () => {
-    return props.rates[selectedCurrency] * props.treeCost;
-  };
-  const [treeCost, setTreeCost] = useState(caclculateTreeCost());
-
-  const handleCurrencyChange = currency => {
-    showCurrencyModal && currency != selectedCurrency
-      ? setForce(true)
-      : setForce(false);
-
-    setSelectedCurrency(currency);
-
-    setShowCurrencyModal(false);
-    setTreeCost(calculateAmount(currency));
-    props.setCurrency(currency);
-  };
-  useEffect(() => {
-    setSelectedCurrency(props.globalCurrency.currency);
-    props.setCurrency(props.globalCurrency.currency);
-  }, [props.globalCurrency]);
-  // This function takes the tree Count and calculates the total amount
-  const calculateAmount = currency => {
-    return (
-      Math.round(props.treeCost * parseFloat(props.rates[currency]) * 100) /
-        100 +
-      props.fee
-    );
-  };
-  return (
-    <View style={styles.projectDetails}>
-      <Image
-        style={styles.projectImage}
-        source={{
-          uri: getImageUrl("project", "thumb", props.selectedProject.image)
-        }}
-      />
-      <View style={styles.projectNameAmount}>
-        <Text style={styles.projectName}>{props.selectedProject.name}</Text>
-        <View style={styles.projectAmountView}>
-          <TouchableOpacity
-            onPress={() => setShowCurrencyModal(true)}
-            style={{ flexDirection: "row", alignItems: "center" }}
-          >
-            <Text style={styles.isTaxDeductibleCountry}>
-              {selectedCurrency}
-            </Text>
-            <Icon name={"chevron-down"} size={14} color="#89b53a" />
-          </TouchableOpacity>
-
-          {/* <Image style={styles.projectAmountImage} source={currencyIcon} /> */}
-          <Text style={styles.projectAmountText}>
-            <NumberFormat
-              currency={selectedCurrency}
-              data={treeCost.toFixed(2)}
-              handleCurrencyChange={handleCurrencyChange}
-              force={force}
-            />{" "}
-            per tree
-          </Text>
-        </View>
-      </View>
-      <CurrencySelectorList
-        hideCurrencyModal={() => setShowCurrencyModal(false)}
-        show={showCurrencyModal}
-        handleCurrencyChange={handleCurrencyChange}
-        selectedCurrency={selectedCurrency}
-      />
-    </View>
-  );
-}
-
-export function NoPlantProjectDetails(props) {
-  return (
-    <TouchableOpacity style={styles.noprojectDetails}>
-      <View style={styles.noprojectImage} />
-      <View style={styles.noprojectNameAmount}>
-        <Text style={styles.noprojectName}>Select Project</Text>
-        <Text style={styles.noprojectAmountText}>
-          Tap here to view all projects
-        </Text>
-      </View>
-      <View style={[{ alignSelf: "auto", marginRight: 16 }]}>
-        <Icon name={"chevron-right"} size={14} color="#4d5153" />
-      </View>
-    </TouchableOpacity>
-  );
-}
-
 export function SelectTreeCount(props) {
   const [customTreeCount, setCustomTreeCountLocal] = React.useState(
     props.customTreeCount ? props.customTreeCount : false
@@ -457,61 +356,3 @@ export function SelectTreeCount(props) {
     </>
   );
 }
-
-export const UserContactDetails = props => {
-  let { donorDetails } = props;
-  return (
-    <>
-      <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>CONTACT DETAILS</Text>
-        <TouchableOpacity>
-          {donorDetails.firstName ? (
-            <Text style={styles.sectionRightButton}>Edit</Text>
-          ) : (
-            <Text style={styles.sectionRightButton}>Add</Text>
-          )}
-        </TouchableOpacity>
-      </View>
-      {donorDetails.firstName ? (
-        <View>
-          <Text style={styles.contactDetailsAddress}>
-            {donorDetails.firstName} {donorDetails.lastName}
-          </Text>
-          {donorDetails.companyName ? (
-            <Text style={styles.contactDetailsAddress}>
-              {donorDetails.companyName}
-            </Text>
-          ) : null}
-          <Text style={styles.contactDetailsAddress}>{donorDetails.email}</Text>
-          <Text style={styles.contactDetailsAddress}>
-            {donorDetails.country}
-          </Text>
-        </View>
-      ) : null}
-    </>
-  );
-};
-
-export const SupportUserDetails = props => {
-  return (
-    <View>
-      <View style={[{ marginTop: 20, marginBottom: 0 }]}>
-        <Text style={styles.sectionTitle}>SUPPORT</Text>
-        <View style={styles.supportUser}>
-          <UserProfileImage
-            profileImage={
-              props.context.supportTreeCounterDetails &&
-              props.context.supportTreeCounterDetails.treecounterAvatar
-            }
-            imageStyle={{ width: 40, height: 40, borderRadius: 40 / 2 }}
-          />
-          <View style={styles.supportUserNameContainer}>
-            <Text style={styles.supportUserName}>
-              {props.context.supportTreeCounterDetails.displayName}
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-};

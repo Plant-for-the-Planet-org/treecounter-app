@@ -13,13 +13,14 @@ import { updateStaticRoute } from "../../../helpers/routerHelper";
 import { paymentFee } from "../../../helpers/utils";
 import styles from "../../../styles/donations/donationDetails";
 import {
-  NoPlantProjectDetails,
-  PlantProjectDetails,
   SelectCountryModal,
   SelectTreeCount,
-  SupportUserDetails,
   TaxReceipt
 } from "../components/donationComponents.native";
+import { SupportUserDetails } from "./../components/DonationDetails/SupportUserDetails";
+import { PlantProjectDetails } from "./../components/DonationDetails/PlantProjectDetails";
+import { NoPlantProjectDetails } from "./../components/DonationDetails/NoPlantProjectDetails";
+
 import {
   PledgeOnComponent,
   PledgeTreeCount
@@ -217,6 +218,12 @@ function DonationDetails(props) {
           <NoPlantProjectDetails />
         )}
 
+        {/* Donation Context */}
+
+        {context.contextType === "support" ? (
+          <SupportUserDetails context={context} />
+        ) : null}
+
         {context.contextType === "direct" ||
         context.contextType === "support" ||
         context.contextType === null ? (
@@ -228,12 +235,6 @@ function DonationDetails(props) {
               props.selectedProject.paymentSetup.treeCountOptions
             }
           />
-        ) : null}
-
-        {/* Donation Context */}
-
-        {context.contextType === "support" ? (
-          <SupportUserDetails context={context} />
         ) : null}
 
         {/* Gift Trees */}
@@ -290,9 +291,6 @@ function DonationDetails(props) {
             props.selectedProject.paymentSetup.taxDeductionCountries
           }
         />
-
-        {/* Needed In Future */}
-        {/* <UserContactDetails donorDetails={donorDetails} /> */}
       </ScrollView>
 
       {buttonType === "showPayment" ? (

@@ -21,7 +21,7 @@ import CreditCardForm from "../components/PaymentMethods/CreditCardForm";
 import SafeAreaView from "react-native-safe-area-view";
 import { Header } from "./../components/Header";
 import PaymentLoader from "../components/PaymentLoader";
-import { handleNativePayPress } from "./../components/PaymentMethods/nativePay";
+import { handleNativePayPress } from "./../components/PaymentMethods/NativePay";
 import Axios from "axios";
 
 export default function DonationStep3(props) {

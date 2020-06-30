@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import {
   FlatList,
   Image,
-  Switch,
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
+  Platform,
+  StyleSheet
 } from "react-native";
 import Modal from "react-native-modalbox";
-import Icon from "react-native-vector-icons/FontAwesome5";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { getCountryFlagImageUrl } from "../../../../actions/apiRouting";
 import countryData from "../../../../assets/countryCodes.json";
-import styles from "../../../../styles/donations/donationDetails";
 
 export function getCountryData(countryCode) {
   return countryData.find(c => c.countryCode == countryCode) || {};
@@ -45,14 +44,7 @@ export function SelectCountryModal(props) {
           closeModal();
         }}
       >
-        <View
-          key={countryCode}
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginVertical: 12
-          }}
-        >
+        <View key={countryCode} style={styles.singleCountryView}>
           <Image
             source={{
               uri: getCountryFlagImageUrl(
@@ -61,18 +53,16 @@ export function SelectCountryModal(props) {
                 256
               )
             }}
-            style={{ width: 24, height: 15 }}
+            style={styles.singleCountryFlag}
           />
           <Text
-            style={{
-              paddingLeft: 16,
-              lineHeight: 22,
-              flex: 1,
-              fontFamily: "OpenSans-SemiBold",
-              fontSize: 16,
-              color:
-                selectedCountry === countryCode ? activeColor : defaultColor
-            }}
+            style={[
+              styles.singleCountryName,
+              {
+                color:
+                  selectedCountry === countryCode ? activeColor : defaultColor
+              }
+            ]}
           >
             {getCountryData(countryCode).country}
           </Text>
@@ -122,17 +112,7 @@ export function SelectCountryModal(props) {
       keyboardTopOffset={0}
       swipeToClose
     >
-      <View
-        style={{
-          opacity: 1,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: Platform.OS === "ios" ? 54 : 20,
-          marginBottom: 20,
-          paddingHorizontal: 24
-        }}
-      >
+      <View style={styles.modalView}>
         <TouchableOpacity>
           <MaterialIcon
             name="search"
@@ -142,12 +122,7 @@ export function SelectCountryModal(props) {
           />
         </TouchableOpacity>
         <TextInput
-          style={{
-            fontFamily: "OpenSans-SemiBold",
-            fontSize: 18,
-            color: defaultColor,
-            flexGrow: 1
-          }}
+          style={styles.searchBarInput}
           onChangeText={text => searchCountry(text)}
           value={search}
           autoFocus
@@ -163,31 +138,61 @@ export function SelectCountryModal(props) {
         data={countriesList}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
-        contentContainerStyle={{
-          backgroundColor: "#fff",
-          paddingHorizontal: 24,
-          paddingBottom: 60,
-          zIndex: 2
-        }}
+        contentContainerStyle={styles.flatList}
       />
-      <TouchableOpacity
-        style={{
-          position: "absolute",
-          bottom: 24,
-          alignSelf: "center",
-          backgroundColor: "white",
-          borderWidth: 0.5,
-          borderRadius: 20,
-          justifyContent: "center",
-          alignItems: "center",
-          height: 36,
-          width: 36,
-          zIndex: 4000
-        }}
-        onPress={() => closeModal()}
-      >
+      <TouchableOpacity style={styles.closeButton} onPress={() => closeModal()}>
         <MaterialIcon name="close" size={24} color="#4d5153" />
       </TouchableOpacity>
     </Modal>
   );
 }
+
+const styles = StyleSheet.create({
+  singleCountryView: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 12
+  },
+  singleCountryFlag: { width: 24, height: 15 },
+  singleCountryName: {
+    paddingLeft: 16,
+    lineHeight: 22,
+    flex: 1,
+    fontFamily: "OpenSans-SemiBold",
+    fontSize: 16
+  },
+  modalView: {
+    opacity: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    paddingHorizontal: 24,
+    marginTop: Platform.OS === "ios" ? 54 : 20
+  },
+  searchBarInput: {
+    fontFamily: "OpenSans-SemiBold",
+    fontSize: 18,
+    color: "#4d5153",
+    flexGrow: 1
+  },
+  closeButton: {
+    position: "absolute",
+    bottom: 24,
+    alignSelf: "center",
+    backgroundColor: "white",
+    borderWidth: 0.5,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 36,
+    width: 36,
+    zIndex: 4000
+  },
+  flatList: {
+    backgroundColor: "#fff",
+    paddingHorizontal: 24,
+    paddingBottom: 60,
+    zIndex: 2
+  }
+});

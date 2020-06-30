@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -8,34 +8,34 @@ import {
   Image,
   ScrollView,
   Keyboard
-} from "react-native";
-import { updateStaticRoute } from "../../../helpers/routerHelper";
-import { paymentFee } from "../../../helpers/utils";
-import styles from "../../../styles/donations/donationDetails";
-import { SelectCountryModal } from "../components/DonationDetails/CountrySelector";
-import { SupportUserDetails } from "./../components/DonationDetails/SupportUserDetails";
-import { PlantProjectDetails } from "./../components/DonationDetails/PlantProjectDetails";
-import { NoPlantProjectDetails } from "./../components/DonationDetails/NoPlantProjectDetails";
-import { TaxReceipt } from "./../components/DonationDetails/TaxReceipt";
+} from 'react-native';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import { paymentFee } from '../../../helpers/utils';
+import styles from '../../../styles/donations/donationDetails';
+import { SelectCountryModal } from '../components/DonationDetails/CountrySelector';
+import { SupportUserDetails } from './../components/DonationDetails/SupportUserDetails';
+import { PlantProjectDetails } from './../components/DonationDetails/PlantProjectDetails';
+import { NoPlantProjectDetails } from './../components/DonationDetails/NoPlantProjectDetails';
+import { TaxReceipt } from './../components/DonationDetails/TaxReceipt';
 import {
   PledgeOnComponent,
   PledgeTreeCount
-} from "../components/DonationDetails/PledgeOnComponent";
-import { SelectTreeCount } from "./../components/DonationDetails/SelectTreeCount";
-import { Header } from "./../components/Header";
-import { GiftTreesComponent } from "../components/DonationDetails/GiftTreesComponent";
-import ProjectModal from "./../components/DonationDetails/ProjectModal";
-import stripe from "tipsi-stripe";
-import i18n from "../../../locales/i18n.js";
-import SafeAreaView from "react-native-safe-area-view";
-import PaymentLoader from "../components/PaymentLoader";
-import { nextArrowWhite, nextArrow } from "../../../assets";
-import { formatNumber } from "../../../utils/utils";
-import { handleNativePayPress } from "./../components/PaymentMethods/NativePay";
+} from '../components/DonationDetails/PledgeOnComponent';
+import { SelectTreeCount } from './../components/DonationDetails/SelectTreeCount';
+import { Header } from './../components/Header';
+import { GiftTreesComponent } from '../components/DonationDetails/GiftTreesComponent';
+import ProjectModal from './../components/DonationDetails/ProjectModal';
+import stripe from 'tipsi-stripe';
+import i18n from '../../../locales/i18n.js';
+import SafeAreaView from 'react-native-safe-area-view';
+import PaymentLoader from '../components/PaymentLoader';
+import { nextArrowWhite, nextArrow } from '../../../assets';
+import { formatNumber } from '../../../utils/utils';
+import { handleNativePayPress } from './../components/PaymentMethods/NativePay';
 
-import { SvgXml } from "react-native-svg";
-import google_pay from "../../../assets/svgAssets/donations/google_pay";
-import apple_pay from "../../../assets/svgAssets/donations/apple_pay";
+import { SvgXml } from 'react-native-svg';
+import google_pay from '../../../assets/svgAssets/donations/google_pay';
+import apple_pay from '../../../assets/svgAssets/donations/apple_pay';
 
 function DonationDetails(props) {
   const [commissionSwitch, setCommissionSwitch] = React.useState(false); // for Switching whether the user wants to pay the commission of payment portal
@@ -62,7 +62,7 @@ function DonationDetails(props) {
   const [currency, setCurrency] = React.useState(props.selectedCurrency);
 
   const [allowedNativePay, setallowedNativePay] = React.useState(false); // this is to test whether Apple/Google pay is allowed or not
-  const [applePayStatus, setApplePayStatus] = React.useState("");
+  const [applePayStatus, setApplePayStatus] = React.useState('');
 
   React.useEffect(() => {
     const allowedNativePay = stripe.deviceSupportsNativePay();
@@ -98,25 +98,25 @@ function DonationDetails(props) {
   //   setFrequency(context.donationDetails.frequency);
   // }
 
-  const [buttonType, setButtonType] = React.useState("showPayment");
+  const [buttonType, setButtonType] = React.useState('showPayment');
 
   const keyboardDidShow = () => {
-    setButtonType("");
+    setButtonType('');
   };
 
   const keyboardDidHide = () => {
-    setButtonType("showPayment");
+    setButtonType('showPayment');
   };
 
   let keyboardDidShowListener;
   let keyboardDidHideListener;
   React.useEffect(() => {
     keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
+      'keyboardDidShow',
       keyboardDidShow
     );
     keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
+      'keyboardDidHide',
       keyboardDidHide
     );
     // clean up
@@ -144,7 +144,7 @@ function DonationDetails(props) {
   const onContinue = () => {
     // Set Donation Details and then switch the page
     saveContext();
-    updateStaticRoute("donor_details_form", props.navigation, {
+    updateStaticRoute('donor_details_form', props.navigation, {
       navigation: props.navigation,
       paymentSetup: props.selectedProject.paymentSetup
     });
@@ -157,7 +157,7 @@ function DonationDetails(props) {
   return loading ? (
     <PaymentLoader />
   ) : (
-    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
       <ProjectModal
         hideModal={setProjectModal}
         show={showProjectModal}
@@ -171,13 +171,13 @@ function DonationDetails(props) {
       <ScrollView
         contentContainerStyle={[
           styles.scrollView,
-          Platform.OS === "ios" ? null : { marginTop: 24 }
+          Platform.OS === 'ios' ? null : { marginTop: 24 }
         ]}
       >
         <Header
           onBack={props.contextActions.clearDonationReducer}
           navigation={props.navigation}
-          title={"Tree Donation"}
+          title={'Tree Donation'}
         />
 
         {/* Plant Project Details */}
@@ -216,12 +216,12 @@ function DonationDetails(props) {
 
         {/* Donation Context */}
 
-        {context.contextType === "support" ? (
+        {context.contextType === 'support' ? (
           <SupportUserDetails context={context} />
         ) : null}
 
-        {context.contextType === "direct" ||
-        context.contextType === "support" ||
+        {context.contextType === 'direct' ||
+        context.contextType === 'support' ||
         context.contextType === null ? (
           <SelectTreeCount
             treeCount={treeCount}
@@ -234,8 +234,8 @@ function DonationDetails(props) {
         ) : null}
 
         {/* Gift Trees */}
-        {context.contextType === "gift-contact" ||
-        context.contextType === "gift-invitation" ? (
+        {context.contextType === 'gift-contact' ||
+        context.contextType === 'gift-invitation' ? (
           <GiftTreesComponent
             treeCount={treeCount}
             setTreeCount={setTreeCount}
@@ -247,7 +247,7 @@ function DonationDetails(props) {
           />
         ) : null}
 
-        {context.contextType === "pledge" ? (
+        {context.contextType === 'pledge' ? (
           <>
             <PledgeOnComponent pledgeDetails={context.pledgeDetails} />
             <PledgeTreeCount
@@ -259,7 +259,7 @@ function DonationDetails(props) {
         ) : null}
 
         <View
-          style={[styles.horizontalDivider, { width: "14%", marginTop: 30 }]}
+          style={[styles.horizontalDivider, { width: '14%', marginTop: 30 }]}
         />
 
         {/* Tax Receipt */}
@@ -289,7 +289,7 @@ function DonationDetails(props) {
         />
       </ScrollView>
 
-      {buttonType === "showPayment" ? (
+      {buttonType === 'showPayment' ? (
         <PaymentOption
           treeCount={treeCount}
           commissionSwitch={commissionSwitch}
@@ -297,7 +297,7 @@ function DonationDetails(props) {
           onContinue={onContinue}
           // frequency={frequency}
           isApplePay={
-            allowedNativePay ? (Platform.OS === "ios" ? true : false) : null
+            allowedNativePay ? (Platform.OS === 'ios' ? true : false) : null
           }
           setLoading={setLoading}
           setDonationStatus={setDonationStatus}
@@ -360,8 +360,8 @@ export function PaymentOption(props) {
         : props.selectedProject.paymentSetup.gateways[
             props.selectedProject.paymentSetup.defaultCountry
           ].stripe.stripePublishableKey,
-    merchantId: "", // The value can be blank but the key is needed
-    androidPayMode: "test" // Android only
+    merchantId: '', // The value can be blank but the key is needed
+    androidPayMode: 'test' // Android only
   });
   return (
     <View style={styles.bottomButtonView}>
@@ -398,8 +398,8 @@ export function PaymentOption(props) {
       {props.treeCount ? (
         <View
           style={{
-            flexDirection: "column",
-            justifyContent: "center",
+            flexDirection: 'column',
+            justifyContent: 'center',
             padding: 20
           }}
         >
@@ -427,7 +427,7 @@ export function PaymentOption(props) {
           </TouchableOpacity>
         </View>
       ) : (
-        <View style={[styles.continueButtonView, { backgroundColor: "grey" }]}>
+        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
           <Text style={styles.continueButtonText}>Next</Text>
           <Image
             style={{ maxHeight: 24, maxWidth: 24 }}

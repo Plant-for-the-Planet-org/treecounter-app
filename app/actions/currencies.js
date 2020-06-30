@@ -1,6 +1,6 @@
-import { setCurrenciesConversions } from "../reducers/currenciesReducer";
-import { getRequest } from "../utils/api";
-import { debug } from "../debug";
+import { setCurrenciesConversions } from '../reducers/currenciesReducer';
+import { getRequest } from '../utils/api';
+import { debug } from '../debug';
 
 let last = 0;
 
@@ -17,8 +17,8 @@ export function fetchCurrencies() {
       if (now - last > 10000) {
         last = now;
 
-        debug("fetchCurrencies...");
-        getRequest("public_currencies_get")
+        debug('fetchCurrencies...');
+        getRequest('public_currencies_get')
           .then(response => {
             dispatch(setCurrenciesConversions(response.data));
             resolve(response.data);
@@ -28,7 +28,7 @@ export function fetchCurrencies() {
             reject(error);
           });
       } else {
-        debug("fetchCurrencies already called, throttling.");
+        debug('fetchCurrencies already called, throttling.');
         resolve();
       }
     });

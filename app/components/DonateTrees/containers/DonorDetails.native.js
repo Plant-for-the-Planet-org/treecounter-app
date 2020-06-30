@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   setDonationDetails,
   setDonorDetails,
   setPaymentDetails,
   setPaymentResponse,
   setPledgeDetails
-} from "../redux/action";
-import DonorDetailsNative from "../screens/DonorDetails.native";
-import { currentUserProfileSelector } from "../../../selectors/index";
+} from '../redux/action';
+import DonorDetailsNative from '../screens/DonorDetails.native';
+import { currentUserProfileSelector } from '../../../selectors/index';
 const DonorDetails = props => {
   return (
     <DonorDetailsNative
@@ -30,7 +30,7 @@ const DonorDetails = props => {
         setPaymentDetails: props.setPaymentDetails
       }}
       currentUserProfile={props.currentUserProfile}
-      paymentSetup={props.navigation.getParam("paymentSetup")}
+      paymentSetup={props.navigation.getParam('paymentSetup')}
     />
   );
 };

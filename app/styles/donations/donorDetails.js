@@ -1,7 +1,7 @@
-import { Dimensions } from "react-native";
-import EStyleSheet from "react-native-extended-stylesheet";
+import { Dimensions } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const width = Dimensions.get("window").width;
+const width = Dimensions.get('window').width;
 export default EStyleSheet.create({
   scrollView: {
     padding: 24,
@@ -9,18 +9,18 @@ export default EStyleSheet.create({
     paddingTop: 0
   },
   pageTitle: {
-    fontFamily: "OpenSans-Bold",
+    fontFamily: 'OpenSans-Bold',
     fontSize: 27,
     lineHeight: 40,
     letterSpacing: 0,
-    textAlign: "left",
-    color: "#4d5153"
+    textAlign: 'left',
+    color: '#4d5153'
   },
 
   // Project Details
   projectDetails: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
     marginTop: 20
   },
   projectImage: {
@@ -32,17 +32,17 @@ export default EStyleSheet.create({
     marginLeft: 10
   },
   projectName: {
-    fontFamily: "OpenSans-SemiBold",
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 18,
     lineHeight: 24,
-    color: "#4d5153",
-    display: "flex",
-    flexWrap: "wrap",
-    maxWidth: "95%"
+    color: '#4d5153',
+    display: 'flex',
+    flexWrap: 'wrap',
+    maxWidth: '95%'
   },
   projectAmountView: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
     marginTop: 10
   },
   projectAmountImage: {
@@ -50,16 +50,16 @@ export default EStyleSheet.create({
     width: 14
   },
   projectAmountText: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 11,
-    color: "#4d5153",
+    color: '#4d5153',
     marginLeft: 10
   },
 
   // Gift Details
   giftDetails: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
     marginTop: 20
   },
   giftImage: {
@@ -71,243 +71,243 @@ export default EStyleSheet.create({
     marginLeft: 10
   },
   giftName: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     letterSpacing: 0.21,
-    textAlign: "left",
-    color: "#4d5153",
-    display: "flex",
-    flexWrap: "wrap"
+    textAlign: 'left',
+    color: '#4d5153',
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   giftRecipient: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 11,
-    color: "#4d5153"
+    color: '#4d5153'
   },
 
   // Tree Count Selector
 
   treeCountSelector: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between"
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
   },
   selectorView: {
     borderRadius: 7,
-    backgroundColor: "#ffffff",
-    borderStyle: "solid",
+    backgroundColor: '#ffffff',
+    borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: "#d5d5d5",
+    borderColor: '#d5d5d5',
     height: 54,
     paddingVertical: 24,
     paddingHorizontal: 12,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 16,
     width: width * 0.24
   },
   treeCountText: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 13,
     lineHeight: 19,
-    textAlign: "center",
-    color: "#4d5153",
-    display: "flex",
-    flexWrap: "wrap",
+    textAlign: 'center',
+    color: '#4d5153',
+    display: 'flex',
+    flexWrap: 'wrap',
     maxWidth: 42
   },
   selectedView: {
     borderRadius: 7,
-    backgroundColor: "#89b53a",
+    backgroundColor: '#89b53a',
     height: 54,
     paddingVertical: 24,
     paddingHorizontal: 12,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 16,
     width: width * 0.24
   },
   selectedTreeCountText: {
-    fontFamily: "OpenSans-Bold",
+    fontFamily: 'OpenSans-Bold',
     fontSize: 13,
     lineHeight: 19,
     letterSpacing: 0,
-    textAlign: "center",
-    color: "#ffffff",
-    display: "flex",
-    flexWrap: "wrap",
+    textAlign: 'center',
+    color: '#ffffff',
+    display: 'flex',
+    flexWrap: 'wrap',
     maxWidth: 42
   },
 
   // Custom Tree Count Selector
   customSelectorView: {
     borderRadius: 7,
-    backgroundColor: "#ffffff",
-    borderStyle: "solid",
+    backgroundColor: '#ffffff',
+    borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: "#d5d5d5",
+    borderColor: '#d5d5d5',
     height: 54,
     paddingVertical: 24,
     paddingHorizontal: 24,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 16,
     flexGrow: 1,
     width: width * 0.6
   },
   customSelectedView: {
     borderRadius: 7,
-    backgroundColor: "#89b53a",
+    backgroundColor: '#89b53a',
     height: 54,
     paddingVertical: 12,
     paddingHorizontal: 24,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 16,
     flexGrow: 1,
     width: width * 0.6,
-    display: "flex",
-    flexDirection: "row"
+    display: 'flex',
+    flexDirection: 'row'
   },
   customTreeCountText: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     lineHeight: 19,
     letterSpacing: 0,
-    textAlign: "center",
-    color: "#4d5153",
-    display: "flex",
-    flexWrap: "wrap"
+    textAlign: 'center',
+    color: '#4d5153',
+    display: 'flex',
+    flexWrap: 'wrap'
   },
 
   // Donation Frequency
   repititionSelector: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
     marginTop: 20
   },
   repititionText: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     lineHeight: 19,
     letterSpacing: 0,
-    textAlign: "center",
-    color: "#4d5153"
+    textAlign: 'center',
+    color: '#4d5153'
   },
   repititionSelectorView: {
     borderRadius: 7,
-    backgroundColor: "#ffffff",
-    borderStyle: "solid",
+    backgroundColor: '#ffffff',
+    borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: "#d5d5d5",
+    borderColor: '#d5d5d5',
     height: 54,
     paddingVertical: 24,
     paddingHorizontal: 12,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     width: width * 0.26
   },
   selectedRepititionText: {
-    fontFamily: "OpenSans-Bold",
+    fontFamily: 'OpenSans-Bold',
     fontSize: 14,
     lineHeight: 19,
     letterSpacing: 0,
-    textAlign: "center",
-    color: "#ffffff"
+    textAlign: 'center',
+    color: '#ffffff'
   },
   repititionSelectedView: {
     borderRadius: 7,
-    backgroundColor: "#89b53a",
+    backgroundColor: '#89b53a',
     height: 54,
     paddingVertical: 24,
     paddingHorizontal: 12,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     width: width * 0.26
   },
 
   // Horizontal Divider
   horizontalDivider: {
     height: 1,
-    width: "100%",
-    backgroundColor: "#d5d5d5",
+    width: '100%',
+    backgroundColor: '#d5d5d5',
     marginTop: 20
   },
 
   // Commission
   coverCommissionText: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 13,
     lineHeight: 18,
-    color: "rgba(0, 0, 0, 0.6)",
+    color: 'rgba(0, 0, 0, 0.6)',
     width: width * 0.7
   },
   coverCommissionView: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
     marginTop: 60,
-    justifyContent: "space-between"
+    justifyContent: 'space-between'
   },
 
   // Autocomplete Address
 
   // Tax Deductible
   notTaxDeductible: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 10,
     lineHeight: 16,
     letterSpacing: 0,
-    textAlign: "left",
-    color: "rgba(0, 0, 0, 0.6)",
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)',
     marginTop: 20
   },
   isTaxDeductibleText: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 13,
     lineHeight: 18,
-    color: "rgba(0, 0, 0, 0.6)",
+    color: 'rgba(0, 0, 0, 0.6)',
     width: width * 0.7
   },
   isTaxDeductibleView: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
     marginTop: 25,
-    justifyContent: "space-between"
+    justifyContent: 'space-between'
   },
 
   // Payment Process
 
   paymentProcessText: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 10,
     lineHeight: 16,
     letterSpacing: 0,
-    textAlign: "left",
-    color: "rgba(0, 0, 0, 0.6)",
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)',
     marginTop: 20
   },
 
   // Country For Tax
 
   countryForTaxText: {
-    fontFamily: "OpenSans-Regular",
+    fontFamily: 'OpenSans-Regular',
     fontSize: 10,
     lineHeight: 16,
     letterSpacing: 0,
-    textAlign: "left",
-    color: "rgba(0, 0, 0, 0.6)",
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.6)',
     marginBottom: 200
   },
 
   // Payment Button
   bottomButtonView: {
-    backgroundColor: "#f2f2f7",
+    backgroundColor: '#f2f2f7',
     height: 96,
-    flexDirection: "row",
-    position: "absolute",
+    flexDirection: 'row',
+    position: 'absolute',
     bottom: 0,
     right: 0,
     left: 0
@@ -316,132 +316,132 @@ export default EStyleSheet.create({
     padding: 20,
     //width: width * 0.75
     flexGrow: 1,
-    justifyContent: "center"
+    justifyContent: 'center'
   },
   paymentTreeAmount: {
     fontSize: 18,
     lineHeight: 21,
     letterSpacing: 0,
-    textAlign: "left",
-    color: "#89b53a",
-    fontFamily: "OpenSans-Bold"
+    textAlign: 'left',
+    color: '#89b53a',
+    fontFamily: 'OpenSans-Bold'
   },
   paymentTreeCount: {
-    fontFamily: "OpenSans-SemiBold",
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 14,
     lineHeight: 21,
     letterSpacing: 0,
-    textAlign: "left",
-    color: "#4d5153",
+    textAlign: 'left',
+    color: '#4d5153',
     marginLeft: 8
   },
   paymentTreeDetails: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   otherPaymentButton: {
     height: 32,
     borderRadius: 16,
-    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    backgroundColor: 'rgba(0, 0, 0, 0.04)',
     width: width * 0.5,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 8
   },
   donationTree: {
     fontSize: 14,
     lineHeight: 21,
     letterSpacing: 0,
-    textAlign: "left",
-    color: "#707070",
+    textAlign: 'left',
+    color: '#707070',
     marginLeft: 6,
-    fontFamily: "OpenSans-SemiBold"
+    fontFamily: 'OpenSans-SemiBold'
   },
   otherPaymentText: {
     fontSize: 12,
     lineHeight: 12,
     letterSpacing: 0,
-    textAlign: "left",
-    color: "#4d5153",
+    textAlign: 'left',
+    color: '#4d5153',
     marginTop: 8,
-    fontFamily: "OpenSans-SemiBold"
+    fontFamily: 'OpenSans-SemiBold'
   },
   continueButtonView: {
-    backgroundColor: "#89b53a",
+    backgroundColor: '#89b53a',
     paddingVertical: 12,
     height: 52,
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    flexDirection: 'row',
     borderRadius: 26,
     right: 20
   },
   continueButtonText: {
-    fontFamily: "OpenSans-SemiBold",
+    fontFamily: 'OpenSans-SemiBold',
     fontSize: 16,
     letterSpacing: 0.21,
-    color: "#ffffff",
+    color: '#ffffff',
     marginRight: 12
   },
 
   // Input Selection
 
   treeCountTextInput: {
-    borderColor: "gray",
+    borderColor: 'gray',
     borderWidth: 0,
     borderBottomWidth: 1,
     padding: 0,
     width: 50,
-    color: "#fff"
+    color: '#fff'
   },
   treeCountTextInputSelected: {
-    borderColor: "white",
+    borderColor: 'white',
     borderWidth: 0,
     borderBottomWidth: 1,
     padding: 0,
     width: 50,
-    color: "#fff"
+    color: '#fff'
   },
   treeCountNumber: {
     fontSize: 14,
-    fontWeight: "normal",
-    fontStyle: "normal",
+    fontWeight: 'normal',
+    fontStyle: 'normal',
     lineHeight: 19,
     letterSpacing: 0,
-    textAlign: "center",
-    color: "#4d5153",
-    fontFamily: "OpenSans-Regular"
+    textAlign: 'center',
+    color: '#4d5153',
+    fontFamily: 'OpenSans-Regular'
   },
   treeCountNumberSelected: {
     fontSize: 14,
-    fontWeight: "normal",
-    fontStyle: "normal",
+    fontWeight: 'normal',
+    fontStyle: 'normal',
     lineHeight: 19,
     letterSpacing: 0,
-    textAlign: "center",
-    color: "#ffffff",
-    fontFamily: "OpenSans-Regular"
+    textAlign: 'center',
+    color: '#ffffff',
+    fontFamily: 'OpenSans-Regular'
   },
 
   // Donor Form
 
   formScrollView: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     flex: 1,
     padding: 24
     // paddingBottom: 100,
   },
   formHalfTextField: {
-    width: "45%",
+    width: '45%',
     marginTop: 24,
     zIndex: 1
   },
   formView: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 });

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-import orderBy from "lodash/orderBy";
-import PropTypes from "prop-types";
-import React, { PureComponent } from "react";
+import orderBy from 'lodash/orderBy';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import {
   Animated,
   FlatList,
@@ -9,19 +9,19 @@ import {
   RefreshControl,
   Text,
   View
-} from "react-native";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { selectPlantProjectAction } from "../../../actions/selectPlantProjectAction";
-import { debug } from "../../../debug";
-import { updateStaticRoute } from "../../../helpers/routerHelper";
-import i18n from "../../../locales/i18n.js";
-import styles from "../../../styles/selectplantproject/featured.native";
-import { flatListContainerStyle } from "../../../styles/selectplantproject/selectplantproject-snippet.native";
-import colors from "../../../utils/constants";
-import LoadingIndicator from "../../Common/LoadingIndicator.native";
-import PlantProjectSnippet from "../../PlantProjects/PlantProjectSnippet";
-import { trees } from "./../../../assets";
+} from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
+import { debug } from '../../../debug';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import i18n from '../../../locales/i18n.js';
+import styles from '../../../styles/selectplantproject/featured.native';
+import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
+import colors from '../../../utils/constants';
+import LoadingIndicator from '../../Common/LoadingIndicator.native';
+import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
+import { trees } from './../../../assets';
 
 class FeaturedProjects extends PureComponent {
   constructor(props) {
@@ -37,7 +37,7 @@ class FeaturedProjects extends PureComponent {
       initiated: false,
       shouldLoad: props.plantProjects.length != this.perPage,
       loader: true,
-      search: props.search || ""
+      search: props.search || ''
     };
   }
   componentDidMount() {
@@ -47,7 +47,7 @@ class FeaturedProjects extends PureComponent {
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ isFetching: true, page: 1 }, async () => {
         try {
-          const data = await this.props.loadProjects("featured", {
+          const data = await this.props.loadProjects('featured', {
             page: this.state.page
           });
           this.setState({
@@ -63,7 +63,7 @@ class FeaturedProjects extends PureComponent {
   async UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.index == 0 && !this.state.initiated) {
       debug(
-        "component got index calling in featured=======================================================",
+        'component got index calling in featured=======================================================',
         nextProps
       );
       this.setState({
@@ -73,7 +73,7 @@ class FeaturedProjects extends PureComponent {
     }
     if (nextProps.search && this.state.search !== nextProps.search) {
       this.setState({ search: nextProps.search });
-      debug("search", nextProps.search);
+      debug('search', nextProps.search);
     }
   }
   fetchMore = () => {
@@ -81,7 +81,7 @@ class FeaturedProjects extends PureComponent {
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ page: this.state.page + 1 }, async () => {
         try {
-          const data = await this.props.loadProjects("featured", {
+          const data = await this.props.loadProjects('featured', {
             page: this.state.page
           });
           this.setState({
@@ -97,19 +97,19 @@ class FeaturedProjects extends PureComponent {
   };
   _keyExtractor = item => item.id.toString();
   onSelectClickedFeaturedProjects = item => {
-    console.log("Project Item ------ ", item);
+    console.log('Project Item ------ ', item);
     this.props.selectPlantProjectAction(item.id);
     const { navigation, context } = this.props;
-    updateStaticRoute("app_donate_detail", navigation, {
+    updateStaticRoute('app_donate_detail', navigation, {
       id: item.id,
-      userForm: navigation.getParam("userForm"),
+      userForm: navigation.getParam('userForm'),
       context: context
     });
   };
 
   _renderItem = ({ item }) => (
     <PlantProjectSnippet
-      key={"projectFull" + item.id}
+      key={'projectFull' + item.id}
       cardStyle={styles.cardStyle}
       onMoreClick={id => this.props.onMoreClick(id, item.name)}
       plantProject={item}
@@ -125,13 +125,13 @@ class FeaturedProjects extends PureComponent {
     const { loader } = this.state;
     let featuredProjects = orderBy(
       this.props.plantProjects.filter(project => project.isFeatured),
-      "created"
+      'created'
     );
 
     const Header = (
       <View style={styles.headerView}>
         <Text style={styles.headerTitle}>
-          {i18n.t("label.select_project_title")}
+          {i18n.t('label.select_project_title')}
         </Text>
         <Image
           source={trees}
@@ -170,7 +170,7 @@ class FeaturedProjects extends PureComponent {
             ])}
           />
         ) : (
-          <LoadingIndicator contentLoader screen={"ProjectsLoading"} />
+          <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
         )}
       </View>
     );

@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   setDonationDetails,
   setDonorDetails,
@@ -9,9 +9,9 @@ import {
   setPledgeDetails,
   createDonation,
   donationPay
-} from "../redux/action";
-import PaymentDetailsNative from "../screens/PaymentDetails.native";
-import { currentUserProfileSelector } from "../../../selectors/index";
+} from '../redux/action';
+import PaymentDetailsNative from '../screens/PaymentDetails.native';
+import { currentUserProfileSelector } from '../../../selectors/index';
 const PaymentDetails = props => {
   return (
     <PaymentDetailsNative
@@ -34,7 +34,7 @@ const PaymentDetails = props => {
       currentUserProfile={props.currentUserProfile}
       createDonation={props.createDonation}
       donationPay={props.donationPay}
-      paymentSetup={props.navigation.getParam("paymentSetup")}
+      paymentSetup={props.navigation.getParam('paymentSetup')}
     />
   );
 };

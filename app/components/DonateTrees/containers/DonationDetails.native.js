@@ -1,12 +1,12 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { fetchCurrencies } from "../../../actions/currencies";
-import { loadProject } from "../../../actions/loadTposAction";
-import { loadUserProfile } from "../../../actions/loadUserProfileAction";
-import { selectPlantProjectAction } from "../../../actions/selectPlantProjectAction";
-import DonateTrees from "../screens/DonationDetails.native";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchCurrencies } from '../../../actions/currencies';
+import { loadProject } from '../../../actions/loadTposAction';
+import { loadUserProfile } from '../../../actions/loadUserProfileAction';
+import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
+import DonateTrees from '../screens/DonationDetails.native';
 import {
   setDonationDetails,
   setDonorDetails,
@@ -16,20 +16,20 @@ import {
   createDonation,
   clearDonationReducer,
   donationPay
-} from "../redux/action";
+} from '../redux/action';
 import {
   currenciesSelector,
   currentUserProfileSelector,
   getCurrency,
   selectedPlantProjectIdSelector,
   selectedPlantProjectSelector
-} from "../../../selectors";
-import * as RNLocalize from "react-native-localize";
-import { ActivityIndicator, View } from "react-native";
+} from '../../../selectors';
+import * as RNLocalize from 'react-native-localize';
+import { ActivityIndicator, View } from 'react-native';
 
 class DonationTreesContainer extends Component {
   state = {
-    currency: ""
+    currency: ''
   };
   static navigationOptions = {
     header: null
@@ -50,8 +50,8 @@ class DonationTreesContainer extends Component {
     // selectedProjectId &&
     //   (await this.props.loadProject({ id: selectedProjectId }));
     let selectedProjectId;
-    if (this.props.navigation && this.props.navigation.getParam("id"))
-      selectedProjectId = parseInt(this.props.navigation.getParam("id"));
+    if (this.props.navigation && this.props.navigation.getParam('id'))
+      selectedProjectId = parseInt(this.props.navigation.getParam('id'));
 
     if (this.props.selectedProject === undefined) {
       this.props.loadProject({ id: selectedProjectId });
@@ -66,7 +66,7 @@ class DonationTreesContainer extends Component {
     }
 
     // this causes a redraw
-    typeof selectedProjectId == "number" &&
+    typeof selectedProjectId == 'number' &&
       this.props.selectPlantProjectAction(selectedProjectId);
 
     if (!this.props.currencies.currencies) {
@@ -122,13 +122,13 @@ class DonationTreesContainer extends Component {
       <View
         style={{
           flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#fff"
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#fff'
         }}
       >
         <ActivityIndicator
-          style={{ alignSelf: "center" }}
+          style={{ alignSelf: 'center' }}
           size="large"
           color="#89b53a"
         />

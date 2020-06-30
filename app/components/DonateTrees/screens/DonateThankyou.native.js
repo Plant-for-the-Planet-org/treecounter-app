@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Image,
   ScrollView,
@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
   BackHandler
-} from "react-native";
+} from 'react-native';
 import {
   closeIcon,
   deciduousTree,
@@ -14,29 +14,29 @@ import {
   downloadGreen,
   planetLogo,
   sendGreen
-} from "../../../assets";
-import i18n from "../../../locales/i18n";
-import styles from "../../../styles/donation/donation.native";
-import PrimaryButton from "../../Common/Button/PrimaryButton";
-import { updateStaticRoute, updateRoute } from "../../../helpers/routerHelper";
+} from '../../../assets';
+import i18n from '../../../locales/i18n';
+import styles from '../../../styles/donation/donation.native';
+import PrimaryButton from '../../Common/Button/PrimaryButton';
+import { updateStaticRoute, updateRoute } from '../../../helpers/routerHelper';
 
 export default function DonateThankYou(props) {
   const { getParam } = props.navigation;
-  let treeCount = getParam("treeCount");
-  let plantedBy = getParam("plantedBy");
-  let loggedIn = getParam("loggedIn");
-  let treePossessive = treeCount > 1 ? "trees" : "tree";
+  let treeCount = getParam('treeCount');
+  let plantedBy = getParam('plantedBy');
+  let loggedIn = getParam('loggedIn');
+  let treePossessive = treeCount > 1 ? 'trees' : 'tree';
 
   let navigateBack = () => {
-    updateRoute("app_donateTrees", props.navigation);
+    updateRoute('app_donateTrees', props.navigation);
     return true;
   };
 
   React.useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", navigateBack);
+    BackHandler.addEventListener('hardwareBackPress', navigateBack);
     // clean up
     return () => {
-      BackHandler.removeEventListener("hardwareBackPress", navigateBack);
+      BackHandler.removeEventListener('hardwareBackPress', navigateBack);
     };
   });
 
@@ -62,9 +62,9 @@ export default function DonateThankYou(props) {
         {/* ===== Image Ends ===== */}
 
         <View style={styles.thankYouContainer}>
-          <Text style={styles.thankyouText}>{i18n.t("label.thankyou")}!</Text>
+          <Text style={styles.thankyouText}>{i18n.t('label.thankyou')}!</Text>
           <Text style={styles.thankyouMessage}>
-            {i18n.t("label.thankyou_message", {
+            {i18n.t('label.thankyou_message', {
               treeCount,
               treePossessive,
               plantedBy
@@ -116,8 +116,8 @@ export default function DonateThankYou(props) {
       <PrimaryButton
         onClick={() => {
           loggedIn
-            ? updateRoute("app_userHome", props.navigation)
-            : updateRoute("app_donateTrees", props.navigation);
+            ? updateRoute('app_userHome', props.navigation)
+            : updateRoute('app_donateTrees', props.navigation);
         }}
         buttonStyle={styles.thankyouButton}
       >

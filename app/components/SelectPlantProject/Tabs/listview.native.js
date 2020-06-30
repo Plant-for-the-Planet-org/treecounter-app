@@ -1,16 +1,16 @@
 /* eslint-disable no-underscore-dangle */
-import React, { PureComponent } from "react";
-import { FlatList, View, RefreshControl, Animated } from "react-native";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { debug } from "../../../debug";
-import PlantProjectSnippet from "../../../components/PlantProjects/PlantProjectSnippet";
-import styles from "../../../styles/selectplantproject/list.native";
-import { updateStaticRoute } from "../../../helpers/routerHelper";
-import { flatListContainerStyle } from "../../../styles/selectplantproject/selectplantproject-snippet.native";
-import { selectPlantProjectAction } from "../../../actions/selectPlantProjectAction";
-import LoadingIndicator from "../../Common/LoadingIndicator.native";
+import React, { PureComponent } from 'react';
+import { FlatList, View, RefreshControl, Animated } from 'react-native';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { debug } from '../../../debug';
+import PlantProjectSnippet from '../../../components/PlantProjects/PlantProjectSnippet';
+import styles from '../../../styles/selectplantproject/list.native';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
+import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
+import LoadingIndicator from '../../Common/LoadingIndicator.native';
 
 class ListViewProjects extends PureComponent {
   constructor(props) {
@@ -28,7 +28,7 @@ class ListViewProjects extends PureComponent {
   onRefresh() {
     this.setState({ isFetching: true, page: 1 }, async () => {
       try {
-        const data = await this.props.loadProjects("all", {
+        const data = await this.props.loadProjects('all', {
           page: this.state.page
         });
         this.setState({
@@ -49,10 +49,10 @@ class ListViewProjects extends PureComponent {
       // );
       this.setState({ initiated: true, isFetching: true });
       try {
-        const data = await this.props.loadProjects("all", {});
+        const data = await this.props.loadProjects('all', {});
         this.setState({ isFetching: false, plantProjects: data }, () => {
           debug(
-            "component updated with data first time list =======================================================",
+            'component updated with data first time list =======================================================',
             this.state
           );
         });
@@ -66,7 +66,7 @@ class ListViewProjects extends PureComponent {
       this.setState({ page: this.state.page + 1 }, async () => {
         // debug('fettch more list calling load');
         try {
-          const data = await this.props.loadProjects("all", {
+          const data = await this.props.loadProjects('all', {
             page: this.state.page
           });
           this.setState({
@@ -82,19 +82,19 @@ class ListViewProjects extends PureComponent {
   };
   _keyExtractor = item => item.id.toString();
   onSelectClickedFeaturedProjects = item => {
-    console.log("Project Item ------ ", item);
+    console.log('Project Item ------ ', item);
     this.props.selectPlantProjectAction(item.id);
     const { navigation, context } = this.props;
-    updateStaticRoute("app_donate_detail", navigation, {
+    updateStaticRoute('app_donate_detail', navigation, {
       id: item.id,
-      userForm: navigation.getParam("userForm"),
+      userForm: navigation.getParam('userForm'),
       context: context
     });
   };
   _renderItem = ({ item }) => (
     <PlantProjectSnippet
       cardStyle={styles.cardStyle}
-      key={"projectFull" + item.id}
+      key={'projectFull' + item.id}
       onMoreClick={id => this.props.onMoreClick(id, item.name)}
       plantProject={item}
       onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
@@ -108,7 +108,7 @@ class ListViewProjects extends PureComponent {
   render() {
     const { isFetching } = this.state;
     return (
-      <View style={{ height: "100%" }}>
+      <View style={{ height: '100%' }}>
         {!isFetching ? (
           <FlatList
             contentContainerStyle={{
@@ -123,7 +123,7 @@ class ListViewProjects extends PureComponent {
               <RefreshControl
                 refreshing={this.state.isFetching}
                 onRefresh={this.onRefresh.bind(this)}
-                tintColor={"#89b53a"}
+                tintColor={'#89b53a'}
               />
             }
             scrollEventThrottle={24}
@@ -136,7 +136,7 @@ class ListViewProjects extends PureComponent {
             ])}
           />
         ) : (
-          <LoadingIndicator contentLoader screen={"ProjectsLoading"} />
+          <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
         )}
       </View>
     );

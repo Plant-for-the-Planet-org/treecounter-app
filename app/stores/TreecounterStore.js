@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import thunkMiddleware from "redux-thunk";
-import logger from "redux-logger";
-import reactotron from "../../ReactotronConfig";
-import { context } from "../config";
-import middlewares from "./middlewares";
-import initialState from "./storeInitialState";
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import logger from 'redux-logger';
+import reactotron from '../../ReactotronConfig';
+import { context } from '../config';
+import middlewares from './middlewares';
+import initialState from './storeInitialState';
 
-import { initialState as entitiesState } from "../reducers/entitiesReducer";
-import reducers from "../reducers/reducer";
+import { initialState as entitiesState } from '../reducers/entitiesReducer';
+import reducers from '../reducers/reducer';
 /**
  * This function will be called in App.js by either:
  *   1. ReactOnRails.registerStore({ TreecounterStore: configureStore }) and receive props and context created by Symfony
@@ -29,7 +29,7 @@ export default function configureStore() {
 
   // use devtools if we are in a browser and the extension is enabled
   const composeEnhancers =
-    typeof window !== "undefined" &&
+    typeof window !== 'undefined' &&
     // eslint-disable-next-line no-underscore-dangle
     (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
 

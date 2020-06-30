@@ -1,14 +1,14 @@
-import { createSelector } from "reselect";
-import { denormalize } from "normalizr";
-import { debug } from "../debug";
+import { createSelector } from 'reselect';
+import { denormalize } from 'normalizr';
+import { debug } from '../debug';
 import {
   userProfileSchema,
   plantProjectSchema,
   competitionPagerSchema,
   competitionSchema
-} from "../schemas";
-import { getCurrentUserProfileId } from "../reducers/currentUserProfileIdReducer";
-import { getUserFeeds } from "../reducers/userFeedReducer";
+} from '../schemas';
+import { getCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
+import { getUserFeeds } from '../reducers/userFeedReducer';
 import {
   getPlantProjects,
   getPaymentGateways,
@@ -16,17 +16,17 @@ import {
   getCompetitionPager,
   getCompetition,
   getCompetitionEnrollment
-} from "../reducers/entitiesReducer";
-import { getSupportedTreecounter } from "../reducers/supportedTreecounterReducer";
-import { getSelectedPlantProjectId } from "../reducers/selectedPlantProjectIdReducer";
-import { getPledges } from "../reducers/pledgeReducer";
-import { getPostedPledges } from "../reducers/pledgeReducer";
-import { getPledgeEvents } from "../reducers/pledgeEventReducer";
-import { getPaymentStatus } from "../reducers/paymentStatus";
-import { getCurrencies } from "../reducers/currenciesReducer";
-import { getGlobalCurrency } from "../reducers/currencyReducer";
-import { getCdnMedia, getWebMapIdList } from "../reducers/configReducer";
-import { getCompetitionDetail } from "../components/Competition/redux/competitionDetailReducer";
+} from '../reducers/entitiesReducer';
+import { getSupportedTreecounter } from '../reducers/supportedTreecounterReducer';
+import { getSelectedPlantProjectId } from '../reducers/selectedPlantProjectIdReducer';
+import { getPledges } from '../reducers/pledgeReducer';
+import { getPostedPledges } from '../reducers/pledgeReducer';
+import { getPledgeEvents } from '../reducers/pledgeEventReducer';
+import { getPaymentStatus } from '../reducers/paymentStatus';
+import { getCurrencies } from '../reducers/currenciesReducer';
+import { getGlobalCurrency } from '../reducers/currencyReducer';
+import { getCdnMedia, getWebMapIdList } from '../reducers/configReducer';
+import { getCompetitionDetail } from '../components/Competition/redux/competitionDetailReducer';
 
 export const supportedTreecounterSelector = state =>
   getSupportedTreecounter(state);
@@ -53,7 +53,7 @@ export const paymentStatusSelector = state => getPaymentStatus(state);
 export const pledgeEventSelector = state => getPledgeEvents(state);
 export const selectedCompetitionIdSelector = state =>
   getCompetitionDetail(state);
-function logSelectorUpdate(selectorName, args = "None") {
+function logSelectorUpdate(selectorName, args = 'None') {
   //debug('SELECTOR: ' + selectorName, args);
 }
 
@@ -92,7 +92,7 @@ export const getAllPlantProjectsSelector = createSelector(
       []
     );
     let tpoNameExpandedProjects = normalisedProjects.map(project => {
-      project.tpo_name = tpos[project.tpoId] ? tpos[project.tpoId].name : "-";
+      project.tpo_name = tpos[project.tpoId] ? tpos[project.tpoId].name : '-';
       return project;
     });
     tpoNameExpandedProjects.sort(function(a, b) {
@@ -143,7 +143,7 @@ export const currentUserProfileSelector = createSelector(
   currentUserProfileIdSelector,
   entitiesSelector,
   (currentUserProfileId, entities) => {
-    logSelectorUpdate("currentUserProfileSelector");
+    logSelectorUpdate('currentUserProfileSelector');
     return null === currentUserProfileId
       ? null
       : denormalize(
@@ -160,7 +160,7 @@ export const currentUserProfileSelector = createSelector(
 export const userTreecounterSelector = createSelector(
   currentUserProfileSelector,
   currentUserProfile => {
-    logSelectorUpdate("userTreecounterSelector");
+    logSelectorUpdate('userTreecounterSelector');
     return null === currentUserProfile ? null : currentUserProfile.treecounter;
   }
 );
@@ -168,7 +168,7 @@ export const userTreecounterSelector = createSelector(
 export const userChallengesSelector = createSelector(
   userTreecounterSelector,
   userTreecounter => {
-    logSelectorUpdate("userChallengesSelector");
+    logSelectorUpdate('userChallengesSelector');
     return null === userTreecounter ? null : userTreecounter.challenges;
   }
 );
@@ -180,7 +180,7 @@ export const userChallengesSelector = createSelector(
 export const userContributionsSelector = createSelector(
   userTreecounterSelector,
   userTreecounter => {
-    logSelectorUpdate("userContributionsSelector");
+    logSelectorUpdate('userContributionsSelector');
     return null === userTreecounter ? null : userTreecounter.contributions;
   }
 );
@@ -213,11 +213,11 @@ export const sortedUserContributionsSelector = createSelector(
     let newContributions = [];
     if (contributions !== null && gifts !== null) {
       for (let i = 0; i < contributions.length; i++) {
-        contributions[i].category = "contributions";
+        contributions[i].category = 'contributions';
         newContributions.push(contributions[i]);
       }
       for (let i = 0; i < gifts.length; i++) {
-        gifts[i].category = "gifts";
+        gifts[i].category = 'gifts';
         newContributions.push(gifts[i]);
       }
     }
@@ -245,7 +245,7 @@ export const selectedPlantProjectSelector = createSelector(
   selectedPlantProjectIdSelector,
   entitiesSelector,
   (selectedPlantProjectId, entities) => {
-    logSelectorUpdate("selectedPlantProjectSelector");
+    logSelectorUpdate('selectedPlantProjectSelector');
     return null === selectedPlantProjectId
       ? null
       : denormalize(
@@ -263,7 +263,7 @@ export const selectedReviewsSelector = createSelector(
   selectedPlantProjectIdSelector,
   entitiesSelector,
   (selectedPlantProjectId, entities) => {
-    logSelectorUpdate("selectedReviewsSelector");
+    logSelectorUpdate('selectedReviewsSelector');
     return null === selectedPlantProjectId
       ? null
       : //denormalize(
@@ -282,7 +282,7 @@ export const selectedTpoSelector = createSelector(
   selectedPlantProjectSelector,
   getTpos,
   (selectedPlantProject, tpos) => {
-    logSelectorUpdate("selectedTpoSelector");
+    logSelectorUpdate('selectedTpoSelector');
     if (selectedPlantProject) {
       if (Object.keys(tpos).length) {
         return tpos[selectedPlantProject.tpoId];
@@ -303,7 +303,7 @@ export const availablePaymentGatewaysSelector = createSelector(
   selectedPlantProjectSelector,
   paymentGatewaysSelector,
   (selectedPlantProject, paymentGateways) => {
-    logSelectorUpdate("availablePaymentGatewaysSelector");
+    logSelectorUpdate('availablePaymentGatewaysSelector');
     return null === selectedPlantProject
       ? null
       : paymentGateways.filter(function(paymentGateway) {
@@ -318,7 +318,7 @@ export const availablePaymentGatewaysSelector = createSelector(
 export const userTreecounterDataSelector = createSelector(
   userTreecounterSelector,
   treecounter => {
-    logSelectorUpdate("userTreecounterDataSelector");
+    logSelectorUpdate('userTreecounterDataSelector');
     return null === treecounter
       ? null
       : {
@@ -342,7 +342,7 @@ export const userPlantProjectsSelector = createSelector(
   plantProjectsSelector,
   sortedUserContributionsSelector,
   (currentUserProfile, plantProjects, sortedUserContributions) => {
-    logSelectorUpdate("userPlantProjectsSelector");
+    logSelectorUpdate('userPlantProjectsSelector');
     if (null === currentUserProfile) {
       return [];
     }
@@ -350,7 +350,7 @@ export const userPlantProjectsSelector = createSelector(
     const userPlantProjectIds = [
       ...new Set(
         sortedUserContributions
-          .filter(contribution => "donation" === contribution.contributionType)
+          .filter(contribution => 'donation' === contribution.contributionType)
           .map(contribution => contribution.plantProjectId)
       )
     ];
@@ -367,7 +367,7 @@ export const userPlantProjectsSelector = createSelector(
 export const sortedUserPlantProjectsSelector = createSelector(
   userPlantProjectsSelector,
   plantProjects => {
-    logSelectorUpdate("sortedUserPlantProjectsSelector");
+    logSelectorUpdate('sortedUserPlantProjectsSelector');
     return null === plantProjects
       ? null
       : Object.values(plantProjects).sort(
@@ -384,7 +384,7 @@ export const activePlantProjectsSelector = createSelector(
   plantProjectsSelector,
   tposSelector,
   (plantProjects, tpos) => {
-    logSelectorUpdate("activePlantProjectsSelector");
+    logSelectorUpdate('activePlantProjectsSelector');
     return Object.values(plantProjects).filter(plantProject => {
       let tpo = tpos[plantProject.tpoId];
       return (
@@ -404,7 +404,7 @@ export const unusedPlantProjectsSelector = createSelector(
   userPlantProjectsSelector,
   activePlantProjectsSelector,
   (userProjects, allActiveProjects) => {
-    logSelectorUpdate("currentUserProfileSelector");
+    logSelectorUpdate('currentUserProfileSelector');
     if (null === userProjects || 0 === userProjects.length) {
       return allActiveProjects;
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Animated,
   Image,
@@ -8,21 +8,21 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator
-} from "react-native";
-import WebView from "react-native-webview";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import stripe from "tipsi-stripe";
-import { nextArrowWhite, paypal, paypalLogo } from "../../../assets";
-import styles from "../../../styles/donation/donation.native";
-import colors from "../../../utils/constants";
-import { formatNumber } from "../../../utils/utils";
-import CreditCardForm from "../components/PaymentMethods/CreditCardForm";
-import SafeAreaView from "react-native-safe-area-view";
-import { Header } from "./../components/Header";
-import PaymentLoader from "../components/PaymentLoader";
-import { handleNativePayPress } from "./../components/PaymentMethods/NativePay";
-import Axios from "axios";
+} from 'react-native';
+import WebView from 'react-native-webview';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import stripe from 'tipsi-stripe';
+import { nextArrowWhite, paypal, paypalLogo } from '../../../assets';
+import styles from '../../../styles/donation/donation.native';
+import colors from '../../../utils/constants';
+import { formatNumber } from '../../../utils/utils';
+import CreditCardForm from '../components/PaymentMethods/CreditCardForm';
+import SafeAreaView from 'react-native-safe-area-view';
+import { Header } from './../components/Header';
+import PaymentLoader from '../components/PaymentLoader';
+import { handleNativePayPress } from './../components/PaymentMethods/NativePay';
+import Axios from 'axios';
 
 export default function DonationStep3(props) {
   const [payPalInfo, setPayPalInfo] = React.useState(false);
@@ -34,7 +34,7 @@ export default function DonationStep3(props) {
   const [approvalUrl, setApprovalUrl] = React.useState(null);
   const [dataDetail, setDataDetail] = React.useState(null);
 
-  const [cardValues, setcardValues] = React.useState("");
+  const [cardValues, setcardValues] = React.useState('');
   const [cardValid, setcardValid] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
@@ -44,11 +44,11 @@ export default function DonationStep3(props) {
 
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
+      'keyboardDidShow',
       keyboardDidShow
     );
     const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
+      'keyboardDidHide',
       keyboardDidHide
     );
     if (props.paymentSetup) {
@@ -57,21 +57,21 @@ export default function DonationStep3(props) {
           props.paymentSetup.gateways[
             props.context.donationDetails.selectedTaxCountry
           ].stripe.stripePublishableKey,
-        merchantId: "", // Optional
-        androidPayMode: "test" // Android only
+        merchantId: '', // Optional
+        androidPayMode: 'test' // Android only
       });
 
       if (
-        "paypal" in
+        'paypal' in
         props.paymentSetup.gateways[
           props.context.donationDetails.selectedTaxCountry
         ]
       ) {
         setPaypalOption(true);
         setDataDetail({
-          intent: "sale",
+          intent: 'sale',
           payer: {
-            payment_method: "paypal"
+            payment_method: 'paypal'
           },
           transactions: [
             {
@@ -86,18 +86,18 @@ export default function DonationStep3(props) {
                     props.context.donationDetails.totalTreeCount *
                     props.context.donationDetails.selectedProject.treeCost
                   ).toString(),
-                  tax: "0",
-                  shipping: "0",
-                  handling_fee: "0",
-                  shipping_discount: "0",
-                  insurance: "0"
+                  tax: '0',
+                  shipping: '0',
+                  handling_fee: '0',
+                  shipping_discount: '0',
+                  insurance: '0'
                 }
               }
             }
           ],
           redirect_urls: {
-            return_url: "https://example.com",
-            cancel_url: "https://example.com"
+            return_url: 'https://example.com',
+            cancel_url: 'https://example.com'
           }
         });
       }
@@ -122,18 +122,18 @@ export default function DonationStep3(props) {
     ).then(response => {
       setAccessToken(response.data.accessToken);
       Axios.post(
-        "https://api.sandbox.paypal.com/v1/payments/payment",
+        'https://api.sandbox.paypal.com/v1/payments/payment',
         dataDetail,
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${response.data.accessToken}`
           }
         }
       )
         .then(response => {
           const { id, links } = response.data;
-          const approvalUrl = links.find(data => data.rel == "approval_url");
+          const approvalUrl = links.find(data => data.rel == 'approval_url');
 
           setPaymentId(id);
           setApprovalUrl(approvalUrl.href);
@@ -145,7 +145,7 @@ export default function DonationStep3(props) {
   };
 
   const _onNavigationStateChange = webViewState => {
-    if (webViewState.url.includes("https://example.com/")) {
+    if (webViewState.url.includes('https://example.com/')) {
       setApprovalUrl(null);
 
       const { PayerID, paymentId } = webViewState.url;
@@ -155,7 +155,7 @@ export default function DonationStep3(props) {
         { payer_id: PayerID },
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${accessToken}`
           }
         }
@@ -180,20 +180,20 @@ export default function DonationStep3(props) {
   return loading ? (
     <PaymentLoader />
   ) : (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       {approvalUrl ? (
         <WebView
-          style={{ height: "100%", width: "100%" }}
+          style={{ height: '100%', width: '100%' }}
           source={{ uri: approvalUrl }}
           onNavigationStateChange={_onNavigationStateChange}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
+          javaScriptEnabled
+          domStorageEnabled
           style={{ marginTop: 20 }}
         />
       ) : (
         <KeyboardAwareScrollView
           contentContainerStyle={[
-            Platform.OS === "ios"
+            Platform.OS === 'ios'
               ? { paddingBottom: 200 }
               : { marginTop: 24, paddingBottom: 200 }
           ]}
@@ -203,7 +203,7 @@ export default function DonationStep3(props) {
           scrollEventThrottle={16}
         >
           <View style={{ paddingHorizontal: 20 }}>
-            <Header navigation={props.navigation} title={"Payment Mode"} />
+            <Header navigation={props.navigation} title={'Payment Mode'} />
           </View>
 
           <View style={styles.pageView}>

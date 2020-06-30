@@ -1,5 +1,5 @@
-import { Formik } from "formik";
-import React, { useEffect, useState, useRef } from "react";
+import { Formik } from 'formik';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   ActivityIndicator,
   Animated,
@@ -9,47 +9,47 @@ import {
   Text,
   TouchableOpacity,
   View
-} from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { TextField } from "react-native-material-textfield";
-import * as Yup from "yup";
-import { nextArrowWhite } from "../../../assets";
-import { updateStaticRoute } from "../../../helpers/routerHelper";
-import i18n from "../../../locales/i18n.js";
-import styles from "../../../styles/donations/donorDetails";
-import { formatNumber } from "../../../utils/utils";
-import { SelectCountryModal } from "../components/DonationDetails/CountrySelector";
-import { Header } from "./../components/Header";
+} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { TextField } from 'react-native-material-textfield';
+import * as Yup from 'yup';
+import { nextArrowWhite } from '../../../assets';
+import { updateStaticRoute } from '../../../helpers/routerHelper';
+import i18n from '../../../locales/i18n.js';
+import styles from '../../../styles/donations/donorDetails';
+import { formatNumber } from '../../../utils/utils';
+import { SelectCountryModal } from '../components/DonationDetails/CountrySelector';
+import { Header } from './../components/Header';
 
-import countryData from "../../../assets/countryCodes.json";
-import SafeAreaView from "react-native-safe-area-view";
+import countryData from '../../../assets/countryCodes.json';
+import SafeAreaView from 'react-native-safe-area-view';
 
-import { getCountryFlagImageUrl } from "../../../actions/apiRouting";
+import { getCountryFlagImageUrl } from '../../../actions/apiRouting';
 
 export function getCountryData(countryCode) {
   return countryData.find(c => c.countryCode == countryCode) || {};
 }
 const DonationContactDetailsSchema = Yup.object().shape({
   firstname: Yup.string()
-    .min(2, "First name is too short!")
-    .max(50, "First name is too long!")
-    .required("First name is required"),
+    .min(2, 'First name is too short!')
+    .max(50, 'First name is too long!')
+    .required('First name is required'),
   lastname: Yup.string()
-    .min(2, "Last name is too short!")
-    .max(50, "Last name is too long!")
-    .required("Last name is equired"),
+    .min(2, 'Last name is too short!')
+    .max(50, 'Last name is too long!')
+    .required('Last name is equired'),
   email: Yup.string()
-    .email("Invalid email")
-    .required("Email is required"),
-  address: Yup.string().required("Address is required"),
-  city: Yup.string().required("City is required"),
-  zipCode: Yup.string().required("Zip Code is required"),
-  country: Yup.string().required("Country is required")
+    .email('Invalid email')
+    .required('Email is required'),
+  address: Yup.string().required('Address is required'),
+  city: Yup.string().required('City is required'),
+  zipCode: Yup.string().required('Zip Code is required'),
+  country: Yup.string().required('Country is required')
 });
 
 export default function DonorDetails(props) {
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
-  const [buttonType, setButtonType] = useState("showPayment");
+  const [buttonType, setButtonType] = useState('showPayment');
 
   const [showCountryModal, setShowCountryModal] = React.useState(false);
 
@@ -62,20 +62,20 @@ export default function DonorDetails(props) {
   let addressRef = useRef(null);
 
   const keyboardDidShow = () => {
-    setButtonType("");
+    setButtonType('');
   };
 
   const keyboardDidHide = () => {
-    setButtonType("showPayment");
+    setButtonType('showPayment');
   };
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
+      'keyboardDidShow',
       keyboardDidShow
     );
     const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
+      'keyboardDidHide',
       keyboardDidHide
     );
 
@@ -87,48 +87,48 @@ export default function DonorDetails(props) {
   });
 
   let textfieldDesigns = {
-    tintColor: "#89b53a",
-    baseColor: "#4d5153",
-    textColor: "#4d5153",
+    tintColor: '#89b53a',
+    baseColor: '#4d5153',
+    textColor: '#4d5153',
     titleFontSize: 12,
     lineWidth: 1.5,
     labelTextStyle: {
-      fontFamily: "OpenSans-SemiBold"
+      fontFamily: 'OpenSans-SemiBold'
       // textTransform: "uppercase"
     },
 
-    titleTextStyle: { fontFamily: "OpenSans-SemiBold" },
-    affixTextStyle: { fontFamily: "OpenSans-Regular" },
-    style: { fontFamily: "OpenSans-Regular" }
+    titleTextStyle: { fontFamily: 'OpenSans-SemiBold' },
+    affixTextStyle: { fontFamily: 'OpenSans-Regular' },
+    style: { fontFamily: 'OpenSans-Regular' }
   };
   return (
-    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
       <Formik
         initialValues={{
           firstname: props.currentUserProfile
             ? props.currentUserProfile.firstname
-            : "",
+            : '',
           lastname: props.currentUserProfile
             ? props.currentUserProfile.lastname
-            : "",
-          email: props.currentUserProfile ? props.currentUserProfile.email : "",
+            : '',
+          email: props.currentUserProfile ? props.currentUserProfile.email : '',
           address: props.currentUserProfile
             ? props.currentUserProfile.address
-            : "",
-          city: props.currentUserProfile ? props.currentUserProfile.city : "",
+            : '',
+          city: props.currentUserProfile ? props.currentUserProfile.city : '',
           zipCode: props.currentUserProfile
             ? props.currentUserProfile.zipCode
-            : "",
+            : '',
           country: props.currentUserProfile
             ? props.currentUserProfile.country
-            : "",
+            : '',
           isCompany: false,
-          companyName: ""
+          companyName: ''
         }}
         validationSchema={DonationContactDetailsSchema}
         onSubmit={values => {
           props.contextActions.setDonorDetails(values);
-          updateStaticRoute("payment_details_form", props.navigation, {
+          updateStaticRoute('payment_details_form', props.navigation, {
             navigation: props.navigation,
             paymentSetup: props.paymentSetup
           });
@@ -139,7 +139,7 @@ export default function DonorDetails(props) {
             <KeyboardAwareScrollView
               contentContainerStyle={[
                 styles.scrollView,
-                Platform.OS === "ios" ? null : { marginTop: 24 }
+                Platform.OS === 'ios' ? null : { marginTop: 24 }
               ]}
               keyboardDismissMode="on-drag"
               resetScrollToCoords={{ x: 0, y: 0 }}
@@ -152,7 +152,7 @@ export default function DonorDetails(props) {
                 { nativeEvent: { contentOffset: { y: scrollY } } }
               ])}
             >
-              <Header navigation={props.navigation} title={"Contact Details"} />
+              <Header navigation={props.navigation} title={'Contact Details'} />
 
               <View>
                 <View style={styles.formView}>
@@ -160,14 +160,14 @@ export default function DonorDetails(props) {
                     <TextField
                       {...textfieldDesigns}
                       returnKeyType="next"
-                      label={i18n.t("label.pledgeFormFName")}
+                      label={i18n.t('label.pledgeFormFName')}
                       value={formikProps.values.firstname}
                       error={
                         formikProps.touched.firstname &&
                         formikProps.errors.firstname
                       }
-                      onChangeText={formikProps.handleChange("firstname")}
-                      onBlur={formikProps.handleBlur("firstname")}
+                      onChangeText={formikProps.handleChange('firstname')}
+                      onBlur={formikProps.handleBlur('firstname')}
                       onSubmitEditing={() => {
                         lastnameRef.focus();
                       }}
@@ -181,14 +181,14 @@ export default function DonorDetails(props) {
                         formikProps.touched.lastname &&
                         formikProps.errors.lastname
                       }
-                      label={i18n.t("label.pledgeFormLName")}
+                      label={i18n.t('label.pledgeFormLName')}
                       value={formikProps.values.lastname}
                       returnKeyType="next"
                       ref={input => {
                         lastnameRef = input;
                       }}
-                      onChangeText={formikProps.handleChange("lastname")}
-                      onBlur={formikProps.handleBlur("lastname")}
+                      onChangeText={formikProps.handleChange('lastname')}
+                      onBlur={formikProps.handleBlur('lastname')}
                       onSubmitEditing={() => {
                         emailRef.focus();
                       }}
@@ -199,7 +199,7 @@ export default function DonorDetails(props) {
                 <View style={{ marginTop: 12 }}>
                   <TextField
                     {...textfieldDesigns}
-                    label={i18n.t("label.pledgeFormEmail")}
+                    label={i18n.t('label.pledgeFormEmail')}
                     value={formikProps.values.email}
                     keyboardType="email-address"
                     error={
@@ -209,15 +209,15 @@ export default function DonorDetails(props) {
                     ref={input => {
                       emailRef = input;
                     }}
-                    onChangeText={formikProps.handleChange("email")}
-                    onBlur={formikProps.handleBlur("email")}
+                    onChangeText={formikProps.handleChange('email')}
+                    onBlur={formikProps.handleBlur('email')}
                   />
                 </View>
 
                 <View style={{ marginTop: 12 }}>
                   <TextField
                     {...textfieldDesigns}
-                    label={i18n.t("Street Address")}
+                    label={i18n.t('Street Address')}
                     value={formikProps.values.address}
                     error={
                       formikProps.touched.address && formikProps.errors.address
@@ -226,8 +226,8 @@ export default function DonorDetails(props) {
                     ref={input => {
                       addressRef = input;
                     }}
-                    onChangeText={formikProps.handleChange("address")}
-                    onBlur={formikProps.handleBlur("address")}
+                    onChangeText={formikProps.handleChange('address')}
+                    onBlur={formikProps.handleBlur('address')}
                   />
                 </View>
 
@@ -235,7 +235,7 @@ export default function DonorDetails(props) {
                   <View style={[styles.formHalfTextField, { zIndex: 2 }]}>
                     <TextField
                       {...textfieldDesigns}
-                      label={i18n.t("City")}
+                      label={i18n.t('City')}
                       value={formikProps.values.city}
                       error={
                         formikProps.touched.city && formikProps.errors.city
@@ -244,29 +244,29 @@ export default function DonorDetails(props) {
                       // ref={input => {
                       //   cityRef = input;
                       // }}
-                      onChangeText={formikProps.handleChange("city")}
-                      onBlur={formikProps.handleBlur("city")}
+                      onChangeText={formikProps.handleChange('city')}
+                      onBlur={formikProps.handleBlur('city')}
                     />
                   </View>
                   <View style={[styles.formHalfTextField, { zIndex: 1 }]}>
                     <TextField
                       {...textfieldDesigns}
-                      label={"Zip code"}
+                      label={'Zip code'}
                       value={formikProps.values.zipCode}
                       returnKeyType="next"
                       error={
                         formikProps.touched.zipCode &&
                         formikProps.errors.zipCode
                       }
-                      onChangeText={formikProps.handleChange("zipCode")}
-                      onBlur={formikProps.handleBlur("zipCode")}
+                      onChangeText={formikProps.handleChange('zipCode')}
+                      onBlur={formikProps.handleBlur('zipCode')}
                     />
                   </View>
                 </View>
                 <TouchableOpacity
                   style={{
                     borderBottomWidth: 1.5,
-                    borderBottomColor: "#4d5153",
+                    borderBottomColor: '#4d5153',
                     marginBottom: 8,
                     paddingBottom: 6,
                     marginTop: 44
@@ -280,8 +280,8 @@ export default function DonorDetails(props) {
                   {formikProps.values.country ? (
                     <View
                       style={{
-                        flexDirection: "row",
-                        alignItems: "center"
+                        flexDirection: 'row',
+                        alignItems: 'center'
                       }}
                     >
                       <Image
@@ -289,7 +289,7 @@ export default function DonorDetails(props) {
                           uri: getCountryFlagImageUrl(
                             getCountryData(formikProps.values.country)
                               .currencyCountryFlag,
-                            "png",
+                            'png',
                             256
                           )
                         }}
@@ -300,9 +300,9 @@ export default function DonorDetails(props) {
                           paddingLeft: 12,
                           lineHeight: 22,
                           flex: 1,
-                          fontFamily: "OpenSans-Regular",
+                          fontFamily: 'OpenSans-Regular',
                           fontSize: 16,
-                          color: "#111"
+                          color: '#111'
                         }}
                       >
                         {getCountryData(formikProps.values.country).country}
@@ -311,8 +311,8 @@ export default function DonorDetails(props) {
                   ) : (
                     <Text
                       style={{
-                        fontFamily: "OpenSans-SemiBold",
-                        color: "#4d5153",
+                        fontFamily: 'OpenSans-SemiBold',
+                        color: '#4d5153',
                         fontSize: 16
                       }}
                     >
@@ -335,14 +335,14 @@ export default function DonorDetails(props) {
                   <Switch
                     style={styles.coverCommissionSwitch}
                     onValueChange={value =>
-                      formikProps.setFieldValue("isCompany", value)
+                      formikProps.setFieldValue('isCompany', value)
                     }
                     thumbColor={
-                      formikProps.values.isCompany ? "#89b53a" : "#bdc3c7"
+                      formikProps.values.isCompany ? '#89b53a' : '#bdc3c7'
                     }
                     trackColor={{
-                      false: "#f2f2f7",
-                      true: "rgba(137, 181, 58, 0.6)"
+                      false: '#f2f2f7',
+                      true: 'rgba(137, 181, 58, 0.6)'
                     }}
                     value={formikProps.values.isCompany}
                   />
@@ -351,21 +351,21 @@ export default function DonorDetails(props) {
                   <View style={{ paddingBottom: 200 }}>
                     <TextField
                       {...textfieldDesigns}
-                      label={"Company Name"}
+                      label={'Company Name'}
                       value={formikProps.values.companyName}
                       error={
                         formikProps.touched.companyName &&
                         formikProps.errors.companyName
                       }
                       returnKeyType="next"
-                      onChangeText={formikProps.handleChange("companyName")}
-                      onBlur={formikProps.handleBlur("companyName")}
+                      onChangeText={formikProps.handleChange('companyName')}
+                      onBlur={formikProps.handleBlur('companyName')}
                     />
                   </View>
                 ) : null}
               </View>
             </KeyboardAwareScrollView>
-            {buttonType === "showPayment" ? (
+            {buttonType === 'showPayment' ? (
               props.context &&
               props.context.donationDetails &&
               props.context.donationDetails.totalTreeCount ? (
@@ -435,7 +435,7 @@ export function PaymentOption(props) {
           />
         </TouchableOpacity>
       ) : (
-        <View style={[styles.continueButtonView, { backgroundColor: "grey" }]}>
+        <View style={[styles.continueButtonView, { backgroundColor: 'grey' }]}>
           <Text style={styles.continueButtonText}>Next</Text>
           <Image
             style={{ maxHeight: 24, maxWidth: 24 }}

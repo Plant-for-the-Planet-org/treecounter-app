@@ -1,21 +1,21 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { loadProject } from "../../actions/loadTposAction";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { loadProject } from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
-} from "../../actions/selectPlantProjectAction";
-import { setDonationContext } from "../../components/DonateTrees/redux/action";
-import PlantProjectFull from "../../components/PlantProjects/PlantProjectFull";
-import { updateStaticRoute } from "../../helpers/routerHelper";
+} from '../../actions/selectPlantProjectAction';
+import { setDonationContext } from '../../components/DonateTrees/redux/action';
+import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import {
   currentUserProfileSelector,
   selectedPlantProjectIdSelector,
   selectedPlantProjectSelector,
   selectedTpoSelector
-} from "../../selectors";
+} from '../../selectors';
 
 const SelectedPlantProjectContainer = props => {
   const getProjectDetails = async projectSlug => {
@@ -49,20 +49,20 @@ const SelectedPlantProjectContainer = props => {
     //   };
     //   context = newContext;
     // } else {
-    context.contextType = newContext.contextType || "direct";
+    context.contextType = newContext.contextType || 'direct';
     context.plantProject = {
       currency: props.selectedProject.currency,
       amountPerTree: props.selectedProject.treeCost,
       plantProjectID: id
     };
-    !newContext.contextType && props.setDonationContext("direct");
+    !newContext.contextType && props.setDonationContext('direct');
     // }
 
     if (navigation) {
-      updateStaticRoute("app_donate_detail", navigation, {
+      updateStaticRoute('app_donate_detail', navigation, {
         id: id,
-        userForm: navigation.getParam("userForm"),
-        giftMethod: navigation.getParam("giftMethod"),
+        userForm: navigation.getParam('userForm'),
+        giftMethod: navigation.getParam('giftMethod'),
         context: context
       });
     }
@@ -81,7 +81,7 @@ const SelectedPlantProjectContainer = props => {
 };
 
 SelectedPlantProjectContainer.navigationOptions = () => ({
-  headerMode: "none"
+  headerMode: 'none'
 });
 
 const mapStateToProps = state => ({

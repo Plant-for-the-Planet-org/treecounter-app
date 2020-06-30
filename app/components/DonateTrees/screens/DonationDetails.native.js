@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import {
-  Animated,
   Text,
   TouchableOpacity,
   View,
@@ -19,10 +18,13 @@ import {
   SelectCountryModal,
   SelectTreeCount,
   SupportUserDetails,
-  TaxReceipt,
+  TaxReceipt
+} from "../components/donationComponents.native";
+import {
   PledgeOnComponent,
   PledgeTreeCount
-} from "../components/donationComponents.native";
+} from "./../components/PledgeOnComponent";
+
 import { Header } from "./../components/Header";
 import { GiftTreesComponent } from "../components/giftDonationComponents.native";
 import ProjectModal from "../components/ProjectModal.native";
@@ -32,8 +34,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import PaymentLoader from "../components/PaymentLoader";
 import { nextArrowWhite, nextArrow } from "../../../assets";
 import { formatNumber } from "../../../utils/utils";
-import { handleApplePayPress } from "./../components/paymentMethods/applePay";
-import { handleAndroidPayPress } from "./../components/paymentMethods/googlePay";
 import { handleNativePayPress } from "./../components/paymentMethods/nativePay";
 
 import { SvgXml } from "react-native-svg";

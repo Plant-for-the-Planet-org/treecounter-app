@@ -14,7 +14,6 @@ import {
   CLEAR_PAYMENT_RESPONSE,
   SET_PLEDGE_DETAILS,
   CLEAR_PLEDGE_DETAILS,
-  SET_SELECTED_PROJECT,
   CLEAR_SELECTED_PROJECT,
   SET_SUPPORT_DETAILS,
   CLEAR_SUPPORT_DETAILS,
@@ -138,15 +137,6 @@ export const setPledgeDetails = pledgeContextDetails => dispatch => {
 export const clearPledgeDetails = () => dispatch => {
   dispatch({
     type: CLEAR_PLEDGE_DETAILS
-  });
-};
-
-export const setSelectedProjectDetails = selectedProjectDetails => dispatch => {
-  dispatch({
-    type: SET_SELECTED_PROJECT,
-    payload: {
-      selectedProjectDetails
-    }
   });
 };
 

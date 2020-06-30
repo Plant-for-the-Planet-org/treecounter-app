@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   Dimensions
 } from "react-native";
-import styles from "../../../styles/donations/donationDetails";
-import { getImageUrl } from "../../../actions/apiRouting";
-import { formatDate } from "../../../utils/utils";
+import styles from "../../../../styles/donations/donationDetails";
+import { getImageUrl } from "../../../../actions/apiRouting";
+import { formatDate } from "../../../../utils/utils";
 const width = Dimensions.get("window").width;
 
 export function PledgeOnComponent(props: {

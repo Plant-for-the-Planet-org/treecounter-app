@@ -53,9 +53,16 @@ class DonationTreesContainer extends Component {
     if (this.props.navigation && this.props.navigation.getParam("id"))
       selectedProjectId = parseInt(this.props.navigation.getParam("id"));
 
-    console.log("SELECTED PROJECT ID", selectedProjectId);
     if (this.props.selectedProject === undefined) {
       this.props.loadProject({ id: selectedProjectId });
+    }
+
+    if (
+      this.props.selectedProject &&
+      !this.props.selectedProject.tpoData &&
+      !this.props.selectedProject.paymentSetup
+    ) {
+      await this.props.loadProject({ id: selectedProjectId });
     }
 
     // this causes a redraw
@@ -81,8 +88,6 @@ class DonationTreesContainer extends Component {
   };
 
   render() {
-    console.log("SELECTED PROJECT", this.props.selectedProject);
-
     return this.props.selectedProject &&
       this.props.selectedProject.paymentSetup ? (
       <DonateTrees

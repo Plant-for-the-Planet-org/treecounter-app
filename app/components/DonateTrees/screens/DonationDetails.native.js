@@ -24,7 +24,7 @@ import { NoPlantProjectDetails } from "./../components/DonationDetails/NoPlantPr
 import {
   PledgeOnComponent,
   PledgeTreeCount
-} from "./../components/PledgeOnComponent";
+} from "../components/DonationDetails/PledgeOnComponent";
 
 import { Header } from "./../components/Header";
 import { GiftTreesComponent } from "../components/giftDonationComponents.native";

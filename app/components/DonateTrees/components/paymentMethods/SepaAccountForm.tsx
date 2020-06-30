@@ -1,39 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Text,
-  StyleSheet,
   View,
-  ScrollView,
   TouchableOpacity,
   Image,
   Keyboard,
-  Platform,
   TextInput
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import { sepa } from './../../../assets';
-import CheckBox from 'react-native-check-box';
-import styles from './../../../styles/donation/donation.native';
-
-import { TextField } from 'react-native-material-textfield';
-import i18n from '../../../locales/i18n';
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { sepa } from "../../../../assets";
+import CheckBox from "react-native-check-box";
+import styles from "../../../../styles/donation/donation.native";
 
 export default class SepaAccountForm extends Component {
   state = {
     sepaInfo: false,
     showNewSepaAccount: false,
     showPay: true,
-    sepaIbanNumber: '',
+    sepaIbanNumber: "",
     sepaIbanNumberList: [
       {
         id: 0,
         selected: false,
-        cardNumber: '5997'
+        cardNumber: "5997"
       },
       {
         id: 1,
         selected: true,
-        cardNumber: '5997'
+        cardNumber: "5997"
       }
     ]
   };
@@ -73,11 +67,11 @@ export default class SepaAccountForm extends Component {
 
   componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
+      "keyboardDidShow",
       this._keyboardDidShow
     );
     this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
+      "keyboardDidHide",
       this._keyboardDidHide
     );
   }
@@ -134,7 +128,7 @@ export default class SepaAccountForm extends Component {
             <View>
               {this.state.sepaIbanNumberList.map(sepaIbanAccount => (
                 <TouchableOpacity
-                  style={{ flexDirection: 'row', marginTop: 28 }}
+                  style={{ flexDirection: "row", marginTop: 28 }}
                   onPress={() => {
                     this.selectSepaIban(sepaIbanAccount.id);
                   }}
@@ -155,7 +149,7 @@ export default class SepaAccountForm extends Component {
                     />
                   </View>
 
-                  <Text style={{ fontWeight: 'bold', marginRight: 10 }}>
+                  <Text style={{ fontWeight: "bold", marginRight: 10 }}>
                     SEPA IBAN Ending in 2000
                   </Text>
                 </TouchableOpacity>
@@ -164,7 +158,7 @@ export default class SepaAccountForm extends Component {
               {/* View for New Sepa Card  */}
               <View>
                 <TouchableOpacity
-                  style={{ flexDirection: 'row', marginTop: 28 }}
+                  style={{ flexDirection: "row", marginTop: 28 }}
                   onPress={() => {
                     this.selectNewSepaAccount();
                   }}
@@ -225,11 +219,11 @@ export default class SepaAccountForm extends Component {
                         });
                       }}
                       rightText={
-                        'Save this payment method in my account for future donations'
+                        "Save this payment method in my account for future donations"
                       }
                       rightTextStyle={styles.checkBoxText}
                       isChecked={this.state.isCheckedSepa}
-                      checkBoxColor={'#89b53a'}
+                      checkBoxColor={"#89b53a"}
                     />
                   </View>
                 ) : null}

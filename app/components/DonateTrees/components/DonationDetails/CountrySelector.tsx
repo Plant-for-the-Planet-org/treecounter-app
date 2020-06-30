@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   FlatList,
   Image,
@@ -11,71 +11,9 @@ import {
 import Modal from "react-native-modalbox";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
-import { getCountryFlagImageUrl } from "../../../actions/apiRouting";
-import countryData from "../../../assets/countryCodes.json";
-import styles from "../../../styles/donations/donationDetails";
-
-export function TaxReceipt(props) {
-  let {
-    taxReceiptSwitch,
-    toggleTaxReceipt,
-    selectedTaxCountry,
-    setShowTaxCountryModal,
-    oneTaxCountry
-  } = props;
-  const SelectedCountryText = () => {
-    return (
-      <Text
-        style={[
-          styles.isTaxDeductibleCountry,
-          taxReceiptSwitch ? null : { color: "rgba(0, 0, 0, 0.3)" }
-        ]}
-      >
-        {getCountryData(selectedTaxCountry).country}
-      </Text>
-    );
-  };
-  return (
-    <View style={styles.isTaxDeductibleView}>
-      <View>
-        <Text style={styles.isTaxDeductibleText}>
-          Send me a tax deduction receipt for
-        </Text>
-        {oneTaxCountry ? (
-          <TouchableOpacity
-            onPress={() => {
-              setShowTaxCountryModal(
-                prevTaxCountryModal => !prevTaxCountryModal
-              ),
-                toggleTaxReceipt(true);
-            }}
-            style={{ flexDirection: "row", alignItems: "center" }}
-          >
-            <SelectedCountryText />
-            <Icon
-              name={"chevron-down"}
-              size={14}
-              color={taxReceiptSwitch ? "#89b53a" : "rgba(0, 0, 0, 0.2)"}
-            />
-          </TouchableOpacity>
-        ) : (
-          <SelectedCountryText />
-        )}
-      </View>
-
-      <Switch
-        style={styles.isTaxDeductibleSwitch}
-        onValueChange={toggleTaxReceipt}
-        value={taxReceiptSwitch}
-        thumbColor={taxReceiptSwitch ? "#89b53a" : "#bdc3c7"}
-        trackColor={{
-          false: "#f2f2f7",
-          true: "rgba(137, 181, 58, 0.6)"
-        }}
-      />
-    </View>
-  );
-}
+import { getCountryFlagImageUrl } from "../../../../actions/apiRouting";
+import countryData from "../../../../assets/countryCodes.json";
+import styles from "../../../../styles/donations/donationDetails";
 
 export function getCountryData(countryCode) {
   return countryData.find(c => c.countryCode == countryCode) || {};
@@ -251,108 +189,5 @@ export function SelectCountryModal(props) {
         <MaterialIcon name="close" size={24} color="#4d5153" />
       </TouchableOpacity>
     </Modal>
-  );
-}
-
-export function SelectTreeCount(props) {
-  const [customTreeCount, setCustomTreeCountLocal] = React.useState(
-    props.customTreeCount ? props.customTreeCount : false
-  );
-  const [tempTreeCount, setTempTreeCount] = React.useState(0);
-  let treeCountOptions;
-  let defaultTreeCountOption;
-
-  const customTreeCountRef = React.useRef(null);
-
-  if (props.treeCountOptions) {
-    treeCountOptions = props.treeCountOptions.fixedTreeCountOptions;
-    if (!props.treeCount) {
-      props.setTreeCount(props.treeCountOptions.fixedDefaultTreeCount);
-    }
-  } else {
-    defaultTreeCountOption = 10;
-    treeCountOptions = [10, 20, 50, 150];
-    if (!props.treeCount) {
-      props.setTreeCount(defaultTreeCountOption);
-    }
-  }
-
-  if (!customTreeCountRef.isFocused && customTreeCount) {
-    props.setTreeCount(tempTreeCount);
-  }
-  const setCustomTreeCount = value => {
-    if (props.hasOwnProperty("customTreeCount")) {
-      props.setCustomTreeCount(value);
-      setCustomTreeCountLocal(value);
-    } else {
-      setCustomTreeCountLocal(value);
-    }
-  };
-
-  return (
-    <>
-      <View style={styles.treeCountSelector}>
-        {treeCountOptions.map(option => (
-          <TouchableOpacity
-            onPress={() => {
-              props.setTreeCount(option);
-              setCustomTreeCount(false);
-            }}
-            style={
-              props.treeCount === option
-                ? styles.selectedView
-                : styles.selectorView
-            }
-          >
-            <Text
-              style={
-                props.treeCount === option
-                  ? styles.selectedTreeCountText
-                  : styles.treeCountText
-              }
-            >
-              {option} Trees
-            </Text>
-          </TouchableOpacity>
-        ))}
-        {customTreeCount ? (
-          <View style={styles.customSelectedView}>
-            <TextInput
-              style={
-                customTreeCount
-                  ? styles.treeCountTextInputSelected
-                  : styles.treeCountTextInput
-              }
-              onChangeText={treeCount => setTempTreeCount(Number(treeCount))}
-              onSubmitEditing={() => props.setTreeCount(tempTreeCount)}
-              value={tempTreeCount}
-              keyboardType={"number-pad"}
-              autoFocus
-              ref={customTreeCountRef}
-            />
-            <Text
-              style={
-                customTreeCount
-                  ? styles.treeCountNumberSelected
-                  : styles.treeCountNumber
-              }
-            >
-              Trees
-            </Text>
-          </View>
-        ) : (
-          <TouchableOpacity
-            onPress={() => {
-              setCustomTreeCount(true);
-              setTempTreeCount(0);
-              props.setTreeCount(Number(tempTreeCount));
-            }}
-            style={styles.customSelectorView}
-          >
-            <Text style={styles.customTreeCountText}>Custom Trees</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-    </>
   );
 }

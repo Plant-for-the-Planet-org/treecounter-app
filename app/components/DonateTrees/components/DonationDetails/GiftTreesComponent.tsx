@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import styles from "../../../styles/donations/donationDetails";
-import GetRandomImage from "../../../utils/getRandomImage";
-import { SelectTreeCount } from "./donationComponents.native";
+import styles from "../../../../styles/donations/donationDetails";
+import GetRandomImage from "../../../../utils/getRandomImage";
+import { SelectTreeCount } from "./SelectTreeCount";
 import { TextField } from "react-native-material-textfield";
-import i18n from "../../../locales/i18n";
+import i18n from "../../../../locales/i18n";
 
 export const GiftTreesComponent = props => {
   const [currentIndex, setCurrentIndex] = React.useState(0);

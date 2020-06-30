@@ -12,30 +12,26 @@ import {
 import { updateStaticRoute } from "../../../helpers/routerHelper";
 import { paymentFee } from "../../../helpers/utils";
 import styles from "../../../styles/donations/donationDetails";
-import {
-  SelectCountryModal,
-  SelectTreeCount,
-  TaxReceipt
-} from "../components/donationComponents.native";
+import { SelectCountryModal } from "../components/DonationDetails/CountrySelector";
 import { SupportUserDetails } from "./../components/DonationDetails/SupportUserDetails";
 import { PlantProjectDetails } from "./../components/DonationDetails/PlantProjectDetails";
 import { NoPlantProjectDetails } from "./../components/DonationDetails/NoPlantProjectDetails";
-
+import { TaxReceipt } from "./../components/DonationDetails/TaxReceipt";
 import {
   PledgeOnComponent,
   PledgeTreeCount
 } from "../components/DonationDetails/PledgeOnComponent";
-
+import { SelectTreeCount } from "./../components/DonationDetails/SelectTreeCount";
 import { Header } from "./../components/Header";
-import { GiftTreesComponent } from "../components/giftDonationComponents.native";
-import ProjectModal from "../components/ProjectModal.native";
+import { GiftTreesComponent } from "../components/DonationDetails/GiftTreesComponent";
+import ProjectModal from "./../components/DonationDetails/ProjectModal";
 import stripe from "tipsi-stripe";
 import i18n from "../../../locales/i18n.js";
 import SafeAreaView from "react-native-safe-area-view";
 import PaymentLoader from "../components/PaymentLoader";
 import { nextArrowWhite, nextArrow } from "../../../assets";
 import { formatNumber } from "../../../utils/utils";
-import { handleNativePayPress } from "./../components/paymentMethods/nativePay";
+import { handleNativePayPress } from "./../components/PaymentMethods/nativePay";
 
 import { SvgXml } from "react-native-svg";
 import google_pay from "../../../assets/svgAssets/donations/google_pay";

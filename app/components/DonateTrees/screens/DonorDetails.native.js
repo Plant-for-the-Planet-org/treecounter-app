@@ -18,7 +18,7 @@ import { updateStaticRoute } from "../../../helpers/routerHelper";
 import i18n from "../../../locales/i18n.js";
 import styles from "../../../styles/donations/donorDetails";
 import { formatNumber } from "../../../utils/utils";
-import { SelectCountryModal } from "../components/donationComponents.native";
+import { SelectCountryModal } from "../components/DonationDetails/CountrySelector";
 import { Header } from "./../components/Header";
 
 import countryData from "../../../assets/countryCodes.json";

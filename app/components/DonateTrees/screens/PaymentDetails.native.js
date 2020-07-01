@@ -15,11 +15,11 @@ import stripe from 'tipsi-stripe';
 import { nextArrowWhite, paypal, paypalLogo } from '../../../assets';
 import styles from '../../../styles/donation/donation.native';
 import { formatNumber } from '../../../utils/utils';
-import CreditCardForm from '../components/PaymentMethods/CreditCardForm';
+import CreditCardForm from '../components/paymentMethods/CreditCardForm';
 import SafeAreaView from 'react-native-safe-area-view';
 import { Header } from './../components/Header';
 import PaymentLoader from '../components/PaymentLoader';
-import { handleNativePayPress } from './../components/PaymentMethods/NativePay';
+import { handleNativePayPress } from './../components/paymentMethods/NativePay';
 import Axios from 'axios';
 
 export default function DonationStep3(props) {

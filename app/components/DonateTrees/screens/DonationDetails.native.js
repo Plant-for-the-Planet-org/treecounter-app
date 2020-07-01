@@ -26,7 +26,6 @@ import { Header } from './../components/Header';
 import { GiftTreesComponent } from '../components/DonationDetails/GiftTreesComponent';
 import ProjectModal from './../components/DonationDetails/ProjectModal';
 import stripe from 'tipsi-stripe';
-import i18n from '../../../locales/i18n.js';
 import SafeAreaView from 'react-native-safe-area-view';
 import PaymentLoader from '../components/PaymentLoader';
 import { nextArrowWhite } from '../../../assets';

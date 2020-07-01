@@ -45,9 +45,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-node-treecounter-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-node2-treecounter-${{ hashFiles('package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node-treecounter-
+          ${{ runner.os }}-node2-treecounter-
 
     - name: Install npm
       run : |

@@ -159,11 +159,6 @@ export function updateUserProfile(data, profileType, forcePromisify) {
           debug(err);
           reject(err);
           dispatch(setProgressModelState(false));
-          NotificationManager.error(
-            err.response.data ? err.response.data.message : i18n.t('label.error'),
-            i18n.t('label.error'),
-            5000
-          );
         });
     });
   };

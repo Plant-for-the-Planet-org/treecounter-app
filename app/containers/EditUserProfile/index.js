@@ -225,7 +225,7 @@ class EditUserProfileContainer extends React.Component {
           }
         })
         .catch(error => {
-          NotificationManager.error(error.message, i18n.t('label.error'), 5000);
+          // NotificationManager.error(error.message, i18n.t('label.error'), 5000);
         });
     }
   };

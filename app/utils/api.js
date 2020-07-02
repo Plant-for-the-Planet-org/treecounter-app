@@ -11,8 +11,6 @@ import { context } from '../config';
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
-  } else if (response.status == 426) {
-    return response;
   } else {
     let error = new Error(response);
     throw error;
@@ -27,11 +25,13 @@ function onAPIError(error) {
   // if (error.response) {
   //   NotificationManager.error(error.response.data ? error.response.data.message || 'Error', 'Error', 5000);
   // }
+  // Unauthorized error shall logout users
   if (error.response && error.response.status === 401) {
     getStore().dispatch(logoutUser());
   }
+  // Upgrade error shall logout users
   if (error.response && error.response.status === 426) {
-    // TODO show update message
+    getStore().dispatch(logoutUser());
   }
   throw error;
 }

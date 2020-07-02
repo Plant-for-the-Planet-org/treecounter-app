@@ -289,7 +289,7 @@ class Menu extends Component {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://play.google.com/store/apps/details?id=${context['android'].appId}`}
+            href={`https://play.app.goo.gl/?link=https://play.google.com/store/apps/details?id=${context['android'].appId}`}
           >
             <img src={images['googlePlayBadge_' + userLang.replace(/-/g,'')]} />
           </a>

@@ -62,8 +62,9 @@ import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/Individual
 import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
 import RegisterTreesContainer from '../../containers/RegisterTrees';
 import colors from '../../utils/constants';
-
 import FullMapComponent from './../UserHome/FullMapComponent';
+import SplashScreen from './../TreecounterGraphics/SplashScreen';
+
 const headerLabels = {
   [getLocalRoute('app_login')]: 'label.login',
   [getLocalRoute('app_signup')]: 'label.signUp',
@@ -101,7 +102,8 @@ const headerLabels = {
   ['app_create_competition']: '',
   ['app_unfulfilled_pledge_events']: 'label.pledges',
   ['app_pledge_form']: 'label.pledgeToPlant',
-  ['app_pledge_update_form']: 'label.updatePledge'
+  ['app_pledge_update_form']: 'label.updatePledge',
+  ['app_splash_screen']: ''
 };
 
 export const getAppNavigator = function (isLoggedIn, userProfile) {
@@ -161,6 +163,18 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       }
     }
   );
+
+  const splashScreenNavigator = createStackNavigator(
+    {
+      ['app_splash_screen']: {
+        screen: SplashScreen
+      }
+    },
+    {
+      headerMode: 'none'
+    }
+  );
+
   const getTitle = function (navigation) {
     let title = navigation.getParam('titleParam');
     try {
@@ -421,6 +435,7 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
 
   const AppNavigator = createDrawerNavigator(
     {
+      splashScreenNavigator,
       appStackNavigator: {
         screen: appStackNavigator,
         path: ''

@@ -25,7 +25,12 @@ function onAPIError(error) {
   // if (error.response) {
   //   NotificationManager.error(error.response.data ? error.response.data.message || 'Error', 'Error', 5000);
   // }
+  // Unauthorized error shall logout users
   if (error.response && error.response.status === 401) {
+    getStore().dispatch(logoutUser());
+  }
+  // Upgrade error shall logout users
+  if (error.response && error.response.status === 426) {
     getStore().dispatch(logoutUser());
   }
   throw error;

@@ -11,7 +11,6 @@ import {
 import WebView from 'react-native-webview';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import stripe from 'tipsi-stripe';
 import { nextArrowWhite, paypal, paypalLogo } from '../../../assets';
 import styles from '../../../styles/donation/donation.native';
 import { formatNumber } from '../../../utils/utils';
@@ -40,6 +39,8 @@ export default function DonationStep3(props) {
     setPayPalInfo(!payPalInfo);
   };
 
+  const [stripe, setStripe] = React.useState(null);
+
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -49,15 +50,9 @@ export default function DonationStep3(props) {
       'keyboardDidHide',
       keyboardDidHide
     );
+
     if (props.paymentSetup) {
-      stripe.setOptions({
-        publishableKey:
-          props.paymentSetup.gateways[
-            props.context.donationDetails.selectedTaxCountry
-          ].stripe.stripePublishableKey,
-        merchantId: '', // Optional
-        androidPayMode: 'test' // Android only
-      });
+      setStripe(props.context.paymentDetails.stripe);
 
       if (
         'paypal' in

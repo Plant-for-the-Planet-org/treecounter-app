@@ -26,7 +26,7 @@ import countryData from '../../../assets/countryCodes.json';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import { getCountryFlagImageUrl } from '../../../actions/apiRouting';
-import { colors } from './../../../utils/constants';
+import colors from '../../../utils/constants';
 
 export function getCountryData(countryCode) {
   return countryData.find(c => c.countryCode == countryCode) || {};

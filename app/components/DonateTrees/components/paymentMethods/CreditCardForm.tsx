@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Text, View, TouchableOpacity, Image } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import styles from "../../../../styles/donation/donation.native";
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import styles from '../../../../styles/donation/donation.native';
 import {
   visa,
   masterCard,
@@ -9,9 +9,9 @@ import {
   discover,
   creditCard,
   creditCardBack
-} from "../../../../assets";
-import CheckBox from "react-native-check-box";
-import { CreditCardInput } from "react-native-credit-card-input";
+} from '../../../../assets';
+import CheckBox from 'react-native-check-box';
+import { CreditCardInput } from 'react-native-credit-card-input';
 
 export default class CreditCardForm extends Component {
   state = {
@@ -70,7 +70,7 @@ export default class CreditCardForm extends Component {
         changeInCardValue: false
       });
       this.props.setcardValid(true);
-      let expArr = this.state.cardValues.values.expiry.split("/");
+      let expArr = this.state.cardValues.values.expiry.split('/');
       let cardDetails = {
         number: this.state.cardValues.values.number,
         cvc: this.state.cardValues.values.cvc,
@@ -115,7 +115,7 @@ export default class CreditCardForm extends Component {
             <View>
               {this.state.creditCardsList.map(creditCardsList => (
                 <TouchableOpacity
-                  style={{ flexDirection: "row", marginTop: 28 }}
+                  style={{ flexDirection: 'row', marginTop: 28 }}
                   onPress={() => {
                     this.selectCreditCard(creditCardsList.id);
                   }}
@@ -139,14 +139,14 @@ export default class CreditCardForm extends Component {
                     source={creditCardsList.image}
                     style={[styles.creditCardsDesign, { marginRight: 20 }]}
                   />
-                  <Text style={{ fontWeight: "bold", marginRight: 10 }}>
+                  <Text style={{ fontWeight: 'bold', marginRight: 10 }}>
                     {creditCardsList.cardNumber}
                   </Text>
 
                   <Text
                     style={
-                      creditCardsList.expiryDate == "Expired"
-                        ? { color: "red" }
+                      creditCardsList.expiryDate == 'Expired'
+                        ? { color: 'red' }
                         : null
                     }
                   >
@@ -158,7 +158,7 @@ export default class CreditCardForm extends Component {
               {/* View for New Credit Card  */}
               <View>
                 <TouchableOpacity
-                  style={{ flexDirection: "row", marginTop: 28 }}
+                  style={{ flexDirection: 'row', marginTop: 28 }}
                   onPress={() => {
                     this.selectNewCreditCard();
                   }}
@@ -181,11 +181,11 @@ export default class CreditCardForm extends Component {
                   <Text
                     style={{
                       fontSize: 14,
-                      fontFamily: "OpenSans-Bold",
+                      fontFamily: 'OpenSans-Bold',
                       lineHeight: 19,
                       letterSpacing: 0,
-                      textAlign: "left",
-                      color: "rgba(0, 0, 0, 0.6)"
+                      textAlign: 'left',
+                      color: 'rgba(0, 0, 0, 0.6)'
                     }}
                   >
                     Add New Payment method
@@ -196,15 +196,15 @@ export default class CreditCardForm extends Component {
                     <CreditCardInput
                       onChange={this._onChange}
                       inputContainerStyle={{
-                        maxWidth: 120,
-                        fontFamily: "OpenSans-Regular"
+                        maxWidth: 120
+                        // fontFamily: "OpenSans-Regular"
                       }}
                       cardImageFront={creditCard}
                       cardImageBack={creditCardBack}
-                      cardFontFamily={"OpenSans-Regular"}
-                      labelStyle={{ fontFamily: "OpenSans-Regular" }}
+                      cardFontFamily={'OpenSans-Regular'}
+                      labelStyle={{ fontFamily: 'OpenSans-Regular' }}
                       allowScroll
-                      placeholderColor={"#d5d5d5"}
+                      placeholderColor={'#d5d5d5'}
                     />
 
                     <CheckBox
@@ -215,11 +215,11 @@ export default class CreditCardForm extends Component {
                         });
                       }}
                       rightText={
-                        "Save this payment method in my account for future donations"
+                        'Save this payment method in my account for future donations'
                       }
                       rightTextStyle={styles.checkBoxText}
                       isChecked={this.state.isChecked}
-                      checkBoxColor={"#89b53a"}
+                      checkBoxColor={'#89b53a'}
                     />
                   </View>
                 ) : null}

@@ -141,6 +141,9 @@ function DonationDetails(props) {
           props.selectedProject.currency
         ].rates
     });
+    props.contextActions.setPaymentDetails({
+      stripe: stripe
+    });
   };
   const onContinue = () => {
     // Set Donation Details and then switch the page

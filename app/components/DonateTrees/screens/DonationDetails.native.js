@@ -26,12 +26,11 @@ import { Header } from './../components/Header';
 import { GiftTreesComponent } from '../components/DonationDetails/GiftTreesComponent';
 import ProjectModal from './../components/DonationDetails/ProjectModal';
 import stripe from 'tipsi-stripe';
-import i18n from '../../../locales/i18n.js';
 import SafeAreaView from 'react-native-safe-area-view';
 import PaymentLoader from '../components/PaymentLoader';
 import { nextArrowWhite } from '../../../assets';
 import { formatNumber } from '../../../utils/utils';
-import { handleNativePayPress } from './../components/PaymentMethods/NativePay';
+import { handleNativePayPress } from './../components/paymentMethods/NativePay';
 
 import { SvgXml } from 'react-native-svg';
 import google_pay from '../../../assets/svgAssets/donations/Gpay_Black';

@@ -400,16 +400,11 @@ export default EStyleSheet.create({
   bottomButtonView: {
     width: '100%',
     backgroundColor: '#f2f2f7',
-    height: 96,
-    flexDirection: 'row',
+    height: 110,
     position: 'absolute',
-    bottom: 0
-  },
-  leftSection: {
+    bottom: 0,
     padding: 20,
-    //width: width * 0.75
-    flexGrow: 1,
-    justifyContent: 'center'
+    flexGrow: 1
   },
   paymentTreeAmount: {
     fontSize: 18,
@@ -429,8 +424,7 @@ export default EStyleSheet.create({
   },
   paymentTreeDetails: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: 'row'
   },
   otherPaymentButton: {
     height: 32,
@@ -482,28 +476,23 @@ export default EStyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     flexDirection: 'row',
-    borderRadius: 26
+    borderRadius: 6,
+    backgroundColor: '#89B53A',
+    height: 36,
+    paddingHorizontal: 21,
+    paddingVertical: 7
   },
   continueOtherButtonText: {
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 13,
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 16,
     letterSpacing: 0.21,
-    color: '#89b53a',
-    marginRight: 5.4,
-    marginTop: 18
+    color: '#fff',
+    marginRight: 5.4
   },
   nativePayButton: {
-    backgroundColor: 'white',
-    paddingVertical: 24,
-    paddingHorizontal: 36,
-    height: 52,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'flex-end',
-    borderRadius: 26,
-    borderWidth: 1,
-    borderColor: '#d5d5d5',
-    marginTop: -48
+    alignSelf: 'flex-end'
   },
   // Input Selection
 

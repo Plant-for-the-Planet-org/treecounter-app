@@ -34,8 +34,8 @@ import { formatNumber } from '../../../utils/utils';
 import { handleNativePayPress } from './../components/PaymentMethods/NativePay';
 
 import { SvgXml } from 'react-native-svg';
-import google_pay from '../../../assets/svgAssets/donations/google_pay';
-import apple_pay from '../../../assets/svgAssets/donations/apple_pay';
+import google_pay from '../../../assets/svgAssets/donations/Gpay_Black';
+import apple_pay from '../../../assets/svgAssets/donations/ApplePay_Black';
 import colors from '../../../utils/constants';
 
 function DonationDetails(props) {
@@ -367,79 +367,72 @@ export function PaymentOption(props) {
   });
   return (
     <View style={styles.bottomButtonView}>
-      <View style={styles.leftSection}>
-        {props.treeCount ? (
-          <>
-            <View style={styles.paymentTreeDetails}>
-              <Text style={styles.paymentTreeAmount}>
-                {formatNumber(
-                  props.commissionSwitch
-                    ? props.treeCost *
-                        props.treeCount *
-                        props.rates[props.selectedCurrency] +
-                        ((props.treeCount / 100) * 2.9 + 0.3)
-                    : props.treeCost *
-                        props.treeCount *
-                        props.rates[props.selectedCurrency],
-                  null,
-                  props.selectedCurrency
-                )}
-              </Text>
-            </View>
-
-            <View>
-              <Text style={styles.paymentTreeCount}>
-                for {props.treeCount} trees
-              </Text>
-            </View>
-          </>
-        ) : !props.treeCount ? (
-          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
-        ) : null}
-      </View>
       {props.treeCount ? (
-        <View
-          style={{
-            flexDirection: 'column',
-            justifyContent: 'center',
-            padding: 20
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => handleNativePayPress(paymentProps)}
-            style={styles.nativePayButton}
-          >
-            <SvgXml
-              style={{ maxHeight: 24, maxWidth: 60 }}
-              xml={props.isApplePay ? apple_pay : google_pay}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => props.onContinue()}
-            style={styles.continueOtherButton}
-          >
-            <Text style={styles.continueOtherButtonText}>
-              Other Payment Methods
+        <View style={{ flexDirection: 'column' }}>
+          <View style={styles.paymentTreeDetails}>
+            <Text style={styles.paymentTreeAmount}>
+              {formatNumber(
+                props.commissionSwitch
+                  ? props.treeCost *
+                      props.treeCount *
+                      props.rates[props.selectedCurrency] +
+                      ((props.treeCount / 100) * 2.9 + 0.3)
+                  : props.treeCost *
+                      props.treeCount *
+                      props.rates[props.selectedCurrency],
+                null,
+                props.selectedCurrency
+              )}
             </Text>
-            {/* <Image
-              style={{ maxHeight: 18, maxWidth: 18 }}
-              source={nextArrow}
+            <Text style={styles.paymentTreeCount}>
+              {' '}
+              for {props.treeCount} trees
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingTop: 12
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => handleNativePayPress(paymentProps)}
+              style={styles.nativePayButton}
+            >
+              <SvgXml
+                style={{ maxHeight: 37, maxWidth: 150 }}
+                xml={props.isApplePay ? apple_pay : google_pay}
+              />
+            </TouchableOpacity>
+            <Text>OR</Text>
+            <TouchableOpacity
+              onPress={() => props.onContinue()}
+              style={styles.continueOtherButton}
+            >
+              <Text style={styles.continueOtherButtonText}>Continue</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : !props.treeCount ? (
+        <>
+          <Text style={styles.paymentTreeCount}>Please select Tree count</Text>
+          <View
+            style={[
+              styles.continueButtonView,
+              { backgroundColor: colors.GREY }
+            ]}
+          >
+            <Text style={styles.continueButtonText}>Next</Text>
+            <Image
+              style={{ maxHeight: 24, maxWidth: 24 }}
+              source={nextArrowWhite}
               resizeMode="contain"
-            /> */}
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <View
-          style={[styles.continueButtonView, { backgroundColor: colors.GREY }]}
-        >
-          <Text style={styles.continueButtonText}>Next</Text>
-          <Image
-            style={{ maxHeight: 24, maxWidth: 24 }}
-            source={nextArrowWhite}
-            resizeMode="contain"
-          />
-        </View>
-      )}
+            />
+          </View>
+        </>
+      ) : null}
     </View>
   );
 }

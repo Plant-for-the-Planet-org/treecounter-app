@@ -10,11 +10,16 @@ import { context } from '../config';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    if (!response.data || typeof response.data !== 'object') {
-      debug('API response is not an object:', typeof response.data, response.data);
-    } else {
-      //debug('API response:', response.data);
+    if (response.status === 204) {
+      //debug('API response status:', response.status);
       return response;
+    } else {
+      if (!response.data || typeof response.data !== 'object') {
+        debug('API response is not an object:', typeof response.data, response.data);
+      } else {
+        //debug('API response:', response.data);
+        return response;
+      }
     }
   }
   let error = new Error(response);

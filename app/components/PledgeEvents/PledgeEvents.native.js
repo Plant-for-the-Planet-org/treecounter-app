@@ -5,7 +5,8 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Platform
 } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { SafeAreaView } from 'react-navigation';
@@ -18,15 +19,15 @@ import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { delimitNumbers } from './../../utils/utils';
 import LoadingIndicator from './../Common/LoadingIndicator';
 import HeaderAnimatedImage from './../Header/HeaderAnimatedImage.native';
-import PledgeTabView from './PledgeTabView.native';
-
+import { PledgeTabView, TabButtons } from './PledgeTabView.native';
+import { Header } from './../DonateTrees/components/Header';
 const PledgeEvents = props => {
-  const [scrollY] = React.useState(new Animated.Value(0));
   const [showRBSheetState, setShowRBSheetState] = React.useState(true);
   const pledges = props.pledges;
   const navigation = props.navigation;
   const myPledge = props.myPledge;
   const RBSheetRef = React.useRef('');
+  const [tabselected, setTabSelected] = React.useState('recent');
 
   React.useEffect(() => {
     if (props.showRBSheet && showRBSheetState) {
@@ -42,20 +43,43 @@ const PledgeEvents = props => {
     <LoadingIndicator contentLoader screen={'PledgeEvents'} />
   ) : (
     <SafeAreaView style={styles.peRootView}>
-      <View>
-        <HeaderAnimatedImage
-          navigation={navigation}
-          title={pledges.name}
-          scrollY={scrollY}
-          titleStyle={styles.eventTitle}
-          imageStyle={styles.peHeaderLogo}
-          imageSource={{
-            uri: getImageUrl('event', 'thumb', pledges.image)
-          }}
-        />
+      <ScrollView
+        stickyHeaderIndices={[1]}
+        contentContainerStyle={styles.peRootScrollView}
+        scrollEnabled
+      >
+        <View style={{ marginHorizontal: 20 }}>
+          <Header navigation={navigation} useBackIcon />
+          <Image
+            style={[
+              styles.peHeaderLogo,
+              Platform.OS === 'ios' ? null : { marginTop: -40 }
+            ]}
+            source={{
+              uri: getImageUrl('event', 'thumb', pledges.image)
+            }}
+            resizeMode="contain"
+          />
+          <Text style={styles.eventTitle}>{pledges.name}</Text>
+          {pledges && pledges.total ? (
+            <Text style={styles.eventSubTitle}>
+              {i18n.t('label.treesPledgedAllPledges', {
+                treeCount: delimitNumbers(pledges.total)
+              })}
+            </Text>
+          ) : null}
+        </View>
 
-        <EventDetails pledges={pledges} scrollY={scrollY} />
+        {pledges && pledges.total > 0 ? (
+          <TabButtons
+            tabselected={tabselected}
+            setTabSelected={setTabSelected}
+          />
+        ) : null}
 
+        {pledges && (
+          <EventDetails tabselected={tabselected} pledges={pledges} />
+        )}
         {/* This opens when the user has just created the Pledge  */}
         <RBSheet
           ref={RBSheetRef}
@@ -111,23 +135,23 @@ const PledgeEvents = props => {
             </View>
           </View>
         </RBSheet>
+      </ScrollView>
 
-        {typeof myPledge !== 'undefined' && myPledge !== null ? (
-          myPledge.length > 0 ? (
-            <FulfillPledgeButton
-              myPledge={myPledge[0]}
-              pledges={pledges}
-              selectPlantProjectAction={props.selectPlantProjectAction}
-              navigation={navigation}
-              contextActions={props.contextActions}
-            />
-          ) : (
-            <MakePledgeButton navigation={navigation} pledges={pledges} />
-          )
+      {typeof myPledge !== 'undefined' && myPledge !== null ? (
+        myPledge.length > 0 ? (
+          <FulfillPledgeButton
+            myPledge={myPledge[0]}
+            pledges={pledges}
+            selectPlantProjectAction={props.selectPlantProjectAction}
+            navigation={navigation}
+            contextActions={props.contextActions}
+          />
         ) : (
           <MakePledgeButton navigation={navigation} pledges={pledges} />
-        )}
-      </View>
+        )
+      ) : (
+        <MakePledgeButton navigation={navigation} pledges={pledges} />
+      )}
     </SafeAreaView>
   );
 };
@@ -240,10 +264,6 @@ function navigateToDonationDetails(
     eventName: pledges.name,
     eventDate: pledges.eventDate
   });
-
-  // contextActions.setDonationDetails({
-  //   selectedProject:
-  // });
   contextActions.setDonationContext('pledge');
 
   updateStaticRoute('app_donate_detail', navigation, {
@@ -251,41 +271,19 @@ function navigateToDonationDetails(
   });
 }
 
-function EventDetails(props) {
+const EventDetails = props => {
   let pledges = props.pledges;
+
   return (
-    <ScrollView
-      contentContainerStyle={styles.peRootScrollView}
-      scrollEnabled
-      scrollEventThrottle={16}
-      onScroll={Animated.event([
-        { nativeEvent: { contentOffset: { y: props.scrollY } } }
-      ])}
-    >
-      {pledges &&
-      pledges.highestPledgeEvents &&
-      pledges.highestPledgeEvents.length > 0 ? (
-        // If there are Pledges
-        <View>
-          <Text style={styles.eventSubTitle}>
-            {i18n.t('label.treesPledgedAllPledges', {
-              treeCount: delimitNumbers(pledges.total)
-            })}
-          </Text>
-          {/* All the pledges are here */}
-          <PledgeTabView pledges={pledges} />
-        </View>
+    <>
+      {pledges.highestPledgeEvents && pledges.highestPledgeEvents.length > 0 ? (
+        <PledgeTabView pledges={pledges} tabselected={props.tabselected} />
       ) : (
-        // If there are no Pledges
-        <View>
-          <Text style={styles.eventSubTitle}>{i18n.t('label.noPledges')}</Text>
-        </View>
+        <Text style={styles.eventSubTitle}>{i18n.t('label.noPledges')}</Text>
       )}
 
       {/* Show Event Images */}
-      {pledges &&
-      pledges.pledgeEventImages &&
-      pledges.pledgeEventImages.length > 0 ? (
+      {pledges.pledgeEventImages && pledges.pledgeEventImages.length > 0 ? (
         <EventImages pledgeEventImages={pledges.pledgeEventImages} />
       ) : null}
 
@@ -295,9 +293,9 @@ function EventDetails(props) {
           <Text style={styles.peDescriptionText}>{pledges.description}</Text>
         </CardLayout>
       ) : null}
-    </ScrollView>
+    </>
   );
-}
+};
 
 function EventImages(props) {
   const pledgeImages = props.pledgeEventImages;

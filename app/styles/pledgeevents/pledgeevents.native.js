@@ -7,15 +7,13 @@ export default EStyleSheet.create({
   peRootView: { flex: 1, backgroundColor: 'white' },
   peRootScrollView: {
     backgroundColor: 'white',
-    paddingBottom: 300,
-    marginTop: 240
+    paddingBottom: 300
   },
-  peHeader: { marginTop: 20, marginHorizontal: 20 },
   peHeaderLogo: {
     height: 70,
     width: 70,
-    borderRadius: 35,
-    marginBottom: 10
+    marginBottom: 10,
+    borderRadius: 40
   },
   peSliderScrollView: { paddingRight: 20, height: 180, marginTop: 30 },
   peDescriptionView: {
@@ -56,14 +54,13 @@ export default EStyleSheet.create({
     textAlign: 'left',
     color: '#4d5153',
     marginTop: 7,
-    marginHorizontal: 20,
     fontFamily: 'OpenSans-Regular'
   },
   makePledgeButton: {
     width: '88%',
     marginLeft: '7%',
     position: 'absolute',
-    top: '90%'
+    bottom: '4%'
   },
   makePledgeButton2: {
     width: '80%',
@@ -92,7 +89,7 @@ export default EStyleSheet.create({
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
     justifyContent: 'space-around',
-    marginTop: 20
+    backgroundColor: 'white'
   },
   tabViewButtonText: {
     fontSize: 13,
@@ -120,7 +117,8 @@ export default EStyleSheet.create({
     color: '#4d5153',
     marginTop: 26,
     marginBottom: 20,
-    fontFamily: 'OpenSans-SemiBold'
+    fontFamily: 'OpenSans-SemiBold',
+    flex: 1
   },
   tabViewContentText: {
     fontSize: 16,
@@ -129,7 +127,8 @@ export default EStyleSheet.create({
     textAlign: 'left',
     color: '#4d5153',
     marginBottom: 24,
-    fontFamily: 'OpenSans-Regular'
+    fontFamily: 'OpenSans-Regular',
+    flex: 1
   },
 
   // Make Pledge Form Styles

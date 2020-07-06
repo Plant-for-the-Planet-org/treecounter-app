@@ -1,11 +1,12 @@
-import React from "react";
-import { Text, View, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { closeIcon } from "../../../assets";
+import React from 'react';
+import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { closeIcon, backArrow } from '../../../assets';
 
 export function Header(props: {
   onBack: () => void;
   navigation: { goBack: () => void };
   title: string;
+  useBackIcon: Boolean;
 }) {
   let navigateBack = () => {
     if (props.onBack) {
@@ -19,7 +20,7 @@ export function Header(props: {
       <View style={styles.headerView}>
         <TouchableOpacity style={styles.closeButton} onPress={navigateBack}>
           <Image
-            source={closeIcon}
+            source={props.useBackIcon ? backArrow : closeIcon}
             resizeMode="contain"
             style={styles.closeButtonImage}
           />
@@ -34,22 +35,22 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     height: 60,
     zIndex: 100,
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    width: "100%"
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%'
   },
   closeButton: { height: 18, zIndex: 1001 },
   closeButtonImage: { height: 18, width: 24 },
   headerTitle: {
-    fontFamily: "OpenSans-ExtraBold",
+    fontFamily: 'OpenSans-ExtraBold',
     fontSize: 27,
     lineHeight: 40,
     letterSpacing: 0,
-    textAlign: "left",
-    color: "#4d5153"
+    textAlign: 'left',
+    color: '#4d5153'
   }
 });

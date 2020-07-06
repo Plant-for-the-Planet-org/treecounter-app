@@ -197,7 +197,11 @@ export default function DonationStep3(props) {
           scrollEventThrottle={16}
         >
           <View style={{ paddingHorizontal: 20 }}>
-            <Header navigation={props.navigation} title={'Payment Mode'} />
+            <Header
+              navigation={props.navigation}
+              title={'Payment Mode'}
+              useBackIcon
+            />
           </View>
 
           <View style={styles.pageView}>

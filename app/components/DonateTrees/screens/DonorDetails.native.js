@@ -155,7 +155,11 @@ export default function DonorDetails(props) {
                 { nativeEvent: { contentOffset: { y: scrollY } } }
               ])}
             >
-              <Header navigation={props.navigation} title={'Contact Details'} />
+              <Header
+                navigation={props.navigation}
+                title={'Contact Details'}
+                useBackIcon
+              />
 
               <View>
                 <View style={styles.formView}>

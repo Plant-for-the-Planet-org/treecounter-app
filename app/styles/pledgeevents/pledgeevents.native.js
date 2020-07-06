@@ -154,9 +154,8 @@ export default EStyleSheet.create({
     fontFamily: 'OpenSans-SemiBold'
   },
   formScrollView: {
-    padding: 24,
-    paddingBottom: 220,
-    marginTop: 100
+    paddingHorizontal: 24,
+    paddingBottom: 220
   },
   formHalfTextField: { width: '45%' },
 

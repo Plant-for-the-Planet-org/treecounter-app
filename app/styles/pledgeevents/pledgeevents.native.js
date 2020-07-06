@@ -133,7 +133,8 @@ export default EStyleSheet.create({
 
   // Make Pledge Form Styles
   createPledgeRootView: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    flex: 1
   },
   titleText: {
     fontSize: 27,
@@ -143,6 +144,14 @@ export default EStyleSheet.create({
     color: '#4d5153',
     marginTop: 30,
     fontFamily: 'OpenSans-Bold'
+  },
+  pageTitle: {
+    fontFamily: 'OpenSans-ExtraBold',
+    fontSize: 27,
+    lineHeight: 40,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
   },
   subtitleText: {
     fontSize: 18,

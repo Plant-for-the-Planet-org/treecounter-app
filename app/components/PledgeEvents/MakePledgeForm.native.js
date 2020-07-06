@@ -156,14 +156,7 @@ class MakePledgeForm extends Component {
                 <Header navigation={this.props.navigation} useBackIcon />
                 <Text
                   style={[
-                    {
-                      fontFamily: 'OpenSans-ExtraBold',
-                      fontSize: 27,
-                      lineHeight: 40,
-                      letterSpacing: 0,
-                      textAlign: 'left',
-                      color: '#4d5153'
-                    },
+                    styles.pageTitle,
                     Platform.OS === 'ios' ? null : { marginTop: -40 }
                   ]}
                 >

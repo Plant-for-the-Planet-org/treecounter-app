@@ -12,12 +12,12 @@ import SafeAreaView from 'react-native-safe-area-view';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { initLocale } from '../../actions/getLocale.native.js';
 import { fetchCurrencies } from '../../actions/currencies';
-import { fetchConfig } from '../../actions/fetchConfig';
+
 class App extends Component {
   componentDidMount() {
     initLocale();
+    // moved fetchConfig to Menu component
     this.props.fetchCurrencies();
-    this.props.fetchConfig();
     // TODO: at this time the locale isn't yet defined, so this API call is currently done with locale = undefined
     // Is there any way to wait with this API call until the locale is defined?
   }
@@ -44,7 +44,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchCurrencies,
-      fetchConfig
       // loadUserProfile,
       // NotificationAction,
     },

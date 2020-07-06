@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, ScrollView, SafeAreaView, Text, Linking, Platform } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { debug } from '../../debug';
 import styles from '../../styles/menu.native';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
@@ -15,21 +17,19 @@ import UserProfileImage from '../Common/UserProfileImage.native';
 import { LargeMenuItem } from './MenuItem.native';
 import countryCodes from '../../assets/countryCodes.json';
 import CurrencySelector from '../Common/CurrencySelectorList.native';
+import { fetchConfig, getAppVersions } from '../../actions/fetchConfig';
+import { version } from './../../../package.json';
 
 //   icons.target_outline;
 
-export default class Menu extends Component {
-  state = {
-    showCurrencyModal: false
-  };
-  static propTypes = {
-    menuData: PropTypes.array.isRequired,
-    onPress: PropTypes.func,
-    selectPlantProjectAction: PropTypes.func,
-    userProfile: PropTypes.any,
-    navigation: PropTypes.any,
-    lastRoute: PropTypes.any
-  };
+class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showCurrencyModal: false
+    };
+  }
+
   hideCurrencyModal = () => {
     this.setState({ showCurrencyModal: false });
   };
@@ -45,7 +45,7 @@ export default class Menu extends Component {
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (Platform.OS === 'android') {
       const NativeLinking = require('react-native/Libraries/Linking/NativeLinking').default;
       NativeLinking.getInitialURL().then(url => url && this.resetStackToProperRoute(url)).catch(e => debug(e));
@@ -55,6 +55,16 @@ export default class Menu extends Component {
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);
+
+    // check for updates
+    this.props.fetchConfig().then(() => {
+      console.log('package version:', version, ' appVersions:', getAppVersions());
+      if (getAppVersions()[Platform.OS] && version < getAppVersions()[Platform.OS]) {
+         // show the user an information that the app is outdate and a link to the app stores
+        updateStaticRoute('app_splash_screen', this.props.navigation);
+      }}
+    );
+
     // const welcome = await fetchItem('welcome').catch(error => debug(error));
     if (!this.props.userProfile) {
       // if (welcome == null) {
@@ -64,6 +74,7 @@ export default class Menu extends Component {
       // }
       updateRoute('welcome_screen', this.props.navigation, 0);
     }
+
     // saveItem('welcome', JSON.stringify({ value: 'true' }));
   }
   componentWillUnmount() {
@@ -351,3 +362,20 @@ export default class Menu extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      fetchConfig
+    },
+    dispatch);
+};
+export default connect(null, mapDispatchToProps)(Menu);
+Menu.propTypes = {
+  menuData: PropTypes.array.isRequired,
+  onPress: PropTypes.func,
+  selectPlantProjectAction: PropTypes.func,
+  userProfile: PropTypes.any,
+  navigation: PropTypes.any,
+  lastRoute: PropTypes.any
+};

@@ -4,7 +4,10 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { debug } from '../../debug';
 import EditUserProfile from '../../components/EditUserProfile';
-import {currentUserProfileSelector, getProgressModelSelector} from '../../selectors/index';
+import {
+  currentUserProfileSelector,
+  getProgressModelSelector
+} from '../../selectors/index';
 import {
   updateUserProfile,
   updatePlantProject,
@@ -126,6 +129,14 @@ class EditUserProfileContainer extends React.Component {
             i18n.t('label.error'),
             5000
           );
+        } else {
+          NotificationManager.error(
+            err.response.data
+              ? err.response.data.message
+              : i18n.t('label.error'),
+            i18n.t('label.error'),
+            5000
+          );
         }
       });
   };
@@ -224,8 +235,42 @@ class EditUserProfileContainer extends React.Component {
             );
           }
         })
-        .catch(error => {
-          NotificationManager.error(error.message, i18n.t('label.error'), 5000);
+        .catch(err => {
+          if (err.response.data.code === 400) {
+            if (profileType == 'password') {
+              NotificationManager.error(
+                err.response.data.errors.children.currentPassword.errors
+                  ? err.response.data.errors.children.currentPassword.errors[0]
+                  : err.response.data.errors.children.password.errors
+                  ? err.response.data.errors.children.password.errors[0]
+                  : err.response.data.errors.children.password.children.first
+                  ? err.response.data.errors.children.password.children.first
+                      .errors[0]
+                  : err.response.data.errors.children.password.children.second
+                  ? err.response.data.errors.children.password.children.second
+                      .errors[0]
+                  : 'label.error',
+                i18n.t('label.error'),
+                5000
+              );
+            } else {
+              NotificationManager.error(
+                err.response.data
+                  ? err.response.data.message
+                  : i18n.t('label.error'),
+                i18n.t('label.error'),
+                5000
+              );
+            }
+          } else {
+            NotificationManager.error(
+              err.response.data
+                ? err.response.data.message
+                : i18n.t('label.error'),
+              i18n.t('label.error'),
+              5000
+            );
+          }
         });
     }
   };
@@ -262,7 +307,7 @@ EditUserProfileContainer.propTypes = {
 
 const mapStateToProps = state => ({
   currentUserProfile: currentUserProfileSelector(state),
-  loading: getProgressModelSelector(state),
+  loading: getProgressModelSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {

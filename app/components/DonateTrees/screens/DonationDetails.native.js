@@ -30,7 +30,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 import PaymentLoader from '../components/PaymentLoader';
 import { nextArrowWhite } from '../../../assets';
 import { formatNumber } from '../../../utils/utils';
-import { handleNativePayPress } from './../components/PaymentMethods/NativePay';
+import { handleNativePayPress } from '../components/PaymentOptions/NativePay';
 
 import { SvgXml } from 'react-native-svg';
 import google_pay from '../../../assets/svgAssets/donations/Gpay_Black';

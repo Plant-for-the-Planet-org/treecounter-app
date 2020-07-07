@@ -91,6 +91,7 @@ const statusOptions = [
   { value: 'en', label: 'English', icon: images.worldImg },
   { value: 'de', label: 'Deutsch', icon: images.germany },
   { value: 'es', label: 'Español', icon: images.spain },
+  { value: 'it', label: 'Italiano', icon: images.italy },
 // TODO: activate 'pt' here
 //  { value: 'pt', label: 'Português', icon: images.portugal },
   { value: 'pt-BR', label: 'Português brasileiro', icon: images.brazil }

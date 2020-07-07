@@ -144,16 +144,19 @@ import tax_grey from './images/icons/tax_grey.png';
 import worldImg from './images/icons/world.png';
 import germany from './images/flags/germany.png';
 import spain from './images/flags/spain.png';
+import italy from './images/flags/italy.png';
 import portugal from './images/flags/portugal.png';
 import brazil from './images/flags/brazil.png';
 import googlePlayBadge_en from './images/en/google-play-badge.png';
 import googlePlayBadge_de from './images/de/google-play-badge.png';
 import googlePlayBadge_es from './images/es/google-play-badge.png';
+import googlePlayBadge_it from './images/it/google-play-badge.png';
 import googlePlayBadge_pt from './images/pt/google-play-badge.png';
 import googlePlayBadge_ptBR from './images/pt-BR/google-play-badge.png';
 import appleStoreBadge_en from './images/en/apple-store-badge.png';
 import appleStoreBadge_de from './images/de/apple-store-badge.png';
 import appleStoreBadge_es from './images/es/apple-store-badge.png';
+import appleStoreBadge_it from './images/it/apple-store-badge.png';
 import appleStoreBadge_pt from './images/pt/apple-store-badge.png';
 import appleStoreBadge_ptBR from './images/pt-BR/apple-store-badge.png';
 import attach from './images/attach.png';
@@ -230,6 +233,7 @@ export {
   worldImg,
   germany,
   spain,
+  italy,
   portugal,
   brazil,
   mapCollapse,
@@ -374,11 +378,13 @@ export {
   googlePlayBadge_en,
   googlePlayBadge_de,
   googlePlayBadge_es,
+  googlePlayBadge_it,
   googlePlayBadge_pt,
   googlePlayBadge_ptBR,
   appleStoreBadge_en,
   appleStoreBadge_de,
   appleStoreBadge_es,
+  appleStoreBadge_it,
   appleStoreBadge_pt,
   appleStoreBadge_ptBR,
   attach,

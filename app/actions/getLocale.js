@@ -2,6 +2,7 @@ import { getItemSync } from '../stores/localStorage';
 import en from 'date-fns/locale/en-US';
 import de from 'date-fns/locale/de';
 import es from 'date-fns/locale/es';
+import it from 'date-fns/locale/it';
 import pt from 'date-fns/locale/pt';
 import ptBR from 'date-fns/locale/pt-BR';
 // import and register all locales used for 'react-datepicker'
@@ -11,10 +12,10 @@ import { registerLocale } from 'react-datepicker';
 let cache = { locale: undefined };
 
 // TODO: activate 'pt' here
-//export const supportedLocales = ['en', 'de', 'es', 'pt', 'pt-BR'];
-export const supportedLocales = ['en', 'de', 'es', 'pt-BR'];
+//export const supportedLocales = ['en', 'de', 'es', 'it', 'pt', 'pt-BR'];
+export const supportedLocales = ['en', 'de', 'es', 'it', 'pt-BR'];
 export const defaultLocale = 'en';
-export const localeObjects = { 'en': en, 'de': de , 'es': es , 'pt': pt , 'pt-BR': ptBR };
+export const localeObjects = { 'en': en, 'de': de , 'es': es , 'it': it, 'pt': pt , 'pt-BR': ptBR };
 
 /**
  * Call this when the app starts up

@@ -5,6 +5,7 @@ import 'intl';
 import 'intl/locale-data/jsonp/en';
 import 'intl/locale-data/jsonp/de';
 import 'intl/locale-data/jsonp/es';
+import 'intl/locale-data/jsonp/it';
 import 'intl/locale-data/jsonp/pt';
 import 'intl/locale-data/jsonp/pt-BR';
 

@@ -10,11 +10,20 @@ import { context } from '../config';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    let error = new Error(response);
-    throw error;
+    if (response.status === 204) {
+      //debug('API response status:', response.status);
+      return response;
+    } else {
+      if (!response.data || typeof response.data !== 'object') {
+        debug('API response is not an object:', typeof response.data, response.data);
+      } else {
+        //debug('API response:', response.data);
+        return response;
+      }
+    }
   }
+  let error = new Error(response);
+  throw error;
 }
 
 function onAPIError(error) {
@@ -118,7 +127,6 @@ export async function postRequest(
   recaptcha = false
 ) {
   let url = await getApiRoute(route, params);
-  debug(url);
   return await axios
     .post(url, data, await getHeaders(authenticated, recaptcha))
     .then(checkStatus)
@@ -173,7 +181,7 @@ export async function deleteAuthenticatedRequest(route, params) {
  * @param {endPoint} params
  */
 export async function getExternalRequest(params) {
-  debug('calling getexternal', params);
+  debug('getExternalRequest:', params);
   return await axios
     .get(params.endPoint)
     .then(checkStatus)

@@ -1,4 +1,8 @@
 {
   "world": "Mundo",
-  "leaderboard": "Ranking"
+  "leaderboard": "Ranking",
+  "updateRequired": "Atualização Necessária",
+  "updateExplanation": "Nós introduzimos novas funcionalidades, por favor atualize o aplicativo para plantar mais árvores!",
+  "openAppStore": "Abrir App Store",
+  "openPlayStore": "Abrir Play Store"
 }

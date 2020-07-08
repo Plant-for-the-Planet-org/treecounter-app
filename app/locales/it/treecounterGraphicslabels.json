@@ -1,5 +1,18 @@
 {
+  "individual_plant_personal": "piantati da me",
+  "individual_plant_community": "dalla mia comunità",
+  "treecounter_tooltip": "Alberi piantati da persone che li hanno donati a questo contatore di alberi.\nPer esempio, puoi donare alberi ai tuoi amici, alla tua scuola o alla tua città e aiutarli a raggiungere il loro obbiettivo! Tutti gli alberi che hai donato appariranno nel loro contatore di alberi",
   "tpo_plant_personal": "da noi",
+  "tpo_individual_plant_community": "Destinati a noi",
+  "by": "di",
   "faqs": "Domande frequenti",
-  "logged_in": "Connesso"
+  "logged_in": "Connesso",
+  "trillionTreeMessage1": "Pianta con noi! L'App Plant-for-the-Planet presenta organizzazioni che piantano alberi da tutto il mondo. In questo modo puoi facilmente piantare alberi! Non importa dove tu sia, non è mai stato così semplice salvare il clima e fare qualcosa di buono. ",
+  "trillionTreeMessage2": " Il rimboschimento globale potrebbe catturare il 25% delle emissioni annue globali di carbonio e creare ricchezza nei paesi in via di sviluppo.",
+  "trillionlabel": "Trillion Tree Eventi oggi",
+  "trillionTreesEvents": "Trillion Tree Eventi",
+  "searchProjectTitle": "Il mondo ha bisogno di più alberi",
+  "searchProjectPara": "Un recente studio pubblicato su Science afferma che piantare un trilione di alberi può catturare il 25% della CO2 prodotta dall'uomo",
+  "searchProjectButton": "Trova progetti da donare",
+  "treesPledged": "Alberi impegnati"
 }

@@ -1,1 +1,20 @@
-{ }
+{
+  "redeem_trees": "Riscatta gli alberi",
+  "redeem_heading": "Puoi usare questo strumento per aggiungere alberi al tuo Tree Counter personale usando un Voucher albero o un Codice merce.",
+  "claim_trees": "Richiedi alberi",
+  "enter_code": "Inserisci un Voucher albero, un codice merce o un Token per richiedere il riscatto dei tuoi alberi",
+  "log_in": "Effettua il login o registrati per riscattare il tuo codice",
+  "validate_code": "Convalidare il codice",
+  "code": "Codice",
+  "redeem_code": "Riscatta codice",
+  "validate_code_label": "Digita il codice per riscattare",
+  "claiming": "Rivendicazione:",
+  "trees_in_code": "Alberi in questo codice",
+  "you_can_redeem": "Puoi riscattare",
+  "planted_by": "Piantato da",
+  "add_my_trees": "Aggiungi ai miei alberi",
+  "already_redeemed_trees": "Hai già riscattato questo codice, provane un altro.",
+  "RedeemxTrees": "Riscatta {{treeCount}} Alberi",
+  "Redeem1Tree": "Riscatta albero {{treeCount}}",
+  "redeem_trees_button": "menu_item.redemption"
+}

@@ -1,4 +1,11 @@
 {
+  "reset": "Ripristina.",
   "dont_have_account": "Non hai un account?",
-  "password": "Password"
+  "login": "Accedi",
+  "log-in": "Accesso",
+  "show": "Mostra",
+  "hide": "Nascondere",
+  "password": "Password",
+  "current_password": "Password attuale",
+  "login_description": "Accedi con il tuo account della Plant-for-the-Planet App per accedere al tuo contatore di alberi personale. Puoi iscriverti se non hai ancora un account."
 }

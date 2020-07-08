@@ -1,1 +1,7 @@
-{ }
+{
+  "set_target": "Imposta un obiettivo",
+  "update_target": "Aggiorna il mio target",
+  "save": "Salva",
+  "target_count": "Totale target albero",
+  "target_year": "Anno di riferimento"
+}

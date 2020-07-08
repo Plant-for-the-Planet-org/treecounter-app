@@ -1,4 +1,16 @@
 {
   "activate_ur_account": "Attiva il tuo account",
-  "resent_email": "Rinvia l'e-mail"
+  "not_yet_activated": "Non hai ancora attivato il tuo account.",
+  "received_email": "Dovresti aver ricevuto un'email quando ti sei registrato. Fare clic sul collegamento di attivazione fornito in questa e-mail per completare la procedura di iscrizione.",
+  "not_received_email": "Se non hai ricevuto l'email di attivazione, fai clic sul link per inviarlo di nuovo.",
+  "resent_email": "Rinvia l'e-mail",
+  "account_activation": "attivazione dell'account",
+  "successfully_activated": "Hai attivato correttamente il tuo account <br / >.",
+  "already_activated": "Il tuo account è già stato attivato <br / >in precedenza.",
+  "do_profile_or_target": "Adesso puoi",
+  "customize_your_profile": "personalizza il tuo profilo",
+  "or": "o",
+  "set_a_target": "fissare un obiettivo",
+  "do_login": "Tu puoi ora",
+  "login": "accesso"
 }

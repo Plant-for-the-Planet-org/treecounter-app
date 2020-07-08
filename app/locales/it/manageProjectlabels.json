@@ -1,1 +1,9 @@
-{ }
+{
+  "trees_planted": "Alberi piantati",
+  "discard_changes": "Non salvare le modifiche",
+  "my_dashboard": "la mia scrivania",
+  "project_heading": "Puoi gestire i tuoi progetti di piantumazione e visualizzare le donazioni che hai ricevuto",
+  "total_donation": "Donazioni totali",
+  "connect_to_stripe": "Connetti a Stripe",
+  "recent_donations": "Donazioni recenti"
+}

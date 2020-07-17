@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Animated,
   Image,
   ScrollView,
   Text,
@@ -18,7 +17,6 @@ import CardLayout from '../Common/Card';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { delimitNumbers } from './../../utils/utils';
 import LoadingIndicator from './../Common/LoadingIndicator';
-import HeaderAnimatedImage from './../Header/HeaderAnimatedImage.native';
 import { PledgeTabView, TabButtons } from './PledgeTabView.native';
 import { Header } from './../DonateTrees/components/Header';
 const PledgeEvents = props => {

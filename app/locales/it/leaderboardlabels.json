@@ -1,6 +1,18 @@
 {
+  "treecount_leaderboard": "Classifica",
+  "trillion_tree_campaign_app_header": "App Plant-for-the-planet",
+  "tree_planter": "Una piantatrice di alberi",
+  "treecount_map": "Mappa",
   "sortBy": "Ordina per",
   "timePeriod": "Periodo di tempo",
+  "map_description": "C'è abbastanza spazio nel mondo per tantissimi nuovi alberi. In totale, un area della grandezza degli Stati Uniti potrebbe essere riforestata! Scopri sulla mappa dove sono già stati piantati alberi e dove possono esserne piantati di più. Sulla tabella segnapunti puoi vedere quali paesi, organizzazioni o aziende hanno piantato il maggior numero di alberi.",
+  "explore": "Esplora",
+  "plantedTrees": "Alberi piantati",
   "plantedTrees_description": "Tutti gli alberi registrati su questo sito dal 2006.",
-  "existingForest": "Foresta Esistente"
+  "existingForest": "Foresta Esistente",
+  "existingForest_description": "Attualmente esistono 3.04 trilioni di alberi in tutto il mondo. Prima che gli umani iniziassero a tagliare le foreste, circa 11.000 anni fa, erano sei trilioni. La mappa mostra il numero di alberi per km2.",
+  "existingForest_source": "Crowther, T. W. et al. (2015) Mappatura della densità degli  alberisu scala globale. Nature 525, 201-205.",
+  "restorationOpportunities": "Opportunità di restauro",
+  "restorationOpportunities_description": "Mezzo miliardo di ettari sono adatti per il restauro su vasta scala di foreste chiuse. Più di un miliardo e mezzo di ettari sono meglio situati per il restauro del mosaico, che combina foreste con altri usi del suolo come l'agroforestazione, l'agricoltura di piccoli proprietari e gli insediamenti.",
+  "restorationOpportunities_source": "Crowther, T. W. et al. (2017) Previsione del potenziale di riforestazione della foresta globale. bioRxiv 210062."
 }

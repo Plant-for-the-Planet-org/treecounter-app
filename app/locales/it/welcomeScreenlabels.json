@@ -1,1 +1,6 @@
-{ }
+{
+  "welcome_to_ttc": "Benvenuti nella Plant-for-the-Planet App",
+  "welcome_screen_summery": "Crea il tuo contatore albero personale.",
+  "welcome_screen_summery_1": "Supporta le organizzazioni che piantano alberi e inizia a piantare alberi dal tuo telefono.",
+  "view_global_treecounter": " Visualizza il contatore di alberi globale"
+}

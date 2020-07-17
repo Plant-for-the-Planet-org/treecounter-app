@@ -1,1 +1,25 @@
-{ }
+{
+  "challenge_heading": "Sfida gli amici ",
+  "challenge_to_plant": "Sfida a piantare",
+  "challenge_edit_description": "Chi pianta la foresta più grande? Sfida i tuoi amici e colleghi di lavoro o prendi parte ad una competizione già avviata!",
+  "from": "da parte di",
+  "indefinite": "Indefinito",
+  "to": "a",
+  "accept": "Accettare",
+  "reject": "Rifiutare",
+  "sent": "Inviato",
+  "accepted": "Accettato",
+  "declined": "Rifiutato",
+  "challenge_accept": "Hai accettato la sfida",
+  "challenge_deny": "Hai negato la sfida",
+  "challenge_error": "L'attuale obiettivo di {{user}} è alberi {{target}}. Si prega di inserire un numero più alto.",
+  "search_user": "Cerca utente",
+  "email": "Email",
+  "year": "Anno",
+  "challenge_create_successfully": "Sfida creata con successo",
+  "please_select_user": "Si prega di selezionare l'utente",
+  "please_select_year": "Si prega di selezionare l'anno",
+  "could_not_add_user": "Impossibile aggiungere l'utente",
+  "name_is_required": "Il nome è obbligatorio",
+  "goal_is_required": "La sfida è obbligatoria"
+}

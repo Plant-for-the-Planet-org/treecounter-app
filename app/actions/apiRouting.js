@@ -1,5 +1,6 @@
 const routes = require('../server/routes/fos_js_routes.json');
 import Routing from './router.min.js';
+//import { debug } from '../debug';
 import { context } from '../config';
 import { getCdnMediaUrl, getWebMapIds } from './fetchConfig';
 import { getLocaleAsync } from './getLocale';
@@ -17,6 +18,7 @@ export const getApiRoute = async (routeName, params) => {
   const url = `${serverName}${baseUrl}${Routing.generate(routeName, {
     ...params
   })}`;
+  //debug('API request:', url);
   return url;
 };
 

@@ -112,7 +112,7 @@ class EditUserProfileContainer extends React.Component {
         this.props.logoutUser();
       })
       .catch(err => {
-        if (err.response.data.code === 400) {
+        if (err.response.data && err.response.data.code === 400) {
           NotificationManager.error(
             err.response.data.errors.children.newEmail.errors
               ? err.response.data.errors.children.newEmail.errors[0]
@@ -229,7 +229,7 @@ class EditUserProfileContainer extends React.Component {
           }
         })
         .catch(err => {
-          if (err.response.data.code === 400) {
+          if (err.response.data && err.response.data.code === 400) {
             if (profileType == 'password') {
               NotificationManager.error(
                 err.response.data.errors.children.currentPassword.errors

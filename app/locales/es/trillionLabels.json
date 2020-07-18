@@ -1,4 +1,8 @@
 {
   "world": "Mundo",
-  "leaderboard": "Clasificación"
+  "leaderboard": "Clasificación",
+  "updateRequired": "Se requiere actualización",
+  "updateExplanation": "Hemos introducido nuevas características, por favor, actualiza la aplicación para plantar más árboles!",
+  "openAppStore": "Abrir en la App Store",
+  "openPlayStore": "Abrir en la Play Store"
 }

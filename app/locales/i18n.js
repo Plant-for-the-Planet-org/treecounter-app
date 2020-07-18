@@ -2,6 +2,7 @@ import i18next from 'i18next';
 import enlabels from './en';
 import deLabels from './de';
 import esLabels from './es';
+import itLabels from './it';
 import ptLabels from './pt';
 import ptBRLabels from './pt-BR';
 import { getLocale, defaultLocale } from '../actions/getLocale';
@@ -32,6 +33,11 @@ i18next.init({
     'es': {
       translation: {
         label: esLabels
+      }
+    },
+    'it': {
+      translation: {
+        label: itLabels
       }
     },
     'pt': {

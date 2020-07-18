@@ -55,4 +55,10 @@ curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
    -F bundle=@ios-release.bundle \
    -F projectRoot=`pwd`
 
+# upload the dSYMs you can download from AppStore Connect
+# curl --http1.1 https://upload.bugsnag.com/ \
+#  -F apiKey="$BUGSNAG_API_KEY" \
+#  -F dsym=@~/Downloads/appDsyms.zip \
+#  -F projectRoot=`pwd`
+
 rm ios-release.bundle ios-release.bundle.map

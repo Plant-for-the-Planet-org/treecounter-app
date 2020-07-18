@@ -45,4 +45,14 @@ curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
    -F bundle=@ios-release.bundle \
    -F projectRoot=`pwd`
 
+# also upload iOS source maps for package version
+curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
+   -F apiKey="$BUGSNAG_API_KEY" \
+   -F appVersion="$PACKAGE_VERSION" \
+   -F dev=false \
+   -F platform=ios \
+   -F sourceMap=@ios-release.bundle.map \
+   -F bundle=@ios-release.bundle \
+   -F projectRoot=`pwd`
+
 rm ios-release.bundle ios-release.bundle.map

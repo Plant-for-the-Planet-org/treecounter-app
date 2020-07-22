@@ -16,5 +16,6 @@
   "already_redeemed_trees": "Você já resgatou este código, por favor tente outro.",
   "RedeemxTrees": "Resgatar {{treeCount}} Árvores",
   "Redeem1Tree": "Resgatar {{treeCount}} Árvore",
-  "redeem_trees_button": "Resgatar Árvores"
+  "redeem_trees_button": "Resgatar Árvores",
+  "redeem": "Resgate"
 }

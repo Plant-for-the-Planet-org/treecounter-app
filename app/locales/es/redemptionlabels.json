@@ -16,5 +16,6 @@
   "already_redeemed_trees": "Ya has canjeado este código, intenta con otro.",
   "RedeemxTrees": "Canjear {{treeCount}} Árboles",
   "Redeem1Tree": "Canjear {{treeCount}} Árboles",
-  "redeem_trees_button": "Canjear Árboles"
+  "redeem_trees_button": "Canjear Árboles",
+  "redeem": "Canjear"
 }

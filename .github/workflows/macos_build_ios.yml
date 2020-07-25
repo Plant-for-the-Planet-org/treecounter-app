@@ -64,7 +64,7 @@ jobs:
       run: |
         source ~/.bashrc
         echo $PATH
-        bash <(curl --compressed -s https://raw.githubusercontent.com/labbots/google-drive-upload/master/install.sh) -R v3.1.1
+        curl --compressed -s https://raw.githubusercontent.com/labbots/google-drive-upload/v2.7/install.sh | bash -s -- -R v2.7
         echo "CLIENT_ID=\"$CLIENT_ID\"" >> ~/.googledrive.conf
         echo "CLIENT_SECRET=\"$CLIENT_SECRET\"" >> ~/.googledrive.conf
         echo "REFRESH_TOKEN=\"$REFRESH_TOKEN\"" >> ~/.googledrive.conf

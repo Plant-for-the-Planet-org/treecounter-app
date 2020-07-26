@@ -1,1 +1,7 @@
-{ }
+{
+  "imprint": "Imprimer",
+  "privacy": "Confidentialité",
+  "contact": "Contact",
+  "information": "Information",
+  "data_protection": "Politique de Protection des Données"
+}

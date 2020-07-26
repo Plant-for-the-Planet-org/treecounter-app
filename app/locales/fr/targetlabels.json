@@ -1,3 +1,7 @@
 {
-  "set_target": "Choisir mon objectif"
+  "set_target": "Mon objectif d'Arbres",
+  "update_target": "Mon objectif d'Arbres",
+  "save": "Sauvegarder",
+  "target_count": "Objectif total d'Arbres",
+  "target_year": "Année Cible"
 }

@@ -1,1 +1,24 @@
-{ }
+{
+  "amount": "Montant du Don",
+  "creditCard": "Carte de crédit",
+  "confirm": "Je confirme que je paierai le montant de {{amount}}{{currency}} au compte suivant.",
+  "bank_transfer": "Virement",
+  "pay_via": "Payer par virement bancaire",
+  "pay": "Payer",
+  "choose": "Choisir",
+  "card": "Carte",
+  "last4": "4 derniers chiffres",
+  "save_for_later": "Ajouter ce mode de paiement à mon compte pour mes dons futurs",
+  "sepa_debit": "Prélèvement SEPA",
+  "stripe_sepa_des1": "En fournissant votre IBAN et en confirmant ce paiement, vous autorisez",
+  "stripe_sepa_des2": "et Stripe, notre prestataire de services de paiement, pour envoyer  à votre banque les instructions pour le débit de votre compte selon ces instructions. Vous avez droit à un remboursement auprès de votre banque selon les termes et conditions de votre accord avec votre banque. Un remboursement doit être réclamé dans les 8 semaines à compter de la date à laquelle votre compte a été débité.",
+  "pay_via_sepa": "Payez avec SEPA",
+  "contact_firstname": "Prénom",
+  "contact_lastname": "Nom De Famille",
+  "donate_to": "Faire un \"Don\" à {{name}}",
+  "payment_failed": "Paiement refusé",
+  "go_back_to_app": "Retournez à l'Application \"Plant-for-the-Planet\"",
+  "please_confirm": "Confirmer",
+  "please_enter_card_details": "Entrer correctement les détails de votre carte",
+  "please_enter_iban": "Veuillez entrer l'IBAN correct"
+}

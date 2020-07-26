@@ -1,1 +1,23 @@
-{ }
+{
+  "community_reviews": "Avis d'experts",
+  "write_review": "Emettre un avis",
+  "view_pdf": "Voir le PDF",
+  "edit_review": "Modifier l'Avis",
+  "delete_review": "Supprimer l'avis",
+  "upload_report": "Télécharger le rapport (PDF)",
+  "add_project_review": "Ajouter une Revue de Projet",
+  "edit_project_review": "Modifier l'analyse du Projet",
+  "guide_line": "Veuillez vérifier les directives et évaluez uniquement les indices que vous connaissez. Tous les indices sont facultatifs.",
+  "brief_review": "BREVE PRESENTATION DU PROJET",
+  "no_pdf_found": "Aucun pdf valide trouvé!",
+  "reviews": "Commentaire",
+  "summary_missing": "Texte bref manquant",
+  "file_selected": "1 Fichier sélectionné",
+  "add_pictures": "AJOUTER DES PHOTOS",
+  "file_already_upload": "1 fichier PDF déjà enregistré",
+  "view_guidelines": "Voir les lignes directrices",
+  "land_quality": "Qualité des terres",
+  "co_benefits": "Avantages associés",
+  "survival_rate": "Taux de reprise",
+  "at_least_one_index": "Un index de révision au moins doit être fourni."
+}

@@ -1,1 +1,5 @@
-{ }
+{
+  "mail_sent": "Nous venons de vous envoyer un email.",
+  "secure_link": "Cliquer sur le lien sécurisé que nous vous avons envoyé pour réinitialiser votre mot de passe. Si vous n'avez pas reçu d' email, vérifier votre dossier de courrier indésirable (SPAM).",
+  "try_again_login": "Essayez à nouveau de vous connecter"
+}

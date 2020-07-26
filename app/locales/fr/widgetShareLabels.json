@@ -1,1 +1,14 @@
-{ }
+{
+  "widget_share": "Widget: Partagez vos progrès",
+  "widget_share_description": "Widget est un moyen simple de montrer les progrès de votre plantation d’arbres sur un site Web ou un Blog. Seul le \"Compteur d'Arbres\" publics de la Campagne Mille Milliards d'Arbres\" peut être intégré.",
+  "widget_share_choose_widget": "1. Choisissez le type de widget",
+  "widget_share_copy_paste_html_snippet": "2. Copier et coller un extrait de code HTML",
+  "widget_basic": "Nombre d'Arbres",
+  "widget_global_tree_counter": "Compteur d'Arbres global",
+  "widget_standard_tree_counter": "Compteur d'Arbres standard",
+  "widget_progress_tree_counter": "Etat du Compteur d'Arbres",
+  "widget_donate_trees": "Donner des Arbres",
+  "widget_preview": "Aperçu du widget",
+  "widget_not_public_acct_warning": "Votre profil n'est pas visible publiquement. Pour créer votre widget \"Compteur d'Arbres\", rendez public votre Compte dans l'Edition du Profil.",
+  "widget_loading": " chargement du widget ..."
+}

@@ -1,1 +1,25 @@
-{ }
+{
+  "challenge_heading": "Challenge",
+  "challenge_to_plant": "Défi de plantation:",
+  "challenge_edit_description": "Qui plante la plus grande forêt? Défiez vos amis et collègues de travail ou participez à des concours en cours!",
+  "from": "de",
+  "indefinite": "Indéfini",
+  "to": "à",
+  "accept": "Accepter",
+  "reject": "Rejeter",
+  "sent": "Envoyé",
+  "accepted": "Accepté",
+  "declined": "Refusée",
+  "challenge_accept": "Vous avez relevé le défi",
+  "challenge_deny": "Vous avez refusé le défi",
+  "challenge_error": "La cible actuelle de {{user}} est  {{target}} Arbres. Entrer un nombre d'Arbres plus élevé.",
+  "search_user": "Rechercher un Utilisateur",
+  "email": "Email",
+  "year": "An",
+  "challenge_create_successfully": "Défi créé avec succès",
+  "please_select_user": "Sélectionner un Utilisateur",
+  "please_select_year": "Sélectionner l'année",
+  "could_not_add_user": "Impossible d'ajouter un Utilisateur",
+  "name_is_required": "Nom requis",
+  "goal_is_required": "Objectif est requis"
+}

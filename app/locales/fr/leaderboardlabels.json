@@ -1,3 +1,18 @@
 {
-  "restorationOpportunities": "Opportunitées de restauration"
+  "treecount_leaderboard": "Leaderboard",
+  "trillion_tree_campaign_app_header": "App Plant-for-the-Planet",
+  "tree_planter": "Un planteur d'arbres",
+  "treecount_map": "Carte",
+  "sortBy": "Trier par",
+  "timePeriod": "Période de temps",
+  "map_description": "Il y a assez d'espace sur Terre pour beaucoup de nouveaux arbres. Au total, une zone équivalente à la taille des USA pourrait être reboisée! Découvrir sur la carte où des arbres ont déjà été plantés et où d'autres peuvent être plantés. Dans le classement, vous pouvez voir quels pays, organisations ou entreprises ont planté le plus d'arbres.",
+  "explore": "Explorer",
+  "plantedTrees": "Arbres plantés",
+  "plantedTrees_description": "Tous les arbres enregistrés sur ce site depuis 2006.",
+  "existingForest": "Forêt existante",
+  "existingForest_description": "3.040.000.000.000 d'arbres (Plus de trois Mille Milliards) sont sur Terre. Il y a environ 11 000 ans, il y avait ± 6 000 milliards d'arbres avant que l'homme commence à couper la forêt. La carte indique le nombre d'arbres par km 2.",
+  "existingForest_source": "Crowther, T. W. et al. (2015) Cartographie de la densité des arbres à l'échelle mondiale. Nature 525, 201-205.",
+  "restorationOpportunities": "Possibilité de restauration",
+  "restorationOpportunities_description": "Un demi milliards d'hectares sont possibles pour restaurer un couvert de forêt dense à grande échelle. En outre, un milliard et demi d’hectares sont des emplacement idéaux pour la restauration forestière en mosaïques, qui combinent des forêts avec d’autres utilisations des terres telles que l’agroforesterie, la petite agriculture et les habitations.",
+  "restorationOpportunities_source": "Crowther, T. W. et al. (2017) Prévision du potentiel mondial de reboisement forestier. bioRxiv 210062."
 }

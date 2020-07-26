@@ -1,6 +1,8 @@
 {
-  "lbr_countries": "Des pays",
+  "lbr_countries": "Pays",
   "lbr_companies": "Entreprises",
   "lbr_individuals": "Personnes",
+  "lbr_schools": "Écoles",
+  "lbr_tree_planting_organizations": "Organisation de Plantation d'Arbres (TPO en anglais)",
   "lbr_organizations": "Organisations"
 }

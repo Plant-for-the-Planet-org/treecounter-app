@@ -1,1 +1,21 @@
-{ }
+{
+  "redeem_trees": "Échanger un \"Cadeau d'Arbres\"",
+  "redeem_heading": "Vous pouvez utiliser cet outil pour ajouter des arbres sur votre \"Compteur d’Arbres\" personnel. Vous pouvez à l'aide d'un \"Bon d’Arbres\" ou un \"Code de marchandise\".",
+  "claim_trees": "Réclamer des arbres",
+  "enter_code": "Veuillez saisir un 'Bon valeur' d’Arbres, un Code de marchandise ou un Jeton pour réclamer le rachat de vos arbres.",
+  "log_in": "Veuillez vous connecter ou vous inscrire pour utiliser votre code.",
+  "validate_code": "Valider le code",
+  "code": "Code",
+  "redeem_code": "Utiliser le code",
+  "validate_code_label": "Veuillez saisir le Code à utiliser",
+  "claiming": "Soutien:",
+  "trees_in_code": "Arbres dans ce code",
+  "you_can_redeem": "Vous pouvez échanger",
+  "planted_by": "Planté par",
+  "add_my_trees": "Ajouter à mes Arbres",
+  "already_redeemed_trees": "Vous avez déjà utilisé ce code, veuillez en essayer un autre.",
+  "RedeemxTrees": "Utiliser {{treeCount}} Arbres",
+  "Redeem1Tree": "Échanger {{treeCount}} Arbres",
+  "redeem_trees_button": "Racheter des arbres",
+  "redeem": "Racheter"
+}

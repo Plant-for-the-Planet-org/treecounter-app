@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:drawable="@drawable/ic_loadingscreen" />
+  <item android:drawable="@drawable/ic_loadingscreen" />
+  <item android:drawable="@drawable/ic_logos"
+    android:width="350dp"
+    android:height="720dp"
+    android:top="0dp"
+    android:bottom="0dp"
+    android:gravity="center"
+    />
 
 </layer-list>

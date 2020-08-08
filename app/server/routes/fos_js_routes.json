@@ -112,6 +112,27 @@
       "methods":  [],
       "schemes":  []
     },
+    "app_selectedProject": {
+      "tokens": [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "projectSlug"
+        ],
+        [
+          "text",
+          "/project"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
     "app_homepage":  {
       "tokens":  [
         [

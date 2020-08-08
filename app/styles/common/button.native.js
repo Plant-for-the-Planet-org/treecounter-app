@@ -110,7 +110,7 @@ export default EStyleSheet.create({
     bottom: '6%'
     // paddingHorizontal: 24
   },
-  actionButtonTouchableRegisterTree: {
+  actionButtonTouchableNoFixedPosition: {
     width: '100%',
     bottom: '6%'
     // paddingHorizontal: 24

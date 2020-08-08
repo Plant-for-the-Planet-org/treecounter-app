@@ -531,7 +531,7 @@ export const FormikFormTree = props => {
             <CardLayout style={styles.buttonContainer}>
               <View style={buttonStyles.buttonContainer}>
                 <TouchableOpacity
-                  style={buttonStyles.actionButtonTouchable}
+                  style={buttonStyles.actionButtonTouchableNoFixedPosition}
                   onPress={props.handleSubmit}
                   disabled={!props.isValid || loadButton}
                 >

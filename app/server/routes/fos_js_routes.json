@@ -84,21 +84,6 @@
       ],
       "schemes":  []
     },
-    "plugin_account_info":  {
-      "tokens":  [
-        [
-          "text",
-          "/accountInfo"
-        ]
-      ],
-      "defaults":  [],
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [
-        "GET"
-      ],
-      "schemes":  []
-    },
     "app_selectProject":  {
       "tokens":  [
         [
@@ -111,27 +96,6 @@
       "hosttokens":  [],
       "methods":  [],
       "schemes":  []
-    },
-    "app_selectedProject": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "projectSlug"
-        ],
-        [
-          "text",
-          "/project"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
     },
     "app_homepage":  {
       "tokens":  [
@@ -831,6 +795,25 @@
         [
           "text",
           "/widget-builder"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_selectedProject":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "projectSlug"
+        ],
+        [
+          "text",
+          "/project"
         ]
       ],
       "defaults":  [],
@@ -5576,6 +5559,88 @@
       ],
       "schemes":  []
     },
+    "app_plantLocations_get":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "guid"
+        ],
+        [
+          "text",
+          "/app/plantLocations"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_project_get":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "guid"
+        ],
+        [
+          "text",
+          "/app/projects"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_projects_get":  {
+      "tokens":  [
+        [
+          "text",
+          "/app/projects"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_payment_setup_get":  {
+      "tokens":  [
+        [
+          "text",
+          "/paymentOptions"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "guid"
+        ],
+        [
+          "text",
+          "/app/projects"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
     "auth0_authenticate_user":  {
       "tokens":  [
         [
@@ -5591,32 +5656,20 @@
       ],
       "schemes":  []
     },
-    "account_infoplugin_account_info":  {
+    "auth0_lookupAccessToken":  {
       "tokens":  [
         [
-          "text",
-          "/accountInfo"
-        ],
-        [
           "variable",
           "/",
           "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
+          "accessToken"
         ],
         [
           "text",
-          "/api/plugin"
+          "/api/auth0/lookupAccessToken"
         ]
       ],
-      "defaults":  {
-        "_locale":  []
-      },
+      "defaults":  [],
       "requirements":  [],
       "hosttokens":  [],
       "methods":  [
@@ -5624,32 +5677,29 @@
       ],
       "schemes":  []
     },
-    "plugin_api_key_by_slug":  {
+    "plugin_accountInfo":  {
       "tokens":  [
         [
           "text",
-          "/apiKeyBySlug"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api/plugin"
+          "/plugin/accountInfo"
         ]
       ],
-      "defaults":  {
-        "_locale":  []
-      },
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "plugin_apiKeyBySlug":  {
+      "tokens":  [
+        [
+          "text",
+          "/plugin/apiKeyBySlug"
+        ]
+      ],
+      "defaults":  [],
       "requirements":  [],
       "hosttokens":  [],
       "methods":  [
@@ -5661,28 +5711,10 @@
       "tokens":  [
         [
           "text",
-          "/plantLocations"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
+          "/treemapper/plantLocations"
         ]
       ],
-      "defaults":  {
-        "_locale":  []
-      },
+      "defaults":  [],
       "requirements":  [],
       "hosttokens":  [],
       "methods":  [
@@ -5700,28 +5732,10 @@
         ],
         [
           "text",
-          "/plantLocations"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
+          "/treemapper/plantLocations"
         ]
       ],
-      "defaults":  {
-        "_locale":  []
-      },
+      "defaults":  [],
       "requirements":  [],
       "hosttokens":  [],
       "methods":  [
@@ -5749,28 +5763,10 @@
         ],
         [
           "text",
-          "/plantLocations"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
+          "/treemapper/plantLocations"
         ]
       ],
-      "defaults":  {
-        "_locale":  []
-      },
+      "defaults":  [],
       "requirements":  [],
       "hosttokens":  [],
       "methods":  [
@@ -5788,28 +5784,10 @@
         ],
         [
           "text",
-          "/plantLocation"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
+          "/treemapper/plantLocation"
         ]
       ],
-      "defaults":  {
-        "_locale":  []
-      },
+      "defaults":  [],
       "requirements":  [],
       "hosttokens":  [],
       "methods":  [
@@ -5821,28 +5799,10 @@
       "tokens":  [
         [
           "text",
-          "/plantLocations"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
+          "/treemapper/plantLocations"
         ]
       ],
-      "defaults":  {
-        "_locale":  []
-      },
+      "defaults":  [],
       "requirements":  [],
       "hosttokens":  [],
       "methods":  [
@@ -5860,28 +5820,10 @@
         ],
         [
           "text",
-          "/plantLocations"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
+          "/treemapper/plantLocations"
         ]
       ],
-      "defaults":  {
-        "_locale":  []
-      },
+      "defaults":  [],
       "requirements":  [],
       "hosttokens":  [],
       "methods":  [
@@ -5889,36 +5831,54 @@
       ],
       "schemes":  []
     },
-    "userInfo_get":  {
+    "accountInfo_get":  {
       "tokens":  [
         [
           "text",
-          "/userInfo"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
+          "/treemapper/accountInfo"
         ]
       ],
-      "defaults":  {
-        "_locale":  []
-      },
+      "defaults":  [],
       "requirements":  [],
       "hosttokens":  [],
       "methods":  [
         "GET"
+      ],
+      "schemes":  []
+    },
+    "common_register_post":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "profileType"
+        ],
+        [
+          "text",
+          "/treemapper/register"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "common_profile_patch":  {
+      "tokens":  [
+        [
+          "text",
+          "/treemapper/profilePatch"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "PUT"
       ],
       "schemes":  []
     },

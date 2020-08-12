@@ -38,7 +38,7 @@
     "@react-native-community/datetimepicker": "^3.0.2",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.6",
-    "@react-native-community/netinfo": "^5.5.1",
+    "@react-native-community/netinfo": "^5.9.5",
     "@react-native-community/picker": "^1.7.1",
     "@react-native-community/viewpager": "^3.3.0",
     "autosuggest-highlight": "^3.1.1",

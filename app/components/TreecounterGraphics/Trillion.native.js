@@ -460,8 +460,7 @@ class Trillion extends PureComponent {
         />
       ) : null,
       this.state.loadSvg ? (
-        <>
-          <SafeAreaView style={{ flex: 1 }}>
+          <SafeAreaView style={{ flex: 1 }} key="safe-area-view">
             <HeaderStatic
               title={i18n.t('label.explore')}
               navigation={this.props.navigation}
@@ -480,7 +479,6 @@ class Trillion extends PureComponent {
               onIndexChange={this._handleIndexChange}
             />
           </SafeAreaView>
-        </>
       ) : null
     ];
   }

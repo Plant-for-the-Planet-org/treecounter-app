@@ -1,1 +1,20 @@
-{ }
+{
+  "NDVI_container_static_month": "JFMAMJJASOND",
+  "NDVI_gradient_result_line_title": "Corrente",
+  "NDVI_legend_indicators": "indicatori",
+  "NDVI_info_results": "Risultati NDVI da",
+  "NDVI_info": "Informazioni",
+  "NDVI_info_average": "Media:",
+  "NDVI_info_maximum": "Max:",
+  "NDVI_info_minimum": "min:",
+  "NDVI_legend_water": "Acqua",
+  "NDVI_legend_rock_sand_snow": "Rock / Sabbia / Neve",
+  "NDVI_legend_grasslands": "praterie",
+  "NDVI_legend_dense_vegetation": "Vegetazione fitta",
+  "NDVI_on_load_paragraph": "Attualmente sta recuperando NDVI. Per favore, controlla tra un minuto o due.",
+  "NDVI_on_load_refresh_button": "Rinfrescare",
+  "NDVI_carbon_title": "CO2 catturata",
+  "NDVI_time_series": "Serie storiche NDVI",
+  "NDVI_carbon_tooltip": "La biomassa catturata è una quantità stimata calcolata utilizzando l'NDVI dal luogo del progetto. Stiamo lavorando per migliorare il nostro algoritmo di calcolo per migliorare l'accuratezza.",
+  "NDVI_tooltip_for_help_button": "(NDVI) viene calcolato dalle immagini satellitari analizzando il riflesso della luce nel vicino infrarosso da parte delle piante. I risultati NDVI calibrati ci consentono di stimare la crescita della vegetazione e la biomassa complessiva, poiché una maggiore crescita della vegetazione influenzerà il rapporto tra la luce visibile assorbita e la luce infrarossa riflessa"
+}

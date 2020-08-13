@@ -489,6 +489,13 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-slick",
       "licenseFile": "node_modules/react-native-slick/LICENSE"
     },
+    "react-native-splash-screen@3.2.0": {
+      "licenses": "MIT",
+      "repository": "https://github.com/crazycodeboy/react-native-splash-screen",
+      "publisher": "crazycodeboy",
+      "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-splash-screen",
+      "licenseFile": "node_modules/react-native-splash-screen/LICENSE"
+    },
     "react-native-svg-uri@1.2.3": {
       "licenses": "ISC",
       "repository": "https://github.com/matiascba/react-native-svg-uri",

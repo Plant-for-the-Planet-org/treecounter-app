@@ -36,7 +36,7 @@ export function challenge(challengeDetails) {
           reject(error);
           dispatch(setProgressModelState(false));
           NotificationManager.error(
-            error.response.data.message,
+            error.response.data ? error.response.data.message : i18n.t('label.error'),
             i18n.t('label.error'),
             5000
           );

@@ -91,6 +91,8 @@ const statusOptions = [
   { value: 'en', label: 'English', icon: images.worldImg },
   { value: 'de', label: 'Deutsch', icon: images.germany },
   { value: 'es', label: 'Español', icon: images.spain },
+  { value: 'fr', label: 'Français', icon: images.france },
+  { value: 'it', label: 'Italiano', icon: images.italy },
 // TODO: activate 'pt' here
 //  { value: 'pt', label: 'Português', icon: images.portugal },
   { value: 'pt-BR', label: 'Português brasileiro', icon: images.brazil }
@@ -171,7 +173,7 @@ class Menu extends Component {
     this.setState({
       selectedLanguage: selectedOption
     });
-    debug('change');
+    debug('change language to', selectedOption.value);
     saveItem('language', selectedOption.value);
     this.props.userProfile
       ? this.props
@@ -289,7 +291,7 @@ class Menu extends Component {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://play.google.com/store/apps/details?id=${context['android'].appId}`}
+            href={`https://play.app.goo.gl/?link=https://play.google.com/store/apps/details?id=${context['android'].appId}`}
           >
             <img src={images['googlePlayBadge_' + userLang.replace(/-/g,'')]} />
           </a>

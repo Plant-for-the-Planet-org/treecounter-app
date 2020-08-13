@@ -1,1 +1,8 @@
-{ }
+{
+  "lbr_countries": "paesi",
+  "lbr_companies": "Aziende",
+  "lbr_individuals": "Gli individui",
+  "lbr_schools": "scuole",
+  "lbr_tree_planting_organizations": "Organizzazione che pianta alberi",
+  "lbr_organizations": "organizzazioni"
+}

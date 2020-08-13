@@ -1,1 +1,8 @@
-{ }
+{
+  "welcome_scrn_4_heading": "Sans commission\n& Open source",
+  "welcome_scrn_4_sub_heading": "Nous sommes sérieux!\n100% des dons vont directement aux\nOrganisations de Plantation d'Arbres (TPO en anglais)",
+  "welcome_scrn_4_continue": "Poursuivre",
+  "welcome_scrn_4_already_have_an_account": "Vous avez déjà un compte?",
+  "welcome_scrn_4_sign_in": "Se connecter",
+  "welcome_scrn_4_commision": "COMMISSION"
+}

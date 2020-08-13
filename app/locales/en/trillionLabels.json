@@ -1,4 +1,8 @@
 {
   "world": "World",
-  "leaderboard": "Leaderboard"
+  "leaderboard": "Leaderboard",
+  "updateRequired": "Update Required",
+  "updateExplanation": "We’ve introduced new features, please update the app to plant more trees!",
+  "openAppStore": "Open App Store",
+  "openPlayStore": "Open Play Store"
 }

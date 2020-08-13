@@ -1,4 +1,8 @@
 {
   "world": "Welt",
-  "leaderboard": "Bestenliste"
+  "leaderboard": "Bestenliste",
+  "updateRequired": "Update erforderlich",
+  "updateExplanation": "Wir haben neue Funktionen eingeführt, bitte aktualisieren Sie die App, um mehr Bäume zu pflanzen!",
+  "openAppStore": "App Store öffnen",
+  "openPlayStore": "Play Store öffnen"
 }

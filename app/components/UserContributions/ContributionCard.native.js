@@ -302,7 +302,7 @@ class ContributionCard extends React.Component {
             disabled={isCardPressed}
             style={singleRedeemObject}
             onPress={() => {
-              this.props.onPressSingleContribution(contribution);
+              this.props.onPressSingleContribution && this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
@@ -337,7 +337,7 @@ class ContributionCard extends React.Component {
             disabled={isCardPressed}
             style={singleRedeemObject}
             onPress={() => {
-              this.props.onPressSingleContribution(contribution);
+              this.props.onPressSingleContribution && this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
@@ -383,7 +383,7 @@ class ContributionCard extends React.Component {
             disabled={isCardPressed}
             style={singleRedeemObject}
             onPress={() => {
-              this.props.onPressSingleContribution(contribution);
+              this.props.onPressSingleContribution && this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>
@@ -418,7 +418,7 @@ class ContributionCard extends React.Component {
             disabled={isCardPressed}
             style={singleRedeemObject}
             onPress={() => {
-              this.props.onPressSingleContribution(contribution);
+              this.props.onPressSingleContribution && this.props.onPressSingleContribution(contribution);
             }}
           >
             <View>

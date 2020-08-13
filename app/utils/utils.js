@@ -58,9 +58,14 @@ export function formatDate(date, style = 'dd MMM yyyy', locale) {
   //debug('formatDate', date, style, locale);
 
   if (date) {
-    return format(parseISO(date), style, {
-      locale: localeObjects[locale]
-    });
+    try {
+      return format(parseISO(date), style, {
+        locale: localeObjects[locale]
+      });
+    } catch (err) {
+      // debug(err);
+      return '';
+    }
   } else {
     return '';
   }

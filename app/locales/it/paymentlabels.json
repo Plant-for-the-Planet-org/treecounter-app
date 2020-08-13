@@ -1,11 +1,24 @@
 {
+  "amount": "quantità:",
   "creditCard": "Carta di credito",
+  "confirm": "Confermo che pagherò l'importo di {{amount}}{{currency}}al seguente account",
   "bank_transfer": "Bonifico",
   "pay_via": "Paga tramite bonifico bancario",
   "pay": "Paga",
+  "choose": "Scegliere",
+  "card": "Carta",
+  "last4": "Ultime 4 cifre",
+  "save_for_later": "Salva questo metodo di pagamento per donazioni future ",
+  "sepa_debit": "Addebito diretto SEPA",
   "stripe_sepa_des1": "Fornendo il tuo IBAN e confermando questo pagamento, stai autorizzando",
-  "stripe_sepa_des2": "e Stripe, il nostro fornitore di servizi di pagamento, per inviare istruzioni alla tua banca per addebitare il tuo conto in conformità con tali istruzioni. Hai diritto a un rimborso dalla tua banca secondo i termini e le condizioni del contratto con la tua banca. Un rimborso deve essere richiesto entro 8 settimane a partire dalla data in cui è stato addebitato il tuo account.",
+  "stripe_sepa_des2": "e Stripe, il nostro fornitore di servizi di pagamento, per inviare istruzioni alla tua banca per addebitare il tuo conto in conformità con tali istruzioni. Hai diritto a un rimborso dalla tua banca secondo i termini e le condizioni del contratto con la tua banca. Un rimborso deve essere richiesto entro 8 settimane a partire dalla data in cui è stato addebitato il tuo acconto.",
   "pay_via_sepa": "Paga con SEPA",
   "contact_firstname": "Nome",
-  "contact_lastname": "Cognome"
+  "contact_lastname": "Cognome",
+  "donate_to": "Dona a {{name}}",
+  "payment_failed": "Pagamento non riuscito",
+  "go_back_to_app": "Torna all'App",
+  "please_confirm": "Per favore conferma",
+  "please_enter_card_details": "Si prega di inserire i dettagli della carta corretti",
+  "please_enter_iban": "Si prega di inserire l'IBAN corretto"
 }

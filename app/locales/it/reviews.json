@@ -1,1 +1,23 @@
-{ }
+{
+  "community_reviews": "Recensioni di esperti",
+  "write_review": "Scrivere una recensione",
+  "view_pdf": "Visualizza PDF",
+  "edit_review": "Modifica recensione",
+  "delete_review": "Elimina recensione",
+  "upload_report": "Carica rapporto (PDF)",
+  "add_project_review": "Aggiungi revisione del progetto",
+  "edit_project_review": "Modifica revisione progetto",
+  "guide_line": "Controlla le linee guida e valuta solo gli indici delle tariffe con cui hai più familiarità. Tutti gli indici sono opzionali.",
+  "brief_review": "BREVE RECENSIONE DEL PROGETTO",
+  "no_pdf_found": "Nessun pdf valido trovato!",
+  "reviews": "Recensioni",
+  "summary_missing": "Breve testo mancante",
+  "file_selected": "1 file selezionato",
+  "add_pictures": "AGGIUNGI FOTO",
+  "file_already_upload": "1 file PDF già lì",
+  "view_guidelines": "Visualizza Linee guida",
+  "land_quality": "Qualità della terra",
+  "co_benefits": "Vantaggi",
+  "survival_rate": "Tasso di sopravvivenza",
+  "at_least_one_index": "È necessario fornire almeno un indice di revisione."
+}

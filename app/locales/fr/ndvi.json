@@ -1,1 +1,20 @@
-{ }
+{
+  "NDVI_container_static_month": "JFMAMJJASOND",
+  "NDVI_gradient_result_line_title": "Actuel",
+  "NDVI_legend_indicators": "Indicateurs",
+  "NDVI_info_results": "Résultats de l'Index NDVI de",
+  "NDVI_info": "Info",
+  "NDVI_info_average": "Moyenne:",
+  "NDVI_info_maximum": "Max:",
+  "NDVI_info_minimum": "Min:",
+  "NDVI_legend_water": "Eau",
+  "NDVI_legend_rock_sand_snow": "Rocher/Sable/Neige",
+  "NDVI_legend_grasslands": "Prairies",
+  "NDVI_legend_dense_vegetation": "Végétation dense",
+  "NDVI_on_load_paragraph": "Récupération de NDVI en cours. Vérifier dans une ou deux  minutes.",
+  "NDVI_on_load_refresh_button": "Rafraîchir",
+  "NDVI_carbon_title": "CO2 stocké",
+  "NDVI_time_series": "Série chronologique de NDVI",
+  "NDVI_carbon_tooltip": "La biomasse capturée est estimée par le NDIV de l’emplacement du projet. Nous travaillons sur notre algorithme de calcul pour améliorer la précision.",
+  "NDVI_tooltip_for_help_button": "Le NDVI est calculé à partir de l'imagerie satellite en analysant la réflexion du rayonnement infrarouge-proche par les plantes. Le calibrage NDVI nous permet d'estimer la croissance de la végétation et la biomasse globale, car une croissance plus importante de la végétation modifie le rapport de la lumière visible absorbée et du rayonnement infrarouge-proche réfléchi."
+}

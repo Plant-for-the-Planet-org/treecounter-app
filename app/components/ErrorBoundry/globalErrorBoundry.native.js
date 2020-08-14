@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, ScrollView, SafeAreaView } from 'react-native';
+import { debug } from '../../debug';
 import { context } from '../../config';
 import styles from '../../styles/edit_profile.native';
 import i18n from '../../locales/i18n.js';
-import { Client, Configuration } from 'bugsnag-react-native';
+import Bugsnag from '@bugsnag/react-native'
 import { version as app_version } from '../../../package.json';
+
 const textColor = 'white';
-let bugsnag;
 if (context.bugsnagApiKey) {
-  const configuration = new Configuration();
-  configuration.apiKey = context.bugsnagApiKey;
-  configuration.codeBundleId = app_version;
-  bugsnag = new Client(configuration);
+  Bugsnag.start({
+    apiKey: context.bugsnagApiKey,
+    codeBundleId: app_version
+  })
 }
 
 export default class GlobalErrorBoundary extends React.Component {
@@ -23,9 +24,11 @@ export default class GlobalErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true, error, info });
-    if (bugsnag) {
-      bugsnag.notify(error, function(report) {
-        report.metadata = { info: info };
+    debug('GlobalErrorBoundary', error, info);
+
+    if (context.bugsnagApiKey) {
+      Bugsnag.notify(error, event => {
+        event.addMetadata('info', { info: info })
       });
     }
   }
@@ -45,13 +48,10 @@ export default class GlobalErrorBoundary extends React.Component {
               {i18n.t('label.sorry_inconveniences')}
             </Text>
             <Text
-              style={{ color: textColor, fontSize: 10, fontStyle: 'italic' }}
+              style={{ color: textColor, fontSize: 20, fontStyle: 'italic', padding: 15 }}
             >
-              {i18n.t('label.error') +
-                ` : ${this.state.error} + \n\n${this.state.info}`}
+              {i18n.t('label.error') + " : " + this.state.error + '\n\n' + this.state.info }
             </Text>
-
-            <Text />
           </ScrollView>
         </SafeAreaView>
       );

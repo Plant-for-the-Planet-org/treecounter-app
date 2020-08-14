@@ -149,5 +149,10 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>bugsnag</key>
+	<dict>
+		<key>apiKey</key>
+		<string>RNC_bugsnagApiKey</string>
+	</dict>
 </dict>
 </plist>

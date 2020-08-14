@@ -4,7 +4,17 @@ import { withRouter } from 'react-router-dom';
 import { debug } from '../../debug';
 import { info } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
+import { context } from '../../config';
 import i18n from '../../locales/i18n.js';
+import Bugsnag from '@bugsnag/js';
+import { version as app_version } from '../../../package.json';
+
+if (context.bugsnagApiKey) {
+  Bugsnag.start({
+    apiKey: context.bugsnagApiKey,
+    appVersion: app_version
+  })
+}
 
 class BodyErrorBoundary extends React.Component {
   constructor(props) {
@@ -32,10 +42,13 @@ class BodyErrorBoundary extends React.Component {
   componentDidCatch(error, info) {
     this.secondsRemaining = 30;
     this.setState({ hasErrorOccurred: true, seconds: 30 }, this.startCountDown);
-    debug(error, info);
+    debug('BodyErrorBoundary', error, info);
 
-    // You can also log the error to an error reporting service
-    // logErrorToMyService(error, info);
+    if (context.bugsnagApiKey) {
+      Bugsnag.notify(error, function(event) {
+        event.addMetadata('info', { info: info })
+      });
+    }
   }
 
   tick() {

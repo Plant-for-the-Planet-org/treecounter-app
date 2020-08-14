@@ -14,6 +14,7 @@
 #import "ReactNativeConfig.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <RNSplashScreen.h>
+#import <Bugsnag/Bugsnag.h>
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -37,6 +38,7 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [RNSplashScreen show];
+  [Bugsnag start];
   return YES;
 }
 

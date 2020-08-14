@@ -43,7 +43,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        SoLoader.init(this, /* native exopackage */ false);
         Bugsnag.start(this /* app context */);
+        SoLoader.init(this, /* native exopackage */ false);
     }
 }

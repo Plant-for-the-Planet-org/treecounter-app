@@ -11,7 +11,6 @@ import { version as app_version } from '../../../package.json';
 const textColor = 'white';
 if (context.bugsnagApiKey) {
   Bugsnag.start({
-    apiKey: context.bugsnagApiKey,
     codeBundleId: app_version
   })
 }

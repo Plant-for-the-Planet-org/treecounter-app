@@ -1,4 +1,4 @@
-import Config from "react-native-config";
+import Config from 'react-native-config';
 
 console.log('react-native config', Config);
 export const initialProps = {

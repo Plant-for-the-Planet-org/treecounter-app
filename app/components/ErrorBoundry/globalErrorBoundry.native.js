@@ -50,7 +50,7 @@ export default class GlobalErrorBoundary extends React.Component {
             <Text
               style={{ color: textColor, fontSize: 20, fontStyle: 'italic', padding: 15 }}
             >
-              {i18n.t('label.error') + " : " + this.state.error + '\n\n' + this.state.info }
+              {i18n.t('label.error') + ' : ' + this.state.error + '\n\n' + this.state.info }
             </Text>
           </ScrollView>
         </SafeAreaView>

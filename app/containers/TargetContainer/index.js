@@ -17,14 +17,8 @@ class TargetContainer extends React.Component {
     };
     this.onSubmitTarget = this.onSubmitTarget.bind(this);
   }
-  onSubmitTarget = () => {
-    /* debug(
-      '\x1b[45m targetCOntainer',
-      this.refs.targetContainer.refs.setTargetForm.validate
-    ); */
-    //debug('\x1b[0m');
-    //debug(this.refs.targetContainer.refs.setTargetForm.validate());
-    let value = this.refs.targetContainer.refs.setTargetForm.getValue();
+  onSubmitTarget = (formRef) => {
+    let value = formRef.getValue();
     if (value) {
       this.props
         .SubmitTarget(value, this.props.navigation)
@@ -41,7 +35,7 @@ class TargetContainer extends React.Component {
               }
             },
             () => {
-              this.refs.targetContainer.refs.setTargetForm.validate();
+              formRef.validate();
             }
           );
         });
@@ -51,7 +45,6 @@ class TargetContainer extends React.Component {
   render() {
     return (
       <Target
-        ref={'targetContainer'}
         treecounter={this.props.treecounter}
         schemaOptions={this.state.schemaOptions}
         onSubmitTarget={this.onSubmitTarget}

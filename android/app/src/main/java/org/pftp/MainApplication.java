@@ -1,6 +1,8 @@
 package org.pftp;
 
 import android.app.Application;
+
+import com.bugsnag.android.Bugsnag;
 import com.facebook.react.PackageList;
 
 import com.facebook.react.ReactApplication;
@@ -41,6 +43,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Bugsnag.start(this /* app context */);
         SoLoader.init(this, /* native exopackage */ false);
     }
 }

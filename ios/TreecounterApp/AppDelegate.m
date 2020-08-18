@@ -14,15 +14,16 @@
 #import "ReactNativeConfig.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <RNSplashScreen.h>
+#import <Bugsnag/Bugsnag.h>
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [Bugsnag start];
   NSString *apiKey = [ReactNativeConfig envFor:@"googleMapApiKey"];
   if (!apiKey.length) {
     apiKey = @"NOKEYAVAILABLE";
   }
-  NSLog(@"apiKey=%@", apiKey);
   //NSURL *jsCodeLocation;
   [GMSServices provideAPIKey:apiKey];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];

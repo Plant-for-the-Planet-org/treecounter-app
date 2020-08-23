@@ -6,6 +6,7 @@ import Legend from './Legend';
 import GradientResultLine from './GradientResultLine';
 import TimeSeries from './TimeSeries';
 import _ from 'lodash';
+import { Intl } from '../../locales/Intl';
 import i18n from '../../locales/i18n.js';
 import LoadingNDVI from './LoadingNDVI';
 import CarbonDetails from './CarbonDetails';

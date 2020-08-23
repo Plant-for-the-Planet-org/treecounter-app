@@ -8,7 +8,7 @@ import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { setLastRoute } from '../reducers/updateLastRouteReducer';
 
 export function loadUserProfile(returnData) {
-  const request = getAuthenticatedRequest('data_userProfile_get');
+  const request = getAuthenticatedRequest('load_user_profiledata_userProfile_get');
 
   return dispatch => {
     dispatch(setProgressModelState(true));

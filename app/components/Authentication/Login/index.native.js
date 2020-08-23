@@ -181,6 +181,8 @@ export default class Login extends Component {
                       onSubmitEditing={() => {
                         this.passwordTextInput.focus();
                       }}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
                     />
                   </View>
 

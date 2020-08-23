@@ -310,7 +310,7 @@ export default class EditUserProfile extends React.Component {
           <PrimaryButton
             onClick={() => {
               let value = this.refs.password.getValue();
-              if (value && value.password.first !== value.password.second) {
+              if (value && value.password && value.password.first !== value.password.second) {
                 //same password
                 this.setState({ passwordNotSameError: true });
                 return;

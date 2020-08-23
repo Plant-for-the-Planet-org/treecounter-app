@@ -110,6 +110,11 @@ export default EStyleSheet.create({
     bottom: '6%'
     // paddingHorizontal: 24
   },
+  actionButtonTouchableNoFixedPosition: {
+    width: '100%',
+    bottom: '6%'
+    // paddingHorizontal: 24
+  },
   actionButtonTouchableFullScreen: {
     width: '88%',
     marginLeft: '6%',

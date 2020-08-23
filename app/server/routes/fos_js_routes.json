@@ -1,21 +1,877 @@
 {
-  "base_url": "",
-  "routes": {
-    "api_login_check": {
-      "tokens": [
+  "base_url":  "",
+  "routes":  {
+    "data_userProfile_get":  {
+      "tokens":  [
+        [
+          "text",
+          "/loadUserProfile"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "data_menu_get":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "category"
+        ],
+        [
+          "text",
+          "/menu"
+        ]
+      ],
+      "defaults":  {
+        "category":  "web.main"
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "stripe_paymentIntent_request":  {
+      "tokens":  [
+        [
+          "text",
+          "/paymentIntent/request"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "stripe_paymentIntent_confirm":  {
+      "tokens":  [
+        [
+          "text",
+          "/paymentIntent/confirm"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "search2":  {
+      "tokens":  [
+        [
+          "text",
+          "/search2"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "app_selectProject":  {
+      "tokens":  [
+        [
+          "text",
+          "/select-project"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_homepage":  {
+      "tokens":  [
+        [
+          "text",
+          "/"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_pledge":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "eventSlug"
+        ],
+        [
+          "text",
+          "/pledge"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_explore":  {
+      "tokens":  [
+        [
+          "text",
+          "/explore"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_leaderboard":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "subSection"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "section"
+        ],
+        [
+          "text",
+          "/leaderboard"
+        ]
+      ],
+      "defaults":  {
+        "subSection":  null
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_faq":  {
+      "tokens":  [
+        [
+          "text",
+          "/faq"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_giftTrees":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "treecounter"
+        ],
+        [
+          "text",
+          "/gift-trees"
+        ]
+      ],
+      "defaults":  {
+        "treecounter":  null
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_support":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "treecounter"
+        ],
+        [
+          "text",
+          "/support"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_redeem":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "code"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "type"
+        ],
+        [
+          "text",
+          "/redeem"
+        ]
+      ],
+      "defaults":  {
+        "type":  "gift",
+        "code":  null
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_claim":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "code"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "type"
+        ],
+        [
+          "text",
+          "/claim"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_accountActivate":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "token"
+        ],
+        [
+          "text",
+          "/account-activate"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_accountActivated":  {
+      "tokens":  [
+        [
+          "text",
+          "/account-activated"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_accountActivation":  {
+      "tokens":  [
+        [
+          "text",
+          "/account-activation"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_forgotPassword":  {
+      "tokens":  [
+        [
+          "text",
+          "/forgot-password"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_resetPassword":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "token"
+        ],
+        [
+          "text",
+          "/reset-password"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_passwordSent":  {
+      "tokens":  [
+        [
+          "text",
+          "/password-sent"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_userHome":  {
+      "tokens":  [
+        [
+          "text",
+          "/home"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_login":  {
+      "tokens":  [
+        [
+          "text",
+          "/login"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_donateTrees":  {
+      "tokens":  [
+        [
+          "text",
+          "/donate-trees"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_donateTrees_project":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "plantProject"
+        ],
+        [
+          "text",
+          "/donate-trees"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_donateTrees_context":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "context"
+        ],
+        [
+          "text",
+          "/donate-trees/c"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_myTrees":  {
+      "tokens":  [
+        [
+          "text",
+          "/my-trees"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_editTrees":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "contribution"
+        ],
+        [
+          "text",
+          "/edit-trees"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_registerTrees":  {
+      "tokens":  [
+        [
+          "text",
+          "/register-trees"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_signup":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "type"
+        ],
+        [
+          "text",
+          "/signup"
+        ]
+      ],
+      "defaults":  {
+        "type":  null
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_editProfile":  {
+      "tokens":  [
+        [
+          "text",
+          "/edit-profile"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_editCompetition":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "competition"
+        ],
+        [
+          "text",
+          "/edit-competition"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_signupSuccess":  {
+      "tokens":  [
+        [
+          "text",
+          "/signup-success"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_target":  {
+      "tokens":  [
+        [
+          "text",
+          "/target"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_plantProject":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "plantProject"
+        ],
+        [
+          "text",
+          "/p"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_treecounter":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "treecounter"
+        ],
+        [
+          "text",
+          "/t"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_stripeConnect":  {
+      "tokens":  [
+        [
+          "text",
+          "/stripe-connect"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_competitions":  {
+      "tokens":  [
+        [
+          "text",
+          "/competitions"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_competition":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "competition"
+        ],
+        [
+          "text",
+          "/competition"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_manageProjects":  {
+      "tokens":  [
+        [
+          "text",
+          "/manage-plant-projects"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_imprint":  {
+      "tokens":  [
+        [
+          "text",
+          "/imprint"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_privacy":  {
+      "tokens":  [
+        [
+          "text",
+          "/data-protection-policy"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_userNotification":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "uid"
+        ],
+        [
+          "text",
+          "/user-notification"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_challenge":  {
+      "tokens":  [
+        [
+          "text",
+          "/challenge"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_challengeResponse":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "token"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "action"
+        ],
+        [
+          "text",
+          "/challenge-response"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_payment":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "donationContribution"
+        ],
+        [
+          "text",
+          "/donation-payment"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_widgetBuilder":  {
+      "tokens":  [
+        [
+          "text",
+          "/widget-builder"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "app_selectedProject":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "projectSlug"
+        ],
+        [
+          "text",
+          "/project"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
+    },
+    "api_login_check":  {
+      "tokens":  [
         [
           "text",
           "/api/login_check"
         ]
       ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [],
-      "schemes": []
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
     },
-    "auth_forgotPassword_post": {
-      "tokens": [
+    "api_token_refresh":  {
+      "tokens":  [
+        [
+          "text",
+          "/token_refresh"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults":  {
+        "_locale":  []
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "auth_forgotPassword_post":  {
+      "tokens":  [
         [
           "text",
           "/forgotPassword"
@@ -37,18 +893,18 @@
           "/auth"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "auth_resetPassword_form": {
-      "tokens": [
+    "auth_resetPassword_form":  {
+      "tokens":  [
         [
           "text",
           "/resetPassword"
@@ -70,18 +926,18 @@
           "/auth"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "auth_resetPassword_post": {
-      "tokens": [
+    "auth_resetPassword_post":  {
+      "tokens":  [
         [
           "text",
           "/resetPassword"
@@ -103,18 +959,18 @@
           "/auth"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "auth_sendActivationLink_post": {
-      "tokens": [
+    "auth_sendActivationLink_post":  {
+      "tokens":  [
         [
           "text",
           "/sendActivationLink"
@@ -136,18 +992,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "auth_accountActivate_post": {
-      "tokens": [
+    "auth_accountActivate_post":  {
+      "tokens":  [
         [
           "text",
           "/accountActivate"
@@ -169,18 +1025,18 @@
           "/auth"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "auth_accountActivationToken_debug": {
-      "tokens": [
+    "auth_accountActivationToken_debug":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -208,18 +1064,18 @@
           "/auth"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "auth_accountDeActivate_debug": {
-      "tokens": [
+    "auth_accountDeActivate_debug":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -247,51 +1103,18 @@
           "/auth"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "post_token_refreshapi_token_refresh": {
-      "tokens": [
-        [
-          "text",
-          "/token_refresh"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
-        ]
-      ],
-      "defaults": {
-        "_locale": []
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
-      "schemes": []
-    },
-    "challenge_form": {
-      "tokens": [
+    "challenge_form":  {
+      "tokens":  [
         [
           "text",
           "/challengeForm"
@@ -313,18 +1136,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "challengeResponse_form": {
-      "tokens": [
+    "challengeResponse_form":  {
+      "tokens":  [
         [
           "text",
           "/challengeResponseForm"
@@ -346,18 +1169,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "challengeDecline_form": {
-      "tokens": [
+    "challengeDecline_form":  {
+      "tokens":  [
         [
           "text",
           "/challengeDeclineForm"
@@ -379,18 +1202,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "challenge_post": {
-      "tokens": [
+    "challenge_post":  {
+      "tokens":  [
         [
           "text",
           "/challenge"
@@ -412,18 +1235,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "challenge_put": {
-      "tokens": [
+    "challenge_put":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -451,18 +1274,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "challengeDecline_put": {
-      "tokens": [
+    "challengeDecline_put":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -490,18 +1313,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competition_form": {
-      "tokens": [
+    "competition_form":  {
+      "tokens":  [
         [
           "text",
           "/competitionForm"
@@ -523,18 +1346,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competitions_get": {
-      "tokens": [
+    "competitions_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -562,19 +1385,19 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "category": "all",
-        "_locale": []
+      "defaults":  {
+        "category":  "all",
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competitionsMine_get": {
-      "tokens": [
+    "competitionsMine_get":  {
+      "tokens":  [
         [
           "text",
           "/competitionsMine"
@@ -596,18 +1419,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competition_get": {
-      "tokens": [
+    "competition_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -635,18 +1458,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competition_post": {
-      "tokens": [
+    "competition_post":  {
+      "tokens":  [
         [
           "text",
           "/competition"
@@ -668,18 +1491,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competition_put": {
-      "tokens": [
+    "competition_put":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -707,18 +1530,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competition_delete": {
-      "tokens": [
+    "competition_delete":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -746,18 +1569,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "DELETE"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competition_test": {
-      "tokens": [
+    "competition_test":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -785,18 +1608,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competitionInvitation_form": {
-      "tokens": [
+    "competitionInvitation_form":  {
+      "tokens":  [
         [
           "text",
           "/competitionInvitationForm"
@@ -818,18 +1641,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competitionEnroll_post": {
-      "tokens": [
+    "competitionEnroll_post":  {
+      "tokens":  [
         [
           "text",
           "/competitionEnroll"
@@ -851,18 +1674,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competitionLeave_post": {
-      "tokens": [
+    "competitionLeave_post":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -890,18 +1713,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competitionInvitation_post": {
-      "tokens": [
+    "competitionInvitation_post":  {
+      "tokens":  [
         [
           "text",
           "/competitionInvitation"
@@ -923,18 +1746,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competitionEnrollment_delete": {
-      "tokens": [
+    "competitionEnrollment_delete":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -962,18 +1785,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "DELETE"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competitionEnrollment_accept": {
-      "tokens": [
+    "competitionEnrollment_accept":  {
+      "tokens":  [
         [
           "text",
           "/accept"
@@ -1005,18 +1828,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "competitionEnrollment_decline": {
-      "tokens": [
+    "competitionEnrollment_decline":  {
+      "tokens":  [
         [
           "text",
           "/decline"
@@ -1048,18 +1871,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "data_userProfile_get": {
-      "tokens": [
+    "load_user_profiledata_userProfile_get":  {
+      "tokens":  [
         [
           "text",
           "/loadUserProfile"
@@ -1081,51 +1904,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "data_loginLoad_get": {
-      "tokens": [
-        [
-          "text",
-          "/loadLoginData"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
-        ]
-      ],
-      "defaults": {
-        "_locale": []
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "data_menu_get": {
-      "tokens": [
+    "menudata_menu_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -1153,19 +1943,19 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "category": "web.main",
-        "_locale": []
+      "defaults":  {
+        "category":  "web.main",
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "followSubscribe_post": {
-      "tokens": [
+    "followSubscribe_post":  {
+      "tokens":  [
         [
           "text",
           "/followSubscribe"
@@ -1187,18 +1977,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "followUnSubscribe_post": {
-      "tokens": [
+    "followUnSubscribe_post":  {
+      "tokens":  [
         [
           "text",
           "/followUnSubscribe"
@@ -1220,18 +2010,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "forms_get": {
-      "tokens": [
+    "forms_get":  {
+      "tokens":  [
         [
           "text",
           "/forms"
@@ -1253,18 +2043,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "targetUpdate_form": {
-      "tokens": [
+    "targetUpdate_form":  {
+      "tokens":  [
         [
           "text",
           "/targets/updateForm"
@@ -1286,18 +2076,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "target_put": {
-      "tokens": [
+    "target_put":  {
+      "tokens":  [
         [
           "text",
           "/targets"
@@ -1319,18 +2109,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "donationContribution_post": {
-      "tokens": [
+    "donationContribution_post":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -1358,18 +2148,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "giftDonationContribution_post": {
-      "tokens": [
+    "giftDonationContribution_post":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -1397,57 +2187,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "donationContributionByToken_get": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "token"
-        ],
-        [
-          "text",
-          "/donationByToken"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/api"
-        ]
-      ],
-      "defaults": {
-        "_locale": []
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "donationCreate_post": {
-      "tokens": [
+    "donationCreate_post":  {
+      "tokens":  [
         [
           "text",
           "/create"
@@ -1479,18 +2230,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "giftDonationCreate_post": {
-      "tokens": [
+    "giftDonationCreate_post":  {
+      "tokens":  [
         [
           "text",
           "/create"
@@ -1522,18 +2273,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "donationCreatePublic_post": {
-      "tokens": [
+    "donationCreatePublic_post":  {
+      "tokens":  [
         [
           "text",
           "/create"
@@ -1565,18 +2316,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "giftDonationCreatePublic_post": {
-      "tokens": [
+    "giftDonationCreatePublic_post":  {
+      "tokens":  [
         [
           "text",
           "/create"
@@ -1608,18 +2359,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "donationPay_post": {
-      "tokens": [
+    "donationPay_post":  {
+      "tokens":  [
         [
           "text",
           "/pay"
@@ -1651,18 +2402,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "donationPayPublic_post": {
-      "tokens": [
+    "donationPayPublic_post":  {
+      "tokens":  [
         [
           "text",
           "/pay"
@@ -1694,18 +2445,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "donationFinalize_get": {
-      "tokens": [
+    "donationFinalize_get":  {
+      "tokens":  [
         [
           "text",
           "/finalize"
@@ -1737,18 +2488,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "donationFinalizePublic_get": {
-      "tokens": [
+    "donationFinalizePublic_get":  {
+      "tokens":  [
         [
           "text",
           "/finalize"
@@ -1780,18 +2531,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "paymentInfo_get": {
-      "tokens": [
+    "paymentInfo_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -1819,18 +2570,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "donationContribution_form": {
-      "tokens": [
+    "donationContribution_form":  {
+      "tokens":  [
         [
           "text",
           "/donationContributionForm"
@@ -1852,18 +2603,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "giftDonationContribution_form": {
-      "tokens": [
+    "giftDonationContribution_form":  {
+      "tokens":  [
         [
           "text",
           "/giftDonationContributionForm"
@@ -1885,18 +2636,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantContribution_forms": {
-      "tokens": [
+    "plantContribution_forms":  {
+      "tokens":  [
         [
           "text",
           "/plantContributionForms"
@@ -1918,18 +2669,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantContribution_get": {
-      "tokens": [
+    "plantContribution_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -1957,18 +2708,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantContribution_post": {
-      "tokens": [
+    "plantContribution_post":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -1996,18 +2747,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantContribution_put": {
-      "tokens": [
+    "plantContribution_put":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2035,18 +2786,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantContribution_delete": {
-      "tokens": [
+    "plantContribution_delete":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2074,18 +2825,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "DELETE"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantContribution_post_deprecated": {
-      "tokens": [
+    "plantContribution_post_deprecated":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2123,18 +2874,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_ipstack": {
-      "tokens": [
+    "public_ipstack":  {
+      "tokens":  [
         [
           "text",
           "/ipstack"
@@ -2156,18 +2907,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_userNotification": {
-      "tokens": [
+    "public_userNotification":  {
+      "tokens":  [
         [
           "text",
           "/userNotification"
@@ -2189,18 +2940,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_accessDenied": {
-      "tokens": [
+    "public_accessDenied":  {
+      "tokens":  [
         [
           "text",
           "/accessDenied"
@@ -2222,18 +2973,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "data_tpos_get": {
-      "tokens": [
+    "data_tpos_get":  {
+      "tokens":  [
         [
           "text",
           "/loadTpos"
@@ -2255,18 +3006,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_currencies_get": {
-      "tokens": [
+    "public_currencies_get":  {
+      "tokens":  [
         [
           "text",
           "/currencies"
@@ -2288,18 +3039,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_currencyRates_get": {
-      "tokens": [
+    "public_currencyRates_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2327,19 +3078,51 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "baseCurrency": null,
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_menu_get": {
-      "tokens": [
+    "public_currencyName_get":  {
+      "tokens":  [
+        [
+          "text",
+          "/currencyNames"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults":  {
+        "_locale":  []
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "public_menu_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2367,19 +3150,19 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "category": "web.main",
-        "_locale": []
+      "defaults":  {
+        "category":  "web.main",
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_signupTypes": {
-      "tokens": [
+    "public_signupTypes":  {
+      "tokens":  [
         [
           "text",
           "/signupTypes"
@@ -2401,18 +3184,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_registrationTypes": {
-      "tokens": [
+    "public_registrationTypes":  {
+      "tokens":  [
         [
           "text",
           "/registrationTypes"
@@ -2434,18 +3217,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "treecounter_get": {
-      "tokens": [
+    "treecounter_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2473,92 +3256,19 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "uid": null,
-        "_locale": []
+      "defaults":  {
+        "uid":  null,
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "targetLog_get": {
-      "tokens": [
-        [
-          "text",
-          "/target"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/public"
-        ]
-      ],
-      "defaults": {
-        "_locale": []
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "targetLogs_get": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "sort"
-        ],
-        [
-          "text",
-          "/target"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/public"
-        ]
-      ],
-      "defaults": {
-        "sort": null,
-        "_locale": []
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "donate_post": {
-      "tokens": [
+    "donate_post":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2586,18 +3296,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "giftDonate_post": {
-      "tokens": [
+    "giftDonate_post":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2625,18 +3335,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "pay_post": {
-      "tokens": [
+    "pay_post":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2664,18 +3374,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "paymentInfoResponse_get": {
-      "tokens": [
+    "paymentInfoResponse_get":  {
+      "tokens":  [
         [
           "text",
           "/response"
@@ -2707,18 +3417,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_exploreData_get": {
-      "tokens": [
+    "public_exploreData_get":  {
+      "tokens":  [
         [
           "text",
           "/exploreData"
@@ -2740,18 +3450,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_exploreQuery_get": {
-      "tokens": [
+    "public_exploreQuery_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2785,19 +3495,19 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "subSection": null,
-        "_locale": []
+      "defaults":  {
+        "subSection":  null,
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "eventPledgeAuthed_form": {
-      "tokens": [
+    "eventPledgeAuthed_form":  {
+      "tokens":  [
         [
           "text",
           "/eventPledgeForm"
@@ -2819,18 +3529,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "eventPledge_form": {
-      "tokens": [
+    "eventPledge_form":  {
+      "tokens":  [
         [
           "text",
           "/eventPledgeForm"
@@ -2852,18 +3562,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_pledgeEvents_get": {
-      "tokens": [
+    "public_pledgeEvents_get":  {
+      "tokens":  [
         [
           "text",
           "/pledgeEvents"
@@ -2885,18 +3595,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "pledgeEventAuthed_get": {
-      "tokens": [
+    "pledgeEventAuthed_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2924,18 +3634,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "pledgeEvent_get": {
-      "tokens": [
+    "pledgeEvent_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -2963,18 +3673,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "eventPledgesByTokenPublic_get": {
-      "tokens": [
+    "eventPledgesByTokenPublic_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -3002,18 +3712,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "eventPledgesByToken_get": {
-      "tokens": [
+    "eventPledgesByToken_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -3041,18 +3751,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "eventPledgeAuthed_post": {
-      "tokens": [
+    "eventPledgeAuthed_post":  {
+      "tokens":  [
         [
           "text",
           "/eventPledge"
@@ -3084,18 +3794,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "eventPledge_post": {
-      "tokens": [
+    "eventPledge_post":  {
+      "tokens":  [
         [
           "text",
           "/eventPledge"
@@ -3127,18 +3837,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "eventPledgeAuthed_put": {
-      "tokens": [
+    "eventPledgeAuthed_put":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -3166,18 +3876,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "eventPledge_put": {
-      "tokens": [
+    "eventPledge_put":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -3205,18 +3915,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "config_get": {
-      "tokens": [
+    "config_get":  {
+      "tokens":  [
         [
           "text",
           "/config"
@@ -3238,21 +3948,27 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_donationContext_encrypt": {
-      "tokens": [
+    "donationContext_decrypt":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "contextToken"
+        ],
         [
           "text",
-          "/donationContext/encrypt"
+          "/donationContext"
         ],
         [
           "variable",
@@ -3268,21 +3984,21 @@
         ],
         [
           "text",
-          "/public"
+          "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_donationContext_decrypt": {
-      "tokens": [
+    "public_donationContext_decrypt":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -3310,18 +4026,84 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_ndvi_get": {
-      "tokens": [
+    "donationContext_encrypt":  {
+      "tokens":  [
+        [
+          "text",
+          "/donationContext"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/api"
+        ]
+      ],
+      "defaults":  {
+        "_locale":  []
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "public_donationContext_encrypt":  {
+      "tokens":  [
+        [
+          "text",
+          "/donationContext"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults":  {
+        "_locale":  []
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "public_ndvi_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -3349,18 +4131,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_faqs_get": {
-      "tokens": [
+    "public_faqs_get":  {
+      "tokens":  [
         [
           "text",
           "/faqs"
@@ -3382,18 +4164,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_privacy_get": {
-      "tokens": [
+    "public_privacy_get":  {
+      "tokens":  [
         [
           "text",
           "/privacy"
@@ -3415,18 +4197,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "public_imprint_get": {
-      "tokens": [
+    "public_imprint_get":  {
+      "tokens":  [
         [
           "text",
           "/imprint"
@@ -3448,18 +4230,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "validateCode_post": {
-      "tokens": [
+    "validateCode_post":  {
+      "tokens":  [
         [
           "text",
           "/validateCode"
@@ -3481,18 +4263,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "convertCode_post": {
-      "tokens": [
+    "convertCode_post":  {
+      "tokens":  [
         [
           "text",
           "/convertCode"
@@ -3514,18 +4296,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "signup_forms": {
-      "tokens": [
+    "signup_forms":  {
+      "tokens":  [
         [
           "text",
           "/signupForms"
@@ -3547,18 +4329,18 @@
           "/auth"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profileUpdate_forms": {
-      "tokens": [
+    "profileUpdate_forms":  {
+      "tokens":  [
         [
           "text",
           "/profileUpdateForms"
@@ -3580,18 +4362,18 @@
           "/auth"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "signup_post": {
-      "tokens": [
+    "signup_post":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -3619,18 +4401,18 @@
           "/auth"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profile_put": {
-      "tokens": [
+    "profile_put":  {
+      "tokens":  [
         [
           "text",
           "/profileUpdate"
@@ -3652,18 +4434,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profileImage_put": {
-      "tokens": [
+    "profileImage_put":  {
+      "tokens":  [
         [
           "text",
           "/profileImageUpdate"
@@ -3685,18 +4467,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profilePassword_put": {
-      "tokens": [
+    "profilePassword_put":  {
+      "tokens":  [
         [
           "text",
           "/profilePasswordUpdate"
@@ -3718,18 +4500,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profileEmail_put": {
-      "tokens": [
+    "profileEmail_put":  {
+      "tokens":  [
         [
           "text",
           "/profileEmailUpdate"
@@ -3751,18 +4533,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profileAboutMe_put": {
-      "tokens": [
+    "profileAboutMe_put":  {
+      "tokens":  [
         [
           "text",
           "/profileAboutMe"
@@ -3784,18 +4566,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profileDedication_put": {
-      "tokens": [
+    "profileDedication_put":  {
+      "tokens":  [
         [
           "text",
           "/profileDedication"
@@ -3817,18 +4599,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profileLocale_put": {
-      "tokens": [
+    "profileLocale_put":  {
+      "tokens":  [
         [
           "text",
           "/profileLocale"
@@ -3850,18 +4632,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profileCurrency_put": {
-      "tokens": [
+    "profileCurrency_put":  {
+      "tokens":  [
         [
           "text",
           "/profileCurrency"
@@ -3883,18 +4665,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "profile_delete": {
-      "tokens": [
+    "profile_delete":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -3922,18 +4704,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "DELETE"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "stripe_customer": {
-      "tokens": [
+    "stripe_customer":  {
+      "tokens":  [
         [
           "text",
           "/stripe/customer"
@@ -3955,18 +4737,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "stripe_paymentMethod_attach": {
-      "tokens": [
+    "stripe_paymentMethod_attach":  {
+      "tokens":  [
         [
           "text",
           "/stripe/customer/paymentMethod/attach"
@@ -3988,18 +4770,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "stripe_paymentMethod_detach": {
-      "tokens": [
+    "stripe_paymentMethod_detach":  {
+      "tokens":  [
         [
           "text",
           "/stripe/customer/paymentMethod/detach"
@@ -4021,18 +4803,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantProject_form": {
-      "tokens": [
+    "plantProject_form":  {
+      "tokens":  [
         [
           "text",
           "/plantProjectForm"
@@ -4054,18 +4836,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantProject_post": {
-      "tokens": [
+    "plantProject_post":  {
+      "tokens":  [
         [
           "text",
           "/plantProjects"
@@ -4087,18 +4869,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantProject_put": {
-      "tokens": [
+    "plantProject_put":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -4126,18 +4908,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantProject_delete": {
-      "tokens": [
+    "plantProject_delete":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -4165,18 +4947,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "DELETE"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantProject_position": {
-      "tokens": [
+    "plantProject_position":  {
+      "tokens":  [
         [
           "text",
           "/position"
@@ -4208,18 +4990,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantProjects_get": {
-      "tokens": [
+    "plantProjects_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -4247,19 +5029,19 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "category": "all",
-        "_locale": []
+      "defaults":  {
+        "category":  "all",
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "plantProject_get": {
-      "tokens": [
+    "plantProject_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -4287,18 +5069,100 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "review_form": {
-      "tokens": [
+    "plantProject_paypalAccessToken_get":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "accountUid"
+        ],
+        [
+          "text",
+          "/paypalAccessToken"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "plantProjectUid"
+        ],
+        [
+          "text",
+          "/plantProject"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults":  {
+        "_locale":  []
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "plantProjectMap_get":  {
+      "tokens":  [
+        [
+          "text",
+          "/plantProjectMap"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "_locale"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "version"
+        ],
+        [
+          "text",
+          "/public"
+        ]
+      ],
+      "defaults":  {
+        "_locale":  []
+      },
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "review_form":  {
+      "tokens":  [
         [
           "text",
           "/reviewForm"
@@ -4320,18 +5184,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "review_get": {
-      "tokens": [
+    "review_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -4359,18 +5223,18 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "review_indexes_get": {
-      "tokens": [
+    "review_indexes_get":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -4398,19 +5262,19 @@
           "/public"
         ]
       ],
-      "defaults": {
-        "translated": null,
-        "_locale": []
+      "defaults":  {
+        "translated":  null,
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "review_post": {
-      "tokens": [
+    "review_post":  {
+      "tokens":  [
         [
           "text",
           "/review"
@@ -4432,18 +5296,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "review_put": {
-      "tokens": [
+    "review_put":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -4471,18 +5335,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "PUT"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "review_delete": {
-      "tokens": [
+    "review_delete":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -4510,18 +5374,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "DELETE"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "userfeeds_get": {
-      "tokens": [
+    "userfeeds_get":  {
+      "tokens":  [
         [
           "text",
           "/userfeeds"
@@ -4543,18 +5407,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "userfeedsMore_get": {
-      "tokens": [
+    "userfeedsMore_get":  {
+      "tokens":  [
         [
           "text",
           "/more"
@@ -4586,18 +5450,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "userFeedsMarkRead_post": {
-      "tokens": [
+    "userFeedsMarkRead_post":  {
+      "tokens":  [
         [
           "text",
           "/userfeeds/markRead"
@@ -4619,18 +5483,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "userFeedsMarkUnRead_post": {
-      "tokens": [
+    "userFeedsMarkUnRead_post":  {
+      "tokens":  [
         [
           "text",
           "/userfeeds/markUnRead"
@@ -4652,18 +5516,18 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "POST"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "userfeedsAll_get": {
-      "tokens": [
+    "userfeedsAll_get":  {
+      "tokens":  [
         [
           "text",
           "/userfeedsAll"
@@ -4685,64 +5549,354 @@
           "/api"
         ]
       ],
-      "defaults": {
-        "_locale": []
+      "defaults":  {
+        "_locale":  []
       },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "bazinga_jstranslation_js": {
-      "tokens": [
+    "app_plantLocations_get":  {
+      "tokens":  [
         [
           "variable",
-          ".",
-          "js|json",
-          "_format"
+          "/",
+          "[^/]++",
+          "guid"
+        ],
+        [
+          "text",
+          "/app/plantLocations"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_project_get":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "guid"
+        ],
+        [
+          "text",
+          "/app/projects"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_projects_get":  {
+      "tokens":  [
+        [
+          "text",
+          "/app/projects"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "app_payment_setup_get":  {
+      "tokens":  [
+        [
+          "text",
+          "/paymentOptions"
         ],
         [
           "variable",
           "/",
-          "[\\w]+",
-          "domain"
+          "[^/]++",
+          "guid"
         ],
         [
           "text",
-          "/translations"
+          "/app/projects"
         ]
       ],
-      "defaults": {
-        "domain": "messages",
-        "_format": "js"
-      },
-      "requirements": {
-        "_format": "js|json",
-        "domain": "[\\w]+"
-      },
-      "hosttokens": [],
-      "methods": [
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
+      "schemes":  []
     },
-    "gesdinet_jwt_refresh_token": {
-      "tokens": [
+    "auth0_authenticate_user":  {
+      "tokens":  [
+        [
+          "text",
+          "/api/auth0/authenticateUser"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "auth0_lookupAccessToken":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "accessToken"
+        ],
+        [
+          "text",
+          "/api/auth0/lookupAccessToken"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "plugin_accountInfo":  {
+      "tokens":  [
+        [
+          "text",
+          "/plugin/accountInfo"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "plugin_apiKeyBySlug":  {
+      "tokens":  [
+        [
+          "text",
+          "/plugin/apiKeyBySlug"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "plantLocation_post":  {
+      "tokens":  [
+        [
+          "text",
+          "/treemapper/plantLocations"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "plantLocation_put":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "plantLocation"
+        ],
+        [
+          "text",
+          "/treemapper/plantLocations"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "PUT"
+      ],
+      "schemes":  []
+    },
+    "plantLocationCoordinate_put":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "guid"
+        ],
+        [
+          "text",
+          "/coordinates"
+        ],
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "plantLocationGuid"
+        ],
+        [
+          "text",
+          "/treemapper/plantLocations"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "PUT"
+      ],
+      "schemes":  []
+    },
+    "plantLocation_delete":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "guid"
+        ],
+        [
+          "text",
+          "/treemapper/plantLocation"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "DELETE"
+      ],
+      "schemes":  []
+    },
+    "plantLocations_get":  {
+      "tokens":  [
+        [
+          "text",
+          "/treemapper/plantLocations"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "plantLocation_get":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "guid"
+        ],
+        [
+          "text",
+          "/treemapper/plantLocations"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "accountInfo_get":  {
+      "tokens":  [
+        [
+          "text",
+          "/treemapper/accountInfo"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "GET"
+      ],
+      "schemes":  []
+    },
+    "common_register_post":  {
+      "tokens":  [
+        [
+          "variable",
+          "/",
+          "[^/]++",
+          "profileType"
+        ],
+        [
+          "text",
+          "/treemapper/register"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "POST"
+      ],
+      "schemes":  []
+    },
+    "common_profile_patch":  {
+      "tokens":  [
+        [
+          "text",
+          "/treemapper/profilePatch"
+        ]
+      ],
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [
+        "PUT"
+      ],
+      "schemes":  []
+    },
+    "gesdinet_jwt_refresh_token":  {
+      "tokens":  [
         [
           "text",
           "/api/token/refresh"
         ]
       ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [],
-      "schemes": []
+      "defaults":  [],
+      "requirements":  [],
+      "hosttokens":  [],
+      "methods":  [],
+      "schemes":  []
     },
-    "liip_imagine_filter": {
-      "tokens": [
+    "liip_imagine_filter":  {
+      "tokens":  [
         [
           "variable",
           "/",
@@ -4760,854 +5914,21 @@
           "/media/cache/resolve"
         ]
       ],
-      "defaults": [],
-      "requirements": {
-        "filter": "[A-z0-9_-]*",
-        "path": ".+"
+      "defaults":  [],
+      "requirements":  {
+        "filter":  "[A-z0-9_-]*",
+        "path":  ".+"
       },
-      "hosttokens": [],
-      "methods": [
+      "hosttokens":  [],
+      "methods":  [
         "GET"
       ],
-      "schemes": []
-    },
-    "search2": {
-      "tokens": [
-        [
-          "text",
-          "/search2"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "POST"
-      ],
-      "schemes": []
-    },
-    "app_selectProject": {
-      "tokens": [
-        [
-          "text",
-          "/select-project"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_selectedProject": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "projectSlug"
-        ],
-        [
-          "text",
-          "/project"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_homepage": {
-      "tokens": [
-        [
-          "text",
-          "/"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_pledge": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "eventSlug"
-        ],
-        [
-          "text",
-          "/pledge"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_explore": {
-      "tokens": [
-        [
-          "text",
-          "/explore"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_leaderboard": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "subSection"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "section"
-        ],
-        [
-          "text",
-          "/leaderboard"
-        ]
-      ],
-      "defaults": {
-        "subSection": null
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_faq": {
-      "tokens": [
-        [
-          "text",
-          "/faq"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_giftTrees": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "treecounter"
-        ],
-        [
-          "text",
-          "/gift-trees"
-        ]
-      ],
-      "defaults": {
-        "treecounter": null
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_support": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "treecounter"
-        ],
-        [
-          "text",
-          "/support"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_redeem": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "code"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "type"
-        ],
-        [
-          "text",
-          "/redeem"
-        ]
-      ],
-      "defaults": {
-        "type": "gift",
-        "code": null
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_claim": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "code"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "type"
-        ],
-        [
-          "text",
-          "/claim"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_accountActivate": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "token"
-        ],
-        [
-          "text",
-          "/account-activate"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_accountActivated": {
-      "tokens": [
-        [
-          "text",
-          "/account-activated"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_accountActivation": {
-      "tokens": [
-        [
-          "text",
-          "/account-activation"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_forgotPassword": {
-      "tokens": [
-        [
-          "text",
-          "/forgot-password"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_resetPassword": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "token"
-        ],
-        [
-          "text",
-          "/reset-password"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_passwordSent": {
-      "tokens": [
-        [
-          "text",
-          "/password-sent"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_userHome": {
-      "tokens": [
-        [
-          "text",
-          "/home"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_login": {
-      "tokens": [
-        [
-          "text",
-          "/login"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_donateTrees": {
-      "tokens": [
-        [
-          "text",
-          "/donate-trees"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_donateTrees_project": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "plantProject"
-        ],
-        [
-          "text",
-          "/donate-trees"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_donateTrees_context": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "context"
-        ],
-        [
-          "text",
-          "/donate-trees/c"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_myTrees": {
-      "tokens": [
-        [
-          "text",
-          "/my-trees"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_editTrees": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "contribution"
-        ],
-        [
-          "text",
-          "/edit-trees"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_registerTrees": {
-      "tokens": [
-        [
-          "text",
-          "/register-trees"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_mapTrees": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "type"
-        ],
-        [
-          "text",
-          "/map-trees"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_signup": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "type"
-        ],
-        [
-          "text",
-          "/signup"
-        ]
-      ],
-      "defaults": {
-        "type": null
-      },
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_editProfile": {
-      "tokens": [
-        [
-          "text",
-          "/edit-profile"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_editCompetition": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "competition"
-        ],
-        [
-          "text",
-          "/edit-competition"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_signupSuccess": {
-      "tokens": [
-        [
-          "text",
-          "/signup-success"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_target": {
-      "tokens": [
-        [
-          "text",
-          "/target"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_plantProject": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "plantProject"
-        ],
-        [
-          "text",
-          "/p"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_treecounter": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "treecounter"
-        ],
-        [
-          "text",
-          "/t"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_stripeConnect": {
-      "tokens": [
-        [
-          "text",
-          "/stripe-connect"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_competitions": {
-      "tokens": [
-        [
-          "text",
-          "/competitions"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_competition": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "competition"
-        ],
-        [
-          "text",
-          "/competition"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_manageProjects": {
-      "tokens": [
-        [
-          "text",
-          "/manage-plant-projects"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_imprint": {
-      "tokens": [
-        [
-          "text",
-          "/imprint"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_privacy": {
-      "tokens": [
-        [
-          "text",
-          "/data-protection-policy"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_userNotification": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "uid"
-        ],
-        [
-          "text",
-          "/user-notification"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_challenge": {
-      "tokens": [
-        [
-          "text",
-          "/challenge"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_challengeResponse": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "token"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "action"
-        ],
-        [
-          "text",
-          "/challenge-response"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_payment": {
-      "tokens": [
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "donationContribution"
-        ],
-        [
-          "text",
-          "/donation-payment"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
-    },
-    "app_widgetBuilder": {
-      "tokens": [
-        [
-          "text",
-          "/widget-builder"
-        ]
-      ],
-      "defaults": [],
-      "requirements": [],
-      "hosttokens": [],
-      "methods": [
-        "GET"
-      ],
-      "schemes": []
+      "schemes":  []
     }
   },
-  "prefix": "",
-  "host": "localhost",
-  "port": "",
-  "scheme": "http"
+  "prefix":  "",
+  "host":  "localhost",
+  "port":  "",
+  "scheme":  "http",
+  "locale":  []
 }

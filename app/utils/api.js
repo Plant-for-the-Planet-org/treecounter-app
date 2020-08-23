@@ -22,7 +22,8 @@ function checkStatus(response) {
       }
     }
   }
-  let error = new Error(response);
+  let error = new Error('response: ' + JSON.stringify(response));
+  error.response = response;
   throw error;
 }
 

@@ -76,11 +76,11 @@ class PlantProjectFull extends React.Component {
   }*/
 
   UNSAFE_componentWillMount() {
-    StatusBar.setTranslucent(true);
+    if (Platform.OS === 'android') StatusBar.setTranslucent(true);
     setTimeout(() => this.setState({ loader: false }), 2000);
   }
   componentWillUnmount() {
-    StatusBar.setTranslucent(false);
+    if (Platform.OS === 'android') StatusBar.setTranslucent(false);
   }
   render() {
     let { plantProject } = this.props;
@@ -142,7 +142,7 @@ class PlantProjectFull extends React.Component {
           }
         //  appurl={'weplant://project/' + this.props.plantProject.id}
         />
-        <ScrollView
+        <Animated.ScrollView
           contentContainerStyle={[
             {
               backgroundColor: backgroundColor
@@ -155,7 +155,7 @@ class PlantProjectFull extends React.Component {
                 contentOffset: { y: this.state.scrollY }
               }
             }
-          ])}
+          ], { useNativeDriver: true })}
         >
           <PlantProjectSnippetDetails
             key={'projectFull' + plantProject.id}
@@ -176,7 +176,7 @@ class PlantProjectFull extends React.Component {
               {...detailsProps}
             />
           </View>
-        </ScrollView>
+        </Animated.ScrollView>
         {plantProject.allowDonations ? (
           <View style={styles.bottomActionArea}>
             <View style={styles.centeredContentContainer}>

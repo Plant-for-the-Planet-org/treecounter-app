@@ -156,7 +156,7 @@ class DonationTabView extends React.PureComponent {
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 35 }}
-        enableOnAndroid={false}
+        enableOnAndroid
       >
         <CardLayout withoutShadow>
           <Form

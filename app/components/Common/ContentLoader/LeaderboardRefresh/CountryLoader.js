@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentLoader from 'react-native-content-loader';
+import ContentLoader from 'react-content-loader'
 import { Circle, Rect } from 'react-native-svg';
 
 const CountryLoader = () => {
@@ -8,8 +8,8 @@ const CountryLoader = () => {
       height={100}
       width={400}
       speed={2}
-      primaryColor="#f3f3f3"
-      secondaryColor="#ecebeb"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
     >
       <Rect x="116" y="28" rx="4" ry="4" width="120" height="16" />
       <Circle cx="74" cy="46" r="30" />

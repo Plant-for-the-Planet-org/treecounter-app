@@ -199,7 +199,7 @@ class Trillion extends PureComponent {
         return this.state.loading ? (
           <LoadingIndicator contentLoader={contentLoader} screen="AppHome" />
         ) : (
-            <ScrollView
+            <Animated.ScrollView
               contentContainerStyle={{
                 paddingBottom: 72,
                 backgroundColor: backgroundColor
@@ -211,7 +211,7 @@ class Trillion extends PureComponent {
                     contentOffset: { y: this.state.scrollY }
                   }
                 }
-              ])}
+              ], { useNativeDriver: true })}
             >
               {/* <StatusBar backgroundColor="white" barStyle="dark-content" /> */}
               <View style={styles.parentContainer}>
@@ -426,7 +426,7 @@ class Trillion extends PureComponent {
                 </Text>
               </TouchableOpacity>
             </View> */}
-            </ScrollView>
+            </Animated.ScrollView>
           );
       }
       case 'leaderBoard': {

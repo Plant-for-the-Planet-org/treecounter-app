@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { PureComponent } from 'react';
-import { FlatList, View, RefreshControl, Animated } from 'react-native';
+import { View, RefreshControl, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -109,7 +109,7 @@ class ListViewProjects extends PureComponent {
     return (
       <View style={{ height: '100%' }}>
         {!isFetching ? (
-          <FlatList
+          <Animated.FlatList
             contentContainerStyle={{
               ...flatListContainerStyle
             }}
@@ -132,7 +132,7 @@ class ListViewProjects extends PureComponent {
                   contentOffset: { y: this.props.scrollY }
                 }
               }
-            ])}
+            ], { useNativeDriver: true })}
           />
         ) : (
           <LoadingIndicator contentLoader screen={'ProjectsLoading'} />

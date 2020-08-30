@@ -107,6 +107,7 @@ const headerLabels = {
 };
 
 export const getAppNavigator = function (isLoggedIn, userProfile) {
+
   const searchNavigator = createStackNavigator(
     {
       Search: {
@@ -117,12 +118,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
       navigationOptions: {
         gesturesEnabled: false
       }
@@ -134,12 +129,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
       navigationOptions: {
         gesturesEnabled: false
       }
@@ -152,12 +141,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
       navigationOptions: {
         gesturesEnabled: false
       }

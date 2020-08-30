@@ -3,7 +3,6 @@ import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import {
-  FlatList,
   View,
   Image,
   Text,
@@ -135,7 +134,7 @@ export default class FeaturedProjects extends PureComponent {
     return (
       <View style={styles.flexContainer}>
         {!loader ? (
-          <FlatList
+          <Animated.FlatList
             contentContainerStyle={{
               ...flatListContainerStyle
             }}
@@ -158,7 +157,7 @@ export default class FeaturedProjects extends PureComponent {
                   contentOffset: { y: this.props.scrollY }
                 }
               }
-            ])}
+            ], { useNativeDriver: true })}
           />
         ) : (
             <LoadingIndicator contentLoader screen={'ProjectsLoading'} />

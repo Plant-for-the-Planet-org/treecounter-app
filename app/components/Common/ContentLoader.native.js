@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Dimensions, Image, ScrollView, Platform } from 'react-native';
-import ContentLoader from 'react-native-content-loader';
+import ContentLoader from 'react-content-loader/native'
 import { Circle, Rect } from 'react-native-svg';
 import { debug } from '../../debug';
 import { treelogo } from '../../assets/index';
@@ -11,8 +11,8 @@ const CompetitionLoader = () => (
     height={HEIGHT}
     width={WIDTH}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
     <Rect x="30" y="190" rx="10" ry="10" width="35%" height="20" />
@@ -29,8 +29,8 @@ const SingleCompetitionLoader = () => (
     height={HEIGHT}
     width={WIDTH}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <Rect x="30" y="14" rx="10" ry="10" width="85%" height="150" />
     <Rect x="30" y="173" rx="10" ry="10" width="85%" height="20" />
@@ -49,7 +49,7 @@ const SingleCompetitionLoader = () => (
   </ContentLoader>
 );
 const LeaderBoardLoader = () => (
-  <ContentLoader height={300} duration={1000}>
+  <ContentLoader height={300} speed={2}>
     <Rect x="0" y="30" rx="0" ry="0" width="100" height="13" />
     <Rect x="0" y="55" rx="5" ry="5" width="200" height="26" />
     <Circle cx="250" cy="60" r="30" />
@@ -60,8 +60,8 @@ const WorldLoader = () => (
     height={HEIGHT}
     width={WIDTH}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
     <Rect x="30" y="190" rx="10" ry="10" width="45%" height="20" />
@@ -89,8 +89,8 @@ const InitialContentLoader = () => (
       height={HEIGHT}
       width={WIDTH}
       speed={2}
-      primaryColor="#f3f3f3"
-      secondaryColor="#ecebeb"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
     >
       <Rect x="30" y="3" rx="10" ry="10" width="85%" height="180" />
       <Rect x="30" y="190" rx="10" ry="10" width="45%" height="20" />
@@ -108,8 +108,8 @@ const ProfileLoader = () => (
     height={550}
     width={500}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
     <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
@@ -126,8 +126,8 @@ const PublicProfileLoader = () => (
     height={550}
     width={500}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
     <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
@@ -145,8 +145,8 @@ const CompetitionListLoader = () => (
     height={550}
     width={500}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
     <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
@@ -164,8 +164,8 @@ const CompetitionSingleLoader = () => (
     height={550}
     width={500}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
     <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
@@ -183,8 +183,8 @@ const ProjectListLoader = () => (
     height={550}
     width={500}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <Rect x="100" y="3" rx="10" ry="10" width="300" height="180" />
     <Rect x="100" y="190" rx="10" ry="10" width="140" height="20" />
@@ -203,8 +203,8 @@ const ProjectSingleLoader = () => (
       height={HEIGHT * 1.5}
       width={WIDTH}
       speed={2}
-      primaryColor="#f3f3f3"
-      secondaryColor="#ecebeb"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
     >
       <Rect x="0" y="0" rx="10" ry="0" width="100%" height="200" />
       <Rect x="0" y="210" rx="10" ry="0" width="100%" height="30" />
@@ -239,8 +239,8 @@ const PublicTreeCounterContentLoader = () => (
     height={HEIGHT}
     width={WIDTH}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <Circle cx="15%" cy="60" r="30" />
     <Rect x="30%" y="40" rx="4" ry="4" width="60%" height="13" />
@@ -253,8 +253,8 @@ const PledgeEventsContentLoader = () => (
     height={HEIGHT}
     width={WIDTH}
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
   >
     <View>
       <Rect x="30" y="10%" rx="5" ry="5" width="45" height="28" />
@@ -281,8 +281,8 @@ const ProjectsLoading = () => (
       height={HEIGHT * 1.2}
       width={WIDTH}
       speed={2}
-      primaryColor="#E1E2E2"
-      secondaryColor="#ecebeb"
+      backgroundColor="#E1E2E2"
+      foregroundColor="#ecebeb"
     >
       <Rect x="30" y="3" rx="3" ry="3" width="85%" height="180" />
       <Rect x="30" y="200" rx="3" ry="3" width="75%" height="30" />

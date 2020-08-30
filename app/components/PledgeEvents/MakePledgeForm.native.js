@@ -27,6 +27,10 @@ import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
 
+const AnimatedKeyboardAwareScrollView = Animated.createAnimatedComponent(
+  KeyboardAwareScrollView
+);
+
 // let _ = require('lodash');
 
 class MakePledgeForm extends Component {
@@ -143,7 +147,7 @@ class MakePledgeForm extends Component {
             >
               {props => (
                 <>
-                  <KeyboardAwareScrollView
+                  <AnimatedKeyboardAwareScrollView
                     contentContainerStyle={styles.formScrollView}
                     keyboardDismissMode="on-drag"
                     keyboardShouldPersistTaps="always"
@@ -156,7 +160,7 @@ class MakePledgeForm extends Component {
                           contentOffset: { y: this.state.scrollY }
                         }
                       }
-                    ])}
+                    ], { useNativeDriver: true })}
                   >
                     <View>
                       <Text style={styles.subtitleText}>
@@ -282,7 +286,7 @@ class MakePledgeForm extends Component {
                         />
                       </View>
                     </View>
-                  </KeyboardAwareScrollView>
+                  </AnimatedKeyboardAwareScrollView>
 
                   {this.state.buttonType === 'pledge' ? (
                     <TouchableOpacity

@@ -33,7 +33,8 @@ class CollapsibleDatePickerIOS extends React.PureComponent {
     const locals = this.props.locals;
     let animation = Animated.timing;
     let animationConfig = {
-      duration: 200
+      duration: 200,
+      useNativeDriver: true
     };
     if (locals.config) {
       if (locals.config.animation) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentLoader from 'react-content-loader'
+import ContentLoader from 'react-content-loader/native'
 import { Circle, Rect } from 'react-native-svg';
 
 const CountryLoader = () => {

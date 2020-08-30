@@ -146,7 +146,6 @@ const tpoLeaderBoard = ({ navigation }) => {
 const CompanyListItem = ({ onPressListItem, item, index }) => {
   const [isPress, setIsPress] = useState(false);
   const isPrivate = 'mayPublish' in item && !item.mayPublish;
-  debug(isPress, 'isPressisPress');
   return (
     <TouchableOpacity
       onPress={() =>

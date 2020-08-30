@@ -12,8 +12,7 @@ import {
   Platform,
   Text,
   Animated,
-  StatusBar,
-  ScrollView
+  StatusBar
 } from 'react-native';
 import styles from '../../styles/selectplantproject/selectplantproject-full';
 import PlantProjectDetails from './PlantProjectDetails';

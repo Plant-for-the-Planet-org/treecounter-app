@@ -89,6 +89,7 @@ if (propfile.exists()) {
     properties.load(propfile.newDataInputStream())
 }
 
+// TODO: Hermes engine crashes with @react-native-community/datetimepicker
 project.ext.react = [
         entryFile   : "index.native.js",
         enableHermes: false,

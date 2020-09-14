@@ -19,7 +19,7 @@ class SelectPlantProjectContainer extends PureComponent {
   state = {
     featuredProjects: [],
   };
-  // componentWillMount() {
+  // UNSAFE_componentWillMount) {
   //   let plantProjects = this.props.plantProjects.filter(
   //     project => project.allowDonations
   //   );
@@ -37,7 +37,7 @@ class SelectPlantProjectContainer extends PureComponent {
   //   }
   // }
 
-  // componentWillReceiveProps(nextProps) {
+  // UNSAFE_componentWillReceiveProps(nextProps) {
   //   let plantProjects = nextProps.plantProjects.filter(
   //     project => project.allowDonations
   //   );

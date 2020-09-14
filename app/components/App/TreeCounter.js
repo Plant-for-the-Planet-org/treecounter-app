@@ -143,7 +143,7 @@ class TreeCounter extends Component {
 
   _appRoutes = undefined;
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     const { userProfile } = this.props;
     const isLoggedIn = null !== userProfile;
     if (isLoggedIn) {
@@ -163,7 +163,7 @@ class TreeCounter extends Component {
     this.props.fetchpledgeEventsAction();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.userProfile !== this.props.userProfile &&
       (!nextProps.userProfile ||

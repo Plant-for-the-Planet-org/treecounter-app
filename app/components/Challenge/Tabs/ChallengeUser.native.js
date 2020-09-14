@@ -4,14 +4,16 @@ import SearchUser from './SearchUser.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import ChallengeList from '../challengeList';
 import CardLayout from '../../Common/Card';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Picker } from '@react-native-community/picker';
 import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
-import challengeStyles from '../../../styles/challenge';
 // import TabContainer from '../../../containers/Menu/TabContainer';
 import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
-import styles from '../../../styles/profilepicker.native';
+
+import challengeStyles from '../../../styles/challenge';
+import styles from '../../../styles/register_trees.native';
+import errorStyles from '../../../styles/profilepicker.native';
 
 class ChallengeUser extends Component {
   constructor(props) {
@@ -120,9 +122,9 @@ class ChallengeUser extends Component {
           }}
         >
           {this.props.error ? (
-            <View style={styles.containerDedicateStyle}>
-              <View style={styles.dedicateTreeName}>
-                <Text style={styles.textDedicateStyle}>
+            <View style={errorStyles.containerDedicateStyle}>
+              <View style={errorStyles.dedicateTreeName}>
+                <Text style={errorStyles.textDedicateStyle}>
                   {i18n.t('label.challenge_error', {
                     user: this.state.selectedSuggestion.name,
                     target: parseInt(this.props.error)
@@ -170,22 +172,22 @@ class ChallengeUser extends Component {
                   isChecked={this.state.isChecked}
                   rightText={i18n.t('label.by')}
                 />
-                <Dropdown
-                  containerStyle={{
-                    width: 70
-                  }}
-                  dropdownOffset={{
-                    top: 10,
-                    left: 0
-                  }}
-                  onChangeText={item =>
-                    this.setState({
-                      byYear: item
-                    })
-                  }
-                  label={i18n.t('label.year')}
-                  data={this.years}
-                />
+                <Picker
+                  selectedValue={this.state.byYear}
+                  style={{width: '50%'}}
+                  itemStyle={styles.textStyle}
+                  mode="dialog"
+                  prompt={i18n.t('label.year')}
+                  onValueChange={(itemValue) =>
+                    this.setState({byYear: itemValue})
+                  }>
+                  {this.years
+                    .map(year => {
+                      return (
+                        <Picker.Item key={'' + year.value} label={'' + year.value} value={year.value} />
+                      );
+                    })}
+                </Picker>
               </View>
               <PrimaryButton onClick={this.onNextClick}>
                 {i18n.t('label.challenge_heading')}

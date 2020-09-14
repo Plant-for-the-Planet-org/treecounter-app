@@ -98,7 +98,7 @@ class AnimatedViews extends React.Component {
     }
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.userContributions && this.state.markers) {
       if (nextProps.userContributions.length !== this.state.markers.length || JSON.stringify(nextProps.userContributions) !== JSON.stringify(this.state.markers)) {
         this.setState({ markers: nextProps.userContributions })

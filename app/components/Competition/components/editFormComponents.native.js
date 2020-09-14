@@ -3,7 +3,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { Formik } from 'formik';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { TextField } from 'react-native-material-textfield';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Picker } from '@react-native-community/picker';
 import ImagePicker from 'react-native-image-picker';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -229,38 +229,22 @@ export const FormikForm = props => {
 };
 
 export function AccessPicker(props) {
-  let data = [
-    {
-      label: i18n.t('label.competition_access_immediate'),
-      value: 'immediate'
-    },
-    {
-      label: i18n.t('label.competition_access_request'),
-      value: 'request'
-    },
-    {
-      label: i18n.t('label.competition_access_invitation'),
-      value: 'invitation'
-    }
-  ];
   const onChange = value => {
     props.setFieldValue('access', value);
   };
-  // eslint-disable-next-line
-  let dropdown = '';
   return (
     <View>
-      <Dropdown
-        ref={ref => (dropdown = ref)}
-        label={i18n.t('label.competition_access')}
-        data={data}
-        onChangeText={onChange}
-        lineWidth={1}
-        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-        error={props.touched.access && props.errors.access}
-        value={props.values.access}
-      />
+      <Picker
+        selectedValue={props.values.access}
+        style={{ fontSize: 15, fontFamily: 'OpenSans-Regular' }}
+        itemStyle={{ fontSize: 15, fontFamily: 'OpenSans-Regular' }}
+        mode="dialog"
+        prompt={i18n.t('label.competition_access')}
+        onValueChange={onChange}>
+          <Picker.Item key="immediate" label={i18n.t('label.competition_access_immediate')} value="immediate" />
+          <Picker.Item key="request" label={i18n.t('label.competition_access_request')} value="request" />
+          <Picker.Item key="invitation" label={i18n.t('label.competition_access_invitation')} value="invitation" />
+      </Picker>
     </View>
   );
 }

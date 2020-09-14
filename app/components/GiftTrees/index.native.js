@@ -14,7 +14,7 @@ export default class GiftTrees extends Component {
     this.openProjects = this.openProjects.bind(this);
   }
   openProjects(formValue, type) {
-    // debug('Open Project called up ', formValue);
+    //debug('Open Project called up ', formValue);
     this.props.openProjects(formValue, type);
   }
   render() {

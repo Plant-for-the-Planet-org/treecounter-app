@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 import styles from '../../styles/currencies/treeCounterSelector';
 import { formatNumber } from '../../utils/utils';
@@ -47,7 +47,7 @@ class TreeCountSelector extends React.Component {
     if (treeCount === '') {
       treeCount = 0;
     }
-    debug('tree count changed', treeCount);
+    //debug('tree count changed', treeCount);
     this.updateStateAndParent({
       variableTreeCount: parseInt(treeCount),
       variableAmount: this.props.treeCountToAmount(treeCount)
@@ -88,7 +88,7 @@ class TreeCountSelector extends React.Component {
       const data = formatNumber(treeCountToAmount(treeCount), null, currency);
       return symbol ? data.replace(/[\d.,]/g, '') : data;
     } catch (err) {
-      debug('error formatting', err);
+      //debug('error formatting', err);
       return symbol ? currency : treeCountToAmount(treeCount) + ' ' + currency;
     }
   }

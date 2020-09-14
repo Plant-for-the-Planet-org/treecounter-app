@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, ScrollView, SafeAreaView } from 'react-native';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import { context } from '../../config';
 import styles from '../../styles/edit_profile.native';
 import i18n from '../../locales/i18n.js';
@@ -23,7 +23,7 @@ export default class GlobalErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true, error, info });
-    debug('GlobalErrorBoundary', error, info);
+    //debug('GlobalErrorBoundary', error, info);
 
     if (context.bugsnagApiKey) {
       Bugsnag.notify(error, event => {

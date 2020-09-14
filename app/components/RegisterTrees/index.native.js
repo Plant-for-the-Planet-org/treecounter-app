@@ -5,7 +5,7 @@ import { Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import CardLayout from '../Common/Card';
 import i18n from '../../locales/i18n.js';
 import RegisterTreeTab from './RegisterTreeTab.native';
@@ -41,7 +41,7 @@ export default class RegisterTrees extends Component {
       index: 0,
       routes: this.routes
     };
-    debug('this.props.navigation', this.props);
+    //debug('this.props.navigation', this.props);
     // Bind Local method
     this._handleIndexChange = this._handleIndexChange.bind(this);
   }

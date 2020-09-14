@@ -327,7 +327,7 @@ function getQueryVariable(query, variable) {
  * @param mapPoint array of coordinate of longitude and latitude
  * */
 export function encodeFormData(mode, mapPoint) {
-  debug('Data in polygon', mapPoint);
+  //debug('Data in polygon', mapPoint);
 
   if (!mapPoint) {
     return '';
@@ -340,15 +340,15 @@ export function encodeFormData(mode, mapPoint) {
       Array.isArray(mapPoint) &&
       mapPoint.length
     ) {
-      debug('Data in polygon', mapPoint);
+      //debug('Data in polygon', mapPoint);
       const polygon = mapPoint.map(polygonItem => {
         const data = polygonItem.coordinates.map(cord => {
-          debug('cord', cord);
+          //debug('cord', cord);
           return [cord.latitude, cord.longitude];
         });
         return data;
       });
-      debug('polygon', polygon);
+      //debug('polygon', polygon);
       return {
         type: 'Polygon',
         coordinates: polygon
@@ -481,7 +481,7 @@ class NativeMapView extends Component {
        * */
       const { editing, creatingHole } = this.state;
       if (!editing) {
-        debug('clicked map');
+        //debug('clicked map');
         this.setState({
           editing: {
             id: id++,
@@ -870,7 +870,7 @@ class NativeMapView extends Component {
         },
         editable: true,
         onPress: () => {
-          debug('clicked');
+          //debug('clicked');
         }
       }
       : {

@@ -21,7 +21,7 @@ const AddImage = props => {
   };
 
   const renderAsset = (image, index) => {
-    debug(image);
+    //debug(image);
     return (
       <View
         key={index}
@@ -55,11 +55,11 @@ const AddImage = props => {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
                 debug('ImagePicker Error: ', response.error);
               } else {
-                debug('ImagePicker data: ', response.data);
+                //debug('ImagePicker data: ', response.data);
                 props.updateImages('data:image/jpeg;base64,' + response.data);
               }
             });
@@ -72,9 +72,9 @@ const AddImage = props => {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
-                debug('ImagePicker Error: ', response.error);
+                //debug('ImagePicker Error: ', response.error);
               } else {
                 props.updateImages('data:image/jpeg;base64,' + response.data);
               }

@@ -74,7 +74,7 @@ export default EStyleSheet.create({
     marginLeft: 2
   },
 
-  ///Bottom Menu Related Styles:
+  // Bottom Menu Related Styles:
   bottomMenuContainer: {
     height: 50,
     width: '100%',

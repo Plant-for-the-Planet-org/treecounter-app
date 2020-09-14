@@ -20,6 +20,7 @@ function isEmail(x) {
   return /(.)+@(.)+/.test(x);
 }
 
+transform.resetFormats();
 transform.registerFormat('email', isEmail);
 
 export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
@@ -62,10 +63,11 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.config = {
               iconUrl: images[properties[propertyKey].icon]
             };
-            if (properties[propertyKey].icon === 'email') {
-              options.config = { ...options.config, email: true };
-              properties[propertyKey].format = 'email';
-            }
+            // already done below for propertyKey === 'email'
+            //if (properties[propertyKey].icon === 'email') {
+            //  options.config = { ...options.config, email: true };
+            //  properties[propertyKey].format = 'email';
+            //}
           }
           if (properties[propertyKey]['maxDate']) {
             options.config = { ...options.config, maxDate: true };

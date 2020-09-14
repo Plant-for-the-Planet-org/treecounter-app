@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import { info } from '../../assets';
 import { context } from '../../config';
 import i18n from '../../locales/i18n.js';
@@ -22,7 +22,7 @@ export default class GlobalErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true });
-    debug('GlobalErrorBoundary', error, info);
+    //debug('GlobalErrorBoundary', error, info);
 
     if (context.bugsnagApiKey) {
       Bugsnag.notify(error, function(event) {

@@ -34,8 +34,8 @@ export function addPlantProject(plantProject) {
     return new Promise(function(resolve) {
       postAuthenticatedRequest('plantProject_post', plantProject)
         .then(res => {
-          debug(res.status);
-          debug(res);
+          //debug(res.status);
+          //debug(res);
           const { plantProject, userProfile, tpo } = res.data.merge;
           dispatch(
             mergeEntities(normalize(plantProject, [plantProjectSchema]))
@@ -170,8 +170,8 @@ export function updateProfileDedication(data) {
     return new Promise(function(resolve, reject) {
       putAuthenticatedRequest('profileDedication_put', data)
         .then(res => {
-          debug(res.status);
-          debug(res);
+          //debug(res.status);
+          //debug(res);
           if (res.data && res.data instanceof Object) {
             dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           }
@@ -193,8 +193,8 @@ export function deleteUserProfile(userProfile) {
     return new Promise(function(resolve, reject) {
       deleteAuthenticatedRequest('profile_delete', { userProfile })
         .then(res => {
-          debug(res.status);
-          debug(res);
+          //debug(res.status);
+          //debug(res);
           if (res.data && res.data instanceof Object) {
             dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           }

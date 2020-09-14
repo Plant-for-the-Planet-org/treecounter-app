@@ -79,10 +79,10 @@ export default class Privacy extends Component {
                 ? `${context.scheme}://${context.host}${url}`
                 : url;
             } catch (err) {
-              //debug(err);
+              debug(err);
             }
 
-            // debug('clicked link: ', url);
+            //debug('clicked link: ', url);
             Linking.openURL(url).catch(err => {
               debug(err);
             });

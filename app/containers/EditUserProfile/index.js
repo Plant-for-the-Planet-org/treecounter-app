@@ -80,7 +80,7 @@ class EditUserProfileContainer extends React.Component {
   }
 
   deleteProfile = () => {
-    debug('call Profile Deletion API here', this.props.currentUserProfile);
+    //debug('call Profile Deletion API here', this.props.currentUserProfile);
     this.props
       .deleteUserProfile(this.props.currentUserProfile.id)
       .then((/* data */) => {
@@ -199,7 +199,7 @@ class EditUserProfileContainer extends React.Component {
     const imageForm =
       (formRefs && formRefs['image']) ||
       this.refs.EditUserProfileContainer.refs['image'];
-    debug(profileForm.validate());
+    //debug(profileForm.validate());
     let value = profileForm.getValue();
 
     let imageValue = undefined;

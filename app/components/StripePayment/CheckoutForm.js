@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectStripe } from 'react-stripe-elements';
 import classnames from 'classnames';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import LoadingIndicators from '../../components/Common/LoadingIndicator';
 import CCForm from './CCForm';
 import SEPAForm from './SEPAForm';
@@ -34,7 +34,7 @@ class CheckoutForm extends React.Component {
   };
 
   handleSubmitSEPAPayment = async (/* ev */) => {
-    debug('SEPA PAYMENT SUBMITED');
+    //debug('SEPA PAYMENT SUBMITED');
   };
 
   onChangeSelectedCard = choose => {

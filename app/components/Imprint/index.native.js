@@ -82,7 +82,7 @@ export default class Imprint extends Component {
               //debug(err);
             }
 
-            //  debug('clicked link: ', url);
+            //debug('clicked link: ', url);
             Linking.openURL(url).catch(err => {
               debug(err);
             });

@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Formik } from 'formik';
 import { SafeAreaView } from 'react-navigation';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
 import { updatePledge } from './../../actions/pledgeAction';
@@ -126,7 +126,7 @@ class MakePledgeForm extends Component {
                 treeCount: values.treeCount,
                 isAnonymous: this.state.isAnonymous
               };
-              debug(data);
+              //debug(data);
               // Update pledge using token
 
               this.props.updatePledge(

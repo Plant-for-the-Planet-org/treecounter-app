@@ -106,7 +106,7 @@ class Trillion extends PureComponent {
     this.props.fetchpledgeEventsAction();
 
     if (this.props.userProfile) {
-      debug('User Logged in');
+      //debug('User Logged in');
     } else {
       fetchItem('pledgedEvent')
         .then(data => {
@@ -126,7 +126,7 @@ class Trillion extends PureComponent {
       JSON.stringify(this.props.entities.eventPledge)
     ) {
       if (this.props.userProfile) {
-        debug('User Logged in');
+        //debug('User Logged in');
       } else {
         fetchItem('pledgedEvent')
           .then(data => {
@@ -193,7 +193,7 @@ class Trillion extends PureComponent {
     const { navigation /* , userProfile, isLoggedIn */ } = this.props;
     const backgroundColor = 'white';
     const { contentLoader } = this.state;
-    // debug(this.props.pledgeEvents);
+    //debug(this.props.pledgeEvents);
     switch (route.key) {
       case 'world': {
         return this.state.loading ? (

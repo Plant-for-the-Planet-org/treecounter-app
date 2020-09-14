@@ -107,7 +107,7 @@ export default function Redemption(props) {
       //     }).then(res => {
       //       if (res.data.status === "error") {
       //         setFormError(res.data.errorText)
-      //         debug(res.data.errorText)
+      //         //debug(res.data.errorText)
       //       } else {
       //         setFormError('')
       //       }

@@ -47,7 +47,7 @@ export function fetchPledgesAction(eventSlug, createTimeout = false) {
             .catch(error => debug(error)),
         30000
       );
-      debug('setTimeout', timeoutID);
+      //debug('setTimeout', timeoutID);
       dispatch(saveTimeoutID(timeoutID));
     }
   };
@@ -68,7 +68,7 @@ export function postPledge(data, params, loggedIn) {
             dispatch(
               mergeEntities(normalize(userProfile[0], userProfileSchema))
             );
-            debug(res.data);
+            //debug(res.data);
           })
           .catch(error => {
             NotificationManager.error(
@@ -98,7 +98,7 @@ export function updatePledge(data, params, loggedIn) {
     loggedIn
       ? putAuthenticatedRequest('eventPledgeAuthed_put', data, params)
           .then(res => {
-            debug(res.data);
+            //debug(res.data);
             const { eventPledge, pledgeEvent } = res.data.merge;
             dispatch(
               mergeEntities(normalize(pledgeEvent, [pledgeEventSchema]))
@@ -119,7 +119,7 @@ export function updatePledge(data, params, loggedIn) {
 
 async function getLocalStorageItem(key, res) {
   const token = res.data.token;
-  debug(token);
+  //debug(token);
   try {
     let pledgesArray = await fetchItem(key).catch(() => {
       saveItem(key, []);
@@ -133,7 +133,7 @@ async function getLocalStorageItem(key, res) {
       saveItem(key, JSON.stringify(newPledgesArray));
     } // No existing pledges
     else {
-      debug('No existing pledges found');
+      //debug('No existing pledges found');
       pledgesArray = [];
       let newPledgesArray = pledgesArray;
       newPledgesArray.push(token);
@@ -157,7 +157,7 @@ async function getLocalStorageItem(key, res) {
 export function clearTimeoutAction(id) {
   return dispatch => {
     clearInterval(id);
-    debug('clearTimeout', id);
+    //debug('clearTimeout', id);
     dispatch(clearTimeoutID());
   };
 }

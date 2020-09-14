@@ -17,7 +17,7 @@ export function fetchCurrencies() {
       if (now - last > 10000) {
         last = now;
 
-        debug('fetchCurrencies...');
+        //debug('fetchCurrencies...');
         getRequest('public_currencies_get')
           .then(response => {
             dispatch(setCurrenciesConversions(response.data));
@@ -25,7 +25,7 @@ export function fetchCurrencies() {
           })
           .catch(error => { debug(error); reject(error) });
       } else {
-        debug('fetchCurrencies already called, throttling.');
+        //debug('fetchCurrencies already called, throttling.');
         resolve();
       }
     })

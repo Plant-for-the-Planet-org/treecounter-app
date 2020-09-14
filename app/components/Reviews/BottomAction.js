@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import { updateStaticRoute } from './../../helpers/routerHelper';
 import i18n from '../../locales/i18n.js';
 
 export default class BottomAction extends Component {
   constructor(props) {
     super(props);
-    debug('in con', props);
+    //debug('in con', props);
   }
   render() {
-    debug('got props review:', this.props.review, this.props.close);
+    //debug('got props review:', this.props.review, this.props.close);
     return (
       <View>
         <TouchableOpacity
           onPress={() => {
             this.props.close();
-            debug(
+            /* debug(
               'got review props in bottom action:',
               this.props.review,
               this.props.navigation
-            );
+            ); */
             updateStaticRoute('app_add_review', this.props.navigation, {
               review: this.props.review
             });
@@ -58,7 +58,7 @@ export default class BottomAction extends Component {
 
         <TouchableOpacity
           onPress={async () => {
-            debug('deleting', this.props.review.id);
+            //debug('deleting', this.props.review.id);
             this.props.close();
             await this.props.delete(this.props.review.id);
           }}

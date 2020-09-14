@@ -31,7 +31,7 @@ const CountryDetails = ({ navigation }) => {
     const caption = navigation.getParam('caption');
     setQueryResult(null);
     setSection(caption);
-    debug(section, subSection, caption, 'Sections');
+    //debug(section, subSection, caption, 'Sections');
     LeaderBoardDataAction({
       section,
       orderBy: orderBy,

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import * as Yup from 'yup';
-import { debug } from '../debug';
+//import { debug } from '../debug';
 import { postDirectRequest } from '../../app/utils/api';
 import {
   profile,
@@ -124,9 +124,9 @@ export function queryParamsToObject(queryParams) {
         '"}'
     );
   } catch (err) {
-    debug(err);
+    //debug(err);
   }
-  debug('object to return ', returnObject);
+  //debug('object to return ', returnObject);
   return returnObject;
 }
 
@@ -135,13 +135,13 @@ export function objectToQueryParams(objectValue) {
     .map(key => key + '=' + objectValue[key])
     .join('&');
 
-  debug('object to return ', valueString);
+  //debug('object to return ', valueString);
   return valueString;
 }
 
 // credits to https://itnext.io/create-date-from-mysql-datetime-format-in-javascript-912111d57599
 export function getDateFromMySQL(dateTime) {
-  debug('getDateFromMySQL', dateTime);
+  //debug('getDateFromMySQL', dateTime);
   if (dateTime) {
     let dateTimeParts = dateTime.split(/[- :]/);
     dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
@@ -152,7 +152,7 @@ export function getDateFromMySQL(dateTime) {
 }
 
 export function formatDateToMySQL(date) {
-  debug('formatDateToMySQL', date);
+  //debug('formatDateToMySQL', date);
 
   try {
     let dd = date.getDate();
@@ -167,7 +167,7 @@ export function formatDateToMySQL(date) {
 
     date = yyyy + '-' + mm + '-' + dd;
   } catch (err) {
-    // debug(err);
+    //debug(err);
   }
   return date;
 }

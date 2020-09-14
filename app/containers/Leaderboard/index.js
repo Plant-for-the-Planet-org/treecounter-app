@@ -66,16 +66,16 @@ class LeaderBoardContainer extends React.Component {
     orderBy = this.state.sortingQueryParam.orderBy,
     period = this.state.sortingQueryParam.period
   ) {
-    debug(
+    /* debug(
       section,
       orderBy,
       period,
       subSection,
       'section, orderBy, period, subSection  LeaderBoardDataAction'
-    );
+    ); */
     LeaderBoardDataAction({ section, orderBy, period, subSection }).then(
       success => {
-        debug(success, 'SUCCESSS');
+        //debug(success, 'SUCCESSS');
         if (
           success.data &&
           success.data instanceof Object &&
@@ -147,7 +147,7 @@ class LeaderBoardContainer extends React.Component {
   };
 
   UNSAFE_componentWillReceiveProps(nextProps /*, nextState*/) {
-    debug('__componentWillReceiveProps__');
+    //debug('__componentWillReceiveProps__');
 
     if (!this.props.navigation) {
       const { match } = nextProps;
@@ -250,7 +250,7 @@ class LeaderBoardContainer extends React.Component {
   }
 
   render() {
-    debug(this.props.handleScrollAnimation, 'this.props LeaderBoardContainer');
+    //debug(this.props.handleScrollAnimation, 'this.props LeaderBoardContainer');
     return (
       <Leaderboard
         ref={'leaderBoard'}

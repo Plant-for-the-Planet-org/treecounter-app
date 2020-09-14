@@ -115,7 +115,7 @@ const CountriesLeaderBoard = ({ navigation }) => {
       caption
     });
   };
-  debug('queryresult', queryresult);
+  //debug('queryresult', queryresult);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header navigation={navigation} />

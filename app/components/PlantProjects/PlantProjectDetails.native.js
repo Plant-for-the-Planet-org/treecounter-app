@@ -204,7 +204,7 @@ const _goToURL = url => {
     if (supported) {
       Linking.openURL(url);
     } else {
-      debug('Cannot open URI: ' + url);
+      //debug('Cannot open URI: ' + url);
     }
   });
 */

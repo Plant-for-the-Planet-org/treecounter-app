@@ -193,7 +193,7 @@ export function createCompetition(value, navigation) {
           //   competition: res.data.merge.competition[0].id,
           //   titleParam: res.data.merge.competition[0].name
           // });
-          // debug(updateRoute('app_competitions', navigation || dispatch));
+          //debug(updateRoute('app_competitions', navigation || dispatch));
           updateRoute('app_competitions', navigation || dispatch);
           resolve(res.data);
           dispatch(setProgressModelState(false));

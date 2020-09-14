@@ -20,7 +20,7 @@ export function fetchLocation() {
     if (!getItemSync('preferredCurrency')) {
       getRequest('public_ipstack')
         .then(res => {
-          debug('Got location fetch ip', res.data);
+          //debug('Got location fetch ip', res.data);
           const foundLocation = find(countryCodes, {
             countryCode: res.data.country_code
           });
@@ -60,7 +60,7 @@ export function fetchConfig() {
     return new Promise(function (resolve, reject) {
       request
         .then(res => {
-          debug('Got config fetch data:', res.data);
+          //debug('Got config fetch data:', res.data);
           cdnMedia = res.data.cdnMedia;
           webMapIds = res.data.webMapIds;
           appVersions = res.data.appVersions;

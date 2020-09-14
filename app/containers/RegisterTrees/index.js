@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import RegisterTrees from '../../components/RegisterTrees';
 import { registerTree } from '../../actions/registerTree';
 import { mergeContributionImages } from '../../helpers/utils';
@@ -27,7 +27,7 @@ class RegisterTreesContainer extends PureComponent {
     /* registerTreeForm =
       registerTreeForm || this.refs.registerTrees.refs.registerTreeForm;
     let value = registerTreeForm.getValue() || registerTreeForm;*/
-    debug('got the form value:register form:', value);
+    //debug('got the form value:register form:', value);
 
     if (value) {
       value = mergeContributionImages(value);

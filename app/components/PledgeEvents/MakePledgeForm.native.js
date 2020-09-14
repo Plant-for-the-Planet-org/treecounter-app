@@ -15,7 +15,7 @@ import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Formik } from 'formik';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
 import { postPledge } from './../../actions/pledgeAction';
@@ -126,7 +126,7 @@ class MakePledgeForm extends Component {
                   treeCount: values.treeCount,
                   isAnonymous: this.state.isAnonymous
                 };
-                debug(data);
+                //debug(data);
                 const params = this.props.navigation.getParam('slug');
                 this.props.postPledge(
                   data,

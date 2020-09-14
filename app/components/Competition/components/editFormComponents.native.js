@@ -310,7 +310,7 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
                 debug('ImagePicker Error: ', response.error);
               } else {
@@ -329,7 +329,7 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
                 debug('ImagePicker Error: ', response.error);
               } else {

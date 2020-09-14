@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 // import i18n from '../../locales/i18n.js';
 import { currencySort } from './utils';
 import { currenciesSelector } from '../../selectors';
@@ -93,10 +93,10 @@ class GlobalCurrencySelector extends Component {
   }
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
-      let curreniesData = await this.props.fetchCurrencies();
-      debug('got fron fetch', curreniesData);
+      //let curreniesData = await this.props.fetchCurrencies();
+      //debug('got from fetch', curreniesData);
     }
-    debug('settings', this.state);
+    //debug('settings', this.state);
     !this.props.userProfile && this.setState({ preferredCurrency: getPreferredCurrency() }) && this.props.setCurrencyAction(this.state.preferredCurrency)
     this.props.userProfile &&
       this.props.userProfile.currency &&
@@ -121,7 +121,7 @@ class GlobalCurrencySelector extends Component {
       ];
   }
   handleCurrencyChange(selectedOption) {
-    debug(selectedOption);
+    //debug(selectedOption);
     this.updateState({ preferredCurrency: selectedOption.value });
     this.props.setCurrencyAction(selectedOption.value);
     this.props.userProfile &&

@@ -374,8 +374,8 @@ export function decodeFormData(mode, mapPoint) {
       return [
         {
           coordinate: {
-            latitude: getQueryVariable(mapPoint, 'geoLatitude'),
-            longitude: getQueryVariable(mapPoint, 'geoLongitude'),
+            latitude: Number(getQueryVariable(mapPoint, 'geoLatitude')) ? Number(getQueryVariable(mapPoint, 'geoLatitude')) : 0,
+            longitude: Number(getQueryVariable(mapPoint, 'geoLongitude')) ? Number(getQueryVariable(mapPoint, 'geoLongitude')) : 0,
             key: 1
           }
         }
@@ -576,8 +576,8 @@ class NativeMapView extends Component {
         markers: [
           {
             coordinate: {
-              latitude: region.latitude,
-              longitude: region.longitude
+              latitude: Number(region.latitude) ? Number(region.latitude) : 0,
+              longitude: Number(region.longitude) ? Number(region.longitude) : 0
             },
             key: id++
           }

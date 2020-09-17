@@ -381,8 +381,8 @@ class AnimatedViews extends React.Component {
                 identifier={String(marker.id)}
                 key={marker.id}
                 coordinate={{
-                  latitude: marker.geoLatitude,
-                  longitude: marker.geoLongitude
+                  latitude: Number(marker.geoLatitude) ? Number(marker.geoLatitude) : 0,
+                  longitude: Number(marker.geoLongitude) ? Number(marker.geoLongitude): 0
                 }}
               >
                 {this.getTreeImage(marker.treeCount, i)}

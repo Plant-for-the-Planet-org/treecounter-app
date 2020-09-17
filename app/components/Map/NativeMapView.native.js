@@ -40,7 +40,7 @@ const ASPECT_RATIO = width / height;
 const LATITUDE = null; //37.78825;
 const LONGITUDE = null; //-122.4324;
 const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const LONGITUDE_DELTA = Math.abs(LATITUDE_DELTA * ASPECT_RATIO);
 
 let id = 0;
 

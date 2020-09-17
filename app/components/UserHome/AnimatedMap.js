@@ -19,7 +19,7 @@ import UserContributionsDetails from '../UserContributions/ContributionDetails/i
 const screen = Dimensions.get('window');
 const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const LONGITUDE_DELTA = Math.abs(LATITUDE_DELTA * ASPECT_RATIO);
 
 class AnimatedViews extends React.Component {
   constructor(props) {

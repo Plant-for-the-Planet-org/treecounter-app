@@ -118,6 +118,7 @@ export function queryParamsToObject(queryParams) {
       '{"' +
         decodeURI(queryParams)
           .replace('?', '')
+          .replace(/\\/g, '\\\\')
           .replace(/"/g, '\\"')
           .replace(/&/g, '","')
           .replace(/=/g, '":"') +

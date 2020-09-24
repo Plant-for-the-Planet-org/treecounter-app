@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import SingleReview from './SingleReview';
 import { getReviewIndexes } from '../../actions/reviews';
 // import { ScrollView } from 'react-native-gesture-handler';
@@ -29,7 +29,7 @@ const { width } = Dimensions.get('window');
 class Reviews extends Component {
   constructor(props) {
     super(props);
-    debug('reviews props:', props);
+    //debug('reviews props:', props);
 
     this.state = {
       reviewIndexes: []
@@ -38,10 +38,10 @@ class Reviews extends Component {
   async UNSAFE_componentWillMount() {
     try {
       const { data } = await getReviewIndexes();
-      debug('indexs', data);
+      //debug('indexs', data);
       this.setState({ reviewIndexes: data });
     } catch (err) {
-      debug('eror on reviewindex', err);
+      //debug('eror on reviewindex', err);
     }
   }
   isReviewer() {

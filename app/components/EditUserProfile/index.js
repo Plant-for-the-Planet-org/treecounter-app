@@ -127,7 +127,7 @@ export default class EditUserProfile extends React.Component {
 
   changeEmail = () => {
     let formRef = 'change_email';
-    debug(this.refs[formRef].validate());
+    //debug(this.refs[formRef].validate());
 
     let value = this.refs[formRef].getValue();
     this.props.updateEmail(value);

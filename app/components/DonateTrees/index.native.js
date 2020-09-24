@@ -73,7 +73,7 @@ export default class DonateTrees extends React.PureComponent {
     }
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
-    debug('got user form', this.props.navigation.getParam('userForm'), params);
+    //debug('got user form', this.props.navigation.getParam('userForm'), params);
     if (params !== undefined && params.giftMethod === 'invitation') {
       this.setState({
         giftTreeCounterName:
@@ -88,10 +88,10 @@ export default class DonateTrees extends React.PureComponent {
   UNSAFE_componentWillReceiveProps(nextProps) {
     // const { navigation } = this.props;
     if (nextProps.selectedProject) {
-      debug(
+      /* debug(
         'nextProps.selectedProject.paymentSetup',
         nextProps.selectedProject.paymentSetup
-      );
+      ); */
       if (
         nextProps.selectedProject.paymentSetup &&
         nextProps.selectedProject.paymentSetup.treeCountOptions &&

@@ -36,7 +36,7 @@ class PublicTreecounterContainer extends Component {
 
   fetchAndSetSearchResult(props) {
     const { treecounterLookupAction } = props;
-    debug('fetchAndSetSearchResult');
+    //debug('fetchAndSetSearchResult');
     treecounterLookupAction(this.getTreeCounterId(props), this.props.navigation)
       .then(treecounter => {
         this.setState({
@@ -51,7 +51,7 @@ class PublicTreecounterContainer extends Component {
     this.fetchAndSetSearchResult(this.props);
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
-    debug('test, props', nextProps);
+    //debug('test, props', nextProps);
     if (this.getTreeCounterId(this.props) === this.getTreeCounterId(nextProps))
       return;
     this.fetchAndSetSearchResult(nextProps);

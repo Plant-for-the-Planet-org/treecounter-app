@@ -109,7 +109,7 @@ class Menu extends Component {
   resetStackToProperRoute = url => {
     // Do Whatever you need to do within your app to redirect users to the proper route
     let urlBreak = url.split('/');
-    debug(urlBreak);
+    //debug(urlBreak);
     const { navigation } = this.props;
     if (
       urlBreak.indexOf('account-activate') !== -1 ||

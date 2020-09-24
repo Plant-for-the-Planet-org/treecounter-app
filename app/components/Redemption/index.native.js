@@ -24,6 +24,11 @@ import buttonStyles from '../../styles/common/button.native';
 import colors from '../../utils/constants';
 
 const height = Dimensions.get('window').height;
+
+const AnimatedKeyboardAwareScrollView = Animated.createAnimatedComponent(
+  KeyboardAwareScrollView
+);
+
 export default function Redemption(props) {
   const [scrollY] = React.useState(new Animated.Value(0));
 
@@ -102,7 +107,7 @@ export default function Redemption(props) {
       //     }).then(res => {
       //       if (res.data.status === "error") {
       //         setFormError(res.data.errorText)
-      //         debug(res.data.errorText)
+      //         //debug(res.data.errorText)
       //       } else {
       //         setFormError('')
       //       }
@@ -114,7 +119,7 @@ export default function Redemption(props) {
       >
         {props => (
           <>
-            <KeyboardAwareScrollView
+            <AnimatedKeyboardAwareScrollView
               contentContainerStyle={styles.formScrollView}
               keyboardDismissMode="on-drag"
               keyboardShouldPersistTaps="always"
@@ -128,7 +133,7 @@ export default function Redemption(props) {
                     contentOffset: { y: scrollY }
                   }
                 }
-              ])}
+              ], { useNativeDriver: true })}
               extraScrollHeight={12}
             >
               <Text style={styles.mainTitle}>
@@ -163,7 +168,7 @@ export default function Redemption(props) {
                   onSubmitEditing={props.handleSubmit}
                 />
               </View>
-            </KeyboardAwareScrollView>
+            </AnimatedKeyboardAwareScrollView>
 
             {buttonType === 'validate' ? (
               !props.isValid ? (

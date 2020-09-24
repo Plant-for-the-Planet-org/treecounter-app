@@ -3,7 +3,6 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
-import { Animated } from 'react-native';
 import { debug } from '../../debug';
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
@@ -107,6 +106,7 @@ const headerLabels = {
 };
 
 export const getAppNavigator = function (isLoggedIn, userProfile) {
+
   const searchNavigator = createStackNavigator(
     {
       Search: {
@@ -117,12 +117,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
       navigationOptions: {
         gesturesEnabled: false
       }
@@ -134,12 +128,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
       navigationOptions: {
         gesturesEnabled: false
       }
@@ -152,12 +140,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
       navigationOptions: {
         gesturesEnabled: false
       }

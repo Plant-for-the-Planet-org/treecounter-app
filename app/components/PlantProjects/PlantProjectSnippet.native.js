@@ -91,7 +91,7 @@ class PlantProjectSnippet extends PureComponent {
     } else {
       projectImage = plantProjectImages && plantProjectImages.find(() => true);
     }
-    // debug('project image', projectImage);
+    //debug('project image', projectImage);
     const teaserProps = {
       tpoName: this.props.tpoName,
       projectName,

@@ -89,7 +89,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
 
   render() {
     const { treeCountOptions } = this.props;
-    // debug('Tree Count currency selector called up');
+    //debug('Tree Count currency selector called up');
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 35 }}

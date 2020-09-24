@@ -182,7 +182,7 @@ export async function deleteAuthenticatedRequest(route, params) {
  * @param {endPoint} params
  */
 export async function getExternalRequest(params) {
-  debug('getExternalRequest:', params);
+  //debug('getExternalRequest:', params);
   return await axios
     .get(params.endPoint)
     .then(checkStatus)

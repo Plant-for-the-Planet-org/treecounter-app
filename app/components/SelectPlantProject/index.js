@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import _ from 'lodash';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import CarouselNavigation from '../Common/CarouselNavigation';
 import { arrow_right_orange, arrow_left_orange } from '../../assets';
 import CardLayout from '../Common/Card';
@@ -175,7 +175,7 @@ class SelectPlantProject extends Component {
         modalProject: project
       });
     } catch (error) {
-      debug('load details error', error);
+      //debug('load details error', error);
     }
   }
 

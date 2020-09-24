@@ -168,12 +168,14 @@ const styles = StyleSheet.create({
   tabText: {
     fontSize: 10,
     fontFamily: "OpenSans-SemiBold",
-    marginTop: 2
+    marginTop: 2,
+    color: "#000000"
   },
   donateTabText: {
     fontSize: 10,
     fontFamily: "OpenSans-SemiBold",
-    top: -23
+    top: -23,
+    color: "#000000"
   },
   tabTextGreen: {
     fontSize: 10,

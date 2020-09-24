@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Select, { components } from 'react-select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import * as images from '../../assets';
 import planetLogo from '../../assets/svgAssets/Planet-Logo.svg';
 import { getLocalRoute } from '../../actions/apiRouting';
@@ -173,7 +173,7 @@ class Menu extends Component {
     this.setState({
       selectedLanguage: selectedOption
     });
-    debug('change language to', selectedOption.value);
+    //debug('change language to', selectedOption.value);
     saveItem('language', selectedOption.value);
     this.props.userProfile
       ? this.props

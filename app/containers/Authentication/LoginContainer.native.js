@@ -29,7 +29,7 @@ class LoginContainer extends React.Component {
 
   onPress = (value, recaptchaToken, refreshToken) => {
     // let result = this.refs.loginContainer.refs.loginForm.validate();
-    // debug(result);
+    //debug(result);
     // let value = this.refs.loginContainer.refs.loginForm.getValue();
     if (value) {
       this.onClick(value, recaptchaToken, refreshToken);
@@ -37,7 +37,7 @@ class LoginContainer extends React.Component {
   };
 
   onClick(formValue, recaptchaToken, refreshToken) {
-    // debug(this.refs.loginContainer.refs.loginForm.validate());
+    //debug(this.refs.loginContainer.refs.loginForm.validate());
     // let formValue = this.refs.loginContainer.refs.loginForm.getValue();
     if (formValue) {
       this.props

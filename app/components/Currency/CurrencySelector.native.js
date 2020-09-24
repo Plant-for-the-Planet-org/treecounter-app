@@ -28,7 +28,7 @@ class CurrencySelector extends React.PureComponent {
       );
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.globalCurrency &&
       nextProps.globalCurrency.currency !== this.state.selectedCurrency

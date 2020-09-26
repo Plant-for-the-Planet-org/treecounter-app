@@ -35,8 +35,6 @@
     "@bugsnag/react-native": "^7.3.1",
     "@esri/react-arcgis": "^5.0.0",
     "@react-native-community/async-storage": "^1.8.1",
-    "@react-native-community/cli-platform-android": "^4.10.0",
-    "@react-native-community/cli-platform-ios": "^4.10.0",
     "@react-native-community/datetimepicker": "^3.0.2",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.6",
@@ -142,13 +140,13 @@
     "rxjs": "^6.5.4",
     "rxjs-compat": "^6.5.4",
     "slick-carousel": "^1.8.1",
+    "snyk": "^1.373.0",
     "source-map-explorer": "^2.3.1",
     "tcomb-form": "^0.9.21",
     "tcomb-form-native": "^0.6.20",
     "tcomb-json-schema": "^0.3.2",
     "uuid": "^7.0.1",
-    "yup": "^0.28.1",
-    "snyk": "^1.373.0"
+    "yup": "^0.28.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

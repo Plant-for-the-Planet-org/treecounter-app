@@ -20,7 +20,9 @@
     "ios": "ENVFILE=.env.develop react-native run-ios --scheme 'TreecounterApp(.env.develop)'",
     "android": "ENVFILE=.env.develop react-native run-android --variant 'developDebug'",
     "metro": "react-native start --reset-cache",
-    "heroku-postbuild": "echo \"api_url=$api_url\nenv=$env\nscheme=$scheme\nmediaPath=$mediaPath\nhost=$host\nbase=$base\ncurrency=$currency\ngoogleMapApiKey=$googleMapApiKey\ndebug=$debug\nbugsnagApiKey=$bugsnagApiKey\nandroidAppId=$androidAppId\niosAppId=$iosAppId\nlocationApikKey=$locationApikKey\" >> .env.production && webpack --config ./web/config/webpack.server.config.js --progress --profile --bail"
+    "heroku-postbuild": "echo \"api_url=$api_url\nenv=$env\nscheme=$scheme\nmediaPath=$mediaPath\nhost=$host\nbase=$base\ncurrency=$currency\ngoogleMapApiKey=$googleMapApiKey\ndebug=$debug\nbugsnagApiKey=$bugsnagApiKey\nandroidAppId=$androidAppId\niosAppId=$iosAppId\nlocationApikKey=$locationApikKey\" >> .env.production && webpack --config ./web/config/webpack.server.config.js --progress --profile --bail",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "lint-staged": {
     "*.js": [
@@ -33,8 +35,6 @@
     "@bugsnag/react-native": "^7.3.1",
     "@esri/react-arcgis": "^5.0.0",
     "@react-native-community/async-storage": "^1.8.1",
-    "@react-native-community/cli-platform-android": "^4.7.0",
-    "@react-native-community/cli-platform-ios": "^4.7.0",
     "@react-native-community/datetimepicker": "^3.0.2",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.6",
@@ -54,10 +54,10 @@
     "esri-loader": "2.13.0",
     "formik": "^2.1.4",
     "history": "^4.10.1",
-    "i18next": "^19.3.2",
+    "i18next": "^19.6.0",
     "intl": "^1.2.5",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.16",
     "normalizr": "^3.6.0",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
@@ -80,7 +80,7 @@
     "react-native-fs": "2.16.6",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-get-random-values": "^1.2.0",
-    "react-native-google-places-autocomplete": "^1.4.1",
+    "react-native-google-places-autocomplete": "^1.4.2",
     "react-native-htmlview": "^0.15.0",
     "react-native-i18n": "^2.0.15",
     "react-native-image-carousel": "^0.4.6",
@@ -140,6 +140,7 @@
     "rxjs": "^6.5.4",
     "rxjs-compat": "^6.5.4",
     "slick-carousel": "^1.8.1",
+    "snyk": "^1.401.0",
     "source-map-explorer": "^2.3.1",
     "tcomb-form": "^0.9.21",
     "tcomb-form-native": "^0.6.20",
@@ -193,5 +194,6 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"
-  }
+  },
+  "snyk": true
 }

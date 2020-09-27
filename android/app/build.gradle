@@ -92,7 +92,7 @@ if (propfile.exists()) {
 // TODO: Hermes engine crashes with @react-native-community/datetimepicker
 project.ext.react = [
         entryFile   : "index.native.js",
-        enableHermes: false,
+        enableHermes: true,
         root        : "../../",
 ]
 
@@ -213,10 +213,7 @@ android {
     }
 
     packagingOptions {
-        pickFirst "lib/armeabi-v7a/libc++_shared.so"
-        pickFirst "lib/arm64-v8a/libc++_shared.so"
-        pickFirst "lib/x86/libc++_shared.so"
-        pickFirst "lib/x86_64/libc++_shared.so"
+        pickFirst '**/libc++_shared.so'
     }
 
     lintOptions {
@@ -240,10 +237,6 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.flipper'
     }
-
-    // TODO: are these two libs still used?
-    implementation 'com.facebook.fresco:animated-gif:2.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

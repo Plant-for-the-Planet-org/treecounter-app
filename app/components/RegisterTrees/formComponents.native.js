@@ -960,7 +960,7 @@ export function CompetitionDatePicker(props) {
         date={new Date(props.endDate)}
         onCancel={() => setShowDatePicker(false)}
         maximumDate={new Date()}
-        minimumDate={new Date('1/01/2006')}
+        minimumDate={new Date(2006, 0, 1) }
         titleIOS={i18n.t('label.datePickerTitle')}
         cancelTextIOS={i18n.t('label.datePickerCancel')}
         confirmTextIOS={i18n.t('label.datePickerConfirm')}

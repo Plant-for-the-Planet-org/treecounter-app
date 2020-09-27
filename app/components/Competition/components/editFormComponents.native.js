@@ -358,7 +358,11 @@ export function CompetitionDatePicker(props) {
           <Text style={styles.labelEndDate}>
             {i18n.t('label.competition_end_date')}
           </Text>
-          <Text>{formatDate(formatDateToMySQL(props.endDate))}</Text>
+          <Text style={styles.EndDate}>
+            {formatDate(formatDateToMySQL(props.endDate))}</Text>
+          {props.errors && props.errors.endDate ? (
+            <Text>{props.errors.endDate}</Text>
+          ) : null}
         </View>
         <View style={styles.datePickerUnderline} />
       </TouchableOpacity>
@@ -375,6 +379,9 @@ export function CompetitionDatePicker(props) {
         date={new Date(props.endDate)}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}
+        titleIOS={i18n.t('label.datePickerTitle')}
+        cancelTextIOS={i18n.t('label.datePickerCancel')}
+        confirmTextIOS={i18n.t('label.datePickerConfirm')}
       />
     </View>
   );

@@ -191,7 +191,7 @@ export const FormikFormTree = props => {
                               color: '#4d5153'
                             }}
                           >
-                            {i18n.t('label.register_tree_tpo_label')}{' '}
+                            {i18n.t('label.register_tree_tpo_label') + ' '}
                             <TouchableWithoutFeedback
                               onPress={() => {
                                 inputEl &&
@@ -214,7 +214,7 @@ export const FormikFormTree = props => {
                                   ? parentProps.plantProjects[0].text
                                   : filter(parentProps.plantProjects, {
                                     value: props.values.plantProject
-                                  })[0].text}{' '}
+                                  })[0].text + ' '}
                                 <Icon
                                   name="angle-down"
                                   size={20}

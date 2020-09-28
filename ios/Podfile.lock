@@ -311,7 +311,7 @@ PODS:
     - React-Core
   - react-native-maps (0.26.1):
     - React
-  - react-native-netinfo (5.5.1):
+  - react-native-netinfo (5.9.5):
     - React
   - react-native-pdf (6.0.1):
     - React
@@ -740,7 +740,7 @@ SPEC CHECKSUMS:
   react-native-google-maps: 2e2e697dab576abd5809d78cd74e775865b62bf7
   react-native-image-picker: 32d1ad2c0024ca36161ae0d5c2117e2d6c441f11
   react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
-  react-native-netinfo: 1ee553f84e01aaffbed0e5bd53d8515f7d675055
+  react-native-netinfo: 7f3f3ed9e8f0e7ab3e7cac00cbfdc6997e25ecaf
   react-native-pdf: 29a09815e99c92743aa8459a90564aaddd4065e0
   react-native-safe-area-context: 8260e5157617df4b72865f44006797f895b2ada7
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865

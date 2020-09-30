@@ -122,7 +122,6 @@ class PlantProjectSnippet extends PureComponent {
     //       ? leafGray
     //       : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
-
     return (
       <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
         <View style={[styles.projectSnippetContainer]} withoutShadow>
@@ -289,7 +288,11 @@ class PlantProjectSnippet extends PureComponent {
               </View>
               {allowDonations ? (
                 <TouchableOpacity
-                  onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
+                  onPress={() =>
+                    this.props.onSelectClickedFeaturedProjects(
+                      this.props.plantProject
+                    )
+                  }
                 >
                   <View style={styles.costContainer}>
                     <View style={styles.costTextContainer}>

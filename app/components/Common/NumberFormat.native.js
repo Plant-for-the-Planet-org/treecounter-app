@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import { currentUserProfileSelector } from '../../selectors';
 import { connect } from 'react-redux';
 import { currenciesSelector, getCurrency } from '../../selectors';
+import { getPreferredCurrency } from '../../actions/globalCurrency.native.js';
 import { formatNumber } from '../../utils/utils';
-import { context } from '../../config';
+// import { context } from '../../config';
 
 const NumberFormat = ({
   data,
@@ -12,17 +13,26 @@ const NumberFormat = ({
   userProfile,
   currencies,
   globalCurrency,
-  force
+  force,
+  handleCurrencyChange
 }) => {
   if (!userProfile) {
     userProfile = {
       // we use redux currency or use EUR if not found for now, dont use localstorage currency for now
-      currency: globalCurrency.currency || context.currency
+      currency: globalCurrency.currency || getPreferredCurrency()
     };
   }
+
   if (force && currency) {
     // force use provided currency
     userProfile.currency = currency;
+  } else if (
+    handleCurrencyChange &&
+    currency &&
+    userProfile.currency &&
+    currency != userProfile.currency
+  ) {
+    handleCurrencyChange(userProfile.currency);
   }
   return formatNumber(data, locale, currency, userProfile, currencies);
 };

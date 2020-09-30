@@ -1,16 +1,17 @@
 import React from 'react';
 import {
   Animated,
-  TouchableOpacity,
   BackHandler,
-  View,
-  Platform,
+  Dimensions,
   Image,
-  Share
+  Platform,
+  Share,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import i18n from '../../locales/i18n';
-import { Dimensions } from 'react-native';
 import { closeHBlack, closeHWhite, shareBlack, shareWhite } from '../../assets';
+import { updateStaticRoute } from '../../helpers/routerHelper';
+import i18n from '../../locales/i18n';
 
 const Layout = {
   window: {
@@ -39,7 +40,19 @@ export default function HeaderAnimated(props) {
     props.navigation.goBack();
     return true;
   };
-
+  const backHandler = () => {
+    let { navigation, donationContext } = props;
+    if (navigation && donationContext.selectedProject) {
+      props.selectPlantProjectAction(donationContext.selectedProject.id);
+      updateStaticRoute('app_donate_detail', navigation, {
+        id: donationContext.selectedProject.id,
+        userForm: navigation.getParam('userForm'),
+        giftMethod: navigation.getParam('giftMethod')
+      });
+    } else {
+      navigateBack();
+    }
+  };
   React.useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', navigateBack);
     // clean up
@@ -111,7 +124,7 @@ export default function HeaderAnimated(props) {
               justifyContent: 'center',
               alignSelf: 'center'
             }}
-            onPress={() => props.navigation.goBack()}
+            onPress={backHandler}
           >
             <Image
               source={closeHBlack}

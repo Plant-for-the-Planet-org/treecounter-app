@@ -248,7 +248,8 @@ class Trillion extends PureComponent {
                                 updateStaticRoute('app_pledge_events', navigation, {
                                   slug: featuredEvents.slug,
                                   plantProject: { id: -1 },
-                                  treeCount: -1
+                                  treeCount: -1,
+                                  showRBSheet: false
                                 });
                               }}
                             >
@@ -294,7 +295,7 @@ class Trillion extends PureComponent {
                                     'app_pledge_events',
                                     navigation,
                                     {
-                                      slug: unfulfilledEvent.slug,
+                                      slug: unfulfilledEvent.eventSlug,
                                       plantProject: { id: -1 },
                                       treeCount: -1
                                     }
@@ -310,38 +311,6 @@ class Trillion extends PureComponent {
                   </View>
                 ) : null}
                 {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
-                {/* <View style={{ marginTop: 16 }}>
-                  <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ paddingRight: 20 }}
-                  >
-                    {this.props.entities.eventPledge !== null &&
-                      this.props.entities.eventPledge !== undefined
-                      ? Object.values(this.props.entities.eventPledge).map(
-                        unfulfilledEvent =>
-                          unfulfilledEvent.status === 'pending' ? (
-                            <TouchableOpacity
-                              key={unfulfilledEvent.token}
-                              onPress={() => {
-                                updateStaticRoute(
-                                  'app_pledge_events',
-                                  navigation,
-                                  {
-                                    slug: unfulfilledEvent.eventSlug,
-                                    plantProject: { id: -1 },
-                                    treeCount: -1
-                                  }
-                                );
-                              }}
-                            >
-                              <UnfulfilledEvents event={unfulfilledEvent} />
-                            </TouchableOpacity>
-                          ) : null
-                      )
-                      : null}
-                  </ScrollView>
-                </View> */}
               </View>
 
               {/* Tree Counter SVG */}
@@ -426,7 +395,7 @@ class Trillion extends PureComponent {
                 </Text>
               </TouchableOpacity>
             </View> */}
-            </ScrollView>
+            </ScrollView >
           );
       }
       case 'leaderBoard': {

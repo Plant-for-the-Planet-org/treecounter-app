@@ -23,7 +23,10 @@ import {
 // import { getAllCompetitionsSelector } from '../../selectors';
 import { getContentLoaderState } from '../../../reducers/contentloaderReducer';
 import { competitionFormSchemaOptions } from '../../../server/parsedSchemas/competition';
-
+import {
+  setDonationContext,
+  setSupportDetails
+} from './../../DonateTrees/redux/action';
 class CompetitionContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -47,7 +50,7 @@ class CompetitionContainer extends React.Component {
       };
       this.props
         .createCompetition(newvalue, this.props.navigation)
-        .then((/* success */) => {})
+        .then((/* success */) => { })
         .catch(err => {
           debug('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
@@ -106,6 +109,8 @@ class CompetitionContainer extends React.Component {
         onCreateCompetition={this.createCompetition}
         competitionFormSchemaOptions={this.state.competitionFormSchemaOptions}
         supportTreecounterAction={this.props.supportTreecounterAction}
+        setSupportDetails={this.props.setSupportDetails}
+        setDonationContext={this.props.setDonationContext}
         editCompetition={id => this.editCompetition(id)}
         navigation={this.props.navigation}
         fetchMineCompetitions={() => this.fetchMineCompetitions()}
@@ -114,8 +119,8 @@ class CompetitionContainer extends React.Component {
         }
       />
     ) : (
-      <LoadingIndicator contentLoader screen="Competition" />
-    );
+        <LoadingIndicator contentLoader screen="Competition" />
+      );
   }
 
   onMoreClick(id, name) {
@@ -151,6 +156,8 @@ const mapDispatchToProps = dispatch => {
       enrollCompetition,
       createCompetition,
       supportTreecounterAction,
+      setSupportDetails,
+      setDonationContext,
       setCurrentCompetitions,
       clearCurrentCompetitions
     },

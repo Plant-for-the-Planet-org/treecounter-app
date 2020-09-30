@@ -24,32 +24,39 @@ const activeColor = '#74ba00';
 const defaultColor = '#4d5153';
 
 class CurrencySelectorList extends Component {
-
   state = {
     focus: 0,
     search: '',
-    preferredCurrency: this.props.userProfile ? this.props.userProfile.curreny : (this.props.selectedCurrency
+    preferredCurrency: this.props.userProfile
+      ? this.props.userProfile.curreny
+      : this.props.selectedCurrency
       ? this.props.selectedCurrency
-      : this.props.globalCurrency.currency),
+      : this.props.globalCurrency.currency,
     show: this.props.show
   };
   async componentDidMount() {
     if (!this.props.currencies.currencies) {
       await this.props.fetchCurrencies();
     }
-    if (!this.state.preferredCurrency && this.props.selectedCurrency && this.props.selectedCurrency != this.state.preferredCurrency) {
+    if (
+      !this.state.preferredCurrency &&
+      this.props.selectedCurrency &&
+      this.props.selectedCurrency != this.state.preferredCurrency
+    ) {
       this.setState({ preferredCurrency: this.props.selectedCurrency });
       this.props.setCurrencyAction(this.props.selectedCurrency);
     } else if (
       !this.state.preferredCurrency &&
-      this.props.globalCurrency.currency && this.props.globalCurrency.currency != this.state.preferredCurrency
+      this.props.globalCurrency.currency &&
+      this.props.globalCurrency.currency != this.state.preferredCurrency
     ) {
       this.setState({ preferredCurrency: this.props.globalCurrency.currency });
       this.props.setCurrencyAction(this.props.globalCurrency.currency);
     }
     if (
       this.props.userProfile &&
-      this.props.userProfile.currency && this.props.userProfile.currency != this.state.preferredCurrency
+      this.props.userProfile.currency &&
+      this.props.userProfile.currency != this.state.preferredCurrency
     ) {
       this.setState({ preferredCurrency: this.props.userProfile.currency });
       this.props.setCurrencyAction(this.props.userProfile.currency);
@@ -58,37 +65,44 @@ class CurrencySelectorList extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.userProfile &&
-      nextProps.userProfile.currency && nextProps.userProfile.currency != this.state.preferredCurrency
+      nextProps.userProfile.currency &&
+      nextProps.userProfile.currency != this.state.preferredCurrency
     ) {
       this.setState({ preferredCurrency: nextProps.userProfile.currency });
       this.props.setCurrencyAction(nextProps.userProfile.currency);
     }
+    if (
+      nextProps.selectedCurrency &&
+      this.state.preferredCurrency &&
+      this.state.preferredCurrency != nextProps.selectedCurrency
+    ) {
+      this.setState({ preferredCurrency: nextProps.selectedCurrency });
+    }
   }
-
   getCurrencyNames() {
     return this.props.currencies.currencies
       ? currencySort(
-        Object.keys(this.props.currencies.currencies.currency_names)
-      )
-        .map(currency => {
-          return {
-            value: currency,
-            label: this.props.currencies.currencies.currency_names[currency]
-          };
-        })
-        .filter(
-          currency =>
-            currency.value.includes(this.state.search.toUpperCase()) ||
-            currency.label
-              .toLowerCase()
-              .includes(this.state.search.toLowerCase())
+          Object.keys(this.props.currencies.currencies.currency_names)
         )
+          .map(currency => {
+            return {
+              value: currency,
+              label: this.props.currencies.currencies.currency_names[currency]
+            };
+          })
+          .filter(
+            currency =>
+              currency.value.includes(this.state.search.toUpperCase()) ||
+              currency.label
+                .toLowerCase()
+                .includes(this.state.search.toLowerCase())
+          )
       : [
-        {
-          value: this.state.preferredCurrency,
-          label: this.state.preferredCurrency
-        }
-      ];
+          {
+            value: this.state.preferredCurrency,
+            label: this.state.preferredCurrency
+          }
+        ];
   }
   setSearch = (text = '') => {
     this.state.search !== text && this.setState({ search: text });
@@ -99,13 +113,11 @@ class CurrencySelectorList extends Component {
   };
   // first close any open search, then close modal dialog
   onClosed = () => {
-    this.state.search ? (
-      this.setSearch()
-    ) : (
-        this.props.hideCurrencyModal({
+    this.state.search
+      ? this.setSearch()
+      : this.props.hideCurrencyModal({
           show: false
-        })
-      );
+        });
   };
   getCountryCode = currency =>
     countryCodes.find(c => c.code == currency.value) || {};
@@ -187,7 +199,13 @@ class CurrencySelectorList extends Component {
         keyboardTopOffset={0}
         swipeToClose
       >
-        <View style={{ backgroundColor: backgroundColor, flex: 1, marginBottom: 20 }}>
+        <View
+          style={{
+            backgroundColor: backgroundColor,
+            flex: 1,
+            marginBottom: 20
+          }}
+        >
           <View
             style={{
               backgroundColor: 'white',
@@ -208,9 +226,8 @@ class CurrencySelectorList extends Component {
                 {this.state.search ? (
                   <Icon name="arrow-back" size={30} color="black" />
                 ) : (
-                    <Icon name="close" size={30} color="#4d5153" />
-                  )}
-
+                  <Icon name="close" size={30} color="#4d5153" />
+                )}
               </TouchableItem>
               <View
                 style={{

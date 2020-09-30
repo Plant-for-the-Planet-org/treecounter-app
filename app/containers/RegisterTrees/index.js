@@ -98,9 +98,10 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ registerTree }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  RegisterTreesContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegisterTreesContainer);
 
 RegisterTreesContainer.propTypes = {
   registerTree: PropTypes.func.isRequired,

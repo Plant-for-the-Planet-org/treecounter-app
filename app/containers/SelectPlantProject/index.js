@@ -68,6 +68,7 @@ class SelectPlantProjectContainer extends PureComponent {
     if (!this.props.currencies.currencies) {
       this.props.fetchCurrencies();
     }
+
     this.props.selectPlantProjectAction(null);
   }
 
@@ -77,6 +78,10 @@ class SelectPlantProjectContainer extends PureComponent {
       project => project.allowDonations
     );
     debug('==== plantprojects', plantProjects);
+    let context = {}
+    if (this.props.navigation.getParam('context')) {
+      context = this.props.navigation.getParam('context')
+    }
     return !plantProjects.length ? null : (
       <SelectPlantProject
         selectProject={this.selectPlantProjectAction}
@@ -86,6 +91,7 @@ class SelectPlantProjectContainer extends PureComponent {
         navigation={this.props.navigation}
         supportTreecounter={this.props.supportTreecounter}
         loadDetails={this.loadDetails}
+        context={context}
         featuredProjects={this.state.featuredProjects}
       />
     );
@@ -149,9 +155,10 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  SelectPlantProjectContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectPlantProjectContainer);
 
 SelectPlantProjectContainer.propTypes = {
   plantProjects: PropTypes.array,

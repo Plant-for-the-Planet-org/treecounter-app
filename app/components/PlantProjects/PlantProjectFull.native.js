@@ -1,31 +1,29 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import {} from 'react-native';
+import {
+  Animated,
+  Platform,
+  ScrollView,
+  StatusBar,
+  Text,
+  View
+} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-import { debug } from '../../debug';
-import i18n from '../../locales/i18n';
 import { loadProject } from '../../actions/loadTposAction';
-import { queryParamsToObject } from '../../helpers/utils';
-import {
-  View,
-  Platform,
-  Text,
-  Animated,
-  StatusBar,
-  ScrollView
-} from 'react-native';
-import styles from '../../styles/selectplantproject/selectplantproject-full';
-import PlantProjectDetails from './PlantProjectDetails';
-import FullHeightButton from '../Common/Button/FullHeightButton';
 import { right_arrow_button } from '../../assets';
-import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
-import NumberFormat from '../Common/NumberFormat.native';
+import { context } from '../../config';
+import { queryParamsToObject } from '../../helpers/utils';
+import i18n from '../../locales/i18n';
+import styles from '../../styles/selectplantproject/selectplantproject-full';
+import FullHeightButton from '../Common/Button/FullHeightButton';
 // import { formatNumber } from '../../utils/utils';
 import LoadingIndicator from '../Common/LoadingIndicator.native';
+import NumberFormat from '../Common/NumberFormat.native';
 import HeaderFullPages from '../Header/HeaderFullPages.native';
-import { context } from '../../config';
 import { getLocalRoute } from './../../actions/apiRouting';
+import PlantProjectDetails from './PlantProjectDetails';
+import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
 
 /**
@@ -84,9 +82,8 @@ class PlantProjectFull extends React.Component {
   }
   render() {
     let { plantProject } = this.props;
-
     if (!plantProject || !plantProject.tpoData) return <LoadingIndicator />;
-    debug('rendering with project:', plantProject);
+    // debug('rendering with project:', plantProject);
     const {
       images,
       description,
@@ -132,6 +129,8 @@ class PlantProjectFull extends React.Component {
           scrollY={this.state.scrollY}
           entityType={'projects'}
           entityName={tpoName}
+          donationContext={this.props.donationContext}
+          selectPlantProjectAction={this.props.selectPlantProjectAction}
           url={
             context.scheme +
             '://' +
@@ -140,7 +139,7 @@ class PlantProjectFull extends React.Component {
             '/' +
             this.props.plantProject.id
           }
-        //  appurl={'weplant://project/' + this.props.plantProject.id}
+          //  appurl={'weplant://project/' + this.props.plantProject.id}
         />
         <ScrollView
           contentContainerStyle={[
@@ -203,16 +202,18 @@ class PlantProjectFull extends React.Component {
               onClick={() => this.props.selectProject(plantProject.id)}
               image={right_arrow_button}
             >
-              {i18n.t('label.donate')}
+              {!this.props.donationContext.selectedProject
+                ? i18n.t('label.donate')
+                : i18n.t('label.select_project')}
             </FullHeightButton>
           </View>
         ) : null}
       </View>
     ) : (
-        <View style={{ flex: 1, marginTop: -20 }}>
-          <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
-        </View>
-      );
+      <View style={{ flex: 1, marginTop: -20 }}>
+        <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
+      </View>
+    );
   }
 }
 

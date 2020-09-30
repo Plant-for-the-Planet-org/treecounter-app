@@ -5,9 +5,9 @@ import {
   Dimensions,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Keyboard
 } from 'react-native';
-import { debug } from '../../debug';
 import StaticTabbar from './StaticTabbar';
 import i18n from '../../locales/i18n';
 import NetInfo from '@react-native-community/netinfo';
@@ -19,23 +19,20 @@ let unsubscribe = null;
 export default class Tabbar extends React.PureComponent {
   state = {
     isConnected: true,
+    buttonType: 'showBottomNav'
   };
 
   checkInternet() {
     NetInfo.fetch().then(state => {
-      debug('Connection type', state.type);
-      debug('Is connected?', state.isConnected);
       this.setState({
-        isConnected: state.isConnected,
+        isConnected: state.isConnected
       });
     });
   }
   subscribeCheckInternet() {
     unsubscribe = NetInfo.addEventListener(state => {
-      debug('Connection type', state.type);
-      debug('Is connected?', state.isConnected);
       this.setState({
-        isConnected: state.isConnected,
+        isConnected: state.isConnected
       });
     });
   }
@@ -46,9 +43,35 @@ export default class Tabbar extends React.PureComponent {
   }
   componentDidMount() {
     this.subscribeCheckInternet();
+
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      // eslint-disable-next-line no-underscore-dangle
+      this._keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      // eslint-disable-next-line no-underscore-dangle
+      this._keyboardDidHide
+    );
   }
+  // eslint-disable-next-line no-underscore-dangle
+  _keyboardDidShow = () => {
+    this.setState({
+      buttonType: ''
+    });
+  };
+
+  // eslint-disable-next-line no-underscore-dangle
+  _keyboardDidHide = () => {
+    this.setState({
+      buttonType: 'showBottomNav'
+    });
+  };
   componentWillUnmount() {
     this.unsubscribeCheckInternet();
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
   }
 
   render() {
@@ -86,7 +109,7 @@ export default class Tabbar extends React.PureComponent {
         route: 'app_userHome'
       }
     ];
-    return (
+    return this.state.buttonType === 'showBottomNav' ? (
       <>
         <View {...{ height, width }}>
           <View
@@ -123,26 +146,26 @@ export default class Tabbar extends React.PureComponent {
         {this.state.isConnected ? (
           <SafeAreaView style={styles.container} />
         ) : (
-            <TouchableOpacity
-              onPress={() => this.checkInternet()}
-              style={{
-                width: '100%',
-                height: 48,
-                backgroundColor: '#bdc3c7',
-                justifyContent: 'center',
-                flexDirection: 'row',
-                alignItems: 'center'
-              }}
-            >
-              <Text style={[styles.noInternetText]}>
-                {i18n.t('label.noInternet')}
-              </Text>
-              <Icon name={'refresh'} size={18} color={'#353b48'} />
-              {/* <Text style={styles.noInternetText}>{i18n.t('label.someFunctionality')}</Text> */}
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity
+            onPress={() => this.checkInternet()}
+            style={{
+              width: '100%',
+              height: 48,
+              backgroundColor: '#bdc3c7',
+              justifyContent: 'center',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}
+          >
+            <Text style={[styles.noInternetText]}>
+              {i18n.t('label.noInternet')}
+            </Text>
+            <Icon name={'refresh'} size={18} color={'#353b48'} />
+            {/* <Text style={styles.noInternetText}>{i18n.t('label.someFunctionality')}</Text> */}
+          </TouchableOpacity>
+        )}
       </>
-    );
+    ) : null;
   }
 }
 

@@ -81,26 +81,27 @@ class ListViewProjects extends PureComponent {
       });
   };
   _keyExtractor = item => item.id.toString();
-  onSelectClickedFeaturedProjects(id) {
-    this.props.selectPlantProjectAction(id);
-    const { navigation } = this.props;
-    updateStaticRoute(
-      'app_donate_detail',
-      navigation,
-      navigation.getParam('userForm')
-    );
-  }
+  onSelectClickedFeaturedProjects = item => {
+    console.log('Project Item ------ ', item);
+    this.props.selectPlantProjectAction(item.id);
+    const { navigation, context } = this.props;
+    updateStaticRoute('app_donate_detail', navigation, {
+      id: item.id,
+      userForm: navigation.getParam('userForm'),
+      context: context
+    });
+  };
   _renderItem = ({ item }) => (
     <PlantProjectSnippet
       cardStyle={styles.cardStyle}
       key={'projectFull' + item.id}
       onMoreClick={id => this.props.onMoreClick(id, item.name)}
       plantProject={item}
-      onSelectClickedFeaturedProjects={this.props.selectProject}
+      onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
       showMoreButton={false}
       tpoName={item.tpo_name}
-      selectProject={this.onSelectClickedFeaturedProjects}
       navigation={this.props.navigation}
+      context={this.props.context}
     />
   );
 
@@ -152,6 +153,6 @@ const mapDispatchToProps = dispatch => {
 export default connect(null, mapDispatchToProps)(ListViewProjects);
 ListViewProjects.propTypes = {
   projects: PropTypes.array.isRequired,
-  selectProject: PropTypes.func.isRequired,
+  selectProject: PropTypes.func,
   onMoreClick: PropTypes.func.isRequired
 };

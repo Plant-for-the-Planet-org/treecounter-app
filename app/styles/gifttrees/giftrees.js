@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-// import { Dimensions } from 'react-native';
+import { Platform } from 'react-native';
 
 // const Layout = {
 //     window: {
@@ -16,7 +16,6 @@ export default EStyleSheet.create({
     minHeight: '100%'
   },
   view_container: { backgroundColor: 'white', flex: 1 },
-
   gtDescription: {
     padding: 12,
     color: '#c4bfbf',
@@ -41,5 +40,135 @@ export default EStyleSheet.create({
     fontSize: 16,
     color: '#4d5153',
     fontFamily: 'OpenSans-Regular'
-  }
+  },
+
+  // New Designs
+
+  nMainContainer: {
+    backgroundColor: 'white',
+    marginTop: Platform.OS === 'ios' ? 30 : 70,
+    paddingLeft: 20,
+    paddingRight: 20,
+    height: '100%'
+  },
+  nGiftDesc: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 18,
+    lineHeight: 24,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginTop: 8
+  },
+  giftImage: {
+    maxWidth: 246,
+    maxHeight: 158,
+    alignSelf: 'center',
+    marginTop: 24
+  },
+  actionButtonView: {
+    borderRadius: 100,
+    backgroundColor: '#89b53a',
+    height: 52,
+    justifyContent: 'center'
+  },
+  actionButtonView2: {
+    borderRadius: 100,
+    borderColor: '#89b53a',
+    borderWidth: 1,
+    height: 52,
+    justifyContent: 'center'
+  },
+  actionButtonText: {
+    fontSize: 16,
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#ffffff',
+    fontFamily: 'OpenSans-Bold'
+  },
+  actionButtonText2: {
+    fontSize: 16,
+    lineHeight: 22,
+    letterSpacing: 0.21,
+    textAlign: 'center',
+    color: '#89b53a',
+    fontFamily: 'OpenSans-Bold'
+  },
+  selectContactTitle: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 17,
+    lineHeight: 23,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginTop: 15,
+    marginBottom: 25
+  },
+  contactDisplayName: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    lineHeight: 14,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  contactEmail: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 14,
+    lineHeight: 14,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153',
+    marginTop: 2
+  },
+  headerText: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 27,
+    lineHeight: 40,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  selectedNumText: {
+    fontFamily: 'OpenSans-SemiBold',
+    textAlign: 'right'
+  },
+  disabledView: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    backgroundColor: '#c2c2c2',
+    opacity: 0.7
+  },
+  disabledText: { color: '#c2c2c2' },
+  giftTreesTitle: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 27,
+    lineHeight: 40,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: '#4d5153'
+  },
+  selectContactButton: {
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+    width: '100%',
+    marginTop: 16
+  },
+  receiverButton: {
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+    width: '100%'
+  },
+  receiverButtonContainer: {
+    position: 'absolute',
+    bottom: '12%',
+    width: '100%',
+    alignSelf: 'center'
+  },
+  spaceView: { height: 60, width: 15, backgroundColor: 'transparent' }
 });

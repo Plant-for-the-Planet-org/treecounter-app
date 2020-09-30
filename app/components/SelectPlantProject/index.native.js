@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+// import TabContainer from '../../containers/Menu/TabContainer';
+import { Animated, Dimensions, Platform, Text, View } from 'react-native';
+import { TabBar, TabView } from 'react-native-tab-view';
+import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { TabBar, TabView } from 'react-native-tab-view';
-import { Text, View, Animated, Platform, Dimensions } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { loadProject, loadProjects } from '../../actions/loadTposAction';
 import { debug } from '../../debug';
 import i18n from '../../locales/i18n.js';
+import { getAllPlantProjectsSelector } from '../../selectors';
 import styles from '../../styles/common/tabbar';
+import colors from '../../utils/constants';
+import HeaderStatic from './../Header/HeaderStatic';
 import FeaturedProjects from './Tabs/featured';
 import ListProjects from './Tabs/list';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import HeaderStatic from './../Header/HeaderStatic';
-import { getAllPlantProjectsSelector } from '../../selectors';
-import { loadProject, loadProjects } from '../../actions/loadTposAction';
 const height = Dimensions.get('window').height;
-import colors from '../../utils/constants';
 
 class SelectPlantTabView extends PureComponent {
   constructor(props) {
@@ -28,7 +28,7 @@ class SelectPlantTabView extends PureComponent {
       index: 0,
       scrollY: new Animated.Value(0)
     };
-    this.onSelectProjects = this.onSelectProjects.bind(this);
+    // this.onSelectProjects = this.onSelectProjects.bind(this);
   }
 
   indexChange(index) {
@@ -36,30 +36,23 @@ class SelectPlantTabView extends PureComponent {
       index: index
     });
   }
-  onSelectProjects(id) {
-    debug('porps---', this.props);
-    this.props.selectProject(id);
-    const { navigation } = this.props;
-    debug(
-      '=======in selectplant project component... calling donate detail with',
-      {
-        userForm: navigation.getParam('userForm'),
-        giftMethod: navigation.getParam('giftMethod')
-      }
-    );
-    updateStaticRoute('app_donate_detail', navigation, {
-      userForm: navigation.getParam('userForm'),
-      giftMethod: navigation.getParam('giftMethod')
-    });
-  }
-  handleExpandedClicked = optionNumber => {
-    this.setState({
-      expandedOption: optionNumber
-    });
-  };
+  // onSelectProjects(id) {
+  //   // debug('porps---', this.props);
+  //   this.props.selectProject(id);
+  //   const { navigation } = this.props;
+  //   updateStaticRoute('app_donate_detail', navigation, {
+  //     userForm: navigation.getParam('userForm'),
+  //     giftMethod: navigation.getParam('giftMethod'),
+  //     context: this.props.context
+  //   });
+  // }
+  // handleExpandedClicked = optionNumber => {
+  //   this.setState({
+  //     expandedOption: optionNumber
+  //   });
+  // };
 
   handleIndexChange = index => {
-    debug('indicator index, ', index);
     this.setState({ index: index });
     if (
       index &&
@@ -67,7 +60,6 @@ class SelectPlantTabView extends PureComponent {
     ) {
       try {
         // this.props.loadProjects();
-        //debug('loaded projects in list', projects);
       } catch (error) {
         debug('error on lloading project on list', error);
       }
@@ -139,32 +131,29 @@ class SelectPlantTabView extends PureComponent {
       loadProjects,
       loadProject
     };
-    const { index } = this.state;
 
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        debug('fatured active', index, this.props.plantProjects);
         return this.props.plantProjects.filter(project => project.isFeatured)
           .length ? (
-            <FeaturedProjects
-              onSelectProjects={this.onSelectProjects}
-              {...props}
-              jumpTo={jumpTo}
-              index={this.state.index}
-              scrollY={this.state.scrollY}
-            />
-          ) : null;
-      case 'list':
-        debug('list active', index, this.props.plantProjects);
-
-        return (
-          <ListProjects
-            onSelectProjects={this.onSelectProjects}
+          <FeaturedProjects
             {...props}
             jumpTo={jumpTo}
             index={this.state.index}
             scrollY={this.state.scrollY}
+            context={this.props.context}
+            search={this.props.search}
+          />
+        ) : null;
+      case 'list':
+        return (
+          <ListProjects
+            {...props}
+            jumpTo={jumpTo}
+            index={this.state.index}
+            scrollY={this.state.scrollY}
+            context={this.props.context}
           />
         );
       default:
@@ -181,15 +170,21 @@ class SelectPlantTabView extends PureComponent {
     return (
       <>
         <SafeAreaView style={{ flex: 1 }}>
-          <HeaderStatic
-            title={i18n.t('label.projects')}
-            scrollY={this.state.scrollY}
-            navigation={this.props.navigation}
-          />
-          <Animated.View
-            style={{ marginTop: Platform.OS === 'ios' ? height < 737 ? 56 : 26 : 56 }}
-          />
-
+          {this.props.hideTitle ? null : (
+            <>
+              <HeaderStatic
+                title={i18n.t('label.projects')}
+                scrollY={this.state.scrollY}
+                navigation={this.props.navigation}
+              />
+              <Animated.View
+                style={{
+                  marginTop:
+                    Platform.OS === 'ios' ? (height < 737 ? 56 : 26) : 56
+                }}
+              />
+            </>
+          )}
           <TabView
             useNativeDriver
             navigationState={this.state}

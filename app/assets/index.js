@@ -165,14 +165,19 @@ import closeBlack from './images/icons/closeblack.png';
 import planetLogo from './images/Planet-Logo.png';
 import circleDelete from './images/icons/circle-delete.png';
 import leaf from './images/leaf.png';
-import readmoreUp from './images/readmoreUp.png';
-import readmoreDown from './images/readmoreDown.png';
 import leafGray from './images/leaf_gray.png';
 import treelogo from '../../icon.png';
 import Projects from './images/projects.jpg';
 import WelcomeImage3 from './images/welcome_screen_3_image.jpg';
 import welcomeScreen5 from './images/welcomeScreen5.png';
 import backArrow from './images/icons/backArrow.png';
+import currencyIcon from './images/currencyIcon.png';
+import gPayLogo from './images/gpay.png';
+import applePayLogo from './images/applepay.png';
+import blackLock from './images/icons/blackLock.png';
+import infoHint from './images/infoHint.png';
+import readmoreDown from './images/readmoreDown.png';
+import readmoreUp from './images/readmoreUp.png';
 import redeemImage from './images/redeemImage.png';
 import globe from './images/icons/globe.png';
 import outline_email from './images/icons/outline_email.png';
@@ -182,6 +187,7 @@ import grayShareIcon from './images/icons/gray_share_icon.png';
 import closeIcon from './images/icons/close.png';
 import downloadGreen from './images/icons/download_green.png';
 import sendWhite from './images/icons/send_white.png';
+import sendGreen from './images/icons/send_green.png';
 import FAQsCover from './images/FAQs.png';
 import donateIcon from './images/icons/donateIcon.png';
 import donateIconGreen from './images/icons/donateIconGreen.png';
@@ -211,6 +217,21 @@ import forest from './images/trees/forest.png';
 import fields from './images/trees/fields.png';
 import beach from './images/trees/beach.png';
 
+import visa from './images/icons/visa.png';
+import googlePay from './images/icons/googlePay.png';
+import sepa from './images/icons/sepa.png';
+import applePay from './images/icons/applePay.png';
+import paypal from './images/icons/paypal.png';
+import masterCard from './images/icons/masterCard.png';
+import americanExpress from './images/icons/americanExpress.png';
+import discover from './images/icons/discover.png';
+import paypalLogo from './images/icons/paypalLogo.png';
+import creditCard from './images/icons/creditCard.png';
+import creditCardBack from './images/icons/creditCardBack.png';
+
+import giftplant from './images/gifttrees/giftplant.png'
+import donateThankyou from './images/DonateThankyou.png';
+import deciduousTree from './images/deciduous-tree.png';
 import tree_1 from './images/icons/tree_1.png';
 import smalltreewhite from '../assets/images/smalltreewhite.png';
 import markerImage from './images/tree.png';
@@ -391,10 +412,15 @@ export {
   circleDelete,
   leaf,
   leafGray,
+  currencyIcon,
+  gPayLogo,
+  applePayLogo,
   Projects,
   WelcomeImage3,
   welcomeScreen5,
   backArrow,
+  blackLock,
+  infoHint,
   right_arrow_button,
   globe,
   rocket,
@@ -407,6 +433,7 @@ export {
   closeIcon,
   downloadGreen,
   sendWhite,
+  sendGreen,
   FAQsCover,
   deleteOutlineWhite,
   share,
@@ -417,6 +444,17 @@ export {
   donateIconGreen,
   competeIcon,
   competeIconGreen,
+  visa,
+  googlePay,
+  applePay,
+  sepa,
+  masterCard,
+  paypal,
+  americanExpress,
+  discover,
+  paypalLogo,
+  creditCard,
+  creditCardBack,
   editIcon,
   deleteIcon,
   redMyLocationIcon,
@@ -434,6 +472,9 @@ export {
   hills,
   mountains,
   spruce,
+  giftplant,
+  donateThankyou,
+  deciduousTree,
   tree_1,
   smalltreewhite,
   markerImage,

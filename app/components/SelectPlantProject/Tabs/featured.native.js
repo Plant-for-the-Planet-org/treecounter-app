@@ -3,24 +3,27 @@ import orderBy from 'lodash/orderBy';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import {
+  Animated,
   FlatList,
-  View,
   Image,
-  Text,
   RefreshControl,
-  Animated
+  Text,
+  View
 } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
 import { debug } from '../../../debug';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
-import styles from '../../../styles/selectplantproject/featured.native';
-import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
-import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
-import { trees } from './../../../assets';
 import i18n from '../../../locales/i18n.js';
-import LoadingIndicator from '../../Common/LoadingIndicator.native';
+import styles from '../../../styles/selectplantproject/featured.native';
+import { flatListContainerStyle } from '../../../styles/selectplantproject/selectplantproject-snippet.native';
 import colors from '../../../utils/constants';
+import LoadingIndicator from '../../Common/LoadingIndicator.native';
+import PlantProjectSnippet from '../../PlantProjects/PlantProjectSnippet';
+import { trees } from './../../../assets';
 
-export default class FeaturedProjects extends PureComponent {
+class FeaturedProjects extends PureComponent {
   constructor(props) {
     super(props);
     this.onSelectClickedFeaturedProjects = this.onSelectClickedFeaturedProjects.bind(
@@ -33,7 +36,8 @@ export default class FeaturedProjects extends PureComponent {
       page: parseInt(props.plantProjects.length / this.perPage),
       initiated: false,
       shouldLoad: props.plantProjects.length != this.perPage,
-      loader: true
+      loader: true,
+      search: props.search || ''
     };
   }
   componentDidMount() {
@@ -67,9 +71,13 @@ export default class FeaturedProjects extends PureComponent {
         shouldLoad: this.props.plantProjects.length == this.perPage
       });
     }
+    if (nextProps.search && this.state.search !== nextProps.search) {
+      this.setState({ search: nextProps.search });
+      debug('search', nextProps.search);
+    }
   }
   fetchMore = () => {
-    debug('this. should load in fetch more', this.state.shouldLoad);
+    // debug('this. should load in fetch more', this.state.shouldLoad);
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ page: this.state.page + 1 }, async () => {
         try {
@@ -81,22 +89,23 @@ export default class FeaturedProjects extends PureComponent {
             shouldLoad: data.length == this.perPage,
             plantProjects: [...this.state.plantProjects, ...data]
           });
-          debug('Got from fetch more:', data, this.perPage);
+          // debug('Got from fetch more:', data, this.perPage);
         } catch (error) {
           this.setState({ isFetching: false, shouldLoad: false });
         }
       });
   };
   _keyExtractor = item => item.id.toString();
-  onSelectClickedFeaturedProjects(id) {
-    this.props.selectProject(id);
-    const { navigation } = this.props;
-    updateStaticRoute(
-      'app_donate_detail',
-      navigation,
-      navigation.getParam('userForm')
-    );
-  }
+  onSelectClickedFeaturedProjects = item => {
+    console.log('Project Item ------ ', item);
+    this.props.selectPlantProjectAction(item.id);
+    const { navigation, context } = this.props;
+    updateStaticRoute('app_donate_detail', navigation, {
+      id: item.id,
+      userForm: navigation.getParam('userForm'),
+      context: context
+    });
+  };
 
   _renderItem = ({ item }) => (
     <PlantProjectSnippet
@@ -107,8 +116,8 @@ export default class FeaturedProjects extends PureComponent {
       onSelectClickedFeaturedProjects={this.onSelectClickedFeaturedProjects}
       showMoreButton={false}
       tpoName={item.tpo_name}
-      selectProject={this.props.onSelectProjects}
       navigation={this.props.navigation}
+      context={this.props.context}
     />
   );
 
@@ -131,7 +140,7 @@ export default class FeaturedProjects extends PureComponent {
         />
       </View>
     );
-    debug('featuredProjects', featuredProjects);
+    // debug('featuredProjects', featuredProjects);
     return (
       <View style={styles.flexContainer}>
         {!loader ? (
@@ -161,16 +170,26 @@ export default class FeaturedProjects extends PureComponent {
             ])}
           />
         ) : (
-            <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
-          )}
+          <LoadingIndicator contentLoader screen={'ProjectsLoading'} />
+        )}
       </View>
     );
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      selectPlantProjectAction
+    },
+    dispatch
+  );
+};
+export default connect(null, mapDispatchToProps)(FeaturedProjects);
+
 FeaturedProjects.propTypes = {
   plantProjects: PropTypes.array.isRequired,
-  selectProject: PropTypes.func.isRequired,
+  selectProject: PropTypes.func,
   onMoreClick: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
   index: PropTypes.any

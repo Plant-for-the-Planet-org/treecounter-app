@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Keyboard,
-  Animated
-} from 'react-native';
+import { Text, View, Image, TouchableOpacity, Keyboard, Platform } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CheckBox from 'react-native-check-box';
@@ -24,7 +17,7 @@ import i18n from '../../locales/i18n';
 import { currentUserProfileSelector } from './../../selectors';
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
-import HeaderAnimated from './../Header/HeaderAnimated.native';
+import { Header } from '../DonateTrees/components/Header';
 
 class MakePledgeForm extends Component {
   static navigationOptions = {
@@ -37,7 +30,6 @@ class MakePledgeForm extends Component {
     firstname: '',
     lastname: '',
     isAnonymous: false,
-    scrollY: new Animated.Value(0),
     oldTreeCount: ''
   };
 
@@ -100,207 +92,195 @@ class MakePledgeForm extends Component {
     const currency = unfulfilledEvent.plantProjectCurrency;
     const token = unfulfilledEvent.token;
 
+    let textfieldDesigns = {
+      tintColor: '#89b53a',
+      textColor: '#4d5153',
+      titleFontSize: 12,
+      lineWidth: 1,
+      labelTextStyle: {
+        fontFamily: 'OpenSans-SemiBold'
+      },
+
+      titleTextStyle: { fontFamily: 'OpenSans-SemiBold' },
+      affixTextStyle: { fontFamily: 'OpenSans-Regular' },
+      style: { fontFamily: 'OpenSans-Regular' }
+    };
     return (
       <SafeAreaView style={styles.createPledgeRootView}>
-        <View>
-          <HeaderAnimated
-            navigation={this.props.navigation}
-            title={i18n.t('label.updatePledgeButton')}
-            scrollY={this.state.scrollY}
-          />
-          <View />
-          <Formik
-            initialValues={{
-              firstname,
-              lastname,
-              treeCount
-            }}
-            onSubmit={values => {
-              const data = {
-                firstname: values.firstname,
-                lastname: values.lastname,
-                treeCount: values.treeCount,
-                isAnonymous: this.state.isAnonymous
-              };
-              debug(data);
-              // Update pledge using token
+        <Formik
+          initialValues={{
+            firstname,
+            lastname,
+            treeCount
+          }}
+          onSubmit={values => {
+            const data = {
+              firstname: values.firstname,
+              lastname: values.lastname,
+              treeCount: values.treeCount,
+              isAnonymous: this.state.isAnonymous
+            };
+            debug(data);
+            // Update pledge using token
 
-              this.props.updatePledge(
-                data,
-                {
-                  token: token,
-                  version: 'v1.3'
-                },
-                this.state.loggedIn
-              );
-
-              //saveItem('pledgedEvent', JSON.stringify(date));
-
-              updateStaticRoute('app_pledge_events', this.props.navigation, {
-                slug: this.props.slug,
-                plantProject: this.props.navigation.getParam('plantProject'),
-                treeCount: data.treeCount
+            this.props.updatePledge(
+              data,
+              {
+                token: token,
+                version: 'v1.3'
+              },
+              this.state.loggedIn
+            );
+            updateStaticRoute('app_pledge_events', this.props.navigation, {
+              slug: this.props.slug,
+              plantProject: this.props.navigation.getParam('plantProject'),
+              treeCount: data.treeCount,
+              showRBSheet: true
+            });
+          }}
+          validationSchema={this.validationSchema}
+          validate={values => {
+            let errors = {};
+            if (values.treeCount < this.state.oldTreeCount) {
+              errors.treeCount = i18n.t('label.higherTreeCount', {
+                treeCount: this.state.oldTreeCount
               });
-            }}
-            validationSchema={this.validationSchema}
-            validate={values => {
-              let errors = {};
-              if (values.treeCount < this.state.oldTreeCount) {
-                errors.treeCount = i18n.t('label.higherTreeCount', {
-                  treeCount: this.state.oldTreeCount
-                });
-              }
-              return errors;
-            }}
-          >
-            {props => (
-              <>
-                <KeyboardAwareScrollView
-                  contentContainerStyle={styles.formScrollView}
-                  keyboardDismissMode="on-drag"
-                  keyboardShouldPersistTaps="always"
-                  resetScrollToCoords={{ x: 0, y: 0 }}
-                  scrollEnabled
-                  scrollEventThrottle={16}
-                  onScroll={Animated.event([
-                    {
-                      nativeEvent: {
-                        contentOffset: { y: this.state.scrollY }
-                      }
-                    }
-                  ])}
+            }
+            return errors;
+          }}
+        >
+          {props => (
+            <>
+              <KeyboardAwareScrollView
+                contentContainerStyle={styles.formScrollView}
+                keyboardDismissMode="on-drag"
+                keyboardShouldPersistTaps="always"
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                scrollEnabled
+                scrollEventThrottle={16}
+              >
+                <Header navigation={this.props.navigation} useBackIcon />
+                <Text
+                  style={[
+                    styles.pageTitle,
+                    Platform.OS === 'ios' ? null : { marginTop: -40 }
+                  ]}
                 >
-                  <View>
-                    <Text style={styles.subtitleText}>
-                      {i18n.t('label.pledgeToPlantDesc', {
-                        treeCost: treeCost,
-                        currency: currency,
-                        projectName: projectName
-                      })}
-                    </Text>
-                  </View>
-                  <View>
-                    <View style={styles.formView}>
-                      <View style={styles.formHalfTextField}>
-                        <TextField
-                          label={i18n.t('label.pledgeFormFName')}
-                          value={props.values.firstname}
-                          tintColor={'#89b53a'}
-                          titleFontSize={12}
-                          returnKeyType="next"
-                          lineWidth={1}
-                          labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                          titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                          affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                          blurOnSubmit={false}
-                          onSubmitEditing={() => {
-                            this.lastnameTextInput.focus();
-                          }}
-                          error={
-                            props.touched.firstname && props.errors.firstname
-                          }
-                          onChangeText={props.handleChange('firstname')}
-                          onBlur={props.handleBlur('firstname')}
-                        />
-                      </View>
-
-                      <View style={styles.formHalfTextField}>
-                        <TextField
-                          label={i18n.t('label.pledgeFormLName')}
-                          value={props.values.lastname}
-                          tintColor={'#89b53a'}
-                          titleFontSize={12}
-                          returnKeyType="next"
-                          lineWidth={1}
-                          ref={input => {
-                            this.lastnameTextInput = input;
-                          }}
-                          labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                          titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                          affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                          onSubmitEditing={() => {
-                            this.emailTextInput.focus();
-                          }}
-                          error={
-                            props.touched.lastname && props.errors.lastname
-                          }
-                          onChangeText={props.handleChange('lastname')}
-                          onBlur={props.handleBlur('lastname')}
-                        />
-                      </View>
+                  {i18n.t('label.updatePledgeButton')}
+                </Text>
+                <View>
+                  <Text style={styles.subtitleText}>
+                    {i18n.t('label.pledgeToPlantDesc', {
+                      treeCost: treeCost,
+                      currency: currency,
+                      projectName: projectName
+                    })}
+                  </Text>
+                </View>
+                <View>
+                  <View style={styles.formView}>
+                    <View style={styles.formHalfTextField}>
+                      <TextField
+                        label={i18n.t('label.pledgeFormFName')}
+                        value={props.values.firstname}
+                        returnKeyType="next"
+                        blurOnSubmit={false}
+                        onSubmitEditing={() => {
+                          this.lastnameTextInput.focus();
+                        }}
+                        error={
+                          props.touched.firstname && props.errors.firstname
+                        }
+                        onChangeText={props.handleChange('firstname')}
+                        onBlur={props.handleBlur('firstname')}
+                        {...textfieldDesigns}
+                      />
                     </View>
 
-                    <View style={styles.formtreecountView}>
-                      <View style={styles.formHalfTextField}>
-                        <TextField
-                          label={i18n.t('label.pledgeFormTreecount')}
-                          tintColor={'#89b53a'}
-                          value={props.values.treeCount}
-                          titleFontSize={12}
-                          lineWidth={1}
-                          keyboardType="numeric"
-                          ref={input => {
-                            this.treecountTextInput = input;
-                          }}
-                          error={
-                            props.touched.treeCount && props.errors.treeCount
-                          }
-                          labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                          titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
-                          affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-                          returnKeyType="done"
-                          onChangeText={props.handleChange('treeCount')}
-                          onBlur={props.handleBlur('treeCount')}
-                        />
-                      </View>
-                    </View>
-                    <View style={{ width: '100%', marginTop: 30 }}>
-                      <CheckBox
-                        onClick={() => {
-                          this.setState({
-                            isAnonymous: !this.state.isAnonymous
-                          });
+                    <View style={styles.formHalfTextField}>
+                      <TextField
+                        label={i18n.t('label.pledgeFormLName')}
+                        value={props.values.lastname}
+                        returnKeyType="next"
+                        ref={input => {
+                          this.lastnameTextInput = input;
                         }}
-                        checkedCheckBoxColor="#89b53a"
-                        isChecked={this.state.isAnonymous}
-                        rightTextStyle={{
-                          fontFamily: 'OpenSans-Regular'
+                        onSubmitEditing={() => {
+                          this.emailTextInput.focus();
                         }}
-                        rightText={i18n.t('label.createPledgeFormHint')}
+                        error={props.touched.lastname && props.errors.lastname}
+                        onChangeText={props.handleChange('lastname')}
+                        onBlur={props.handleBlur('lastname')}
+                        {...textfieldDesigns}
                       />
                     </View>
                   </View>
-                </KeyboardAwareScrollView>
 
-                {this.state.buttonType === 'pledge' ? (
-                  <TouchableOpacity
-                    style={styles.makePledgeButton2}
-                    onPress={props.handleSubmit}
-                  >
-                    <View style={styles.makePledgeButtonView}>
-                      <Text style={styles.makePledgeButtonText}>
-                        {i18n.t('label.updatePledgeButton')}
-                      </Text>
+                  <View style={styles.formtreecountView}>
+                    <View style={styles.formHalfTextField}>
+                      <TextField
+                        label={i18n.t('label.pledgeFormTreecount')}
+                        value={props.values.treeCount}
+                        keyboardType="numeric"
+                        ref={input => {
+                          this.treecountTextInput = input;
+                        }}
+                        error={
+                          props.touched.treeCount && props.errors.treeCount
+                        }
+                        returnKeyType="done"
+                        onChangeText={props.handleChange('treeCount')}
+                        onBlur={props.handleBlur('treeCount')}
+                        {...textfieldDesigns}
+                      />
                     </View>
-                  </TouchableOpacity>
-                ) : null}
-
-                {this.state.buttonType === '>' ? (
-                  <TouchableOpacity
-                    style={styles.pledgeSmallButton}
-                    onPress={props.handleSubmit}
-                  >
-                    <Image
-                      source={forward}
-                      resizeMode="cover"
-                      style={styles.pledgeSmallButtonIcon}
+                  </View>
+                  <View style={{ width: '100%', marginTop: 30 }}>
+                    <CheckBox
+                      onClick={() => {
+                        this.setState({
+                          isAnonymous: !this.state.isAnonymous
+                        });
+                      }}
+                      checkedCheckBoxColor="#89b53a"
+                      isChecked={this.state.isAnonymous}
+                      rightTextStyle={{
+                        fontFamily: 'OpenSans-Regular'
+                      }}
+                      rightText={i18n.t('label.createPledgeFormHint')}
                     />
-                  </TouchableOpacity>
-                ) : null}
-              </>
-            )}
-          </Formik>
-        </View>
+                  </View>
+                </View>
+              </KeyboardAwareScrollView>
+
+              {this.state.buttonType === 'pledge' ? (
+                <TouchableOpacity
+                  style={styles.makePledgeButton2}
+                  onPress={props.handleSubmit}
+                >
+                  <View style={styles.makePledgeButtonView}>
+                    <Text style={styles.makePledgeButtonText}>
+                      {i18n.t('label.updatePledgeButton')}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ) : null}
+
+              {this.state.buttonType === '>' ? (
+                <TouchableOpacity
+                  style={styles.pledgeSmallButton}
+                  onPress={props.handleSubmit}
+                >
+                  <Image
+                    source={forward}
+                    resizeMode="cover"
+                    style={styles.pledgeSmallButtonIcon}
+                  />
+                </TouchableOpacity>
+              ) : null}
+            </>
+          )}
+        </Formik>
       </SafeAreaView>
     );
   }

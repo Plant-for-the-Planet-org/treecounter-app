@@ -65,6 +65,12 @@ class PublicTreeCounter extends React.Component {
   onRegisterSupporter() {
     this.props.supportTreecounterAction(this.props.treecounter);
     updateRoute('app_supportTrees', this.props.navigation, 44, {
+      context: {
+        contextType: 'support',
+        support: {
+          supportedTreecounterID: this.props.treecounter.id
+        }
+      },
       titleParam: i18n.t('label.support_trees_to', {
         user: this.props.treecounter.displayName
       })
@@ -215,51 +221,51 @@ class PublicTreeCounter extends React.Component {
           </View>
           <View>
             {userProfile.synopsis1 ||
-            userProfile.synopsis2 ||
-            userProfile.linkText ||
-            userProfile.url ? (
-              <CardLayout>
-                {userProfile.synopsis1 ? (
-                  <Text style={stylesHome.footerText}>
-                    {userProfile.synopsis1}
-                  </Text>
-                ) : null}
-                {userProfile.synopsis2 ? (
-                  <Text style={stylesHome.footerText}>
-                    {userProfile.synopsis2}
-                  </Text>
-                ) : null}
-                {userProfile.url ? (
-                  <Text
-                    style={stylesHome.linkText}
-                    onPress={() => this._goToURL(userProfile.url)}
-                  >
-                    {userProfile.linkText || i18n.t('label.read_more')}
-                  </Text>
-                ) : null}
-              </CardLayout>
-            ) : null}
+              userProfile.synopsis2 ||
+              userProfile.linkText ||
+              userProfile.url ? (
+                <CardLayout>
+                  {userProfile.synopsis1 ? (
+                    <Text style={stylesHome.footerText}>
+                      {userProfile.synopsis1}
+                    </Text>
+                  ) : null}
+                  {userProfile.synopsis2 ? (
+                    <Text style={stylesHome.footerText}>
+                      {userProfile.synopsis2}
+                    </Text>
+                  ) : null}
+                  {userProfile.url ? (
+                    <Text
+                      style={stylesHome.linkText}
+                      onPress={() => this._goToURL(userProfile.url)}
+                    >
+                      {userProfile.linkText || i18n.t('label.read_more')}
+                    </Text>
+                  ) : null}
+                </CardLayout>
+              ) : null}
           </View>
           <View>
             {'tpo' === userProfile.type &&
-            1 <= tpoProps.plantProjects.length ? (
-              <View style={{ marginBottom: 20 }}>
-                {tpoProps.plantProjects.map(project => (
-                  <PlantProjectSnippet
-                    key={'trillion' + project.id}
-                    onMoreClick={id => this.onMoreClick(id, project.name)}
-                    plantProject={project}
-                    onSelectClickedFeaturedProjects={id =>
-                      this.onSelectClickedFeaturedProjects(id)
-                    }
-                    selectProject={id => this.onPlantProjectSelected(id)}
-                    showMoreButton={false}
-                    tpoName={project.tpo_name}
-                    navigation={navigation}
-                  />
-                ))}
-              </View>
-            ) : null}
+              1 <= tpoProps.plantProjects.length ? (
+                <View style={{ marginBottom: 20 }}>
+                  {tpoProps.plantProjects.map(project => (
+                    <PlantProjectSnippet
+                      key={'trillion' + project.id}
+                      onMoreClick={id => this.onMoreClick(id, project.name)}
+                      plantProject={project}
+                      onSelectClickedFeaturedProjects={id =>
+                        this.onSelectClickedFeaturedProjects(id)
+                      }
+                      selectProject={id => this.onPlantProjectSelected(id)}
+                      showMoreButton={false}
+                      tpoName={project.tpo_name}
+                      navigation={navigation}
+                    />
+                  ))}
+                </View>
+              ) : null}
           </View>
 
           <View>

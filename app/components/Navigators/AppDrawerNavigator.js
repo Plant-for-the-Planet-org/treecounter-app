@@ -1,67 +1,75 @@
-import { createDrawerNavigator } from 'react-navigation-drawer';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
 import { Animated } from 'react-native';
-import { debug } from '../../debug';
-import Trillion from '../TreecounterGraphics/Trillion';
-import LoginContainer from '../../containers/Authentication/LoginContainer';
-import SignUpContainer from '../../containers/Authentication/SignUpContainer';
-import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
-import TargetContainer from '../../containers/TargetContainer';
-import DonationTreesContainer from '../../containers/DonateTrees';
+import { createAppContainer } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { getLocalRoute } from '../../actions/apiRouting';
-import styles from '../../styles/header.native';
-import BurgerMenu from '../Header/BurgerMenu';
-import HeaderRight from '../Header/HeaderFields';
-import i18n from '../../locales/i18n';
-import FAQContainer from '../../containers/FAQ';
-import UserContributionsContainer from '../../containers/UserContributions';
-import UserHomeContainer from '../../containers/UserHome';
-import SearchLayout from '../Header/SearchLayout';
-import AboutUsContainer from '../../containers/AboutUs';
-import UserContributionsDetailsContainer from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
+import CountriesLeaderBoard from '../../components/LeaderboardRefresh/Countries/CountriesLeaderBoard';
+import CountryDetails from '../../components/LeaderboardRefresh/Countries/CountryDetails';
 import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
-import LicenseInfoList from '../AboutUs/LicenseInfoList';
-import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
-import GiftTreesContainer from '../../containers/GiftTrees';
-import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
-import EditUserContributionContainer from '../../containers/EditUserContribution';
-import EditUserProfileContainer from '../../containers/EditUserProfile';
-import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import AboutUsContainer from '../../containers/AboutUs';
 import ActivateAccountContainer from '../../containers/Authentication/ActivateAccountContainer';
 import SelectedPlantProjectContainer from '../../containers/SelectedPlantProject';
 import SelectedCompetitionContainer from './../Competition/containers/SelectedCompetition';
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
+import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
+import LoginContainer from '../../containers/Authentication/LoginContainer';
 import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
+import SignUpContainer from '../../containers/Authentication/SignUpContainer';
+import EditUserContributionContainer from '../../containers/EditUserContribution';
+import EditUserProfileContainer from '../../containers/EditUserProfile';
+import FAQContainer from '../../containers/FAQ';
+import GiftTreesContainer from '../../containers/GiftTrees';
+import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
+import SideMenuContainer from '../../containers/Menu/SideMenuContainer';
+import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
 import ImprintContainer from '../../containers/Imprint';
 import PrivacyContainer from '../../containers/Privacy';
 import CompetitionContainer from './../Competition/containers/CompetitionContainer';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
-import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
 import EditCompetitionContainer from './../Competition/containers/EditCompetition';
 import SuccessfullActivatedContainer from '../../containers/Authentication/SuccessfullActivatedContainer';
-import PledgeEvents from './../PledgeEvents/PledgeEvents.native';
-import UnfulfilledPledgeEvents from './../PledgeEvents/UnfulfilledPledgeEvent';
-import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
-import Reviews from './../Reviews/Reviews';
-import AddReview from './../Reviews/AddReview/AddReview';
-import PDFViewer from '../PDFViewer';
 import createCompeition from '../Competition/screens/createCompetition.native';
-import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
 import RedemptionContainer from '../../containers/RedemptionContainer/index.native';
-import AddTrees from '../Redemption/app/AddTrees.native';
-import CountriesLeaderBoard from '../../components/LeaderboardRefresh/Countries/CountriesLeaderBoard';
-import CountryDetails from '../../components/LeaderboardRefresh/Countries/CountryDetails';
-import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeaderBoard';
-import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
-import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
-import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
-import RegisterTreesContainer from '../../containers/RegisterTrees';
+import TargetContainer from '../../containers/TargetContainer';
+import UserContributionsContainer from '../../containers/UserContributions';
+import UserContributionsDetailsContainer from '../../containers/UserContributionsDetails';
+import UserHomeContainer from '../../containers/UserHome';
+import { debug } from '../../debug';
+import i18n from '../../locales/i18n';
+import styles from '../../styles/header.native';
 import colors from '../../utils/constants';
+import LicenseInfoList from '../AboutUs/LicenseInfoList';
+import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
+import BurgerMenu from '../Header/BurgerMenu';
+import HeaderRight from '../Header/HeaderFields';
+import SearchLayout from '../Header/SearchLayout';
+import CompaniesLeaderBoard from '../LeaderboardRefresh/Companies/CompaniesLeaderBoard';
+import IndividualsLeaderBoard from '../LeaderboardRefresh/Individuals/IndividualsLeaderBoard';
+import SchoolsLeaderBoard from '../LeaderboardRefresh/Schools/SchoolsLeaderBoard';
+import tpoLeaderBoard from '../LeaderboardRefresh/TPOs/tpoLeaderBoard';
+import GiftEmail from '../NewGiftTrees/components/GiftEmail.native';
+import GiftMessage from '../NewGiftTrees/components/GiftMessage.native';
+import SelectContacts from '../NewGiftTrees/components/SelectContacts.native';
+import PDFViewer from '../PDFViewer';
+import AddTrees from '../Redemption/app/AddTrees.native';
+import Trillion from '../TreecounterGraphics/Trillion';
+import PledgeEvents from './../../containers/Pledge';
+import MakePledgeForm from './../PledgeEvents/MakePledgeForm.native';
+import UpdatePledgeEvent from './../PledgeEvents/UpdatePledgeEvent.native';
+import AddReview from './../Reviews/AddReview/AddReview';
+import Reviews from './../Reviews/Reviews';
+
+// Donation Files
+import DonationTreesContainer from './../DonateTrees/containers/DonationDetails.native';
+import DonorDetails from './../DonateTrees/containers/DonorDetails.native';
+import DonationStep3 from './../DonateTrees/containers/PaymentDetails.native';
+import DonateThankYou from '../DonateTrees/screens/DonateThankyou.native';
+
+import RegisterTreesContainer from '../../containers/RegisterTrees';
 import FullMapComponent from './../UserHome/FullMapComponent';
 import SplashScreen from './../TreecounterGraphics/SplashScreen';
 
@@ -95,7 +103,6 @@ const headerLabels = {
   ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
   ['delete_contribution']: 'label.delete_contribution',
-  ['app_donate_detail']: 'label.donate',
   ['app_gift_projects']: 'label.gift_trees',
   ['pickup_profile_modal']: 'label.dedicate_trees_to',
   ['app_pledge_events']: 'label.pledges',
@@ -106,7 +113,7 @@ const headerLabels = {
   ['app_splash_screen']: ''
 };
 
-export const getAppNavigator = function (isLoggedIn, userProfile) {
+export const getAppNavigator = function(isLoggedIn, userProfile) {
   const searchNavigator = createStackNavigator(
     {
       Search: {
@@ -175,7 +182,7 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
     }
   );
 
-  const getTitle = function (navigation) {
+  const getTitle = function(navigation) {
     let title = navigation.getParam('titleParam');
     try {
       if (!title) {
@@ -215,7 +222,9 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: Trillion
       },
       [getLocalRoute('app_giftTrees')]: {
-        screen: GiftTreesContainer
+        screen: GiftTreesContainer,
+        navigationOptions: { tabBarVisible: false },
+        path: 'gift-trees/'
       },
       [getLocalRoute('app_donateTrees')]: {
         screen: SelectPlantProjectContainer
@@ -224,8 +233,18 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: isLoggedIn ? CompetitionContainer : LoginContainer
       },
       [getLocalRoute('app_userHome')]: {
-        screen: isLoggedIn ? () => <UserHomeContainer isLoggedIn={isLoggedIn} /> : LoginContainer,
-        navigationOptions: ({ navigation }) => ({ tabBarVisible: isLoggedIn ? navigation.state.params ? navigation.state.params.isFullMapComponentModal ? false : true : true : true })
+        screen: isLoggedIn
+          ? () => <UserHomeContainer isLoggedIn={isLoggedIn} />
+          : LoginContainer,
+        navigationOptions: ({ navigation }) => ({
+          tabBarVisible: isLoggedIn
+            ? navigation.state.params
+              ? navigation.state.params.isFullMapComponentModal
+                ? false
+                : true
+              : true
+            : true
+        })
       }
     },
     {
@@ -280,6 +299,15 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: LicenseInfoList,
         navigationOptions: { header: null }
       },
+
+      ['select_contacts_gift']: {
+        screen: SelectContacts,
+        navigationOptions: { header: null }
+      },
+      ['gift_user_email']: {
+        screen: GiftEmail,
+        navigationOptions: { header: null }
+      },
       [getLocalRoute('app_imprint')]: {
         screen: ImprintContainer,
         navigationOptions: { header: null }
@@ -301,7 +329,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       ['app_gift_projects']: {
-        screen: SelectPlantProjectContainer
+        screen: SelectPlantProjectContainer,
+        navigationOptions: { header: null }
       },
       [getLocalRoute('app_accountActivate')]: {
         screen: SuccessfullActivatedContainer,
@@ -316,7 +345,9 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       ['app_supportTrees']: {
-        screen: SelectPlantProjectContainer
+        screen: SelectPlantProjectContainer,
+        navigationOptions: { header: null },
+        path: 'support/:treecounterSlug'
       },
       [getLocalRoute('app_selectProject')]: {
         screen: SelectPlantProjectContainer,
@@ -338,7 +369,16 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         navigationOptions: { header: null }
       },
       ['app_donate_detail']: {
-        screen: DonationTreesContainer
+        screen: DonationTreesContainer,
+        path: 'donate-trees/:slug'
+      },
+      ['donor_details_form']: {
+        screen: DonorDetails,
+        navigationOptions: { header: null }
+      },
+      ['payment_details_form']: {
+        screen: DonationStep3,
+        navigationOptions: { header: null }
       },
       ['app_pledge_events']: {
         screen: PledgeEvents
@@ -369,9 +409,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       ['app_pledge_update_form']: {
         screen: UpdatePledgeEvent
-      },
-      ['app_unfulfilled_pledge_events']: {
-        screen: UnfulfilledPledgeEvents
       },
       ['contribution_details']: {
         screen: UserContributionsDetailsContainer
@@ -409,6 +446,14 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       ['tpo_LeaderBoard']: {
         screen: tpoLeaderBoard,
+        navigationOptions: { header: null }
+      },
+      ['donate_thankyou']: {
+        screen: DonateThankYou,
+        navigationOptions: { header: null }
+      },
+      ['gift_message']: {
+        screen: GiftMessage,
         navigationOptions: { header: null }
       }
     },

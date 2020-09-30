@@ -25,5 +25,9 @@
   "Last_Name": "Last Name",
   "Email": "Email",
   "Gift_Message": "Gift Message",
-  "search_user_desrcription": "Search a user whom you want to gift trees. In the next steps you can select projects that will plant trees."
+  "search_user_desrcription": "Search a user whom you want to gift trees. In the next steps you can select projects that will plant trees.",
+  "gift_tree_description_new": "Select a person whom you want to donate trees. Recipient will receive an email to join-in with your gift.",
+  "select_contact": "Select Contact",
+  "search_contact": "Search Contact",
+  "add_gift_message": "Add Gift Message"
 }

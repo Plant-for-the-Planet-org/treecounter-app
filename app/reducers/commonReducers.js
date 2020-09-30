@@ -1,20 +1,19 @@
-import entitiesReducer from './entitiesReducer';
-import currentUserProfileIdReducer from './currentUserProfileIdReducer';
-import selectedPlantProjectIdReducer from './selectedPlantProjectIdReducer';
-import supportedTreecounterReducer from './supportedTreecounterReducer';
-import userFeedReducer from './userFeedReducer';
-import fetchPledgesReducer from './pledgeReducer';
+import donationsReducer from './../components/DonateTrees/redux/reducer';
+import configReducer from './configReducer';
+import contentloaderReducer from './contentloaderReducer';
 import currenciesReducer from './currenciesReducer';
 import currencyReducer from './currencyReducer';
-import configReducer from './configReducer';
-import paymentStatusReducer from './paymentStatus';
+import currentUserProfileIdReducer from './currentUserProfileIdReducer';
+import entitiesReducer from './entitiesReducer';
 import modelDialogReducer from './modelDialogReducer';
-import contentloaderReducer from './contentloaderReducer';
-
+import paymentStatusReducer from './paymentStatus';
 import pledgeEventReducer from './pledgeEventReducer';
+import fetchPledgesReducer from './pledgeReducer';
+import selectedPlantProjectIdReducer from './selectedPlantProjectIdReducer';
+import supportedTreecounterReducer from './supportedTreecounterReducer';
 import updateLastRouteReducer from './updateLastRouteReducer';
+import userFeedReducer from './userFeedReducer';
 import competitionDetailReducer from '../components/Competition/redux/competitionDetailReducer';
-
 import competitionsReducer from '../components/Competition/redux/competitionsReducer';
 
 const commonReducers = {
@@ -33,6 +32,7 @@ const commonReducers = {
   pledgeEvents: pledgeEventReducer,
   lastRouteState: updateLastRouteReducer,
   competitionDetail: competitionDetailReducer,
+  donations: donationsReducer,
   competitionsReducer
 };
 

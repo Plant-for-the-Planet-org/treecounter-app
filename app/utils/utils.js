@@ -110,7 +110,7 @@ export function convertNumber(number, useDigits) {
   let pow = Math.pow;
   let powerOfUsedDigits = pow(10, useDigits);
   let roundedNumber =
-    Math.round(number * powerOfUsedDigits / pow(10, digitsInGroup)) /
+    Math.round((number * powerOfUsedDigits) / pow(10, digitsInGroup)) /
     powerOfUsedDigits;
   let isSingular = roundedNumber == 1 ? 1 : 0;
   return (

@@ -15,24 +15,23 @@ const ListProjects = ({
   placeholderTextColor,
   loadProjects,
   index,
-  scrollY
+  scrollY,
+  context,
+  ...props
 }) => {
   const [search, setSearch] = useState('');
   // memoized: refilters if plantProjects or search string changes
-  const filteredProjects = useMemo(
-    () => {
-      if (!search) {
-        return plantProjects;
-      }
-      const s = search.toLocaleLowerCase();
-      return plantProjects.filter(
-        project =>
-          project.name.toLowerCase().includes(s) ||
-          project.tpo_name.toLowerCase().includes(s)
-      );
-    },
-    [plantProjects, search]
-  );
+  const filteredProjects = useMemo(() => {
+    if (!search) {
+      return plantProjects;
+    }
+    const s = search.toLocaleLowerCase();
+    return plantProjects.filter(
+      project =>
+        project.name.toLowerCase().includes(s) ||
+        project.tpo_name.toLowerCase().includes(s)
+    );
+  }, [plantProjects, search]);
 
   return (
     <View key={'listViewProject'} style={styles.flexContainer}>
@@ -62,12 +61,14 @@ const ListProjects = ({
 
       {/* <View style={styles.listViewContainer}> */}
       <ListViewProjects
+        {...props}
         projects={filteredProjects}
         selectProject={selectProject}
         onMoreClick={onMoreClick}
         loadProjects={loadProjects}
         index={index}
         scrollY={scrollY}
+        context={context}
       />
       {/* </View> */}
     </View>
@@ -76,7 +77,7 @@ const ListProjects = ({
 
 ListProjects.propTypes = {
   plantProjects: PropTypes.array.isRequired,
-  selectProject: PropTypes.func.isRequired,
+  selectProject: PropTypes.func,
   onMoreClick: PropTypes.func.isRequired,
   placeholderTextColor: PropTypes.string,
   loadProjects: PropTypes.func.isRequired,

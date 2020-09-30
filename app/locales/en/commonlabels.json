@@ -50,5 +50,7 @@
   "all_currencies": "All Currencies",
   "share": "Share",
   "noInternet": "You maybe offline",
-  "someFunctionality": "Some functionalities may be unavailable offline"
+  "thankyou": "Thank you",
+  "someFunctionality": "Some functionalities may be unavailable offline",
+  "next": "Next"
 }

@@ -19,9 +19,11 @@ export default EStyleSheet.create({
     backgroundColor: '#89b53a',
     borderColor: '#89b53a',
     borderWidth: 1,
-    borderRadius: 4,
+    borderRadius: 25,
     padding: 10,
     margin: 5,
+    width: '92%',
+    alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center'
   },

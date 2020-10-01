@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import {
   Animated,
-  FlatList,
   Image,
   RefreshControl,
   Text,
@@ -73,7 +72,7 @@ class FeaturedProjects extends PureComponent {
     }
     if (nextProps.search && this.state.search !== nextProps.search) {
       this.setState({ search: nextProps.search });
-      debug('search', nextProps.search);
+      //debug('search', nextProps.search);
     }
   }
   fetchMore = () => {

@@ -3,7 +3,6 @@ import React from 'react';
 import {
   Animated,
   Platform,
-  ScrollView,
   StatusBar,
   Text,
   View

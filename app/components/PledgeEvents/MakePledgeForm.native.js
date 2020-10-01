@@ -27,10 +27,6 @@ import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 import { Header } from '../DonateTrees/components/Header';
 
-const AnimatedKeyboardAwareScrollView = Animated.createAnimatedComponent(
-  KeyboardAwareScrollView
-);
-
 class MakePledgeForm extends Component {
   static navigationOptions = {
     header: null
@@ -129,7 +125,7 @@ class MakePledgeForm extends Component {
               treeCount: values.treeCount,
               isAnonymous: this.state.isAnonymous
             };
-            debug(data);
+            //debug(data);
             const params = this.props.navigation.getParam('slug');
             this.props.postPledge(
               data,
@@ -150,7 +146,7 @@ class MakePledgeForm extends Component {
         >
           {props => (
             <>
-              <AnimatedKeyboardAwareScrollView
+              <KeyboardAwareScrollView
                 contentContainerStyle={styles.formScrollView}
                 keyboardDismissMode="on-drag"
                 keyboardShouldPersistTaps="always"
@@ -268,7 +264,7 @@ class MakePledgeForm extends Component {
                     />
                   </View>
                 </View>
-              </AnimatedKeyboardAwareScrollView>
+              </KeyboardAwareScrollView>
 
               {this.state.buttonType === 'pledge' ? (
                 <TouchableOpacity

@@ -120,7 +120,7 @@ class MakePledgeForm extends Component {
               treeCount: values.treeCount,
               isAnonymous: this.state.isAnonymous
             };
-            debug(data);
+            //debug(data);
             // Update pledge using token
 
             this.props.updatePledge(

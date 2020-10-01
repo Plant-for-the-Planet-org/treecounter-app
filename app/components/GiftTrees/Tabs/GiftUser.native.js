@@ -51,7 +51,7 @@ export default class GiftUser extends Component {
     });
   };
   onSearchResultClick(suggestion) {
-    // debug('suggestion clicked', suggestion);
+    //debug('suggestion clicked', suggestion);
     this.setState({ selectedSuggestion: suggestion });
   }
   onNextClick() {

@@ -24,7 +24,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
   locale = locale || getLocale();
   try {
     let style = { maximumFractionDigits: 2 };
-    // debug('got numberformat', data, locale, currency, style, userProfile);
+    //debug('got numberformat', data, locale, currency, style, userProfile);
     if (currency) {
       style.style = 'currency';
       style.currency = currency;
@@ -45,7 +45,7 @@ export function formatNumber(data, locale, currency, userProfile, currencies) {
         }
       }
     }
-    // debug('got numberformat', data, locale, currency, style, userProfile);
+    //debug('got numberformat', data, locale, currency, style, userProfile);
     return new Intl.NumberFormat(locale, style).format(data);
   } catch (error) {
     console.error(error);
@@ -58,9 +58,14 @@ export function formatDate(date, style = 'dd MMM yyyy', locale) {
   //debug('formatDate', date, style, locale);
 
   if (date) {
-    return format(parseISO(date), style, {
-      locale: localeObjects[locale]
-    });
+    try {
+      return format(parseISO(date), style, {
+        locale: localeObjects[locale]
+      });
+    } catch (err) {
+      //debug(err);
+      return '';
+    }
   } else {
     return '';
   }

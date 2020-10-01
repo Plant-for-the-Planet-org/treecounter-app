@@ -1,1 +1,18 @@
-{ }
+{
+  "individual_plant_personal": "planté par moi",
+  "individual_plant_community": "Dédié à moi",
+  "treecounter_tooltip": "Arbres plantés par des personnes qui ont attribué des arbres à ce \"Compteur d’Arbres\".\nPar exemple, vous pouvez offrir des arbres à vos amis, à votre école, à votre ville ou à votre employeur et ainsi contribuer à ce qu'ils atteignent leur cible. Tous les arbres que vous leur offrez seront comptabilisés dans leur \"Compteur d'Arbres\".",
+  "tpo_plant_personal": "par nous",
+  "tpo_individual_plant_community": "Dédié à nous",
+  "by": "par",
+  "faqs": "FAQs",
+  "logged_in": "Connecté",
+  "trillionTreeMessage1": "Plantez avec nous! L'Application \"Plant-for-the-Planet\" regroupe des Organisations de plantation d'arbres du monde entier. Vous pouvez ainsi, vous aussi, facilement contribuer à planter des arbres! Qu'importe quand et où vous vous trouvez, il n'a jamais été aussi simple de sauver le climat et de faire quelque chose de bien.",
+  "trillionTreeMessage2": "Parce que la reforestation mondiale absorbe au moins un quart des émissions anthropiques annuelles de CO2 et génère en même temps la prospérité dans les Pays du Sud.",
+  "trillionlabel": "Mille milliards d'arbres aujourd'hui",
+  "trillionTreesEvents": "Evénements \"Mille Milliards d'Arbres\"",
+  "searchProjectTitle": "Le monde a besoin de plus d'arbres",
+  "searchProjectPara": "Une publication récente dans le périodique \"Science\" affirme que la plantation de Mille Milliards d'arbres peut capter 25% du CO2 d'origine humaine.",
+  "searchProjectButton": "Trouver des Projets pour faire un don",
+  "treesPledged": "Promesse d'Arbres"
+}

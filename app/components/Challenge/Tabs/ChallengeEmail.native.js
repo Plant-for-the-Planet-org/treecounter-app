@@ -7,7 +7,7 @@ import { TextInput, View, Text } from 'react-native';
 import ChallengeList from '../challengeList';
 import { withNavigation } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Picker } from '@react-native-community/picker';
 import CheckBox from 'react-native-check-box';
 import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';
@@ -16,7 +16,9 @@ import { NotificationManager } from '../../../notification/PopupNotificaiton/not
 import challengeStyles from '../../../styles/challenge';
 import styles from '../../../styles/register_trees.native';
 import errorStyles from '../../../styles/profilepicker.native';
+
 let TCombForm = t.form.Form;
+
 const getFormLayoutTemplate = () => {
   const formLayoutTreesTemplate = locals => {
     return (
@@ -181,22 +183,22 @@ class ChallengeEmail extends Component {
                   isChecked={this.state.isChecked}
                   rightText={i18n.t('label.by')}
                 />
-                <Dropdown
-                  containerStyle={{
-                    width: 70
-                  }}
-                  dropdownOffset={{
-                    top: 0,
-                    left: 0
-                  }}
-                  onChangeText={item =>
-                    this.setState({
-                      byYear: item
-                    })
-                  }
-                  label={i18n.t('label.year')}
-                  data={this.years}
-                />
+                <Picker
+                  selectedValue={this.state.byYear}
+                  style={{width: '50%'}}
+                  itemStyle={styles.textStyle}
+                  mode="dialog"
+                  prompt={i18n.t('label.year')}
+                  onValueChange={(itemValue) =>
+                    this.setState({byYear: itemValue})
+                  }>
+                  {this.years
+                    .map(year => {
+                      return (
+                        <Picker.Item key={'' + year.value} label={'' + year.value} value={year.value} />
+                      );
+                    })}
+                </Picker>
               </View>
               <PrimaryButton onClick={this.onNextClick}>
                 {i18n.t('label.challenge_heading')}

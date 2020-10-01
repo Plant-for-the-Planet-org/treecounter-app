@@ -83,7 +83,7 @@ class EditUserProfileContainer extends React.Component {
   }
 
   deleteProfile = () => {
-    debug('call Profile Deletion API here', this.props.currentUserProfile);
+    //debug('call Profile Deletion API here', this.props.currentUserProfile);
     this.props
       .deleteUserProfile(this.props.currentUserProfile.id)
       .then((/* data */) => {
@@ -115,7 +115,7 @@ class EditUserProfileContainer extends React.Component {
         this.props.logoutUser();
       })
       .catch(err => {
-        if (err.response.data.code === 400) {
+        if (err.response.data && err.response.data.code === 400) {
           NotificationManager.error(
             err.response.data.errors.children.newEmail.errors
               ? err.response.data.errors.children.newEmail.errors[0]
@@ -206,7 +206,7 @@ class EditUserProfileContainer extends React.Component {
     const imageForm =
       (formRefs && formRefs['image']) ||
       this.refs.EditUserProfileContainer.refs['image'];
-    debug(profileForm.validate());
+    //debug(profileForm.validate());
     let value = profileForm.getValue();
 
     let imageValue = undefined;
@@ -236,7 +236,7 @@ class EditUserProfileContainer extends React.Component {
           }
         })
         .catch(err => {
-          if (err.response.data.code === 400) {
+          if (err.response.data && err.response.data.code === 400) {
             if (profileType == 'password') {
               NotificationManager.error(
                 err.response.data.errors.children.currentPassword.errors

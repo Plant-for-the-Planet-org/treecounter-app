@@ -96,7 +96,7 @@ export const FormikFormTree = props => {
    * */
   // eslint-disable-next-line
   const isContributionImage = props => {
-    debug('Image props',  props.values.contributionImages)
+    //debug('Image props',  props.values.contributionImages)
     if (parentProps.isEdit) {
       const contributImage =
         props.values.contributionImages &&
@@ -131,16 +131,16 @@ export const FormikFormTree = props => {
           imageFile: image
         });
       });
-      debug('updating review images:', contributionImages);
+      //debug('updating review images:', contributionImages);
       setContributionImages(contributionImages)
     props.setFieldValue('contributionImages',contributionImages)
   }
   const deleteImage=(index,props)=> {
-    debug('contributionImages==delete',contributionImages)
+    //debug('contributionImages==delete',contributionImages)
     let images = [...contributionImages.reverse()];
     images = images.filter((data, i) => i !== index);
     setContributionImages(images);
-    debug('images delete',contributionImages,index)
+    //debug('images delete',contributionImages,index)
     props.setFieldValue('contributionImages',images)
   }
   /**
@@ -191,7 +191,7 @@ export const FormikFormTree = props => {
                               color: '#4d5153'
                             }}
                           >
-                            {i18n.t('label.register_tree_tpo_label')}{' '}
+                            {i18n.t('label.register_tree_tpo_label') + ' '}
                             <TouchableWithoutFeedback
                               onPress={() => {
                                 inputEl &&
@@ -214,7 +214,7 @@ export const FormikFormTree = props => {
                                   ? parentProps.plantProjects[0].text
                                   : filter(parentProps.plantProjects, {
                                     value: props.values.plantProject
-                                  })[0].text}{' '}
+                                  })[0].text + ' '}
                                 <Icon
                                   name="angle-down"
                                   size={20}
@@ -531,7 +531,7 @@ export const FormikFormTree = props => {
             <CardLayout style={styles.buttonContainer}>
               <View style={buttonStyles.buttonContainer}>
                 <TouchableOpacity
-                  style={buttonStyles.actionButtonTouchable}
+                  style={buttonStyles.actionButtonTouchableNoFixedPosition}
                   onPress={props.handleSubmit}
                   disabled={!props.isValid || loadButton}
                 >
@@ -853,7 +853,7 @@ export function AddImage(props) {
   };
 
   const renderAsset = (image, index) => {
-    debug('Image in add images=====>',image)
+    //debug('Image in add images=====>',image)
     return (
       <View key={index} style={[{ position: 'relative', marginRight: 8 }]}>
         <Image
@@ -898,7 +898,7 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
                 debug('ImagePicker Error: ', response.error);
               } else {
@@ -914,9 +914,9 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
-                debug('ImagePicker Error: ', response.error);
+                //debug('ImagePicker Error: ', response.error);
               } else {
                 props.updateImages('data:image/jpeg;base64,' + response.data);
               }
@@ -960,7 +960,7 @@ export function CompetitionDatePicker(props) {
         date={new Date(props.endDate)}
         onCancel={() => setShowDatePicker(false)}
         maximumDate={new Date()}
-        minimumDate={new Date('1/01/2006')}
+        minimumDate={new Date(2006, 0, 1) }
         titleIOS={i18n.t('label.datePickerTitle')}
         cancelTextIOS={i18n.t('label.datePickerCancel')}
         confirmTextIOS={i18n.t('label.datePickerConfirm')}

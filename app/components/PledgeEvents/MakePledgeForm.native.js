@@ -15,7 +15,7 @@ import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Formik } from 'formik';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
 import { postPledge } from './../../actions/pledgeAction';
@@ -26,6 +26,10 @@ import { currentUserProfileSelector } from './../../selectors';
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 import { Header } from '../DonateTrees/components/Header';
+
+const AnimatedKeyboardAwareScrollView = Animated.createAnimatedComponent(
+  KeyboardAwareScrollView
+);
 
 class MakePledgeForm extends Component {
   static navigationOptions = {
@@ -146,7 +150,7 @@ class MakePledgeForm extends Component {
         >
           {props => (
             <>
-              <KeyboardAwareScrollView
+              <AnimatedKeyboardAwareScrollView
                 contentContainerStyle={styles.formScrollView}
                 keyboardDismissMode="on-drag"
                 keyboardShouldPersistTaps="always"
@@ -264,7 +268,7 @@ class MakePledgeForm extends Component {
                     />
                   </View>
                 </View>
-              </KeyboardAwareScrollView>
+              </AnimatedKeyboardAwareScrollView>
 
               {this.state.buttonType === 'pledge' ? (
                 <TouchableOpacity

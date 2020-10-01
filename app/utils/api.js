@@ -22,7 +22,8 @@ function checkStatus(response) {
       }
     }
   }
-  let error = new Error(response);
+  let error = new Error('response: ' + JSON.stringify(response));
+  error.response = response;
   throw error;
 }
 
@@ -181,7 +182,7 @@ export async function deleteAuthenticatedRequest(route, params) {
  * @param {endPoint} params
  */
 export async function getExternalRequest(params) {
-  debug('getExternalRequest:', params);
+  //debug('getExternalRequest:', params);
   return await axios
     .get(params.endPoint)
     .then(checkStatus)

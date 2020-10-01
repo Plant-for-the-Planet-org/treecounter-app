@@ -3,7 +3,8 @@ import i18n from '../../locales/i18n';
 import { Dropdown } from 'react-native-material-dropdown';
 
 import PropTypes from 'prop-types';
-import { Text, View, Platform, Dimensions } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
+// import { Text, View } from 'react-native';
 // import datePickerStyle from '../../styles/date_picker.native';
 
 // const UIPICKER_HEIGHT = 216;
@@ -214,6 +215,12 @@ SelectTemplateIOS.propTypes = {
   locals: PropTypes.object.isRequired
 };
 
+// disabled custom template for select/dropdown as not working correctly
+export function getSelectTemplate(/*enumOption*/) {
+  return null;
+}
+
+/*
 export function getSelectTemplate(enumOption) {
   return function SelectTemplate(locals) {
     const options = enumOption ? enumOption : locals.options;
@@ -249,6 +256,7 @@ export function getSelectTemplate(enumOption) {
     );
   };
 }
+*/
 
 // export function getSelectTemplate(enumOption) {
 //   return function SelectTemplate(locals) {

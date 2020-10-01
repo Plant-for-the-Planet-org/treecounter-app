@@ -1,1 +1,9 @@
-{ }
+{
+  "trees_planted": "Arbres Plantés",
+  "discard_changes": "Annuler les modifications",
+  "my_dashboard": "Mon tableau de bord",
+  "project_heading": "Vous pouvez gérer vos Projets de plantation d'arbres et (à l'avenir) voir les Dons que vous avez reçus.",
+  "total_donation": "Total des Dons",
+  "connect_to_stripe": "Se connecter à la bande",
+  "recent_donations": "Dons récents"
+}

@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectPlantProjectAction } from '../../../actions/selectPlantProjectAction';
-import { debug } from '../../../debug';
+//import { debug } from '../../../debug';
 import { updateStaticRoute } from '../../../helpers/routerHelper';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/selectplantproject/featured.native';
@@ -62,10 +62,10 @@ class FeaturedProjects extends PureComponent {
   }
   async UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.index == 0 && !this.state.initiated) {
-      debug(
+      /* debug(
         'component got index calling in featured=======================================================',
         nextProps
-      );
+      ); */
       this.setState({
         initiated: true,
         shouldLoad: this.props.plantProjects.length == this.perPage
@@ -77,7 +77,7 @@ class FeaturedProjects extends PureComponent {
     }
   }
   fetchMore = () => {
-    // debug('this. should load in fetch more', this.state.shouldLoad);
+    //debug('this. should load in fetch more', this.state.shouldLoad);
     if (!this.state.isFetching && this.state.shouldLoad)
       this.setState({ page: this.state.page + 1 }, async () => {
         try {
@@ -89,7 +89,7 @@ class FeaturedProjects extends PureComponent {
             shouldLoad: data.length == this.perPage,
             plantProjects: [...this.state.plantProjects, ...data]
           });
-          // debug('Got from fetch more:', data, this.perPage);
+          //debug('Got from fetch more:', data, this.perPage);
         } catch (error) {
           this.setState({ isFetching: false, shouldLoad: false });
         }
@@ -140,11 +140,11 @@ class FeaturedProjects extends PureComponent {
         />
       </View>
     );
-    // debug('featuredProjects', featuredProjects);
+    //debug('featuredProjects', featuredProjects);
     return (
       <View style={styles.flexContainer}>
         {!loader ? (
-          <FlatList
+          <Animated.FlatList
             contentContainerStyle={{
               ...flatListContainerStyle
             }}
@@ -167,7 +167,7 @@ class FeaturedProjects extends PureComponent {
                   contentOffset: { y: this.props.scrollY }
                 }
               }
-            ])}
+            ], { useNativeDriver: true })}
           />
         ) : (
           <LoadingIndicator contentLoader screen={'ProjectsLoading'} />

@@ -74,6 +74,7 @@ class CompetitionFull extends React.Component {
           ) {
             invitedCount++;
           }
+          // eslint-disable-next-line no-unused-vars
           inviteCount++;
         }
       }

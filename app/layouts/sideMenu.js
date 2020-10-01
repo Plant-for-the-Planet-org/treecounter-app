@@ -18,7 +18,7 @@ const PublicSideMenuSchema = menuNameParam => {
 
 const AuthenticatedSideMenuSchema = menuNameParam => {
   return new Observable(observe => {
-    getAuthenticatedRequest('data_menu_get', {
+    getAuthenticatedRequest('menudata_menu_get', {
       category: menuNameParam,
       version: 'v1.1'
     })

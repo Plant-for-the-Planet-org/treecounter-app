@@ -42,14 +42,14 @@ class PlantProjectFull extends React.Component {
 
   /*async UNSAFE_componentWillReceiveProps(nextProps) {
     try {
-      debug('plantproject while receive props', nextProps.plantProject);
+      //debug('plantproject while receive props', nextProps.plantProject);
       if (nextProps.plantProject && !nextProps.plantProject.tpoData) {
         // we dont have the details in store, fetch it
         const plantProject = await this.props.loadProject(
           nextProps.plantProject,
           {}
         );
-        debug('fetched details plantproject in full', plantProject);
+        //debug('fetched details plantproject in full', plantProject);
         // this.setState({ plantProject });
       }
     } catch (error) {
@@ -58,14 +58,14 @@ class PlantProjectFull extends React.Component {
   }
   async componentDidMount() {
     try {
-      debug('plantproject while did mount', this.props.plantProject);
+      //debug('plantproject while did mount', this.props.plantProject);
       if (this.props.plantProject && !this.props.plantProject.tpoData) {
         // we dont have the details in store, fetch it
         const plantProject = await this.props.loadProject(
           this.props.plantProject,
           {}
         );
-        debug('fetched details plantproject in full', plantProject);
+        //debug('fetched details plantproject in full', plantProject);
         // this.setState({ plantProject });
       }
     } catch (error) {
@@ -74,16 +74,16 @@ class PlantProjectFull extends React.Component {
   }*/
 
   UNSAFE_componentWillMount() {
-    StatusBar.setTranslucent(true);
+    if (Platform.OS === 'android') StatusBar.setTranslucent(true);
     setTimeout(() => this.setState({ loader: false }), 2000);
   }
   componentWillUnmount() {
-    StatusBar.setTranslucent(false);
+    if (Platform.OS === 'android') StatusBar.setTranslucent(false);
   }
   render() {
     let { plantProject } = this.props;
     if (!plantProject || !plantProject.tpoData) return <LoadingIndicator />;
-    // debug('rendering with project:', plantProject);
+    //debug('rendering with project:', plantProject);
     const {
       images,
       description,
@@ -141,7 +141,7 @@ class PlantProjectFull extends React.Component {
           }
           //  appurl={'weplant://project/' + this.props.plantProject.id}
         />
-        <ScrollView
+        <Animated.ScrollView
           contentContainerStyle={[
             {
               backgroundColor: backgroundColor
@@ -154,7 +154,7 @@ class PlantProjectFull extends React.Component {
                 contentOffset: { y: this.state.scrollY }
               }
             }
-          ])}
+          ], { useNativeDriver: true })}
         >
           <PlantProjectSnippetDetails
             key={'projectFull' + plantProject.id}
@@ -175,7 +175,7 @@ class PlantProjectFull extends React.Component {
               {...detailsProps}
             />
           </View>
-        </ScrollView>
+        </Animated.ScrollView>
         {plantProject.allowDonations ? (
           <View style={styles.bottomActionArea}>
             <View style={styles.centeredContentContainer}>

@@ -124,12 +124,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
       navigationOptions: {
         gesturesEnabled: false
       }
@@ -141,12 +135,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
       navigationOptions: {
         gesturesEnabled: false
       }
@@ -159,12 +147,6 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
     },
     {
       headerMode: 'none',
-      transitionConfig: () => ({
-        transitionSpec: {
-          duration: 0,
-          timing: Animated.timing
-        }
-      }),
       navigationOptions: {
         gesturesEnabled: false
       }
@@ -196,7 +178,7 @@ export const getAppNavigator = function(isLoggedIn, userProfile) {
           navigation.state.routes.length > 0
         ) {
           const route = navigation.state.routes[index];
-          if (route.routeName === '/home') {
+          if (route.routeName === '/home' && userProfile) {
             title = userProfile.fullname;
           } else {
             title = i18n.t(headerLabels[route.routeName]);

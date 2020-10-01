@@ -64,8 +64,7 @@ jobs:
       run: |
         source ~/.bashrc
         echo $PATH
-        bash <(curl --compressed -s https://raw.githubusercontent.com/labbots/google-drive-upload/master/install.sh) -R v2.7
-        #bash <(curl --compressed -# https://raw.githubusercontent.com/Akianonymus/google-drive-upload/fix/install.sh) -r Akianonymus/google-drive-upload -B fix
+        curl --compressed -s https://raw.githubusercontent.com/labbots/google-drive-upload/v2.7/install.sh | bash -s -- -R v2.7
         echo "CLIENT_ID=\"$CLIENT_ID\"" >> ~/.googledrive.conf
         echo "CLIENT_SECRET=\"$CLIENT_SECRET\"" >> ~/.googledrive.conf
         echo "REFRESH_TOKEN=\"$REFRESH_TOKEN\"" >> ~/.googledrive.conf
@@ -78,9 +77,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-node2-${{ hashFiles('package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node-
+          ${{ runner.os }}-node2-
 
     - name: Install npm
       run : |
@@ -136,9 +135,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ios/Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile*') }}
+        key: ${{ runner.os }}-pods2-${{ hashFiles('ios/Podfile*') }}
         restore-keys: |
-          ${{ runner.os }}-pods-
+          ${{ runner.os }}-pods2-
 
     - name: Install Pods
       run: pod install

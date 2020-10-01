@@ -24,6 +24,16 @@ curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
    -F bundle=@android-release.bundle \
    -F projectRoot=`pwd`
 
+# also upload iOS source maps for package version as codeBundleId
+curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
+   -F apiKey="$BUGSNAG_API_KEY" \
+   -F codeBundleId="$PACKAGE_VERSION" \
+   -F dev=false \
+   -F platform=android \
+   -F sourceMap=@android-release.bundle.map \
+   -F bundle=@android-release.bundle \
+   -F projectRoot=`pwd`
+
 rm android-release.bundle android-release.bundle.map
 
 react-native bundle \
@@ -38,11 +48,27 @@ react-native bundle \
 # For now we have to set this manually here with every release :-(
 curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
    -F apiKey="$BUGSNAG_API_KEY" \
-   -F appVersion="1.49.44" \
+   -F appVersion="1.49.45" \
    -F dev=false \
    -F platform=ios \
    -F sourceMap=@ios-release.bundle.map \
    -F bundle=@ios-release.bundle \
    -F projectRoot=`pwd`
+
+# also upload iOS source maps for package version as codeBundleId
+curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
+   -F apiKey="$BUGSNAG_API_KEY" \
+   -F codeBundleId="$PACKAGE_VERSION" \
+   -F dev=false \
+   -F platform=ios \
+   -F sourceMap=@ios-release.bundle.map \
+   -F bundle=@ios-release.bundle \
+   -F projectRoot=`pwd`
+
+# upload the dSYMs you can download from AppStore Connect
+# curl --http1.1 https://upload.bugsnag.com/ \
+#  -F apiKey="$BUGSNAG_API_KEY" \
+#  -F dsym=@~/Downloads/appDsyms.zip \
+#  -F projectRoot=`pwd`
 
 rm ios-release.bundle ios-release.bundle.map

@@ -3,7 +3,7 @@ import i18n from '../locales/i18n.js';
 export const commonValidator = function(value, path, context) {
   let hasConfig = context && context.options.config;
   if (!value && hasConfig && hasConfig.required) {
-    // debug('TEST_ERROR', value, path, context);
+    //debug('TEST_ERROR', value, path, context);
     return i18n.t('label.isRequired', {
       context: i18n.t(context.options.label)
     });

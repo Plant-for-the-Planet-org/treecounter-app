@@ -1,3 +1,8 @@
 {
-  "welcome_scrn_1_heading": "Tu es probablement ici\npour planter des arbres"
+  "welcome_scrn_1_heading": "Tu es probablement ici\npour planter des arbres",
+  "welcome_scrn_1_sub_heading": "C'est seulement le début ...",
+  "welcome_scrn_1_get_started_btn": "Commencer",
+  "welcome_scrn_1_continue": "Continuer",
+  "welcome_scrn_1_already_have_an_account": "J'ai déjà d'un compte",
+  "welcome_scrn_1_open_as_guest": "Continuer en tant qu'Invité"
 }

@@ -23,7 +23,7 @@ const Info = props => {
           <View style={styles.container}>
             <View>
               <Text style={textCommonStyle}>
-                {`${props.ndviResulFromSpell}  `}
+                {`${props.ndviResulFromSpell} `}
                 {formatDate(
                   formatDateToMySQL(
                     new Date(
@@ -36,15 +36,18 @@ const Info = props => {
                 )}
               </Text>
               <Text style={textCommonStyle}>
-                {`${props.minimumSpell} `}
+                {// eslint-disable-next-line
+                `${props.minimumSpell} `}
                 <Text style={boldTextStyle}>
                   {Math.round(aggregate.min * 100) / 100}
                 </Text>
-                {` ${props.averageSpell} `}
+                {// eslint-disable-next-line
+                ` ${props.averageSpell} `}
                 <Text style={boldTextStyle}>
                   {Math.round(aggregate.avg * 100) / 100}
                 </Text>
-                {` ${props.maximumSpell} `}
+                {// eslint-disable-next-line
+                ` ${props.maximumSpell} `}
                 <Text style={boldTextStyle}>
                   {Math.round(aggregate.max * 100) / 100}
                 </Text>
@@ -96,5 +99,9 @@ Info.propTypes = {
   month: PropTypes.number,
   carbon: PropTypes.number,
   ndviAggregate: PropTypes.object,
-  selectedDataPoint: PropTypes.object
+  selectedDataPoint: PropTypes.object,
+  ndviResulFromSpell: PropTypes.string,
+  minimumSpell: PropTypes.string,
+  averageSpell: PropTypes.string,
+  maximumSpell: PropTypes.string
 };

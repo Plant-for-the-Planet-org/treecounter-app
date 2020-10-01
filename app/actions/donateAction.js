@@ -36,7 +36,7 @@ export function attachCardToCostumer(paymentMethod) {
     });
     request
       .then(() => {
-        debug('method attached');
+        //debug('method attached');
       })
       .catch(error => debug(error));
   };
@@ -198,7 +198,7 @@ export function paymentClear() {
 
 //             dispatch(paymentSuccess({ status: true, message: 'success' }));
 //             dispatch(setProgressModelState(false));
-//             //   debug(`Thank you for planting ${
+//             //   //debug(`Thank you for planting ${
 //             //     contribution.treeCount
 //             //   } trees with us!
 //             // Your donation has been registered as: ${contribution.uid}
@@ -273,7 +273,7 @@ export function paymentClear() {
 
 //             dispatch(paymentSuccess({ status: true, message: 'success' }));
 //             dispatch(setProgressModelState(false));
-//             //   debug(`Thank you for planting ${
+//             //   //debug(`Thank you for planting ${
 //             //     contribution.treeCount
 //             //   } trees with us!
 //             // Your donation has been registered as: ${contribution.uid}

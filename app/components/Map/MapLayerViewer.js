@@ -115,7 +115,7 @@ class MapLayerView extends React.Component {
   }
 
   handleLoad = (map, view) => {
-    debug('WebMap.onLoad', this._mounted, map);
+    //debug('WebMap.onLoad', this._mounted, map);
     if (this._mounted) {
       map.layers.forEach(layer => {
         layer.visible = this.props.layers.includes(layer.title);

@@ -41,12 +41,12 @@ class DonationTreesContainer extends Component {
     if (match && match.params && match.params.slug) {
       postDirectRequest('/suggest.php', 'q=' + match.params.slug)
         .then(_suggestions => {
-          debug('sugessions', _suggestions);
+          //debug('sugessions', _suggestions);
           if (
             _suggestions.data.length &&
             _suggestions.data[0].slug == match.params.slug
           ) {
-            debug('support treecounter suggestions', _suggestions.data[0]);
+            //debug('support treecounter suggestions', _suggestions.data[0]);
             _suggestions.data[0].type != 'tpo' &&
               supportTreecounterAction({
                 id: _suggestions.data[0].treecounterId,
@@ -58,11 +58,11 @@ class DonationTreesContainer extends Component {
         .catch(error => debug(error));
     } else {
       const { currentUserProfile } = this.props;
-      debug(
+      /* debug(
         'current user profile and suported tree counter',
         currentUserProfile,
         this.props.supportTreecounter.treecounterId
-      );
+      ); */
       if (currentUserProfile && !this.props.supportTreecounter.treecounterId) {
         currentUserProfile.supportedTreecounter &&
           this.props.supportTreecounterAction({
@@ -104,10 +104,10 @@ class DonationTreesContainer extends Component {
   }
   componentWillUnmount() {
     const { currentUserProfile } = this.props;
-    debug(
+    /* debug(
       'current user profile unmounting donate trees container',
       currentUserProfile
-    );
+    ); */
     if (currentUserProfile) {
       currentUserProfile.supportedTreecounter &&
         this.props.supportTreecounterAction({

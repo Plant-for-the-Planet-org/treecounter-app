@@ -1,1 +1,14 @@
-{ }
+{
+  "name": "Nom",
+  "price": "Prix",
+  "select_project": "Sélectionner un Projet",
+  "search_project": "Rechercher des Projets ...",
+  "donate_trees_cap": "Donner des Arbres",
+  "featured": "En Vedette",
+  "list": "Tous",
+  "country": "Pays",
+  "select_by_country": "Trier par Pays",
+  "cost_per_tree": "par arbre",
+  "no_tax_deduction": "Aucune déduction fiscale possible",
+  "select_project_title": "Sélectionner un Projet de plantation pour faire un don d'arbres à planter"
+}

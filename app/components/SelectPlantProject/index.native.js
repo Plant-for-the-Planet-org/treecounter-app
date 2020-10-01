@@ -37,7 +37,7 @@ class SelectPlantTabView extends PureComponent {
     });
   }
   // onSelectProjects(id) {
-  //   // debug('porps---', this.props);
+  //   //debug('porps---', this.props);
   //   this.props.selectProject(id);
   //   const { navigation } = this.props;
   //   updateStaticRoute('app_donate_detail', navigation, {
@@ -61,7 +61,7 @@ class SelectPlantTabView extends PureComponent {
       try {
         // this.props.loadProjects();
       } catch (error) {
-        debug('error on lloading project on list', error);
+        debug('error on loading project on list', error);
       }
     }
   };

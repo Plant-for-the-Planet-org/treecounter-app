@@ -4,7 +4,7 @@ import { Text, View, Image } from 'react-native';
 import { PropTypes } from 'prop-types';
 import ReactNativeTooltipMenu from 'react-native-popover-tooltip';
 import _ from 'lodash';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import CardLayout from '../Common/Card';
 import styles from '../../styles/leaderboard/leader_board';
@@ -33,7 +33,7 @@ export default class Leaderboard extends Component {
   };
 
   _handleSortingChange = sortValue => {
-    // debug('call sort here', sortValue);
+    //debug('call sort here', sortValue);
     this.props.handleSectionChange(
       this.state.selectedCategory || this.props.categoryInfo.categoryKeys[0],
       undefined,
@@ -43,7 +43,7 @@ export default class Leaderboard extends Component {
   };
 
   _handleItemPress(treeCounterId, uri, title) {
-    debug(treeCounterId, uri, title, 'treeCounterId , uri, title ');
+    //debug(treeCounterId, uri, title, 'treeCounterId , uri, title ');
     if (treeCounterId) {
       this.props.navigation.navigate(getLocalRoute('app_treecounter'), {
         treeCounterId,
@@ -81,7 +81,7 @@ export default class Leaderboard extends Component {
                 const isPrivate =
                   // eslint-disable-next-line no-prototype-builtins
                   result.hasOwnProperty('mayPublish') && !result.mayPublish;
-                // debug(isPrivate, result, maxPlanted, "Resultsssss")
+                //debug(isPrivate, result, maxPlanted, "Resultsssss")
                 return (
                   <LeaderboardItem
                     key={'LeaderboardItem' + index}
@@ -155,8 +155,7 @@ export default class Leaderboard extends Component {
     const sortView = (
       <View style={styles.sortView}>
         <Text style={styles.itemViewText}>
-          {i18n.t('label.sortBy')}
-          {': '}
+          {i18n.t('label.sortBy') + ': '}
           <Text style={styles.plantedTextStyle}>
             {this.props.timePeriodsInfo.timePeriods[selectedSorting]}
           </Text>

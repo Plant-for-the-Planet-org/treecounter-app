@@ -1,24 +1,24 @@
-import config from 'react-native-config';
+import Config from 'react-native-config';
 
-console.log('react-native config', config);
+console.log('react-native config', Config);
 export const initialProps = {
-  mediaPath: config.mediaPath // relative URI on server, where images are located (further sub-paths must be specified in application)
+  mediaPath: Config.mediaPath // relative URI on server, where images are located (further sub-paths must be specified in application)
 };
 
 export const context = {
-  scheme: config.scheme,
-  host: config.host,
-  api_url: config.api_url,
-  base: config.base, // API base url. Debug mode off: "" on: "/app_dev.php" (requires login)
-  debug: config.debug, // local console debugging switch
-  currency: config.currency,
-  bugsnagApiKey: config.bugsnagApiKey,
+  scheme: Config.scheme,
+  host: Config.host,
+  api_url: Config.api_url,
+  base: Config.base, // API base url. Debug mode off: "" on: "/app_dev.php" (requires login)
+  debug: Config.debug, // local console debugging switch
+  currency: Config.currency,
+  bugsnagApiKey: Config.bugsnagApiKey,
   android: {
-    appId: config.androidAppId
+    appId: Config.androidAppId
   },
   ios: {
-    appId: config.iosAppId
+    appId: Config.iosAppId
   },
-  locationApikKey: config.locationApikKey,
-  googleMapApiKey: config.googleMapApiKey
+  locationApikKey: Config.locationApikKey,
+  googleMapApiKey: Config.googleMapApiKey
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { debug } from '../../../debug';
+//import { debug } from '../../../debug';
 import styles from '../../../styles/user-home';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { getImageUrl } from './../../../actions/apiRouting';
@@ -17,7 +17,7 @@ class CompetitionSnippet extends React.Component {
 
   containerPress(id) {
     if (this.props.onMoreClick) {
-      debug(this.props.onMoreClick, 'this.props.onMoreClick');
+      //debug(this.props.onMoreClick, 'this.props.onMoreClick');
       this.props.onMoreClick(id);
     }
   }

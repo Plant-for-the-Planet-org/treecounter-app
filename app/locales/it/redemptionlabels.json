@@ -16,5 +16,6 @@
   "already_redeemed_trees": "Hai già riscattato questo codice, provane un altro.",
   "RedeemxTrees": "Riscatta {{treeCount}} Alberi",
   "Redeem1Tree": "Riscatta albero {{treeCount}}",
-  "redeem_trees_button": "menu_item.redemption"
+  "redeem_trees_button": "Riscattare gli alberi",
+  "redeem": "Riscatta"
 }

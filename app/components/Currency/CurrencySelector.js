@@ -28,7 +28,7 @@ class CurrencySelector extends React.Component {
     this.setState({ currenciesArray: currencySort(Object.keys(currencies)) });
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
-    // debug('next props currency', nextProps);
+    //debug('next props currency', nextProps);
     if (
       nextProps.globalCurrency &&
       nextProps.globalCurrency.currency !== this.state.selectedCurrency
@@ -37,10 +37,10 @@ class CurrencySelector extends React.Component {
     }
   }
   handleChange(value) {
-    // debug('changed locally', value);
+    //debug('changed locally', value);
     this.setState({ selectedCurrency: value });
     this.props.onChange(value);
-    // debug('changed locally', this.state.selectedCurrency);
+    //debug('changed locally', this.state.selectedCurrency);
   }
   render() {
     return (

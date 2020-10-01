@@ -326,7 +326,7 @@ export default class DonateTrees extends Component {
   }
 
   render() {
-    debug(this.props.currentUserProfile);
+    //debug(this.props.currentUserProfile);
     // this is just for NextArrow displayNone
     let displayNone = classNames({
       'display-none': this.state.pageIndex === 3
@@ -431,7 +431,7 @@ export default class DonateTrees extends Component {
           plantProject.paymentSetup.countries[countryCurrency].paymentMethods;
       }
     }
-    debug('support treecounter', this.props.supportTreecounter);
+    //debug('support treecounter', this.props.supportTreecounter);
     return this.state.showSelectProject ? (
       <SelectPlantProjectContainer
         supportTreecounter={this.props.supportTreecounter}
@@ -592,10 +592,10 @@ export default class DonateTrees extends Component {
                             plantProjectName: plantProject.name
                           }}
                           onFailure={data =>
-                            debug('/////////////////// payment failure ', data)
+                            debug('payment failure ', data)
                           }
                           onError={data =>
-                            debug('/////////////////// payment error ', data)
+                            debug('payment error ', data)
                           }
                         />
                       ) : null}

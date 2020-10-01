@@ -379,7 +379,7 @@ class UserHome extends Component {
                   source={coupon}
                 />
               </View>
-              <Text style={styles.circleButtonText}>Redeem</Text>
+              <Text style={styles.circleButtonText}>{i18n.t('label.redeem')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.circleButton}
@@ -411,7 +411,7 @@ class UserHome extends Component {
                   source={share}
                 />
               </View>
-              <Text style={styles.circleButtonText}>Share</Text>
+              <Text style={styles.circleButtonText}>{i18n.t('label.share')}</Text>
             </TouchableOpacity>
           </View>
 

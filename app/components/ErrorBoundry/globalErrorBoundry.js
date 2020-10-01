@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+//import { debug } from '../../debug';
 import { info } from '../../assets';
 import { context } from '../../config';
 import i18n from '../../locales/i18n.js';
-import bugsnag from '@bugsnag/js';
+import Bugsnag from '@bugsnag/js';
 import { version as app_version } from '../../../package.json';
 
-let bugsnagClient;
 if (context.bugsnagApiKey) {
-  bugsnagClient = bugsnag({
+  Bugsnag.start({
     apiKey: context.bugsnagApiKey,
     appVersion: app_version
-  });
+  })
 }
 
 export default class GlobalErrorBoundary extends React.Component {
@@ -22,11 +22,11 @@ export default class GlobalErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasErrorOccurred: true });
-    console.error(error, info);
+    //debug('GlobalErrorBoundary', error, info);
 
-    if (bugsnagClient) {
-      bugsnag.notify(error, function(report) {
-        report.metadata = { info: info };
+    if (context.bugsnagApiKey) {
+      Bugsnag.notify(error, function(event) {
+        event.addMetadata('info', { info: info })
       });
     }
   }

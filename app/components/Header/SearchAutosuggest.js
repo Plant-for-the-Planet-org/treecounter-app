@@ -134,7 +134,7 @@ class SearchAutosuggest extends Component {
       onChange: this.onChange,
       className: 'form-control search_text',
       onKeyDown: event => {
-        // debug(event);
+        //debug(event);
         if (event.key === 'Enter') {
           event.preventDefault();
         }

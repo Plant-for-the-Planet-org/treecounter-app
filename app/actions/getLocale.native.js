@@ -2,6 +2,8 @@ import { getLanguages } from 'react-native-i18n';
 import en from 'date-fns/locale/en-US';
 import de from 'date-fns/locale/de';
 import es from 'date-fns/locale/es';
+import fr from 'date-fns/locale/fr';
+import it from 'date-fns/locale/it';
 import pt from 'date-fns/locale/pt';
 import ptBR from 'date-fns/locale/pt-BR';
 // import { debug } from '../debug';
@@ -9,10 +11,10 @@ import ptBR from 'date-fns/locale/pt-BR';
 let cache = { locale: undefined };
 
 // TODO: activate 'pt' here
-//export const supportedLocales = ['en', 'de', 'es', 'pt', 'pt-BR'];
-export const supportedLocales = ['en', 'de', 'es', 'pt-BR'];
+//export const supportedLocales = ['en', 'de', 'es', 'fr', 'it', 'pt', 'pt-BR'];
+export const supportedLocales = ['en', 'de', 'es', 'fr', 'it', 'pt-BR'];
 export const defaultLocale = 'en';
-export const localeObjects = { 'en': en, 'de': de , 'es': es , 'pt': pt , 'pt-BR': ptBR };
+export const localeObjects = { 'en': en, 'de': de , 'es': es , 'fr': fr , 'it': it, 'pt': pt , 'pt-BR': ptBR };
 
 /**
  * Call this when the app starts up
@@ -24,7 +26,7 @@ export async function initLocale() {
 }
 
 export async function getLocaleAsync() {
-  // debug('getLocale', cache.locale);
+  //debug('getLocale', cache.locale);
   if (!cache.locale) {
     await initLocale();
   }
@@ -32,7 +34,7 @@ export async function getLocaleAsync() {
 }
 
 export function getLocale() {
-  // debug('getLocale', cache.locale);
+  //debug('getLocale', cache.locale);
   if (!cache.locale) {
     initLocale();
   }

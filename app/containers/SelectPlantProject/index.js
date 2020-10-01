@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import { updateRoute } from '../../helpers/routerHelper';
 import {
   getAllPlantProjectsSelector,
@@ -19,7 +19,7 @@ class SelectPlantProjectContainer extends PureComponent {
   state = {
     featuredProjects: [],
   };
-  // componentWillMount() {
+  // UNSAFE_componentWillMount) {
   //   let plantProjects = this.props.plantProjects.filter(
   //     project => project.allowDonations
   //   );
@@ -37,7 +37,7 @@ class SelectPlantProjectContainer extends PureComponent {
   //   }
   // }
 
-  // componentWillReceiveProps(nextProps) {
+  // UNSAFE_componentWillReceiveProps(nextProps) {
   //   let plantProjects = nextProps.plantProjects.filter(
   //     project => project.allowDonations
   //   );
@@ -62,7 +62,7 @@ class SelectPlantProjectContainer extends PureComponent {
           .length
       ) {*/
     let data = await this.props.loadProjects('featured');
-    debug('===got data in await in did mount:', data);
+    //debug('===got data in await in did mount:', data);
     this.setState({ featuredProjects: data });
     // }
     if (!this.props.currencies.currencies) {
@@ -77,7 +77,7 @@ class SelectPlantProjectContainer extends PureComponent {
     let plantProjects = this.props.plantProjects.filter(
       project => project.allowDonations
     );
-    debug('==== plantprojects', plantProjects);
+    //debug('==== plantprojects', plantProjects);
     let context = {}
     if (this.props.navigation.getParam('context')) {
       context = this.props.navigation.getParam('context')
@@ -103,11 +103,11 @@ class SelectPlantProjectContainer extends PureComponent {
     let project = this.props.plantProjects.find(
       project => project['id'] === id
     );
-    debug(
+    /* debug(
       'project on more click=================',
       project,
       this.props.navigation.getParam('userForm')
-    );
+    ); */
     if (project && !project.paymentSetup) {
       project = await this.loadDetails({ id: id });
     }
@@ -125,14 +125,14 @@ class SelectPlantProjectContainer extends PureComponent {
     this.props.selectPlantProjectAction(id);
     const { navigation } = this.props;
     if (navigation) {
-      debug(
+      /* debug(
         '---in selectplant project container... calling donate detail with',
         {
           id: id,
           userForm: navigation.getParam('userForm'),
           giftMethod: navigation.getParam('giftMethod')
         }
-      );
+      ); */
       updateStaticRoute('app_donate_detail', navigation, {
         id: id,
         userForm: navigation.getParam('userForm'),

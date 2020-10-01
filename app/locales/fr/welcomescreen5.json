@@ -1,1 +1,8 @@
-{ }
+{
+  "welcome_scrn_5_heading": "Suivre les arbres\nque vous plantez",
+  "welcome_scrn_5_sub_heading": "Enregistrer un arbre que vous avez\nplanté est un jeu d'enfant et vous pouvez\ntoujours ajouter des détails.",
+  "welcome_scrn_5_continue": "Poursuivre",
+  "welcome_scrn_5_create_an_account": "Créer un compte",
+  "welcome_scrn_5_already_have_an_account": "Vous avez déjà un compte?",
+  "welcome_scrn_5_sign_in": "S'identifier"
+}

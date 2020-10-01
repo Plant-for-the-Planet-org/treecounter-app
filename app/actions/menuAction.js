@@ -12,7 +12,7 @@ import {
 
 export function MenuAction(isAuthenticated = false) {
   return isAuthenticated
-    ? getAuthenticatedRequest('data_menu_get')
+    ? getAuthenticatedRequest('menudata_menu_get')
     : getRequest('public_menu_get');
 }
 
@@ -25,8 +25,8 @@ export function updateTpoProject(plantProject) {
         plantProject: projectId
       })
         .then(res => {
-          debug(res.status);
-          debug(res);
+          //debug(res.status);
+          //debug(res);
           let updatedProject = res.data;
           if (updatedProject && updatedProject instanceof Object) {
             dispatch(

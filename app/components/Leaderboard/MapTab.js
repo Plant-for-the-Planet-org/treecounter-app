@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import MapLayerSelector from './MapLayerSelector';
 import ArcGISExploreMap from '../Map/ArcGISExploreMap';
 import i18n from '../../locales/i18n';
@@ -32,7 +32,7 @@ export default class MapTab extends React.Component {
     this.state = {
       webMapId: props.mapInfo.webMapIds.explore,
       mapLayers: props.mapInfo.mapLayers,
-      activeMapLayers: props.mapInfo.mapLayersKeys.splice(0, 1),
+      activeMapLayers: Object.keys(props.mapInfo.mapLayers).splice(0, 1),
       mapDescriptionInfoMap
     };
 
@@ -44,9 +44,9 @@ export default class MapTab extends React.Component {
   }
 
   render() {
-    const { mapInfo } = this.props;
+    //const { mapInfo } = this.props;
 
-    debug('mapInfo ', mapInfo);
+    //debug('mapInfo ', mapInfo);
     return (
       <div className="map-tab__container">
         <MapLayerSelector

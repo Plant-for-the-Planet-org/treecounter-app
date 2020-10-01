@@ -14,7 +14,7 @@ import {
 import { supportTreecounterAction } from '../../../actions/supportTreecounterAction';
 import LoadingIndicator from '../../../components/Common/LoadingIndicator';
 import Competiton from './../screens/CompetitionList';
-import { debug } from '../../../debug';
+//import { debug } from '../../../debug';
 import { updateRoute } from '../../../helpers/routerHelper';
 import {
   formatDateToMySQL,
@@ -52,7 +52,7 @@ class CompetitionContainer extends React.Component {
         .createCompetition(newvalue, this.props.navigation)
         .then((/* success */) => { })
         .catch(err => {
-          debug('err signup data', err);
+          //debug('err signup data', err);
           let newSchemaOptions = handleServerResponseError(
             err,
             this.state.competitionFormSchemaOptions
@@ -90,7 +90,7 @@ class CompetitionContainer extends React.Component {
   };
 
   render() {
-    // debug(this.props.contentloader, '**********************');
+    //debug(this.props.contentloader, '**********************');
     const { contentloader } = this.props;
     return !contentloader ? (
       <Competiton

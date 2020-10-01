@@ -40,7 +40,7 @@ const ASPECT_RATIO = width / height;
 const LATITUDE = null; //37.78825;
 const LONGITUDE = null; //-122.4324;
 const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const LONGITUDE_DELTA = Math.abs(LATITUDE_DELTA * ASPECT_RATIO);
 
 let id = 0;
 
@@ -327,7 +327,7 @@ function getQueryVariable(query, variable) {
  * @param mapPoint array of coordinate of longitude and latitude
  * */
 export function encodeFormData(mode, mapPoint) {
-  debug('Data in polygon', mapPoint);
+  //debug('Data in polygon', mapPoint);
 
   if (!mapPoint) {
     return '';
@@ -340,15 +340,15 @@ export function encodeFormData(mode, mapPoint) {
       Array.isArray(mapPoint) &&
       mapPoint.length
     ) {
-      debug('Data in polygon', mapPoint);
+      //debug('Data in polygon', mapPoint);
       const polygon = mapPoint.map(polygonItem => {
         const data = polygonItem.coordinates.map(cord => {
-          debug('cord', cord);
+          //debug('cord', cord);
           return [cord.latitude, cord.longitude];
         });
         return data;
       });
-      debug('polygon', polygon);
+      //debug('polygon', polygon);
       return {
         type: 'Polygon',
         coordinates: polygon
@@ -374,8 +374,8 @@ export function decodeFormData(mode, mapPoint) {
       return [
         {
           coordinate: {
-            latitude: getQueryVariable(mapPoint, 'geoLatitude'),
-            longitude: getQueryVariable(mapPoint, 'geoLongitude'),
+            latitude: Number(getQueryVariable(mapPoint, 'geoLatitude')) ? Number(getQueryVariable(mapPoint, 'geoLatitude')) : 0,
+            longitude: Number(getQueryVariable(mapPoint, 'geoLongitude')) ? Number(getQueryVariable(mapPoint, 'geoLongitude')) : 0,
             key: 1
           }
         }
@@ -481,7 +481,7 @@ class NativeMapView extends Component {
        * */
       const { editing, creatingHole } = this.state;
       if (!editing) {
-        debug('clicked map');
+        //debug('clicked map');
         this.setState({
           editing: {
             id: id++,
@@ -576,8 +576,8 @@ class NativeMapView extends Component {
         markers: [
           {
             coordinate: {
-              latitude: region.latitude,
-              longitude: region.longitude
+              latitude: Number(region.latitude) ? Number(region.latitude) : 0,
+              longitude: Number(region.longitude) ? Number(region.longitude) : 0
             },
             key: id++
           }
@@ -870,7 +870,7 @@ class NativeMapView extends Component {
         },
         editable: true,
         onPress: () => {
-          debug('clicked');
+          //debug('clicked');
         }
       }
       : {

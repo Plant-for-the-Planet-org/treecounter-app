@@ -94,7 +94,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
 
   render() {
     const { treeCountOptions } = this.props;
-    // debug('Tree Count currency selector called up');
+    //debug('Tree Count currency selector called up');
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 35 }}
@@ -119,8 +119,8 @@ class TreeCountCurrencySelector extends React.PureComponent {
                   <Text style={styles.selectedProjectCol}>
                     {' '}
                     {i18n.t('label.trees')}
-                  </Text>{' '}
-                  {i18n.t('label.gift_to', {
+                  </Text>
+                  {' ' + i18n.t('label.gift_to', {
                     name: this.props.giftTreeCounterName
                   })}
                 </Text>
@@ -128,33 +128,33 @@ class TreeCountCurrencySelector extends React.PureComponent {
               </View>
             ) : this.props.supportTreecounter && // Check whether context is Support Participant
               this.props.supportTreecounter.displayName ? (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      width: '100%'
-                    }}
-                  >
-                    <Text numberOfLines={1} ellipsizeMode={'tail'}>
-                      <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
-                      <Text style={styles.selectedProjectCol}>
-                        {' '}
-                        {i18n.t('label.trees')}
-                      </Text>{' '}
-                      {i18n.t('label.support_to', {
-                        name: this.props.supportTreecounter.displayName
-                      })}
-                    </Text>
-                    {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
-                  </View>
-                ) : (
-                  <View style={styles.selectedProjectRow}>
-                    <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
-                    <Text style={styles.selectedProjectCol}>
-                      {i18n.t('label.trees')}
-                    </Text>
-                  </View>
-                )}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  width: '100%'
+                }}
+              >
+                <Text numberOfLines={1} ellipsizeMode={'tail'}>
+                  <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
+                  <Text style={styles.selectedProjectCol}>
+                    {' '}
+                    {i18n.t('label.trees')}
+                  </Text>
+                  {' ' + i18n.t('label.support_to', {
+                    name: this.props.supportTreecounter.displayName
+                  })}
+                </Text>
+                {/*<Text>{this.props.giftTreeCounterName}</Text>*/}
+              </View>
+            ) : (
+              <View style={styles.selectedProjectRow}>
+                <Text>{delimitNumbers(this.state.selectedTreeCount)}</Text>
+                <Text style={styles.selectedProjectCol}>
+                  {i18n.t('label.trees')}
+                </Text>
+              </View>
+            )}
 
             <View style={styles.selectedProjectRow}>
               <Text>

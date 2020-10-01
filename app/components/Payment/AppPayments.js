@@ -108,10 +108,10 @@ export default class AppPayments extends Component {
                   }}
                   donationId={paymentInfo.id}
                   onFailure={data =>
-                    debug('/////////////////// payment failure ', data)
+                    debug('payment failure ', data)
                   }
                   onError={data =>
-                    debug('/////////////////// payment error ', data)
+                    debug('payment error ', data)
                   }
                 />
               ) : null}

@@ -57,7 +57,7 @@ class PublicTreeCounter extends React.Component {
   }
 
   onPlantProjectSelected(selectedPlantProjectId) {
-    debug('on plant project seected', selectedPlantProjectId);
+    //debug('on plant project seected', selectedPlantProjectId);
     this.props.selectPlantProjectIdAction(selectedPlantProjectId);
     this.props.route('app_donateTrees');
   }
@@ -381,7 +381,7 @@ class PublicTreeCounter extends React.Component {
       if (supported) {
         Linking.openURL(url);
       } else {
-        debug("Don't know how to open URI: " + url);
+        //debug("Don't know how to open URI: " + url);
       }
     });
 */
@@ -413,7 +413,7 @@ export default PublicTreeCounter;
 //   };
 //   let index = 0;
 
-//   debug('Children', children)
+//   //debug('Children', children)
 //   if (children) {
 //     return (
 //       <View style={{ marginTop: 20 }}>

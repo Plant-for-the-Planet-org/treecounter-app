@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { TextField } from 'react-native-material-textfield';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Text, View, Image, TouchableOpacity, Keyboard } from 'react-native';
-import { debug } from '../../../debug';
+//import { debug } from '../../../debug';
 import { forward } from '../../../assets';
 import styles from '../../../styles/competition/competition-form.native';
 import stylesGift from '../../../styles/gifttrees/giftrees';
@@ -52,7 +52,7 @@ export default class FormikFormGift extends Component {
     let { props } = this;
 
     const backgroundColor = 'rgba(137, 181, 58, 0.19)';
-    debug('buttonType', this.buttonType);
+    //debug('buttonType', this.buttonType);
     return (
       <Formik
         initialValues={props.initialValues}
@@ -62,10 +62,9 @@ export default class FormikFormGift extends Component {
         validationSchema={this.validationSchema}
       >
         {props => {
-          let isValid = props;
+          //let isValid = props;
           return (
             <>
-              {debug('isValid', isValid)}
               <View style={styles.view_container}>
                 <KeyboardAwareScrollView
                   contentContainerStyle={[

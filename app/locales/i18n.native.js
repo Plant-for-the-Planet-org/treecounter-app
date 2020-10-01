@@ -3,6 +3,8 @@ import { getLanguages } from 'react-native-i18n';
 import enlabels from './en';
 import deLabels from './de';
 import esLabels from './es';
+import frLabels from './fr';
+import itLabels from './it';
 import ptLabels from './pt';
 import ptBRLabels from './pt-BR';
 import { supportedLocales, defaultLocale } from '../actions/getLocale';
@@ -45,6 +47,16 @@ i18next.init({
     'es': {
       translation: {
         label: esLabels
+      }
+    },
+    'fr': {
+      translation: {
+        label: frLabels
+      }
+    },
+    'it': {
+      translation: {
+        label: itLabels
       }
     },
     'pt': {

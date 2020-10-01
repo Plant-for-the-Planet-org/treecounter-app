@@ -109,6 +109,8 @@ jobs:
         # prepare local.properties
         echo "MYAPP_RELEASE_STORE_PASSWORD=$android_release_password" > android/local.properties
         echo "MYAPP_RELEASE_KEY_PASSWORD=$android_release_password" >> android/local.properties
+        # running jetify manually for tipsi stripe
+        npm run jetify
 
     - name: Fixes for Android Build
       run: |

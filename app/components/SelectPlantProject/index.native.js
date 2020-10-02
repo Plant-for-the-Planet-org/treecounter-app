@@ -37,16 +37,16 @@ class SelectPlantTabView extends PureComponent {
     });
   }
   onSelectProjects(id) {
-    debug('porps---', this.props);
+    //debug('porps---', this.props);
     this.props.selectProject(id);
     const { navigation } = this.props;
-    debug(
+    /* debug(
       '=======in selectplant project component... calling donate detail with',
       {
         userForm: navigation.getParam('userForm'),
         giftMethod: navigation.getParam('giftMethod')
       }
-    );
+    ); */
     updateStaticRoute('app_donate_detail', navigation, {
       userForm: navigation.getParam('userForm'),
       giftMethod: navigation.getParam('giftMethod')
@@ -59,7 +59,7 @@ class SelectPlantTabView extends PureComponent {
   };
 
   handleIndexChange = index => {
-    debug('indicator index, ', index);
+    //debug('indicator index, ', index);
     this.setState({ index: index });
     if (
       index &&
@@ -69,7 +69,7 @@ class SelectPlantTabView extends PureComponent {
         // this.props.loadProjects();
         //debug('loaded projects in list', projects);
       } catch (error) {
-        debug('error on lloading project on list', error);
+        debug('error on loading project on list', error);
       }
     }
   };
@@ -139,12 +139,12 @@ class SelectPlantTabView extends PureComponent {
       loadProjects,
       loadProject
     };
-    const { index } = this.state;
+    //const { index } = this.state;
 
     // Only render a tab if it is focused
     switch (route.key) {
       case 'featured':
-        debug('fatured active', index, this.props.plantProjects);
+        //debug('featured active', index, this.props.plantProjects);
         return this.props.plantProjects.filter(project => project.isFeatured)
           .length ? (
             <FeaturedProjects
@@ -156,8 +156,7 @@ class SelectPlantTabView extends PureComponent {
             />
           ) : null;
       case 'list':
-        debug('list active', index, this.props.plantProjects);
-
+        //debug('list active', index, this.props.plantProjects);
         return (
           <ListProjects
             onSelectProjects={this.onSelectProjects}

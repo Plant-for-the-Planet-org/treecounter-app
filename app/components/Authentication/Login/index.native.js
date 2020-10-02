@@ -11,7 +11,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { debug } from ',,/../../debug';
+//import { debug } from ',,/../../debug';
 import loginFormSchema from '../../../server/formSchemas/login';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
@@ -83,9 +83,9 @@ export default class Login extends Component {
     if (this.state.formValue) {
       Keyboard.dismiss();
 
-      debug('Form value', this.state.formValue);
+      //debug('Form value', this.state.formValue);
     }
-    debug('Form value', this.state.formValue);
+    //debug('Form value', this.state.formValue);
     // eslint-disable-next-line no-underscore-dangle
     this.props.onPress(this.state.formValue);
   };

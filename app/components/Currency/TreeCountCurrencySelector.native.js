@@ -89,7 +89,7 @@ class TreeCountCurrencySelector extends React.PureComponent {
 
   render() {
     const { treeCountOptions } = this.props;
-    // debug('Tree Count currency selector called up');
+    //debug('Tree Count currency selector called up');
     return (
       <KeyboardAwareScrollView
         contentContainerStyle={{ paddingBottom: 35 }}
@@ -113,8 +113,8 @@ class TreeCountCurrencySelector extends React.PureComponent {
                   <Text style={styles.selectedProjectCol}>
                     {' '}
                     {i18n.t('label.trees')}
-                  </Text>{' '}
-                  {i18n.t('label.gift_to', {
+                  </Text>
+                  {' ' + i18n.t('label.gift_to', {
                     name: this.props.giftTreeCounterName
                   })}
                 </Text>
@@ -134,8 +134,8 @@ class TreeCountCurrencySelector extends React.PureComponent {
                   <Text style={styles.selectedProjectCol}>
                     {' '}
                     {i18n.t('label.trees')}
-                  </Text>{' '}
-                  {i18n.t('label.support_to', {
+                  </Text>
+                  {' ' + i18n.t('label.support_to', {
                     name: this.props.supportTreecounter.displayName
                   })}
                 </Text>

@@ -291,7 +291,6 @@ class UserContributionsDetails extends React.Component {
                   marginVertical: 30
                 }}
               >
-                {/* {debug('\x1b[46m \x1b[30m video', videoUrl)} */}
                 {videoUrl ? <VideoContainer url={videoUrl} /> : null}
                 {/* TODO Add thumbnail for video */}
                 {contributionOrPlantedImages &&

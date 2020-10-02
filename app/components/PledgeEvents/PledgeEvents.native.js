@@ -293,13 +293,13 @@ function FulfillPledgeButton(props) {
 function EventDetails(props) {
   let pledges = props.pledges;
   return (
-    <ScrollView
+    <Animated.ScrollView
       contentContainerStyle={styles.peRootScrollView}
       scrollEnabled
       scrollEventThrottle={16}
       onScroll={Animated.event([
         { nativeEvent: { contentOffset: { y: props.scrollY } } }
-      ])}
+      ], { useNativeDriver: true })}
     >
       {/* <View style={styles.peHeader}>
 
@@ -338,7 +338,7 @@ function EventDetails(props) {
           <Text style={styles.peDescriptionText}>{pledges.description}</Text>
         </CardLayout>
       ) : null}
-    </ScrollView>
+    </Animated.ScrollView>
   );
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import { loadProject } from '../../actions/loadTposAction';
 import PlantProjectSpecs from './PlantProjectSpecs';
 import SeeMoreToggle from '../Common/SeeMoreToggle';
@@ -50,7 +50,7 @@ class PlantProjectFull extends React.Component {
         this.props.plantProject
       );
       this.setState({ plantProject });
-      debug('fetched details plantproject n plan project full', plantProject);
+      //debug('fetched details plantproject n plan project full', plantProject);
     }
   }
   toggleExpanded() {

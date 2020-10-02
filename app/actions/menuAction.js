@@ -25,8 +25,8 @@ export function updateTpoProject(plantProject) {
         plantProject: projectId
       })
         .then(res => {
-          debug(res.status);
-          debug(res);
+          //debug(res.status);
+          //debug(res);
           let updatedProject = res.data;
           if (updatedProject && updatedProject instanceof Object) {
             dispatch(

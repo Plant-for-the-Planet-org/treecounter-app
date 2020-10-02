@@ -24,7 +24,7 @@ const { width } = Dimensions.get('window');
 export default class AddRatingSection extends Component {
   constructor(props) {
     super(props);
-    debug('props got in add rating:', props);
+    //debug('props got in add rating:', props);
     let scoreObj = {};
     this.state = {
       id: props.review.id || undefined,
@@ -38,7 +38,7 @@ export default class AddRatingSection extends Component {
     };
     this.updateImages = this.updateImages.bind(this);
     this.deleteImage = this.deleteImage.bind(this);
-    debug('after merging props in add rating', this.state);
+    //debug('after merging props in add rating', this.state);
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (
@@ -47,17 +47,17 @@ export default class AddRatingSection extends Component {
     ) {
       let scoreObj = {};
       Object.keys(nextProps.reviewIndexes).map(index => {
-        debug(index);
+        //debug(index);
         scoreObj[index] = { score: 0 };
       });
       this.setState({ reviewIndexScores: scoreObj });
-      debug('new props in add rating2', this.state);
+      //debug('new props in add rating2', this.state);
     }
   }
   setStateAndUpdateParent(data) {
     this.setState(data, () => {
       this.props.onUpdate({ ...this.state });
-      debug('setting on add rating:', this.state);
+      //debug('setting on add rating:', this.state);
     });
   }
 
@@ -71,7 +71,7 @@ export default class AddRatingSection extends Component {
       forceJpg: true
     })
       .then(images => {
-        debug('received image', images, images[0].data);
+        //debug('received image', images, images[0].data);
         this.updateImages(images);
       })
       .catch(e => {
@@ -83,7 +83,7 @@ export default class AddRatingSection extends Component {
     let images = [...reviewImages];
     images = images.filter((data, i) => i !== index);
     reviewImages = [];
-    debug(images, index, reviewImages);
+    //debug(images, index, reviewImages);
     this.setStateAndUpdateParent({
       reviewImages: images
     });
@@ -98,7 +98,7 @@ export default class AddRatingSection extends Component {
         imageFile: image
       });
     });
-    debug('updating review images:', reviewImages);
+    //debug('updating review images:', reviewImages);
     this.setStateAndUpdateParent({
       reviewImages: reviewImages
     });
@@ -112,7 +112,7 @@ export default class AddRatingSection extends Component {
       includeBase64: true
     })
       .then(image => {
-        debug('received image', image, image.data);
+        //debug('received image', image, image.data);
         this.updateImages([image]);
       })
 
@@ -130,7 +130,7 @@ export default class AddRatingSection extends Component {
   }
 
   renderImage(image) {
-    debug('image', image);
+    //debug('image', image);
     return (
       <Image
         style={{ width: 200, height: 107, marginRight: 5, borderRadius: 2 }}
@@ -145,7 +145,7 @@ export default class AddRatingSection extends Component {
   async readContent(path) {
     RNFS.readFile(path, 'base64')
       .then(encoded => {
-        debug('data', encoded);
+        //debug('data', encoded);
         this.setStateAndUpdateParent({
           pdfFile: 'data:application/pdf;base64,' + encoded
         });
@@ -159,22 +159,22 @@ export default class AddRatingSection extends Component {
         type: [DocumentPicker.types.pdf],
         readContent: false
       });
-      debug(
+      /* debug(
         'Found doc:',
         res.uri,
         res.type, // mime type
         res.name,
         res.size,
         res.content
-      );
+      ); */
 
       this.readContent(res.uri);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
-        debug('err', err);
+        //debug('err', err);
         // User cancelled the picker, exit any dialogs or menus and move on
       } else {
-        debug('err', err);
+        //debug('err', err);
       }
     }
   }
@@ -188,12 +188,12 @@ export default class AddRatingSection extends Component {
       score: reviewIndexScores[type].score == rating ? 0 : rating
     };
     this.setStateAndUpdateParent({ reviewIndexScores });
-    debug('rating', rating, type);
+    //debug('rating', rating, type);
   }
   render() {
     let { reviewIndexes } = this.props;
     let { reviewIndexScores } = this.state;
-    debug('index scores in add rating:', this.props);
+    //debug('index scores in add rating:', this.props);
     const guideLineUrl =
       'https://startplanting.atlassian.net/wiki/spaces/PA/pages/25559041';
     return (
@@ -246,7 +246,7 @@ export default class AddRatingSection extends Component {
             lineWidth={1}
             blurOnSubmit={false}
             onChangeText={summary => {
-              debug('summary', summary);
+              //debug('summary', summary);
               this.setStateAndUpdateParent({ summary: summary });
             }}
             value={this.state.summary}

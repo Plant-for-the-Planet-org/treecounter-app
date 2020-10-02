@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import { info } from '../../assets';
 import { updateRoute } from '../../helpers/routerHelper';
 import { context } from '../../config';
@@ -42,7 +42,7 @@ class BodyErrorBoundary extends React.Component {
   componentDidCatch(error, info) {
     this.secondsRemaining = 30;
     this.setState({ hasErrorOccurred: true, seconds: 30 }, this.startCountDown);
-    debug('BodyErrorBoundary', error, info);
+    //debug('BodyErrorBoundary', error, info);
 
     if (context.bugsnagApiKey) {
       Bugsnag.notify(error, function(event) {

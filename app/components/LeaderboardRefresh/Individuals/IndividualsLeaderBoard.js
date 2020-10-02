@@ -36,7 +36,7 @@ const IndividualsLeaderBoard = ({ navigation }) => {
       success => {
         if (success.data && success.data instanceof Object && success.data.data)
           setQueryResult(success.data.data);
-        debug(success.data.data, 'success.data.data');
+        //debug(success.data.data, 'success.data.data');
       },
       error => {
         debug(error);
@@ -77,7 +77,7 @@ const IndividualsLeaderBoard = ({ navigation }) => {
       });
     }
   };
-  debug('queryresult', queryresult);
+  //debug('queryresult', queryresult);
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header navigation={navigation} />
@@ -148,7 +148,6 @@ const IndividualsLeaderBoard = ({ navigation }) => {
 const CompanyListItem = ({ onPressListItem, item, index }) => {
   const [isPress, setIsPress] = useState(false);
   const isPrivate = 'mayPublish' in item && !item.mayPublish;
-  debug(isPress, 'isPressisPress');
   return (
     <TouchableOpacity
       onPress={() =>

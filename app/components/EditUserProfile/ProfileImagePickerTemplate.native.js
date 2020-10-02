@@ -5,6 +5,7 @@ import ImagePicker from 'react-native-image-picker';
 import styles from '../../styles/file_picker.native';
 import UserProfileImage from '../Common/UserProfileImage';
 import { close_green } from '../../assets';
+import { debug } from '../../debug';
 import i18n from '../../locales/i18n';
 
 export function ProfileImagePickerTemplate(locals) {
@@ -32,14 +33,14 @@ export function ProfileImagePickerTemplate(locals) {
         onPress={
           (/* event */) => {
             ImagePicker.showImagePicker(options, response => {
-              // debug('Response = ', response);
+              //debug('Response = ', response);
 
               if (response.didCancel) {
                 //debug('User cancelled image picker');
               } else if (response.error) {
-                //debug('ImagePicker Error: ', response.error);
+                debug('ImagePicker Error: ', response.error);
               } else if (response.customButton) {
-                // debug('User tapped custom button: ', response.customButton);
+                //debug('User tapped custom button: ', response.customButton);
               } else {
                 // let source = { uri: response.uri };
                 locals.onChange('data:image/jpeg;base64,' + response.data);

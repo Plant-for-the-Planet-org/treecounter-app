@@ -97,7 +97,7 @@ export function sendEmail(/* navigation = undefined */) {
   return (/* dispatch */) => {
     postActivateLinkRequest('auth_sendActivationLink_post')
       .then((/* res */) => {
-        // debug(res);
+        //debug(res);
       })
       .catch(err => debug(err));
   };

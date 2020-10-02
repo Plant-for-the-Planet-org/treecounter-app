@@ -24,21 +24,21 @@ export function addReview(review) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve) {
-      debug('review:', review, review.id);
+      //debug('review:', review, review.id);
 
       postAuthenticatedRequest('review_post', review)
         .then(res => {
-          debug(res.status);
-          debug(res);
+          //debug(res.status);
+          //debug(res);
           let { review, plantProject } = res.data.merge;
-          debug(review);
-          debug('Normalize:', normalize(review, [reviewsSchema]));
+          //debug(review);
+          //debug('Normalize:', normalize(review, [reviewsSchema]));
           dispatch(mergeEntities(normalize(review, [reviewsSchema])));
           // TODO: we need to fix to add entry to plant project and userprofile
           // let reviews = [...plantProject.reviews];
-          // debug('pmatProject:', plantProject);
+          // //debug('pmatProject:', plantProject);
           // plantProject.reviews = [reviews, review];
-          // debug('pmatProject:', normalize(plantProject, [plantProjectSchema]));
+          // //debug('pmatProject:', normalize(plantProject, [plantProjectSchema]));
           dispatch(
             mergeEntities(normalize(plantProject, [plantProjectSchema]))
           );
@@ -63,12 +63,12 @@ export function deleteReview(reviewId) {
   return dispatch => {
     dispatch(setProgressModelState(true));
     return new Promise(function(resolve, reject) {
-      debug('delete review ', reviewId);
+      //debug('delete review ', reviewId);
       deleteAuthenticatedRequest('review_delete', {
         review: reviewId
       })
         .then(res => {
-          debug(res.data);
+          //debug(res.data);
           const { review } = res.data.delete;
           try {
             dispatch(deleteEntity({ reviews: review }));
@@ -109,13 +109,13 @@ export function updateReview(review) {
     return new Promise(function(resolve, reject) {
       let reviewId = review.id;
       delete review.id;
-      debug('putting', review);
+      //debug('putting', review);
 
       putAuthenticatedRequest('review_put', review, {
         review: reviewId
       })
         .then(res => {
-          debug('updated reviews:', res.data);
+          //debug('updated reviews:', res.data);
           let { review, plantProject } = res.data.merge;
           try {
             dispatch(mergeEntities(normalize(review, [reviewsSchema])));

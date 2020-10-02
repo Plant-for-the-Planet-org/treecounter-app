@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import StaticTabbar from './StaticTabbar';
 import i18n from '../../locales/i18n';
 import NetInfo from '@react-native-community/netinfo';
@@ -23,8 +23,8 @@ export default class Tabbar extends React.PureComponent {
 
   checkInternet() {
     NetInfo.fetch().then(state => {
-      debug('Connection type', state.type);
-      debug('Is connected?', state.isConnected);
+      //debug('Connection type', state.type);
+      //debug('Is connected?', state.isConnected);
       this.setState({
         isConnected: state.isConnected,
       });
@@ -32,8 +32,8 @@ export default class Tabbar extends React.PureComponent {
   }
   subscribeCheckInternet() {
     unsubscribe = NetInfo.addEventListener(state => {
-      debug('Connection type', state.type);
-      debug('Is connected?', state.isConnected);
+      //debug('Connection type', state.type);
+      //debug('Is connected?', state.isConnected);
       this.setState({
         isConnected: state.isConnected,
       });

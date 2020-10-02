@@ -133,8 +133,8 @@ export default class Map extends Component {
 
           function setLocation(long, lat) {
             // set form values
-            debug('latitude: ' + lat);
-            debug('longitude: ' + long);
+            //debug('latitude: ' + lat);
+            //debug('longitude: ' + long);
             drawMarker(long, lat, redSymbol);
           }
           function drawMarker(long, lat, symbol) {
@@ -148,7 +148,7 @@ export default class Map extends Component {
             )
               .then(response => response.json())
               .then(res => {
-                debug('Selected country: ', res.address.CountryCode);
+                //debug('Selected country: ', res.address.CountryCode);
                 mapThis.props.onMapsClick({
                   latitude: lat,
                   longitude: long,
@@ -161,7 +161,7 @@ export default class Map extends Component {
           function Marker() {
             if (!mapThis.props.hasOwnProperty('pins')) return;
 
-            debug('Loading pins', mapThis.props);
+            //debug('Loading pins', mapThis.props);
 
             mapThis.props.pins.forEach(pin => {
               let symbol = new esri.symbol.PictureMarkerSymbol(

@@ -11,7 +11,7 @@ import {
 // import { ScrollView } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { debug } from '../../../debug';
+//import { debug } from '../../../debug';
 import {
   selectedPlantProjectSelector,
   selectedReviewsSelector
@@ -35,7 +35,7 @@ const { width } = Dimensions.get('window');
 class AddReview extends Component {
   constructor(props) {
     super(props);
-    debug('props in add reviews', props);
+    //debug('props in add reviews', props);
     this.state = {
       validationError: {},
       reviewIndexes: {},
@@ -49,26 +49,26 @@ class AddReview extends Component {
   }
   onUpdate(data) {
     this.setState({ review: data }, () => {
-      debug('submitted', this.submitted);
+      //debug('submitted', this.submitted);
       this.submitted && this.validate();
     });
   }
   async UNSAFE_componentWillMount() {
     try {
       const { data } = await getReviewIndexes();
-      debug('indexs', data);
+      //debug('indexs', data);
       let obj = {};
       data.map(i => {
         obj[i.slug] = i;
       });
       this.setState({ reviewIndexes: obj });
     } catch (err) {
-      debug('eror on reviewindex', err);
+      //debug('eror on reviewindex', err);
     }
   }
   validate() {
     const { review } = this.state;
-    debug('validating', review, !review.reviewIndexScores);
+    //debug('validating', review, !review.reviewIndexScores);
     if (
       !review.reviewIndexScores ||
       !Object.keys(review.reviewIndexScores).filter(index =>
@@ -91,9 +91,9 @@ class AddReview extends Component {
   async create() {
     this.submitted = true;
     if (!this.validate()) return;
-    const { review } = this.state;
+    //const { review } = this.state;
 
-    debug('review before submitting', review);
+    //debug('review before submitting', review);
     try {
       if (this.state.review.id) {
         let {
@@ -127,7 +127,7 @@ class AddReview extends Component {
     }
   }
   render() {
-    debug('state', this.state);
+    //debug('state', this.state);
     return (
       <ScrollView
         contentContainerStyle={{
@@ -182,7 +182,7 @@ class AddReview extends Component {
         <TouchableOpacity
           style={styles.pledgeSmallButton}
           onPress={() => {
-            debug('plant project', this.props.selectedPlantProject);
+            //debug('plant project', this.props.selectedPlantProject);
             this.create();
           }}
         >

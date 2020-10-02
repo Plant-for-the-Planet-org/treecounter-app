@@ -13,12 +13,14 @@ import { DatePickerTemplate } from '../components/Templates/DatePickerTemplate';
 
 // Import assets
 import * as images from '../assets';
+import i18n from '../locales/i18n.js';
 import { formatDate } from '../utils/utils';
 
 function isEmail(x) {
   return /(.)+@(.)+/.test(x);
 }
 
+transform.resetFormats();
 transform.registerFormat('email', isEmail);
 
 export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
@@ -33,7 +35,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
         if (properties[propertyKey]['enum']) {
           for (let enumKeys in properties[propertyKey].enum) {
             newEnum[properties[propertyKey].enum[enumKeys]] =
-              properties[propertyKey].enum_titles[enumKeys];
+              i18n.t(properties[propertyKey].enum_titles[enumKeys]);
           }
           properties[propertyKey].enum = newEnum;
           delete properties[propertyKey].enum_titles;
@@ -61,10 +63,11 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.config = {
               iconUrl: images[properties[propertyKey].icon]
             };
-            if (properties[propertyKey].icon === 'email') {
-              options.config = { ...options.config, email: true };
-              properties[propertyKey].format = 'email';
-            }
+            // already done below for propertyKey === 'email'
+            //if (properties[propertyKey].icon === 'email') {
+            //  options.config = { ...options.config, email: true };
+            //  properties[propertyKey].format = 'email';
+            //}
           }
           if (properties[propertyKey]['maxDate']) {
             options.config = { ...options.config, maxDate: true };
@@ -83,8 +86,8 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
           }
 
           if (!properties[propertyKey]['enum']) {
-            options.placeholder = properties[propertyKey].title;
-            options.label = properties[propertyKey].title;
+            options.placeholder = i18n.t(properties[propertyKey].title);
+            options.label = i18n.t(properties[propertyKey].title);
             options.auto = 'none';
             options.autoCapitalize = 'none';
             options.template = TextInputTemplate;
@@ -106,14 +109,14 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.template = getSelectTemplate();
             options.nullOption = {
               value: '',
-              text: properties[propertyKey].title
+              text: i18n.t(properties[propertyKey].title)
             };
           }
         } else if (
           properties[propertyKey].type &&
           properties[propertyKey].type === 'boolean'
         ) {
-          options.label = properties[propertyKey].title;
+          options.label = i18n.t(properties[propertyKey].title);
           options.template = CheckboxTemplate;
         }
         // Check what kind of widget it has
@@ -176,7 +179,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
           }
         } ******/
         if (properties[propertyKey].type === 'array') {
-          let title = properties[propertyKey].title;
+          let title = i18n.t(properties[propertyKey].title);
           let arrayConfig =
             innerConfig[propertyKey] &&
             innerConfig[propertyKey][properties[propertyKey].type];
@@ -193,7 +196,7 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
           }
 
           let arrayOptions = {
-            placeholder: title,
+            placeholder: i18n.t(title),
             auto: 'none',
             autoCapitalize: 'none',
             disableOrder: true,

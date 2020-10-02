@@ -66,7 +66,7 @@ const Element = (
         }
       });
     }
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
       const options = _extractOptions(nextProps);
       if (
         Object.keys(options).length !== 0 &&

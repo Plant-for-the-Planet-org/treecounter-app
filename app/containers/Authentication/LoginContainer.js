@@ -25,8 +25,8 @@ class LoginContainer extends React.Component {
   }
 
   onPress = (recaptchaToken, refreshToken) => {
-    let result = this.refs.loginContainer.refs.loginForm.validate();
-    debug(result);
+    //let result = this.refs.loginContainer.refs.loginForm.validate();
+    //debug(result);
     let value = this.refs.loginContainer.refs.loginForm.getValue();
     if (value) {
       this.onClick(value, recaptchaToken, refreshToken);
@@ -34,7 +34,7 @@ class LoginContainer extends React.Component {
   };
 
   onClick(value, recaptchaToken, refreshToken) {
-    debug(this.refs.loginContainer.refs.loginForm.validate());
+    //debug(this.refs.loginContainer.refs.loginForm.validate());
     let formValue = this.refs.loginContainer.refs.loginForm.getValue();
     if (formValue) {
       this.props

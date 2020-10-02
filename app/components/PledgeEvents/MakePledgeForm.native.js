@@ -15,7 +15,7 @@ import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Formik } from 'formik';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import styles from './../../styles/pledgeevents/pledgeevents.native';
 import { forward } from './../../assets';
 import { postPledge } from './../../actions/pledgeAction';
@@ -26,6 +26,10 @@ import { currentUserProfileSelector } from './../../selectors';
 import pledgeFormSchema from './../../server/formSchemas/pledge';
 import { generateFormikSchemaFromFormSchema } from '../../helpers/utils';
 import HeaderAnimated from './../Header/HeaderAnimated.native';
+
+const AnimatedKeyboardAwareScrollView = Animated.createAnimatedComponent(
+  KeyboardAwareScrollView
+);
 
 // let _ = require('lodash');
 
@@ -122,7 +126,7 @@ class MakePledgeForm extends Component {
                   treeCount: values.treeCount,
                   isAnonymous: this.state.isAnonymous
                 };
-                debug(data);
+                //debug(data);
                 const params = this.props.navigation.getParam('slug');
                 this.props.postPledge(
                   data,
@@ -143,7 +147,7 @@ class MakePledgeForm extends Component {
             >
               {props => (
                 <>
-                  <KeyboardAwareScrollView
+                  <AnimatedKeyboardAwareScrollView
                     contentContainerStyle={styles.formScrollView}
                     keyboardDismissMode="on-drag"
                     keyboardShouldPersistTaps="always"
@@ -156,7 +160,7 @@ class MakePledgeForm extends Component {
                           contentOffset: { y: this.state.scrollY }
                         }
                       }
-                    ])}
+                    ], { useNativeDriver: true })}
                   >
                     <View>
                       <Text style={styles.subtitleText}>
@@ -282,7 +286,7 @@ class MakePledgeForm extends Component {
                         />
                       </View>
                     </View>
-                  </KeyboardAwareScrollView>
+                  </AnimatedKeyboardAwareScrollView>
 
                   {this.state.buttonType === 'pledge' ? (
                     <TouchableOpacity

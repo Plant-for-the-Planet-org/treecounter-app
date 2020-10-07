@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
-import { ReCaptcha, loadReCaptcha } from 'recaptcha-v3-react';
+import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3';
 import { uuidv4 } from '../../../utils/uuid';
 import { debug } from '../../../debug';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
@@ -25,17 +25,10 @@ export default class SignUp extends Component {
   }
 
   componentDidMount() {
-    loadReCaptcha({
-      key: '6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF',
-      id: uuidv4(),
-      onSuccess: () => {
-        let gBatch = document.getElementsByClassName('grecaptcha-badge');
-        if (gBatch.length > 0) {
-          gBatch[0].style.visibility = 'visible';
-        }
-      },
-      onError: e => {
-        debug(e);
+    loadReCaptcha('6Ldl8WoUAAAAAGj0OIKqbvkm_XiDPbve07JJySBF', () => {
+      let gBatch = document.getElementsByClassName('grecaptcha-badge');
+      if (gBatch.length > 0) {
+        gBatch[0].style.visibility = 'visible';
       }
     });
   }

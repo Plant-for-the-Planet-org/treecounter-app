@@ -57,7 +57,7 @@
     "i18next": "^19.6.0",
     "intl": "^1.2.5",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.16",
+    "lodash": "^4.17.20",
     "normalizr": "^3.6.0",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
@@ -146,7 +146,7 @@
     "tcomb-form-native": "^0.6.20",
     "tcomb-json-schema": "^0.3.2",
     "uuid": "^7.0.1",
-    "yup": "^0.28.1"
+    "yup": "^0.28.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

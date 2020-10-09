@@ -125,7 +125,7 @@
     "react-router-dom": "^5.1.2",
     "react-select": "^3.0.8",
     "react-share": "^4.0.1",
-    "react-slick": "^0.25.2",
+    "react-slick": "^0.27.11",
     "react-smartbanner": "^5.1.4",
     "react-stripe-elements": "^6.1.0",
     "react-tooltip": "^4.2.7",

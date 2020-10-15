@@ -38,5 +38,19 @@
   "permission_denied_title": "Zugriff verweigert",
   "permission_denied_text": "Keine Zugriffsberechtigung für deine Kamera oder Fotogallerie.",
   "permission_denied_retry_title": "Wiederholen",
-  "permission_denied_ok_title": "Ich bin sicher"
+  "permission_denied_ok_title": "Ich bin sicher",
+  "city": "Stadt",
+  "state": "Staat",
+  "country": "Land",
+  "school_type": "Schulart",
+  "primary_school": "Grundschule",
+  "secondary_school": "Mittelstufe",
+  "higher_school": "Oberstufe",
+  "other_school": "Andere",
+  "org_type": "Art der Organisation",
+  "org_non_profit": "Non Profit",
+  "org_service_club": "Service Club",
+  "org_political_party": "Politische Partei",
+  "org_other": "Andere",
+  "sub_type": "Unterart"
 }

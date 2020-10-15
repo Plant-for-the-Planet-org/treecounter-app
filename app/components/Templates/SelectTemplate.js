@@ -7,6 +7,20 @@ export function getSelectTemplate(enumOption) {
       locals.onChange($event.target.value);
     }
     const options = enumOption ? enumOption : locals.options;
+
+    options.sort(function(a,b) {
+      if (!b.value) return 1;
+      if (!a.value) return -1;
+
+      let nameA = i18n.t(a.text).toLowerCase(),
+        nameB = i18n.t(b.text).toLowerCase();
+        if (nameA < nameB)
+          //sort string ascending
+          return -1;
+        if (nameA > nameB) return 1;
+        return 0; //default return value (no sorting)
+    });
+
     return (
       <div className="pftp-selectfield">
         <select

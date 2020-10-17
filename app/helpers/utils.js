@@ -25,7 +25,6 @@ import {
   leaderboards_company_green
 } from '../assets';
 import { getErrorView } from '../server/validator';
-//import countryCodes from '../assets/countryCodes.json';
 import i18n from '../locales/i18n';
 
 /*
@@ -587,10 +586,6 @@ export function getCountryIso2(countryCode) {
 
 export function getISOToCountryName(code) {
   return { country: i18n.t('country.' + code.toLowerCase()) };
-  // const foundCountry = countryCodes.filter(data => {
-  //   return data.countryCode == code;
-  // });
-  // return foundCountry.length ? foundCountry[0] : { country: code };
 }
 
 export function isTpo(currentUserProfile) {

@@ -9,6 +9,7 @@ export function getSelectTemplate(enumOption) {
     const options = enumOption ? enumOption : locals.options;
 
     options.sort(function(a,b) {
+      // keep the label describing the select list at the top!
       if (!b.value) return 1;
       if (!a.value) return -1;
 

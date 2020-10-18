@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
+import '../../utils/polyfill.js';
 import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
 import GlobalErrorBoundary from '../ErrorBoundry/globalErrorBoundry';

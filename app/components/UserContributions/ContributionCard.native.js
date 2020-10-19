@@ -425,7 +425,7 @@ class ContributionCard extends React.Component {
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
-                    {i18n.t('label.gifted_from_person') + contribution.giverName}
+                    {i18n.t('label.gifted_from_person') + (contribution.giverName || contribution.giver)}
                   </Text>
                   <View style={styles.row2}>
                     <Text style={styles.redeemObjectSubTitle}>{tpoLine}</Text>

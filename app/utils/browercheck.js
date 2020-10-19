@@ -29,5 +29,5 @@ function samsung(range) {
 }
 
 export function browserNotCompatible() {
-  return safari('<10') || samsung('<6') || !Object.values || !window.Intl;
+  return safari('<10') || samsung('<6') || !Object.values || !window.Intl || !window.crypto;
 }

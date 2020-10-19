@@ -18,6 +18,8 @@ import {
   paymentCleared,
   donationCreation
 } from '../reducers/paymentStatus';
+import { NotificationManager } from '../notification/PopupNotificaiton/notificationManager';
+import i18n from '../locales/i18n.js';
 
 export function fillCard() {
   return (/* dispatch */) => {
@@ -63,6 +65,13 @@ export function createPaymentDonation(plantProjectId, requestData, loggedIn) {
       .catch(error => {
         debug(error);
         dispatch(setProgressModelState(false));
+        NotificationManager.error(
+          error.response.data ? error.response.data.message : i18n.t('label.error'),
+            error.response.data.errors.children.amount.errors
+              ? error.response.data.errors.children.amount.errors[0]
+              : i18n.t('label.error'),
+          5000
+        );
       });
   };
 }
@@ -88,6 +97,13 @@ export function createPaymentGift(plantProjectId, requestData, loggedIn) {
       .catch(error => {
         debug(error);
         dispatch(setProgressModelState(false));
+        NotificationManager.error(
+          error.response.data ? error.response.data.message : i18n.t('label.error'),
+            error.response.data.errors.children.amount.errors
+              ? error.response.data.errors.children.amount.errors[0]
+              : i18n.t('label.error'),
+          5000
+        );
       });
   };
 }

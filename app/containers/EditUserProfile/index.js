@@ -120,7 +120,7 @@ class EditUserProfileContainer extends React.Component {
                 ? err.response.data.errors.children.newEmail.children.first.errors[0]
                 : err.response.data.errors.children.newEmail.children.second
                   ? err.response.data.errors.children.newEmail.children.second.errors[0]
-                  : 'label.error',
+                  : i18n.t('label.error'),
             i18n.t('label.error'),
             5000
           );
@@ -240,7 +240,7 @@ class EditUserProfileContainer extends React.Component {
                       ? err.response.data.errors.children.password.children.first.errors[0]
                       : err.response.data.errors.children.password.children.second
                         ? err.response.data.errors.children.password.children.second.errors[0]
-                        : 'label.error',
+                        : i18n.t('label.error'),
                 i18n.t('label.error'),
                 5000
               );

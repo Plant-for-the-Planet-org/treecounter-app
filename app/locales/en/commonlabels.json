@@ -12,6 +12,7 @@
   "error_reported": "We have reported this error to our IT Professionals.",
   "home_page_redirected": "You will be redirected to home page in {{seconds}} seconds",
   "planting_404": "To avoid this situation on this planet lets plant some trees.",
+  "browser_not_supported": "Your browser is not supported. Please update or install another browser.",
   "close_and_reopen": "Please close the app and restart it.",
   "cancel": "Cancel",
   "searchshort": "Search",

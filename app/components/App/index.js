@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
-import '../../utils/polyfill.js';
+import '../../utils/polyfill';
 import TreeCounter from './TreeCounter';
 import configureStore from '../../stores/TreecounterStore';
 import GlobalErrorBoundary from '../ErrorBoundry/globalErrorBoundry';
+import BrowserNotSupported from '../ErrorBoundry/browserNotSupported';
 import { isIOS, isAndroid } from '../../utils/utils';
-import { browserNotCompatible } from '../../utils/browercheck.js';
+import { browserNotCompatible } from '../../utils/browercheck';
 import SmartBannerClickable from '../SmartBanner';
-import i18n from '../../locales/i18n.js';
+import i18n from '../../locales/i18n';
 let store;
 
 export default class App extends Component {
@@ -20,9 +21,7 @@ export default class App extends Component {
   render() {
     if (browserNotCompatible()) {
       return (
-        <div className="app">
-          Browser is not compatible. Please download a newer version.
-        </div>
+        <BrowserNotSupported />
       );
     }
     else {

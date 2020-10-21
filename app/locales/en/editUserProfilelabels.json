@@ -38,5 +38,19 @@
   "permission_denied_title": "Permission denied",
   "permission_denied_text": "No access grant to your camera or photo library.",
   "permission_denied_retry_title": "Retry",
-  "permission_denied_ok_title": "I'm sure"
+  "permission_denied_ok_title": "I'm sure",
+  "city": "City",
+  "state": "State",
+  "country": "Country",
+  "school_type": "Type of school",
+  "primary_school": "Primary",
+  "secondary_school": "Secondary",
+  "higher_school": "Higher",
+  "other_school": "Other",
+  "org_type": "Type of organisation",
+  "org_non_profit": "Non Profit",
+  "org_service_club": "Service Club",
+  "org_political_party": "Political Party",
+  "org_other": "Other",
+  "sub_type": "Subtype"
 }

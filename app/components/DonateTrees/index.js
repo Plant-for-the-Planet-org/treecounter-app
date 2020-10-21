@@ -169,6 +169,7 @@ export default class DonateTrees extends Component {
       ) {
         requestData.communityTreecounter = this.props.supportTreecounter.treecounterId;
       }
+      //TODO: do not continue if this request fails
       this.props.createPaymentDonation(
         this.props.selectedProject.id,
         requestData,

@@ -24,7 +24,7 @@ curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
    -F bundle=@android-release.bundle \
    -F projectRoot=`pwd`
 
-# also upload iOS source maps for package version as codeBundleId
+# also upload Android source maps for package version as codeBundleId
 curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
    -F apiKey="$BUGSNAG_API_KEY" \
    -F codeBundleId="$PACKAGE_VERSION" \
@@ -48,7 +48,7 @@ react-native bundle \
 # For now we have to set this manually here with every release :-(
 curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
    -F apiKey="$BUGSNAG_API_KEY" \
-   -F appVersion="1.49.45" \
+   -F appVersion="1.49.46" \
    -F dev=false \
    -F platform=ios \
    -F sourceMap=@ios-release.bundle.map \

@@ -2,7 +2,7 @@
   "how_to_update":
     "Run ./node_modules/license-checker/bin/license-checker --production --relativeLicensePath --direct --json > license.json to fetch license info from package.json - copy paste required & specific license info in LicenseInfo.json file under app or web specific",
   "appLicenses": {
-    "@bugsnag/js@6.5.2": {
+    "@bugsnag/js@7.3.0": {
       "licenses": "MIT",
       "repository": "https://github.com/bugsnag/bugsnag-js",
       "publisher": "Bugsnag",
@@ -68,12 +68,6 @@
       "publisher": "Matt Zabriskie",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/axios",
       "licenseFile": "node_modules/axios/LICENSE"
-    },
-    "bugsnag-react-native@2.23.6": {
-      "licenses": "MIT",
-      "repository": "https://github.com/bugsnag/bugsnag-react-native",
-      "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/bugsnag-react-native",
-      "licenseFile": "node_modules/bugsnag-react-native/LICENSE.txt"
     },
     "classnames@2.2.6": {
       "licenses": "MIT",
@@ -157,7 +151,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/history",
       "licenseFile": "node_modules/history/LICENSE"
     },
-    "i18next@19.3.2": {
+    "i18next@19.6.0": {
       "licenses": "MIT",
       "repository": "https://github.com/i18next/i18next",
       "publisher": "Jan Mühlemann",
@@ -224,6 +218,14 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-autosuggest",
       "licenseFile": "node_modules/react-autosuggest/LICENSE"
     },
+    "react-content-loader@5.1.1": {
+      "licenses": "MIT",
+      "repository": "https://github.com/danilowoz/react-content-loader",
+      "publisher": "Danilo Woznica",
+      "email": "danilowoz@gmail.com",
+      "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-content-loader",
+      "licenseFile": "node_modules/react-content-loader/LICENSE"
+    },
     "react-dom@16.12.0": {
       "licenses": "MIT",
       "repository": "https://github.com/facebook/react",
@@ -268,19 +270,12 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-collapsible",
       "licenseFile": "node_modules/react-native-collapsible/LICENSE"
     },
-    "react-native-config@0.12.0": {
+    "react-native-config@1.3.3": {
       "licenses": "MIT",
       "repository": "https://github.com/luggit/react-native-config",
       "publisher": "Pedro Belo",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-config",
       "licenseFile": "node_modules/react-native-config/LICENSE"
-    },
-    "react-native-content-loader@0.1.6": {
-      "licenses": "MIT",
-      "repository": "https://github.com/aschenkel/react-native-svg-animated-linear-gradient",
-      "publisher": "Nhan Nguyen",
-      "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-content-loader",
-      "licenseFile": "node_modules/react-native-content-loader/LICENSE"
     },
     "react-native-device-info@5.5.3": {
       "licenses": "MIT",
@@ -291,7 +286,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-device-info",
       "licenseFile": "node_modules/react-native-device-info/LICENSE"
     },
-    "react-native-document-picker@3.2.4": {
+    "react-native-document-picker@3.5.4": {
       "licenses": "MIT",
       "repository": "https://github.com/Elyx0/react-native-document-picker",
       "publisher": "Elyx0",
@@ -409,12 +404,19 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-material-textfield",
       "licenseFile": "node_modules/react-native-material-textfield/license.txt"
     },
-    "react-native-modalbox@2.0.0": {
+    "react-native-modal-datetime-picker@8.9.3": {
       "licenses": "MIT",
-      "repository": "https://github.com/maxs15/react-native-modalbox",
+      "repository": "https://github.com/mmazzarolo/react-native-modal-datetime-picker",
+      "publisher": "Mazzarolo Matteo",
+      "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-modal-datetime-picker",
+      "licenseFile": "node_modules/react-native-modal-datetime-picker/LICENSE.md"
+    },
+    "react-native-modalbox@2.1.0": {
+      "licenses": "MIT",
+      "repository": "https://github.com/kazzkiq/react-native-modalbox",
       "publisher": "Maxime Mezrahi",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-modalbox",
-      "licenseFile": "node_modules/react-native-modalbox/License.txt"
+      "licenseFile": "node_modules/react-native-modalbox/LICENSE"
     },
     "react-native-pdf@6.0.1": {
       "licenses": "MIT",
@@ -424,7 +426,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-pdf",
       "licenseFile": "node_modules/react-native-pdf/LICENSE"
     },
-    "react-native-permissions@2.0.9": {
+    "react-native-permissions@2.2.0": {
       "licenses": "MIT",
       "repository": "https://github.com/react-native-community/react-native-permissions",
       "publisher": "Mathieu Acthernoene",
@@ -453,7 +455,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-raw-bottom-sheet",
       "licenseFile": "node_modules/react-native-raw-bottom-sheet/LICENSE"
     },
-    "react-native-reanimated@1.7.0": {
+    "react-native-reanimated@1.13.0": {
       "licenses": "MIT",
       "repository": "https://github.com/software-mansion/react-native-reanimated",
       "publisher": "Krzysztof Magiera",
@@ -548,7 +550,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-webview",
       "licenseFile": "node_modules/react-native-webview/LICENSE"
     },
-    "react-native@0.61.5": {
+    "react-native@0.63.2": {
       "licenses": "MIT",
       "repository": "https://github.com/facebook/react-native",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native",
@@ -568,6 +570,13 @@
       "publisher": "Minh Tran",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-notifications",
       "licenseFile": "node_modules/react-notifications/README.md"
+    },
+    "react-recaptcha-v3@2.0.1": {
+      "licenses": "MIT",
+      "repository": "https://github.com/codeep/react-recaptcha-v3",
+      "publisher": "Codeep",
+      "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-recaptcha-v3",
+      "licenseFile": "node_modules/react-recaptcha-v3/README.md"
     },
     "react-redux@7.2.0": {
       "licenses": "MIT",
@@ -645,27 +654,19 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-tooltip",
       "licenseFile": "node_modules/react-tooltip/LICENSE"
     },
-    "react-youtube@7.9.0": {
+    "react-youtube@7.11.2": {
       "licenses": "MIT",
-      "repository": "https://github.com/compedit/react-youtube",
-      "publisher": "troy betz",
-      "email": "troybetz@gmail.com",
+      "repository": "https://github.com/tjallingt/react-youtube",
+      "publisher": "Tjalling Tolle",
+      "email": "tjallingt@gmail.com",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-youtube",
       "licenseFile": "node_modules/react-youtube/LICENSE"
     },
-    "react@16.12.0": {
+    "react@16.13.1": {
       "licenses": "MIT",
       "repository": "https://github.com/facebook/react",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react",
       "licenseFile": "node_modules/react/LICENSE"
-    },
-    "recaptcha-v3-react@3.0.3": {
-      "licenses": "MIT",
-      "repository": "https://github.com/JustFly1984/recaptcha-v3-react",
-      "publisher": "Alexey Lyakhov",
-      "email": "justfly1984@gmail.com",
-      "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/recaptcha-v3-react",
-      "licenseFile": "node_modules/recaptcha-v3-react/README.md"
     },
     "redux-actions@2.6.5": {
       "licenses": "MIT",
@@ -778,7 +779,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/uuid",
       "licenseFile": "node_modules/uuid/LICENSE.md"
     },
-    "yup@0.28.1": {
+    "yup@0.28.2": {
       "licenses": "MIT",
       "repository": "https://github.com/jquense/yup",
       "publisher": "@monasticpanic Jason Quense",

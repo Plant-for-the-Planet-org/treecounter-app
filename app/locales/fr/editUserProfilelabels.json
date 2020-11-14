@@ -1,5 +1,5 @@
 {
-  "sure": "Êtes-vous sûr?",
+  "sure": "Êtes-vous certain?",
   "delete_confirmation": "Dès que vous confirmez, toutes les données de votre compte seront supprimées. Cette action ne peut pas être annulée.",
   "password_changed": "Votre mot de passe a été changé avec succès",
   "return_to_profile": "Retour à Mon Profil",
@@ -38,5 +38,19 @@
   "permission_denied_title": "Permission refusée",
   "permission_denied_text": "Aucune autorisation d'accès à votre appareil photo ou à votre photothèque.",
   "permission_denied_retry_title": "Essayer à nouveau",
-  "permission_denied_ok_title": "Je suis certain"
+  "permission_denied_ok_title": "Je suis certain",
+  "city": "Ville",
+  "state": "État",
+  "country": "Pays",
+  "school_type": "Type d'école",
+  "primary_school": "Primaire",
+  "secondary_school": "Secondaire",
+  "higher_school": "Plus haut",
+  "other_school": "Autres",
+  "org_type": "Type d'organisation",
+  "org_non_profit": "Sans but lucratif",
+  "org_service_club": "Service Club",
+  "org_political_party": "Parti politique",
+  "org_other": "Autre",
+  "sub_type": "Sous-type"
 }

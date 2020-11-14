@@ -42,15 +42,15 @@
   "city": "Stadt",
   "state": "Staat",
   "country": "Land",
-  "school_type": "Schulart",
-  "primary_school": "Grundschule",
-  "secondary_school": "Mittelstufe",
-  "higher_school": "Oberstufe",
+  "school_type": "Art der Schule",
+  "primary_school": "Primärstufe",
+  "secondary_school": "Sekundarstufe",
+  "higher_school": "Höhere Schule",
   "other_school": "Andere",
   "org_type": "Art der Organisation",
   "org_non_profit": "Non Profit",
-  "org_service_club": "Service Club",
+  "org_service_club": "Service-Club",
   "org_political_party": "Politische Partei",
   "org_other": "Andere",
-  "sub_type": "Unterart"
+  "sub_type": "Untertyp"
 }

@@ -841,8 +841,18 @@ export class CustomSwitch extends React.Component {
 export function AddImage(props) {
   const images = props.images;
 
+
   const options = {
-    title: props.title || 'Add Image',
+    title: props.title || i18n.t('label.choose_from_library'),
+    cancelButtonTitle: i18n.t('label.cancel'),
+    takePhotoButtonTitle: i18n.t('label.take_photo'),
+    chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+    'permissionDenied.title': i18n.t('label.permission_denied_title'),
+    'permissionDenied.text': i18n.t('label.permission_denied_text'),
+    'permissionDenied.reTryTitle': i18n.t(
+      'label.permission_denied_retry_title'
+    ),
+    'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
     allowsEditing: true,
     mediaType: 'photo',
     multiple: true,
@@ -878,7 +888,7 @@ export function AddImage(props) {
                 lineHeight: 28
               }}
             >
-              Remove
+              {i18n.t('label.remove_image')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -961,7 +971,7 @@ export function CompetitionDatePicker(props) {
         onCancel={() => setShowDatePicker(false)}
         maximumDate={new Date()}
         minimumDate={new Date(2006, 0, 1) }
-        titleIOS={i18n.t('label.datePickerTitle')}
+        headerTextIOS={i18n.t('label.datePickerTitle')}
         cancelTextIOS={i18n.t('label.datePickerCancel')}
         confirmTextIOS={i18n.t('label.datePickerConfirm')}
         pickerContainerStyleIOS={{ color: '#89B53A' }}

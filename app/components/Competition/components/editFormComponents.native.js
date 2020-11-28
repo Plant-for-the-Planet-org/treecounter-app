@@ -379,7 +379,7 @@ export function CompetitionDatePicker(props) {
         date={new Date(props.endDate)}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}
-        titleIOS={i18n.t('label.datePickerTitle')}
+        headerTextIOS={i18n.t('label.datePickerTitle')}
         cancelTextIOS={i18n.t('label.datePickerCancel')}
         confirmTextIOS={i18n.t('label.datePickerConfirm')}
       />

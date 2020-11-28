@@ -40,7 +40,7 @@
   "quintillion_singular": "Trillion",
   "quintillion_plural": "Trillionen",
   "donation_id_missing_error": "Spenden-ID fehlt. Dies kann passieren, wenn die Spende unter dem unterstützten Mindestbetrag liegt.",
-  "datePickerTitle": "Datum Wählen",
+  "datePickerTitle": "Datum wählen",
   "datePickerCancel": "Stornieren",
   "datePickerConfirm": "Bestätigen",
   "view_all": "Zeige alle",

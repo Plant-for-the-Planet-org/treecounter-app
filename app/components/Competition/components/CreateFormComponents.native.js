@@ -194,7 +194,16 @@ export function AddImage(props) {
   const image = props.image;
 
   const options = {
-    title: 'Add Image',
+    title: i18n.t('label.add_image'),
+    cancelButtonTitle: i18n.t('label.cancel'),
+    takePhotoButtonTitle: i18n.t('label.take_photo'),
+    chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+    'permissionDenied.title': i18n.t('label.permission_denied_title'),
+    'permissionDenied.text': i18n.t('label.permission_denied_text'),
+    'permissionDenied.reTryTitle': i18n.t(
+      'label.permission_denied_retry_title'
+    ),
+    'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
     storageOptions: {
       skipBackup: true,
       path: 'images'

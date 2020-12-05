@@ -15,6 +15,7 @@
   "plant_date": "Datum der Pflanzung *",
   "geo_location": "Geo-Standort",
   "add_images": "Bilder hinzufügen",
+  "remove_image": "Löschen",
   "add_classification": "Klassifizierung",
   "tree_classification": "Baumklassifizierung",
   "tree_scientific_name": "Wissenschaftlicher Baumname",

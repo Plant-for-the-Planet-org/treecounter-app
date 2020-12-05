@@ -25,7 +25,7 @@ class SignUpContainer extends React.Component {
   }
 
   onSignUpClicked = (profileType, signupForm, token, refreshToken) => {
-    debug(signupForm.validate());
+    //debug(signupForm.validate());
     let formValue = signupForm.getValue();
     if (formValue) {
       this.props

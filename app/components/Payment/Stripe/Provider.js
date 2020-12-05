@@ -144,7 +144,7 @@ export default class Provider extends React.Component<Props> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const apiKeyChanged =
       this.props.apiKey &&
       nextProps.apiKey &&

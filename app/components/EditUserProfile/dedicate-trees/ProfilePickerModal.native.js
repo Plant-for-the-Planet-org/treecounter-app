@@ -3,7 +3,7 @@ import { View, ScrollView, Text, Platform } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { debug } from '../../../debug';
+//import { debug } from '../../../debug';
 import styles from '../../../styles/profilepicker.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import SearchUser from '../../GiftTrees/Tabs/SearchUser';
@@ -23,7 +23,7 @@ class ProfilePickerModal extends Component {
   }
 
   onSearchResultClick(event) {
-    debug(event);
+    //debug(event);
     this.setState({ selectedSuggestion: event });
   }
 

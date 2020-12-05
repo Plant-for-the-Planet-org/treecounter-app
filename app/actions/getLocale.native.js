@@ -26,7 +26,7 @@ export async function initLocale() {
 }
 
 export async function getLocaleAsync() {
-  // debug('getLocale', cache.locale);
+  //debug('getLocale', cache.locale);
   if (!cache.locale) {
     await initLocale();
   }
@@ -34,7 +34,7 @@ export async function getLocaleAsync() {
 }
 
 export function getLocale() {
-  // debug('getLocale', cache.locale);
+  //debug('getLocale', cache.locale);
   if (!cache.locale) {
     initLocale();
   }

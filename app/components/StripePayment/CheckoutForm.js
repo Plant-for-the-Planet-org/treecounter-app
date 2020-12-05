@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectStripe } from 'react-stripe-elements';
 import classnames from 'classnames';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import LoadingIndicators from '../../components/Common/LoadingIndicator';
 import CCForm from './CCForm';
 import SEPAForm from './SEPAForm';
@@ -34,7 +34,7 @@ class CheckoutForm extends React.Component {
   };
 
   handleSubmitSEPAPayment = async (/* ev */) => {
-    debug('SEPA PAYMENT SUBMITED');
+    //debug('SEPA PAYMENT SUBMITED');
   };
 
   onChangeSelectedCard = choose => {
@@ -103,6 +103,7 @@ class CheckoutForm extends React.Component {
           ? this.props.paymentStatus.contribution[0].id
           : undefined;
       if (donationId) {
+        //this.props.setProgressModelState(true);
         let requestData = {
           account: this.props.accountName,
           gateway: this.props.gateway,
@@ -138,6 +139,7 @@ class CheckoutForm extends React.Component {
             }
           });
       } else {
+        this.props.setProgressModelState(false);
         this.props.paymentFailed({
           status: false,
           message: i18n.t('label.donation_id_missing_error')

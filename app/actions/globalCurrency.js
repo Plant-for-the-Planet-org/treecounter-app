@@ -14,7 +14,7 @@ export function getPreferredCurrency() {
 }
 
 function guess() {
-  // debug('locale', getLocale());
+  //debug('locale', getLocale());
   cache.currency =
     getLocale() == 'de'
       ? 'EUR'

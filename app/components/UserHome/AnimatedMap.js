@@ -19,7 +19,7 @@ import UserContributionsDetails from '../UserContributions/ContributionDetails/i
 const screen = Dimensions.get('window');
 const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const LONGITUDE_DELTA = Math.abs(LATITUDE_DELTA * ASPECT_RATIO);
 
 class AnimatedViews extends React.Component {
   constructor(props) {
@@ -98,7 +98,7 @@ class AnimatedViews extends React.Component {
     }
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.userContributions && this.state.markers) {
       if (nextProps.userContributions.length !== this.state.markers.length || JSON.stringify(nextProps.userContributions) !== JSON.stringify(this.state.markers)) {
         this.setState({ markers: nextProps.userContributions })
@@ -381,8 +381,8 @@ class AnimatedViews extends React.Component {
                 identifier={String(marker.id)}
                 key={marker.id}
                 coordinate={{
-                  latitude: marker.geoLatitude,
-                  longitude: marker.geoLongitude
+                  latitude: Number(marker.geoLatitude) ? Number(marker.geoLatitude) : 0,
+                  longitude: Number(marker.geoLongitude) ? Number(marker.geoLongitude): 0
                 }}
               >
                 {this.getTreeImage(marker.treeCount, i)}

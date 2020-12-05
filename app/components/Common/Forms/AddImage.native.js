@@ -10,7 +10,16 @@ const AddImage = props => {
   const images = props.images;
 
   const options = {
-    title: props.title || 'Add Image',
+    title: props.title || i18n.t('label.add_image'),
+    cancelButtonTitle: i18n.t('label.cancel'),
+    takePhotoButtonTitle: i18n.t('label.take_photo'),
+    chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+    'permissionDenied.title': i18n.t('label.permission_denied_title'),
+    'permissionDenied.text': i18n.t('label.permission_denied_text'),
+    'permissionDenied.reTryTitle': i18n.t(
+      'label.permission_denied_retry_title'
+    ),
+    'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
     allowsEditing: true,
     mediaType: 'photo',
     multiple: true,
@@ -21,7 +30,7 @@ const AddImage = props => {
   };
 
   const renderAsset = (image, index) => {
-    debug(image);
+    //debug(image);
     return (
       <View
         key={index}
@@ -55,11 +64,11 @@ const AddImage = props => {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
                 debug('ImagePicker Error: ', response.error);
               } else {
-                debug('ImagePicker data: ', response.data);
+                //debug('ImagePicker data: ', response.data);
                 props.updateImages('data:image/jpeg;base64,' + response.data);
               }
             });
@@ -72,9 +81,9 @@ const AddImage = props => {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
-                debug('ImagePicker Error: ', response.error);
+                //debug('ImagePicker Error: ', response.error);
               } else {
                 props.updateImages('data:image/jpeg;base64,' + response.data);
               }

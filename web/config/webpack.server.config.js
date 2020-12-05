@@ -4,6 +4,7 @@ const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const commonConfig = require('./webpack.common.config.js')(true);
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+//const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = webpackMerge(commonConfig, {
   mode: 'production',
@@ -27,15 +28,6 @@ module.exports = webpackMerge(commonConfig, {
     publicPath: '/'
   },
   devtool: 'source-map',
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['eslint-loader']
-      }
-    ]
-  },
   optimization: {
     minimize: true,
     minimizer: [
@@ -58,6 +50,7 @@ module.exports = webpackMerge(commonConfig, {
           minimize: false
         }
       }
-    })
+    }),
+//    new ESLintPlugin()
   ]
 });

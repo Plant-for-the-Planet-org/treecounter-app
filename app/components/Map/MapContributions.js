@@ -63,10 +63,10 @@ class MapContributions extends PureComponent {
         .queryFeatures(query)
         .then(featureSet => {
           if (!this._mounted) return;
-          debug(
+          /* debug(
             '############ MapContributions featureSet: ',
             featureSet.features
-          );
+          ); */
           // featureSet.features.forEach(feature => {
           //   const {attributes, geometry} =  feature;
           // });

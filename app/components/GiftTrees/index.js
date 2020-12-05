@@ -162,11 +162,11 @@ export default class GiftTrees extends Component {
     this.setState({ showSelectProject: value });
   }
   getSuggestionAndSet(value) {
-    debug('calling', value);
+    //debug('calling', value);
     const { updatePageIndex, updateSelectProject, suggestionClicked } = this;
     postDirectRequest('/suggest.php', 'q=' + value.trim())
       .then(_suggestions => {
-        debug('sugessions', _suggestions);
+        //debug('sugessions', _suggestions);
         if (_suggestions.data.length && _suggestions.data[0].slug == value) {
           suggestionClicked(null, { suggestion: _suggestions.data[0] });
           updatePageIndex(1);
@@ -211,6 +211,7 @@ export default class GiftTrees extends Component {
         currency: this.state.selectedCurrency,
         ...this.state.form
       };
+      //TODO: do not continue if this request fails
       this.props.createPaymentGift(
         this.props.selectedProject.id,
         requestData,
@@ -585,10 +586,10 @@ export default class GiftTrees extends Component {
                     treeCount: this.state.selectedTreeCount
                   }}
                   onFailure={data =>
-                    debug('/////////////////// payment failure ', data)
+                    debug('payment failure ', data)
                   }
                   onError={data =>
-                    debug('/////////////////// payment error ', data)
+                    debug('payment error ', data)
                   }
                 />
               ) : null}

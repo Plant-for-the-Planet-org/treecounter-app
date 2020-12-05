@@ -10,13 +10,13 @@ export default class PDFViewer extends React.Component {
     super(props);
     let { params } = this.props.navigation.state;
     this.state = { uri: params ? params.url : this.props.url, cache: true };
-    debug();
+    //debug();
   }
 
   render() {
     const source = { ...this.state, uri: getPDFUrl(this.state.uri) };
     let instance = this;
-    debug(this.state);
+    //debug(this.state);
     return (
       <View style={styles.container}>
         {!this.state.uri ? (

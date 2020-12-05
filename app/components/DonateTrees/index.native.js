@@ -73,7 +73,7 @@ export default class DonateTrees extends React.PureComponent {
     }
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
-    debug('got user form', this.props.navigation.getParam('userForm'), params);
+    //debug('got user form', this.props.navigation.getParam('userForm'), params);
     if (params !== undefined && params.giftMethod === 'invitation') {
       this.setState({
         giftTreeCounterName:
@@ -88,10 +88,10 @@ export default class DonateTrees extends React.PureComponent {
   UNSAFE_componentWillReceiveProps(nextProps) {
     // const { navigation } = this.props;
     if (nextProps.selectedProject) {
-      debug(
+      /* debug(
         'nextProps.selectedProject.paymentSetup',
         nextProps.selectedProject.paymentSetup
-      );
+      ); */
       if (
         nextProps.selectedProject.paymentSetup &&
         nextProps.selectedProject.paymentSetup.treeCountOptions &&
@@ -355,6 +355,7 @@ export default class DonateTrees extends React.PureComponent {
     sendState = { ...this.state.form };
     if (params !== undefined && params.giftMethod != null) {
       if (params.giftMethod === 'invitation') {
+        //TODO: do not continue if this request fails
         this.props.createPaymentGift(
           this.props.selectedProject.id,
           {
@@ -367,6 +368,7 @@ export default class DonateTrees extends React.PureComponent {
           this.props.currentUserProfile
         );
       } else if (params.giftMethod === 'direct') {
+        //TODO: do not continue if this request fails
         this.props.createPaymentGift(
           this.props.selectedProject.id,
           {
@@ -388,6 +390,7 @@ export default class DonateTrees extends React.PureComponent {
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
     }
+    //TODO: do not continue if this request fails
     this.props.createPaymentDonation(
       this.props.selectedProject.id,
       {

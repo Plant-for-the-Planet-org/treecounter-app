@@ -3,7 +3,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { Formik } from 'formik';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { TextField } from 'react-native-material-textfield';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Picker } from '@react-native-community/picker';
 import ImagePicker from 'react-native-image-picker';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -229,38 +229,22 @@ export const FormikForm = props => {
 };
 
 export function AccessPicker(props) {
-  let data = [
-    {
-      label: i18n.t('label.competition_access_immediate'),
-      value: 'immediate'
-    },
-    {
-      label: i18n.t('label.competition_access_request'),
-      value: 'request'
-    },
-    {
-      label: i18n.t('label.competition_access_invitation'),
-      value: 'invitation'
-    }
-  ];
   const onChange = value => {
     props.setFieldValue('access', value);
   };
-  // eslint-disable-next-line
-  let dropdown = '';
   return (
     <View>
-      <Dropdown
-        ref={ref => (dropdown = ref)}
-        label={i18n.t('label.competition_access')}
-        data={data}
-        onChangeText={onChange}
-        lineWidth={1}
-        itemTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-        labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
-        error={props.touched.access && props.errors.access}
-        value={props.values.access}
-      />
+      <Picker
+        selectedValue={props.values.access}
+        style={{ fontSize: 15, fontFamily: 'OpenSans-Regular' }}
+        itemStyle={{ fontSize: 15, fontFamily: 'OpenSans-Regular' }}
+        mode="dialog"
+        prompt={i18n.t('label.competition_access')}
+        onValueChange={onChange}>
+          <Picker.Item key="immediate" label={i18n.t('label.competition_access_immediate')} value="immediate" />
+          <Picker.Item key="request" label={i18n.t('label.competition_access_request')} value="request" />
+          <Picker.Item key="invitation" label={i18n.t('label.competition_access_invitation')} value="invitation" />
+      </Picker>
     </View>
   );
 }
@@ -269,7 +253,16 @@ export function AddImage(props) {
   let image = props.image;
 
   const options = {
-    title: 'Add Image',
+    title: i18n.t('label.add_image'),
+    cancelButtonTitle: i18n.t('label.cancel'),
+    takePhotoButtonTitle: i18n.t('label.take_photo'),
+    chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+    'permissionDenied.title': i18n.t('label.permission_denied_title'),
+    'permissionDenied.text': i18n.t('label.permission_denied_text'),
+    'permissionDenied.reTryTitle': i18n.t(
+      'label.permission_denied_retry_title'
+    ),
+    'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
     storageOptions: {
       skipBackup: true,
       path: 'images'
@@ -326,7 +319,7 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchImageLibrary(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
                 debug('ImagePicker Error: ', response.error);
               } else {
@@ -345,7 +338,7 @@ export function AddImage(props) {
           onPress={() => {
             ImagePicker.launchCamera(options, response => {
               if (response.didCancel) {
-                debug('User cancelled image picker');
+                //debug('User cancelled image picker');
               } else if (response.error) {
                 debug('ImagePicker Error: ', response.error);
               } else {
@@ -374,7 +367,11 @@ export function CompetitionDatePicker(props) {
           <Text style={styles.labelEndDate}>
             {i18n.t('label.competition_end_date')}
           </Text>
-          <Text>{formatDate(formatDateToMySQL(props.endDate))}</Text>
+          <Text style={styles.EndDate}>
+            {formatDate(formatDateToMySQL(props.endDate))}</Text>
+          {props.errors && props.errors.endDate ? (
+            <Text>{props.errors.endDate}</Text>
+          ) : null}
         </View>
         <View style={styles.datePickerUnderline} />
       </TouchableOpacity>
@@ -391,6 +388,9 @@ export function CompetitionDatePicker(props) {
         date={new Date(props.endDate)}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}
+        headerTextIOS={i18n.t('label.datePickerTitle')}
+        cancelTextIOS={i18n.t('label.datePickerCancel')}
+        confirmTextIOS={i18n.t('label.datePickerConfirm')}
       />
     </View>
   );

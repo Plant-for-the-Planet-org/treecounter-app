@@ -1,12 +1,19 @@
 import i18next from 'i18next';
 import { getLanguages } from 'react-native-i18n';
-import enlabels from './en';
+import enLabels from './en';
 import deLabels from './de';
 import esLabels from './es';
 import frLabels from './fr';
 import itLabels from './it';
 import ptLabels from './pt';
 import ptBRLabels from './pt-BR';
+import enCountries from './en/country.json';
+import deCountries from './de/country.json';
+import esCountries from './es/country.json';
+import frCountries from './fr/country.json';
+import itCountries from './it/country.json';
+import ptCountries from './pt/country.json';
+import ptBRCountries from './pt-BR/country.json';
 import { supportedLocales, defaultLocale } from '../actions/getLocale';
 
 // TO-DO: consider changing this the same way as i18n.js using getLocale()
@@ -36,37 +43,44 @@ i18next.init({
   resources: {
     'en': {
       translation: {
-        label: enlabels
+        label: enLabels,
+        country: enCountries
       }
     },
     'de': {
       translation: {
-        label: deLabels
+        label: deLabels,
+        country: deCountries
       }
     },
     'es': {
       translation: {
-        label: esLabels
+        label: esLabels,
+        country: esCountries
       }
     },
     'fr': {
       translation: {
-        label: frLabels
+        label: frLabels,
+        country: frCountries
       }
     },
     'it': {
       translation: {
-        label: itLabels
+        label: itLabels,
+        country: itCountries
       }
     },
     'pt': {
       translation: {
-        label: ptLabels
+        label: ptLabels,
+        country: ptCountries
       }
     },
     'pt-BR': {
       translation: {
-        label: ptBRLabels
+        label: ptBRLabels,
+        country: ptBRCountries
       }
     }
   }

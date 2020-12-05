@@ -19,6 +19,7 @@ function isEmail(x) {
   return /(.)+@(.)+/.test(x);
 }
 
+transform.resetFormats();
 transform.registerFormat('email', isEmail);
 
 export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
@@ -28,12 +29,11 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
     let properties = liformSchema.properties;
 
     for (let propertyKey in properties) {
-      let newEnum = {};
       if (properties[propertyKey]) {
         if (properties[propertyKey]['enum']) {
+          let newEnum = {};
           for (let enumKeys in properties[propertyKey].enum) {
-            newEnum[properties[propertyKey].enum[enumKeys]] =
-              properties[propertyKey].enum_titles[enumKeys];
+            newEnum[properties[propertyKey].enum[enumKeys]] = properties[propertyKey].enum_titles[enumKeys];
           }
           properties[propertyKey].enum = newEnum;
           delete properties[propertyKey].enum_titles;
@@ -61,10 +61,11 @@ export default function parseJsonToTcomb(liformSchemaJson, config, validator) {
             options.config = {
               iconUrl: images[properties[propertyKey].icon]
             };
-            if (properties[propertyKey].icon === 'email') {
-              options.config = { ...options.config, email: true };
-              properties[propertyKey].format = 'email';
-            }
+            // already done below for propertyKey === 'email'
+            //if (properties[propertyKey].icon === 'email') {
+            //  options.config = { ...options.config, email: true };
+            //  properties[propertyKey].format = 'email';
+            //}
           }
           if (properties[propertyKey]['maxDate']) {
             options.config = { ...options.config, maxDate: true };

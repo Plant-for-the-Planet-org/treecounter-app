@@ -132,7 +132,7 @@ class PaymentSelector extends React.Component<{}, { elementFontSize: string }> {
       this.props.onSuccess({ gateway, accountName, ...response });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.paymentMethods) {
       // lookup stripe related payment methods for the current country/currency combination
       const stripeGateways = Object.keys(nextProps.paymentMethods).filter(

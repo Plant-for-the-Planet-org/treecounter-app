@@ -4,6 +4,7 @@ const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const commonConfig = require('./webpack.common.config.js')(true);
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+//const ESLintPlugin = require('eslint-webpack-plugin');
 
 const {
   BugsnagBuildReporterPlugin,
@@ -34,15 +35,6 @@ module.exports = env => {
       publicPath: '/'
     },
     devtool: 'source-map',
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: ['eslint-loader']
-        }
-      ]
-    },
     optimization: {
       minimize: true,
       minimizer: [
@@ -75,7 +67,8 @@ module.exports = env => {
             minimize: false
           }
         }
-      })
+      }),
+//      new ESLintPlugin()
     ]
   });
 };

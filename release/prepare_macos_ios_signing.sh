@@ -7,7 +7,7 @@ echo "Preparing iOS build"
 gpg --quiet --batch --yes --decrypt --passphrase="$PROVISIONING_PASSWORD" --output release/AppStoreCertificates.p12 release/AppStoreCertificates.p12.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$PROVISIONING_PASSWORD" --output release/d7eac000-9967-4d71-b570-0262a5c3fb21.mobileprovision release/d7eac000-9967-4d71-b570-0262a5c3fb21.mobileprovision.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$PROVISIONING_PASSWORD" --output release/36898aad-d25b-4d4a-bc71-05faedd579f1.mobileprovision release/36898aad-d25b-4d4a-bc71-05faedd579f1.mobileprovision.gpg
-gpg --quiet --batch --yes --decrypt --passphrase="$PROVISIONING_PASSWORD" --output release/31f528b5-e436-47ab-b159-9d59e9abb155.mobileprovision release/31f528b5-e436-47ab-b159-9d59e9abb155.mobileprovision.gpg
+gpg --quiet --batch --yes --decrypt --passphrase="$PROVISIONING_PASSWORD" --output release/4aedc09f-4a34-45f1-92f2-55d3bbb7ac89.mobileprovision release/4aedc09f-4a34-45f1-92f2-55d3bbb7ac89.mobileprovision.gpg
 
 echo "Release folder:"
 ls -l release/*

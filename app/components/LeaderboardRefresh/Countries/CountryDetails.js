@@ -31,7 +31,7 @@ const CountryDetails = ({ navigation }) => {
     const caption = navigation.getParam('caption');
     setQueryResult(null);
     setSection(caption);
-    debug(section, subSection, caption, 'Sections');
+    //debug(section, subSection, caption, 'Sections');
     LeaderBoardDataAction({
       section,
       orderBy: orderBy,
@@ -148,7 +148,6 @@ const CountryDetails = ({ navigation }) => {
 const CompanyListItem = ({ onPressListItem, item, index }) => {
   const [isPress, setIsPress] = useState(false);
   const isPrivate = 'mayPublish' in item && !item.mayPublish;
-  debug(isPress, 'isPressisPress');
   return (
     <TouchableOpacity
       onPress={() =>

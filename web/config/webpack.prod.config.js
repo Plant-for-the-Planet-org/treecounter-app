@@ -3,6 +3,7 @@ const webpackMerge = require('webpack-merge');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const commonConfig = require('./webpack.common.config.js')(true);
 const path = require('path');
+//const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = webpackMerge(commonConfig, {
   mode: 'production',
@@ -25,15 +26,6 @@ module.exports = webpackMerge(commonConfig, {
     filename: '[name].[hash].js',
     publicPath: '/'
   },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['eslint-loader']
-      }
-    ]
-  },
   optimization: {
     minimize: true
   },
@@ -45,6 +37,7 @@ module.exports = webpackMerge(commonConfig, {
           minimize: false
         }
       }
-    })
+    }),
+//    new ESLintPlugin()
   ]
 });

@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { find } from 'lodash';
-import { debug } from '../../debug';
+//import { debug } from '../../debug';
 import SingleRating from './SingleRating';
 import BottomAction from './BottomAction';
 import { pushStaticRoute } from './../../helpers/routerHelper';
@@ -16,7 +16,7 @@ import styles from '../../styles/review.native';
 export default class SingleReview extends Component {
   constructor(props) {
     super(props);
-    debug('single props', props);
+    //debug('single props', props);
     this.close = this.close.bind(this);
     this.state = {
       reviewIndexes: props.reviewIndexes
@@ -26,7 +26,7 @@ export default class SingleReview extends Component {
     nextProps.reviewIndexes
       ? this.setState({ reviewIndexes: nextProps.reviewIndexes })
       : '';
-    debug('got new props: in single reviews:', nextProps);
+    //debug('got new props: in single reviews:', nextProps);
   }
   close() {
     this.RBSheet.close();
@@ -52,7 +52,7 @@ export default class SingleReview extends Component {
   }
   render() {
     let { review, navigation } = this.props;
-    // debug('in single props in render', this.props);
+    //debug('in single props in render', this.props);
     const { reviewIndexScores } = review;
     const { reviewIndexes } = this.state;
     return (

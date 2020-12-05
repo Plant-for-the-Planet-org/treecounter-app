@@ -109,6 +109,7 @@ jobs:
     # - name: Overide Environment if Master Branch
     #   if: endsWith(github.ref, '/master')
     #   run: |
+    #     # change this to -> echo "{name}={value"}" >> $GITHUB_ENV
     #     echo "::set-env name=host::https://www.trilliontreecampaign.org";
     #     echo "::set-env name=api_url::https://app.plant-for-the-planet.org";
     #     echo "::set-env name=mapIdsInventory::534da741b327459eb117f4cc93acd98e";
@@ -120,6 +121,7 @@ jobs:
     # - name: Overide Environment if Staging Branch
     #   if: endsWith(github.ref, '/staging')
     #   run: |
+    #     # change this to -> echo "{name}={value"}" >> $GITHUB_ENV
     #     echo "::set-env name=host::https://staging.trilliontreecampaign.org";
     #     echo "::set-env name=api_url::https://app-staging.plant-for-the-planet.org";
     #     echo "::set-env name=mapIdsInventory::dee6acf9de774fe6878813f707b4ab88";
@@ -175,7 +177,7 @@ jobs:
     - name: Prepare iOS IPA for upload
       run: |
         upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.ipa
-        echo "::set-env name=upload_file::$upload_file"
+        echo "upload_file=$upload_file" >> $GITHUB_ENV
         mkdir -p uploads
         mv 'ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa' uploads/$upload_file
 

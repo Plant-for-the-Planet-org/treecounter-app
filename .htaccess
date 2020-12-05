@@ -5,6 +5,11 @@
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
 DirectoryIndex index.html
 
+AuthType Basic
+AuthName "TTC"
+AuthUserFile /kunden/188089_20457/pftp2014/source/.htpasswd
+require valid-user
+
 # By default, Apache does not evaluate symbolic links if you did not enable this
 # feature in your server configuration. Uncomment the following line if you
 # install assets as symlinks or if you experience problems related to symlinks

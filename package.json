@@ -88,7 +88,7 @@
     "react-native-image-picker": "git+https://github.com/norbertschuler/react-native-image-picker.git",
     "react-native-keyboard-aware-scroll-view": "^0.9.2",
     "react-native-linear-gradient": "react-native-community/react-native-linear-gradient",
-    "react-native-map-clustering": "^3.1.2",
+    "react-native-map-clustering": "^3.3.9",
     "react-native-maps": "^0.26.1",
     "react-native-material-dropdown": "git+https://github.com/norbertschuler/react-native-material-dropdown.git",
     "react-native-material-textfield": "git+https://github.com/norbertschuler/react-native-material-textfield.git",

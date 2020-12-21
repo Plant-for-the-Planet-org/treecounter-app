@@ -57,8 +57,8 @@ function guessLocale() {
     return supportedLocales.includes(tempLocale) ? tempLocale : 'en';
   } else if (location_locale.includes('?noredirect')) {
     return defaultLocale;
-  } else if (languageCached !== null) {
-    return languageCached;
+  } else if (languageCached) {
+    return supportedLocales.includes(languageCached) ? languageCached : 'en';
   } else {
     let locale = navigator.language || navigator.userLanguage;
     // if not supported long locale format, e.g. en-US try short version, e.g. en

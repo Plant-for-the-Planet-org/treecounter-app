@@ -38,5 +38,19 @@
   "permission_denied_title": "Permissão negada",
   "permission_denied_text": "Sem permissão de acesso à sua câmera ou à sua biblioteca de fotos.",
   "permission_denied_retry_title": "Tentar novamente",
-  "permission_denied_ok_title": "Tenho certeza"
+  "permission_denied_ok_title": "Tenho certeza",
+  "city": "Cidade",
+  "state": "Estado",
+  "country": "País",
+  "school_type": "Tipo de escola",
+  "primary_school": "Primário",
+  "secondary_school": "Secundário",
+  "higher_school": "Superior",
+  "other_school": "Outros",
+  "org_type": "Tipo de organização",
+  "org_non_profit": "Sem fins lucrativos",
+  "org_service_club": "Clube de Serviços",
+  "org_political_party": "Partido Político",
+  "org_other": "Outros",
+  "sub_type": "Subtipo"
 }

@@ -355,6 +355,7 @@ export default class DonateTrees extends React.PureComponent {
     sendState = { ...this.state.form };
     if (params !== undefined && params.giftMethod != null) {
       if (params.giftMethod === 'invitation') {
+        //TODO: do not continue if this request fails
         this.props.createPaymentGift(
           this.props.selectedProject.id,
           {
@@ -367,6 +368,7 @@ export default class DonateTrees extends React.PureComponent {
           this.props.currentUserProfile
         );
       } else if (params.giftMethod === 'direct') {
+        //TODO: do not continue if this request fails
         this.props.createPaymentGift(
           this.props.selectedProject.id,
           {
@@ -388,6 +390,7 @@ export default class DonateTrees extends React.PureComponent {
     if (this.props.supportTreecounter.treecounterId) {
       sendState.communityTreecounter = this.props.supportTreecounter.treecounterId;
     }
+    //TODO: do not continue if this request fails
     this.props.createPaymentDonation(
       this.props.selectedProject.id,
       {

@@ -211,6 +211,7 @@ export default class GiftTrees extends Component {
         currency: this.state.selectedCurrency,
         ...this.state.form
       };
+      //TODO: do not continue if this request fails
       this.props.createPaymentGift(
         this.props.selectedProject.id,
         requestData,

@@ -194,7 +194,16 @@ export function AddImage(props) {
   const image = props.image;
 
   const options = {
-    title: 'Add Image',
+    title: i18n.t('label.add_image'),
+    cancelButtonTitle: i18n.t('label.cancel'),
+    takePhotoButtonTitle: i18n.t('label.take_photo'),
+    chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+    'permissionDenied.title': i18n.t('label.permission_denied_title'),
+    'permissionDenied.text': i18n.t('label.permission_denied_text'),
+    'permissionDenied.reTryTitle': i18n.t(
+      'label.permission_denied_retry_title'
+    ),
+    'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
     storageOptions: {
       skipBackup: true,
       path: 'images'
@@ -300,7 +309,7 @@ export function CompetitionDatePicker(props) {
         date={new Date(props.endDate)}
         onCancel={() => setShowDatePicker(false)}
         minimumDate={new Date(new Date().valueOf() + 1000 * 3600 * 24)}
-        titleIOS={i18n.t('label.datePickerTitle')}
+        headerTextIOS={i18n.t('label.datePickerTitle')}
         cancelTextIOS={i18n.t('label.datePickerCancel')}
         confirmTextIOS={i18n.t('label.datePickerConfirm')}
       />

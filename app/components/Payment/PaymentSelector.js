@@ -85,6 +85,7 @@ class PaymentSelector extends Component {
             this.props.currentUserProfile
           )
           .then(response => {
+            setProgressModelState(false);
             if (response.data.status == 'failed') {
               this.props.paymentFailed({
                 status: false,
@@ -96,7 +97,6 @@ class PaymentSelector extends Component {
                 this.props.currentUserProfile
               );
             }
-            setProgressModelState(false);
           });
       } else {
         setProgressModelState(false);

@@ -4,6 +4,7 @@ import { debug } from '../debug';
 export const loadState = async () => {
   try {
     const serializedState = await AsyncStorage.getItem('state');
+    console.log(serializedState);
     if (serializedState === null) {
       return undefined;
     }

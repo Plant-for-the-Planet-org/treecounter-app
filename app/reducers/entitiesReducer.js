@@ -5,6 +5,7 @@ import set from 'lodash/set';
 
 export const initialState = {
   userProfile: null,
+  accessToken: null,
   contribution: {},
   tpo: {},
   plantProject: {},
@@ -19,6 +20,7 @@ export const initialState = {
 };
 
 export const getUserProfiles = state => state.entities.userProfile;
+export const getAccessToken = state => state.entities.accessToken;
 export const getContributions = state => state.entities.contribution;
 export const getTpos = state => state.entities.tpo;
 export const getPlantProjects = state => state.entities.plantProject;

@@ -12,6 +12,7 @@ import i18n from '../../locales/i18n.js';
 import styless from '../../styles/WelcomeScreens/WelcomeScreen5';
 import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 import SafeAreaView from 'react-native-safe-area-view';
+import {auth0Login} from '../../actions/auth0Actions';
 
 const WelcomSlider = ({ navigation }) => {
   const appHomePage = () => updateRoute('app_homepage', navigation);
@@ -20,7 +21,7 @@ const WelcomSlider = ({ navigation }) => {
       <View style={{ backgroundColor: '#fff', marginTop: 16 }}>
         <View style={styless.bottomRow}>
           <PrimaryButton
-            onClick={() => updateRoute('app_signup', navigation)}
+            onClick={() => auth0Login()}
             buttonStyle={styless.buttonStyle}
           >
             <Text style={styless.continueBtn}>
@@ -30,7 +31,7 @@ const WelcomSlider = ({ navigation }) => {
         </View>
         <View style={styless.bottomRow}>
           <PrimaryButton
-            onClick={() => updateRoute('app_login', navigation)}
+            onClick={() => auth0Login()}
             buttonStyle={styless.lowerBtnStyle}
           >
             <Text style={styless.alreadyHaveAccountBtn}>

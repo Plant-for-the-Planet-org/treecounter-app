@@ -63,7 +63,7 @@ async function getHeaders(authenticated = false, recaptcha) {
   }
   if (authenticated) {
     return {
-      headers: { ...headers, Authorization: `Bearer ${await getAccessToken()}` }
+      headers: { ...headers, Authorization: `OAuth ${await getAccessToken()}` }
     };
   } else {
     return { headers };

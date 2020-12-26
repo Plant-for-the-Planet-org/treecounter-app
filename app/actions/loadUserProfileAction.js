@@ -14,6 +14,10 @@ export function loadUserProfile(returnData) {
     dispatch(setProgressModelState(true));
     request
       .then(res => {
+
+        if (res.code === '303') {
+          // Signup user
+        }
         dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
         dispatch(setCurrentUserProfileId(res.data.id));
         dispatch(setProgressModelState(false));

@@ -17,7 +17,6 @@ export const reviewsSchema = new schema.Entity('reviews');
 export const tpoSchema = new schema.Entity('tpo');
 export const treecounterSchema = new schema.Entity('treecounter');
 export const userProfileSchema = new schema.Entity('userProfile');
-export const accessTokenSchema = new schema.Entity('accessToken');
 
 challengeSchema.define({
   treecounter: treecounterSchema

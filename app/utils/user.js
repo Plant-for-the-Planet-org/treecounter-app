@@ -80,3 +80,15 @@ const getTokenExpires = async () => {
 };
 
 const getCurrentUnixTimestamp = () => Math.floor(Date.now() / 1000);
+
+
+// Accepts 3 parameters -
+// token - this is the access_token from Auth0
+// refresh_token - this is refresh token
+// id_token - this is the idToken used to get the expriration time
+export const updateNewJWT = (token, refreshToken, idToken) => {
+  saveItem('token', token);
+  saveItem('refresh_token', refreshToken);
+  saveItem('token_expires', `${getExpirationTimeStamp(idToken)}`);
+  return;
+};

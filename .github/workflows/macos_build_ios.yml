@@ -105,8 +105,8 @@ jobs:
         AUTH0_CLIENT_ID: 4xN2f8asiz24HA4bnB1c8weT9BFh624u
 
       run: |
-        /usr/local/opt/gettext/bin/envsubst < .env.deploy > .env.develop
-        cp .env.develop .env
+        /usr/local/opt/gettext/bin/envsubst < .env.deploy > .env.staging
+        cp .env.staging .env
 
 # Currently not yet supported different flavors
     # - name: Overide Environment if Master Branch
@@ -157,7 +157,7 @@ jobs:
     - name: Build archive
       run: |
         xcodebuild -sdk iphoneos -workspace TreecounterApp.xcworkspace \
-        -configuration Release -scheme 'TreecounterApp(.env.develop)' \
+        -configuration Release -scheme 'TreecounterApp(.env.staging)' \
         -derivedDataPath DerivedData \
         -archivePath DerivedData/Archive/TreecounterAppDevelop archive
       working-directory: ./ios
@@ -174,15 +174,15 @@ jobs:
 #    - name: Upload iOS IPA file
 #      uses: actions/upload-artifact@v1
 #      with:
-#        name: TreecounterApp-develop-release.ipa
-#        path: ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa
+#        name: TreecounterApp-staging-release.ipa
+#        path: ios/DerivedData/ipa/TreecounterApp(.env.staging).ipa
 
     - name: Prepare iOS IPA for upload
       run: |
         upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.ipa
         echo "upload_file=$upload_file" >> $GITHUB_ENV
         mkdir -p uploads
-        mv 'ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa' uploads/$upload_file
+        mv 'ios/DerivedData/ipa/TreecounterApp(.env.staging).ipa' uploads/$upload_file
 
     # depends on existence of upload file at uploads/$upload_file
     - name: Upload iOS IPA to Browserstack

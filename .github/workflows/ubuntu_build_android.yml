@@ -72,8 +72,8 @@ jobs:
         AUTH0_DOMAIN: https://accounts.plant-for-the-planet.org
         AUTH0_CLIENT_ID: 4xN2f8asiz24HA4bnB1c8weT9BFh624u
       run: |
-        envsubst < .env.deploy > .env.develop
-        cp .env.develop .env
+        envsubst < .env.deploy > .env.staging
+        cp .env.staging .env
 
 # Currently not yet supported different flavors
     # - name: Overide Environment if Master Branch
@@ -142,8 +142,8 @@ jobs:
 #    - name: Upload Android APK file
 #      uses: actions/upload-artifact@v1
 #      with:
-#        name: TreecounterApp-develop-release.apk
-#        path: android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk
+#        name: TreecounterApp-staging-release.apk
+#        path: android/app/build/outputs/apk/develop/release/app-staging-universal-release.apk
 
     - name: Prepare Android APK for upload
       run: |

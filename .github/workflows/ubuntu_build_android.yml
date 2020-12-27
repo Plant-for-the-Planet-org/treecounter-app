@@ -135,7 +135,7 @@ jobs:
 #      working-directory: ./android
 
     - name: Android Build
-      run: ./gradlew assembleDevelopRelease --stacktrace --no-daemon
+      run: ./gradlew assembleStagingRelease --stacktrace --no-daemon
       working-directory: ./android
 
 # We only have 0.5GB space to store artifacts for GitHub actions
@@ -143,14 +143,14 @@ jobs:
 #      uses: actions/upload-artifact@v1
 #      with:
 #        name: TreecounterApp-staging-release.apk
-#        path: android/app/build/outputs/apk/develop/release/app-staging-universal-release.apk
+#        path: android/app/build/outputs/apk/staging/release/app-staging-universal-release.apk
 
     - name: Prepare Android APK for upload
       run: |
         upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.apk
         echo "upload_file=$upload_file" >> $GITHUB_ENV
         mkdir -p uploads
-        mv android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk uploads/$upload_file
+        mv android/app/build/outputs/apk/staging/release/app-staging-universal-release.apk uploads/$upload_file
 
     # depends on existence of upload file at uploads/$upload_file
     - name: Upload Android APK to Browserstack

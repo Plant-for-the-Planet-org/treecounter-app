@@ -58,8 +58,8 @@ jobs:
         googleMapApiKey: ${{ secrets.GOOGLE_MAP_API_KEY }}
         mediaPath: /media/cache
         scheme: https
-        host: development.trilliontreecampaign.org
-        api_url: https://app-development.plant-for-the-planet.org
+        host: staging.trilliontreecampaign.org
+        api_url: https://app-staging.plant-for-the-planet.org
         base:
         debug: true
         currency: EUR
@@ -68,7 +68,9 @@ jobs:
         androidAppId: org.pftp
         iosAppId: 1444740626
         locationApikKey: ${{ secrets.LOCATION_API_KEY }}
-        env: develop
+        env: staging
+        AUTH0_DOMAIN: https://accounts.plant-for-the-planet.org
+        AUTH0_CLIENT_ID: 4xN2f8asiz24HA4bnB1c8weT9BFh624u
       run: |
         envsubst < .env.deploy > .env.develop
         cp .env.develop .env

@@ -77,9 +77,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-node2-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-node3-${{ hashFiles('package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node2-
+          ${{ runner.os }}-node3-
 
     - name: Install npm
       run : |
@@ -140,9 +140,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ios/Pods
-        key: ${{ runner.os }}-pods2-${{ hashFiles('ios/Podfile*') }}
+        key: ${{ runner.os }}-pods3-${{ hashFiles('ios/Podfile*') }}
         restore-keys: |
-          ${{ runner.os }}-pods2-
+          ${{ runner.os }}-pods3-
 
     - name: Install Pods
       run: pod install

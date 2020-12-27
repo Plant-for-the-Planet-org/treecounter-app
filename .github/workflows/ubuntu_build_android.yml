@@ -45,9 +45,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-node2-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-node3-${{ hashFiles('package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node2-
+          ${{ runner.os }}-node3-
 
     - name: Install npm
       run : |
@@ -125,9 +125,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.gradle/caches
-        key: ${{ runner.os }}-androidgradle2-${{ hashFiles('android/*.gradle') }}
+        key: ${{ runner.os }}-androidgradle3-${{ hashFiles('android/*.gradle') }}
         restore-keys: |
-          ${{ runner.os }}-androidgradle2-
+          ${{ runner.os }}-androidgradle3-
 
 # Currently not working due to https://github.com/react-native-community/react-native-maps/issues/3266
 #    - name: Checking Gradle dependencies

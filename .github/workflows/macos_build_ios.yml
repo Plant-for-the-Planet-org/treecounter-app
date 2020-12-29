@@ -77,9 +77,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-node2-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-node3-${{ hashFiles('package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node2-
+          ${{ runner.os }}-node3-
 
     - name: Install npm
       run : |
@@ -90,8 +90,8 @@ jobs:
         googleMapApiKey: ${{ secrets.GOOGLE_MAP_API_KEY }}
         mediaPath: /media/cache
         scheme: https
-        host: development.trilliontreecampaign.org
-        api_url: https://app-development.plant-for-the-planet.org
+        host: staging.trilliontreecampaign.org
+        api_url: https://app-staging.plant-for-the-planet.org
         base:
         debug: true
         currency: EUR
@@ -100,10 +100,13 @@ jobs:
         androidAppId: org.pftp
         iosAppId: 1444740626
         locationApikKey: ${{ secrets.LOCATION_API_KEY }}
-        env: develop
+        env: staging
+        AUTH0_DOMAIN: https://accounts.plant-for-the-planet.org
+        AUTH0_CLIENT_ID: xUmyt9CxZc9OKiaXavkStCb2jKbB1eCx
+
       run: |
-        /usr/local/opt/gettext/bin/envsubst < .env.deploy > .env.develop
-        cp .env.develop .env
+        /usr/local/opt/gettext/bin/envsubst < .env.deploy > .env.staging
+        cp .env.staging .env
 
 # Currently not yet supported different flavors
     # - name: Overide Environment if Master Branch
@@ -137,9 +140,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ios/Pods
-        key: ${{ runner.os }}-pods2-${{ hashFiles('ios/Podfile*') }}
+        key: ${{ runner.os }}-pods3-${{ hashFiles('ios/Podfile*') }}
         restore-keys: |
-          ${{ runner.os }}-pods2-
+          ${{ runner.os }}-pods3-
 
     - name: Install Pods
       run: pod install
@@ -154,7 +157,7 @@ jobs:
     - name: Build archive
       run: |
         xcodebuild -sdk iphoneos -workspace TreecounterApp.xcworkspace \
-        -configuration Release -scheme 'TreecounterApp(.env.develop)' \
+        -configuration Release -scheme 'TreecounterApp(.env.staging)' \
         -derivedDataPath DerivedData \
         -archivePath DerivedData/Archive/TreecounterAppDevelop archive
       working-directory: ./ios
@@ -171,15 +174,15 @@ jobs:
 #    - name: Upload iOS IPA file
 #      uses: actions/upload-artifact@v1
 #      with:
-#        name: TreecounterApp-develop-release.ipa
-#        path: ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa
+#        name: TreecounterApp-staging-release.ipa
+#        path: ios/DerivedData/ipa/TreecounterApp(.env.staging).ipa
 
     - name: Prepare iOS IPA for upload
       run: |
         upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.ipa
         echo "upload_file=$upload_file" >> $GITHUB_ENV
         mkdir -p uploads
-        mv 'ios/DerivedData/ipa/TreecounterApp(.env.develop).ipa' uploads/$upload_file
+        mv 'ios/DerivedData/ipa/TreecounterApp(.env.staging).ipa' uploads/$upload_file
 
     # depends on existence of upload file at uploads/$upload_file
     - name: Upload iOS IPA to Browserstack

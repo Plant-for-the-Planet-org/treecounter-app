@@ -45,9 +45,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-node2-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-node3-${{ hashFiles('package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node2-
+          ${{ runner.os }}-node3-
 
     - name: Install npm
       run : |
@@ -58,8 +58,8 @@ jobs:
         googleMapApiKey: ${{ secrets.GOOGLE_MAP_API_KEY }}
         mediaPath: /media/cache
         scheme: https
-        host: development.trilliontreecampaign.org
-        api_url: https://app-development.plant-for-the-planet.org
+        host: staging.trilliontreecampaign.org
+        api_url: https://app-staging.plant-for-the-planet.org
         base:
         debug: true
         currency: EUR
@@ -68,10 +68,12 @@ jobs:
         androidAppId: org.pftp
         iosAppId: 1444740626
         locationApikKey: ${{ secrets.LOCATION_API_KEY }}
-        env: develop
+        env: staging
+        AUTH0_DOMAIN: https://accounts.plant-for-the-planet.org
+        AUTH0_CLIENT_ID: xUmyt9CxZc9OKiaXavkStCb2jKbB1eCx
       run: |
-        envsubst < .env.deploy > .env.develop
-        cp .env.develop .env
+        envsubst < .env.deploy > .env.staging
+        cp .env.staging .env
 
 # Currently not yet supported different flavors
     # - name: Overide Environment if Master Branch
@@ -123,9 +125,9 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.gradle/caches
-        key: ${{ runner.os }}-androidgradle2-${{ hashFiles('android/*.gradle') }}
+        key: ${{ runner.os }}-androidgradle3-${{ hashFiles('android/*.gradle') }}
         restore-keys: |
-          ${{ runner.os }}-androidgradle2-
+          ${{ runner.os }}-androidgradle3-
 
 # Currently not working due to https://github.com/react-native-community/react-native-maps/issues/3266
 #    - name: Checking Gradle dependencies
@@ -133,22 +135,22 @@ jobs:
 #      working-directory: ./android
 
     - name: Android Build
-      run: ./gradlew assembleDevelopRelease --stacktrace --no-daemon
+      run: ./gradlew assembleStagingRelease --stacktrace --no-daemon
       working-directory: ./android
 
 # We only have 0.5GB space to store artifacts for GitHub actions
 #    - name: Upload Android APK file
 #      uses: actions/upload-artifact@v1
 #      with:
-#        name: TreecounterApp-develop-release.apk
-#        path: android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk
+#        name: TreecounterApp-staging-release.apk
+#        path: android/app/build/outputs/apk/staging/release/app-staging-universal-release.apk
 
     - name: Prepare Android APK for upload
       run: |
         upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.apk
         echo "upload_file=$upload_file" >> $GITHUB_ENV
         mkdir -p uploads
-        mv android/app/build/outputs/apk/develop/release/app-develop-universal-release.apk uploads/$upload_file
+        mv android/app/build/outputs/apk/staging/release/app-staging-universal-release.apk uploads/$upload_file
 
     # depends on existence of upload file at uploads/$upload_file
     - name: Upload Android APK to Browserstack

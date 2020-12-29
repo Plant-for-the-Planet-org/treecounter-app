@@ -340,7 +340,8 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: Reviews
       },
       [getLocalRoute('app_login')]: {
-        screen: LoginContainer
+        screen: LoginContainer,
+        navigationOptions: { header: null }
       },
       ['app_add_review']: {
         screen: AddReview,

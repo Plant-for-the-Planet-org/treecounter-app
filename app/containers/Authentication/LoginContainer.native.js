@@ -9,116 +9,96 @@ import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from '../../selectors';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import { View } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
-EStyleSheet.build({
-  // always call EStyleSheet.build() even if you don't use global variables!
-  $primary: '#b9d384',
-  $textColor: '#686060',
-  $placeholderColor: '#e9e9e9',
-  $colorPrimary: '#b7d37f',
-  $colorPrimaryDark: '#b7d37f',
-  $colorPrimaryAccent: '#e86f56',
-  $colorPrimaryAccentLight: '#ec6453',
-  $borderColor: '#aba2a2',
-  $inputBorderColor: '#dad7d7',
-  $backgroundScreen: '#f1f1f1',
-  $colorError: '#ff0033',
-  $colorRedeemBorder: '#9fc356',
-  $colorRedeemInside: '#f5fbe8',
-  $cardTextColor: '#686060',
-  $lightTextColor: '#9c9b9b',
+import { auth0Login, auth0Logout, userLogout } from '../../actions/auth0Actions';
+import { updateRoute } from '../../helpers/routerHelper';
+import { logoutUser } from '../../actions/authActions';
 
-  $newPrimary: '#89b53a',
-  $greyColor: '#d3d3d3'
-});
+function LoginContainer(props) {
+  const [loading, setLoading] = React.useState(true);
+  const [userProfile, setUserProfile] = React.useState(null);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-class LoginContainer extends Component {
-  _AppNavigator = undefined;
-  constructor(props) {
-    super(props);
-    const { userProfile } = this.props;
-    const isLoggedIn = null !== userProfile;
-    this.state = {
-      loading: true,
-      isLoggedIn: isLoggedIn
-    };
-  }
+  const [fetchUserProfile, setFetchUserProfile] = React.useState(false);
 
-
-  shouldComponentUpdate(nextProps, nextState) {
-    //If there is no change in the user login state then don't re-render the component
-    if (
-      (nextState.loading === this.state.loading &&
-        nextState.isLoggedIn === this.state.isLoggedIn &&
-        !nextProps.userProfile &&
-        !this.props.userProfile) ||
-      (nextProps.userProfile &&
-        this.props.userProfile &&
-        nextProps.userProfile.id === this.props.userProfile.id)
-    ) {
-      return false;
+  React.useEffect(() => {
+    // If user profile is already there and mode is not equal to logout do not perform the steps 
+    if (props.navigation && !fetchUserProfile) {
+      let mode = props.navigation.getParam('mode', 'login');
+      if (mode) {
+        if (mode === 'signup') {
+          auth0Login(true).then((res) => {
+            updateRoute('app_signup', props.navigation);
+          })
+        }
+        else if (mode === 'logout') {
+          auth0Logout().then((res) => {
+            props.logoutUser();
+            updateRoute('app_homepage', props.navigation);
+          })
+        }
+        else {
+          auth0Login(false).then((res) => {
+            setFetchUserProfile(true)
+          })
+        }
+      }
     }
-    // shouldComponentUpdate should be pure !!
-    this._AppNavigator = getAppNavigator(
-      nextState.isLoggedIn,
-      nextProps.userProfile
+  }, [props.navigation])
+
+  React.useEffect(() => {
+    async function loadState() {
+      // If user profile is present store it in the state and set isLoggedIn as true.
+      if (props.userProfile) {
+        setUserProfile(props.userProfile)
+        setIsLoggedIn(true);
+        setLoading(false)
+      }
+      else {
+        let token = await getAccessToken();
+        if (token) {
+          props.loadUserProfile();
+        } else {
+          setLoading(false);
+          setIsLoggedIn(false);
+          updateRoute('app_homepage', props.navigation);
+        }
+      }
+    }
+    if (fetchUserProfile) {
+      loadState();
+    }
+  }, [props.userProfile, fetchUserProfile]);
+
+  const white = '#fff';
+
+  let AppNavigator;
+  if (!loading && !AppNavigator) {
+    AppNavigator = getAppNavigator(
+      isLoggedIn,
+      userProfile
     );
-    return true;
-  }
-  async UNSAFE_componentWillMount() {
-    const { userProfile } = this.props;
-    const isLoggedIn = null !== userProfile;
-    if (isLoggedIn) {
-      this.setState({ loading: false, isLoggedIn: true });
-    } else {
-      let token = await getAccessToken();
-      if (token) {
-        this.props.loadUserProfile();
-      } else {
-        this.setState({ loading: false, isLoggedIn: false });
-      }
-    }
-    this.props.fetchpledgeEventsAction();
-  }
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.userProfile !== this.props.userProfile) {
-      let isLoggedIn = null !== nextProps.userProfile;
-      if (isLoggedIn !== this.state.isLoggedIn) {
-        this.setState({ loading: false, isLoggedIn: isLoggedIn });
-      }
-    }
   }
 
-  render() {
-    const white = '#fff';
-    if (!this.state.loading) {
-      if (!this._AppNavigator) {
-        this._AppNavigator = getAppNavigator(
-          this.state.isLoggedIn,
-          this.props.userProfile
-        );
-      }
 
-      return (
-        <View style={{ flex: 1, backgroundColor: white }}>
-          <LoadingIndicator contentLoader screen="worldLoader" />
-        </View>
-      );
-    }
-    return (
+  return !loading ? AppNavigator ? <AppNavigator /> :
+    (
       <View style={{ flex: 1, backgroundColor: white }}>
         <LoadingIndicator contentLoader screen="worldLoader" />
       </View>
-    );
-  }
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    loadUserProfile: PropTypes.func,
-    fetchpledgeEventsAction: PropTypes.func
-  };
+    ) : (
+      <View style={{ flex: 1, backgroundColor: white }}>
+        <LoadingIndicator contentLoader screen="worldLoader" />
+      </View>
+    )
 }
+
+LoginContainer.propTypes = {
+  dispatch: PropTypes.func,
+  loadUserProfile: PropTypes.func,
+  logoutUser: PropTypes.func.isRequired,
+  fetchpledgeEventsAction: PropTypes.func
+};
 
 const mapStateToProps = state => {
   return {
@@ -133,7 +113,8 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators(
       {
         loadUserProfile,
-        fetchpledgeEventsAction
+        fetchpledgeEventsAction,
+        logoutUser
       },
       dispatch
     )

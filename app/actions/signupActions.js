@@ -12,58 +12,45 @@ export function signUp(
   recaptchaToken,
   navigation = undefined
 ) {
-  if (userData.password.first === userData.password.second) {
-    return dispatch => {
-      dispatch(setProgressModelState(true));
-      return postRequest(
-        'signup_post',
-        userData,
-        { profileType: profileType },
-        false,
-        recaptchaToken
-      )
-        .then(res => {
-          const { token, refresh_token, data } = res.data;
-          if (!data.isActivated) {
-            updateActivateToken(userData.email, token);
-          } else {
-            updateJWT(token, refresh_token);
-            dispatch(loadUserProfile(data));
-            NotificationManager.success(
-              i18n.t('label.registration_successfully'),
-              i18n.t('label.congrats'),
-              5000
-            );
-          }
 
-          updateRoute(
-            data.routeName,
-            navigation || dispatch,
-            null,
-            data.routeParams
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    return postRequest(
+      'signup_post',
+      userData,
+      { profileType: profileType, version: 'v1.5' },
+      false,
+      recaptchaToken
+    )
+      .then(res => {
+        const { token, refresh_token, data } = res.data;
+        if (!data.isActivated) {
+          updateActivateToken(userData.email, token);
+        } else {
+          updateJWT(token, refresh_token);
+          dispatch(loadUserProfile(data));
+          NotificationManager.success(
+            i18n.t('label.registration_successfully'),
+            i18n.t('label.congrats'),
+            5000
           );
-          dispatch(setProgressModelState(false));
-          return res;
-        })
-        .catch(err => {
-          dispatch(setProgressModelState(false));
-          throw err;
-        });
-    };
-  } else {
-    NotificationManager.error(
-      i18n.t('label.passwords_do_not_match'),
-      i18n.t('label.error'),
-      5000
-    );
-    return (/* dispatch */) => {
-      return new Promise(function(resolve) {
-        setTimeout(function() {
-          resolve('foo');
-        }, 30);
+        }
+
+        updateRoute(
+          data.routeName,
+          navigation || dispatch,
+          null,
+          data.routeParams
+        );
+        dispatch(setProgressModelState(false));
+        return res;
+      })
+      .catch(err => {
+        dispatch(setProgressModelState(false));
+        throw err;
       });
-    };
-  }
+  };
+
 }
 
 export function accountActivate(token) {

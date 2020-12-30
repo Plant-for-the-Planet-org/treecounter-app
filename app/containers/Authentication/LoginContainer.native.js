@@ -28,7 +28,7 @@ function LoginContainer(props) {
       if (mode) {
         if (mode === 'signup') {
           auth0Login(true).then((res) => {
-            updateRoute('app_signup', props.navigation);
+            setFetchUserProfile(true)
           })
         }
         else if (mode === 'logout') {
@@ -57,7 +57,10 @@ function LoginContainer(props) {
       else {
         let token = await getAccessToken();
         if (token) {
-          props.loadUserProfile();
+          const data = {
+            navigation: props.navigation
+          }
+          props.loadUserProfile(data);
         } else {
           setLoading(false);
           setIsLoggedIn(false);

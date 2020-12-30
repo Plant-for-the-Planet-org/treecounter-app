@@ -29,6 +29,9 @@ function checkStatus(response) {
 
 function onAPIError(error) {
   //400 : INPUT_VALIDATION_ERROR dont show error balloons
+  if (error.response && error.response.status === 303) {
+    return error.response
+  }
   if (error.response && error.response.status === 400) {
     throw error;
   }

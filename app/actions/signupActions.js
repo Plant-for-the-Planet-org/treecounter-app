@@ -27,8 +27,12 @@ export function signUp(
         if (!data.isActivated) {
           updateActivateToken(userData.email, token);
         } else {
+          let navigationData = {
+            ...data,
+            navigation: navigation || dispatch
+          }
           updateJWT(token, refresh_token);
-          dispatch(loadUserProfile(data));
+          dispatch(loadUserProfile(navigationData));
           NotificationManager.success(
             i18n.t('label.registration_successfully'),
             i18n.t('label.congrats'),
@@ -60,7 +64,10 @@ export function accountActivate(token) {
       .then(res => {
         const { token, refresh_token, data } = res.data;
         updateJWT(token, refresh_token);
-        dispatch(loadUserProfile());
+        let navigationData = {
+          navigation: dispatch
+        }
+        dispatch(loadUserProfile(navigationData));
         if (data.routeName !== 'app_userHome') {
           updateRoute(data.routeName, dispatch, null, data.routeParams);
         } else {

@@ -29,6 +29,8 @@ function LoginContainer(props) {
         if (mode === 'signup') {
           auth0Login(true).then((res) => {
             setFetchUserProfile(true)
+          }).catch((err) => {
+            updateRoute('welcome_screen', props.navigation);
           })
         }
         else if (mode === 'logout') {
@@ -40,6 +42,8 @@ function LoginContainer(props) {
         else {
           auth0Login(false).then((res) => {
             setFetchUserProfile(true)
+          }).catch((err) => {
+            updateRoute('welcome_screen', props.navigation);
           })
         }
       }

@@ -5,7 +5,7 @@ PODS:
   - BugsnagReactNative (7.5.5):
     - React
   - BVLinearGradient (2.5.6):
-    - React-Core
+    - React
   - CocoaAsyncSocket (7.6.5)
   - CocoaLibEvent (1.0.0)
   - DoubleConversion (1.1.6)
@@ -695,7 +695,7 @@ SPEC CHECKSUMS:
   A0Auth0: 2919855112dbfadfea2c55418fa6114f274ee6de
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BugsnagReactNative: 722e3508bb4aadf5e9a5ef11f2195983ace1108a
-  BVLinearGradient: 48f1964a78bddfae412d1aac5f386c2949fe0306
+  BVLinearGradient: 60a475b2edfe7707deda00278cb8ce9bfe70e669
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
   DoubleConversion: cde416483dac037923206447da6e1454df403714

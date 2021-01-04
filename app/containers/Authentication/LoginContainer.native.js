@@ -22,7 +22,7 @@ function LoginContainer(props) {
   const [fetchUserProfile, setFetchUserProfile] = React.useState(false);
 
   React.useEffect(() => {
-    // If user profile is already there and mode is not equal to logout do not perform the steps 
+    // If user profile is already there and mode is not equal to logout do not perform the steps
     if (props.navigation && !fetchUserProfile) {
       let mode = props.navigation.getParam('mode', 'login');
       if (mode) {
@@ -86,7 +86,6 @@ function LoginContainer(props) {
       userProfile
     );
   }
-
 
   return !loading ? AppNavigator ? <AppNavigator /> :
     (

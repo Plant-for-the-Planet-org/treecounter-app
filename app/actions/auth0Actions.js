@@ -8,14 +8,15 @@ const auth0 = new Auth0({ domain: Config.AUTH0_DOMAIN, clientId: Config.AUTH0_CL
 //  ---------------- AUTH0 ACTIONS START----------------
 
 export function auth0Login(isSignup) {
-  const credentials = auth0.webAuth.authorize({ scope: 'openid email profile offline_access', screen_hint: isSignup ? 'signup' : 'login', }, { ephemeralSession: false });
-  return credentials.then(res => {
-    const { accessToken, idToken, refreshToken } = res;
-    updateNewJWT(accessToken, refreshToken, idToken);
-    return res;
-  })
-    .catch(err => {
-      throw err;
+  return auth0.webAuth
+    .authorize({scope: 'openid email profile offline_access', screen_hint: isSignup ? 'signup' : 'login', }, { ephemeralSession: false })
+    .then(credentials => {
+      const { accessToken, idToken, refreshToken } = credentials;
+      updateNewJWT(accessToken, refreshToken, idToken);
+      return credentials;
+    })
+    .catch(error => {
+      throw error;
     });
 }
 

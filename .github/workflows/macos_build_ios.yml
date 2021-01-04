@@ -101,8 +101,8 @@ jobs:
         iosAppId: 1444740626
         locationApikKey: ${{ secrets.LOCATION_API_KEY }}
         env: staging
-        AUTH0_DOMAIN: https://accounts.plant-for-the-planet.org
-        AUTH0_CLIENT_ID: xUmyt9CxZc9OKiaXavkStCb2jKbB1eCx
+        AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
+        AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
 
       run: |
         /usr/local/opt/gettext/bin/envsubst < .env.deploy > .env.staging

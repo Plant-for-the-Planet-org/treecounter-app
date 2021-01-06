@@ -36,6 +36,8 @@ function LoginContainer(props) {
         else if (mode === 'logout') {
           auth0Logout().then((res) => {
             props.logoutUser();
+            updateRoute('welcome_screen', props.navigation);
+          }).catch((err) => {
             updateRoute('app_homepage', props.navigation);
           })
         }

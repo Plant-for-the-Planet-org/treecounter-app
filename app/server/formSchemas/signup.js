@@ -577,7 +577,7 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
@@ -1198,7 +1198,7 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
@@ -1800,7 +1800,7 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
@@ -2416,7 +2416,7 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
@@ -3027,7 +3027,7 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
@@ -3638,7 +3638,7 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,

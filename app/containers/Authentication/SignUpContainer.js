@@ -29,6 +29,31 @@ class SignUpContainer extends React.Component {
     }
   }
 
+  async componentDidMount() {
+    let authtoken = await getAccessToken();
+    auth0.auth.userInfo({ token: authtoken })
+      .then((res) => {
+        let formValue = {
+          ...this.state.formValue,
+          email: res.email
+        }
+        this.setState({ formValue: formValue })
+      })
+  }
+
+  async componentDidUpdate() {
+    if (this.state.formValue === {}) {
+      let authtoken = await getAccessToken();
+      auth0.auth.userInfo({ token: authtoken })
+        .then((res) => {
+          let formValue = {
+            ...this.state.formValue,
+            email: res.email
+          }
+          this.setState({ formValue: formValue })
+        })
+    }
+  }
   onSignUpClicked = async (profileType, signupForm, token, refreshToken) => {
     //debug(signupForm.validate());
     let formValue = signupForm.getValue();
@@ -37,7 +62,10 @@ class SignUpContainer extends React.Component {
       auth0.auth
         .userInfo({ token: authtoken })
         .then((res) => {
-          formValue.email = res.email;
+          formValue = {
+            ...formValue,
+            email: res.email
+          }
           this.props
             .signUp(profileType, formValue, token, this.props.navigation)
             .then((/* success */) => { })

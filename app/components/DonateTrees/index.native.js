@@ -129,9 +129,15 @@ export default class DonateTrees extends React.PureComponent {
   handleOpenURL = url => {
     if (url.url.split('//')[1] === 'paymentSuccess') {
       if (this.props.currentUserProfile) {
-        this.props.loadUserProfile();
+        this.props.loadUserProfile().then(() => {
+          this.props.updateRoute('app_userHome');
+        })
+        .catch(err => {
+          // handle failure
+          this.props.paymentClear();
+          this.goToNextTab(1);
+        });
       }
-      this.props.updateRoute('app_userHome');
     } else {
       // handle failure
       this.props.paymentClear();

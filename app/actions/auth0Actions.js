@@ -9,7 +9,7 @@ const auth0 = new Auth0({ domain: Config.AUTH0_DOMAIN, clientId: Config.AUTH0_CL
 
 export function auth0Login(isSignup) {
   return auth0.webAuth
-    .authorize({scope: 'openid email profile offline_access', screen_hint: isSignup ? 'signup' : 'login', }, { ephemeralSession: false })
+    .authorize({scope: 'openid email profile offline_access', screen_hint: isSignup ? 'signup' : 'login' }, { ephemeralSession: true })
     .then(credentials => {
       const { accessToken, idToken, refreshToken } = credentials;
       updateNewJWT(accessToken, refreshToken, idToken);

@@ -151,7 +151,9 @@ class TreeCounter extends Component {
     } else {
       let token = await getAccessToken();
       if (token) {
-        this.props.loadUserProfile();
+        this.props.loadUserProfile().catch(err => {
+          this.setState({ loading: false, isLoggedIn: false });
+        });
         this.props.NotificationAction();
       } else {
         this.setState({ loading: false, isLoggedIn: false });

@@ -31,7 +31,9 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
         } else {
           updateJWT(token, refresh_token);
           dispatch(setProgressModelState(false));
-          dispatch(loadUserProfile(data));
+          dispatch(loadUserProfile(data).catch(err => {
+            throw new Error(err);
+          }));
           dispatch(setProgressModelState(true));
           dispatch(NotificationAction());
         }

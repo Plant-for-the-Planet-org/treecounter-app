@@ -9,16 +9,14 @@ import { setLastRoute } from '../reducers/updateLastRouteReducer';
 import { updateRoute } from '../helpers/routerHelper';
 
 export function loadUserProfile(props) {
-  const request = getAuthenticatedRequest('load_user_profiledata_userProfile_get');
-
   return dispatch => {
     dispatch(setProgressModelState(true));
-    request
+    return getAuthenticatedRequest('load_user_profiledata_userProfile_get')
       .then(res => {
         if (res.status === 303) {
-          updateRoute('app_signup', props.navigation || dispatch);
-        }
-        else {
+          dispatch(setProgressModelState(false));
+          throw new Error(res.data.message);
+        } else {
           dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
           dispatch(setCurrentUserProfileId(res.data.id));
           dispatch(setProgressModelState(false));
@@ -26,11 +24,11 @@ export function loadUserProfile(props) {
             dispatch(setLastRoute(props));
           }
         }
-
       })
       .catch(error => {
         debug(error);
         dispatch(setProgressModelState(false));
+        throw error;
       });
   };
 }

@@ -14,7 +14,9 @@ export function setRedemptionCodeAction(data, params) {
           // therefore the only solution to update the gifts is to reload the treecounter
           // with the user profile.
           dispatch(
-            loadUserProfile(null)
+            loadUserProfile(null).catch(err => {
+              throw new Error(err);
+            })
           );
           resolve(res);
         }, (err) => {

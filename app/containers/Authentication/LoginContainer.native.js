@@ -66,7 +66,11 @@ function LoginContainer(props) {
           const data = {
             navigation: props.navigation
           }
-          props.loadUserProfile(data);
+          props.loadUserProfile(data).catch(err => {
+            setLoading(false);
+            setIsLoggedIn(false);
+            updateRoute('app_signup', props.navigation);
+          });
         } else {
           setLoading(false);
           setIsLoggedIn(false);

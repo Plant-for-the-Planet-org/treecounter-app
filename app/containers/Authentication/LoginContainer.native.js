@@ -13,6 +13,7 @@ import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
 import { auth0Login, auth0Logout, userLogout } from '../../actions/auth0Actions';
 import { updateRoute } from '../../helpers/routerHelper';
 import { logoutUser } from '../../actions/authActions';
+import jwtDecode from 'jwt-decode';
 
 function LoginContainer(props) {
   const [loading, setLoading] = React.useState(true);
@@ -26,9 +27,18 @@ function LoginContainer(props) {
     if (props.navigation && !fetchUserProfile) {
       let mode = props.navigation.getParam('mode', 'login');
       if (mode) {
-        if (mode === 'signup') {
-          auth0Login(true).then((res) => {
-            setFetchUserProfile(true)
+        if (mode === 'signup' || mode === 'login') {
+          auth0Login(mode === 'signup' ? true : false).then((res) => {
+            // setFetchUserProfile(true)
+            const { email, email_verified } = jwtDecode(res.idToken);
+
+            if (!email_verified) {
+              updateActivateToken(email, res.idToken);
+              // Redirect user to email verification page - information (Complete profile) // Open mail app or Retry login button and a close button on top left
+              // From the mailing client user will click on the link and we have to handle the deep linking - LoginContainer (later)
+
+              // After that take Complete signup page
+            }
           }).catch((err) => {
             updateRoute('welcome_screen', props.navigation);
           })
@@ -41,13 +51,7 @@ function LoginContainer(props) {
             updateRoute('app_homepage', props.navigation);
           })
         }
-        else {
-          auth0Login(false).then((res) => {
-            setFetchUserProfile(true)
-          }).catch((err) => {
-            updateRoute('welcome_screen', props.navigation);
-          })
-        }
+
       }
     }
   }, [props.navigation])

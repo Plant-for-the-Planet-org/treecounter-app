@@ -1,10 +1,10 @@
 export default {
-  title: 'login',
+  title: 'otpcode',
   type: 'object',
   properties: {
     _username: {
       type: 'string',
-      title: 'label.email',
+      title: 'label.code',
       icon: 'email',
       propertyOrder: 1
     }

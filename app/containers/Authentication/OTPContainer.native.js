@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 import { debug } from '../../debug';
 import { login } from '../../actions/authActions';
 import { updateRoute } from '../../helpers/routerHelper';
-import Login from '../../components/Authentication/Login/index';
+import OTPCode from '../../components/Authentication/Login/OTPCode';
 import { schemaOptions } from '../../server/parsedSchemas/login';
 import { handleServerResponseError } from '../../helpers/utils';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
 
-class LoginContainer extends React.Component {
+class OTPContainer extends React.Component {
   static navigationOptions = {
     header: null
   };
@@ -56,9 +57,6 @@ class LoginContainer extends React.Component {
                 ...newSchemaOptions
               }
             }
-            // () => {
-            //   this.refs.loginContainer.refs.loginForm.validate();
-            // }
           );
         });
       this.setState({ formValue: formValue });
@@ -67,7 +65,7 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <Login
+      <OTPCode
         ref={'loginContainer'}
         onPress={this.onPress}
         updateRoute={(routeName, id) =>
@@ -76,6 +74,8 @@ class LoginContainer extends React.Component {
         formValue={this.state.formValue}
         schemaOptions={this.state.schemaOptions}
         navigation={this.props.navigation}
+        email={this.props.navigation.getParam('email', null)}
+        loadUserProfile={this.props.loadUserProfile}
       />
     );
   }
@@ -85,6 +85,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       login,
+      loadUserProfile,
       route: (routeName, id, navigation) => dispatch =>
         updateRoute(routeName, navigation || dispatch, id)
     },
@@ -92,10 +93,11 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default connect(null, mapDispatchToProps)(OTPContainer);
 
-LoginContainer.propTypes = {
+OTPContainer.propTypes = {
   login: PropTypes.func,
   route: PropTypes.func,
-  navigation: PropTypes.any
+  navigation: PropTypes.any,
+  loadUserProfile: PropTypes.func
 };

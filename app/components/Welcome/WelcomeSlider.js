@@ -22,7 +22,7 @@ const WelcomSlider = ({ navigation }) => {
       <View style={{ backgroundColor: '#fff', marginTop: 16 }}>
         <View style={styless.bottomRow}>
           <PrimaryButton
-            onClick={() => loginPage('signup')}
+            onClick={() => updateRoute('app_login', navigation)}
             buttonStyle={styless.buttonStyle}
           >
             <Text style={styless.continueBtn}>
@@ -32,7 +32,7 @@ const WelcomSlider = ({ navigation }) => {
         </View>
         <View style={styless.bottomRow}>
           <PrimaryButton
-            onClick={() => loginPage('login')}
+            onClick={() => updateRoute('app_login', navigation)}
             buttonStyle={styless.lowerBtnStyle}
           >
             <Text style={styless.alreadyHaveAccountBtn}>

@@ -12,28 +12,30 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 //import { debug } from ',,/../../debug';
-import loginFormSchema from '../../../server/formSchemas/login';
+import otpFormSchema from '../../../server/formSchemas/otpcode';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
 import TouchableItem from '../../Common/TouchableItem.native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
-import { generateFormikSchemaFromFormSchema } from './../../../helpers/utils';
-import HeaderNew from './../../Header/HeaderNew.native';
-import { auth0Login } from '../../../actions/auth0Actions';
+import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
+import HeaderNew from '../../Header/HeaderNew.native';
+import { auth0OTP } from '../../../actions/auth0Actions';
+import { getAccessToken } from '../../../utils/user';
+import { updateRoute } from '../../../helpers/routerHelper/routerHelper';
 
-export default class Login extends Component {
+export default class OTPCode extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       shortHeight: 401,
-      loadButton: false
+      loadButton: false,
     };
   }
 
   UNSAFE_componentWillMount() {
-    this.validationSchema = generateFormikSchemaFromFormSchema(loginFormSchema);
+    this.validationSchema = generateFormikSchemaFromFormSchema(otpFormSchema);
 
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -72,7 +74,9 @@ export default class Login extends Component {
     // eslint-disable-next-line no-underscore-dangle
     this.props.onPress(this.state.formValue);
   };
+
   render() {
+
     const backgroundColor = 'white';
     const lockedButton = 'rgba(137, 181, 58, 0.19)';
     return (
@@ -94,8 +98,22 @@ export default class Login extends Component {
             this.setState({
               loadButton: true
             });
-
-            auth0Login(values._username, this.props.navigation);
+            const email = this.props.email;
+            auth0OTP(email, values._username, this.props.navigation).then((res) => {
+              if (res.accessToken) {
+                const data = {
+                  navigation: this.props.navigation
+                }
+                this.props.loadUserProfile(data).catch(err => {
+                  updateRoute('app_signup', this.props.navigation);
+                });
+              } else {
+                updateRoute('app_homepage', this.props.navigation);
+              }
+            }).catch((err) => {
+              updateRoute('welcome_screen', this.props.navigation);
+            })
+            this.props.onPress(formValue);
 
             setTimeout(
               () =>
@@ -110,7 +128,6 @@ export default class Login extends Component {
           {props => (
             <>
               <KeyboardAvoidingView
-                //behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={{
                   minHeight: '100%'
                 }}
@@ -132,11 +149,11 @@ export default class Login extends Component {
                 //  scrollEnabled
                 >
                   <Text style={styles.loginTitle}>
-                    {i18n.t('label.log-in')}
+                    Enter Code
                   </Text>
                   <View>
                     <TextField
-                      label={i18n.t('label.email')}
+                      label={'Enter Code'}
                       // eslint-disable-next-line no-underscore-dangle
                       value={props.values._username}
                       tintColor={'#89b53a'}
@@ -151,9 +168,14 @@ export default class Login extends Component {
                       returnKeyType="next"
                       onChangeText={props.handleChange('_username')}
                       onBlur={props.handleBlur('_username')}
-                      keyboardType="email-address"
+                      keyboardType="numeric"
                       autoCapitalize="none"
                     />
+                  </View>
+                  <View style={[styles.bottomRow]}>
+                    <Text style={styles.enterCode}>
+                      Please enter the code sent on your email.
+                      </Text>
                   </View>
 
                   {this.state.shortHeight > 400 && Platform.OS === 'ios' ? (
@@ -179,7 +201,7 @@ export default class Login extends Component {
                           />
                         ) : (
                             <Text style={styles.actionButtonText}>
-                              {i18n.t('label.login')}
+                              Submit Code
                             </Text>
                           )}
                       </View>
@@ -207,7 +229,7 @@ export default class Login extends Component {
                         />
                       ) : (
                           <Text style={styles.actionButtonText}>
-                            {i18n.t('label.login')}
+                            Submit Code
                           </Text>
                         )}
                     </View>
@@ -222,10 +244,12 @@ export default class Login extends Component {
   }
 }
 
-Login.propTypes = {
+OTPCode.propTypes = {
   onPress: PropTypes.func.isRequired,
   onError: PropTypes.func,
   updateRoute: PropTypes.func,
   formValue: PropTypes.any,
-  schemaOptions: PropTypes.any
+  schemaOptions: PropTypes.any,
+  email: PropTypes.any,
+  loadUserProfile: PropTypes.any
 };

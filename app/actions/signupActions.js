@@ -24,6 +24,8 @@ export function signUp(
     )
       .then(res => {
         const { token, refresh_token, data } = res.data;
+
+        // To do - test this and remove account activation from the flow
         if (!data.isActivated) {
           updateActivateToken(userData.email, token);
         } else {

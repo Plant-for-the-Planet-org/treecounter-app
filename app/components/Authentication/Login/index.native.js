@@ -132,7 +132,7 @@ export default class Login extends Component {
                 //  scrollEnabled
                 >
                   <Text style={styles.loginTitle}>
-                    {i18n.t('label.log-in')}
+                    {i18n.t('label.login_or_signup')}
                   </Text>
                   <View>
                     <TextField
@@ -148,11 +148,12 @@ export default class Login extends Component {
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       autoCorrect={false}
-                      returnKeyType="next"
+                      returnKeyType="done"
                       onChangeText={props.handleChange('_username')}
                       onBlur={props.handleBlur('_username')}
                       keyboardType="email-address"
                       autoCapitalize="none"
+                      onSubmitEditing={props.isValid ? props.handleSubmit : null}
                     />
                   </View>
 

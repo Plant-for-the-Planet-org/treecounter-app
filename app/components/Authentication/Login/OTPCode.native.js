@@ -149,11 +149,11 @@ export default class OTPCode extends Component {
                 //  scrollEnabled
                 >
                   <Text style={styles.loginTitle}>
-                    Enter Code
+                    {i18n.t('label.enter_login_code')}
                   </Text>
                   <View>
                     <TextField
-                      label={'Enter Code'}
+                      label={i18n.t('label.enter_login_code')}
                       // eslint-disable-next-line no-underscore-dangle
                       value={props.values._username}
                       tintColor={'#89b53a'}
@@ -165,17 +165,18 @@ export default class OTPCode extends Component {
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       autoCorrect={false}
-                      returnKeyType="next"
+                      returnKeyType="done"
                       onChangeText={props.handleChange('_username')}
                       onBlur={props.handleBlur('_username')}
                       keyboardType="numeric"
                       autoCapitalize="none"
+                      onSubmitEditing={props.isValid ? props.handleSubmit : null}
                     />
                   </View>
                   <View style={[styles.bottomRow]}>
                     <Text style={styles.enterCode}>
-                      Please enter the code sent on your email.
-                      </Text>
+                      {i18n.t('label.please_enter_code')}
+                    </Text>
                   </View>
 
                   {this.state.shortHeight > 400 && Platform.OS === 'ios' ? (
@@ -201,7 +202,7 @@ export default class OTPCode extends Component {
                           />
                         ) : (
                             <Text style={styles.actionButtonText}>
-                              Submit Code
+                              {i18n.t('label.submit_code')}
                             </Text>
                           )}
                       </View>
@@ -229,7 +230,7 @@ export default class OTPCode extends Component {
                         />
                       ) : (
                           <Text style={styles.actionButtonText}>
-                            Submit Code
+                            {i18n.t('label.submit_code')}
                           </Text>
                         )}
                     </View>

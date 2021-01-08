@@ -349,7 +349,7 @@ class Menu extends Component {
         <View style={styles.sideNavigationActionMenuContainer}>
           {this.props.userProfile ? (
             <LargeMenuItem
-              onPress={() => updateRoute('app_login', this.props.navigation, null, { mode: 'logout' })}
+              onPress={this.props.logoutUser}
               title={i18n.t('label.logout')}
               iconUrl={icons.logout}
             />

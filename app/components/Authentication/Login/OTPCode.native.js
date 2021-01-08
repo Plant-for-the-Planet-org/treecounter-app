@@ -12,17 +12,28 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 //import { debug } from ',,/../../debug';
-import otpFormSchema from '../../../server/formSchemas/otpcode';
 import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
-import TouchableItem from '../../Common/TouchableItem.native';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
-import { generateFormikSchemaFromFormSchema } from '../../../helpers/utils';
 import HeaderNew from '../../Header/HeaderNew.native';
-import { auth0OTP } from '../../../actions/auth0Actions';
-import { getAccessToken } from '../../../utils/user';
+import { auth0OTP, auth0Login } from '../../../actions/auth0Actions';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper';
+import * as yup from 'yup';
+import { setLocale } from 'yup';
+import LoadingIndicator from '../../Common/LoadingIndicator';
+
+setLocale({
+  number: {
+    default: i18n.t('label.validCode'),
+    integer: i18n.t('label.validCode'),
+    positive: i18n.t('label.validCode')
+  }
+});
+
+let schema = yup.object().shape({
+  loginCode: yup.number().integer().positive(),
+});
 
 export default class OTPCode extends Component {
   constructor(props) {
@@ -31,11 +42,11 @@ export default class OTPCode extends Component {
     this.state = {
       shortHeight: 401,
       loadButton: false,
+      loadingPage: false
     };
   }
 
   UNSAFE_componentWillMount() {
-    this.validationSchema = generateFormikSchemaFromFormSchema(otpFormSchema);
 
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -64,22 +75,26 @@ export default class OTPCode extends Component {
       shortHeight: shortHeight
     });
   };
-  handleLoginClick = () => {
-    if (this.state.formValue) {
-      Keyboard.dismiss();
 
-      //debug('Form value', this.state.formValue);
-    }
-    //debug('Form value', this.state.formValue);
-    // eslint-disable-next-line no-underscore-dangle
-    this.props.onPress(this.state.formValue);
+  handleTryAgain = () => {
+    this.setState({
+      loadingPage: true
+    });
+    auth0Login(this.props.email, this.props.navigation);
+    setTimeout(
+      () =>
+        this.setState({
+          loadingPage: false
+        }),
+      3000
+    );
   };
 
   render() {
 
     const backgroundColor = 'white';
     const lockedButton = 'rgba(137, 181, 58, 0.19)';
-    return (
+    return !this.state.loadingPage ? (
       <View style={{ flex: 1 }}>
         <HeaderNew
           title={''}
@@ -88,18 +103,19 @@ export default class OTPCode extends Component {
         <Formik
           initialValues={{
             // eslint-disable-next-line no-underscore-dangle
-            _username: ''
+            loginCode: ''
           }}
           /* ExceptionsManager.js:126 Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
              Check the render method of `Login`.
              in Formik (at Login/index.native.js:103) */
           // ref={'loginForm'}
-          onSubmit={values => {
+          onSubmit={(values, actions) => {
             this.setState({
               loadButton: true
             });
             const email = this.props.email;
-            auth0OTP(email, values._username, this.props.navigation).then((res) => {
+            auth0OTP(email, values.loginCode, this.props.navigation).then((res) => {
+
               if (res.accessToken) {
                 const data = {
                   navigation: this.props.navigation
@@ -111,9 +127,9 @@ export default class OTPCode extends Component {
                 updateRoute('app_homepage', this.props.navigation);
               }
             }).catch((err) => {
-              updateRoute('welcome_screen', this.props.navigation);
+
+              actions.setFieldError('loginCode', i18n.t('label.validCode'))
             })
-            this.props.onPress(formValue);
 
             setTimeout(
               () =>
@@ -123,7 +139,7 @@ export default class OTPCode extends Component {
               3000
             );
           }}
-          validationSchema={this.validationSchema}
+          validationSchema={schema}
         >
           {props => (
             <>
@@ -149,25 +165,25 @@ export default class OTPCode extends Component {
                 //  scrollEnabled
                 >
                   <Text style={styles.loginTitle}>
-                    {i18n.t('label.enter_login_code')}
+                    {i18n.t('label.OTPSent')}
                   </Text>
                   <View>
                     <TextField
                       label={i18n.t('label.enter_login_code')}
                       // eslint-disable-next-line no-underscore-dangle
-                      value={props.values._username}
+                      value={props.values.loginCode}
                       tintColor={'#89b53a'}
                       titleFontSize={12}
                       lineWidth={1}
                       // eslint-disable-next-line no-underscore-dangle
-                      error={props.touched._username && props.errors._username}
+                      error={props.touched.loginCode && props.errors.loginCode}
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       autoCorrect={false}
                       returnKeyType="done"
-                      onChangeText={props.handleChange('_username')}
-                      onBlur={props.handleBlur('_username')}
+                      onChangeText={props.handleChange('loginCode')}
+                      onBlur={props.handleBlur('loginCode')}
                       keyboardType="numeric"
                       autoCapitalize="none"
                       onSubmitEditing={props.isValid ? props.handleSubmit : null}
@@ -176,6 +192,7 @@ export default class OTPCode extends Component {
                   <View style={[styles.bottomRow]}>
                     <Text style={styles.enterCode}>
                       {i18n.t('label.please_enter_code')}
+                      <Text onPress={this.handleTryAgain} style={styles.forgotPasswordHighlight}>{i18n.t('label.tryAgain')}</Text>
                     </Text>
                   </View>
 
@@ -185,12 +202,12 @@ export default class OTPCode extends Component {
                         styles.actionButtonTouchable,
                         { marginLeft: 24, marginRight: 24 }
                       ]}
-                      onPress={props.isValid ? props.handleSubmit : null}
+                      onPress={props.isValid || !props.isSubmitting ? props.handleSubmit : null}
                     >
                       <View
                         style={[
                           styles.actionButtonView,
-                          !props.isValid
+                          !props.isValid || props.isSubmitting
                             ? { backgroundColor: lockedButton }
                             : {}
                         ]}
@@ -215,12 +232,12 @@ export default class OTPCode extends Component {
                       styles.actionButtonTouchable,
                       { marginLeft: 24, marginRight: 24, paddingHorizontal: 24 }
                     ]}
-                    onPress={props.isValid ? props.handleSubmit : null}
+                    onPress={props.isValid || !props.isSubmitting ? props.handleSubmit : null}
                   >
                     <View
                       style={[
                         styles.actionButtonView,
-                        !props.isValid ? { backgroundColor: lockedButton } : {}
+                        !props.isValid || props.isSubmitting ? { backgroundColor: lockedButton } : {}
                       ]}
                     >
                       {this.state.loadButton ? (
@@ -241,7 +258,9 @@ export default class OTPCode extends Component {
           )}
         </Formik>
       </View>
-    );
+    ) : (
+        <LoadingIndicator contentLoader screen="profileLoader" />
+      );
   }
 }
 

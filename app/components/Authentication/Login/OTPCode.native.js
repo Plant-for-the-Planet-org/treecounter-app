@@ -191,7 +191,7 @@ export default class OTPCode extends Component {
                   </View>
                   <View style={[styles.bottomRow]}>
                     <Text style={styles.enterCode}>
-                      {i18n.t('label.please_enter_code')}
+                      {i18n.t('label.please_enter_code') + ' '}
                       <Text onPress={this.handleTryAgain} style={styles.forgotPasswordHighlight}>{i18n.t('label.tryAgain')}</Text>
                     </Text>
                   </View>

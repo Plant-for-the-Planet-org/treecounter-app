@@ -38,11 +38,14 @@ let schema = yup.object().shape({
 export default class OTPCode extends Component {
   constructor(props) {
     super(props);
-
+    this.startTimer = this.startTimer.bind(this);
+    this.countDown = this.countDown.bind(this);
+    this.timer = 0;
     this.state = {
       shortHeight: 401,
       loadButton: false,
-      loadingPage: false
+      loadingPage: false,
+      seconds: 30
     };
   }
 
@@ -76,6 +79,29 @@ export default class OTPCode extends Component {
     });
   };
 
+  componentDidMount() {
+    this.startTimer()
+  }
+
+  startTimer() {
+    if (this.timer == 0 && this.state.seconds > 0) {
+      this.timer = setInterval(this.countDown, 1000);
+    }
+  }
+
+  countDown() {
+    // Remove one second, set state so a re-render happens.
+    let seconds = this.state.seconds - 1;
+    this.setState({
+      seconds: seconds,
+    });
+
+    // Check if we're at zero.
+    if (seconds == 0) {
+      clearInterval(this.timer);
+    }
+  }
+
   handleTryAgain = () => {
     this.setState({
       loadingPage: true
@@ -102,7 +128,6 @@ export default class OTPCode extends Component {
         />
         <Formik
           initialValues={{
-            // eslint-disable-next-line no-underscore-dangle
             loginCode: ''
           }}
           /* ExceptionsManager.js:126 Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
@@ -127,8 +152,12 @@ export default class OTPCode extends Component {
                 updateRoute('app_homepage', this.props.navigation);
               }
             }).catch((err) => {
-
+              this.setState({
+                loadButton: false
+              });
               actions.setFieldError('loginCode', i18n.t('label.validCode'))
+              // actions.resetForm();
+              actions.setSubmitting(false)
             })
 
             setTimeout(
@@ -191,8 +220,14 @@ export default class OTPCode extends Component {
                   </View>
                   <View style={[styles.bottomRow]}>
                     <Text style={styles.enterCode}>
-                      {i18n.t('label.please_enter_code')}
-                      <Text onPress={this.handleTryAgain} style={styles.forgotPasswordHighlight}>{i18n.t('label.tryAgain')}</Text>
+                      {i18n.t('label.please_enter_code', {
+                        count: this.state.seconds
+                      })}
+                      {this.state.seconds > 0 ? (
+                        <Text>{""}</Text>
+                      ) : (
+                          <Text onPress={this.handleTryAgain} style={styles.forgotPasswordHighlight}>{i18n.t('label.tryAgain')}</Text>
+                        )}
                     </Text>
                   </View>
 

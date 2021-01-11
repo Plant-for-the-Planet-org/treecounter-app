@@ -224,10 +224,10 @@ export default class OTPCode extends Component {
                         count: this.state.seconds
                       })}
                       {this.state.seconds > 0 ? (
-                        <Text>{""}</Text>
+                        <Text>{''}</Text>
                       ) : (
-                          <Text onPress={this.handleTryAgain} style={styles.forgotPasswordHighlight}>{i18n.t('label.tryAgain')}</Text>
-                        )}
+                        <Text onPress={this.handleTryAgain} style={styles.forgotPasswordHighlight}>{' ' + i18n.t('label.tryAgain')}</Text>
+                      )}
                     </Text>
                   </View>
 

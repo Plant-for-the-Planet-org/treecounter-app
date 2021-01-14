@@ -2,7 +2,7 @@ import { NotificationManager } from '../notification/PopupNotificaiton/notificat
 import { updateRoute } from '../helpers/routerHelper';
 import { postRequest } from '../utils/api';
 import { updateJWT, updateActivateToken } from '../utils/user';
-import { loadUserProfile } from './loadUserProfileAction';
+import { loadUserProfileSilently } from './loadUserProfileAction';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import i18n from '../locales/i18n.js';
 
@@ -29,14 +29,8 @@ export function signUp(
         if (!data.isActivated) {
           updateActivateToken(userData.email, token);
         } else {
-          let navigationData = {
-            ...data,
-            navigation: navigation || dispatch
-          }
           updateJWT(token, refresh_token);
-          dispatch(loadUserProfile(navigationData).catch(err => {
-            throw new Error(err);
-          }));
+          dispatch(loadUserProfileSilently(data));
           NotificationManager.success(
             i18n.t('label.registration_successfully'),
             i18n.t('label.congrats'),
@@ -68,12 +62,7 @@ export function accountActivate(token) {
       .then(res => {
         const { token, refresh_token, data } = res.data;
         updateJWT(token, refresh_token);
-        let navigationData = {
-          navigation: dispatch
-        }
-        dispatch(loadUserProfile(navigationData).catch(err => {
-          throw new Error(err);
-        }));
+        dispatch(loadUserProfileSilently());
         if (data.routeName !== 'app_userHome') {
           updateRoute(data.routeName, dispatch, null, data.routeParams);
         } else {

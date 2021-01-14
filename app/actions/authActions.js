@@ -1,5 +1,5 @@
 import { updateRoute } from '../helpers/routerHelper';
-import { loadUserProfile } from './loadUserProfileAction';
+import { loadUserProfileSilently } from './loadUserProfileAction';
 import { debug } from '../debug';
 import { createAction } from 'redux-actions';
 import { clearStorage } from '../stores/localStorage';
@@ -31,9 +31,7 @@ export function login(credentials, recaptchaToken, navigation = undefined) {
         } else {
           updateJWT(token, refresh_token);
           dispatch(setProgressModelState(false));
-          dispatch(loadUserProfile(data).catch(err => {
-            throw new Error(err);
-          }));
+          dispatch(loadUserProfileSilently(data));
           dispatch(setProgressModelState(true));
           dispatch(NotificationAction());
         }

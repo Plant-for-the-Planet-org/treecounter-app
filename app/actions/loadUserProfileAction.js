@@ -32,3 +32,25 @@ export function loadUserProfile(props) {
       });
   };
 }
+
+// this function is called by other actions
+export function loadUserProfileSilently(returnData) {
+  const request = getAuthenticatedRequest('load_user_profiledata_userProfile_get');
+
+  return dispatch => {
+    dispatch(setProgressModelState(true));
+    request
+      .then(res => {
+        dispatch(mergeEntities(normalize(res.data, userProfileSchema)));
+        dispatch(setCurrentUserProfileId(res.data.id));
+        dispatch(setProgressModelState(false));
+        if (returnData) {
+          dispatch(setLastRoute(returnData));
+        }
+      })
+      .catch(error => {
+        debug(error);
+        dispatch(setProgressModelState(false));
+      });
+  };
+}

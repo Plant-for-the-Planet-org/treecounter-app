@@ -19,7 +19,7 @@ export function signUp(
       'signup_post',
       userData,
       { profileType: profileType, version: 'v1.5' },
-      false,
+      true,
       recaptchaToken
     )
       .then(res => {

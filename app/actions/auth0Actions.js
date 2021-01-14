@@ -1,6 +1,6 @@
 import Config from 'react-native-config';
 import Auth0 from 'react-native-auth0';
-import { updateNewJWT } from '../utils/user';
+import { updateAuth0JWT } from '../utils/user';
 import { updateRoute } from '../helpers/routerHelper/routerHelper.native';
 
 // AUTH0 CONFIG
@@ -33,7 +33,7 @@ export function auth0OTP(email, code, navigation) {
     })
     .then((credentials) => {
       const { accessToken, idToken, refreshToken } = credentials;
-      updateNewJWT(accessToken, refreshToken, idToken);
+      updateAuth0JWT(accessToken, refreshToken, idToken);
       return credentials;
     })
     .catch(error => {

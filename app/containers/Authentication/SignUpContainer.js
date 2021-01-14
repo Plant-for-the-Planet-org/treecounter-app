@@ -8,7 +8,7 @@ import { SignUp } from '../../components/Authentication';
 import { signUp } from '../../actions/signupActions';
 import { schemaOptions } from '../../server/parsedSchemas/signup';
 import { handleServerResponseError } from '../../helpers/utils';
-import { getAccessToken } from '../../utils/user';
+import { getAuth0AccessToken } from '../../utils/user';
 import Config from 'react-native-config';
 import Auth0 from 'react-native-auth0';
 
@@ -30,7 +30,7 @@ class SignUpContainer extends React.Component {
   }
 
   async componentDidMount() {
-    let authtoken = await getAccessToken();
+    let authtoken = await getAuth0AccessToken();
     auth0.auth.userInfo({ token: authtoken })
       .then((res) => {
         let formValue = {
@@ -43,7 +43,7 @@ class SignUpContainer extends React.Component {
 
   async componentDidUpdate() {
     if (this.state.formValue === {}) {
-      let authtoken = await getAccessToken();
+      let authtoken = await getAuth0AccessToken();
       auth0.auth.userInfo({ token: authtoken })
         .then((res) => {
           let formValue = {
@@ -57,7 +57,7 @@ class SignUpContainer extends React.Component {
   onSignUpClicked = async (profileType, signupForm, token, refreshToken) => {
     //debug(signupForm.validate());
     let formValue = signupForm.getValue();
-    let authtoken = await getAccessToken();
+    let authtoken = await getAuth0AccessToken();
     if (formValue) {
       auth0.auth
         .userInfo({ token: authtoken })

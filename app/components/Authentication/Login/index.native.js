@@ -19,17 +19,7 @@ import { Formik } from 'formik';
 import HeaderNew from './../../Header/HeaderNew.native';
 import { auth0Login } from '../../../actions/auth0Actions';
 import * as yup from 'yup';
-import { setLocale } from 'yup';
 
-setLocale({
-  string: {
-    email: i18n.t('label.validEmail'),
-  }
-});
-
-let schema = yup.object().shape({
-  email: yup.string().email(),
-});
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -71,6 +61,12 @@ export default class Login extends Component {
   };
 
   render() {
+    const schema = yup.object().shape({
+      email: yup.string()
+        .email(i18n.t('label.validEmail'))
+        .required(i18n.t('label.validEmail')),
+    });
+
     const backgroundColor = 'white';
     const lockedButton = 'rgba(137, 181, 58, 0.19)';
     return (

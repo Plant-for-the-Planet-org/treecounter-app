@@ -20,20 +20,7 @@ import HeaderNew from '../../Header/HeaderNew.native';
 import { auth0OTP, auth0Login } from '../../../actions/auth0Actions';
 import { updateRoute } from '../../../helpers/routerHelper/routerHelper';
 import * as yup from 'yup';
-import { setLocale } from 'yup';
 import LoadingIndicator from '../../Common/LoadingIndicator';
-
-setLocale({
-  number: {
-    default: i18n.t('label.validCode'),
-    integer: i18n.t('label.validCode'),
-    positive: i18n.t('label.validCode')
-  }
-});
-
-let schema = yup.object().shape({
-  loginCode: yup.number().integer().positive(),
-});
 
 export default class OTPCode extends Component {
   constructor(props) {
@@ -117,6 +104,13 @@ export default class OTPCode extends Component {
   };
 
   render() {
+    const schema = yup.object().shape({
+      loginCode: yup.number()
+        .integer(i18n.t('label.validCode'))
+        .positive(i18n.t('label.validCode'))
+        .required(i18n.t('label.validCode'))
+        .typeError(i18n.t('label.invalid_number')),
+    });
 
     const backgroundColor = 'white';
     const lockedButton = 'rgba(137, 181, 58, 0.19)';

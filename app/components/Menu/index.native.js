@@ -60,9 +60,10 @@ class Menu extends Component {
     this.props.fetchConfig().then(() => {
       console.log('package version:', version, ' appVersions:', getAppVersions());
       if (getAppVersions()[Platform.OS] && version < getAppVersions()[Platform.OS]) {
-         // show the user an information that the app is outdate and a link to the app stores
+        // show the user an information that the app is outdate and a link to the app stores
         updateStaticRoute('app_splash_screen', this.props.navigation);
-      }}
+      }
+    }
     );
 
     // const welcome = await fetchItem('welcome').catch(error => debug(error));
@@ -159,8 +160,9 @@ class Menu extends Component {
           ),
         0
       );
-    } else if (urlBreak.indexOf('project') !== -1) {+
-      this.props.selectPlantProjectAction(urlBreak[urlBreak.length - 1]);
+    } else if (urlBreak.indexOf('project') !== -1) {
+      +
+        this.props.selectPlantProjectAction(urlBreak[urlBreak.length - 1]);
       setTimeout(
         () =>
           updateRoute(
@@ -231,22 +233,22 @@ class Menu extends Component {
             </Text>
           </TouchableItem>
         ) : (
-          <View style={styles.profileContainer}>
-            <UserProfileImage
-              style={styles.profileLogImageStyle}
-              imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
-            />
-            <Text style={styles.profileTextHeading}>
-              {i18n.t('label.guest')}
-            </Text>
-            <LargeMenuItem
-              style={{ paddingLeft: 0 }}
-              onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}
-              title={i18n.t('label.login')}
-              iconUrl={icons.logout}
-            />
-          </View>
-        )}
+            <View style={styles.profileContainer}>
+              <UserProfileImage
+                style={styles.profileLogImageStyle}
+                imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
+              />
+              <Text style={styles.profileTextHeading}>
+                {i18n.t('label.guest')}
+              </Text>
+              <LargeMenuItem
+                style={{ paddingLeft: 0 }}
+                onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}
+                title={i18n.t('label.login')}
+                iconUrl={icons.logout}
+              />
+            </View>
+          )}
         <ScrollView style={styles.sideNavigationActionMenuContainer}>
           <View style={styles.centerMenu}>
             <LargeMenuItem
@@ -262,7 +264,7 @@ class Menu extends Component {
                   256
                 )
               }}
-              // iconUrl={icons.dollar}
+            // iconUrl={icons.dollar}
             />
             {this.props.userProfile ? (
               <LargeMenuItem
@@ -320,7 +322,7 @@ class Menu extends Component {
                 title={i18n.t('label.community')}
                 details={
                   this.props.userProfile.supportedTreecounter &&
-                  this.props.userProfile.supportedTreecounter.displayName
+                    this.props.userProfile.supportedTreecounter.displayName
                     ? this.props.userProfile.supportedTreecounter.displayName
                     : i18n.t('label.pick_profile')
                 }

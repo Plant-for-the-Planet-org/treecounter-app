@@ -577,44 +577,44 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
         propertyOrder: 6
       },
-      password: {
-        title: null,
-        type: 'object',
-        properties: {
-          first: {
-            type: 'string',
-            title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: 'key',
-            help: null,
-            propertyOrder: 1
-          },
-          second: {
-            type: 'string',
-            title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: null,
-            help: null,
-            propertyOrder: 2
-          }
-        },
-        required: ['first', 'second'],
-        icon: null,
-        help: null,
-        propertyOrder: 7
-      },
+      // password: {
+      //   title: null,
+      //   type: 'object',
+      //   properties: {
+      //     first: {
+      //       type: 'string',
+      //       title: 'label.password',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: 'key',
+      //       help: null,
+      //       propertyOrder: 1
+      //     },
+      //     second: {
+      //       type: 'string',
+      //       title: 'label.password_repeat',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: null,
+      //       help: null,
+      //       propertyOrder: 2
+      //     }
+      //   },
+      //   required: ['first', 'second'],
+      //   icon: null,
+      //   help: null,
+      //   propertyOrder: 7
+      // },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
@@ -637,7 +637,7 @@ export default {
       'city',
       'country',
       'email',
-      'password'
+      // 'password'
     ],
     submit_url: '',
     submit_method: 'POST'
@@ -1198,44 +1198,44 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
         propertyOrder: 4
       },
-      password: {
-        title: null,
-        type: 'object',
-        properties: {
-          first: {
-            type: 'string',
-            title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: 'key',
-            help: null,
-            propertyOrder: 1
-          },
-          second: {
-            type: 'string',
-            title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: null,
-            help: null,
-            propertyOrder: 2
-          }
-        },
-        required: ['first', 'second'],
-        icon: null,
-        help: null,
-        propertyOrder: 5
-      },
+      // password: {
+      //   title: null,
+      //   type: 'object',
+      //   properties: {
+      //     first: {
+      //       type: 'string',
+      //       title: 'label.password',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: 'key',
+      //       help: null,
+      //       propertyOrder: 1
+      //     },
+      //     second: {
+      //       type: 'string',
+      //       title: 'label.password_repeat',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: null,
+      //       help: null,
+      //       propertyOrder: 2
+      //     }
+      //   },
+      //   required: ['first', 'second'],
+      //   icon: null,
+      //   help: null,
+      //   propertyOrder: 5
+      // },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
@@ -1251,7 +1251,7 @@ export default {
         propertyOrder: 7
       }
     },
-    required: ['firstname', 'lastname', 'country', 'email', 'password'],
+    required: ['firstname', 'lastname', 'country', 'email'],
     submit_url: '',
     submit_method: 'POST'
   },
@@ -1800,44 +1800,44 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
         propertyOrder: 4
       },
-      password: {
-        title: null,
-        type: 'object',
-        properties: {
-          first: {
-            type: 'string',
-            title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: 'key',
-            help: null,
-            propertyOrder: 1
-          },
-          second: {
-            type: 'string',
-            title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: null,
-            help: null,
-            propertyOrder: 2
-          }
-        },
-        required: ['first', 'second'],
-        icon: null,
-        help: null,
-        propertyOrder: 5
-      },
+      // password: {
+      //   title: null,
+      //   type: 'object',
+      //   properties: {
+      //     first: {
+      //       type: 'string',
+      //       title: 'label.password',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: 'key',
+      //       help: null,
+      //       propertyOrder: 1
+      //     },
+      //     second: {
+      //       type: 'string',
+      //       title: 'label.password_repeat',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: null,
+      //       help: null,
+      //       propertyOrder: 2
+      //     }
+      //   },
+      //   required: ['first', 'second'],
+      //   icon: null,
+      //   help: null,
+      //   propertyOrder: 5
+      // },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
@@ -1853,7 +1853,7 @@ export default {
         propertyOrder: 7
       }
     },
-    required: ['name', 'country', 'email', 'password'],
+    required: ['name', 'country', 'email'],
     submit_url: '',
     submit_method: 'POST'
   },
@@ -2416,44 +2416,44 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
         propertyOrder: 4
       },
-      password: {
-        title: null,
-        type: 'object',
-        properties: {
-          first: {
-            type: 'string',
-            title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: 'key',
-            help: null,
-            propertyOrder: 1
-          },
-          second: {
-            type: 'string',
-            title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: null,
-            help: null,
-            propertyOrder: 2
-          }
-        },
-        required: ['first', 'second'],
-        icon: null,
-        help: null,
-        propertyOrder: 5
-      },
+      // password: {
+      //   title: null,
+      //   type: 'object',
+      //   properties: {
+      //     first: {
+      //       type: 'string',
+      //       title: 'label.password',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: 'key',
+      //       help: null,
+      //       propertyOrder: 1
+      //     },
+      //     second: {
+      //       type: 'string',
+      //       title: 'label.password_repeat',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: null,
+      //       help: null,
+      //       propertyOrder: 2
+      //     }
+      //   },
+      //   required: ['first', 'second'],
+      //   icon: null,
+      //   help: null,
+      //   propertyOrder: 5
+      // },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
@@ -2469,7 +2469,7 @@ export default {
         propertyOrder: 7
       }
     },
-    required: ['name', 'subType', 'country', 'email', 'password'],
+    required: ['name', 'subType', 'country', 'email'],
     submit_url: '',
     submit_method: 'POST'
   },
@@ -3027,44 +3027,44 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
         propertyOrder: 4
       },
-      password: {
-        title: null,
-        type: 'object',
-        properties: {
-          first: {
-            type: 'string',
-            title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: 'key',
-            help: null,
-            propertyOrder: 1
-          },
-          second: {
-            type: 'string',
-            title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: null,
-            help: null,
-            propertyOrder: 2
-          }
-        },
-        required: ['first', 'second'],
-        icon: null,
-        help: null,
-        propertyOrder: 5
-      },
+      // password: {
+      //   title: null,
+      //   type: 'object',
+      //   properties: {
+      //     first: {
+      //       type: 'string',
+      //       title: 'label.password',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: 'key',
+      //       help: null,
+      //       propertyOrder: 1
+      //     },
+      //     second: {
+      //       type: 'string',
+      //       title: 'label.password_repeat',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: null,
+      //       help: null,
+      //       propertyOrder: 2
+      //     }
+      //   },
+      //   required: ['first', 'second'],
+      //   icon: null,
+      //   help: null,
+      //   propertyOrder: 5
+      // },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
@@ -3080,7 +3080,7 @@ export default {
         propertyOrder: 7
       }
     },
-    required: ['name', 'subType', 'country', 'email', 'password'],
+    required: ['name', 'subType', 'country', 'email'],
     submit_url: '',
     submit_method: 'POST'
   },
@@ -3638,44 +3638,44 @@ export default {
         attr: {
           maxlength: 100
         },
-        widget: 'email',
+        widget: 'hidden',
         icon: 'email',
         help: null,
         maxLength: 100,
         propertyOrder: 4
       },
-      password: {
-        title: null,
-        type: 'object',
-        properties: {
-          first: {
-            type: 'string',
-            title: 'label.password',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: 'key',
-            help: null,
-            propertyOrder: 1
-          },
-          second: {
-            type: 'string',
-            title: 'label.password_repeat',
-            attr: {
-              class: 'password-field'
-            },
-            widget: 'password',
-            icon: null,
-            help: null,
-            propertyOrder: 2
-          }
-        },
-        required: ['first', 'second'],
-        icon: null,
-        help: null,
-        propertyOrder: 5
-      },
+      // password: {
+      //   title: null,
+      //   type: 'object',
+      //   properties: {
+      //     first: {
+      //       type: 'string',
+      //       title: 'label.password',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: 'key',
+      //       help: null,
+      //       propertyOrder: 1
+      //     },
+      //     second: {
+      //       type: 'string',
+      //       title: 'label.password_repeat',
+      //       attr: {
+      //         class: 'password-field'
+      //       },
+      //       widget: 'password',
+      //       icon: null,
+      //       help: null,
+      //       propertyOrder: 2
+      //     }
+      //   },
+      //   required: ['first', 'second'],
+      //   icon: null,
+      //   help: null,
+      //   propertyOrder: 5
+      // },
       mayPublish: {
         type: 'boolean',
         title: 'label.mayPublish',
@@ -3691,7 +3691,7 @@ export default {
         propertyOrder: 7
       }
     },
-    required: ['name', 'subType', 'country', 'email', 'password'],
+    required: ['name', 'subType', 'country', 'email'],
     submit_url: '',
     submit_method: 'POST'
   }

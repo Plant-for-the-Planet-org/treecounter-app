@@ -15,12 +15,14 @@ import SafeAreaView from 'react-native-safe-area-view';
 
 const WelcomSlider = ({ navigation }) => {
   const appHomePage = () => updateRoute('app_homepage', navigation);
+
+  // const loginPage = (mode) => updateRoute('app_login', navigation, null, { mode: mode })
   const Footer = () => {
     return (
       <View style={{ backgroundColor: '#fff', marginTop: 16 }}>
         <View style={styless.bottomRow}>
           <PrimaryButton
-            onClick={() => updateRoute('app_signup', navigation)}
+            onClick={() => updateRoute('app_login', navigation)}
             buttonStyle={styless.buttonStyle}
           >
             <Text style={styless.continueBtn}>

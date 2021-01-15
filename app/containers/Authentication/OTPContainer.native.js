@@ -1,0 +1,103 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { debug } from '../../debug';
+import { login } from '../../actions/authActions';
+import { updateRoute } from '../../helpers/routerHelper';
+import OTPCode from '../../components/Authentication/Login/OTPCode';
+import { schemaOptions } from '../../server/parsedSchemas/login';
+import { handleServerResponseError } from '../../helpers/utils';
+import { loadUserProfile } from '../../actions/loadUserProfileAction';
+
+class OTPContainer extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+  constructor(props) {
+    super(props);
+    this.state = { formValue: {}, schemaOptions };
+  }
+
+  componentWillUnmount() {
+    if (!this.props.navigation) {
+      let gBatch = document.getElementsByClassName('grecaptcha-badge');
+      if (gBatch.length > 0) {
+        gBatch[0].style.visibility = 'hidden';
+      }
+    }
+  }
+
+  onPress = (value, recaptchaToken, refreshToken) => {
+    // let result = this.refs.loginContainer.refs.loginForm.validate();
+    //debug(result);
+    // let value = this.refs.loginContainer.refs.loginForm.getValue();
+    if (value) {
+      this.onClick(value, recaptchaToken, refreshToken);
+    }
+  };
+
+  onClick(formValue, recaptchaToken, refreshToken) {
+    //debug(this.refs.loginContainer.refs.loginForm.validate());
+    // let formValue = this.refs.loginContainer.refs.loginForm.getValue();
+    if (formValue) {
+      this.props
+        .login(formValue, recaptchaToken, this.props.navigation)
+        .then(val => val)
+        .catch(err => {
+          if (refreshToken) refreshToken();
+          debug('err signup data', err);
+          let newSchemaOptions = handleServerResponseError(
+            err,
+            this.state.schemaOptions
+          );
+          this.setState(
+            {
+              schemaOptions: {
+                ...newSchemaOptions
+              }
+            }
+          );
+        });
+      this.setState({ formValue: formValue });
+    }
+  }
+
+  render() {
+    return (
+      <OTPCode
+        ref={'loginContainer'}
+        onPress={this.onPress}
+        updateRoute={(routeName, id) =>
+          this.props.route(routeName, id, this.props.navigation)
+        }
+        formValue={this.state.formValue}
+        schemaOptions={this.state.schemaOptions}
+        navigation={this.props.navigation}
+        email={this.props.navigation.getParam('email', null)}
+        loadUserProfile={this.props.loadUserProfile}
+      />
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      login,
+      loadUserProfile,
+      route: (routeName, id, navigation) => dispatch =>
+        updateRoute(routeName, navigation || dispatch, id)
+    },
+    dispatch
+  );
+};
+
+export default connect(null, mapDispatchToProps)(OTPContainer);
+
+OTPContainer.propTypes = {
+  login: PropTypes.func,
+  route: PropTypes.func,
+  navigation: PropTypes.any,
+  loadUserProfile: PropTypes.func
+};

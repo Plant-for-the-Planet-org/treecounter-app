@@ -7,5 +7,14 @@
   "hide": "Verstecke",
   "password": "Passwort",
   "current_password": "Aktuelles Passwort",
-  "login_description": "Melde dich mit deinem Plant-for-the-Planet App Konto an, um auf deinen persönlichen Baumzähler zuzugreifen. Du kannst dich registrieren, wenn du noch kein Konto hast."
+  "login_description": "Melde dich mit deinem Plant-for-the-Planet App Konto an, um auf deinen persönlichen Baumzähler zuzugreifen. Du kannst dich registrieren, wenn du noch kein Konto hast.",
+  "enter_login_code": "Code eingeben",
+  "please_enter_code": "Bitte gib den Code aus der empfangenen E-Mail ein.",
+  "submit_code": "Code abschicken",
+  "login_or_signup": "Einloggen oder registrieren",
+  "enter_your_email": "E-Mail eingeben",
+  "tryAgain": "Nochmal versuchen",
+  "OTPSent": "Wir haben dir einen Einmal-Code gesendet",
+  "validEmail": "Bitte gib eine gültige E-Mail-Adresse ein",
+  "validCode": "Bitte gib einen gültiten Code ein"
 }

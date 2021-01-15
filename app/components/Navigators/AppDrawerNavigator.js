@@ -6,6 +6,7 @@ import React from 'react';
 import { debug } from '../../debug';
 import Trillion from '../TreecounterGraphics/Trillion';
 import LoginContainer from '../../containers/Authentication/LoginContainer';
+import OTPContainer from '../../containers/Authentication/OTPContainer';
 import SignUpContainer from '../../containers/Authentication/SignUpContainer';
 import ForgotPasswordContainer from '../../containers/Authentication/ForgotPasswordContainer';
 import TargetContainer from '../../containers/TargetContainer';
@@ -340,7 +341,12 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: Reviews
       },
       [getLocalRoute('app_login')]: {
-        screen: LoginContainer
+        screen: LoginContainer,
+        navigationOptions: { header: null }
+      },
+      ['app_otp']: {
+        screen: OTPContainer,
+        navigationOptions: { header: null }
       },
       ['app_add_review']: {
         screen: AddReview,

@@ -31,6 +31,11 @@ export default EStyleSheet.create({
     fontFamily: 'OpenSans-SemiBold'
   },
 
+  enterCode: {
+    color: '#4d5153',
+    fontFamily: 'OpenSans-SemiBold'
+  },
+
   actionButtonTouchable: {
     width: '100%',
     // marginLeft: '20%',

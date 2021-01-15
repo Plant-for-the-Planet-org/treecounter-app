@@ -15,7 +15,7 @@ export function auth0Login(email, navigation) {
       email: email,
       send: 'code',
     })
-    .then(res => {
+    .then(() => {
       updateRoute('app_otp', navigation, null, { email: email })
       // return res;
     })
@@ -24,7 +24,7 @@ export function auth0Login(email, navigation) {
     });
 }
 
-export function auth0OTP(email, code, navigation) {
+export function auth0OTP(email, code) {
   // Function for getting access token
   return auth0.auth
     .loginWithEmail({

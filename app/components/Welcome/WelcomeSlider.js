@@ -16,7 +16,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 const WelcomSlider = ({ navigation }) => {
   const appHomePage = () => updateRoute('app_homepage', navigation);
 
-  const loginPage = (mode) => updateRoute('app_login', navigation, null, { mode: mode })
+  // const loginPage = (mode) => updateRoute('app_login', navigation, null, { mode: mode })
   const Footer = () => {
     return (
       <View style={{ backgroundColor: '#fff', marginTop: 16 }}>

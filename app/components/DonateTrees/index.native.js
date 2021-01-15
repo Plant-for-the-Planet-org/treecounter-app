@@ -132,7 +132,7 @@ export default class DonateTrees extends React.PureComponent {
         this.props.loadUserProfile().then(() => {
           this.props.updateRoute('app_userHome');
         })
-        .catch(err => {
+        .catch(() => {
           // handle failure
           this.props.paymentClear();
           this.goToNextTab(1);

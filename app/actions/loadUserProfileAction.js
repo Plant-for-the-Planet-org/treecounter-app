@@ -6,7 +6,6 @@ import { mergeEntities } from '../reducers/entitiesReducer';
 import { setCurrentUserProfileId } from '../reducers/currentUserProfileIdReducer';
 import { setProgressModelState } from '../reducers/modelDialogReducer';
 import { setLastRoute } from '../reducers/updateLastRouteReducer';
-import { updateRoute } from '../helpers/routerHelper';
 
 export function loadUserProfile(props) {
   return dispatch => {

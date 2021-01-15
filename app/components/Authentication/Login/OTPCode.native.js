@@ -132,18 +132,18 @@ export default class OTPCode extends Component {
               loadButton: true
             });
             const email = this.props.email;
-            auth0OTP(email, values.loginCode, this.props.navigation).then((res) => {
+            auth0OTP(email, values.loginCode).then((res) => {
               if (res.accessToken) {
                 const data = {
                   navigation: this.props.navigation
                 }
-                this.props.loadUserProfile(data).catch(err => {
+                this.props.loadUserProfile(data).catch(() => {
                   updateRoute('app_signup', this.props.navigation);
                 });
               } else {
                 updateRoute('app_homepage', this.props.navigation);
               }
-            }).catch((err) => {
+            }).catch(() => {
               this.setState({
                 loadButton: false
               });

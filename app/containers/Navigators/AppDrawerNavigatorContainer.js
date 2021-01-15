@@ -73,7 +73,7 @@ class AppDrawerNavigatorContainer extends Component {
     } else {
       let token = await getAccessToken();
       if (token) {
-        this.props.loadUserProfile().catch(err => {
+        this.props.loadUserProfile().catch(() => {
           this.setState({ loading: false, isLoggedIn: false });
         });
       } else {

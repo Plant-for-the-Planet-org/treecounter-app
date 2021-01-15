@@ -37,7 +37,6 @@ export default class OTPCode extends Component {
   }
 
   UNSAFE_componentWillMount() {
-
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       // eslint-disable-next-line no-underscore-dangle
@@ -134,7 +133,6 @@ export default class OTPCode extends Component {
             });
             const email = this.props.email;
             auth0OTP(email, values.loginCode, this.props.navigation).then((res) => {
-
               if (res.accessToken) {
                 const data = {
                   navigation: this.props.navigation
@@ -154,13 +152,12 @@ export default class OTPCode extends Component {
               actions.setSubmitting(false)
             })
 
-            setTimeout(
-              () =>
-                this.setState({
-                  loadButton: false
-                }),
-              3000
-            );
+            setTimeout(() => {
+              this.setState({
+                loadButton: false
+              })
+              actions.setSubmitting(false);
+            }, 3000);
           }}
           validationSchema={schema}
         >

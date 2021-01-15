@@ -31,7 +31,6 @@ export default class Login extends Component {
   }
 
   UNSAFE_componentWillMount() {
-
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       // eslint-disable-next-line no-underscore-dangle
@@ -84,18 +83,17 @@ export default class Login extends Component {
              Check the render method of `Login`.
              in Formik (at Login/index.native.js:103) */
           // ref={'loginForm'}
-          onSubmit={values => {
+          onSubmit={(values, actions) => {
             this.setState({
               loadButton: true
             });
             auth0Login(values.email, this.props.navigation);
-            setTimeout(
-              () =>
+            setTimeout(() => {
                 this.setState({
                   loadButton: false
-                }),
-              3000
-            );
+                });
+                actions.setSubmitting(false);
+              }, 3000);
           }}
           validationSchema={schema}
         >

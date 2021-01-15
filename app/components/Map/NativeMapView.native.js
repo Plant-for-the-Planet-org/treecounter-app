@@ -425,7 +425,7 @@ class NativeMapView extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps, this.props)) {
       this.onPropsUpdate(nextProps);
-      this.ref && this.ref.setAddressText(nextProps.address);
+      this.ref && nextProps.address && this.ref.setAddressText(nextProps.address);
     }
   }
 
@@ -862,13 +862,15 @@ class NativeMapView extends Component {
             shouldDisplayListView: true
           });
         },
-
         onBlur: () => {
           this.setState({
             shouldDisplayListView: false
           });
         },
         editable: true,
+        keyboardAppearance: 'light',
+        placeholderTextColor: '#4d5153',
+        returnKeyType: 'search', // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
         onPress: () => {
           //debug('clicked');
         }
@@ -876,7 +878,10 @@ class NativeMapView extends Component {
       : {
         editable: true,
         onFocus: onPress,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        keyboardAppearance: 'light',
+        placeholderTextColor: '#4d5153',
+        returnKeyType: 'search', // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
       };
     return this.renderComp(
       <View style={fullScreen ? styles.fullScreenContainer : styles.container}>
@@ -916,10 +921,7 @@ class NativeMapView extends Component {
                   autoFocus={false}
                   fetchDetails={true}
                   ref={ref => (this.ref = ref)}
-                  placeholderTextColor={'#4d5153'}
                   // listViewDisplayed="auto"
-                  returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-                  keyboardAppearance={'light'}
                   styles={{
                     textInputContainer: {
                       borderTopWidth: 0,

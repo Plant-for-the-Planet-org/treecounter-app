@@ -68,7 +68,7 @@ const Trillion = lazy(() => import('../TreecounterGraphics/Trillion'));
 
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { NotificationAction } from '../../actions/notificationAction';
-import { getAccessToken } from '../../utils/user';
+import { getAccessToken, getAuth0AccessToken } from '../../utils/user';
 import { currentUserProfileSelector } from '../../selectors';
 import { getLocalRoute } from '../../actions/apiRouting';
 
@@ -149,9 +149,12 @@ class TreeCounter extends Component {
     if (isLoggedIn) {
       this.setState({ loading: false, isLoggedIn: true });
     } else {
+      let auth0Token = await getAuth0AccessToken();
       let token = await getAccessToken();
-      if (token) {
-        this.props.loadUserProfile();
+      if (auth0Token || token) {
+        this.props.loadUserProfile().catch(() => {
+          this.setState({ loading: false, isLoggedIn: false });
+        });
         this.props.NotificationAction();
       } else {
         this.setState({ loading: false, isLoggedIn: false });

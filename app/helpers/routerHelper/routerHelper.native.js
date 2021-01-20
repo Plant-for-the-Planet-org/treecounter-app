@@ -11,7 +11,7 @@ export function updateRoute(routeName, navigation, id, params) {
   if (id === 0) {
     navigation.closeDrawer();
   }
-  navigation.navigate(route, params);
+  if (route) navigation.navigate(route, params);
 }
 
 export function updateStaticRoute(routeName, navigation, params) {

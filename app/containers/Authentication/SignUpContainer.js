@@ -8,6 +8,11 @@ import { SignUp } from '../../components/Authentication';
 import { signUp } from '../../actions/signupActions';
 import { schemaOptions } from '../../server/parsedSchemas/signup';
 import { handleServerResponseError } from '../../helpers/utils';
+import { getAuth0AccessToken } from '../../utils/user';
+import Config from 'react-native-config';
+import Auth0 from 'react-native-auth0';
+
+const auth0 = new Auth0({ domain: Config.AUTH0_DOMAIN, clientId: Config.AUTH0_CLIENT_ID });
 
 class SignUpContainer extends React.Component {
   constructor(props) {
@@ -24,33 +29,68 @@ class SignUpContainer extends React.Component {
     }
   }
 
-  onSignUpClicked = (profileType, signupForm, token, refreshToken) => {
+  async componentDidMount() {
+    let authtoken = await getAuth0AccessToken();
+    auth0.auth.userInfo({ token: authtoken })
+      .then((res) => {
+        let formValue = {
+          ...this.state.formValue,
+          email: res.email
+        }
+        this.setState({ formValue: formValue })
+      })
+  }
+
+  async componentDidUpdate() {
+    if (this.state.formValue === {}) {
+      let authtoken = await getAuth0AccessToken();
+      auth0.auth.userInfo({ token: authtoken })
+        .then((res) => {
+          let formValue = {
+            ...this.state.formValue,
+            email: res.email
+          }
+          this.setState({ formValue: formValue })
+        })
+    }
+  }
+  onSignUpClicked = async (profileType, signupForm, token, refreshToken) => {
     //debug(signupForm.validate());
     let formValue = signupForm.getValue();
+    let authtoken = await getAuth0AccessToken();
     if (formValue) {
-      this.props
-        .signUp(profileType, formValue, token, this.props.navigation)
-        .then((/* success */) => {})
-        .catch(err => {
-          if (refreshToken) refreshToken();
-          debug('err signup data', err);
-          let newSchemaOptions = handleServerResponseError(
-            err,
-            this.state.schemaOptions[profileType]
-          );
-          this.setState(
-            {
-              schemaOptions: {
-                ...this.state.schemaOptions,
-                [profileType]: newSchemaOptions
-              }
-            },
-            () => {
-              signupForm.validate();
-            }
-          );
-        });
-      this.setState({ formValue: formValue });
+      auth0.auth
+        .userInfo({ token: authtoken })
+        .then((res) => {
+          formValue = {
+            ...formValue,
+            email: res.email
+          }
+          this.props
+            .signUp(profileType, formValue, token, this.props.navigation)
+            .then((/* success */) => { })
+            .catch(err => {
+              if (refreshToken) refreshToken();
+              debug('err signup data', err);
+              let newSchemaOptions = handleServerResponseError(
+                err,
+                this.state.schemaOptions[profileType]
+              );
+              this.setState(
+                {
+                  schemaOptions: {
+                    ...this.state.schemaOptions,
+                    [profileType]: newSchemaOptions
+                  }
+                },
+                () => {
+                  signupForm.validate();
+                }
+              );
+            });
+          this.setState({ formValue: formValue });
+        })
+        .catch(console.error);
     }
   };
 

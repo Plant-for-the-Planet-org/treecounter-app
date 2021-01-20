@@ -61,10 +61,6 @@ export default class EditUserProfile extends Component {
           title: i18n.t('label.description')
         },
         {
-          key: 'security',
-          title: i18n.t('label.profile_security')
-        },
-        {
           key: 'following',
           title: i18n.t('label.subscribed')
         }
@@ -377,7 +373,7 @@ class SecurityTabView extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       emailButtonPress: false,
       changPassworsdButtonPress: false,
     }
@@ -385,8 +381,8 @@ class SecurityTabView extends React.PureComponent {
 
   render() {
     const { type } = this.props.currentUserProfile;
-    const {loading} = this.props;
-    const {emailButtonPress, changPassworsdButtonPress} = this.state;
+    const { loading } = this.props;
+    const { emailButtonPress, changPassworsdButtonPress } = this.state;
     return (
       <KeyboardAwareScrollView enableOnAndroid>
         <CardLayout style={{ flex: 1 }}>
@@ -405,7 +401,7 @@ class SecurityTabView extends React.PureComponent {
             onClick={() => {
               this.setState({
                 emailButtonPress: true,
-                changPassworsdButtonPress:false,
+                changPassworsdButtonPress: false,
               });
               this.props.changeEmail(this.refs.change_email);
             }}
@@ -436,9 +432,9 @@ class SecurityTabView extends React.PureComponent {
                 //same password
                 this.props.onSamePasswordErrorState(true);
                 this.setState({
-                  emailButtonPress:false,
+                  emailButtonPress: false,
                   passwordNotSameError: true,
-                  changPassworsdButtonPress:true,
+                  changPassworsdButtonPress: true,
                 });
                 return;
               }

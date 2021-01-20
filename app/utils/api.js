@@ -2,7 +2,7 @@ import axios from 'axios';
 import { uuidv1 } from './uuid';
 import { debug } from '../debug';
 import { fetchItem, saveItem } from '../stores/localStorage';
-import { getAccessToken } from './user';
+import { getAccessToken, getAuth0AccessToken } from './user';
 import { getApiRoute } from '../actions/apiRouting';
 import { getStore } from '../components/App/index';
 import { logoutUser } from '../actions/authActions';
@@ -29,6 +29,9 @@ function checkStatus(response) {
 
 function onAPIError(error) {
   //400 : INPUT_VALIDATION_ERROR dont show error balloons
+  if (error.response && error.response.status === 303) {
+    return error.response
+  }
   if (error.response && error.response.status === 400) {
     throw error;
   }
@@ -62,9 +65,16 @@ async function getHeaders(authenticated = false, recaptcha) {
     };
   }
   if (authenticated) {
-    return {
-      headers: { ...headers, Authorization: `Bearer ${await getAccessToken()}` }
-    };
+    let auth0Token = await getAuth0AccessToken();
+    if (auth0Token) {
+      return {
+        headers: { ...headers, Authorization: `OAuth ${auth0Token}` }
+      };
+    } else {
+      return {
+        headers: { ...headers, Authorization: `Bearer ${await getAccessToken()}` }
+      };
+    }
   } else {
     return { headers };
   }

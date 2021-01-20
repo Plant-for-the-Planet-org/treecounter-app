@@ -7,16 +7,9 @@ export default {
       title: 'label.email',
       icon: 'email',
       propertyOrder: 1
-    },
-    _password: {
-      type: 'string',
-      title: 'label.password',
-      icon: 'key',
-      widget: 'password',
-      propertyOrder: 2
     }
   },
-  required: ['_username', '_password'],
+  required: ['_username'],
   submit_url: '/api/login_check',
   submit_method: 'POST'
 };

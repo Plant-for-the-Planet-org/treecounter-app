@@ -16,17 +16,23 @@ import i18n from '../../../locales/i18n.js';
 import styles from '../../../styles/login';
 import { TextField } from 'react-native-material-textfield';
 import { Formik } from 'formik';
-import HeaderNew from './../../Header/HeaderNew.native';
-import { auth0Login } from '../../../actions/auth0Actions';
+import HeaderNew from '../../Header/HeaderNew.native';
+import { auth0OTP, auth0Login } from '../../../actions/auth0Actions';
+import { updateRoute } from '../../../helpers/routerHelper/routerHelper';
 import * as yup from 'yup';
+import LoadingIndicator from '../../Common/LoadingIndicator';
 
-export default class Login extends Component {
+export default class OTPCode extends Component {
   constructor(props) {
     super(props);
-
+    this.startTimer = this.startTimer.bind(this);
+    this.countDown = this.countDown.bind(this);
+    this.timer = 0;
     this.state = {
       shortHeight: 401,
-      loadButton: false
+      loadButton: false,
+      loadingPage: false,
+      seconds: 30
     };
   }
 
@@ -59,16 +65,55 @@ export default class Login extends Component {
     });
   };
 
+  componentDidMount() {
+    this.startTimer()
+  }
+
+  startTimer() {
+    if (this.timer == 0 && this.state.seconds > 0) {
+      this.timer = setInterval(this.countDown, 1000);
+    }
+  }
+
+  countDown() {
+    // Remove one second, set state so a re-render happens.
+    let seconds = this.state.seconds - 1;
+    this.setState({
+      seconds: seconds,
+    });
+
+    // Check if we're at zero.
+    if (seconds == 0) {
+      clearInterval(this.timer);
+    }
+  }
+
+  handleTryAgain = () => {
+    this.setState({
+      loadingPage: true
+    });
+    auth0Login(this.props.email, this.props.navigation);
+    setTimeout(
+      () =>
+        this.setState({
+          loadingPage: false
+        }),
+      3000
+    );
+  };
+
   render() {
     const schema = yup.object().shape({
-      email: yup.string()
-        .email(i18n.t('label.validEmail'))
-        .required(i18n.t('label.validEmail')),
+      loginCode: yup.number()
+        .integer(i18n.t('label.validCode'))
+        .positive(i18n.t('label.validCode'))
+        .required(i18n.t('label.validCode'))
+        .typeError(i18n.t('label.invalid_number')),
     });
 
     const backgroundColor = 'white';
     const lockedButton = 'rgba(137, 181, 58, 0.19)';
-    return (
+    return !this.state.loadingPage ? (
       <View style={{ flex: 1 }}>
         <HeaderNew
           title={''}
@@ -76,8 +121,7 @@ export default class Login extends Component {
         />
         <Formik
           initialValues={{
-            // eslint-disable-next-line no-underscore-dangle
-            email: ''
+            loginCode: ''
           }}
           /* ExceptionsManager.js:126 Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
              Check the render method of `Login`.
@@ -87,20 +131,39 @@ export default class Login extends Component {
             this.setState({
               loadButton: true
             });
-            auth0Login(values.email, this.props.navigation);
-            setTimeout(() => {
-                this.setState({
-                  loadButton: false
+            const email = this.props.email;
+            auth0OTP(email, values.loginCode).then((res) => {
+              if (res.accessToken) {
+                const data = {
+                  navigation: this.props.navigation
+                }
+                this.props.loadUserProfile(data).catch(() => {
+                  updateRoute('app_signup', this.props.navigation);
                 });
-                actions.setSubmitting(false);
-              }, 3000);
+              } else {
+                updateRoute('app_homepage', this.props.navigation);
+              }
+            }).catch(() => {
+              this.setState({
+                loadButton: false
+              });
+              actions.setFieldError('loginCode', i18n.t('label.validCode'))
+              // actions.resetForm();
+              actions.setSubmitting(false)
+            })
+
+            setTimeout(() => {
+              this.setState({
+                loadButton: false
+              })
+              actions.setSubmitting(false);
+            }, 3000);
           }}
           validationSchema={schema}
         >
           {props => (
             <>
               <KeyboardAvoidingView
-                //behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={{
                   minHeight: '100%'
                 }}
@@ -122,29 +185,41 @@ export default class Login extends Component {
                 //  scrollEnabled
                 >
                   <Text style={styles.loginTitle}>
-                    {i18n.t('label.enter_your_email')}
+                    {i18n.t('label.OTPSent')}
                   </Text>
                   <View>
                     <TextField
-                      label={i18n.t('label.email')}
+                      label={i18n.t('label.enter_login_code')}
                       // eslint-disable-next-line no-underscore-dangle
-                      value={props.values.email}
+                      value={props.values.loginCode}
                       tintColor={'#89b53a'}
                       titleFontSize={12}
                       lineWidth={1}
                       // eslint-disable-next-line no-underscore-dangle
-                      error={props.touched.email && props.errors.email}
+                      error={props.touched.loginCode && props.errors.loginCode}
                       labelTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       titleTextStyle={{ fontFamily: 'OpenSans-SemiBold' }}
                       affixTextStyle={{ fontFamily: 'OpenSans-Regular' }}
                       autoCorrect={false}
                       returnKeyType="done"
-                      onChangeText={props.handleChange('email')}
-                      onBlur={props.handleBlur('email')}
-                      keyboardType="email-address"
+                      onChangeText={props.handleChange('loginCode')}
+                      onBlur={props.handleBlur('loginCode')}
+                      keyboardType="numeric"
                       autoCapitalize="none"
                       onSubmitEditing={props.isValid ? props.handleSubmit : null}
                     />
+                  </View>
+                  <View style={[styles.bottomRow]}>
+                    <Text style={styles.enterCode}>
+                      {i18n.t('label.please_enter_code', {
+                        count: this.state.seconds
+                      })}
+                      {this.state.seconds > 0 ? (
+                        <Text>{''}</Text>
+                      ) : (
+                        <Text onPress={this.handleTryAgain} style={styles.forgotPasswordHighlight}>{' ' + i18n.t('label.tryAgain')}</Text>
+                      )}
+                    </Text>
                   </View>
 
                   {this.state.shortHeight > 400 && Platform.OS === 'ios' ? (
@@ -170,7 +245,7 @@ export default class Login extends Component {
                           />
                         ) : (
                             <Text style={styles.actionButtonText}>
-                              {i18n.t('label.continue')}
+                              {i18n.t('label.submit_code')}
                             </Text>
                           )}
                       </View>
@@ -198,7 +273,7 @@ export default class Login extends Component {
                         />
                       ) : (
                           <Text style={styles.actionButtonText}>
-                            {i18n.t('label.continue')}
+                            {i18n.t('label.submit_code')}
                           </Text>
                         )}
                     </View>
@@ -209,14 +284,18 @@ export default class Login extends Component {
           )}
         </Formik>
       </View>
-    );
+    ) : (
+        <LoadingIndicator contentLoader screen="profileLoader" />
+      );
   }
 }
 
-Login.propTypes = {
+OTPCode.propTypes = {
   onPress: PropTypes.func.isRequired,
   onError: PropTypes.func,
   updateRoute: PropTypes.func,
   formValue: PropTypes.any,
-  schemaOptions: PropTypes.any
+  schemaOptions: PropTypes.any,
+  email: PropTypes.any,
+  loadUserProfile: PropTypes.any
 };

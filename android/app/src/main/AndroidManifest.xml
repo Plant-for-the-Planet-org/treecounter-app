@@ -82,6 +82,11 @@
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/reset-password" />
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/t/" />
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/project/" />
+            <data
+              android:host="@string/AUTH0_DOMAIN"
+              android:pathPrefix="/android/${applicationId}/callback"
+              android:scheme="${applicationId}" 
+            />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getAppNavigator } from '../../components/Navigators/AppDrawerNavigator';
-import { getAccessToken } from '../../utils/user';
+import { getAccessToken, getAuth0AccessToken } from '../../utils/user';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { currentUserProfileSelector } from '../../selectors';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -71,9 +71,12 @@ class AppDrawerNavigatorContainer extends Component {
     if (isLoggedIn) {
       this.setState({ loading: false, isLoggedIn: true });
     } else {
+      let auth0Token = await getAuth0AccessToken();
       let token = await getAccessToken();
-      if (token) {
-        this.props.loadUserProfile();
+      if (auth0Token || token) {
+        this.props.loadUserProfile().catch(() => {
+          this.setState({ loading: false, isLoggedIn: false });
+        });
       } else {
         this.setState({ loading: false, isLoggedIn: false });
       }

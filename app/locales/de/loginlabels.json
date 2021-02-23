@@ -9,12 +9,12 @@
   "current_password": "Aktuelles Passwort",
   "login_description": "Melde dich mit deinem Plant-for-the-Planet App Konto an, um auf deinen persönlichen Baumzähler zuzugreifen. Du kannst dich registrieren, wenn du noch kein Konto hast.",
   "enter_login_code": "Code eingeben",
-  "please_enter_code": "Bitte gib den Code aus der empfangenen E-Mail ein.",
-  "submit_code": "Code abschicken",
-  "login_or_signup": "Einloggen oder registrieren",
+  "please_enter_code": "Bitte prüfe deine E-Mail. Wenn du keinen Code erhalten haben, kannst du es in {{count}} Sekunden erneut versuchen.",
+  "submit_code": "Code senden",
+  "login_or_signup": "Anmelden oder Registrieren",
   "enter_your_email": "E-Mail eingeben",
-  "tryAgain": "Nochmal versuchen",
-  "OTPSent": "Wir haben dir einen Einmal-Code gesendet",
-  "validEmail": "Bitte gib eine gültige E-Mail-Adresse ein",
-  "validCode": "Bitte gib einen gültiten Code ein"
+  "tryAgain": "Erneut versuchen",
+  "OTPSent": "Wir haben dir einen einen Einmal-Code gesendet.",
+  "validEmail": "Bitte gibt eine gültige E-Mail-Adresse ein.",
+  "validCode": "Bitte gib einen gültigen Code ein."
 }

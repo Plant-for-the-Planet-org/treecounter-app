@@ -4,7 +4,10 @@ import { updateAuth0JWT } from '../utils/user';
 import { updateRoute } from '../helpers/routerHelper/routerHelper.native';
 
 // AUTH0 CONFIG
-const auth0 = new Auth0({ domain: Config.AUTH0_DOMAIN, clientId: Config.AUTH0_CLIENT_ID });
+const auth0 = new Auth0({
+  domain: Config.AUTH0_DOMAIN,
+  clientId: Config.AUTH0_CLIENT_ID
+});
 
 //  ---------------- AUTH0 ACTIONS START----------------
 
@@ -13,10 +16,10 @@ export function auth0Login(email, navigation) {
   auth0.auth
     .passwordlessWithEmail({
       email: email,
-      send: 'code',
+      send: 'code'
     })
     .then(() => {
-      updateRoute('app_otp', navigation, null, { email: email })
+      updateRoute('app_otp', navigation, null, { email: email });
       // return res;
     })
     .catch(error => {
@@ -30,8 +33,9 @@ export function auth0OTP(email, code) {
     .loginWithEmail({
       email: email,
       code: code,
+      scope: 'offline_access'
     })
-    .then((credentials) => {
+    .then(credentials => {
       const { accessToken, idToken, refreshToken } = credentials;
       updateAuth0JWT(accessToken, refreshToken, idToken);
       return credentials;
@@ -45,10 +49,27 @@ export const auth0Logout = () => {
   return new Promise((resolve, reject) => {
     auth0.webAuth
       .clearSession()
-      .then((res) => {
+      .then(res => {
         resolve(res);
       })
-      .catch((error) => {
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
+/**
+ * Gets the new credentials which includes refreshToken, idToken and accessToken
+ * @param {string} refreshToken - used to get new credentials using this refresh token
+ */
+export const auth0NewAccessToken = refreshToken => {
+  return new Promise((resolve, reject) => {
+    auth0.auth
+      .refreshToken({ refreshToken })
+      .then(credentials => {
+        resolve(credentials);
+      })
+      .catch(error => {
         reject(error);
       });
   });

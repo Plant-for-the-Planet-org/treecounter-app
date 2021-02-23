@@ -1,4 +1,5 @@
 import jwtDecode from 'jwt-decode';
+import { auth0NewAccessToken } from '../actions/auth0Actions';
 import { debug } from '../debug';
 import { getItem, saveItem } from '../stores/localStorage';
 import { postRequest } from './api';
@@ -64,14 +65,23 @@ const refreshTokenIfExpired = async () => {
   return;
 };
 
-const tokenIsExpired = async () => {
-  let tokenExpiry = await getTokenExpires();
+/**
+ * Returns a boolean value [true] if token is expired else returns [false]
+ * @param {boolean} isAuth0 - gets result for auth0 token if [true]. Defaults to [false]
+ */
+const tokenIsExpired = async (isAuth0 = false) => {
+  let tokenExpiry = await getTokenExpires(isAuth0);
   let expired = getCurrentUnixTimestamp() > tokenExpiry;
   return expired;
 };
 
-const getTokenExpires = async () => {
-  let tokenExpiryTime = await getItem('token_expires');
+const getTokenExpires = async isAuth0 => {
+  let tokenExpiryTime;
+  if (isAuth0) {
+    tokenExpiryTime = await getItem('auth0_token_expires');
+  } else {
+    tokenExpiryTime = await getItem('token_expires');
+  }
   if (tokenExpiryTime) {
     return parseInt(tokenExpiryTime);
   } else {
@@ -86,8 +96,40 @@ const getCurrentUnixTimestamp = () => Math.floor(Date.now() / 1000);
  */
 export const getAuth0AccessToken = async () => {
   const token = await getItem('auth0_token');
+  if (token) {
+    // This may throw an Error if localStorage is broken
+    // or POST requests timeout
+    try {
+      const newToken = await refreshAuth0TokenIfExpired();
+      if (newToken) {
+        return newToken;
+      }
+    } catch (error) {
+      // 400
+      debug(`Failed to refresh token: ${error}`);
+      return;
+    }
+  }
   return token;
-}
+};
+
+/**
+ * @returns string | void
+ */
+const refreshAuth0TokenIfExpired = async () => {
+  if (await tokenIsExpired(true)) {
+    const prev_refresh_token = await getItem('auth0_refresh_token');
+    if (prev_refresh_token) {
+      const credentials = await auth0NewAccessToken(prev_refresh_token);
+      if (credentials) {
+        const { accessToken, idToken, refreshToken } = credentials;
+        updateAuth0JWT(accessToken, refreshToken, idToken);
+        return accessToken;
+      }
+    }
+  }
+  return;
+};
 
 // Accepts 3 parameters -
 // token - this is the access_token from Auth0
@@ -95,7 +137,10 @@ export const getAuth0AccessToken = async () => {
 // id_token - this is the idToken used to get the expriration time
 export const updateAuth0JWT = (token, refreshToken, idToken) => {
   saveItem('auth0_token', token);
-  saveItem('auth0_refresh_token', refreshToken);
+  // adds refreshToken to storage, if present
+  if (refreshToken) {
+    saveItem('auth0_refresh_token', refreshToken);
+  }
   saveItem('auth0_token_expires', `${getExpirationTimeStamp(idToken)}`);
   return;
 };

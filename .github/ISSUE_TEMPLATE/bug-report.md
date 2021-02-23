@@ -29,16 +29,10 @@ Steps to reproduce the behavior:
 **Screenshots**
 *If applicable, add screenshots to help explain your problem.*
 
-**Desktop (please complete the following information):**
-- OS: [e.g. latest MacOS]
-- Browser [e.g. latest Chrome, Safari]
-- Plant-for-the-Planet Client Version [e.g. 1.3.4]
-
 **Smartphone (please complete the following information):**
-- Device: [e.g. iPhone 11]
-- OS: [e.g. iOS 13.5]
-- Browser [e.g. stock browser, Safari]
-- Plant-for-the-Planet App Version [e.g. 1.3.4]
+- Device: [e.g. iPhone]
+- OS: [e.g. latest iOS]
+- Plant-for-the-Planet App Version: [e.g. 1.3.9]
 
 **Additional context**
 *Add any other context about the problem here.*

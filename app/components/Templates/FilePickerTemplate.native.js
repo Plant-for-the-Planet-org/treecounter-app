@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import { Alert, View, Image, TouchableOpacity } from 'react-native';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { PERMISSIONS, request } from 'react-native-permissions';
 import { debug } from '../../debug';
 import { imageUpload } from '../../assets';
 import i18n from '../../locales/i18n';
@@ -11,20 +12,22 @@ export function FilePickerTemplate(locals) {
   let { category, variant } = locals.config || {};
 
   const options = {
-    title: i18n.t('label.add_image_title'),
-    cancelButtonTitle: i18n.t('label.cancel'),
-    takePhotoButtonTitle: i18n.t('label.take_photo'),
-    chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
-    'permissionDenied.title': i18n.t('label.permission_denied_title'),
-    'permissionDenied.text': i18n.t('label.permission_denied_text'),
-    'permissionDenied.reTryTitle': i18n.t(
-      'label.permission_denied_retry_title'
-    ),
-    'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
-    storageOptions: {
-      skipBackup: true,
-      path: 'images'
-    }
+    // title: i18n.t('label.add_image_title'),
+    // cancelButtonTitle: i18n.t('label.cancel'),
+    // takePhotoButtonTitle: i18n.t('label.take_photo'),
+    // chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+    // 'permissionDenied.title': i18n.t('label.permission_denied_title'),
+    // 'permissionDenied.text': i18n.t('label.permission_denied_text'),
+    // 'permissionDenied.reTryTitle': i18n.t(
+    //   'label.permission_denied_retry_title'
+    // ),
+    // 'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
+    // storageOptions: {
+    //   skipBackup: true,
+    //   path: 'images'
+    // }
+    mediaType: 'photo',
+    includeBase64: true,
   };
 
   return (
@@ -32,19 +35,25 @@ export function FilePickerTemplate(locals) {
       <TouchableOpacity
         onPress={
           (/* event */) => {
-            ImagePicker.showImagePicker(options, response => {
-              //debug('Response = ', response);
-
-              if (response.didCancel) {
-                //debug('User cancelled image picker');
-              } else if (response.error) {
-                debug('ImagePicker Error: ', response.error);
-              } else if (response.customButton) {
-                //debug('User tapped custom button: ', response.customButton);
-              } else {
-                // let source = { uri: response.uri };
-                locals.onChange('data:image/jpeg;base64,' + response.data);
-              }
+            request(
+              Platform.select({
+                android: PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+                ios: PERMISSIONS.IOS.PHOTO_LIBRARY
+              })
+            ).then((/*response*/) => {
+              launchImageLibrary(options, response => {
+                if (response.didCancel) {
+                  //debug('User cancelled image picker');
+                } else if (response.errorCode) {
+                  debug('ImagePicker Error: ', response.errorCode, response.errorMessage);
+                  Alert.alert(
+                    i18n.t('label.permission_denied_title'),
+                    i18n.t('label.permission_denied_text'),
+                  );
+                } else {
+                  locals.onChange('data:image/jpeg;base64,' + response.base64);
+                }
+              });
             });
           }
         }

@@ -266,5 +266,30 @@ export default EStyleSheet.create({
     marginRight: 12,
     height: 52,
     justifyContent: 'center'
-  }
+  },
+  // styles for react-native-raw-bottom-sheet
+  bottomSheetTitle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 64,
+    paddingLeft: 25,
+    fontSize: 18,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 19,
+    letterSpacing: 0
+  },
+  bottomSheetItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 48,
+    paddingLeft: 25,
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 19,
+    letterSpacing: 0
+  },
 });

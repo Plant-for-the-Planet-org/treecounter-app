@@ -68,6 +68,9 @@ jest.mock('react-native-splash-screen', () => {
     hide: jest.fn()
   };
 });
+jest.mock('react-native-get-random-values', () => {});
+jest.mock('@react-native-community/picker', () => {});
+jest.mock('react-native-pdf', () => {});
 
 // eslint-disable-next-line no-undef
 it('renders correctly', () => {

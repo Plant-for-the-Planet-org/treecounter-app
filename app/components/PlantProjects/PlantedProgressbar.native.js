@@ -9,8 +9,6 @@ import { convertNumber, formatNumber } from '../../utils/utils';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../utils/constants';
 
-const flagIcon = <Icon name="flag" size={18} color={colors.WHITE} />;
-
 class PlantedProgressBar extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +31,7 @@ class PlantedProgressBar extends React.Component {
     } else {
       treeCountWidth = treePlantedRatio * 100;
     }
-    const colors = { backgroundColor: '#79b805', borderColor: '#79b805' };
+    const myColors = { backgroundColor: '#79b805', borderColor: '#79b805' };
     return (
       <View style={[styles.treeCounterContainer, style]}>
         <View style={styles.treePlantedContainer}>
@@ -43,8 +41,8 @@ class PlantedProgressBar extends React.Component {
                 ? {
                   height: '100%',
                   flexDirection: 'row',
-                  backgroundColor: colors.backgroundColor,
-                  borderColor: colors.borderColor,
+                  backgroundColor: myColors.backgroundColor,
+                  borderColor: myColors.borderColor,
                   width: treeCountWidth + '%',
                   paddingRight: 10,
                   padding: 5,
@@ -90,7 +88,7 @@ class PlantedProgressBar extends React.Component {
             </Text>
 
             <View style={{ paddingLeft: 5.5, paddingRight: 12 }}>
-              {flagIcon}
+              <Icon name="flag" size={18} color={colors.WHITE} />
             </View>
           </View>
         ) : null}

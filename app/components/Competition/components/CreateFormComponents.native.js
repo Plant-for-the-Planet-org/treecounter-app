@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Alert, Text, View, Image, Platform, TouchableOpacity } from 'react-native';
 import {
   cameraSolid,
   imageGallery,
@@ -262,6 +262,8 @@ export function AddImage(props) {
                   );
                 }
               });
+            }).catch(err => {
+              debug(err);
             });
           }}
         >
@@ -292,6 +294,8 @@ export function AddImage(props) {
                   );
                 }
               });
+            }).catch(err => {
+              debug(err);
             });
           }}
           style={styles.addImageButton2}

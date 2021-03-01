@@ -929,6 +929,8 @@ export function AddImage(props) {
                   props.updateImages('data:image/jpeg;base64,' + response.base64);
                 }
               });
+            }).catch(err => {
+              debug(err);
             });
           }}
         >
@@ -956,6 +958,8 @@ export function AddImage(props) {
                   props.updateImages('data:image/jpeg;base64,' + response.base64);
                 }
               });
+            }).catch(err => {
+              debug(err);
             });
           }}
           style={styles.addImageButton2}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Alert, Text, View, Image, Platform, TouchableOpacity } from 'react-native';
 import { Formik } from 'formik';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { TextField } from 'react-native-material-textfield';
@@ -342,6 +342,8 @@ export function AddImage(props) {
                   );
                 }
               });
+            }).catch(err => {
+              debug(err);
             });
           }}
         >
@@ -372,6 +374,8 @@ export function AddImage(props) {
                   );
                 }
               });
+            }).catch(err => {
+              debug(err);
             });
           }}
           style={styles.addImageButton2}

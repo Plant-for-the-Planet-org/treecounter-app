@@ -835,6 +835,8 @@ class NativeMapView extends Component {
           }
         );
       }, 1000);
+    }).catch(err => {
+      debug(err);
     });
   };
 /**

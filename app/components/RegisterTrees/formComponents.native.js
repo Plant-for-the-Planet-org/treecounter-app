@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle,react-native/no-color-literals */
 import React, { useState, useEffect, useRef } from 'react';
 import {
+  Alert,
   Image,
   Platform,
   Text,
@@ -13,7 +14,8 @@ import { Switch } from 'react-native-switch';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Formik } from 'formik';
 import { TextField } from 'react-native-material-textfield';
-import ImagePicker from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { PERMISSIONS, request } from 'react-native-permissions';
 import { Dropdown } from 'react-native-material-dropdown';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { filter } from 'lodash';
@@ -843,23 +845,25 @@ export function AddImage(props) {
 
 
   const options = {
-    title: props.title || i18n.t('label.add_images'),
-    cancelButtonTitle: i18n.t('label.cancel'),
-    takePhotoButtonTitle: i18n.t('label.take_photo'),
-    chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
-    'permissionDenied.title': i18n.t('label.permission_denied_title'),
-    'permissionDenied.text': i18n.t('label.permission_denied_text'),
-    'permissionDenied.reTryTitle': i18n.t(
-      'label.permission_denied_retry_title'
-    ),
-    'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
-    allowsEditing: true,
+    // title: props.title || i18n.t('label.add_images'),
+    // cancelButtonTitle: i18n.t('label.cancel'),
+    // takePhotoButtonTitle: i18n.t('label.take_photo'),
+    // chooseFromLibraryButtonTitle: i18n.t('label.choose_from_library'),
+    // 'permissionDenied.title': i18n.t('label.permission_denied_title'),
+    // 'permissionDenied.text': i18n.t('label.permission_denied_text'),
+    // 'permissionDenied.reTryTitle': i18n.t(
+    //   'label.permission_denied_retry_title'
+    // ),
+    // 'permissionDenied.okTitle': i18n.t('label.permission_denied_ok_title'),
+    // allowsEditing: true,
+    // mediaType: 'photo',
+    // multiple: true,
+    // storageOptions: {
+    //   skipBackup: true,
+    //   path: 'images'
+    // }
     mediaType: 'photo',
-    multiple: true,
-    storageOptions: {
-      skipBackup: true,
-      path: 'images'
-    }
+    includeBase64: true,
   };
 
   const renderAsset = (image, index) => {
@@ -906,14 +910,25 @@ export function AddImage(props) {
         <TouchableOpacity
           style={styles.addImageButton1}
           onPress={() => {
-            ImagePicker.launchImageLibrary(options, response => {
-              if (response.didCancel) {
-                //debug('User cancelled image picker');
-              } else if (response.error) {
-                debug('ImagePicker Error: ', response.error);
-              } else {
-                props.updateImages('data:image/jpeg;base64,' + response.data);
-              }
+            request(
+              Platform.select({
+                android: PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+                ios: PERMISSIONS.IOS.PHOTO_LIBRARY
+              })
+            ).then((/*response*/) => {
+              launchImageLibrary(options, response => {
+                if (response.didCancel) {
+                  //debug('User cancelled image picker');
+                } else if (response.errorCode) {
+                  debug('ImagePicker Error: ', response.errorCode, response.errorMessage);
+                  Alert.alert(
+                    i18n.t('label.permission_denied_title'),
+                    i18n.t('label.permission_denied_text'),
+                  );
+                } else {
+                  props.updateImages('data:image/jpeg;base64,' + response.base64);
+                }
+              });
             });
           }}
         >
@@ -922,14 +937,25 @@ export function AddImage(props) {
 
         <TouchableOpacity
           onPress={() => {
-            ImagePicker.launchCamera(options, response => {
-              if (response.didCancel) {
-                //debug('User cancelled image picker');
-              } else if (response.error) {
-                //debug('ImagePicker Error: ', response.error);
-              } else {
-                props.updateImages('data:image/jpeg;base64,' + response.data);
-              }
+            request(
+              Platform.select({
+                android: PERMISSIONS.ANDROID.CAMERA,
+                ios: PERMISSIONS.IOS.CAMERA
+              })
+            ).then((/*response*/) => {
+              launchCamera(options, response => {
+                if (response.didCancel) {
+                  //debug('User cancelled image picker');
+                } else if (response.errorCode) {
+                  debug('ImagePicker Error: ', response.errorCode, response.errorMessage);
+                  Alert.alert(
+                    i18n.t('label.permission_denied_title'),
+                    i18n.t('label.permission_denied_text'),
+                  );
+                } else {
+                  props.updateImages('data:image/jpeg;base64,' + response.base64);
+                }
+              });
             });
           }}
           style={styles.addImageButton2}

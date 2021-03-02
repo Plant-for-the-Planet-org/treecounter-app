@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { Alert, Text, View, Image, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import { debug } from '../../../debug';
 import { cameraSolid, imageGallery, circleDelete } from '../../../assets';
 import styles from '../../../styles/competition/competition-form.native';
@@ -84,6 +84,8 @@ const AddImage = props => {
                   props.updateImages('data:image/jpeg;base64,' + response.base64);
                 }
               });
+            }).catch(err => {
+              debug(err);
             });
           }}
         >
@@ -111,6 +113,8 @@ const AddImage = props => {
                   props.updateImages('data:image/jpeg;base64,' + response.base64);
                 }
               });
+            }).catch(err => {
+              debug(err);
             });
           }}
           style={styles.addImageButton2}

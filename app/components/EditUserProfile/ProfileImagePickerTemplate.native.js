@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, View, Image, Text, TouchableOpacity } from 'react-native';
+import { Alert, View, Image, Platform, Text, TouchableOpacity } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { PERMISSIONS, request } from 'react-native-permissions';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -54,6 +54,8 @@ export function ProfileImagePickerTemplate(locals) {
           locals.onChange('data:image/jpeg;base64,' + response.base64);
         }
       });
+    }).catch(err => {
+      debug(err);
     });
   };
 
@@ -80,6 +82,8 @@ export function ProfileImagePickerTemplate(locals) {
           locals.onChange('data:image/jpeg;base64,' + response.base64);
         }
       });
+    }).catch(err => {
+      debug(err);
     });
   };
 

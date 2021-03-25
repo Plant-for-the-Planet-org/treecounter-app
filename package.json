@@ -141,7 +141,7 @@
     "rxjs": "^6.5.4",
     "rxjs-compat": "^6.5.4",
     "slick-carousel": "^1.8.1",
-    "snyk": "^1.425.4",
+    "snyk": "^1.465.0",
     "source-map-explorer": "^2.3.1",
     "tcomb-form": "^0.9.21",
     "tcomb-form-native": "^0.6.20",

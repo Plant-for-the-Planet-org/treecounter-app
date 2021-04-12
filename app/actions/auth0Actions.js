@@ -37,8 +37,8 @@ export function auth0OTP(email, code) {
       audience: 'urn:plant-for-the-planet',
     })
     .then(credentials => {
-      const { accessToken, idToken, refreshToken, expires_in } = credentials;
-      updateAuth0JWT(accessToken, refreshToken, idToken, expires_in);
+      const { accessToken, idToken, refreshToken } = credentials;
+      updateAuth0JWT(accessToken, refreshToken, idToken);
       return credentials;
     })
     .catch(error => {

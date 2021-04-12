@@ -122,8 +122,8 @@ const refreshAuth0TokenIfExpired = async () => {
     if (prev_refresh_token) {
       const credentials = await auth0NewAccessToken(prev_refresh_token);
       if (credentials) {
-        const { accessToken, idToken, refreshToken, expires_in } = credentials;
-        updateAuth0JWT(accessToken, refreshToken, idToken, expires_in);
+        const { accessToken, idToken, refreshToken } = credentials;
+        updateAuth0JWT(accessToken, refreshToken, idToken);
         return accessToken;
       }
     }
@@ -135,7 +135,7 @@ const refreshAuth0TokenIfExpired = async () => {
 // token - this is the access_token from Auth0
 // refresh_token - this is refresh token
 // id_token - this is the idToken used to get the expriration time
-export const updateAuth0JWT = (token, refreshToken, idToken, expires_in) => {
+export const updateAuth0JWT = (token, refreshToken, idToken) => {
   saveItem('auth0_token', token);
   // adds refreshToken to storage, if present
   if (refreshToken) {
@@ -143,8 +143,8 @@ export const updateAuth0JWT = (token, refreshToken, idToken, expires_in) => {
   }
   if (idToken) {
     saveItem('auth0_token_expires', `${getExpirationTimeStamp(idToken)}`);
-  } else if (expires_in) {
-    saveItem('auth0_token_expires', expires_in);
+  } else {
+    saveItem('auth0_token_expires', `${getExpirationTimeStamp(token)}`);
   }
   return;
 };

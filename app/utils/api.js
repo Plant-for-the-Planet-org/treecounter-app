@@ -68,7 +68,7 @@ async function getHeaders(authenticated = false, recaptcha) {
     let auth0Token = await getAuth0AccessToken();
     if (auth0Token) {
       return {
-        headers: { ...headers, Authorization: `OAuth ${auth0Token}` }
+        headers: { ...headers, Authorization: `Bearer ${auth0Token}` }
       };
     } else {
       return {

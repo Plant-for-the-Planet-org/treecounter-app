@@ -19,7 +19,7 @@ jobs:
     - name: Select Xcode
       run: |
         echo "Default version:" `xcode-select -p`
-        sudo xcode-select -s /Applications/Xcode_11.4.1.app
+        sudo xcode-select -s /Applications/Xcode_12.4.app
         echo "Selected version:" `xcode-select -p`
 
     - name: Check versions

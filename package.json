@@ -96,7 +96,7 @@
     "react-native-modal-datetime-picker": "^8.9.3",
     "react-native-modalbox": "git+https://github.com/norbertschuler/react-native-modalbox.git",
     "react-native-pdf": "^6.0.1",
-    "react-native-permissions": "^2.2.0",
+    "react-native-permissions": "^3.0.3",
     "react-native-popover-tooltip": "^1.1.4",
     "react-native-ratings": "^6.5.0",
     "react-native-raw-bottom-sheet": "^2.0.6",

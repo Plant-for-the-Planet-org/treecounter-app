@@ -35,7 +35,7 @@
     "@bugsnag/react-native": "^7.5.3",
     "@esri/react-arcgis": "^5.0.0",
     "@react-native-community/async-storage": "^1.8.1",
-    "@react-native-community/datetimepicker": "^3.0.2",
+    "@react-native-community/datetimepicker": "^3.4.6",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.6",
     "@react-native-community/netinfo": "^5.9.5",

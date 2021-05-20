@@ -526,7 +526,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-navigation-stack",
       "licenseFile": "node_modules/react-navigation-stack/LICENSE"
     },
-    "react-native-tab-view@2.15.2": {
+    "react-native-tab-view@2.16.0": {
       "licenses": "MIT",
       "repository": "https://github.com/satya164/react-native-tab-view",
       "publisher": "Satyajit Sahoo",

@@ -2,25 +2,25 @@
   "how_to_update":
     "Run ./node_modules/license-checker/bin/license-checker --production --relativeLicensePath --direct --json > license.json to fetch license info from package.json - copy paste required & specific license info in LicenseInfo.json file under app or web specific",
   "appLicenses": {
-    "@bugsnag/js@7.3.0": {
+    "@bugsnag/js@7.5.4": {
       "licenses": "MIT",
       "repository": "https://github.com/bugsnag/bugsnag-js",
       "publisher": "Bugsnag",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@bugsnag/js",
       "licenseFile": "node_modules/@bugsnag/js/LICENSE.txt"
     },
-    "@esri/react-arcgis@5.0.0": {
+    "@esri/react-arcgis@5.1.0": {
       "licenses": "Apache-2.0",
       "repository": "https://github.com/Esri/react-arcgis",
       "publisher": "Nick Senger",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@esri/react-arcgis",
       "licenseFile": "node_modules/@esri/react-arcgis/LICENSE"
     },
-    "@react-native-community/async-storage@1.8.1": {
+    "@react-native-community/async-storage@1.12.1": {
       "licenses": "MIT",
       "repository": "https://github.com/react-native-community/react-native-async-storage",
       "publisher": "Krzysztof Borowy",
-      "email": "krizzu.dev@gmail.com",
+      "email": "hello@krizzu.dev",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@react-native-community/async-storage",
       "licenseFile": "node_modules/@react-native-community/async-storage/LICENSE"
     },
@@ -30,7 +30,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@react-native-community/geolocation",
       "licenseFile": "node_modules/@react-native-community/geolocation/README.md"
     },
-    "@react-native-community/masked-view@0.1.7": {
+    "@react-native-community/masked-view@0.1.10": {
       "licenses": "MIT",
       "repository": "https://github.com/react-native-community/react-native-masked-view",
       "publisher": "Mike Nedosekin",
@@ -38,7 +38,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@react-native-community/masked-view",
       "licenseFile": "node_modules/@react-native-community/masked-view/README.md"
     },
-    "@react-native-community/netinfo@5.5.1": {
+    "@react-native-community/netinfo@5.9.9": {
       "licenses": "MIT",
       "repository": "https://github.com/react-native-community/react-native-netinfo",
       "publisher": "Matt Oakes",
@@ -46,7 +46,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/@react-native-community/netinfo",
       "licenseFile": "node_modules/@react-native-community/netinfo/LICENSE"
     },
-    "@react-native-community/viewpager@3.3.0": {
+    "@react-native-community/viewpager@3.3.1": {
       "licenses": "MIT",
       "repository": "https://github.com/react-native-community/react-native-viewpager",
       "publisher": "Ferran Negre Pizarro",
@@ -62,7 +62,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/autosuggest-highlight",
       "licenseFile": "node_modules/autosuggest-highlight/LICENSE"
     },
-    "axios@0.19.2": {
+    "axios@0.21.1": {
       "licenses": "MIT",
       "repository": "https://github.com/axios/axios",
       "publisher": "Matt Zabriskie",
@@ -85,7 +85,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/cookie-cutter",
       "licenseFile": "node_modules/cookie-cutter/README.markdown"
     },
-    "core-js@3.6.4": {
+    "core-js@3.8.1": {
       "licenses": "MIT",
       "repository": "https://github.com/zloirock/core-js",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/core-js",
@@ -99,14 +99,14 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/crypto-js",
       "licenseFile": "node_modules/crypto-js/LICENSE"
     },
-    "css-loader@3.4.2": {
+    "css-loader@5.2.4": {
       "licenses": "MIT",
       "repository": "https://github.com/webpack-contrib/css-loader",
       "publisher": "Tobias Koppers @sokra",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/css-loader",
       "licenseFile": "node_modules/css-loader/LICENSE"
     },
-    "date-fns@2.9.0": {
+    "date-fns@2.16.1": {
       "licenses": "MIT",
       "repository": "https://github.com/date-fns/date-fns",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/date-fns",
@@ -118,7 +118,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/deprecated-react-native-listview",
       "licenseFile": ""
     },
-    "dotenv-webpack@1.7.0": {
+    "dotenv-webpack@1.8.0": {
       "licenses": "MIT",
       "repository": "https://github.com/mrsteele/dotenv-webpack",
       "publisher": "Matt Steele",
@@ -136,13 +136,14 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/esri-loader",
       "licenseFile": "node_modules/esri-loader/LICENSE"
     },
-    "formik@2.1.4": {
-      "licenses": "MIT",
-      "repository": "https://github.com/jaredpalmer/formik",
+    "formik@2.2.6": {
+      "licenses": "Apache-2.0",
+      "repository": "https://github.com/formium/formik",
       "publisher": "Jared Palmer",
       "email": "jared@palmer.net",
+      "url": "https://jaredpalmer.com",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/formik",
-      "licenseFile": "node_modules/formik/LICENSE"
+      "licenseFile": "node_modules/formik/README.md"
     },
     "history@4.10.1": {
       "licenses": "MIT",
@@ -151,7 +152,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/history",
       "licenseFile": "node_modules/history/LICENSE"
     },
-    "i18next@19.6.0": {
+    "i18next@20.2.2": {
       "licenses": "MIT",
       "repository": "https://github.com/i18next/i18next",
       "publisher": "Jan Mühlemann",
@@ -176,15 +177,15 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/jwt-decode",
       "licenseFile": "node_modules/jwt-decode/LICENSE"
     },
-    "lodash@4.17.15": {
+    "lodash-es@4.17.20": {
       "licenses": "MIT",
       "repository": "https://github.com/lodash/lodash",
       "publisher": "John-David Dalton",
       "email": "john.david.dalton@gmail.com",
-      "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/lodash",
-      "licenseFile": "node_modules/lodash/LICENSE"
+      "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/lodash-es",
+      "licenseFile": "node_modules/lodash-es/LICENSE"
     },
-    "normalizr@3.6.0": {
+    "normalizr@3.6.1": {
       "licenses": "MIT",
       "repository": "https://github.com/paularmstrong/normalizr",
       "publisher": "Paul Armstrong",
@@ -218,7 +219,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-autosuggest",
       "licenseFile": "node_modules/react-autosuggest/LICENSE"
     },
-    "react-content-loader@5.1.1": {
+    "react-content-loader@5.1.4": {
       "licenses": "MIT",
       "repository": "https://github.com/danilowoz/react-content-loader",
       "publisher": "Danilo Woznica",
@@ -226,13 +227,13 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-content-loader",
       "licenseFile": "node_modules/react-content-loader/LICENSE"
     },
-    "react-dom@16.12.0": {
+    "react-dom@16.14.0": {
       "licenses": "MIT",
       "repository": "https://github.com/facebook/react",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-dom",
       "licenseFile": "node_modules/react-dom/LICENSE"
     },
-    "react-i18next@11.3.3": {
+    "react-i18next@11.8.5": {
       "licenses": "MIT",
       "repository": "https://github.com/i18next/react-i18next",
       "publisher": "Jan Mühlemann",
@@ -241,7 +242,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-i18next",
       "licenseFile": "node_modules/react-i18next/LICENSE"
     },
-    "react-modal@3.11.2": {
+    "react-modal@3.12.1": {
       "licenses": "MIT",
       "repository": "https://github.com/reactjs/react-modal",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-modal",
@@ -262,7 +263,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-check-box",
       "licenseFile": "node_modules/react-native-check-box/LICENSE"
     },
-    "react-native-collapsible@1.5.1": {
+    "react-native-collapsible@1.5.3": {
       "licenses": "MIT",
       "repository": "git+https://oblador@github.com/oblador/react-native-collapsible",
       "publisher": "Joel Arvidsson",
@@ -270,14 +271,14 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-collapsible",
       "licenseFile": "node_modules/react-native-collapsible/LICENSE"
     },
-    "react-native-config@1.3.3": {
+    "react-native-config@1.4.0": {
       "licenses": "MIT",
       "repository": "https://github.com/luggit/react-native-config",
       "publisher": "Pedro Belo",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-config",
       "licenseFile": "node_modules/react-native-config/LICENSE"
     },
-    "react-native-device-info@5.5.3": {
+    "react-native-device-info@5.6.5": {
       "licenses": "MIT",
       "repository": "https://github.com/react-native-community/react-native-device-info",
       "publisher": "Rebecca Hughes",
@@ -312,7 +313,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-fs",
       "licenseFile": "node_modules/react-native-fs/LICENSE"
     },
-    "react-native-gesture-handler@1.6.0": {
+    "react-native-gesture-handler@1.9.0": {
       "licenses": "MIT",
       "repository": "https://github.com/software-mansion/react-native-gesture-handler",
       "publisher": "Krzysztof Magiera",
@@ -320,13 +321,13 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-gesture-handler",
       "licenseFile": "node_modules/react-native-gesture-handler/LICENSE"
     },
-    "react-native-get-random-values@1.3.0": {
+    "react-native-get-random-values@1.5.0": {
       "licenses": "MIT",
       "repository": "https://github.com/LinusU/react-native-get-random-values",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-get-random-values",
-      "licenseFile": "node_modules/react-native-get-random-values/readme.md"
+      "licenseFile": "node_modules/react-native-get-random-values/LICENSE"
     },
-    "react-native-google-places-autocomplete@1.4.1": {
+    "react-native-google-places-autocomplete@2.1.2": {
       "licenses": "MIT",
       "repository": "https://github.com/FaridSafi/react-native-google-places-autocomplete",
       "publisher": "Farid from Safi",
@@ -357,14 +358,14 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-image-carousel",
       "licenseFile": "node_modules/react-native-image-carousel/LICENSE"
     },
-    "react-native-image-crop-picker@0.28.0": {
+    "react-native-image-crop-picker@0.35.2": {
       "licenses": "MIT",
       "repository": "https://github.com/ivpusic/react-native-image-crop-picker",
       "publisher": "Ivan Pusic",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-image-crop-picker",
       "licenseFile": "node_modules/react-native-image-crop-picker/LICENSE"
     },
-    "react-native-keyboard-aware-scroll-view@0.9.1": {
+    "react-native-keyboard-aware-scroll-view@0.9.3": {
       "licenses": "MIT",
       "repository": "https://github.com/APSL/react-native-keyboard-aware-scroll-view",
       "publisher": "Alvaro Medina Ballester",
@@ -381,7 +382,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-linear-gradient",
       "licenseFile": "node_modules/react-native-linear-gradient/LICENSE"
     },
-    "react-native-map-clustering@3.1.2": {
+    "react-native-map-clustering@3.3.9": {
       "licenses": "MIT",
       "repository": "https://github.com/venits/react-native-map-clustering",
       "publisher": "Venits",
@@ -418,7 +419,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-modalbox",
       "licenseFile": "node_modules/react-native-modalbox/LICENSE"
     },
-    "react-native-pdf@6.0.1": {
+    "react-native-pdf@6.2.2": {
       "licenses": "MIT",
       "repository": "https://github.com/wonday/react-native-pdf",
       "publisher": "Wonday",
@@ -426,9 +427,9 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-pdf",
       "licenseFile": "node_modules/react-native-pdf/LICENSE"
     },
-    "react-native-permissions@2.2.0": {
+    "react-native-permissions@3.0.3": {
       "licenses": "MIT",
-      "repository": "https://github.com/react-native-community/react-native-permissions",
+      "repository": "https://github.com/zoontek/react-native-permissions",
       "publisher": "Mathieu Acthernoene",
       "email": "zoontek@gmail.com",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-permissions",
@@ -448,14 +449,14 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-ratings",
       "licenseFile": "node_modules/react-native-ratings/LICENSE"
     },
-    "react-native-raw-bottom-sheet@2.0.6": {
+    "react-native-raw-bottom-sheet@2.2.0": {
       "licenses": "MIT",
       "repository": "https://github.com/nysamnang/react-native-raw-bottom-sheet",
       "publisher": "NY Samnang",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-raw-bottom-sheet",
       "licenseFile": "node_modules/react-native-raw-bottom-sheet/LICENSE"
     },
-    "react-native-reanimated@1.13.0": {
+    "react-native-reanimated@1.13.2": {
       "licenses": "MIT",
       "repository": "https://github.com/software-mansion/react-native-reanimated",
       "publisher": "Krzysztof Magiera",
@@ -463,7 +464,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-reanimated",
       "licenseFile": "node_modules/react-native-reanimated/LICENSE"
     },
-    "react-native-root-toast@3.2.0": {
+    "react-native-root-toast@3.1.2": {
       "licenses": "MIT",
       "repository": "https://github.com/magicismight/react-native-root-toast",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-root-toast",
@@ -485,7 +486,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-safe-area-view",
       "licenseFile": "node_modules/react-native-safe-area-view/LICENSE"
     },
-    "react-native-slick@1.0.2": {
+    "react-native-slick@1.6.0": {
       "licenses": "MIT",
       "repository": "https://github.com/ahmed3mar/react-native-slick",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-slick",
@@ -519,15 +520,15 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-switch",
       "licenseFile": "node_modules/react-native-switch/LICENSE"
     },
-    "react-navigation-stack@2.3.13": {
+    "react-navigation-stack@2.10.2": {
       "licenses": "MIT",
       "repository": "https://github.com/react-navigation/react-navigation-stack",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-navigation-stack",
       "licenseFile": "node_modules/react-navigation-stack/LICENSE"
     },
-    "react-native-tab-view@2.13.0": {
+    "react-native-tab-view@2.16.0": {
       "licenses": "MIT",
-      "repository": "https://github.com/react-native-community/react-native-tab-view",
+      "repository": "https://github.com/satya164/react-native-tab-view",
       "publisher": "Satyajit Sahoo",
       "email": "satyajit.happy@gmail.com",
       "url": "https://github.com/satya164/",
@@ -542,7 +543,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-vector-icons",
       "licenseFile": "node_modules/react-native-vector-icons/LICENSE"
     },
-    "react-native-webview@8.1.2": {
+    "react-native-webview@11.0.2": {
       "licenses": "MIT",
       "repository": "https://github.com/react-native-community/react-native-webview",
       "publisher": "Jamon Holmgren",
@@ -550,7 +551,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native-webview",
       "licenseFile": "node_modules/react-native-webview/LICENSE"
     },
-    "react-native@0.63.2": {
+    "react-native@0.63.4": {
       "licenses": "MIT",
       "repository": "https://github.com/facebook/react-native",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-native",
@@ -564,10 +565,9 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-navigation-redux-helpers",
       "licenseFile": "node_modules/react-navigation-redux-helpers/LICENSE"
     },
-    "react-notifications@1.4.3": {
+    "react-notifications@1.7.2": {
       "licenses": "MIT",
-      "repository": "https://github.com/minhtranite/react-notifications",
-      "publisher": "Minh Tran",
+      "repository": "https://github.com/tjrexer/react-notifications",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-notifications",
       "licenseFile": "node_modules/react-notifications/README.md"
     },
@@ -578,7 +578,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-recaptcha-v3",
       "licenseFile": "node_modules/react-recaptcha-v3/README.md"
     },
-    "react-redux@7.2.0": {
+    "react-redux@7.2.2": {
       "licenses": "MIT",
       "repository": "https://github.com/reduxjs/react-redux",
       "publisher": "Dan Abramov",
@@ -595,26 +595,30 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-reveal",
       "licenseFile": "node_modules/react-reveal/LICENSE.txt"
     },
-    "react-router-dom@5.1.2": {
+    "react-router-dom@5.2.0": {
       "licenses": "MIT",
       "repository": "https://github.com/ReactTraining/react-router",
+      "publisher": "React Training",
+      "email": "hello@reacttraining.com",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-router-dom",
       "licenseFile": "node_modules/react-router-dom/LICENSE"
     },
-    "react-router@5.1.2": {
+    "react-router@5.2.0": {
       "licenses": "MIT",
       "repository": "https://github.com/ReactTraining/react-router",
+      "publisher": "React Training",
+      "email": "hello@reacttraining.com",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-router",
       "licenseFile": "node_modules/react-router/LICENSE"
     },
-    "react-select@3.0.8": {
+    "react-select@3.1.1": {
       "licenses": "MIT",
-      "repository": "https://github.com/JedWatson/react-select",
+      "repository": "https://github.com/JedWatson/react-select/tree/master/packages/react-select",
       "publisher": "Jed Watson",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-select",
       "licenseFile": "node_modules/react-select/README.md"
     },
-    "react-share@4.0.1": {
+    "react-share@4.3.1": {
       "licenses": "MIT",
       "repository": "https://github.com/nygardk/react-share",
       "publisher": "Klaus Nygård",
@@ -623,7 +627,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-share",
       "licenseFile": "node_modules/react-share/LICENSE"
     },
-    "react-slick@0.25.2": {
+    "react-slick@0.27.13": {
       "licenses": "MIT",
       "repository": "https://github.com/akiran/react-slick",
       "publisher": "Kiran Abburi",
@@ -639,7 +643,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-smartbanner",
       "licenseFile": "node_modules/react-smartbanner/LICENSE"
     },
-    "react-stripe-elements@6.1.0": {
+    "react-stripe-elements@6.1.2": {
       "licenses": "MIT",
       "repository": "https://github.com/stripe/react-stripe-elements",
       "publisher": "Stripe",
@@ -647,14 +651,14 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-stripe-elements",
       "licenseFile": "node_modules/react-stripe-elements/LICENSE"
     },
-    "react-tooltip@4.0.3": {
+    "react-tooltip@4.2.11": {
       "licenses": "MIT",
       "repository": "https://github.com/wwayne/react-tooltip",
       "publisher": "wwayne",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/react-tooltip",
       "licenseFile": "node_modules/react-tooltip/LICENSE"
     },
-    "react-youtube@7.11.2": {
+    "react-youtube@7.13.0": {
       "licenses": "MIT",
       "repository": "https://github.com/tjallingt/react-youtube",
       "publisher": "Tjalling Tolle",
@@ -676,7 +680,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/redux-actions",
       "licenseFile": "node_modules/redux-actions/LICENSE"
     },
-    "redux-form@8.3.0": {
+    "redux-form@8.3.7": {
       "licenses": "MIT",
       "repository": "https://github.com/redux-form/redux-form",
       "publisher": "Erik Rasmussen",
@@ -720,12 +724,12 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/rn-fetch-blob",
       "licenseFile": "node_modules/rn-fetch-blob/LICENSE"
     },
-    "rxjs-compat@6.5.4": {
+    "rxjs-compat@6.6.3": {
       "licenses": "Apache-2.0",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/rxjs-compat",
       "licenseFile": "node_modules/rxjs-compat/LICENSE.txt"
     },
-    "rxjs@6.5.4": {
+    "rxjs@6.6.3": {
       "licenses": "Apache-2.0",
       "repository": "https://github.com/reactivex/rxjs",
       "publisher": "Ben Lesh",
@@ -741,7 +745,7 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/slick-carousel",
       "licenseFile": "node_modules/slick-carousel/LICENSE"
     },
-    "source-map-explorer@2.3.1": {
+    "source-map-explorer@2.5.1": {
       "licenses": "Apache-2.0",
       "repository": "https://github.com/danvk/source-map-explorer",
       "publisher": "Dan Vanderkam",
@@ -773,13 +777,13 @@
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/tcomb-json-schema",
       "licenseFile": "node_modules/tcomb-json-schema/LICENSE"
     },
-    "uuid@7.0.2": {
+    "uuid@7.0.3": {
       "licenses": "MIT",
       "repository": "https://github.com/uuidjs/uuid",
       "path": "/Users/norbertschuler/Development/PFTP/treecounter-app/node_modules/uuid",
       "licenseFile": "node_modules/uuid/LICENSE.md"
     },
-    "yup@0.28.2": {
+    "yup@0.32.9": {
       "licenses": "MIT",
       "repository": "https://github.com/jquense/yup",
       "publisher": "@monasticpanic Jason Quense",

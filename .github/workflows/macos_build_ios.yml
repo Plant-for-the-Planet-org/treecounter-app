@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - develop
+      - master
 
 jobs:
   build:
@@ -19,7 +20,7 @@ jobs:
     - name: Select Xcode
       run: |
         echo "Default version:" `xcode-select -p`
-        sudo xcode-select -s /Applications/Xcode_11.4.1.app
+        sudo xcode-select -s /Applications/Xcode_12.4.app
         echo "Selected version:" `xcode-select -p`
 
     - name: Check versions
@@ -182,7 +183,8 @@ jobs:
         upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.ipa
         echo "upload_file=$upload_file" >> $GITHUB_ENV
         mkdir -p uploads
-        mv 'ios/DerivedData/ipa/TreecounterApp(.env.staging).ipa' uploads/$upload_file
+        ls -l 'ios/DerivedData/ipa'
+        mv 'ios/DerivedData/ipa/TreecounterApp.ipa' uploads/$upload_file
 
     # depends on existence of upload file at uploads/$upload_file
     - name: Upload iOS IPA to Browserstack

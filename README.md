@@ -17,6 +17,8 @@ Run `nvm install && nvm use` to install and use required version of node.
 
 ## Web Setup
 
+!!! Web setup is deprecated. Please visit https://github.com/plant-for-the-Planet-org/planet-webapp
+
 Run following commands
 
 ```

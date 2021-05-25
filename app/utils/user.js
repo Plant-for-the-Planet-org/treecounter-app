@@ -141,6 +141,10 @@ export const updateAuth0JWT = (token, refreshToken, idToken) => {
   if (refreshToken) {
     saveItem('auth0_refresh_token', refreshToken);
   }
-  saveItem('auth0_token_expires', `${getExpirationTimeStamp(idToken)}`);
+  if (idToken) {
+    saveItem('auth0_token_expires', `${getExpirationTimeStamp(idToken)}`);
+  } else {
+    saveItem('auth0_token_expires', `${getExpirationTimeStamp(token)}`);
+  }
   return;
 };

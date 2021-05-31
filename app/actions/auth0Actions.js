@@ -1,6 +1,6 @@
 import Config from 'react-native-config';
 import Auth0 from 'react-native-auth0';
-import { updateAuth0JWT } from '../utils/user';
+import { updateAuth0JWT, updateEmail } from '../utils/user';
 import { updateRoute } from '../helpers/routerHelper/routerHelper.native';
 
 // AUTH0 CONFIG
@@ -33,12 +33,13 @@ export function auth0OTP(email, code) {
     .loginWithEmail({
       email: email,
       code: code,
-      scope: 'openid email profile offline_access',
+      scope: 'offline_access',
       audience: 'urn:plant-for-the-planet',
     })
     .then(credentials => {
       const { accessToken, idToken, refreshToken } = credentials;
       updateAuth0JWT(accessToken, refreshToken, idToken);
+      updateEmail(email);
       return credentials;
     })
     .catch(error => {

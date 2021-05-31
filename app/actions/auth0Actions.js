@@ -33,7 +33,7 @@ export function auth0OTP(email, code) {
     .loginWithEmail({
       email: email,
       code: code,
-      scope: 'offline_access',
+      scope: 'openid email profile offline_access',
       audience: 'urn:plant-for-the-planet',
     })
     .then(credentials => {

@@ -53,7 +53,6 @@
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:path="/" />
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/imprint" />
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/edit-profile" />
-            <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/login" />
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/password-sent" />
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/signup" />
             <data android:scheme="https" android:host="www.trilliontreecampaign.org" android:pathPrefix="/my-trees" />
@@ -85,7 +84,7 @@
             <data
               android:host="@string/AUTH0_DOMAIN"
               android:pathPrefix="/android/${applicationId}/callback"
-              android:scheme="${applicationId}" 
+              android:scheme="${applicationId}"
             />
         </intent-filter>
       </activity>

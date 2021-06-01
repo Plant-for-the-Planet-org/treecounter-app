@@ -315,10 +315,11 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_editTrees') + '/:selectedTreeId'}
               component={EditUserContributionContainer}
             />
-            <PrivateRoute
-              path={getLocalRoute('app_myTrees')}
-              component={UserContributionsContainer}
-            />
+            // disabled as /my-trees screen is not supported any more
+            // <PrivateRoute
+            //   path={getLocalRoute('app_myTrees')}
+            //   component={UserContributionsContainer}
+            // />
             <PrivateRoute
               path={getLocalRoute('app_editProfile')}
               component={EditUserProfileContainer}

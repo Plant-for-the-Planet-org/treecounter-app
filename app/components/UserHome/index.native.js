@@ -37,7 +37,8 @@ class UserHome extends Component {
       svgData: svgData,
       routes: [
         { key: 'home', title: i18n.t('label.home') },
-        { key: 'my-trees', title: i18n.t('label.my_trees') }
+        // disabled as /my-trees screen is not supported any more
+        // { key: 'my-trees', title: i18n.t('label.my_trees') }
       ],
       index: 0,
       showAllContributions: false,

@@ -153,9 +153,10 @@ export default class Redemption extends Component {
       );
     } else {
       form = null;
+      // changed to /home screen as /my-trees is not supported any more
       button = (
         <div className="row">
-          <PrimaryButton onClick={() => this.props.route('app_myTrees')}>
+          <PrimaryButton onClick={() => this.props.route('app_userHome')}>
             {this.props.buttonText}
           </PrimaryButton>
         </div>

@@ -148,3 +148,19 @@ export const updateAuth0JWT = (token, refreshToken, idToken) => {
   }
   return;
 };
+
+/**
+ * @returns string | null
+ */
+export const getEmail = async () => {
+  const email = await getItem('email');
+  return email;
+};
+
+// Store registration mail
+// email - this is the email the user registered with
+export const updateEmail = (email) => {
+  saveItem('email', email);
+  return;
+};
+

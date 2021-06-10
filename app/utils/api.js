@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Platform } from 'react-native';
 import { uuidv1 } from './uuid';
 import { debug } from '../debug';
 import { fetchItem, saveItem } from '../stores/localStorage';
@@ -7,6 +8,7 @@ import { getApiRoute } from '../actions/apiRouting';
 import { getStore } from '../components/App/index';
 import { logoutUser } from '../actions/authActions';
 import { context } from '../config';
+import { name as packageName, version } from '../../package';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -55,7 +57,8 @@ function onAPIResponse(response) {
 
 async function getHeaders(authenticated = false, recaptcha) {
   let headers = {
-    'X-SESSION-ID': await getSessionId()
+    'X-SESSION-ID': await getSessionId(),
+    'User-Agent': packageName + '/' + Platform.OS + '/' + version,
     // 'X-VERSION-KEY': 'd3b7387a-35d8-11e9-b210-d663bd873d93'
   };
   if (recaptcha) {

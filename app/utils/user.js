@@ -134,18 +134,14 @@ const refreshAuth0TokenIfExpired = async () => {
 // Accepts 3 parameters -
 // token - this is the access_token from Auth0
 // refresh_token - this is refresh token
-// id_token - this is the idToken used to get the expriration time
+// id_token - this is the idToken (not used yet)
 export const updateAuth0JWT = (token, refreshToken, idToken) => {
   saveItem('auth0_token', token);
   // adds refreshToken to storage, if present
   if (refreshToken) {
     saveItem('auth0_refresh_token', refreshToken);
   }
-  if (idToken) {
-    saveItem('auth0_token_expires', `${getExpirationTimeStamp(idToken)}`);
-  } else {
-    saveItem('auth0_token_expires', `${getExpirationTimeStamp(token)}`);
-  }
+  saveItem('auth0_token_expires', `${getExpirationTimeStamp(token)}`);
   return;
 };
 

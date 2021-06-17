@@ -72,7 +72,8 @@ const headerLabels = {
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.projects',
   [getLocalRoute('app_faq')]: 'label.faqs',
-  [getLocalRoute('app_myTrees')]: 'label.my_trees',
+  // disabled as /my-trees screen is not supported any more
+  // [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
   [getLocalRoute('app_homepage')]: 'label.trillion_tree_campaign_app_header',
   [getLocalRoute('app_explore')]: 'label.explore',
@@ -238,9 +239,10 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: SignUpContainer,
         path: 'signup'
       },
-      [getLocalRoute('app_myTrees')]: {
-        screen: UserContributionsContainer
-      },
+      // disabled as /my-trees screen is not supported any more
+      // [getLocalRoute('app_myTrees')]: {
+      //   screen: UserContributionsContainer
+      // },
       ['my_trees_fullMap']: {
         screen: FullMapComponent,
         navigationOptions: { header: null }

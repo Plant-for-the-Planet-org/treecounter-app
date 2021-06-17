@@ -151,8 +151,8 @@ android {
         applicationId "org.pftp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 44
-        versionName "1.4.1"
+        versionCode 45
+        versionName "1.4.2"
         ndk {
             abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }

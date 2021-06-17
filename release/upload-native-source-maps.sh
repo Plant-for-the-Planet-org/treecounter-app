@@ -15,24 +15,20 @@ react-native bundle \
     --bundle-output android-release.bundle \
     --sourcemap-output android-release.bundle.map
 
-curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
-   -F apiKey="$BUGSNAG_API_KEY" \
-   -F appVersion="$PACKAGE_VERSION" \
-   -F dev=false \
-   -F platform=android \
-   -F sourceMap=@android-release.bundle.map \
-   -F bundle=@android-release.bundle \
-   -F projectRoot=`pwd`
+bugsnag-source-maps upload-react-native \
+   --api-key "$BUGSNAG_API_KEY" \
+   --app-version "$PACKAGE_VERSION" \
+   --platform android \
+   --source-map android-release.bundle.map \
+   --bundle android-release.bundle
 
-# also upload Android source maps for package version as codeBundleId
-curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
-   -F apiKey="$BUGSNAG_API_KEY" \
-   -F codeBundleId="$PACKAGE_VERSION" \
-   -F dev=false \
-   -F platform=android \
-   -F sourceMap=@android-release.bundle.map \
-   -F bundle=@android-release.bundle \
-   -F projectRoot=`pwd`
+# also upload Android source maps for package version as code-bundle-id
+bugsnag-source-maps upload-react-native \
+   --api-key "$BUGSNAG_API_KEY" \
+   --code-bundle-id "$PACKAGE_VERSION" \
+   --platform android \
+   --source-map android-release.bundle.map \
+   --bundle android-release.bundle
 
 rm android-release.bundle android-release.bundle.map
 
@@ -43,32 +39,29 @@ react-native bundle \
     --bundle-output ios-release.bundle \
     --sourcemap-output ios-release.bundle.map
 
-# Change appBundleVersion once we set it back to package version
-#   -F appBundleVersion="$PACKAGE_VERSION" \
+# Change app-bundle-version once we set it back to package version
+#   --app-bundle-version "$PACKAGE_VERSION" \
 # For now we have to set this manually here with every release :-(
-curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
-   -F apiKey="$BUGSNAG_API_KEY" \
-   -F appVersion="1.49.51" \
-   -F dev=false \
-   -F platform=ios \
-   -F sourceMap=@ios-release.bundle.map \
-   -F bundle=@ios-release.bundle \
-   -F projectRoot=`pwd`
+bugsnag-source-maps upload-react-native \
+   --api-key "$BUGSNAG_API_KEY" \
+   --app-version "1.49.52" \
+   --platform ios \
+   --source-map ios-release.bundle.map \
+   --bundle ios-release.bundle
 
-# also upload iOS source maps for package version as codeBundleId
-curl --http1.1 https://upload.bugsnag.com/react-native-source-map \
-   -F apiKey="$BUGSNAG_API_KEY" \
-   -F codeBundleId="$PACKAGE_VERSION" \
-   -F dev=false \
-   -F platform=ios \
-   -F sourceMap=@ios-release.bundle.map \
-   -F bundle=@ios-release.bundle \
-   -F projectRoot=`pwd`
+# also upload iOS source maps for package version as code-bundle-id
+bugsnag-source-maps upload-react-native \
+   --api-key "$BUGSNAG_API_KEY" \
+   --code-bundle-id "$PACKAGE_VERSION" \
+   --platform ios \
+   --source-map ios-release.bundle.map \
+   --bundle ios-release.bundle
 
+rm ios-release.bundle ios-release.bundle.map
+
+# deprecated
 # upload the dSYMs you can download from AppStore Connect
 # curl --http1.1 https://upload.bugsnag.com/ \
 #  -F apiKey="$BUGSNAG_API_KEY" \
 #  -F dsym=@~/Downloads/appDsyms.zip \
 #  -F projectRoot=`pwd`
-
-rm ios-release.bundle ios-release.bundle.map

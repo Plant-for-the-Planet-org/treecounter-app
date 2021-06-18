@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@bugsnag/js": "^7.3.0",
-    "@bugsnag/react-native": "^7.5.3",
+    "@bugsnag/react-native": "^7.9.4",
     "@esri/react-arcgis": "^5.0.0",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/datetimepicker": "^3.0.2",

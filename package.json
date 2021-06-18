@@ -31,7 +31,7 @@
     ]
   },
   "dependencies": {
-    "@bugsnag/js": "^7.3.0",
+    "@bugsnag/js": "^7.9.2",
     "@bugsnag/react-native": "^7.5.3",
     "@esri/react-arcgis": "^5.0.0",
     "@react-native-community/async-storage": "^1.8.1",

@@ -20,6 +20,7 @@ export default class Target extends Component {
     this.state = {
       label: countTarget !== 0 ? i18n.t('label.update') : i18n.t('label.save')
     };
+    this.formRef=React.createRef();
   }
 
   shouldComponentUpdate(nextProps) {
@@ -37,14 +38,14 @@ export default class Target extends Component {
             style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 140 : 100 }}
           >
             <Form
-              ref={'setTargetForm'}
+              ref={this.formRef}
               type={targetFormSchema}
               options={this.props.schemaOptions}
               value={this.props.treecounter}
             />
           </CardLayout>
           <PrimaryButton
-            onClick={this.props.onSubmitTarget}
+            onClick={()=>this.props.onSubmitTarget(this.formRef.current)}
             buttonStyle={{ marginTop: 10 }}
           >
             {this.state.label}

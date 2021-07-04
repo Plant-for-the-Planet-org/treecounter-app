@@ -41,6 +41,7 @@ export default class Target extends Component {
       label: countTarget !== 0 ? i18n.t('label.update') : i18n.t('label.save'),
       initialValues: { countTarget, targetYear, targetComment }
     };
+    this.formRef=React.createRef();
   }
   shouldComponentUpdate(nextProps) {
     return JSON.stringify(nextProps) !== JSON.stringify(this.props);
@@ -52,12 +53,12 @@ export default class Target extends Component {
         <TextHeading>{i18n.t('label.set_target')}</TextHeading>
         <CardLayout>
           <TCombForm
-            ref="setTargetForm"
+            ref={this.formRef}
             type={targetFormSchema}
             options={allSchemaOptions}
             value={this.state.initialValues}
           />
-          <PrimaryButton onClick={this.props.onSubmitTarget}>
+          <PrimaryButton onClick={()=>this.props.onSubmitTarget(this.formRef.current)}>
             {this.state.label}
           </PrimaryButton>
         </CardLayout>

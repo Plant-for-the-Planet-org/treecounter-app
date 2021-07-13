@@ -305,7 +305,6 @@ class PlantProjectSnippet extends PureComponent {
               {allowDonations ? (
                 <TouchableOpacity
                   onPress={() => {
-                    // this.props.onSelectClickedFeaturedProjects(id);
                     this.openWebView(`${planet_pay_url}/?to=${slug}`);
                   }}
                 >

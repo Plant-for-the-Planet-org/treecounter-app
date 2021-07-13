@@ -5,10 +5,12 @@ import {
   Text,
   TouchableHighlight,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert,
+  Linking
 } from "react-native";
 import SingleRating from "../Reviews/SingleRating";
-
+import { context } from "../../config";
 import { getImageUrl } from "../../actions/apiRouting";
 import {
   // tick,
@@ -29,6 +31,7 @@ import { selectPlantProjectAction } from "../../actions/selectPlantProjectAction
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { InAppBrowser } from "react-native-inappbrowser-reborn";
 //keeping Icon here instead of in assets
 // const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
@@ -42,11 +45,20 @@ class PlantProjectSnippet extends PureComponent {
   containerPress = () => {
     if (this.props.onMoreClick) {
       const { id, name } = this.props.plantProject;
-      console.log(this.props.plantProject, "this.props.plantProject");
       this.props.onMoreClick(id, name);
     }
   };
-
+  openWebView = async link => {
+    try {
+      const url = link;
+      if (await InAppBrowser.isAvailable()) {
+        await InAppBrowser.open(url);
+      } else Linking.openURL(url);
+    } catch (error) {
+      console.error(error);
+      Alert.alert(error.message);
+    }
+  };
   render() {
     const {
       // eslint-disable-next-line no-unused-vars
@@ -67,7 +79,8 @@ class PlantProjectSnippet extends PureComponent {
       allowDonations,
       image,
       reviewScore: plantProjectRating,
-      reviews
+      reviews,
+      slug
       // survivalRateStatus
       // description,
       // homepageUrl: homepageUrl,
@@ -123,6 +136,7 @@ class PlantProjectSnippet extends PureComponent {
     //       ? leafGray
     //       : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
+    const { planet_pay_url } = context;
 
     return (
       <TouchableHighlight underlayColor={"white"} onPress={onPressHandler}>
@@ -292,6 +306,7 @@ class PlantProjectSnippet extends PureComponent {
                 <TouchableOpacity
                   onPress={() => {
                     // this.props.onSelectClickedFeaturedProjects(id);
+                    this.openWebView(`${planet_pay_url}/?to=${slug}`);
                   }}
                 >
                   <View style={styles.costContainer}>

@@ -20,7 +20,7 @@ import HeaderFullPages from "../Header/HeaderFullPages.native";
 import { context } from "../../config";
 import { getLocalRoute } from "./../../actions/apiRouting";
 import { InAppBrowser } from "react-native-inappbrowser-reborn";
-
+import { getAuth0AccessToken } from "../../utils/user";
 // import TabContainer from '../../containers/Menu/TabContainer';
 
 /**
@@ -212,7 +212,17 @@ class PlantProjectFull extends React.Component {
             <FullHeightButton
               buttonStyle={styles.squareButton}
               onClick={() => {
-                this.openWebView(`${planet_pay_url}/?to=${plantProject.slug}`);
+                getAuth0AccessToken().then(token => {
+                  if (token) {
+                    this.openWebView(
+                      `${planet_pay_url}/?to=${plantProject.slug}&token=${token}`
+                    );
+                  } else {
+                    this.openWebView(
+                      `${planet_pay_url}/?to=${plantProject.slug}`
+                    );
+                  }
+                });
               }}
               image={right_arrow_button}
             >

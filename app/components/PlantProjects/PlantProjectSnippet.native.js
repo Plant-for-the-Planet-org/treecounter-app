@@ -33,6 +33,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { InAppBrowser } from "react-native-inappbrowser-reborn";
 import {getAuth0AccessToken} from '../../utils/user'
+import { getLocale } from '../../actions/getLocale';
 //keeping Icon here instead of in assets
 // const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
@@ -138,6 +139,7 @@ class PlantProjectSnippet extends PureComponent {
     //       : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     const { planet_pay_url } = context;
+    const locale = getLocale();
 
     return (
       <TouchableHighlight underlayColor={"white"} onPress={onPressHandler}>
@@ -309,10 +311,10 @@ class PlantProjectSnippet extends PureComponent {
                     getAuth0AccessToken().then(token => {
                       if (token) {
                         this.openWebView(
-                          `${planet_pay_url}/?to=${slug}&token=${token}`
+                          `${planet_pay_url}/?to=${slug}&locale=${locale}&token=${token}`
                         );
                       } else {
-                        this.openWebView(`${planet_pay_url}/?to=${slug}`);
+                        this.openWebView(`${planet_pay_url}/?to=${slug}&locale=${locale}`);
                       }
                     });
                   }}

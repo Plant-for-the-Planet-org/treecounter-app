@@ -22,6 +22,7 @@ import { getLocalRoute } from "./../../actions/apiRouting";
 import { InAppBrowser } from "react-native-inappbrowser-reborn";
 import { getAuth0AccessToken } from "../../utils/user";
 // import TabContainer from '../../containers/Menu/TabContainer';
+import { getLocale } from '../../actions/getLocale';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -127,6 +128,8 @@ class PlantProjectFull extends React.Component {
     const navigation = this.props.navigation;
     const backgroundColor = "white";
 
+    const locale = getLocale();
+
     return !loader ? (
       <View style={{ flex: 1 }}>
         <StatusBar
@@ -215,11 +218,11 @@ class PlantProjectFull extends React.Component {
                 getAuth0AccessToken().then(token => {
                   if (token) {
                     this.openWebView(
-                      `${planet_pay_url}/?to=${plantProject.slug}&token=${token}`
+                      `${planet_pay_url}/?to=${plantProject.slug}&locale=${locale}&token=${token}`
                     );
                   } else {
                     this.openWebView(
-                      `${planet_pay_url}/?to=${plantProject.slug}`
+                      `${planet_pay_url}/?to=${plantProject.slug}&locale=${locale}`
                     );
                   }
                 });

@@ -60,10 +60,16 @@ export default class EditUserProfile extends Component {
           key: 'desc',
           title: i18n.t('label.description')
         },
-        {
-          key: 'following',
-          title: i18n.t('label.subscribed')
-        }
+        /*         
+          {
+            key: 'security',
+            title: i18n.t('label.profile_security')
+          },
+          {
+            key: 'following',
+            title: i18n.t('label.subscribed')
+          },
+        */
       ]
     };
   }

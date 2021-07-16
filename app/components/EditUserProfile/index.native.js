@@ -60,7 +60,7 @@ export default class EditUserProfile extends Component {
           key: 'desc',
           title: i18n.t('label.description')
         },
-        /*         
+        /* disabled functionality at July 16th
           {
             key: 'security',
             title: i18n.t('label.profile_security')

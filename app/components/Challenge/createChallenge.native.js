@@ -151,7 +151,7 @@ export default class ChallengeTabView extends Component {
             {i18n.t("label.changed_challenge_workflow")}
           </Text>
         </View>
-        {/*
+        {/* disabled functionality at July 16th
          <TabView
           useNativeDriver
           navigationState={this.state}

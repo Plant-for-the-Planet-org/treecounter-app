@@ -33,7 +33,8 @@ class DonationTreesContainer extends PureComponent {
             _suggestions.data[0].type != 'tpo' && supportTreecounterAction({
               id: _suggestions.data[0].treecounterId,
               type: _suggestions.data[0].type,
-              displayName: _suggestions.data[0].name
+              displayName: _suggestions.data[0].name,
+              slug: _suggestions.data[0].slug,
             });
           }
         })
@@ -50,7 +51,8 @@ class DonationTreesContainer extends PureComponent {
           this.props.supportTreecounterAction({
             id: currentUserProfile.supportedTreecounter.id,
             type: currentUserProfile.supportedTreecounter.type,
-            displayName: currentUserProfile.supportedTreecounter.displayName
+            displayName: currentUserProfile.supportedTreecounter.displayName,
+            slug: currentUserProfile.supportedTreecounter.slug,
           });
       }
     }
@@ -94,7 +96,8 @@ class DonationTreesContainer extends PureComponent {
       currentUserProfile.supportedTreecounter &&
         this.props.supportTreecounterAction({
           id: null,
-          displayName: null
+          displayName: null,
+          slug: null,
         });
     }
   }

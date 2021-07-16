@@ -23,6 +23,7 @@ import { InAppBrowser } from "react-native-inappbrowser-reborn";
 import { getAuth0AccessToken } from "../../utils/user";
 // import TabContainer from '../../containers/Menu/TabContainer';
 import { getLocale } from '../../actions/getLocale';
+import { supportedTreecounterSelector } from '../../selectors';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -92,6 +93,7 @@ class PlantProjectFull extends React.Component {
   render() {
     let { plantProject } = this.props;
 
+
     if (!plantProject || !plantProject.tpoData) return <LoadingIndicator />;
     //debug('rendering with project:', plantProject);
     const {
@@ -129,6 +131,7 @@ class PlantProjectFull extends React.Component {
     const backgroundColor = "white";
 
     const locale = getLocale();
+    const supportedSlug = this.props?.supportTreecounter?.slug;
 
     return !loader ? (
       <View style={{ flex: 1 }}>
@@ -151,7 +154,7 @@ class PlantProjectFull extends React.Component {
             "/" +
             this.props.plantProject.id
           }
-          //  appurl={'weplant://project/' + this.props.plantProject.id}
+        //  appurl={'weplant://project/' + this.props.plantProject.id}
         />
         <Animated.ScrollView
           contentContainerStyle={[
@@ -218,11 +221,11 @@ class PlantProjectFull extends React.Component {
                 getAuth0AccessToken().then(token => {
                   if (token) {
                     this.openWebView(
-                      `${planet_pay_url}/?to=${plantProject.slug}&locale=${locale}&token=${token}`
+                      `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}&token=${token}`
                     );
                   } else {
                     this.openWebView(
-                      `${planet_pay_url}/?to=${plantProject.slug}&locale=${locale}`
+                      `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}`
                     );
                   }
                 });
@@ -251,6 +254,12 @@ PlantProjectFull.propTypes = {
   onBackClick: PropTypes.func
 };
 
+const mapStateToProps = state => {
+  return {
+    supportTreecounter: supportedTreecounterSelector(state),
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
@@ -259,4 +268,8 @@ const mapDispatchToProps = dispatch => {
     dispatch
   );
 };
-export default connect(null, mapDispatchToProps)(PlantProjectFull);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlantProjectFull);

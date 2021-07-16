@@ -32,8 +32,9 @@ import { selectPlantProjectAction } from "../../actions/selectPlantProjectAction
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { InAppBrowser } from "react-native-inappbrowser-reborn";
-import {getAuth0AccessToken} from '../../utils/user'
+import { getAuth0AccessToken } from '../../utils/user'
 import { getLocale } from '../../actions/getLocale';
+import { supportedTreecounterSelector } from '../../selectors';
 //keeping Icon here instead of in assets
 // const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
@@ -140,6 +141,7 @@ class PlantProjectSnippet extends PureComponent {
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     const { planet_pay_url } = context;
     const locale = getLocale();
+    const supportedSlug = this.props?.supportTreecounter?.slug;
 
     return (
       <TouchableHighlight underlayColor={"white"} onPress={onPressHandler}>
@@ -288,8 +290,8 @@ class PlantProjectSnippet extends PureComponent {
                     <Text style={styles.survivalText}>
                       {specsProps.taxDeduction && specsProps.taxDeduction.length
                         ? `${i18n.t("label.tax_deductible")} ${i18n.t(
-                            "label.in"
-                          )} ${deducibleText1}`
+                          "label.in"
+                        )} ${deducibleText1}`
                         : i18n.t("label.no_tax_deduction")}
                     </Text>
                   </View>
@@ -311,10 +313,10 @@ class PlantProjectSnippet extends PureComponent {
                     getAuth0AccessToken().then(token => {
                       if (token) {
                         this.openWebView(
-                          `${planet_pay_url}/?to=${slug}&locale=${locale}&token=${token}`
+                          `${planet_pay_url}/?to=${slug}&s=${supportedSlug}&locale=${locale}&token=${token}`
                         );
                       } else {
-                        this.openWebView(`${planet_pay_url}/?to=${slug}&locale=${locale}`);
+                        this.openWebView(`${planet_pay_url}/?to=${supportedSlug}&s=${slug}&locale=${locale}`);
                       }
                     });
                   }}
@@ -386,6 +388,13 @@ PlantProjectSnippet.propTypes = {
   showCertifiedTag: PropTypes.bool,
   selectProject: PropTypes.func
 };
+
+const mapStateToProps = state => {
+  return {
+    supportTreecounter: supportedTreecounterSelector(state),
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
@@ -394,4 +403,8 @@ const mapDispatchToProps = dispatch => {
     dispatch
   );
 };
-export default connect(null, mapDispatchToProps)(PlantProjectSnippet);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlantProjectSnippet);

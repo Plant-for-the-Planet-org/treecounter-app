@@ -19,7 +19,7 @@ export default class GiftTabView extends Component {
       index: 0
     };
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   indexChange(index) {
     this.setState({
@@ -102,13 +102,15 @@ export default class GiftTabView extends Component {
       alignItems: "center"
     };
     return (
-      // <TabView
-      //   useNativeDriver
-      //   navigationState={this.state}
-      //   renderScene={this._renderSelectPlantScene}
-      //   renderTabBar={this._renderTabBar}
-      //   onIndexChange={this._handleIndexChange}
-      // />
+      /* disabled functionality at July 16th 
+        <TabView
+          useNativeDriver
+          navigationState={this.state}
+          renderScene={this._renderSelectPlantScene}
+          renderTabBar={this._renderTabBar}
+          onIndexChange={this._handleIndexChange}
+        />
+       */
       <View style={style}>
         <View style={{ paddingBottom: 20 }}>
           <Image

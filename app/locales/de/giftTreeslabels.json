@@ -25,5 +25,6 @@
   "Last_Name": "Nachname",
   "Email": "Email",
   "Gift_Message": "Nachricht zum Geschenk",
-  "search_user_desrcription": "Suche eine Person, der du Bäume schenken möchtest. Im nächsten Schritt kannst du ein Projekt auswählen, welches die Bäume pflanzt."
+  "search_user_desrcription": "Suche eine Person, der du Bäume schenken möchtest. Im nächsten Schritt kannst du ein Projekt auswählen, welches die Bäume pflanzt.",
+  "changed_gift_workflow": "Wir haben diese Funktion geändert. Bitte spende an dein gewünschtes Projekt und wähle für die Bäume einen Empfänger."
 }

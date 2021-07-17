@@ -75,6 +75,9 @@ class PublicTreeCounter extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     const treecounter = nextProps.treecounter;
     if (treecounter) {
+      if ('tpo' === treecounter.userProfile.type) {
+        this.props.clearSupport();
+      }
       let svgData = {
         id: treecounter.id,
         target: treecounter.countTarget,
@@ -88,6 +91,7 @@ class PublicTreeCounter extends React.Component {
       this.setState({ svgData });
     }
   }
+
   updateSvg(toggle) {
     if (toggle) {
       const treecounter = this.props.treecounter;
@@ -117,6 +121,7 @@ class PublicTreeCounter extends React.Component {
       this.setState({ svgData: Object.assign({}, svgData) });
     }
   }
+
   onMoreClick(id, name) {
     this.props.clearSupport();
     this.props.selectPlantProjectIdAction(id);
@@ -133,6 +138,7 @@ class PublicTreeCounter extends React.Component {
     const { navigation } = this.props;
     updateStaticRoute('app_donate_detail', navigation);
   };
+
   render() {
     const { treecounter, currentUserProfile, navigation } = this.props;
     if (null === treecounter) {

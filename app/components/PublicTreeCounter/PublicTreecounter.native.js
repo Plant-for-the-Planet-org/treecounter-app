@@ -341,33 +341,35 @@ class PublicTreeCounter extends React.Component {
             ) : null
           } */}
         </ScrollView>
-        <View
-          style={[
-            stylesPublicPage.bottomActionArea,
-            { position: 'absolute', bottom: 0, right: 0, left: 0 }
-          ]}
-        >
-          <Text style={[stylesPublicPage.supportUserText]}>
-            {i18n.t('label.supportUser', {
-              displayName: this.props.treecounter.displayName
-            })}
-          </Text>
-          <TouchableItem activeOpacity={0.6} onPress={this.onRegisterSupporter}>
-            <View style={stylesPublicPage.fullHeightButton}>
-              <Image
-                source={white_heart}
-                style={
-                  white_heart
-                    ? { width: 20, height: 20, marginRight: 12 }
-                    : { width: 0 }
-                }
-              />
-              <Text style={[stylesPublicPage.primaryButtonText]}>
-                {i18n.t('label.donate')}
-              </Text>
-            </View>
-          </TouchableItem>
-        </View>
+        {'tpo' !== userProfile.type ? (
+          <View
+            style={[
+              stylesPublicPage.bottomActionArea,
+              { position: 'absolute', bottom: 0, right: 0, left: 0 }
+            ]}
+          >
+            <Text style={[stylesPublicPage.supportUserText]}>
+              {i18n.t('label.supportUser', {
+                displayName: this.props.treecounter.displayName
+              })}
+            </Text>
+            <TouchableItem activeOpacity={0.6} onPress={this.onRegisterSupporter}>
+              <View style={stylesPublicPage.fullHeightButton}>
+                <Image
+                  source={white_heart}
+                  style={
+                    white_heart
+                      ? { width: 20, height: 20, marginRight: 12 }
+                      : { width: 0 }
+                  }
+                />
+                <Text style={[stylesPublicPage.primaryButtonText]}>
+                  {i18n.t('label.donate')}
+                </Text>
+              </View>
+            </TouchableItem>
+          </View>
+        ) : null}
       </SafeAreaView>
     );
   }

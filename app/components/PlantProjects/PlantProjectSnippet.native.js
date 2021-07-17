@@ -34,7 +34,6 @@ import { bindActionCreators } from "redux";
 import { InAppBrowser } from "react-native-inappbrowser-reborn";
 import { getAuth0AccessToken } from '../../utils/user'
 import { getLocale } from '../../actions/getLocale';
-import { supportedTreecounterSelector } from '../../selectors';
 //keeping Icon here instead of in assets
 // const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
@@ -54,6 +53,7 @@ class PlantProjectSnippet extends PureComponent {
   openWebView = async link => {
     try {
       const url = link;
+      console.log("PlantProjectSnippet.native.js", link);
       if (await InAppBrowser.isAvailable()) {
         await InAppBrowser.open(url);
       } else Linking.openURL(url);
@@ -141,7 +141,6 @@ class PlantProjectSnippet extends PureComponent {
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
     const { planet_pay_url } = context;
     const locale = getLocale();
-    const supportedSlug = this.props?.supportTreecounter?.slug;
 
     return (
       <TouchableHighlight underlayColor={"white"} onPress={onPressHandler}>
@@ -313,10 +312,10 @@ class PlantProjectSnippet extends PureComponent {
                     getAuth0AccessToken().then(token => {
                       if (token) {
                         this.openWebView(
-                          `${planet_pay_url}/?to=${slug}&s=${supportedSlug}&locale=${locale}&token=${token}`
+                          `${planet_pay_url}/?to=${slug}&locale=${locale}&token=${token}`
                         );
                       } else {
-                        this.openWebView(`${planet_pay_url}/?to=${supportedSlug}&s=${slug}&locale=${locale}`);
+                        this.openWebView(`${planet_pay_url}/?to=${slug}&locale=${locale}`);
                       }
                     });
                   }}
@@ -389,12 +388,6 @@ PlantProjectSnippet.propTypes = {
   selectProject: PropTypes.func
 };
 
-const mapStateToProps = state => {
-  return {
-    supportTreecounter: supportedTreecounterSelector(state),
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
@@ -405,6 +398,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(PlantProjectSnippet);

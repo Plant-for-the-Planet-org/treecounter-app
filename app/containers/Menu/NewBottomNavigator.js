@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,19 +8,24 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
+import { bindActionCreators } from 'redux';
 //import { debug } from '../../debug';
 import StaticTabbar from './StaticTabbar';
 import i18n from '../../locales/i18n';
 import NetInfo from '@react-native-community/netinfo';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { clearSupport } from '../../actions/supportTreecounterAction';
 
 let unsubscribe = null;
 
 // eslint-disable-next-line react/prefer-stateless-function
-export default class Tabbar extends React.PureComponent {
-  state = {
-    isConnected: true,
-  };
+class Tabbar extends PureComponent {
+  constructor() {
+    super();
+    this.state = {
+      isConnected: true,
+    };
+  }
 
   checkInternet() {
     NetInfo.fetch().then(state => {
@@ -100,7 +106,11 @@ export default class Tabbar extends React.PureComponent {
               }
             ]}
           >
-            <StaticTabbar {...{ tabs }} navigation={this.props.navigation} />
+            <StaticTabbar
+              {...{ tabs }}
+              navigation={this.props.navigation}
+              onPressHook={(() => this.props.clearSupport())}
+            />
           </View>
           <View
             style={{
@@ -123,24 +133,24 @@ export default class Tabbar extends React.PureComponent {
         {this.state.isConnected ? (
           <SafeAreaView style={styles.container} />
         ) : (
-            <TouchableOpacity
-              onPress={() => this.checkInternet()}
-              style={{
-                width: '100%',
-                height: 48,
-                backgroundColor: '#bdc3c7',
-                justifyContent: 'center',
-                flexDirection: 'row',
-                alignItems: 'center'
-              }}
-            >
-              <Text style={[styles.noInternetText]}>
-                {i18n.t('label.noInternet')}
-              </Text>
-              <Icon name={'refresh'} size={18} color={'#353b48'} />
-              {/* <Text style={styles.noInternetText}>{i18n.t('label.someFunctionality')}</Text> */}
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity
+            onPress={() => this.checkInternet()}
+            style={{
+              width: '100%',
+              height: 48,
+              backgroundColor: '#bdc3c7',
+              justifyContent: 'center',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}
+          >
+            <Text style={[styles.noInternetText]}>
+              {i18n.t('label.noInternet')}
+            </Text>
+            <Icon name={'refresh'} size={18} color={'#353b48'} />
+            {/* <Text style={styles.noInternetText}>{i18n.t('label.someFunctionality')}</Text> */}
+          </TouchableOpacity>
+        )}
       </>
     );
   }
@@ -158,3 +168,9 @@ const styles = StyleSheet.create({
     marginRight: 6
   }
 });
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ clearSupport }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(Tabbar);

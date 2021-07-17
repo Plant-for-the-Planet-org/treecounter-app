@@ -24,6 +24,7 @@ import { getAuth0AccessToken } from "../../utils/user";
 // import TabContainer from '../../containers/Menu/TabContainer';
 import { getLocale } from '../../actions/getLocale';
 import { supportedTreecounterSelector } from '../../selectors';
+import { clearSupport } from '../../actions/supportTreecounterAction';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -82,6 +83,7 @@ class PlantProjectFull extends React.Component {
   openWebView = async link => {
     try {
       const url = link;
+      console.log("PlantProjectFull.native.js", link);
       if (await InAppBrowser.isAvailable()) {
         await InAppBrowser.open(url);
       } else Linking.openURL(url);
@@ -131,7 +133,7 @@ class PlantProjectFull extends React.Component {
     const backgroundColor = "white";
 
     const locale = getLocale();
-    const supportedSlug = this.props?.supportTreecounter?.slug;
+    const supportedSlug = this.props.supportTreecounter?.slug ? this.props.supportTreecounter.slug : '';
 
     return !loader ? (
       <View style={{ flex: 1 }}>
@@ -263,7 +265,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      loadProject
+      loadProject,
+      clearSupport
     },
     dispatch
   );

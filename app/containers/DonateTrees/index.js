@@ -7,7 +7,7 @@ import { createPaymentDonation, createPaymentGift, paymentClear } from '../../ac
 import { loadProject } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { clearPlantProject, selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import { clearSupport, supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import DonateTrees from '../../components/DonateTrees';
 import { debug } from '../../debug';
@@ -94,11 +94,7 @@ class DonationTreesContainer extends PureComponent {
     ); */
     if (currentUserProfile) {
       currentUserProfile.supportedTreecounter &&
-        this.props.supportTreecounterAction({
-          id: null,
-          displayName: null,
-          slug: null,
-        });
+        this.props.clearSupport();
     }
   }
   onTabChange = title => this.props.navigation.setParams({ titleParam: title });
@@ -157,6 +153,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      clearSupport,
       supportTreecounterAction,
       selectPlantProjectAction,
       fetchCurrencies,

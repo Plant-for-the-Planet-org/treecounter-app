@@ -254,11 +254,11 @@ class CompetitionFull extends React.Component {
                       >
                         {competitionDetail
                           ? i18n.t('label.comp_by_name', {
-                              compname:
-                                competitionDetail && competitionDetail.name,
-                              ownername:
-                                competitionDetail && competitionDetail.ownerName
-                            })
+                            compname:
+                              competitionDetail && competitionDetail.name,
+                            ownername:
+                              competitionDetail && competitionDetail.ownerName
+                          })
                           : null}
                       </Text>
                     </View>
@@ -287,8 +287,8 @@ class CompetitionFull extends React.Component {
                           <Text style={snippetStyles.bottomText}>
                             {competitionDetail &&
                               competitionDetail.contact +
-                                ', ' +
-                                competitionDetail &&
+                              ', ' +
+                              competitionDetail &&
                               competitionDetail.email}
                           </Text>
                         </View>
@@ -346,11 +346,11 @@ class CompetitionFull extends React.Component {
                         {competitionDetail.filterType === 'all'
                           ? i18n.t('label.if_all_project_msg')
                           : competitionDetail.filterType === 'donations'
-                          ? i18n.t('label.donation_only_msg')
-                          : competitionDetail.filterType === 'registered'
-                          ? i18n.t('label.register_only_msg')
-                          : null}
-                        {}
+                            ? i18n.t('label.donation_only_msg')
+                            : competitionDetail.filterType === 'registered'
+                              ? i18n.t('label.register_only_msg')
+                              : null}
+                        { }
                       </Text>
                       <Image
                         source={trees}
@@ -363,9 +363,10 @@ class CompetitionFull extends React.Component {
                     {competitionDetail.filterType === 'all' ? (
                       <TouchableOpacity
                         style={{ width: '100%' }}
-                        onPress={() =>
+                        onPress={() => {
+                          this.props.clearSupport();
                           navigation.navigate(getLocalRoute('app_donateTrees'))
-                        }
+                        }}
                       >
                         <Text style={snippetStyles.googleCardButton}>
                           {i18n.t('label.donate_now')}
@@ -374,9 +375,10 @@ class CompetitionFull extends React.Component {
                     ) : competitionDetail.filterType === 'donations' ? (
                       <TouchableOpacity
                         style={{ width: '100%' }}
-                        onPress={() =>
+                        onPress={() => {
+                          this.props.clearSupport();
                           navigation.navigate(getLocalRoute('app_donateTrees'))
-                        }
+                        }}
                       >
                         <Text style={snippetStyles.googleCardButton}>
                           {i18n.t('label.donate_now')}
@@ -435,6 +437,9 @@ class CompetitionFull extends React.Component {
                                 supportTreecounterAction={
                                   this.props.supportTreecounterAction
                                 }
+                                clearSupport={
+                                  this.props.clearSupport
+                                }
                                 key={index}
                                 status={status}
                                 competitionEnded={competitionEnded}
@@ -452,8 +457,8 @@ class CompetitionFull extends React.Component {
 
               {/* Participant Requests */}
               {requestCount > 0 &&
-              competitionDetail &&
-              competitionDetail.ownerTreecounterId ===
+                competitionDetail &&
+                competitionDetail.ownerTreecounterId ===
                 this.props.treeCounter.id ? (
                 <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
                   <View style={snippetStyles.projectSpecsContainer}>
@@ -485,6 +490,9 @@ class CompetitionFull extends React.Component {
                                 supportTreecounterAction={
                                   this.props.supportTreecounterAction
                                 }
+                                clearSupport={
+                                  this.props.clearSupport
+                                }
                                 key={index}
                               />
                             ) : null
@@ -499,7 +507,7 @@ class CompetitionFull extends React.Component {
 
               {/* Invitation Details */}
               {competitionDetail &&
-              competitionDetail.ownerTreecounterId ===
+                competitionDetail.ownerTreecounterId ===
                 this.props.treeCounter.id ? (
                 <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
                   <View style={snippetStyles.projectSpecsContainer}>
@@ -534,6 +542,9 @@ class CompetitionFull extends React.Component {
                                 supportTreecounterAction={
                                   this.props.supportTreecounterAction
                                 }
+                                clearSupport={
+                                  this.props.clearSupport
+                                }
                                 key={index}
                               />
                             ) : null
@@ -547,8 +558,8 @@ class CompetitionFull extends React.Component {
 
               {/* Invited Users */}
               {competitionDetail &&
-              invitedCount > 0 &&
-              competitionDetail.ownerTreecounterId !==
+                invitedCount > 0 &&
+                competitionDetail.ownerTreecounterId !==
                 this.props.treeCounter.id ? (
                 <CardLayout style={[snippetStyles.projectSnippetContainerN]}>
                   <View style={snippetStyles.projectSpecsContainer}>
@@ -562,7 +573,7 @@ class CompetitionFull extends React.Component {
                         {hasEnrollments &&
                           competitionDetail.allEnrollments.map((top, index) =>
                             top.status === 'invited' &&
-                            top.treecounterSlug ===
+                              top.treecounterSlug ===
                               this.props.treeCounter.slug ? (
                               <CompetitionParticipant
                                 competitor={top}
@@ -576,6 +587,9 @@ class CompetitionFull extends React.Component {
                                 cancelInvite={id => this.props.cancelInvite(id)}
                                 supportTreecounterAction={
                                   this.props.supportTreecounterAction
+                                }
+                                clearSupport={
+                                  this.props.clearSupport
                                 }
                                 key={index}
                               />
@@ -593,7 +607,7 @@ class CompetitionFull extends React.Component {
       </View>
     );
   }
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 }
 
 const mapStateToProps = state => ({
@@ -625,5 +639,6 @@ CompetitionFull.propTypes = {
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
   supportTreecounterAction: PropTypes.any,
+  clearSupport: PropTypes.any,
   editCompetition: PropTypes.any
 };

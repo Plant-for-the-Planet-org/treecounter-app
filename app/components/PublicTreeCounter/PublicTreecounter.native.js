@@ -58,6 +58,7 @@ class PublicTreeCounter extends React.Component {
 
   onPlantProjectSelected(selectedPlantProjectId) {
     //debug('on plant project seected', selectedPlantProjectId);
+    this.props.clearSupport();
     this.props.selectPlantProjectIdAction(selectedPlantProjectId);
     this.props.route('app_donateTrees');
   }
@@ -117,6 +118,7 @@ class PublicTreeCounter extends React.Component {
     }
   }
   onMoreClick(id, name) {
+    this.props.clearSupport();
     this.props.selectPlantProjectIdAction(id);
     const { navigation } = this.props;
     updateRoute('app_selectedProject', navigation, null, {
@@ -126,6 +128,7 @@ class PublicTreeCounter extends React.Component {
   }
 
   onSelectClickedFeaturedProjects = id => {
+    this.props.clearSupport();
     this.props.selectPlantProjectIdAction(id);
     const { navigation } = this.props;
     updateStaticRoute('app_donate_detail', navigation);
@@ -215,9 +218,9 @@ class PublicTreeCounter extends React.Component {
           </View>
           <View>
             {userProfile.synopsis1 ||
-            userProfile.synopsis2 ||
-            userProfile.linkText ||
-            userProfile.url ? (
+              userProfile.synopsis2 ||
+              userProfile.linkText ||
+              userProfile.url ? (
               <CardLayout>
                 {userProfile.synopsis1 ? (
                   <Text style={stylesHome.footerText}>
@@ -242,7 +245,7 @@ class PublicTreeCounter extends React.Component {
           </View>
           <View>
             {'tpo' === userProfile.type &&
-            1 <= tpoProps.plantProjects.length ? (
+              1 <= tpoProps.plantProjects.length ? (
               <View style={{ marginBottom: 20 }}>
                 {tpoProps.plantProjects.map(project => (
                   <PlantProjectSnippet
@@ -390,6 +393,7 @@ PublicTreeCounter.propTypes = {
   unfollowSubscribeAction: PropTypes.func,
   selectPlantProjectIdAction: PropTypes.func,
   supportTreecounterAction: PropTypes.func,
+  clearSupport: PropTypes.func,
   route: PropTypes.func,
   navigation: PropTypes.any
 };

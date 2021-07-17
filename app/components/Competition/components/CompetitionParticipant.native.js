@@ -30,6 +30,7 @@ class CompetitionParticipant extends React.Component {
   }
   // This function is for participants to plant trees
   plantButton() {
+    this.props.clearSupport();
     updateRoute('app_donateTrees', this.props.navigation);
   }
   render() {
@@ -173,5 +174,6 @@ CompetitionParticipant.propTypes = {
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
   supportTreecounterAction: PropTypes.any,
+  clearSupport: PropTypes.any,
   navigation: PropTypes.any
 };

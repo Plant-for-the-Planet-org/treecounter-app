@@ -1,15 +1,17 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
 import {
   Image,
   Text,
   TouchableHighlight,
   View,
-  TouchableOpacity
-} from 'react-native';
-import SingleRating from '../Reviews/SingleRating';
-
-import { getImageUrl } from '../../actions/apiRouting';
+  TouchableOpacity,
+  Alert,
+  Linking
+} from "react-native";
+import SingleRating from "../Reviews/SingleRating";
+import { context } from "../../config";
+import { getImageUrl } from "../../actions/apiRouting";
 import {
   // tick,
   location_grey,
@@ -17,18 +19,22 @@ import {
   tax_grey
   // leaf,
   // leafGray
-} from '../../assets';
-import i18n from '../../locales/i18n';
-import styles from '../../styles/selectplantproject/selectplantproject-snippet.native';
-import { getISOToCountryName } from '../../helpers/utils';
+} from "../../assets";
+import i18n from "../../locales/i18n";
+import styles from "../../styles/selectplantproject/selectplantproject-snippet.native";
+import { getISOToCountryName } from "../../helpers/utils";
 // import CardLayout from '../Common/Card';
-import NumberFormat from '../Common/NumberFormat.native';
-import PlantedProgressBar from './PlantedProgressbar.native';
-import { updateStaticRoute } from '../../helpers/routerHelper';
-import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
+import NumberFormat from "../Common/NumberFormat.native";
+import PlantedProgressBar from "./PlantedProgressbar.native";
+import { updateStaticRoute } from "../../helpers/routerHelper";
+import { selectPlantProjectAction } from "../../actions/selectPlantProjectAction";
 // import Icon from 'react-native-vector-icons/FontAwesome';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { InAppBrowser } from "react-native-inappbrowser-reborn";
+import { getAuth0AccessToken } from '../../utils/user'
+import { getLocale } from '../../actions/getLocale';
+import { supportedTreecounterSelector } from '../../selectors';
 //keeping Icon here instead of in assets
 // const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
@@ -45,7 +51,18 @@ class PlantProjectSnippet extends PureComponent {
       this.props.onMoreClick(id, name);
     }
   };
-
+  openWebView = async link => {
+    try {
+      const url = link;
+      console.log("PlantProjectSnippet.native.js", link);
+      if (await InAppBrowser.isAvailable()) {
+        await InAppBrowser.open(url);
+      } else Linking.openURL(url);
+    } catch (error) {
+      console.error(error);
+      Alert.alert(error.message);
+    }
+  };
   render() {
     const {
       // eslint-disable-next-line no-unused-vars
@@ -66,7 +83,8 @@ class PlantProjectSnippet extends PureComponent {
       allowDonations,
       image,
       reviewScore: plantProjectRating,
-      reviews
+      reviews,
+      slug
       // survivalRateStatus
       // description,
       // homepageUrl: homepageUrl,
@@ -114,7 +132,7 @@ class PlantProjectSnippet extends PureComponent {
           getISOToCountryName(taxDeductibleCountries[i]).country
         );
       }
-    deducibleText1 = deducibleText1.join(', ') + '.';
+    deducibleText1 = deducibleText1.join(", ") + ".";
     // const survivalRateLeaf =
     // survivalRateStatus == 'verified'
     //     ? leaf
@@ -122,9 +140,12 @@ class PlantProjectSnippet extends PureComponent {
     //       ? leafGray
     //       : null;
     let onPressHandler = this.props.clickable ? this.containerPress : undefined;
+    const { planet_pay_url } = context;
+    const locale = getLocale();
+    const supportedSlug = this.props.supportTreecounter?.slug ? this.props.supportTreecounter.slug : '';
 
     return (
-      <TouchableHighlight underlayColor={'white'} onPress={onPressHandler}>
+      <TouchableHighlight underlayColor={"white"} onPress={onPressHandler}>
         <View style={[styles.projectSnippetContainer]} withoutShadow>
           {projectImage ? (
             <View style={styles.projectImageContainer}>
@@ -132,12 +153,12 @@ class PlantProjectSnippet extends PureComponent {
                 style={styles.teaser__projectImage}
                 source={{
                   uri: getImageUrl(
-                    'project',
-                    'large',
+                    "project",
+                    "large",
                     teaserProps.projectImage.image
                   )
                 }}
-                resizeMode={'cover'}
+                resizeMode={"cover"}
               />
               {/* {reviews && reviews.length ? (
                 <View style={styles.certifiedAndRatingContainer}>
@@ -183,12 +204,12 @@ class PlantProjectSnippet extends PureComponent {
                 style={{ paddingTop: 10, paddingLeft: 2, flex: 1 }}
                 onPress={() => {
                   this.props.selectPlantProjectAction(id);
-                  updateStaticRoute('app_reviews', this.props.navigation);
+                  updateStaticRoute("app_reviews", this.props.navigation);
                 }}
               >
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <SingleRating
-                    name={(plantProjectRating / 100).toFixed(2) || '0.0'}
+                    name={(plantProjectRating / 100).toFixed(2) || "0.0"}
                     indexScore={{
                       score: Math.round(plantProjectRating / 100)
                     }}
@@ -202,7 +223,7 @@ class PlantProjectSnippet extends PureComponent {
             >
               <View style={styles.locationContainer}>
                 {country ? (
-                  <View style={{ flexDirection: 'row' }}>
+                  <View style={{ flexDirection: "row" }}>
                     <Image
                       source={location_grey}
                       style={{
@@ -257,8 +278,8 @@ class PlantProjectSnippet extends PureComponent {
                   </View>
                 </View> */}
 
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <View style={{ flexDirection: "row", marginTop: 10 }}>
                     <Image
                       source={tax_grey}
                       style={{
@@ -269,10 +290,10 @@ class PlantProjectSnippet extends PureComponent {
                     />
                     <Text style={styles.survivalText}>
                       {specsProps.taxDeduction && specsProps.taxDeduction.length
-                        ? `${i18n.t('label.tax_deductible')} ${i18n.t(
-                            'label.in'
-                          )} ${deducibleText1}`
-                        : i18n.t('label.no_tax_deduction')}
+                        ? `${i18n.t("label.tax_deductible")} ${i18n.t(
+                          "label.in"
+                        )} ${deducibleText1}`
+                        : i18n.t("label.no_tax_deduction")}
                     </Text>
                   </View>
 
@@ -289,7 +310,19 @@ class PlantProjectSnippet extends PureComponent {
               </View>
               {allowDonations ? (
                 <TouchableOpacity
-                  onPress={() => this.props.onSelectClickedFeaturedProjects(id)}
+                  onPress={() => {
+                    getAuth0AccessToken().then(token => {
+                      if (token) {
+                        this.openWebView(
+                          `${planet_pay_url}/?to=${slug}&s=${supportedSlug}&locale=${locale}&token=${token}`
+                        );
+                      } else {
+                        this.openWebView(
+                          `${planet_pay_url}/?to=${supportedSlug}&s=${slug}&locale=${locale}`
+                        );
+                      }
+                    });
+                  }}
                 >
                   <View style={styles.costContainer}>
                     <View style={styles.costTextContainer}>
@@ -303,7 +336,7 @@ class PlantProjectSnippet extends PureComponent {
                     </View>
 
                     <Text style={[styles.costPerTreeText]}>
-                      {i18n.t('label.cost_per_tree')}
+                      {i18n.t("label.cost_per_tree")}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -358,6 +391,13 @@ PlantProjectSnippet.propTypes = {
   showCertifiedTag: PropTypes.bool,
   selectProject: PropTypes.func
 };
+
+const mapStateToProps = state => {
+  return {
+    supportTreecounter: supportedTreecounterSelector(state),
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
@@ -366,4 +406,8 @@ const mapDispatchToProps = dispatch => {
     dispatch
   );
 };
-export default connect(null, mapDispatchToProps)(PlantProjectSnippet);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlantProjectSnippet);

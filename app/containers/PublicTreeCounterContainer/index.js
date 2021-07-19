@@ -6,7 +6,7 @@ import { updateRoute } from '../../helpers/routerHelper';
 import PublicTreecounter from '../../components/PublicTreeCounter/PublicTreecounter';
 import { currentUserProfileSelector } from '../../selectors';
 import { selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import { clearSupport, supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { followUser, unfollowUser } from '../../actions/followActions';
 import { treecounterLookupAction } from '../../actions/treecounterLookupAction';
 
@@ -66,6 +66,7 @@ class PublicTreecounterContainer extends Component {
         unfollowSubscribeAction={this.props.unfollowSubscribeAction}
         selectPlantProjectIdAction={this.props.selectPlantProjectIdAction}
         supportTreecounterAction={this.props.supportTreecounterAction}
+        clearSupport={this.props.clearSupport}
         navigation={this.props.navigation}
         route={(routeName, id, params) =>
           this.props.route(routeName, id, params, this.props.navigation)
@@ -79,6 +80,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       selectPlantProjectIdAction: selectPlantProjectAction,
+      clearSupport: clearSupport,
       supportTreecounterAction: supportTreecounterAction,
       followSubscribeAction: followUser,
       unfollowSubscribeAction: unfollowUser,
@@ -108,6 +110,7 @@ PublicTreecounterContainer.propTypes = {
   followSubscribeAction: PropTypes.func,
   unfollowSubscribeAction: PropTypes.func,
   selectPlantProjectIdAction: PropTypes.func,
+  clearSupport: PropTypes.func,
   supportTreecounterAction: PropTypes.func,
   treecounterLookupAction: PropTypes.func,
   route: PropTypes.func,

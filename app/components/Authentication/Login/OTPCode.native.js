@@ -212,7 +212,8 @@ export default class OTPCode extends Component {
                   <View style={[styles.bottomRow]}>
                     <Text style={styles.enterCode}>
                       {i18n.t('label.please_enter_code', {
-                        count: this.state.seconds
+                        email: this.props.email,
+                        count: this.state.seconds,
                       })}
                       {this.state.seconds > 0 ? (
                         <Text>{''}</Text>
@@ -244,10 +245,10 @@ export default class OTPCode extends Component {
                             color={backgroundColor}
                           />
                         ) : (
-                            <Text style={styles.actionButtonText}>
-                              {i18n.t('label.submit_code')}
-                            </Text>
-                          )}
+                          <Text style={styles.actionButtonText}>
+                            {i18n.t('label.submit_code')}
+                          </Text>
+                        )}
                       </View>
                     </TouchableOpacity>
                   ) : null}
@@ -272,10 +273,10 @@ export default class OTPCode extends Component {
                           color={backgroundColor}
                         />
                       ) : (
-                          <Text style={styles.actionButtonText}>
-                            {i18n.t('label.submit_code')}
-                          </Text>
-                        )}
+                        <Text style={styles.actionButtonText}>
+                          {i18n.t('label.submit_code')}
+                        </Text>
+                      )}
                     </View>
                   </TouchableOpacity>
                 ) : null}
@@ -285,8 +286,8 @@ export default class OTPCode extends Component {
         </Formik>
       </View>
     ) : (
-        <LoadingIndicator contentLoader screen="profileLoader" />
-      );
+      <LoadingIndicator contentLoader screen="profileLoader" />
+    );
   }
 }
 

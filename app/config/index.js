@@ -1,6 +1,6 @@
 /* processing values from environment */
 
-console.log('Environment: ', process.env.env);
+console.log("Environment: ", process.env.env);
 export const initialProps = {
   mediaPath: process.env.mediaPath // relative URI on server, where images are located (further sub-paths must be specified in application)
 };
@@ -20,5 +20,6 @@ export const context = {
     appId: process.env.iosAppId
   },
   locationApikKey: process.env.locationApikKey,
-  googleMapApiKey: process.env.googleMapApiKey
+  googleMapApiKey: process.env.googleMapApiKey,
+  planet_pay_url: process.env.planet_pay_url
 };

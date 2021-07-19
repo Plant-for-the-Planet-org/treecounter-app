@@ -1,6 +1,6 @@
-import Config from 'react-native-config';
+import Config from "react-native-config";
 
-console.log('react-native config', Config);
+console.log("react-native config", Config);
 export const initialProps = {
   mediaPath: Config.mediaPath // relative URI on server, where images are located (further sub-paths must be specified in application)
 };
@@ -20,5 +20,6 @@ export const context = {
     appId: Config.iosAppId
   },
   locationApikKey: Config.locationApikKey,
-  googleMapApiKey: Config.googleMapApiKey
+  googleMapApiKey: Config.googleMapApiKey,
+  planet_pay_url: Config.planet_pay_url
 };

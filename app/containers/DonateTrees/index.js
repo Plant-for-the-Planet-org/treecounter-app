@@ -7,7 +7,7 @@ import { createPaymentDonation, createPaymentGift, paymentClear } from '../../ac
 import { loadProject } from '../../actions/loadTposAction';
 import { loadUserProfile } from '../../actions/loadUserProfileAction';
 import { clearPlantProject, selectPlantProjectAction } from '../../actions/selectPlantProjectAction';
-import { supportTreecounterAction } from '../../actions/supportTreecounterAction';
+import { clearSupport, supportTreecounterAction } from '../../actions/supportTreecounterAction';
 import { updateUserProfile } from '../../actions/updateUserProfile';
 import DonateTrees from '../../components/DonateTrees';
 import { debug } from '../../debug';
@@ -33,7 +33,8 @@ class DonationTreesContainer extends PureComponent {
             _suggestions.data[0].type != 'tpo' && supportTreecounterAction({
               id: _suggestions.data[0].treecounterId,
               type: _suggestions.data[0].type,
-              displayName: _suggestions.data[0].name
+              displayName: _suggestions.data[0].name,
+              slug: _suggestions.data[0].slug,
             });
           }
         })
@@ -50,7 +51,8 @@ class DonationTreesContainer extends PureComponent {
           this.props.supportTreecounterAction({
             id: currentUserProfile.supportedTreecounter.id,
             type: currentUserProfile.supportedTreecounter.type,
-            displayName: currentUserProfile.supportedTreecounter.displayName
+            displayName: currentUserProfile.supportedTreecounter.displayName,
+            slug: currentUserProfile.supportedTreecounter.slug,
           });
       }
     }
@@ -92,10 +94,7 @@ class DonationTreesContainer extends PureComponent {
     ); */
     if (currentUserProfile) {
       currentUserProfile.supportedTreecounter &&
-        this.props.supportTreecounterAction({
-          id: null,
-          displayName: null
-        });
+        this.props.clearSupport();
     }
   }
   onTabChange = title => this.props.navigation.setParams({ titleParam: title });
@@ -154,6 +153,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      clearSupport,
       supportTreecounterAction,
       selectPlantProjectAction,
       fetchCurrencies,
@@ -190,6 +190,7 @@ DonationTreesContainer.propTypes = {
   gift: PropTypes.func,
   fetchCurrencies: PropTypes.func,
   clearPlantProject: PropTypes.func,
+  clearSupport: PropTypes.object,
   supportTreecounter: PropTypes.object,
   setProgressModelState: PropTypes.func,
   loadUserProfile: PropTypes.func,

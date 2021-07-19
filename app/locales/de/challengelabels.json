@@ -21,5 +21,6 @@
   "please_select_year": "Bitte Jahr auswählen",
   "could_not_add_user": "Benutzer konnte nicht hinzugefügt werden",
   "name_is_required": "Name ist erforderlich",
-  "goal_is_required": "Zielangabe ist erforderlich"
+  "goal_is_required": "Zielangabe ist erforderlich",
+  "changed_challenge_workflow": "Wir haben diese Funktion vorerst deaktivert. Du kannst deine Bäume aber Freunden schenken, um sie auf ein Projekt aufmerksam zu machen."
 }

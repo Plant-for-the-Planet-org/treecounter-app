@@ -15,7 +15,7 @@ import {
   invitePart,
   leaveCompetition
 } from './../redux/competitionActions';
-import { supportTreecounterAction } from '../../../actions/supportTreecounterAction';
+import { clearSupport, supportTreecounterAction } from '../../../actions/supportTreecounterAction';
 
 class SelectedCompetitionContainer extends Component {
   constructor(props) {
@@ -78,6 +78,7 @@ class SelectedCompetitionContainer extends Component {
           declinePart={id => this.props.declinePart(id)}
           cancelInvite={id => this.props.cancelInvite(id)}
           supportTreecounterAction={this.props.supportTreecounterAction}
+          clearSupport={this.props.clearSupport}
           currentUserProfile={this.props.userProfile}
           navigation={this.props.navigation}
           editCompetition={id => this.editCompetition(id)}
@@ -105,7 +106,8 @@ const mapDispatchToProps = dispatch => {
       declinePart,
       cancelInvite,
       invitePart,
-      supportTreecounterAction
+      supportTreecounterAction,
+      clearSupport,
     },
     dispatch
   );
@@ -124,6 +126,5 @@ SelectedCompetitionContainer.propTypes = {
   confirmPart: PropTypes.any,
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
-  supportTreecounterAction: PropTypes.any,
   editCompetition: PropTypes.any
 };

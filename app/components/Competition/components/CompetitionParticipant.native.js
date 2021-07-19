@@ -18,7 +18,8 @@ class CompetitionParticipant extends React.Component {
   supportButton() {
     let supportObject = {
       id: this.props.competitor.treecounterId,
-      displayName: this.props.competitor.treecounterDisplayName
+      displayName: this.props.competitor.treecounterDisplayName,
+      slug: this.props.competitor.treecounterSlug,
     };
     this.props.supportTreecounterAction(supportObject);
     updateRoute('app_supportTrees', this.props.navigation, 55, {
@@ -29,6 +30,7 @@ class CompetitionParticipant extends React.Component {
   }
   // This function is for participants to plant trees
   plantButton() {
+    this.props.clearSupport();
     updateRoute('app_donateTrees', this.props.navigation);
   }
   render() {
@@ -120,14 +122,14 @@ class CompetitionParticipant extends React.Component {
               }
             >
               {this.props.competitor.treecounterSlug ===
-              this.props.treeCounter.slug
+                this.props.treeCounter.slug
                 ? i18n.t('label.me')
                 : this.props.competitor.treecounterDisplayName}
             </Text>
             {/* Competitor Name Ends */}
 
             {this.props.type === 'participants' ||
-            this.props.type === 'invite' ? (
+              this.props.type === 'invite' ? (
               <Text style={styles.topCompetitorScoreText}>
                 {this.props.competitor.score} {i18n.t('label.planted')}
               </Text>
@@ -172,5 +174,6 @@ CompetitionParticipant.propTypes = {
   declinePart: PropTypes.any,
   cancelInvite: PropTypes.any,
   supportTreecounterAction: PropTypes.any,
+  clearSupport: PropTypes.any,
   navigation: PropTypes.any
 };

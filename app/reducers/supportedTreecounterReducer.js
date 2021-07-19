@@ -10,7 +10,8 @@ export const getSupportedTreecounter = state => state.supportedTreecounter;
 
 export const initialState = {
   treecounterId: null,
-  displayName: null
+  displayName: null,
+  slug: null,
 };
 
 const supportedTreecounterReducer = handleActions(
@@ -18,7 +19,8 @@ const supportedTreecounterReducer = handleActions(
     [setSupportedTreecounter]: (state, action) => ({
       treecounterId: action.payload.id,
       type: action.payload.type,
-      displayName: action.payload.displayName
+      displayName: action.payload.displayName,
+      slug: action.payload.slug,
     }),
     [clearSupportedTreecounter]: () => initialState
   },

@@ -25,6 +25,9 @@ import { getAuth0AccessToken } from "../../utils/user";
 import { getLocale } from '../../actions/getLocale';
 import { supportedTreecounterSelector } from '../../selectors';
 import { clearSupport } from '../../actions/supportTreecounterAction';
+import { getCurrency } from '../../selectors';
+import { currentUserProfileSelector } from '../../selectors';
+import { getPreferredCountryCodeFromCurrency } from '../../utils/currency';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -134,6 +137,8 @@ class PlantProjectFull extends React.Component {
 
     const locale = getLocale();
     const supportedSlug = this.props.supportTreecounter?.slug ? this.props.supportTreecounter.slug : '';
+    const userCurrency = this.props.userProfile?.currency || this.props.globalCurrency?.currency;
+    const currencyCountry = this.props.globalCurrency ? (getPreferredCountryCodeFromCurrency(userCurrency)) : '';
 
     return !loader ? (
       <View style={{ flex: 1 }}>
@@ -223,11 +228,11 @@ class PlantProjectFull extends React.Component {
                 getAuth0AccessToken().then(token => {
                   if (token) {
                     this.openWebView(
-                      `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}&token=${token}`
+                      `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}&token=${token}`
                     );
                   } else {
                     this.openWebView(
-                      `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}`
+                      `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}`
                     );
                   }
                 });
@@ -259,6 +264,8 @@ PlantProjectFull.propTypes = {
 const mapStateToProps = state => {
   return {
     supportTreecounter: supportedTreecounterSelector(state),
+    globalCurrency: getCurrency(state),
+    userProfile: currentUserProfileSelector(state),
   };
 };
 

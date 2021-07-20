@@ -35,6 +35,9 @@ import { InAppBrowser } from "react-native-inappbrowser-reborn";
 import { getAuth0AccessToken } from '../../utils/user'
 import { getLocale } from '../../actions/getLocale';
 import { supportedTreecounterSelector } from '../../selectors';
+import { getCurrency } from '../../selectors';
+import { currentUserProfileSelector } from '../../selectors';
+import { getPreferredCountryCodeFromCurrency } from '../../utils/currency';
 //keeping Icon here instead of in assets
 // const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
@@ -143,6 +146,8 @@ class PlantProjectSnippet extends PureComponent {
     const { planet_pay_url } = context;
     const locale = getLocale();
     const supportedSlug = this.props.supportTreecounter?.slug ? this.props.supportTreecounter.slug : '';
+    const userCurrency = this.props.userProfile?.currency || this.props.globalCurrency?.currency;
+    const currencyCountry = this.props.globalCurrency ? (getPreferredCountryCodeFromCurrency(userCurrency)) : '';
 
     return (
       <TouchableHighlight underlayColor={"white"} onPress={onPressHandler}>
@@ -314,11 +319,11 @@ class PlantProjectSnippet extends PureComponent {
                     getAuth0AccessToken().then(token => {
                       if (token) {
                         this.openWebView(
-                          `${planet_pay_url}/?to=${slug}&s=${supportedSlug}&locale=${locale}&token=${token}`
+                          `${planet_pay_url}/?to=${slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}&token=${token}`
                         );
                       } else {
                         this.openWebView(
-                          `${planet_pay_url}/?to=${supportedSlug}&s=${slug}&locale=${locale}`
+                          `${planet_pay_url}/?to=${supportedSlug}&s=${slug}&locale=${locale}&country=${currencyCountry}`
                         );
                       }
                     });
@@ -395,6 +400,8 @@ PlantProjectSnippet.propTypes = {
 const mapStateToProps = state => {
   return {
     supportTreecounter: supportedTreecounterSelector(state),
+    globalCurrency: getCurrency(state),
+    userProfile: currentUserProfileSelector(state),
   };
 };
 

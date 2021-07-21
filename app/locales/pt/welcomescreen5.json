@@ -1,4 +1,8 @@
 {
+  "welcome_scrn_5_heading": "Acompanhe as\nárvores que você planta",
+  "welcome_scrn_5_sub_heading": "Registrando uma árvore que você possui\nplantada é uma brisa e você pode\nsempre adicione detalhes sobre ele.",
   "welcome_scrn_5_continue": "Continuar",
-  "welcome_scrn_5_already_have_an_account": "já tem uma conta?"
+  "welcome_scrn_5_create_an_account": "Crie a sua conta aqui",
+  "welcome_scrn_5_already_have_an_account": "já tem uma conta?",
+  "welcome_scrn_5_sign_in": "Conecte-se"
 }

@@ -1,5 +1,8 @@
 {
   "loading": "načítání ...",
+  "go_back": "Vraťte se",
+  "add_project": "Přidat projekt",
+  "update": "Aktualizace",
   "isRequired": "{{context}} je povinné",
   "enterValidEmail": "Zadejte platný e-mail",
   "invalidLength": "Neplatná délka: měla by být menší než {{length}}",
@@ -9,6 +12,7 @@
   "error_reported": "Nahlásili jsme chybu našim IT profesionálům.",
   "home_page_redirected": "Budete přesměrováni na domovskou stránku za {{seconds}} sekund",
   "planting_404": "Abychom se této situaci na naší planetě vyhnuli, pojďmě zasadit nějaké stromy.",
+  "browser_not_supported": "Váš prohlížeč není podporován. Aktualizujte nebo nainstalujte jiný prohlížeč.",
   "close_and_reopen": "Prosím, zavřete aplikaci a spusťte ji znovu.",
   "cancel": "Zrušit",
   "searchshort": "Vyhledat",
@@ -34,5 +38,18 @@
   "quadrillion_singular": "Kvadrilion",
   "quadrillion_plural": "Kvadrilion",
   "quintillion_singular": "Kvintilion",
-  "quintillion_plural": "Kvintilion"
+  "quintillion_plural": "Kvintilion",
+  "donation_id_missing_error": "chybí id daru",
+  "datePickerTitle": "Vyber datum",
+  "datePickerCancel": "Zrušit",
+  "datePickerConfirm": "Potvrdit",
+  "view_all": "Zobrazit vše",
+  "show_all": "Ukázat vše",
+  "show_less": "Ukaž méně",
+  "select_currency": "Vyberte Měna",
+  "featured_currencies": "Doporučené měny",
+  "all_currencies": " Všechny měny",
+  "share": "Podíl",
+  "noInternet": "Nelze se připojit k internetu. Možná jste offline",
+  "someFunctionality": "Některé funkce nemusí být k dispozici offline"
 }

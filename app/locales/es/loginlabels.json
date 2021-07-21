@@ -7,5 +7,14 @@
   "hide": "Amagar",
   "password": "Contraseña",
   "current_password": "Contraseña Actual",
-  "login_description": "Inicie sesión con su cuenta de la campaña Trillion Tree para acceder a su contador personal del árboles. Puedes registrarte si aún no tienes una cuenta."
+  "login_description": "Inicie sesión con su cuenta de la campaña Trillion Tree para acceder a su contador personal del árboles. Puedes registrarte si aún no tienes una cuenta.",
+  "enter_login_code": "Introduzca el código",
+  "please_enter_code": "Por favor, compruebe su correo electrónico, si no ha recibido un código puede intentarlo de nuevo en {{count}} segundos.",
+  "submit_code": "Enviar código",
+  "login_or_signup": "Iniciar sesión o registrarse",
+  "enter_your_email": "Ingrese su correo electrónico",
+  "tryAgain": "Inténtalo de nuevo",
+  "OTPSent": "Te hemos enviado un código de una sola vez",
+  "validEmail": "Por favor, introduzca una dirección de correo electrónico válida",
+  "validCode": "Por favor, introduzca un código válido"
 }

@@ -5,8 +5,14 @@
   "treecount_map": "Mapa",
   "sortBy": "Ordenar por",
   "timePeriod": "Período",
+  "map_description": "Há espaço suficiente no mundo para muitas árvores novas. No total, uma área do tamanho dos EUA poderia ser reflorestada! Descubra no mapa onde as árvores já foram plantadas e onde mais podem ser plantadas. No placar, você pode ver quais países, organizações ou empresas plantaram mais árvores.",
   "explore": "Explorar",
+  "plantedTrees": "Árvores plantadas",
   "plantedTrees_description": "Todas as árvores registradas neste site desde 2006.",
   "existingForest": "Floresta existente",
-  "restorationOpportunities": "Oportunidades de Restauração"
+  "existingForest_description": "Atualmente, existem 3,04 trilhões de árvores em todo o mundo. Abaixo de seis trilhões de árvores antes que os humanos comecem a derrubar florestas, cerca de 11.000 anos atrás. O mapa mostra o número de árvores por km².",
+  "existingForest_source": "Crowther, T. W. et al. (2015) Mapeando a densidade de árvores em escala global. Nature 525, 201–205.",
+  "restorationOpportunities": "Oportunidades de Restauração",
+  "restorationOpportunities_description": "Meio bilhão de hectares são adequados para restauração em larga escala de florestas fechadas. Mais de um bilhão e meio de hectares são melhores para a restauração de mosaico, que combina florestas com outros usos da terra, como agrosilvicultura, agricultura familiar e assentamentos.",
+  "restorationOpportunities_source": "Crowther, T. W. et al. (2017) Previsão do potencial global de reflorestamento florestal. bioRxiv 210062."
 }

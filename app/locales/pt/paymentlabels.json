@@ -9,11 +9,16 @@
   "card": "Cartão",
   "last4": "Últimos 4 digitos",
   "save_for_later": "Adicione este método de pagamento à minha conta para futuras doações",
+  "sepa_debit": "Débito Direto SEPA",
+  "stripe_sepa_des1": "Ao fornecer seu IBAN e confirmar este pagamento, você está autorizando",
+  "stripe_sepa_des2": "e Stripe, nosso provedor de serviços de pagamento, para enviar instruções ao seu banco para debitar sua conta e seu banco para debitar sua conta de acordo com essas instruções. Você tem direito a um reembolso do seu banco, de acordo com os termos e condições do contrato com o seu banco. Um reembolso deve ser solicitado no prazo de oito semanas a partir da data em que sua conta foi debitada.",
+  "pay_via_sepa": "Pague com a SEPA",
   "contact_firstname": "Primeiro nome",
   "contact_lastname": "Sobrenome",
   "donate_to": "Doar para {{name}}",
   "payment_failed": "Pagamento falhou",
   "go_back_to_app": "Voltar ao aplicativo Plant-for-the-Planet",
   "please_confirm": "Por favor confirme",
-  "please_enter_card_details": "Digite corretamente os dados do cartão"
+  "please_enter_card_details": "Digite corretamente os dados do cartão",
+  "please_enter_iban": "Digite o IBAN correto"
 }

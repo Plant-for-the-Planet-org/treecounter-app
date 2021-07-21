@@ -4,6 +4,7 @@
   "challenge_edit_description": "Kdo zasadí největší les? Vyzvěte přátele a kolegy nebo se zapojte do existujících soutěží!",
   "from": "z",
   "indefinite": "Neurčitý",
+  "to": "na",
   "accept": "Akceptovat",
   "reject": "Odmítnout",
   "sent": "Posláno",
@@ -18,5 +19,7 @@
   "challenge_create_successfully": "Výzva byla úspěšně vytvořena",
   "please_select_user": "Vyberte prosím uživatele",
   "please_select_year": "Vyberte rok",
-  "could_not_add_user": "Nelze přidat uživatele"
+  "could_not_add_user": "Nelze přidat uživatele",
+  "name_is_required": "Jméno je povinné",
+  "goal_is_required": "Je vyžadována výzva"
 }

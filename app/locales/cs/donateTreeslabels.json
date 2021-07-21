@@ -7,6 +7,7 @@
   "company": "Společnost",
   "Cost": "Cena za strom",
   "donateTrees": "Darovat stromy",
+  "individual": "Jednotlivý strom",
   "survival_rate": "Míra přežití",
   "add_featured_image": "Přidat doporučený obrázek",
   "add_image": "Přidat obrázek",
@@ -21,5 +22,7 @@
   "donation_detail": "Podrobnosti o darování",
   "donor_detail": "Podrobnosti o dárci",
   "try_again": "Zkuste znovu",
-  "return_home": "Vrátit se domů"
+  "return_home": "Vrátit se domů",
+  "donate_trees_text": "Stromy",
+  "custom_tree": "Vlastní stromy"
 }

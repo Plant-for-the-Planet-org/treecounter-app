@@ -323,7 +323,7 @@ class PlantProjectSnippet extends PureComponent {
                         );
                       } else {
                         this.openWebView(
-                          `${planet_pay_url}/?to=${supportedSlug}&s=${slug}&locale=${locale}&country=${currencyCountry}`
+                          `${planet_pay_url}/?to=${slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}`
                         );
                       }
                     });

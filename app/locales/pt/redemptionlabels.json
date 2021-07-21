@@ -1,10 +1,21 @@
 {
   "redeem_trees": "Resgatar vale árvore",
+  "redeem_heading": "Se você recebeu um código de voucher ou um vale presente de árvore, você pode resgatar o código correspondente aqui. As árvores aparecerão em \"Minha Floresta\".",
   "claim_trees": "Reivindicar árvores",
   "enter_code": "Insira um voucher de árvore, código do produto ou token para solicitar o resgate de suas árvores",
   "log_in": "Faça o login ou inscreva-se para resgatar seu código.",
   "validate_code": "Validar Código",
   "code": "Código",
   "redeem_code": "Resgatar Código",
-  "redeem_trees_button": "Resgatar árvores"
+  "validate_code_label": "Digite o código para resgatar",
+  "claiming": "Reivindicação:",
+  "trees_in_code": "Árvores neste código",
+  "you_can_redeem": "Você pode resgatar",
+  "planted_by": "Plantado por",
+  "add_my_trees": "Adicionar às minhas árvores",
+  "already_redeemed_trees": "Você já resgatou este código, tente outro.",
+  "RedeemxTrees": "Resgatar {{treeCount}} Árvores",
+  "Redeem1Tree": "Resgatar árvore {{treeCount}}",
+  "redeem_trees_button": "Resgatar árvores",
+  "redeem": "Resgate"
 }

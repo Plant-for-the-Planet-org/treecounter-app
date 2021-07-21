@@ -7,5 +7,14 @@
   "hide": "Cacher",
   "password": "Mot de passe",
   "current_password": "Mot de Passe Actuel",
-  "login_description": "Vous connecter à votre Compte \"Plant-for-the-Planet\" pour accéder à votre \"Compteur d'Arbres\" personnel. Vous pouvez vous inscrire si vous n'avez pas encore de compte."
+  "login_description": "Vous connecter à votre Compte \"Plant-for-the-Planet\" pour accéder à votre \"Compteur d'Arbres\" personnel. Vous pouvez vous inscrire si vous n'avez pas encore de compte.",
+  "enter_login_code": "Entrer le code",
+  "please_enter_code": "Consulter votre boite email. Si nous n'avez pas reçu de code, réessayer dans {{count}} secondes.",
+  "submit_code": "Soumettre un code",
+  "login_or_signup": "Connexion ou inscription",
+  "enter_your_email": "Entrer votre adresse email",
+  "tryAgain": "Essayer à nouveau",
+  "OTPSent": "Nous vous avons envoyé un code unique",
+  "validEmail": "Entrer une adresse électronique valide",
+  "validCode": "Entrer un code valide"
 }

@@ -7,6 +7,7 @@
   "company": "Empresa",
   "Cost": "Custo por árvore",
   "donateTrees": "Doe árvores",
+  "individual": "Árvore Individual",
   "survival_rate": "Taxa de sobrevivência",
   "add_featured_image": "Adicionar imagem em destaque",
   "add_image": "Adicionar imagem",
@@ -16,5 +17,12 @@
   "next": "Próximo",
   "delete_project": "Excluir projeto",
   "thankyou_planting": "Obrigado por plantar {{count}} árvores conosco! Enviamos um e-mail de confirmação para você. Se sua doação foi para um projeto dedutível de impostos, você receberá um e-mail com um recibo da doação em breve.",
-  "donate_trees_text": "Árvores"
+  "donate_trees_description": "Plante árvores para o futuro das crianças! Explore projetos de plantio em todo o mundo e ajude a plantar mais árvores com apenas alguns cliques. Juntos, estamos a caminho de um trilhão de árvores.",
+  "donation_contribution": "Doação",
+  "donation_detail": "Detalhes da doação",
+  "donor_detail": "Detalhes do doador",
+  "try_again": "tente novamente",
+  "return_home": "Voltar para casa",
+  "donate_trees_text": "Árvores",
+  "custom_tree": "Árvores Personalizadas"
 }

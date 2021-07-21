@@ -38,5 +38,19 @@
   "permission_denied_title": "Permesso negato",
   "permission_denied_text": "Nessuna concessione di accesso alla fotocamera o alla libreria di foto.",
   "permission_denied_retry_title": "Riprova",
-  "permission_denied_ok_title": "sono sicuro"
+  "permission_denied_ok_title": "sono sicuro",
+  "city": "Città",
+  "state": "Stato",
+  "country": "Paese",
+  "school_type": "Tipo di scuola",
+  "primary_school": "Primario",
+  "secondary_school": "Secondario",
+  "higher_school": "Più in alto",
+  "other_school": "Altro",
+  "org_type": "Tipo di organizzazione",
+  "org_non_profit": "Non profit",
+  "org_service_club": "Club di servizio",
+  "org_political_party": "Partito politico",
+  "org_other": "Altro",
+  "sub_type": "Sottotipo"
 }

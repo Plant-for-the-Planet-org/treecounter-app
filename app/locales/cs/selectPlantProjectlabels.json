@@ -2,7 +2,13 @@
   "name": "Název",
   "price": "Cena",
   "select_project": "Zvolte projekt",
+  "search_project": "Prohledat projekty ...",
+  "donate_trees_cap": "Darovat stromy",
   "featured": "Vybrané",
+  "list": "Seznam",
   "country": "Země",
-  "select_by_country": "Seřadit podle Země"
+  "select_by_country": "Seřadit podle Země",
+  "cost_per_tree": "Náklady na strom",
+  "no_tax_deduction": "K dispozici není odpočet daně",
+  "select_project_title": "Vyberte projekt výsadby a poskytněte dar na pěstování stromů"
 }

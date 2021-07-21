@@ -4,5 +4,9 @@
   "read_more": "Přečtěte si více",
   "contributor": "Přispěvatel",
   "planted_trees": "Zasazené stromy",
-  "target": "Cíl"
+  "target": "Cíl",
+  "support_trees_to": "Podpořit stromy {{user}}",
+  "give_trees_to_company": "Přiřaďte stromům {{companyName}}",
+  "shareuserprofile": "Seznamte se s {{displayName}} v aplikaci Plant-for-the-Planet https://www.trilliontreecampaign.org/t/{{slug}}",
+  "supportUser": "Darujte stromy na podporu {{displayName}}"
 }

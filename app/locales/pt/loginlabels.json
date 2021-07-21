@@ -3,6 +3,18 @@
   "dont_have_account": "Não tem uma conta?",
   "login": "Entrar",
   "log-in": "Conecte-se",
+  "show": "exposição",
+  "hide": "ocultar",
   "password": "Senha",
-  "current_password": "senha atual"
+  "current_password": "senha atual",
+  "login_description": "Entre com sua conta do aplicativo Plant-for-the-Planet para acessar seu contador pessoal em árvore. Você pode se inscrever se ainda não possui uma conta.",
+  "enter_login_code": "Digite o código",
+  "please_enter_code": "Por favor, verifique seu e-mail, Se você não recebeu um código você pode tentar novamente em {{count}} segundos.",
+  "submit_code": "Submeter Código",
+  "login_or_signup": "Login ou Inscrição",
+  "enter_your_email": "Digite seu e-mail",
+  "tryAgain": "Tente novamente",
+  "OTPSent": "Nós lhe enviamos um código uma vez",
+  "validEmail": "Por favor, introduza um endereço de e-mail válido",
+  "validCode": "Por favor, introduza um Código válido"
 }

@@ -1,1 +1,23 @@
-{ }
+{
+  "community_reviews": "Odborné recenze",
+  "write_review": "Napsat recenzi",
+  "view_pdf": "Zobrazit PDF",
+  "edit_review": "Upravit recenzi",
+  "delete_review": "Smazat recenzi",
+  "upload_report": "Nahrát zprávu (PDF)",
+  "add_project_review": "Přidat recenzi projektu",
+  "edit_project_review": "Upravit recenzi projektu",
+  "guide_line": "Přečtěte si pokyny a indexy sazeb, které znáte nejvíc. Všechny indexy jsou volitelné.",
+  "brief_review": "KRÁTKÉ PŘEZKUM PROJEKTU",
+  "no_pdf_found": "Nebyl nalezen žádný platný pdf!",
+  "reviews": "recenze",
+  "summary_missing": "Krátký text chybí",
+  "file_selected": "1 Vybraný soubor",
+  "add_pictures": "PŘIDAT OBRÁZKY",
+  "file_already_upload": "1 soubor PDF již existuje",
+  "view_guidelines": "Zobrazit pokyny",
+  "land_quality": "Kvalita půdy",
+  "co_benefits": "Co výhody",
+  "survival_rate": "Míra přežití",
+  "at_least_one_index": "Musí být uveden alespoň jeden index revize."
+}

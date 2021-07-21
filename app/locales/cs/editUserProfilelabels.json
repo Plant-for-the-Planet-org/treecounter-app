@@ -38,5 +38,19 @@
   "permission_denied_title": "Přístup odepřen",
   "permission_denied_text": "Nemáme přístup k vaší kameře či fotogalerii",
   "permission_denied_retry_title": "Opakovat",
-  "permission_denied_ok_title": "Jsem si jistý"
+  "permission_denied_ok_title": "Jsem si jistý",
+  "city": "Město",
+  "state": "Stát",
+  "country": "Země",
+  "school_type": "Typ školy",
+  "primary_school": "Hlavní",
+  "secondary_school": "Sekundární",
+  "higher_school": "Vyšší",
+  "other_school": "jiný",
+  "org_type": "Typ organizace",
+  "org_non_profit": "Neziskové",
+  "org_service_club": "Servisní klub",
+  "org_political_party": "Politická strana",
+  "org_other": "jiný",
+  "sub_type": "Podtyp"
 }

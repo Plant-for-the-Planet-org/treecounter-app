@@ -3,10 +3,21 @@
   "write_review": "Escreva um comentário",
   "view_pdf": "Ver PDF",
   "edit_review": "Editar avaliação",
+  "delete_review": "Excluir comentário",
+  "upload_report": "Carregar relatório (PDF)",
   "add_project_review": "Adicionar classificação ao projeto",
   "edit_project_review": "Editar classificação do projeto",
   "guide_line": "Por favor leia as instruções e classifique apenas os critérios que você tem familiaridade. Todos os critérios são opcionais.",
   "brief_review": "BREVE DESCRIÇÃO DO PROJETO",
+  "no_pdf_found": "Nenhum pdf válido encontrado!",
+  "reviews": "Avaliações",
+  "summary_missing": "Texto breve ausente",
+  "file_selected": "1 arquivo selecionado",
+  "add_pictures": "ADICIONAR IMAGENS",
+  "file_already_upload": "1 arquivo PDF já está lá",
+  "view_guidelines": "Veja as Diretrizes",
   "land_quality": "Qualidade da terra",
-  "co_benefits": "Benefícios Co"
+  "co_benefits": "Benefícios Co",
+  "survival_rate": "Taxa de sobrevivência",
+  "at_least_one_index": "Pelo menos um índice de revisão deve ser fornecido."
 }

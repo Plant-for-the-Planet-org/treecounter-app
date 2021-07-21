@@ -1,3 +1,8 @@
 {
-  "leaderboard": "Leaderboard"
+  "world": "Svět",
+  "leaderboard": "Leaderboard",
+  "updateRequired": "Vyžaduje se aktualizace",
+  "updateExplanation": "Představili jsme nové funkce, aktualizujte prosím aplikaci tak, aby zasadila více stromů!",
+  "openAppStore": "Otevřete App Store",
+  "openPlayStore": "Otevřete Obchod Play"
 }

@@ -1,5 +1,8 @@
 {
   "lbr_countries": "Země",
+  "lbr_companies": "Společnosti",
   "lbr_individuals": "Jednotlivci",
-  "lbr_tree_planting_organizations": "Organizace, která sází stromy"
+  "lbr_schools": "Školy",
+  "lbr_tree_planting_organizations": "Organizace, která sází stromy",
+  "lbr_organizations": "Organizace"
 }

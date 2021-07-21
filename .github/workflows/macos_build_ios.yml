@@ -104,7 +104,7 @@ jobs:
         env: staging
         AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
         AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
-
+        planet_pay_url: http://paydev.pp.eco
       run: |
         /usr/local/opt/gettext/bin/envsubst < .env.deploy > .env.staging
         cp .env.staging .env

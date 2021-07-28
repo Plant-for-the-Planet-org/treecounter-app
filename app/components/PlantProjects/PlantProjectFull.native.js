@@ -88,7 +88,15 @@ class PlantProjectFull extends React.Component {
       const url = link;
       console.log("PlantProjectFull.native.js", link);
       if (await InAppBrowser.isAvailable()) {
-        await InAppBrowser.open(url);
+        await InAppBrowser.open(url, {
+          // iOS Properties
+          animated: true,
+          modalPresentationStyle: 'fullScreen',
+          enableBarCollapsing: true,
+          // Android Properties
+          enableUrlBarHiding: true,
+          enableDefaultShare: true,
+        });
       } else Linking.openURL(url);
     } catch (error) {
       console.error(error);

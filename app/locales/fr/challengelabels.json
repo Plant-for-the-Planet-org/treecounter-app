@@ -21,5 +21,6 @@
   "please_select_year": "Sélectionner l'année",
   "could_not_add_user": "Impossible d'ajouter un Utilisateur",
   "name_is_required": "Nom requis",
-  "goal_is_required": "Objectif est requis"
+  "goal_is_required": "Objectif est requis",
+  "changed_challenge_workflow": "Nous avons désactivé cette fonctionnalité pour l'instant. Mais vous pouvez donner des arbres à vos amis pour les sensibiliser à un projet."
 }

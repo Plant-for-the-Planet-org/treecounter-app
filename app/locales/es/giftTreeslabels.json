@@ -25,5 +25,6 @@
   "Last_Name": "Apellidos",
   "Email": "Correo electrónico",
   "Gift_Message": "Mensaje del regalo",
-  "search_user_desrcription": "Busca un usuario a quien quieras regalar árboles. En los próximos pasos puedes seleccionar proyectos en los que se plantarán árboles."
+  "search_user_desrcription": "Busca un usuario a quien quieras regalar árboles. En los próximos pasos puedes seleccionar proyectos en los que se plantarán árboles.",
+  "changed_gift_workflow": "Hemos cambiado el funcionamiento de los regalos, por favor dona a tu proyecto favorito y dedica los árboles a alguien."
 }

@@ -25,5 +25,6 @@
   "Last_Name": "Nom de famille",
   "Email": "Email",
   "Gift_Message": "Message de \"Cadeau\"",
-  "search_user_desrcription": "Rechercher un Utilisateur auquel vous souhaitez offrir des arbres. Dans les étapes suivantes, vous sélectionnerez des projets qui planteront des arbres."
+  "search_user_desrcription": "Rechercher un Utilisateur auquel vous souhaitez offrir des arbres. Dans les étapes suivantes, vous sélectionnerez des projets qui planteront des arbres.",
+  "changed_gift_workflow": "Nous avons modifié le mode de fonctionnement des cadeaux. Veuillez faire un don à votre projet préféré et dédier des arbres à quelqu'un."
 }

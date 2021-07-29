@@ -25,5 +25,6 @@
   "Last_Name": "Příjmení",
   "Email": "Email",
   "Gift_Message": "Dárková zpráva",
-  "search_user_desrcription": "Vyhledejte uživatele, kterého chcete darovat stromy. V dalších krocích můžete vybrat projekty, které budou sázet stromy."
+  "search_user_desrcription": "Vyhledejte uživatele, kterého chcete darovat stromy. V dalších krocích můžete vybrat projekty, které budou sázet stromy.",
+  "changed_gift_workflow": "Změnili jsme fungování dárků, přispějte prosím na svůj oblíbený projekt a věnujte někomu stromy."
 }

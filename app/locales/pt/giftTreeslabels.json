@@ -25,5 +25,6 @@
   "Last_Name": "Sobrenome",
   "Email": "O email",
   "Gift_Message": "Mensagem de presente",
-  "search_user_desrcription": "Pesquise um usuário que você deseja presentear árvores. Nas próximas etapas, você pode selecionar projetos que plantarão árvores."
+  "search_user_desrcription": "Pesquise um usuário que você deseja presentear árvores. Nas próximas etapas, você pode selecionar projetos que plantarão árvores.",
+  "changed_gift_workflow": "Nós mudamos a forma como os presentes funcionam, por favor, doe ao seu projeto favorito e dedique árvores a alguém."
 }

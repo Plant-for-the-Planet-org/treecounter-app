@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TabView, TabBar } from 'react-native-tab-view';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import ChallengeUser from './Tabs/ChallengeUser';
 import ChallengeEmail from './Tabs/ChallengeEmail';
 import { challengeFormSchemaOptions } from '../../server/parsedSchemas/challenge';
@@ -118,24 +118,41 @@ export default class ChallengeTabView extends Component {
 
   render() {
     const textColor = '#4d5153';
+    const style = {
+      backgroundColor: "white",
+      flex: 1,
+      padding: 20,
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center"
+    };
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
-        <HeaderNew title={''} navigation={this.props.navigation} />
-        <View style={{ marginTop: 60 }} />
-        <Text
-          style={{
-            fontFamily: 'OpenSans-ExtraBold',
-            fontSize: 27,
-            lineHeight: 40,
-            letterSpacing: 0,
-            textAlign: 'left',
-            color: textColor,
-            left: 20
-          }}
-        >
-          {i18n.t('label.challenge_heading')}
-        </Text>
-        <TabView
+        <HeaderNew
+          navigation={this.props.navigation}
+          title={i18n.t('label.challenge_heading')}
+        />
+        <View style={style}>
+          <View style={{ paddingBottom: 20 }}>
+            <Image
+              source={require("../../assets/images/gifts.png")}
+              style={{ width: 220, height: 220 }}
+            />
+          </View>
+
+          <Text
+            style={{
+              fontSize: 16,
+              color: "#4d5153",
+              fontFamily: "OpenSans-Regular",
+              textAlign: "center"
+            }}
+          >
+            {i18n.t("label.changed_challenge_workflow")}
+          </Text>
+        </View>
+        {/* disabled functionality at July 16th
+         <TabView
           useNativeDriver
           navigationState={this.state}
           // eslint-disable-next-line no-underscore-dangle
@@ -145,6 +162,7 @@ export default class ChallengeTabView extends Component {
           // eslint-disable-next-line no-underscore-dangle
           onIndexChange={this._handleIndexChange}
         />
+        */}
       </SafeAreaView>
     );
   }

@@ -74,6 +74,7 @@ jobs:
       run : |
         npm install
 
+    # planet_pay_url: http://paydev.pp.eco won't work due to losing query parameters on redirect
     - name: Setting Environment Variables
       env:
         googleMapApiKey: ${{ secrets.GOOGLE_MAP_API_KEY }}
@@ -92,6 +93,7 @@ jobs:
         env: staging
         AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
         AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
+        planet_pay_url: https://donate.plant-for-the-planet.org
       run: |
         envsubst < .env.deploy > .env.staging
         cp .env.staging .env

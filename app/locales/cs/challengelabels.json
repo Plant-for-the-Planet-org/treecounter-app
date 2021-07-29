@@ -21,5 +21,6 @@
   "please_select_year": "Vyberte rok",
   "could_not_add_user": "Nelze přidat uživatele",
   "name_is_required": "Jméno je povinné",
-  "goal_is_required": "Je vyžadována výzva"
+  "goal_is_required": "Je vyžadována výzva",
+  "changed_challenge_workflow": "Tuto funkci jsme prozatím deaktivovali. Můžete však darovat stromy svým přátelům, aby se o projektu dozvěděli."
 }

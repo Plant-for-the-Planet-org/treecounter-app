@@ -1,6 +1,6 @@
 {
   "name": "TreecounterApp",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "build": "1",
   "private": true,
   "scripts": {

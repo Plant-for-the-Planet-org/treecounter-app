@@ -228,7 +228,7 @@ class Trillion extends PureComponent {
                 {/* Trillion Tree Events Title Ended */}
 
                 {/* Featured events horizontal ScrollView */}
-                {this.props.pledgeEvents &&
+                {/* {this.props.pledgeEvents &&
                   this.props.pledgeEvents.pledgeEvents ? (
                     <View>
                       <ScrollView
@@ -267,11 +267,11 @@ class Trillion extends PureComponent {
                         )}
                       </ScrollView>
                     </View>
-                  ) : null}
+                  ) : null} */}
                 {/* Featured events horizontal ScrollView Ended */}
 
                 {/*  Unfulfilled Pledge Events horizontal ScrollView */}
-                {this.props.entities.eventPledge ? (
+                {/* {this.props.entities.eventPledge ? (
                   <View>
                     <View style={{ marginTop: 25, marginLeft: 16 }}>
                       <Text style={styles.trillionTreeEventTitle}>
@@ -308,7 +308,7 @@ class Trillion extends PureComponent {
                       </ScrollView>
                     </View>
                   </View>
-                ) : null}
+                ) : null} */}
                 {/* Unfulfilled Pledge Events horizontal ScrollView Ended */}
                 {/* <View style={{ marginTop: 16 }}>
                   <ScrollView

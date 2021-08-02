@@ -119,9 +119,11 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       url,
       linkText,
-      tpoName,
       ndviUid
     } = plantProject;
+
+    const tpoName = plantProject.tpoName || plantProject.tpoData?.name;
+
     const { loader } = this.state;
     let tpo = plantProject.tpoData || {};
     const { planet_pay_url } = context;

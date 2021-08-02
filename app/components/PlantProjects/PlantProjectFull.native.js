@@ -165,9 +165,8 @@ class PlantProjectFull extends React.Component {
             context.scheme +
             "://" +
             context.host +
-            getLocalRoute("app_selectedProject") +
             "/" +
-            this.props.plantProject.id
+            this.props.plantProject.slug
           }
         //  appurl={'weplant://project/' + this.props.plantProject.id}
         />

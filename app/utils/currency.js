@@ -1,3 +1,5 @@
+import countryCodes from '../assets/countryCodes.json';
+
 /**
  * Convert a price from one currency to another
  *
@@ -67,3 +69,21 @@ export const currencySort = currenciesArray => {
   }
   return currenciesArray;
 };
+
+/**
+ * Returns preferred country code for given currency
+ * @param {String} currency 
+ * @returns {String} countryCode
+ */
+export const getPreferredCountryCodeFromCurrency = currency => {
+  if (currency === 'EUR') {
+    return 'de';
+  } else if (currency === 'USD') {
+    return 'us';
+  } else if (currency === 'GBP') {
+    return 'gb';
+  } else {
+    return countryCodes.find(c => c.code == currency)?.countryCode?.toLowerCase() || '';
+  }
+}
+

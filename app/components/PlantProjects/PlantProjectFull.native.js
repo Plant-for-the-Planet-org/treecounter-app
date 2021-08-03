@@ -1,31 +1,33 @@
-import React from 'react';
-import {} from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Linking, Alert } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import PropTypes from "prop-types";
 //import { debug } from '../../debug';
-import i18n from '../../locales/i18n';
-import { loadProject } from '../../actions/loadTposAction';
-import { queryParamsToObject } from '../../helpers/utils';
-import {
-  View,
-  Platform,
-  Text,
-  Animated,
-  StatusBar
-} from 'react-native';
-import styles from '../../styles/selectplantproject/selectplantproject-full';
-import PlantProjectDetails from './PlantProjectDetails';
-import FullHeightButton from '../Common/Button/FullHeightButton';
-import { right_arrow_button } from '../../assets';
-import PlantProjectSnippetDetails from './PlantProjectSnippetDetails.native';
-import NumberFormat from '../Common/NumberFormat.native';
+import i18n from "../../locales/i18n";
+import { loadProject } from "../../actions/loadTposAction";
+import { queryParamsToObject } from "../../helpers/utils";
+import { View, Platform, Text, Animated, StatusBar } from "react-native";
+import styles from "../../styles/selectplantproject/selectplantproject-full";
+import PlantProjectDetails from "./PlantProjectDetails";
+import FullHeightButton from "../Common/Button/FullHeightButton";
+import { right_arrow_button } from "../../assets";
+import PlantProjectSnippetDetails from "./PlantProjectSnippetDetails.native";
+import NumberFormat from "../Common/NumberFormat.native";
 // import { formatNumber } from '../../utils/utils';
-import LoadingIndicator from '../Common/LoadingIndicator.native';
-import HeaderFullPages from '../Header/HeaderFullPages.native';
-import { context } from '../../config';
-import { getLocalRoute } from './../../actions/apiRouting';
+import LoadingIndicator from "../Common/LoadingIndicator.native";
+import HeaderFullPages from "../Header/HeaderFullPages.native";
+import { context } from "../../config";
+import { getLocalRoute } from "./../../actions/apiRouting";
+import { InAppBrowser } from "react-native-inappbrowser-reborn";
+import { getAuth0AccessToken } from "../../utils/user";
 // import TabContainer from '../../containers/Menu/TabContainer';
+import { getLocale } from '../../actions/getLocale';
+import { supportedTreecounterSelector } from '../../selectors';
+import { clearSupport } from '../../actions/supportTreecounterAction';
+import { getCurrency } from '../../selectors';
+import { currentUserProfileSelector } from '../../selectors';
+import { getPreferredCountryCodeFromCurrency } from '../../utils/currency';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -75,14 +77,35 @@ class PlantProjectFull extends React.Component {
   }*/
 
   UNSAFE_componentWillMount() {
-    if (Platform.OS === 'android') StatusBar.setTranslucent(true);
+    if (Platform.OS === "android") StatusBar.setTranslucent(true);
     setTimeout(() => this.setState({ loader: false }), 2000);
   }
   componentWillUnmount() {
-    if (Platform.OS === 'android') StatusBar.setTranslucent(false);
+    if (Platform.OS === "android") StatusBar.setTranslucent(false);
   }
+  openWebView = async link => {
+    try {
+      const url = link;
+      console.log("PlantProjectFull.native.js", link);
+      if (await InAppBrowser.isAvailable()) {
+        await InAppBrowser.open(url, {
+          // iOS Properties
+          animated: true,
+          modalPresentationStyle: 'fullScreen',
+          enableBarCollapsing: true,
+          // Android Properties
+          enableUrlBarHiding: true,
+          enableDefaultShare: true,
+        });
+      } else Linking.openURL(url);
+    } catch (error) {
+      console.error(error);
+      Alert.alert(error.message);
+    }
+  };
   render() {
     let { plantProject } = this.props;
+
 
     if (!plantProject || !plantProject.tpoData) return <LoadingIndicator />;
     //debug('rendering with project:', plantProject);
@@ -101,6 +124,8 @@ class PlantProjectFull extends React.Component {
     } = plantProject;
     const { loader } = this.state;
     let tpo = plantProject.tpoData || {};
+    const { planet_pay_url } = context;
+
     const detailsProps = {
       description,
       images,
@@ -116,27 +141,32 @@ class PlantProjectFull extends React.Component {
     };
 
     const navigation = this.props.navigation;
-    const backgroundColor = 'white';
+    const backgroundColor = "white";
+
+    const locale = getLocale();
+    const supportedSlug = this.props.supportTreecounter?.slug ? this.props.supportTreecounter.slug : '';
+    const userCurrency = this.props.userProfile?.currency || this.props.globalCurrency?.currency;
+    const currencyCountry = this.props.globalCurrency ? (getPreferredCountryCodeFromCurrency(userCurrency)) : '';
 
     return !loader ? (
       <View style={{ flex: 1 }}>
         <StatusBar
           backgroundColor="rgba(52, 52, 52, 0.0)"
-          barStyle={'dark-content'}
-          styleContainer={{ marginTop: Platform.OS === 'ios' ? -20 : 0 }}
+          barStyle={"dark-content"}
+          styleContainer={{ marginTop: Platform.OS === "ios" ? -20 : 0 }}
         />
         <HeaderFullPages
           navigation={this.props.navigation}
-          title={''}
+          title={""}
           scrollY={this.state.scrollY}
-          entityType={'projects'}
+          entityType={"projects"}
           entityName={tpoName}
           url={
             context.scheme +
-            '://' +
+            "://" +
             context.host +
-            getLocalRoute('app_selectedProject') +
-            '/' +
+            getLocalRoute("app_selectedProject") +
+            "/" +
             this.props.plantProject.id
           }
         //  appurl={'weplant://project/' + this.props.plantProject.id}
@@ -148,16 +178,19 @@ class PlantProjectFull extends React.Component {
             }
           ]}
           scrollEventThrottle={16}
-          onScroll={Animated.event([
-            {
-              nativeEvent: {
-                contentOffset: { y: this.state.scrollY }
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: { y: this.state.scrollY }
+                }
               }
-            }
-          ], { useNativeDriver: true })}
+            ],
+            { useNativeDriver: true }
+          )}
         >
           <PlantProjectSnippetDetails
-            key={'projectFull' + plantProject.id}
+            key={"projectFull" + plantProject.id}
             showMoreButton={false}
             clickable={false}
             plantProject={plantProject}
@@ -194,24 +227,36 @@ class PlantProjectFull extends React.Component {
               </View>
 
               <Text style={[styles.costPerTree]}>
-                {i18n.t('label.cost_per_tree')}
+                {i18n.t("label.cost_per_tree")}
               </Text>
             </View>
             <FullHeightButton
               buttonStyle={styles.squareButton}
-              onClick={() => this.props.selectProject(plantProject.id)}
+              onClick={() => {
+                getAuth0AccessToken().then(token => {
+                  if (token) {
+                    this.openWebView(
+                      `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}&token=${token}`
+                    );
+                  } else {
+                    this.openWebView(
+                      `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}`
+                    );
+                  }
+                });
+              }}
               image={right_arrow_button}
             >
-              {i18n.t('label.donate')}
+              {i18n.t("label.donate")}
             </FullHeightButton>
           </View>
         ) : null}
       </View>
     ) : (
-        <View style={{ flex: 1, marginTop: -20 }}>
-          <LoadingIndicator contentLoader screen={'ProjectSingleLoader'} />
-        </View>
-      );
+      <View style={{ flex: 1, marginTop: -20 }}>
+        <LoadingIndicator contentLoader screen={"ProjectSingleLoader"} />
+      </View>
+    );
   }
 }
 
@@ -224,12 +269,25 @@ PlantProjectFull.propTypes = {
   onBackClick: PropTypes.func
 };
 
+const mapStateToProps = state => {
+  return {
+    supportTreecounter: supportedTreecounterSelector(state),
+    globalCurrency: getCurrency(state),
+    userProfile: currentUserProfileSelector(state),
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      loadProject
+      loadProject,
+      clearSupport
     },
     dispatch
   );
 };
-export default connect(null, mapDispatchToProps)(PlantProjectFull);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlantProjectFull);

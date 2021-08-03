@@ -24,6 +24,8 @@ interface Tab {
 
 interface StaticTabbarProps {
   tabs: Tab[];
+  navigation: any,
+  onPressHook: Function,
 }
 
 export default class StaticTabbar extends React.PureComponent<
@@ -54,6 +56,10 @@ export default class StaticTabbar extends React.PureComponent<
     this.setState({
       selectedTab: index
     });
+    // call parent hook for pressing if available
+    if (this.props.onPressHook) {
+      this.props.onPressHook();
+    }
     updateRoute(tabs[index].route, this.props.navigation, 0);
   };
 

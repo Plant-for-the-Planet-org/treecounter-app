@@ -21,5 +21,6 @@
   "please_select_year": "Please select year",
   "could_not_add_user": "Could not add user",
   "name_is_required": "Name is required",
-  "goal_is_required": "Goal is required"
+  "goal_is_required": "Goal is required",
+  "changed_challenge_workflow": "We have deactivated this feature for the time being. But you can donate trees to your friends to make them aware of a project."
 }

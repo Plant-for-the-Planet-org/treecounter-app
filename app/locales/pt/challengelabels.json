@@ -19,5 +19,8 @@
   "challenge_create_successfully": "Desafio criado com sucesso",
   "please_select_user": "Por favor, selecione um usuário",
   "please_select_year": "Por favor selecione o ano",
-  "could_not_add_user": "Não foi possível adicionar o usuário"
+  "could_not_add_user": "Não foi possível adicionar o usuário",
+  "name_is_required": "Nome é obrigatório",
+  "goal_is_required": "O desafio é obrigatório",
+  "changed_challenge_workflow": "Desactivámos esta funcionalidade por agora. Mas você pode doar árvores aos seus amigos para que eles tomem conhecimento de um projeto."
 }

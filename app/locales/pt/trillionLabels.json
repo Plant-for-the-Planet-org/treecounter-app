@@ -1,4 +1,8 @@
 {
   "world": "Mundo",
-  "leaderboard": " Quadro de liderança"
+  "leaderboard": " Quadro de liderança",
+  "updateRequired": "Actualização Necessária",
+  "updateExplanation": "Nós introduzimos novas funcionalidades, por favor actualize a aplicação para plantar mais árvores!",
+  "openAppStore": "Abrir Loja App",
+  "openPlayStore": "Loja Open Play"
 }

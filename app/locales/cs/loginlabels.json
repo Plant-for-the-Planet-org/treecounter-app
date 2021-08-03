@@ -2,7 +2,19 @@
   "reset": "Reset.",
   "dont_have_account": "Nemáte účet?",
   "login": "Přihlásit se",
+  "log-in": "Přihlásit se",
+  "show": "Ukázat",
+  "hide": "Skrýt",
   "password": "Heslo",
   "current_password": "Aktuální heslo",
-  "login_description": "Přihlaste se ke svému Plant-for-the-Planet účtu, abyste získali přístup ke svému osobnímu počítadlu stromů. Můžete se zaregistrovat, pokud ještě nemáte účet. Nemáte-li účet, můžete se zaregistrovat."
+  "login_description": "Přihlaste se ke svému Plant-for-the-Planet účtu, abyste získali přístup ke svému osobnímu počítadlu stromů. Můžete se zaregistrovat, pokud ještě nemáte účet. Nemáte-li účet, můžete se zaregistrovat.",
+  "enter_login_code": "Zadejte kód",
+  "please_enter_code": "Zkontrolujte prosím svůj e-mail {{email}}. Pokud jste neobdrželi kód, můžete to zkusit znovu za {{count}} s.",
+  "submit_code": "Odeslat kód",
+  "login_or_signup": "Přihlaste se nebo se zaregistrujte",
+  "enter_your_email": "Vložte svůj e-mail",
+  "tryAgain": "Zkus to znovu",
+  "OTPSent": "Jednorázový kód jsme vám zaslali",
+  "validEmail": "Zadejte platnou e-mailovou adresu",
+  "validCode": "Zadejte platný kód"
 }

@@ -21,5 +21,6 @@
   "please_select_year": "Por favor seleccione el año",
   "could_not_add_user": "No se pudo agregar usuario",
   "name_is_required": "Se requiere el nombre",
-  "goal_is_required": "Se requiere un desafío"
+  "goal_is_required": "Se requiere un desafío",
+  "changed_challenge_workflow": "Hemos desactivado esta función por el momento. Pero puedes donar árboles a tus amigos para que conozcan un proyecto."
 }

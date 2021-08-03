@@ -8,6 +8,8 @@
   "subtype": "Categoria",
   "country": "País",
   "password_repeat": "Repita a senha",
+  "mayPublish": "Concordo em publicar meu nome no site e no aplicativo Plant-for-the-Planet.",
+  "mayContact": "Concordo que posso ser contatado pela organização de crianças e jovens Plant-for-the-Planet como parte das novidades e desafios do plantio de árvores.",
   "firstname": "Primeiro nome",
   "lastname": "Sobrenome",
   "company_or_orga_name": "Nome da empresa ou organização",
@@ -17,5 +19,11 @@
   "individual_title": "Apenas eu",
   "company_title": "Empresa / Organização",
   "education_title": "Escola",
+  "already_have_account": "já tem uma conta?",
+  "education": "Educação",
+  "organization": "Organização",
+  "title": "Título",
+  "registration_successfully": "Registro bem-sucedido",
+  "passwords_do_not_match": "As senhas não coincidem",
   "is_anonymous": "Esconder meu nome da lista (compromissos anônimos)"
 }

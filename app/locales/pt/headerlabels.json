@@ -1,4 +1,5 @@
 {
+  "menu": "Menu",
   "signUp": "Cadastre-se",
   "home": "Home",
   "search": "Digite um nome ou competição",
@@ -18,5 +19,18 @@
   "delete_profile": "Excluir perfil",
   "unsubscribe": "Deixar de Seguir",
   "subscribe": "Seguir",
-  "subscribed": "Seguindo"
+  "subscribed": "Seguindo",
+  "profile": "Perfil",
+  "gender": "Gênero",
+  "password": "Senha",
+  "no_notifications": "Você não tem notificações",
+  "all_notifications": "Ver todas as notificações",
+  "dedicate_trees_to": "Dedique as árvores para",
+  "dedicate": "Dedicar",
+  "about_us": "Cerca de",
+  "open_source_license": "Licença Open Source",
+  "license_credit_info": "O aplicativo Plant-for-the-Planet usa componentes Open Source. Você pode encontrar o código fonte de seus projetos de código aberto, juntamente com as informações de licença abaixo. Agradecemos e agradecemos a esses desenvolvedores por suas contribuições ao Open Source.",
+  "license_info_header": "Informações sobre licenças",
+  "not_following_anybody": "Você não está seguindo ninguém",
+  "guest": "Convidado"
 }

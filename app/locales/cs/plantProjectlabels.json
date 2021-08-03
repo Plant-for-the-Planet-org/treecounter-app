@@ -19,5 +19,15 @@
   "link": "Odkaz",
   "exit": "Východ",
   "plant_project_update_success": "Projekt byl úspěšně aktualizován ",
-  "about": "O"
+  "land-quality": "Kvalita půdy",
+  "co-benefits": "Co výhody",
+  "survival-rate": "Míra přežití",
+  "new_review_added_successfully": "Nová recenze byla úspěšně přidána",
+  "review_deleted_successfully": "Recenze byla úspěšně smazána",
+  "review_updated_successfully": "Recenze byla úspěšně aktualizována",
+  "about": "O",
+  "contact_details": "Kontaktní údaje",
+  "view_profile": "Prohlédnout profil",
+  "read_less": "Přečtěte si méně",
+  "shareProject": "Zasaďte stromy {{entityName}} na {{url}}"
 }

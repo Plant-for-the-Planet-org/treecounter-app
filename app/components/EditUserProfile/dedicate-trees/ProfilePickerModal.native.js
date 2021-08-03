@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Platform } from 'react-native';
+import { View, ScrollView, Text, Image, Platform } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -92,12 +92,41 @@ class ProfilePickerModal extends Component {
       </View>
     );
 
+    const style = {
+      backgroundColor: "white",
+      flex: 1,
+      padding: 20,
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center"
+    };
+
     return (
       <View style={{ flex: 1, backgroundColor: colors.WHITE }}>
         <HeaderNew
           navigation={this.props.navigation}
           title={i18n.t('label.dedicate_trees')}
         />
+        <View style={style}>
+          <View style={{ paddingBottom: 20 }}>
+            <Image
+              source={require("../../../assets/images/gifts.png")}
+              style={{ width: 220, height: 220 }}
+            />
+          </View>
+
+          <Text
+            style={{
+              fontSize: 16,
+              color: "#4d5153",
+              fontFamily: "OpenSans-Regular",
+              textAlign: "center"
+            }}
+          >
+            {i18n.t("label.changed_gift_workflow")}
+          </Text>
+        </View>
+        {/* disabled functionality at July 16th
         <ScrollView
           contentContainerStyle={[
             { marginTop: Platform.OS === 'ios' ? 140 : 100 }
@@ -155,11 +184,12 @@ class ProfilePickerModal extends Component {
                 </CardLayout>
               </View>
             ) : (
-                pickupProfileView
-              )}
+              pickupProfileView
+            )}
           </View>
         </ScrollView>
-      </View>
+        */}
+      </View >
     );
   }
 }

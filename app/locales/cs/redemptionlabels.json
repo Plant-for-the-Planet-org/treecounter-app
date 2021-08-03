@@ -1,9 +1,21 @@
 {
   "redeem_trees": "Uplatnit darované stromy",
+  "redeem_heading": "Pokud jste obdrželi voucher kód či stromový dar, můžete je uplatnit zde. Stromy se vám poté objeví v sekci \"Můj les\". ",
   "claim_trees": "Nárokovat stromy",
   "enter_code": "Zadejte prosím stromový voucher, merchandise kód či token k uplatnění vašich stromů",
   "log_in": "Přihlaste se nebo se zaregistrujte a využijte svůj kód",
   "validate_code": "Ověřit kód",
   "code": "Kód",
-  "redeem_code": "Použít kód"
+  "redeem_code": "Použít kód",
+  "validate_code_label": "Zadejte kód pro uplatnění",
+  "claiming": "Nárokování:",
+  "trees_in_code": "Stromy v tomto kódu",
+  "you_can_redeem": "Můžete uplatnit",
+  "planted_by": "Výsadba",
+  "add_my_trees": "Přidat do mých stromů",
+  "already_redeemed_trees": "Tento kód jste již uplatnili, zkuste prosím jiný.",
+  "RedeemxTrees": "Uplatnit {{treeCount}} stromů",
+  "Redeem1Tree": "Uplatnit strom {{treeCount}}",
+  "redeem_trees_button": "Uplatnit stromy",
+  "redeem": "Vykoupit"
 }

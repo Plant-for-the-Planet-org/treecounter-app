@@ -21,5 +21,6 @@
   "please_select_year": "Si prega di selezionare l'anno",
   "could_not_add_user": "Impossibile aggiungere l'utente",
   "name_is_required": "Il nome è obbligatorio",
-  "goal_is_required": "La sfida è obbligatoria"
+  "goal_is_required": "La sfida è obbligatoria",
+  "changed_challenge_workflow": "Abbiamo disattivato questa funzione per il momento. Ma puoi donare alberi ai tuoi amici per fargli conoscere un progetto."
 }

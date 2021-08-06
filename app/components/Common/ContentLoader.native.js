@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, Dimensions, Image, ScrollView, Platform } from 'react-native';
-import ContentLoader from 'react-content-loader/native'
-import { Circle, Rect } from 'react-native-svg';
-import { treelogo } from '../../assets/index';
-const HEIGHT = Dimensions.get('window').height;
-const WIDTH = Dimensions.get('window').width;
+import React from "react";
+import { View, Dimensions, Image, ScrollView, Platform } from "react-native";
+import ContentLoader from "react-content-loader/native";
+import { Circle, Rect } from "react-native-svg";
+import { treelogo } from "../../assets/index";
+const HEIGHT = Dimensions.get("window").height;
+const WIDTH = Dimensions.get("window").width;
 const CompetitionLoader = () => (
   <ContentLoader
     height={HEIGHT}
@@ -76,9 +76,9 @@ const InitialContentLoader = () => (
   <View>
     <View
       style={{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
         marginVertical: 40
       }}
     >
@@ -247,32 +247,6 @@ const PublicTreeCounterContentLoader = () => (
     <Circle cx="50%" cy="50%" r="106" />
   </ContentLoader>
 );
-const PledgeEventsContentLoader = () => (
-  <ContentLoader
-    height={HEIGHT}
-    width={WIDTH}
-    speed={2}
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
-  >
-    <View>
-      <Rect x="30" y="10%" rx="5" ry="5" width="45" height="28" />
-      <Rect x="30" y="17%" rx="4" ry="4" width="60%" height="12" />
-      <Rect x="30" y="21%" rx="3" ry="3" width="75%" height="12" />
-      <Rect x="30" y="26%" rx="3" ry="3" width="85%" height="6" />
-      <Rect x="30" y="30%" rx="3" ry="3" width="85%" height="6" />
-      <Rect x="30" y="34%" rx="3" ry="3" width="75%" height="6" />
-      <Rect x="30" y="45%" rx="5" ry="5" width="38%" height="36" />
-      <Rect x="50%" y="45%" rx="5" ry="5" width="35%" height="36" />
-      <Rect x="30" y="80%" rx="5" ry="5" width="131" height="47" />
-      <Rect x="50%" y="80%" rx="5" ry="5" width="131" height="47" />
-      <Rect x="30" y="60%" rx="3" ry="3" width="301" height="6" />
-      <Rect x="30" y="63%" rx="3" ry="3" width="301" height="6" />
-      <Rect x="30" y="66%" rx="3" ry="3" width="301" height="6" />
-      <Rect x="30" y="69%" rx="3" ry="3" width="301" height="6" />
-    </View>
-  </ContentLoader>
-);
 
 const ProjectsLoading = () => (
   <ScrollView>
@@ -301,29 +275,28 @@ const ContentLoading = props => {
   const { screen } = props;
   return (
     <View style={loadingIndicatorStyle}>
-      {screen === 'AppHome' && <WorldLoader />}
-      {screen === 'LeaderBoard' && <LeaderBoardLoader />}
-      {screen === 'Competition' && <CompetitionLoader />}
-      {screen === 'SingleCompetition' && <SingleCompetitionLoader />}
-      {screen === 'PublicTreeCounterContentLoader' && (
+      {screen === "AppHome" && <WorldLoader />}
+      {screen === "LeaderBoard" && <LeaderBoardLoader />}
+      {screen === "Competition" && <CompetitionLoader />}
+      {screen === "SingleCompetition" && <SingleCompetitionLoader />}
+      {screen === "PublicTreeCounterContentLoader" && (
         <PublicTreeCounterContentLoader />
       )}
-      {screen === 'profileLoader' && <ProfileLoader />}
-      {screen === 'publicProfileLoader' && <PublicProfileLoader />}
-      {screen === 'competitionListLoader' && <CompetitionListLoader />}
-      {screen === 'competitionSingleLoader' && <CompetitionSingleLoader />}
-      {screen === 'projectListLoader' && <ProjectListLoader />}
-      {screen === 'worldLoader' && <InitialContentLoader />}
-      {screen === 'ProjectSingleLoader' && <ProjectSingleLoader />}
-      {screen === 'PledgeEvents' && <PledgeEventsContentLoader />}
-      {screen === 'ProjectsLoading' && <ProjectsLoading />}
+      {screen === "profileLoader" && <ProfileLoader />}
+      {screen === "publicProfileLoader" && <PublicProfileLoader />}
+      {screen === "competitionListLoader" && <CompetitionListLoader />}
+      {screen === "competitionSingleLoader" && <CompetitionSingleLoader />}
+      {screen === "projectListLoader" && <ProjectListLoader />}
+      {screen === "worldLoader" && <InitialContentLoader />}
+      {screen === "ProjectSingleLoader" && <ProjectSingleLoader />}
+      {screen === "ProjectsLoading" && <ProjectsLoading />}
     </View>
   );
 };
 const loadingIndicatorStyle = {
   flex: 1,
-  alignItems: 'center',
-  marginTop: Platform.OS === 'ios' ? HEIGHT * 0.1 : HEIGHT * 0.05
+  alignItems: "center",
+  marginTop: Platform.OS === "ios" ? HEIGHT * 0.1 : HEIGHT * 0.05
 };
 {
   /*const containerStyle = {

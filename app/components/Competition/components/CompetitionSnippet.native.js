@@ -53,6 +53,7 @@ class CompetitionSnippet extends React.Component {
       competitionDetail.ownerTreecounterId === this.props.treeCounter.id
     ) {
       button = (
+        /* competition data is taken from state 'competitionDetail', but not updated before editing!!
         <TouchableItem
           onPress={() => this.props.editCompetition(this.props.competition.id)}
         >
@@ -60,6 +61,8 @@ class CompetitionSnippet extends React.Component {
             {i18n.t('label.edit')}
           </Text>
         </TouchableItem>
+        */
+        null
       );
       //button = <Text style={{ paddingLeft: 5, paddingRight: 5 }} />;
     } else if (status === '') {
@@ -162,8 +165,8 @@ class CompetitionSnippet extends React.Component {
 
               <View style={styles.topCompetitorContainer}>
                 {this.props.competition &&
-                this.props.competition.topEnrollments &&
-                this.props.competition.topEnrollments.length === 3 ? (
+                  this.props.competition.topEnrollments &&
+                  this.props.competition.topEnrollments.length === 3 ? (
                   <View>
                     <View style={styles.horizontalRule} />
                     {this.props.competition.topEnrollments.map((top, index) => (
@@ -193,7 +196,7 @@ class CompetitionSnippet extends React.Component {
 
                 <View style={styles.buttonContainer}>
                   {this.props.competition &&
-                  this.props.competition.competitorCount > 0 ? (
+                    this.props.competition.competitorCount > 0 ? (
                     <Text style={styles.bottomParticipantText}>
                       {this.props.competition.competitorCount}{' '}
                       {i18n.t('label.participants')}

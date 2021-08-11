@@ -176,7 +176,7 @@ export function leaveCompetition(id) {
 export function createCompetition(value, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       postAuthenticatedRequest('competition_post', value)
         .then(res => {
           dispatch(
@@ -203,9 +203,9 @@ export function createCompetition(value, navigation) {
             5000
           );
           dispatch(fetchMineCompetitions());
-          dispatch(fetchCompetitions('all'));
-          dispatch(fetchCompetitions('featured'));
-          dispatch(fetchCompetitions('archived'));
+          dispatch(fetchCompetitions('all', 1));
+          dispatch(fetchCompetitions('featured', 1));
+          dispatch(fetchCompetitions('archived', 1));
         })
         .catch(error => {
           debug(error);
@@ -224,7 +224,7 @@ export function createCompetition(value, navigation) {
 export function editCompetition(value, param, navigation) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       putAuthenticatedRequest('competition_put', value, { competition: param })
         .then(res => {
           dispatch(
@@ -262,7 +262,7 @@ export function editCompetition(value, param, navigation) {
 export function deleteCompetition(param) {
   return dispatch => {
     dispatch(setProgressModelState(true));
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       deleteAuthenticatedRequest('competition_delete', { competition: param })
         .then(res => {
           dispatch(unlinkEntity(res.data.unlink));

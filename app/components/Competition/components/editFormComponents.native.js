@@ -35,7 +35,7 @@ export const FormikForm = props => {
     RBSheetRef.close();
     props
       .onDeleteCompetition(props.competition_id)
-      .then((/* success */) => {})
+      .then((/* success */) => { })
       .catch(err => {
         debug('Error', err);
       });
@@ -94,7 +94,7 @@ export const FormikForm = props => {
                 <View style={styles.formHalfTextField}>
                   <TextField
                     label={i18n.t('label.competition_goal')}
-                    value={props.values.goal}
+                    value={props.values.goal + ''}
                     tintColor={'#89b53a'}
                     titleFontSize={12}
                     returnKeyType="next"
@@ -242,9 +242,9 @@ export function AccessPicker(props) {
         mode="dialog"
         prompt={i18n.t('label.competition_access')}
         onValueChange={onChange}>
-          <Picker.Item key="immediate" label={i18n.t('label.competition_access_immediate')} value="immediate" />
-          <Picker.Item key="request" label={i18n.t('label.competition_access_request')} value="request" />
-          <Picker.Item key="invitation" label={i18n.t('label.competition_access_invitation')} value="invitation" />
+        <Picker.Item key="immediate" label={i18n.t('label.competition_access_immediate')} value="immediate" />
+        <Picker.Item key="request" label={i18n.t('label.competition_access_request')} value="request" />
+        <Picker.Item key="invitation" label={i18n.t('label.competition_access_invitation')} value="invitation" />
       </Picker>
     </View>
   );

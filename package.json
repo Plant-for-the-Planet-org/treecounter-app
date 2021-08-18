@@ -174,7 +174,6 @@
     "husky": "^4.2.3",
     "image-webpack-loader": "^6.0.0",
     "jest": "^25.1.0",
-    "license-checker": "^25.0.1",
     "lint-staged": "^10.0.8",
     "live-server": "^1.2.1",
     "metro-react-native-babel-preset": "0.59.0",

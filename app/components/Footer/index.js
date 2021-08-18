@@ -15,13 +15,19 @@ const Footer = () => {
       </div>
 
       <div className="app-container__buttons">
-        <TransparentButton onClick={() => updateRoute('app_imprint')}>
+        <a
+          className="pftp-button-transparent"
+          href="https://a.plant-for-the-planet.org/imprint"
+        >
           <span>{i18n.t('label.imprint')}</span>
-        </TransparentButton>
+        </a>
         <span className="seprator">|</span>
-        <TransparentButton onClick={() => updateRoute('app_privacy')}>
+        <a
+          className="pftp-button-transparent"
+          href="https://a.plant-for-the-planet.org/privacy-terms"
+        >
           <span>{i18n.t('label.privacy')}</span>
-        </TransparentButton>
+        </a>
         <span className="seprator">|</span>
         <a
           className="pftp-button-transparent"

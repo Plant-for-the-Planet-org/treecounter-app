@@ -688,32 +688,6 @@
       "methods":  [],
       "schemes":  []
     },
-    "app_imprint":  {
-      "tokens":  [
-        [
-          "text",
-          "/imprint"
-        ]
-      ],
-      "defaults":  [],
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [],
-      "schemes":  []
-    },
-    "app_privacy":  {
-      "tokens":  [
-        [
-          "text",
-          "/data-protection-policy"
-        ]
-      ],
-      "defaults":  [],
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [],
-      "schemes":  []
-    },
     "app_userNotification":  {
       "tokens":  [
         [
@@ -4146,72 +4120,6 @@
         [
           "text",
           "/faqs"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/public"
-        ]
-      ],
-      "defaults":  {
-        "_locale":  []
-      },
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [
-        "GET"
-      ],
-      "schemes":  []
-    },
-    "public_privacy_get":  {
-      "tokens":  [
-        [
-          "text",
-          "/privacy"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/public"
-        ]
-      ],
-      "defaults":  {
-        "_locale":  []
-      },
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [
-        "GET"
-      ],
-      "schemes":  []
-    },
-    "public_imprint_get":  {
-      "tokens":  [
-        [
-          "text",
-          "/imprint"
         ],
         [
           "variable",

@@ -7,7 +7,6 @@ import donateTreeslabels from './donateTreeslabels.json';
 import editUserProfilelabels from './editUserProfilelabels.json';
 import emailSentActivationlabels from './emailSentActivationlabels.json';
 import emailSentlabels from './emailSentlabels.json';
-import faqlabels from './faqlabels.json';
 import footerlabels from './footerlabels.json';
 import forgotPasswordlabels from './forgotPasswordlabels.json';
 import giftTreeslabels from './giftTreeslabels.json';
@@ -52,7 +51,6 @@ export default {
   ...editUserProfilelabels,
   ...emailSentActivationlabels,
   ...emailSentlabels,
-  ...faqlabels,
   ...footerlabels,
   ...forgotPasswordlabels,
   ...giftTreeslabels,
@@ -75,7 +73,7 @@ export default {
   ...treecounterGraphicslabels,
   ...trillionlabels,
   ...userContributionslabels,
-//  ...widgetShareLabels,
+  //  ...widgetShareLabels,
   ...NDVI,
   ...reviews,
   ...formValidationErrors,

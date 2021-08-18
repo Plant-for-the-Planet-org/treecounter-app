@@ -52,7 +52,6 @@ const SignupSuccessPage = lazy(() =>
 const SideMenuContainer = lazy(() =>
   import('../../containers/Menu/SideMenuContainer')
 );
-const FAQContainer = lazy(() => import('../../containers/FAQ'));
 const PledgeContainer = lazy(() => import('../../containers/Pledge'));
 const RedemptionContainer = lazy(() =>
   import('../../containers/RedemptionContainer')
@@ -326,7 +325,6 @@ class TreeCounter extends Component {
               path={getLocalRoute('app_challenge')}
               component={ChallengeContainer}
             />
-            <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
             {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
             <Route
               path={getLocalRoute('app_giftTrees')}

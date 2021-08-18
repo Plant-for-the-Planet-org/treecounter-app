@@ -36,9 +36,12 @@ const Footer = () => {
           <span>{i18n.t('label.contact')}</span>
         </a>
         <span className="seprator">|</span>
-        <TransparentButton onClick={() => updateRoute('app_faq')}>
+        <a
+          className="pftp-button-transparent"
+          href="https://a.plant-for-the-planet.org/faq"
+        >
           <span>{i18n.t('label.faqs')}</span>
-        </TransparentButton>
+        </a>
       </div>
     </div>
   );

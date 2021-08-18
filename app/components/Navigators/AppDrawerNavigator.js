@@ -16,7 +16,6 @@ import styles from '../../styles/header.native';
 import BurgerMenu from '../Header/BurgerMenu';
 import HeaderRight from '../Header/HeaderFields';
 import i18n from '../../locales/i18n';
-import FAQContainer from '../../containers/FAQ';
 import UserContributionsContainer from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout';
@@ -68,7 +67,6 @@ const headerLabels = {
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.projects',
-  [getLocalRoute('app_faq')]: 'label.faqs',
   // disabled as /my-trees screen is not supported any more
   // [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
@@ -296,9 +294,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer
-      },
-      [getLocalRoute('app_faq')]: {
-        screen: FAQContainer
       },
       [getLocalRoute('app_editCompetition')]: {
         screen: isLoggedIn ? EditCompetitionContainer : LoginContainer,

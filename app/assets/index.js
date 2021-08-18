@@ -188,7 +188,6 @@ import grayShareIcon from "./images/icons/gray_share_icon.png";
 import closeIcon from "./images/icons/close.png";
 import downloadGreen from "./images/icons/download_green.png";
 import sendWhite from "./images/icons/send_white.png";
-import FAQsCover from "./images/FAQs.png";
 import donateIcon from "./images/icons/donateIcon.png";
 import donateIconGreen from "./images/icons/donateIconGreen.png";
 import competeIcon from "./images/icons/competeIcon.png";
@@ -419,7 +418,6 @@ export {
   closeIcon,
   downloadGreen,
   sendWhite,
-  FAQsCover,
   deleteOutlineWhite,
   share,
   coupon,

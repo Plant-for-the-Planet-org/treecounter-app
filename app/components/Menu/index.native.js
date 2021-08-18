@@ -3,6 +3,7 @@ import { View, ScrollView, SafeAreaView, Text, Linking, Platform } from 'react-n
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 import { debug } from '../../debug';
 import styles from '../../styles/menu.native';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
@@ -21,6 +22,29 @@ import { fetchConfig, getAppVersions } from '../../actions/fetchConfig';
 import { version } from './../../../package.json';
 
 //   icons.target_outline;
+
+const openWebView = async (link) => {
+  try {
+    const url = link;
+    if (await InAppBrowser.isAvailable()) {
+      await InAppBrowser.open(url, {
+        // iOS Properties
+        animated: true,
+        modalPresentationStyle: 'fullScreen',
+        enableBarCollapsing: true,
+        // Android Properties
+        enableUrlBarHiding: true,
+        enableDefaultShare: true,
+      });
+    } else Linking.openURL(url);
+  } catch (error) {
+    console.error(error);
+    Alert.alert(error.message);
+  }
+};
+const onPressFAQ = () => {
+  openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/faq`);
+};
 
 class Menu extends Component {
   constructor(props) {
@@ -233,22 +257,22 @@ class Menu extends Component {
             </Text>
           </TouchableItem>
         ) : (
-            <View style={styles.profileContainer}>
-              <UserProfileImage
-                style={styles.profileLogImageStyle}
-                imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
-              />
-              <Text style={styles.profileTextHeading}>
-                {i18n.t('label.guest')}
-              </Text>
-              <LargeMenuItem
-                style={{ paddingLeft: 0 }}
-                onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}
-                title={i18n.t('label.login')}
-                iconUrl={icons.logout}
-              />
-            </View>
-          )}
+          <View style={styles.profileContainer}>
+            <UserProfileImage
+              style={styles.profileLogImageStyle}
+              imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
+            />
+            <Text style={styles.profileTextHeading}>
+              {i18n.t('label.guest')}
+            </Text>
+            <LargeMenuItem
+              style={{ paddingLeft: 0 }}
+              onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}
+              title={i18n.t('label.login')}
+              iconUrl={icons.logout}
+            />
+          </View>
+        )}
         <ScrollView style={styles.sideNavigationActionMenuContainer}>
           <View style={styles.centerMenu}>
             <LargeMenuItem
@@ -331,9 +355,7 @@ class Menu extends Component {
             ) : null}
 
             <LargeMenuItem
-              onPress={this.onPressMenu.bind(this, {
-                uri: getLocalRoute('app_faq')
-              })}
+              onPress={() => { onPressFAQ(); }}
               title={i18n.t('label.faqs')}
               iconUrl={icons.faqs}
             />

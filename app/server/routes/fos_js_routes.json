@@ -175,21 +175,6 @@
       ],
       "schemes":  []
     },
-    "app_faq":  {
-      "tokens":  [
-        [
-          "text",
-          "/faq"
-        ]
-      ],
-      "defaults":  [],
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [
-        "GET"
-      ],
-      "schemes":  []
-    },
     "app_giftTrees":  {
       "tokens":  [
         [
@@ -4087,39 +4072,6 @@
         [
           "text",
           "/ndvi"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/public"
-        ]
-      ],
-      "defaults":  {
-        "_locale":  []
-      },
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [
-        "GET"
-      ],
-      "schemes":  []
-    },
-    "public_faqs_get":  {
-      "tokens":  [
-        [
-          "text",
-          "/faqs"
         ],
         [
           "variable",

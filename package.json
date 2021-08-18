@@ -61,7 +61,6 @@
     "normalizr": "^3.6.0",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
-    "react-accessible-accordion": "2.4.5",
     "react-async-script-loader": "^0.3.0",
     "react-autosuggest": "^9.4.3",
     "react-content-loader": "^5.1.1",

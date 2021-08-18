@@ -119,9 +119,11 @@ class PlantProjectFull extends React.Component {
       plantProjectImages,
       url,
       linkText,
-      tpoName,
       ndviUid
     } = plantProject;
+
+    const tpoName = plantProject.tpoName || plantProject.tpoData?.name;
+
     const { loader } = this.state;
     let tpo = plantProject.tpoData || {};
     const { planet_pay_url } = context;
@@ -165,9 +167,8 @@ class PlantProjectFull extends React.Component {
             context.scheme +
             "://" +
             context.host +
-            getLocalRoute("app_selectedProject") +
             "/" +
-            this.props.plantProject.id
+            this.props.plantProject.slug
           }
         //  appurl={'weplant://project/' + this.props.plantProject.id}
         />

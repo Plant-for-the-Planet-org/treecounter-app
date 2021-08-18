@@ -71,7 +71,8 @@ const refreshTokenIfExpired = async () => {
  */
 const tokenIsExpired = async (isAuth0 = false) => {
   let tokenExpiry = await getTokenExpires(isAuth0);
-  let expired = getCurrentUnixTimestamp() > tokenExpiry;
+  // let the token expire 5 minutes before it actually expires
+  let expired = (getCurrentUnixTimestamp() + 300) > tokenExpiry;
   return expired;
 };
 

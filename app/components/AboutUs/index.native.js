@@ -8,6 +8,7 @@ import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import HeaderNew from './../Header/HeaderNew.native';
 import colors from '../../utils/constants';
+import * as icons from '../../assets';
 
 const openWebView = async (link) => {
   try {
@@ -64,18 +65,22 @@ class AboutUs extends Component {
           <LargeMenuItem
             onPress={() => { onPressPolicy(); }}
             title={i18n.t('label.data_protection')}
+            iconUrl={icons.info}
           />
           <LargeMenuItem
             onPress={() => { onPressImprint(); }}
             title={i18n.t('label.imprint')}
+            iconUrl={icons.info}
           />
           <LargeMenuItem
             onPress={() => { onPressTerms(); }}
             title={i18n.t('label.terms_of_service')}
+            iconUrl={icons.info}
           />
           <LargeMenuItem
             onPress={() => { onPressOpenSource(); }}
             title={i18n.t('label.open_source_license')}
+            iconUrl={icons.info}
           />
         </ScrollView>
         {/* <TabContainer {...this.props} /> */}

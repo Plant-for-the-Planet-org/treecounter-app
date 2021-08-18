@@ -29,13 +29,13 @@ const openWebView = async (link) => {
   }
 };
 const onPressImprint = () => {
-  openWebView('https://a.plant-for-the-planet.org/imprint');
+  openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/imprint`);
 };
 const onPressPolicy = () => {
-  openWebView('https://a.plant-for-the-planet.org/privacy-terms');
+  openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/privacy-terms`);
 };
 const onPressTerms = () => {
-  openWebView('https://a.plant-for-the-planet.org/privacy-terms');
+  openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/privacy-terms`);
 };
 const onPressOpenSource = () => {
   openWebView('https://github.com/Plant-for-the-Planet-org/treecounter-app/network/dependencies');

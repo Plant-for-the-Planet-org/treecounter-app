@@ -319,8 +319,8 @@ class TreeCounter extends Component {
             //   component={UserContributionsContainer}
             // />
             <PrivateRoute
-            path={getLocalRoute('app_editProfile')}
-            component={EditUserProfileContainer}
+              path={getLocalRoute('app_editProfile')}
+              component={EditUserProfileContainer}
             />
             <PrivateRoute
               path={getLocalRoute('app_challenge')}

@@ -4,31 +4,12 @@ import { ScrollView, View, Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
-import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import HeaderNew from './../Header/HeaderNew.native';
 import colors from '../../utils/constants';
+import openWebView from '../../utils/openWebView';
 import * as icons from '../../assets';
 
-const openWebView = async (link) => {
-  try {
-    const url = link;
-    if (await InAppBrowser.isAvailable()) {
-      await InAppBrowser.open(url, {
-        // iOS Properties
-        animated: true,
-        modalPresentationStyle: 'fullScreen',
-        enableBarCollapsing: true,
-        // Android Properties
-        enableUrlBarHiding: true,
-        enableDefaultShare: true,
-      });
-    } else Linking.openURL(url);
-  } catch (error) {
-    console.error(error);
-    Alert.alert(error.message);
-  }
-};
 const onPressImprint = () => {
   openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/imprint`);
 };

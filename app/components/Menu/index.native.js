@@ -3,7 +3,6 @@ import { View, ScrollView, SafeAreaView, Text, Linking, Platform } from 'react-n
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 import { debug } from '../../debug';
 import styles from '../../styles/menu.native';
 import { updateRoute, updateStaticRoute } from '../../helpers/routerHelper';
@@ -20,28 +19,10 @@ import countryCodes from '../../assets/countryCodes.json';
 import CurrencySelector from '../Common/CurrencySelectorList.native';
 import { fetchConfig, getAppVersions } from '../../actions/fetchConfig';
 import { version } from './../../../package.json';
+import openWebView from '../../utils/openWebView';
 
 //   icons.target_outline;
 
-const openWebView = async (link) => {
-  try {
-    const url = link;
-    if (await InAppBrowser.isAvailable()) {
-      await InAppBrowser.open(url, {
-        // iOS Properties
-        animated: true,
-        modalPresentationStyle: 'fullScreen',
-        enableBarCollapsing: true,
-        // Android Properties
-        enableUrlBarHiding: true,
-        enableDefaultShare: true,
-      });
-    } else Linking.openURL(url);
-  } catch (error) {
-    console.error(error);
-    Alert.alert(error.message);
-  }
-};
 const onPressFAQ = () => {
   openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/faq`);
 };

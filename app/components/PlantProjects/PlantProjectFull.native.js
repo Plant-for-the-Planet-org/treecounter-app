@@ -18,8 +18,6 @@ import NumberFormat from "../Common/NumberFormat.native";
 import LoadingIndicator from "../Common/LoadingIndicator.native";
 import HeaderFullPages from "../Header/HeaderFullPages.native";
 import { context } from "../../config";
-import { getLocalRoute } from "./../../actions/apiRouting";
-import { InAppBrowser } from "react-native-inappbrowser-reborn";
 import { getAuth0AccessToken } from "../../utils/user";
 // import TabContainer from '../../containers/Menu/TabContainer';
 import { getLocale } from '../../actions/getLocale';
@@ -28,6 +26,7 @@ import { clearSupport } from '../../actions/supportTreecounterAction';
 import { getCurrency } from '../../selectors';
 import { currentUserProfileSelector } from '../../selectors';
 import { getPreferredCountryCodeFromCurrency } from '../../utils/currency';
+import openWebView from '../../utils/openWebView';
 
 /**
  * see: https://github.com/Plant-for-the-Planet-org/treecounter-platform/wiki/Component-PlantProjectFull
@@ -83,26 +82,6 @@ class PlantProjectFull extends React.Component {
   componentWillUnmount() {
     if (Platform.OS === "android") StatusBar.setTranslucent(false);
   }
-  openWebView = async link => {
-    try {
-      const url = link;
-      console.log("PlantProjectFull.native.js", link);
-      if (await InAppBrowser.isAvailable()) {
-        await InAppBrowser.open(url, {
-          // iOS Properties
-          animated: true,
-          modalPresentationStyle: 'fullScreen',
-          enableBarCollapsing: true,
-          // Android Properties
-          enableUrlBarHiding: true,
-          enableDefaultShare: true,
-        });
-      } else Linking.openURL(url);
-    } catch (error) {
-      console.error(error);
-      Alert.alert(error.message);
-    }
-  };
   render() {
     let { plantProject } = this.props;
 
@@ -236,11 +215,11 @@ class PlantProjectFull extends React.Component {
               onClick={() => {
                 getAuth0AccessToken().then(token => {
                   if (token) {
-                    this.openWebView(
+                    openWebView(
                       `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}&token=${token}`
                     );
                   } else {
-                    this.openWebView(
+                    openWebView(
                       `${planet_pay_url}/?to=${plantProject.slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}`
                     );
                   }

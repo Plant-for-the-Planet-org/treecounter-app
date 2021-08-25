@@ -17,6 +17,8 @@ const openWebView = async (link: string) => {
         // Android Properties
         enableUrlBarHiding: true,
         enableDefaultShare: true,
+        forceCloseOnRedirection: false,
+        showInRecents: true,
       });
     } else Linking.openURL(link);
   } catch (error) {

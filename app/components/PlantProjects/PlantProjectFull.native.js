@@ -96,6 +96,8 @@ class PlantProjectFull extends React.Component {
           // Android Properties
           enableUrlBarHiding: true,
           enableDefaultShare: true,
+          forceCloseOnRedirection: false,
+          showInRecents: true,
         });
       } else Linking.openURL(url);
     } catch (error) {

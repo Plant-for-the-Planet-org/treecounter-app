@@ -44,7 +44,7 @@ react-native bundle \
 # For now we have to set this manually here with every release :-(
 bugsnag-source-maps upload-react-native \
    --api-key "$BUGSNAG_API_KEY" \
-   --app-version "1.49.55" \
+   --app-version "1.49.56" \
    --platform ios \
    --source-map ios-release.bundle.map \
    --bundle ios-release.bundle

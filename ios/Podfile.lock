@@ -2,8 +2,8 @@ PODS:
   - A0Auth0 (2.8.2):
     - React
   - boost-for-react-native (1.63.0)
-  - BugsnagReactNative (7.5.5):
-    - React
+  - BugsnagReactNative (7.12.0):
+    - React-Core
   - BVLinearGradient (2.5.6):
     - React-Core
   - CocoaAsyncSocket (7.6.5)
@@ -336,7 +336,7 @@ PODS:
     - React
   - react-native-viewpager (3.3.1):
     - React
-  - react-native-webview (11.0.2):
+  - react-native-webview (11.13.0):
     - React-Core
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
@@ -406,7 +406,7 @@ PODS:
     - React
   - RNCPicker (1.8.1):
     - React-Core
-  - RNDateTimePicker (3.0.8):
+  - RNDateTimePicker (3.5.2):
     - React-Core
   - RNDeviceInfo (5.6.5):
     - React
@@ -718,7 +718,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   A0Auth0: 8a88e39e1e987a30ee3a0ebe17d758055a3d6762
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  BugsnagReactNative: 722e3508bb4aadf5e9a5ef11f2195983ace1108a
+  BugsnagReactNative: 2e6375ce8a5789af2d1e3f2b6b8d5f679c1b2242
   BVLinearGradient: 48f1964a78bddfae412d1aac5f386c2949fe0306
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cde416483dac037923206447da6e1454df403714
@@ -777,7 +777,7 @@ SPEC CHECKSUMS:
   react-native-safe-area-context: 8260e5157617df4b72865f44006797f895b2ada7
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-viewpager: 248267e605c2d4edd26924da7f15032d57ac0b75
-  react-native-webview: b2542d6fd424bcc3e3b2ec5f854f0abb4ec86c87
+  react-native-webview: b176c6404ad40d10cfc818be41c053f85a72d751
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -792,7 +792,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: cb9a623793918c6699586281f0b51cbc38f046f9
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
   RNCPicker: 914b557e20b3b8317b084aca9ff4b4edb95f61e4
-  RNDateTimePicker: aab869a517ecf3095910be81093e3d9b27cd82ed
+  RNDateTimePicker: c9911be59b1f8670b9f244b85af3a7c295e175ed
   RNDeviceInfo: e841619c3dac5495a095c5455473579ff04908d4
   RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b

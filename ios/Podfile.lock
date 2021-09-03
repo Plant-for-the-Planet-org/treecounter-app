@@ -322,7 +322,7 @@ PODS:
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 3.2.0)
     - React
-  - react-native-image-picker (3.2.1):
+  - react-native-image-picker (3.8.1):
     - React-Core
   - react-native-maps (0.26.1):
     - React
@@ -770,7 +770,7 @@ SPEC CHECKSUMS:
   react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
   react-native-get-random-values: 1404bd5cc0ab0e287f75ee1c489555688fc65f89
   react-native-google-maps: 2e2e697dab576abd5809d78cd74e775865b62bf7
-  react-native-image-picker: 0c28bf3cb089cfe840bc5cc9fac3dcc10f2188d9
+  react-native-image-picker: 5a7dd93d4f9dd0d910da5dde3707fd96f70d03b3
   react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
   react-native-netinfo: 77d133105df525d4a11f10fcaa8d0b8883ea6429
   react-native-pdf: 4b5a9e4465a6a3b399e91dc4838eb44ddf716d1f

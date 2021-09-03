@@ -45,7 +45,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "cookie-cutter": "^0.2.0",
-    "core-js": "^3.6.4",
+    "core-js": "^3.16.1",
     "crypto-js": "^4.0.0",
     "css-loader": "^5.0.0",
     "date-fns": "^2.9.0",

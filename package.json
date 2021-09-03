@@ -48,7 +48,7 @@
     "core-js": "^3.6.4",
     "crypto-js": "^4.0.0",
     "css-loader": "^5.0.0",
-    "date-fns": "^2.9.0",
+    "date-fns": "^2.23.0",
     "deprecated-react-native-listview": "0.0.6",
     "dotenv-webpack": "^1.7.0",
     "esri-loader": "2.13.0",

@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: "com.bugsnag.android.gradle"
 project.ext.envConfigFiles = [
         staging   : ".env.staging",
         production: ".env.production",
@@ -89,7 +90,6 @@ if (propfile.exists()) {
     properties.load(propfile.newDataInputStream())
 }
 
-// TODO: Hermes engine crashes with @react-native-community/datetimepicker
 project.ext.react = [
         entryFile   : "index.native.js",
         enableHermes: true,
@@ -138,7 +138,7 @@ def jscFlavor = 'org.webkit:android-jsc:+'
  * on project.ext.react, JavaScript will not be compiled to Hermes Bytecode
  * and the benefits of using Hermes will therefore be sharply reduced.
  */
-def enableHermes = project.ext.react.get("enableHermes", false);
+def enableHermes = project.ext.react.get("enableHermes", true);
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -255,4 +255,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-apply from: "../../node_modules/@bugsnag/react-native/bugsnag-react-native.gradle"

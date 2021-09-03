@@ -120,7 +120,7 @@ class ContributionCard extends React.Component {
 
   plantProjectLine(plantProjectName, country) {
     let countryName = country && getISOToCountryName(country).country
-    return (plantProjectName ? plantProjectName + ' ' : '') + countryName;
+    return (plantProjectName ? plantProjectName + ' ' : '') + (countryName ? countryName : '');
   }
 
   donateActionLine(isGift, plantDate, givee, giveeSlug) {

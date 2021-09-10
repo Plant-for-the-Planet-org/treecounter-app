@@ -42,7 +42,7 @@
     "@react-native-community/picker": "^1.7.1",
     "@react-native-community/viewpager": "^3.3.0",
     "autosuggest-highlight": "^3.1.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.3",
     "classnames": "^2.2.6",
     "cookie-cutter": "^0.2.0",
     "core-js": "^3.16.1",

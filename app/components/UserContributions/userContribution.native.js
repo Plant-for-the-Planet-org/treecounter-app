@@ -21,10 +21,9 @@ export default class UserContributions extends React.Component {
   _handleIndexChange = index => this.setState({ index });
 
   getMapComponent = userContribution => {
-    let geoLatLong = `geoLongitude=${
-      userContribution.geoLongitude
-      }&geoLatitude=${userContribution.geoLatitude}&country=${
-      userContribution.country
+    let geoLatLong = `geoLongitude=${userContribution.geoLongitude || 0
+      }&geoLatitude=${userContribution.geoLatitude || 0
+      }&country=${userContribution.country
       }`;
     return (
       <NativeMapView

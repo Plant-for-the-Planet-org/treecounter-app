@@ -93,7 +93,7 @@ const UserDetails = ({
         </TransparentButton>
         <a
           className="pftp-button-transparent"
-          href="https://a.plant-for-the-planet.org/faq"
+          href={`https://a.plant-for-the-planet.org/${i18n.language}/faq`}
         >
           <img src={QuestionMarkGreen} />
           <span>{i18n.t('label.help')}</span>

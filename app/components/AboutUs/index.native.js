@@ -11,13 +11,13 @@ import openWebView from '../../utils/openWebView';
 import * as icons from '../../assets';
 
 const onPressImprint = () => {
-  openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/imprint`);
+  openWebView(`https://pp.eco/legal/${i18n.language}/imprint`);
 };
 const onPressPolicy = () => {
-  openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/privacy-terms`);
+  openWebView(`https://pp.eco/legal/${i18n.language}/privacy`);
 };
 const onPressTerms = () => {
-  openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/privacy-terms`);
+  openWebView(`https://pp.eco/legal/${i18n.language}/terms`);
 };
 const onPressOpenSource = () => {
   openWebView('https://github.com/Plant-for-the-Planet-org/treecounter-app/network/dependencies');

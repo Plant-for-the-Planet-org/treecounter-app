@@ -17,16 +17,23 @@ const Footer = () => {
       <div className="app-container__buttons">
         <a
           className="pftp-button-transparent"
-          href="https://a.plant-for-the-planet.org/imprint"
+          href={`https://pp.eco/legal/${i18n.language}/imprint`}
         >
           <span>{i18n.t('label.imprint')}</span>
         </a>
         <span className="seprator">|</span>
         <a
           className="pftp-button-transparent"
-          href="https://a.plant-for-the-planet.org/privacy-terms"
+          href={`https://pp.eco/legal/${i18n.language}/privacy`}
         >
           <span>{i18n.t('label.privacy')}</span>
+        </a>
+        <span className="seprator">|</span>
+        <a
+          className="pftp-button-transparent"
+          href={`https://pp.eco/legal/${i18n.language}/terms`}
+        >
+          <span>{i18n.t('label.terms_of_service')}</span>
         </a>
         <span className="seprator">|</span>
         <a
@@ -38,7 +45,7 @@ const Footer = () => {
         <span className="seprator">|</span>
         <a
           className="pftp-button-transparent"
-          href="https://a.plant-for-the-planet.org/faq"
+          href={`https://a.plant-for-the-planet.org/${i18n.language}/faq`}
         >
           <span>{i18n.t('label.faqs')}</span>
         </a>

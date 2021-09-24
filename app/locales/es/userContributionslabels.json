@@ -57,6 +57,7 @@
   "gifted": "Regalado",
   "registered_trees": "Árboles registrados",
   "tree_donation": "Donación de árboles",
+  "no_date_available": "No se indica la fecha",
   "redeemed_trees": "Árboles canjeados",
   "geolocation_default_error": "Las coordenadas para el registro de este árbol son incorrectas.",
   "geolocation_error_by_user": "Por favor, actualice el registro con los datos correctos.",

@@ -57,6 +57,7 @@
   "gifted": "Nadaný",
   "registered_trees": "Registrované stromy",
   "tree_donation": "Darování stromů",
+  "no_date_available": "Datum neuvedeno",
   "redeemed_trees": "Vykoupené stromy",
   "geolocation_default_error": "Souřadnice pro tuto stromovou registraci jsou nesprávné.",
   "geolocation_error_by_user": "Aktualizujte prosím registraci správnými údaji.",

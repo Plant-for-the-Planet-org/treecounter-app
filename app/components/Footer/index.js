@@ -15,13 +15,26 @@ const Footer = () => {
       </div>
 
       <div className="app-container__buttons">
-        <TransparentButton onClick={() => updateRoute('app_imprint')}>
+        <a
+          className="pftp-button-transparent"
+          href={`https://pp.eco/legal/${i18n.language}/imprint`}
+        >
           <span>{i18n.t('label.imprint')}</span>
-        </TransparentButton>
+        </a>
         <span className="seprator">|</span>
-        <TransparentButton onClick={() => updateRoute('app_privacy')}>
+        <a
+          className="pftp-button-transparent"
+          href={`https://pp.eco/legal/${i18n.language}/privacy`}
+        >
           <span>{i18n.t('label.privacy')}</span>
-        </TransparentButton>
+        </a>
+        <span className="seprator">|</span>
+        <a
+          className="pftp-button-transparent"
+          href={`https://pp.eco/legal/${i18n.language}/terms`}
+        >
+          <span>{i18n.t('label.terms_of_service')}</span>
+        </a>
         <span className="seprator">|</span>
         <a
           className="pftp-button-transparent"
@@ -30,9 +43,12 @@ const Footer = () => {
           <span>{i18n.t('label.contact')}</span>
         </a>
         <span className="seprator">|</span>
-        <TransparentButton onClick={() => updateRoute('app_faq')}>
+        <a
+          className="pftp-button-transparent"
+          href={`https://a.plant-for-the-planet.org/${i18n.language}/faq`}
+        >
           <span>{i18n.t('label.faqs')}</span>
-        </TransparentButton>
+        </a>
       </div>
     </div>
   );

@@ -52,7 +52,6 @@ const SignupSuccessPage = lazy(() =>
 const SideMenuContainer = lazy(() =>
   import('../../containers/Menu/SideMenuContainer')
 );
-const FAQContainer = lazy(() => import('../../containers/FAQ'));
 const PledgeContainer = lazy(() => import('../../containers/Pledge'));
 const RedemptionContainer = lazy(() =>
   import('../../containers/RedemptionContainer')
@@ -93,8 +92,6 @@ const EditUserProfileContainer = lazy(() =>
 );
 const LeaderboardContainer = lazy(() => import('../../containers/Leaderboard'));
 import { fetchpledgeEventsAction } from '../../actions/pledgeEventsAction';
-const PrivacyContainer = lazy(() => import('../../containers/Privacy'));
-const ImprintContainer = lazy(() => import('../../containers/Imprint'));
 const AppPaymentContainer = lazy(() => import('../../containers/AppPayment'));
 const BodyErrorBoundary = lazy(() =>
   import('../ErrorBoundry/bodyErrorBoundry')
@@ -327,15 +324,6 @@ class TreeCounter extends Component {
             <PrivateRoute
               path={getLocalRoute('app_challenge')}
               component={ChallengeContainer}
-            />
-            <Route path={getLocalRoute('app_faq')} component={FAQContainer} />
-            <Route
-              path={getLocalRoute('app_privacy')}
-              component={PrivacyContainer}
-            />
-            <Route
-              path={getLocalRoute('app_imprint')}
-              component={ImprintContainer}
             />
             {/*<Route path="/payment/project/:projectId" component={PaymentDonation}/>*/}
             <Route

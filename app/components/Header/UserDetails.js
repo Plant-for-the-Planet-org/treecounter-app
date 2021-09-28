@@ -91,10 +91,13 @@ const UserDetails = ({
           <img src={EditGreen} />
           <span>{i18n.t('label.edit_profile')}</span>
         </TransparentButton>
-        <TransparentButton onClick={() => updateRoute('app_faq')}>
+        <a
+          className="pftp-button-transparent"
+          href={`https://a.plant-for-the-planet.org/${i18n.language}/faq`}
+        >
           <img src={QuestionMarkGreen} />
           <span>{i18n.t('label.help')}</span>
-        </TransparentButton>
+        </a>
       </div>
       <hr className="divider__light" />
       <div className="popover__action-link">

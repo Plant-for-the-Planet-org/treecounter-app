@@ -4,11 +4,24 @@ import { ScrollView, View, Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import i18n from '../../locales/i18n';
 import { withNavigation } from 'react-navigation';
-import { updateRoute } from '../../helpers/routerHelper/routerHelper.native';
 // import TabContainer from '../../containers/Menu/TabContainer';
-const LicenseInfo = require('./LicenseInfo.json');
 import HeaderNew from './../Header/HeaderNew.native';
 import colors from '../../utils/constants';
+import openWebView from '../../utils/openWebView';
+import * as icons from '../../assets';
+
+const onPressImprint = () => {
+  openWebView(`https://pp.eco/legal/${i18n.language}/imprint`);
+};
+const onPressPolicy = () => {
+  openWebView(`https://pp.eco/legal/${i18n.language}/privacy`);
+};
+const onPressTerms = () => {
+  openWebView(`https://pp.eco/legal/${i18n.language}/terms`);
+};
+const onPressOpenSource = () => {
+  openWebView('https://github.com/Plant-for-the-Planet-org/treecounter-app/network/dependencies');
+};
 
 //Run license-checker --production  --json > license.json to fetch license info from package.json:
 //Copy paste required and specific license info in LicenseInfo.json file under app or web specific
@@ -31,24 +44,24 @@ class AboutUs extends Component {
             title={version}
           />
           <LargeMenuItem
-            onPress={() => {
-              updateRoute('app_privacy', this.props.navigation, null);
-            }}
+            onPress={() => { onPressPolicy(); }}
             title={i18n.t('label.data_protection')}
+            iconUrl={icons.info}
           />
           <LargeMenuItem
-            onPress={() => {
-              updateRoute('app_imprint', this.props.navigation, null);
-            }}
+            onPress={() => { onPressImprint(); }}
             title={i18n.t('label.imprint')}
+            iconUrl={icons.info}
           />
           <LargeMenuItem
-            onPress={() => {
-              this.props.navigation.navigate('license_info_list', {
-                licenseList: LicenseInfo
-              });
-            }}
+            onPress={() => { onPressTerms(); }}
+            title={i18n.t('label.terms_of_service')}
+            iconUrl={icons.info}
+          />
+          <LargeMenuItem
+            onPress={() => { onPressOpenSource(); }}
             title={i18n.t('label.open_source_license')}
+            iconUrl={icons.info}
           />
         </ScrollView>
         {/* <TabContainer {...this.props} /> */}

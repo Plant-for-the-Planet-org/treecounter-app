@@ -135,21 +135,23 @@ class Menu extends Component {
           ),
         0
       );
-    } else if (urlBreak.indexOf('competition') !== -1) {
-      setTimeout(
-        () =>
-          updateRoute(
-            '/' + urlBreak[urlBreak.length - 2],
-            // '/' +
-            // urlBreak[urlBreak.length - 1],
-            navigation,
-            0,
-            {
-              competition: urlBreak[urlBreak.length - 1]
-            }
-          ),
-        0
-      );
+      /*  
+          } else if (urlBreak.indexOf('competition') !== -1) {
+            setTimeout(
+              () =>
+                updateRoute(
+                  '/' + urlBreak[urlBreak.length - 2],
+                  // '/' +
+                  // urlBreak[urlBreak.length - 1],
+                  navigation,
+                  0,
+                  {
+                    competition: urlBreak[urlBreak.length - 1]
+                  }
+                ),
+              0
+            );
+       */
     } else if (urlBreak.indexOf('t') !== -1) {
       setTimeout(
         () =>

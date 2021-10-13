@@ -175,21 +175,6 @@
       ],
       "schemes":  []
     },
-    "app_faq":  {
-      "tokens":  [
-        [
-          "text",
-          "/faq"
-        ]
-      ],
-      "defaults":  [],
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [
-        "GET"
-      ],
-      "schemes":  []
-    },
     "app_giftTrees":  {
       "tokens":  [
         [
@@ -680,32 +665,6 @@
         [
           "text",
           "/manage-plant-projects"
-        ]
-      ],
-      "defaults":  [],
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [],
-      "schemes":  []
-    },
-    "app_imprint":  {
-      "tokens":  [
-        [
-          "text",
-          "/imprint"
-        ]
-      ],
-      "defaults":  [],
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [],
-      "schemes":  []
-    },
-    "app_privacy":  {
-      "tokens":  [
-        [
-          "text",
-          "/data-protection-policy"
         ]
       ],
       "defaults":  [],
@@ -4113,105 +4072,6 @@
         [
           "text",
           "/ndvi"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/public"
-        ]
-      ],
-      "defaults":  {
-        "_locale":  []
-      },
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [
-        "GET"
-      ],
-      "schemes":  []
-    },
-    "public_faqs_get":  {
-      "tokens":  [
-        [
-          "text",
-          "/faqs"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/public"
-        ]
-      ],
-      "defaults":  {
-        "_locale":  []
-      },
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [
-        "GET"
-      ],
-      "schemes":  []
-    },
-    "public_privacy_get":  {
-      "tokens":  [
-        [
-          "text",
-          "/privacy"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "_locale"
-        ],
-        [
-          "variable",
-          "/",
-          "[^/]++",
-          "version"
-        ],
-        [
-          "text",
-          "/public"
-        ]
-      ],
-      "defaults":  {
-        "_locale":  []
-      },
-      "requirements":  [],
-      "hosttokens":  [],
-      "methods":  [
-        "GET"
-      ],
-      "schemes":  []
-    },
-    "public_imprint_get":  {
-      "tokens":  [
-        [
-          "text",
-          "/imprint"
         ],
         [
           "variable",

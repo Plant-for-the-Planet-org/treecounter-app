@@ -85,8 +85,8 @@ class AnimatedViews extends React.Component {
         })
         this.mapView.animateToRegion(
           {
-            latitude: this.state.markers[0].geoLatitude,
-            longitude: this.state.markers[0].geoLongitude,
+            latitude: this.state.markers[0].geoLatitude || 0,
+            longitude: this.state.markers[0].geoLongitude || 0,
             latitudeDelta: 0.00095,
             longitudeDelta: 0.0095
           },
@@ -123,8 +123,8 @@ class AnimatedViews extends React.Component {
                 })
                 this.mapView.animateToRegion(
                   {
-                    latitude: activeMarker.geoLatitude,
-                    longitude: activeMarker.geoLongitude,
+                    latitude: activeMarker.geoLatitude || 0,
+                    longitude: activeMarker.geoLongitude || 0,
                     latitudeDelta: 0.00095,
                     longitudeDelta: 0.0095
                   },
@@ -227,8 +227,8 @@ class AnimatedViews extends React.Component {
         try {
           this.mapView.animateToRegion(
             {
-              latitude: oneContribution.geoLatitude,
-              longitude: oneContribution.geoLongitude,
+              latitude: oneContribution.geoLatitude || 0,
+              longitude: oneContribution.geoLongitude || 0,
               latitudeDelta: 0.00095,
               longitudeDelta: 0.0095
             },
@@ -269,8 +269,8 @@ class AnimatedViews extends React.Component {
     try {
       this.mapView.animateToRegion(
         {
-          latitude: oneContribution.geoLatitude,
-          longitude: oneContribution.geoLongitude,
+          latitude: oneContribution.geoLatitude || 0,
+          longitude: oneContribution.geoLongitude || 0,
           latitudeDelta: 0.00095,
           longitudeDelta: 0.0095
         },
@@ -330,8 +330,8 @@ class AnimatedViews extends React.Component {
         try {
           this.mapView.animateToRegion(
             {
-              latitude: oneContribution.geoLatitude,
-              longitude: oneContribution.geoLongitude,
+              latitude: oneContribution.geoLatitude || 0,
+              longitude: oneContribution.geoLongitude || 0,
               latitudeDelta: 0.00095,
               longitudeDelta: 0.0095
             },
@@ -381,8 +381,8 @@ class AnimatedViews extends React.Component {
                 identifier={String(marker.id)}
                 key={marker.id}
                 coordinate={{
-                  latitude: Number(marker.geoLatitude) ? Number(marker.geoLatitude) : 0,
-                  longitude: Number(marker.geoLongitude) ? Number(marker.geoLongitude): 0
+                  latitude: marker.geoLatitude || 0,
+                  longitude: marker.geoLongitude || 0
                 }}
               >
                 {this.getTreeImage(marker.treeCount, i)}

@@ -6,8 +6,6 @@ import {
   TouchableHighlight,
   View,
   TouchableOpacity,
-  Alert,
-  Linking
 } from "react-native";
 import SingleRating from "../Reviews/SingleRating";
 import { context } from "../../config";
@@ -31,13 +29,13 @@ import { selectPlantProjectAction } from "../../actions/selectPlantProjectAction
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { InAppBrowser } from "react-native-inappbrowser-reborn";
 import { getAuth0AccessToken } from '../../utils/user'
 import { getLocale } from '../../actions/getLocale';
 import { supportedTreecounterSelector } from '../../selectors';
 import { getCurrency } from '../../selectors';
 import { currentUserProfileSelector } from '../../selectors';
 import { getPreferredCountryCodeFromCurrency } from '../../utils/currency';
+import openWebView from '../../utils/openWebView';
 //keeping Icon here instead of in assets
 // const starIcon = <Icon name="star" size={14} color="#89b53a" />;
 
@@ -52,28 +50,6 @@ class PlantProjectSnippet extends PureComponent {
     if (this.props.onMoreClick) {
       const { id, name } = this.props.plantProject;
       this.props.onMoreClick(id, name);
-    }
-  };
-  openWebView = async link => {
-    try {
-      const url = link;
-      console.log("PlantProjectSnippet.native.js", link);
-      if (await InAppBrowser.isAvailable()) {
-        await InAppBrowser.open(url, {
-          // iOS Properties
-          animated: true,
-          modalPresentationStyle: 'fullScreen',
-          enableBarCollapsing: true,
-          // Android Properties
-          enableUrlBarHiding: true,
-          enableDefaultShare: true,
-          forceCloseOnRedirection: false,
-          showInRecents: true,
-        });
-      } else Linking.openURL(url);
-    } catch (error) {
-      console.error(error);
-      Alert.alert(error.message);
     }
   };
   render() {
@@ -328,11 +304,11 @@ class PlantProjectSnippet extends PureComponent {
                   onPress={() => {
                     getAuth0AccessToken().then(token => {
                       if (token) {
-                        this.openWebView(
+                        openWebView(
                           `${planet_pay_url}/?to=${slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}&token=${token}`
                         );
                       } else {
-                        this.openWebView(
+                        openWebView(
                           `${planet_pay_url}/?to=${slug}&s=${supportedSlug}&locale=${locale}&country=${currencyCountry}`
                         );
                       }

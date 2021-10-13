@@ -19,8 +19,13 @@ import countryCodes from '../../assets/countryCodes.json';
 import CurrencySelector from '../Common/CurrencySelectorList.native';
 import { fetchConfig, getAppVersions } from '../../actions/fetchConfig';
 import { version } from './../../../package.json';
+import openWebView from '../../utils/openWebView';
 
 //   icons.target_outline;
+
+const onPressFAQ = () => {
+  openWebView(`https://a.plant-for-the-planet.org/${i18n.language}/faq`);
+};
 
 class Menu extends Component {
   constructor(props) {
@@ -130,21 +135,23 @@ class Menu extends Component {
           ),
         0
       );
-    } else if (urlBreak.indexOf('competition') !== -1) {
-      setTimeout(
-        () =>
-          updateRoute(
-            '/' + urlBreak[urlBreak.length - 2],
-            // '/' +
-            // urlBreak[urlBreak.length - 1],
-            navigation,
-            0,
-            {
-              competition: urlBreak[urlBreak.length - 1]
-            }
-          ),
-        0
-      );
+      /*  
+          } else if (urlBreak.indexOf('competition') !== -1) {
+            setTimeout(
+              () =>
+                updateRoute(
+                  '/' + urlBreak[urlBreak.length - 2],
+                  // '/' +
+                  // urlBreak[urlBreak.length - 1],
+                  navigation,
+                  0,
+                  {
+                    competition: urlBreak[urlBreak.length - 1]
+                  }
+                ),
+              0
+            );
+       */
     } else if (urlBreak.indexOf('t') !== -1) {
       setTimeout(
         () =>
@@ -233,22 +240,22 @@ class Menu extends Component {
             </Text>
           </TouchableItem>
         ) : (
-            <View style={styles.profileContainer}>
-              <UserProfileImage
-                style={styles.profileLogImageStyle}
-                imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
-              />
-              <Text style={styles.profileTextHeading}>
-                {i18n.t('label.guest')}
-              </Text>
-              <LargeMenuItem
-                style={{ paddingLeft: 0 }}
-                onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}
-                title={i18n.t('label.login')}
-                iconUrl={icons.logout}
-              />
-            </View>
-          )}
+          <View style={styles.profileContainer}>
+            <UserProfileImage
+              style={styles.profileLogImageStyle}
+              imageStyle={{ width: 60, height: 60, borderRadius: 60 / 2 }}
+            />
+            <Text style={styles.profileTextHeading}>
+              {i18n.t('label.guest')}
+            </Text>
+            <LargeMenuItem
+              style={{ paddingLeft: 0 }}
+              onPress={this.onPressMenu.bind(this, { uri: 'app_login' })}
+              title={i18n.t('label.login')}
+              iconUrl={icons.logout}
+            />
+          </View>
+        )}
         <ScrollView style={styles.sideNavigationActionMenuContainer}>
           <View style={styles.centerMenu}>
             <LargeMenuItem
@@ -331,9 +338,7 @@ class Menu extends Component {
             ) : null}
 
             <LargeMenuItem
-              onPress={this.onPressMenu.bind(this, {
-                uri: getLocalRoute('app_faq')
-              })}
+              onPress={() => { onPressFAQ(); }}
               title={i18n.t('label.faqs')}
               iconUrl={icons.faqs}
             />

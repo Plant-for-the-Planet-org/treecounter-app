@@ -120,7 +120,7 @@ class ContributionCard extends React.Component {
 
   plantProjectLine(plantProjectName, country) {
     let countryName = country && getISOToCountryName(country).country
-    return (plantProjectName ? plantProjectName + ' ' : '') + countryName;
+    return (plantProjectName ? plantProjectName + ' ' : '') + (countryName ? countryName : '');
   }
 
   donateActionLine(isGift, plantDate, givee, giveeSlug) {
@@ -312,7 +312,13 @@ class ContributionCard extends React.Component {
                     {formatDate(plantDate)}
                   </Text>
                 </View>
-              ) : null}
+              ) : (
+                <View style={styles.redeemObjectDate}>
+                  <Text style={styles.redeemObjectDateText}>
+                    {i18n.t('label.no_date_available')}
+                  </Text>
+                </View>
+              )}
 
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
@@ -347,7 +353,14 @@ class ContributionCard extends React.Component {
                     {formatDate(plantDate)}
                   </Text>
                 </View>
-              ) : null}
+              ) : (
+                <View style={styles.redeemObjectDate}>
+                  <Text style={styles.redeemObjectDateText}>
+                    {i18n.t('label.no_date_available')}
+                  </Text>
+                </View>
+              )}
+
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>
                   <Text style={styles.redeemObjectTitle}>
@@ -393,7 +406,13 @@ class ContributionCard extends React.Component {
                     {formatDate(redemptionDate)}
                   </Text>
                 </View>
-              ) : null}
+              ) : (
+                <View style={styles.redeemObjectDate}>
+                  <Text style={styles.redeemObjectDateText}>
+                    {i18n.t('label.no_date_available')}
+                  </Text>
+                </View>
+              )}
 
               <View style={styles.redeemObjectTreesContainer}>
                 <View style={styles.row1}>

@@ -16,7 +16,6 @@ import styles from '../../styles/header.native';
 import BurgerMenu from '../Header/BurgerMenu';
 import HeaderRight from '../Header/HeaderFields';
 import i18n from '../../locales/i18n';
-import FAQContainer from '../../containers/FAQ';
 import UserContributionsContainer from '../../containers/UserContributions';
 import UserHomeContainer from '../../containers/UserHome';
 import SearchLayout from '../Header/SearchLayout';
@@ -24,7 +23,6 @@ import AboutUsContainer from '../../containers/AboutUs';
 import UserContributionsDetailsContainer from '../../containers/UserContributionsDetails';
 import ConfirmProfileDeletionModal from '../../components/EditUserProfile/ConfirmProfileDeletionModal';
 import WelcomScreenSlider from '../../components/Welcome/WelcomeSlider';
-import LicenseInfoList from '../AboutUs/LicenseInfoList';
 import NewBottomNavigator from '../../containers/Menu/NewBottomNavigator';
 import GiftTreesContainer from '../../containers/GiftTrees';
 import PublicTreeCounterContainer from '../../containers/PublicTreeCounterContainer';
@@ -37,8 +35,6 @@ import SelectedCompetitionContainer from './../Competition/containers/SelectedCo
 import SelectPlantProjectContainer from '../../containers/SelectPlantProject';
 import EmailSentContainer from '../../containers/Authentication/EmailSentContainer';
 import ResetPasswordContainer from '../../containers/Authentication/ResetPasswordContainer';
-import ImprintContainer from '../../containers/Imprint';
-import PrivacyContainer from '../../containers/Privacy';
 import CompetitionContainer from './../Competition/containers/CompetitionContainer';
 import ChallengeContainer from '../../containers/Challenge/createChallenge';
 import ProfilePickerModal from '../EditUserProfile/dedicate-trees/ProfilePickerModal';
@@ -71,7 +67,6 @@ const headerLabels = {
   [getLocalRoute('app_forgotPassword')]: 'label.forgot_ur_password',
   [getLocalRoute('app_target')]: 'label.set_target',
   [getLocalRoute('app_donateTrees')]: 'label.projects',
-  [getLocalRoute('app_faq')]: 'label.faqs',
   // disabled as /my-trees screen is not supported any more
   // [getLocalRoute('app_myTrees')]: 'label.my_trees',
   [getLocalRoute('app_registerTrees')]: 'label.heading_register_trees',
@@ -87,13 +82,10 @@ const headerLabels = {
   [getLocalRoute('app_selectedProject')]: 'label.project',
   [getLocalRoute('app_competition')]: '',
   [getLocalRoute('app_editCompetition')]: '',
-  [getLocalRoute('app_imprint')]: 'label.imprint',
-  [getLocalRoute('app_privacy')]: 'label.data_protection',
   [getLocalRoute('app_challenge')]: 'label.challenge_heading',
   [getLocalRoute('app_resetPassword')]: 'label.reset_ur_password',
   ['about_us']: 'label.about_us',
   ['tab-navigation']: 'Tab Navigation',
-  ['license_info_list']: 'label.open_source_license',
   ['delete_profile_confirm']: 'label.delete_profile',
   ['delete_contribution']: 'label.delete_contribution',
   ['app_donate_detail']: 'label.donate',
@@ -261,18 +253,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
         screen: AboutUsContainer,
         navigationOptions: { header: null }
       },
-      ['license_info_list']: {
-        screen: LicenseInfoList,
-        navigationOptions: { header: null }
-      },
-      [getLocalRoute('app_imprint')]: {
-        screen: ImprintContainer,
-        navigationOptions: { header: null }
-      },
-      [getLocalRoute('app_privacy')]: {
-        screen: PrivacyContainer,
-        navigationOptions: { header: null }
-      },
       [getLocalRoute('app_editTrees')]: {
         screen: EditUserContributionContainer
       },
@@ -314,9 +294,6 @@ export const getAppNavigator = function (isLoggedIn, userProfile) {
       },
       [getLocalRoute('app_competition')]: {
         screen: isLoggedIn ? SelectedCompetitionContainer : LoginContainer
-      },
-      [getLocalRoute('app_faq')]: {
-        screen: FAQContainer
       },
       [getLocalRoute('app_editCompetition')]: {
         screen: isLoggedIn ? EditCompetitionContainer : LoginContainer,

@@ -6,7 +6,8 @@ import {
   Platform,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Image,
 } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { SafeAreaView } from 'react-navigation';
@@ -131,6 +132,14 @@ class Competiton extends React.Component {
     //   outputRange: [56, 0],
     //   extrapolate: 'clamp'
     // });
+    const style = {
+      backgroundColor: "white",
+      flex: 1,
+      padding: 20,
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center"
+    };
     return (
       <>
         <SafeAreaView style={{ flex: 1 }}>
@@ -146,6 +155,7 @@ class Competiton extends React.Component {
               marginTop: Platform.OS === 'ios' ? (height < 737 ? 56 : 26) : 56
             }}
           />
+          {/*           
           <TabView
             useNativeDriver
             navigationState={this.state}
@@ -153,8 +163,10 @@ class Competiton extends React.Component {
             renderTabBar={this._renderTabBar}
             onIndexChange={this._handleIndexChange}
           />
+          */}
 
           {/* Button to add new competitions(On each page) */}
+          {/*           
           <TouchableOpacity
             style={buttonStyles.plusButton}
             onPress={() => {
@@ -169,6 +181,26 @@ class Competiton extends React.Component {
           >
             <Text style={buttonStyles.plusButtonIcon}>+</Text>
           </TouchableOpacity>
+          */}
+          <View style={style}>
+            <View style={{ paddingBottom: 20 }}>
+              <Image
+                source={require("../../../assets/images/gifts.png")}
+                style={{ width: 220, height: 220 }}
+              />
+            </View>
+
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#4d5153",
+                fontFamily: "OpenSans-Regular",
+                textAlign: "center"
+              }}
+            >
+              {i18n.t("label.changed_challenge_workflow")}
+            </Text>
+          </View>
         </SafeAreaView>
       </>
     );

@@ -11,7 +11,7 @@ import { TextField } from 'react-native-material-textfield';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { PERMISSIONS, request } from 'react-native-permissions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Picker } from '@react-native-community/picker';
+import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { debug } from '../../../debug';
 import styles from '../../../styles/competition/competition-form.native';

@@ -13,7 +13,7 @@ import {
   Platform,
   ActivityIndicator
 } from 'react-native';
-import ViewPagerAndroid from '@react-native-community/viewpager';
+import PagerView from 'react-native-pager-view';
 
 /**
  * Default styles
@@ -693,7 +693,7 @@ export default class extends Component {
       );
     }
     return (
-      <ViewPagerAndroid
+      <PagerView
         ref={this.refScrollView}
         {...this.props}
         initialPage={this.props.loop ? this.state.index + 1 : this.state.index}
@@ -703,7 +703,7 @@ export default class extends Component {
         style={[styles.wrapperAndroid, this.props.style]}
       >
         {pages}
-      </ViewPagerAndroid>
+      </PagerView>
     );
   };
 

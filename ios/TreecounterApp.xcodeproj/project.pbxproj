@@ -17,6 +17,7 @@
 		6120BA1189D14C56A8E8CF65 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79829B7B4E914185BF3BE7C5 /* OpenSans-ExtraBoldItalic.ttf */; };
 		62E8C1EDE2C741239E916FB9 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3837E42AA9BD4A6A8B5261EA /* OpenSans-BoldItalic.ttf */; };
 		6B0830F92318070200E64C6C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B0830FB2318070200E64C6C /* InfoPlist.strings */; };
+		6B2B98C5273884050040C59C /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6B2B98C4273884050040C59C /* Config.xcconfig */; };
 		6B9F6B7626FCD76A008A6FFC /* Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9F6B7526FCD76A008A6FFC /* Void.swift */; };
 		6B9F6B7726FCD76A008A6FFC /* Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9F6B7526FCD76A008A6FFC /* Void.swift */; };
 		84BF1F352460E21E009EB9C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84BF1F342460E21E009EB9C6 /* LaunchScreen.storyboard */; };
@@ -59,6 +60,7 @@
 		4F0548F411A546C79D230135 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../app/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		4F6DFC7E814546FD8D7A8276 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBold.ttf"; path = "../app/assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		6B0830FC2318070700E64C6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6B2B98C4273884050040C59C /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		6B3D2A7C24530E60002B35AB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6B63E89724F9968500DAE516 /* TreecounterApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TreecounterApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		6B7C9C2224402A3F000447B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				6B2B98C4273884050040C59C /* Config.xcconfig */,
 				13B07FAE1A68108700A75B9A /* TreecounterApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* TreecounterAppTests */,
@@ -330,6 +333,7 @@
 				FA70D9E8C5764BEE8D9A91FF /* OpenSans-RegularItalic.ttf in Resources */,
 				84BF1F352460E21E009EB9C6 /* LaunchScreen.storyboard in Resources */,
 				EAE8BDB618174F13BB7DD398 /* OpenSans-SemiBold.ttf in Resources */,
+				6B2B98C5273884050040C59C /* Config.xcconfig in Resources */,
 				5756BAFD954E4B71ADBE04D0 /* OpenSans-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -744,6 +748,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B2B98C4273884050040C59C /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -806,6 +811,7 @@
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B2B98C4273884050040C59C /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;

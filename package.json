@@ -100,7 +100,7 @@
     "react-native-popover-tooltip": "^1.1.4",
     "react-native-ratings": "^6.5.0",
     "react-native-raw-bottom-sheet": "^2.0.6",
-    "react-native-reanimated": "^1.7.0",
+    "react-native-reanimated": "^2.3.0",
     "react-native-root-toast": "3.1.2",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-safe-area-view": "^1.0.0",

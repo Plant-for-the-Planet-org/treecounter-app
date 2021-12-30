@@ -27,8 +27,10 @@ echo $PATH
 
 # Setting Environment Variables
 cd ../..
-envsubst < .env.deploy > .env.staging
-cp .env.staging .env
+envsubst < .env.deploy > $ENV_FILENAME
+cp $ENV_FILENAME .env
+echo "ENV_FILENAME is $ENV_FILENAME"
+cat $ENV_FILENAME
 
 # Install dependencies
 echo "Running npm install"

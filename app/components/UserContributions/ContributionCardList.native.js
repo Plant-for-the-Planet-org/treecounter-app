@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { FlatList } from 'react-native';
 import ContributionCard from './ContributionCard';
 import { convertNumIdToString } from '../../utils/utils';
 
@@ -19,19 +18,16 @@ const ContributionCardList = props => {
     return new Date(b.plantDate ? b.plantDate : b.redemptionDate) - new Date(a.plantDate ? a.plantDate : a.redemptionDate);
   });
   return (
-    <FlatList
-      data={convertNumIdToString(contributions.length > 3 && showAllContributions ? contributions : contributions.slice(0, 3))}
-      renderItem={({ item }) => (
-        <ContributionCard
-          isCardPressed={isCardPressed}
-          onPressSingleContribution={onPressSingleContribution}
-          contribution={item}
-          deleteContribution={deleteContribution}
-          key={item.id}
-          navigation={props.navigation}
-        />
-      )}
-    />
+    (convertNumIdToString(contributions.length > 3 && showAllContributions ? contributions : contributions.slice(0, 3))).map((item) => (
+      <ContributionCard
+        isCardPressed={isCardPressed}
+        onPressSingleContribution={onPressSingleContribution}
+        contribution={item}
+        deleteContribution={deleteContribution}
+        key={item.id}
+        navigation={props.navigation}
+      />
+    ))
   )
 };
 

@@ -13,7 +13,11 @@
     "shake": "adb shell input keyevent 82",
     "clean": "./clean.sh",
     "ios": "ENVFILE=.env.develop react-native run-ios --scheme 'TreecounterApp(.env.develop)'",
+    "ios:staging": "ENVFILE=.env.staging react-native run-ios --scheme 'TreecounterApp(.env.staging)'",
+    "ios:production": "ENVFILE=.env.production react-native run-ios --scheme 'TreecounterApp(.env.production)'",
     "android": "ENVFILE=.env.develop react-native run-android --variant 'developDebug'",
+    "android:staging": "ENVFILE=.env.staging react-native run-android --variant 'stagingDebug'",
+    "android:production": "ENVFILE=.env.production react-native run-android --variant 'productionDebug'",
     "metro": "react-native start --reset-cache",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect"

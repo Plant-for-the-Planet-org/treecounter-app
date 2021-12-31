@@ -102,10 +102,10 @@ class CurrencySelectorList extends Component {
     this.state.search ? (
       this.setSearch()
     ) : (
-        this.props.hideCurrencyModal({
-          show: false
-        })
-      );
+      this.props.hideCurrencyModal({
+        show: false
+      })
+    );
   };
   getCountryCode = currency =>
     countryCodes.find(c => c.code == currency.value) || {};
@@ -208,8 +208,8 @@ class CurrencySelectorList extends Component {
                 {this.state.search ? (
                   <Icon name="arrow-back" size={30} color="black" />
                 ) : (
-                    <Icon name="close" size={30} color="#4d5153" />
-                  )}
+                  <Icon name="close" size={30} color="#4d5153" />
+                )}
 
               </TouchableItem>
               <View
@@ -234,9 +234,15 @@ class CurrencySelectorList extends Component {
                 />
               </View>
             </View>
-            <ScrollView>
-              <View>
-                {this.state.search ? null : (
+            {this.state.search ? (
+              <FlatList
+                data={currenciesArray}
+                keyExtractor={this.keyExtractor}
+                renderItem={this.renderItem}
+              />
+            ) : (
+              <>
+                <View>
                   <Text
                     style={{
                       fontFamily: 'OpenSans-Bold',
@@ -248,15 +254,13 @@ class CurrencySelectorList extends Component {
                   >
                     {i18n.t('label.featured_currencies')}
                   </Text>
-                )}
-                <FlatList
-                  data={currenciesArray.slice(0, 2)}
-                  keyExtractor={this.keyExtractor}
-                  renderItem={this.renderItem}
-                />
-              </View>
-              <View>
-                {this.state.search ? null : (
+                  <FlatList
+                    data={currenciesArray.slice(0, 2)}
+                    keyExtractor={this.keyExtractor}
+                    renderItem={this.renderItem}
+                  />
+                </View>
+                <View>
                   <Text
                     style={{
                       fontFamily: 'OpenSans-Bold',
@@ -268,14 +272,14 @@ class CurrencySelectorList extends Component {
                   >
                     {i18n.t('label.all_currencies')}
                   </Text>
-                )}
-              </View>
-              <FlatList
-                data={currenciesArray.slice(2)}
-                keyExtractor={this.keyExtractor}
-                renderItem={this.renderItem}
-              />
-            </ScrollView>
+                  <FlatList
+                    data={currenciesArray.slice(2)}
+                    keyExtractor={this.keyExtractor}
+                    renderItem={this.renderItem}
+                  />
+                </View>
+              </>
+            )}
           </View>
         </View>
       </Modal>

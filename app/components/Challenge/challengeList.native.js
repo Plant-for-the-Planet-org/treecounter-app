@@ -8,6 +8,7 @@ class ChallengeList extends Component {
   render() {
     const { challenges } = this.props;
     return (
+      /* This crashes if embedded into a ScrollView */
       <FlatList
         data={challenges}
         // eslint-disable-next-line no-underscore-dangle

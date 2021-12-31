@@ -141,7 +141,7 @@
     "snyk": "^1.753.0",
     "source-map-explorer": "^2.5.2",
     "tcomb-form": "^0.9.21",
-    "tcomb-form-native": "^0.6.20",
+    "tcomb-form-native": "git+https://github.com/norbertschuler/tcomb-form-native",
     "tcomb-json-schema": "^0.3.2",
     "uuid": "^7.0.1",
     "yup": "^0.32.11"

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Dimensions, findNodeHandle, FlatList, Image, LayoutAnimation, Linking, Platform, RefreshControl, ScrollView, Share, Text, TouchableOpacity, UIManager, View } from 'react-native';
+import { Dimensions, findNodeHandle, Image, LayoutAnimation, Linking, Platform, RefreshControl, ScrollView, Share, Text, TouchableOpacity, UIManager, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
 import { fullscreen_icon } from '../../assets/index';
@@ -445,27 +445,27 @@ class UserHome extends Component {
                   userProfile.synopsis2 ||
                   userProfile.linkText ||
                   userProfile.url ? (
-                    <View>
-                      {userProfile.synopsis1 ? (
-                        <Text style={styles.footerText}>
-                          {userProfile.synopsis1}
-                        </Text>
-                      ) : null}
-                      {userProfile.synopsis2 ? (
-                        <Text style={styles.footerText}>
-                          {userProfile.synopsis2}
-                        </Text>
-                      ) : null}
-                      {userProfile.url ? (
-                        <Text
-                          style={styles.linkText}
-                          onPress={() => this._goToURL(userProfile.url)}
-                        >
-                          {userProfile.linkText || i18n.t('label.read_more')}
-                        </Text>
-                      ) : null}
-                    </View>
-                  ) : null}
+                  <View>
+                    {userProfile.synopsis1 ? (
+                      <Text style={styles.footerText}>
+                        {userProfile.synopsis1}
+                      </Text>
+                    ) : null}
+                    {userProfile.synopsis2 ? (
+                      <Text style={styles.footerText}>
+                        {userProfile.synopsis2}
+                      </Text>
+                    ) : null}
+                    {userProfile.url ? (
+                      <Text
+                        style={styles.linkText}
+                        onPress={() => this._goToURL(userProfile.url)}
+                      >
+                        {userProfile.linkText || i18n.t('label.read_more')}
+                      </Text>
+                    ) : null}
+                  </View>
+                ) : null}
               </View>
             </View>
           ) : null}
@@ -484,7 +484,7 @@ class UserHome extends Component {
             </View>
           ) : null}
 
-          {/* Competitions */}
+          {/* Competitions
           {userProfile.treecounter.competitions.length > 0 ? (
             <MyCompetitions
               onCompetitionClick={this.onCompetitionClick}
@@ -492,6 +492,7 @@ class UserHome extends Component {
               competitions={userProfile.treecounter.competitions}
             />
           ) : null}
+          */}
 
           {/* Plant Projects of TPO  */}
           {userProfile.plantProjects ? (
@@ -499,27 +500,24 @@ class UserHome extends Component {
           ) : null}
           <ScrollView>
             {userProfile.plantProjects ? (
-              <FlatList
-                data={convertNumIdToString(userProfile.plantProjects)}
-                renderItem={({ item }) => {
-                  let project = item;
-                  return (
-                    <PlantProjectSnippet
-                      key={'projectFull' + project.id}
-                      onMoreClick={id =>
-                        this.onPlantProjectClick(id, project.name)
-                      }
-                      plantProject={project}
-                      onSelectClickedFeaturedProjects={id =>
-                        this.onPlantProjectClick(id, project.name)
-                      }
-                      showMoreButton={false}
-                      tpoName={project.tpo_name}
-                      navigation={this.props.navigation}
-                    />
-                  );
-                }}
-              />
+              (convertNumIdToString(userProfile.plantProjects)).map((item) => {
+                let project = item;
+                return (
+                  <PlantProjectSnippet
+                    key={'projectFull' + project.id}
+                    onMoreClick={id =>
+                      this.onPlantProjectClick(id, project.name)
+                    }
+                    plantProject={project}
+                    onSelectClickedFeaturedProjects={id =>
+                      this.onPlantProjectClick(id, project.name)
+                    }
+                    showMoreButton={false}
+                    tpoName={project.tpo_name}
+                    navigation={this.props.navigation}
+                  />
+                );
+              })
             ) : null}
           </ScrollView>
 
@@ -541,11 +539,11 @@ class UserHome extends Component {
 
           {this.props.userContributions &&
             this.props.userContributions.length > 3 ? (
-              <ToggleButton
-                updateFunction={() => this.readMore()}
-                showMore={showAllContributions}
-              />
-            ) : null}
+            <ToggleButton
+              updateFunction={() => this.readMore()}
+              showMore={showAllContributions}
+            />
+          ) : null}
 
           {/* <RenderIndividualsList
             navigation={this.props.navigation}
@@ -617,23 +615,19 @@ function MyCompetitions(props) {
         contentContainerStyle={{ paddingLeft: 20 }}
       >
         {competitions.length > 0 ? (
-          <FlatList
-            horizontal
-            data={convertNumIdToString(competitions)}
-            renderItem={({ item }) => {
-              let competition = item;
-              return (
-                <CompetitionSnippet
-                  key={'competition' + competition.id}
-                  onMoreClick={id =>
-                    props.onCompetitionClick(id, competition.name)
-                  }
-                  competition={competition}
-                  type="all"
-                />
-              );
-            }}
-          />
+          (convertNumIdToString(competitions)).map((item) => {
+            let competition = item;
+            return (
+              <CompetitionSnippet
+                key={'competition' + competition.id}
+                onMoreClick={id =>
+                  props.onCompetitionClick(id, competition.name)
+                }
+                competition={competition}
+                type="all"
+              />
+            );
+          })
         ) : null}
       </ScrollView>
     </View>

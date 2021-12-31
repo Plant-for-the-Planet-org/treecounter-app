@@ -34,7 +34,7 @@ export default function GetRandomImage(props) {
     // clean up
   }, []);
 
-  return (
+  return selectedImage ? (
     <View>
       <Image
         source={selectedImage}
@@ -45,5 +45,5 @@ export default function GetRandomImage(props) {
         }}
       />
     </View>
-  );
+  ) : null;
 }

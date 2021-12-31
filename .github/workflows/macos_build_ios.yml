@@ -23,6 +23,9 @@ jobs:
         sudo xcode-select -s /Applications/Xcode_12.4.app
         echo "Selected version:" `xcode-select -p`
 
+    - name: Upgrade npm to latest version
+      run: sudo npm i -g npm@latest --force
+
     - name: Check versions
       run: |
         echo "Xcode version:"

@@ -150,12 +150,8 @@ class Competiton extends React.Component {
             showSearch
             navigation={this.props.navigation}
           />
-          <Animated.View
-            style={{
-              marginTop: Platform.OS === 'ios' ? (height < 737 ? 56 : 26) : 56
-            }}
-          />
-          {/*           
+          <Animated.View style={{ marginTop: 56 }} />
+          {/*
           <TabView
             useNativeDriver
             navigationState={this.state}

@@ -4,7 +4,7 @@ import SearchUser from './SearchUser.native';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import ChallengeList from '../challengeList';
 import CardLayout from '../../Common/Card';
-import { Picker } from '@react-native-community/picker';
+import { Picker } from '@react-native-picker/picker';
 import { withNavigation } from 'react-navigation';
 import CheckBox from 'react-native-check-box';
 // import TabContainer from '../../../containers/Menu/TabContainer';

@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { Linking, SafeAreaView, Platform } from 'react-native';
+import NativeIntentAndroid from 'react-native/Libraries/Linking/NativeIntentAndroid'
 import PropTypes from 'prop-types';
 import { TabView } from 'react-native-tab-view';
 import { debug } from '../../debug';
@@ -15,6 +16,8 @@ import { context } from '../../config';
 // import TabContainer from '../../containers/Menu/TabContainer';
 import LoadingIndicator from '../Common/LoadingIndicator';
 import colors from '../../utils/constants';
+
+const NativeLinking = Platform.OS === 'android' ? NativeIntentAndroid : Linking;
 
 export default class DonateTrees extends React.PureComponent {
   constructor(props) {
@@ -65,12 +68,7 @@ export default class DonateTrees extends React.PureComponent {
   componentDidMount() {
     // const { navigation } = this.props;
     this.props.onTabChange(this.state.routes[0].title);
-    if (Platform.OS === 'android') {
-      const NativeLinking = require('react-native/Libraries/Linking/NativeLinking').default;
-      NativeLinking.getInitialURL().then(url => url && this.handleOpenURL(url)).catch(e => debug(e));
-    } else {
-      Linking.getInitialURL().then(url => url && this.handleOpenURL(url)).catch(e => debug(e));
-    }
+    NativeLinking.getInitialURL().then(url => url && this.handleOpenURL(url)).catch(e => debug(e));
     Linking.addEventListener('url', this.handleOpenURL);
     let params = this.props.navigation.state.params;
     //debug('got user form', this.props.navigation.getParam('userForm'), params);

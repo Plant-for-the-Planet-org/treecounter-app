@@ -460,25 +460,23 @@ class Trillion extends PureComponent {
         />
       ) : null,
       this.state.loadSvg ? (
-          <SafeAreaView style={{ flex: 1 }} key="safe-area-view">
-            <HeaderStatic
-              title={i18n.t('label.explore')}
-              navigation={this.props.navigation}
-              showSearch
-            />
-            <Animated.View
-              style={{ marginTop: Platform.OS === 'ios' ? height < 737 ? 56 : 26 : 56 }}
-            />
+        <SafeAreaView style={{ flex: 1 }} key="safe-area-view">
+          <HeaderStatic
+            title={i18n.t('label.explore')}
+            navigation={this.props.navigation}
+            showSearch
+          />
+          <Animated.View style={{ marginTop: 56 }} />
 
-            <TabView
-              key="tabs"
-              useNativeDriver
-              navigationState={this.state}
-              renderScene={this._renderScreen}
-              renderTabBar={this._renderTabBar}
-              onIndexChange={this._handleIndexChange}
-            />
-          </SafeAreaView>
+          <TabView
+            key="tabs"
+            useNativeDriver
+            navigationState={this.state}
+            renderScene={this._renderScreen}
+            renderTabBar={this._renderTabBar}
+            onIndexChange={this._handleIndexChange}
+          />
+        </SafeAreaView>
       ) : null
     ];
   }

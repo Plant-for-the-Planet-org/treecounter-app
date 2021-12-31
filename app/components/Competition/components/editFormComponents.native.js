@@ -3,7 +3,7 @@ import { Alert, Text, View, Image, Platform, TouchableOpacity } from 'react-nati
 import { Formik } from 'formik';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { TextField } from 'react-native-material-textfield';
-import { Picker } from '@react-native-community/picker';
+import { Picker } from '@react-native-picker/picker';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { PERMISSIONS, request } from 'react-native-permissions';
 import RBSheet from 'react-native-raw-bottom-sheet';

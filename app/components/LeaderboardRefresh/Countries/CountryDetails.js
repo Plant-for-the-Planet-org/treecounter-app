@@ -85,63 +85,61 @@ const CountryDetails = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header navigation={navigation} />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.headingAndSubHeadeingContainer}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>{section}</Text>
-          </View>
-          <View>
-            <Text style={styles.subHeaderText}>
-              {i18n.t('label.lbr_c_d_leaderboard')}
-            </Text>
-          </View>
+      <View style={styles.headingAndSubHeadeingContainer}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerText}>{section}</Text>
         </View>
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          contentContainerStyle={styles.timeLineContentContainerStyle}
-          style={styles.timeLineContainer}
+        <View>
+          <Text style={styles.subHeaderText}>
+            {i18n.t('label.lbr_c_d_leaderboard')}
+          </Text>
+        </View>
+      </View>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        contentContainerStyle={styles.timeLineContentContainerStyle}
+        style={styles.timeLineContainer}
+      >
+        <TouchableOpacity
+          onPress={() => setPeriod('1w')}
+          style={
+            styles[period == '1w' ? 'activeChipContainer' : 'chipContainer']
+          }
         >
-          <TouchableOpacity
-            onPress={() => setPeriod('1w')}
-            style={
-              styles[period == '1w' ? 'activeChipContainer' : 'chipContainer']
-            }
+          <Text
+            style={styles[period == '1w' ? 'activeChipText' : 'chipText']}
           >
-            <Text
-              style={styles[period == '1w' ? 'activeChipText' : 'chipText']}
-            >
-              {i18n.t('label.lbr_c_d_this_week')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setPeriod('1y')}
-            style={
-              styles[period == '1y' ? 'activeChipContainer' : 'chipContainer']
-            }
+            {i18n.t('label.lbr_c_d_this_week')}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setPeriod('1y')}
+          style={
+            styles[period == '1y' ? 'activeChipContainer' : 'chipContainer']
+          }
+        >
+          <Text
+            style={styles[period == '1y' ? 'activeChipText' : 'chipText']}
           >
-            <Text
-              style={styles[period == '1y' ? 'activeChipText' : 'chipText']}
-            >
-              {i18n.t('label.lbr_c_d_year')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setPeriod('all')}
-            style={
-              styles[period == 'all' ? 'activeChipContainer' : 'chipContainer']
-            }
+            {i18n.t('label.lbr_c_d_year')}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setPeriod('all')}
+          style={
+            styles[period == 'all' ? 'activeChipContainer' : 'chipContainer']
+          }
+        >
+          <Text
+            style={styles[period == 'all' ? 'activeChipText' : 'chipText']}
           >
-            <Text
-              style={styles[period == 'all' ? 'activeChipText' : 'chipText']}
-            >
-              {i18n.t('label.lbr_c_d_all_time')}
-            </Text>
-          </TouchableOpacity>
-        </ScrollView>
-        <View style={styles.countriesListContainer}>{renderList()}</View>
+            {i18n.t('label.lbr_c_d_all_time')}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
-    </SafeAreaView>
+      <View style={styles.countriesListContainer}>{renderList()}</View>
+    </SafeAreaView >
   );
 };
 
@@ -176,8 +174,8 @@ const CompanyListItem = ({ onPressListItem, item, index }) => {
             }}
           />
         ) : (
-            <GetRandomImage name={item.caption} />
-          )}
+          <GetRandomImage name={item.caption} />
+        )}
       </View>
       <View style={styles.countryBody}>
         <View style={styles.countryNameCont}>

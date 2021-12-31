@@ -17,6 +17,9 @@ jobs:
     - name: Checkout branch
       uses: actions/checkout@v2
 
+    - name: Upgrade npm to latest version
+      run: sudo npm i -g npm@latest
+
     - name: Check versions
       run: |
         echo "Node version:"

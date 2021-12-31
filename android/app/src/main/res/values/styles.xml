@@ -1,18 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:datePickerDialogTheme">@style/Dialog.Theme</item>
         <item name="android:timePickerDialogTheme">@style/Dialog.Theme</item>
     </style>
 
-	<style name="Dialog.Theme" parent="Theme.AppCompat.Light.Dialog">
+	<style name="Dialog.Theme" parent="Theme.AppCompat.DayNight.Dialog">
 	    <item name="colorAccent">#89B53A</item>
 	    <item name="android:textColorPrimary">#686060</item>
  	</style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:background">@drawable/background_splash</item>
         <item name="android:statusBarColor">@color/background</item>
     </style>
@@ -20,6 +20,6 @@
     <style name="SplashStatusBarTheme" parent="SplashScreen_SplashTheme">
        <item name="android:statusBarColor">@color/background</item>
    </style>
-    
+
 
 </resources>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, SafeAreaView, Text, Linking, Platform } from 'react-native';
+import NativeIntentAndroid from 'react-native/Libraries/Linking/NativeIntentAndroid'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -20,6 +21,8 @@ import CurrencySelector from '../Common/CurrencySelectorList.native';
 import { fetchConfig, getAppVersions } from '../../actions/fetchConfig';
 import { version } from './../../../package.json';
 import openWebView from '../../utils/openWebView';
+
+const NativeLinking = Platform.OS === 'android' ? NativeIntentAndroid : Linking;
 
 //   icons.target_outline;
 
@@ -51,12 +54,7 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    if (Platform.OS === 'android') {
-      const NativeLinking = require('react-native/Libraries/Linking/NativeLinking').default;
-      NativeLinking.getInitialURL().then(url => url && this.resetStackToProperRoute(url)).catch(e => debug(e));
-    } else {
-      Linking.getInitialURL().then(url => url && this.resetStackToProperRoute(url)).catch(e => debug(e));
-    }
+    NativeLinking.getInitialURL().then(url => url && this.resetStackToProperRoute(url)).catch(e => debug(e));
 
     // This listener handles the case where the app is woken up from the Universal or Deep Linking
     Linking.addEventListener('url', this.appWokeUp);

@@ -142,7 +142,7 @@
     "rxjs": "^6.6.7",
     "rxjs-compat": "^6.6.7",
     "slick-carousel": "^1.8.1",
-    "snyk": "^1.753.0",
+    "snyk": "^1.818.0",
     "source-map-explorer": "^2.5.2",
     "tcomb-form": "^0.9.21",
     "tcomb-form-native": "git+https://github.com/norbertschuler/tcomb-form-native",

@@ -34,7 +34,7 @@ cat $ENV_FILENAME
 
 # Install dependencies
 echo "Running npm install"
-npm install
+npm install --legacy-peer-deps
 echo "Running pod install"
 cd ios
 pod install

@@ -75,7 +75,7 @@
     "react-native-blob-util": "^0.13.16",
     "react-native-check-box": "^2.1.7",
     "react-native-collapsible": "^1.6.0",
-    "react-native-config": "1.4.0",
+    "react-native-config": "1.4.5",
     "react-native-device-info": "^5.5.4",
     "react-native-document-picker": "^3.5.4",
     "react-native-extended-stylesheet": "^0.12.0",

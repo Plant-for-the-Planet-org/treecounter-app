@@ -347,9 +347,9 @@ PODS:
     - glog
   - react-native-blob-util (0.13.18):
     - React-Core
-  - react-native-config (1.4.0):
-    - react-native-config/App (= 1.4.0)
-  - react-native-config/App (1.4.0):
+  - react-native-config (1.4.5):
+    - react-native-config/App (= 1.4.5)
+  - react-native-config/App (1.4.5):
     - React-Core
   - react-native-document-picker (3.5.4):
     - React
@@ -458,12 +458,12 @@ PODS:
     - React-Core
   - RNI18n (2.0.15):
     - React
-  - RNImageCropPicker (0.35.3):
+  - RNImageCropPicker (0.37.3):
     - React-Core
     - React-RCTImage
-    - RNImageCropPicker/QBImagePickerController (= 0.35.3)
+    - RNImageCropPicker/QBImagePickerController (= 0.37.3)
     - TOCropViewController
-  - RNImageCropPicker/QBImagePickerController (0.35.3):
+  - RNImageCropPicker/QBImagePickerController (0.37.3):
     - React-Core
     - React-RCTImage
     - TOCropViewController
@@ -840,7 +840,7 @@ SPEC CHECKSUMS:
   React-jsinspector: c5989c77cb89ae6a69561095a61cce56a44ae8e8
   React-logger: a0833912d93b36b791b7a521672d8ee89107aff1
   react-native-blob-util: 600972b1782380a5a7d5db61a3817ea32349dae9
-  react-native-config: f309b9ac19456dea12325699af51e0fa0217ce6a
+  react-native-config: 6502b1879f97ed5ac570a029961fc35ea606cd14
   react-native-document-picker: 4921045c5c6c78243010f784eae0a3f4b2af7799
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-get-random-values: a6ea6a8a65dc93e96e24a11105b1a9c8cfe1d72a
@@ -873,7 +873,7 @@ SPEC CHECKSUMS:
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
-  RNImageCropPicker: 08ba3a2e2f4f8833d606f01906c371e382c4dea9
+  RNImageCropPicker: 44e2807bc410741f35d4c45b6586aedfe3da39d2
   RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
   RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
   RNReanimated: c1b56d030d1616239861534d9adb531f8cffab68
@@ -886,6 +886,6 @@ SPEC CHECKSUMS:
   Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 957984ec97882203d2e2c23e4e4891746bd7e8ab
+PODFILE CHECKSUM: cb08c56dacf154b063f96eafd0ef18cf6b96d30a
 
 COCOAPODS: 1.11.3

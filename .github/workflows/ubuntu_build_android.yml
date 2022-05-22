@@ -133,9 +133,16 @@ jobs:
         env:
           android_release_password: ${{ secrets.ANDROID_RELEASE_PASSWORD }}
         run: |
-          # react-native-i18n has an incompatible manifest
+          # react-native-i18n has an incompatible manifest and build.gradle file
           search='<uses-sdk android:minSdkVersion="16" />'
           sed -i "s|${search}||g" node_modules/react-native-i18n/android/src/main/AndroidManifest.xml
+          search='compile "com.facebook.react:react-native:+" // From node_modules'
+          replace='implementation "com.facebook.react:react-native:+"'
+          sed -i "s|${search}|${replace}|g" node_modules/react-native-i18n/android/build.gradle
+          # react-native-reanimated has an incompatible build.gradle file
+          search="classpath += files(project.getConfigurations().getByName('compile').asList())"
+          replace="project.getConfigurations().getByName('implementation').setCanBeResolved(true); classpath += files(project.getConfigurations().getByName('implementation').asList())"
+          sed -i "s|${search}|${replace}|g" node_modules/react-native-reanimated/android/build.gradle
           # prepare local.properties
           echo "MYAPP_RELEASE_STORE_PASSWORD=$android_release_password" > android/local.properties
           echo "MYAPP_RELEASE_KEY_PASSWORD=$android_release_password" >> android/local.properties

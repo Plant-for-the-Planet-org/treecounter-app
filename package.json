@@ -92,7 +92,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "github:react-native-community/react-native-linear-gradient",
     "react-native-map-clustering": "^3.4.2",
-    "react-native-maps": "^0.29.3",
+    "react-native-maps": "^0.31.1",
     "react-native-material-dropdown": "git+https://github.com/norbertschuler/react-native-material-dropdown.git",
     "react-native-material-textfield": "git+https://github.com/norbertschuler/react-native-material-textfield.git",
     "react-native-modal-datetime-picker": "^8.9.3",

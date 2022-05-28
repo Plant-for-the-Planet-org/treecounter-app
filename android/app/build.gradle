@@ -290,8 +290,9 @@ android {
             def versionCodes = ["armeabi-v7a": 5, "x86": 6, "arm64-v8a": 7, "x86_64": 8]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
-                output.versionCodeOverride =
-                  defaultConfig.versionCode * 1000 + versionCodes.get(abi)
+                output.versionCodeOverride =  versionCodes.get(abi) * 10000 + defaultConfig.versionCode
+            } else {
+                output.versionCodeOverride = 9 * 100000 + defaultConfig.versionCode
             }
         }
     }

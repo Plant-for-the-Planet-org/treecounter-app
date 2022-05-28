@@ -345,7 +345,7 @@ PODS:
   - React-jsinspector (0.68.2)
   - React-logger (0.68.2):
     - glog
-  - react-native-blob-util (0.13.18):
+  - react-native-blob-util (0.16.0):
     - React-Core
   - react-native-config (1.4.5):
     - react-native-config/App (= 1.4.5)
@@ -480,7 +480,7 @@ PODS:
   - RNVectorIcons (6.7.0):
     - React
   - SocketRocket (0.6.0)
-  - TOCropViewController (2.6.0)
+  - TOCropViewController (2.6.1)
   - toolbar-android (0.2.1):
     - React
   - Yoga (1.14.0)
@@ -517,8 +517,6 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.125.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - Google-Maps-iOS-Utils
-  - GoogleMaps
   - OpenSSL-Universal (= 1.1.1100)
   - Permission-BluetoothPeripheral (from `../node_modules/react-native-permissions/ios/BluetoothPeripheral`)
   - Permission-Calendars (from `../node_modules/react-native-permissions/ios/Calendars`)
@@ -803,7 +801,7 @@ SPEC CHECKSUMS:
   Flipper-RSocket: d9d9ade67cbecf6ac10730304bf5607266dd2541
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  glog: 5337263514dd6f09803962437687240c5dc39aa4
+  glog: 476ee3e89abb49e07f822b48323c51c57124b572
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: 32ca02de09de357a10ac773f2c70f1986751392d
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
@@ -826,7 +824,7 @@ SPEC CHECKSUMS:
   Permission-Siri: 1ae2ad3349327f25eac3f7d7a69389ca46d4c163
   Permission-SpeechRecognition: fdab73ea6aec7103fef3ef8719194e9ef65dbb9e
   Permission-StoreKit: 49cd0d1d0cec7211b1a7fefb3a810f3caa89b992
-  RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
+  RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
   RCTRequired: 3e917ea5377751094f38145fdece525aa90545a0
   RCTTypeSafety: c43c072a4bd60feb49a9570b0517892b4305c45e
   React: 176dd882de001854ced260fad41bb68a31aa4bd0
@@ -839,7 +837,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: b7b553412f2ec768fe6c8f27cd6bafdb9d8719e6
   React-jsinspector: c5989c77cb89ae6a69561095a61cce56a44ae8e8
   React-logger: a0833912d93b36b791b7a521672d8ee89107aff1
-  react-native-blob-util: 600972b1782380a5a7d5db61a3817ea32349dae9
+  react-native-blob-util: 2d49d135d6fe1410c019fb5bff241dac7f12d73d
   react-native-config: 6502b1879f97ed5ac570a029961fc35ea606cd14
   react-native-document-picker: 4921045c5c6c78243010f784eae0a3f4b2af7799
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
@@ -881,11 +879,11 @@ SPEC CHECKSUMS:
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   RNVectorIcons: 368d6d8b8301224e5ffb6254191f4f8876c2be0d
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
-  TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
+  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   toolbar-android: 2a73856e98b750d7e71ce4644d3f41cc98211719
   Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: cb08c56dacf154b063f96eafd0ef18cf6b96d30a
+PODFILE CHECKSUM: b91dcc00db99f5148e73ca1d7b6ff6a7f024feb0
 
 COCOAPODS: 1.11.3

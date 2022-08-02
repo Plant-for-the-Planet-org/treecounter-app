@@ -60,11 +60,11 @@ export default class EditUserProfile extends Component {
           key: 'desc',
           title: i18n.t('label.description')
         },
+        {
+          key: 'security',
+          title: i18n.t('label.profile_security')
+        },
         /* disabled functionality at July 16th
-          {
-            key: 'security',
-            title: i18n.t('label.profile_security')
-          },
           {
             key: 'following',
             title: i18n.t('label.subscribed')
@@ -184,44 +184,44 @@ export default class EditUserProfile extends Component {
                 treeCounter.followeeIds &&
                 this.props.followeeList &&
                 this.props.followeeList.length > 0 ? (
-                  <View>
-                    {this.props.followeeList.map(follow => (
-                      <View key={follow.id} style={styles.followerRow}>
-                        <UserProfileImage
-                          profileImage={follow.userProfile.image}
-                        />
-                        <TouchableItem
-                          style={styles.followerCol}
-                          onPress={() => {
-                            setTimeout(() => {
-                              this.props.navigation.navigate(
-                                getLocalRoute('app_treecounter'),
-                                {
-                                  treeCounterId: follow.id,
-                                  titleParam: follow.displayName
-                                }
-                              );
-                            }, 0);
-                          }}
-                        >
-                          <Text>{follow.displayName}</Text>
-                        </TouchableItem>
+                <View>
+                  {this.props.followeeList.map(follow => (
+                    <View key={follow.id} style={styles.followerRow}>
+                      <UserProfileImage
+                        profileImage={follow.userProfile.image}
+                      />
+                      <TouchableItem
+                        style={styles.followerCol}
+                        onPress={() => {
+                          setTimeout(() => {
+                            this.props.navigation.navigate(
+                              getLocalRoute('app_treecounter'),
+                              {
+                                treeCounterId: follow.id,
+                                titleParam: follow.displayName
+                              }
+                            );
+                          }, 0);
+                        }}
+                      >
+                        <Text>{follow.displayName}</Text>
+                      </TouchableItem>
 
-                        <FollowLabelButton
-                          label={i18n.t('label.unsubscribe')}
-                          isSubscribed
-                          onClick={() => {
-                            this.props.unfollowUser(follow.id);
-                          }}
-                        />
-                      </View>
-                    ))}
-                  </View>
-                ) : this.props.followeeList ? (
-                  <Text>{i18n.t('label.not_following_anybody')}</Text>
-                ) : (
-                    <LoadingIndicator contentLoader screen="profileLoader" />
-                  )}
+                      <FollowLabelButton
+                        label={i18n.t('label.unsubscribe')}
+                        isSubscribed
+                        onClick={() => {
+                          this.props.unfollowUser(follow.id);
+                        }}
+                      />
+                    </View>
+                  ))}
+                </View>
+              ) : this.props.followeeList ? (
+                <Text>{i18n.t('label.not_following_anybody')}</Text>
+              ) : (
+                <LoadingIndicator contentLoader screen="profileLoader" />
+              )}
             </ScrollView>
           </CardLayout>
         );
@@ -391,6 +391,7 @@ class SecurityTabView extends React.PureComponent {
     const { emailButtonPress, changPassworsdButtonPress } = this.state;
     return (
       <KeyboardAwareScrollView enableOnAndroid>
+        {/* disabled functionality at July 23th 2022
         <CardLayout style={{ flex: 1 }}>
           <View {...this.props}>
             <Form
@@ -450,6 +451,19 @@ class SecurityTabView extends React.PureComponent {
           >
             {i18n.t('label.change_password')}
           </PrimaryButton>
+          <PrimaryButton
+            buttonStyle={styles.deleteProfileButton}
+            onClick={() => {
+              this.props.navigation.navigate('delete_profile_confirm', {
+                deleteProfile: this.props.deleteProfile
+              });
+            }}
+          >
+            {i18n.t('label.delete_profile')}
+          </PrimaryButton>
+        </CardLayout>
+        */}
+        <CardLayout style={{ flex: 1 }}>
           <PrimaryButton
             buttonStyle={styles.deleteProfileButton}
             onClick={() => {

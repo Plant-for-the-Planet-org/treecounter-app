@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Image
-  // FlatList
 } from 'react-native';
 import { backArrow } from './../../assets';
 import { debug } from '../../debug';
@@ -126,8 +125,9 @@ class PublicTreeCounter extends React.Component {
     this.props.clearSupport();
     this.props.selectPlantProjectIdAction(id);
     const { navigation } = this.props;
-    updateRoute('app_selectedProject', navigation, null, {
+    updateRoute('app_selectedProject', navigation, 1, {
       titleParam: name,
+      projectName: name,
       id: id
     });
   }

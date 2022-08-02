@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import {
   selectedPlantProjectIdSelector,
@@ -8,9 +8,9 @@ import {
   selectedTpoSelector,
   currentUserProfileSelector
 } from '../../selectors';
-import {updateStaticRoute} from '../../helpers/routerHelper';
+import { updateStaticRoute } from '../../helpers/routerHelper';
 import PlantProjectFull from '../../components/PlantProjects/PlantProjectFull';
-import {loadProject} from '../../actions/loadTposAction';
+import { loadProject } from '../../actions/loadTposAction';
 import {
   clearPlantProject,
   selectPlantProjectAction
@@ -18,24 +18,18 @@ import {
 
 const SelectedPlantProjectContainer = props => {
   const getProjectDetails = async (projectSlug) => {
-    if (projectSlug) {
-      const project = await props.loadProject(
-        { id: projectSlug || props.selectedPlantProjectId },
-        { loading: true }
-      );
-      props.selectPlantProjectAction(project.id);
-    } else {
-      props.loadProject(
-        {id: props.selectedPlantProjectId},
-        {loading: true}
-      );
-    }
+    const project = await props.loadProject(
+      { id: projectSlug || props.selectedPlantProjectId },
+      { loading: true }
+    );
   };
+
   React.useEffect(() => {
-    getProjectDetails(props.navigation.state.params.projectName);
+    getProjectDetails();
   }, [props.navigation.state.params.projectName]);
+
   const selectProject = id => {
-    const {navigation} = props;
+    const { navigation } = props;
     props.selectPlantProjectAction(id);
     if (navigation) {
       updateStaticRoute('app_donate_detail', navigation, {
@@ -46,7 +40,7 @@ const SelectedPlantProjectContainer = props => {
     }
   };
 
-  return (
+  return props.selectedProject ? (
     <PlantProjectFull
       {...props}
       plantProject={props.selectedProject}
@@ -54,7 +48,7 @@ const SelectedPlantProjectContainer = props => {
       selectProject={id => selectProject(id)}
       currentUserProfile={props.currentUserProfile}
     />
-  );
+  ) : null;
 };
 
 SelectedPlantProjectContainer.navigationOptions = () => ({

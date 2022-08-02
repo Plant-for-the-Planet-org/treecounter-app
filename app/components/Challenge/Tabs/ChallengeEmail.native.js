@@ -7,7 +7,7 @@ import { TextInput, View, Text } from 'react-native';
 import ChallengeList from '../challengeList';
 import { withNavigation } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Picker } from '@react-native-community/picker';
+import { Picker } from '@react-native-picker/picker';
 import CheckBox from 'react-native-check-box';
 import i18n from '../../../locales/i18n';
 import { NotificationManager } from '../../../notification/PopupNotificaiton/notificationManager';

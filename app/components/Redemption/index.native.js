@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-// import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-navigation';
 import { Formik } from 'formik';
 import { updateStaticRoute } from '../../helpers/routerHelper';
 import HeaderNew from './../Header/HeaderNew.native';
@@ -66,9 +66,18 @@ export default function Redemption(props) {
 
   const lockedButton = 'rgba(137, 181, 58, 0.19)';
 
+  const style = {
+    backgroundColor: "white",
+    flex: 1,
+    padding: 20,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  };
+
   return (
+    /*
     <View style={styles.mainContainer}>
-      {/* <View style={styles.mainContainer}> */}
       <HeaderNew title={''} navigation={props.navigation} />
       <Formik
         initialValues={{
@@ -247,8 +256,33 @@ export default function Redemption(props) {
           </>
         )}
       </Formik>
-      {/* </View> */}
     </View>
+    */
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.WHITE }}>
+      <HeaderNew
+        navigation={props.navigation}
+        title={i18n.t('label.redeem_trees')}
+      />
+      <View style={style}>
+        <View style={{ paddingBottom: 20 }}>
+          <Image
+            source={require("../../assets/images/gifts.png")}
+            style={{ width: 220, height: 220 }}
+          />
+        </View>
+
+        <Text
+          style={{
+            fontSize: 16,
+            color: "#4d5153",
+            fontFamily: "OpenSans-Regular",
+            textAlign: "center"
+          }}
+        >
+          {i18n.t("label.changed_challenge_workflow")}
+        </Text>
+      </View>
+    </SafeAreaView>
   );
 }
 

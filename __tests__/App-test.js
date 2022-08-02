@@ -45,32 +45,32 @@ jest.mock('react-native-gesture-handler', () => {
     Directions: {}
   };
 });
-jest.mock('react-native-reanimated', () => {});
-jest.mock('react-native-tab-view', () => {});
-jest.mock('react-native-device-info', () => {});
-jest.mock('react-navigation-drawer', () => {});
-jest.mock('react-native-image-picker', () => {});
-jest.mock('deprecated-react-native-listview', () => {});
-jest.mock('react-native-document-picker', () => {});
-jest.mock('react-native-fs', () => {});
-jest.mock('rn-fetch-blob', () => {});
+jest.mock('react-native-reanimated', () => { });
+jest.mock('react-native-tab-view', () => { });
+jest.mock('react-native-device-info', () => { });
+jest.mock('react-navigation-drawer', () => { });
+jest.mock('react-native-image-picker', () => { });
+jest.mock('deprecated-react-native-listview', () => { });
+jest.mock('react-native-document-picker', () => { });
+jest.mock('react-native-fs', () => { });
+jest.mock('react-native-blob-util', () => { });
 jest.mock('react-native-vector-icons/FontAwesome', () => {
   return {
     loadFont: jest.fn()
   };
 });
-jest.mock('@react-native-community/viewpager', () => {});
-jest.mock('@react-native-community/masked-view', () => {});
-jest.mock('@react-native-community/datetimepicker', () => {});
-jest.mock('@react-native-community/netinfo', () => {});
+jest.mock('react-native-pager-view', () => { });
+jest.mock('@react-native-community/masked-view', () => { });
+jest.mock('@react-native-community/datetimepicker', () => { });
+jest.mock('@react-native-community/netinfo', () => { });
 jest.mock('react-native-splash-screen', () => {
   return {
     hide: jest.fn()
   };
 });
-jest.mock('react-native-get-random-values', () => {});
-jest.mock('@react-native-community/picker', () => {});
-jest.mock('react-native-pdf', () => {});
+jest.mock('react-native-get-random-values', () => { });
+jest.mock('@react-native-community/picker', () => { });
+jest.mock('react-native-pdf', () => { });
 
 // eslint-disable-next-line no-undef
 it('renders correctly', () => {

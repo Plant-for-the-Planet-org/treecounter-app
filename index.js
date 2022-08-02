@@ -1,7 +1,5 @@
 import { AppRegistry } from 'react-native';
 import App from './app/components/App';
-
-/* app.js */
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 // import {
@@ -20,8 +18,20 @@ EStyleSheet.build({
   $colorPrimary: '#b7d37f',
   $colorPrimaryDark: '#b7d37f',
   $colorPrimaryAccent: '#e86f56',
-  $colorPrimaryAccentLight: '#ec6453'
+  $colorPrimaryAccentLight: '#ec6453',
+  $borderColor: '#aba2a2',
+  $inputBorderColor: '#dad7d7',
+  $backgroundScreen: '#f1f1f1',
+  $colorError: '#ff0033',
+  $colorRedeemBorder: '#9fc356',
+  $colorRedeemInside: '#f5fbe8',
+  $cardTextColor: '#686060',
+  $lightTextColor: '#9c9b9b',
+
+  $newPrimary: '#89b53a',
+  $greyColor: '#d3d3d3'
 });
+
 
 // const customTextProps = {
 //   style: {

@@ -216,6 +216,7 @@ const CompetitionsList = props => {
   };
 
   return (
+    /* This crashes if embedded into a ScrollView */
     <FlatList
       data={
         props.tabType !== 'mine'

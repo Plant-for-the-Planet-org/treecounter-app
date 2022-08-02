@@ -14,195 +14,198 @@ jobs:
     runs-on: macOS-latest
     timeout-minutes: 75
     steps:
-    - name: Checkout branch
-      uses: actions/checkout@v2
+      - name: Checkout branch
+        uses: actions/checkout@v2
 
-    - name: Select Xcode
-      run: |
-        echo "Default version:" `xcode-select -p`
-        sudo xcode-select -s /Applications/Xcode_12.4.app
-        echo "Selected version:" `xcode-select -p`
+      - name: Select Xcode
+        run: |
+          echo "Default version:" `xcode-select -p`
+          sudo xcode-select -s /Applications/Xcode_12.4.app
+          echo "Selected version:" `xcode-select -p`
 
-    - name: Check versions
-      run: |
-        echo "Xcode version:"
-        xcodebuild -version
-        echo "Pod version:"
-        pod --version
-        echo "Brew version:"
-        brew --version
-        echo "Node version:"
-        node --version
-        echo "NPM version:"
-        npm --version
-        echo "PATH:"
-        echo $PATH
+      - name: Upgrade npm to latest version
+        run: sudo npm i -g npm@latest --force
 
-    - name: Installing Gettext for envsubst command
-      run: |
-        echo $PATH
-        brew reinstall gettext
+      - name: Check versions
+        run: |
+          echo "Xcode version:"
+          xcodebuild -version
+          echo "Pod version:"
+          pod --version
+          echo "Brew version:"
+          brew --version
+          echo "Node version:"
+          node --version
+          echo "NPM version:"
+          npm --version
+          echo "PATH:"
+          echo $PATH
 
-    - name: Installing and changing to newer bash version
-      run: |
-        echo $PATH
-        bash -version
-        brew reinstall bash
-        sudo chsh -s /usr/local/bin/bash
+      - name: Installing Gettext for envsubst command
+        run: |
+          echo $PATH
+          brew reinstall gettext
 
-    - name: Installing and changing to gnu sed version
-      run: |
-        echo $PATH
-        brew reinstall gnu-sed
-        echo 'export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"' >> ~/.bashrc
+      - name: Installing and changing to newer bash version
+        run: |
+          echo $PATH
+          bash -version
+          brew reinstall bash
+          sudo chsh -s /usr/local/bin/bash
 
-    - name: Installing google-drive-upload script
-      env:
-        CLIENT_ID: ${{ secrets.GOOGLE_DRIVE_CLIENT_ID }}
-        CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
-        REFRESH_TOKEN: ${{ secrets.GOOGLE_DRIVE_REFRESH_TOKEN }}
-        ACCESS_TOKEN: ${{ secrets.GOOGLE_DRIVE_ACCESS_TOKEN }}
-      run: |
-        source ~/.bashrc
-        echo $PATH
-        curl --compressed -s https://raw.githubusercontent.com/labbots/google-drive-upload/v2.7/install.sh | bash -s -- -R v2.7
-        echo "CLIENT_ID=\"$CLIENT_ID\"" >> ~/.googledrive.conf
-        echo "CLIENT_SECRET=\"$CLIENT_SECRET\"" >> ~/.googledrive.conf
-        echo "REFRESH_TOKEN=\"$REFRESH_TOKEN\"" >> ~/.googledrive.conf
-        echo "ACCESS_TOKEN=\"$ACCESS_TOKEN\"" >> ~/.googledrive.conf
-        echo "ACCESS_TOKEN_EXPIRY=" >> ~/.googledrive.conf
-        echo "ROOT_FOLDER=\"1sO16rDuJA8McRA8-Q-I6R2OjMGcG4nEp\"" >> ~/.googledrive.conf
-        echo "ROOT_FOLDER_NAME=" >> ~/.googledrive.conf
+      - name: Installing and changing to gnu sed version
+        run: |
+          echo $PATH
+          brew reinstall gnu-sed
+          echo 'export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"' >> ~/.bashrc
 
-    - name: Caching node modules
-      uses: actions/cache@v1
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node3-${{ hashFiles('package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node3-
+      - name: Installing google-drive-upload script
+        env:
+          CLIENT_ID: ${{ secrets.GOOGLE_DRIVE_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.GOOGLE_DRIVE_REFRESH_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.GOOGLE_DRIVE_ACCESS_TOKEN }}
+        run: |
+          source ~/.bashrc
+          echo $PATH
+          curl --compressed -s https://raw.githubusercontent.com/labbots/google-drive-upload/v2.7/install.sh | bash -s -- -R v2.7
+          echo "CLIENT_ID=\"$CLIENT_ID\"" >> ~/.googledrive.conf
+          echo "CLIENT_SECRET=\"$CLIENT_SECRET\"" >> ~/.googledrive.conf
+          echo "REFRESH_TOKEN=\"$REFRESH_TOKEN\"" >> ~/.googledrive.conf
+          echo "ACCESS_TOKEN=\"$ACCESS_TOKEN\"" >> ~/.googledrive.conf
+          echo "ACCESS_TOKEN_EXPIRY=" >> ~/.googledrive.conf
+          echo "ROOT_FOLDER=\"1sO16rDuJA8McRA8-Q-I6R2OjMGcG4nEp\"" >> ~/.googledrive.conf
+          echo "ROOT_FOLDER_NAME=" >> ~/.googledrive.conf
 
-    - name: Install npm
-      run : |
-        npm install
+      - name: Caching node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node3-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node3-
 
-    # planet_pay_url: http://paydev.pp.eco won't work due to losing query parameters on redirect
-    - name: Setting Environment Variables
-      env:
-        googleMapApiKey: ${{ secrets.GOOGLE_MAP_API_KEY }}
-        mediaPath: /media/cache
-        scheme: https
-        host: staging.trilliontreecampaign.org
-        api_url: https://app-staging.plant-for-the-planet.org
-        base:
-        debug: true
-        currency: EUR
-        mapIdsInventory: dee6acf9de774fe6878813f707b4ab88
-        bugsnagApiKey: ${{ secrets.BUGSNAG_API_KEY }}
-        androidAppId: org.pftp
-        iosAppId: 1444740626
-        locationApikKey: ${{ secrets.LOCATION_API_KEY }}
-        env: staging
-        AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
-        AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
-        planet_pay_url: https://donate.plant-for-the-planet.org
-      run: |
-        /usr/local/opt/gettext/bin/envsubst < .env.deploy > .env.staging
-        cp .env.staging .env
+      - name: Install npm
+        run: |
+          npm install --legacy-peer-deps
 
-# Currently not yet supported different flavors
-    # - name: Overide Environment if Master Branch
-    #   if: endsWith(github.ref, '/master')
-    #   run: |
-    #     # change this to -> echo "{name}={value"}" >> $GITHUB_ENV
-    #     echo "::set-env name=host::https://www.trilliontreecampaign.org";
-    #     echo "::set-env name=api_url::https://app.plant-for-the-planet.org";
-    #     echo "::set-env name=mapIdsInventory::534da741b327459eb117f4cc93acd98e";
-    #     echo "::set-env name=debug::false";
-    #     echo "::set-env name=env::production";
-    #     envsubst < .env.deploy > .env.production
-    #     cp .env.production .env
-    #
-    # - name: Overide Environment if Staging Branch
-    #   if: endsWith(github.ref, '/staging')
-    #   run: |
-    #     # change this to -> echo "{name}={value"}" >> $GITHUB_ENV
-    #     echo "::set-env name=host::https://staging.trilliontreecampaign.org";
-    #     echo "::set-env name=api_url::https://app-staging.plant-for-the-planet.org";
-    #     echo "::set-env name=mapIdsInventory::dee6acf9de774fe6878813f707b4ab88";
-    #     echo "::set-env name=debug::true";
-    #     echo "::set-env name=env::staging";
-    #     envsubst < .env.deploy > .env.staging
-    #     cp .env.staging .env
+      # planet_pay_url: http://paydev.pp.eco won't work due to losing query parameters on redirect
+      - name: Setting Environment Variables
+        env:
+          googleMapApiKey: ${{ secrets.GOOGLE_MAP_API_KEY }}
+          mediaPath: /media/cache
+          scheme: https
+          host: staging.trilliontreecampaign.org
+          api_url: https://app-staging.plant-for-the-planet.org
+          base:
+          debug: true
+          currency: EUR
+          mapIdsInventory: dee6acf9de774fe6878813f707b4ab88
+          bugsnagApiKey: ${{ secrets.BUGSNAG_API_KEY }}
+          androidAppId: org.pftp
+          iosAppId: 1444740626
+          locationApikKey: ${{ secrets.LOCATION_API_KEY }}
+          env: staging
+          AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
+          AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
+          planet_pay_url: https://donate.plant-for-the-planet.org
+        run: |
+          /usr/local/opt/gettext/bin/envsubst < .env.deploy > .env.staging
+          cp .env.staging .env
 
-    - name: Listing Environment Variables
-      run: cat .env
+      # Currently not yet supported different flavors
+      # - name: Overide Environment if Master Branch
+      #   if: endsWith(github.ref, '/master')
+      #   run: |
+      #     # change this to -> echo "{name}={value"}" >> $GITHUB_ENV
+      #     echo "::set-env name=host::https://www.trilliontreecampaign.org";
+      #     echo "::set-env name=api_url::https://app.plant-for-the-planet.org";
+      #     echo "::set-env name=mapIdsInventory::534da741b327459eb117f4cc93acd98e";
+      #     echo "::set-env name=debug::false";
+      #     echo "::set-env name=env::production";
+      #     envsubst < .env.deploy > .env.production
+      #     cp .env.production .env
+      #
+      # - name: Overide Environment if Staging Branch
+      #   if: endsWith(github.ref, '/staging')
+      #   run: |
+      #     # change this to -> echo "{name}={value"}" >> $GITHUB_ENV
+      #     echo "::set-env name=host::https://staging.trilliontreecampaign.org";
+      #     echo "::set-env name=api_url::https://app-staging.plant-for-the-planet.org";
+      #     echo "::set-env name=mapIdsInventory::dee6acf9de774fe6878813f707b4ab88";
+      #     echo "::set-env name=debug::true";
+      #     echo "::set-env name=env::staging";
+      #     envsubst < .env.deploy > .env.staging
+      #     cp .env.staging .env
 
-    - name: Caching Pods
-      uses: actions/cache@v1
-      with:
-        path: ios/Pods
-        key: ${{ runner.os }}-pods3-${{ hashFiles('ios/Podfile*') }}
-        restore-keys: |
-          ${{ runner.os }}-pods3-
+      - name: Listing Environment Variables
+        run: cat .env
 
-    - name: Install Pods
-      run: pod install
-      working-directory: ./ios
+      - name: Caching Pods
+        uses: actions/cache@v1
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods3-${{ hashFiles('ios/Podfile*') }}
+          restore-keys: |
+            ${{ runner.os }}-pods3-
 
-    - name: Preparing build
-      env:
-        PROVISIONING_PASSWORD: ${{ secrets.IOS_PROVISIONING_PASSWORD }}
-      run: |
-        ./release/prepare_macos_ios_signing.sh
+      - name: Install Pods
+        run: pod install
+        working-directory: ./ios
 
-    - name: Build archive
-      run: |
-        xcodebuild -sdk iphoneos -workspace TreecounterApp.xcworkspace \
-        -configuration Release -scheme 'TreecounterApp(.env.staging)' \
-        -derivedDataPath DerivedData \
-        -archivePath DerivedData/Archive/TreecounterAppDevelop archive
-      working-directory: ./ios
+      - name: Preparing build
+        env:
+          PROVISIONING_PASSWORD: ${{ secrets.IOS_PROVISIONING_PASSWORD }}
+        run: |
+          ./release/prepare_macos_ios_signing.sh
 
-    - name: Export Archive
-      run: |
-        xcodebuild -exportArchive \
-        -archivePath DerivedData/Archive/TreecounterAppDevelop.xcarchive \
-        -exportOptionsPlist ../release/Develop-Store.plist \
-        -exportPath DerivedData/ipa
-      working-directory: ./ios
+      - name: Build archive
+        run: |
+          xcodebuild -sdk iphoneos -workspace TreecounterApp.xcworkspace \
+          -configuration Release -scheme 'TreecounterApp(.env.staging)' \
+          -derivedDataPath DerivedData \
+          -archivePath DerivedData/Archive/TreecounterAppDevelop archive
+        working-directory: ./ios
 
-# We only have 0.5GB space to store artifacts for GitHub actions
-#    - name: Upload iOS IPA file
-#      uses: actions/upload-artifact@v1
-#      with:
-#        name: TreecounterApp-staging-release.ipa
-#        path: ios/DerivedData/ipa/TreecounterApp(.env.staging).ipa
+      - name: Export Archive
+        run: |
+          xcodebuild -exportArchive \
+          -archivePath DerivedData/Archive/TreecounterAppDevelop.xcarchive \
+          -exportOptionsPlist ../release/Develop-Store.plist \
+          -exportPath DerivedData/ipa
+        working-directory: ./ios
 
-    - name: Prepare iOS IPA for upload
-      run: |
-        upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.ipa
-        echo "upload_file=$upload_file" >> $GITHUB_ENV
-        mkdir -p uploads
-        ls -l 'ios/DerivedData/ipa'
-        mv 'ios/DerivedData/ipa/TreecounterApp.ipa' uploads/$upload_file
+      # We only have 0.5GB space to store artifacts for GitHub actions
+      #    - name: Upload iOS IPA file
+      #      uses: actions/upload-artifact@v1
+      #      with:
+      #        name: TreecounterApp-staging-release.ipa
+      #        path: ios/DerivedData/ipa/TreecounterApp(.env.staging).ipa
 
-    # depends on existence of upload file at uploads/$upload_file
-    - name: Upload iOS IPA to Browserstack
-      env:
-        BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-      run: |
-        curl -u "planetit1:$BROWSERSTACK_ACCESS_KEY" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@uploads/$upload_file"
+      - name: Prepare iOS IPA for upload
+        run: |
+          upload_file=TreecounterApp-`echo $GITHUB_REF | awk '{split($0,a,"/"); print a[3]}'`.ipa
+          echo "upload_file=$upload_file" >> $GITHUB_ENV
+          mkdir -p uploads
+          ls -l 'ios/DerivedData/ipa'
+          mv 'ios/DerivedData/ipa/TreecounterApp.ipa' uploads/$upload_file
 
-    # depends on existence of upload file at uploads/$upload_file
-    - name: Upload iOS IPA to Google Drive
-      run: |
-        source ~/.bashrc
-        gupload -C TreecounterApp uploads/$upload_file
+      # depends on existence of upload file at uploads/$upload_file
+      - name: Upload iOS IPA to Browserstack
+        env:
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+        run: |
+          curl -u "planetit1:$BROWSERSTACK_ACCESS_KEY" -X POST "https://api-cloud.browserstack.com/app-live/upload" -F "file=@uploads/$upload_file"
 
-    - name: Slack notification
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      run: |
-        payload="{\"channel\": \"#notifications-git\", \"username\": \"webhookbot\", \"text\": \"Finished GitHub action $GITHUB_WORKFLOW for $GITHUB_REF (TreecounterApp)\"}"
-        curl -X POST --data-urlencode "payload=$payload" https://hooks.slack.com/services/$SLACK_WEBHOOK_URL
+      # depends on existence of upload file at uploads/$upload_file
+      - name: Upload iOS IPA to Google Drive
+        run: |
+          source ~/.bashrc
+          gupload -C TreecounterApp uploads/$upload_file
+
+      - name: Slack notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          payload="{\"channel\": \"#notifications-git\", \"username\": \"webhookbot\", \"text\": \"Finished GitHub action $GITHUB_WORKFLOW for $GITHUB_REF (TreecounterApp)\"}"
+          curl -X POST --data-urlencode "payload=$payload" https://hooks.slack.com/services/$SLACK_WEBHOOK_URL

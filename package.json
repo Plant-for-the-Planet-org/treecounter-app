@@ -130,7 +130,7 @@
     "react-router-dom": "^5.3.0",
     "react-select": "^3.2.0",
     "react-share": "^4.4.0",
-    "react-slick": "^0.27.14",
+    "react-slick": "^0.29.0",
     "react-smartbanner": "^5.1.4",
     "react-stripe-elements": "^6.1.0",
     "react-tooltip": "^4.2.21",

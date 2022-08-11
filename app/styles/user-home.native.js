@@ -25,6 +25,7 @@ export default EStyleSheet.create({
   },
   userProfileContainer: {
     padding: 10,
+    marginTop: 10,
     marginBottom: 10,
     alignItems: 'center'
   },

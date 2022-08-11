@@ -19,6 +19,7 @@ import { updateRoute, updateStaticRoute } from './../../helpers/routerHelper';
 import PlantProjectSnippet from './../PlantProjects/PlantProjectSnippet';
 import CompetitionSnippet from './app/CompetitionSnippet';
 import FullMapComponent from './AnimatedMap';
+import openWebView from '../../utils/openWebView';
 
 class UserHome extends Component {
   constructor(props) {
@@ -369,9 +370,14 @@ class UserHome extends Component {
             <TouchableOpacity
               style={styles.circleButton}
               onPress={() => {
+                openWebView(
+                  `https://a.plant-for-the-planet.org/${i18n.language}/status`
+                );
+                /*
                 updateStaticRoute('app_redeem', this.props.navigation, {
                   code: null
                 });
+                */
               }}
             >
               <View style={styles.circleButtonView}>

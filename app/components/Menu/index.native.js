@@ -133,7 +133,7 @@ class Menu extends Component {
           ),
         0
       );
-      /*  
+      /*
           } else if (urlBreak.indexOf('competition') !== -1) {
             setTimeout(
               () =>
@@ -301,14 +301,21 @@ class Menu extends Component {
                 //   params: { code: null }
                 // })}
                 onPress={() => {
+                  openWebView(
+                    `https://a.plant-for-the-planet.org/${i18n.language}/status`
+                  );
+                  /*
                   updateStaticRoute('app_redeem', this.props.navigation, {
                     code: null
                   });
+                  */
                 }}
                 title={i18n.t('label.redeem_trees')}
                 iconUrl={icons.redeem_outline}
               />
             ) : null}
+
+            {/*
             {this.props.userProfile ? (
               <LargeMenuItem
                 onPress={this.onPressMenu.bind(this, {
@@ -334,6 +341,7 @@ class Menu extends Component {
                 iconUrl={icons.communityMenu}
               />
             ) : null}
+            */}
 
             <LargeMenuItem
               onPress={() => { onPressFAQ(); }}

@@ -74,11 +74,11 @@ export default class StaticTabbar extends React.PureComponent<
             const tabWidth = width / tabs.length;
             const cursor = tabWidth * key;
             const iconColor =
-              key === this.state.selectedTab ? "#89b53a" : "#4d5153";
+              tab.id === this.state.selectedTab ? "#89b53a" : "#4d5153";
             return (
               <React.Fragment {...{ key }}>
                 <TouchableWithoutFeedback onPress={() => onPress(key)}>
-                  {key === 2 ? (
+                  {tab.id === 2 ? (
                     <View style={[styles.donatetab]}>
                       <View
                         style={{
@@ -93,7 +93,7 @@ export default class StaticTabbar extends React.PureComponent<
                       >
                         <Image
                           source={
-                            key === this.state.selectedTab
+                            tab.id === this.state.selectedTab
                               ? donateIconGreen
                               : donateIcon
                           }
@@ -102,7 +102,7 @@ export default class StaticTabbar extends React.PureComponent<
                       </View>
                       <Text
                         style={
-                          key === this.state.selectedTab
+                          tab.id === this.state.selectedTab
                             ? styles.donateTabTextGreen
                             : styles.donateTabText
                         }
@@ -110,11 +110,11 @@ export default class StaticTabbar extends React.PureComponent<
                         {tab.title}
                       </Text>
                     </View>
-                  ) : key === 3 ? (
+/*                   ) : tab.id === 3 ? (
                     <View style={[styles.donatetab]}>
                       <Image
                         source={
-                          key === this.state.selectedTab
+                          tab.id === this.state.selectedTab
                             ? competeIconGreen
                             : competeIcon
                         }
@@ -122,7 +122,7 @@ export default class StaticTabbar extends React.PureComponent<
                       />
                       <Text
                         style={
-                          key === this.state.selectedTab
+                          tab.id === this.state.selectedTab
                             ? styles.tabTextGreen
                             : styles.tabText
                         }
@@ -130,12 +130,12 @@ export default class StaticTabbar extends React.PureComponent<
                         {tab.title}
                       </Text>
                     </View>
-                  ) : (
+ */                  ) : (
                     <View style={[styles.tab]}>
                       <Icon name={tab.name} color={iconColor} size={21} />
                       <Text
                         style={
-                          key === this.state.selectedTab
+                          tab.id === this.state.selectedTab
                             ? styles.tabTextGreen
                             : styles.tabText
                         }
